@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_journal/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history> ,
 			       <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history> ,
@@ -100,7 +99,6 @@
 <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history> ;
-        dcterms:type  "startDateIntervalMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap> ;
         rr:predicate  dbo:firstPublicationDate .
 
@@ -140,7 +138,6 @@
 <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history> ;
-        dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap> ;
         rr:predicate   dbo:finalPublicationYear .
 
@@ -179,7 +176,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/ISSN/FunctionTermMap> ;
         rr:predicate  dbo:issn .
 
@@ -219,7 +215,6 @@
 <./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_journal/StartDate/firstPublicationDate/finalPublicationDate/history> ;
-        dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_journal/EndDate/firstPublicationDate/finalPublicationDate/history/FunctionTermMap> ;
         rr:predicate   dbo:finalPublicationDate .
 
@@ -258,7 +253,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/lccn/LCCN/FunctionTermMap> ;
         rr:predicate  dbo:lccn .
 
@@ -297,7 +291,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/oclc/OCLC/FunctionTermMap> ;
         rr:predicate  dbo:oclc .
 
@@ -336,7 +329,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/jstor/JSTOR/FunctionTermMap> ;
         rr:predicate  dbo:jstor .
 
@@ -375,7 +367,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/publisher/publisher/FunctionTermMap> ;
         rr:predicate  dbo:publisher .
 
@@ -414,7 +405,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/issn/eISSN/FunctionTermMap> ;
         rr:predicate  dbo:issn .
 
@@ -453,7 +443,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/license/license/FunctionTermMap> ;
         rr:predicate  dbo:license .
 
@@ -492,7 +481,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/isPeerReviewed/peer-reviewed/FunctionTermMap> ;
         rr:predicate  dbo:isPeerReviewed .
 
@@ -531,7 +519,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactorAsOf/impact-year/FunctionTermMap> ;
         rr:predicate  dbo:impactFactorAsOf .
 
@@ -570,7 +557,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/openAccessContent/openaccess/FunctionTermMap> ;
         rr:predicate  dbo:openAccessContent .
 
@@ -609,7 +595,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/coden/CODEN/FunctionTermMap> ;
         rr:predicate  dbo:coden .
 
@@ -648,7 +633,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/picture/cover/FunctionTermMap> ;
         rr:predicate  dbo:picture .
 
@@ -687,7 +671,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/frequencyOfPublication/frequency/FunctionTermMap> ;
         rr:predicate  dbo:frequencyOfPublication .
 
@@ -727,7 +710,6 @@
 <./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_journal/EndDate/firstPublicationYear/finalPublicationYear/history> ;
-        dcterms:type  "startDateIntervalMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/StartDate/firstPublicationYear/finalPublicationYear/history/FunctionTermMap> ;
         rr:predicate  dbo:firstPublicationYear .
 
@@ -766,7 +748,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/formerName/former_names/FunctionTermMap> ;
         rr:predicate  dbo:formerName .
 
@@ -805,7 +786,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/editor/editor/FunctionTermMap> ;
         rr:predicate  dbo:editor .
 
@@ -844,7 +824,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap> ;
         rr:predicate  dbo:abbreviation .
 
@@ -883,7 +862,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/country/country/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
@@ -922,7 +900,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/impactFactor/impact/FunctionTermMap> ;
         rr:predicate  dbo:impactFactor .
 
@@ -961,7 +938,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:name/title/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -1000,7 +976,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/academicDiscipline/discipline/FunctionTermMap> ;
         rr:predicate  dbo:academicDiscipline .
 
@@ -1039,7 +1014,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/language/language/FunctionTermMap> ;
         rr:predicate  dbo:language .
 
@@ -1078,7 +1052,6 @@
 #######################
 <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_journal/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 

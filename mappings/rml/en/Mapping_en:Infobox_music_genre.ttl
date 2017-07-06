@@ -33,13 +33,12 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_music_genre/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins> ,
 			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments> ,
 			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives> ,
-			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins> ,
 			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicSubgenre/subgenres> ,
+			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres> ,
 			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name> ;
         rr:subjectMap          <./Mapping_en:Infobox_music_genre/SubjectMap> .
 
@@ -74,9 +73,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_music_genre/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_music_genre/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicFusionGenre/fusiongenres/FunctionTermMap> ;
         rr:predicate  dbo:musicFusionGenre .
 
@@ -113,126 +149,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap> ;
-        rr:predicate  dbo:instrument .
-
-### Function Term Map
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_music_genre/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_music_genre/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "instrument" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "instruments" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap> ;
-        rr:predicate  dbo:derivative .
-
-### Function Term Map
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_music_genre/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_music_genre/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "derivative" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "derivatives" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap> ;
-        rr:predicate  dbo:stylisticOrigin .
-
-### Function Term Map
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_music_genre/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_music_genre/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "stylisticOrigin" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "stylistic_origins" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicSubgenre/subgenres>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/musicSubgenre/subgenres/FunctionTermMap> ;
         rr:predicate  dbo:musicSubgenre .
 
@@ -269,41 +187,116 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name>
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
+        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap> ;
+        rr:predicate  dbo:derivative .
 
 ### Function Term Map
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_music_genre/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_music_genre/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
+        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "derivative" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+### References
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/derivative/derivatives/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "derivatives" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap> ;
+        rr:predicate  dbo:instrument .
+
+### Function Term Map
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_music_genre/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_music_genre/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "instrument" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/instrument/instruments/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "instruments" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap> ;
+        rr:predicate  dbo:stylisticOrigin .
+
+### Function Term Map
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_music_genre/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_music_genre/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_music_genre/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "stylisticOrigin" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_music_genre/SimplePropertyMapping/stylisticOrigin/stylistic_origins/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "name" .
+        rml:reference  "stylistic_origins" .
 
 
 ######################

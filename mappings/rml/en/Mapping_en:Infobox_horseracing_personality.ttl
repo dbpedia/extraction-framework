@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "conditionalMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_horseracing_personality/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race> ,
 			       <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place> ,
@@ -76,7 +75,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/race/race/FunctionTermMap> ;
         rr:predicate  dbo:race .
 
@@ -115,7 +113,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
@@ -154,7 +151,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -193,7 +189,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/raceHorse/horses>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/raceHorse/horses/FunctionTermMap> ;
         rr:predicate  dbo:raceHorse .
 
@@ -233,7 +228,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/honours/honours/FunctionTermMap> ;
         rr:predicate  dbo:honours .
 
@@ -272,7 +266,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
@@ -311,7 +304,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -350,7 +342,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -389,7 +380,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/wins/career%20wins>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/wins/career%20wins/FunctionTermMap> ;
         rr:predicate  dbo:wins .
 
@@ -428,7 +418,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/award/awards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/award/awards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -467,7 +456,6 @@
 #######################
 <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_horseracing_personality/SimplePropertyMapping/occupation/occupation/FunctionTermMap> ;
         rr:predicate  dbo:occupation .
 
@@ -511,7 +499,6 @@
 ###################################
 <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey>
         a                    rr:PredicateObjectMap ;
-        dcterms:type         "conditionalMapping" ;
         crml:equalCondition  <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/FunctionTermMap> ;
         crml:fallbackMap     <./Mapping_en:Infobox_horseracing_personality/ConditionalMapping/occupation_equals_Jockey/1> ;
         rr:object            dbo:Agent , dul:NaturalPerson , dul:Agent , wikidata:Q5 , dbo:Jockey , dbo:Person , schema:Person , foaf:Person , wikidata:Q215627 , dbo:Athlete , owl:Thing ;

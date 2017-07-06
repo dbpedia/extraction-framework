@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_military_person/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/militaryBranch/branch> ,
 			       <./Mapping_en:Infobox_military_person/EndDate/serviceStartYear/serviceEndYear/serviceyears> ,
@@ -92,7 +91,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/militaryBranch/branch>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/militaryBranch/branch/FunctionTermMap> ;
         rr:predicate  dbo:militaryBranch .
 
@@ -132,7 +130,6 @@
 <./Mapping_en:Infobox_military_person/EndDate/serviceStartYear/serviceEndYear/serviceyears>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_military_person/StartDate/serviceStartYear/serviceEndYear/serviceyears> ;
-        dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_military_person/EndDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap> ;
         rr:predicate   dbo:serviceEndYear .
 
@@ -172,7 +169,6 @@
 <./Mapping_en:Infobox_military_person/StartDate/serviceStartYear/serviceEndYear/serviceyears>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_military_person/EndDate/serviceStartYear/serviceEndYear/serviceyears> ;
-        dcterms:type  "startDateIntervalMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/StartDate/serviceStartYear/serviceEndYear/serviceyears/FunctionTermMap> ;
         rr:predicate  dbo:serviceStartYear .
 
@@ -211,7 +207,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/relation/relations>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/relation/relations/FunctionTermMap> ;
         rr:predicate  dbo:relation .
 
@@ -250,7 +245,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/restingPlace/placeofburial>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/restingPlace/placeofburial/FunctionTermMap> ;
         rr:predicate  dbo:restingPlace .
 
@@ -289,7 +283,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/deathDate/died>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/deathDate/died/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
@@ -328,7 +321,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/allegiance/allegiance>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/allegiance/allegiance/FunctionTermMap> ;
         rr:predicate  dbo:allegiance .
 
@@ -367,7 +359,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/battle/battles>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/battle/battles/FunctionTermMap> ;
         rr:predicate  dbo:battle .
 
@@ -406,7 +397,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/militaryUnit/unit>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/militaryUnit/unit/FunctionTermMap> ;
         rr:predicate  dbo:militaryUnit .
 
@@ -445,7 +435,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/militaryCommand/commands>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/militaryCommand/commands/FunctionTermMap> ;
         rr:predicate  dbo:militaryCommand .
 
@@ -484,7 +473,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/birthPlace/placeofbirth>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -523,7 +511,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/occupation/laterwork>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/occupation/laterwork/FunctionTermMap> ;
         rr:predicate  dbo:occupation .
 
@@ -562,7 +549,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/award/awards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/award/awards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -601,7 +587,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -640,7 +625,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/deathPlace/placeofdeath>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
@@ -679,7 +663,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/serviceNumber/servicenumber>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/serviceNumber/servicenumber/FunctionTermMap> ;
         rr:predicate  dbo:serviceNumber .
 
@@ -718,7 +701,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/birthDate/born>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/birthDate/born/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -757,7 +739,6 @@
 #######################
 <./Mapping_en:Infobox_military_person/SimplePropertyMapping/foaf:nick/nickname>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_person/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
         rr:predicate  foaf:nick .
 

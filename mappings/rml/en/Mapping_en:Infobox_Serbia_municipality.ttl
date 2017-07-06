@@ -33,15 +33,14 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "conditionalMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Serbia_municipality/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> ,
 			       <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/maximumElevation/highest_m> ,
 			       <./Mapping_en:Infobox_Serbia_municipality/ConditionalMapping/settlement_type_equals_city> ,
 			       <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/postalCode/postal_code> ,
 			       <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/demonym/demonym> ,
-			       <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaTotal/area> ,
 			       <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaCode/municipality_code> ,
+			       <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaTotal/area> ,
 			       <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/elevation/elevation> ,
 			       <./Mapping_en:Infobox_Serbia_municipality/ConstantMapping/country/Serbia> ,
 			       <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/populationAsOf/populationof> ,
@@ -79,7 +78,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap> ;
         rr:predicate  dbo:neighboringMunicipality .
 
@@ -118,7 +116,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/maximumElevation/highest_m>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap> ;
         rr:predicate  dbo:maximumElevation .
 
@@ -165,7 +162,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/postalCode/postal_code>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap> ;
         rr:predicate  dbo:postalCode .
 
@@ -204,7 +200,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/demonym/demonym>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap> ;
         rr:predicate  dbo:demonym .
 
@@ -243,7 +238,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaTotal/area>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap> ;
         rr:predicate  dbo:areaTotal .
 
@@ -289,7 +283,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaCode/municipality_code>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap> ;
         rr:predicate  dbo:areaCode .
 
@@ -328,7 +321,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/elevation/elevation>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap> ;
         rr:predicate  dbo:elevation .
 
@@ -374,7 +366,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/ConstantMapping/country/Serbia>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
         rr:object     dbr-en:Serbia ;
         rr:predicate  dbo:country .
 
@@ -383,7 +374,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/latitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/latitude/ObjectMap> ;
         rr:predicate  geo:lat .
 
@@ -446,7 +436,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/populationAsOf/populationof>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap> ;
         rr:predicate  dbo:populationAsOf .
 
@@ -485,7 +474,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -524,7 +512,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/minimumElevation/lowest_m>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap> ;
         rr:predicate  dbo:minimumElevation .
 
@@ -570,7 +557,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/longitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/longitude/ObjectMap> ;
         rr:predicate  geo:long .
 
@@ -633,7 +619,6 @@
 #######################
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/populationTotal/population>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap> ;
         rr:predicate  dbo:populationTotal .
 
@@ -677,7 +662,6 @@
 ###################################
 <./Mapping_en:Infobox_Serbia_municipality/ConditionalMapping/settlement_type_equals_city>
         a                    rr:PredicateObjectMap ;
-        dcterms:type         "conditionalMapping" ;
         crml:equalCondition  <./Mapping_en:Infobox_Serbia_municipality/ConditionalMapping/settlement_type_equals_city/FunctionTermMap> ;
         crml:fallbackMap     <./Mapping_en:Infobox_Serbia_municipality/ConditionalMapping/settlement_type_equals_city/1> ;
         rr:object            wikidata:Q515 , dbo:City , schema:City , dbo:Location , dbo:PopulatedPlace , owl:Thing , dbo:Settlement , wikidata:Q486972 , schema:Place , dbo:Place ;

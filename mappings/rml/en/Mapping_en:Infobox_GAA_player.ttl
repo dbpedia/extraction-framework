@@ -33,14 +33,13 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_GAA_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/team/club> ,
 			       <./Mapping_en:Infobox_GAA_player/EndDate/activeYearsStartYear/activeYearsEndYear/clyears> ,
 			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/formerTeam/clubs> ,
 			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:name/irish> ,
-			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/birthDate/dob> ,
 			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport> ,
+			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/birthDate/dob> ,
 			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/deathDate/dod> ,
 			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:name/name> ,
 			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:name/fullname> ,
@@ -90,7 +89,6 @@
 <./Mapping_en:Infobox_GAA_player/EndDate/activeYearsStartYear/activeYearsEndYear/clyears>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_GAA_player/StartDate/activeYearsStartYear/activeYearsEndYear/clyears> ;
-        dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_GAA_player/EndDate/activeYearsStartYear/activeYearsEndYear/clyears/FunctionTermMap> ;
         rr:predicate   dbo:activeYearsEndYear .
 
@@ -129,7 +127,6 @@
 #######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/team/club>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/team/club/FunctionTermMap> ;
         rr:predicate  dbo:team .
 
@@ -168,7 +165,6 @@
 #######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/formerTeam/clubs>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/formerTeam/clubs/FunctionTermMap> ;
         rr:predicate  dbo:formerTeam .
 
@@ -207,7 +203,6 @@
 #######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:name/irish>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:name/irish/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -244,48 +239,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap> ;
-        rr:predicate  dbo:sport .
-
-### Function Term Map
-<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_GAA_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GAA_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_GAA_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "sport" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "sport" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/birthDate/dob>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/birthDate/dob/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -322,9 +277,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap> ;
+        rr:predicate  dbo:sport .
+
+### Function Term Map
+<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_GAA_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GAA_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_GAA_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "sport" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/sport/sport/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sport" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/deathDate/dod>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/deathDate/dod/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
@@ -363,7 +355,6 @@
 #######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -402,7 +393,6 @@
 #######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:name/fullname>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -441,7 +431,6 @@
 #######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/birthPlace/placeofbirth>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -480,7 +469,6 @@
 #######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:nick/nickname>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
         rr:predicate  foaf:nick .
 
@@ -519,7 +507,6 @@
 #######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/position/clposition>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/position/clposition/FunctionTermMap> ;
         rr:predicate  dbo:position .
 
@@ -559,7 +546,6 @@
 <./Mapping_en:Infobox_GAA_player/StartDate/activeYearsStartYear/activeYearsEndYear/clyears>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_GAA_player/EndDate/activeYearsStartYear/activeYearsEndYear/clyears> ;
-        dcterms:type  "startDateIntervalMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/StartDate/activeYearsStartYear/activeYearsEndYear/clyears/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsStartYear .
 
@@ -598,7 +584,6 @@
 #######################
 <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/height/height>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_GAA_player/SimplePropertyMapping/height/height/FunctionTermMap> ;
         rr:predicate  dbo:height .
 

@@ -33,15 +33,14 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "conditionalMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/ConstantMapping/country/United_Kingdom> ,
 			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name> ,
 			       <./Mapping_en:Infobox_London_station/latitude> ,
 			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name> ,
 			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone> ,
-			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1> ,
 			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager> ,
+			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1> ,
 			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform> ,
 			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1> ,
 			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale> ,
@@ -91,7 +90,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/ConstantMapping/country/United_Kingdom>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
         rr:object     dbr-en:United_Kingdom ;
         rr:predicate  dbo:country .
 
@@ -100,7 +98,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -139,7 +136,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/latitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
 
@@ -177,7 +173,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/picture/image_name/FunctionTermMap> ;
         rr:predicate  dbo:picture .
 
@@ -216,7 +211,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/fareZone/fare_zone/FunctionTermMap> ;
         rr:predicate  dbo:fareZone .
 
@@ -253,48 +247,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap> ;
-        rr:predicate  dbo:operatedBy .
-
-### Function Term Map
-<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "operatedBy" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "manager" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager1/FunctionTermMap> ;
         rr:predicate  dbo:operatedBy .
 
@@ -331,9 +285,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap> ;
+        rr:predicate  dbo:operatedBy .
+
+### Function Term Map
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_London_station/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_London_station/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_London_station/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "operatedBy" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "manager" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap> ;
         rr:predicate  dbo:railwayPlatforms .
 
@@ -372,7 +363,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner1/FunctionTermMap> ;
         rr:predicate  dbo:owner .
 
@@ -411,7 +401,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/locale/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
@@ -450,7 +439,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/start/FunctionTermMap> ;
         rr:predicate  dbo:openingDate .
 
@@ -489,7 +477,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/district/borough/FunctionTermMap> ;
         rr:predicate  dbo:district .
 
@@ -529,7 +516,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap> ;
         rr:predicate  dbo:gridReference .
 
@@ -568,7 +554,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/agencyStationCode/railcode/FunctionTermMap> ;
         rr:predicate  dbo:agencyStationCode .
 
@@ -607,7 +592,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
         rr:predicate  dbo:owner .
 
@@ -646,7 +630,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/isHandicappedAccessible/access/FunctionTermMap> ;
         rr:predicate  dbo:isHandicappedAccessible .
 
@@ -685,7 +668,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/ConstantMapping/location/Greater_London>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
         rr:object     dbr-en:Greater_London ;
         rr:predicate  dbo:location .
 
@@ -694,7 +676,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/alias/alt_name/FunctionTermMap> ;
         rr:predicate  dbo:alias .
 
@@ -733,7 +714,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap> ;
         rr:predicate  dbo:railwayPlatforms .
 
@@ -772,7 +752,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap> ;
         rr:predicate  dbo:openingDate .
 
@@ -811,7 +790,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/location/borough/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
@@ -850,7 +828,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/start/FunctionTermMap> ;
         rr:predicate  dbo:openingYear .
 
@@ -889,7 +866,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/owner/owner2/FunctionTermMap> ;
         rr:predicate  dbo:owner .
 
@@ -928,7 +904,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/longitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/longitude/FunctionTermMap> ;
         rr:predicate  geo:long .
 
@@ -961,7 +936,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap> ;
         rr:predicate  dbo:openingYear .
 
@@ -1000,7 +974,6 @@
 #######################
 <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_London_station/SimplePropertyMapping/operatedBy/manager2/FunctionTermMap> ;
         rr:predicate  dbo:operatedBy .
 
@@ -1044,7 +1017,6 @@
 ###################################
 <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened>
         a                    rr:PredicateObjectMap ;
-        dcterms:type         "conditionalMapping" ;
         crml:equalCondition  <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/FunctionTermMap> ;
         crml:fallbackMap     <./Mapping_en:Infobox_London_station/ConditionalMapping/events_contains_Opened/1> ;
         rr:object            dbo:Location , dbo:Infrastructure , schema:Place , dbo:Place , dbo:ArchitecturalStructure , wikidata:Q719456 , owl:Thing , dbo:Station ;

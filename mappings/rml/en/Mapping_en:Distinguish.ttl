@@ -33,14 +33,13 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Distinguish/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/6> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1> ,
+        rr:predicateObjectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2> ,
 			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/3> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5> ;
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/6> ;
         rr:subjectMap          <./Mapping_en:Distinguish/SubjectMap> .
 
 
@@ -69,99 +68,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap> ;
-        rr:predicate  owl:differentFrom .
-
-### Function Term Map
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Distinguish/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Distinguish/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/transformParameterPOM> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Distinguish/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "owl:differentFrom" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/transformParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "internal" ;
-        rr:predicate  dbf:transformParameter .
-
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "2" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap> ;
-        rr:predicate  owl:differentFrom .
-
-### Function Term Map
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Distinguish/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Distinguish/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/transformParameterPOM> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Distinguish/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/transformParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "internal" ;
-        rr:predicate  dbf:transformParameter .
-
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "owl:differentFrom" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "4" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/6>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/6/FunctionTermMap> ;
         rr:predicate  owl:differentFrom .
 
@@ -204,54 +112,96 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap> ;
         rr:predicate  owl:differentFrom .
 
 ### Function Term Map
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Distinguish/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Distinguish/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/transformParameterPOM> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/transformParameterPOM> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Distinguish/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/transformParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "internal" ;
-        rr:predicate  dbf:transformParameter .
-
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "owl:differentFrom" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/transformParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "internal" ;
+        rr:predicate  dbf:transformParameter .
+
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "1" .
+        rml:reference  "5" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap> ;
+        rr:predicate  owl:differentFrom .
+
+### Function Term Map
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Distinguish/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Distinguish/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/transformParameterPOM> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Distinguish/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/transformParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "internal" ;
+        rr:predicate  dbf:transformParameter .
+
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "owl:differentFrom" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "4" .
 
 
 ### PredicateObjectMap
 #######################
 <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/3>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/3/FunctionTermMap> ;
         rr:predicate  owl:differentFrom .
 
@@ -294,47 +244,90 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap> ;
+        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap> ;
         rr:predicate  owl:differentFrom .
 
 ### Function Term Map
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Distinguish/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Distinguish/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/transformParameterPOM> ,
-			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/transformParameterPOM> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Distinguish/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "owl:differentFrom" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/transformParameterPOM>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/transformParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "internal" ;
         rr:predicate  dbf:transformParameter .
 
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "5" .
+        rml:reference  "2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap> ;
+        rr:predicate  owl:differentFrom .
+
+### Function Term Map
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Distinguish/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Distinguish/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/transformParameterPOM> ,
+			       <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Distinguish/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/transformParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "internal" ;
+        rr:predicate  dbf:transformParameter .
+
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "owl:differentFrom" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Distinguish/SimplePropertyMapping/owl:differentFrom/1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "1" .
 
 
 ######################

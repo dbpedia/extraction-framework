@@ -33,17 +33,14 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_television_channel/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/lastAirDate/closed%20date> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/sisterStation/sister%20names> ,
-			       <./Mapping_en:Infobox_television_channel/IntermediateNodeMapping/PersonFunction/leaderFunction__2> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/parentOrganisation/parent> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/language/language> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/shareOfAudience/share> ,
 			       <./Mapping_en:Infobox_television_channel/latitude> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/motto/motto> ,
-			       <./Mapping_en:Infobox_television_channel/IntermediateNodeMapping/PersonFunction/leaderFunction__1> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/location/location> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastNetwork/affiliates> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/shareSource/share%20source> ,
@@ -72,8 +69,8 @@
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastArea/available> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foundingDate/founded> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/owningCompany/owner> ,
-			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastNetwork/network> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/headquarter/headquarters> ,
+			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastNetwork/network> ,
 			       <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/keyPerson/key%20people> ;
         rr:subjectMap          <./Mapping_en:Infobox_television_channel/SubjectMap> .
 
@@ -115,7 +112,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/lastAirDate/closed%20date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/lastAirDate/closed%20date/FunctionTermMap> ;
         rr:predicate  dbo:lastAirDate .
 
@@ -154,7 +150,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/sisterStation/sister%20names>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/sisterStation/sister%20names/FunctionTermMap> ;
         rr:predicate  dbo:sisterStation .
 
@@ -191,18 +186,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_television_channel/IntermediateNodeMapping/PersonFunction/leaderFunction__2>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_television_channel/IntermediateNodeMapping/PersonFunction/leaderFunction__2/ObjectMap> ;
-        rr:predicate  dbo:leaderFunction .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/parentOrganisation/parent>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/parentOrganisation/parent/FunctionTermMap> ;
         rr:predicate  dbo:parentOrganisation .
 
@@ -241,7 +226,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/language/language>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/language/language/FunctionTermMap> ;
         rr:predicate  dbo:language .
 
@@ -280,7 +264,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/shareOfAudience/share>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/shareOfAudience/share/FunctionTermMap> ;
         rr:predicate  dbo:shareOfAudience .
 
@@ -319,7 +302,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/latitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
 
@@ -357,7 +339,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/motto/motto>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/motto/motto/FunctionTermMap> ;
         rr:predicate  dbo:motto .
 
@@ -394,18 +375,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_television_channel/IntermediateNodeMapping/PersonFunction/leaderFunction__1>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_television_channel/IntermediateNodeMapping/PersonFunction/leaderFunction__1/ObjectMap> ;
-        rr:predicate  dbo:leaderFunction .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/location/location>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/location/location/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
@@ -444,7 +415,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastNetwork/affiliates>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastNetwork/affiliates/FunctionTermMap> ;
         rr:predicate  dbo:broadcastNetwork .
 
@@ -483,7 +453,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/shareSource/share%20source>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/shareSource/share%20source/FunctionTermMap> ;
         rr:predicate  dbo:shareSource .
 
@@ -522,7 +491,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/type/type>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/type/type/FunctionTermMap> ;
         rr:predicate  dbo:type .
 
@@ -561,7 +529,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastArea/broadcast_area>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastArea/broadcast_area/FunctionTermMap> ;
         rr:predicate  dbo:broadcastArea .
 
@@ -600,7 +567,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/firstAirDate/launch>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/firstAirDate/launch/FunctionTermMap> ;
         rr:predicate  dbo:firstAirDate .
 
@@ -639,7 +605,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/longitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/longitude/FunctionTermMap> ;
         rr:predicate  geo:long .
 
@@ -672,7 +637,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/successor/replaced%20by%20names>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/successor/replaced%20by%20names/FunctionTermMap> ;
         rr:predicate  dbo:successor .
 
@@ -711,7 +675,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foundingYear/founded>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foundingYear/founded/FunctionTermMap> ;
         rr:predicate  dbo:foundingYear .
 
@@ -750,7 +713,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/locationCity/city>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/locationCity/city/FunctionTermMap> ;
         rr:predicate  dbo:locationCity .
 
@@ -789,7 +751,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/shareDate/share%20as%20of>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/shareDate/share%20as%20of/FunctionTermMap> ;
         rr:predicate  dbo:shareDate .
 
@@ -828,7 +789,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/pictureFormat/picture%20format>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/pictureFormat/picture%20format/FunctionTermMap> ;
         rr:predicate  dbo:pictureFormat .
 
@@ -867,7 +827,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/timeshiftChannel/timeshift%20names>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/timeshiftChannel/timeshift%20names/FunctionTermMap> ;
         rr:predicate  dbo:timeshiftChannel .
 
@@ -906,7 +865,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastArea/broadcast%20area>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastArea/broadcast%20area/FunctionTermMap> ;
         rr:predicate  dbo:broadcastArea .
 
@@ -945,7 +903,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/formerName/former%20names>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/formerName/former%20names/FunctionTermMap> ;
         rr:predicate  dbo:formerName .
 
@@ -984,7 +941,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/predecessor/replaced%20names>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/predecessor/replaced%20names/FunctionTermMap> ;
         rr:predicate  dbo:predecessor .
 
@@ -1023,7 +979,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foaf:homepage/web>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -1062,7 +1017,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foaf:homepage/homepage>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -1101,7 +1055,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/slogan/slogan>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/slogan/slogan/FunctionTermMap> ;
         rr:predicate  dbo:slogan .
 
@@ -1140,7 +1093,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foaf:logo/logofile>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foaf:logo/logofile/FunctionTermMap> ;
         rr:predicate  foaf:logo .
 
@@ -1179,7 +1131,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -1218,7 +1169,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/locationCountry/country>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/locationCountry/country/FunctionTermMap> ;
         rr:predicate  dbo:locationCountry .
 
@@ -1257,7 +1207,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -1296,7 +1245,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foundedBy/founder>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foundedBy/founder/FunctionTermMap> ;
         rr:predicate  dbo:foundedBy .
 
@@ -1335,7 +1283,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/country/country/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
@@ -1374,7 +1321,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastArea/available>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastArea/available/FunctionTermMap> ;
         rr:predicate  dbo:broadcastArea .
 
@@ -1413,7 +1359,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foundingDate/founded>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/foundingDate/founded/FunctionTermMap> ;
         rr:predicate  dbo:foundingDate .
 
@@ -1452,7 +1397,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/owningCompany/owner>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/owningCompany/owner/FunctionTermMap> ;
         rr:predicate  dbo:owningCompany .
 
@@ -1491,7 +1435,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/headquarter/headquarters>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap> ;
         rr:predicate  dbo:headquarter .
 
@@ -1530,7 +1473,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastNetwork/network>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/broadcastNetwork/network/FunctionTermMap> ;
         rr:predicate  dbo:broadcastNetwork .
 
@@ -1569,7 +1511,6 @@
 #######################
 <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/keyPerson/key%20people>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_television_channel/SimplePropertyMapping/keyPerson/key%20people/FunctionTermMap> ;
         rr:predicate  dbo:keyPerson .
 

@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_person/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/deathCause/death_cause> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/predecessor/predecessor> ,
@@ -42,7 +41,6 @@
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/occupation/occupation> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/birthDate/birth_date> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/deathYear/death_date> ,
-			       <./Mapping_en:Infobox_person/IntermediateNodeMapping/PersonFunction/occupation__1> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/deathPlace/deathplace> ,
 			       <./Mapping_en:Infobox_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/alias/other_names> ,
@@ -60,7 +58,6 @@
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/board/boards> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/parent/parents> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/alias/othername> ,
-			       <./Mapping_en:Infobox_person/IntermediateNodeMapping/PersonFunction/personFunction__2> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/deathPlace/death_place> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/residence/residence> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/deathDate/death_date> ,
@@ -85,7 +82,6 @@
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/employer/employer> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/nationality/nationality> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/relative/relatives> ,
-			       <./Mapping_en:Infobox_person/GeoCoordinatesMapping> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/stateOfOrigin/nationality> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/salary/salary> ,
 			       <./Mapping_en:Infobox_person/SimplePropertyMapping/successor/successor> ,
@@ -133,7 +129,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/predecessor/predecessor>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap> ;
         rr:predicate  dbo:predecessor .
 
@@ -172,7 +167,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/deathCause/death_cause>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/deathCause/death_cause/FunctionTermMap> ;
         rr:predicate  dbo:deathCause .
 
@@ -211,7 +205,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/bodyDiscovered/body_discovered>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/bodyDiscovered/body_discovered/FunctionTermMap> ;
         rr:predicate  dbo:bodyDiscovered .
 
@@ -250,7 +243,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/networth/net%20worth>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/networth/net%20worth/FunctionTermMap> ;
         rr:predicate  dbo:networth .
 
@@ -296,7 +288,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/occupation/occupation>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/occupation/occupation/FunctionTermMap> ;
         rr:predicate  dbo:occupation .
 
@@ -335,7 +326,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -374,7 +364,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/deathYear/death_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/deathYear/death_date/FunctionTermMap> ;
         rr:predicate  dbo:deathYear .
 
@@ -411,18 +400,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_person/IntermediateNodeMapping/PersonFunction/occupation__1>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_person/IntermediateNodeMapping/PersonFunction/occupation__1/ObjectMap> ;
-        rr:predicate  dbo:occupation .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/deathPlace/deathplace>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
@@ -462,7 +441,6 @@
 <./Mapping_en:Infobox_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active> ;
-        dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap> ;
         rr:predicate   dbo:activeYearsEndYear .
 
@@ -501,7 +479,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/alias/other_names>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/alias/other_names/FunctionTermMap> ;
         rr:predicate  dbo:alias .
 
@@ -540,7 +517,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/title/title>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/title/title/FunctionTermMap> ;
         rr:predicate  dbo:title .
 
@@ -579,7 +555,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/networth/networth>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/networth/networth/FunctionTermMap> ;
         rr:predicate  dbo:networth .
 
@@ -625,7 +600,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/pseudonym/pseudonym>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/pseudonym/pseudonym/FunctionTermMap> ;
         rr:predicate  dbo:pseudonym .
 
@@ -664,7 +638,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/birthPlace/birthplace>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -703,7 +676,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/child/children>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/child/children/FunctionTermMap> ;
         rr:predicate  dbo:child .
 
@@ -742,7 +714,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/birthName/birthname>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/birthName/birthname/FunctionTermMap> ;
         rr:predicate  dbo:birthName .
 
@@ -781,7 +752,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/birthName/birth_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/birthName/birth_name/FunctionTermMap> ;
         rr:predicate  dbo:birthName .
 
@@ -821,7 +791,6 @@
 <./Mapping_en:Infobox_person/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_person/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive> ;
-        dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_person/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap> ;
         rr:predicate   dbo:activeYearsEndYear .
 
@@ -860,7 +829,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/spouse/spouse>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/spouse/spouse/FunctionTermMap> ;
         rr:predicate  dbo:spouse .
 
@@ -899,7 +867,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -938,7 +905,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/opponent/opponents>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/opponent/opponents/FunctionTermMap> ;
         rr:predicate  dbo:opponent .
 
@@ -977,7 +943,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/board/boards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/board/boards/FunctionTermMap> ;
         rr:predicate  dbo:board .
 
@@ -1016,7 +981,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/parent/parents>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/parent/parents/FunctionTermMap> ;
         rr:predicate  dbo:parent .
 
@@ -1055,7 +1019,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/alias/othername>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/alias/othername/FunctionTermMap> ;
         rr:predicate  dbo:alias .
 
@@ -1092,18 +1055,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_person/IntermediateNodeMapping/PersonFunction/personFunction__2>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_person/IntermediateNodeMapping/PersonFunction/personFunction__2/ObjectMap> ;
-        rr:predicate  dbo:personFunction .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/deathPlace/death_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
@@ -1142,7 +1095,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/residence/residence>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/residence/residence/FunctionTermMap> ;
         rr:predicate  dbo:residence .
 
@@ -1181,7 +1133,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/deathDate/death_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
@@ -1220,7 +1171,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -1259,7 +1209,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/height/height>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/height/height/FunctionTermMap> ;
         rr:predicate  dbo:height .
 
@@ -1306,7 +1255,6 @@
 <./Mapping_en:Infobox_person/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_person/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive> ;
-        dcterms:type  "startDateIntervalMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsStartYear .
 
@@ -1345,7 +1293,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/citizenship/citizenship>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/citizenship/citizenship/FunctionTermMap> ;
         rr:predicate  dbo:citizenship .
 
@@ -1384,7 +1331,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/foaf:homepage/homepage>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -1423,7 +1369,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/relation/relations>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/relation/relations/FunctionTermMap> ;
         rr:predicate  dbo:relation .
 
@@ -1462,7 +1407,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/almaMater/alma_mater>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap> ;
         rr:predicate  dbo:almaMater .
 
@@ -1501,7 +1445,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/birthYear/birth_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/birthYear/birth_date/FunctionTermMap> ;
         rr:predicate  dbo:birthYear .
 
@@ -1540,7 +1483,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/restingPlace/resting_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/restingPlace/resting_place/FunctionTermMap> ;
         rr:predicate  dbo:restingPlace .
 
@@ -1579,7 +1521,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/deathDate/deathdate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
@@ -1618,7 +1559,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/callSign/callsign>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/callSign/callsign/FunctionTermMap> ;
         rr:predicate  dbo:callSign .
 
@@ -1658,7 +1598,6 @@
 <./Mapping_en:Infobox_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_person/EndDate/activeYearsStartYear/activeYearsEndYear/years_active> ;
-        dcterms:type  "startDateIntervalMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/StartDate/activeYearsStartYear/activeYearsEndYear/years_active/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsStartYear .
 
@@ -1697,7 +1636,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/knownFor/known_for>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/knownFor/known_for/FunctionTermMap> ;
         rr:predicate  dbo:knownFor .
 
@@ -1736,7 +1674,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/award/awards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/award/awards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -1775,7 +1712,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/hometown/home_town>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/hometown/home_town/FunctionTermMap> ;
         rr:predicate  dbo:hometown .
 
@@ -1814,7 +1750,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/party/party>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/party/party/FunctionTermMap> ;
         rr:predicate  dbo:party .
 
@@ -1853,7 +1788,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/education/education>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/education/education/FunctionTermMap> ;
         rr:predicate  dbo:education .
 
@@ -1892,7 +1826,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/partner/partner>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/partner/partner/FunctionTermMap> ;
         rr:predicate  dbo:partner .
 
@@ -1931,7 +1864,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/employer/employer>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/employer/employer/FunctionTermMap> ;
         rr:predicate  dbo:employer .
 
@@ -1970,7 +1902,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/relative/relatives>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/relative/relatives/FunctionTermMap> ;
         rr:predicate  dbo:relative .
 
@@ -2009,7 +1940,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/nationality/nationality>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
         rr:predicate  dbo:nationality .
 
@@ -2046,18 +1976,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_person/GeoCoordinatesMapping>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateGeoMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_person/GeoCoordinatesMapping/ObjectMap> ;
-        rr:predicate  dbo:restingPlacePosition .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/stateOfOrigin/nationality>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/stateOfOrigin/nationality/FunctionTermMap> ;
         rr:predicate  dbo:stateOfOrigin .
 
@@ -2096,7 +2016,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/salary/salary>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/salary/salary/FunctionTermMap> ;
         rr:predicate  dbo:salary .
 
@@ -2142,7 +2061,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/successor/successor>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/successor/successor/FunctionTermMap> ;
         rr:predicate  dbo:successor .
 
@@ -2181,7 +2099,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -2220,7 +2137,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/ethnicity/ethnicity>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/ethnicity/ethnicity/FunctionTermMap> ;
         rr:predicate  dbo:ethnicity .
 
@@ -2259,7 +2175,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/religion/religion>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/religion/religion/FunctionTermMap> ;
         rr:predicate  dbo:religion .
 
@@ -2298,7 +2213,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/birthDate/birthdate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -2337,7 +2251,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/weight/weight>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
         rr:predicate  dbo:weight .
 
@@ -2383,7 +2296,6 @@
 #######################
 <./Mapping_en:Infobox_person/SimplePropertyMapping/networth/net_worth>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_person/SimplePropertyMapping/networth/net_worth/FunctionTermMap> ;
         rr:predicate  dbo:networth .
 
@@ -2436,29 +2348,19 @@
 ############
 
 
-<./Mapping_en:Infobox_person/Function/StartDateFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:startDateFunction ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_person/Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_person/Function/LatitudeFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:latFunction ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_person/Function/LongitudeFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:lonFunction ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_person/Function/EndDateFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:endDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_person/Function/StartDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:startDateFunction ;
         rr:predicate  fno:executes .
 
 

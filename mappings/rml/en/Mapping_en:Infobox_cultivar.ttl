@@ -33,14 +33,13 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_cultivar/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/marketing_names> ,
 			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid> ,
-			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/cultivatedVariety/cultivar> ,
+			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species> ,
 			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/origin/origin> ,
-			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/marketing_names> ;
+			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/cultivatedVariety/cultivar> ;
         rr:subjectMap          <./Mapping_en:Infobox_cultivar/SubjectMap> .
 
 
@@ -76,126 +75,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap> ;
-        rr:predicate  dbo:species .
-
-### Function Term Map
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_cultivar/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_cultivar/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_cultivar/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "species" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "species" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap> ;
-        rr:predicate  dbo:hybrid .
-
-### Function Term Map
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_cultivar/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_cultivar/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_cultivar/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "hybrid" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "hybrid" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_cultivar/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_cultivar/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_cultivar/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "name" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/cultivatedVariety/cultivar>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/cultivatedVariety/cultivar/FunctionTermMap> ;
         rr:predicate  dbo:cultivatedVariety .
 
@@ -234,7 +115,6 @@
 #######################
 <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/origin/origin>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/origin/origin/FunctionTermMap> ;
         rr:predicate  dbo:origin .
 
@@ -271,9 +151,84 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap> ;
+        rr:predicate  dbo:species .
+
+### Function Term Map
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_cultivar/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_cultivar/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_cultivar/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "species" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/species/species/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "species" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap> ;
+        rr:predicate  dbo:hybrid .
+
+### Function Term Map
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_cultivar/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_cultivar/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_cultivar/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "hybrid" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/hybrid/hybrid/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "hybrid" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/marketing_names>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/marketing_names/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -306,6 +261,44 @@
 <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/marketing_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "marketing_names" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_cultivar/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_cultivar/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_cultivar/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_cultivar/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
 
 
 ######################

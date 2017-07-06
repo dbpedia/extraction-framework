@@ -33,14 +33,13 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_standard/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title> ,
-			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title> ,
 			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language> ,
+			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer> ,
 			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer> ,
-			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title> ,
-			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer> ;
+			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist> ,
+			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title> ;
         rr:subjectMap          <./Mapping_en:Infobox_standard/SubjectMap> .
 
 
@@ -78,7 +77,6 @@
 #######################
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/english_title/FunctionTermMap> ;
         rr:predicate  dbo:title .
 
@@ -117,7 +115,6 @@
 #######################
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/lyrics/lyricist/FunctionTermMap> ;
         rr:predicate  dbo:lyrics .
 
@@ -154,48 +151,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap> ;
-        rr:predicate  dbo:language .
-
-### Function Term Map
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_standard/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_standard/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_standard/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "language" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "language" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/composer/composer/FunctionTermMap> ;
         rr:predicate  dbo:composer .
 
@@ -232,48 +189,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap> ;
-        rr:predicate  dbo:title .
-
-### Function Term Map
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_standard/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_standard/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_standard/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "title" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "title" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer/FunctionTermMap> ;
         rr:predicate  dbo:writer .
 
@@ -306,6 +223,82 @@
 <./Mapping_en:Infobox_standard/SimplePropertyMapping/writer/writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "writer" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+### Function Term Map
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_standard/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_standard/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_standard/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "language" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "language" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap> ;
+        rr:predicate  dbo:title .
+
+### Function Term Map
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_standard/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_standard/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_standard/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "title" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_standard/SimplePropertyMapping/title/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title" .
 
 
 ######################

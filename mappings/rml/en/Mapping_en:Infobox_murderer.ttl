@@ -33,15 +33,14 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_murderer/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthName/birthname> ,
 			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathDate/death_date> ,
 			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/foaf:name/name> ,
 			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/country/country> ,
 			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthDate/birth_date> ,
-			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place> ,
-			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthPlace/birth_place> ;
+			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthPlace/birth_place> ,
+			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place> ;
         rr:subjectMap          <./Mapping_en:Infobox_murderer/SubjectMap> .
 
 
@@ -84,7 +83,6 @@
 #######################
 <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthName/birthname>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthName/birthname/FunctionTermMap> ;
         rr:predicate  dbo:birthName .
 
@@ -123,7 +121,6 @@
 #######################
 <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathDate/death_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
@@ -162,7 +159,6 @@
 #######################
 <./Mapping_en:Infobox_murderer/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -201,7 +197,6 @@
 #######################
 <./Mapping_en:Infobox_murderer/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/country/country/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
@@ -240,7 +235,6 @@
 #######################
 <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -277,48 +271,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
-        rr:predicate  dbo:deathPlace .
-
-### Function Term Map
-<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_murderer/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_murderer/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_murderer/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "deathPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "death_place" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -351,6 +305,44 @@
 <./Mapping_en:Infobox_murderer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "birth_place" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_murderer/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_murderer/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_murderer/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_murderer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_place" .
 
 
 ######################

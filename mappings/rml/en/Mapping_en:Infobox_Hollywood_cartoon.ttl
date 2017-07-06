@@ -33,14 +33,13 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Hollywood_cartoon/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series> ,
-			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor> ,
-			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name> ,
-			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator> ,
 			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director> ,
-			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer> ;
+			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor> ,
+			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer> ,
+			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name> ,
+			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series> ;
         rr:subjectMap          <./Mapping_en:Infobox_Hollywood_cartoon/SubjectMap> .
 
 
@@ -77,7 +76,6 @@
 #######################
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/series/series/FunctionTermMap> ;
         rr:predicate  dbo:series .
 
@@ -114,48 +112,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap> ;
-        rr:predicate  dbo:distributor .
-
-### Function Term Map
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Hollywood_cartoon/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Hollywood_cartoon/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Hollywood_cartoon/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "distributor" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "distributor" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/foaf:name/cartoon_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -192,48 +150,84 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator>
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap> ;
-        rr:predicate  dbo:animator .
+        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap> ;
+        rr:predicate  dbo:producer .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap>
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Hollywood_cartoon/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Hollywood_cartoon/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Hollywood_cartoon/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "animator" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "producer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 ### References
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "animator" .
+        rml:reference  "producer" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap> ;
+        rr:predicate  dbo:distributor .
+
+### Function Term Map
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Hollywood_cartoon/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Hollywood_cartoon/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Hollywood_cartoon/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "distributor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/distributor/distributor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "distributor" .
 
 
 ### PredicateObjectMap
 #######################
 <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/director/director/FunctionTermMap> ;
         rr:predicate  dbo:director .
 
@@ -270,41 +264,40 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer>
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap> ;
-        rr:predicate  dbo:producer .
+        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap> ;
+        rr:predicate  dbo:animator .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap>
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Hollywood_cartoon/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Hollywood_cartoon/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Hollywood_cartoon/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "producer" ;
+        rr:object     "animator" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/producer/producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_Hollywood_cartoon/SimplePropertyMapping/animator/animator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "producer" .
+        rml:reference  "animator" .
 
 
 ######################

@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:IMDb_name/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:IMDb_name/SimplePropertyMapping/imdbId/id> ;
         rr:subjectMap          <./Mapping_en:IMDb_name/SubjectMap> .
@@ -66,7 +65,6 @@
 #######################
 <./Mapping_en:IMDb_name/SimplePropertyMapping/imdbId/id>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:IMDb_name/SimplePropertyMapping/imdbId/id/FunctionTermMap> ;
         rr:predicate  dbo:imdbId .
 

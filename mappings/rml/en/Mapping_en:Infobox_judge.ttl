@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_judge/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/residence/residence> ,
 			       <./Mapping_en:Infobox_judge/SimplePropertyMapping/birthPlace/birth_place> ,
@@ -43,7 +42,6 @@
 			       <./Mapping_en:Infobox_judge/SimplePropertyMapping/occupation/occupation> ,
 			       <./Mapping_en:Infobox_judge/SimplePropertyMapping/foaf:homepage/website> ,
 			       <./Mapping_en:Infobox_judge/SimplePropertyMapping/relation/relations> ,
-			       <./Mapping_en:Infobox_judge/GeoCoordinatesMapping> ,
 			       <./Mapping_en:Infobox_judge/SimplePropertyMapping/nationality/nationality> ,
 			       <./Mapping_en:Infobox_judge/SimplePropertyMapping/child/children> ,
 			       <./Mapping_en:Infobox_judge/SimplePropertyMapping/partner/partner> ,
@@ -95,7 +93,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/residence/residence>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/residence/residence/FunctionTermMap> ;
         rr:predicate  dbo:residence .
 
@@ -134,7 +131,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -173,7 +169,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/restingPlace/restingplace>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/restingPlace/restingplace/FunctionTermMap> ;
         rr:predicate  dbo:restingPlace .
 
@@ -212,7 +207,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -251,7 +245,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/almaMater/alma_mater>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/almaMater/alma_mater/FunctionTermMap> ;
         rr:predicate  dbo:almaMater .
 
@@ -290,7 +283,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/occupation/occupation>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/occupation/occupation/FunctionTermMap> ;
         rr:predicate  dbo:occupation .
 
@@ -329,7 +321,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -368,7 +359,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/relation/relations>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/relation/relations/FunctionTermMap> ;
         rr:predicate  dbo:relation .
 
@@ -405,18 +395,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_judge/GeoCoordinatesMapping>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateGeoMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_judge/GeoCoordinatesMapping/ObjectMap> ;
-        rr:predicate  dbo:restingPlacePosition .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/nationality/nationality>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
         rr:predicate  dbo:nationality .
 
@@ -455,7 +435,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/child/children>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/child/children/FunctionTermMap> ;
         rr:predicate  dbo:child .
 
@@ -494,7 +473,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/partner/partner>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/partner/partner/FunctionTermMap> ;
         rr:predicate  dbo:partner .
 
@@ -533,7 +511,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/party/party>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/party/party/FunctionTermMap> ;
         rr:predicate  dbo:party .
 
@@ -572,7 +549,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/religion/religion>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/religion/religion/FunctionTermMap> ;
         rr:predicate  dbo:religion .
 
@@ -611,7 +587,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/otherParty/otherparty>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/otherParty/otherparty/FunctionTermMap> ;
         rr:predicate  dbo:otherParty .
 
@@ -650,7 +625,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/spouse/spouse>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/spouse/spouse/FunctionTermMap> ;
         rr:predicate  dbo:spouse .
 
@@ -689,7 +663,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -728,7 +701,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/deathDate/death_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
@@ -767,7 +739,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/birthName/birthname>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/birthName/birthname/FunctionTermMap> ;
         rr:predicate  dbo:birthName .
 
@@ -806,7 +777,6 @@
 #######################
 <./Mapping_en:Infobox_judge/SimplePropertyMapping/deathPlace/death_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_judge/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
@@ -852,19 +822,9 @@
 ############
 
 
-<./Mapping_en:Infobox_judge/Function/LatitudeFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:latFunction ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_judge/Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_judge/Function/LongitudeFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:lonFunction ;
         rr:predicate  fno:executes .
 
 

@@ -32,21 +32,9 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
-        rml:logicalSource      <./Mapping_en:Listen/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8> ,
-			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3> ,
-			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6> ,
-			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1> ,
-			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7> ,
-			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9> ,
-			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11> ,
-			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5> ,
-			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4> ,
-			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10> ,
-			       <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2> ;
-        rr:subjectMap          <./Mapping_en:Listen/SubjectMap> .
+<>      a                  rr:TriplesMap ;
+        rml:logicalSource  <./Mapping_en:Listen/LogicalSource> ;
+        rr:subjectMap      <./Mapping_en:Listen/SubjectMap> .
 
 
 ### Main SubjectMap
@@ -72,104 +60,6 @@
 # Mappings
 ###########
 
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__8/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__3/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__6/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__1/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__7/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__9/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__11/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__5/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__4/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__10/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Listen/IntermediateNodeMapping/Sound/soundRecording__2/ObjectMap> ;
-        rr:predicate  dbo:soundRecording .
-
 
 ######################
 # Conditional Mappings
@@ -177,23 +67,5 @@
 
 
 
-############
-# Functions
-############
-
-
-<./Mapping_en:Listen/Function/SimplePropertyFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:simplePropertyFunction ;
-        rr:predicate  fno:executes .
-
-
-### Functions SubjectMap
-#########################
-
-<./Mapping_en:Listen/SubjectMap/Function>
-        a            rr:SubjectMap ;
-        rr:class     fno:Execution ;
-        rr:termType  rr:BlankNode .
 
 

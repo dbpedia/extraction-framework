@@ -33,12 +33,11 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_website/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/language/language> ,
-			       <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner> ,
 			       <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:name/name> ,
 			       <./Mapping_en:Infobox_website/SimplePropertyMapping/type/type> ,
+			       <./Mapping_en:Infobox_website/SimplePropertyMapping/language/language> ,
 			       <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author> ,
 			       <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url> ;
         rr:subjectMap          <./Mapping_en:Infobox_website/SubjectMap> .
@@ -74,9 +73,84 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_website/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_website/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_website/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "url" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap> ;
+        rr:predicate  dbo:author .
+
+### Function Term Map
+<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_website/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_website/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_website/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "author" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "author" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_website/SimplePropertyMapping/language/language>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/language/language/FunctionTermMap> ;
         rr:predicate  dbo:language .
 
@@ -113,48 +187,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
-        rr:predicate  dbo:owner .
-
-### Function Term Map
-<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_website/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_website/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_website/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "owner" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "owner" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_website/SimplePropertyMapping/type/type>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/type/type/FunctionTermMap> ;
         rr:predicate  dbo:type .
 
@@ -193,7 +227,6 @@
 #######################
 <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -230,80 +263,40 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author>
+<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap> ;
-        rr:predicate  dbo:author .
+        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
 
 ### Function Term Map
-<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap>
+<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_website/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_website/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_website/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "author" ;
+        rr:object     "owner" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_website/SimplePropertyMapping/author/author/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_website/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "author" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap> ;
-        rr:predicate  foaf:homepage .
-
-### Function Term Map
-<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_website/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_website/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_website/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_website/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "url" .
+        rml:reference  "owner" .
 
 
 ######################

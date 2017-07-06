@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "conditionalMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_presenter/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_presenter/SimplePropertyMapping/country/country> ,
 			       <./Mapping_en:Infobox_presenter/SimplePropertyMapping/birthPlace/birth_place> ,
@@ -73,7 +72,6 @@
 #######################
 <./Mapping_en:Infobox_presenter/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_presenter/SimplePropertyMapping/country/country/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
@@ -112,7 +110,6 @@
 #######################
 <./Mapping_en:Infobox_presenter/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_presenter/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -151,7 +148,6 @@
 #######################
 <./Mapping_en:Infobox_presenter/SimplePropertyMapping/foaf:homepage/web>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_presenter/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -186,12 +182,10 @@
         rml:reference  "web" .
 
 
-
 ### PredicateObjectMap
 #######################
 <./Mapping_en:Infobox_presenter/SimplePropertyMapping/deathDate/death_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_presenter/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
@@ -226,11 +220,11 @@
         rml:reference  "death_date" .
 
 
+
 ### PredicateObjectMap
 #######################
 <./Mapping_en:Infobox_presenter/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_presenter/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -269,7 +263,6 @@
 #######################
 <./Mapping_en:Infobox_presenter/SimplePropertyMapping/deathPlace/death_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_presenter/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
@@ -308,7 +301,6 @@
 #######################
 <./Mapping_en:Infobox_presenter/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_presenter/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -347,7 +339,6 @@
 #######################
 <./Mapping_en:Infobox_presenter/SimplePropertyMapping/birthName/birth_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_presenter/SimplePropertyMapping/birthName/birth_name/FunctionTermMap> ;
         rr:predicate  dbo:birthName .
 
@@ -391,7 +382,6 @@
 ###################################
 <./Mapping_en:Infobox_presenter/ConditionalMapping/station_isSet_null>
         a                    rr:PredicateObjectMap ;
-        dcterms:type         "conditionalMapping" ;
         crml:equalCondition  <./Mapping_en:Infobox_presenter/ConditionalMapping/station_isSet_null/FunctionTermMap> ;
         crml:fallbackMap     <./Mapping_en:Infobox_presenter/ConditionalMapping/station_isSet_null/1> ;
         rr:object            dbo:Person , wikidata:Q2722764 , wikidata:Q215627 , dbo:Presenter , dbo:RadioHost , dul:NaturalPerson , owl:Thing , dbo:Agent , dul:Agent , foaf:Person , schema:Person , wikidata:Q5 , wikidata:Q13590141 ;

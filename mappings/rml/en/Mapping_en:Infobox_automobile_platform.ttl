@@ -33,12 +33,10 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_automobile_platform/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_automobile_platform/StartDate/productionStartDate/productionEndDate/production> ,
 			       <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/predecessor/predecessor> ,
 			       <./Mapping_en:Infobox_automobile_platform/StartDate/productionStartYear/productionEndYear/production> ,
-			       <./Mapping_en:Infobox_automobile_platform/IntermediateNodeMapping/AutomobileEngine/engine__1> ,
 			       <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/manufacturer/manufacturer> ,
 			       <./Mapping_en:Infobox_automobile_platform/CorrespondingProperty> ,
 			       <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/length/length> ,
@@ -92,7 +90,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/predecessor/predecessor>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap> ;
         rr:predicate  dbo:predecessor .
 
@@ -132,7 +129,6 @@
 <./Mapping_en:Infobox_automobile_platform/StartDate/productionStartDate/productionEndDate/production>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_automobile_platform/EndDate/productionStartDate/productionEndDate/production> ;
-        dcterms:type  "startDateIntervalMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap> ;
         rr:predicate  dbo:productionStartDate .
 
@@ -172,7 +168,6 @@
 <./Mapping_en:Infobox_automobile_platform/StartDate/productionStartYear/productionEndYear/production>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_automobile_platform/EndDate/productionStartYear/productionEndYear/production> ;
-        dcterms:type  "startDateIntervalMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap> ;
         rr:predicate  dbo:productionStartYear .
 
@@ -209,18 +204,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_automobile_platform/IntermediateNodeMapping/AutomobileEngine/engine__1>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_automobile_platform/IntermediateNodeMapping/AutomobileEngine/engine__1/ObjectMap> ;
-        rr:predicate  dbo:engine .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/manufacturer/manufacturer>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap> ;
         rr:predicate  dbo:manufacturer .
 
@@ -267,7 +252,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/length/length>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/length/length/FunctionTermMap> ;
         rr:predicate  dbo:length .
 
@@ -313,7 +297,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/assembly/assembly>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/assembly/assembly/FunctionTermMap> ;
         rr:predicate  dbo:assembly .
 
@@ -352,7 +335,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/foaf:name/aka>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/foaf:name/aka/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -391,7 +373,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -430,7 +411,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/transmission/transmission>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/transmission/transmission/FunctionTermMap> ;
         rr:predicate  dbo:transmission .
 
@@ -469,7 +449,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/successor/successor>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/successor/successor/FunctionTermMap> ;
         rr:predicate  dbo:successor .
 
@@ -509,7 +488,6 @@
 <./Mapping_en:Infobox_automobile_platform/EndDate/productionStartYear/productionEndYear/production>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_automobile_platform/StartDate/productionStartYear/productionEndYear/production> ;
-        dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_automobile_platform/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap> ;
         rr:predicate   dbo:productionEndYear .
 
@@ -548,7 +526,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/bodyStyle/body_style>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap> ;
         rr:predicate  dbo:bodyStyle .
 
@@ -587,7 +564,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/height/height>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/height/height/FunctionTermMap> ;
         rr:predicate  dbo:height .
 
@@ -634,7 +610,6 @@
 <./Mapping_en:Infobox_automobile_platform/EndDate/productionStartDate/productionEndDate/production>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_automobile_platform/StartDate/productionStartDate/productionEndDate/production> ;
-        dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_automobile_platform/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap> ;
         rr:predicate   dbo:productionEndDate .
 
@@ -673,7 +648,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/layout/layout>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/layout/layout/FunctionTermMap> ;
         rr:predicate  dbo:layout .
 
@@ -712,7 +686,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/weight/weight>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
         rr:predicate  dbo:weight .
 
@@ -758,7 +731,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/wheelbase/wheelbase>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap> ;
         rr:predicate  dbo:wheelbase .
 
@@ -804,7 +776,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/relatedMeanOfTransportation/related>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap> ;
         rr:predicate  dbo:relatedMeanOfTransportation .
 
@@ -843,7 +814,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/vehicle/vehicles>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/vehicle/vehicles/FunctionTermMap> ;
         rr:predicate  dbo:vehicle .
 
@@ -882,7 +852,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/width/width>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/width/width/FunctionTermMap> ;
         rr:predicate  dbo:width .
 
@@ -928,7 +897,6 @@
 #######################
 <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/class/class>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_automobile_platform/SimplePropertyMapping/class/class/FunctionTermMap> ;
         rr:predicate  dbo:class .
 

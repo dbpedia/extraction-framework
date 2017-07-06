@@ -33,19 +33,14 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_organization/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/abbreviation/abbreviation> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/type/type> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/purpose/purpose> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/extinctionDate/extinction> ,
-			       <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__5> ,
-			       <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__1> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/extinctionYear/extinction> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/formationDate/formation> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/headquarter/headquarters> ,
-			       <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__2> ,
-			       <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__7> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/location/location> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/foaf:name/name> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/mainOrgan/main_organ> ,
@@ -53,19 +48,15 @@
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/foaf:homepage/website> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/formationYear/formation> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/numberOfStaff/num_staff> ,
-			       <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__3> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/numberOfVolunteers/num_volunteers> ,
 			       <./Mapping_en:Infobox_organization/latitude> ,
-			       <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__4> ,
 			       <./Mapping_en:Infobox_organization/longitude> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/motto/motto> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/membership/membership> ,
-			       <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__8> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/language/language> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/parentOrganisation/parent_organization> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/budget/budget> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/regionServed/region_served> ,
-			       <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__6> ,
 			       <./Mapping_en:Infobox_organization/SimplePropertyMapping/affiliation/affiliations> ;
         rr:subjectMap          <./Mapping_en:Infobox_organization/SubjectMap> .
 
@@ -103,7 +94,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/abbreviation/abbreviation>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/abbreviation/abbreviation/FunctionTermMap> ;
         rr:predicate  dbo:abbreviation .
 
@@ -142,7 +132,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/type/type>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/type/type/FunctionTermMap> ;
         rr:predicate  dbo:type .
 
@@ -181,7 +170,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/purpose/purpose>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/purpose/purpose/FunctionTermMap> ;
         rr:predicate  dbo:purpose .
 
@@ -220,7 +208,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/extinctionDate/extinction>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/extinctionDate/extinction/FunctionTermMap> ;
         rr:predicate  dbo:extinctionDate .
 
@@ -257,27 +244,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__5>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__5/ObjectMap> ;
-        rr:predicate  dbo:leaderFunction .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__1>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__1/ObjectMap> ;
-        rr:predicate  dbo:leaderFunction .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/extinctionYear/extinction>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/extinctionYear/extinction/FunctionTermMap> ;
         rr:predicate  dbo:extinctionYear .
 
@@ -316,7 +284,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/headquarter/headquarters>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap> ;
         rr:predicate  dbo:headquarter .
 
@@ -355,7 +322,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/formationDate/formation>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/formationDate/formation/FunctionTermMap> ;
         rr:predicate  dbo:formationDate .
 
@@ -392,27 +358,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__2>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__2/ObjectMap> ;
-        rr:predicate  dbo:leaderFunction .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__7>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__7/ObjectMap> ;
-        rr:predicate  dbo:leaderFunction .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/location/location>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/location/location/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
@@ -451,7 +398,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/mainOrgan/main_organ>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/mainOrgan/main_organ/FunctionTermMap> ;
         rr:predicate  dbo:mainOrgan .
 
@@ -490,7 +436,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -529,7 +474,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/status/status>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/status/status/FunctionTermMap> ;
         rr:predicate  dbo:status .
 
@@ -568,7 +512,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -607,7 +550,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/formationYear/formation>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/formationYear/formation/FunctionTermMap> ;
         rr:predicate  dbo:formationYear .
 
@@ -646,7 +588,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/numberOfStaff/num_staff>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/numberOfStaff/num_staff/FunctionTermMap> ;
         rr:predicate  dbo:numberOfStaff .
 
@@ -683,18 +624,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__3>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__3/ObjectMap> ;
-        rr:predicate  dbo:leaderFunction .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/numberOfVolunteers/num_volunteers>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/numberOfVolunteers/num_volunteers/FunctionTermMap> ;
         rr:predicate  dbo:numberOfVolunteers .
 
@@ -733,7 +664,6 @@
 #######################
 <./Mapping_en:Infobox_organization/latitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
 
@@ -769,18 +699,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__4>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__4/ObjectMap> ;
-        rr:predicate  dbo:leaderFunction .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_organization/longitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/longitude/FunctionTermMap> ;
         rr:predicate  geo:long .
 
@@ -813,7 +733,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/motto/motto>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/motto/motto/FunctionTermMap> ;
         rr:predicate  dbo:motto .
 
@@ -852,7 +771,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/membership/membership>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/membership/membership/FunctionTermMap> ;
         rr:predicate  dbo:membership .
 
@@ -889,18 +807,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__8>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__8/ObjectMap> ;
-        rr:predicate  dbo:leaderFunction .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/language/language>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/language/language/FunctionTermMap> ;
         rr:predicate  dbo:language .
 
@@ -939,7 +847,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/parentOrganisation/parent_organization>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/parentOrganisation/parent_organization/FunctionTermMap> ;
         rr:predicate  dbo:parentOrganisation .
 
@@ -978,7 +885,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/budget/budget>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/budget/budget/FunctionTermMap> ;
         rr:predicate  dbo:budget .
 
@@ -1022,18 +928,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__6>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_organization/IntermediateNodeMapping/PersonFunction/leaderFunction__6/ObjectMap> ;
-        rr:predicate  dbo:leaderFunction .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/regionServed/region_served>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/regionServed/region_served/FunctionTermMap> ;
         rr:predicate  dbo:regionServed .
 
@@ -1072,7 +968,6 @@
 #######################
 <./Mapping_en:Infobox_organization/SimplePropertyMapping/affiliation/affiliations>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_organization/SimplePropertyMapping/affiliation/affiliations/FunctionTermMap> ;
         rr:predicate  dbo:affiliation .
 

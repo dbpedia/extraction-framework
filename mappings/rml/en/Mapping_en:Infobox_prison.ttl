@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_prison/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_prison/SimplePropertyMapping/foaf:name/prison_name> ,
 			       <./Mapping_en:Infobox_prison/SimplePropertyMapping/location/location> ;
@@ -75,7 +74,6 @@
 #######################
 <./Mapping_en:Infobox_prison/SimplePropertyMapping/location/location>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_prison/SimplePropertyMapping/location/location/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
@@ -114,7 +112,6 @@
 #######################
 <./Mapping_en:Infobox_prison/SimplePropertyMapping/foaf:name/prison_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_prison/SimplePropertyMapping/foaf:name/prison_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 

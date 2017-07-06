@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_diocese/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi> ,
 			       <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory> ,
@@ -42,7 +41,6 @@
 			       <./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province> ,
 			       <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members> ,
 			       <./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron> ,
-			       <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping> ,
 			       <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/latin> ,
 			       <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction> ,
 			       <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name> ,
@@ -91,7 +89,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_sqmi/FunctionTermMap> ;
         rr:predicate  dbo:area .
 
@@ -137,7 +134,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/territory/territory/FunctionTermMap> ;
         rr:predicate  dbo:territory .
 
@@ -176,7 +172,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/established/established>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/established/established/FunctionTermMap> ;
         rr:predicate  dbo:established .
 
@@ -215,7 +210,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/local>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/local/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -254,7 +248,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/province/province/FunctionTermMap> ;
         rr:predicate  dbo:province .
 
@@ -293,7 +286,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap> ;
         rr:predicate  dbo:numberOfMembers .
 
@@ -332,7 +324,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/patron/patron/FunctionTermMap> ;
         rr:predicate  dbo:patron .
 
@@ -369,18 +360,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_diocese/GeoCoordinatesMapping>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateGeoMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_diocese/GeoCoordinatesMapping/ObjectMap> ;
-        rr:predicate  dbo:location .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/latin>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/latin/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -419,7 +400,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/jurisdiction/jurisdiction/FunctionTermMap> ;
         rr:predicate  dbo:jurisdiction .
 
@@ -458,7 +438,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -497,7 +476,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/population/FunctionTermMap> ;
         rr:predicate  dbo:area .
 
@@ -536,7 +514,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -575,7 +552,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/country/country/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
@@ -614,7 +590,6 @@
 #######################
 <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_diocese/SimplePropertyMapping/area/area_km2/FunctionTermMap> ;
         rr:predicate  dbo:area .
 
@@ -667,19 +642,9 @@
 ############
 
 
-<./Mapping_en:Infobox_diocese/Function/LatitudeFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:latFunction ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_diocese/Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_diocese/Function/LongitudeFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:lonFunction ;
         rr:predicate  fno:executes .
 
 

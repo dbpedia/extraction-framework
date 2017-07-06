@@ -33,17 +33,15 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "conditionalMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_military_installation/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_military_installation/ConditionalMapping/type_contains_Castle> ,
 			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/code/code> ,
 			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/buildingEndDate/built> ,
-			       <./Mapping_en:Infobox_military_installation/GeoCoordinatesMapping> ,
 			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/height/height> ,
 			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/type/type> ,
 			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/location/location> ,
 			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/foaf:name/native_name> ,
+			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/location/location> ,
 			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/demolitionDate/demolished> ,
 			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/owner/ownership> ,
 			       <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/builder/builder> ;
@@ -77,7 +75,6 @@
 #######################
 <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/code/code>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/code/code/FunctionTermMap> ;
         rr:predicate  dbo:code .
 
@@ -116,7 +113,6 @@
 #######################
 <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/buildingEndDate/built>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/buildingEndDate/built/FunctionTermMap> ;
         rr:predicate  dbo:buildingEndDate .
 
@@ -153,18 +149,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_military_installation/GeoCoordinatesMapping>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateGeoMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_military_installation/GeoCoordinatesMapping/ObjectMap> ;
-        rr:predicate  dbo:location .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/height/height>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/height/height/FunctionTermMap> ;
         rr:predicate  dbo:height .
 
@@ -203,7 +189,6 @@
 #######################
 <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/type/type>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/type/type/FunctionTermMap> ;
         rr:predicate  dbo:type .
 
@@ -242,7 +227,6 @@
 #######################
 <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -281,7 +265,6 @@
 #######################
 <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/foaf:name/native_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -320,7 +303,6 @@
 #######################
 <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/location/location>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/location/location/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
@@ -359,7 +341,6 @@
 #######################
 <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/demolitionDate/demolished>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap> ;
         rr:predicate  dbo:demolitionDate .
 
@@ -398,7 +379,6 @@
 #######################
 <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/owner/ownership>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/owner/ownership/FunctionTermMap> ;
         rr:predicate  dbo:owner .
 
@@ -437,7 +417,6 @@
 #######################
 <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/builder/builder>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_military_installation/SimplePropertyMapping/builder/builder/FunctionTermMap> ;
         rr:predicate  dbo:builder .
 
@@ -481,7 +460,6 @@
 ###################################
 <./Mapping_en:Infobox_military_installation/ConditionalMapping/type_contains_Castle>
         a                    rr:PredicateObjectMap ;
-        dcterms:type         "conditionalMapping" ;
         crml:equalCondition  <./Mapping_en:Infobox_military_installation/ConditionalMapping/type_contains_Castle/FunctionTermMap> ;
         crml:fallbackMap     <./Mapping_en:Infobox_military_installation/ConditionalMapping/type_contains_Castle/1> ;
         rr:object            schema:Place , owl:Thing , wikidata:Q23413 , wikidata:Q41176 , dbo:Castle , dbo:Building , dbo:Place , dbo:ArchitecturalStructure , dbo:Location ;
@@ -608,11 +586,6 @@
 ############
 
 
-<./Mapping_en:Infobox_military_installation/Function/LongitudeFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:lonFunction ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_military_installation/Function/contains>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:contains ;
@@ -621,11 +594,6 @@
 <./Mapping_en:Infobox_military_installation/Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_military_installation/Function/LatitudeFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:latFunction ;
         rr:predicate  fno:executes .
 
 

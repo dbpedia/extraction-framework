@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_restaurant/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_restaurant/latitude> ,
 			       <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity> ,
@@ -88,7 +87,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/latitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
 
@@ -126,7 +124,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/seatingCapacity/seating-capacity/FunctionTermMap> ;
         rr:predicate  dbo:seatingCapacity .
 
@@ -165,7 +162,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/headChef/head-chef/FunctionTermMap> ;
         rr:predicate  dbo:headChef .
 
@@ -204,7 +200,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foundingDate/established/FunctionTermMap> ;
         rr:predicate  dbo:foundingDate .
 
@@ -243,7 +238,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/rating/rating/FunctionTermMap> ;
         rr:predicate  dbo:rating .
 
@@ -282,7 +276,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/owner/current-owner/FunctionTermMap> ;
         rr:predicate  dbo:owner .
 
@@ -321,7 +314,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/cuisine/food-type/FunctionTermMap> ;
         rr:predicate  dbo:cuisine .
 
@@ -360,7 +352,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/dressCode/dress-code/FunctionTermMap> ;
         rr:predicate  dbo:dressCode .
 
@@ -399,7 +390,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/slogan/slogan/FunctionTermMap> ;
         rr:predicate  dbo:slogan .
 
@@ -438,7 +428,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/reservations/reservations/FunctionTermMap> ;
         rr:predicate  dbo:reservations .
 
@@ -475,9 +464,40 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_restaurant/longitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+### Function Term Map
+<./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_restaurant/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_restaurant/Function/LongitudeFunction> ,
+			       <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_restaurant/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonParameter .
+
+### References
+<./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "longitude" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -514,42 +534,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_restaurant/longitude>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap> ;
-        rr:predicate  geo:long .
-
-### Function Term Map
-<./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_restaurant/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_restaurant/Function/LongitudeFunction> ,
-			       <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_restaurant/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:lonParameter .
-
-### References
-<./Mapping_en:Infobox_restaurant/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "longitude" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/address/street-address/FunctionTermMap> ;
         rr:predicate  dbo:address .
 
@@ -588,7 +574,6 @@
 #######################
 <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_restaurant/SimplePropertyMapping/chef/chef/FunctionTermMap> ;
         rr:predicate  dbo:chef .
 

@@ -33,13 +33,12 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_NHL_team/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/generalManager/general_manager> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name> ,
 			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city> ,
-			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/formationYear/founded> ,
-			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name> ,
 			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/formationDate/founded> ,
+			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/formationYear/founded> ,
+			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/generalManager/general_manager> ,
 			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach> ;
         rr:subjectMap          <./Mapping_en:Infobox_NHL_team/SubjectMap> .
 
@@ -79,9 +78,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap> ;
+        rr:predicate  dbo:manager .
+
+### Function Term Map
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NHL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NHL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NHL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "manager" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "head_coach" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/generalManager/general_manager>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/generalManager/general_manager/FunctionTermMap> ;
         rr:predicate  dbo:generalManager .
 
@@ -118,48 +154,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap> ;
-        rr:predicate  dbo:locationCity .
-
-### Function Term Map
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_NHL_team/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_NHL_team/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_NHL_team/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "locationCity" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "city" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/formationYear/founded>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/formationYear/founded/FunctionTermMap> ;
         rr:predicate  dbo:formationYear .
 
@@ -196,48 +192,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_NHL_team/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_NHL_team/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_NHL_team/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "team_name" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/formationDate/founded>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/formationDate/founded/FunctionTermMap> ;
         rr:predicate  dbo:formationDate .
 
@@ -274,41 +230,78 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach>
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap> ;
-        rr:predicate  dbo:manager .
+        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap> ;
+        rr:predicate  dbo:locationCity .
 
 ### Function Term Map
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap>
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_NHL_team/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NHL_team/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_NHL_team/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "manager" ;
+        rr:object     "locationCity" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/manager/head_coach/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/locationCity/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "head_coach" .
+        rml:reference  "city" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_NHL_team/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_NHL_team/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_NHL_team/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_NHL_team/SimplePropertyMapping/foaf:name/team_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "team_name" .
 
 
 ######################

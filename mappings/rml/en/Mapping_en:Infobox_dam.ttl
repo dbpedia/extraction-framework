@@ -33,12 +33,9 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official> ,
 			       <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length> ,
-			       <./Mapping_en:Infobox_dam/IntermediateNodeMapping/Lake/lake__1> ,
-			       <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2> ,
 			       <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest> ,
 			       <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began> ,
 			       <./Mapping_en:Infobox_dam/latitude> ,
@@ -98,7 +95,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name_official/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -137,7 +133,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/length/dam_length/FunctionTermMap> ;
         rr:predicate  dbo:length .
 
@@ -181,27 +176,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap> ;
-        rr:predicate  dbo:part .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_dam/IntermediateNodeMapping/Lake/lake__1>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateNodeMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/IntermediateNodeMapping/Lake/lake__1/ObjectMap> ;
-        rr:predicate  dbo:lake .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/elevation/dam_elevation_crest/FunctionTermMap> ;
         rr:predicate  dbo:elevation .
 
@@ -240,7 +216,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartDate/construction_began/FunctionTermMap> ;
         rr:predicate  dbo:buildingStartDate .
 
@@ -279,7 +254,6 @@
 #######################
 <./Mapping_en:Infobox_dam/latitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/latitude/ObjectMap> ;
         rr:predicate  geo:lat .
 
@@ -342,7 +316,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionYear/demolished/FunctionTermMap> ;
         rr:predicate  dbo:demolitionYear .
 
@@ -381,7 +354,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/status/status/FunctionTermMap> ;
         rr:predicate  dbo:status .
 
@@ -420,7 +392,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap> ;
         rr:predicate  dbo:demolitionDate .
 
@@ -459,7 +430,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/buildingStartYear/construction_began/FunctionTermMap> ;
         rr:predicate  dbo:buildingStartYear .
 
@@ -498,7 +468,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/operator/FunctionTermMap> ;
         rr:predicate  dbo:operator .
 
@@ -537,7 +506,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/dam_operator>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/dam_operator/FunctionTermMap> ;
         rr:predicate  dbo:operator .
 
@@ -576,7 +544,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/purpose/purpose/FunctionTermMap> ;
         rr:predicate  dbo:purpose .
 
@@ -615,7 +582,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/country/country/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
@@ -654,7 +620,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
         rr:predicate  dbo:owner .
 
@@ -693,7 +658,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/height/dam_height/FunctionTermMap> ;
         rr:predicate  dbo:height .
 
@@ -739,7 +703,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -778,7 +741,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/opening/FunctionTermMap> ;
         rr:predicate  dbo:openingYear .
 
@@ -817,7 +779,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
@@ -856,7 +817,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/river/dam_crosses/FunctionTermMap> ;
         rr:predicate  dbo:river .
 
@@ -895,7 +855,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/description/dam_type/FunctionTermMap> ;
         rr:predicate  dbo:description .
 
@@ -934,7 +893,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/opening/FunctionTermMap> ;
         rr:predicate  dbo:openingDate .
 
@@ -973,7 +931,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/volume/dam_volume/FunctionTermMap> ;
         rr:predicate  dbo:volume .
 
@@ -1012,7 +969,6 @@
 #######################
 <./Mapping_en:Infobox_dam/longitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/longitude/ObjectMap> ;
         rr:predicate  geo:long .
 
@@ -1075,7 +1031,6 @@
 #######################
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 

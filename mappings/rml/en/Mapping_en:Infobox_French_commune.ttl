@@ -33,13 +33,12 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_French_commune/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/inseeCode/INSEE> ,
 			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/canton/canton> ,
 			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/elevation/elevation_m> ,
-			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/native_name> ,
 			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/area/area_km2> ,
+			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/native_name> ,
 			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/subdivisions/subdivisions> ,
 			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/area/area%20km2> ,
 			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/minimumElevation/elevation%20min%20m> ,
@@ -101,7 +100,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/inseeCode/INSEE>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/inseeCode/INSEE/FunctionTermMap> ;
         rr:predicate  dbo:inseeCode .
 
@@ -140,7 +138,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/canton/canton>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/canton/canton/FunctionTermMap> ;
         rr:predicate  dbo:canton .
 
@@ -179,7 +176,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/elevation/elevation_m>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap> ;
         rr:predicate  dbo:elevation .
 
@@ -223,48 +219,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap> ;
-        rr:predicate  dbo:postalCode .
-
-### Function Term Map
-<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_French_commune/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_French_commune/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_French_commune/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "postalCode" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "postal_code" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/area/area_km2>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/area/area_km2/FunctionTermMap> ;
         rr:predicate  dbo:area .
 
@@ -308,9 +264,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap> ;
+        rr:predicate  dbo:postalCode .
+
+### Function Term Map
+<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_French_commune/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_French_commune/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_French_commune/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "postalCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "postal_code" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/area/area%20km2>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/area/area%20km2/FunctionTermMap> ;
         rr:predicate  dbo:area .
 
@@ -356,7 +349,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/subdivisions/subdivisions>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/subdivisions/subdivisions/FunctionTermMap> ;
         rr:predicate  dbo:subdivisions .
 
@@ -395,7 +387,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/minimumElevation/elevation%20min%20m>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/minimumElevation/elevation%20min%20m/FunctionTermMap> ;
         rr:predicate  dbo:minimumElevation .
 
@@ -441,7 +432,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationAsOf/population%20date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationAsOf/population%20date/FunctionTermMap> ;
         rr:predicate  dbo:populationAsOf .
 
@@ -480,7 +470,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/native_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -519,7 +508,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/intercommunality/intercommunality>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/intercommunality/intercommunality/FunctionTermMap> ;
         rr:predicate  dbo:intercommunality .
 
@@ -558,7 +546,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -597,7 +584,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -636,7 +622,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/maximumElevation/elevation_max_m>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/maximumElevation/elevation_max_m/FunctionTermMap> ;
         rr:predicate  dbo:maximumElevation .
 
@@ -682,7 +667,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationAsOf/population_year>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationAsOf/population_year/FunctionTermMap> ;
         rr:predicate  dbo:populationAsOf .
 
@@ -721,7 +705,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/timeZone/time_zone>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap> ;
         rr:predicate  dbo:timeZone .
 
@@ -760,7 +743,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/maximumElevation/elevation%20max%20m>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/maximumElevation/elevation%20max%20m/FunctionTermMap> ;
         rr:predicate  dbo:maximumElevation .
 
@@ -806,7 +788,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/mayor/mayor>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/mayor/mayor/FunctionTermMap> ;
         rr:predicate  dbo:mayor .
 
@@ -845,7 +826,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/ConstantMapping/country/France>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
         rr:object     dbr-en:France ;
         rr:predicate  dbo:country .
 
@@ -854,7 +834,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/latitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
 
@@ -892,7 +871,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal%20code>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal%20code/FunctionTermMap> ;
         rr:predicate  dbo:postalCode .
 
@@ -931,7 +909,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/longitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/longitude/FunctionTermMap> ;
         rr:predicate  geo:long .
 
@@ -964,7 +941,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationTotal/population>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationTotal/population/FunctionTermMap> ;
         rr:predicate  dbo:populationTotal .
 
@@ -1003,7 +979,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/minimumElevation/elevation_min_m>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/minimumElevation/elevation_min_m/FunctionTermMap> ;
         rr:predicate  dbo:minimumElevation .
 
@@ -1049,7 +1024,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/arrondissement/arrondissement>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/arrondissement/arrondissement/FunctionTermMap> ;
         rr:predicate  dbo:arrondissement .
 
@@ -1088,7 +1062,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/elevation/elevation%20m>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/elevation/elevation%20m/FunctionTermMap> ;
         rr:predicate  dbo:elevation .
 
@@ -1134,7 +1107,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/department/department>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/department/department/FunctionTermMap> ;
         rr:predicate  dbo:department .
 
@@ -1173,7 +1145,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/motto/city_motto>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/motto/city_motto/FunctionTermMap> ;
         rr:predicate  dbo:motto .
 
@@ -1212,7 +1183,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/native%20name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/native%20name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -1251,7 +1221,6 @@
 #######################
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/region/region>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/region/region/FunctionTermMap> ;
         rr:predicate  dbo:region .
 

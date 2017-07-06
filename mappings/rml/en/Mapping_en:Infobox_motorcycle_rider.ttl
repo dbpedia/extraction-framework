@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_motorcycle_rider/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/birthDate/birth_date> ,
 			       <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/foaf:homepage/website> ,
@@ -84,7 +83,6 @@
 #######################
 <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -123,7 +121,6 @@
 #######################
 <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -162,7 +159,6 @@
 #######################
 <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -201,7 +197,6 @@
 #######################
 <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/deathDate/death_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
@@ -240,7 +235,6 @@
 #######################
 <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/nationality/nationality>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
         rr:predicate  dbo:nationality .
 
@@ -277,48 +271,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap> ;
-        rr:predicate  dbo:team .
-
-### Function Term Map
-<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_motorcycle_rider/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_motorcycle_rider/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_motorcycle_rider/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "team" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Current team" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/birthPlace/birth_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -355,9 +309,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_motorcycle_rider/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_motorcycle_rider/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_motorcycle_rider/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/team/Current%20team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Current team" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/deathPlace/death_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_motorcycle_rider/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 

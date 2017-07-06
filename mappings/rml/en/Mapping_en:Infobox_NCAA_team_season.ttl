@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_NCAA_team_season/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach> ,
 			       <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year> ;
@@ -70,7 +69,6 @@
 #######################
 <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/year/Year/FunctionTermMap> ;
         rr:predicate  dbo:year .
 
@@ -109,7 +107,6 @@
 #######################
 <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_NCAA_team_season/SimplePropertyMapping/coach/HeadCoach/FunctionTermMap> ;
         rr:predicate  dbo:coach .
 

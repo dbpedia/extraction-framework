@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_space_expedition/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_space_expedition/latitude> ,
 			       <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/numberOfOrbits/orbits> ,
@@ -115,7 +114,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/latitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/latitude/FunctionTermMap> ;
         rr:predicate  geo:lat .
 
@@ -153,7 +151,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/numberOfOrbits/orbits>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/numberOfOrbits/orbits/FunctionTermMap> ;
         rr:predicate  dbo:numberOfOrbits .
 
@@ -192,7 +189,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchPad/launch_pad>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchPad/launch_pad/FunctionTermMap> ;
         rr:predicate  dbo:launchPad .
 
@@ -231,7 +227,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/crewSize/crew_size>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/crewSize/crew_size/FunctionTermMap> ;
         rr:predicate  dbo:crewSize .
 
@@ -270,7 +265,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/previousMission/previous>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/previousMission/previous/FunctionTermMap> ;
         rr:predicate  dbo:previousMission .
 
@@ -309,7 +303,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/booster/booster>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/booster/booster/FunctionTermMap> ;
         rr:predicate  dbo:booster .
 
@@ -348,7 +341,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/missionDuration/mission_duration>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/missionDuration/mission_duration/FunctionTermMap> ;
         rr:predicate  dbo:missionDuration .
 
@@ -392,9 +384,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap> ;
+        rr:predicate  dbo:launchDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_space_expedition/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_space_expedition/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_space_expedition/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "launchDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "launch_date" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/distanceTraveled/Distance>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/distanceTraveled/Distance/FunctionTermMap> ;
         rr:predicate  dbo:distanceTraveled .
 
@@ -438,48 +467,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap> ;
-        rr:predicate  dbo:launchDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_space_expedition/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_space_expedition/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_space_expedition/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "launchDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/launch_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "launch_date" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/spacewalkEnd/spacewalk_end>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/spacewalkEnd/spacewalk_end/FunctionTermMap> ;
         rr:predicate  dbo:spacewalkEnd .
 
@@ -518,7 +507,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/previousMission/previous_mission>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/previousMission/previous_mission/FunctionTermMap> ;
         rr:predicate  dbo:previousMission .
 
@@ -557,7 +545,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/stationVisitDuration/StationVisitLength>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/stationVisitDuration/StationVisitLength/FunctionTermMap> ;
         rr:predicate  dbo:stationVisitDuration .
 
@@ -603,7 +590,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/LaunchDate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchDate/LaunchDate/FunctionTermMap> ;
         rr:predicate  dbo:launchDate .
 
@@ -642,7 +628,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/spacewalkBegin/spacewalk_begin>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/spacewalkBegin/spacewalk_begin/FunctionTermMap> ;
         rr:predicate  dbo:spacewalkBegin .
 
@@ -681,7 +666,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/crewSize/NumberOfCrew>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/crewSize/NumberOfCrew/FunctionTermMap> ;
         rr:predicate  dbo:crewSize .
 
@@ -720,7 +704,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/cmpEvaDuration/cmp_eva_duration>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/cmpEvaDuration/cmp_eva_duration/FunctionTermMap> ;
         rr:predicate  dbo:cmpEvaDuration .
 
@@ -766,7 +749,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarOrbitTime/time_lunar_orbits>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarOrbitTime/time_lunar_orbits/FunctionTermMap> ;
         rr:predicate  dbo:lunarOrbitTime .
 
@@ -812,7 +794,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarEvaTime/lunar_eva_duration>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarEvaTime/lunar_eva_duration/FunctionTermMap> ;
         rr:predicate  dbo:lunarEvaTime .
 
@@ -858,7 +839,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/spacecraft/spacecraft_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/spacecraft/spacecraft_name/FunctionTermMap> ;
         rr:predicate  dbo:spacecraft .
 
@@ -897,7 +877,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/longitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/longitude/FunctionTermMap> ;
         rr:predicate  geo:long .
 
@@ -930,7 +909,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/landingDate/LandingDate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/landingDate/LandingDate/FunctionTermMap> ;
         rr:predicate  dbo:landingDate .
 
@@ -969,7 +947,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/foaf:name/mission_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/foaf:name/mission_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -1008,7 +985,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/callSign/callsign>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/callSign/callsign/FunctionTermMap> ;
         rr:predicate  dbo:callSign .
 
@@ -1047,7 +1023,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/mass/Mass>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/mass/Mass/FunctionTermMap> ;
         rr:predicate  dbo:mass .
 
@@ -1093,7 +1068,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/landingVehicle/LandingVehicle>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/landingVehicle/LandingVehicle/FunctionTermMap> ;
         rr:predicate  dbo:landingVehicle .
 
@@ -1132,7 +1106,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/shuttle/shuttle_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/shuttle/shuttle_name/FunctionTermMap> ;
         rr:predicate  dbo:shuttle .
 
@@ -1171,7 +1144,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/crewMember/crew_caption>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/crewMember/crew_caption/FunctionTermMap> ;
         rr:predicate  dbo:crewMember .
 
@@ -1210,7 +1182,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/landingDate/landing>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/landingDate/landing/FunctionTermMap> ;
         rr:predicate  dbo:landingDate .
 
@@ -1249,7 +1220,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/commandModule/command_module>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/commandModule/command_module/FunctionTermMap> ;
         rr:predicate  dbo:commandModule .
 
@@ -1288,7 +1258,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/missionDuration/Duration>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/missionDuration/Duration/FunctionTermMap> ;
         rr:predicate  dbo:missionDuration .
 
@@ -1334,7 +1303,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarRover/lunar_rover>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarRover/lunar_rover/FunctionTermMap> ;
         rr:predicate  dbo:lunarRover .
 
@@ -1373,7 +1341,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/serviceModule/service_module>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/serviceModule/service_module/FunctionTermMap> ;
         rr:predicate  dbo:serviceModule .
 
@@ -1412,7 +1379,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/foaf:name/Name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -1451,7 +1417,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarModule/lunar_module>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarModule/lunar_module/FunctionTermMap> ;
         rr:predicate  dbo:lunarModule .
 
@@ -1490,7 +1455,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarSurfaceTime/lunar_surface_time>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarSurfaceTime/lunar_surface_time/FunctionTermMap> ;
         rr:predicate  dbo:lunarSurfaceTime .
 
@@ -1536,7 +1500,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/crewMember/CrewCaption>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/crewMember/CrewCaption/FunctionTermMap> ;
         rr:predicate  dbo:crewMember .
 
@@ -1575,7 +1538,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/nextMission/next>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/nextMission/next/FunctionTermMap> ;
         rr:predicate  dbo:nextMission .
 
@@ -1614,7 +1576,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/distanceTraveled/distance_traveled>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/distanceTraveled/distance_traveled/FunctionTermMap> ;
         rr:predicate  dbo:distanceTraveled .
 
@@ -1660,7 +1621,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/nextMission/next_mission>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/nextMission/next_mission/FunctionTermMap> ;
         rr:predicate  dbo:nextMission .
 
@@ -1699,7 +1659,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchVehicle/LaunchVehicle>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/launchVehicle/LaunchVehicle/FunctionTermMap> ;
         rr:predicate  dbo:launchVehicle .
 
@@ -1738,7 +1697,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/orbitalInclination/inclination>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/orbitalInclination/inclination/FunctionTermMap> ;
         rr:predicate  dbo:orbitalInclination .
 
@@ -1777,7 +1735,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/stationEvaDuration/StationEVALength>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/stationEvaDuration/StationEVALength/FunctionTermMap> ;
         rr:predicate  dbo:stationEvaDuration .
 
@@ -1823,7 +1780,6 @@
 #######################
 <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarSampleMass/lunar_sample_mass>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_space_expedition/SimplePropertyMapping/lunarSampleMass/lunar_sample_mass/FunctionTermMap> ;
         rr:predicate  dbo:lunarSampleMass .
 

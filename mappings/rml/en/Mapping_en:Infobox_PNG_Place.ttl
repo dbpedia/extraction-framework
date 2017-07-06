@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "conditionalMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_PNG_Place/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> ,
 			       <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/areaTotal/area> ,
@@ -78,7 +77,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap> ;
         rr:predicate  dbo:neighboringMunicipality .
 
@@ -117,7 +115,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/areaTotal/area>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/areaTotal/area/FunctionTermMap> ;
         rr:predicate  dbo:areaTotal .
 
@@ -163,7 +160,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/populationAsOf/populationof>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap> ;
         rr:predicate  dbo:populationAsOf .
 
@@ -202,7 +198,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/minimumElevation/lowest_m>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap> ;
         rr:predicate  dbo:minimumElevation .
 
@@ -248,7 +243,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/demonym/demonym>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/demonym/demonym/FunctionTermMap> ;
         rr:predicate  dbo:demonym .
 
@@ -287,7 +281,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/elevation/elevation>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/elevation/elevation/FunctionTermMap> ;
         rr:predicate  dbo:elevation .
 
@@ -333,7 +326,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/populationTotal/population>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/populationTotal/population/FunctionTermMap> ;
         rr:predicate  dbo:populationTotal .
 
@@ -373,7 +365,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/longitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "longitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/longitude/ObjectMap> ;
         rr:predicate  geo:long .
 
@@ -436,7 +427,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -475,7 +465,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/latitude>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "latitudeMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/latitude/ObjectMap> ;
         rr:predicate  geo:lat .
 
@@ -538,7 +527,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/areaCode/municipality_code>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap> ;
         rr:predicate  dbo:areaCode .
 
@@ -577,7 +565,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/maximumElevation/highest_m>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap> ;
         rr:predicate  dbo:maximumElevation .
 
@@ -623,7 +610,6 @@
 #######################
 <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/postalCode/postal_code>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_PNG_Place/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap> ;
         rr:predicate  dbo:postalCode .
 
@@ -667,7 +653,6 @@
 ###################################
 <./Mapping_en:Infobox_PNG_Place/ConditionalMapping/type_equals_city>
         a                    rr:PredicateObjectMap ;
-        dcterms:type         "conditionalMapping" ;
         crml:equalCondition  <./Mapping_en:Infobox_PNG_Place/ConditionalMapping/type_equals_city/FunctionTermMap> ;
         crml:fallbackMap     <./Mapping_en:Infobox_PNG_Place/ConditionalMapping/type_equals_city/1> ;
         rr:object            dbo:Location , dbo:Place , dbo:City , schema:Place , dbo:PopulatedPlace , owl:Thing , dbo:Settlement , wikidata:Q486972 , wikidata:Q515 , schema:City ;

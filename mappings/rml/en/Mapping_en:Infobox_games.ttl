@@ -33,13 +33,12 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_games/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city> ,
-			       <./Mapping_en:Infobox_games/SimplePropertyMapping/motto/motto> ,
-			       <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:name/name> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/city/Host%20city> ,
 			       <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:name/Name> ,
-			       <./Mapping_en:Infobox_games/SimplePropertyMapping/city/Host%20city> ,
+			       <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city> ,
+			       <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_games/SimplePropertyMapping/motto/motto> ,
 			       <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website> ;
         rr:subjectMap          <./Mapping_en:Infobox_games/SubjectMap> .
 
@@ -76,48 +75,46 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city>
+<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap> ;
-        rr:predicate  dbo:city .
+        rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
 
 ### Function Term Map
-<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap>
+<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue>
+<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_games/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_games/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_games/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "city" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 ### References
-<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "host city" .
+        rml:reference  "website" .
 
 
 ### PredicateObjectMap
 #######################
 <./Mapping_en:Infobox_games/SimplePropertyMapping/motto/motto>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/motto/motto/FunctionTermMap> ;
         rr:predicate  dbo:motto .
 
@@ -156,7 +153,6 @@
 #######################
 <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -193,9 +189,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap> ;
+        rr:predicate  dbo:city .
+
+### Function Term Map
+<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_games/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_games/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_games/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "city" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_games/SimplePropertyMapping/city/host%20city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "host city" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:name/Name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -234,7 +267,6 @@
 #######################
 <./Mapping_en:Infobox_games/SimplePropertyMapping/city/Host%20city>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/city/Host%20city/FunctionTermMap> ;
         rr:predicate  dbo:city .
 
@@ -267,45 +299,6 @@
 <./Mapping_en:Infobox_games/SimplePropertyMapping/city/Host%20city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Host city" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
-        rr:predicate  foaf:homepage .
-
-### Function Term Map
-<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_games/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_games/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_games/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_games/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "website" .
 
 
 ######################

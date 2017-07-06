@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "conditionalMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Chinese-language_singer_and_actor/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/genre/genre> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/academyAward/academyAward> ,
@@ -42,7 +41,6 @@
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenbauhiniaawards> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/hongkongfilmwards> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/cesarAward/cesarAward> ,
-			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/GeoCoordinatesMapping> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/alias/othername> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenmelodyawards> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/hkfcsawards> ,
@@ -71,9 +69,9 @@
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/occupation/occupation> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/pastMember/pastmembers> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/goyaAward/goyaAward> ,
-			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/voiceType/voicetype> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/influencedBy/influencedby> ,
+			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/voiceType/voicetype> ,
+			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/goyaAward/goyaAward> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenroosterawards> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/child/children> ,
 			       <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/field/field> ,
@@ -121,7 +119,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/genre/genre>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/genre/genre/FunctionTermMap> ;
         rr:predicate  dbo:genre .
 
@@ -160,7 +157,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/academyAward/academyAward>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/academyAward/academyAward/FunctionTermMap> ;
         rr:predicate  dbo:academyAward .
 
@@ -199,7 +195,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/grammyAward/grammyAward>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/grammyAward/grammyAward/FunctionTermMap> ;
         rr:predicate  dbo:grammyAward .
 
@@ -238,7 +233,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/filmFareAward/filmfareAward>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/filmFareAward/filmfareAward/FunctionTermMap> ;
         rr:predicate  dbo:filmFareAward .
 
@@ -277,7 +271,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenbauhiniaawards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenbauhiniaawards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -316,7 +309,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/hongkongfilmwards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/hongkongfilmwards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -355,7 +347,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/cesarAward/cesarAward>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/cesarAward/cesarAward/FunctionTermMap> ;
         rr:predicate  dbo:cesarAward .
 
@@ -392,18 +383,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Chinese-language_singer_and_actor/GeoCoordinatesMapping>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "intermediateGeoMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/GeoCoordinatesMapping/ObjectMap> ;
-        rr:predicate  dbo:restingPlacePosition .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/alias/othername>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/alias/othername/FunctionTermMap> ;
         rr:predicate  dbo:alias .
 
@@ -442,7 +423,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenmelodyawards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenmelodyawards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -481,7 +461,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/hkfcsawards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/hkfcsawards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -520,7 +499,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/tonyAward/tonyAward>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/tonyAward/tonyAward/FunctionTermMap> ;
         rr:predicate  dbo:tonyAward .
 
@@ -559,7 +537,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/pinyinchinesename>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/pinyinchinesename/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -598,7 +575,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/chinesename>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/chinesename/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -637,7 +613,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/birthDate/birthdate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -676,7 +651,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/simpchinesename>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/simpchinesename/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -716,7 +690,6 @@
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_Chinese-language_singer_and_actor/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive> ;
-        dcterms:type  "startDateIntervalMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsStartYear .
 
@@ -755,7 +728,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/emmyAward/emmyAward>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/emmyAward/emmyAward/FunctionTermMap> ;
         rr:predicate  dbo:emmyAward .
 
@@ -794,7 +766,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/birthPlace/location>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/birthPlace/location/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -833,7 +804,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/associatedAct/associatedact>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/associatedAct/associatedact/FunctionTermMap> ;
         rr:predicate  dbo:associatedAct .
 
@@ -872,7 +842,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/baftaAward/BAFTAAward>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/baftaAward/BAFTAAward/FunctionTermMap> ;
         rr:predicate  dbo:baftaAward .
 
@@ -911,7 +880,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/nationality/nationality>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
         rr:predicate  dbo:nationality .
 
@@ -950,7 +918,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -989,7 +956,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/influencedBy/influences>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/influencedBy/influences/FunctionTermMap> ;
         rr:predicate  dbo:influencedBy .
 
@@ -1028,7 +994,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/training/training>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/training/training/FunctionTermMap> ;
         rr:predicate  dbo:training .
 
@@ -1067,7 +1032,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/afiAward/AFIAward>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/afiAward/AFIAward/FunctionTermMap> ;
         rr:predicate  dbo:afiAward .
 
@@ -1106,7 +1070,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/parent/parents>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/parent/parents/FunctionTermMap> ;
         rr:predicate  dbo:parent .
 
@@ -1145,7 +1108,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/ConstantMapping/country/People's_Republic_of_China>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
         rr:object     <People's_Republic_of_China> ;
         rr:predicate  dbo:country .
 
@@ -1154,7 +1116,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/mtvasiaawards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/mtvasiaawards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -1193,7 +1154,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/jyutpingchinesename>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/jyutpingchinesename/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -1232,7 +1192,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/influenced/influenced>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/influenced/influenced/FunctionTermMap> ;
         rr:predicate  dbo:influenced .
 
@@ -1271,7 +1230,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/spouse/spouse>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/spouse/spouse/FunctionTermMap> ;
         rr:predicate  dbo:spouse .
 
@@ -1310,7 +1268,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/awards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/awards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -1349,7 +1306,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/occupation/occupation>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/occupation/occupation/FunctionTermMap> ;
         rr:predicate  dbo:occupation .
 
@@ -1388,7 +1344,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/pastMember/pastmembers>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/pastMember/pastmembers/FunctionTermMap> ;
         rr:predicate  dbo:pastMember .
 
@@ -1427,7 +1382,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/influencedBy/influencedby>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/influencedBy/influencedby/FunctionTermMap> ;
         rr:predicate  dbo:influencedBy .
 
@@ -1466,7 +1420,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/voiceType/voicetype>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/voiceType/voicetype/FunctionTermMap> ;
         rr:predicate  dbo:voiceType .
 
@@ -1505,7 +1458,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/goyaAward/goyaAward>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/goyaAward/goyaAward/FunctionTermMap> ;
         rr:predicate  dbo:goyaAward .
 
@@ -1544,7 +1496,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -1583,7 +1534,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenroosterawards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenroosterawards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -1622,7 +1572,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/child/children>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/child/children/FunctionTermMap> ;
         rr:predicate  dbo:child .
 
@@ -1661,7 +1610,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/field/field>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/field/field/FunctionTermMap> ;
         rr:predicate  dbo:field .
 
@@ -1700,7 +1648,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/partner/partner>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/partner/partner/FunctionTermMap> ;
         rr:predicate  dbo:partner .
 
@@ -1739,7 +1686,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/movement/movement>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/movement/movement/FunctionTermMap> ;
         rr:predicate  dbo:movement .
 
@@ -1778,7 +1724,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/restingPlace/restingplace>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/restingPlace/restingplace/FunctionTermMap> ;
         rr:predicate  dbo:restingPlace .
 
@@ -1818,7 +1763,6 @@
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/StartDate/activeYearsStartYear/activeYearsEndYear/yearsactive> ;
-        dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_Chinese-language_singer_and_actor/EndDate/activeYearsStartYear/activeYearsEndYear/yearsactive/FunctionTermMap> ;
         rr:predicate   dbo:activeYearsEndYear .
 
@@ -1857,7 +1801,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/ntsawards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/ntsawards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -1896,7 +1839,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/tradchinesename>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/foaf:name/tradchinesename/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -1935,7 +1877,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/recordLabel/label>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/recordLabel/label/FunctionTermMap> ;
         rr:predicate  dbo:recordLabel .
 
@@ -1974,7 +1915,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/instrument/instrument>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/instrument/instrument/FunctionTermMap> ;
         rr:predicate  dbo:instrument .
 
@@ -2014,7 +1954,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/deathDate/deathdate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
         rr:predicate  dbo:deathDate .
 
@@ -2053,7 +1992,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/birthName/birthname>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/birthName/birthname/FunctionTermMap> ;
         rr:predicate  dbo:birthName .
 
@@ -2092,7 +2030,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/goldenGlobeAward/goldenGlobeAward>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/goldenGlobeAward/goldenGlobeAward/FunctionTermMap> ;
         rr:predicate  dbo:goldenGlobeAward .
 
@@ -2131,7 +2068,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/currentMember/currentmembers>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/currentMember/currentmembers/FunctionTermMap> ;
         rr:predicate  dbo:currentMember .
 
@@ -2170,7 +2106,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenhorseawards>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/award/goldenhorseawards/FunctionTermMap> ;
         rr:predicate  dbo:award .
 
@@ -2209,7 +2144,6 @@
 #######################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/deathPlace/deathplace>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap> ;
         rr:predicate  dbo:deathPlace .
 
@@ -2253,7 +2187,6 @@
 ###################################
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/ConditionalMapping/currentmembers_isSet_null>
         a                    rr:PredicateObjectMap ;
-        dcterms:type         "conditionalMapping" ;
         crml:equalCondition  <./Mapping_en:Infobox_Chinese-language_singer_and_actor/ConditionalMapping/currentmembers_isSet_null/FunctionTermMap> ;
         crml:fallbackMap     <./Mapping_en:Infobox_Chinese-language_singer_and_actor/ConditionalMapping/currentmembers_isSet_null/1> ;
         rr:object            dbo:Band , schema:Organization , owl:Thing , wikidata:Q215380 , dbo:Group , dul:SocialPerson , schema:MusicGroup , dbo:Agent , dul:Agent , wikidata:Q43229 , dbo:Organisation ;
@@ -2490,11 +2423,6 @@
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Chinese-language_singer_and_actor/Function/LongitudeFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:lonFunction ;
-        rr:predicate  fno:executes .
-
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/Function/StartDateFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:startDateFunction ;
@@ -2513,11 +2441,6 @@
 <./Mapping_en:Infobox_Chinese-language_singer_and_actor/Function/EndDateFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:endDateFunction ;
-        rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Chinese-language_singer_and_actor/Function/LatitudeFunction>
-        a             rr:PredicateObjectMap ;
-        rr:object     dbf:latFunction ;
         rr:predicate  fno:executes .
 
 

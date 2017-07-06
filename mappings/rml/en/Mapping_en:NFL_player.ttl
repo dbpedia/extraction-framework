@@ -33,44 +33,43 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/status/status> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear> ,
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/weight/weight> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/currentposition> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school> ,
 			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/college/College> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/team> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/status/status> ,
 			       <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear> ,
 			       <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name> ,
 			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4> ,
 			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/college/College> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/number> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1> ,
 			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/weight/weight> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/currentposition> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/team> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/number> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace> ,
 			       <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsStartYear/debutyear> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround> ;
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate> ;
         rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap> .
 
 
@@ -111,952 +110,46 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/status/status>
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap> ;
-        rr:predicate  dbo:status .
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap> ;
+        rr:predicate  dbo:team .
 
 ### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue>
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "status" ;
+        rr:object     "team" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "status" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap> ;
-        rr:predicate  dbo:position .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "position" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "position3" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap> ;
-        rr:predicate  dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsEndYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "finalyear" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap> ;
-        rr:predicate  dbo:position .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "position" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "position1" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap> ;
-        rr:predicate  dbo:deathPlace .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "deathPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Deathplace" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap> ;
-        rr:predicate  dbo:draftYear .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "draftYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "draftyear" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap> ;
-        rr:predicate  dbo:draftRound .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "draftRound" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "draftround" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap> ;
-        rr:predicate  dbo:debutTeam .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "debutTeam" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "debutteam" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap> ;
-        rr:predicate  dbo:espnId .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "espnId" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "espn" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap> ;
-        rr:predicate  dbo:position .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "position" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "position4" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
-        rr:predicate  dbo:deathDate .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "deathDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "deathdate" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap> ;
-        rr:predicate  dbo:position .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "position" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "position5" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap> ;
-        rr:predicate  dbo:supplementalDraftYear .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "supplementalDraftYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "suppdraftyear" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/college/College>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap> ;
-        rr:predicate  dbo:college .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "college" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "College" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap> ;
-        rr:predicate  dbo:position .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "position" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "position2" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Name" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap> ;
-        rr:predicate  dbo:position .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "position" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "position" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap> ;
-        rr:predicate  dbo:weight .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue> ;
-        rr:datatype         <http://dbpedia.org/datatype/pound> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "pound" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "weight" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Weight_lbs" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/number>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap> ;
-        rr:predicate  dbo:number .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "number" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "number" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap> ;
-        rr:predicate  dbo:number .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "number" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "currentnumber" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap> ;
-        rr:predicate  dbo:highschool .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "highschool" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "high_school" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap> ;
-        rr:predicate  dbo:birthPlace .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "birthPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "Birthplace" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap> ;
-        rr:predicate  dbo:undraftedYear .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "undraftedYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "undraftedyear" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
-        rr:predicate  dbo:birthDate .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "birthDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birthdate" .
+        rml:reference  "teams" .
 
 
 ### PredicateObjectMap
 #######################
 <./Mapping_en:NFL_player/SimplePropertyMapping/weight/weight>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
         rr:predicate  dbo:weight .
 
@@ -1100,126 +193,84 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name>
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap> ;
-        rr:predicate  foaf:name .
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap> ;
+        rr:predicate  dbo:position .
 
 ### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue>
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:name" ;
+        rr:object     "position" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
 ### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position5/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "full_name" .
+        rml:reference  "position5" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath>
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap> ;
-        rr:predicate  dbo:deathDate .
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap> ;
+        rr:predicate  dbo:supplementalDraftYear .
 
 ### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue>
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "deathDate" ;
+        rr:object     "supplementalDraftYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftYear/suppdraftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "DateOfDeath" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap> ;
-        rr:predicate  dbo:draftPick .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "draftPick" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "draftpick" .
+        rml:reference  "suppdraftyear" .
 
 
 ### PredicateObjectMap
 #######################
 <./Mapping_en:NFL_player/SimplePropertyMapping/position/currentposition>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/currentposition/FunctionTermMap> ;
         rr:predicate  dbo:position .
 
@@ -1256,126 +307,281 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth>
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap> ;
-        rr:predicate  dbo:birthDate .
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap> ;
+        rr:predicate  dbo:draftRound .
 
 ### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue>
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "birthDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "draftRound" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 ### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftRound/draftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "DateOfBirth" .
+        rml:reference  "draftround" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams>
+<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap> ;
-        rr:predicate  dbo:formerTeam .
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap> ;
+        rr:predicate  dbo:highschool .
 
 ### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue>
+<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "formerTeam" ;
+        rr:object     "highschool" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/highschool/high_school/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "pastteams" .
+        rml:reference  "high_school" .
 
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam>
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap> ;
-        rr:predicate  dbo:team .
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap> ;
+        rr:predicate  dbo:draftYear .
 
 ### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue>
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "team" ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "draftYear" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftYear/draftyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "draftyear" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/college/College>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap> ;
+        rr:predicate  dbo:college .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "college" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/college/College/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "College" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap> ;
+        rr:predicate  dbo:number .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "number" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/currentnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "currentnumber" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/DateOfDeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "currentteam" .
+        rml:reference  "DateOfDeath" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap> ;
+        rr:predicate  dbo:weight .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/pound> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "pound" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "weight" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/weight/Weight_lbs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Weight_lbs" .
 
 
 ### PredicateObjectMap
 #######################
 <./Mapping_en:NFL_player/SimplePropertyMapping/team/team>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/team/team/FunctionTermMap> ;
         rr:predicate  dbo:team .
 
@@ -1412,9 +618,806 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/team/currentteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "currentteam" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/DateOfBirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "DateOfBirth" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap> ;
+        rr:predicate  dbo:draftPick .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "draftPick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/draftPick/draftpick/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "draftpick" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsEndYear/finalyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "finalyear" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/status/status>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap> ;
+        rr:predicate  dbo:status .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "status" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "status" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap> ;
+        rr:predicate  dbo:debutTeam .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "debutTeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/debutTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "debutteam" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "full_name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position2" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap> ;
+        rr:predicate  dbo:undraftedYear .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "undraftedYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/undraftedYear/undraftedyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "undraftedyear" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap> ;
+        rr:predicate  dbo:espnId .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "espnId" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/espnId/espn/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "espn" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "deathdate" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position4/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position4" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthPlace/Birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Birthplace" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position1" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap> ;
+        rr:predicate  dbo:supplementalDraftRound .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "supplementalDraftRound" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "suppdraftround" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/number>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap> ;
+        rr:predicate  dbo:number .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "number" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "number" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/deathPlace/Deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Deathplace" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/position/position3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position3" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap> ;
+        rr:predicate  dbo:formerTeam .
+
+### Function Term Map
+<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "formerTeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:NFL_player/SimplePropertyMapping/formerTeam/pastteams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "pastteams" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsStartYear/debutyear>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/activeYearsStartYear/debutyear/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsStartYear .
 
@@ -1451,80 +1454,40 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams>
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap> ;
-        rr:predicate  dbo:team .
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
 
 ### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue> .
+        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue> .
 
 ### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue>
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "team" ;
+        rr:object     "birthDate" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+<./Mapping_en:NFL_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "teams" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap> ;
-        rr:predicate  dbo:supplementalDraftRound .
-
-### Function Term Map
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NFL_player/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NFL_player/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:NFL_player/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "supplementalDraftRound" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:NFL_player/SimplePropertyMapping/supplementalDraftRound/suppdraftround/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "suppdraftround" .
+        rml:reference  "birthdate" .
 
 
 ######################

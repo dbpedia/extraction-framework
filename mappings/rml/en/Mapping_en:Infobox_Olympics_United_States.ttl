@@ -33,12 +33,11 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Olympics_United_States/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/summerAppearances/summerappearances> ,
-			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver> ,
-			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/rankInFinalMedalCount/rank> ,
 			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfOfficials/officials> ,
+			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/rankInFinalMedalCount/rank> ,
+			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver> ,
 			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/flagBearer/flagbearer> ,
 			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/nationalOlympicCommittee/NOC> ,
 			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/winterAppearances/winterappearances> ,
@@ -82,7 +81,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/summerAppearances/summerappearances>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/summerAppearances/summerappearances/FunctionTermMap> ;
         rr:predicate  dbo:summerAppearances .
 
@@ -121,7 +119,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/rankInFinalMedalCount/rank>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/rankInFinalMedalCount/rank/FunctionTermMap> ;
         rr:predicate  dbo:rankInFinalMedalCount .
 
@@ -158,48 +155,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap> ;
-        rr:predicate  dbo:numberOfSilverMedalsWon .
-
-### Function Term Map
-<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Olympics_United_States/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_United_States/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Olympics_United_States/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "numberOfSilverMedalsWon" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "silver" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfOfficials/officials>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfOfficials/officials/FunctionTermMap> ;
         rr:predicate  dbo:numberOfOfficials .
 
@@ -236,9 +193,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfSilverMedalsWon .
+
+### Function Term Map
+<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Olympics_United_States/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Olympics_United_States/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Olympics_United_States/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "numberOfSilverMedalsWon" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSilverMedalsWon/silver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "silver" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/winterAppearances/winterappearances>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/winterAppearances/winterappearances/FunctionTermMap> ;
         rr:predicate  dbo:winterAppearances .
 
@@ -277,7 +271,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/nationalOlympicCommittee/NOC>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/nationalOlympicCommittee/NOC/FunctionTermMap> ;
         rr:predicate  dbo:nationalOlympicCommittee .
 
@@ -316,7 +309,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/flagBearer/flagbearer>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/flagBearer/flagbearer/FunctionTermMap> ;
         rr:predicate  dbo:flagBearer .
 
@@ -355,7 +347,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfBronzeMedalsWon/bronze/FunctionTermMap> ;
         rr:predicate  dbo:numberOfBronzeMedalsWon .
 
@@ -394,7 +385,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/games/games>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/games/games/FunctionTermMap> ;
         rr:predicate  dbo:games .
 
@@ -433,7 +423,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/otherAppearances/otherappearances>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/otherAppearances/otherappearances/FunctionTermMap> ;
         rr:predicate  dbo:otherAppearances .
 
@@ -472,7 +461,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfCompetitors/competitors>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfCompetitors/competitors/FunctionTermMap> ;
         rr:predicate  dbo:numberOfCompetitors .
 
@@ -511,7 +499,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/nationalOlympicCommittee/NOCname>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/nationalOlympicCommittee/NOCname/FunctionTermMap> ;
         rr:predicate  dbo:nationalOlympicCommittee .
 
@@ -550,7 +537,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSports/sports>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfSports/sports/FunctionTermMap> ;
         rr:predicate  dbo:numberOfSports .
 
@@ -589,7 +575,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/oldcode/oldcode>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/oldcode/oldcode/FunctionTermMap> ;
         rr:predicate  dbo:oldcode .
 
@@ -628,7 +613,6 @@
 #######################
 <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfGoldMedalsWon/gold>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Olympics_United_States/SimplePropertyMapping/numberOfGoldMedalsWon/gold/FunctionTermMap> ;
         rr:predicate  dbo:numberOfGoldMedalsWon .
 

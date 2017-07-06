@@ -33,14 +33,13 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_MMA_event/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/foaf:name/name> ,
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date> ,
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue> ,
 			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city> ,
 			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/followingEvent/followingevent> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/foaf:name/name> ;
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/followingEvent/followingevent> ;
         rr:subjectMap          <./Mapping_en:Infobox_MMA_event/SubjectMap> .
 
 
@@ -77,165 +76,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap> ;
-        rr:predicate  dbo:date .
-
-### Function Term Map
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MMA_event/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MMA_event/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MMA_event/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "date" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "date" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap> ;
-        rr:predicate  dbo:location .
-
-### Function Term Map
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MMA_event/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MMA_event/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MMA_event/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "location" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "city" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap> ;
-        rr:predicate  dbo:previousEvent .
-
-### Function Term Map
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MMA_event/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MMA_event/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MMA_event/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "previousEvent" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "previousevent" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap> ;
-        rr:predicate  dbo:location .
-
-### Function Term Map
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_MMA_event/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_MMA_event/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_MMA_event/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "location" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "venue" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/followingEvent/followingevent>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/followingEvent/followingevent/FunctionTermMap> ;
         rr:predicate  dbo:followingEvent .
 
@@ -272,9 +114,160 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap> ;
+        rr:predicate  dbo:previousEvent .
+
+### Function Term Map
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MMA_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MMA_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MMA_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "previousEvent" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/previousEvent/previousevent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "previousevent" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MMA_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MMA_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MMA_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "city" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+### Function Term Map
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MMA_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MMA_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MMA_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "location" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/location/venue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "venue" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap> ;
+        rr:predicate  dbo:date .
+
+### Function Term Map
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_MMA_event/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_MMA_event/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_MMA_event/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "date" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/date/date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_MMA_event/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 

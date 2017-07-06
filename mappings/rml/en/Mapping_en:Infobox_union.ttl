@@ -33,13 +33,12 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_union/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/formationDate/founded> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/country/country> ,
+			       <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:name/name> ,
 			       <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation> ,
 			       <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:name/full_name> ,
-			       <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:name/name> ,
-			       <./Mapping_en:Infobox_union/SimplePropertyMapping/country/country> ,
+			       <./Mapping_en:Infobox_union/SimplePropertyMapping/formationDate/founded> ,
 			       <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website> ;
         rr:subjectMap          <./Mapping_en:Infobox_union/SubjectMap> .
 
@@ -77,9 +76,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_union/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_union/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_union/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_union/SimplePropertyMapping/formationDate/founded>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/formationDate/founded/FunctionTermMap> ;
         rr:predicate  dbo:formationDate .
 
@@ -116,48 +152,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap> ;
-        rr:predicate  dbo:affiliation .
-
-### Function Term Map
-<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_union/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_union/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_union/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "affiliation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "affiliation" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:name/full_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -194,9 +190,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap> ;
+        rr:predicate  dbo:affiliation .
+
+### Function Term Map
+<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_union/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_union/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_union/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "affiliation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_union/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "affiliation" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -235,7 +268,6 @@
 #######################
 <./Mapping_en:Infobox_union/SimplePropertyMapping/country/country>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/country/country/FunctionTermMap> ;
         rr:predicate  dbo:country .
 
@@ -268,45 +300,6 @@
 <./Mapping_en:Infobox_union/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "country" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
-        rr:predicate  foaf:homepage .
-
-### Function Term Map
-<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_union/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_union/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_union/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_union/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "website" .
 
 
 ######################

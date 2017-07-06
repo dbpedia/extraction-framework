@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_legislature/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/foaf:name/name> ,
 			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/committeeInLegislature/committees2> ,
@@ -43,9 +42,9 @@
 			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/politicalPartyInLegislature/political_groups2> ,
 			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/house/houses> ,
 			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/house/house1> ,
-			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/foaf:name/native_name> ,
-			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type> ,
 			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1> ,
+			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type> ,
+			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/foaf:name/native_name> ,
 			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/foaf:homepage/website> ,
 			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/house/house2> ,
 			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/electionDateLeader/election1> ,
@@ -93,7 +92,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -132,7 +130,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/committeeInLegislature/committees2>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/committeeInLegislature/committees2/FunctionTermMap> ;
         rr:predicate  dbo:committeeInLegislature .
 
@@ -171,7 +168,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/lastElectionDate/last_election1>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/lastElectionDate/last_election1/FunctionTermMap> ;
         rr:predicate  dbo:lastElectionDate .
 
@@ -210,7 +206,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/politicalPartyInLegislature/political_groups1>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/politicalPartyInLegislature/political_groups1/FunctionTermMap> ;
         rr:predicate  dbo:politicalPartyInLegislature .
 
@@ -249,7 +244,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/legislativePeriodName/legislature>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/legislativePeriodName/legislature/FunctionTermMap> ;
         rr:predicate  dbo:legislativePeriodName .
 
@@ -288,7 +282,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/politicalPartyInLegislature/political_groups2>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/politicalPartyInLegislature/political_groups2/FunctionTermMap> ;
         rr:predicate  dbo:politicalPartyInLegislature .
 
@@ -327,7 +320,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/house/houses>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/house/houses/FunctionTermMap> ;
         rr:predicate  dbo:house .
 
@@ -366,7 +358,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/house/house1>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/house/house1/FunctionTermMap> ;
         rr:predicate  dbo:house .
 
@@ -403,87 +394,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap> ;
-        rr:predicate  dbo:leader .
-
-### Function Term Map
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_legislature/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_legislature/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_legislature/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "leader" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "leader1" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap> ;
-        rr:predicate  dbo:type .
-
-### Function Term Map
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_legislature/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_legislature/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_legislature/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "type" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "house_type" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/foaf:name/native_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -520,9 +432,84 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+### Function Term Map
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_legislature/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_legislature/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_legislature/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "type" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/type/house_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "house_type" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap> ;
+        rr:predicate  dbo:leader .
+
+### Function Term Map
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_legislature/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_legislature/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_legislature/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "leader" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_legislature/SimplePropertyMapping/leader/leader1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leader1" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/foaf:homepage/website>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
         rr:predicate  foaf:homepage .
 
@@ -561,7 +548,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/house/house2>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/house/house2/FunctionTermMap> ;
         rr:predicate  dbo:house .
 
@@ -600,7 +586,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/electionDateLeader/election1>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/electionDateLeader/election1/FunctionTermMap> ;
         rr:predicate  dbo:electionDateLeader .
 
@@ -639,7 +624,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/politicalPartyOfLeader/party1>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/politicalPartyOfLeader/party1/FunctionTermMap> ;
         rr:predicate  dbo:politicalPartyOfLeader .
 
@@ -678,7 +662,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/numberOfMembers/members>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/numberOfMembers/members/FunctionTermMap> ;
         rr:predicate  dbo:numberOfMembers .
 
@@ -717,7 +700,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/isPartOf/body>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/isPartOf/body/FunctionTermMap> ;
         rr:predicate  dbo:isPartOf .
 
@@ -756,7 +738,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/lastElectionDate/last_election2>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/lastElectionDate/last_election2/FunctionTermMap> ;
         rr:predicate  dbo:lastElectionDate .
 
@@ -795,7 +776,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/location/meeting_place>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/location/meeting_place/FunctionTermMap> ;
         rr:predicate  dbo:location .
 
@@ -834,7 +814,6 @@
 #######################
 <./Mapping_en:Infobox_legislature/SimplePropertyMapping/committeeInLegislature/committees1>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_legislature/SimplePropertyMapping/committeeInLegislature/committees1/FunctionTermMap> ;
         rr:predicate  dbo:committeeInLegislature .
 

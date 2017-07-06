@@ -33,7 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_locomotive/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/foaf:name/nicknames> ,
 			       <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/powerType/powertype> ,
@@ -94,7 +93,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/foaf:name/nicknames>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/foaf:name/nicknames/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -133,7 +131,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/rebuilder/rebuilder>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/rebuilder/rebuilder/FunctionTermMap> ;
         rr:predicate  dbo:rebuilder .
 
@@ -172,7 +169,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/powerType/powertype>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/powerType/powertype/FunctionTermMap> ;
         rr:predicate  dbo:powerType .
 
@@ -211,7 +207,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/designer/designer>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/designer/designer/FunctionTermMap> ;
         rr:predicate  dbo:designer .
 
@@ -250,7 +245,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/length/length>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/length/length/FunctionTermMap> ;
         rr:predicate  dbo:length .
 
@@ -289,7 +283,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/owner/currentowner>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/owner/currentowner/FunctionTermMap> ;
         rr:predicate  dbo:owner .
 
@@ -326,48 +319,8 @@
 
 ### PredicateObjectMap
 #######################
-<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap> ;
-        rr:predicate  dbo:engineType .
-
-### Function Term Map
-<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_locomotive/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_locomotive/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_locomotive/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "engineType" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "enginetype" .
-
-
-### PredicateObjectMap
-#######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/builder/builder>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/builder/builder/FunctionTermMap> ;
         rr:predicate  dbo:builder .
 
@@ -404,9 +357,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap> ;
+        rr:predicate  dbo:engineType .
+
+### Function Term Map
+<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_locomotive/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_locomotive/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_locomotive/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "engineType" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_locomotive/SimplePropertyMapping/engineType/enginetype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "enginetype" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/boilerPressure/boilerpressure>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/boilerPressure/boilerpressure/FunctionTermMap> ;
         rr:predicate  dbo:boilerPressure .
 
@@ -445,7 +435,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/cylinderCount/cylindercount>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/cylinderCount/cylindercount/FunctionTermMap> ;
         rr:predicate  dbo:cylinderCount .
 
@@ -484,7 +473,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/retired/retiredate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/retired/retiredate/FunctionTermMap> ;
         rr:predicate  dbo:retired .
 
@@ -523,7 +511,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/deliveryDate/deliverydate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/deliveryDate/deliverydate/FunctionTermMap> ;
         rr:predicate  dbo:deliveryDate .
 
@@ -562,7 +549,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/width/width>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/width/width/FunctionTermMap> ;
         rr:predicate  dbo:width .
 
@@ -601,7 +587,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/height/height>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/height/height/FunctionTermMap> ;
         rr:predicate  dbo:height .
 
@@ -640,7 +625,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/topSpeed/topspeed>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/topSpeed/topspeed/FunctionTermMap> ;
         rr:predicate  dbo:topSpeed .
 
@@ -679,7 +663,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/rebuildDate/rebuilddate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/rebuildDate/rebuilddate/FunctionTermMap> ;
         rr:predicate  dbo:rebuildDate .
 
@@ -718,7 +701,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/restoreDate/restoredate>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/restoreDate/restoredate/FunctionTermMap> ;
         rr:predicate  dbo:restoreDate .
 
@@ -757,7 +739,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/boiler/boiler>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/boiler/boiler/FunctionTermMap> ;
         rr:predicate  dbo:boiler .
 
@@ -796,7 +777,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/foaf:name/officialname>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/foaf:name/officialname/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -835,7 +815,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/numberBuilt/totalproduction>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/numberBuilt/totalproduction/FunctionTermMap> ;
         rr:predicate  dbo:numberBuilt .
 
@@ -875,7 +854,6 @@
 <./Mapping_en:Infobox_locomotive/StartDate/activeYearsStartYear/activeYearsEndYear/builddate>
         a             rr:PredicateObjectMap ;
         dbf:endDate   <./Mapping_en:Infobox_locomotive/EndDate/activeYearsStartYear/activeYearsEndYear/builddate> ;
-        dcterms:type  "startDateIntervalMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/StartDate/activeYearsStartYear/activeYearsEndYear/builddate/FunctionTermMap> ;
         rr:predicate  dbo:activeYearsStartYear .
 
@@ -914,7 +892,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -953,7 +930,6 @@
 #######################
 <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/weight/weight>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_locomotive/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
         rr:predicate  dbo:weight .
 
@@ -993,7 +969,6 @@
 <./Mapping_en:Infobox_locomotive/EndDate/activeYearsStartYear/activeYearsEndYear/builddate>
         a              rr:PredicateObjectMap ;
         dbf:startDate  <./Mapping_en:Infobox_locomotive/StartDate/activeYearsStartYear/activeYearsEndYear/builddate> ;
-        dcterms:type   "endDateIntervalMapping" ;
         rr:objectMap   <./Mapping_en:Infobox_locomotive/EndDate/activeYearsStartYear/activeYearsEndYear/builddate/FunctionTermMap> ;
         rr:predicate   dbo:activeYearsEndYear .
 

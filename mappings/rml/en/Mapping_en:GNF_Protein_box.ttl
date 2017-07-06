@@ -1,1 +1,561 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:GNF_Protein_box> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_en:GNF_Protein_box/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:HumanGene ,
+		     dbo:Gene ,
+		     wikidata:Q7187 ,
+		     dbo:Biomolecule ,
+		     wikidata:Q206229 ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_en:GNF_Protein_box/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:GNF_Protein_box?oldid=19614" .
+
+
+###########
+# Mappings
+###########
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot/FunctionTermMap> ;
+        rr:predicate  dbo:uniprot .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "uniprot" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/uniprot/Hs_Uniprot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Hs_Uniprot" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene/FunctionTermMap> ;
+        rr:predicate  dbo:entrezgene .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "entrezgene" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/entrezgene/Hs_EntrezGene/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Hs_EntrezGene" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber/FunctionTermMap> ;
+        rr:predicate  dbo:ecNumber .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "ecNumber" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ecNumber/ECnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ECnumber" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM/FunctionTermMap> ;
+        rr:predicate  dbo:omim .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "omim" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/omim/OMIM/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "OMIM" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:name/Name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Name" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl/FunctionTermMap> ;
+        rr:predicate  dbo:ensembl .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "ensembl" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/ensembl/Hs_Ensembl/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Hs_Ensembl" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid/FunctionTermMap> ;
+        rr:predicate  dbo:mgiid .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "mgiid" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/mgiid/MGIid/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "MGIid" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA/FunctionTermMap> ;
+        rr:predicate  dbo:refseqmrna .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "refseqmrna" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqmrna/Hs_RefseqmRNA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Hs_RefseqmRNA" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol/FunctionTermMap> ;
+        rr:predicate  dbo:symbol .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "symbol" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/symbol/Symbol/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Symbol" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid/FunctionTermMap> ;
+        rr:predicate  dbo:hgncid .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "hgncid" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/hgncid/HGNCid/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "HGNCid" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image/FunctionTermMap> ;
+        rr:predicate  foaf:img .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "foaf:img" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/foaf:img/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "image" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein/FunctionTermMap> ;
+        rr:predicate  dbo:refseqprotein .
+
+### Function Term Map
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:GNF_Protein_box/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:GNF_Protein_box/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "refseqprotein" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:GNF_Protein_box/SimplePropertyMapping/refseqprotein/Hs_RefseqProtein/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Hs_RefseqProtein" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_en:GNF_Protein_box/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_en:GNF_Protein_box/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
 

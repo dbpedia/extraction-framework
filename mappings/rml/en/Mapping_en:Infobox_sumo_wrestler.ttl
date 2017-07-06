@@ -33,12 +33,11 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_sumo_wrestler/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_name> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/foaf:name/name> ,
 			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthDate/birth_date> ,
-			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/foaf:name/name> ,
 			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place> ,
+			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_name> ,
 			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date> ,
 			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place> ;
         rr:subjectMap          <./Mapping_en:Infobox_sumo_wrestler/SubjectMap> .
@@ -81,9 +80,84 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sumo_wrestler/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sumo_wrestler/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sumo_wrestler/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_place" .
+
+
+### PredicateObjectMap
+#######################
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sumo_wrestler/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sumo_wrestler/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sumo_wrestler/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_date" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_name/FunctionTermMap> ;
         rr:predicate  dbo:birthPlace .
 
@@ -120,9 +194,46 @@
 
 ### PredicateObjectMap
 #######################
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
+
+### Function Value
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_sumo_wrestler/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_sumo_wrestler/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_sumo_wrestler/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_place" .
+
+
+### PredicateObjectMap
+#######################
 <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthDate/birth_date>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
         rr:predicate  dbo:birthDate .
 
@@ -161,7 +272,6 @@
 #######################
 <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
         rr:predicate  foaf:name .
 
@@ -194,123 +304,6 @@
 <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
-        rr:predicate  dbo:birthPlace .
-
-### Function Term Map
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sumo_wrestler/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sumo_wrestler/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sumo_wrestler/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "birthPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "birth_place" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
-        rr:predicate  dbo:deathDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sumo_wrestler/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sumo_wrestler/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sumo_wrestler/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "deathDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "death_date" .
-
-
-### PredicateObjectMap
-#######################
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "simplePropertyMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
-        rr:predicate  dbo:deathPlace .
-
-### Function Term Map
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
-
-### Function Value
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_sumo_wrestler/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_sumo_wrestler/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_sumo_wrestler/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "deathPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_sumo_wrestler/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "death_place" .
 
 
 ######################
