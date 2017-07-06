@@ -237,7 +237,7 @@ class Mappings(@PathParam("lang") langCode : String)
               }
 
               // add new zip entry
-              zip.putNextEntry(new ZipEntry(title + ".ttl"))
+              zip.putNextEntry(new ZipEntry(title.replace("%3A", ":") + ".ttl"))
 
               // write into new zip entry
               writer.println(mappingAsString)
