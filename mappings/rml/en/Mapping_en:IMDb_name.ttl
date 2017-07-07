@@ -84,6 +84,8 @@
 ### Function Execution Mapping
 <./Mapping_en:IMDb_name/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <./Mapping_en:IMDb_name/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:IMDb_name/Function/SimplePropertyFunction> ,
 			       <./Mapping_en:IMDb_name/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
@@ -93,17 +95,23 @@
 ### Parameters
 <./Mapping_en:IMDb_name/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <./Mapping_en:IMDb_name/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 <./Mapping_en:IMDb_name/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "imdbId" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
 <./Mapping_en:IMDb_name/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
         rml:reference  "id" .
 
 

@@ -74,6 +74,8 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
       val functionValue = functionTermMap.addFunctionValue(functionValueUri)
       functionValue.addLogicalSource(rmlModel.logicalSource)
       functionValue.addSubjectMap(rmlModel.functionSubjectMap)
+      functionValue.addRdfsLabel("SimplePropertyMapping TriplesMap")
+      functionValue.addRdfsComment("TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction.")
 
 
       // the next few lines check if the SimplePropertyFunction already exists or not in the mapping file so that
@@ -96,16 +98,22 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
   {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
+    parameterPom.addRdfsLabel("Parameter Predicate Object Map")
+    parameterPom.addRdfsComment("A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple.")
     parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
     val parameterObjectMapUri = parameterPomUri.extend("/ObjectMap")
-    parameterPom.addObjectMap(parameterObjectMapUri).addRMLReference(new RMLLiteral(getParameterValue(param)))
-
+    val objectMap = parameterPom.addObjectMap(parameterObjectMapUri)
+    objectMap.addRMLReference(new RMLLiteral(getParameterValue(param)))
+    objectMap.addRdfsLabel("Parameter Object Map")
+    objectMap.addRdfsComment("An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property.")
   }
 
   private def addConstantParameterFunction(param : String, functionValue: RMLTriplesMap) =
   {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
+    parameterPom.addRdfsLabel("Parameter Predicate Object Map")
+    parameterPom.addRdfsComment("A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple.")
     parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
     parameterPom.addObject(new RMLLiteral(getParameterValue(param)))
   }
