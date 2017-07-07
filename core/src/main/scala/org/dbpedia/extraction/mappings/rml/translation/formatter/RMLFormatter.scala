@@ -169,7 +169,7 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(propertiesArray)
 
-    val heading = hashtags(3) + " PredicateObjectMap\n" + hashtags(23)
+    val heading = hashtags(3) + " Predicate Object Map\n" + hashtags(25)
     val predicateObjectMapString = removePrefixes(freshModel.writeAsTurtle(base : String))
 
     /** The case if a function is used:
@@ -340,7 +340,7 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(propertiesArray)
 
-    val heading = hashtags(3) + " Function Value"
+    val heading = hashtags(3) + " Function Execution Mapping"
     val functionValueString = removePrefixes(freshModel.writeAsTurtle(base : String).replaceAll(",", ",\n\t\t\t      "))
 
     val predicateObjectMapProperty = freshModel.model.getProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
