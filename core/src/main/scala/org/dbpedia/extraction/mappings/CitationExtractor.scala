@@ -40,7 +40,8 @@ extends WikiPageExtractor
 
     private val wikiCode = language.wikiCode
 
-    private val citationTemplatesRegex = List("cite.*".r, "citation.*".r) //TODO make I18n
+    //FIXME put this in a config!
+    private val citationTemplatesRegex = List("cite.*".r, "citation.*".r, "literatur.*".r, "internetquelle.*".r, "bib.*".r)
 
     private val typeProperty = ontology.properties("rdf:type")
     //private val rdfLangStrDt = ontology.datatypes("rdf:langString")
