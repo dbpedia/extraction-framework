@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings.rml.translation.model.rmlresources
 
 import org.apache.jena.rdf.model.{Property, Resource}
 import org.dbpedia.extraction.mappings.rml.translation.model.factories.RMLResourceFactory
+import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
   * Represents a wrapper around a model resource
@@ -28,6 +29,14 @@ class RMLResource(val resource: Resource) {
   def addRMLResource(predicate: String, rmlResource: RMLResource) : RMLResource = {
     resource.addProperty(createProperty(predicate), rmlResource.resource)
     this
+  }
+
+  def addRdfsComment(comment : String) = {
+    resource.addProperty(createProperty(RdfNamespace.RDFS.namespace + "comment"), comment)
+  }
+
+  def addRdfsLabel(label : String) = {
+    resource.addProperty(createProperty(RdfNamespace.RDFS.namespace + "label"), label)
   }
 
   protected def createProperty(property: String) : Property = {
