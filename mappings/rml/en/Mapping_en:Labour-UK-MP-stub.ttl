@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:Labour-UK-MP-stub. This defines the generation of triples that are extracted from Labour-UK-MP-stub." ;
+        rdfs:label             "Mapping en:Labour-UK-MP-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Labour-UK-MP-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Labour-UK-MP-stub/ConstantMapping/country/United_Kingdom> ,
 			       <./Mapping_en:Labour-UK-MP-stub/ConstantMapping/party/Labor_Party_(UK)> ;
@@ -42,8 +44,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Labour-UK-MP-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     wikidata:Q5 ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Labour-UK-MP-stub. This defines the generation of the subject for the triples that are extracted from Labour-UK-MP-stub." ;
+        rdfs:label    "Mapping en:Labour-UK-MP-stub (Subject Map)" ;
+        rr:class      wikidata:Q5 ,
 		     dul:Agent ,
 		     schema:Person ,
 		     wikidata:Q82955 ,
@@ -56,8 +60,8 @@
 		     wikidata:Q215627 ,
 		     dbo:Politician ,
 		     dbo:Agent ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:Canada-bio-stub. This defines the generation of triples that are extracted from Canada-bio-stub." ;
+        rdfs:label             "Mapping en:Canada-bio-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Canada-bio-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Canada-bio-stub/ConstantMapping/nationality/Canada> ;
         rr:subjectMap          <./Mapping_en:Canada-bio-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Canada-bio-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Person ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Canada-bio-stub. This defines the generation of the subject for the triples that are extracted from Canada-bio-stub." ;
+        rdfs:label    "Mapping en:Canada-bio-stub (Subject Map)" ;
+        rr:class      dbo:Person ,
 		     dbo:Agent ,
 		     wikidata:Q215627 ,
 		     wikidata:Q5 ,
@@ -51,8 +55,8 @@
 		     dul:Agent ,
 		     foaf:Person ,
 		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

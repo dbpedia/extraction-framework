@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:India-party-stub. This defines the generation of triples that are extracted from India-party-stub." ;
+        rdfs:label         "Mapping en:India-party-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:India-party-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:India-party-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:India-party-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     schema:Organization ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:India-party-stub. This defines the generation of the subject for the triples that are extracted from India-party-stub." ;
+        rdfs:label    "Mapping en:India-party-stub (Subject Map)" ;
+        rr:class      schema:Organization ,
 		     dbo:PoliticalParty ,
 		     dul:SocialPerson ,
 		     dul:Agent ,
@@ -50,8 +54,8 @@
 		     wikidata:Q43229 ,
 		     dbo:Organisation ,
 		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Baseball-season-stub. This defines the generation of triples that are extracted from Baseball-season-stub." ;
+        rdfs:label         "Mapping en:Baseball-season-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Baseball-season-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Baseball-season-stub/SubjectMap> .
 
@@ -40,13 +42,15 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Baseball-season-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:BaseballSeason ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Baseball-season-stub. This defines the generation of the subject for the triples that are extracted from Baseball-season-stub." ;
+        rdfs:label    "Mapping en:Baseball-season-stub (Subject Map)" ;
+        rr:class      dbo:BaseballSeason ,
 		     dbo:SportsTeamSeason ,
 		     dbo:SportsSeason ,
 		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

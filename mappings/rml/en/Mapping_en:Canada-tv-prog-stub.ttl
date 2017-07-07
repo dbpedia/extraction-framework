@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Canada-tv-prog-stub. This defines the generation of triples that are extracted from Canada-tv-prog-stub." ;
+        rdfs:label         "Mapping en:Canada-tv-prog-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Canada-tv-prog-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Canada-tv-prog-stub/SubjectMap> .
 
@@ -40,15 +42,17 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Canada-tv-prog-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:TelevisionShow ,
-		     wikidata:Q15416 ,
-		     dbo:Work ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Canada-tv-prog-stub. This defines the generation of the subject for the triples that are extracted from Canada-tv-prog-stub." ;
+        rdfs:label    "Mapping en:Canada-tv-prog-stub (Subject Map)" ;
+        rr:class      owl:Thing ,
 		     schema:CreativeWork ,
+		     wikidata:Q15416 ,
 		     wikidata:Q386724 ,
-		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+		     dbo:TelevisionShow ,
+		     dbo:Work ;
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:Scotland-writer-stub. This defines the generation of triples that are extracted from Scotland-writer-stub." ;
+        rdfs:label             "Mapping en:Scotland-writer-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Scotland-writer-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Scotland-writer-stub/ConstantMapping/country/United_Kingdom> ,
 			       <./Mapping_en:Scotland-writer-stub/ConstantMapping/country/Scotland> ;
@@ -42,8 +44,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Scotland-writer-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     wikidata:Q36180 ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Scotland-writer-stub. This defines the generation of the subject for the triples that are extracted from Scotland-writer-stub." ;
+        rdfs:label    "Mapping en:Scotland-writer-stub (Subject Map)" ;
+        rr:class      wikidata:Q36180 ,
 		     schema:Person ,
 		     wikidata:Q215627 ,
 		     foaf:Person ,
@@ -54,8 +58,8 @@
 		     owl:Thing ,
 		     dul:Agent ,
 		     dbo:Agent ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

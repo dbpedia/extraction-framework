@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:Greek-myth-stub. This defines the generation of triples that are extracted from Greek-myth-stub." ;
+        rdfs:label             "Mapping en:Greek-myth-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Greek-myth-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Greek-myth-stub/ConstantMapping/mythology/Greek_mythology> ;
         rr:subjectMap          <./Mapping_en:Greek-myth-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Greek-myth-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dul:NaturalPerson ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Greek-myth-stub. This defines the generation of the subject for the triples that are extracted from Greek-myth-stub." ;
+        rdfs:label    "Mapping en:Greek-myth-stub (Subject Map)" ;
+        rr:class      dul:NaturalPerson ,
 		     wikidata:Q5 ,
 		     foaf:Person ,
 		     dbo:FictionalCharacter ,
@@ -55,8 +59,8 @@
 		     wikidata:Q215627 ,
 		     dbo:Agent ,
 		     wikidata:Q95074 ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:UK-SSSI-stub. This defines the generation of triples that are extracted from UK-SSSI-stub." ;
+        rdfs:label             "Mapping en:UK-SSSI-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:UK-SSSI-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:UK-SSSI-stub/ConstantMapping/location/United_Kingdom> ,
 			       <./Mapping_en:UK-SSSI-stub/ConstantMapping/country/United_Kindgom> ;
@@ -42,15 +44,17 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:UK-SSSI-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:SiteOfSpecialScientificInterest ,
-		     wikidata:Q422211 ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:UK-SSSI-stub. This defines the generation of the subject for the triples that are extracted from UK-SSSI-stub." ;
+        rdfs:label    "Mapping en:UK-SSSI-stub (Subject Map)" ;
+        rr:class      wikidata:Q422211 ,
+		     dbo:Location ,
+		     dbo:SiteOfSpecialScientificInterest ,
 		     dbo:Place ,
 		     schema:Place ,
-		     dbo:Location ,
 		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

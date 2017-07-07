@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Comic-strip-stub. This defines the generation of triples that are extracted from Comic-strip-stub." ;
+        rdfs:label         "Mapping en:Comic-strip-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Comic-strip-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Comic-strip-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Comic-strip-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     schema:CreativeWork ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Comic-strip-stub. This defines the generation of the subject for the triples that are extracted from Comic-strip-stub." ;
+        rdfs:label    "Mapping en:Comic-strip-stub (Subject Map)" ;
+        rr:class      schema:CreativeWork ,
 		     dbo:Work ,
 		     dbo:ComicStrip ,
 		     dbo:Comic ,
@@ -49,8 +53,8 @@
 		     dbo:WrittenWork ,
 		     wikidata:Q386724 ,
 		     wikidata:Q245068 ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

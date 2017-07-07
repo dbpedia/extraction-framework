@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Carabidae-stub. This defines the generation of triples that are extracted from Carabidae-stub." ;
+        rdfs:label         "Mapping en:Carabidae-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Carabidae-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Carabidae-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Carabidae-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Insect ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Carabidae-stub. This defines the generation of the subject for the triples that are extracted from Carabidae-stub." ;
+        rdfs:label    "Mapping en:Carabidae-stub (Subject Map)" ;
+        rr:class      dbo:Insect ,
 		     dbo:Eukaryote ,
 		     wikidata:Q1390 ,
 		     wikidata:Q729 ,
@@ -49,8 +53,8 @@
 		     wikidata:Q19088 ,
 		     owl:Thing ,
 		     dbo:Animal ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

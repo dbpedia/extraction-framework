@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:1930s-UK-film-stub. This defines the generation of triples that are extracted from 1930s-UK-film-stub." ;
+        rdfs:label         "Mapping en:1930s-UK-film-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:1930s-UK-film-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:1930s-UK-film-stub/SubjectMap> .
 
@@ -40,16 +42,18 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:1930s-UK-film-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     <http://dbpedia.org/ontology/Wikidata:Q11424> ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:1930s-UK-film-stub. This defines the generation of the subject for the triples that are extracted from 1930s-UK-film-stub." ;
+        rdfs:label    "Mapping en:1930s-UK-film-stub (Subject Map)" ;
+        rr:class      <http://dbpedia.org/ontology/Wikidata:Q11424> ,
 		     dbo:Work ,
 		     schema:CreativeWork ,
 		     wikidata:Q386724 ,
 		     owl:Thing ,
 		     schema:Movie ,
 		     dbo:Film ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:Japan-dam-stub. This defines the generation of triples that are extracted from Japan-dam-stub." ;
+        rdfs:label             "Mapping en:Japan-dam-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Japan-dam-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Japan-dam-stub/ConstantMapping/country/Japan> ;
         rr:subjectMap          <./Mapping_en:Japan-dam-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Japan-dam-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     schema:Place ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Japan-dam-stub. This defines the generation of the subject for the triples that are extracted from Japan-dam-stub." ;
+        rdfs:label    "Mapping en:Japan-dam-stub (Subject Map)" ;
+        rr:class      schema:Place ,
 		     dbo:Location ,
 		     wikidata:Q12323 ,
 		     dbo:Dam ,
@@ -50,8 +54,8 @@
 		     owl:Thing ,
 		     dbo:ArchitecturalStructure ,
 		     dbo:Place ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

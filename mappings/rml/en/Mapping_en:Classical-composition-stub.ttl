@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Classical-composition-stub. This defines the generation of triples that are extracted from Classical-composition-stub." ;
+        rdfs:label         "Mapping en:Classical-composition-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Classical-composition-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Classical-composition-stub/SubjectMap> .
 
@@ -40,16 +42,18 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Classical-composition-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:MusicalWork ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Classical-composition-stub. This defines the generation of the subject for the triples that are extracted from Classical-composition-stub." ;
+        rdfs:label    "Mapping en:Classical-composition-stub (Subject Map)" ;
+        rr:class      dbo:MusicalWork ,
 		     wikidata:Q2188189 ,
 		     dbo:ClassicalMusicComposition ,
 		     dbo:Work ,
 		     wikidata:Q386724 ,
 		     schema:CreativeWork ,
 		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

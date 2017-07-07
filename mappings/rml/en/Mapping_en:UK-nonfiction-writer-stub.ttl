@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:UK-nonfiction-writer-stub. This defines the generation of triples that are extracted from UK-nonfiction-writer-stub." ;
+        rdfs:label             "Mapping en:UK-nonfiction-writer-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:UK-nonfiction-writer-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:UK-nonfiction-writer-stub/ConstantMapping/country/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:UK-nonfiction-writer-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:UK-nonfiction-writer-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     owl:Thing ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:UK-nonfiction-writer-stub. This defines the generation of the subject for the triples that are extracted from UK-nonfiction-writer-stub." ;
+        rdfs:label    "Mapping en:UK-nonfiction-writer-stub (Subject Map)" ;
+        rr:class      owl:Thing ,
 		     dbo:Agent ,
 		     wikidata:Q36180 ,
 		     foaf:Person ,
@@ -53,8 +57,8 @@
 		     dbo:Writer ,
 		     wikidata:Q215627 ,
 		     schema:Person ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

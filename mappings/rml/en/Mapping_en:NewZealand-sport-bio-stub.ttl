@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:NewZealand-sport-bio-stub. This defines the generation of triples that are extracted from NewZealand-sport-bio-stub." ;
+        rdfs:label             "Mapping en:NewZealand-sport-bio-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:NewZealand-sport-bio-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:NewZealand-sport-bio-stub/ConstantMapping/country/New_Zealand> ;
         rr:subjectMap          <./Mapping_en:NewZealand-sport-bio-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:NewZealand-sport-bio-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Person ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:NewZealand-sport-bio-stub. This defines the generation of the subject for the triples that are extracted from NewZealand-sport-bio-stub." ;
+        rdfs:label    "Mapping en:NewZealand-sport-bio-stub (Subject Map)" ;
+        rr:class      dbo:Person ,
 		     dbo:Athlete ,
 		     owl:Thing ,
 		     wikidata:Q5 ,
@@ -52,8 +56,8 @@
 		     schema:Person ,
 		     dbo:Agent ,
 		     wikidata:Q215627 ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

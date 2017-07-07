@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:Korean cuisine. This defines the generation of triples that are extracted from Korean cuisine." ;
+        rdfs:label             "Mapping en:Korean cuisine (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Korean_cuisine/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Korean_cuisine/ConstantMapping/origin/Korea> ;
         rr:subjectMap          <./Mapping_en:Korean_cuisine/SubjectMap> .
@@ -41,13 +43,15 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Korean_cuisine/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Food ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Korean cuisine. This defines the generation of the subject for the triples that are extracted from Korean cuisine." ;
+        rdfs:label    "Mapping en:Korean cuisine (Subject Map)" ;
+        rr:class      dbo:Food ,
 		     wikidata:Q2095 ,
 		     dul:FunctionalSubstance ,
 		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

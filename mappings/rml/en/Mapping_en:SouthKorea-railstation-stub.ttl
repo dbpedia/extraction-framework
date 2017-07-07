@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:SouthKorea-railstation-stub. This defines the generation of triples that are extracted from SouthKorea-railstation-stub." ;
+        rdfs:label         "Mapping en:SouthKorea-railstation-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:SouthKorea-railstation-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:SouthKorea-railstation-stub/SubjectMap> .
 
@@ -40,19 +42,21 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:SouthKorea-railstation-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     owl:Thing ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:SouthKorea-railstation-stub. This defines the generation of the subject for the triples that are extracted from SouthKorea-railstation-stub." ;
+        rdfs:label    "Mapping en:SouthKorea-railstation-stub (Subject Map)" ;
+        rr:class      owl:Thing ,
 		     dbo:Station ,
 		     wikidata:Q719456 ,
 		     dbo:RailwayStation ,
 		     wikidata:Q55488 ,
 		     dbo:Infrastructure ,
-		     dbo:Place ,
 		     dbo:ArchitecturalStructure ,
+		     dbo:Place ,
 		     dbo:Location ,
 		     schema:Place ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

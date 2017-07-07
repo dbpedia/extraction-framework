@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:Australia-Labor-politician-stub. This defines the generation of triples that are extracted from Australia-Labor-politician-stub." ;
+        rdfs:label             "Mapping en:Australia-Labor-politician-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Australia-Labor-politician-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/Australian_Labor_Party> ,
 			       <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/Australia> ;
@@ -42,8 +44,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Australia-Labor-politician-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     wikidata:Q82955 ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Australia-Labor-politician-stub. This defines the generation of the subject for the triples that are extracted from Australia-Labor-politician-stub." ;
+        rdfs:label    "Mapping en:Australia-Labor-politician-stub (Subject Map)" ;
+        rr:class      wikidata:Q82955 ,
 		     dbo:Person ,
 		     foaf:Person ,
 		     schema:Person ,
@@ -54,8 +58,8 @@
 		     wikidata:Q5 ,
 		     dbo:Politician ,
 		     dul:NaturalPerson ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

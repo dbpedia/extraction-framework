@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Baronet-stub. This defines the generation of triples that are extracted from Baronet-stub." ;
+        rdfs:label         "Mapping en:Baronet-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Baronet-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Baronet-stub/SubjectMap> .
 
@@ -40,21 +42,23 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Baronet-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     wikidata:Q5 ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Baronet-stub. This defines the generation of the subject for the triples that are extracted from Baronet-stub." ;
+        rdfs:label    "Mapping en:Baronet-stub (Subject Map)" ;
+        rr:class      wikidata:Q5 ,
 		     dul:NaturalPerson ,
 		     dbo:Royalty ,
 		     dbo:Baronet ,
-		     wikidata:Q215627 ,
 		     foaf:Person ,
+		     wikidata:Q215627 ,
 		     dbo:Agent ,
 		     dbo:Person ,
 		     dbo:BritishRoyalty ,
 		     owl:Thing ,
 		     dul:Agent ,
 		     schema:Person ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

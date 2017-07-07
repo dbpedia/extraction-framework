@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:US-law-bio-stub. This defines the generation of triples that are extracted from US-law-bio-stub." ;
+        rdfs:label             "Mapping en:US-law-bio-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:US-law-bio-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:US-law-bio-stub/ConstantMapping/nationality/United_States> ;
         rr:subjectMap          <./Mapping_en:US-law-bio-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:US-law-bio-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     foaf:Person ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:US-law-bio-stub. This defines the generation of the subject for the triples that are extracted from US-law-bio-stub." ;
+        rdfs:label    "Mapping en:US-law-bio-stub (Subject Map)" ;
+        rr:class      foaf:Person ,
 		     wikidata:Q215627 ,
 		     wikidata:Q5 ,
 		     dul:NaturalPerson ,
@@ -51,8 +55,8 @@
 		     owl:Thing ,
 		     dbo:Agent ,
 		     dbo:Person ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

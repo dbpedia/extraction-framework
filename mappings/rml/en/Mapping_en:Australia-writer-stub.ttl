@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:Australia-writer-stub. This defines the generation of triples that are extracted from Australia-writer-stub." ;
+        rdfs:label             "Mapping en:Australia-writer-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Australia-writer-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Australia-writer-stub/ConstantMapping/country/Australia> ;
         rr:subjectMap          <./Mapping_en:Australia-writer-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Australia-writer-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     foaf:Person ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Australia-writer-stub. This defines the generation of the subject for the triples that are extracted from Australia-writer-stub." ;
+        rdfs:label    "Mapping en:Australia-writer-stub (Subject Map)" ;
+        rr:class      foaf:Person ,
 		     dul:Agent ,
 		     wikidata:Q5 ,
 		     owl:Thing ,
@@ -50,11 +54,11 @@
 		     wikidata:Q36180 ,
 		     dbo:Writer ,
 		     dul:NaturalPerson ,
-		     schema:Person ,
 		     dbo:Person ,
+		     schema:Person ,
 		     wikidata:Q215627 ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

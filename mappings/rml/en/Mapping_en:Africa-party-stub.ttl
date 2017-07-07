@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Africa-party-stub. This defines the generation of triples that are extracted from Africa-party-stub." ;
+        rdfs:label         "Mapping en:Africa-party-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Africa-party-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Africa-party-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Africa-party-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:PoliticalParty ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Africa-party-stub. This defines the generation of the subject for the triples that are extracted from Africa-party-stub." ;
+        rdfs:label    "Mapping en:Africa-party-stub (Subject Map)" ;
+        rr:class      dbo:PoliticalParty ,
 		     wikidata:Q43229 ,
 		     owl:Thing ,
 		     dul:Agent ,
@@ -50,8 +54,8 @@
 		     schema:Organization ,
 		     wikidata:Q7278 ,
 		     dbo:Organisation ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

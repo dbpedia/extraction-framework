@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:US-painter-stub. This defines the generation of triples that are extracted from US-painter-stub." ;
+        rdfs:label             "Mapping en:US-painter-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:US-painter-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:US-painter-stub/ConstantMapping/country/United_States> ;
         rr:subjectMap          <./Mapping_en:US-painter-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:US-painter-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     wikidata:Q1028181 ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:US-painter-stub. This defines the generation of the subject for the triples that are extracted from US-painter-stub." ;
+        rdfs:label    "Mapping en:US-painter-stub (Subject Map)" ;
+        rr:class      wikidata:Q1028181 ,
 		     schema:Person ,
 		     wikidata:Q5 ,
 		     dbo:Artist ,
@@ -55,8 +59,8 @@
 		     wikidata:Q483501 ,
 		     dbo:Agent ,
 		     dul:Agent ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

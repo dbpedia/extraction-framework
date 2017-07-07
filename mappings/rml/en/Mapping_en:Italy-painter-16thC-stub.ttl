@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Italy-painter-16thC-stub. This defines the generation of triples that are extracted from Italy-painter-16thC-stub." ;
+        rdfs:label         "Mapping en:Italy-painter-16thC-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Italy-painter-16thC-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Italy-painter-16thC-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Italy-painter-16thC-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     foaf:Person ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Italy-painter-16thC-stub. This defines the generation of the subject for the triples that are extracted from Italy-painter-16thC-stub." ;
+        rdfs:label    "Mapping en:Italy-painter-16thC-stub (Subject Map)" ;
+        rr:class      foaf:Person ,
 		     dbo:Artist ,
 		     dbo:Agent ,
 		     owl:Thing ,
@@ -54,8 +58,8 @@
 		     wikidata:Q483501 ,
 		     dbo:Person ,
 		     schema:Person ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

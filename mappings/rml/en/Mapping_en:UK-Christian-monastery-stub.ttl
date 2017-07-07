@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:UK-Christian-monastery-stub. This defines the generation of triples that are extracted from UK-Christian-monastery-stub." ;
+        rdfs:label             "Mapping en:UK-Christian-monastery-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:UK-Christian-monastery-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:UK-Christian-monastery-stub/ConstantMapping/location/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:UK-Christian-monastery-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:UK-Christian-monastery-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Location ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:UK-Christian-monastery-stub. This defines the generation of the subject for the triples that are extracted from UK-Christian-monastery-stub." ;
+        rdfs:label    "Mapping en:UK-Christian-monastery-stub (Subject Map)" ;
+        rr:class      dbo:Location ,
 		     wikidata:Q1370598 ,
 		     dbo:ArchitecturalStructure ,
 		     dbo:Building ,
@@ -51,8 +55,8 @@
 		     wikidata:Q41176 ,
 		     schema:Place ,
 		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

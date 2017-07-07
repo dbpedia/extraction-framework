@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:ChurchofEngland-bishop-stub. This defines the generation of triples that are extracted from ChurchofEngland-bishop-stub." ;
+        rdfs:label         "Mapping en:ChurchofEngland-bishop-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:ChurchofEngland-bishop-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:ChurchofEngland-bishop-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:ChurchofEngland-bishop-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:ChristianBishop ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:ChurchofEngland-bishop-stub. This defines the generation of the subject for the triples that are extracted from ChurchofEngland-bishop-stub." ;
+        rdfs:label    "Mapping en:ChurchofEngland-bishop-stub (Subject Map)" ;
+        rr:class      dbo:ChristianBishop ,
 		     dul:NaturalPerson ,
 		     wikidata:Q5 ,
 		     wikidata:Q215627 ,
@@ -52,8 +56,8 @@
 		     owl:Thing ,
 		     schema:Person ,
 		     foaf:Person ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

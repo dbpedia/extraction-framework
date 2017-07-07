@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Beltasteroid-stub. This defines the generation of triples that are extracted from Beltasteroid-stub." ;
+        rdfs:label         "Mapping en:Beltasteroid-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Beltasteroid-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Beltasteroid-stub/SubjectMap> .
 
@@ -40,16 +42,18 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Beltasteroid-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Place ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Beltasteroid-stub. This defines the generation of the subject for the triples that are extracted from Beltasteroid-stub." ;
+        rdfs:label    "Mapping en:Beltasteroid-stub (Subject Map)" ;
+        rr:class      dbo:Place ,
 		     dbo:CelestialBody ,
 		     dbo:Asteroid ,
 		     schema:Place ,
 		     wikidata:Q3863 ,
 		     dbo:Location ,
 		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

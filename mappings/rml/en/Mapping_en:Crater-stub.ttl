@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Crater-stub. This defines the generation of triples that are extracted from Crater-stub." ;
+        rdfs:label         "Mapping en:Crater-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Crater-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Crater-stub/SubjectMap> .
 
@@ -40,15 +42,17 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Crater-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Crater ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Crater-stub. This defines the generation of the subject for the triples that are extracted from Crater-stub." ;
+        rdfs:label    "Mapping en:Crater-stub (Subject Map)" ;
+        rr:class      owl:Thing ,
 		     dbo:NaturalPlace ,
-		     dbo:Place ,
-		     schema:Place ,
 		     dbo:Location ,
-		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+		     schema:Place ,
+		     dbo:Crater ,
+		     dbo:Place ;
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

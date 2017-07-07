@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Prog-lang-stub. This defines the generation of triples that are extracted from Prog-lang-stub." ;
+        rdfs:label         "Mapping en:Prog-lang-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Prog-lang-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Prog-lang-stub/SubjectMap> .
 
@@ -40,16 +42,18 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Prog-lang-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     wikidata:Q315 ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Prog-lang-stub. This defines the generation of the subject for the triples that are extracted from Prog-lang-stub." ;
+        rdfs:label    "Mapping en:Prog-lang-stub (Subject Map)" ;
+        rr:class      wikidata:Q315 ,
 		     owl:Thing ,
 		     wikidata:Q9143 ,
 		     wikidata:Q34770 ,
 		     dbo:ProgrammingLanguage ,
 		     schema:Language ,
 		     dbo:Language ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

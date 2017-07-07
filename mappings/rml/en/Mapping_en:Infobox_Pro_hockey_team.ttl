@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Infobox Pro hockey team. This defines the generation of triples that are extracted from Infobox Pro hockey team." ;
+        rdfs:label         "Mapping en:Infobox Pro hockey team (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Infobox_Pro_hockey_team/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Infobox_Pro_hockey_team/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Infobox_Pro_hockey_team/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Organisation ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Infobox Pro hockey team. This defines the generation of the subject for the triples that are extracted from Infobox Pro hockey team." ;
+        rdfs:label    "Mapping en:Infobox Pro hockey team (Subject Map)" ;
+        rr:class      dbo:Organisation ,
 		     wikidata:Q4498974 ,
 		     dbo:HockeyTeam ,
 		     schema:Organization ,
@@ -52,8 +56,8 @@
 		     dul:Agent ,
 		     dbo:SportsTeam ,
 		     schema:SportsTeam ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

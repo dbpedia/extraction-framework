@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:France-politician-stub. This defines the generation of triples that are extracted from France-politician-stub." ;
+        rdfs:label             "Mapping en:France-politician-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:France-politician-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:France-politician-stub/ConstantMapping/country/France> ;
         rr:subjectMap          <./Mapping_en:France-politician-stub/SubjectMap> .
@@ -41,20 +43,22 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:France-politician-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     owl:Thing ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:France-politician-stub. This defines the generation of the subject for the triples that are extracted from France-politician-stub." ;
+        rdfs:label    "Mapping en:France-politician-stub (Subject Map)" ;
+        rr:class      owl:Thing ,
 		     wikidata:Q82955 ,
 		     dbo:Agent ,
 		     foaf:Person ,
 		     dul:Agent ,
-		     schema:Person ,
 		     dbo:Politician ,
+		     schema:Person ,
 		     wikidata:Q5 ,
 		     wikidata:Q215627 ,
 		     dul:NaturalPerson ,
 		     dbo:Person ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

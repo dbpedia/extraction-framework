@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:Japan-struct-stub. This defines the generation of triples that are extracted from Japan-struct-stub." ;
+        rdfs:label             "Mapping en:Japan-struct-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Japan-struct-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Japan-struct-stub/ConstantMapping/location/Japan> ;
         rr:subjectMap          <./Mapping_en:Japan-struct-stub/SubjectMap> .
@@ -41,14 +43,16 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Japan-struct-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:ArchitecturalStructure ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Japan-struct-stub. This defines the generation of the subject for the triples that are extracted from Japan-struct-stub." ;
+        rdfs:label    "Mapping en:Japan-struct-stub (Subject Map)" ;
+        rr:class      dbo:Location ,
+		     owl:Thing ,
 		     dbo:Place ,
-		     schema:Place ,
-		     dbo:Location ,
-		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+		     dbo:ArchitecturalStructure ,
+		     schema:Place ;
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:BritishColumbia-park-stub. This defines the generation of triples that are extracted from BritishColumbia-park-stub." ;
+        rdfs:label             "Mapping en:BritishColumbia-park-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:BritishColumbia-park-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/locatedInArea/British_Columbia> ,
 			       <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/country/Canada> ,
@@ -43,15 +45,17 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:BritishColumbia-park-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Park ,
-		     schema:Park ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:BritishColumbia-park-stub. This defines the generation of the subject for the triples that are extracted from BritishColumbia-park-stub." ;
+        rdfs:label    "Mapping en:BritishColumbia-park-stub (Subject Map)" ;
+        rr:class      dbo:Park ,
 		     dbo:Place ,
+		     schema:Park ,
 		     schema:Place ,
 		     dbo:Location ,
 		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

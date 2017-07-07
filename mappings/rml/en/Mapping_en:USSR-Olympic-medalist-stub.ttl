@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:USSR-Olympic-medalist-stub. This defines the generation of triples that are extracted from USSR-Olympic-medalist-stub." ;
+        rdfs:label             "Mapping en:USSR-Olympic-medalist-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:USSR-Olympic-medalist-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:USSR-Olympic-medalist-stub/ConstantMapping/nationality/Soviet_Union> ;
         rr:subjectMap          <./Mapping_en:USSR-Olympic-medalist-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:USSR-Olympic-medalist-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Agent ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:USSR-Olympic-medalist-stub. This defines the generation of the subject for the triples that are extracted from USSR-Olympic-medalist-stub." ;
+        rdfs:label    "Mapping en:USSR-Olympic-medalist-stub (Subject Map)" ;
+        rr:class      dbo:Agent ,
 		     owl:Thing ,
 		     wikidata:Q215627 ,
 		     wikidata:Q5 ,
@@ -52,8 +56,8 @@
 		     foaf:Person ,
 		     schema:Person ,
 		     dbo:Athlete ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

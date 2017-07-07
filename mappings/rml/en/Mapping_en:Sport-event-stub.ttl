@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Sport-event-stub. This defines the generation of triples that are extracted from Sport-event-stub." ;
+        rdfs:label         "Mapping en:Sport-event-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Sport-event-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Sport-event-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Sport-event-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     owl:Thing ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Sport-event-stub. This defines the generation of the subject for the triples that are extracted from Sport-event-stub." ;
+        rdfs:label    "Mapping en:Sport-event-stub (Subject Map)" ;
+        rr:class      owl:Thing ,
 		     wikidata:Q1656682 ,
 		     schema:Event ,
 		     dbo:SocietalEvent ,
@@ -49,8 +53,8 @@
 		     dul:Event ,
 		     schema:SportsEvent ,
 		     dbo:SportsEvent ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

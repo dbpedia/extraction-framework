@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Cricket-team-stub. This defines the generation of triples that are extracted from Cricket-team-stub." ;
+        rdfs:label         "Mapping en:Cricket-team-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Cricket-team-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Cricket-team-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Cricket-team-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Organisation ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Cricket-team-stub. This defines the generation of the subject for the triples that are extracted from Cricket-team-stub." ;
+        rdfs:label    "Mapping en:Cricket-team-stub (Subject Map)" ;
+        rr:class      dbo:Organisation ,
 		     schema:SportsTeam ,
 		     dbo:SportsTeam ,
 		     dul:SocialPerson ,
@@ -51,8 +55,8 @@
 		     wikidata:Q43229 ,
 		     owl:Thing ,
 		     schema:Organization ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

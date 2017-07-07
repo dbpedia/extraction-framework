@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Nonfiction-book-stub. This defines the generation of triples that are extracted from Nonfiction-book-stub." ;
+        rdfs:label         "Mapping en:Nonfiction-book-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Nonfiction-book-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Nonfiction-book-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Nonfiction-book-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     schema:Book ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Nonfiction-book-stub. This defines the generation of the subject for the triples that are extracted from Nonfiction-book-stub." ;
+        rdfs:label    "Mapping en:Nonfiction-book-stub (Subject Map)" ;
+        rr:class      schema:Book ,
 		     dbo:Book ,
 		     dbo:Work ,
 		     schema:CreativeWork ,
@@ -50,8 +54,8 @@
 		     bibo:Book ,
 		     owl:Thing ,
 		     dbo:WrittenWork ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

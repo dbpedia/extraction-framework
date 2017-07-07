@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:NewBrunswick-politician-stub. This defines the generation of triples that are extracted from NewBrunswick-politician-stub." ;
+        rdfs:label         "Mapping en:NewBrunswick-politician-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:NewBrunswick-politician-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:NewBrunswick-politician-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:NewBrunswick-politician-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     wikidata:Q5 ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:NewBrunswick-politician-stub. This defines the generation of the subject for the triples that are extracted from NewBrunswick-politician-stub." ;
+        rdfs:label    "Mapping en:NewBrunswick-politician-stub (Subject Map)" ;
+        rr:class      wikidata:Q5 ,
 		     schema:Person ,
 		     dbo:Politician ,
 		     wikidata:Q82955 ,
@@ -52,8 +56,8 @@
 		     wikidata:Q215627 ,
 		     dbo:Agent ,
 		     dul:NaturalPerson ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

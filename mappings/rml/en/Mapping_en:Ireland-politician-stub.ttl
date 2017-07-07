@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Ireland-politician-stub. This defines the generation of triples that are extracted from Ireland-politician-stub." ;
+        rdfs:label         "Mapping en:Ireland-politician-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Ireland-politician-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Ireland-politician-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Ireland-politician-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dul:NaturalPerson ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Ireland-politician-stub. This defines the generation of the subject for the triples that are extracted from Ireland-politician-stub." ;
+        rdfs:label    "Mapping en:Ireland-politician-stub (Subject Map)" ;
+        rr:class      dul:NaturalPerson ,
 		     owl:Thing ,
 		     dbo:Agent ,
 		     dbo:Person ,
@@ -52,8 +56,8 @@
 		     wikidata:Q5 ,
 		     dul:Agent ,
 		     dbo:Politician ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

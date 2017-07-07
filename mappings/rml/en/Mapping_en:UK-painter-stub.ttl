@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:UK-painter-stub. This defines the generation of triples that are extracted from UK-painter-stub." ;
+        rdfs:label         "Mapping en:UK-painter-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:UK-painter-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:UK-painter-stub/SubjectMap> .
 
@@ -40,22 +42,24 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:UK-painter-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     owl:Thing ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:UK-painter-stub. This defines the generation of the subject for the triples that are extracted from UK-painter-stub." ;
+        rdfs:label    "Mapping en:UK-painter-stub (Subject Map)" ;
+        rr:class      owl:Thing ,
 		     wikidata:Q5 ,
 		     schema:Person ,
 		     dbo:Person ,
 		     dul:Agent ,
 		     dbo:Painter ,
 		     wikidata:Q483501 ,
-		     wikidata:Q215627 ,
 		     wikidata:Q1028181 ,
+		     wikidata:Q215627 ,
 		     dul:NaturalPerson ,
 		     foaf:Person ,
 		     dbo:Artist ,
 		     dbo:Agent ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

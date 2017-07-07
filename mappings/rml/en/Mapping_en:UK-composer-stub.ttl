@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:UK-composer-stub. This defines the generation of triples that are extracted from UK-composer-stub." ;
+        rdfs:label             "Mapping en:UK-composer-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:UK-composer-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:UK-composer-stub/ConstantMapping/country/United_Kingdom> ,
 			       <./Mapping_en:UK-composer-stub/ConstantMapping/nationality/United_Kingdom> ;
@@ -42,8 +44,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:UK-composer-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Person ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:UK-composer-stub. This defines the generation of the subject for the triples that are extracted from UK-composer-stub." ;
+        rdfs:label    "Mapping en:UK-composer-stub (Subject Map)" ;
+        rr:class      dbo:Person ,
 		     dbo:MusicalArtist ,
 		     dul:NaturalPerson ,
 		     wikidata:Q215627 ,
@@ -56,8 +60,8 @@
 		     wikidata:Q483501 ,
 		     owl:Thing ,
 		     foaf:Person ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

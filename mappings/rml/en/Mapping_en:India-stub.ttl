@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:India-stub. This defines the generation of triples that are extracted from India-stub." ;
+        rdfs:label             "Mapping en:India-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:India-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:India-stub/ConstantMapping/country/India> ;
         rr:subjectMap          <./Mapping_en:India-stub/SubjectMap> .
@@ -41,10 +43,12 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:India-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:India-stub. This defines the generation of the subject for the triples that are extracted from India-stub." ;
+        rdfs:label    "Mapping en:India-stub (Subject Map)" ;
+        rr:class      owl:Thing ;
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Software-stub. This defines the generation of triples that are extracted from Software-stub." ;
+        rdfs:label         "Mapping en:Software-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Software-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Software-stub/SubjectMap> .
 
@@ -40,15 +42,17 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Software-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Software ,
-		     wikidata:Q7397 ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Software-stub. This defines the generation of the subject for the triples that are extracted from Software-stub." ;
+        rdfs:label    "Mapping en:Software-stub (Subject Map)" ;
+        rr:class      wikidata:Q7397 ,
+		     owl:Thing ,
 		     dbo:Work ,
-		     schema:CreativeWork ,
 		     wikidata:Q386724 ,
-		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+		     dbo:Software ,
+		     schema:CreativeWork ;
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

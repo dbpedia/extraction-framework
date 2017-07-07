@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:France-writer-stub. This defines the generation of triples that are extracted from France-writer-stub." ;
+        rdfs:label             "Mapping en:France-writer-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:France-writer-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:France-writer-stub/ConstantMapping/country/France> ;
         rr:subjectMap          <./Mapping_en:France-writer-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:France-writer-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     owl:Thing ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:France-writer-stub. This defines the generation of the subject for the triples that are extracted from France-writer-stub." ;
+        rdfs:label    "Mapping en:France-writer-stub (Subject Map)" ;
+        rr:class      owl:Thing ,
 		     dbo:Person ,
 		     wikidata:Q36180 ,
 		     dbo:Agent ,
@@ -53,8 +57,8 @@
 		     dul:NaturalPerson ,
 		     dul:Agent ,
 		     wikidata:Q215627 ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

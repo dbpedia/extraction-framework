@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
+        rdfs:comment       "Main Triples Map of Mapping en:Music-festival-stub. This defines the generation of triples that are extracted from Music-festival-stub." ;
+        rdfs:label         "Mapping en:Music-festival-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Music-festival-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Music-festival-stub/SubjectMap> .
 
@@ -40,8 +42,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Music-festival-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Event ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Music-festival-stub. This defines the generation of the subject for the triples that are extracted from Music-festival-stub." ;
+        rdfs:label    "Mapping en:Music-festival-stub (Subject Map)" ;
+        rr:class      dbo:Event ,
 		     owl:Thing ,
 		     wikidata:Q868557 ,
 		     dbo:SocietalEvent ,
@@ -50,8 +54,8 @@
 		     wikidata:Q1656682 ,
 		     schema:Event ,
 		     dbo:MusicFestival ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

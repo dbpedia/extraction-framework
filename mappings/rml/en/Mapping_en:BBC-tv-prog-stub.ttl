@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:BBC-tv-prog-stub. This defines the generation of triples that are extracted from BBC-tv-prog-stub." ;
+        rdfs:label             "Mapping en:BBC-tv-prog-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:BBC-tv-prog-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:BBC-tv-prog-stub/ConstantMapping/network/BBC> ;
         rr:subjectMap          <./Mapping_en:BBC-tv-prog-stub/SubjectMap> .
@@ -41,15 +43,17 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:BBC-tv-prog-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:TelevisionShow ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:BBC-tv-prog-stub. This defines the generation of the subject for the triples that are extracted from BBC-tv-prog-stub." ;
+        rdfs:label    "Mapping en:BBC-tv-prog-stub (Subject Map)" ;
+        rr:class      dbo:Work ,
 		     wikidata:Q15416 ,
-		     dbo:Work ,
-		     schema:CreativeWork ,
+		     owl:Thing ,
 		     wikidata:Q386724 ,
-		     owl:Thing ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+		     dbo:TelevisionShow ,
+		     schema:CreativeWork ;
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource

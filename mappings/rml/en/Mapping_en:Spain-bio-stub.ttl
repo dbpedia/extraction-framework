@@ -33,6 +33,8 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
+        rdfs:comment           "Main Triples Map of Mapping en:Spain-bio-stub. This defines the generation of triples that are extracted from Spain-bio-stub." ;
+        rdfs:label             "Mapping en:Spain-bio-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Spain-bio-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Spain-bio-stub/ConstantMapping/nationality/Spain> ;
         rr:subjectMap          <./Mapping_en:Spain-bio-stub/SubjectMap> .
@@ -41,8 +43,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Spain-bio-stub/SubjectMap>
-        a            rr:SubjectMap ;
-        rr:class     dbo:Person ,
+        a             rr:SubjectMap ;
+        rdfs:comment  "Main Subject Map of Mapping en:Spain-bio-stub. This defines the generation of the subject for the triples that are extracted from Spain-bio-stub." ;
+        rdfs:label    "Mapping en:Spain-bio-stub (Subject Map)" ;
+        rr:class      dbo:Person ,
 		     wikidata:Q5 ,
 		     schema:Person ,
 		     owl:Thing ,
@@ -51,8 +55,8 @@
 		     dbo:Agent ,
 		     dul:Agent ,
 		     foaf:Person ;
-        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType  rr:IRI .
+        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType   rr:IRI .
 
 
 ### LogicalSource
