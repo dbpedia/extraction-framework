@@ -8,15 +8,13 @@ import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper, ObjectReader}
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity}
-import org.dbpedia.extraction.sources.{Source, XMLSource}
+import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
 
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable
-import scala.collection.mutable.HashSet
-import scala.io.Codec
 import scala.util.Try
 import scala.util.matching.Regex
 
@@ -111,7 +109,6 @@ object ConfigUtils {
    * @param args array of space- or comma-separated language codes or article count ranges
    * @return languages, sorted by language code
    */
-  // TODO: reuse this in org.dbpedia.extraction.dump.download.DownloadConfig
   def parseLanguages(baseDir: File, args: Seq[String], wikiPostFix: String = "wiki"): Array[Language] = {
     
     val keys = for(arg <- args; key <- arg.split("[,\\s]"); if key.nonEmpty) yield key
@@ -145,14 +142,7 @@ object ConfigUtils {
       // these non-ASCII chars anyway, so we don't have to unescape them.
       
       // for all wikis in one of the desired ranges...
-      for ((from, to) <- ranges; wiki <- Config.wikiInfos; if from <= wiki.pages && wiki.pages <= to)
-      {
-        // ...add its language
-        Language.get(wiki.wikicode) match{
-          case Some(l) => languages += l
-          case None =>
-        }
-      }
+      languages ++= (for ((from, to) <- ranges; lang <- Language.map.values; if from <= lang.pages && lang.pages <= to) yield lang)
     }
 
     languages --= excludedLanguages

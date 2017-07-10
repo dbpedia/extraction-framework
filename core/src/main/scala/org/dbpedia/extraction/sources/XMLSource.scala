@@ -1,19 +1,14 @@
 package org.dbpedia.extraction.sources
 
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
-import java.io.{File, FileInputStream, InputStreamReader}
-
-import scala.xml.Elem
-import org.dbpedia.extraction.util.Language
-import java.io.Reader
+import java.io.{File, FileInputStream, InputStreamReader, Reader}
 import java.util.concurrent.{Callable, ExecutorService, Executors}
 
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitle}
+
 import scala.collection.JavaConversions._
-import java.util.logging.Level
-
-import com.sun.net.httpserver.Authenticator.{Failure, Success}
-
-import scala.util.{Failure, Success, Try}
+import scala.util.Try
+import scala.xml.Elem
 
 /**
  *  Loads wiki pages from an XML stream using the MediaWiki export format.
@@ -30,30 +25,30 @@ object XMLSource
     /**
      * Creates an XML Source from an input stream.
      *
-     * @param stream The input stream to read from. Will be closed after reading.
+     * @param file The input stream to read from. Will be closed after reading.
      * @param filter Function to filter pages by their title. Pages for which this function returns false, won't be yielded by the source.
      * @param language if given, parser expects file to be in this language and doesn't read language from siteinfo element
      */
-    def fromFile(file: File, language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
+    def fromFile(file: File, language: Language, filter: WikiTitle => Boolean = _ => true) : Source = {
       fromReader(() => new InputStreamReader(new FileInputStream(file), "UTF-8"), language, filter)
     }
 
-    def fromMultipleFiles(files: List[File], language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
-      fromReaders(files.map { f => () => new InputStreamReader(new FileInputStream(f), "UTF-8") }.toList, language, filter)
+    def fromMultipleFiles(files: List[File], language: Language, filter: WikiTitle => Boolean = _ => true) : Source = {
+      fromReaders(files.map { f => () => new InputStreamReader(new FileInputStream(f), "UTF-8") }, language, filter)
     }
 
     /**
      * Creates an XML Source from a reader.
      *
-     * @param stream The input stream to read from. Will be closed after reading.
+     * @param source The input stream to read from. Will be closed after reading.
      * @param filter Function to filter pages by their title. Pages for which this function returns false, won't be yielded by the source.
      * @param language if given, parser expects file to be in this language and doesn't read language from siteinfo element
      */
-    def fromReader(source: () => Reader, language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
+    def fromReader(source: () => Reader, language: Language, filter: WikiTitle => Boolean = _ => true) : Source = {
       new XMLReaderSource(source, language, filter)
     }
 
-    def fromReaders(sources: List[() => Reader], language: Language, filter: WikiTitle => Boolean = (_ => true)) : Source = {
+    def fromReaders(sources: Seq[() => Reader], language: Language, filter: WikiTitle => Boolean = _ => true) : Source = {
       if (sources.size == 1) fromReader(sources.head, language, filter) // no need to create an ExecutorService
       else new MultipleXMLReaderSource(sources, language, filter)
     }
@@ -77,9 +72,9 @@ object XMLSource
 /**
  * XML source which reads from a file
  */
-private class MultipleXMLReaderSource(sources: List[() => Reader], language: Language, filter: WikiTitle => Boolean) extends Source
+private class MultipleXMLReaderSource(sources: Seq[() => Reader], language: Language, filter: WikiTitle => Boolean) extends Source
 {
-  var executorService : ExecutorService = null
+  var executorService : ExecutorService = _
 
   override def foreach[U](proc : WikiPage => U) : Unit = {
 

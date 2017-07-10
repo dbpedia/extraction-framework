@@ -9,15 +9,16 @@ import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
+import org.dbpedia.extraction.sources.{Source, WikiSource, XMLSource}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, HashMap}
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Loads the dump extraction configuration.
@@ -41,9 +42,9 @@ class ConfigLoader(config: Config)
 
   def getExtractionRecorder(lang: Language): ExtractionRecorder[WikiPage] = {
     extractionRecorder.get(lang) match {
-      case None => {
+      case None =>
         extractionRecorder(lang) = config.logDir match {
-          case Some(p) => {
+          case Some(p) =>
             var logname = config.configPath.replace("\\", "/")
             logname = logname.substring(logname.lastIndexOf("/") + 1)
             logname = logname + "_" + lang.wikiCode + ".log"
@@ -56,11 +57,9 @@ class ConfigLoader(config: Config)
             //  datasets.size+" datasets ("+datasets.mkString(",")+")"
 
             new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null, config.slackCredentials.getOrElse(null))
-          }
           case None => new ExtractionRecorder[WikiPage](null, 2000, null, config.slackCredentials.getOrElse(null))
         }
         extractionRecorder(lang)
-      }
       case Some(er) => er
     }
   }
@@ -68,7 +67,7 @@ class ConfigLoader(config: Config)
   /**
     * Creates ab extraction job for a specific language.
     */
-  val extractionJobWorker = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { input: (Language,  Seq[Class[_ <: Extractor[_]]]) =>
+  val extractionJobWorker: Workers[(Language, Seq[Class[_ <: Extractor[_]]])] = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { input: (Language,  Seq[Class[_ <: Extractor[_]]]) =>
 
     val finder = new Finder[File](config.dumpDir, input._1, config.wikiName)
 
@@ -77,11 +76,11 @@ class ConfigLoader(config: Config)
     //Extraction Context
     val context = new DumpExtractionContext
     {
-      def ontology = _ontology
+      def ontology: Ontology = _ontology
 
-      def commonsSource = _commonsSource
+      def commonsSource: Source = _commonsSource
 
-      def language = input._1
+      def language: Language = input._1
 
       private lazy val _mappingPageSource =
       {
@@ -108,7 +107,7 @@ class ConfigLoader(config: Config)
       }
       def mappings : Mappings = _mappings
 
-      def articlesSource = getArticlesSource(language, finder)
+      def articlesSource: Source = getArticlesSource(language, finder)
 
       private val _redirects =
       {
@@ -158,7 +157,7 @@ class ConfigLoader(config: Config)
     val formatDestinations = new ArrayBuffer[Destination]()
 
     for ((suffix, format) <- config.formats) {
-      val datasetDestinations = new HashMap[Dataset, Destination]()
+      val datasetDestinations = new mutable.HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
           case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
@@ -169,7 +168,7 @@ class ConfigLoader(config: Config)
     }
 
     val destination = new MarkerDestination(
-      new CompositeDestination(formatDestinations.toSeq: _*),
+      new CompositeDestination(formatDestinations: _*),
       finder.file(date, Extraction.Complete).get,
       false
     )
@@ -194,7 +193,7 @@ class ConfigLoader(config: Config)
   /**
     * Creates ab extraction job for a specific language.
     */
-  val imageCategoryWorker = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
+  val imageCategoryWorker: Workers[Language] = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
     getExtractionRecorder(lang).initialize(lang, "Image Extraction")
     getExtractionRecorder(lang).printLabeledLine("Start image list preparation for ImageExtractor.", RecordSeverity.Info)
     val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
@@ -245,7 +244,7 @@ class ConfigLoader(config: Config)
         finder.matchFiles(date, source.substring(1))
       } else List(finder.file(date, source)).collect{case Some(x) => x}
 
-      logger.info(s"Source is ${source} - ${files.size} file(s) matched")
+      logger.info(s"Source is $source - ${files.size} file(s) matched")
 
       files
     }
@@ -272,12 +271,12 @@ class ConfigLoader(config: Config)
     {
       val finder = new Finder[File](config.dumpDir, Language("commons"), config.wikiName)
       val date = latestDate(finder)
-      XMLSource.fromReaders(readers(config.source, finder, date), Language.Commons, _.namespace == Namespace.File)
+      XMLSource.fromReaders(config.source.flatMap(x => readers(x, finder, date)), Language.Commons, _.namespace == Namespace.File)
     }
 
   private def getArticlesSource(language: Language, finder: Finder[File]) =
   {
-    val articlesReaders = readers(config.source, finder, latestDate(finder))
+    val articlesReaders = config.source.flatMap(x => readers(x, finder, latestDate(finder)))
 
     XMLSource.fromReaders(articlesReaders, language,
       title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
@@ -285,11 +284,11 @@ class ConfigLoader(config: Config)
         title.namespace == Namespace.WikidataProperty || ExtractorUtils.titleContainsCommonsMetadata(title))
   }
 
-    private def latestDate(finder: Finder[_]): String = {
-      val isSourceRegex = config.source.startsWith("@")
-      val source = if (isSourceRegex) config.source.substring(1) else config.source
-      val fileName = if (config.requireComplete) Download.Complete else source
-      finder.dates(fileName, isSuffixRegex = isSourceRegex).last
-    }
+  private def latestDate(finder: Finder[_]): String = {
+    val isSourceRegex = config.source.startsWith("@")
+    val source = if (isSourceRegex) config.source.head.substring(1) else config.source.head
+    val fileName = if (config.requireComplete) Download.Complete else source
+    finder.dates(fileName, isSuffixRegex = isSourceRegex).last
+  }
 }
 

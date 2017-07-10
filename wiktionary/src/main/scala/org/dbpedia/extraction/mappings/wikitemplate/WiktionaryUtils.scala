@@ -7,31 +7,32 @@ import org.dbpedia.extraction.mappings.wikitemplate.MyNodeList._
 import org.dbpedia.extraction.util.{Language, UriUtils}
 import org.dbpedia.extraction.wikiparser._
 
-import scala.collection.mutable.{ListBuffer, Stack}
+import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 import scala.io.Source
 import scala.language.{implicitConversions, reflectiveCalls}
 import scala.util.control.Breaks._
 
 
-case class WiktionaryException(val s: String, val vars : VarBindingsHierarchical, val unexpectedNode : Option[Node]) extends  Exception(s) {}
+case class WiktionaryException(s: String, vars : VarBindingsHierarchical, unexpectedNode : Option[Node]) extends  Exception(s) {}
 
-case class ContinueException(val s: String) extends Exception(s) {}
+case class ContinueException(s: String) extends Exception(s) {}
 /**
  * extend the stack class (by using a wrapper and implicit conversion - scala magic)
  */
-class MyStack(s : Stack[Node]) {
-  val stack : Stack[Node] = s
+class MyStack(s : mutable.Stack[Node]) {
+  val stack : mutable.Stack[Node] = s
 
   def prependString(str : String) : Unit  = {
-    if(stack.size == 0){
-      stack push new TextNode(str,0)
+    if(stack.isEmpty){
+      stack push TextNode(str, 0)
     } else {
       if(stack.head.isInstanceOf[TextNode]){
         val head = stack.pop
-        val newhead = new TextNode(str + head.asInstanceOf[TextNode].text, head.line)
+        val newhead = TextNode(str + head.asInstanceOf[TextNode].text, head.line)
         stack.push(newhead)
       } else {
-        val newhead = new TextNode(str, stack.head.line)
+        val newhead =  TextNode(str, stack.head.line)
         stack.push(newhead)
       }
     }
@@ -53,43 +54,41 @@ class MyStack(s : Stack[Node]) {
    * reverse a stack
    * the reverse function return (for some unknown reason) no stack, but a Seq...
    */
-  def reversed : Stack[Node]  = {
-     new Stack().pushAll(stack.reverse)
+  def reversed : mutable.Stack[Node]  = {
+     new mutable.Stack().pushAll(stack.reverse)
   }
 
   /**
    * return all nodes until we see a "list-end" node
    * if "list-start" nodes occur on the way, we need to keep track of them, so we dont see their "lower-level" "list-end" nodes as our searched list end
    */
-  def getList : Stack[Node] = {
+  def getList : mutable.Stack[Node] = {
       val list = new ListBuffer[Node]()
       var i = 0
       breakable {
-        while (stack.size > 0){
+        while (stack.nonEmpty){
           val cur = stack.pop
           cur match {
-            case tn : TemplateNode => {
+            case tn : TemplateNode =>
               if(tn.title.decoded == "Extractiontpl"){
-                val tplType = tn.property("1").get.children(0).asInstanceOf[TextNode].text
+                val tplType = tn.property("1").get.children.head.asInstanceOf[TextNode].text
                 tplType match {
                   case "list-start" =>     i += 1
-                  case "list-end" =>       {
-                    if(i == 0){
+                  case "list-end" =>
+                    if(i == 0)
                       break  //return inner of the list. the list start was consumed before calling this function, now we return before appending the end marker
-                    } else {
+                     else
                       i -= 1
-                    }
-                  }
+
                   case _ =>
                 }
               }
-            }
             case _ =>
           }
           list prepend cur
         }
       }
-      val st = new Stack[Node]() pushAll list
+      val st = new mutable.Stack[Node]() pushAll list
       st
     }
 
@@ -120,8 +119,8 @@ class MyStack(s : Stack[Node]) {
    * on the parsed template there will be this:
    * <tpl><tn="\n"><sec><tpl>
    */
-  def filterNewLines() = {
-    val otherStack = new Stack[Node]()
+  def filterNewLines(): mutable.Stack[Node] = {
+    val otherStack = new mutable.Stack[Node]()
     //stack.foreach(n=>println(n.dumpStrShort))
     val list = stack.toList
     for(i <- list.indices) {
@@ -149,19 +148,18 @@ class MyStack(s : Stack[Node]) {
     stack
   }
 
-  def filterEmptyTextNodes() = {
+  def filterEmptyTextNodes(): mutable.Stack[Node] = {
     val otherStack = stack.reverse
     //println("filterEmptyTextNodes called")
     //stack.foreach(n=>println(n.dumpStrShort))
     stack.clear
-    otherStack.foreach(i=> {
-      i match {
-        case tn : TextNode => if(!tn.text.equals("")){stack.push(i)}
-        case sn : SectionNode => stack.push(sn.copy(children=sn.children.filter((c) => !c.isInstanceOf[TextNode] || !c.asInstanceOf[TextNode].text.equals(""))))
-        case _ => stack push i
+    otherStack.foreach {
+      case i@(tn: TextNode) => if (!tn.text.equals("")) {
+        stack.push(i)
       }
+      case sn: SectionNode => stack.push(sn.copy(children = sn.children.filter((c) => !c.isInstanceOf[TextNode] || !c.asInstanceOf[TextNode].text.equals(""))))
+      case i => stack push i
     }
-    )
     //println("after")
     //stack.foreach(n=>println(n.dumpStrShort))
     stack
@@ -170,16 +168,14 @@ class MyStack(s : Stack[Node]) {
   /**
    * filter whitespaces
    */
-  def filterSpaces() = {
-    val otherStack = new Stack[Node]()
+  def filterSpaces(): mutable.Stack[Node] = {
+    val otherStack = new mutable.Stack[Node]()
     //println("filter spaces called")
     //stack.foreach(n=>println(n.dumpStrShort))
-    stack.foreach(i=> {
-      i match {
-        case tn : TextNode => otherStack push tn.copy(text=tn.text.replace("  ", " ").replace(" \n", "\n"))
-        case _ => otherStack push i
-      }
-    })
+    stack.foreach {
+      case tn: TextNode => otherStack push tn.copy(text = tn.text.replace("  ", " ").replace(" \n", "\n"))
+      case i => otherStack push i
+    }
     stack.clear
     stack.pushAll(otherStack)
     //println("after")
@@ -187,43 +183,40 @@ class MyStack(s : Stack[Node]) {
     stack
   }
 
-  def dropUntilAndPop(f : (Node) => Boolean) = {
+  def dropUntilAndPop(f : (Node) => Boolean): Node = {
     stack.dropWhile(!f(_))
     stack.pop
   }
 
-  def reverseSwapList() = {
-    val otherStack = new Stack[Node]()
+  def reverseSwapList(): mutable.Stack[Node] = {
+    val otherStack = new mutable.Stack[Node]()
     val thisReverse = stack.reverse.filter( (n : Node)=>
         n.isInstanceOf[TemplateNode] && 
         n.asInstanceOf[TemplateNode].title.decoded == "Extractiontpl" && 
         (
-            n.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text == "list-start" || 
-            n.asInstanceOf[TemplateNode].property("1").get.children(0).asInstanceOf[TextNode].text == "list-end"
+            n.asInstanceOf[TemplateNode].property("1").get.children.head.asInstanceOf[TextNode].text == "list-start" ||
+            n.asInstanceOf[TemplateNode].property("1").get.children.head.asInstanceOf[TextNode].text == "list-end"
         )
     )
     val thisClone = stack.clone
 
-    stack.foreach(i=> {
-
-      i match {
-        case tn : TemplateNode => if(tn.title.decoded == "Extractiontpl"){
-                val tplType = tn.property("1").get.children(0).asInstanceOf[TextNode].text
-                tplType match {
-                  case "list-start" => {
-                    val correspondingEnd = thisReverse.pop
-                    otherStack push correspondingEnd
-                  }
-                  case "list-end" => {
-                    val correspondingStart = thisReverse.pop
-                    otherStack push correspondingStart
-                  }
-                  case _ => otherStack push i
-                }
-        } else {otherStack push i}
-        case _ => otherStack push i
+    stack.foreach {
+      case i@(tn: TemplateNode) => if (tn.title.decoded == "Extractiontpl") {
+        val tplType = tn.property("1").get.children.head.asInstanceOf[TextNode].text
+        tplType match {
+          case "list-start" =>
+            val correspondingEnd = thisReverse.pop
+            otherStack push correspondingEnd
+          case "list-end" =>
+            val correspondingStart = thisReverse.pop
+            otherStack push correspondingStart
+          case _ => otherStack push i
+        }
+      } else {
+        otherStack push i
       }
-    })
+      case i => otherStack push i
+    }
     otherStack
   }
 }
@@ -232,14 +225,14 @@ object MyStack {
   /**
  * these functions tell how to convert to the wrapper implicitly
  */
-  implicit def Stack2MyStack(s : Stack[Node]) : MyStack = { new MyStack(s) }
-  implicit def MyStack2Stack(s : MyStack) : Stack[Node] = { s.stack }
+  implicit def Stack2MyStack(s : mutable.Stack[Node]) : MyStack = { new MyStack(s) }
+  implicit def MyStack2Stack(s : MyStack) : mutable.Stack[Node] = { s.stack }
 
-  val parser = WikiParser.getInstance()
+  val parser: WikiParser = WikiParser.getInstance()
   /**
    * parse a string as wikisyntax and return the nodes as a stack
    */
-  def fromString(in : String) : Stack[Node] = {
+  def fromString(in : String) : mutable.Stack[Node] = {
     //normalize
 
     //fix restrictive parsing of sections (must be \n== xy ==\n - but in case start of file or end of file, the newlines are omitted)
@@ -258,7 +251,7 @@ object MyStack {
           new WikiTitle("wiktionary extraction subtemplate", Namespace.Main, Language.English), str //parsing
         )
     ).getOrElse(throw new Exception("Parser Error") )
-    val nodes = new Stack[Node]()
+    val nodes = new mutable.Stack[Node]()
 
     if(appendedNewline && (page.children.last match {case TextNode("\n", _)=>true; case _ => false})){
       nodes.pushAll(page.children.reverse.tail) //without the last
@@ -269,8 +262,8 @@ object MyStack {
         nodes.pop
     }
 
-    nodes.filterEmptyTextNodes
-    nodes.filterSpaces
+    nodes.filterEmptyTextNodes()
+    nodes.filterSpaces()
 
     //println("dumping subtemplate ")
     //nodes.foreach((n: Node) => println(n.dumpStrShort))
@@ -282,7 +275,7 @@ object MyStack {
    * read a file containing wikisyntax and return the nodes as a stack
    * currently not used
    */
-  def fromParsedFile(name : String) : Stack[Node] = {
+  def fromParsedFile(name : String) : mutable.Stack[Node] = {
     fromString(Source.fromFile(name).mkString)
   }
 
@@ -296,7 +289,7 @@ object MyStack {
  */
 object TimeMeasurement {
   def measure(code : => Unit) = new {
-    def report(reporterFunc : Long => Unit) = {
+    def report(reporterFunc : Long => Unit): Unit = {
       val before = System.currentTimeMillis
       code
       val after = System.currentTimeMillis
@@ -321,19 +314,19 @@ object MyString {
 
 object Logging {
   var level = 0  // will be read from config and then overwritten
-  val st_depth_start = new Exception("").getStackTrace.length + 1
+  val st_depth_start: Int = new Exception("").getStackTrace.length + 1
 
   //print info about a function call, and the template and page (the first n nodes)
-  def printFuncDump(name : String, tplIt : Stack[Node], pageIt : Stack[Node], thisLevel : Int) : Unit = {
+  def printFuncDump(name : String, tplIt : mutable.Stack[Node], pageIt : mutable.Stack[Node], thisLevel : Int) : Unit = {
     if(thisLevel <= level){
       val st_depth = new Exception("").getStackTrace.length - st_depth_start
       val prefix =  " " * st_depth
       println(prefix + "------------")
       println(prefix + "<entering " + name +">")
       println(prefix + "<template (next 3)>")
-      println(prefix + tplIt.take(3).map(_.dumpStrShort).mkString)
+      println(prefix + tplIt.take(3).map(_.dumpStrShort()).mkString)
       println(prefix + "<page (next 3)>")
-      println(prefix + pageIt.take(3).map(_.dumpStrShort).mkString)
+      println(prefix + pageIt.take(3).map(_.dumpStrShort()).mkString)
       println(prefix + "------------\n\n")
     }
   }
@@ -436,7 +429,7 @@ class MyNode (val n : Node){
       }
       case _ =>
     }
-    return n.getClass == other.getClass
+    n.getClass == other.getClass
   }
 }
 
@@ -449,30 +442,30 @@ object MyNode{
 class MyNodeList(val nl : List[Node]) {
 
   def toShortDumpString : String = {
-    nl.map((node:Node) => node.dumpStrShort).mkString(" ")
+    nl.map((node:Node) => node.dumpStrShort()).mkString(" ")
   }
 
   def toWikiText : String = {
     nl.map((node:Node) => node.toWikiText).mkString(" ")
   }
 
-  def toReadableString : String = nl.map(n => { n match {
-    case tn : TemplateNode => if(WiktionaryPageExtractor.templateRepresentativeProperty.contains(tn.title.decoded)){
-        val pKey = WiktionaryPageExtractor.templateRepresentativeProperty(tn.title.decoded)
-        val p = tn.property(pKey)
-        if(p.isDefined){
-            p.get.children.toReadableString
-        } else {
-            ""
-        }
-    } else {
+  def toReadableString : String = nl.map {
+    case tn: TemplateNode => if (WiktionaryPageExtractor.templateRepresentativeProperty.contains(tn.title.decoded)) {
+      val pKey = WiktionaryPageExtractor.templateRepresentativeProperty(tn.title.decoded)
+      val p = tn.property(pKey)
+      if (p.isDefined) {
+        p.get.children.toReadableString
+      } else {
         ""
+      }
+    } else {
+      ""
     }
-    case ln : LinkNode => ln.children.toReadableString
-    case _ => n.retrieveText.getOrElse("") 
-  }}).mkString
+    case ln: LinkNode => ln.children.toReadableString
+    case n => n.retrieveText.getOrElse("")
+  }.mkString
 
-  def toStack = new Stack[Node]() pushAll nl.reverse
+  def toStack: mutable.Stack[Node] = new mutable.Stack[Node]() pushAll nl.reverse
 }
 object MyNodeList {
   implicit def MyNodeList2NodeList(mnl : MyNodeList) : List[Node] = mnl.nl

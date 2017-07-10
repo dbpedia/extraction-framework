@@ -46,9 +46,9 @@ class Config(val configPath: String) extends
     * get all universal properties, check if there is an override in the provided config file
     */
 
-  lazy val source: String = this.getProperty("source", "pages-articles.xml.bz2").trim
+  lazy val source: Seq[String] = getStrings(this, "source", ",", required = true)
 
-  lazy val wikiName: String = this.getProperty("wiki-name", "wiki").trim
+  lazy val wikiName: String = getString(this, "wiki-name", required = true).trim
 
   /**
    * Dump directory
@@ -267,6 +267,9 @@ object Config{
 
   val universalConfig: Config = new Config(null)
 
+  /**
+    * The content of the wikipedias.csv in the base-dir (needs to be static)
+    */
   private val wikisinfoFile = new File(getString(universalProperties , "base-dir", required = true), WikiInfo.FileName)
   private lazy val wikiinfo = if(wikisinfoFile.exists()) WikiInfo.fromFile(wikisinfoFile, Codec.UTF8) else Seq()
   def wikiInfos: Seq[WikiInfo] = wikiinfo
