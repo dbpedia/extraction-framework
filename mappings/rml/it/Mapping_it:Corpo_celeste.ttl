@@ -1,4 +1,4 @@
-@base	          	<http://it.dbpedia.org/resource/Mapping_it:Corpo_celeste> .
+@base	          	<http://it.dbpedia.org/resource/Mapping_it:Corpo_celeste/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_it:Corpo_celeste/LogicalSource> ;
-        rr:subjectMap      <./Mapping_it:Corpo_celeste/SubjectMap> .
+<http://it.dbpedia.org/resource/Mapping_it:Corpo_celeste>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_it:Corpo_celeste/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:CelestialBody ,
 		     dbo:Place ,
 		     schema:Place ,
@@ -53,8 +53,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_it:Corpo_celeste/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://it.wikipedia.org/wiki/Mapping_it:Corpo_celeste?oldid=18638" .

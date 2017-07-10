@@ -1,4 +1,4 @@
-@base	          	<http://en.dbpedia.org/resource/Mapping_en:Solar-eclipse-stub> .
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Solar-eclipse-stub/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_en:Solar-eclipse-stub/LogicalSource> ;
-        rr:subjectMap      <./Mapping_en:Solar-eclipse-stub/SubjectMap> .
+<http://en.dbpedia.org/resource/Mapping_en:Solar-eclipse-stub>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_en:Solar-eclipse-stub/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:NaturalEvent ,
 		     wikidata:Q3887 ,
 		     schema:Event ,
@@ -56,8 +56,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_en:Solar-eclipse-stub/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Solar-eclipse-stub?oldid=29648" .

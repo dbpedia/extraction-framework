@@ -1,4 +1,4 @@
-@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Railway_Station> .
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Railway_Station/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,49 +32,49 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20> ,
-			       <./Mapping_en:Infobox_Railway_Station/latitude> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2> ,
-			       <./Mapping_en:Infobox_Railway_Station/longitude> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap> .
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Railway_Station>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/20> ,
+			       <latitude> ,
+			       <SimplePropertyMapping/4> ,
+			       <SimplePropertyMapping/10> ,
+			       <SimplePropertyMapping/29> ,
+			       <SimplePropertyMapping/22> ,
+			       <SimplePropertyMapping/6> ,
+			       <SimplePropertyMapping/12> ,
+			       <SimplePropertyMapping/19> ,
+			       <SimplePropertyMapping/11> ,
+			       <SimplePropertyMapping/31> ,
+			       <SimplePropertyMapping/21> ,
+			       <SimplePropertyMapping/5> ,
+			       <SimplePropertyMapping/8> ,
+			       <SimplePropertyMapping/14> ,
+			       <SimplePropertyMapping/26> ,
+			       <SimplePropertyMapping/23> ,
+			       <SimplePropertyMapping/24> ,
+			       <SimplePropertyMapping/7> ,
+			       <SimplePropertyMapping/16> ,
+			       <SimplePropertyMapping/0> ,
+			       <SimplePropertyMapping/15> ,
+			       <SimplePropertyMapping/13> ,
+			       <SimplePropertyMapping/2> ,
+			       <longitude> ,
+			       <SimplePropertyMapping/9> ,
+			       <SimplePropertyMapping/27> ,
+			       <SimplePropertyMapping/28> ,
+			       <SimplePropertyMapping/25> ,
+			       <SimplePropertyMapping/30> ,
+			       <SimplePropertyMapping/18> ,
+			       <SimplePropertyMapping/1> ,
+			       <SimplePropertyMapping/17> ,
+			       <SimplePropertyMapping/3> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_en:Infobox_Railway_Station/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Location ,
 		     dbo:ArchitecturalStructure ,
 		     wikidata:Q719456 ,
@@ -90,8 +90,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_en:Infobox_Railway_Station/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Railway_Station?oldid=16651" .
@@ -103,1618 +102,1102 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20>
+<SimplePropertyMapping/20>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/20/FTM> ;
         rr:predicate  dbo:yearOfElectrification .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20/FTM>
+<SimplePropertyMapping/20/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/20/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20/FTM/FV>
+<SimplePropertyMapping/20/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "yearOfElectrification" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "electrified" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/latitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/latitude/FTM> ;
+<latitude>  a         rr:PredicateObjectMap ;
+        rr:objectMap  <latitude/FTM> ;
         rr:predicate  geo:lat .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/latitude/FTM>
+<latitude/FTM>
         a                      fnml:FunctionTermMap , rr:TriplesMap ;
-        fnml:functionValue     <./Mapping_en:Infobox_Railway_Station/latitude/FTM> ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/LatitudeFunction> , <./Mapping_en:Infobox_Railway_Station/latitude/FTM/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        fnml:functionValue     <latitude/FTM> ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LatitudeFunction> , <latitude/FTM/ParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/latitude/FTM>
+<latitude/FTM>
         a                      fnml:FunctionTermMap ,
 			       rr:TriplesMap ;
-        fnml:functionValue     <./Mapping_en:Infobox_Railway_Station/latitude/FTM> ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/LatitudeFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/latitude/FTM/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        fnml:functionValue     <latitude/FTM> ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LatitudeFunction> ,
+			       <latitude/FTM/ParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/latitude/FTM/ParameterPOM>
+<latitude/FTM/ParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/latitude/FTM/ParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/FTM/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:coordParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/latitude/FTM/ParameterPOM/ObjectMap>
+<latitude/FTM/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coordinates" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29>
+<SimplePropertyMapping/29>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/29/FTM> ;
         rr:predicate  dbo:visitorStatisticsAsOf .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29/FTM>
+<SimplePropertyMapping/29/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/29/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29/FTM/FV>
+<SimplePropertyMapping/29/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/29/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/29/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "visitorStatisticsAsOf" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "pass_year" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4>
+<SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:servingRailwayLine .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4/FTM>
+<SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4/FTM/FV>
+<SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "servingRailwayLine" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "line" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10>
+<SimplePropertyMapping/10>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/10/FTM> ;
         rr:predicate  dbo:numberOfTracks .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10/FTM>
+<SimplePropertyMapping/10/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/10/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10/FTM/FV>
+<SimplePropertyMapping/10/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "numberOfTracks" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "tracks" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22>
+<SimplePropertyMapping/22>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/22/FTM> ;
         rr:predicate  dbo:agencyStationCode .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22/FTM>
+<SimplePropertyMapping/22/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/22/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22/FTM/FV>
+<SimplePropertyMapping/22/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "agencyStationCode" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "code" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6>
+<SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/6/FTM> ;
         rr:predicate  dbo:stationStructure .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6/FTM>
+<SimplePropertyMapping/6/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/6/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6/FTM/FV>
+<SimplePropertyMapping/6/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "stationStructure" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "structure" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12>
+<SimplePropertyMapping/12>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/12/FTM> ;
         rr:predicate  dbo:bicycleInformation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12/FTM>
+<SimplePropertyMapping/12/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/12/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12/FTM/FV>
+<SimplePropertyMapping/12/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "bicycleInformation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "bicycle" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19>
+<SimplePropertyMapping/19>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/19/FTM> ;
         rr:predicate  dbo:rebuildingYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19/FTM>
+<SimplePropertyMapping/19/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/19/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19/FTM/FV>
+<SimplePropertyMapping/19/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "rebuildingYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "rebuilt" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11>
+<SimplePropertyMapping/11>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/11/FTM> ;
         rr:predicate  dbo:parkingInformation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11/FTM>
+<SimplePropertyMapping/11/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/11/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11/FTM/FV>
+<SimplePropertyMapping/11/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "parkingInformation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "parking" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31>
+<SimplePropertyMapping/31>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/31/FTM> ;
         rr:predicate  dbo:passengersUsedSystem .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31/FTM>
+<SimplePropertyMapping/31/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/31/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31/FTM/FV>
+<SimplePropertyMapping/31/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/31/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/31/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "passengersUsedSystem" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "pass_system" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21>
+<SimplePropertyMapping/21>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/21/FTM> ;
         rr:predicate  dbo:isHandicappedAccessible .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21/FTM>
+<SimplePropertyMapping/21/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/21/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21/FTM/FV>
+<SimplePropertyMapping/21/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "isHandicappedAccessible" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "ADA" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14>
+<SimplePropertyMapping/14>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/14/FTM> ;
         rr:predicate  dbo:openingDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14/FTM>
+<SimplePropertyMapping/14/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/14/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14/FTM/FV>
+<SimplePropertyMapping/14/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "openingDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "opened" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8>
+<SimplePropertyMapping/8>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/8/FTM> ;
         rr:predicate  dbo:depth .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM>
+<SimplePropertyMapping/8/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/8/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM/FV>
+<SimplePropertyMapping/8/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/8/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "depth" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM/FV/unitParameterPOM>
+<SimplePropertyMapping/8/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "depth" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5>
+<SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:otherServingLines .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5/FTM>
+<SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5/FTM/FV>
+<SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "otherServingLines" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "other" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26>
+<SimplePropertyMapping/26>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/26/FTM> ;
         rr:predicate  dbo:availableSmartCard .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26/FTM>
+<SimplePropertyMapping/26/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/26/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26/FTM/FV>
+<SimplePropertyMapping/26/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "availableSmartCard" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "smartcardname" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23>
+<SimplePropertyMapping/23>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/23/FTM> ;
         rr:predicate  dbo:owner .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23/FTM>
+<SimplePropertyMapping/23/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/23/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23/FTM/FV>
+<SimplePropertyMapping/23/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "owner" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "owned" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24>
+<SimplePropertyMapping/24>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/24/FTM> ;
         rr:predicate  dbo:owningOrganisation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24/FTM>
+<SimplePropertyMapping/24/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/24/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24/FTM/FV>
+<SimplePropertyMapping/24/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "owningOrganisation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "owned" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16>
+<SimplePropertyMapping/16>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/16/FTM> ;
         rr:predicate  dbo:closingDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16/FTM>
+<SimplePropertyMapping/16/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/16/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16/FTM/FV>
+<SimplePropertyMapping/16/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "closingDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "closed" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7>
+<SimplePropertyMapping/7>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/7/FTM> ;
         rr:predicate  dbo:railwayPlatforms .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7/FTM>
+<SimplePropertyMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/7/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7/FTM/FV>
+<SimplePropertyMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "railwayPlatforms" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "platform" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0>
+<SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0/FTM>
+<SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/0/FTM/FV> ;
         rr:language         "en" .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0/FTM/FV>
+<SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "name" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15>
+<SimplePropertyMapping/15>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/15/FTM> ;
         rr:predicate  dbo:openingYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15/FTM>
+<SimplePropertyMapping/15/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/15/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15/FTM/FV>
+<SimplePropertyMapping/15/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "openingYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "opened" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13>
+<SimplePropertyMapping/13>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/13/FTM> ;
         rr:predicate  dbo:canBaggageChecked .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13/FTM>
+<SimplePropertyMapping/13/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/13/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13/FTM/FV>
+<SimplePropertyMapping/13/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "canBaggageChecked" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "baggage_check" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2>
+<SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:picture .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2/FTM>
+<SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2/FTM/FV>
+<SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "picture" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "image" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/longitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/longitude/FTM> ;
+<longitude>  a        rr:PredicateObjectMap ;
+        rr:objectMap  <longitude/FTM> ;
         rr:predicate  geo:long .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/longitude/FTM>
+<longitude/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/longitude/FTM/FV> .
+        fnml:functionValue  <longitude/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/longitude/FTM/FV>
+<longitude/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/LongitudeFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/longitude/FTM/FV/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LongitudeFunction> ,
+			       <longitude/FTM/FV/ParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/longitude/FTM/FV/ParameterPOM>
+<longitude/FTM/FV/ParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/longitude/FTM/FV/ParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/FTM/FV/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:coordParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/longitude/FTM/FV/ParameterPOM/ObjectMap>
+<longitude/FTM/FV/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "coordinates" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9>
+<SimplePropertyMapping/9>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/9/FTM> ;
         rr:predicate  dbo:numberOfPlatformLevels .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9/FTM>
+<SimplePropertyMapping/9/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/9/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9/FTM/FV>
+<SimplePropertyMapping/9/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "numberOfPlatformLevels" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "levels" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27>
+<SimplePropertyMapping/27>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/27/FTM> ;
         rr:predicate  dbo:formerName .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27/FTM>
+<SimplePropertyMapping/27/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/27/FTM/FV> ;
         rr:language         "en" .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27/FTM/FV>
+<SimplePropertyMapping/27/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "formerName" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "former" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28>
+<SimplePropertyMapping/28>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/28/FTM> ;
         rr:predicate  dbo:passengersPerYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28/FTM>
+<SimplePropertyMapping/28/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/28/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28/FTM/FV>
+<SimplePropertyMapping/28/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "passengersPerYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "passengers" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25>
+<SimplePropertyMapping/25>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/25/FTM> ;
         rr:predicate  dbo:fareZone .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25/FTM>
+<SimplePropertyMapping/25/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/25/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25/FTM/FV>
+<SimplePropertyMapping/25/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "fareZone" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "zone" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30>
+<SimplePropertyMapping/30>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/30/FTM> ;
         rr:predicate  dbo:visitorsPercentageChange .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30/FTM>
+<SimplePropertyMapping/30/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/30/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30/FTM/FV>
+<SimplePropertyMapping/30/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/30/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/30/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "visitorsPercentageChange" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "pass_percent" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18>
+<SimplePropertyMapping/18>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/18/FTM> ;
         rr:predicate  dbo:rebuildingDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18/FTM>
+<SimplePropertyMapping/18/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/18/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18/FTM/FV>
+<SimplePropertyMapping/18/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "rebuildingDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "rebuilt" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1>
+<SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1/FTM>
+<SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1/FTM/FV>
+<SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "type" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "type" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17>
+<SimplePropertyMapping/17>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/17/FTM> ;
         rr:predicate  dbo:closingYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17/FTM>
+<SimplePropertyMapping/17/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/17/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17/FTM/FV>
+<SimplePropertyMapping/17/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "closingYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "closed" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3>
+<SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:address .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3/FTM>
+<SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/3/FTM/FV> ;
         rr:language         "en" .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3/FTM/FV>
+<SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Railway_Station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Railway_Station/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "address" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Railway_Station/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "address" .
 
 
@@ -1729,17 +1212,17 @@
 ############
 
 
-<./Mapping_en:Infobox_Railway_Station/Function/LatitudeFunction>
+<Function/LatitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:latFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Railway_Station/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Railway_Station/Function/LongitudeFunction>
+<Function/LongitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:lonFunction ;
         rr:predicate  fno:executes .
@@ -1748,7 +1231,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_en:Infobox_Railway_Station/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

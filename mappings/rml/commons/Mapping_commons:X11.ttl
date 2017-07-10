@@ -1,4 +1,4 @@
-@base	          	<http://commons.dbpedia.org/resource/Mapping_commons:X11> .
+@base	          	<http://commons.dbpedia.org/resource/Mapping_commons:X11/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,17 +32,17 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_commons:X11/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_commons:X11/ConstantMapping/license/mit-license.php> ,
-			       <./Mapping_commons:X11/ConstantMapping/license/Category:Unverified_Commons_media_license> ;
-        rr:subjectMap          <./Mapping_commons:X11/SubjectMap> .
+<http://commons.dbpedia.org/resource/Mapping_commons:X11>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <ConstantMapping/0> ,
+			       <ConstantMapping/1> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_commons:X11/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Document ,
 		     foaf:Document ,
 		     dbo:Work ,
@@ -56,8 +56,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_commons:X11/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://commons.wikimedia.org/wiki/Mapping_commons:X11?oldid=37000" .
@@ -69,16 +68,14 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_commons:X11/ConstantMapping/license/Category:Unverified_Commons_media_license>
-        a             rr:PredicateObjectMap ;
+<ConstantMapping/1>  a  rr:PredicateObjectMap ;
         rr:object     <http://mappings.dbpedia.org/index.php/Category:Unverified_Commons_media_license> ;
         rr:predicate  dbo:license .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_commons:X11/ConstantMapping/license/mit-license.php>
-        a             rr:PredicateObjectMap ;
+<ConstantMapping/0>  a  rr:PredicateObjectMap ;
         rr:object     <http://opensource.org/licenses/mit-license.php> ;
         rr:predicate  dbo:license .
 

@@ -1,4 +1,4 @@
-@base	          	<http://de.dbpedia.org/resource/Mapping_de:Turnierplan32-kompakt-3> .
+@base	          	<http://de.dbpedia.org/resource/Mapping_de:Turnierplan32-kompakt-3/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_de:Turnierplan32-kompakt-3/LogicalSource> ;
-        rr:subjectMap      <./Mapping_de:Turnierplan32-kompakt-3/SubjectMap> .
+<http://de.dbpedia.org/resource/Mapping_de:Turnierplan32-kompakt-3>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_de:Turnierplan32-kompakt-3/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Event ,
 		     dbo:SportsEvent ,
 		     dul:Event ,
@@ -56,8 +56,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_de:Turnierplan32-kompakt-3/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://de.wikipedia.org/wiki/Mapping_de:Turnierplan32-kompakt-3?oldid=48510" .

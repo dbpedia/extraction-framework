@@ -1,4 +1,4 @@
-@base	          	<http://eo.dbpedia.org/resource/Mapping_eo:Informkesto_lingvo> .
+@base	          	<http://eo.dbpedia.org/resource/Mapping_eo:Informkesto_lingvo/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_eo:Informkesto_lingvo/LogicalSource> ;
-        rr:subjectMap      <./Mapping_eo:Informkesto_lingvo/SubjectMap> .
+<http://eo.dbpedia.org/resource/Mapping_eo:Informkesto_lingvo>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_eo:Informkesto_lingvo/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Language ,
 		     schema:Language ,
 		     wikidata:Q315 ,
@@ -53,8 +53,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_eo:Informkesto_lingvo/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://eo.wikipedia.org/wiki/Mapping_eo:Informkesto_lingvo?oldid=37955" .

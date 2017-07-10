@@ -1,4 +1,4 @@
-@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Faktamall_sport> .
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Faktamall_sport/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_sv:Faktamall_sport/LogicalSource> ;
-        rr:subjectMap      <./Mapping_sv:Faktamall_sport/SubjectMap> .
+<http://sv.dbpedia.org/resource/Mapping_sv:Faktamall_sport>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_sv:Faktamall_sport/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Sport ,
 		     wikidata:Q349 ,
 		     dbo:Activity ,
@@ -54,8 +54,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_sv:Faktamall_sport/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://sv.wikipedia.org/wiki/Mapping_sv:Faktamall_sport?oldid=39994" .

@@ -1,4 +1,4 @@
-@base	          	<http://eo.dbpedia.org/resource/Mapping_eo:Domajno_de_la_alta_nivelo> .
+@base	          	<http://eo.dbpedia.org/resource/Mapping_eo:Domajno_de_la_alta_nivelo/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_eo:Domajno_de_la_alta_nivelo/LogicalSource> ;
-        rr:subjectMap      <./Mapping_eo:Domajno_de_la_alta_nivelo/SubjectMap> .
+<http://eo.dbpedia.org/resource/Mapping_eo:Domajno_de_la_alta_nivelo>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_eo:Domajno_de_la_alta_nivelo/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Website ,
 		     schema:WebPage ,
 		     dbo:Work ,
@@ -54,8 +54,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_eo:Domajno_de_la_alta_nivelo/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://eo.wikipedia.org/wiki/Mapping_eo:Domajno_de_la_alta_nivelo?oldid=38423" .

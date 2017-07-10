@@ -1,4 +1,4 @@
-@base	          	<http://it.dbpedia.org/resource/Mapping_it:Infobox_aeromobile> .
+@base	          	<http://it.dbpedia.org/resource/Mapping_it:Infobox_aeromobile/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_it:Infobox_aeromobile/LogicalSource> ;
-        rr:subjectMap      <./Mapping_it:Infobox_aeromobile/SubjectMap> .
+<http://it.dbpedia.org/resource/Mapping_it:Infobox_aeromobile>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_it:Infobox_aeromobile/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Aircraft ,
 		     wikidata:Q11436 ,
 		     schema:Product ,
@@ -54,8 +54,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_it:Infobox_aeromobile/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://it.wikipedia.org/wiki/Mapping_it:Infobox_aeromobile?oldid=18792" .

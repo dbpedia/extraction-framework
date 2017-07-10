@@ -1,4 +1,4 @@
-@base	          	<http://es.dbpedia.org/resource/Mapping_es:Ficha_de_puerto> .
+@base	          	<http://es.dbpedia.org/resource/Mapping_es:Ficha_de_puerto/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_es:Ficha_de_puerto/LogicalSource> ;
-        rr:subjectMap      <./Mapping_es:Ficha_de_puerto/SubjectMap> .
+<http://es.dbpedia.org/resource/Mapping_es:Ficha_de_puerto>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_es:Ficha_de_puerto/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Place ,
 		     schema:Place ,
 		     owl:Thing ,
@@ -56,8 +56,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_es:Ficha_de_puerto/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://es.wikipedia.org/wiki/Mapping_es:Ficha_de_puerto?oldid=39646" .

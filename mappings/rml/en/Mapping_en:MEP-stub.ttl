@@ -1,4 +1,4 @@
-@base	          	<http://en.dbpedia.org/resource/Mapping_en:MEP-stub> .
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:MEP-stub/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_en:MEP-stub/LogicalSource> ;
-        rr:subjectMap      <./Mapping_en:MEP-stub/SubjectMap> .
+<http://en.dbpedia.org/resource/Mapping_en:MEP-stub>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_en:MEP-stub/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Person ,
 		     foaf:Person ,
 		     dbo:Agent ,
@@ -59,8 +59,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_en:MEP-stub/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:MEP-stub?oldid=29073" .

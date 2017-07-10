@@ -1,4 +1,4 @@
-@base	          	<http://en.dbpedia.org/resource/Mapping_en:NewZealand-sport-bio-stub> .
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:NewZealand-sport-bio-stub/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,16 +32,16 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:NewZealand-sport-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NewZealand-sport-bio-stub/ConstantMapping/country/New_Zealand> ;
-        rr:subjectMap          <./Mapping_en:NewZealand-sport-bio-stub/SubjectMap> .
+<http://en.dbpedia.org/resource/Mapping_en:NewZealand-sport-bio-stub>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <ConstantMapping/0> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_en:NewZealand-sport-bio-stub/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Person ,
 		     dbo:Athlete ,
 		     owl:Thing ,
@@ -59,8 +59,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_en:NewZealand-sport-bio-stub/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:NewZealand-sport-bio-stub?oldid=29071" .
@@ -72,8 +71,7 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:NewZealand-sport-bio-stub/ConstantMapping/country/New_Zealand>
-        a             rr:PredicateObjectMap ;
+<ConstantMapping/0>  a  rr:PredicateObjectMap ;
         rr:object     dbr-en:New_Zealand ;
         rr:predicate  dbo:country .
 

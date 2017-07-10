@@ -1,4 +1,4 @@
-@base	          	<http://en.dbpedia.org/resource/Mapping_en:Poem-stub> .
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Poem-stub/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_en:Poem-stub/LogicalSource> ;
-        rr:subjectMap      <./Mapping_en:Poem-stub/SubjectMap> .
+<http://en.dbpedia.org/resource/Mapping_en:Poem-stub>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_en:Poem-stub/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     wikidata:Q5185279 ,
 		     dbo:Work ,
 		     dbo:WrittenWork ,
@@ -55,8 +55,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_en:Poem-stub/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Poem-stub?oldid=29705" .

@@ -1,4 +1,4 @@
-@base	          	<http://nl.dbpedia.org/resource/Mapping_nl:Infobox_medicus> .
+@base	          	<http://nl.dbpedia.org/resource/Mapping_nl:Infobox_medicus/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,65 +32,65 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap> .
+<http://nl.dbpedia.org/resource/Mapping_nl:Infobox_medicus>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <StartDateMapping/4> ,
+			       <SimplePropertyMapping/23> ,
+			       <SimplePropertyMapping/13> ,
+			       <SimplePropertyMapping/1> ,
+			       <EndDateMapping/3> ,
+			       <StartDateMapping/5> ,
+			       <EndDateMapping/8> ,
+			       <SimplePropertyMapping/16> ,
+			       <SimplePropertyMapping/21> ,
+			       <SimplePropertyMapping/7> ,
+			       <EndDateMapping/1> ,
+			       <SimplePropertyMapping/3> ,
+			       <StartDateMapping/7> ,
+			       <StartDateMapping/3> ,
+			       <SimplePropertyMapping/12> ,
+			       <SimplePropertyMapping/31> ,
+			       <SimplePropertyMapping/0> ,
+			       <EndDateMapping/2> ,
+			       <SimplePropertyMapping/29> ,
+			       <SimplePropertyMapping/2> ,
+			       <EndDateMapping/7> ,
+			       <StartDateMapping/0> ,
+			       <SimplePropertyMapping/25> ,
+			       <EndDateMapping/5> ,
+			       <SimplePropertyMapping/15> ,
+			       <SimplePropertyMapping/30> ,
+			       <SimplePropertyMapping/26> ,
+			       <SimplePropertyMapping/20> ,
+			       <SimplePropertyMapping/10> ,
+			       <SimplePropertyMapping/22> ,
+			       <EndDateMapping/0> ,
+			       <SimplePropertyMapping/18> ,
+			       <StartDateMapping/6> ,
+			       <StartDateMapping/2> ,
+			       <SimplePropertyMapping/9> ,
+			       <SimplePropertyMapping/11> ,
+			       <SimplePropertyMapping/5> ,
+			       <SimplePropertyMapping/19> ,
+			       <SimplePropertyMapping/28> ,
+			       <EndDateMapping/6> ,
+			       <SimplePropertyMapping/6> ,
+			       <StartDateMapping/1> ,
+			       <SimplePropertyMapping/24> ,
+			       <SimplePropertyMapping/14> ,
+			       <EndDateMapping/4> ,
+			       <SimplePropertyMapping/17> ,
+			       <SimplePropertyMapping/8> ,
+			       <SimplePropertyMapping/4> ,
+			       <SimplePropertyMapping/27> ,
+			       <StartDateMapping/8> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_nl:Infobox_medicus/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     owl:Thing ,
 		     dbo:Person ,
 		     dbo:Agent ,
@@ -110,8 +110,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_nl:Infobox_medicus/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://nl.wikipedia.org/wiki/Mapping_nl:Infobox_medicus?oldid=47792" .
@@ -123,2243 +122,1695 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3> ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM> ;
+<StartDateMapping/4>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/4/FTM> ;
         rr:predicate  dbo:activeYearsStartYear .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM>
+<StartDateMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV> .
+        fnml:functionValue  <StartDateMapping/4/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV>
+<StartDateMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/StartDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/4/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/4/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/PropertyParameterPOM>
+<StartDateMapping/4/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <StartDateMapping/4/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/OntologyParameterPOM>
+<StartDateMapping/4/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsStartYear" ;
         rr:predicate  dbf:startDateOntologyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/PropertyParameterPOM/ObjectMap>
+<StartDateMapping/4/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "tijdvak3" .
+        rml:reference  "tijdvak5" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23>
+<SimplePropertyMapping/23>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/23/FTM> ;
         rr:predicate  dbo:personFunction .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23/FTM>
+<SimplePropertyMapping/23/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/23/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23/FTM/FV>
+<SimplePropertyMapping/23/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "personFunction" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "functie1" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13>
+<SimplePropertyMapping/13>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/13/FTM> ;
         rr:predicate  dbo:spouse .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13/FTM>
+<SimplePropertyMapping/13/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/13/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13/FTM/FV>
+<SimplePropertyMapping/13/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "spouse" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "partners" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1>
+<SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM> ;
         rr:predicate  foaf:nick .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1/FTM>
+<SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/1/FTM/FV> ;
         rr:language         "nl" .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1/FTM/FV>
+<SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:nick" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "altnaam" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7> ;
-        rr:objectMap   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
+<EndDateMapping/3>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/3/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM>
+<EndDateMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV> .
+        fnml:functionValue  <EndDateMapping/3/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV>
+<EndDateMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/EndDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/3/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/3/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/OntologyParameterPOM>
+<EndDateMapping/3/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsEndYear" ;
         rr:predicate  dbf:endDateOntologyParameter .
 
+<EndDateMapping/3/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
 ### References
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/PropertyParameterPOM/ObjectMap>
+<EndDateMapping/3/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "tijdvak7" .
+        rml:reference  "tijdvak4" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16>
+<StartDateMapping/5>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/5/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<StartDateMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <StartDateMapping/5/FTM/FV> .
+
+### Function Execution Mapping
+<StartDateMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/5/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/5/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<StartDateMapping/5/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16/FTM> ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<StartDateMapping/5/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/5/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<StartDateMapping/5/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "tijdvak6" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/8>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/8/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/8/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/8/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/8/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/8/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<EndDateMapping/8/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/8/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<EndDateMapping/8/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "tijdvak9" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/16>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/16/FTM> ;
         rr:predicate  dbo:speciality .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16/FTM>
+<SimplePropertyMapping/16/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/16/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16/FTM/FV>
+<SimplePropertyMapping/16/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "speciality" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "specialisme" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1>
+<SimplePropertyMapping/21>
         a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1> ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM> ;
-        rr:predicate  dbo:activeYearsStartYear .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/StartDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsStartYear" ;
-        rr:predicate  dbf:startDateOntologyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "tijdvak1" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8> ;
-        rr:objectMap   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/EndDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsEndYear" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "tijdvak8" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/21/FTM> ;
         rr:predicate  dbo:related .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21/FTM>
+<SimplePropertyMapping/21/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/21/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21/FTM/FV>
+<SimplePropertyMapping/21/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "related" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "zieook" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7>
+<SimplePropertyMapping/7>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/7/FTM> ;
         rr:predicate  dbo:signature .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7/FTM>
+<SimplePropertyMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/7/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7/FTM/FV>
+<SimplePropertyMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "signature" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "handtekening" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2> ;
-        rr:objectMap   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
+<EndDateMapping/1>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/1/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM>
+<EndDateMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV> .
+        fnml:functionValue  <EndDateMapping/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV>
+<EndDateMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/EndDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/1/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/1/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/OntologyParameterPOM>
+<EndDateMapping/1/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsEndYear" ;
         rr:predicate  dbf:endDateOntologyParameter .
 
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/PropertyParameterPOM>
+<EndDateMapping/1/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <EndDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/PropertyParameterPOM/ObjectMap>
+<EndDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "tijdvak2" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4> ;
-        rr:objectMap   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/EndDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/OntologyParameterPOM>
+<SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsEndYear" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "tijdvak4" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:occupation .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3/FTM>
+<SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3/FTM/FV>
+<SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "occupation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "beroep" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9> ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM> ;
+<StartDateMapping/7>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/7/FTM> ;
         rr:predicate  dbo:activeYearsStartYear .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM>
+<StartDateMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV> .
+        fnml:functionValue  <StartDateMapping/7/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV>
+<StartDateMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/StartDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/7/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/7/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/OntologyParameterPOM>
+<StartDateMapping/7/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsStartYear" ;
         rr:predicate  dbf:startDateOntologyParameter .
 
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/PropertyParameterPOM>
+<StartDateMapping/7/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <StartDateMapping/7/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "tijdvak9" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31/FTM> ;
-        rr:predicate  dbo:personFunction .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "personFunction" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "functie9" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak1> ;
-        rr:objectMap   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/EndDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsEndYear" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak1/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "tijdvak1" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12/FTM> ;
-        rr:predicate  dbo:pictureDescription .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "pictureDescription" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "onderschrift" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0/FTM> ;
-        rr:predicate  dbo:picture .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "picture" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "afbeelding" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29/FTM> ;
-        rr:predicate  dbo:personFunction .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "personFunction" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "functie7" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2/FTM> ;
-        rr:predicate  dbo:knownFor .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "knownFor" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "bekendvan" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5> ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM> ;
-        rr:predicate  dbo:activeYearsStartYear .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/StartDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsStartYear" ;
-        rr:predicate  dbf:startDateOntologyParameter .
-
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "tijdvak5" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25/FTM> ;
-        rr:predicate  dbo:personFunction .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "personFunction" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "functie3" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6> ;
-        rr:objectMap   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/EndDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsEndYear" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "tijdvak6" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15/FTM> ;
-        rr:predicate  dbo:religion .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "religion" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "religie" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30/FTM> ;
-        rr:predicate  dbo:personFunction .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "personFunction" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "functie8" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26/FTM> ;
-        rr:predicate  dbo:personFunction .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "personFunction" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "functie4" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20/FTM> ;
-        rr:predicate  foaf:homepage .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "website" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10/FTM> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10/FTM/FV> ;
-        rr:language         "nl" .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "naam" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22/FTM> ;
-        rr:predicate  dbo:webcast .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "webcast" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "extra portaal" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18/FTM> ;
-        rr:predicate  dbo:deathPlace .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "deathPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "sterfplaats" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9/FTM> ;
-        rr:predicate  dbo:child .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "child" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "kinderen" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak8> ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM> ;
-        rr:predicate  dbo:activeYearsStartYear .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/StartDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsStartYear" ;
-        rr:predicate  dbf:startDateOntologyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak8/FTM/FV/PropertyParameterPOM/ObjectMap>
+<StartDateMapping/7/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "tijdvak8" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11/FTM> ;
-        rr:predicate  dbo:citizenship .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "citizenship" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "nationaliteit" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5/FTM> ;
-        rr:predicate  dbo:birthDate .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "birthDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "geboortedatum" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19/FTM> ;
-        rr:predicate  dbo:longName .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19/FTM/FV> ;
-        rr:language         "nl" .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "longName" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "volledigenaam" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28/FTM> ;
-        rr:predicate  dbo:personFunction .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "personFunction" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "functie6" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak2> ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM> ;
+<StartDateMapping/3>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/3/FTM> ;
         rr:predicate  dbo:activeYearsStartYear .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM>
+<StartDateMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV> .
+        fnml:functionValue  <StartDateMapping/3/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV>
+<StartDateMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/StartDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/3/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/3/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/OntologyParameterPOM>
+<StartDateMapping/3/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsStartYear" ;
         rr:predicate  dbf:startDateOntologyParameter .
 
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/PropertyParameterPOM>
+<StartDateMapping/3/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <StartDateMapping/3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak2/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "tijdvak2" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak4> ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM> ;
-        rr:predicate  dbo:activeYearsStartYear .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/StartDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsStartYear" ;
-        rr:predicate  dbf:startDateOntologyParameter .
-
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak4/FTM/FV/PropertyParameterPOM/ObjectMap>
+<StartDateMapping/3/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "tijdvak4" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6>
+<SimplePropertyMapping/31>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6/FTM> ;
-        rr:predicate  dbo:birthPlace .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "birthPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "geboorteplaats" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/31/FTM> ;
         rr:predicate  dbo:personFunction .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24/FTM>
+<SimplePropertyMapping/31/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/31/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24/FTM/FV>
+<SimplePropertyMapping/31/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/31/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/31/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "personFunction" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "functie2" .
+        rml:reference  "functie9" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14>
+<SimplePropertyMapping/12>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14/FTM> ;
-        rr:predicate  dbo:party .
+        rr:objectMap  <SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:pictureDescription .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14/FTM>
+<SimplePropertyMapping/12/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/12/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14/FTM/FV>
+<SimplePropertyMapping/12/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "party" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "politiek" .
+        rml:reference  "onderschrift" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17>
+<SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17/FTM> ;
-        rr:predicate  dbo:deathDate .
+        rr:objectMap  <SimplePropertyMapping/0/FTM> ;
+        rr:predicate  dbo:picture .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17/FTM>
+<SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17/FTM/FV>
+<SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "deathDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "sterfdatum" .
+        rml:reference  "afbeelding" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak6> ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM> ;
-        rr:predicate  dbo:activeYearsStartYear .
+<EndDateMapping/2>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/2/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM>
+<EndDateMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV> .
+        fnml:functionValue  <EndDateMapping/2/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV>
+<EndDateMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/StartDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/2/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/2/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/PropertyParameterPOM>
+<EndDateMapping/2/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsStartYear" ;
-        rr:predicate  dbf:startDateOntologyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak6/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "tijdvak6" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak9> ;
-        rr:objectMap   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/EndDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <EndDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/OntologyParameterPOM>
+<EndDateMapping/2/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsEndYear" ;
         rr:predicate  dbf:endDateOntologyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak9/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "tijdvak9" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8/FTM> ;
-        rr:predicate  dbo:institution .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "institution" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "instituut" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak3> ;
-        rr:objectMap   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/EndDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsEndYear" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-### References
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak3/FTM/FV/PropertyParameterPOM/ObjectMap>
+<EndDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "tijdvak3" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7>
+<SimplePropertyMapping/29>
         a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak7> ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/29/FTM> ;
+        rr:predicate  dbo:personFunction .
+
+### Function Term Map
+<SimplePropertyMapping/29/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/29/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/29/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/29/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/29/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "functie7" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:knownFor .
+
+### Function Term Map
+<SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "bekendvan" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/7>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/7/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/7/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/7/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/7/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/7/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/7/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<EndDateMapping/7/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+### References
+<EndDateMapping/7/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "tijdvak8" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/0>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/0/FTM> ;
         rr:predicate  dbo:activeYearsStartYear .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM>
+<StartDateMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV> .
+        fnml:functionValue  <StartDateMapping/0/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV>
+<StartDateMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/StartDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/0/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/0/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/OntologyParameterPOM>
+<StartDateMapping/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<StartDateMapping/0/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsStartYear" ;
         rr:predicate  dbf:startDateOntologyParameter .
 
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/PropertyParameterPOM>
+### References
+<StartDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "tijdvak1" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/25>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
+        rr:objectMap  <SimplePropertyMapping/25/FTM> ;
+        rr:predicate  dbo:personFunction .
+
+### Function Term Map
+<SimplePropertyMapping/25/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/25/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/25/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak7/FTM/FV/PropertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "functie3" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/5>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/5/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/5/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/5/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/5/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/5/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<EndDateMapping/5/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/5/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<EndDateMapping/5/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "tijdvak6" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/15>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/15/FTM> ;
+        rr:predicate  dbo:religion .
+
+### Function Term Map
+<SimplePropertyMapping/15/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/15/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/15/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "religie" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/30>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/30/FTM> ;
+        rr:predicate  dbo:personFunction .
+
+### Function Term Map
+<SimplePropertyMapping/30/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/30/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/30/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/30/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/30/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "functie8" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/26>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/26/FTM> ;
+        rr:predicate  dbo:personFunction .
+
+### Function Term Map
+<SimplePropertyMapping/26/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/26/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/26/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "functie4" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/20>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/20/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<SimplePropertyMapping/20/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/20/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/20/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/10/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/10/FTM/FV> ;
+        rr:language         "nl" .
+
+### Function Execution Mapping
+<SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "naam" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/22>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/22/FTM> ;
+        rr:predicate  dbo:webcast .
+
+### Function Term Map
+<SimplePropertyMapping/22/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/22/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/22/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "extra portaal" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/0>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/0/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/0/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/0/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<EndDateMapping/0/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+### References
+<EndDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "tijdvak1" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/18>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/18/FTM> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<SimplePropertyMapping/18/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/18/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/18/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sterfplaats" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/6>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/6/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<StartDateMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <StartDateMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<StartDateMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/6/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/6/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<StartDateMapping/6/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/6/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<StartDateMapping/6/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+### References
+<StartDateMapping/6/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "tijdvak7" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_nl:Infobox_medicus/StartDate/activeYearsStartYear/activeYearsEndYear/tijdvak5> ;
-        rr:objectMap   <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
+<StartDateMapping/2>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/2/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM>
+<StartDateMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV> .
+        fnml:functionValue  <StartDateMapping/2/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV>
+<StartDateMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/EndDateFunction> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/2/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/2/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/PropertyParameterPOM>
+<StartDateMapping/2/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <StartDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<StartDateMapping/2/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+### References
+<StartDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "tijdvak3" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:child .
+
+### Function Term Map
+<SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/9/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "kinderen" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:citizenship .
+
+### Function Term Map
+<SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/11/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nationaliteit" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/5/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "geboortedatum" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/19>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/19/FTM> ;
+        rr:predicate  dbo:longName .
+
+### Function Term Map
+<SimplePropertyMapping/19/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/19/FTM/FV> ;
+        rr:language         "nl" .
+
+### Function Execution Mapping
+<SimplePropertyMapping/19/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "volledigenaam" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/28>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/28/FTM> ;
+        rr:predicate  dbo:personFunction .
+
+### Function Term Map
+<SimplePropertyMapping/28/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/28/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/28/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "functie6" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/6>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/6/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/6/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/6/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/6/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<EndDateMapping/6/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/6/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/OntologyParameterPOM>
+### References
+<EndDateMapping/6/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "tijdvak7" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "geboorteplaats" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/1>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/1/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<StartDateMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <StartDateMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<StartDateMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/1/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/1/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<StartDateMapping/1/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<StartDateMapping/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<StartDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "tijdvak2" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/24>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/24/FTM> ;
+        rr:predicate  dbo:personFunction .
+
+### Function Term Map
+<SimplePropertyMapping/24/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/24/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/24/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "functie2" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/14>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/14/FTM> ;
+        rr:predicate  dbo:party .
+
+### Function Term Map
+<SimplePropertyMapping/14/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/14/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/14/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "politiek" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/4>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/4/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/4/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/4/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/4/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/4/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/4/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<EndDateMapping/4/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsEndYear" ;
         rr:predicate  dbf:endDateOntologyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/EndDate/activeYearsStartYear/activeYearsEndYear/tijdvak5/FTM/FV/PropertyParameterPOM/ObjectMap>
+<EndDateMapping/4/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "tijdvak5" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4>
+<SimplePropertyMapping/17>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/17/FTM> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<SimplePropertyMapping/17/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/17/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/17/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "sterfdatum" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:institution .
+
+### Function Term Map
+<SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/8/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "instituut" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:deathCause .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4/FTM>
+<SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4/FTM/FV>
+<SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "deathCause" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "doodsoorzaak" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27>
+<SimplePropertyMapping/27>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/27/FTM> ;
         rr:predicate  dbo:personFunction .
 
 ### Function Term Map
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27/FTM>
+<SimplePropertyMapping/27/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/27/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27/FTM/FV>
+<SimplePropertyMapping/27/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Infobox_medicus/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Infobox_medicus/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "personFunction" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Infobox_medicus/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "functie5" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/8>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/8/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<StartDateMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <StartDateMapping/8/FTM/FV> .
+
+### Function Execution Mapping
+<StartDateMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/8/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/8/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<StartDateMapping/8/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/8/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<StartDateMapping/8/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+### References
+<StartDateMapping/8/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "tijdvak9" .
 
 
 ######################
@@ -2373,17 +1824,17 @@
 ############
 
 
-<./Mapping_nl:Infobox_medicus/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_nl:Infobox_medicus/Function/StartDateFunction>
+<Function/StartDateFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:startDateFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_nl:Infobox_medicus/Function/EndDateFunction>
+<Function/EndDateFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:endDateFunction ;
         rr:predicate  fno:executes .
@@ -2392,7 +1843,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_nl:Infobox_medicus/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

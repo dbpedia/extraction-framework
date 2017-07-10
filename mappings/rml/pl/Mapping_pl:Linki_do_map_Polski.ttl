@@ -1,4 +1,4 @@
-@base	          	<http://pl.dbpedia.org/resource/Mapping_pl:Linki_do_map_Polski> .
+@base	          	<http://pl.dbpedia.org/resource/Mapping_pl:Linki_do_map_Polski/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,17 +32,17 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_pl:Linki_do_map_Polski/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_pl:Linki_do_map_Polski/latitude> ,
-			       <./Mapping_pl:Linki_do_map_Polski/longitude> ;
-        rr:subjectMap          <./Mapping_pl:Linki_do_map_Polski/SubjectMap> .
+<http://pl.dbpedia.org/resource/Mapping_pl:Linki_do_map_Polski>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <latitude> ,
+			       <longitude> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_pl:Linki_do_map_Polski/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Place ,
 		     schema:Place ,
 		     dbo:Location ,
@@ -54,8 +54,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_pl:Linki_do_map_Polski/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://pl.wikipedia.org/wiki/Mapping_pl:Linki_do_map_Polski?oldid=12379" .
@@ -67,124 +66,121 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_pl:Linki_do_map_Polski/longitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap> ;
+<longitude>  a        rr:PredicateObjectMap ;
+        rr:objectMap  <longitude/ObjectMap> ;
         rr:predicate  geo:long .
 
 ### Function Term Map
-<./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap>
+<longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV> .
+        fnml:functionValue  <longitude/ObjectMap/FV> .
 
 ### Function Execution Mapping
-<./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV>
+<longitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_pl:Linki_do_map_Polski/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_pl:Linki_do_map_Polski/Function/LongitudeFunction> ,
-			       <./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
-			       <./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
-			       <./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
-			       <./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
-        rr:subjectMap          <./Mapping_pl:Linki_do_map_Polski/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LongitudeFunction> ,
+			       <longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
+			       <longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
+			       <longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
+			       <longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonDegreesParameterPOM>
+<longitude/ObjectMap/FV/lonDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonDirectionParameterPOM>
+<longitude/ObjectMap/FV/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
 
-<./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonSecondsParameterPOM>
+<longitude/ObjectMap/FV/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonSecondsParameter .
 
-<./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonMinutesParameterPOM>
+<longitude/ObjectMap/FV/lonMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
 
 ### References
-<./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "minutN" .
 
-<./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "sekundN" .
 
-<./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "stopniN" .
 
-<./Mapping_pl:Linki_do_map_Polski/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_pl:Linki_do_map_Polski/latitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap> ;
+<latitude>  a         rr:PredicateObjectMap ;
+        rr:objectMap  <latitude/ObjectMap> ;
         rr:predicate  geo:lat .
 
 ### Function Term Map
-<./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV> .
+<latitude/ObjectMap>  a     fnml:FunctionTermMap ;
+        fnml:functionValue  <latitude/ObjectMap/FV> .
 
 ### Function Execution Mapping
-<./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV>
+<latitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_pl:Linki_do_map_Polski/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_pl:Linki_do_map_Polski/Function/LatitudeFunction> ,
-			       <./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
-			       <./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
-			       <./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
-			       <./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/latDirectionParameterPOM> ;
-        rr:subjectMap          <./Mapping_pl:Linki_do_map_Polski/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LatitudeFunction> ,
+			       <latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
+			       <latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
+			       <latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
+			       <latitude/ObjectMap/FV/latDirectionParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatMinutesParameterPOM>
+<latitude/ObjectMap/FV/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latMinutesParameter .
 
-<./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatDegreesParameterPOM>
+<latitude/ObjectMap/FV/LatDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDegreesParameter .
 
-<./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatSecondsParameterPOM>
+<latitude/ObjectMap/FV/LatSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
 
-<./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/latDirectionParameterPOM>
+<latitude/ObjectMap/FV/latDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
 
 ### References
-<./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "stopniE" .
 
-<./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "sekundE" .
 
-<./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "minutE" .
 
-<./Mapping_pl:Linki_do_map_Polski/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
@@ -200,12 +196,12 @@
 ############
 
 
-<./Mapping_pl:Linki_do_map_Polski/Function/LongitudeFunction>
+<Function/LongitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:lonFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_pl:Linki_do_map_Polski/Function/LatitudeFunction>
+<Function/LatitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:latFunction ;
         rr:predicate  fno:executes .
@@ -214,7 +210,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_pl:Linki_do_map_Polski/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

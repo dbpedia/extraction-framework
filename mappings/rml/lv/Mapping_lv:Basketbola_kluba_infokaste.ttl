@@ -1,4 +1,4 @@
-@base	          	<http://lv.dbpedia.org/resource/Mapping_lv:Basketbola_kluba_infokaste> .
+@base	          	<http://lv.dbpedia.org/resource/Mapping_lv:Basketbola_kluba_infokaste/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,16 +32,16 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_lv:Basketbola_kluba_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0> ;
-        rr:subjectMap          <./Mapping_lv:Basketbola_kluba_infokaste/SubjectMap> .
+<http://lv.dbpedia.org/resource/Mapping_lv:Basketbola_kluba_infokaste>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/0> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_lv:Basketbola_kluba_infokaste/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dul:SocialPerson ,
 		     wikidata:Q43229 ,
 		     dbo:Agent ,
@@ -59,8 +59,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_lv:Basketbola_kluba_infokaste/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://lv.wikipedia.org/wiki/Mapping_lv:Basketbola_kluba_infokaste?oldid=51035" .
@@ -72,50 +71,34 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0>
+<SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0/FTM>
+<SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/0/FTM/FV> ;
         rr:language         "lv" .
 
 ### Function Execution Mapping
-<./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0/FTM/FV>
+<SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_lv:Basketbola_kluba_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Basketbola_kluba_infokaste/Function/SimplePropertyFunction> ,
-			       <./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_lv:Basketbola_kluba_infokaste/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_lv:Basketbola_kluba_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "klubs" .
 
 
@@ -130,7 +113,7 @@
 ############
 
 
-<./Mapping_lv:Basketbola_kluba_infokaste/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
@@ -139,7 +122,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_lv:Basketbola_kluba_infokaste/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

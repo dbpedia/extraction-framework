@@ -27,10 +27,13 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
 
   def addIndependentDateIntervalMapping() : List[RMLPredicateObjectMap] = {
     val uri = rmlModel.wikiTitle.resourceIri
-    val startUri = new RMLUri(uri + "/StartDate/" + mapping.startDateOntologyProperty.name + "/" + mapping.endDateOntologyProperty.name + "/" + mapping.templateProperty)
+    val startUri = new RMLUri(uri + "/StartDateMapping/" + TemplateRMLMapper.startDateCount)
     val startPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(startUri)
-    val endUri = new RMLUri(uri + "/EndDate/" + mapping.startDateOntologyProperty.name + "/" + mapping.endDateOntologyProperty.name + "/" + mapping.templateProperty)
+    TemplateRMLMapper.increaseStartDateCount()
+
+    val endUri = new RMLUri(uri + "/EndDateMapping/" + TemplateRMLMapper.endDateCount)
     val endPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(endUri)
+    TemplateRMLMapper.increaseEndDateCount()
 
     addDateIntervalMappingToPredicateObjectMaps(startPom, endPom)
 
@@ -39,12 +42,13 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
 
   def addDateIntervalMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) : List[RMLPredicateObjectMap] = {
 
-    val startUri = new RMLUri(uri + "/StartDate/" + mapping.startDateOntologyProperty.name + "/" + mapping.endDateOntologyProperty.name + "/" + mapping.templateProperty)
+    val startUri = new RMLUri(uri + "/StartDateMapping/" + TemplateRMLMapper.startDateCount)
     val startDateIntervalPom = triplesMap.addPredicateObjectMap(startUri)
+    TemplateRMLMapper.increaseStartDateCount()
 
-
-    val endUri = new RMLUri(uri + "/EndDate/" + mapping.startDateOntologyProperty.name + "/" + mapping.endDateOntologyProperty.name + "/" + mapping.templateProperty)
+    val endUri = new RMLUri(uri + "/EndDateMapping/" + TemplateRMLMapper.endDateCount)
     val endDateIntervalPom = triplesMap.addPredicateObjectMap(endUri)
+    TemplateRMLMapper.increaseEndDateCount()
 
     addDateIntervalMappingToPredicateObjectMaps(startDateIntervalPom, endDateIntervalPom)
 
@@ -54,14 +58,14 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
 
   private def addDateIntervalMappingToPredicateObjectMaps(startDateIntervalPom: RMLPredicateObjectMap, endDateIntervalPom: RMLPredicateObjectMap) =
   {
-    startDateIntervalPom.addDCTermsType(new RMLLiteral("startDateIntervalMapping"))
+    //startDateIntervalPom.addDCTermsType(new RMLLiteral("startDateIntervalMapping"))
     startDateIntervalPom.addPredicate(new RMLUri(mapping.startDateOntologyProperty.uri))
 
-    endDateIntervalPom.addDCTermsType(new RMLLiteral("endDateIntervalMapping"))
+    //endDateIntervalPom.addDCTermsType(new RMLLiteral("endDateIntervalMapping"))
     endDateIntervalPom.addPredicate(new RMLUri(mapping.endDateOntologyProperty.uri))
 
-    startDateIntervalPom.addDBFEndDate(endDateIntervalPom)
-    endDateIntervalPom.addDBFStartDate(startDateIntervalPom)
+    //startDateIntervalPom.addDBFEndDate(endDateIntervalPom)
+    //endDateIntervalPom.addDBFStartDate(startDateIntervalPom)
 
 
     val startFunctionTermMapUri = startDateIntervalPom.uri.extend("/FunctionTermMap")

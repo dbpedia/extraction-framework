@@ -1,4 +1,4 @@
-@base	          	<http://be.dbpedia.org/resource/Mapping_be:Таксон> .
+@base	          	<http://be.dbpedia.org/resource/Mapping_be:Таксон/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,19 +32,19 @@
 
 ### Main TriplesMap
 ####################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B> ;
-        rr:subjectMap          <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap> .
+        rml:logicalSource      <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
+        rr:predicateObjectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B> ;
+        rr:subjectMap          <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap>
         a            rr:SubjectMap ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
@@ -53,7 +53,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
@@ -67,146 +67,98 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM> ;
         rr:predicate  dbo:synonym .
 
 ### Function Term Map
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV> .
+        fnml:functionValue  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/SimplePropertyFunction> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
+        rml:logicalSource      <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
+        rr:predicateObjectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/SimplePropertyFunction> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "synonym" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "syn" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV> ;
+        fnml:functionValue  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV> ;
         rr:language         "be" .
 
 ### Function Execution Mapping
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/SimplePropertyFunction> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
+        rml:logicalSource      <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
+        rr:predicateObjectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/SimplePropertyFunction> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "name" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:kingdom .
 
 ### Function Term Map
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV> .
+        fnml:functionValue  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/SimplePropertyFunction> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
+        rml:logicalSource      <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
+        rr:predicateObjectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/SimplePropertyFunction> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "kingdom" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "regnum" .
 
 
@@ -217,202 +169,202 @@
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM> ;
-        crml:fallbackMap     <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1> ;
+        crml:equalCondition  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM> ;
+        crml:fallbackMap     <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1> ;
         rr:object            wikidata:Q19088 , dbo:Plant , wikidata:Q756 , owl:Thing , dbo:Species , dbo:Eukaryote ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV> .
+        fnml:functionValue  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
+        rml:logicalSource      <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
+        rr:predicateObjectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/ValueParameterPOM> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/ValueParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Расліны" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/PropertyParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 ### References
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/PropertyParameterPOM/ObjectMap>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "regnum" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM> ;
-        crml:fallbackMap     <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2> ;
+        crml:equalCondition  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM> ;
+        crml:fallbackMap     <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2> ;
         rr:object            dbo:Eukaryote , owl:Thing , wikidata:Q729 , dbo:Animal , wikidata:Q19088 , dbo:Species ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV> .
+        fnml:functionValue  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
+        rml:logicalSource      <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
+        rr:predicateObjectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/ValueParameterPOM> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/ValueParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Жывёлы" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/PropertyParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 ### References
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/PropertyParameterPOM/ObjectMap>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "regnum" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM> ;
-        crml:fallbackMap     <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3> ;
+        crml:equalCondition  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM> ;
+        crml:fallbackMap     <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3> ;
         rr:object            dbo:Fungus , dbo:Eukaryote , wikidata:Q19088 , dbo:Species , owl:Thing ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV> .
+        fnml:functionValue  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
+        rml:logicalSource      <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
+        rr:predicateObjectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/ValueParameterPOM> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/PropertyParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/ValueParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Грыбы" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
 ### References
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/PropertyParameterPOM/ObjectMap>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "regnum" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM> ;
-        crml:fallbackMap     <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4> ;
+        crml:equalCondition  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM> ;
+        crml:fallbackMap     <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4> ;
         rr:object            dbo:Bacteria , dbo:Species , owl:Thing ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV> .
+        fnml:functionValue  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
+        rml:logicalSource      <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
+        rr:predicateObjectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/ValueParameterPOM> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/ValueParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Бактэрыі" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/PropertyParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 ### References
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/PropertyParameterPOM/ObjectMap>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "regnum" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM> ;
-        crml:fallbackMap     <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/5> ;
+        crml:equalCondition  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM> ;
+        crml:fallbackMap     <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/5> ;
         rr:object            dbo:Archaea , dbo:Species , owl:Thing ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV> .
+        fnml:functionValue  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
+        rml:logicalSource      <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/LogicalSource> ;
+        rr:predicateObjectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/ValueParameterPOM> ,
+			       <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/ValueParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Археі" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/PropertyParameterPOM>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 ### References
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/PropertyParameterPOM/ObjectMap>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "regnum" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/5>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/ConditionalMapping/regnum_contains_%D0%A0%D0%B0%D1%81%D0%BB%D1%96%D0%BD%D1%8B/1/2/3/4/5>
         a             rr:PredicateObjectMap ;
         rr:object     dbo:Species , owl:Thing ;
         rr:predicate  rdf:type .
@@ -423,12 +375,12 @@
 ############
 
 
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/SimplePropertyFunction>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/Function/contains>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:contains ;
         rr:predicate  fno:executes .
@@ -437,7 +389,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function>
+<http://be.dbpedia.org/resource/Mapping_be:%D0%A2%D0%B0%D0%BA%D1%81%D0%BE%D0%BD/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

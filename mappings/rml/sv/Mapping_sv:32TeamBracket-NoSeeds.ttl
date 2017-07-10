@@ -1,4 +1,4 @@
-@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:32TeamBracket-NoSeeds> .
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:32TeamBracket-NoSeeds/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_sv:32TeamBracket-NoSeeds/LogicalSource> ;
-        rr:subjectMap      <./Mapping_sv:32TeamBracket-NoSeeds/SubjectMap> .
+<http://sv.dbpedia.org/resource/Mapping_sv:32TeamBracket-NoSeeds>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_sv:32TeamBracket-NoSeeds/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     schema:Event ,
 		     dbo:Tournament ,
 		     owl:Thing ,
@@ -58,8 +58,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_sv:32TeamBracket-NoSeeds/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://sv.wikipedia.org/wiki/Mapping_sv:32TeamBracket-NoSeeds?oldid=41159" .

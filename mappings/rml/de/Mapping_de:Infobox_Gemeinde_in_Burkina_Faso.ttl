@@ -1,4 +1,4 @@
-@base	          	<http://de.dbpedia.org/resource/Mapping_de:Infobox_Gemeinde_in_Burkina_Faso> .
+@base	          	<http://de.dbpedia.org/resource/Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,25 +32,25 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/longitude> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap> .
+<http://de.dbpedia.org/resource/Mapping_de:Infobox_Gemeinde_in_Burkina_Faso>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/6> ,
+			       <SimplePropertyMapping/5> ,
+			       <SimplePropertyMapping/0> ,
+			       <latitude> ,
+			       <SimplePropertyMapping/2> ,
+			       <SimplePropertyMapping/7> ,
+			       <SimplePropertyMapping/1> ,
+			       <longitude> ,
+			       <SimplePropertyMapping/4> ,
+			       <SimplePropertyMapping/3> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Place ,
 		     dbo:PopulatedPlace ,
 		     dbo:Location ,
@@ -65,8 +65,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://de.wikipedia.org/wiki/Mapping_de:Infobox_Gemeinde_in_Burkina_Faso?oldid=11775" .
@@ -78,464 +77,332 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6>
+<SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/6/FTM> ;
         rr:predicate  dbo:censusYear .
 
 ### Function Term Map
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6/FTM>
+<SimplePropertyMapping/6/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/6/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6/FTM/FV>
+<SimplePropertyMapping/6/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/SimplePropertyFunction> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "censusYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "EinwohnerStand" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5>
+<SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:populationUrban .
 
 ### Function Term Map
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5/FTM>
+<SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5/FTM/FV>
+<SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/SimplePropertyFunction> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "populationUrban" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "Einwohner" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0>
+<SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0/FTM>
+<SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/0/FTM/FV> ;
         rr:language         "de" .
 
 ### Function Execution Mapping
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0/FTM/FV>
+<SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/SimplePropertyFunction> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "Name" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude/FTM> ;
+<latitude>  a         rr:PredicateObjectMap ;
+        rr:objectMap  <latitude/FTM> ;
         rr:predicate  geo:lat .
 
 ### Function Term Map
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude/FTM>
+<latitude/FTM>
         a                      fnml:FunctionTermMap , rr:TriplesMap ;
-        fnml:functionValue     <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude/FTM> ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/LatitudeFunction> , <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude/FTM/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        fnml:functionValue     <latitude/FTM> ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LatitudeFunction> , <latitude/FTM/ParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Function Execution Mapping
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude/FTM>
+<latitude/FTM>
         a                      fnml:FunctionTermMap ,
 			       rr:TriplesMap ;
-        fnml:functionValue     <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude/FTM> ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/LatitudeFunction> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude/FTM/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        fnml:functionValue     <latitude/FTM> ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LatitudeFunction> ,
+			       <latitude/FTM/ParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude/FTM/ParameterPOM>
+<latitude/FTM/ParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude/FTM/ParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/FTM/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latParameter .
 
 ### References
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/latitude/FTM/ParameterPOM/ObjectMap>
+<latitude/FTM/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Breitengrad" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2>
+<SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:region .
 
 ### Function Term Map
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2/FTM>
+<SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2/FTM/FV>
+<SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/SimplePropertyFunction> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "region" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "Region" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7>
+<SimplePropertyMapping/7>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/7/FTM> ;
         rr:predicate  dbo:leaderName .
 
 ### Function Term Map
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7/FTM>
+<SimplePropertyMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/7/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7/FTM/FV>
+<SimplePropertyMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/SimplePropertyFunction> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "leaderName" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "Bürgermeister" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1>
+<SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:cityType .
 
 ### Function Term Map
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1/FTM>
+<SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1/FTM/FV>
+<SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/SimplePropertyFunction> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "cityType" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "Gemeindeart" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/longitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/longitude/FTM> ;
+<longitude>  a        rr:PredicateObjectMap ;
+        rr:objectMap  <longitude/FTM> ;
         rr:predicate  geo:long .
 
 ### Function Term Map
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/longitude/FTM>
+<longitude/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/longitude/FTM/FV> .
+        fnml:functionValue  <longitude/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/longitude/FTM/FV>
+<longitude/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/LongitudeFunction> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/longitude/FTM/FV/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LongitudeFunction> ,
+			       <longitude/FTM/FV/ParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/longitude/FTM/FV/ParameterPOM>
+<longitude/FTM/FV/ParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/longitude/FTM/FV/ParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/FTM/FV/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonParameter .
 
 ### References
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/longitude/FTM/FV/ParameterPOM/ObjectMap>
+<longitude/FTM/FV/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Längengrad" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4>
+<SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:areaTotal .
 
 ### Function Term Map
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM>
+<SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/4/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
 
 ### Function Execution Mapping
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM/FV>
+<SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/SimplePropertyFunction> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/4/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/4/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "areaTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM/FV/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 ### References
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "Fläche" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3>
+<SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:province .
 
 ### Function Term Map
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3/FTM>
+<SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3/FTM/FV>
+<SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/SimplePropertyFunction> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "province" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "Provinz" .
 
 
@@ -550,17 +417,17 @@
 ############
 
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/LatitudeFunction>
+<Function/LatitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:latFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/Function/LongitudeFunction>
+<Function/LongitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:lonFunction ;
         rr:predicate  fno:executes .
@@ -569,7 +436,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_de:Infobox_Gemeinde_in_Burkina_Faso/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

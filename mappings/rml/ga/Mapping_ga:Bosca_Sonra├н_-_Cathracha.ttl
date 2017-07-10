@@ -1,4 +1,4 @@
-@base	          	<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonraí_-_Cathracha> .
+@base	          	<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonraí_-_Cathracha/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,24 +32,24 @@
 
 ### Main TriplesMap
 ####################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/122> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde> ;
-        rr:subjectMap          <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap> .
+        rml:logicalSource      <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
+        rr:predicateObjectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/11> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/10> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/15> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/17> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/13> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/16> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/12> ;
+        rr:subjectMap          <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap>
         a            rr:SubjectMap ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
@@ -58,7 +58,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
@@ -71,351 +71,237 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/11>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM> ;
-        rr:predicate  dbo:areaTotal .
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/11/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM/FV> ;
-        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+        fnml:functionValue  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/11/FTM/FV> ;
+        rr:language         "ga" .
 
 ### Function Execution Mapping
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM/FV>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/11/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
+        rml:logicalSource      <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
+        rr:predicateObjectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM/FV/ontologyPropertyParameterPOM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "areaTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM/FV/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "squareKilometre" ;
-        rr:predicate  dbf:unitParameter .
-
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/119/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "ainmneacha_eile" .
+
+
+### Predicate Object Map
+#########################
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/10/FTM/FV> ;
+        rr:language         "ga" .
+
+### Function Execution Mapping
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
+        rr:predicateObjectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
+
+### Parameters
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ainm" .
+
+
+### Predicate Object Map
+#########################
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/15>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/15/FTM> ;
+        rr:predicate  dbo:province .
+
+### Function Term Map
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/15/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/15/FTM/FV> .
+
+### Function Execution Mapping
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/15/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
+        rr:predicateObjectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
+
+### Parameters
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ceantar" .
+
+
+### Predicate Object Map
+#########################
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14/FTM> ;
+        rr:predicate  dbo:areaTotal .
+
+### Function Term Map
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+### Function Execution Mapping
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
+        rr:predicateObjectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
+
+### Parameters
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
         rml:reference  "achar" .
 
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/13>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118/FTM> ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/13/FTM> ;
         rr:predicate  foaf:homepage .
 
 ### Function Term Map
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118/FTM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/13/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118/FTM/FV> .
+        fnml:functionValue  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/13/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118/FTM/FV>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/13/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
+        rml:logicalSource      <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
+        rr:predicateObjectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118/FTM/FV/propertyParameterPOM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/118/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "líonláithreán" .
 
 
-### Predicate Object Map
-#########################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117/FTM> ;
-        rr:predicate  dbo:country .
-
-### Function Term Map
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "country" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/117/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "tír" .
-
 
 ### Predicate Object Map
 #########################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/16>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121/FTM> ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/16/FTM> ;
         rr:predicate  dbo:populationTotal .
 
 ### Function Term Map
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121/FTM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/16/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121/FTM/FV> .
+        fnml:functionValue  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/16/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121/FTM/FV>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/16/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
+        rml:logicalSource      <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
+        rr:predicateObjectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121/FTM/FV/propertyParameterPOM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "populationTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/121/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "daonra" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/12>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120/FTM> ;
-        rr:predicate  dbo:province .
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:country .
 
 ### Function Term Map
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120/FTM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/12/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120/FTM/FV> .
+        fnml:functionValue  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/12/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120/FTM/FV>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/12/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
+        rml:logicalSource      <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
+        rr:predicateObjectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120/FTM/FV/ontologyPropertyParameterPOM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "province" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/120/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "ceantar" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116/FTM> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116/FTM/FV> ;
-        rr:language         "ga" .
-
-### Function Execution Mapping
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/116/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "ainmneacha_eile" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115/FTM> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115/FTM/FV> ;
-        rr:language         "ga" .
-
-### Function Execution Mapping
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/115/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "ainm" .
-
+        rml:reference  "tír" .
 
 
 ######################
@@ -425,99 +311,97 @@
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/122>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/17>
         a                    rr:PredicateObjectMap ;
-        rdfs:comment         "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label           "SimplePropertyMapping (PredicateObjectMap)." ;
-        crml:equalCondition  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM> ;
-        rr:objectMap         <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/122/FTM> ;
+        crml:equalCondition  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM> ;
+        rr:objectMap         <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/17/FTM> ;
         rr:predicate         dbo:elevation .
 
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM> ;
-        crml:fallbackMap     <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1> ;
+        crml:equalCondition  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM> ;
+        crml:fallbackMap     <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1> ;
         rr:object            dbo:City , dbo:Location , wikidata:Q515 , wikidata:Q486972 , dbo:PopulatedPlace , schema:Place , dbo:Settlement , schema:City , owl:Thing , dbo:Place ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV> .
+        fnml:functionValue  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/contains> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
+        rml:logicalSource      <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
+        rr:predicateObjectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/contains> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/ValueParameterPOM> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/ValueParameterPOM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Airde" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/PropertyParameterPOM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 ### References
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/PropertyParameterPOM/ObjectMap>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "staitistic_eile_teideal" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM> ;
-        crml:fallbackMap     <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/vehicleCode/staitistic_eile> , <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/2> ;
+        crml:equalCondition  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM> ;
+        crml:fallbackMap     <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/vehicleCode/staitistic_eile> , <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/2> ;
         rr:object            dbo:Place , schema:Place , owl:Thing , wikidata:Q486972 , dbo:City , dbo:Location , dbo:Settlement , dbo:PopulatedPlace , schema:City , wikidata:Q515 ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV> .
+        fnml:functionValue  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/contains> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
+        rml:logicalSource      <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/LogicalSource> ;
+        rr:predicateObjectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/contains> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/ValueParameterPOM> ,
+			       <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/ValueParameterPOM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Uimhirphlátaí" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/PropertyParameterPOM>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 ### References
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/PropertyParameterPOM/ObjectMap>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "staitistic_eile_teideal" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/vehicleCode/staitistic_eile>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/vehicleCode/staitistic_eile>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM> ;
-        rr:objectMap         <./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/vehicleCode/staitistic_eile/FTM> .
+        crml:equalCondition  <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/ConditionalMapping/staitistic_eile_teideal_contains_Airde/1/FTM> ;
+        rr:objectMap         <http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SimplePropertyMapping/vehicleCode/staitistic_eile/FTM> .
 
 
 ############
@@ -525,12 +409,12 @@
 ############
 
 
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/contains>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/contains>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:contains ;
         rr:predicate  fno:executes .
 
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
@@ -539,7 +423,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function>
+<http://ga.dbpedia.org/resource/Mapping_ga:Bosca_Sonra%C3%AD_-_Cathracha/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

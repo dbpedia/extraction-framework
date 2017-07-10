@@ -1,4 +1,4 @@
-@base	          	<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animangá/Mangá> .
+@base	          	<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animangá/Mangá/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -85,8 +85,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:releaseDate .
 
@@ -98,34 +96,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "releaseDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "data início" .
 
 
@@ -133,8 +117,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/7>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/7/FTM> ;
         rr:predicate  dbo:literaryGenre .
 
@@ -146,34 +128,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/7/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "literaryGenre" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "gênero" .
 
 
@@ -181,8 +149,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/4/FTM> ;
         rr:predicate  foaf:name .
 
@@ -195,34 +161,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "título" .
 
 
@@ -230,8 +182,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:closingDate .
 
@@ -243,34 +193,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "closingDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "data_fim" .
 
 
@@ -278,8 +214,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/10>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/10/FTM> ;
         rr:predicate  dbo:publisher .
 
@@ -291,34 +225,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/10/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "publisher" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "editoras" .
 
 
@@ -326,8 +246,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/8>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/8/FTM> ;
         rr:predicate  dbo:literaryGenre .
 
@@ -339,34 +257,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/8/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "literaryGenre" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "genero" .
 
 
@@ -374,8 +278,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:author .
 
@@ -387,34 +289,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "author" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "autor" .
 
 
@@ -422,8 +310,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/3/FTM> ;
         rr:predicate  foaf:name .
 
@@ -436,34 +322,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "titulo" .
 
 
@@ -471,8 +343,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:releaseDate .
 
@@ -484,34 +354,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "releaseDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "data_inicio" .
 
 
@@ -519,8 +375,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/11>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/11/FTM> ;
         rr:predicate  dbo:publisher .
 
@@ -532,34 +386,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/11/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "publisher" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "outras editoras" .
 
 
@@ -567,8 +407,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/9>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/9/FTM> ;
         rr:predicate  dbo:literaryGenre .
 
@@ -580,34 +418,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/9/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "literaryGenre" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "tipo" .
 
 
@@ -615,8 +439,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/6/FTM> ;
         rr:predicate  dbo:illustrator .
 
@@ -628,34 +450,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/6/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SubjectMap/Function> .
 
 ### Parameters
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "illustrator" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Info/Animang%C3%A1/Mang%C3%A1/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "ilustrador" .
 
 

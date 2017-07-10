@@ -1,4 +1,4 @@
-@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Församlingsfakta> .
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Församlingsfakta/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<./Mapping_sv:F%C3%B6rsamlingsfakta>
+<http://sv.dbpedia.org/resource/Mapping_sv:F%C3%B6rsamlingsfakta>
         a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_sv:F%C3%B6rsamlingsfakta/LogicalSource> ;
-        rr:subjectMap      <./Mapping_sv:F%C3%B6rsamlingsfakta/SubjectMap> .
+        rml:logicalSource  <http://sv.dbpedia.org/resource/Mapping_sv:F%C3%B6rsamlingsfakta/LogicalSource> ;
+        rr:subjectMap      <http://sv.dbpedia.org/resource/Mapping_sv:F%C3%B6rsamlingsfakta/SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_sv:F%C3%B6rsamlingsfakta/SubjectMap>
+<http://sv.dbpedia.org/resource/Mapping_sv:F%C3%B6rsamlingsfakta/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:PopulatedPlace ,
 		     wikidata:Q486972 ,
@@ -55,7 +55,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_sv:F%C3%B6rsamlingsfakta/LogicalSource>
+<http://sv.dbpedia.org/resource/Mapping_sv:F%C3%B6rsamlingsfakta/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;

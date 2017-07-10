@@ -1,4 +1,4 @@
-@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Avtal> .
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Avtal/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_sv:Avtal/LogicalSource> ;
-        rr:subjectMap      <./Mapping_sv:Avtal/SubjectMap> .
+<http://sv.dbpedia.org/resource/Mapping_sv:Avtal>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_sv:Avtal/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Work ,
 		     schema:CreativeWork ,
 		     wikidata:Q386724 ,
@@ -52,8 +52,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_sv:Avtal/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://sv.wikipedia.org/wiki/Mapping_sv:Avtal?oldid=40557" .

@@ -1,4 +1,4 @@
-@base	          	<http://lv.dbpedia.org/resource/Mapping_lv:Ezera_infokaste> .
+@base	          	<http://lv.dbpedia.org/resource/Mapping_lv:Ezera_infokaste/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,19 +32,19 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_lv:Ezera_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0> ,
-			       <./Mapping_lv:Ezera_infokaste/latitude> ,
-			       <./Mapping_lv:Ezera_infokaste/longitude> ,
-			       <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1> ;
-        rr:subjectMap          <./Mapping_lv:Ezera_infokaste/SubjectMap> .
+<http://lv.dbpedia.org/resource/Mapping_lv:Ezera_infokaste>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/0> ,
+			       <latitude> ,
+			       <longitude> ,
+			       <SimplePropertyMapping/1> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_lv:Ezera_infokaste/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:NaturalPlace ,
 		     schema:BodyOfWater ,
 		     schema:LakeBodyOfWater ,
@@ -62,8 +62,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_lv:Ezera_infokaste/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://lv.wikipedia.org/wiki/Mapping_lv:Ezera_infokaste?oldid=50682" .
@@ -75,231 +74,194 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1>
+<SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:areaTotal .
 
 ### Function Term Map
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM>
+<SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/1/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
 
 ### Function Execution Mapping
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM/FV>
+<SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_lv:Ezera_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Ezera_infokaste/Function/SimplePropertyFunction> ,
-			       <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_lv:Ezera_infokaste/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/1/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "areaTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM/FV/unitParameterPOM>
+<SimplePropertyMapping/1/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
 ### References
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "platība" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_lv:Ezera_infokaste/longitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/longitude/ObjectMap> ;
+<longitude>  a        rr:PredicateObjectMap ;
+        rr:objectMap  <longitude/ObjectMap> ;
         rr:predicate  geo:long .
 
 ### Function Term Map
-<./Mapping_lv:Ezera_infokaste/longitude/ObjectMap>
+<longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV> .
+        fnml:functionValue  <longitude/ObjectMap/FV> .
 
 ### Function Execution Mapping
-<./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV>
+<longitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_lv:Ezera_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Ezera_infokaste/Function/LongitudeFunction> ,
-			       <./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
-			       <./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
-			       <./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
-			       <./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
-        rr:subjectMap          <./Mapping_lv:Ezera_infokaste/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LongitudeFunction> ,
+			       <longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
+			       <longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
+			       <longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
+			       <longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM>
+<longitude/ObjectMap/FV/lonMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
 
-<./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM>
+<longitude/ObjectMap/FV/lonDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM>
+<longitude/ObjectMap/FV/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonSecondsParameter .
 
-<./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM>
+<longitude/ObjectMap/FV/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
 
 ### References
-<./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "gar_s" .
 
-<./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "gar_d" .
 
-<./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "gar_m" .
 
-<./Mapping_lv:Ezera_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "gar_EW" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_lv:Ezera_infokaste/latitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/latitude/ObjectMap> ;
+<latitude>  a         rr:PredicateObjectMap ;
+        rr:objectMap  <latitude/ObjectMap> ;
         rr:predicate  geo:lat .
 
 ### Function Term Map
-<./Mapping_lv:Ezera_infokaste/latitude/ObjectMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV> .
+<latitude/ObjectMap>  a     fnml:FunctionTermMap ;
+        fnml:functionValue  <latitude/ObjectMap/FV> .
 
 ### Function Execution Mapping
-<./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV>
+<latitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_lv:Ezera_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Ezera_infokaste/Function/LatitudeFunction> ,
-			       <./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
-			       <./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
-			       <./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
-			       <./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM> ;
-        rr:subjectMap          <./Mapping_lv:Ezera_infokaste/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LatitudeFunction> ,
+			       <latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
+			       <latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
+			       <latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
+			       <latitude/ObjectMap/FV/latDirectionParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM>
+<latitude/ObjectMap/FV/LatDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDegreesParameter .
 
-<./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM>
+<latitude/ObjectMap/FV/LatSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
 
-<./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM>
+<latitude/ObjectMap/FV/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latMinutesParameter .
 
-<./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM>
+<latitude/ObjectMap/FV/latDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
 
 ### References
-<./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "plat_s" .
 
-<./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "plat_d" .
 
-<./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "plat_m" .
 
-<./Mapping_lv:Ezera_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "plat_NS" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0>
+<SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0/FTM>
+<SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/0/FTM/FV> ;
         rr:language         "lv" .
 
 ### Function Execution Mapping
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0/FTM/FV>
+<SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_lv:Ezera_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Ezera_infokaste/Function/SimplePropertyFunction> ,
-			       <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_lv:Ezera_infokaste/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_lv:Ezera_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "ezers" .
 
 
@@ -314,17 +276,17 @@
 ############
 
 
-<./Mapping_lv:Ezera_infokaste/Function/LatitudeFunction>
+<Function/LatitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:latFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_lv:Ezera_infokaste/Function/LongitudeFunction>
+<Function/LongitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:lonFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_lv:Ezera_infokaste/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
@@ -333,7 +295,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_lv:Ezera_infokaste/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

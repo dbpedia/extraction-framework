@@ -1,4 +1,4 @@
-@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation> .
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,48 +32,48 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7> ,
-			       <./Mapping_en:Infobox_Automobile_generation/CorrespondingProperty> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap> .
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/20> ,
+			       <SimplePropertyMapping/22> ,
+			       <EndDateMapping/0> ,
+			       <SimplePropertyMapping/18> ,
+			       <SimplePropertyMapping/1> ,
+			       <SimplePropertyMapping/14> ,
+			       <StartDateMapping/0> ,
+			       <SimplePropertyMapping/17> ,
+			       <SimplePropertyMapping/0> ,
+			       <SimplePropertyMapping/13> ,
+			       <SimplePropertyMapping/21> ,
+			       <SimplePropertyMapping/16> ,
+			       <SimplePropertyMapping/9> ,
+			       <SimplePropertyMapping/8> ,
+			       <SimplePropertyMapping/12> ,
+			       <SimplePropertyMapping/15> ,
+			       <SimplePropertyMapping/11> ,
+			       <SimplePropertyMapping/5> ,
+			       <StartDateMapping/3> ,
+			       <SimplePropertyMapping/4> ,
+			       <SimplePropertyMapping/7> ,
+			       <EndDateMapping/3> ,
+			       <EndDateMapping/2> ,
+			       <CorrespondingProperty> ,
+			       <SimplePropertyMapping/6> ,
+			       <SimplePropertyMapping/10> ,
+			       <SimplePropertyMapping/3> ,
+			       <StartDateMapping/2> ,
+			       <SimplePropertyMapping/19> ,
+			       <SimplePropertyMapping/2> ,
+			       <StartDateMapping/1> ,
+			       <SimplePropertyMapping/23> ,
+			       <EndDateMapping/1> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_en:Infobox_Automobile_generation/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Automobile ,
 		     schema:Product ,
 		     dbo:MeanOfTransportation ,
@@ -86,8 +86,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_en:Infobox_Automobile_generation/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Automobile_generation?oldid=7246" .
@@ -99,1521 +98,1111 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20>
+<SimplePropertyMapping/20>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/20/FTM> ;
         rr:predicate  dbo:weight .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM>
+<SimplePropertyMapping/20/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/20/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/Mass> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM/FV>
+<SimplePropertyMapping/20/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/20/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM/FV/unitParameterPOM>
+<SimplePropertyMapping/20/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "Mass" ;
         rr:predicate  dbf:unitParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "weight" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "weight" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22>
+<SimplePropertyMapping/22>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/22/FTM> ;
         rr:predicate  dbo:designer .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22/FTM>
+<SimplePropertyMapping/22/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/22/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22/FTM/FV>
+<SimplePropertyMapping/22/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "designer" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "designer" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production> ;
-        rr:objectMap   <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FTM> ;
-        rr:predicate   dbo:productionEndYear .
+<EndDateMapping/0>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/0/FTM> ;
+        rr:predicate  dbo:productionEndDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FTM>
+<EndDateMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FTM/FV> .
+        fnml:functionValue  <EndDateMapping/0/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FTM/FV>
+<EndDateMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/EndDateFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/0/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/0/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FTM/FV/OntologyParameterPOM>
+<EndDateMapping/0/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "productionEndYear" ;
+        rr:object     "productionEndDate" ;
         rr:predicate  dbf:endDateOntologyParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM>
+<EndDateMapping/0/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <EndDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM/ObjectMap>
+<EndDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "production" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18>
+<SimplePropertyMapping/18>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/18/FTM> ;
         rr:predicate  dbo:width .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM>
+<SimplePropertyMapping/18/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/18/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM/FV>
+<SimplePropertyMapping/18/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/18/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM/FV/unitParameterPOM>
+<SimplePropertyMapping/18/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "width" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "width" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1>
+<SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:manufacturer .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1/FTM>
+<SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1/FTM/FV>
+<SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "manufacturer" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "manufacturer" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14>
+<SimplePropertyMapping/14>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/14/FTM> ;
         rr:predicate  dbo:automobilePlatform .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14/FTM>
+<SimplePropertyMapping/14/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/14/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14/FTM/FV>
+<SimplePropertyMapping/14/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "automobilePlatform" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "platform" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production> ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FTM> ;
+<StartDateMapping/0>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/0/FTM> ;
         rr:predicate  dbo:productionStartDate .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FTM>
+<StartDateMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FTM/FV> .
+        fnml:functionValue  <StartDateMapping/0/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FTM/FV>
+<StartDateMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/StartDateFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/0/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/0/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM>
+<StartDateMapping/0/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <StartDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FTM/FV/OntologyParameterPOM>
+<StartDateMapping/0/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "productionStartDate" ;
         rr:predicate  dbf:startDateOntologyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM/ObjectMap>
+<StartDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "production" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production> ;
-        rr:objectMap   <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FTM> ;
-        rr:predicate   dbo:productionEndDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/EndDateFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM>
+<SimplePropertyMapping/17>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "productionEndDate" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "production" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/17/FTM> ;
         rr:predicate  dbo:length .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM>
+<SimplePropertyMapping/17/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/17/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/Length> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM/FV>
+<SimplePropertyMapping/17/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/17/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM/FV/unitParameterPOM>
+<SimplePropertyMapping/17/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "Length" ;
         rr:predicate  dbf:unitParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "length" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "length" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0>
+<SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0/FTM>
+<SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/0/FTM/FV> ;
         rr:language         "en" .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0/FTM/FV>
+<SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "name" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13>
+<SimplePropertyMapping/13>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/13/FTM> ;
         rr:predicate  dbo:layout .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13/FTM>
+<SimplePropertyMapping/13/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/13/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13/FTM/FV>
+<SimplePropertyMapping/13/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "layout" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "layout" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21>
+<SimplePropertyMapping/21>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/21/FTM> ;
         rr:predicate  dbo:relatedMeanOfTransportation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21/FTM>
+<SimplePropertyMapping/21/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/21/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21/FTM/FV>
+<SimplePropertyMapping/21/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "relatedMeanOfTransportation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "related" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16>
+<SimplePropertyMapping/16>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/16/FTM> ;
         rr:predicate  dbo:wheelbase .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM>
+<SimplePropertyMapping/16/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/16/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/millimetre> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM/FV>
+<SimplePropertyMapping/16/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/16/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM/FV/unitParameterPOM>
+<SimplePropertyMapping/16/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "millimetre" ;
         rr:predicate  dbf:unitParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "wheelbase" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "wheelbase" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9>
+<SimplePropertyMapping/9>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/9/FTM> ;
         rr:predicate  dbo:predecessor .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9/FTM>
+<SimplePropertyMapping/9/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/9/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9/FTM/FV>
+<SimplePropertyMapping/9/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "predecessor" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "predecessor" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8>
+<SimplePropertyMapping/8>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/8/FTM> ;
         rr:predicate  dbo:assembly .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8/FTM>
+<SimplePropertyMapping/8/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/8/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8/FTM/FV>
+<SimplePropertyMapping/8/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "assembly" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "assembly" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production>
+<SimplePropertyMapping/12>
         a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production> ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:bodyStyle .
+
+### Function Term Map
+<SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/12/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "body_style" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/15>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/15/FTM> ;
+        rr:predicate  dbo:transmission .
+
+### Function Term Map
+<SimplePropertyMapping/15/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/15/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/15/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "transmission" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:class .
+
+### Function Term Map
+<SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/11/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "class" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:productionStartYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FTM>
+<SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FTM/FV>
+<SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/StartDateFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FTM/FV/OntologyParameterPOM>
+<SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production_start" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/3>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/3/FTM> ;
+        rr:predicate  dbo:modelStartYear .
+
+### Function Term Map
+<StartDateMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <StartDateMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<StartDateMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/3/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/3/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<StartDateMapping/3/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "modelStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<StartDateMapping/3/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<StartDateMapping/3/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "model_years" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:productionEndYear .
+
+### Function Term Map
+<SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/7/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production_end" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:productionStartDate .
+
+### Function Term Map
+<SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/4/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production_start" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/3>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/3/FTM> ;
+        rr:predicate  dbo:modelEndYear .
+
+### Function Term Map
+<EndDateMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/3/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/3/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/3/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<EndDateMapping/3/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "modelEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+### References
+<EndDateMapping/3/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "model_years" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:successor .
+
+### Function Term Map
+<SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/10/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "successor" .
+
+
+### Predicate Object Map
+#########################
+<CorrespondingProperty>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <CorrespondingProperty/ObjectMap> ;
+        rr:predicate  dbo:variantOf .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:productionEndDate .
+
+### Function Term Map
+<SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production_end" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/2>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/2/FTM> ;
+        rr:predicate  dbo:modelEndDate .
+
+### Function Term Map
+<EndDateMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/2/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/2/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/2/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "modelEndDate" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<EndDateMapping/2/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<EndDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "model_years" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/3/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/3/FTM/FV> ;
+        rr:language         "en" .
+
+### Function Execution Mapping
+<SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aka" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/2>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/2/FTM> ;
+        rr:predicate  dbo:modelStartDate .
+
+### Function Term Map
+<StartDateMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <StartDateMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<StartDateMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/2/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/2/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<StartDateMapping/2/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<StartDateMapping/2/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "modelStartDate" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+### References
+<StartDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "model_years" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/19>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/19/FTM> ;
+        rr:predicate  dbo:height .
+
+### Function Term Map
+<SimplePropertyMapping/19/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/19/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/19/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/19/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<SimplePropertyMapping/19/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "Length" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:parentCompany .
+
+### Function Term Map
+<SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "parent_company" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/1>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/1/FTM> ;
+        rr:predicate  dbo:productionStartYear .
+
+### Function Term Map
+<StartDateMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <StartDateMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<StartDateMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/1/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/1/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<StartDateMapping/1/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "productionStartYear" ;
         rr:predicate  dbf:startDateOntologyParameter .
 
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM>
+<StartDateMapping/1/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <StartDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FTM/FV/PropertyParameterPOM/ObjectMap>
+<StartDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "production" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12>
+<SimplePropertyMapping/23>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12/FTM> ;
-        rr:predicate  dbo:bodyStyle .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "bodyStyle" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "body_style" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years> ;
-        rr:objectMap   <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FTM> ;
-        rr:predicate   dbo:modelEndDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/EndDateFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "modelEndDate" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "model_years" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15/FTM> ;
-        rr:predicate  dbo:transmission .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "transmission" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "transmission" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11/FTM> ;
-        rr:predicate  dbo:class .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "class" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "class" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5/FTM> ;
-        rr:predicate  dbo:productionStartYear .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "productionStartYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "production_start" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7/FTM> ;
-        rr:predicate  dbo:productionEndYear .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "productionEndYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "production_end" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4/FTM> ;
-        rr:predicate  dbo:productionStartDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "productionStartDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "production_start" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/CorrespondingProperty>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/CorrespondingProperty/ObjectMap> ;
-        rr:predicate  dbo:variantOf .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6/FTM> ;
-        rr:predicate  dbo:productionEndDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "productionEndDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "production_end" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10/FTM> ;
-        rr:predicate  dbo:successor .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "successor" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "successor" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3/FTM> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3/FTM/FV> ;
-        rr:language         "en" .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "aka" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years> ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FTM> ;
-        rr:predicate  dbo:modelStartYear .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/StartDateFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "modelStartYear" ;
-        rr:predicate  dbf:startDateOntologyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "model_years" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM> ;
-        rr:predicate  dbo:height .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM/FV> ;
-        rr:datatype         <http://dbpedia.org/datatype/Length> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "height" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM/FV/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "Length" ;
-        rr:predicate  dbf:unitParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "height" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years> ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FTM> ;
-        rr:predicate  dbo:modelStartDate .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/StartDateFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "modelStartDate" ;
-        rr:predicate  dbf:startDateOntologyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "model_years" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2/FTM> ;
-        rr:predicate  dbo:parentCompany .
-
-### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "parentCompany" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "parent_company" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/23/FTM> ;
         rr:predicate  dbo:designCompany .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23/FTM>
+<SimplePropertyMapping/23/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/23/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23/FTM/FV>
+<SimplePropertyMapping/23/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "designCompany" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "designer" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years> ;
-        rr:objectMap   <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FTM> ;
-        rr:predicate   dbo:modelEndYear .
+<EndDateMapping/1>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/1/FTM> ;
+        rr:predicate  dbo:productionEndYear .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FTM>
+<EndDateMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FTM/FV> .
+        fnml:functionValue  <EndDateMapping/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FTM/FV>
+<EndDateMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Automobile_generation/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Automobile_generation/Function/EndDateFunction> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/1/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/1/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FTM/FV/OntologyParameterPOM>
+<EndDateMapping/1/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:object     "modelEndYear" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <EndDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:endDatePropertyParameter .
 
+<EndDateMapping/1/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "productionEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
 ### References
-<./Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FTM/FV/PropertyParameterPOM/ObjectMap>
+<EndDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "model_years" .
+        rml:reference  "production" .
 
 
 ######################
@@ -1627,17 +1216,17 @@
 ############
 
 
-<./Mapping_en:Infobox_Automobile_generation/Function/EndDateFunction>
+<Function/EndDateFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:endDateFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Automobile_generation/Function/StartDateFunction>
+<Function/StartDateFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:startDateFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Automobile_generation/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
@@ -1646,7 +1235,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_en:Infobox_Automobile_generation/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

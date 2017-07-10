@@ -105,17 +105,67 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
 object TemplateRMLMapper {
 
   private var _simplePropertyCount = 0
+  private var _startDateCount = 0
+  private var _endDateCount = 0
+  private var _latitudeCount = 0
+  private var _longitudeCount = 0
+  private var _constantCount = 0
 
   def simplePropertyCount : Int = {
     _simplePropertyCount
   }
 
+  def startDateCount : Int = {
+    _startDateCount
+  }
+
+  def endDateCount : Int = {
+    _endDateCount
+  }
+
+  def latitudeCount : Int = {
+    _latitudeCount
+  }
+
+  def longitudeCount : Int = {
+    _longitudeCount
+  }
+
+  def constantCount : Int = {
+    _constantCount
+  }
+
   def resetState(): Unit = {
     _simplePropertyCount = 0
+    _startDateCount = 0
+    _endDateCount = 0
+    _latitudeCount = 0
+    _longitudeCount = 0
+    _constantCount = 0
   }
 
   def increaseSimplePropertyCount(): Unit = {
     _simplePropertyCount += 1
+  }
+
+  def increaseStartDateCount() : Unit = {
+    _startDateCount += 1
+  }
+
+  def increaseEndDateCount() : Unit = {
+    _endDateCount += 1
+  }
+
+  def increaseLatitudeCount() : Unit = {
+    _latitudeCount += 1
+  }
+
+  def increaseLongitudeCount() : Unit = {
+    _longitudeCount += 1
+  }
+
+  def increaseConstantCount() : Unit = {
+    _constantCount += 1
   }
 
 }

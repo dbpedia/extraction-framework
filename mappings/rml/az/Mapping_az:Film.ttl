@@ -1,4 +1,4 @@
-@base	          	<http://az.dbpedia.org/resource/Mapping_az:Film> .
+@base	          	<http://az.dbpedia.org/resource/Mapping_az:Film/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_az:Film/LogicalSource> ;
-        rr:subjectMap      <./Mapping_az:Film/SubjectMap> .
+<http://az.dbpedia.org/resource/Mapping_az:Film>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_az:Film/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     schema:CreativeWork ,
 		     owl:Thing ,
 		     <http://dbpedia.org/ontology/Wikidata:Q11424> ,
@@ -55,8 +55,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_az:Film/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://az.wikipedia.org/wiki/Mapping_az:Film?oldid=47657" .

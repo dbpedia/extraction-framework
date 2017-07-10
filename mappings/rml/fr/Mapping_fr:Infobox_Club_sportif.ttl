@@ -1,4 +1,4 @@
-@base	          	<http://fr.dbpedia.org/resource/Mapping_fr:Infobox_Club_sportif> .
+@base	          	<http://fr.dbpedia.org/resource/Mapping_fr:Infobox_Club_sportif/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,36 +32,36 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13> ,
-			       <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap> .
+<http://fr.dbpedia.org/resource/Mapping_fr:Infobox_Club_sportif>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/27> ,
+			       <SimplePropertyMapping/24> ,
+			       <SimplePropertyMapping/21> ,
+			       <SimplePropertyMapping/33> ,
+			       <ConditionalMapping/Sport_contains_football> ,
+			       <SimplePropertyMapping/29> ,
+			       <SimplePropertyMapping/26> ,
+			       <SimplePropertyMapping/19> ,
+			       <SimplePropertyMapping/35> ,
+			       <SimplePropertyMapping/20> ,
+			       <SimplePropertyMapping/28> ,
+			       <SimplePropertyMapping/17> ,
+			       <SimplePropertyMapping/34> ,
+			       <SimplePropertyMapping/31> ,
+			       <SimplePropertyMapping/16> ,
+			       <SimplePropertyMapping/30> ,
+			       <SimplePropertyMapping/23> ,
+			       <SimplePropertyMapping/18> ,
+			       <SimplePropertyMapping/25> ,
+			       <SimplePropertyMapping/22> ,
+			       <SimplePropertyMapping/32> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_fr:Infobox_Club_sportif/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
@@ -69,8 +69,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_fr:Infobox_Club_sportif/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://fr.wikipedia.org/wiki/Mapping_fr:Infobox_Club_sportif?oldid=35410" .
@@ -82,968 +81,648 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11>
+<SimplePropertyMapping/27>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11/FTM> ;
-        rr:predicate  foaf:name .
+        rr:objectMap  <SimplePropertyMapping/27/FTM> ;
+        rr:predicate  dbo:ground .
 
 ### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11/FTM>
+<SimplePropertyMapping/27/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11/FTM/FV> ;
-        rr:language         "fr" .
+        fnml:functionValue  <SimplePropertyMapping/27/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11/FTM/FV>
+<SimplePropertyMapping/27/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Nom du club" .
+        rml:reference  "Stade" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27>
+<SimplePropertyMapping/24>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27/FTM> ;
-        rr:predicate  dbo:chairman .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "chairman" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Président" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24/FTM> ;
-        rr:predicate  dbo:headquarter .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "headquarter" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Siege" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21/FTM> ;
-        rr:predicate  dbo:extinctionYear .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "extinctionYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Date de disparition" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13/FTM> ;
-        rr:predicate  foaf:nick .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13/FTM/FV> ;
-        rr:language         "fr" .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:nick" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Surnoms" .
-
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29/FTM> ;
-        rr:predicate  dbo:league .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "league" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Championnat actuel" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26/FTM> ;
-        rr:predicate  dbo:colourName .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26/FTM/FV> ;
-        rr:language         "fr" .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "colourName" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Couleurs" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/24/FTM> ;
         rr:predicate  dbo:formationYear .
 
 ### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19/FTM>
+<SimplePropertyMapping/24/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/24/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19/FTM/FV>
+<SimplePropertyMapping/24/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "formationYear" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "Date de fondation" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20>
+<SimplePropertyMapping/21>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20/FTM> ;
-        rr:predicate  dbo:extinctionDate .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "extinctionDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Date de disparition" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15/FTM> ;
-        rr:predicate  foaf:logo .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:logo" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Logo" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12/FTM> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12/FTM/FV> ;
-        rr:language         "fr" .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Nom complet" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28/FTM> ;
-        rr:predicate  dbo:manager .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "manager" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Entraîneur" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17/FTM> ;
-        rr:predicate  dbo:formerName .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17/FTM/FV> ;
-        rr:language         "fr" .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "formerName" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Noms precedents" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14/FTM> ;
-        rr:predicate  foaf:homepage .
-
-### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Site web" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/21/FTM> ;
         rr:predicate  dbo:sport .
 
 ### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16/FTM>
+<SimplePropertyMapping/21/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/21/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16/FTM/FV>
+<SimplePropertyMapping/21/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "sport" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "Sport" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30>
+<SimplePropertyMapping/33>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30/FTM> ;
-        rr:predicate  dbo:clubsRecordGoalscorer .
+        rr:objectMap  <SimplePropertyMapping/33/FTM> ;
+        rr:predicate  dbo:manager .
 
 ### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30/FTM>
+<SimplePropertyMapping/33/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/33/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30/FTM/FV>
+<SimplePropertyMapping/33/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/33/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/33/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "clubsRecordGoalscorer" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/33/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/33/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Entraîneur" .
+
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/29>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/29/FTM> ;
+        rr:predicate  dbo:headquarter .
+
+### Function Term Map
+<SimplePropertyMapping/29/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/29/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/29/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/29/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/29/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Siege" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/26>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/26/FTM> ;
+        rr:predicate  dbo:extinctionYear .
+
+### Function Term Map
+<SimplePropertyMapping/26/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/26/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/26/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Date de disparition" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/19>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/19/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<SimplePropertyMapping/19/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/19/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/19/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Site web" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/35>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/35/FTM> ;
+        rr:predicate  dbo:clubsRecordGoalscorer .
+
+### Function Term Map
+<SimplePropertyMapping/35/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/35/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/35/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/35/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/35/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/35/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/35/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
         rml:reference  "Meilleur buteur" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23>
+<SimplePropertyMapping/20>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/20/FTM> ;
+        rr:predicate  foaf:logo .
+
+### Function Term Map
+<SimplePropertyMapping/20/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/20/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/20/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Logo" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/28>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/28/FTM> ;
         rr:predicate  dbo:capacity .
 
 ### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23/FTM>
+<SimplePropertyMapping/28/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/28/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23/FTM/FV>
+<SimplePropertyMapping/28/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "capacity" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "Capacite" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18>
+<SimplePropertyMapping/34>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18/FTM> ;
-        rr:predicate  dbo:formationDate .
+        rr:objectMap  <SimplePropertyMapping/34/FTM> ;
+        rr:predicate  dbo:league .
 
 ### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18/FTM>
+<SimplePropertyMapping/34/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/34/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18/FTM/FV>
+<SimplePropertyMapping/34/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/34/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/34/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/34/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "formationDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/34/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Date de fondation" .
+        rml:reference  "Championnat actuel" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25>
+<SimplePropertyMapping/17>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25/FTM> ;
-        rr:predicate  dbo:colour .
+        rr:objectMap  <SimplePropertyMapping/17/FTM> ;
+        rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25/FTM>
+<SimplePropertyMapping/17/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/17/FTM/FV> ;
+        rr:language         "fr" .
 
 ### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25/FTM/FV>
+<SimplePropertyMapping/17/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "colour" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Nom complet" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/31>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/31/FTM> ;
+        rr:predicate  dbo:colourName .
+
+### Function Term Map
+<SimplePropertyMapping/31/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/31/FTM/FV> ;
+        rr:language         "fr" .
+
+### Function Execution Mapping
+<SimplePropertyMapping/31/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/31/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/31/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
         rml:reference  "Couleurs" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22>
+<SimplePropertyMapping/16>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22/FTM> ;
-        rr:predicate  dbo:ground .
+        rr:objectMap  <SimplePropertyMapping/16/FTM> ;
+        rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22/FTM>
+<SimplePropertyMapping/16/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/16/FTM/FV> ;
+        rr:language         "fr" .
 
 ### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22/FTM/FV>
+<SimplePropertyMapping/16/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "ground" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_fr:Infobox_Club_sportif/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Stade" .
+        rml:reference  "Nom du club" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/30>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/30/FTM> ;
+        rr:predicate  dbo:colour .
+
+### Function Term Map
+<SimplePropertyMapping/30/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/30/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/30/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/30/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/30/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Couleurs" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/23>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/23/FTM> ;
+        rr:predicate  dbo:formationDate .
+
+### Function Term Map
+<SimplePropertyMapping/23/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/23/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/23/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Date de fondation" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/18>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/18/FTM> ;
+        rr:predicate  foaf:nick .
+
+### Function Term Map
+<SimplePropertyMapping/18/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/18/FTM/FV> ;
+        rr:language         "fr" .
+
+### Function Execution Mapping
+<SimplePropertyMapping/18/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Surnoms" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/25>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/25/FTM> ;
+        rr:predicate  dbo:extinctionDate .
+
+### Function Term Map
+<SimplePropertyMapping/25/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/25/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/25/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Date de disparition" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/22>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/22/FTM> ;
+        rr:predicate  dbo:formerName .
+
+### Function Term Map
+<SimplePropertyMapping/22/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/22/FTM/FV> ;
+        rr:language         "fr" .
+
+### Function Execution Mapping
+<SimplePropertyMapping/22/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Noms precedents" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/32>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/32/FTM> ;
+        rr:predicate  dbo:chairman .
+
+### Function Term Map
+<SimplePropertyMapping/32/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/32/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/32/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/32/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/32/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/32/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/32/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Président" .
 
 
 ######################
@@ -1053,85 +732,85 @@
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football>
+<ConditionalMapping/Sport_contains_football>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/FTM> ;
-        crml:fallbackMap     <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1> ;
+        crml:equalCondition  <ConditionalMapping/Sport_contains_football/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/Sport_contains_football/1> ;
         rr:object            dbo:SportsTeam , schema:SportsTeam , dbo:SoccerClub , wikidata:Q43229 , dbo:Organisation , owl:Thing , dul:SocialPerson , dul:Agent , wikidata:Q476028 , dbo:Agent , schema:Organization ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/FTM>
+<ConditionalMapping/Sport_contains_football/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/Sport_contains_football/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/FTM/FV>
+<ConditionalMapping/Sport_contains_football/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/contains> ,
-			       <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/contains> ,
+			       <ConditionalMapping/Sport_contains_football/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/Sport_contains_football/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/Sport_contains_football/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "football" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/Sport_contains_football/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/Sport_contains_football/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 ### References
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/Sport_contains_football/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Sport" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1>
+<ConditionalMapping/Sport_contains_football/1>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/FTM> ;
-        crml:fallbackMap     <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/2> ;
+        crml:equalCondition  <ConditionalMapping/Sport_contains_football/1/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/Sport_contains_football/1/2> ;
         rr:object            schema:SportsTeam , owl:Thing , dbo:RugbyClub , dbo:Organisation , dbo:Agent , dbo:SportsTeam , dul:SocialPerson , wikidata:Q43229 , dul:Agent , schema:Organization ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/FTM>
+<ConditionalMapping/Sport_contains_football/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/Sport_contains_football/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/FTM/FV>
+<ConditionalMapping/Sport_contains_football/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_fr:Infobox_Club_sportif/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_fr:Infobox_Club_sportif/Function/contains> ,
-			       <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/contains> ,
+			       <ConditionalMapping/Sport_contains_football/1/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/Sport_contains_football/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/Sport_contains_football/1/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "rugby" ;
         rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
 
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/Sport_contains_football/1/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/Sport_contains_football/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
 
 ### References
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/Sport_contains_football/1/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Sport" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_fr:Infobox_Club_sportif/ConditionalMapping/Sport_contains_football/1/2>
+<ConditionalMapping/Sport_contains_football/1/2>
         a             rr:PredicateObjectMap ;
         rr:object     dbo:Agent , dul:Agent , dul:SocialPerson , schema:SportsTeam , schema:Organization , dbo:SportsTeam , wikidata:Q43229 , dbo:Organisation , owl:Thing ;
         rr:predicate  rdf:type .
@@ -1142,13 +821,12 @@
 ############
 
 
-<./Mapping_fr:Infobox_Club_sportif/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_fr:Infobox_Club_sportif/Function/contains>
-        a             rr:PredicateObjectMap ;
+<Function/contains>  a  rr:PredicateObjectMap ;
         rr:object     dbf:contains ;
         rr:predicate  fno:executes .
 
@@ -1156,7 +834,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_fr:Infobox_Club_sportif/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

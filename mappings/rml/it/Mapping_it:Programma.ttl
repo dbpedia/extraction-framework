@@ -1,4 +1,4 @@
-@base	          	<http://it.dbpedia.org/resource/Mapping_it:Programma> .
+@base	          	<http://it.dbpedia.org/resource/Mapping_it:Programma/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,16 +32,16 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_it:Programma/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio> ;
-        rr:subjectMap          <./Mapping_it:Programma/SubjectMap> .
+<http://it.dbpedia.org/resource/Mapping_it:Programma>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <ConditionalMapping/tipo_equals_radio> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_it:Programma/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
@@ -49,8 +49,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_it:Programma/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://it.wikipedia.org/wiki/Mapping_it:Programma?oldid=18815" .
@@ -68,46 +67,46 @@
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio>
+<ConditionalMapping/tipo_equals_radio>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/FTM> ;
-        crml:fallbackMap     <./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/1> ;
+        crml:equalCondition  <ConditionalMapping/tipo_equals_radio/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/tipo_equals_radio/1> ;
         rr:object            owl:Thing , schema:CreativeWork , wikidata:Q386724 , dbo:RadioProgram , wikidata:Q1555508 , dbo:Work ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/FTM>
+<ConditionalMapping/tipo_equals_radio/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/tipo_equals_radio/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/FTM/FV>
+<ConditionalMapping/tipo_equals_radio/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_it:Programma/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_it:Programma/Function/equals> ,
-			       <./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_it:Programma/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/tipo_equals_radio/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/tipo_equals_radio/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/tipo_equals_radio/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "radio" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/tipo_equals_radio/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/tipo_equals_radio/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/tipo_equals_radio/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "tipo" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_it:Programma/ConditionalMapping/tipo_equals_radio/1>
+<ConditionalMapping/tipo_equals_radio/1>
         a             rr:PredicateObjectMap ;
         rr:object     dbo:TelevisionShow , wikidata:Q15416 , dbo:Work , schema:CreativeWork , wikidata:Q386724 , owl:Thing ;
         rr:predicate  rdf:type .
@@ -118,8 +117,7 @@
 ############
 
 
-<./Mapping_it:Programma/Function/equals>
-        a             rr:PredicateObjectMap ;
+<Function/equals>  a  rr:PredicateObjectMap ;
         rr:object     dbf:equals ;
         rr:predicate  fno:executes .
 
@@ -127,7 +125,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_it:Programma/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

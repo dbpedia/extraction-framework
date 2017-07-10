@@ -1,4 +1,4 @@
-@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Gp-intro> .
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Gp-intro/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_sv:Gp-intro/LogicalSource> ;
-        rr:subjectMap      <./Mapping_sv:Gp-intro/SubjectMap> .
+<http://sv.dbpedia.org/resource/Mapping_sv:Gp-intro>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_sv:Gp-intro/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     owl:Thing ,
 		     schema:SportsEvent ,
 		     dbo:Event ,
@@ -57,8 +57,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_sv:Gp-intro/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://sv.wikipedia.org/wiki/Mapping_sv:Gp-intro?oldid=40068" .

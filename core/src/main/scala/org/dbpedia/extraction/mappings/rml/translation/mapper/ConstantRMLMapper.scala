@@ -25,18 +25,19 @@ class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
 
   def addIndependentConstantMapping(uri: String) : List[RMLPredicateObjectMap] =
   {
-    val constantMappingUri = new RMLUri(uri + "/ConstantMapping/" + mapping.ontologyProperty.name + "/" + mapping.value)
+    val constantMappingUri = new RMLUri(uri + "/ConstantMapping/" + TemplateRMLMapper.constantCount)
     val constantPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(constantMappingUri)
     addConstantValuePredicateObjectMap(constantPom)
+    TemplateRMLMapper.increaseConstantCount()
     List(constantPom)
   }
 
   def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] = {
     val replaceRegex = ".*/".r //e.g. http://en.dbpedia.org/resource/... would appear in the uri if not replaced
-    val constantMappingUri = new RMLUri(uri + "/ConstantMapping/" + mapping.ontologyProperty.name + "/" +
-      replaceRegex.replaceAllIn(mapping.value, ""))
+    val constantMappingUri = new RMLUri(uri + "/ConstantMapping/" + TemplateRMLMapper.constantCount)
     val constantPom = triplesMap.addPredicateObjectMap(constantMappingUri)
     addConstantValuePredicateObjectMap(constantPom)
+    TemplateRMLMapper.increaseConstantCount()
     List(constantPom)
   }
 

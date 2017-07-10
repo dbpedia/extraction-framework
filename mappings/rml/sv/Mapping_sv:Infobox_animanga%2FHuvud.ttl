@@ -1,4 +1,4 @@
-@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Infobox_animanga/Huvud> .
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Infobox_animanga/Huvud/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,14 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <Huvud/LogicalSource> ;
-        rr:subjectMap      <Huvud/SubjectMap> .
+<http://sv.dbpedia.org/resource/Mapping_sv:Infobox_animanga/Huvud>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<Huvud/SubjectMap>  a  rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Work ,
 		     schema:CreativeWork ,
 		     wikidata:Q386724 ,
@@ -51,8 +52,7 @@
 ### LogicalSource
 ##################
 
-<Huvud/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://sv.wikipedia.org/wiki/Mapping_sv:Infobox_animanga/Huvud?oldid=40187" .

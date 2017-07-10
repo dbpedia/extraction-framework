@@ -1,4 +1,4 @@
-@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Föreningsfakta> .
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Föreningsfakta/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<./Mapping_sv:F%C3%B6reningsfakta>
+<http://sv.dbpedia.org/resource/Mapping_sv:F%C3%B6reningsfakta>
         a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_sv:F%C3%B6reningsfakta/LogicalSource> ;
-        rr:subjectMap      <./Mapping_sv:F%C3%B6reningsfakta/SubjectMap> .
+        rml:logicalSource  <http://sv.dbpedia.org/resource/Mapping_sv:F%C3%B6reningsfakta/LogicalSource> ;
+        rr:subjectMap      <http://sv.dbpedia.org/resource/Mapping_sv:F%C3%B6reningsfakta/SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_sv:F%C3%B6reningsfakta/SubjectMap>
+<http://sv.dbpedia.org/resource/Mapping_sv:F%C3%B6reningsfakta/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Organisation ,
 		     owl:Thing ,
@@ -56,7 +56,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_sv:F%C3%B6reningsfakta/LogicalSource>
+<http://sv.dbpedia.org/resource/Mapping_sv:F%C3%B6reningsfakta/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;

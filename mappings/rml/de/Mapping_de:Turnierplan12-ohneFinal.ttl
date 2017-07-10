@@ -1,4 +1,4 @@
-@base	          	<http://de.dbpedia.org/resource/Mapping_de:Turnierplan12-ohneFinal> .
+@base	          	<http://de.dbpedia.org/resource/Mapping_de:Turnierplan12-ohneFinal/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_de:Turnierplan12-ohneFinal/LogicalSource> ;
-        rr:subjectMap      <./Mapping_de:Turnierplan12-ohneFinal/SubjectMap> .
+<http://de.dbpedia.org/resource/Mapping_de:Turnierplan12-ohneFinal>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_de:Turnierplan12-ohneFinal/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:SocietalEvent ,
 		     wikidata:Q1656682 ,
 		     dbo:Event ,
@@ -56,8 +56,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_de:Turnierplan12-ohneFinal/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://de.wikipedia.org/wiki/Mapping_de:Turnierplan12-ohneFinal?oldid=48516" .

@@ -1,4 +1,4 @@
-@base	          	<http://es.dbpedia.org/resource/Mapping_es:Ficha_de_mineral> .
+@base	          	<http://es.dbpedia.org/resource/Mapping_es:Ficha_de_mineral/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_es:Ficha_de_mineral/LogicalSource> ;
-        rr:subjectMap      <./Mapping_es:Ficha_de_mineral/SubjectMap> .
+<http://es.dbpedia.org/resource/Mapping_es:Ficha_de_mineral>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_es:Ficha_de_mineral/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Mineral ,
 		     wikidata:Q7946 ,
 		     dbo:ChemicalSubstance ,
@@ -53,8 +53,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_es:Ficha_de_mineral/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://es.wikipedia.org/wiki/Mapping_es:Ficha_de_mineral?oldid=39640" .

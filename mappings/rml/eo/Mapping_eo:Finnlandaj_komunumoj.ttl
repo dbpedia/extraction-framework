@@ -1,4 +1,4 @@
-@base	          	<http://eo.dbpedia.org/resource/Mapping_eo:Finnlandaj_komunumoj> .
+@base	          	<http://eo.dbpedia.org/resource/Mapping_eo:Finnlandaj_komunumoj/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,16 +32,16 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_eo:Finnlandaj_komunumoj/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0> ;
-        rr:subjectMap          <./Mapping_eo:Finnlandaj_komunumoj/SubjectMap> .
+<http://eo.dbpedia.org/resource/Mapping_eo:Finnlandaj_komunumoj>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/0> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_eo:Finnlandaj_komunumoj/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Place ,
 		     dbo:PopulatedPlace ,
 		     dbo:Location ,
@@ -61,8 +61,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_eo:Finnlandaj_komunumoj/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://eo.wikipedia.org/wiki/Mapping_eo:Finnlandaj_komunumoj?oldid=38333" .
@@ -74,49 +73,33 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0>
+<SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:populationTotal .
 
 ### Function Term Map
-<./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0/FTM>
+<SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0/FTM/FV>
+<SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_eo:Finnlandaj_komunumoj/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_eo:Finnlandaj_komunumoj/Function/SimplePropertyFunction> ,
-			       <./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_eo:Finnlandaj_komunumoj/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "populationTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_eo:Finnlandaj_komunumoj/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "loĝantaro" .
 
 
@@ -131,7 +114,7 @@
 ############
 
 
-<./Mapping_eo:Finnlandaj_komunumoj/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
@@ -140,7 +123,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_eo:Finnlandaj_komunumoj/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

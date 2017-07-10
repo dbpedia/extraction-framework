@@ -1,4 +1,4 @@
-@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Helikopter> .
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Helikopter/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_sv:Helikopter/LogicalSource> ;
-        rr:subjectMap      <./Mapping_sv:Helikopter/SubjectMap> .
+<http://sv.dbpedia.org/resource/Mapping_sv:Helikopter>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_sv:Helikopter/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Aircraft ,
 		     wikidata:Q11436 ,
 		     schema:Product ,
@@ -54,8 +54,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_sv:Helikopter/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://sv.wikipedia.org/wiki/Mapping_sv:Helikopter?oldid=40731" .

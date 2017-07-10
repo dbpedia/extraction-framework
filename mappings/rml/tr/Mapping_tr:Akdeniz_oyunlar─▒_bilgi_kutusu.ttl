@@ -1,4 +1,4 @@
-@base	          	<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunları_bilgi_kutusu> .
+@base	          	<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunları_bilgi_kutusu/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,16 +32,16 @@
 
 ### Main TriplesMap
 ####################
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu>
+<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0> ;
-        rr:subjectMap          <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SubjectMap> .
+        rml:logicalSource      <http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/LogicalSource> ;
+        rr:predicateObjectMap  <http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0> ;
+        rr:subjectMap          <http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SubjectMap>
+<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Unknown ,
 		     dul:Entity ,
@@ -53,7 +53,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/LogicalSource>
+<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
@@ -66,50 +66,34 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0>
+<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM> ;
+        rr:objectMap  <http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM>
+<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV> ;
+        fnml:functionValue  <http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV> ;
         rr:language         "tr" .
 
 ### Function Execution Mapping
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV>
+<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/Function/SimplePropertyFunction> ,
-			       <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SubjectMap/Function> .
+        rml:logicalSource      <http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/LogicalSource> ;
+        rr:predicateObjectMap  <http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/Function/SimplePropertyFunction> ,
+			       <http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "İsim" .
 
 
@@ -124,7 +108,7 @@
 ############
 
 
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/Function/SimplePropertyFunction>
+<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
@@ -133,7 +117,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SubjectMap/Function>
+<http://tr.dbpedia.org/resource/Mapping_tr:Akdeniz_oyunlar%C4%B1_bilgi_kutusu/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

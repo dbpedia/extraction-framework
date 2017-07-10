@@ -1,4 +1,4 @@
-@base	          	<http://ga.dbpedia.org/resource/Mapping_ga:Imreoir_sacair_bosca_eolais> .
+@base	          	<http://ga.dbpedia.org/resource/Mapping_ga:Imreoir_sacair_bosca_eolais/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,32 +32,32 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap> .
+<http://ga.dbpedia.org/resource/Mapping_ga:Imreoir_sacair_bosca_eolais>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/26> ,
+			       <StartDateMapping/2> ,
+			       <SimplePropertyMapping/28> ,
+			       <EndDateMapping/2> ,
+			       <StartDateMapping/1> ,
+			       <SimplePropertyMapping/19> ,
+			       <SimplePropertyMapping/20> ,
+			       <SimplePropertyMapping/27> ,
+			       <SimplePropertyMapping/21> ,
+			       <SimplePropertyMapping/22> ,
+			       <EndDateMapping/1> ,
+			       <SimplePropertyMapping/24> ,
+			       <StartDateMapping/0> ,
+			       <EndDateMapping/0> ,
+			       <ConditionalMapping/blianta_bainisteoir_isSet_null> ,
+			       <SimplePropertyMapping/23> ,
+			       <SimplePropertyMapping/25> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
@@ -65,8 +65,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://ga.wikipedia.org/wiki/Mapping_ga:Imreoir_sacair_bosca_eolais?oldid=47405" .
@@ -78,719 +77,547 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111>
+<SimplePropertyMapping/26>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111/FTM> ;
-        rr:predicate  dbo:number .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "number" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/111/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "suíomh" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir> ;
-        rr:objectMap   <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/EndDateFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsEndYear" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "blianta_imreoir" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110/FTM> ;
-        rr:predicate  dbo:deathPlace .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "deathPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/110/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "áit_bháis" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD> ;
-        rr:objectMap   <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/EndDateFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsEndYear" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "blianta_traenálaí" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105/FTM> ;
-        rr:predicate  foaf:name .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105/FTM/FV> ;
-        rr:language         "ga" .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/105/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "ainm" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir> ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM> ;
-        rr:predicate  dbo:activeYearsStartYear .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/StartDateFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsStartYear" ;
-        rr:predicate  dbf:startDateOntologyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "blianta_bainisteoir" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107/FTM> ;
-        rr:predicate  dbo:birthDate .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "birthDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/107/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "dáta_breithe" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir>
-        a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir> ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM> ;
-        rr:predicate  dbo:activeYearsStartYear .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/StartDateFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsStartYear" ;
-        rr:predicate  dbf:startDateOntologyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:startDatePropertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_imreoir/FTM/FV/PropertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "blianta_imreoir" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/26/FTM> ;
         rr:predicate  dbo:team .
 
 ### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113/FTM>
+<SimplePropertyMapping/26/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/26/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113/FTM/FV>
+<SimplePropertyMapping/26/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "team" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/113/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "clubanna_imreoir" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112/FTM> ;
-        rr:predicate  dbo:team .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "team" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/112/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "club" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106/FTM> ;
-        rr:predicate  foaf:nick .
+<StartDateMapping/2>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/2/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
 
 ### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106/FTM>
+<StartDateMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106/FTM/FV> ;
-        rr:language         "ga" .
+        fnml:functionValue  <StartDateMapping/2/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106/FTM/FV>
+<StartDateMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/2/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/2/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106/FTM/FV/propertyParameterPOM>
+<StartDateMapping/2/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
 
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106/FTM/FV/ontologyPropertyParameterPOM>
+<StartDateMapping/2/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:nick" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:objectMap  <StartDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
 
 ### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/106/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "leasainm" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114/FTM> ;
-        rr:predicate  dbo:managerClub .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "managerClub" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/114/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "clubanna_bainisteoir" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108/FTM> ;
-        rr:predicate  dbo:birthPlace .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "birthPlace" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/108/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "áit_breithe" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109/FTM> ;
-        rr:predicate  dbo:deathDate .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "deathDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SimplePropertyMapping/109/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "dáta_báis" .
-
-
-
-### Predicate Object Map
-#########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir>
-        a              rr:PredicateObjectMap ;
-        dbf:startDate  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir> ;
-        rr:objectMap   <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM> ;
-        rr:predicate   dbo:activeYearsEndYear .
-
-### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/EndDateFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/OntologyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:object     "activeYearsEndYear" ;
-        rr:predicate  dbf:endDateOntologyParameter .
-
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/PropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/PropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:endDatePropertyParameter .
-
-### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_bainisteoir/FTM/FV/PropertyParameterPOM/ObjectMap>
+<StartDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "blianta_bainisteoir" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD>
+<SimplePropertyMapping/28>
         a             rr:PredicateObjectMap ;
-        dbf:endDate   <./Mapping_ga:Imreoir_sacair_bosca_eolais/EndDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD> ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/28/FTM> ;
+        rr:predicate  dbo:managerClub .
+
+### Function Term Map
+<SimplePropertyMapping/28/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/28/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/28/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "clubanna_bainisteoir" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/2>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/2/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/2/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/2/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/2/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<EndDateMapping/2/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+### References
+<EndDateMapping/2/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "blianta_bainisteoir" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/1>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/1/FTM> ;
         rr:predicate  dbo:activeYearsStartYear .
 
 ### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM>
+<StartDateMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV> .
+        fnml:functionValue  <StartDateMapping/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV>
+<StartDateMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/StartDateFunction> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/PropertyParameterPOM> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/OntologyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/1/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/1/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/OntologyParameterPOM>
+<StartDateMapping/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<StartDateMapping/1/FTM/FV/OntologyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "activeYearsStartYear" ;
         rr:predicate  dbf:startDateOntologyParameter .
 
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/PropertyParameterPOM>
+### References
+<StartDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "blianta_traenálaí" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/19>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/19/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<SimplePropertyMapping/19/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/19/FTM/FV> ;
+        rr:language         "ga" .
+
+### Function Execution Mapping
+<SimplePropertyMapping/19/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ainm" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/20>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/20/FTM> ;
+        rr:predicate  foaf:nick .
+
+### Function Term Map
+<SimplePropertyMapping/20/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/20/FTM/FV> ;
+        rr:language         "ga" .
+
+### Function Execution Mapping
+<SimplePropertyMapping/20/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "leasainm" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/27>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/27/FTM> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<SimplePropertyMapping/27/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/27/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/27/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "clubanna_imreoir" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/21>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/21/FTM> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<SimplePropertyMapping/21/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/21/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/21/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dáta_breithe" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/22>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/22/FTM> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<SimplePropertyMapping/22/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/22/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/22/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "áit_breithe" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/1>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/1/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/1/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/1/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/1/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<EndDateMapping/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<EndDateMapping/1/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "blianta_traenálaí" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/24>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/24/FTM> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<SimplePropertyMapping/24/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/24/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/24/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "áit_bháis" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/0>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/0/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<StartDateMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <StartDateMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<StartDateMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/0/FTM/FV/PropertyParameterPOM> ,
+			       <StartDateMapping/0/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<StartDateMapping/0/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<StartDateMapping/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:startDatePropertyParameter .
 
 ### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/StartDate/activeYearsStartYear/activeYearsEndYear/blianta_traen%C3%A1la%C3%AD/FTM/FV/PropertyParameterPOM/ObjectMap>
+<StartDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rml:reference  "blianta_traenálaí" .
+        rml:reference  "blianta_imreoir" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/0>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/0/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/0/FTM/FV/PropertyParameterPOM> ,
+			       <EndDateMapping/0/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<EndDateMapping/0/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+### References
+<EndDateMapping/0/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "blianta_imreoir" .
+
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/23>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/23/FTM> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<SimplePropertyMapping/23/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/23/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/23/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dáta_báis" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/25>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/25/FTM> ;
+        rr:predicate  dbo:number .
+
+### Function Term Map
+<SimplePropertyMapping/25/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/25/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/25/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "suíomh" .
 
 
 ######################
@@ -800,73 +627,73 @@
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null>
+<ConditionalMapping/blianta_bainisteoir_isSet_null>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/FTM> ;
-        crml:fallbackMap     <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1> ;
+        crml:equalCondition  <ConditionalMapping/blianta_bainisteoir_isSet_null/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/blianta_bainisteoir_isSet_null/1> ;
         rr:object            wikidata:Q215627 , dul:Agent , wikidata:Q628099 , dbo:Agent , dbo:SoccerManager , foaf:Person , owl:Thing , dbo:SportsManager , dul:NaturalPerson , dbo:Person , schema:Person , wikidata:Q5 ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/FTM>
+<ConditionalMapping/blianta_bainisteoir_isSet_null/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV>
+<ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/isSet> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/isSet> ,
+			       <ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/isSet/propertyParameter> .
 
 ### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/blianta_bainisteoir_isSet_null/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "blianta_bainisteoir" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1>
+<ConditionalMapping/blianta_bainisteoir_isSet_null/1>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM> ;
-        crml:fallbackMap     <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1/2> ;
+        crml:equalCondition  <ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/blianta_bainisteoir_isSet_null/1/2> ;
         rr:object            schema:Person , dbo:Agent , owl:Thing , dbo:Person , dul:NaturalPerson , foaf:Person , dbo:SportsManager , dul:Agent , dbo:SoccerManager , wikidata:Q215627 , wikidata:Q5 , wikidata:Q628099 ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM>
+<ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV>
+<ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_ga:Imreoir_sacair_bosca_eolais/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/isSet> ,
-			       <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/isSet> ,
+			       <ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/isSet/propertyParameter> .
 
 ### References
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/blianta_bainisteoir_isSet_null/1/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "clubanna_bainisteoir" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/ConditionalMapping/blianta_bainisteoir_isSet_null/1/2>
+<ConditionalMapping/blianta_bainisteoir_isSet_null/1/2>
         a             rr:PredicateObjectMap ;
         rr:object     wikidata:Q5 , dul:Agent , dul:NaturalPerson , wikidata:Q215627 , dbo:Person , dbo:Athlete , dbo:Agent , schema:Person , wikidata:Q937857 , dbo:SoccerPlayer , owl:Thing , foaf:Person ;
         rr:predicate  rdf:type .
@@ -877,22 +704,21 @@
 ############
 
 
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/isSet>
-        a             rr:PredicateObjectMap ;
+<Function/isSet>  a   rr:PredicateObjectMap ;
         rr:object     dbf:isSet ;
         rr:predicate  fno:executes .
 
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/EndDateFunction>
+<Function/EndDateFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:endDateFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/Function/StartDateFunction>
+<Function/StartDateFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:startDateFunction ;
         rr:predicate  fno:executes .
@@ -901,7 +727,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_ga:Imreoir_sacair_bosca_eolais/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

@@ -1,4 +1,4 @@
-@base	          	<http://en.dbpedia.org/resource/Mapping_en:Nonfiction-tv-prog-stub> .
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Nonfiction-tv-prog-stub/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_en:Nonfiction-tv-prog-stub/LogicalSource> ;
-        rr:subjectMap      <./Mapping_en:Nonfiction-tv-prog-stub/SubjectMap> .
+<http://en.dbpedia.org/resource/Mapping_en:Nonfiction-tv-prog-stub>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_en:Nonfiction-tv-prog-stub/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:TelevisionShow ,
 		     wikidata:Q15416 ,
 		     dbo:Work ,
@@ -54,8 +54,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_en:Nonfiction-tv-prog-stub/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Nonfiction-tv-prog-stub?oldid=29061" .

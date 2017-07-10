@@ -1,4 +1,4 @@
-@base	          	<http://en.dbpedia.org/resource/Mapping_en:Liberal-UK-MP-stub> .
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Liberal-UK-MP-stub/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,17 +32,17 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Liberal-UK-MP-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/country/United_Kingdom> ,
-			       <./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/party/Liberal_Party_(UK)> ;
-        rr:subjectMap          <./Mapping_en:Liberal-UK-MP-stub/SubjectMap> .
+<http://en.dbpedia.org/resource/Mapping_en:Liberal-UK-MP-stub>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <ConstantMapping/0> ,
+			       <ConstantMapping/1> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_en:Liberal-UK-MP-stub/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     wikidata:Q215627 ,
 		     foaf:Person ,
 		     dbo:Agent ,
@@ -61,8 +61,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_en:Liberal-UK-MP-stub/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Liberal-UK-MP-stub?oldid=28848" .
@@ -74,16 +73,14 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/party/Liberal_Party_(UK)>
-        a             rr:PredicateObjectMap ;
-        rr:object     <Liberal_Party_(UK)> ;
+<ConstantMapping/1>  a  rr:PredicateObjectMap ;
+        rr:object     <http://en.dbpedia.org/resource/Liberal_Party_(UK)> ;
         rr:predicate  dbo:party .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/country/United_Kingdom>
-        a             rr:PredicateObjectMap ;
+<ConstantMapping/0>  a  rr:PredicateObjectMap ;
         rr:object     dbr-en:United_Kingdom ;
         rr:predicate  dbo:country .
 

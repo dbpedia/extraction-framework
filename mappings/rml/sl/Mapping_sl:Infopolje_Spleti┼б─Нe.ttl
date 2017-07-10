@@ -1,4 +1,4 @@
-@base	          	<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spletišče> .
+@base	          	<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spletišče/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,20 +32,20 @@
 
 ### Main TriplesMap
 ####################
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4> ;
-        rr:subjectMap          <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap> .
+        rml:logicalSource      <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
+        rr:predicateObjectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0> ,
+			       <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1> ,
+			       <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2> ,
+			       <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3> ,
+			       <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4> ;
+        rr:subjectMap          <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Website ,
 		     schema:WebPage ,
@@ -60,7 +60,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
@@ -73,242 +73,162 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM> ;
+        rr:objectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:author .
 
 ### Function Term Map
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV> .
+        fnml:functionValue  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function> .
+        rml:logicalSource      <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
+        rr:predicateObjectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction> ,
+			       <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "author" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "author" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM> ;
+        rr:objectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:language .
 
 ### Function Term Map
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV> .
+        fnml:functionValue  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function> .
+        rml:logicalSource      <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
+        rr:predicateObjectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction> ,
+			       <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "language" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "language" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM> ;
+        rr:objectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:type .
 
 ### Function Term Map
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV> .
+        fnml:functionValue  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function> .
+        rml:logicalSource      <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
+        rr:predicateObjectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction> ,
+			       <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "type" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "type" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM> ;
+        rr:objectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV> ;
+        fnml:functionValue  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV> ;
         rr:language         "sl" .
 
 ### Function Execution Mapping
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function> .
+        rml:logicalSource      <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
+        rr:predicateObjectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction> ,
+			       <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "name" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM> ;
+        rr:objectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:owner .
 
 ### Function Term Map
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV> .
+        fnml:functionValue  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function> .
+        rml:logicalSource      <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/LogicalSource> ;
+        rr:predicateObjectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction> ,
+			       <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "owner" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "owner" .
 
 
@@ -323,7 +243,7 @@
 ############
 
 
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
@@ -332,7 +252,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function>
+<http://sl.dbpedia.org/resource/Mapping_sl:Infopolje_Spleti%C5%A1%C4%8De/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

@@ -1,4 +1,4 @@
-@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Stubbmall> .
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Stubbmall/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_sv:Stubbmall/LogicalSource> ;
-        rr:subjectMap      <./Mapping_sv:Stubbmall/SubjectMap> .
+<http://sv.dbpedia.org/resource/Mapping_sv:Stubbmall>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_sv:Stubbmall/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Agent ,
 		     dul:Agent ,
 		     owl:Thing ;
@@ -51,8 +51,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_sv:Stubbmall/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://sv.wikipedia.org/wiki/Mapping_sv:Stubbmall?oldid=40814" .

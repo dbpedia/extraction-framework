@@ -1,4 +1,4 @@
-@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Myndighetsfakta> .
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Myndighetsfakta/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_sv:Myndighetsfakta/LogicalSource> ;
-        rr:subjectMap      <./Mapping_sv:Myndighetsfakta/SubjectMap> .
+<http://sv.dbpedia.org/resource/Mapping_sv:Myndighetsfakta>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_sv:Myndighetsfakta/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:Organisation ,
 		     dbo:Agent ,
 		     owl:Thing ,
@@ -55,8 +55,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_sv:Myndighetsfakta/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://sv.wikipedia.org/wiki/Mapping_sv:Myndighetsfakta?oldid=40141" .

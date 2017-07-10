@@ -1,4 +1,4 @@
-@base	          	<http://eo.dbpedia.org/resource/Mapping_eo:Informkesto_stacio> .
+@base	          	<http://eo.dbpedia.org/resource/Mapping_eo:Informkesto_stacio/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_eo:Informkesto_stacio/LogicalSource> ;
-        rr:subjectMap      <./Mapping_eo:Informkesto_stacio/SubjectMap> .
+<http://eo.dbpedia.org/resource/Mapping_eo:Informkesto_stacio>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_eo:Informkesto_stacio/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     wikidata:Q55488 ,
 		     dbo:Place ,
 		     wikidata:Q719456 ,
@@ -58,8 +58,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_eo:Informkesto_stacio/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://eo.wikipedia.org/wiki/Mapping_eo:Informkesto_stacio?oldid=38128" .

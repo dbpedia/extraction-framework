@@ -1,4 +1,4 @@
-@base	          	<http://en.dbpedia.org/resource/Mapping_en:Japan-company-stub> .
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Japan-company-stub/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_en:Japan-company-stub/LogicalSource> ;
-        rr:subjectMap      <./Mapping_en:Japan-company-stub/SubjectMap> .
+<http://en.dbpedia.org/resource/Mapping_en:Japan-company-stub>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_en:Japan-company-stub/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dul:SocialPerson ,
 		     dbo:Organisation ,
 		     schema:Organization ,
@@ -56,8 +56,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_en:Japan-company-stub/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Japan-company-stub?oldid=29009" .

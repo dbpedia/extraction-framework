@@ -1,4 +1,4 @@
-@base	          	<http://el.dbpedia.org/resource/Mapping_el:Infobox_football_league-cup> .
+@base	          	<http://el.dbpedia.org/resource/Mapping_el:Infobox_football_league-cup/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_el:Infobox_football_league-cup/LogicalSource> ;
-        rr:subjectMap      <./Mapping_el:Infobox_football_league-cup/SubjectMap> .
+<http://el.dbpedia.org/resource/Mapping_el:Infobox_football_league-cup>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_el:Infobox_football_league-cup/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     wikidata:Q43229 ,
 		     dul:Agent ,
 		     schema:Organization ,
@@ -58,8 +58,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_el:Infobox_football_league-cup/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://el.wikipedia.org/wiki/Mapping_el:Infobox_football_league-cup?oldid=10565" .

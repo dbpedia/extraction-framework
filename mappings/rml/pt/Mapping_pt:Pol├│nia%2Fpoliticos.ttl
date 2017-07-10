@@ -1,4 +1,4 @@
-@base	          	<http://pt.dbpedia.org/resource/Mapping_pt:Polónia/politicos> .
+@base	          	<http://pt.dbpedia.org/resource/Mapping_pt:Polónia/politicos/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -80,8 +80,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:birthDate .
 
@@ -93,34 +91,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SubjectMap/Function> .
 
 ### Parameters
-<http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "birthDate" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "data_nasc" .
 
 
@@ -128,8 +112,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:picture .
 
@@ -141,34 +123,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SubjectMap/Function> .
 
 ### Parameters
-<http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "picture" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "imagem" .
 
 
@@ -176,8 +144,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:party .
 
@@ -189,34 +155,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SubjectMap/Function> .
 
 ### Parameters
-<http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "party" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "partido" .
 
 
@@ -224,8 +176,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:office .
 
@@ -237,34 +187,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SubjectMap/Function> .
 
 ### Parameters
-<http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "office" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "cargo" .
 
 
@@ -272,8 +208,6 @@
 #########################
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
@@ -286,34 +220,20 @@
 ### Function Execution Mapping
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/LogicalSource> ;
         rr:predicateObjectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/Function/SimplePropertyFunction> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
         rr:subjectMap          <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SubjectMap/Function> .
 
 ### Parameters
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:objectMap  <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
 <http://pt.dbpedia.org/resource/Mapping_pt:Pol%C3%B3nia/politicos/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "nome" .
 
 

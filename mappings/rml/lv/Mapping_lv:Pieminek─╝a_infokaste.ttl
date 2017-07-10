@@ -1,4 +1,4 @@
-@base	          	<http://lv.dbpedia.org/resource/Mapping_lv:Pieminekļa_infokaste> .
+@base	          	<http://lv.dbpedia.org/resource/Mapping_lv:Pieminekļa_infokaste/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,19 +32,19 @@
 
 ### Main TriplesMap
 ####################
-<./Mapping_lv:Pieminek%C4%BCa_infokaste>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude> ;
-        rr:subjectMap          <./Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap> .
+        rml:logicalSource      <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource> ;
+        rr:predicateObjectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude> ;
+        rr:subjectMap          <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Monument ,
 		     wikidata:Q4989906 ,
@@ -59,7 +59,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
@@ -72,222 +72,190 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap> ;
         rr:predicate  geo:long .
 
 ### Function Term Map
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV> .
+        fnml:functionValue  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV> .
 
 ### Function Execution Mapping
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/Function/LongitudeFunction> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
-        rr:subjectMap          <./Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap/Function> .
+        rml:logicalSource      <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource> ;
+        rr:predicateObjectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/Function/LongitudeFunction> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
+        rr:subjectMap          <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonSecondsParameter .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
 
 ### References
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longd" .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longs" .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longm" .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longEW" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap> ;
         rr:predicate  geo:lat .
 
 ### Function Term Map
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV> .
+        fnml:functionValue  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV> .
 
 ### Function Execution Mapping
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/Function/LatitudeFunction> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM> ;
-        rr:subjectMap          <./Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap/Function> .
+        rml:logicalSource      <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource> ;
+        rr:predicateObjectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/Function/LatitudeFunction> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM> ;
+        rr:subjectMap          <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDegreesParameter .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latMinutesParameter .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
 
 ### References
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lats" .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "latNS" .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "latd" .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "latm" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:designer .
 
 ### Function Term Map
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV> .
+        fnml:functionValue  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/Function/SimplePropertyFunction> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap/Function> .
+        rml:logicalSource      <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource> ;
+        rr:predicateObjectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/Function/SimplePropertyFunction> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "designer" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "designer" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV> ;
+        fnml:functionValue  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV> ;
         rr:language         "lv" .
 
 ### Function Execution Mapping
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/Function/SimplePropertyFunction> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap/Function> .
+        rml:logicalSource      <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/LogicalSource> ;
+        rr:predicateObjectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/Function/SimplePropertyFunction> ,
+			       <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "monument_name" .
 
 
@@ -302,17 +270,17 @@
 ############
 
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/Function/LongitudeFunction>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/Function/LongitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:lonFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/Function/LatitudeFunction>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/Function/LatitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:latFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/Function/SimplePropertyFunction>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
@@ -321,7 +289,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap/Function>
+<http://lv.dbpedia.org/resource/Mapping_lv:Pieminek%C4%BCa_infokaste/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

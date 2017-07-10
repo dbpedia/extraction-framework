@@ -1,4 +1,4 @@
-@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Town_AT> .
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_Town_AT/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,46 +32,46 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87> ,
-			       <./Mapping_en:Infobox_Town_AT/ConstantMapping/country/Austria> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85> ,
-			       <./Mapping_en:Infobox_Town_AT/longitude> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97> ,
-			       <./Mapping_en:Infobox_Town_AT/latitude> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap> .
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Town_AT>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/47> ,
+			       <SimplePropertyMapping/55> ,
+			       <SimplePropertyMapping/58> ,
+			       <SimplePropertyMapping/37> ,
+			       <SimplePropertyMapping/34> ,
+			       <ConditionalMapping/type_equals_City> ,
+			       <SimplePropertyMapping/39> ,
+			       <SimplePropertyMapping/50> ,
+			       <ConstantMapping/0> ,
+			       <SimplePropertyMapping/43> ,
+			       <SimplePropertyMapping/46> ,
+			       <SimplePropertyMapping/49> ,
+			       <SimplePropertyMapping/54> ,
+			       <SimplePropertyMapping/57> ,
+			       <SimplePropertyMapping/36> ,
+			       <SimplePropertyMapping/33> ,
+			       <SimplePropertyMapping/41> ,
+			       <SimplePropertyMapping/52> ,
+			       <longitude> ,
+			       <SimplePropertyMapping/42> ,
+			       <SimplePropertyMapping/45> ,
+			       <SimplePropertyMapping/48> ,
+			       <SimplePropertyMapping/53> ,
+			       <SimplePropertyMapping/56> ,
+			       <SimplePropertyMapping/59> ,
+			       <SimplePropertyMapping/35> ,
+			       <latitude> ,
+			       <SimplePropertyMapping/40> ,
+			       <SimplePropertyMapping/38> ,
+			       <SimplePropertyMapping/51> ,
+			       <SimplePropertyMapping/44> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_en:Infobox_Town_AT/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
@@ -79,8 +79,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_en:Infobox_Town_AT/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Town_AT?oldid=31183" .
@@ -92,1488 +91,1040 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105>
+<SimplePropertyMapping/47>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105/FTM> ;
-        rr:predicate  dbo:party .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "party" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/105/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Partei" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88/FTM> ;
-        rr:predicate  dbo:areaCode .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "areaCode" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/88/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "area_code" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99/FTM> ;
-        rr:predicate  foaf:homepage .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/99/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Website" .
-
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80/FTM> ;
-        rr:predicate  dbo:neighboringMunicipality .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "neighboringMunicipality" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/80/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "neighboring_municipalities" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83/FTM> ;
-        rr:predicate  dbo:state .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "state" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/83/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Bundesland" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100/FTM> ;
-        rr:predicate  dbo:demonym .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100/FTM/FV> ;
-        rr:language         "en" .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "demonym" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/100/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "demonym" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM> ;
-        rr:predicate  dbo:elevation .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM/FV> ;
-        rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "elevation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM/FV/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "metre" ;
-        rr:predicate  dbf:unitParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/91/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "elevation" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/47/FTM> ;
         rr:predicate  dbo:minimumElevation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM>
+<SimplePropertyMapping/47/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/47/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM/FV>
+<SimplePropertyMapping/47/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/47/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/47/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/47/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM/FV/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/47/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "minimumElevation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:objectMap  <SimplePropertyMapping/47/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/94/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/47/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "lowest_m" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104>
+<SimplePropertyMapping/55>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104/FTM> ;
-        rr:predicate  dbo:mayor .
+        rr:objectMap  <SimplePropertyMapping/55/FTM> ;
+        rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104/FTM>
+<SimplePropertyMapping/55/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/55/FTM/FV> ;
+        rr:language         "en" .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104/FTM/FV>
+<SimplePropertyMapping/55/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/55/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/55/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/55/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "mayor" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/104/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/55/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Bürgermeister" .
+        rml:reference  "name" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87>
+<SimplePropertyMapping/58>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87/FTM> ;
-        rr:predicate  dbo:areaCode .
+        rr:objectMap  <SimplePropertyMapping/58/FTM> ;
+        rr:predicate  dbo:party .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87/FTM>
+<SimplePropertyMapping/58/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/58/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87/FTM/FV>
+<SimplePropertyMapping/58/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/58/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/58/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/58/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "areaCode" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/87/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/58/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Vorwahl" .
+        rml:reference  "Partei" .
+
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/ConstantMapping/country/Austria>
+<SimplePropertyMapping/34>
         a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/34/FTM> ;
+        rr:predicate  dbo:postalCode .
+
+### Function Term Map
+<SimplePropertyMapping/34/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/34/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/34/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/34/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/34/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/34/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/34/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "PLZ" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/37>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/37/FTM> ;
+        rr:predicate  dbo:state .
+
+### Function Term Map
+<SimplePropertyMapping/37/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/37/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/37/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/37/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/37/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/37/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/37/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "state" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/39>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/39/FTM> ;
+        rr:predicate  dbo:district .
+
+### Function Term Map
+<SimplePropertyMapping/39/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/39/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/39/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/39/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/39/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/39/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/39/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "district" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/50>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/50/FTM> ;
+        rr:predicate  dbo:populationAsOf .
+
+### Function Term Map
+<SimplePropertyMapping/50/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/50/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/50/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/50/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/50/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/50/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/50/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "population_as_of" .
+
+
+### Predicate Object Map
+#########################
+<ConstantMapping/0>  a  rr:PredicateObjectMap ;
         rr:object     dbr-en:Austria ;
         rr:predicate  dbo:country .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98>
+<SimplePropertyMapping/43>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98/FTM> ;
-        rr:predicate  foaf:homepage .
+        rr:objectMap  <SimplePropertyMapping/43/FTM> ;
+        rr:predicate  dbo:areaTotal .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98/FTM>
+<SimplePropertyMapping/43/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/43/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98/FTM/FV>
+<SimplePropertyMapping/43/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/43/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/43/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/43/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/43/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/43/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:homepage" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/98/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/43/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "website" .
+        rml:reference  "Fläche" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102>
+<SimplePropertyMapping/46>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/46/FTM> ;
+        rr:predicate  dbo:maximumElevation .
+
+### Function Term Map
+<SimplePropertyMapping/46/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/46/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/46/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/46/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/46/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/46/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+<SimplePropertyMapping/46/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/46/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/46/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevationmax" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/49>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/49/FTM> ;
+        rr:predicate  dbo:populationTotal .
+
+### Function Term Map
+<SimplePropertyMapping/49/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/49/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/49/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/49/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/49/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/49/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/49/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Einwohner" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/54>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/54/FTM> ;
         rr:predicate  foaf:name .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102/FTM>
+<SimplePropertyMapping/54/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/54/FTM/FV> ;
         rr:language         "en" .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102/FTM/FV>
+<SimplePropertyMapping/54/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/54/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/54/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/54/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/102/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/54/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "name" .
+        rml:reference  "Name" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82>
+<SimplePropertyMapping/57>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82/FTM> ;
-        rr:predicate  dbo:postalCode .
+        rr:objectMap  <SimplePropertyMapping/57/FTM> ;
+        rr:predicate  dbo:mayor .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82/FTM>
+<SimplePropertyMapping/57/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/57/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82/FTM/FV>
+<SimplePropertyMapping/57/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/57/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/57/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "postalCode" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/57/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/82/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/57/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "postal_code" .
+        rml:reference  "Bürgermeister" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85>
+<SimplePropertyMapping/41>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85/FTM> ;
-        rr:predicate  dbo:district .
+        rr:objectMap  <SimplePropertyMapping/41/FTM> ;
+        rr:predicate  dbo:areaCode .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85/FTM>
+<SimplePropertyMapping/41/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/41/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85/FTM/FV>
+<SimplePropertyMapping/41/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/41/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/41/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/41/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "district" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/85/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/41/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Bezirk" .
+        rml:reference  "area_code" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/longitude>
+<SimplePropertyMapping/33>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/longitude/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/33/FTM> ;
+        rr:predicate  dbo:neighboringMunicipality .
+
+### Function Term Map
+<SimplePropertyMapping/33/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/33/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/33/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/33/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/33/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/33/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/33/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "neighboring_municipalities" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/36>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/36/FTM> ;
+        rr:predicate  dbo:state .
+
+### Function Term Map
+<SimplePropertyMapping/36/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/36/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/36/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/36/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/36/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/36/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/36/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Bundesland" .
+
+
+### Predicate Object Map
+#########################
+<longitude>  a        rr:PredicateObjectMap ;
+        rr:objectMap  <longitude/ObjectMap> ;
         rr:predicate  geo:long .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/longitude/ObjectMap>
+<longitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV> .
+        fnml:functionValue  <longitude/ObjectMap/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV>
+<longitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/LongitudeFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LongitudeFunction> ,
+			       <longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
+			       <longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
+			       <longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
+			       <longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonMinutesParameterPOM>
+<longitude/ObjectMap/FV/lonMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonMinutesParameter .
 
-<./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonDirectionParameterPOM>
+<longitude/ObjectMap/FV/lonDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDirectionParameter .
 
-<./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonDegreesParameterPOM>
+<longitude/ObjectMap/FV/lonDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
-<./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonSecondsParameterPOM>
+<longitude/ObjectMap/FV/lonSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonSecondsParameter .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lon_sec" .
 
-<./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
-<./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lon_deg" .
 
-<./Mapping_en:Infobox_Town_AT/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
+<longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lon_min" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90>
+<SimplePropertyMapping/52>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/52/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<SimplePropertyMapping/52/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/52/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/52/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/52/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/52/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/52/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/52/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Website" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/42>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/42/FTM> ;
         rr:predicate  dbo:areaTotal .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM>
+<SimplePropertyMapping/42/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/42/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM/FV>
+<SimplePropertyMapping/42/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/42/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/42/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/42/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM/FV/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "squareKilometre" ;
         rr:predicate  dbf:unitParameter .
 
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/42/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "areaTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/90/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Fläche" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM> ;
-        rr:predicate  dbo:maximumElevation .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM/FV> ;
-        rr:datatype         <http://dbpedia.org/datatype/metre> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "maximumElevation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM/FV/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "metre" ;
-        rr:predicate  dbf:unitParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/93/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "elevationmax" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96/FTM> ;
-        rr:predicate  dbo:populationTotal .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "populationTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/96/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Einwohner" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103/FTM> ;
-        rr:predicate  dbo:mayor .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "mayor" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/42/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/103/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/42/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "mayor" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106/FTM> ;
-        rr:predicate  dbo:party .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "party" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/106/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "party" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86/FTM> ;
-        rr:predicate  dbo:district .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "district" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/86/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "district" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM> ;
-        rr:predicate  dbo:areaTotal .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM/FV> ;
-        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "areaTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM/FV/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "squareKilometre" ;
-        rr:predicate  dbf:unitParameter .
-
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/89/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "area" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97>
+<SimplePropertyMapping/45>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97/FTM> ;
-        rr:predicate  dbo:populationAsOf .
+        rr:objectMap  <SimplePropertyMapping/45/FTM> ;
+        rr:predicate  dbo:elevation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97/FTM>
+<SimplePropertyMapping/45/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/45/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97/FTM/FV>
+<SimplePropertyMapping/45/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/45/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/45/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/45/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "populationAsOf" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/45/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<SimplePropertyMapping/45/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/97/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/45/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "population_as_of" .
+        rml:reference  "Höhe" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/latitude>
+<SimplePropertyMapping/48>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/48/FTM> ;
+        rr:predicate  dbo:populationTotal .
+
+### Function Term Map
+<SimplePropertyMapping/48/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/48/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/48/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/48/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/48/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/48/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/48/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "population" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/53>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/53/FTM> ;
+        rr:predicate  dbo:demonym .
+
+### Function Term Map
+<SimplePropertyMapping/53/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/53/FTM/FV> ;
+        rr:language         "en" .
+
+### Function Execution Mapping
+<SimplePropertyMapping/53/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/53/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/53/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/53/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/53/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "demonym" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/56>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/56/FTM> ;
+        rr:predicate  dbo:mayor .
+
+### Function Term Map
+<SimplePropertyMapping/56/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/56/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/56/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/56/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/56/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/56/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/56/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mayor" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/59>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/59/FTM> ;
+        rr:predicate  dbo:party .
+
+### Function Term Map
+<SimplePropertyMapping/59/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/59/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/59/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/59/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/59/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/59/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/59/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "party" .
+
+
+### Predicate Object Map
+#########################
+<latitude>  a         rr:PredicateObjectMap ;
+        rr:objectMap  <latitude/ObjectMap> ;
         rr:predicate  geo:lat .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/latitude/ObjectMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV> .
+<latitude/ObjectMap>  a     fnml:FunctionTermMap ;
+        fnml:functionValue  <latitude/ObjectMap/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV>
+<latitude/ObjectMap/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/LatitudeFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/latDirectionParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LatitudeFunction> ,
+			       <latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
+			       <latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
+			       <latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
+			       <latitude/ObjectMap/FV/latDirectionParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/latDirectionParameterPOM>
+<latitude/ObjectMap/FV/latDirectionParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
 
-<./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatSecondsParameterPOM>
+<latitude/ObjectMap/FV/LatSecondsParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latSecondsParameter .
 
-<./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatMinutesParameterPOM>
+<latitude/ObjectMap/FV/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latMinutesParameter .
 
-<./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatDegreesParameterPOM>
+<latitude/ObjectMap/FV/LatDegreesParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDegreesParameter .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_sec" .
 
-<./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_deg" .
 
-<./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat_min" .
 
-<./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
+<latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "null" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101>
+<SimplePropertyMapping/40>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101/FTM> ;
-        rr:predicate  foaf:name .
+        rr:objectMap  <SimplePropertyMapping/40/FTM> ;
+        rr:predicate  dbo:areaCode .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101/FTM>
+<SimplePropertyMapping/40/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101/FTM/FV> ;
-        rr:language         "en" .
+        fnml:functionValue  <SimplePropertyMapping/40/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101/FTM/FV>
+<SimplePropertyMapping/40/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/40/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/40/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "foaf:name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/40/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/101/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/40/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Name" .
+        rml:reference  "Vorwahl" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81>
+<SimplePropertyMapping/35>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/35/FTM> ;
         rr:predicate  dbo:postalCode .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81/FTM>
+<SimplePropertyMapping/35/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/35/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81/FTM/FV>
+<SimplePropertyMapping/35/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/35/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/35/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/35/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "postalCode" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/81/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/35/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "PLZ" .
+        rml:reference  "postal_code" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84>
+<SimplePropertyMapping/38>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84/FTM> ;
-        rr:predicate  dbo:state .
+        rr:objectMap  <SimplePropertyMapping/38/FTM> ;
+        rr:predicate  dbo:district .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84/FTM>
+<SimplePropertyMapping/38/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/38/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84/FTM/FV>
+<SimplePropertyMapping/38/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/38/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/38/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "state" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/38/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/84/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/38/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "state" .
+        rml:reference  "Bezirk" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92>
+<SimplePropertyMapping/51>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/51/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<SimplePropertyMapping/51/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <SimplePropertyMapping/51/FTM/FV> .
+
+### Function Execution Mapping
+<SimplePropertyMapping/51/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/51/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<SimplePropertyMapping/51/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/51/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<SimplePropertyMapping/51/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/44>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/44/FTM> ;
         rr:predicate  dbo:elevation .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM>
+<SimplePropertyMapping/44/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/44/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM/FV>
+<SimplePropertyMapping/44/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM/FV/unitParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/44/FTM/FV/propertyParameterPOM> ,
+			       <SimplePropertyMapping/44/FTM/FV/unitParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/44/FTM/FV/unitParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "elevation" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM/FV/unitParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
         rr:object     "metre" ;
         rr:predicate  dbf:unitParameter .
 
-### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/92/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "Höhe" .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95>
+<SimplePropertyMapping/44/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95/FTM> ;
-        rr:predicate  dbo:populationTotal .
-
-### Function Term Map
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/44/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "populationTotal" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/95/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/44/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "population" .
+        rml:reference  "elevation" .
 
 
 ######################
@@ -1583,631 +1134,631 @@
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City>
+<ConditionalMapping/type_equals_City>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1> ;
         rr:object            dbo:PopulatedPlace , dbo:Settlement , schema:City , dbo:Location , dbo:City , wikidata:Q486972 , wikidata:Q515 , owl:Thing , schema:Place , dbo:Place ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/FTM>
+<ConditionalMapping/type_equals_City/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/FTM/FV>
+<ConditionalMapping/type_equals_City/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "City" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1>
+<ConditionalMapping/type_equals_City/1>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2> ;
         rr:object            dbo:Location , owl:Thing , dbo:Settlement , schema:City , schema:Place , dbo:Place , dbo:City , dbo:PopulatedPlace , wikidata:Q515 , wikidata:Q486972 ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/FTM>
+<ConditionalMapping/type_equals_City/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/FTM/FV>
+<ConditionalMapping/type_equals_City/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Statutarstadt" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2>
+<ConditionalMapping/type_equals_City/1/2>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3> ;
         rr:object            dbo:Place , dbo:Location , owl:Thing , wikidata:Q486972 , dbo:Settlement , dbo:City , dbo:PopulatedPlace , schema:Place , schema:City , wikidata:Q515 ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/FTM>
+<ConditionalMapping/type_equals_City/1/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Statutory city" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3>
+<ConditionalMapping/type_equals_City/1/2/3>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4> ;
         rr:object            dbo:Location , wikidata:Q3957 , schema:Place , dbo:PopulatedPlace , dbo:Town , owl:Thing , wikidata:Q486972 , dbo:Settlement , dbo:Place ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Town" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4>
+<ConditionalMapping/type_equals_City/1/2/3/4>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5> ;
         rr:object            dbo:Settlement , dbo:Location , dbo:Place , dbo:PopulatedPlace , schema:Place , dbo:Town , wikidata:Q3957 , owl:Thing , wikidata:Q486972 ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Stadt" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5>
+<ConditionalMapping/type_equals_City/1/2/3/4/5>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6> ;
         rr:object            dbo:Location , dbo:PopulatedPlace , dbo:Place , wikidata:Q486972 , owl:Thing , schema:Place , dbo:Town , wikidata:Q3957 , dbo:Settlement ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Stadtgemeinde" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7> ;
         rr:object            dbo:Settlement , wikidata:Q532 , owl:Thing , dbo:PopulatedPlace , dbo:Village , dbo:Location , schema:Place , wikidata:Q486972 , dbo:Place ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "village" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8> ;
         rr:object            dbo:Location , schema:Place , dbo:Settlement , wikidata:Q486972 , dbo:Place , dbo:Village , wikidata:Q532 , owl:Thing , dbo:PopulatedPlace ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "village" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "type" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9> ;
         rr:object            dbo:Place , schema:Place , dbo:City , wikidata:Q515 , owl:Thing , dbo:PopulatedPlace , dbo:Settlement , wikidata:Q486972 , dbo:Location , schema:City ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "City" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Art" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10> ;
         rr:object            wikidata:Q515 , wikidata:Q486972 , schema:City , schema:Place , dbo:City , dbo:Settlement , dbo:Location , dbo:Place , owl:Thing , dbo:PopulatedPlace ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Statutarstadt" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Art" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11> ;
         rr:object            owl:Thing , schema:City , dbo:PopulatedPlace , wikidata:Q486972 , dbo:Location , dbo:Settlement , wikidata:Q515 , dbo:City , schema:Place , dbo:Place ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Statutory city" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Art" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12> ;
         rr:object            schema:Place , wikidata:Q486972 , dbo:Place , dbo:Settlement , dbo:PopulatedPlace , owl:Thing , wikidata:Q3957 , dbo:Town , dbo:Location ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Town" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Art" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13> ;
         rr:object            dbo:Settlement , dbo:Place , wikidata:Q3957 , owl:Thing , dbo:Location , dbo:Town , dbo:PopulatedPlace , wikidata:Q486972 , schema:Place ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Stadt" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Art" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14> ;
         rr:object            dbo:PopulatedPlace , wikidata:Q3957 , dbo:Settlement , dbo:Town , dbo:Place , dbo:Location , schema:Place , wikidata:Q486972 , owl:Thing ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "Stadtgemeinde" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Art" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15> ;
         rr:object            wikidata:Q532 , dbo:Location , dbo:Settlement , dbo:Place , dbo:PopulatedPlace , schema:Place , wikidata:Q486972 , owl:Thing , dbo:Village ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "village" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Art" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15>
         a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM> ;
-        crml:fallbackMap     <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16> ;
+        crml:equalCondition  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16> ;
         rr:object            dbo:Location , owl:Thing , dbo:Village , wikidata:Q486972 , wikidata:Q532 , schema:Place , dbo:Place , dbo:PopulatedPlace , dbo:Settlement ;
         rr:predicate         rdf:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV> .
+        fnml:functionValue  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/Function/equals> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/ValueParameterPOM> ,
-			       <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/equals> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/ValueParameterPOM> ,
+			       <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/ValueParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/ValueParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:object     "village" ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/PropertyParameterPOM>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/PropertyParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
 
 ### References
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/PropertyParameterPOM/ObjectMap>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/FTM/FV/PropertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "Art" .
 
 ### Conditional PredicateObjectMap
 ###################################
-<./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16>
+<ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/12/13/14/15/16>
         a             rr:PredicateObjectMap ;
         rr:object     dbo:Settlement , wikidata:Q486972 , dbo:PopulatedPlace , dbo:Place , schema:Place , dbo:Location , owl:Thing ;
         rr:predicate  rdf:type .
@@ -2218,22 +1769,21 @@
 ############
 
 
-<./Mapping_en:Infobox_Town_AT/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Town_AT/Function/LatitudeFunction>
+<Function/LatitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:latFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Town_AT/Function/equals>
-        a             rr:PredicateObjectMap ;
+<Function/equals>  a  rr:PredicateObjectMap ;
         rr:object     dbf:equals ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Town_AT/Function/LongitudeFunction>
+<Function/LongitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:lonFunction ;
         rr:predicate  fno:executes .
@@ -2242,7 +1792,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_en:Infobox_Town_AT/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

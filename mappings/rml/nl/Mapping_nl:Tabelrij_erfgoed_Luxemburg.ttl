@@ -1,4 +1,4 @@
-@base	          	<http://nl.dbpedia.org/resource/Mapping_nl:Tabelrij_erfgoed_Luxemburg> .
+@base	          	<http://nl.dbpedia.org/resource/Mapping_nl:Tabelrij_erfgoed_Luxemburg/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,26 +32,26 @@
 
 ### Main TriplesMap
 ####################
-<>      a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/longitude> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/ConstantMapping/country/Luxemburg> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/CorrespondingProperty> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap> .
+<http://nl.dbpedia.org/resource/Mapping_nl:Tabelrij_erfgoed_Luxemburg>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/2> ,
+			       <SimplePropertyMapping/3> ,
+			       <SimplePropertyMapping/0> ,
+			       <SimplePropertyMapping/1> ,
+			       <SimplePropertyMapping/6> ,
+			       <longitude> ,
+			       <SimplePropertyMapping/4> ,
+			       <SimplePropertyMapping/5> ,
+			       <ConstantMapping/0> ,
+			       <latitude> ,
+			       <CorrespondingProperty> ;
+        rr:subjectMap          <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dbo:ArchitecturalStructure ,
 		     dbo:Place ,
 		     schema:Place ,
@@ -64,8 +64,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://nl.wikipedia.org/wiki/Mapping_nl:Tabelrij_erfgoed_Luxemburg?oldid=32591" .
@@ -77,425 +76,310 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2>
+<SimplePropertyMapping/2>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/2/FTM> ;
         rr:predicate  dbo:address .
 
 ### Function Term Map
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2/FTM>
+<SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/2/FTM/FV> ;
         rr:language         "nl" .
 
 ### Function Execution Mapping
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2/FTM/FV>
+<SimplePropertyMapping/2/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "address" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "adres" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3>
+<SimplePropertyMapping/3>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/3/FTM> ;
         rr:predicate  dbo:yearOfConstruction .
 
 ### Function Term Map
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3/FTM>
+<SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/3/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3/FTM/FV>
+<SimplePropertyMapping/3/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "yearOfConstruction" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "bouwjaar" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0>
+<SimplePropertyMapping/0>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM> ;
         rr:predicate  dbo:protectionStatus .
 
 ### Function Term Map
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0/FTM>
+<SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0/FTM/FV>
+<SimplePropertyMapping/0/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "protectionStatus" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "niveau" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1>
+<SimplePropertyMapping/1>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM> ;
         rr:predicate  dbo:name .
 
 ### Function Term Map
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1/FTM>
+<SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/1/FTM/FV> ;
         rr:language         "nl" .
 
 ### Function Execution Mapping
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1/FTM/FV>
+<SimplePropertyMapping/1/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "omschrijving" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6>
+<SimplePropertyMapping/6>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/6/FTM> ;
         rr:predicate  dbo:name .
 
 ### Function Term Map
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6/FTM>
+<SimplePropertyMapping/6/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6/FTM/FV> ;
+        fnml:functionValue  <SimplePropertyMapping/6/FTM/FV> ;
         rr:language         "nl" .
 
 ### Function Execution Mapping
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6/FTM/FV>
+<SimplePropertyMapping/6/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "name" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "objectnaam" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/longitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/longitude/FTM> ;
+<longitude>  a        rr:PredicateObjectMap ;
+        rr:objectMap  <longitude/FTM> ;
         rr:predicate  geo:long .
 
 ### Function Term Map
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/longitude/FTM>
+<longitude/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/longitude/FTM/FV> .
+        fnml:functionValue  <longitude/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/longitude/FTM/FV>
+<longitude/FTM/FV>
         a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/LongitudeFunction> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/longitude/FTM/FV/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LongitudeFunction> ,
+			       <longitude/FTM/FV/ParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/longitude/FTM/FV/ParameterPOM>
+<longitude/FTM/FV/ParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/longitude/FTM/FV/ParameterPOM/ObjectMap> ;
+        rr:objectMap  <longitude/FTM/FV/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonParameter .
 
 ### References
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/longitude/FTM/FV/ParameterPOM/ObjectMap>
+<longitude/FTM/FV/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lon" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/ConstantMapping/country/Luxemburg>
+<SimplePropertyMapping/4>
         a             rr:PredicateObjectMap ;
-        rr:object     <Luxemburg> ;
-        rr:predicate  dbo:country .
-
-
-### Predicate Object Map
-#########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/4/FTM> ;
         rr:predicate  dbo:architect .
 
 ### Function Term Map
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4/FTM>
+<SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4/FTM/FV>
+<SimplePropertyMapping/4/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+<SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "architect" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 ### References
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "architect" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5>
+<SimplePropertyMapping/5>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5/FTM> ;
+        rr:objectMap  <SimplePropertyMapping/5/FTM> ;
         rr:predicate  dbo:picture .
 
 ### Function Term Map
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5/FTM>
+<SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5/FTM/FV> .
+        fnml:functionValue  <SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5/FTM/FV>
+<SimplePropertyMapping/5/FTM/FV>
         a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/SimplePropertyFunction> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function> .
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/SimplePropertyFunction> ,
+			       <SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+<SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "picture" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
 ### References
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+<SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
         rml:reference  "image" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude/FTM> ;
+<ConstantMapping/0>  a  rr:PredicateObjectMap ;
+        rr:object     <http://nl.dbpedia.org/resource/Luxemburg> ;
+        rr:predicate  dbo:country .
+
+
+### Predicate Object Map
+#########################
+<latitude>  a         rr:PredicateObjectMap ;
+        rr:objectMap  <latitude/FTM> ;
         rr:predicate  geo:lat .
 
 ### Function Term Map
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude/FTM>
+<latitude/FTM>
         a                      fnml:FunctionTermMap , rr:TriplesMap ;
-        fnml:functionValue     <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude/FTM> ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/LatitudeFunction> , <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude/FTM/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function> .
+        fnml:functionValue     <latitude/FTM> ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LatitudeFunction> , <latitude/FTM/ParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Function Execution Mapping
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude/FTM>
+<latitude/FTM>
         a                      fnml:FunctionTermMap ,
 			       rr:TriplesMap ;
-        fnml:functionValue     <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude/FTM> ;
-        rml:logicalSource      <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/LatitudeFunction> ,
-			       <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude/FTM/ParameterPOM> ;
-        rr:subjectMap          <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function> .
+        fnml:functionValue     <latitude/FTM> ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/LatitudeFunction> ,
+			       <latitude/FTM/ParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude/FTM/ParameterPOM>
+<latitude/FTM/ParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude/FTM/ParameterPOM/ObjectMap> ;
+        rr:objectMap  <latitude/FTM/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latParameter .
 
 ### References
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/latitude/FTM/ParameterPOM/ObjectMap>
+<latitude/FTM/ParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "lat" .
 
 
 ### Predicate Object Map
 #########################
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/CorrespondingProperty>
+<CorrespondingProperty>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_nl:Tabelrij_erfgoed_Luxemburg/CorrespondingProperty/ObjectMap> ;
+        rr:objectMap  <CorrespondingProperty/ObjectMap> ;
         rr:predicate  dbo:listItemOf .
 
 
@@ -510,17 +394,17 @@
 ############
 
 
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/SimplePropertyFunction>
+<Function/SimplePropertyFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:simplePropertyFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/LongitudeFunction>
+<Function/LongitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:lonFunction ;
         rr:predicate  fno:executes .
 
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/Function/LatitudeFunction>
+<Function/LatitudeFunction>
         a             rr:PredicateObjectMap ;
         rr:object     dbf:latFunction ;
         rr:predicate  fno:executes .
@@ -529,7 +413,7 @@
 ### Functions SubjectMap
 #########################
 
-<./Mapping_nl:Tabelrij_erfgoed_Luxemburg/SubjectMap/Function>
+<SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .

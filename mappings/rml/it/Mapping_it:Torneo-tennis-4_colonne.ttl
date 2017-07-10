@@ -1,4 +1,4 @@
-@base	          	<http://it.dbpedia.org/resource/Mapping_it:Torneo-tennis-4_colonne> .
+@base	          	<http://it.dbpedia.org/resource/Mapping_it:Torneo-tennis-4_colonne/> .
 @prefix schema: 	<http://schema.org/> .
 @prefix rr:    		<http://www.w3.org/ns/r2rml#> .
 @prefix owl:   		<http://www.w3.org/2002/07/owl#> .
@@ -32,15 +32,15 @@
 
 ### Main TriplesMap
 ####################
-<>      a                  rr:TriplesMap ;
-        rml:logicalSource  <./Mapping_it:Torneo-tennis-4_colonne/LogicalSource> ;
-        rr:subjectMap      <./Mapping_it:Torneo-tennis-4_colonne/SubjectMap> .
+<http://it.dbpedia.org/resource/Mapping_it:Torneo-tennis-4_colonne>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <LogicalSource> ;
+        rr:subjectMap      <SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
-<./Mapping_it:Torneo-tennis-4_colonne/SubjectMap>
-        a            rr:SubjectMap ;
+<SubjectMap>  a      rr:SubjectMap ;
         rr:class     dul:Event ,
 		     dbo:SocietalEvent ,
 		     wikidata:Q500834 ,
@@ -60,8 +60,7 @@
 ### LogicalSource
 ##################
 
-<./Mapping_it:Torneo-tennis-4_colonne/LogicalSource>
-        a                         rml:LogicalSource ;
+<LogicalSource>  a                rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://it.wikipedia.org/wiki/Mapping_it:Torneo-tennis-4_colonne?oldid=18652" .
