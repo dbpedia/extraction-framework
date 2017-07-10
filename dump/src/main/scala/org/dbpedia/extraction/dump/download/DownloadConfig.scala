@@ -31,6 +31,11 @@ class DownloadConfig(path: String) extends Config(path)
     case Some(u) => u.toBoolean
     case None => throw new IllegalArgumentException("Properties file is lacking this property: " + "unzip")
   }
+
+  val dumpDate: Option[String] = this.getArbitraryStringProperty("dump-date") match {
+    case Some(u) if u.matches("\\d{8,8}") => Some(u)
+    case _ => None
+  }
   
   private def add[K](map: mutable.Map[K,mutable.Set[(String, Boolean)]], key: K, values: Array[(String, Boolean)]) =
     map.getOrElseUpdate(key, new mutable.HashSet[(String, Boolean)]) ++= values

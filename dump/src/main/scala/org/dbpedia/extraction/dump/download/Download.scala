@@ -45,8 +45,12 @@ object Download
     // sort them to have reproducible behavior
       config.languages.foreach { lang =>
         val ld = new LanguageDownloader(config.baseUrl, config.dumpDir, config.wikiName, lang, config.source.map(x => (x, true)), downloader)
-        if(!ld.downloadMostRecent())
-          System.err.println("An error occurred while trying to download the most recent dump file for language: " + lang.wikiCode)
+        config.dumpDate match{
+          case Some(d) => if(!ld.downloadDate(d))
+            System.err.println("An error occurred while trying to download a dump file (" + d + ")for language: " + lang.wikiCode)
+          case None => if(!ld.downloadMostRecent())
+            System.err.println("An error occurred while trying to download the most recent dump file for language: " + lang.wikiCode)
+        }
       }
   }
   
