@@ -1,0 +1,1169 @@
+@base	          	<http://nl.dbpedia.org/resource/Mapping_nl:Infobox_hemellichaam> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_nl:Infobox_hemellichaam/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:CelestialBody ,
+		     dbo:Place ,
+		     schema:Place ,
+		     dbo:Location ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_nl:Infobox_hemellichaam/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://nl.wikipedia.org/wiki/Mapping_nl:Infobox_hemellichaam?oldid=49921" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:discoverer .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "discoverer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "ontdektdoor" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:subtitle .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "subtitle" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "onderschrift" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16/FTM> ;
+        rr:predicate  dbo:discovered .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "discovered" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "datumontdekking" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  dbo:name .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0/FTM/FV> ;
+        rr:language         "nl" .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "naam" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:stellarClassification .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "stellarClassification" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "spectraalklasse" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13/FTM> ;
+        rr:predicate  dbo:meanRadius .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "meanRadius" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "straal" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20/FTM> ;
+        rr:predicate  dbo:age .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "age" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "leeftijd" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:diameter .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "diameter" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "diameter" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:mass .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "mass" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "massa" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:inclination .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "inclination" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "inclinatie" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:type .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "type" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "type" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17/FTM> ;
+        rr:predicate  dbo:constellation .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "constellation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "sterrenbeeld" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:mainspan .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "mainspan" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "afstand" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:picture .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "picture" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "afbeelding" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14/FTM> ;
+        rr:predicate  dbo:length .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "length" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "lengte" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19/FTM> ;
+        rr:predicate  dbo:perifocus .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "perifocus" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "perifocus" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21/FTM> ;
+        rr:predicate  dbo:notes .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "notes" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "overig" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:constellation .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "constellation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "sterrenstelsel" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:orbitalEccentricity .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "orbitalEccentricity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "excentriciteit" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15/FTM> ;
+        rr:predicate  dbo:rotationPeriod .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "rotationPeriod" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "rotatietijd" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:period .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "period" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "periode" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18/FTM> ;
+        rr:predicate  dbo:apofocus .
+
+### Function Term Map
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_nl:Infobox_hemellichaam/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "apofocus" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_nl:Infobox_hemellichaam/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "apofocus" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_nl:Infobox_hemellichaam/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_nl:Infobox_hemellichaam/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

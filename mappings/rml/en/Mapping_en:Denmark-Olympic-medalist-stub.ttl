@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:Denmark-Olympic-medalist-stub. This defines the generation of triples that are extracted from Denmark-Olympic-medalist-stub." ;
-        rdfs:label             "Mapping en:Denmark-Olympic-medalist-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Denmark-Olympic-medalist-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Denmark-Olympic-medalist-stub/ConstantMapping/country/Denmark> ;
         rr:subjectMap          <./Mapping_en:Denmark-Olympic-medalist-stub/SubjectMap> .
@@ -43,10 +41,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Denmark-Olympic-medalist-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Denmark-Olympic-medalist-stub. This defines the generation of the subject for the triples that are extracted from Denmark-Olympic-medalist-stub." ;
-        rdfs:label    "Mapping en:Denmark-Olympic-medalist-stub (Subject Map)" ;
-        rr:class      dul:NaturalPerson ,
+        a            rr:SubjectMap ;
+        rr:class     dul:NaturalPerson ,
 		     owl:Thing ,
 		     dbo:Person ,
 		     dbo:Agent ,
@@ -56,8 +52,8 @@
 		     foaf:Person ,
 		     dul:Agent ,
 		     wikidata:Q5 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

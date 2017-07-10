@@ -1,0 +1,593 @@
+@base	          	<http://ko.dbpedia.org/resource/Mapping_ko:독일_주_정보> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConstantMapping/country/Germany> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://ko.wikipedia.org/wiki/Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4?oldid=15549" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25/FTM> ;
+        rr:predicate  dbo:largestCity .
+
+### Function Term Map
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/SimplePropertyFunction> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "largestCity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "최대도시" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM> ;
+        rr:predicate  dbo:areaTotal .
+
+### Function Term Map
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+### Function Execution Mapping
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/SimplePropertyFunction> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "areaTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "면적" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28/FTM> ;
+        rr:predicate  dbo:grossDomesticProduct .
+
+### Function Term Map
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/SimplePropertyFunction> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "grossDomesticProduct" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "GDP" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22/FTM/FV> ;
+        rr:language         "ko" .
+
+### Function Execution Mapping
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/SimplePropertyFunction> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "원이름" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29/FTM> ;
+        rr:predicate  dbo:grossDomesticProductAsOf .
+
+### Function Term Map
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/SimplePropertyFunction> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "grossDomesticProductAsOf" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "GDP_년도" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/SimplePropertyFunction> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "웹사이트" .
+
+
+
+### Predicate Object Map
+#########################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30/FTM> ;
+        rr:predicate  dbo:populationTotal .
+
+### Function Term Map
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/SimplePropertyFunction> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "populationTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "인구" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26/FTM> ;
+        rr:predicate  dbo:populationAsOf .
+
+### Function Term Map
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/SimplePropertyFunction> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "populationAsOf" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "인구_날짜" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24/FTM> ;
+        rr:predicate  dbo:mayor .
+
+### Function Term Map
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/SimplePropertyFunction> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "mayor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "시장" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConstantMapping/country/Germany>
+        a             rr:PredicateObjectMap ;
+        rr:object     <Germany> ;
+        rr:predicate  dbo:country .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null/FTM> ;
+        crml:fallbackMap     <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null/1> ;
+        rr:object            dbo:Settlement , wikidata:Q515 , schema:Place , dbo:PopulatedPlace , dbo:Place , dbo:City , schema:City , wikidata:Q486972 , dbo:Location , owl:Thing ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/isSet> ,
+			       <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/isSet/propertyParameter> .
+
+### References
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "pop_metro" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/ConditionalMapping/pop_metro_isSet_null/1>
+        a             rr:PredicateObjectMap ;
+        rr:object     wikidata:Q486972 , dbo:PopulatedPlace , dbo:AdministrativeRegion , owl:Thing , dbo:Place , dbo:Region , <http://dbpedia.org/ontology/%3Chttp://purl.org/dc/terms/Jurisdiction%3E> , schema:Place , schema:AdministrativeArea , wikidata:Q3455524 , dbo:Location ;
+        rr:predicate  rdf:type .
+
+
+############
+# Functions
+############
+
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/Function/isSet>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:isSet ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_ko:%EB%8F%85%EC%9D%BC_%EC%A3%BC_%EC%A0%95%EB%B3%B4/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

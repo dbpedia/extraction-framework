@@ -1,0 +1,1563 @@
+@base	          	<http://pt.dbpedia.org/resource/Mapping_pt:Info/Planeta> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/SimplePropertyMapping/1> ,
+			       <Planeta/SimplePropertyMapping/23> ,
+			       <Planeta/SimplePropertyMapping/13> ,
+			       <Planeta/SimplePropertyMapping/25> ,
+			       <Planeta/SimplePropertyMapping/24> ,
+			       <Planeta/SimplePropertyMapping/0> ,
+			       <Planeta/SimplePropertyMapping/22> ,
+			       <Planeta/SimplePropertyMapping/5> ,
+			       <Planeta/SimplePropertyMapping/19> ,
+			       <Planeta/SimplePropertyMapping/3> ,
+			       <Planeta/SimplePropertyMapping/10> ,
+			       <Planeta/SimplePropertyMapping/4> ,
+			       <Planeta/SimplePropertyMapping/20> ,
+			       <Planeta/SimplePropertyMapping/21> ,
+			       <Planeta/SimplePropertyMapping/18> ,
+			       <Planeta/SimplePropertyMapping/17> ,
+			       <Planeta/SimplePropertyMapping/16> ,
+			       <Planeta/SimplePropertyMapping/15> ,
+			       <Planeta/SimplePropertyMapping/27> ,
+			       <Planeta/SimplePropertyMapping/2> ,
+			       <Planeta/SimplePropertyMapping/26> ,
+			       <Planeta/SimplePropertyMapping/9> ,
+			       <Planeta/SimplePropertyMapping/7> ,
+			       <Planeta/SimplePropertyMapping/12> ,
+			       <Planeta/SimplePropertyMapping/6> ,
+			       <Planeta/SimplePropertyMapping/14> ,
+			       <Planeta/SimplePropertyMapping/8> ,
+			       <Planeta/SimplePropertyMapping/11> ;
+        rr:subjectMap          <Planeta/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<Planeta/SubjectMap>  a  rr:SubjectMap ;
+        rr:class     wikidata:Q634 ,
+		     dbo:Planet ,
+		     dbo:CelestialBody ,
+		     schema:Place ,
+		     dbo:Location ,
+		     dbo:Place ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<Planeta/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://pt.wikipedia.org/wiki/Mapping_pt:Info/Planeta?oldid=18588" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:category .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "category" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "categoria" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/23>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/23/FTM> ;
+        rr:predicate  dbo:subtitle .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/23/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/23/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/23/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "subtitle" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "legenda" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/13>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/13/FTM> ;
+        rr:predicate  dbo:meanTemperature .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/13/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/13/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/13/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/13/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/13/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "Temperature" ;
+        rr:predicate  dbf:unitParameter .
+
+<Planeta/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "meanTemperature" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "T_med" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/25>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/25/FTM> ;
+        rr:predicate  dbo:category .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/25/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/25/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/25/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "category" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "categoria" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/24>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/24/FTM> ;
+        rr:predicate  dbo:orbitalInclination .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/24/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/24/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/24/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "orbitalInclination" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "inclinação" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/0/FTM/FV> ;
+        rr:language         "pt" .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "nome" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/22>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/22/FTM> ;
+        rr:predicate  dbo:periapsis .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/22/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/22/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/astronomicalUnit> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/22/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/22/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "periapsis" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/22/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "astronomicalUnit" ;
+        rr:predicate  dbf:unitParameter .
+
+<Planeta/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "periastro" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:meanTemperature .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/5/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "meanTemperature" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "T_med" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/19>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/19/FTM> ;
+        rr:predicate  dbo:absoluteMagnitude .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/19/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/19/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/19/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "absoluteMagnitude" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "magnitude_abs" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:discoverer .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "discoverer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "descobridor" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:apparentMagnitude .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "apparentMagnitude" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "magnitude" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:meanRadius .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "meanRadius" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "raio_medio" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/20>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/20/FTM> ;
+        rr:predicate  dbo:mass .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/20/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/20/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Mass> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/20/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/20/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/20/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "Mass" ;
+        rr:predicate  dbf:unitParameter .
+
+<Planeta/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "mass" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "massa" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/21>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/21/FTM> ;
+        rr:predicate  dbo:escapeVelocity .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/21/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/21/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/kilometrePerSecond> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/21/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/21/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/21/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "kilometrePerSecond" ;
+        rr:predicate  dbf:unitParameter .
+
+<Planeta/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "escapeVelocity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "vel_escape" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/18>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/18/FTM> ;
+        rr:predicate  dbo:surfaceArea .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/18/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/18/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Area> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/18/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/18/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "surfaceArea" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/18/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "Area" ;
+        rr:predicate  dbf:unitParameter .
+
+<Planeta/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "área_sup" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/17>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/17/FTM> ;
+        rr:predicate  dbo:rotationPeriod .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/17/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/17/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/day> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/17/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/17/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "rotationPeriod" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/17/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "day" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<Planeta/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "rotação" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/16>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/16/FTM> ;
+        rr:predicate  dbo:apoapsis .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/16/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/16/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/astronomicalUnit> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/16/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/16/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/16/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "astronomicalUnit" ;
+        rr:predicate  dbf:unitParameter .
+
+<Planeta/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "apoapsis" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "apoastro" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/15>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/15/FTM> ;
+        rr:predicate  dbo:volume .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/15/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/15/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicMetre> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/15/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/15/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "volume" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/15/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "cubicMetre" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<Planeta/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "volume" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/27>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/27/FTM> ;
+        rr:predicate  dbo:colourHexCode .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/27/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/27/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/27/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "colourHexCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "bgcolour" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:discovered .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "discovered" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "descoberto" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/26>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/26/FTM> ;
+        rr:predicate  dbo:background .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/26/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/26/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/26/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "background" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "bgcolour" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:albedo .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/9/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "albedo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "albedo" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:minimumTemperature .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/12/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/12/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "minimumTemperature" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/12/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "Temperature" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<Planeta/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "T_min" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:surfaceArea .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "surfaceArea" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Área_sup" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:orbitalPeriod .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "orbitalPeriod" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "príodo_rev" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/14>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/14/FTM> ;
+        rr:predicate  dbo:maximumTemperature .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/14/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/14/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/14/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/14/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/14/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "Temperature" ;
+        rr:predicate  dbf:unitParameter .
+
+<Planeta/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "maximumTemperature" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "T_max" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:density .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "density" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Planeta/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "densidade" .
+
+
+### Predicate Object Map
+#########################
+<Planeta/SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:temperature .
+
+### Function Term Map
+<Planeta/SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Planeta/SimplePropertyMapping/11/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+### Function Execution Mapping
+<Planeta/SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Planeta/LogicalSource> ;
+        rr:predicateObjectMap  <Planeta/Function/SimplePropertyFunction> ,
+			       <Planeta/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/11/FTM/FV/unitParameterPOM> ,
+			       <Planeta/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Planeta/SubjectMap/Function> .
+
+### Parameters
+<Planeta/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Planeta/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Planeta/SimplePropertyMapping/11/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "Temperature" ;
+        rr:predicate  dbf:unitParameter .
+
+<Planeta/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "temperature" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Planeta/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "temperatures" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<Planeta/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<Planeta/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

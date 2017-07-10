@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Solar-eclipse-stub. This defines the generation of triples that are extracted from Solar-eclipse-stub." ;
-        rdfs:label         "Mapping en:Solar-eclipse-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Solar-eclipse-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Solar-eclipse-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Solar-eclipse-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Solar-eclipse-stub. This defines the generation of the subject for the triples that are extracted from Solar-eclipse-stub." ;
-        rdfs:label    "Mapping en:Solar-eclipse-stub (Subject Map)" ;
-        rr:class      dbo:NaturalEvent ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:NaturalEvent ,
 		     wikidata:Q3887 ,
 		     schema:Event ,
 		     wikidata:Q1656682 ,
@@ -53,8 +49,8 @@
 		     owl:Thing ,
 		     dbo:SolarEclipse ,
 		     dbo:Event ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

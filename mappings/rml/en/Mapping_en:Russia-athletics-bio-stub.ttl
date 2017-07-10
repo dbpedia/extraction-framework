@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Russia-athletics-bio-stub. This defines the generation of triples that are extracted from Russia-athletics-bio-stub." ;
-        rdfs:label         "Mapping en:Russia-athletics-bio-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Russia-athletics-bio-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Russia-athletics-bio-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Russia-athletics-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Russia-athletics-bio-stub. This defines the generation of the subject for the triples that are extracted from Russia-athletics-bio-stub." ;
-        rdfs:label    "Mapping en:Russia-athletics-bio-stub (Subject Map)" ;
-        rr:class      dul:Agent ,
+        a            rr:SubjectMap ;
+        rr:class     dul:Agent ,
 		     dbo:Athlete ,
 		     dul:NaturalPerson ,
 		     dbo:Person ,
@@ -55,8 +51,8 @@
 		     owl:Thing ,
 		     dbo:Agent ,
 		     schema:Person ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:France-castle-stub. This defines the generation of triples that are extracted from France-castle-stub." ;
-        rdfs:label         "Mapping en:France-castle-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:France-castle-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:France-castle-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:France-castle-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:France-castle-stub. This defines the generation of the subject for the triples that are extracted from France-castle-stub." ;
-        rdfs:label    "Mapping en:France-castle-stub (Subject Map)" ;
-        rr:class      dbo:Place ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Place ,
 		     dbo:Castle ,
 		     schema:Place ,
 		     wikidata:Q41176 ,
@@ -54,8 +50,8 @@
 		     dbo:Location ,
 		     dbo:Building ,
 		     owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

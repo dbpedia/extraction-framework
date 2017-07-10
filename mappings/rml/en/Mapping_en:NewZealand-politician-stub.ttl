@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:NewZealand-politician-stub. This defines the generation of triples that are extracted from NewZealand-politician-stub." ;
-        rdfs:label         "Mapping en:NewZealand-politician-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:NewZealand-politician-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:NewZealand-politician-stub/SubjectMap> .
 
@@ -42,22 +40,20 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:NewZealand-politician-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:NewZealand-politician-stub. This defines the generation of the subject for the triples that are extracted from NewZealand-politician-stub." ;
-        rdfs:label    "Mapping en:NewZealand-politician-stub (Subject Map)" ;
-        rr:class      foaf:Person ,
+        a            rr:SubjectMap ;
+        rr:class     foaf:Person ,
 		     dbo:Agent ,
 		     schema:Person ,
 		     dbo:Politician ,
-		     dbo:Person ,
 		     wikidata:Q82955 ,
+		     dbo:Person ,
 		     wikidata:Q5 ,
 		     dul:Agent ,
 		     owl:Thing ,
 		     wikidata:Q215627 ,
 		     dul:NaturalPerson ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

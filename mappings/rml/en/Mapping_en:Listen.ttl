@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Listen. This defines the generation of triples that are extracted from Listen." ;
-        rdfs:label         "Mapping en:Listen (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Listen/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Listen/SubjectMap> .
 
@@ -42,12 +40,10 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Listen/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Listen. This defines the generation of the subject for the triples that are extracted from Listen." ;
-        rdfs:label    "Mapping en:Listen (Subject Map)" ;
-        rr:class      owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

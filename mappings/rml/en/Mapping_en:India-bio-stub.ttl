@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:India-bio-stub. This defines the generation of triples that are extracted from India-bio-stub." ;
-        rdfs:label             "Mapping en:India-bio-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:India-bio-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:India-bio-stub/ConstantMapping/nationality/India> ,
 			       <./Mapping_en:India-bio-stub/ConstantMapping/country/India> ;
@@ -44,10 +42,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:India-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:India-bio-stub. This defines the generation of the subject for the triples that are extracted from India-bio-stub." ;
-        rdfs:label    "Mapping en:India-bio-stub (Subject Map)" ;
-        rr:class      dul:Agent ,
+        a            rr:SubjectMap ;
+        rr:class     dul:Agent ,
 		     schema:Person ,
 		     dbo:Person ,
 		     dul:NaturalPerson ,
@@ -56,8 +52,8 @@
 		     wikidata:Q5 ,
 		     owl:Thing ,
 		     wikidata:Q215627 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

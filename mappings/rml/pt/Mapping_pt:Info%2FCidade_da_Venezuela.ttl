@@ -1,0 +1,915 @@
+@base	          	<http://pt.dbpedia.org/resource/Mapping_pt:Info/Cidade_da_Venezuela> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/SimplePropertyMapping/11> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/2> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/3> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/8> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/9> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/10> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/13> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/4> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/5> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/12> ,
+			       <Cidade_da_Venezuela/latitude> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/0> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/1> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/6> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/7> ,
+			       <Cidade_da_Venezuela/longitude> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<Cidade_da_Venezuela/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:PopulatedPlace ,
+		     wikidata:Q486972 ,
+		     dbo:Place ,
+		     schema:Place ,
+		     dbo:Location ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<Cidade_da_Venezuela/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://pt.wikipedia.org/wiki/Mapping_pt:Info/Cidade_da_Venezuela?oldid=17538" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:subtitle .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/11/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "subtitle" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "legenda" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:censusYear .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "censusYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "censo" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:picture .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "picture" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "imagem" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:picture .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "picture" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "bandeira" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:foundingDate .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/9/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foundingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "fundação" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "website" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/13>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/13/FTM> ;
+        rr:predicate  dbo:density .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/13/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/13/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/13/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "density" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "densidade" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:mayor .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "mayor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "prefeito" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:demonym .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/5/FTM/FV> ;
+        rr:language         "pt" .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "demonym" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "gentílico" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  foaf:logo .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/12/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:logo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "brasão" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/latitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Cidade_da_Venezuela/latitude/ObjectMap> ;
+        rr:predicate  geo:lat .
+
+### Function Term Map
+<Cidade_da_Venezuela/latitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/latitude/ObjectMap/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/latitude/ObjectMap/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/LatitudeFunction> ,
+			       <Cidade_da_Venezuela/latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
+			       <Cidade_da_Venezuela/latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
+			       <Cidade_da_Venezuela/latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
+			       <Cidade_da_Venezuela/latitude/ObjectMap/FV/latDirectionParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/latitude/ObjectMap/FV/LatMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Cidade_da_Venezuela/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latMinutesParameter .
+
+<Cidade_da_Venezuela/latitude/ObjectMap/FV/LatDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Cidade_da_Venezuela/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDegreesParameter .
+
+<Cidade_da_Venezuela/latitude/ObjectMap/FV/latDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Cidade_da_Venezuela/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDirectionParameter .
+
+<Cidade_da_Venezuela/latitude/ObjectMap/FV/LatSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Cidade_da_Venezuela/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latSecondsParameter .
+
+### References
+<Cidade_da_Venezuela/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latM" .
+
+<Cidade_da_Venezuela/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latS" .
+
+<Cidade_da_Venezuela/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latG" .
+
+<Cidade_da_Venezuela/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latP" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/0/FTM/FV> ;
+        rr:language         "pt" .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "nome" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:populationTotal .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "populationTotal" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "população" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:height .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "height" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "altitude" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:area .
+
+### Function Term Map
+<Cidade_da_Venezuela/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/SimplePropertyFunction> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <Cidade_da_Venezuela/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <Cidade_da_Venezuela/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<Cidade_da_Venezuela/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "area" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<Cidade_da_Venezuela/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "área" .
+
+
+### Predicate Object Map
+#########################
+<Cidade_da_Venezuela/longitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Cidade_da_Venezuela/longitude/ObjectMap> ;
+        rr:predicate  geo:long .
+
+### Function Term Map
+<Cidade_da_Venezuela/longitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <Cidade_da_Venezuela/longitude/ObjectMap/FV> .
+
+### Function Execution Mapping
+<Cidade_da_Venezuela/longitude/ObjectMap/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <Cidade_da_Venezuela/LogicalSource> ;
+        rr:predicateObjectMap  <Cidade_da_Venezuela/Function/LongitudeFunction> ,
+			       <Cidade_da_Venezuela/longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
+			       <Cidade_da_Venezuela/longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
+			       <Cidade_da_Venezuela/longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
+			       <Cidade_da_Venezuela/longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
+        rr:subjectMap          <Cidade_da_Venezuela/SubjectMap/Function> .
+
+### Parameters
+<Cidade_da_Venezuela/longitude/ObjectMap/FV/lonMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Cidade_da_Venezuela/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonMinutesParameter .
+
+<Cidade_da_Venezuela/longitude/ObjectMap/FV/lonDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Cidade_da_Venezuela/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDegreesParameter .
+
+<Cidade_da_Venezuela/longitude/ObjectMap/FV/lonSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Cidade_da_Venezuela/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonSecondsParameter .
+
+<Cidade_da_Venezuela/longitude/ObjectMap/FV/lonDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <Cidade_da_Venezuela/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDirectionParameter .
+
+### References
+<Cidade_da_Venezuela/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lonS" .
+
+<Cidade_da_Venezuela/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lonG" .
+
+<Cidade_da_Venezuela/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lonM" .
+
+<Cidade_da_Venezuela/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lonP" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<Cidade_da_Venezuela/Function/LongitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:lonFunction ;
+        rr:predicate  fno:executes .
+
+<Cidade_da_Venezuela/Function/LatitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:latFunction ;
+        rr:predicate  fno:executes .
+
+<Cidade_da_Venezuela/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<Cidade_da_Venezuela/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

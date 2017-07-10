@@ -28,8 +28,8 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
   private def defineTriplesMap() =
   {
     rmlModel.triplesMap.addDCTermsType(new RMLLiteral("templateMapping"))
-    rmlModel.triplesMap.addRdfsLabel(triplesMapLabel)
-    rmlModel.triplesMap.addRdfsComment(triplesMapComment)
+    //rmlModel.triplesMap.addRdfsLabel(triplesMapLabel)
+    //rmlModel.triplesMap.addRdfsComment(triplesMapComment)
     defineSubjectMap()
     defineLogicalSource()
   }
@@ -38,8 +38,8 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
   {
     rmlModel.subjectMap.addTemplate(rmlModel.rmlFactory.createRMLLiteral("http://en.dbpedia.org/resource/{wikititle}"))
     rmlModel.subjectMap.addClass(rmlModel.rmlFactory.createRMLUri(templateMapping.mapToClass.uri))
-    rmlModel.subjectMap.addRdfsComment(subjectMapComment)
-    rmlModel.subjectMap.addRdfsLabel(subjectMapLabel)
+    //rmlModel.subjectMap.addRdfsComment(subjectMapComment)
+    //rmlModel.subjectMap.addRdfsLabel(subjectMapLabel)
     addExtraClassesToSubjectMap(rmlModel.subjectMap)
     rmlModel.subjectMap.addIRITermType()
     addCorrespondingPropertyAndClassToSubjectMap()

@@ -1,0 +1,1200 @@
+@base	          	<http://fr.dbpedia.org/resource/Mapping_fr:Infobox_Salle_de_spectacle> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/longitude> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/latitude> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://fr.wikipedia.org/wiki/Mapping_fr:Infobox_Salle_de_spectacle?oldid=35542" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23/FTM> ;
+        rr:predicate  dbo:closingYear .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "closingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "fermeture" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19/FTM> ;
+        rr:predicate  dbo:architect .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "architect" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "architecte" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26/FTM> ;
+        rr:predicate  dbo:heritageRegister .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "heritageRegister" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "protection" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24/FTM> ;
+        rr:predicate  dbo:formerName .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24/FTM/FV> ;
+        rr:language         "fr" .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "formerName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "anciens noms" .
+
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21/FTM> ;
+        rr:predicate  dbo:openingYear .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "openingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "inauguration" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17/FTM> ;
+        rr:predicate  dbo:tenant .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "tenant" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "résidence" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22/FTM> ;
+        rr:predicate  dbo:closingDate .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "closingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "fermeture" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15/FTM> ;
+        rr:predicate  dbo:organisation .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "organisation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "structure-mère" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13/FTM> ;
+        rr:predicate  dbo:type .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "type" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "type" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16/FTM> ;
+        rr:predicate  dbo:leader .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "leader" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "direction" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20/FTM> ;
+        rr:predicate  dbo:openingDate .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "openingDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "inauguration" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28/FTM> ;
+        rr:predicate  dbo:alternativeName .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28/FTM/FV> ;
+        rr:language         "fr" .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "alternativeName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "surnom" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11/FTM/FV> ;
+        rr:language         "fr" .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "nom" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29/FTM> ;
+        rr:predicate  dbo:thumbnailCaption .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "thumbnailCaption" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "légende" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14/FTM> ;
+        rr:predicate  dbo:operatedBy .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "operatedBy" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "gestion" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:locationCity .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM/FV/selectParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM/FV/selectParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "first" ;
+        rr:predicate  dbf:selectParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "locationCity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "lieu" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/longitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/longitude/FTM> ;
+        rr:predicate  geo:long .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/longitude/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/longitude/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/longitude/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/LongitudeFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/longitude/FTM/FV/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/longitude/FTM/FV/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/longitude/FTM/FV/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/longitude/FTM/FV/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "longitude" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "web" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25/FTM> ;
+        rr:predicate  dbo:status .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "status" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "statut" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/latitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/latitude/FTM> ;
+        rr:predicate  geo:lat .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/latitude/FTM>
+        a                      fnml:FunctionTermMap , rr:TriplesMap ;
+        fnml:functionValue     <./Mapping_fr:Infobox_Salle_de_spectacle/latitude/FTM> ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/LatitudeFunction> , <./Mapping_fr:Infobox_Salle_de_spectacle/latitude/FTM/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/latitude/FTM>
+        a                      fnml:FunctionTermMap ,
+			       rr:TriplesMap ;
+        fnml:functionValue     <./Mapping_fr:Infobox_Salle_de_spectacle/latitude/FTM> ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/LatitudeFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/latitude/FTM/ParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/latitude/FTM/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/latitude/FTM/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/latitude/FTM/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latitude" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18/FTM> ;
+        rr:predicate  dbo:seatingCapacity .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "seatingCapacity" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "places" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/FTM> ;
+        crml:fallbackMap     <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1> ;
+        rr:object            schema:Place , dbo:Theatre , wikidata:Q24354 , dbo:Place , dbo:Venue , dbo:ArchitecturalStructure , owl:Thing , dbo:Location ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/equals> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "théâtre" ;
+        rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "charte" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/FTM> ;
+        crml:fallbackMap     <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/2> ;
+        rr:object            schema:Place , dbo:Location , dbo:ArchitecturalStructure , dbo:Theatre , wikidata:Q24354 , dbo:Place , dbo:Venue , owl:Thing ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Salle_de_spectacle/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/Function/equals> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/equals/propertyParameter> .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "opéra" ;
+        rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
+
+### References
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "charte" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_fr:Infobox_Salle_de_spectacle/ConditionalMapping/charte_equals_th%C3%A9%C3%A2tre/1/2>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbo:Venue , dbo:ArchitecturalStructure , dbo:Place , schema:Place , dbo:Location , owl:Thing ;
+        rr:predicate  rdf:type .
+
+
+############
+# Functions
+############
+
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/Function/LongitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:lonFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/Function/equals>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:equals ;
+        rr:predicate  fno:executes .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/Function/LatitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:latFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_fr:Infobox_Salle_de_spectacle/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

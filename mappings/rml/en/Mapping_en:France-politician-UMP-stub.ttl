@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:France-politician-UMP-stub. This defines the generation of triples that are extracted from France-politician-UMP-stub." ;
-        rdfs:label             "Mapping en:France-politician-UMP-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:France-politician-UMP-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:France-politician-UMP-stub/ConstantMapping/nationality/France> ,
 			       <./Mapping_en:France-politician-UMP-stub/ConstantMapping/party/Union_for_a_Popular_Movement> ;
@@ -44,10 +42,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:France-politician-UMP-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:France-politician-UMP-stub. This defines the generation of the subject for the triples that are extracted from France-politician-UMP-stub." ;
-        rdfs:label    "Mapping en:France-politician-UMP-stub (Subject Map)" ;
-        rr:class      foaf:Person ,
+        a            rr:SubjectMap ;
+        rr:class     foaf:Person ,
 		     schema:Person ,
 		     owl:Thing ,
 		     dbo:Agent ,
@@ -58,8 +54,8 @@
 		     dul:NaturalPerson ,
 		     wikidata:Q5 ,
 		     wikidata:Q82955 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

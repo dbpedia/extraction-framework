@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Scotland-MP-stub. This defines the generation of triples that are extracted from Scotland-MP-stub." ;
-        rdfs:label         "Mapping en:Scotland-MP-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Scotland-MP-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Scotland-MP-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Scotland-MP-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Scotland-MP-stub. This defines the generation of the subject for the triples that are extracted from Scotland-MP-stub." ;
-        rdfs:label    "Mapping en:Scotland-MP-stub (Subject Map)" ;
-        rr:class      dul:Agent ,
+        a            rr:SubjectMap ;
+        rr:class     dul:Agent ,
 		     wikidata:Q486839 ,
 		     wikidata:Q82955 ,
 		     dbo:Politician ,
@@ -58,8 +54,8 @@
 		     foaf:Person ,
 		     owl:Thing ,
 		     dbo:MemberOfParliament ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Germany-composer-stub. This defines the generation of triples that are extracted from Germany-composer-stub." ;
-        rdfs:label         "Mapping en:Germany-composer-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Germany-composer-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Germany-composer-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Germany-composer-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Germany-composer-stub. This defines the generation of the subject for the triples that are extracted from Germany-composer-stub." ;
-        rdfs:label    "Mapping en:Germany-composer-stub (Subject Map)" ;
-        rr:class      schema:Person ,
+        a            rr:SubjectMap ;
+        rr:class     schema:Person ,
 		     wikidata:Q483501 ,
 		     wikidata:Q215627 ,
 		     dbo:Agent ,
@@ -58,8 +54,8 @@
 		     owl:Thing ,
 		     dbo:Artist ,
 		     dul:NaturalPerson ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

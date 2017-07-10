@@ -1,0 +1,983 @@
+@base	          	<http://de.dbpedia.org/resource/Mapping_de:Infobox_Ort_in_Kasachstan> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing ,
+		     dbo:PopulatedPlace ,
+		     wikidata:Q486972 ,
+		     dbo:Place ,
+		     dbo:Settlement ,
+		     dbo:Location ,
+		     schema:Place ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://de.wikipedia.org/wiki/Mapping_de:Infobox_Ort_in_Kasachstan?oldid=47310" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1/FTM/FV> ;
+        rr:language         "de" .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "NameKyrillisch" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap> ;
+        rr:predicate  geo:lat .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/LatitudeFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatDegreesParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatMinutesParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatSecondsParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/latDirectionParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latMinutesParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDegreesParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/latDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDirectionParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latSecondsParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_sec" .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_deg" .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/LatMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_min" .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/latitude/ObjectMap/FV/latDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:censusYear .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "censusYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "EinwohnerStand" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:leaderName .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "leaderName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Akim" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap> ;
+        rr:predicate  geo:long .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/LongitudeFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonDegreesParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonMinutesParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonSecondsParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonDirectionParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonSecondsParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDirectionParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonMinutesParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDegreesParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lon_deg" .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lon_min" .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lon_sec" .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/longitude/ObjectMap/FV/lonDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "null" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:area .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/squareKilometre> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "squareKilometre" ;
+        rr:predicate  dbf:unitParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "area" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Fläche" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:cityType .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "cityType" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Gemeindeart" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:region .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "region" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Gebiet" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:elevation .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM/FV/unitParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "elevation" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "metre" ;
+        rr:predicate  dbf:unitParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Höhe" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13/FTM> ;
+        rr:predicate  dbo:leaderParty .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "leaderParty" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Partei" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Webpräsenz" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:areaCode .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "areaCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Telefonvorwahl" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:foundingYear .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foundingYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Gegründet" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0/FTM/FV> ;
+        rr:language         "de" .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Name" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:populationUrban .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "populationUrban" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Einwohner" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:populationAsOf .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "populationAsOf" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "EinwohnerStand" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:postalCode .
+
+### Function Term Map
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_de:Infobox_Ort_in_Kasachstan/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "postalCode" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Postleitzahl" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/Function/LongitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:lonFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/Function/LatitudeFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:latFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_de:Infobox_Ort_in_Kasachstan/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

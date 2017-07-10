@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Sweden-Olympic-medalist-stub. This defines the generation of triples that are extracted from Sweden-Olympic-medalist-stub." ;
-        rdfs:label         "Mapping en:Sweden-Olympic-medalist-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Sweden-Olympic-medalist-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Sweden-Olympic-medalist-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Sweden-Olympic-medalist-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Sweden-Olympic-medalist-stub. This defines the generation of the subject for the triples that are extracted from Sweden-Olympic-medalist-stub." ;
-        rdfs:label    "Mapping en:Sweden-Olympic-medalist-stub (Subject Map)" ;
-        rr:class      wikidata:Q5 ,
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q5 ,
 		     dbo:Agent ,
 		     dul:NaturalPerson ,
 		     owl:Thing ,
@@ -55,8 +51,8 @@
 		     dbo:Athlete ,
 		     foaf:Person ,
 		     wikidata:Q215627 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

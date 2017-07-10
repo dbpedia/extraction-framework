@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:US-sport-bio-stub. This defines the generation of triples that are extracted from US-sport-bio-stub." ;
-        rdfs:label         "Mapping en:US-sport-bio-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:US-sport-bio-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:US-sport-bio-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:US-sport-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:US-sport-bio-stub. This defines the generation of the subject for the triples that are extracted from US-sport-bio-stub." ;
-        rdfs:label    "Mapping en:US-sport-bio-stub (Subject Map)" ;
-        rr:class      wikidata:Q215627 ,
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q215627 ,
 		     dul:Agent ,
 		     wikidata:Q5 ,
 		     schema:Person ,
@@ -55,8 +51,8 @@
 		     foaf:Person ,
 		     dbo:Athlete ,
 		     dbo:Agent ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

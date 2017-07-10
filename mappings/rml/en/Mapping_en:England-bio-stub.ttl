@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:England-bio-stub. This defines the generation of triples that are extracted from England-bio-stub." ;
-        rdfs:label             "Mapping en:England-bio-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:England-bio-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:England-bio-stub/ConstantMapping/nationality/United_Kingdom> ,
 			       <./Mapping_en:England-bio-stub/ConstantMapping/nationality/England> ;
@@ -44,10 +42,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:England-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:England-bio-stub. This defines the generation of the subject for the triples that are extracted from England-bio-stub." ;
-        rdfs:label    "Mapping en:England-bio-stub (Subject Map)" ;
-        rr:class      dul:NaturalPerson ,
+        a            rr:SubjectMap ;
+        rr:class     dul:NaturalPerson ,
 		     schema:Person ,
 		     dul:Agent ,
 		     wikidata:Q215627 ,
@@ -56,8 +52,8 @@
 		     wikidata:Q5 ,
 		     foaf:Person ,
 		     owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

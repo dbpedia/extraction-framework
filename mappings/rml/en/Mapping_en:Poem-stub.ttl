@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Poem-stub. This defines the generation of triples that are extracted from Poem-stub." ;
-        rdfs:label         "Mapping en:Poem-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Poem-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Poem-stub/SubjectMap> .
 
@@ -42,18 +40,16 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Poem-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Poem-stub. This defines the generation of the subject for the triples that are extracted from Poem-stub." ;
-        rdfs:label    "Mapping en:Poem-stub (Subject Map)" ;
-        rr:class      wikidata:Q5185279 ,
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q5185279 ,
 		     dbo:Work ,
 		     dbo:WrittenWork ,
 		     schema:CreativeWork ,
 		     dbo:Poem ,
 		     owl:Thing ,
 		     wikidata:Q386724 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

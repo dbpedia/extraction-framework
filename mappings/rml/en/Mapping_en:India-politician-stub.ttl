@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:India-politician-stub. This defines the generation of triples that are extracted from India-politician-stub." ;
-        rdfs:label         "Mapping en:India-politician-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:India-politician-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:India-politician-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:India-politician-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:India-politician-stub. This defines the generation of the subject for the triples that are extracted from India-politician-stub." ;
-        rdfs:label    "Mapping en:India-politician-stub (Subject Map)" ;
-        rr:class      dul:NaturalPerson ,
+        a            rr:SubjectMap ;
+        rr:class     dul:NaturalPerson ,
 		     dbo:Politician ,
 		     owl:Thing ,
 		     foaf:Person ,
@@ -56,8 +52,8 @@
 		     wikidata:Q215627 ,
 		     wikidata:Q5 ,
 		     dul:Agent ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

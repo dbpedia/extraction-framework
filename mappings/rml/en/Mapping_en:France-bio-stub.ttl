@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:France-bio-stub. This defines the generation of triples that are extracted from France-bio-stub." ;
-        rdfs:label             "Mapping en:France-bio-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:France-bio-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:France-bio-stub/ConstantMapping/nationality/France> ;
         rr:subjectMap          <./Mapping_en:France-bio-stub/SubjectMap> .
@@ -43,10 +41,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:France-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:France-bio-stub. This defines the generation of the subject for the triples that are extracted from France-bio-stub." ;
-        rdfs:label    "Mapping en:France-bio-stub (Subject Map)" ;
-        rr:class      wikidata:Q215627 ,
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q215627 ,
 		     dbo:Person ,
 		     schema:Person ,
 		     wikidata:Q5 ,
@@ -55,8 +51,8 @@
 		     dul:Agent ,
 		     dul:NaturalPerson ,
 		     dbo:Agent ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

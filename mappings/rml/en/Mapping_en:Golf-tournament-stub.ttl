@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Golf-tournament-stub. This defines the generation of triples that are extracted from Golf-tournament-stub." ;
-        rdfs:label         "Mapping en:Golf-tournament-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Golf-tournament-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Golf-tournament-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Golf-tournament-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Golf-tournament-stub. This defines the generation of the subject for the triples that are extracted from Golf-tournament-stub." ;
-        rdfs:label    "Mapping en:Golf-tournament-stub (Subject Map)" ;
-        rr:class      owl:Thing ,
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing ,
 		     schema:Event ,
 		     dbo:Tournament ,
 		     wikidata:Q15061650 ,
@@ -57,8 +53,8 @@
 		     dbo:GolfTournament ,
 		     dbo:Event ,
 		     dbo:SocietalEvent ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

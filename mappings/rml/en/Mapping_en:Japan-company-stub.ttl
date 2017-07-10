@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Japan-company-stub. This defines the generation of triples that are extracted from Japan-company-stub." ;
-        rdfs:label         "Mapping en:Japan-company-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Japan-company-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Japan-company-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Japan-company-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Japan-company-stub. This defines the generation of the subject for the triples that are extracted from Japan-company-stub." ;
-        rdfs:label    "Mapping en:Japan-company-stub (Subject Map)" ;
-        rr:class      dul:SocialPerson ,
+        a            rr:SubjectMap ;
+        rr:class     dul:SocialPerson ,
 		     dbo:Organisation ,
 		     schema:Organization ,
 		     dbo:Company ,
@@ -53,8 +49,8 @@
 		     wikidata:Q43229 ,
 		     dbo:Agent ,
 		     dul:Agent ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

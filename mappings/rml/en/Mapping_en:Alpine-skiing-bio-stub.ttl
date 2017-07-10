@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Alpine-skiing-bio-stub. This defines the generation of triples that are extracted from Alpine-skiing-bio-stub." ;
-        rdfs:label         "Mapping en:Alpine-skiing-bio-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Alpine-skiing-bio-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Alpine-skiing-bio-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Alpine-skiing-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Alpine-skiing-bio-stub. This defines the generation of the subject for the triples that are extracted from Alpine-skiing-bio-stub." ;
-        rdfs:label    "Mapping en:Alpine-skiing-bio-stub (Subject Map)" ;
-        rr:class      dbo:Skier ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Skier ,
 		     schema:Person ,
 		     wikidata:Q5 ,
 		     wikidata:Q215627 ,
@@ -58,8 +54,8 @@
 		     wikidata:Q4270517 ,
 		     dbo:Person ,
 		     dbo:WinterSportPlayer ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

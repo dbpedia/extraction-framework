@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:US-scientist-stub. This defines the generation of triples that are extracted from US-scientist-stub." ;
-        rdfs:label         "Mapping en:US-scientist-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:US-scientist-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:US-scientist-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:US-scientist-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:US-scientist-stub. This defines the generation of the subject for the triples that are extracted from US-scientist-stub." ;
-        rdfs:label    "Mapping en:US-scientist-stub (Subject Map)" ;
-        rr:class      dbo:Person ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Person ,
 		     owl:Thing ,
 		     dul:Agent ,
 		     wikidata:Q5 ,
@@ -56,8 +52,8 @@
 		     foaf:Person ,
 		     dbo:Scientist ,
 		     dbo:Agent ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Fashion-bio-stub. This defines the generation of triples that are extracted from Fashion-bio-stub." ;
-        rdfs:label         "Mapping en:Fashion-bio-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Fashion-bio-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Fashion-bio-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Fashion-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Fashion-bio-stub. This defines the generation of the subject for the triples that are extracted from Fashion-bio-stub." ;
-        rdfs:label    "Mapping en:Fashion-bio-stub (Subject Map)" ;
-        rr:class      wikidata:Q483501 ,
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q483501 ,
 		     wikidata:Q3501317 ,
 		     dbo:Person ,
 		     schema:Person ,
@@ -58,8 +54,8 @@
 		     wikidata:Q5 ,
 		     dbo:Artist ,
 		     dul:NaturalPerson ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

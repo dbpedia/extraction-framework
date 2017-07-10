@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Pope-stub. This defines the generation of triples that are extracted from Pope-stub." ;
-        rdfs:label         "Mapping en:Pope-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Pope-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Pope-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Pope-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Pope-stub. This defines the generation of the subject for the triples that are extracted from Pope-stub." ;
-        rdfs:label    "Mapping en:Pope-stub (Subject Map)" ;
-        rr:class      foaf:Person ,
+        a            rr:SubjectMap ;
+        rr:class     foaf:Person ,
 		     schema:Person ,
 		     wikidata:Q19546 ,
 		     dbo:Person ,
@@ -57,8 +53,8 @@
 		     dul:Agent ,
 		     dbo:Cleric ,
 		     owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

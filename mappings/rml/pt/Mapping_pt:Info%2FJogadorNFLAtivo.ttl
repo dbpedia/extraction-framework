@@ -1,0 +1,1382 @@
+@base	          	<http://pt.dbpedia.org/resource/Mapping_pt:Info/JogadorNFLAtivo> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/SimplePropertyMapping/4> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/23> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/17> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/5> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/8> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/2> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/15> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/9> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/3> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/14> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/12> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/20> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/6> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/21> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/13> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/7> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/18> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/0> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/19> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/24> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/1> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/11> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/10> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/16> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/25> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/22> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<JogadorNFLAtivo/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dul:NaturalPerson ,
+		     dbo:Person ,
+		     dbo:AmericanFootballPlayer ,
+		     foaf:Person ,
+		     wikidata:Q14128148 ,
+		     schema:Person ,
+		     owl:Thing ,
+		     wikidata:Q215627 ,
+		     dbo:Athlete ,
+		     dbo:GridironFootballPlayer ,
+		     dbo:Agent ,
+		     dul:Agent ,
+		     wikidata:Q5 ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<JogadorNFLAtivo/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://pt.wikipedia.org/wiki/Mapping_pt:Info/JogadorNFLAtivo?oldid=17044" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:debutTeam .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "debutTeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "debutteam" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/23>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/23/FTM> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/23/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/23/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/23/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "currentteam" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/17>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/17/FTM> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/17/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/17/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/17/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "birthplace" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/5/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "finalyear" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:draftRound .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "draftRound" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "draftround" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:highschool .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "highschool" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "highschool" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/15>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/15/FTM> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/15/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/15/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/15/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/15/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/15/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "team" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:draftPick .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/9/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "draftPick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "draftpick" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "debutyear" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/14>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/14/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/14/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/14/FTM/FV> ;
+        rr:language         "pt" .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/14/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/14/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/14/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "name" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:supplementalDraftYear .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/12/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "supplementalDraftYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "suppdraftyear" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/20>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/20/FTM> ;
+        rr:predicate  dbo:weight .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/20/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/20/FTM/FV> ;
+        rr:datatype         <http://dbpedia.org/datatype/Mass> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/20/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/20/FTM/FV/unitParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/20/FTM/FV/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "Mass" ;
+        rr:predicate  dbf:unitParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "weight" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "weight" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:formerTeam .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "formerTeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "finalteam" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/21>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/21/FTM> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/21/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/21/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/21/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "position" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/13>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/13/FTM> ;
+        rr:predicate  dbo:supplementalDraftRound .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/13/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/13/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/13/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/13/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "supplementalDraftRound" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/13/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "suppdraftround" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  dbo:draftYear .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/7/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "draftYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "draftyear" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/18>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/18/FTM> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/18/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/18/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/18/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "deathdate" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  dbo:status .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "status" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "status" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/19>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/19/FTM> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/19/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/19/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/19/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "deathplace" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/24>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/24/FTM> ;
+        rr:predicate  dbo:number .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/24/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/24/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/24/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "number" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "currentnumber" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:college .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "college" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "college" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/11/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "teams" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:undraftedYear .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "undraftedYear" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "undraftedyear" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/16>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/16/FTM> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/16/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/16/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/16/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/16/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/16/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "birthdate" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/25>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/25/FTM> ;
+        rr:predicate  dbo:position .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/25/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/25/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/25/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "position" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "currentposition" .
+
+
+### Predicate Object Map
+#########################
+<JogadorNFLAtivo/SimplePropertyMapping/22>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/22/FTM> ;
+        rr:predicate  dbo:number .
+
+### Function Term Map
+<JogadorNFLAtivo/SimplePropertyMapping/22/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <JogadorNFLAtivo/SimplePropertyMapping/22/FTM/FV> .
+
+### Function Execution Mapping
+<JogadorNFLAtivo/SimplePropertyMapping/22/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <JogadorNFLAtivo/LogicalSource> ;
+        rr:predicateObjectMap  <JogadorNFLAtivo/Function/SimplePropertyFunction> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
+			       <JogadorNFLAtivo/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <JogadorNFLAtivo/SubjectMap/Function> .
+
+### Parameters
+<JogadorNFLAtivo/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "number" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<JogadorNFLAtivo/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <JogadorNFLAtivo/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<JogadorNFLAtivo/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "number" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<JogadorNFLAtivo/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<JogadorNFLAtivo/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

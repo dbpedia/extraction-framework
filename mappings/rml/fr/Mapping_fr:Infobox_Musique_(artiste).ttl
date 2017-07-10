@@ -1,0 +1,1384 @@
+@base	          	<http://fr.dbpedia.org/resource/Mapping_fr:Infobox_Musique_(artiste)> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://fr.wikipedia.org/wiki/Mapping_fr:Infobox_Musique_(artiste)?oldid=35509" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17/FTM/FV> ;
+        rr:language         "fr" .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/17/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "nom" .
+
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives> ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/StartDateFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/PropertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "années actives" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29/FTM> ;
+        rr:predicate  dbo:genre .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "genre" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/29/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "genre" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30/FTM> ;
+        rr:predicate  dbo:influencedBy .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "influencedBy" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/30/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "influences" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33/FTM> ;
+        rr:predicate  dbo:bandMember .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "bandMember" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/33/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "membres actuels" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24/FTM> ;
+        rr:predicate  dbo:nationality .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "nationality" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/24/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "pays d'origine" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM> ;
+        rr:predicate  dbo:deathPlace .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM/FV/selectParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM/FV/selectParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "first" ;
+        rr:predicate  dbf:selectParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "deathPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/26/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "lieu de décès" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35/FTM> ;
+        rr:predicate  foaf:homepage .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:homepage" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/35/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "site web" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19/FTM> ;
+        rr:predicate  foaf:nick .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19/FTM/FV> ;
+        rr:language         "fr" .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:nick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/19/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "nom alias" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21/FTM> ;
+        rr:predicate  dbo:thumbnailCaption .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "thumbnailCaption" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/21/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "légende" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28/FTM> ;
+        rr:predicate  dbo:profession .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "profession" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "profession autre" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32/FTM> ;
+        rr:predicate  dbo:recordLabel .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "recordLabel" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/32/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "label" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM/FV/selectParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM/FV/selectParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "first" ;
+        rr:predicate  dbf:selectParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/23/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "lieu de naissance" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25/FTM> ;
+        rr:predicate  dbo:deathDate .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "deathDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/25/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "date de décès" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34/FTM> ;
+        rr:predicate  dbo:formerBandMember .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "formerBandMember" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/34/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "ex membres" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36/FTM> ;
+        rr:predicate  foaf:logo .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:logo" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/36/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "logo" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_fr:Infobox_Musique_(artiste)/StartDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives> ;
+        rr:objectMap   <./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM> ;
+        rr:predicate   dbo:activeYearsEndYear .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/EndDateFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/PropertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/EndDate/activeYearsStartYear/activeYearsEndYear/ann%C3%A9es%20actives/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "années actives" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18/FTM> ;
+        rr:predicate  dbo:birthName .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18/FTM/FV> ;
+        rr:language         "fr" .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "birthName" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/18/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "nom de naissance" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20/FTM> ;
+        rr:predicate  foaf:nick .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20/FTM/FV> ;
+        rr:language         "fr" .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:nick" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/20/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "surnom" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27/FTM> ;
+        rr:predicate  dbo:profession .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "profession" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/27/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "profession" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31/FTM> ;
+        rr:predicate  dbo:instrument .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "instrument" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/31/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "instrument" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22/FTM> ;
+        rr:predicate  dbo:birthDate .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "birthDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/SimplePropertyMapping/22/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "date de naissance" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/FTM> ;
+        crml:fallbackMap     <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1> ;
+        rr:object            dul:Agent , wikidata:Q483501 , dbo:MusicalArtist , dul:NaturalPerson , foaf:Person , wikidata:Q215627 , wikidata:Q5 , dbo:Agent , schema:Person , dbo:Singer , dbo:Artist , dbo:Person , owl:Thing , wikidata:Q177220 , schema:MusicGroup ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/contains> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "vocal" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "charte" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/FTM> ;
+        crml:fallbackMap     <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2> ;
+        rr:object            dbo:Group , owl:Thing , dul:Agent , wikidata:Q43229 , dbo:Band , dbo:Agent , wikidata:Q215380 , dul:SocialPerson , dbo:Organisation , schema:MusicGroup , schema:Organization ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/contains> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "groupe" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "charte" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/FTM> ;
+        crml:fallbackMap     <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3> ;
+        rr:object            dbo:MusicalArtist , foaf:Person , dbo:Artist , wikidata:Q215627 , wikidata:Q483501 , dbo:Agent , dbo:Instrumentalist , schema:Person , dbo:Person , schema:MusicGroup , dul:NaturalPerson , wikidata:Q5 , owl:Thing , dul:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/contains> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "instrumentiste" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "charte" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/FTM> ;
+        crml:fallbackMap     <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4> ;
+        rr:object            dbo:BackScene , wikidata:Q215627 , schema:Person , dul:NaturalPerson , dbo:MusicalArtist , dbo:Person , wikidata:Q5 , owl:Thing , schema:MusicGroup , wikidata:Q483501 , foaf:Person , dbo:Agent , dbo:Artist , dul:Agent ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/contains> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "scène" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "charte" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/FTM> ;
+        crml:fallbackMap     <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/5> ;
+        rr:object            wikidata:Q5 , dbo:ClassicalMusicArtist , schema:MusicGroup , dul:Agent , foaf:Person , wikidata:Q483501 , dbo:Person , dbo:Artist , owl:Thing , wikidata:Q215627 , schema:Person , dbo:Agent , dbo:MusicalArtist , dul:NaturalPerson ;
+        rr:predicate         rdf:type .
+
+### Function Term Map
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_fr:Infobox_Musique_(artiste)/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_fr:Infobox_Musique_(artiste)/Function/contains> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/FTM/FV/ValueParameterPOM> ,
+			       <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "classique" ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+### References
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "charte" .
+
+### Conditional PredicateObjectMap
+###################################
+<./Mapping_fr:Infobox_Musique_(artiste)/ConditionalMapping/charte_contains_vocal/1/2/3/4/5>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbo:Agent , dul:NaturalPerson , schema:Person , dul:Agent , wikidata:Q483501 , owl:Thing , wikidata:Q215627 , schema:MusicGroup , dbo:Person , dbo:MusicalArtist , foaf:Person , dbo:Artist , wikidata:Q5 ;
+        rr:predicate  rdf:type .
+
+
+############
+# Functions
+############
+
+
+<./Mapping_fr:Infobox_Musique_(artiste)/Function/StartDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:startDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/Function/contains>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:contains ;
+        rr:predicate  fno:executes .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_fr:Infobox_Musique_(artiste)/Function/EndDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:endDateFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_fr:Infobox_Musique_(artiste)/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Golfcourse-stub. This defines the generation of triples that are extracted from Golfcourse-stub." ;
-        rdfs:label         "Mapping en:Golfcourse-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Golfcourse-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Golfcourse-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Golfcourse-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Golfcourse-stub. This defines the generation of the subject for the triples that are extracted from Golfcourse-stub." ;
-        rdfs:label    "Mapping en:Golfcourse-stub (Subject Map)" ;
-        rr:class      owl:Thing ,
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing ,
 		     schema:Place ,
 		     dbo:Place ,
 		     dbo:GolfCourse ,
@@ -53,8 +49,8 @@
 		     dbo:SportFacility ,
 		     wikidata:Q1048525 ,
 		     dbo:Location ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

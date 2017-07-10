@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Italy-painter-stub. This defines the generation of triples that are extracted from Italy-painter-stub." ;
-        rdfs:label         "Mapping en:Italy-painter-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Italy-painter-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Italy-painter-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Italy-painter-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Italy-painter-stub. This defines the generation of the subject for the triples that are extracted from Italy-painter-stub." ;
-        rdfs:label    "Mapping en:Italy-painter-stub (Subject Map)" ;
-        rr:class      dbo:Agent ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Agent ,
 		     wikidata:Q5 ,
 		     owl:Thing ,
 		     schema:Person ,
@@ -55,11 +51,11 @@
 		     dul:Agent ,
 		     wikidata:Q483501 ,
 		     dbo:Person ,
-		     dbo:Painter ,
 		     wikidata:Q1028181 ,
+		     dbo:Painter ,
 		     wikidata:Q215627 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

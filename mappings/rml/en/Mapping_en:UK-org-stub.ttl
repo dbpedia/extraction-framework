@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:UK-org-stub. This defines the generation of triples that are extracted from UK-org-stub." ;
-        rdfs:label         "Mapping en:UK-org-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:UK-org-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:UK-org-stub/SubjectMap> .
 
@@ -42,18 +40,16 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:UK-org-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:UK-org-stub. This defines the generation of the subject for the triples that are extracted from UK-org-stub." ;
-        rdfs:label    "Mapping en:UK-org-stub (Subject Map)" ;
-        rr:class      owl:Thing ,
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing ,
 		     dul:SocialPerson ,
 		     schema:Organization ,
 		     dbo:Organisation ,
 		     dbo:Agent ,
 		     dul:Agent ,
 		     wikidata:Q43229 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

@@ -1,0 +1,438 @@
+@base	          	<http://sv.dbpedia.org/resource/Mapping_sv:Infobox_handbollsspelare> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_sv:Infobox_handbollsspelare/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6> ;
+        rr:subjectMap          <./Mapping_sv:Infobox_handbollsspelare/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_sv:Infobox_handbollsspelare/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Person ,
+		     dbo:Athlete ,
+		     dbo:Agent ,
+		     dul:Agent ,
+		     schema:Person ,
+		     foaf:Person ,
+		     owl:Thing ,
+		     wikidata:Q5 ,
+		     dul:NaturalPerson ,
+		     wikidata:Q215627 ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_sv:Infobox_handbollsspelare/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://sv.wikipedia.org/wiki/Mapping_sv:Infobox_handbollsspelare?oldid=41169" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:club .
+
+### Function Term Map
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sv:Infobox_handbollsspelare/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sv:Infobox_handbollsspelare/Function/SimplePropertyFunction> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sv:Infobox_handbollsspelare/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "club" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "nuvarandeklubb" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:nationality .
+
+### Function Term Map
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sv:Infobox_handbollsspelare/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sv:Infobox_handbollsspelare/Function/SimplePropertyFunction> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sv:Infobox_handbollsspelare/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "nationality" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "landslag" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:weight .
+
+### Function Term Map
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sv:Infobox_handbollsspelare/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sv:Infobox_handbollsspelare/Function/SimplePropertyFunction> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sv:Infobox_handbollsspelare/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "weight" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "vikt" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:formerTeam .
+
+### Function Term Map
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sv:Infobox_handbollsspelare/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sv:Infobox_handbollsspelare/Function/SimplePropertyFunction> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sv:Infobox_handbollsspelare/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "formerTeam" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "seniorklubbar" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  dbo:team .
+
+### Function Term Map
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sv:Infobox_handbollsspelare/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sv:Infobox_handbollsspelare/Function/SimplePropertyFunction> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sv:Infobox_handbollsspelare/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "team" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "tidigareklubbar" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:birthPlace .
+
+### Function Term Map
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sv:Infobox_handbollsspelare/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sv:Infobox_handbollsspelare/Function/SimplePropertyFunction> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sv:Infobox_handbollsspelare/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "birthPlace" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "födelseort" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:height .
+
+### Function Term Map
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sv:Infobox_handbollsspelare/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sv:Infobox_handbollsspelare/Function/SimplePropertyFunction> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sv:Infobox_handbollsspelare/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "height" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_sv:Infobox_handbollsspelare/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "landslagsuppdatering" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_sv:Infobox_handbollsspelare/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_sv:Infobox_handbollsspelare/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

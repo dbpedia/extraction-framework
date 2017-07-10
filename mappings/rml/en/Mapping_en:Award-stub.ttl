@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Award-stub. This defines the generation of triples that are extracted from Award-stub." ;
-        rdfs:label         "Mapping en:Award-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Award-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Award-stub/SubjectMap> .
 
@@ -42,14 +40,12 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Award-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Award-stub. This defines the generation of the subject for the triples that are extracted from Award-stub." ;
-        rdfs:label    "Mapping en:Award-stub (Subject Map)" ;
-        rr:class      dbo:Award ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Award ,
 		     wikidata:Q618779 ,
 		     owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

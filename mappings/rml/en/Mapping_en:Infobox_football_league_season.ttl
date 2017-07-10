@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Infobox football league season. This defines the generation of triples that are extracted from Infobox football league season." ;
-        rdfs:label         "Mapping en:Infobox football league season (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Infobox_football_league_season/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Infobox_football_league_season/SubjectMap> .
 
@@ -42,15 +40,13 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Infobox_football_league_season/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Infobox football league season. This defines the generation of the subject for the triples that are extracted from Infobox football league season." ;
-        rdfs:label    "Mapping en:Infobox football league season (Subject Map)" ;
-        rr:class      dbo:FootballLeagueSeason ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:FootballLeagueSeason ,
 		     dbo:SportsTeamSeason ,
 		     dbo:SportsSeason ,
 		     owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

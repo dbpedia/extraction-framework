@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:England-cricket-bio-stub. This defines the generation of triples that are extracted from England-cricket-bio-stub." ;
-        rdfs:label         "Mapping en:England-cricket-bio-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:England-cricket-bio-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:England-cricket-bio-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:England-cricket-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:England-cricket-bio-stub. This defines the generation of the subject for the triples that are extracted from England-cricket-bio-stub." ;
-        rdfs:label    "Mapping en:England-cricket-bio-stub (Subject Map)" ;
-        rr:class      wikidata:Q5 ,
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q5 ,
 		     foaf:Person ,
 		     dbo:Cricketer ,
 		     dul:NaturalPerson ,
@@ -56,8 +52,8 @@
 		     owl:Thing ,
 		     dbo:Person ,
 		     wikidata:Q215627 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

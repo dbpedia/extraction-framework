@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:Japan-actor-stub. This defines the generation of triples that are extracted from Japan-actor-stub." ;
-        rdfs:label             "Mapping en:Japan-actor-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Japan-actor-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Japan-actor-stub/ConstantMapping/country/Japan> ;
         rr:subjectMap          <./Mapping_en:Japan-actor-stub/SubjectMap> .
@@ -43,10 +41,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Japan-actor-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Japan-actor-stub. This defines the generation of the subject for the triples that are extracted from Japan-actor-stub." ;
-        rdfs:label    "Mapping en:Japan-actor-stub (Subject Map)" ;
-        rr:class      dul:NaturalPerson ,
+        a            rr:SubjectMap ;
+        rr:class     dul:NaturalPerson ,
 		     schema:Person ,
 		     dbo:Artist ,
 		     foaf:Person ,
@@ -55,12 +51,12 @@
 		     owl:Thing ,
 		     dbo:Person ,
 		     dbo:Agent ,
-		     wikidata:Q483501 ,
 		     wikidata:Q5 ,
+		     wikidata:Q483501 ,
 		     wikidata:Q33999 ,
 		     wikidata:Q215627 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

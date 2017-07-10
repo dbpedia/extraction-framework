@@ -1,0 +1,333 @@
+@base	          	<http://pl.dbpedia.org/resource/Mapping_pl:Książę_jaworski> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata> ;
+        rr:subjectMap          <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     foaf:Person ,
+		     wikidata:Q215627 ,
+		     wikidata:Q5 ,
+		     schema:Person ,
+		     dul:NaturalPerson ,
+		     dul:Agent ,
+		     dbo:Person ,
+		     owl:Thing ,
+		     dbo:Agent ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://pl.wikipedia.org/wiki/Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski?oldid=17904" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata> ;
+        rr:objectMap   <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata/FTM> ;
+        rr:predicate   dbo:activeYearsEndYear .
+
+### Function Term Map
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/Function/EndDateFunction> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/PropertyParameterPOM> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsEndYear" ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lata" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/EndDate/activeYearsStartYear/activeYearsEndYear/lata> ;
+        rr:objectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata/FTM> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+### Function Term Map
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/Function/StartDateFunction> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/PropertyParameterPOM> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/OntologyParameterPOM> ;
+        rr:subjectMap          <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "activeYearsStartYear" ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+### References
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/StartDate/activeYearsStartYear/activeYearsEndYear/lata/FTM/FV/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lata" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:title .
+
+### Function Term Map
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2/FTM/FV> ;
+        rr:language         "pl" .
+
+### Function Execution Mapping
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/Function/SimplePropertyFunction> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "title" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "urząd" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:successor .
+
+### Function Term Map
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/Function/SimplePropertyFunction> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "successor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "następca" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  dbo:predecessor .
+
+### Function Term Map
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/Function/SimplePropertyFunction> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "predecessor" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "poprzednik" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/Function/StartDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:startDateFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/Function/EndDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:endDateFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_pl:Ksi%C4%85%C5%BC%C4%99_jaworski/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Netherlands-Olympic-medalist-stub. This defines the generation of triples that are extracted from Netherlands-Olympic-medalist-stub." ;
-        rdfs:label         "Mapping en:Netherlands-Olympic-medalist-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Netherlands-Olympic-medalist-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Netherlands-Olympic-medalist-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Netherlands-Olympic-medalist-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Netherlands-Olympic-medalist-stub. This defines the generation of the subject for the triples that are extracted from Netherlands-Olympic-medalist-stub." ;
-        rdfs:label    "Mapping en:Netherlands-Olympic-medalist-stub (Subject Map)" ;
-        rr:class      dbo:Person ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Person ,
 		     schema:Person ,
 		     dul:Agent ,
 		     wikidata:Q5 ,
@@ -55,8 +51,8 @@
 		     wikidata:Q215627 ,
 		     dbo:Athlete ,
 		     foaf:Person ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

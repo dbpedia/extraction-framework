@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Musician-stub. This defines the generation of triples that are extracted from Musician-stub." ;
-        rdfs:label         "Mapping en:Musician-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Musician-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Musician-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Musician-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Musician-stub. This defines the generation of the subject for the triples that are extracted from Musician-stub." ;
-        rdfs:label    "Mapping en:Musician-stub (Subject Map)" ;
-        rr:class      dul:Agent ,
+        a            rr:SubjectMap ;
+        rr:class     dul:Agent ,
 		     wikidata:Q5 ,
 		     foaf:Person ,
 		     dul:NaturalPerson ,
@@ -58,8 +54,8 @@
 		     dbo:Artist ,
 		     owl:Thing ,
 		     dbo:Person ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

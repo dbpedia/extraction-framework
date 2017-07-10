@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Restaurant-stub. This defines the generation of triples that are extracted from Restaurant-stub." ;
-        rdfs:label         "Mapping en:Restaurant-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Restaurant-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Restaurant-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Restaurant-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Restaurant-stub. This defines the generation of the subject for the triples that are extracted from Restaurant-stub." ;
-        rdfs:label    "Mapping en:Restaurant-stub (Subject Map)" ;
-        rr:class      dbo:Restaurant ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Restaurant ,
 		     dbo:Place ,
 		     schema:Place ,
 		     dbo:ArchitecturalStructure ,
@@ -55,8 +51,8 @@
 		     schema:Restaurant ,
 		     wikidata:Q41176 ,
 		     dbo:Location ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

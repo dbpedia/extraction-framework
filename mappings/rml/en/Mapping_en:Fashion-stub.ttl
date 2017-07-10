@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Fashion-stub. This defines the generation of triples that are extracted from Fashion-stub." ;
-        rdfs:label         "Mapping en:Fashion-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Fashion-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Fashion-stub/SubjectMap> .
 
@@ -42,15 +40,13 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Fashion-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Fashion-stub. This defines the generation of the subject for the triples that are extracted from Fashion-stub." ;
-        rdfs:label    "Mapping en:Fashion-stub (Subject Map)" ;
-        rr:class      dbo:Fashion ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Fashion ,
 		     dbo:TopicalConcept ,
 		     dul:Concept ,
 		     owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

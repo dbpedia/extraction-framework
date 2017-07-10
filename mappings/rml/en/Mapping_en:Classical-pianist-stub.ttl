@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:Classical-pianist-stub. This defines the generation of triples that are extracted from Classical-pianist-stub." ;
-        rdfs:label             "Mapping en:Classical-pianist-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Classical-pianist-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Classical-pianist-stub/ConstantMapping/instrument/Piano> ;
         rr:subjectMap          <./Mapping_en:Classical-pianist-stub/SubjectMap> .
@@ -43,10 +41,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Classical-pianist-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Classical-pianist-stub. This defines the generation of the subject for the triples that are extracted from Classical-pianist-stub." ;
-        rdfs:label    "Mapping en:Classical-pianist-stub (Subject Map)" ;
-        rr:class      wikidata:Q483501 ,
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q483501 ,
 		     schema:Person ,
 		     owl:Thing ,
 		     dbo:Artist ,
@@ -60,8 +56,8 @@
 		     wikidata:Q215627 ,
 		     dbo:ClassicalMusicArtist ,
 		     dul:Agent ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

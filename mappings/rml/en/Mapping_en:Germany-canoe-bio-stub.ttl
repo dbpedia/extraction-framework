@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Germany-canoe-bio-stub. This defines the generation of triples that are extracted from Germany-canoe-bio-stub." ;
-        rdfs:label         "Mapping en:Germany-canoe-bio-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Germany-canoe-bio-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Germany-canoe-bio-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Germany-canoe-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Germany-canoe-bio-stub. This defines the generation of the subject for the triples that are extracted from Germany-canoe-bio-stub." ;
-        rdfs:label    "Mapping en:Germany-canoe-bio-stub (Subject Map)" ;
-        rr:class      schema:Person ,
+        a            rr:SubjectMap ;
+        rr:class     schema:Person ,
 		     wikidata:Q5 ,
 		     wikidata:Q215627 ,
 		     dbo:Canoeist ,
@@ -56,8 +52,8 @@
 		     dbo:Athlete ,
 		     owl:Thing ,
 		     dbo:Agent ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

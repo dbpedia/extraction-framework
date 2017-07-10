@@ -1,0 +1,69 @@
+@base	          	<http://tr.dbpedia.org/resource/Mapping_tr:NHL_takımı_bilgi_kutusu> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<./Mapping_tr:NHL_tak%C4%B1m%C4%B1_bilgi_kutusu>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <./Mapping_tr:NHL_tak%C4%B1m%C4%B1_bilgi_kutusu/LogicalSource> ;
+        rr:subjectMap      <./Mapping_tr:NHL_tak%C4%B1m%C4%B1_bilgi_kutusu/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_tr:NHL_tak%C4%B1m%C4%B1_bilgi_kutusu/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Unknown ,
+		     dul:Entity ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_tr:NHL_tak%C4%B1m%C4%B1_bilgi_kutusu/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://tr.wikipedia.org/wiki/Mapping_tr:NHL_tak%C4%B1m%C4%B1_bilgi_kutusu?oldid=16523" .
+
+
+###########
+# Mappings
+###########
+
+
+######################
+# Conditional Mappings
+######################

@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:Newfoundland-geo-stub. This defines the generation of triples that are extracted from Newfoundland-geo-stub." ;
-        rdfs:label             "Mapping en:Newfoundland-geo-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Newfoundland-geo-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/Canada> ,
 			       <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/Newfoundland_and_Labrador> ;
@@ -44,15 +42,13 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Newfoundland-geo-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Newfoundland-geo-stub. This defines the generation of the subject for the triples that are extracted from Newfoundland-geo-stub." ;
-        rdfs:label    "Mapping en:Newfoundland-geo-stub (Subject Map)" ;
-        rr:class      dbo:Place ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Place ,
 		     schema:Place ,
 		     dbo:Location ,
 		     owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

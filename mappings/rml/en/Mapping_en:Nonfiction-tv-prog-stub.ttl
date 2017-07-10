@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Nonfiction-tv-prog-stub. This defines the generation of triples that are extracted from Nonfiction-tv-prog-stub." ;
-        rdfs:label         "Mapping en:Nonfiction-tv-prog-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Nonfiction-tv-prog-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Nonfiction-tv-prog-stub/SubjectMap> .
 
@@ -42,17 +40,15 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Nonfiction-tv-prog-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Nonfiction-tv-prog-stub. This defines the generation of the subject for the triples that are extracted from Nonfiction-tv-prog-stub." ;
-        rdfs:label    "Mapping en:Nonfiction-tv-prog-stub (Subject Map)" ;
-        rr:class      wikidata:Q386724 ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:TelevisionShow ,
+		     wikidata:Q15416 ,
 		     dbo:Work ,
-		     dbo:TelevisionShow ,
 		     schema:CreativeWork ,
-		     owl:Thing ,
-		     wikidata:Q15416 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+		     wikidata:Q386724 ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

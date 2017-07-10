@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:France-composer-stub. This defines the generation of triples that are extracted from France-composer-stub." ;
-        rdfs:label             "Mapping en:France-composer-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:France-composer-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:France-composer-stub/ConstantMapping/country/France> ;
         rr:subjectMap          <./Mapping_en:France-composer-stub/SubjectMap> .
@@ -43,10 +41,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:France-composer-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:France-composer-stub. This defines the generation of the subject for the triples that are extracted from France-composer-stub." ;
-        rdfs:label    "Mapping en:France-composer-stub (Subject Map)" ;
-        rr:class      dul:NaturalPerson ,
+        a            rr:SubjectMap ;
+        rr:class     dul:NaturalPerson ,
 		     wikidata:Q5 ,
 		     owl:Thing ,
 		     wikidata:Q215627 ,
@@ -59,8 +55,8 @@
 		     schema:Person ,
 		     dbo:Agent ,
 		     dbo:Artist ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:California-school-stub. This defines the generation of triples that are extracted from California-school-stub." ;
-        rdfs:label             "Mapping en:California-school-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:California-school-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:California-school-stub/ConstantMapping/state/California> ,
 			       <./Mapping_en:California-school-stub/ConstantMapping/country/United_States> ;
@@ -44,10 +42,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:California-school-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:California-school-stub. This defines the generation of the subject for the triples that are extracted from California-school-stub." ;
-        rdfs:label    "Mapping en:California-school-stub (Subject Map)" ;
-        rr:class      dbo:Organisation ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Organisation ,
 		     dul:SocialPerson ,
 		     schema:Organization ,
 		     dul:Agent ,
@@ -56,8 +52,8 @@
 		     owl:Thing ,
 		     wikidata:Q43229 ,
 		     schema:EducationalOrganization ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

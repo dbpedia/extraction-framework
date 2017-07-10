@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:England-politician-stub. This defines the generation of triples that are extracted from England-politician-stub." ;
-        rdfs:label         "Mapping en:England-politician-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:England-politician-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:England-politician-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:England-politician-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:England-politician-stub. This defines the generation of the subject for the triples that are extracted from England-politician-stub." ;
-        rdfs:label    "Mapping en:England-politician-stub (Subject Map)" ;
-        rr:class      dul:Agent ,
+        a            rr:SubjectMap ;
+        rr:class     dul:Agent ,
 		     owl:Thing ,
 		     schema:Person ,
 		     dbo:Agent ,
@@ -56,8 +52,8 @@
 		     dbo:Person ,
 		     foaf:Person ,
 		     dbo:Politician ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

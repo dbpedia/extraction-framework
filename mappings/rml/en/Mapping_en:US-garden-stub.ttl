@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:US-garden-stub. This defines the generation of triples that are extracted from US-garden-stub." ;
-        rdfs:label             "Mapping en:US-garden-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:US-garden-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:US-garden-stub/ConstantMapping/location/United_States> ,
 			       <./Mapping_en:US-garden-stub/ConstantMapping/country/United_States> ;
@@ -44,17 +42,15 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:US-garden-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:US-garden-stub. This defines the generation of the subject for the triples that are extracted from US-garden-stub." ;
-        rdfs:label    "Mapping en:US-garden-stub (Subject Map)" ;
-        rr:class      wikidata:Q1107656 ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Garden ,
+		     wikidata:Q1107656 ,
 		     dbo:Place ,
-		     dbo:Location ,
 		     schema:Place ,
-		     dbo:Garden ,
+		     dbo:Location ,
 		     owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

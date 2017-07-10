@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:Jazz-composition-stub. This defines the generation of triples that are extracted from Jazz-composition-stub." ;
-        rdfs:label             "Mapping en:Jazz-composition-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Jazz-composition-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Jazz-composition-stub/ConstantMapping/genre/Jazz> ;
         rr:subjectMap          <./Mapping_en:Jazz-composition-stub/SubjectMap> .
@@ -43,17 +41,15 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Jazz-composition-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Jazz-composition-stub. This defines the generation of the subject for the triples that are extracted from Jazz-composition-stub." ;
-        rdfs:label    "Mapping en:Jazz-composition-stub (Subject Map)" ;
-        rr:class      dbo:MusicalWork ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:MusicalWork ,
+		     wikidata:Q2188189 ,
 		     dbo:Work ,
 		     schema:CreativeWork ,
-		     wikidata:Q2188189 ,
-		     owl:Thing ,
-		     wikidata:Q386724 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+		     wikidata:Q386724 ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

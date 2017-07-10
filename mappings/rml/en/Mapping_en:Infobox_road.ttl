@@ -33,10 +33,9 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:Infobox road. This defines the generation of triples that are extracted from Infobox road." ;
-        rdfs:label             "Mapping en:Infobox road (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Infobox_road/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/16> ,
+        rr:predicateObjectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/12> ,
+			       <./Mapping_en:Infobox_road/SimplePropertyMapping/16> ,
 			       <./Mapping_en:Infobox_road/SimplePropertyMapping/22> ,
 			       <./Mapping_en:Infobox_road/SimplePropertyMapping/5> ,
 			       <./Mapping_en:Infobox_road/SimplePropertyMapping/17> ,
@@ -65,18 +64,15 @@
 			       <./Mapping_en:Infobox_road/SimplePropertyMapping/8> ,
 			       <./Mapping_en:Infobox_road/SimplePropertyMapping/14> ,
 			       <./Mapping_en:Infobox_road/SimplePropertyMapping/20> ,
-			       <./Mapping_en:Infobox_road/SimplePropertyMapping/28> ,
-			       <./Mapping_en:Infobox_road/SimplePropertyMapping/12> ;
+			       <./Mapping_en:Infobox_road/SimplePropertyMapping/28> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap> .
 
 
 ### Main SubjectMap
 ####################
 <./Mapping_en:Infobox_road/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Infobox road. This defines the generation of the subject for the triples that are extracted from Infobox road." ;
-        rdfs:label    "Mapping en:Infobox road (Subject Map)" ;
-        rr:class      dbo:Location ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Location ,
 		     wikidata:Q34442 ,
 		     dbo:Road ,
 		     dbo:ArchitecturalStructure ,
@@ -85,8 +81,8 @@
 		     schema:Place ,
 		     dbo:Place ,
 		     dbo:Infrastructure ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource
@@ -105,6 +101,54 @@
 
 ### Predicate Object Map
 #########################
+<./Mapping_en:Infobox_road/SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM> ;
+        rr:predicate  dbo:county .
+
+### Function Term Map
+<./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_en:Infobox_road/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_road/Function/SimplePropertyFunction> ,
+			       <./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "county" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "countries" .
+
+
+### Predicate Object Map
+#########################
 <./Mapping_en:Infobox_road/SimplePropertyMapping/16>
         a             rr:PredicateObjectMap ;
         rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
@@ -115,8 +159,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/16/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/16/FTM/FV> .
 
 ### Function Execution Mapping
@@ -165,8 +207,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/22/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/22/FTM/FV> .
 
 ### Function Execution Mapping
@@ -215,8 +255,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/5/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/5/FTM/FV> .
 
 ### Function Execution Mapping
@@ -265,8 +303,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/26/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/26/FTM/FV> .
 
 ### Function Execution Mapping
@@ -315,8 +351,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/17/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/17/FTM/FV> .
 
 ### Function Execution Mapping
@@ -365,8 +399,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/1/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/1/FTM/FV> .
 
 ### Function Execution Mapping
@@ -415,8 +447,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/13/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/13/FTM/FV> .
 
 ### Function Execution Mapping
@@ -465,8 +495,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/24/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/24/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/kilometre> .
 
@@ -524,8 +552,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/7/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/7/FTM/FV> .
 
 ### Function Execution Mapping
@@ -574,8 +600,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/19/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/19/FTM/FV> .
 
 ### Function Execution Mapping
@@ -624,8 +648,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/11/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/11/FTM/FV> .
 
 ### Function Execution Mapping
@@ -674,9 +696,8 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/3/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
-        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/3/FTM/FV> .
+        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/3/FTM/FV> ;
+        rr:language         "en" .
 
 ### Function Execution Mapping
 <./Mapping_en:Infobox_road/SimplePropertyMapping/3/FTM/FV>
@@ -724,8 +745,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/15/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/15/FTM/FV> .
 
 ### Function Execution Mapping
@@ -774,8 +793,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/30/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/30/FTM/FV> .
 
 ### Function Execution Mapping
@@ -824,8 +841,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/4/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/4/FTM/FV> .
 
 ### Function Execution Mapping
@@ -874,8 +889,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/0/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/0/FTM/FV> .
 
 ### Function Execution Mapping
@@ -924,8 +937,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/9/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/9/FTM/FV> .
 
 ### Function Execution Mapping
@@ -974,8 +985,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/21/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/21/FTM/FV> .
 
 ### Function Execution Mapping
@@ -1024,8 +1033,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/29/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/29/FTM/FV> .
 
 ### Function Execution Mapping
@@ -1074,8 +1081,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/25/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/25/FTM/FV> .
 
 ### Function Execution Mapping
@@ -1124,9 +1129,8 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/6/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
-        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/6/FTM/FV> .
+        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/6/FTM/FV> ;
+        rr:language         "en" .
 
 ### Function Execution Mapping
 <./Mapping_en:Infobox_road/SimplePropertyMapping/6/FTM/FV>
@@ -1174,9 +1178,8 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/2/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
-        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/2/FTM/FV> .
+        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/2/FTM/FV> ;
+        rr:language         "en" .
 
 ### Function Execution Mapping
 <./Mapping_en:Infobox_road/SimplePropertyMapping/2/FTM/FV>
@@ -1224,8 +1227,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/23/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/23/FTM/FV> ;
         rr:datatype         <http://dbpedia.org/datatype/mile> .
 
@@ -1283,8 +1284,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/27/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/27/FTM/FV> .
 
 ### Function Execution Mapping
@@ -1333,8 +1332,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/10/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/10/FTM/FV> .
 
 ### Function Execution Mapping
@@ -1383,8 +1380,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/18/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/18/FTM/FV> .
 
 ### Function Execution Mapping
@@ -1433,8 +1428,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/8/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/8/FTM/FV> .
 
 ### Function Execution Mapping
@@ -1483,8 +1476,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/14/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/14/FTM/FV> .
 
 ### Function Execution Mapping
@@ -1523,56 +1514,6 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_road/SimplePropertyMapping/28>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
-        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM> ;
-        rr:predicate  dbo:type .
-
-### Function Term Map
-<./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM>
-        a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
-        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV> .
-
-### Function Execution Mapping
-<./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV>
-        a                      rr:TriplesMap ;
-        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
-        rdfs:label             "SimplePropertyMapping TriplesMap" ;
-        rml:logicalSource      <./Mapping_en:Infobox_road/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_road/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
-
-### Parameters
-<./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
-        rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "type" ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
-### References
-<./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
-        rdfs:label     "Parameter Object Map" ;
-        rml:reference  "previous_type" .
-
-
-### Predicate Object Map
-#########################
 <./Mapping_en:Infobox_road/SimplePropertyMapping/20>
         a             rr:PredicateObjectMap ;
         rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
@@ -1583,8 +1524,6 @@
 ### Function Term Map
 <./Mapping_en:Infobox_road/SimplePropertyMapping/20/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
         fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/20/FTM/FV> .
 
 ### Function Execution Mapping
@@ -1623,52 +1562,50 @@
 
 ### Predicate Object Map
 #########################
-<./Mapping_en:Infobox_road/SimplePropertyMapping/12>
+<./Mapping_en:Infobox_road/SimplePropertyMapping/28>
         a             rr:PredicateObjectMap ;
         rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
         rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM> ;
-        rr:predicate  dbo:county .
+        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM> ;
+        rr:predicate  dbo:type .
 
 ### Function Term Map
-<./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM>
+<./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM>
         a                   fnml:FunctionTermMap ;
-        rdfs:comment        "Executes the execution triples that are generated by the fnml:functionValue property. This Term Map takes and returns the object value of the triple that is generated by the function." ;
-        rdfs:label          "SimplePropertyMapping FunctionTermMap" ;
-        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV> .
+        fnml:functionValue  <./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV> .
 
 ### Function Execution Mapping
-<./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV>
+<./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV>
         a                      rr:TriplesMap ;
         rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
         rdfs:label             "SimplePropertyMapping TriplesMap" ;
         rml:logicalSource      <./Mapping_en:Infobox_road/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_road/Function/SimplePropertyFunction> ,
-			       <./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM> ,
-			       <./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM> ;
+			       <./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_road/SubjectMap/Function> .
 
 ### Parameters
-<./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM>
+<./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
         rdfs:label    "Parameter Predicate Object Map" ;
-        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
         rdfs:label    "Parameter Predicate Object Map" ;
-        rr:object     "county" ;
+        rr:object     "type" ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
 ### References
-<./Mapping_en:Infobox_road/SimplePropertyMapping/12/FTM/FV/propertyParameterPOM/ObjectMap>
+<./Mapping_en:Infobox_road/SimplePropertyMapping/28/FTM/FV/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
         rdfs:label     "Parameter Object Map" ;
-        rml:reference  "countries" .
+        rml:reference  "previous_type" .
 
 
 ######################

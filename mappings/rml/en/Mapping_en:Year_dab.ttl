@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Year dab. This defines the generation of triples that are extracted from Year dab." ;
-        rdfs:label         "Mapping en:Year dab (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Year_dab/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Year_dab/SubjectMap> .
 
@@ -42,16 +40,14 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Year_dab/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Year dab. This defines the generation of the subject for the triples that are extracted from Year dab." ;
-        rdfs:label    "Mapping en:Year dab (Subject Map)" ;
-        rr:class      wikidata:Q577 ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Year ,
+		     wikidata:Q577 ,
 		     dul:TimeInterval ,
-		     owl:Thing ,
 		     dbo:TimePeriod ,
-		     dbo:Year ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Norway-mayor-stub. This defines the generation of triples that are extracted from Norway-mayor-stub." ;
-        rdfs:label         "Mapping en:Norway-mayor-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Norway-mayor-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Norway-mayor-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Norway-mayor-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Norway-mayor-stub. This defines the generation of the subject for the triples that are extracted from Norway-mayor-stub." ;
-        rdfs:label    "Mapping en:Norway-mayor-stub (Subject Map)" ;
-        rr:class      dbo:Mayor ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Mayor ,
 		     wikidata:Q82955 ,
 		     dbo:Person ,
 		     wikidata:Q215627 ,
@@ -58,8 +54,8 @@
 		     wikidata:Q30185 ,
 		     foaf:Person ,
 		     dul:NaturalPerson ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

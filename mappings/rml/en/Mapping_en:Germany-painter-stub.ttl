@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Germany-painter-stub. This defines the generation of triples that are extracted from Germany-painter-stub." ;
-        rdfs:label         "Mapping en:Germany-painter-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Germany-painter-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Germany-painter-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Germany-painter-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Germany-painter-stub. This defines the generation of the subject for the triples that are extracted from Germany-painter-stub." ;
-        rdfs:label    "Mapping en:Germany-painter-stub (Subject Map)" ;
-        rr:class      wikidata:Q215627 ,
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q215627 ,
 		     dbo:Painter ,
 		     wikidata:Q1028181 ,
 		     dbo:Artist ,
@@ -58,8 +54,8 @@
 		     foaf:Person ,
 		     schema:Person ,
 		     dbo:Agent ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

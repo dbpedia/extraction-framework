@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:US-record-label-stub. This defines the generation of triples that are extracted from US-record-label-stub." ;
-        rdfs:label         "Mapping en:US-record-label-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:US-record-label-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:US-record-label-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:US-record-label-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:US-record-label-stub. This defines the generation of the subject for the triples that are extracted from US-record-label-stub." ;
-        rdfs:label    "Mapping en:US-record-label-stub (Subject Map)" ;
-        rr:class      owl:Thing ,
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing ,
 		     schema:Organization ,
 		     dbo:Organisation ,
 		     wikidata:Q18127 ,
@@ -55,8 +51,8 @@
 		     dbo:Agent ,
 		     wikidata:Q43229 ,
 		     dul:SocialPerson ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

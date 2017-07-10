@@ -49,4 +49,8 @@ class RMLObjectMap(override val resource: Resource) extends RMLResource(resource
     this
   }
 
+  def addLanguage(language : String) = {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "language"), language)
+  }
+
 }

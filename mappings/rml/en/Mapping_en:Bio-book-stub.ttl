@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:Bio-book-stub. This defines the generation of triples that are extracted from Bio-book-stub." ;
-        rdfs:label             "Mapping en:Bio-book-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Bio-book-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Bio-book-stub/ConstantMapping/literaryGenre/Biography> ;
         rr:subjectMap          <./Mapping_en:Bio-book-stub/SubjectMap> .
@@ -43,10 +41,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Bio-book-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Bio-book-stub. This defines the generation of the subject for the triples that are extracted from Bio-book-stub." ;
-        rdfs:label    "Mapping en:Bio-book-stub (Subject Map)" ;
-        rr:class      dbo:WrittenWork ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:WrittenWork ,
 		     wikidata:Q386724 ,
 		     dbo:Work ,
 		     bibo:Book ,
@@ -55,8 +51,8 @@
 		     owl:Thing ,
 		     wikidata:Q571 ,
 		     schema:Book ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

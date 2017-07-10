@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Japanese-voice-actor-stub. This defines the generation of triples that are extracted from Japanese-voice-actor-stub." ;
-        rdfs:label         "Mapping en:Japanese-voice-actor-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Japanese-voice-actor-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Japanese-voice-actor-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Japanese-voice-actor-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Japanese-voice-actor-stub. This defines the generation of the subject for the triples that are extracted from Japanese-voice-actor-stub." ;
-        rdfs:label    "Mapping en:Japanese-voice-actor-stub (Subject Map)" ;
-        rr:class      dbo:VoiceActor ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:VoiceActor ,
 		     wikidata:Q215627 ,
 		     wikidata:Q5 ,
 		     owl:Thing ,
@@ -59,8 +55,8 @@
 		     wikidata:Q33999 ,
 		     dbo:Agent ,
 		     foaf:Person ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

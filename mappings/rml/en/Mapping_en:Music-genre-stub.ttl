@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Music-genre-stub. This defines the generation of triples that are extracted from Music-genre-stub." ;
-        rdfs:label         "Mapping en:Music-genre-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Music-genre-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Music-genre-stub/SubjectMap> .
 
@@ -42,17 +40,15 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Music-genre-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Music-genre-stub. This defines the generation of the subject for the triples that are extracted from Music-genre-stub." ;
-        rdfs:label    "Mapping en:Music-genre-stub (Subject Map)" ;
-        rr:class      wikidata:Q188451 ,
-		     dbo:TopicalConcept ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:MusicGenre ,
+		     wikidata:Q188451 ,
 		     dul:Concept ,
-		     owl:Thing ,
 		     dbo:Genre ,
-		     dbo:MusicGenre ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+		     dbo:TopicalConcept ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

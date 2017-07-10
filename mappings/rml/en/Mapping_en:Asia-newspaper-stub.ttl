@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Asia-newspaper-stub. This defines the generation of triples that are extracted from Asia-newspaper-stub." ;
-        rdfs:label         "Mapping en:Asia-newspaper-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Asia-newspaper-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Asia-newspaper-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Asia-newspaper-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Asia-newspaper-stub. This defines the generation of the subject for the triples that are extracted from Asia-newspaper-stub." ;
-        rdfs:label    "Mapping en:Asia-newspaper-stub (Subject Map)" ;
-        rr:class      dbo:PeriodicalLiterature ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:PeriodicalLiterature ,
 		     wikidata:Q11032 ,
 		     owl:Thing ,
 		     dbo:Work ,
@@ -54,8 +50,8 @@
 		     dbo:Newspaper ,
 		     wikidata:Q1092563 ,
 		     wikidata:Q386724 ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

@@ -1,0 +1,680 @@
+@base	          	<http://sl.dbpedia.org/resource/Mapping_sl:Televizijska_epizoda> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<>      a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<./Mapping_sl:Televizijska_epizoda/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:TelevisionEpisode ,
+		     schema:TVEpisode ,
+		     dbo:Work ,
+		     schema:CreativeWork ,
+		     wikidata:Q386724 ,
+		     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<./Mapping_sl:Televizijska_epizoda/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://sl.wikipedia.org/wiki/Mapping_sl:Televizijska_epizoda?oldid=49391" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6/FTM> ;
+        rr:predicate  dbo:producer .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "producer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/6/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Production" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0/FTM> ;
+        rr:predicate  dbo:series .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "series" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/0/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Series" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1/FTM> ;
+        rr:predicate  dbo:seasonNumber .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "seasonNumber" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/1/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Season" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7/FTM> ;
+        rr:predicate  foaf:name .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7/FTM/FV> ;
+        rr:language         "sl" .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "foaf:name" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/7/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Title" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2/FTM> ;
+        rr:predicate  dbo:episodeNumber .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "episodeNumber" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/2/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Episode" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3/FTM> ;
+        rr:predicate  dbo:writer .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "writer" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/3/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Writer" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8/FTM> ;
+        rr:predicate  dbo:releaseDate .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "releaseDate" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/8/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Airdate" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9/FTM> ;
+        rr:predicate  dbo:previousWork .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "previousWork" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/9/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Prev" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4/FTM> ;
+        rr:predicate  dbo:director .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "director" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/4/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Director" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10/FTM> ;
+        rr:predicate  dbo:subsequentWork .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "subsequentWork" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/10/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Next" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5/FTM> ;
+        rr:predicate  dbo:guest .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "guest" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/5/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Guests" .
+
+
+### Predicate Object Map
+#########################
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A PredicateObjectMap of the main TriplesMap that defines the generation of the predicate and object of a triple. The object value will be the result of a SimplePropertyFunction." ;
+        rdfs:label    "SimplePropertyMapping (PredicateObjectMap)." ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11/FTM> ;
+        rr:predicate  dbo:picture .
+
+### Function Term Map
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11/FTM/FV> .
+
+### Function Execution Mapping
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11/FTM/FV>
+        a                      rr:TriplesMap ;
+        rdfs:comment           "TriplesMap that generates and returns execution triples that can be executed by the SimplePropertyFunction." ;
+        rdfs:label             "SimplePropertyMapping TriplesMap" ;
+        rml:logicalSource      <./Mapping_sl:Televizijska_epizoda/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM> ,
+			       <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM> ;
+        rr:subjectMap          <./Mapping_sl:Televizijska_epizoda/SubjectMap/Function> .
+
+### Parameters
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11/FTM/FV/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:object     "picture" ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rdfs:comment  "A Predicate Object Map for generating and returning the predicate and/or object of a parameter triple." ;
+        rdfs:label    "Parameter Predicate Object Map" ;
+        rr:objectMap  <./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+### References
+<./Mapping_sl:Televizijska_epizoda/SimplePropertyMapping/11/FTM/FV/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rdfs:comment   "An Object Map for generating and returning the object of a parameter triple. This Object Map refers to a value of a key in an infoboxy with the rml:reference property." ;
+        rdfs:label     "Parameter Object Map" ;
+        rml:reference  "Image" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<./Mapping_sl:Televizijska_epizoda/Function/SimplePropertyFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:simplePropertyFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<./Mapping_sl:Televizijska_epizoda/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .

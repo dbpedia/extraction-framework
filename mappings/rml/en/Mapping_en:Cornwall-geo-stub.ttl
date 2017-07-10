@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:Cornwall-geo-stub. This defines the generation of triples that are extracted from Cornwall-geo-stub." ;
-        rdfs:label             "Mapping en:Cornwall-geo-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:Cornwall-geo-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/United_Kingdom> ,
 			       <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/Conrwall> ;
@@ -44,15 +42,13 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Cornwall-geo-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Cornwall-geo-stub. This defines the generation of the subject for the triples that are extracted from Cornwall-geo-stub." ;
-        rdfs:label    "Mapping en:Cornwall-geo-stub (Subject Map)" ;
-        rr:class      dbo:Place ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Place ,
 		     schema:Place ,
 		     dbo:Location ,
 		     owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

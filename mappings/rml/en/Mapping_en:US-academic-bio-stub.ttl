@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:US-academic-bio-stub. This defines the generation of triples that are extracted from US-academic-bio-stub." ;
-        rdfs:label             "Mapping en:US-academic-bio-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:US-academic-bio-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:US-academic-bio-stub/ConstantMapping/nationality/United_States> ;
         rr:subjectMap          <./Mapping_en:US-academic-bio-stub/SubjectMap> .
@@ -43,10 +41,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:US-academic-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:US-academic-bio-stub. This defines the generation of the subject for the triples that are extracted from US-academic-bio-stub." ;
-        rdfs:label    "Mapping en:US-academic-bio-stub (Subject Map)" ;
-        rr:class      foaf:Person ,
+        a            rr:SubjectMap ;
+        rr:class     foaf:Person ,
 		     wikidata:Q5 ,
 		     owl:Thing ,
 		     schema:Person ,
@@ -55,8 +51,8 @@
 		     dul:Agent ,
 		     wikidata:Q215627 ,
 		     dbo:Person ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

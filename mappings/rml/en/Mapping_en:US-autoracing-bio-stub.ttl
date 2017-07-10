@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:US-autoracing-bio-stub. This defines the generation of triples that are extracted from US-autoracing-bio-stub." ;
-        rdfs:label         "Mapping en:US-autoracing-bio-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:US-autoracing-bio-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:US-autoracing-bio-stub/SubjectMap> .
 
@@ -42,10 +40,8 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:US-autoracing-bio-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:US-autoracing-bio-stub. This defines the generation of the subject for the triples that are extracted from US-autoracing-bio-stub." ;
-        rdfs:label    "Mapping en:US-autoracing-bio-stub (Subject Map)" ;
-        rr:class      wikidata:Q215627 ,
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q215627 ,
 		     wikidata:Q378622 ,
 		     foaf:Person ,
 		     dbo:RacingDriver ,
@@ -58,8 +54,8 @@
 		     dbo:MotorsportRacer ,
 		     dul:Agent ,
 		     dbo:Person ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

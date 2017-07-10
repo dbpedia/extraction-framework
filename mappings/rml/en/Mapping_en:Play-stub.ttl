@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                  rr:TriplesMap ;
-        rdfs:comment       "Main Triples Map of Mapping en:Play-stub. This defines the generation of triples that are extracted from Play-stub." ;
-        rdfs:label         "Mapping en:Play-stub (Triples Map)" ;
         rml:logicalSource  <./Mapping_en:Play-stub/LogicalSource> ;
         rr:subjectMap      <./Mapping_en:Play-stub/SubjectMap> .
 
@@ -42,18 +40,16 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:Play-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:Play-stub. This defines the generation of the subject for the triples that are extracted from Play-stub." ;
-        rdfs:label    "Mapping en:Play-stub (Subject Map)" ;
-        rr:class      dbo:Play ,
+        a            rr:SubjectMap ;
+        rr:class     dbo:Play ,
 		     schema:CreativeWork ,
 		     dbo:WrittenWork ,
 		     wikidata:Q25379 ,
 		     wikidata:Q386724 ,
 		     dbo:Work ,
 		     owl:Thing ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource

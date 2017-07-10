@@ -55,5 +55,9 @@ class RMLTriplesMap(override val resource: Resource) extends RMLResource(resourc
     //resource.addLiteral(createProperty(RdfNamespace.DCTERMS.namespace + "type"), literal.toString())
   }
 
+  def addLanguage(language : String) = {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "language"), language)
+  }
+
 
 }

@@ -33,8 +33,6 @@
 ### Main TriplesMap
 ####################
 <>      a                      rr:TriplesMap ;
-        rdfs:comment           "Main Triples Map of Mapping en:UK-MP-stub. This defines the generation of triples that are extracted from UK-MP-stub." ;
-        rdfs:label             "Mapping en:UK-MP-stub (Triples Map)" ;
         rml:logicalSource      <./Mapping_en:UK-MP-stub/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:UK-MP-stub/ConstantMapping/country/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:UK-MP-stub/SubjectMap> .
@@ -43,24 +41,22 @@
 ### Main SubjectMap
 ####################
 <./Mapping_en:UK-MP-stub/SubjectMap>
-        a             rr:SubjectMap ;
-        rdfs:comment  "Main Subject Map of Mapping en:UK-MP-stub. This defines the generation of the subject for the triples that are extracted from UK-MP-stub." ;
-        rdfs:label    "Mapping en:UK-MP-stub (Subject Map)" ;
-        rr:class      wikidata:Q5 ,
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q5 ,
 		     dul:NaturalPerson ,
 		     schema:Person ,
 		     dbo:MemberOfParliament ,
 		     dul:Agent ,
-		     wikidata:Q486839 ,
 		     foaf:Person ,
+		     wikidata:Q486839 ,
 		     owl:Thing ,
 		     wikidata:Q215627 ,
 		     dbo:Politician ,
 		     dbo:Person ,
 		     wikidata:Q82955 ,
 		     dbo:Agent ;
-        rr:template   "http://en.dbpedia.org/resource/{wikititle}" ;
-        rr:termType   rr:IRI .
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
 
 
 ### LogicalSource
