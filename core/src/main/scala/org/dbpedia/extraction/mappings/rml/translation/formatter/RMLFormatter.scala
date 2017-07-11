@@ -1,5 +1,12 @@
 package org.dbpedia.extraction.mappings.rml.translation.formatter
+import java.net.URLDecoder
+import javax.xml.crypto.URIReference
+
+import org.apache.commons.codec.StringDecoder
+import org.apache.commons.lang3.StringEscapeUtils
+import org.apache.jena.iri.IRIFactory
 import org.apache.jena.rdf.model.{Resource, Statement, StmtIterator}
+import org.apache.jena.util.URIref
 
 import collection.JavaConverters._
 import org.dbpedia.extraction.mappings.rml.translation.model.{ModelWrapper, RMLModel}
@@ -67,7 +74,8 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(triplesMapResource.listProperties())
     val turtle = freshModel.writeAsTurtle(base)
-    val formatted = turtle.replaceAll(",", ",\n\t\t\t      ")
+    val decoded = URLDecoder.decode(turtle, "UTF-8") // Jena uses URL encoding, no IRI encoding, for now this is the solution //TODO
+    val formatted = decoded.replaceAll(",", ",\n\t\t\t      ")
     val heading = hashtags(3) + " Main TriplesMap\n" + hashtags(20)
 
     heading + removePrefixes(formatted) + offset

@@ -36,7 +36,8 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
 
   private def defineSubjectMap() =
   {
-    rmlModel.subjectMap.addTemplate(rmlModel.rmlFactory.createRMLLiteral("http://en.dbpedia.org/resource/{wikititle}"))
+    val isocode = rmlModel.wikiTitle.language.isoCode
+    rmlModel.subjectMap.addTemplate(rmlModel.rmlFactory.createRMLLiteral("http://"+ isocode +".dbpedia.org/resource/{wikititle}"))
     rmlModel.subjectMap.addClass(rmlModel.rmlFactory.createRMLUri(templateMapping.mapToClass.uri))
     //rmlModel.subjectMap.addRdfsComment(subjectMapComment)
     //rmlModel.subjectMap.addRdfsLabel(subjectMapLabel)
