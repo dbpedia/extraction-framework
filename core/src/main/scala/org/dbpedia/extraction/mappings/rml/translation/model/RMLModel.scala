@@ -23,7 +23,7 @@ class RMLModel(val wikiTitle: WikiTitle, val sourceUri : String) extends ModelWr
                                                                 .addBlankNodeTermType()
 
 
-  _logicalSource.addIterator(new RMLLiteral("Infobox"))
+  _logicalSource.addIterator(new RMLLiteral("Infobox:" + wikiTitle.encoded))
   _logicalSource.addReferenceFormulation(new RMLUri(RdfNamespace.QL.namespace + "wikitext"))
 
   def logicalSource = _logicalSource

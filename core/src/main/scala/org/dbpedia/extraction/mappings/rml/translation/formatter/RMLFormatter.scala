@@ -159,7 +159,7 @@ object RMLFormatter extends Formatter {
       conditionals.reduce((first, second) => first.concat("\n" + second))
     } else ""
 
-    heading + offset + conditionalString
+    URLDecoder.decode(heading + offset + conditionalString, "UTF-8") // Jena uses URL encoding, no IRI encoding, for now this is the solution //TODO
 
   }
 

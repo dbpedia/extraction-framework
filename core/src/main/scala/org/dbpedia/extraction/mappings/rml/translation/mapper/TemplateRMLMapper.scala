@@ -48,7 +48,8 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
 
   private def defineLogicalSource() =
   {
-    rmlModel.logicalSource.addSource(rmlModel.rmlFactory.createRMLUri(rmlModel.sourceUri))
+    val source = "https://" + rmlModel.wikiTitle.language.isoCode + ".wikipedia.org/wiki/{wikititle}"
+    rmlModel.logicalSource.addSource(rmlModel.rmlFactory.createRMLLiteral(source))
   }
 
   private def addPropertyMappings() =
