@@ -1,13 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.translation.formatter
 import java.net.URLDecoder
-import javax.xml.crypto.URIReference
-
-import org.apache.commons.codec.StringDecoder
-import org.apache.commons.lang3.StringEscapeUtils
-import org.apache.jena.iri.IRIFactory
 import org.apache.jena.rdf.model.{Resource, Statement, StmtIterator}
-import org.apache.jena.util.URIref
-
 import collection.JavaConverters._
 import org.dbpedia.extraction.mappings.rml.translation.model.{ModelWrapper, RMLModel}
 import org.dbpedia.extraction.ontology.RdfNamespace
