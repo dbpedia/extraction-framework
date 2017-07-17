@@ -13,7 +13,8 @@ import scala.language.reflectiveCalls
   */
 class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
 
-  def mapToModel() : List[RMLPredicateObjectMap] = {
+  def mapToModel() : List[RMLPredicateObjectMap] =
+  {
     addConstantMapping()
   }
 
@@ -33,7 +34,8 @@ class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
     List(constantPom)
   }
 
-  def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] = {
+  def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  {
     val constantMappingUri = new RMLUri(uri + "/ConstantMapping/" + TemplateRMLMapper.constantCount)
     TemplateRMLMapper.increaseConstantCount()
 
@@ -44,7 +46,6 @@ class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
 
   private def addConstantValuePredicateObjectMap(constantPom: RMLPredicateObjectMap) =
   {
-    constantPom.addDCTermsType(new RMLLiteral("constantMapping"))
     constantPom.addPredicate(new RMLUri(mapping.ontologyProperty.uri))
 
     if(mapping.datatype == null) {
@@ -55,9 +56,9 @@ class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
         constantPom.addObject(new RMLLiteral(mapping.value))
       }
     } else {
+
       addUnitToPredicateObjectMap(constantPom)
     }
-
   }
 
 
