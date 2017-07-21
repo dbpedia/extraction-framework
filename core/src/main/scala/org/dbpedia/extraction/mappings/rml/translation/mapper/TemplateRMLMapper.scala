@@ -41,7 +41,7 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
     rmlModel.subjectMap.addClass(rmlModel.rmlFactory.createRMLUri(templateMapping.mapToClass.uri))
     //rmlModel.subjectMap.addRdfsComment(subjectMapComment)
     //rmlModel.subjectMap.addRdfsLabel(subjectMapLabel)
-    addExtraClassesToSubjectMap(rmlModel.subjectMap)
+    //addExtraClassesToSubjectMap(rmlModel.subjectMap)
     rmlModel.subjectMap.addIRITermType()
     addCorrespondingPropertyAndClassToSubjectMap()
   }

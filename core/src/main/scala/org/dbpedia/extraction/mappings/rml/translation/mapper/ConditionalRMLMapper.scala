@@ -37,7 +37,7 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     mapToClassPom.addObject(new RMLUri(firstTemplateMapping.mapToClass.uri))
 
     // adds the related classes of this condition
-    addRelatedClassesToPOM(mapToClassPom, firstTemplateMapping.mapToClass)
+    //addRelatedClassesToPOM(mapToClassPom, firstTemplateMapping.mapToClass) not wanted
 
     val conditionFunctionTermMap = addEqualCondition(firstConditionMapping, mapToClassPom)
 
@@ -77,7 +77,7 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     mapToClassPom.addObject(new RMLUri(templateMapping.mapToClass.uri))
 
     // adds all the related classes for this condition
-    addRelatedClassesToPOM(mapToClassPom, templateMapping.mapToClass)
+    //addRelatedClassesToPOM(mapToClassPom, templateMapping.mapToClass) not wanted @wmaroy
 
     val conditionFunctionTermMap = if(index < mapping.cases.size-1) {
        addEqualCondition(condition, mapToClassPom)
