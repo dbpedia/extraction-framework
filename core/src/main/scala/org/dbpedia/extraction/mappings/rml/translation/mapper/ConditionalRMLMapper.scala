@@ -31,7 +31,6 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     val mapToClassPomUri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/ConditionalMapping" + "/" +
       firstConditionMapping.templateProperty + "_" + firstConditionMapping.operator + "_" + firstConditionMapping.value)
     val mapToClassPom = rmlModel.triplesMap.addConditionalPredicateObjectMap(mapToClassPomUri)
-    mapToClassPom.addDCTermsType(new RMLLiteral("conditionalMapping"))
 
     mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
     mapToClassPom.addObject(new RMLUri(firstTemplateMapping.mapToClass.uri))
