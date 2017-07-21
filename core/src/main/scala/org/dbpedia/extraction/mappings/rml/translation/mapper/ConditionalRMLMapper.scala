@@ -36,9 +36,6 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
     mapToClassPom.addObject(new RMLUri(firstTemplateMapping.mapToClass.uri))
 
-    // adds the related classes of this condition
-    //addRelatedClassesToPOM(mapToClassPom, firstTemplateMapping.mapToClass) not wanted
-
     val conditionFunctionTermMap = addEqualCondition(firstConditionMapping, mapToClassPom)
 
     //add predicate object maps
@@ -75,9 +72,6 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     val mapToClassPom = predicateObjectMap.addFallbackMap(mapToClassPomUri)
     mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
     mapToClassPom.addObject(new RMLUri(templateMapping.mapToClass.uri))
-
-    // adds all the related classes for this condition
-    //addRelatedClassesToPOM(mapToClassPom, templateMapping.mapToClass) not wanted @wmaroy
 
     val conditionFunctionTermMap = if(index < mapping.cases.size-1) {
        addEqualCondition(condition, mapToClassPom)
@@ -168,39 +162,6 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     }
 
     functionTermMap
-  }
-
-  /**
-    * Add related classes to the subject map
-    *
-    * @param subjectMap
-    */
-  private def addExtraClassesToSubjectMap(subjectMap: RMLSubjectMap) =
-  {
-    val relatedClasses = mapping.cases.head.mapping.asInstanceOf[TemplateMapping].mapToClass.relatedClasses
-    for(cls <- relatedClasses) {
-      subjectMap.addClass(new RMLUri(cls.uri))
-    }
-  }
-
-  private def addRelatedClassesToPOM(pom: RMLPredicateObjectMap, mapToClass : OntologyClass) =
-  {
-    mapToClass.relatedClasses.foreach(relatedClass => {
-      pom.addObject(new RMLUri(relatedClass.uri))
-    })
-  }
-
-  /**
-    * Adds related classes of an ontology class to a pom
-    *
-    * @param om
-    * @param mapToClass
-    */
-  private def addRelatedClassesToOM(om : RMLObjectMap, mapToClass : OntologyClass) =
-  {
-    mapToClass.relatedClasses.foreach(relatedClass => {
-      om.addConstant(new RMLUri(relatedClass.uri))
-    })
   }
 
 }
