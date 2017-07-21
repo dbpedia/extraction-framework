@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings.rml.translation.model.factories
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.mappings.rml.translation.mapper.{RMLModelMapper, TemplateRMLMapper}
 import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources.{RMLPredicateObjectMap, RMLUri}
-import org.dbpedia.extraction.mappings.rml.translation.model.{RMLModel, RMLTemplateMapping}
+import org.dbpedia.extraction.mappings.rml.translation.model.{RMLModel, RMLTemplateMapping, RMLTranslationModel}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.PageNode
 
@@ -18,7 +18,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   {
 
     println("Loading RML Mapping: " + page.title.encodedWithNamespace)
-    val rmlModel = new RMLModel(page.title, page.sourceUri)
+    val rmlModel = new RMLTranslationModel(page.title, page.sourceUri)
     val rmlMapper = new RMLModelMapper(rmlModel)
     if(mappings.templateMappings.head._2.isInstanceOf[TemplateMapping]) {
       val templateMapping = mappings.templateMappings.head._2.asInstanceOf[TemplateMapping] // :|

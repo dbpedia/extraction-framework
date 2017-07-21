@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.mappings.rml.translation.mapper
 
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.mappings.rml.translation.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.translation.model.{RMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLSubjectMap, RMLUri}
 
 /**
   * Creates an RML Template Mapping
   */
-class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
+class TemplateRMLMapper(rmlModel: RMLTranslationModel, templateMapping: TemplateMapping) {
 
   private val triplesMapLabel = rmlModel.wikiTitle.decodedWithNamespace + " (Triples Map)"
   private val triplesMapComment = "Main Triples Map of " + rmlModel.wikiTitle.decodedWithNamespace +

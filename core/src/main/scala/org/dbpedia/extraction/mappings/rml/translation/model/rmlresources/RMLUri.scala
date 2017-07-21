@@ -25,6 +25,7 @@ class RMLUri(uri: String) {
 
 }
 object RMLUri {
+
   def encode(s : String) : String =
   {
     val encoded = IRIFactory.iriImplementation.construct(s)
@@ -34,4 +35,8 @@ object RMLUri {
     val toString = encoded.toString
     toString
   }
+
+  val SIMPLEPROPERTYMAPPING = "SimplePropertyMapping"
+
+  val CONSTANTMAPPING = "ConstantMapping"
 }

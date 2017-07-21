@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings.rml.translation.mapper
 
 import org.dbpedia.extraction.mappings.SimplePropertyMapping
 import org.dbpedia.extraction.mappings.rml.translation.dbf.DbfFunction
-import org.dbpedia.extraction.mappings.rml.translation.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.translation.model.{RMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources._
 import org.dbpedia.extraction.ontology.RdfNamespace
 
@@ -11,7 +11,7 @@ import scala.language.reflectiveCalls
 /**
   * Creates RML Mapping from SimplePropertyMappings and adds the triples to the given model
   */
-class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping) {
+class SimplePropertyRMLMapper(rmlModel: RMLTranslationModel, mapping: SimplePropertyMapping) {
 
   val language = mapping.language.isoCode
 

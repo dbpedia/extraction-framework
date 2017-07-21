@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings.rml.translation.mapper
 
 import org.dbpedia.extraction.mappings.GeoCoordinatesMapping
 import org.dbpedia.extraction.mappings.rml.translation.dbf.DbfFunction
-import org.dbpedia.extraction.mappings.rml.translation.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.translation.model.{RMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.ontology.RdfNamespace
 
@@ -11,7 +11,7 @@ import scala.language.reflectiveCalls
   /**
   * Creates RML Mapping from GeoCoordinatesMapping and adds the triples to the given model
   **/
-class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping) {
+class GeoCoordinatesRMLMapper(rmlModel: RMLTranslationModel, mapping: GeoCoordinatesMapping) {
 
   //TODO: refactor
 

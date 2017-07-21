@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.mappings.rml.translation.mapper
 
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.mappings.rml.translation.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.translation.model.{RMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 
 /**
   * IntermediateNodeMapper
   */
-class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMapping, state : MappingState) {
+class IntermediateNodeMapper(rmlModel: RMLTranslationModel, mapping: IntermediateNodeMapping, state : MappingState) {
 
   private val intermedatiaNodeMappingsNumber = state.intermediateNodeMappingsDone + 1
   state.incrementInterMediateNodeMappingsDone()

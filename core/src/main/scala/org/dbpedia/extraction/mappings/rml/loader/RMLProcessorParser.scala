@@ -14,7 +14,7 @@ import org.eclipse.rdf4j.rio.RDFFormat
   */
 
 
-object RMLParser {
+object RMLProcessorParser {
 
   private val retriever : RMLDocRetrieval = new RMLDocRetrieval()
   private val rmlMappingFactory : StdRMLMappingFactory = new StdRMLMappingFactory()
@@ -59,7 +59,7 @@ object RMLParser {
         .filter(_.getName.contains(".ttl")).toList
     }
 
-    val map = files.map(file => file.getName.replace(".ttl", "") -> RMLParser.parseFromFile(file.getAbsolutePath)).toMap
+    val map = files.map(file => file.getName.replace(".ttl", "") -> RMLProcessorParser.parseFromFile(file.getAbsolutePath)).toMap
 
     map
   }

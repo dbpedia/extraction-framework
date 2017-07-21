@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.translation.mapper
 
-import org.dbpedia.extraction.mappings.rml.translation.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.translation.model.{RMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources.{RMLPredicateObjectMap, RMLTriplesMap}
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
 import org.dbpedia.extraction.wikiparser.TemplateNode
@@ -8,7 +8,7 @@ import org.dbpedia.extraction.wikiparser.TemplateNode
 /**
   * Class that adds rml mappings to a ModelWrapper
   */
-class RMLModelMapper(rmlModel: RMLModel) {
+class RMLModelMapper(rmlModel: RMLTranslationModel) {
   
   
   def  addMappingToTriplesMap(mapping: Extractor[TemplateNode], triplesMap: RMLTriplesMap) =

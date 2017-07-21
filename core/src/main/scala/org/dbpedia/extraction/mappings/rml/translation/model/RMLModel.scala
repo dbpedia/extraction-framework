@@ -7,23 +7,16 @@ import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources._
 import org.dbpedia.extraction.wikiparser.WikiTitle
 
 /**
-  * ModelWrapper with behaviour for RML
+  * ModelWrapper that is used for resembling RML Mappings
   */
-class RMLModel(val wikiTitle: WikiTitle, val sourceUri : String) extends ModelWrapper {
+abstract class RMLModel extends ModelWrapper {
 
   val rmlFactory = new RMLResourceFactory(model)
 
-  private val _triplesMap: RMLTriplesMap = rmlFactory.createRMLTriplesMap(new RMLUri(wikiTitle.resourceIri))
-
-
-  private val _subjectMap: RMLSubjectMap = _triplesMap.addSubjectMap(new RMLUri(convertToSubjectMapUri(wikiTitle)))
-  private val _logicalSource: RMLLogicalSource = _triplesMap.addLogicalSource(new RMLUri(convertToLogicalSourceUri(wikiTitle)))
-  private val _functionSubjectMap: RMLSubjectMap = rmlFactory.createRMLSubjectMap(new RMLUri(convertToSubjectMapUri(wikiTitle) + "/Function"))
-                                                              .addClass(new RMLUri(RdfNamespace.FNO.namespace + "Execution"))
-                                                                .addBlankNodeTermType()
-
-  _logicalSource.addIterator(new RMLLiteral("Infobox:" + wikiTitle.encoded))
-  _logicalSource.addReferenceFormulation(new RMLUri(RdfNamespace.QL.namespace + "wikitext"))
+  protected val _triplesMap: RMLTriplesMap
+  protected val _subjectMap: RMLSubjectMap
+  protected val _logicalSource: RMLLogicalSource
+  protected val _functionSubjectMap: RMLSubjectMap
 
   def logicalSource = _logicalSource
   def subjectMap = _subjectMap
@@ -44,12 +37,12 @@ class RMLModel(val wikiTitle: WikiTitle, val sourceUri : String) extends ModelWr
     model.containsResource(model.createResource(rmlUri.toString))
   }
 
-  private def convertToLogicalSourceUri(title: WikiTitle): String =
+  protected def convertToLogicalSourceUri(title: WikiTitle): String =
   {
     title.resourceIri + "/LogicalSource"
   }
 
-  private def convertToSubjectMapUri(title: WikiTitle): String =
+  protected def convertToSubjectMapUri(title: WikiTitle): String =
   {
     title.resourceIri + "/SubjectMap"
   }

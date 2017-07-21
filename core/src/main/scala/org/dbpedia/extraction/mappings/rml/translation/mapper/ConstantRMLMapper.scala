@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings.rml.translation.mapper
 
 import org.dbpedia.extraction.mappings.ConstantMapping
 import org.dbpedia.extraction.mappings.rml.translation.dbf.DbfFunction
-import org.dbpedia.extraction.mappings.rml.translation.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.translation.model.{RMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.ontology.RdfNamespace
 
@@ -11,7 +11,7 @@ import scala.language.reflectiveCalls
 /**
   * Creates RML Mapping from Constant Mappings and adds the triples to the given model
   */
-class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
+class ConstantRMLMapper(rmlModel: RMLTranslationModel, mapping: ConstantMapping) {
 
   def mapToModel() : List[RMLPredicateObjectMap] =
   {
