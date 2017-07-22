@@ -1,7 +1,5 @@
 package org.dbpedia.extraction.server.resources
 
-import java.io
-
 import org.dbpedia.extraction.mappings.{MappingsLoader, Redirects}
 import org.dbpedia.extraction.util.{Language, WikiApi}
 import org.dbpedia.extraction.server.resources.stylesheets.{Log, TriX}
@@ -14,12 +12,12 @@ import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.destinations.{LimitingDestination, WriterDestination}
 import java.net.{URI, URL}
-import java.lang.Exception
 
-import xml.{Elem, NodeBuffer, ProcInstr, XML}
+import xml.{Elem, NodeBuffer}
 import java.io._
-import java.util.zip.{ZipEntry, ZipOutputStream}
 
+import org.apache.commons.compress.archivers.zip.{ZipArchiveEntry, ZipArchiveOutputStream}
+import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream.UnicodeExtraFieldPolicy
 import org.dbpedia.extraction.mappings.rml.translation.model.factories.RMLTemplateMappingFactory
 
 /**
@@ -196,7 +194,7 @@ class Mappings(@PathParam("lang") langCode : String)
       //Load mappings
       val factory = new RMLTemplateMappingFactory()
       val rmlMapping = factory.createMapping(parser(page.head).get, language, MappingsLoader.load(context))
-      val base = rmlMapping.title
+      val base = rmlMapping.title+"/"
       rmlMapping.writeAsTurtle(base)
     }
 
@@ -219,32 +217,41 @@ class Mappings(@PathParam("lang") langCode : String)
         override def run(): Unit = {
 
           //PrintStream => BufferedOutputStream => ZipOutputStream => PipedOutputStream
-          val zip : ZipOutputStream  = new ZipOutputStream(sink)
+          val zip : ZipArchiveOutputStream  = new ZipArchiveOutputStream(sink)
+          zip.setEncoding("UTF-8")
+          zip.setFallbackToUTF8(true)
+          zip.setCreateUnicodeExtraFields(UnicodeExtraFieldPolicy.ALWAYS)
 
           val writer : PrintStream = new PrintStream(new BufferedOutputStream(zip))
 
           try {
             // retrieve the titles of all RML Mappings
-            val titles = Server.instance.extractor.mappingPageSource(language).map(x => x.title.encodedWithNamespace.replace(":", "%3A").replace("/", "%2F"))
+            val titles = Server.instance.extractor.mappingPageSource(language).map(x => x.title)
 
             // iterate over all titles and add them as zip entries to a zip file
             for(title <- titles) {
 
               // retrieve RML mapping as a string
-              val mappingAsString = try {getRdfMapping(title)}
+              val mappingAsString = try {getRdfMapping(title.encodedWithNamespace.replace(":", "%3A").replace("/", "%2F"))}
               catch {
                 case x: Throwable => ""
               }
 
+              val entry = new ZipArchiveEntry(title.encodedWithNamespace.replace("/", "%2F") + ".ttl")
+              zip.putArchiveEntry(entry)
+              zip.write(mappingAsString.getBytes())
+              zip.closeArchiveEntry()
+
               // add new zip entry
-              zip.putNextEntry(new ZipEntry(title.replace("%3A", ":") + ".ttl"))
+              //zip.createArchiveEntry(.getBytes)
+              println(title.encodedWithNamespace.replace("%3A", ":").replace("/", "%2F") + ".ttl")
 
               // write into new zip entry
-              writer.println(mappingAsString)
-              writer.flush()
+              //writer.println(mappingAsString)
+              //writer.flush()
 
               // close the zip entry
-              zip.closeEntry()
+              //zip.closeEntry()
 
             }
 
