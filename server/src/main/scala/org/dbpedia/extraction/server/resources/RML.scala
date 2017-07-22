@@ -28,35 +28,36 @@ class RML {
 
   @POST
   @Path("templates/simpleproperty")
-  @Consumes(Array("application/json"))
-  @Produces(Array("application/json"))
-  def addSimplePropertyMapping(json : String) = {
-    //println(simplePropertyMapping)
-    print(json)
-    val response = "{\"response\" : \"test\"}" //convert entity to json
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def addSimplePropertyMapping(input : String) = {
+    val response = input
     Response.ok(response, MediaType.APPLICATION_JSON).build()
   }
 
   @POST
   @Path("templates/geocoordinate")
-  @Produces(Array("application/json"))
-  def addGeocoordinateMapping = {
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def addGeocoordinateMapping(input : String) = {
     val json = "{\"response\" : \"test\"}" //convert entity to json
     Response.ok(json, MediaType.APPLICATION_JSON).build()
   }
 
   @POST
   @Path("templates/startdate")
-  @Produces(Array("application/json"))
-  def addStartDateMapping = {
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def addStartDateMapping(input : String) = {
     val json = "{\"response\" : \"test\"}" //convert entity to json
     Response.ok(json, MediaType.APPLICATION_JSON).build()
   }
 
   @POST
   @Path("templates/enddate")
-  @Produces(Array("application/json"))
-  def addEndDateMapping = {
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def addEndDateMapping(input : String) = {
     val json = "{\"response\" : \"test\"}" //convert entity to json
     Response.ok(json, MediaType.APPLICATION_JSON).build()
   }
