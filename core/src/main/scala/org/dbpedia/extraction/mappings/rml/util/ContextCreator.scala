@@ -14,10 +14,10 @@ import org.dbpedia.extraction.util.Language
   */
 object ContextCreator {
 
-  private val ontologyPath = "../ontology.xml"
-  private val ontologyFile = new File(ontologyPath)
-  private val ontologySource = XMLSource.fromFile(ontologyFile,Language.Mappings)
-  private val ontologyObject = new OntologyReader().read(ontologySource)
+  private lazy val ontologyPath = "../ontology.xml"
+  private lazy val ontologyFile = new File(ontologyPath)
+  private lazy val ontologySource = XMLSource.fromFile(ontologyFile,Language.Mappings)
+  private lazy val ontologyObject = new OntologyReader().read(ontologySource)
 
   def createXMLContext(pathToXML: String, lang: Language):
   {
@@ -37,6 +37,16 @@ object ContextCreator {
       def redirects: Redirects = null
 
       def mappingPageSource: Traversable[WikiPage] = xmlMapping
+    }
+  }
+
+  def createOntologyContext(ontologyParam: Ontology):
+  {
+    def ontology: Ontology
+  } =
+  {
+    new {
+      def ontology: Ontology = ontologyParam
     }
   }
 

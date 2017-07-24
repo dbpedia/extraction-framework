@@ -8,7 +8,7 @@ import org.dbpedia.extraction.wikiparser.PageNode
   * Abstract factory class for creating RML mappings
   * Contains logic for initiating an RML mapping with a triples map, logical source and subject map
   */
-abstract class RMLMappingFactory {
+trait RMLMappingFactory {
 
   /**
     * Main method for creating the mappings
