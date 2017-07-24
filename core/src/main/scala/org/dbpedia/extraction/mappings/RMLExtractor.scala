@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import be.ugent.mmlab.rml.model.RMLMapping
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
-import org.dbpedia.extraction.mappings.rml.processing.RMLProcessorRunner
+import org.dbpedia.extraction.mappings.rml.process.RMLProcessorRunner
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Node, PageNode, TemplateNode}
