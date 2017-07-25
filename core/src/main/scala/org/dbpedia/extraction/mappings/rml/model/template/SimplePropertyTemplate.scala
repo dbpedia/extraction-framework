@@ -13,7 +13,7 @@ class SimplePropertyTemplate(val property : String,
                              val suffix : String,
                              val transform : String,
                              val unit : Datatype,
-                             val factor : Double) {
+                             val factor : Double) extends Template {
 
   override def toString = {
     val builder = new StringBuilder
