@@ -18,7 +18,7 @@ import java.io._
 
 import org.apache.commons.compress.archivers.zip.{ZipArchiveEntry, ZipArchiveOutputStream}
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream.UnicodeExtraFieldPolicy
-import org.dbpedia.extraction.mappings.rml.translation.model.factories.RMLTemplateMappingFactory
+import org.dbpedia.extraction.mappings.rml.model.factory.RMLTemplateMappingFactory
 
 /**
  * TODO: merge Extraction.scala and Mappings.scala

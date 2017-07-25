@@ -16,6 +16,7 @@ import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
 import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, SimplePropertyTemplate}
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.server.Server
+import org.dbpedia.extraction.server.resources.rml.BadRequestException
 
 import scala.xml.Elem
 
@@ -59,6 +60,10 @@ class RML {
   def addSimplePropertyMapping(input : String) = {
     try {
 
+      // validate the input
+      checkSimplePropertyInput(input)
+
+      // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
       val template = getSimplePropertyTemplate(input)
@@ -66,11 +71,13 @@ class RML {
       // assemble (side-effects)
       TemplateAssembler.assembleSimplePropertyTemplate(mapping, template, mapping.language, mapping.count(RMLUri.SIMPLEPROPERTYMAPPING))
 
+      // create the response
       val response = createResponse(mapping, mappingNode)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
       case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : Exception =>
         e.printStackTrace()
         Response.status(Response.Status.INTERNAL_SERVER_ERROR).build()
@@ -91,6 +98,10 @@ class RML {
   def addConstantMapping(input : String) = {
     try {
 
+      // validate the input
+      checkConstantInput(input)
+
+      // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
       val template = getConstantTemplate(input)
@@ -98,10 +109,13 @@ class RML {
       // assemble (side-effects)
       TemplateAssembler.assembleConstantTemplate(mapping, template, mapping.language, mapping.count(RMLUri.CONSTANTMAPPING))
 
+      // create the response
       val response = createResponse(mapping, mappingNode)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
+
     } catch {
       case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : Exception => {
         e.printStackTrace()
         Response.serverError().build()
@@ -176,6 +190,16 @@ class RML {
   }
 
   /**
+    * Retrieves the parameters JSON node from a POST request
+    * @param input
+    * @return
+    */
+  private def getParameterNode(input : String) : JsonNode = {
+    val templateNode = getTemplateNode(input)
+    templateNode.get("parameters")
+  }
+
+  /**
     * Creates the RMLEditModel from the input JSON
     * @return
     */
@@ -232,6 +256,55 @@ class RML {
     val node = JsonNodeFactory.instance.objectNode()
     node.put("msg", e.getMessage)
     Response.status(Response.Status.BAD_REQUEST).entity(node.toString).`type`(MediaType.APPLICATION_JSON).build()
+  }
+
+  /**
+    * Checks for the basic validity of a request
+    * @param input
+    */
+  private def checkBasicRequest(input : String) = {
+    val mapper = new ObjectMapper()
+    val tree = mapper.readTree(input)
+    if(!tree.has("mapping")) throw new BadRequestException("Missing field: $.mapping")
+    if(!tree.has("template")) throw new BadRequestException("Missing field: $.template")
+
+    val mappingNode = getMappingNode(input)
+    if(!mappingNode.has("language")) throw new BadRequestException("Missing field: $.mapping.language")
+    if(!mappingNode.has("name")) throw new BadRequestException("Missing field: $.mapping.name")
+    if(!mappingNode.has("dump")) throw new BadRequestException("Missing field: $.mapping.dump")
+
+    val templateNode = getTemplateNode(input)
+    if(!templateNode.has("name")) throw new BadRequestException("Missing field: $.template.name")
+    if(!templateNode.has("parameters")) throw new BadRequestException("Missing field: $.template.parameters")
+  }
+
+  /**
+    * Checks the validity of a simple property request input
+    * @param input
+    */
+  private def checkSimplePropertyInput(input : String) = {
+
+    checkBasicRequest(input)
+
+    val parameterNode = getParameterNode(input)
+    if(!parameterNode.has("property")) throw new BadRequestException("Missing field: $.template.parameters.property")
+    if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
+
+  }
+
+  /**
+    * Checks the validity of a constant request input
+    * @param input
+    */
+  private def checkConstantInput(input : String) = {
+
+    checkBasicRequest(input)
+
+    val parameterNode = getParameterNode(input)
+    if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
+    if(!parameterNode.has("value")) throw new BadRequestException("Missing field: $.template.parameters.value")
+
+
   }
 
 }
