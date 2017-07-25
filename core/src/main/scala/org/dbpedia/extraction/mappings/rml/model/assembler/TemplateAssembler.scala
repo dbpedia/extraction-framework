@@ -17,8 +17,8 @@ object TemplateAssembler {
     * @param rmlModel
     * @param simplePropertyTemplate
     */
-  def assembleSimplePropertyTemplate(rmlModel : RMLModel, simplePropertyTemplate: SimplePropertyTemplate, language: String) = {
-    val assembler = new SimplePropertyTemplateAssembler(rmlModel, language, simplePropertyTemplate)
+  def assembleSimplePropertyTemplate(rmlModel : RMLModel, simplePropertyTemplate: SimplePropertyTemplate, language: String, counter : Int) = {
+    val assembler = new SimplePropertyTemplateAssembler(rmlModel, language, simplePropertyTemplate, counter)
     assembler.assemble()
   }
 

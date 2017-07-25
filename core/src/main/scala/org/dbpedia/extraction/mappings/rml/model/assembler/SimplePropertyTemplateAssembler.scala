@@ -4,7 +4,6 @@ import org.dbpedia.extraction.mappings.rml.model.RMLModel
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template.SimplePropertyTemplate
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
-import org.dbpedia.extraction.mappings.rml.translate.mapper.TemplateRMLMapper
 import org.dbpedia.extraction.ontology.RdfNamespace
 import scala.collection.JavaConverters._
 
@@ -12,10 +11,9 @@ import scala.collection.JavaConverters._
   * Created by wmaroy on 24.07.17.
   *
   */
-class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, template: SimplePropertyTemplate) {
+class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, template: SimplePropertyTemplate, counter : Int) {
 
-  //TODO: move out the counter @wmaroy
-  private lazy val simplePropertyCount = countSimpleProperties + 1
+  private lazy val simplePropertyCount = counter + 1
 
   def assemble() = {
     val triplesMap = rmlModel.triplesMap
@@ -23,16 +21,7 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, te
     addSimplePropertyMappingToTriplesMap(uri, triplesMap)
   }
 
-  private def countSimpleProperties : Int = {
-    // define resource and property to look for
-    val triplesMapResource = rmlModel.triplesMap.resource
-    val tmrURI = rmlModel.triplesMap.resource.getURI
-    val pomProperty = rmlModel.model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
 
-    // count the amount of statements that contain "SimplePropertyMapping"
-    val statements = rmlModel.model.listStatements(triplesMapResource, pomProperty, null).toList.asScala
-    statements.count(statement => statement.getObject.asResource().getURI.contains("SimplePropertyMapping"))
-  }
 
   def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
