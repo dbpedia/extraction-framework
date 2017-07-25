@@ -1,15 +1,12 @@
 package org.dbpedia.extraction.server.resources
 
-import java.io.InputStream
 import javax.ws.rs.core.{MediaType, Response}
 import javax.ws.rs.{Produces, _}
 
-import com.fasterxml.jackson.databind
 import com.fasterxml.jackson.databind.node.{JsonNodeFactory, ObjectNode}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
-import dbpedia.dataparsers.ontology.OntologySingleton
 import org.dbpedia.extraction.mappings.rml.exception.OntologyPropertyException
-import org.dbpedia.extraction.mappings.rml.model.{RMLEditModel, RMLTemplateMapping}
+import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
 import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.factory.{ConstantTemplateJSONFactory, RMLEditModelJSONFactory, SimplePropertyTemplateJSONFactory}
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
@@ -128,8 +125,7 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addGeocoordinateMapping(input : String) = {
-    val json = "{\"response\" : \"test\"}" //convert entity to json
-    Response.ok(json, MediaType.APPLICATION_JSON).build()
+    Response.noContent()
   }
 
   @POST
@@ -137,8 +133,7 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addStartDateMapping(input : String) = {
-    val json = "{\"response\" : \"test\"}" //convert entity to json
-    Response.ok(json, MediaType.APPLICATION_JSON).build()
+    Response.noContent()
   }
 
   @POST
@@ -146,8 +141,23 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addEndDateMapping(input : String) = {
-    val json = "{\"response\" : \"test\"}" //convert entity to json
-    Response.ok(json, MediaType.APPLICATION_JSON).build()
+    Response.noContent()
+  }
+
+  @POST
+  @Path("templates/conditional")
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def addConditionalMapping(input : String) = {
+    Response.noContent()
+  }
+
+  @POST
+  @Path("templates/intermediate")
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def addIntermediateMapping(input : String) = {
+    Response.noContent()
   }
 
   /**
