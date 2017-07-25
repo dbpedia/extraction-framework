@@ -8,10 +8,12 @@ import com.fasterxml.jackson.databind
 import com.fasterxml.jackson.databind.node.{JsonNodeFactory, ObjectNode}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import dbpedia.dataparsers.ontology.OntologySingleton
+import org.dbpedia.extraction.mappings.rml.exception.OntologyPropertyException
 import org.dbpedia.extraction.mappings.rml.model.{RMLEditModel, RMLTemplateMapping}
 import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler
-import org.dbpedia.extraction.mappings.rml.model.factory.{RMLEditModelJSONFactory, SimplePropertyTemplateJSONFactory}
-import org.dbpedia.extraction.mappings.rml.model.template.SimplePropertyTemplate
+import org.dbpedia.extraction.mappings.rml.model.factory.{ConstantTemplateJSONFactory, RMLEditModelJSONFactory, SimplePropertyTemplateJSONFactory}
+import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
+import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, SimplePropertyTemplate}
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.server.Server
 
@@ -62,11 +64,44 @@ class RML {
       val template = getSimplePropertyTemplate(input)
 
       // assemble (side-effects)
-      TemplateAssembler.assembleSimplePropertyTemplate(mapping, template, mapping.language, mapping.countSimpleProperties)
+      TemplateAssembler.assembleSimplePropertyTemplate(mapping, template, mapping.language, mapping.count(RMLUri.SIMPLEPROPERTYMAPPING))
+
+      val response = createResponse(mapping, mappingNode)
+      Response.ok(response, MediaType.APPLICATION_JSON).build()
+
+    } catch {
+      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : Exception =>
+        e.printStackTrace()
+        Response.status(Response.Status.INTERNAL_SERVER_ERROR).build()
+    }
+  }
+
+  /**
+    * Takes JSON body input which contains a SimplePropertyTemplate and an RML Mapping dump.
+    * This function adds the template to the mapping and returns these if successful.
+    *
+    * @param input
+    * @return
+    */
+  @POST
+  @Path("templates/constant")
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def addConstantMapping(input : String) = {
+    try {
+
+      val mappingNode = getMappingNode(input)
+      val mapping = getMapping(mappingNode)
+      val template = getConstantTemplate(input)
+
+      // assemble (side-effects)
+      TemplateAssembler.assembleConstantTemplate(mapping, template, mapping.language, mapping.count(RMLUri.CONSTANTMAPPING))
 
       val response = createResponse(mapping, mappingNode)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
     } catch {
+      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
       case e : Exception => {
         e.printStackTrace()
         Response.serverError().build()
@@ -163,6 +198,18 @@ class RML {
   }
 
   /**
+    * Creates the ConstantTemplate from the input JSON
+    * @param input
+    */
+  private def getConstantTemplate(input: String) : ConstantTemplate = {
+    val templateNode = getTemplateNode(input)
+    val ontology = Server.instance.extractor.ontology()
+    val templateFactory = new ConstantTemplateJSONFactory(templateNode, ontology)
+    val template = templateFactory.createTemplate
+    template
+  }
+
+  /**
     * Creates a JSON response
     * Updates the "dump" field
     * @param mapping
@@ -173,6 +220,18 @@ class RML {
     val responseNode = mappingNode.asInstanceOf[ObjectNode].put("dump", updatedMapping)
     val response = responseNode.toString
     response
+  }
+
+  /**
+    * Creates a BAD REQUEST respons based on a given exception
+    * @param e
+    * @return
+    */
+  private def createBadRequestExceptionResponse(e : Exception) : Response = {
+    e.printStackTrace()
+    val node = JsonNodeFactory.instance.objectNode()
+    node.put("msg", e.getMessage)
+    Response.status(Response.Status.BAD_REQUEST).entity(node.toString).`type`(MediaType.APPLICATION_JSON).build()
   }
 
 }
