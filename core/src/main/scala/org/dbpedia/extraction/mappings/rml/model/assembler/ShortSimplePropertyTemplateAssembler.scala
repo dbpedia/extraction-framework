@@ -5,4 +5,6 @@ package org.dbpedia.extraction.mappings.rml.model.assembler
   */
 class ShortSimplePropertyTemplateAssembler {
 
+  //TODO implement
+
 }

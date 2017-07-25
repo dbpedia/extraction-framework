@@ -5,7 +5,6 @@ import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template.SimplePropertyTemplate
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
 import org.dbpedia.extraction.ontology.RdfNamespace
-import scala.collection.JavaConverters._
 
 /**
   * Created by wmaroy on 24.07.17.
@@ -29,7 +28,6 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, te
     val simplePropertyMappingUri = new RMLUri(uri + "/SimplePropertyMapping/" + simplePropertyCount )
     val simplePmPom = triplesMap.addPredicateObjectMap(simplePropertyMappingUri)
 
-    simplePmPom.addDCTermsType(new RMLLiteral("simplePropertyMapping"))
     simplePmPom.addPredicate(new RMLUri(template.ontologyProperty.uri))
     addSimplePropertyToPredicateObjectMap(simplePmPom)
 
@@ -93,13 +91,18 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, te
 
   }
 
+  /**
+    * Adds a rr:language if necessary
+    * @param objectMap
+    * @return
+    */
   private def addLanguage(objectMap : RMLObjectMap) = {
     if (template.ontologyProperty.range.name.equals("rdf:langString")) objectMap.addLanguage(language)
   }
 
 
   /**
-    * Adds all the parameter POMs if neccessary
+    * Adds all the parameter POMs if necessary
     *
     * @param functionValue
     * @return

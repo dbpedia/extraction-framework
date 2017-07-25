@@ -19,9 +19,9 @@ class RMLEditModel(private val mapping : Model,
   model.add(mapping)
 
   override protected val _triplesMap: RMLTriplesMap = getMainTriplesMap
-  override protected val _subjectMap: RMLSubjectMap = _triplesMap.addSubjectMap(new RMLUri(base + "/SubjectMap"))
-  override protected val _logicalSource: RMLLogicalSource = _triplesMap.addLogicalSource(new RMLUri(base + "/LogicalSource"))
-  override protected val _functionSubjectMap: RMLSubjectMap = rmlFactory.createRMLSubjectMap(new RMLUri(base + "/SubjectMap/Function"))
+  override protected val _subjectMap: RMLSubjectMap = _triplesMap.addSubjectMap(new RMLUri(base + "SubjectMap"))
+  override protected val _logicalSource: RMLLogicalSource = _triplesMap.addLogicalSource(new RMLUri(base + "LogicalSource"))
+  override protected val _functionSubjectMap: RMLSubjectMap = rmlFactory.createRMLSubjectMap(new RMLUri(base + "SubjectMap/Function"))
                                                                         .addClass(new RMLUri(RdfNamespace.FNO.namespace + "Execution"))
                                                                         .addBlankNodeTermType()
 
@@ -37,8 +37,8 @@ class RMLEditModel(private val mapping : Model,
   }
 
   private def getMainTriplesMap : RMLTriplesMap = {
-    val triplesMapResourceIRI = base
-    val triplesMap = model.getResource(base)
+    val triplesMapResourceIRI = base.substring(0, base.lastIndexOf('/'))
+    val triplesMap = model.getResource(triplesMapResourceIRI)
     rmlFactory.createRMLTriplesMap(new RMLUri(triplesMap.getURI))
   }
 

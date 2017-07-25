@@ -15,7 +15,7 @@ class RMLEditModelJSONFactory(mappingNode: JsonNode) {
   private lazy val dump = mappingNode.get("dump").asText()
   private lazy val name = mappingNode.get("name").asText()
   private lazy val language = mappingNode.get("language").asText()
-  private lazy val base = "http://" + language + ".dbpedia.org/resource/Mapping_" + language + ":" + name
+  private lazy val base = "http://" + language + ".dbpedia.org/resource/Mapping_" + language + ":" + name + "/"
   private lazy val model = ModelFactory.createDefaultModel().read(new StringReader(dump), base, "TURTLE")
 
   def create : RMLEditModel = {
