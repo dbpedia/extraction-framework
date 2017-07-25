@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.util
 
 import com.fasterxml.jackson.databind.JsonNode
+import org.dbpedia.extraction.mappings.rml.exception.OntologyPropertyException
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty, RdfNamespace}
 
@@ -34,11 +35,17 @@ object JSONFactoryUtil {
     val prefix = extractPrefix(ontologyPropertyParameter)
     val localName = extractLocalName(ontologyPropertyParameter)
 
-    if(RdfNamespace.prefixMap.contains(prefix)) {
+    val result = if(RdfNamespace.prefixMap.contains(prefix)) {
       val ontologyPropertyIRI = RdfNamespace.prefixMap(prefix).namespace + localName
       RMLOntologyUtil.loadOntologyPropertyFromIRI(ontologyPropertyIRI, context)
     } else {
       RMLOntologyUtil.loadOntologyProperty(ontologyPropertyParameter, context)
+    }
+
+    if(result == null) {
+      throw new OntologyPropertyException("Ontology Property cannot be found!")
+    } else {
+      result
     }
 
   }

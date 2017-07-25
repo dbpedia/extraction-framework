@@ -12,7 +12,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   */
 class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, template: SimplePropertyTemplate, counter : Int) {
 
-  private lazy val simplePropertyCount = counter + 1
+  private lazy val simplePropertyCount = counter
 
   def assemble() = {
     val triplesMap = rmlModel.triplesMap

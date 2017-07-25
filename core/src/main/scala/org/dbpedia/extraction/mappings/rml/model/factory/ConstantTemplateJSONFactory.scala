@@ -1,4 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.model.factory
+import java.net.URI
+
 import com.fasterxml.jackson.databind.JsonNode
 import org.dbpedia.extraction.mappings.rml.model.template.ConstantTemplate
 import org.dbpedia.extraction.mappings.rml.util.JSONFactoryUtil

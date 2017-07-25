@@ -25,7 +25,7 @@ class RMLEditModel(private val mapping : Model,
                                                                         .addClass(new RMLUri(RdfNamespace.FNO.namespace + "Execution"))
                                                                         .addBlankNodeTermType()
 
-  def countSimpleProperties : Int = {
+  def count(templateName : String) : Int = {
     // define resource and property to look for
     val triplesMapResource = triplesMap.resource
     val tmrURI = triplesMap.resource.getURI
@@ -33,7 +33,7 @@ class RMLEditModel(private val mapping : Model,
 
     // count the amount of statements that contain "SimplePropertyMapping"
     val statements = model.listStatements(triplesMapResource, pomProperty, null).toList.asScala
-    statements.count(statement => statement.getObject.asResource().getURI.contains("SimplePropertyMapping"))
+    statements.count(statement => statement.getObject.asResource().getURI.contains(templateName))
   }
 
   private def getMainTriplesMap : RMLTriplesMap = {

@@ -1,17 +1,20 @@
 package org.dbpedia.extraction.mappings.rml.model.assembler
 
+import java.net.URI
+
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.ConstantTemplate
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
 import org.dbpedia.extraction.ontology.{OntologyObjectProperty, RdfNamespace}
+import org.dbpedia.extraction.util.Language
 
 /**
   * Created by wmaroy on 25.07.17.
   */
 class ConstantTemplateAssembler(rmlModel : RMLModel, language : String, template: ConstantTemplate, counter : Int) {
 
-  private lazy val constantCount = counter + 1
+  private lazy val constantCount = counter
 
   def assemble() = {
     val uniqueUri = rmlModel.triplesMap.resource.getURI
@@ -34,7 +37,17 @@ class ConstantTemplateAssembler(rmlModel : RMLModel, language : String, template
     if(template.unit == null) {
 
       if(template.ontologyProperty.isInstanceOf[OntologyObjectProperty]) {
-        constantPom.addObject(new RMLUri(template.value))
+
+        // if it is a URI return it directly
+        val uri = new URI(template.value)
+
+        val valueURI =
+
+          // if the URI is absolute, we can use it directly. otherwise we make a DBpedia resource URI
+          if (!uri.isAbsolute) Language(language).resourceUri.append(template.value)
+          else uri.toString
+
+        constantPom.addObject(new RMLUri(valueURI))
       } else {
         constantPom.addObject(new RMLLiteral(template.value))
       }
