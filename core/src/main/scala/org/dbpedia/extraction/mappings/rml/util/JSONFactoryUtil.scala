@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings.rml.util
 
 import com.fasterxml.jackson.databind.JsonNode
-import org.dbpedia.extraction.mappings.rml.exception.OntologyPropertyException
+import org.dbpedia.extraction.mappings.rml.exception.{OntologyPropertyException, TemplateFactoryBundleException}
+import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, TemplateFactoryBundle}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty, RdfNamespace}
 
@@ -48,6 +49,19 @@ object JSONFactoryUtil {
       result
     }
 
+  }
+
+  /**
+    * Returns the right instance of the bundle. If not correct, throw an exception
+    * @param bundle
+    * @return
+    */
+  def getBundle(bundle : TemplateFactoryBundle) : JSONBundle = {
+    if(!bundle.isInstanceOf[JSONBundle]) {
+      throw new TemplateFactoryBundleException(TemplateFactoryBundleException.WRONG_BUNDLE_MSG)
+    } else {
+      bundle.asInstanceOf[JSONBundle]
+    }
   }
 
   private def extractPrefix(s: String) : String = {

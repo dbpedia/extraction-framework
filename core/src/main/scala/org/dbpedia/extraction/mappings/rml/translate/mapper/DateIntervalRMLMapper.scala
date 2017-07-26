@@ -58,15 +58,8 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
 
   private def addDateIntervalMappingToPredicateObjectMaps(startDateIntervalPom: RMLPredicateObjectMap, endDateIntervalPom: RMLPredicateObjectMap) =
   {
-    //startDateIntervalPom.addDCTermsType(new RMLLiteral("startDateIntervalMapping"))
     startDateIntervalPom.addPredicate(new RMLUri(mapping.startDateOntologyProperty.uri))
-
-    //endDateIntervalPom.addDCTermsType(new RMLLiteral("endDateIntervalMapping"))
     endDateIntervalPom.addPredicate(new RMLUri(mapping.endDateOntologyProperty.uri))
-
-    //startDateIntervalPom.addDBFEndDate(endDateIntervalPom)
-    //endDateIntervalPom.addDBFStartDate(startDateIntervalPom)
-
 
     val startFunctionTermMapUri = startDateIntervalPom.uri.extend("/FunctionTermMap")
     val startFunctionTermMap = startDateIntervalPom.addFunctionTermMap(startFunctionTermMapUri)
@@ -79,7 +72,6 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
 
     val endFunctionValueUri = endFunctionTermMapUri.extend("/FunctionValue")
     val endFunctionValue = endFunctionTermMap.addFunctionValue(endFunctionValueUri)
-
 
     startFunctionValue.addLogicalSource(rmlModel.logicalSource)
     startFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)
@@ -96,15 +88,6 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
     val startParameterObjectMapUri = startParameterPomUri.extend("/ObjectMap")
     startParameterPom.addObjectMap(startParameterObjectMapUri).addRMLReference(new RMLLiteral(mapping.templateProperty))
 
-    // adding the start date ontology property parameter of the start date function
-    //val startOntologyParameterPomUri = startFunctionValueUri.extend("/OntologyParameterPOM")
-    //val startOntologyParameterPom = startFunctionValue.addPredicateObjectMap(startOntologyParameterPomUri)
-    //startOntologyParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.ontologyParameter))
-    //startOntologyParameterPom.addObject(new RMLLiteral(mapping.startDateOntologyProperty.name))
-
-    //val startOntologyParameterObjectMapUri = startOntologyParameterPomUri.extend("/ObjectMap")
-    //startOntologyParameterPom.addObjectMap(startOntologyParameterObjectMapUri).addConstant(new RMLLiteral(mapping.startDateOntologyProperty.name))
-
     endFunctionValue.addLogicalSource(rmlModel.logicalSource)
     endFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
@@ -113,22 +96,12 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
     endExecutePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
     endExecutePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.name))
 
-
     // adding the property parameter pom of the end date function
     val endParameterPomUri = endFunctionValueUri.extend("/PropertyParameterPOM")
     val endParameterPom = endFunctionValue.addPredicateObjectMap(endParameterPomUri)
     endParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace +  DbfFunction.endDateFunction.endDateParameter))
     val endParameterObjectMapUri = endParameterPomUri.extend("/ObjectMap")
     endParameterPom.addObjectMap(endParameterObjectMapUri).addRMLReference(new RMLLiteral(mapping.templateProperty))
-
-    // adding the end date ontology property parameter of the end date function
-    //val endOntologyParameterPomUri = endFunctionValueUri.extend("/OntologyParameterPOM")
-    //val endOntologyParameterPom = endFunctionValue.addPredicateObjectMap(endOntologyParameterPomUri)
-    //endOntologyParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.ontologyParameter))
-    //endOntologyParameterPom.addObject(new RMLLiteral(mapping.endDateOntologyProperty.name))
-
-    //val endOntologyParameterObjectMapUri = endOntologyParameterPomUri.extend("/ObjectMap")
-    //endOntologyParameterPom.addObjectMap(endOntologyParameterObjectMapUri).addConstant(new RMLLiteral(mapping.endDateOntologyProperty.name))
 
   }
 

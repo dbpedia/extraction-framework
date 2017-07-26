@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import org.dbpedia.extraction.mappings.rml.exception.OntologyPropertyException
 import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
 import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler
-import org.dbpedia.extraction.mappings.rml.model.factory.{ConstantTemplateJSONFactory, RMLEditModelJSONFactory, SimplePropertyTemplateJSONFactory}
+import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLEditModelJSONFactory}
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
 import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, SimplePropertyTemplate}
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
@@ -195,7 +195,7 @@ class RML {
   private def getTemplateNode(input : String) : JsonNode = {
     val mapper = new ObjectMapper()
     val tree = mapper.readTree(input)
-    val templateNode = tree.get("template")
+    sdfval templateNode = tree.get("template")
     templateNode
   }
 
@@ -226,8 +226,7 @@ class RML {
   private def getSimplePropertyTemplate(input: String) : SimplePropertyTemplate = {
     val templateNode = getTemplateNode(input)
     val ontology = Server.instance.extractor.ontology()
-    val templateFactory = new SimplePropertyTemplateJSONFactory(templateNode, ontology)
-    val template = templateFactory.createTemplate
+    val template = JSONTemplateFactory.createSimplePropertyTemplate(JSONBundle(templateNode, ontology))
     template
   }
 
@@ -238,8 +237,7 @@ class RML {
   private def getConstantTemplate(input: String) : ConstantTemplate = {
     val templateNode = getTemplateNode(input)
     val ontology = Server.instance.extractor.ontology()
-    val templateFactory = new ConstantTemplateJSONFactory(templateNode, ontology)
-    val template = templateFactory.createTemplate
+    val template= JSONTemplateFactory.createConstantTemplate(JSONBundle(templateNode, ontology))
     template
   }
 
