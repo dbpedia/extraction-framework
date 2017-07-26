@@ -11,7 +11,7 @@ import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
 import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLEditModelJSONFactory}
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
-import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, GeocoordinateTemplate, SimplePropertyTemplate}
+import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, GeocoordinateTemplate, SimplePropertyTemplate, StartDateTemplate}
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.server.resources.rml.BadRequestException
@@ -163,7 +163,32 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addStartDateMapping(input : String) = {
-    Response.noContent()
+    try {
+
+      // validate the input
+      checkStartDateInput(input)
+
+      // create the structures
+      val mappingNode = getMappingNode(input)
+      val mapping = getMapping(mappingNode)
+      val template = getStartDateTemplate(input)
+
+      // assemble (side-effects)
+      TemplateAssembler.assembleStartDateTemplate(mapping, template, mapping.language, mapping.count(RMLUri.STARTDATEMAPPING))
+
+      // create the response
+      val msg = "Start Date Mapping successfully added."
+      val response = createResponse(mapping, mappingNode, msg)
+      Response.ok(response, MediaType.APPLICATION_JSON).build()
+
+    } catch {
+      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : BadRequestException => createBadRequestExceptionResponse(e)
+      case e : Exception => {
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+      }
+    }
   }
 
   @POST
@@ -276,7 +301,7 @@ class RML {
   }
 
   /**
-    * Creates the ConstantTemplate from the input JSON
+    * Creates the GeocoordinatesTemplate from the input JSON
     *
     * @param input
     */
@@ -284,6 +309,18 @@ class RML {
     val templateNode = getTemplateNode(input)
     val ontology = Server.instance.extractor.ontology()
     val template= JSONTemplateFactory.createGeocoordinateTemplate(JSONBundle(templateNode, ontology))
+    template
+  }
+
+  /**
+    * Creates the StartDateTemplate from the input JSON
+    *
+    * @param input
+    */
+  private def getStartDateTemplate(input: String) : StartDateTemplate = {
+    val templateNode = getTemplateNode(input)
+    val ontology = Server.instance.extractor.ontology()
+    val template= JSONTemplateFactory.createStartDateTemplate(JSONBundle(templateNode, ontology))
     template
   }
 
@@ -469,6 +506,20 @@ class RML {
         throw new BadRequestException("Bad combination of fields.")
       }
 
+  }
+
+  private def checkStartDateInput(input : String)  = {
+
+    checkBasicRequest(input)
+
+    val parameterNode = getParameterNode(input)
+
+    // check if all necessary fields are there (can be null)
+    if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
+    if(!parameterNode.has("property")) throw new BadRequestException("Missing field: $.template.parameters.property")
+
+    if(!parameterNode.hasNonNull("ontologyProperty")) throw new BadRequestException("Empty field: $.template.parameters.ontologyProperty")
+    if(!parameterNode.hasNonNull("property")) throw new BadRequestException("Empty field: $.template.parameters.property")
   }
 
 

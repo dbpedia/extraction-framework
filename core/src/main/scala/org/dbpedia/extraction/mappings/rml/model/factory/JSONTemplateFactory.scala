@@ -31,11 +31,43 @@ object JSONTemplateFactory extends TemplateFactory {
 
   override def createIntermediateTemplate(templateFactoryBundle: TemplateFactoryBundle): IntermediateTemplate = ???
 
-  override def createStartDateTemplate(templateFactoryBundle: TemplateFactoryBundle): StartDateTemplate = ???
+  /**
+    * Creates a StartDateTemplate object from a JSONBundle object
+    * @param templateFactoryBundle
+    * @return
+    */
+  override def createStartDateTemplate(templateFactoryBundle: TemplateFactoryBundle): StartDateTemplate = {
+    // get bundle
+    val bundle = JSONFactoryUtil.getBundle(templateFactoryBundle)
+
+    // set parameters
+    val ontologyProperty = JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
+    val property = JSONFactoryUtil.parameters("property", bundle.templateNode)
+
+    // create template
+    new StartDateTemplate(property, ontologyProperty)
+
+  }
 
   override def createConditionalTemplate(templateFactoryBundle: TemplateFactoryBundle): ConditionalTemplate = ???
 
-  override def createEndDateTemplate(templateFactoryBundle: TemplateFactoryBundle): EndDateTemplate = ???
+  /**
+    * Creates an EndDateTemplate object from a JSONBundle object
+    * @param templateFactoryBundle
+    * @return
+    */
+  override def createEndDateTemplate(templateFactoryBundle: TemplateFactoryBundle): EndDateTemplate = {
+    // get bundle
+    val bundle = JSONFactoryUtil.getBundle(templateFactoryBundle)
+
+    // set parameters
+    val ontologyProperty = JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
+    val property = JSONFactoryUtil.parameters("property", bundle.templateNode)
+
+    // create template
+    new EndDateTemplate(property, ontologyProperty)
+
+  }
 
   /**
     * Creates a GeoCoordinateTemplate object from a JSONBundle object

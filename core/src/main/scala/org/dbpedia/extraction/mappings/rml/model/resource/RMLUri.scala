@@ -43,4 +43,8 @@ object RMLUri {
   val LATITUDEMAPPING = "LatitudeMapping"
 
   val LONGITUDEMAPPING = "LongitudeMapping"
+
+  val STARTDATEMAPPING = "StartDateMapping"
+
+  val ENDDATEMAPPING = "EndDateMapping"
 }
