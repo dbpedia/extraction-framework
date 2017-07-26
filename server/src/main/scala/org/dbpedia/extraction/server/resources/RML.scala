@@ -11,7 +11,7 @@ import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
 import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLEditModelJSONFactory}
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
-import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, GeocoordinateTemplate, SimplePropertyTemplate, StartDateTemplate}
+import org.dbpedia.extraction.mappings.rml.model.template._
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.server.resources.rml.BadRequestException
@@ -196,7 +196,31 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addEndDateMapping(input : String) = {
-    Response.noContent()
+    try {
+      // validate the input
+      checkStartDateInput(input)
+
+      // create the structures
+      val mappingNode = getMappingNode(input)
+      val mapping = getMapping(mappingNode)
+      val template = getEndDateTemplate(input)
+
+      // assemble (side-effects)
+      TemplateAssembler.assembleEndDateTemplate(mapping, template, mapping.language, mapping.count(RMLUri.STARTDATEMAPPING))
+
+      // create the response
+      val msg = "End Date Mapping successfully added."
+      val response = createResponse(mapping, mappingNode, msg)
+      Response.ok(response, MediaType.APPLICATION_JSON).build()
+
+    } catch {
+      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : BadRequestException => createBadRequestExceptionResponse(e)
+      case e : Exception => {
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+      }
+    }
   }
 
   @POST
@@ -321,6 +345,18 @@ class RML {
     val templateNode = getTemplateNode(input)
     val ontology = Server.instance.extractor.ontology()
     val template= JSONTemplateFactory.createStartDateTemplate(JSONBundle(templateNode, ontology))
+    template
+  }
+
+  /**
+    * Creates the EndDateTemplate from the input JSON
+    *
+    * @param input
+    */
+  private def getEndDateTemplate(input: String) : EndDateTemplate = {
+    val templateNode = getTemplateNode(input)
+    val ontology = Server.instance.extractor.ontology()
+    val template= JSONTemplateFactory.createEndDateTemplate(JSONBundle(templateNode, ontology))
     template
   }
 
@@ -509,6 +545,20 @@ class RML {
   }
 
   private def checkStartDateInput(input : String)  = {
+
+    checkBasicRequest(input)
+
+    val parameterNode = getParameterNode(input)
+
+    // check if all necessary fields are there (can be null)
+    if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
+    if(!parameterNode.has("property")) throw new BadRequestException("Missing field: $.template.parameters.property")
+
+    if(!parameterNode.hasNonNull("ontologyProperty")) throw new BadRequestException("Empty field: $.template.parameters.ontologyProperty")
+    if(!parameterNode.hasNonNull("property")) throw new BadRequestException("Empty field: $.template.parameters.property")
+  }
+
+  private def checkEndDateInput(input : String)  = {
 
     checkBasicRequest(input)
 

@@ -13,10 +13,10 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 class StartDateTemplateAssembler(rmlModel : RMLModel, language : String, template: StartDateTemplate, counter : Int) {
 
   def assemble() = {
-    addDateIntervalMapping()
+    addStartDateMapping()
   }
 
-  def addDateIntervalMapping()  =
+  def addStartDateMapping()  =
   {
     val uri = rmlModel.triplesMap.resource.getURI
     addStartDateMappingToTriplesMap(uri, rmlModel.triplesMap)

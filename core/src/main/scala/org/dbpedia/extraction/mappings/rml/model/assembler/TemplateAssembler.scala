@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings.rml.model.assembler
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLTriplesMap
-import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, GeocoordinateTemplate, SimplePropertyTemplate, StartDateTemplate}
+import org.dbpedia.extraction.mappings.rml.model.template._
 import org.dbpedia.extraction.util.Language
 
 /**
@@ -41,13 +41,26 @@ object TemplateAssembler {
   /**
     *
     * @param rmlModel
-    * @param constantTemplate
+    * @param startDateTemplate
     * @param language
     * @param counter
     * @return
     */
   def assembleStartDateTemplate(rmlModel: RMLModel, startDateTemplate : StartDateTemplate, language: String, counter : Int) = {
     val assembler = new StartDateTemplateAssembler(rmlModel, language, startDateTemplate, counter)
+    assembler.assemble()
+  }
+
+  /**
+    *
+    * @param rmlModel
+    * @param endDateTemplate
+    * @param language
+    * @param counter
+    * @return
+    */
+  def assembleEndDateTemplate(rmlModel: RMLModel, endDateTemplate : EndDateTemplate, language: String, counter : Int) = {
+    val assembler = new EndDateTemplateAssembler(rmlModel, language, endDateTemplate, counter)
     assembler.assemble()
   }
 

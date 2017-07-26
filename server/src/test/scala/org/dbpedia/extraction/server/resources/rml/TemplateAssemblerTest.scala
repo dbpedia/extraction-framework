@@ -56,4 +56,14 @@ class TemplateAssemblerTest extends FlatSpec with Matchers {
 
   }
 
+  "EndDateTemplates" should "be generated correctly" in {
+
+    val tuple = TemplateTestUtil.postTest("/endDateTemplateTest/template.json",
+      "/endDateTemplateTest/expected_response.json",
+      "enddate")
+
+    assert(tuple._1.equals(tuple._2))
+
+  }
+
 }
