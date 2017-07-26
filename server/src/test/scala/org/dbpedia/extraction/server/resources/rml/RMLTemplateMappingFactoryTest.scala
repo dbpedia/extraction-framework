@@ -5,7 +5,7 @@ import org.scalatest.FunSuite
 
 import scala.language.reflectiveCalls
 import org.dbpedia.extraction.mappings.rml.util.ContextCreator
-import org.dbpedia.extraction.mappings.rml.translation.model.factories.RMLTemplateMappingFactory
+import org.dbpedia.extraction.mappings.rml.model.factory.RMLTemplateMappingFactory
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiParser, WikiTitle}
 

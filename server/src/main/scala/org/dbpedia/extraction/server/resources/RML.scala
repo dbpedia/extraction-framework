@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.server.resources
 
+import java.io.{PrintWriter, StringWriter}
 import javax.ws.rs.core.{MediaType, Response}
 import javax.ws.rs.{Produces, _}
 
@@ -10,7 +11,7 @@ import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
 import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLEditModelJSONFactory}
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
-import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, SimplePropertyTemplate}
+import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, GeocoordinateTemplate, SimplePropertyTemplate}
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.server.resources.rml.BadRequestException
@@ -69,7 +70,8 @@ class RML {
       TemplateAssembler.assembleSimplePropertyTemplate(mapping, template, mapping.language, mapping.count(RMLUri.SIMPLEPROPERTYMAPPING))
 
       // create the response
-      val response = createResponse(mapping, mappingNode)
+      val msg = "SimplePropertyMapping succesfully added."
+      val response = createResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
@@ -77,7 +79,7 @@ class RML {
       case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : Exception =>
         e.printStackTrace()
-        Response.status(Response.Status.INTERNAL_SERVER_ERROR).build()
+        createInternalServerErrorResponse(e)
     }
   }
 
@@ -107,7 +109,8 @@ class RML {
       TemplateAssembler.assembleConstantTemplate(mapping, template, mapping.language, mapping.count(RMLUri.CONSTANTMAPPING))
 
       // create the response
-      val response = createResponse(mapping, mappingNode)
+      val msg = "Constant Mapping successfully added."
+      val response = createResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
@@ -115,7 +118,7 @@ class RML {
       case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : Exception => {
         e.printStackTrace()
-        Response.serverError().build()
+        createInternalServerErrorResponse(e)
       }
     }
   }
@@ -125,7 +128,34 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addGeocoordinateMapping(input : String) = {
-    Response.noContent()
+
+
+    try {
+      // validate input
+      checkGeocoordinateInput(input)
+
+      // create the structures
+      val mappingNode = getMappingNode(input)
+      val mapping = getMapping(mappingNode)
+      val template = getGeocoordinateTemplate(input)
+
+      TemplateAssembler.assembleGeocoordinateTemplate(mapping, template, mapping.language, mapping.count(RMLUri.LATITUDEMAPPING))
+
+      // create the response
+      val msg = "Geocoordinate Mapping succesfully added."
+      val response = createResponse(mapping, mappingNode, msg)
+      Response.ok(response, MediaType.APPLICATION_JSON).build()
+
+    } catch {
+      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : BadRequestException => createBadRequestExceptionResponse(e)
+      case e : Exception => {
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+      }
+    }
+
+
   }
 
   @POST
@@ -195,12 +225,13 @@ class RML {
   private def getTemplateNode(input : String) : JsonNode = {
     val mapper = new ObjectMapper()
     val tree = mapper.readTree(input)
-    sdfval templateNode = tree.get("template")
+    val templateNode = tree.get("template")
     templateNode
   }
 
   /**
     * Retrieves the parameters JSON node from a POST request
+    *
     * @param input
     * @return
     */
@@ -211,6 +242,7 @@ class RML {
 
   /**
     * Creates the RMLEditModel from the input JSON
+    *
     * @return
     */
   private def getMapping(mappingNode : JsonNode) : RMLEditModel = {
@@ -221,6 +253,7 @@ class RML {
 
   /**
     * Creates the SimplePropertyTemplate from the input JSON
+    *
     * @param input
     */
   private def getSimplePropertyTemplate(input: String) : SimplePropertyTemplate = {
@@ -232,6 +265,7 @@ class RML {
 
   /**
     * Creates the ConstantTemplate from the input JSON
+    *
     * @param input
     */
   private def getConstantTemplate(input: String) : ConstantTemplate = {
@@ -242,20 +276,37 @@ class RML {
   }
 
   /**
+    * Creates the ConstantTemplate from the input JSON
+    *
+    * @param input
+    */
+  private def getGeocoordinateTemplate(input: String) : GeocoordinateTemplate = {
+    val templateNode = getTemplateNode(input)
+    val ontology = Server.instance.extractor.ontology()
+    val template= JSONTemplateFactory.createGeocoordinateTemplate(JSONBundle(templateNode, ontology))
+    template
+  }
+
+  /**
     * Creates a JSON response
     * Updates the "dump" field
+    *
     * @param mapping
     * @return
     */
-  private def createResponse(mapping : RMLEditModel, mappingNode: JsonNode) : String = {
+  private def createResponse(mapping : RMLEditModel, mappingNode: JsonNode, msg : String) : String = {
     val updatedMapping = RMLFormatter.format(mapping, mapping.base)
-    val responseNode = mappingNode.asInstanceOf[ObjectNode].put("dump", updatedMapping)
+    mappingNode.asInstanceOf[ObjectNode].put("dump", updatedMapping)
+    val responseNode = JsonNodeFactory.instance.objectNode()
+    responseNode.set("mapping", mappingNode)
+    responseNode.put("msg", msg)
     val response = responseNode.toString
     response
   }
 
   /**
     * Creates a BAD REQUEST respons based on a given exception
+    *
     * @param e
     * @return
     */
@@ -267,7 +318,37 @@ class RML {
   }
 
   /**
+    * Creates a INTERNAL SERVER ERROR
+    *
+    * @param e
+    * @return
+    */
+  private def createInternalServerErrorResponse(e : Exception) : Response = {
+
+    val node = JsonNodeFactory.instance.objectNode()
+    node.put("msg", e.getMessage)
+    node.put("exception", e.toString)
+
+    val stacktrace = getStacktrace(e)
+    node.put("stacktrace", stacktrace)
+    Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(node.toString).`type`(MediaType.APPLICATION_JSON).build()
+  }
+
+  /**
+    * Retrieves the stacktrace of an Exception
+    * @param e
+    * @return
+    */
+  private def getStacktrace(e : Exception) : String = {
+    val sw = new StringWriter()
+    val pw = new PrintWriter(sw)
+    e.printStackTrace(pw)
+    sw.toString
+  }
+
+  /**
     * Checks for the basic validity of a request
+    *
     * @param input
     */
   private def checkBasicRequest(input : String) = {
@@ -277,17 +358,18 @@ class RML {
     if(!tree.has("template")) throw new BadRequestException("Missing field: $.template")
 
     val mappingNode = getMappingNode(input)
-    if(!mappingNode.has("language")) throw new BadRequestException("Missing field: $.mapping.language")
-    if(!mappingNode.has("name")) throw new BadRequestException("Missing field: $.mapping.name")
-    if(!mappingNode.has("dump")) throw new BadRequestException("Missing field: $.mapping.dump")
+    if(!mappingNode.hasNonNull("language")) throw new BadRequestException("Missing field: $.mapping.language")
+    if(!mappingNode.hasNonNull("name")) throw new BadRequestException("Missing field: $.mapping.name")
+    if(!mappingNode.hasNonNull("dump")) throw new BadRequestException("Missing field: $.mapping.dump")
 
     val templateNode = getTemplateNode(input)
-    if(!templateNode.has("name")) throw new BadRequestException("Missing field: $.template.name")
-    if(!templateNode.has("parameters")) throw new BadRequestException("Missing field: $.template.parameters")
+    if(!templateNode.hasNonNull("name")) throw new BadRequestException("Missing field: $.template.name")
+    if(!templateNode.hasNonNull("parameters")) throw new BadRequestException("Missing field: $.template.parameters")
   }
 
   /**
     * Checks the validity of a simple property request input
+    *
     * @param input
     */
   private def checkSimplePropertyInput(input : String) = {
@@ -295,13 +377,24 @@ class RML {
     checkBasicRequest(input)
 
     val parameterNode = getParameterNode(input)
+
     if(!parameterNode.has("property")) throw new BadRequestException("Missing field: $.template.parameters.property")
     if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
+    if(!parameterNode.has("select")) throw new BadRequestException("Missing field: $.template.parameters.select")
+    if(!parameterNode.has("suffix")) throw new BadRequestException("Missing field: $.template.parameters.suffix")
+    if(!parameterNode.has("prefix")) throw new BadRequestException("Missing field: $.template.parameters.prefix")
+    if(!parameterNode.has("factor")) throw new BadRequestException("Missing field: $.template.parameters.factor")
+    if(!parameterNode.has("unit")) throw new BadRequestException("Missing field: $.template.parameters.unit")
+    if(!parameterNode.has("transform")) throw new BadRequestException("Missing field: $.template.parameters.transform")
+
+    if(!parameterNode.hasNonNull("property")) throw new BadRequestException("Empty field: $.template.parameters.property")
+    if(!parameterNode.hasNonNull("ontologyProperty")) throw new BadRequestException("Empty field: $.template.parameters.ontologyProperty")
 
   }
 
   /**
     * Checks the validity of a constant request input
+    *
     * @param input
     */
   private def checkConstantInput(input : String) = {
@@ -309,10 +402,75 @@ class RML {
     checkBasicRequest(input)
 
     val parameterNode = getParameterNode(input)
+
+    // check if all necessary fields are there (can be null)
     if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
     if(!parameterNode.has("value")) throw new BadRequestException("Missing field: $.template.parameters.value")
+    if(!parameterNode.has("unit")) throw new BadRequestException("Missing field: $.template.parameters.unit")
 
+    if(!parameterNode.hasNonNull("ontologyProperty")) throw new BadRequestException("Empty field: $.template.parameters.ontologyProperty")
+    if(!parameterNode.hasNonNull("value")) throw new BadRequestException("Empty field: $.template.parameters.value")
 
   }
+
+  private def checkGeocoordinateInput(input : String) = {
+
+    checkBasicRequest(input)
+
+    val parameterNode = getParameterNode(input)
+
+    // check if all necessary fields are there (can be null)
+    if(!parameterNode.has("coordinate")) throw new BadRequestException("Missing field: $.template.parameters.coordinate")
+    if(!parameterNode.has("latitude")) throw new BadRequestException("Missing field: $.template.parameters.latitude")
+    if(!parameterNode.has("longitude")) throw new BadRequestException("Missing field: $.template.parameters.longitude")
+    if(!parameterNode.has("latitudeDegrees")) throw new BadRequestException("Missing field: $.template.parameters.latitudeDegrees")
+    if(!parameterNode.has("latitudeMinutes")) throw new BadRequestException("Missing field: $.template.parameters.latitudeMinutes")
+    if(!parameterNode.has("latitudeSeconds")) throw new BadRequestException("Missing field: $.template.parameters.latitudeSeconds")
+    if(!parameterNode.has("latitudeDirection")) throw new BadRequestException("Missing field: $.template.parameters.latitudeDirection")
+    if(!parameterNode.has("longitudeDegrees")) throw new BadRequestException("Missing field: $.template.parameters.longitudeDegrees")
+    if(!parameterNode.has("longitudeMinutes")) throw new BadRequestException("Missing field: $.template.parameters.longitudeMinutes")
+    if(!parameterNode.has("longitudeSeconds")) throw new BadRequestException("Missing field: $.template.parameters.longitudeSeconds")
+    if(!parameterNode.has("longitudeDirection")) throw new BadRequestException("Missing field: $.template.parameters.longitudeDirection")
+
+    if(
+      !( // if all below does not hold, throw exception
+      // coordinate is set and the rest is not
+      (parameterNode.hasNonNull("coordinate") &&
+        !parameterNode.hasNonNull("latitude") && !parameterNode.hasNonNull("longitude") && !parameterNode.hasNonNull("latitudeDegrees") &&
+        !parameterNode.hasNonNull("latitudeMinutes") && !parameterNode.hasNonNull("latitudeSeconds") &&
+        !parameterNode.hasNonNull("latitudeDirection") &&
+        !parameterNode.hasNonNull("longitudeDegrees") && !parameterNode.hasNonNull("longitudeMinutes") &&
+        !parameterNode.hasNonNull("longitudeSeconds") &&
+        !parameterNode.hasNonNull("longitudeDirection"))
+
+        ||
+
+        // latitude and longitude is set and the rest is not
+        (parameterNode.hasNonNull("latitude") && parameterNode.hasNonNull("longitude") &&
+        !parameterNode.hasNonNull("coordinate") &&
+        !parameterNode.hasNonNull("latitudeDegrees") && !parameterNode.hasNonNull("latitudeMinutes") &&
+        !parameterNode.hasNonNull("latitudeSeconds") && !parameterNode.hasNonNull("latitudeDirection") &&
+        !parameterNode.hasNonNull("longitudeDegrees") && !parameterNode.hasNonNull("longitudeMinutes") &&
+        !parameterNode.hasNonNull("longitudeSeconds") &&
+        !parameterNode.hasNonNull("longitudeDirection"))
+
+        ||
+
+        // all the degree parameters are set
+        (!parameterNode.hasNonNull("latitude") && !parameterNode.hasNonNull("longitude") &&
+          !parameterNode.hasNonNull("coordinate") &&
+          parameterNode.hasNonNull("latitudeDegrees") && parameterNode.hasNonNull("latitudeMinutes") &&
+          parameterNode.hasNonNull("latitudeSeconds") && parameterNode.hasNonNull("latitudeDirection") &&
+          parameterNode.hasNonNull("longitudeDegrees") && parameterNode.hasNonNull("longitudeMinutes") &&
+          parameterNode.hasNonNull("longitudeSeconds") &&
+          parameterNode.hasNonNull("longitudeDirection")))
+      )
+      {
+        throw new BadRequestException("Bad combination of fields.")
+      }
+
+  }
+
+
 
 }

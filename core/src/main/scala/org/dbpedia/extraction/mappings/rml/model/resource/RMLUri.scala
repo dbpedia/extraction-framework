@@ -39,4 +39,8 @@ object RMLUri {
   val SIMPLEPROPERTYMAPPING = "SimplePropertyMapping"
 
   val CONSTANTMAPPING = "ConstantMapping"
+
+  val LATITUDEMAPPING = "LatitudeMapping"
+
+  val LONGITUDEMAPPING = "LongitudeMapping"
 }

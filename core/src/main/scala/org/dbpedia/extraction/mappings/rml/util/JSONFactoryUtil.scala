@@ -32,17 +32,24 @@ object JSONFactoryUtil {
   }
 
   def getOntologyProperty(templateNode: JsonNode, context : {def ontology: Ontology}) : OntologyProperty = {
+
     val ontologyPropertyParameter = JSONFactoryUtil.parameters("ontologyProperty", templateNode)
     val prefix = extractPrefix(ontologyPropertyParameter)
     val localName = extractLocalName(ontologyPropertyParameter)
 
+    // load the property
     val result = if(RdfNamespace.prefixMap.contains(prefix)) {
       val ontologyPropertyIRI = RdfNamespace.prefixMap(prefix).namespace + localName
       RMLOntologyUtil.loadOntologyPropertyFromIRI(ontologyPropertyIRI, context)
     } else {
-      RMLOntologyUtil.loadOntologyProperty(ontologyPropertyParameter, context)
+      try {
+        RMLOntologyUtil.loadOntologyProperty(ontologyPropertyParameter, context)
+      } catch {
+        case e : Exception => null
+      }
     }
 
+    // throw exception if not found
     if(result == null) {
       throw new OntologyPropertyException("Ontology Property cannot be found!")
     } else {
@@ -53,6 +60,7 @@ object JSONFactoryUtil {
 
   /**
     * Returns the right instance of the bundle. If not correct, throw an exception
+    *
     * @param bundle
     * @return
     */

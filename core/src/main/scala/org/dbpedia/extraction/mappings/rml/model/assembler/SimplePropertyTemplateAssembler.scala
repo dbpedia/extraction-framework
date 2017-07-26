@@ -20,8 +20,6 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, te
     addSimplePropertyMappingToTriplesMap(uri, triplesMap)
   }
 
-
-
   def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
