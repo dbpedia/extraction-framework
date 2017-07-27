@@ -14,6 +14,7 @@ import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTempla
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
 import org.dbpedia.extraction.mappings.rml.model.template._
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
+import org.dbpedia.extraction.mappings.rml.util.JSONFactoryUtil
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.server.resources.rml.BadRequestException
 
@@ -235,11 +236,17 @@ class RML {
   def addConditionalMapping(input : String) = {
 
     try {
+
+      // check validity of the input
+      checkConditionalInput(input)
+
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
       val template = getTemplate(input, ConditionalTemplate.NAME).asInstanceOf[ConditionalTemplate]
-      Response.noContent()
+
+      
+      createNotImplementedResponse
 
     } catch {
       case e : OntologyClassException => createBadRequestExceptionResponse(e)
@@ -262,7 +269,7 @@ class RML {
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //  Util private methods
+  //  Util private methods: general
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
@@ -348,6 +355,9 @@ class RML {
     template
   }
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Util private methods: response creation
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
     * Creates a JSON response
@@ -367,7 +377,7 @@ class RML {
   }
 
   /**
-    * Creates a BAD REQUEST respons based on a given exception
+    * Creates a BAD REQUEST response based on a given exception
     *
     * @param e
     * @return
@@ -377,6 +387,16 @@ class RML {
     val node = JsonNodeFactory.instance.objectNode()
     node.put("msg", e.getMessage)
     Response.status(Response.Status.BAD_REQUEST).entity(node.toString).`type`(MediaType.APPLICATION_JSON).build()
+  }
+
+  /**
+    * Creates a NO CONTENT response
+    * @return
+    */
+  private def createNotImplementedResponse : Response = {
+    val node = JsonNodeFactory.instance.objectNode()
+    node.put("msg", "API call is not supported yet.")
+    Response.status(Response.Status.NO_CONTENT).entity(node.toString).`type`(MediaType.APPLICATION_JSON).build()
   }
 
   /**
@@ -409,6 +429,10 @@ class RML {
     sw.toString
   }
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Util private methods: request input validation
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   /**
     * Checks for the basic validity of a request
     *
@@ -435,9 +459,9 @@ class RML {
     *
     * @param input
     */
-  private def checkSimplePropertyInput(input : String) = {
+  private def checkSimplePropertyInput(input : String, nested : Boolean = false) = {
 
-    checkBasicRequest(input)
+    if(!nested) checkBasicRequest(input)
 
     val parameterNode = getParameterNode(input)
 
@@ -460,9 +484,9 @@ class RML {
     *
     * @param input
     */
-  private def checkConstantInput(input : String) = {
+  private def checkConstantInput(input : String, nested : Boolean = false) = {
 
-    checkBasicRequest(input)
+    if(!nested) checkBasicRequest(input)
 
     val parameterNode = getParameterNode(input)
 
@@ -476,9 +500,14 @@ class RML {
 
   }
 
-  private def checkGeocoordinateInput(input : String) = {
+  /**
+    * Checks the validity of geocoordinate request input
+    *
+    * @param input
+    */
+  private def checkGeocoordinateInput(input : String, nested : Boolean = false) = {
 
-    checkBasicRequest(input)
+    if(!nested) checkBasicRequest(input)
 
     val parameterNode = getParameterNode(input)
 
@@ -534,23 +563,14 @@ class RML {
 
   }
 
-  private def checkStartDateInput(input : String)  = {
+  /**
+    * Checks the validity of a Start Date request input
+    *
+    * @param input
+    */
+  private def checkStartDateInput(input : String, nested : Boolean = false)  = {
 
-    checkBasicRequest(input)
-
-    val parameterNode = getParameterNode(input)
-
-    // check if all necessary fields are there (can be null)
-    if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
-    if(!parameterNode.has("property")) throw new BadRequestException("Missing field: $.template.parameters.property")
-
-    if(!parameterNode.hasNonNull("ontologyProperty")) throw new BadRequestException("Empty field: $.template.parameters.ontologyProperty")
-    if(!parameterNode.hasNonNull("property")) throw new BadRequestException("Empty field: $.template.parameters.property")
-  }
-
-  private def checkEndDateInput(input : String)  = {
-
-    checkBasicRequest(input)
+    if(!nested) checkBasicRequest(input)
 
     val parameterNode = getParameterNode(input)
 
@@ -562,6 +582,67 @@ class RML {
     if(!parameterNode.hasNonNull("property")) throw new BadRequestException("Empty field: $.template.parameters.property")
   }
 
+  /**
+    * Checks the validity of an End Date request input
+    *
+    * @param input
+    */
+  private def checkEndDateInput(input : String, nested : Boolean = false)  = {
 
+    if(!nested) checkBasicRequest(input)
+
+    val parameterNode = getParameterNode(input)
+
+    // check if all necessary fields are there (can be null)
+    if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
+    if(!parameterNode.has("property")) throw new BadRequestException("Missing field: $.template.parameters.property")
+
+    if(!parameterNode.hasNonNull("ontologyProperty")) throw new BadRequestException("Empty field: $.template.parameters.ontologyProperty")
+    if(!parameterNode.hasNonNull("property")) throw new BadRequestException("Empty field: $.template.parameters.property")
+  }
+
+  /**
+    * Checks the validity of a Conditional request input
+    *
+    * @param input
+    */
+  private def checkConditionalInput(input : String) : Unit = {
+
+    def createTemplateInputString(node : JsonNode) : String = {
+      // little transformation to make it a valid input string
+      JsonNodeFactory.instance.objectNode().set("template", node).toString
+    }
+
+    val parameterNode = getParameterNode(input)
+
+    // check if all necessary fields are there (can be null)
+    if(!parameterNode.has("condition")) throw new BadRequestException("Missing field: $.template.parameters.condition")
+    if(!parameterNode.has("templates")) throw new BadRequestException("Missing field: $.template.parameters.templates")
+    if(!parameterNode.has("class")) throw new BadRequestException("Missing field: $.template.parameters.class")
+    if(!parameterNode.has("fallback")) throw new BadRequestException("Missing field: $.template.parameters.fallback")
+
+    // check if all templates are correct as well
+    if(parameterNode.hasNonNull("templates")) {
+      val templates = JSONFactoryUtil.jsonNodeToSeq(parameterNode.get("templates"))
+      templates.foreach( templateNode => {
+        val templateNodeString = createTemplateInputString(templateNode)
+        val name = JSONFactoryUtil.get("name", templateNode)
+        name match {
+          case SimplePropertyTemplate.NAME => checkSimplePropertyInput(templateNodeString, nested = true)
+          case GeocoordinateTemplate.NAME => checkGeocoordinateInput(templateNodeString, nested = true)
+          case StartDateTemplate.NAME => checkStartDateInput(templateNodeString, nested = true)
+          case EndDateTemplate.NAME => checkEndDateInput(templateNodeString, nested = true)
+          case _ => throw new BadRequestException("Incorrect template: " + name)
+        }
+      })
+    }
+
+    if(parameterNode.hasNonNull("fallback")) {
+      val fallbackNode = parameterNode.get("fallback")
+      val input = createTemplateInputString(fallbackNode)
+      checkConditionalInput(input)
+    }
+
+  }
 
 }

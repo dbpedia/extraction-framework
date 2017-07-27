@@ -238,7 +238,7 @@ object JSONTemplateFactory extends TemplateFactory {
         case GeocoordinateTemplate.NAME => createGeocoordinateTemplate(bundle)
         case StartDateTemplate.NAME => createStartDateTemplate(bundle)
         case EndDateTemplate.NAME => createEndDateTemplate(bundle)
-        case _ => throw new IllegalArgumentException("Incorrect template name is found: " + name)
+        case _ => throw new IllegalArgumentException("Incorrect template: " + name)
       }
     }
 
