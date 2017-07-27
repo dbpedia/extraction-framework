@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.util
 
 import com.fasterxml.jackson.databind.JsonNode
-import org.dbpedia.extraction.mappings.rml.exception.{OntologyPropertyException, TemplateFactoryBundleException}
+import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyPropertyException, TemplateFactoryBundleException}
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, TemplateFactoryBundle}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty, RdfNamespace}
@@ -27,9 +27,14 @@ object JSONFactoryUtil {
     templateNode.get("parameters").get(key)
   }
 
+  def hasParameter(key : String, templateNode : JsonNode) : Boolean = {
+    val parameterNode = templateNode.get("parameters")
+    parameterNode.has(key) && parameterNode.hasNonNull(key)
+  }
+
   def jsonNodeToSeq(listNode : JsonNode) : Seq[JsonNode] = {
     if(listNode.isArray) listNode.iterator().asScala.toSeq
-    else throw new IllegalArgumentException("Json Node is not an array."); null
+    else throw new IllegalArgumentException("Json Node is not an array.")
   }
 
   def getOntologyProperty(templateNode: JsonNode, ontology: Ontology) : OntologyProperty = {
@@ -67,7 +72,7 @@ object JSONFactoryUtil {
 
     // throw exception if not found
     if(result == null) {
-      throw new OntologyPropertyException("Ontology Property cannot be found!")
+      throw new OntologyPropertyException("Ontology Property cannot be found in current ontology: " + ontologyPropertyParameter)
     } else {
       result
     }
@@ -76,7 +81,28 @@ object JSONFactoryUtil {
 
   def getOntologyClass(ontologyClass : String, ontology: Ontology) : OntologyClass = {
     val context = ContextCreator.createOntologyContext(ontology)
-    RMLOntologyUtil.loadOntologyClass(ontologyClass, context)
+
+    val prefix = extractPrefix(ontologyClass)
+    val localName = extractLocalName(ontologyClass)
+
+    // load the property
+    val result = if(RdfNamespace.prefixMap.contains(prefix)) {
+      val ontologyPropertyIRI = RdfNamespace.prefixMap(prefix).namespace + localName
+      RMLOntologyUtil.loadOntologyClassFromIRI(ontologyPropertyIRI, context)
+    } else {
+      try {
+        RMLOntologyUtil.loadOntologyClass(ontologyClass, context)
+      } catch {
+        case e : Exception => null
+      }
+    }
+
+    // throw exception if not found
+    if(result == null) {
+      throw new OntologyClassException("Ontology Class cannot be found in current ontology: " + ontologyClass)
+    } else {
+      result
+    }
   }
 
   /**

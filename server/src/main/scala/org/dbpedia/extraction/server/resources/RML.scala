@@ -6,7 +6,8 @@ import javax.ws.rs.{Produces, _}
 
 import com.fasterxml.jackson.databind.node.{JsonNodeFactory, ObjectNode}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
-import org.dbpedia.extraction.mappings.rml.exception.OntologyPropertyException
+import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyPropertyException}
+import org.dbpedia.extraction.mappings.rml.model
 import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
 import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLEditModelJSONFactory}
@@ -24,6 +25,10 @@ import scala.xml.Elem
 
 @Path("rml/")
 class RML {
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Template API
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   @GET
   @Produces(Array("application/xhtml+xml"))
@@ -64,7 +69,7 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getSimplePropertyTemplate(input)
+      val template = getTemplate(input, SimplePropertyTemplate.NAME).asInstanceOf[SimplePropertyTemplate]
 
       // assemble (side-effects)
       TemplateAssembler.assembleSimplePropertyTemplate(mapping, template, mapping.language, mapping.count(RMLUri.SIMPLEPROPERTYMAPPING))
@@ -103,7 +108,7 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getConstantTemplate(input)
+      val template = getTemplate(input, ConstantTemplate.NAME).asInstanceOf[ConstantTemplate]
 
       // assemble (side-effects)
       TemplateAssembler.assembleConstantTemplate(mapping, template, mapping.language, mapping.count(RMLUri.CONSTANTMAPPING))
@@ -137,7 +142,7 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getGeocoordinateTemplate(input)
+      val template = getTemplate(input, GeocoordinateTemplate.NAME).asInstanceOf[GeocoordinateTemplate]
 
       TemplateAssembler.assembleGeocoordinateTemplate(mapping, template, mapping.language, mapping.count(RMLUri.LATITUDEMAPPING))
 
@@ -171,7 +176,7 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getStartDateTemplate(input)
+      val template = getTemplate(input, StartDateTemplate.NAME).asInstanceOf[StartDateTemplate]
 
       // assemble (side-effects)
       TemplateAssembler.assembleStartDateTemplate(mapping, template, mapping.language, mapping.count(RMLUri.STARTDATEMAPPING))
@@ -203,7 +208,7 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getEndDateTemplate(input)
+      val template = getTemplate(input, EndDateTemplate.NAME).asInstanceOf[EndDateTemplate]
 
       // assemble (side-effects)
       TemplateAssembler.assembleEndDateTemplate(mapping, template, mapping.language, mapping.count(RMLUri.STARTDATEMAPPING))
@@ -228,7 +233,24 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addConditionalMapping(input : String) = {
-    Response.noContent()
+
+    try {
+      // create the structures
+      val mappingNode = getMappingNode(input)
+      val mapping = getMapping(mappingNode)
+      val template = getTemplate(input, ConditionalTemplate.NAME).asInstanceOf[ConditionalTemplate]
+      Response.noContent()
+
+    } catch {
+      case e : OntologyClassException => createBadRequestExceptionResponse(e)
+      case e : BadRequestException => createBadRequestExceptionResponse(e)
+      case e : IllegalArgumentException => createBadRequestExceptionResponse(e)
+      case e : Exception => {
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+      }
+    }
+
   }
 
   @POST
@@ -238,6 +260,10 @@ class RML {
   def addIntermediateMapping(input : String) = {
     Response.noContent()
   }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Util private methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
     * Retrieves the mapping dump from the input JSON string from a POST request
@@ -301,64 +327,27 @@ class RML {
   }
 
   /**
-    * Creates the SimplePropertyTemplate from the input JSON
+    * Retrieves a template from a template node and template name
     *
     * @param input
+    * @param templateName
+    * @return
     */
-  private def getSimplePropertyTemplate(input: String) : SimplePropertyTemplate = {
+  private def getTemplate(input: String, templateName : String) : Template = {
     val templateNode = getTemplateNode(input)
     val ontology = Server.instance.extractor.ontology()
-    val template = JSONTemplateFactory.createSimplePropertyTemplate(JSONBundle(templateNode, ontology))
+    val template = templateName match {
+      case SimplePropertyTemplate.NAME => JSONTemplateFactory.createSimplePropertyTemplate(JSONBundle(templateNode, ontology))
+      case GeocoordinateTemplate.NAME => JSONTemplateFactory.createGeocoordinateTemplate(JSONBundle(templateNode, ontology))
+      case ConstantTemplate.NAME => JSONTemplateFactory.createConstantTemplate(JSONBundle(templateNode, ontology))
+      case StartDateTemplate.NAME => JSONTemplateFactory.createStartDateTemplate(JSONBundle(templateNode, ontology))
+      case EndDateTemplate.NAME => JSONTemplateFactory.createEndDateTemplate(JSONBundle(templateNode, ontology))
+      case ConditionalTemplate.NAME => JSONTemplateFactory.createConditionalTemplate(JSONBundle(templateNode, ontology))
+    }
+
     template
   }
 
-  /**
-    * Creates the ConstantTemplate from the input JSON
-    *
-    * @param input
-    */
-  private def getConstantTemplate(input: String) : ConstantTemplate = {
-    val templateNode = getTemplateNode(input)
-    val ontology = Server.instance.extractor.ontology()
-    val template= JSONTemplateFactory.createConstantTemplate(JSONBundle(templateNode, ontology))
-    template
-  }
-
-  /**
-    * Creates the GeocoordinatesTemplate from the input JSON
-    *
-    * @param input
-    */
-  private def getGeocoordinateTemplate(input: String) : GeocoordinateTemplate = {
-    val templateNode = getTemplateNode(input)
-    val ontology = Server.instance.extractor.ontology()
-    val template= JSONTemplateFactory.createGeocoordinateTemplate(JSONBundle(templateNode, ontology))
-    template
-  }
-
-  /**
-    * Creates the StartDateTemplate from the input JSON
-    *
-    * @param input
-    */
-  private def getStartDateTemplate(input: String) : StartDateTemplate = {
-    val templateNode = getTemplateNode(input)
-    val ontology = Server.instance.extractor.ontology()
-    val template= JSONTemplateFactory.createStartDateTemplate(JSONBundle(templateNode, ontology))
-    template
-  }
-
-  /**
-    * Creates the EndDateTemplate from the input JSON
-    *
-    * @param input
-    */
-  private def getEndDateTemplate(input: String) : EndDateTemplate = {
-    val templateNode = getTemplateNode(input)
-    val ontology = Server.instance.extractor.ontology()
-    val template= JSONTemplateFactory.createEndDateTemplate(JSONBundle(templateNode, ontology))
-    template
-  }
 
   /**
     * Creates a JSON response
@@ -409,6 +398,7 @@ class RML {
 
   /**
     * Retrieves the stacktrace of an Exception
+    *
     * @param e
     * @return
     */

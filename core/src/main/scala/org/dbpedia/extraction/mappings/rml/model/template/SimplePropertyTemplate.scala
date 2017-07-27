@@ -13,7 +13,8 @@ case class SimplePropertyTemplate(property : String,
                                   suffix : String,
                                   transform : String,
                                   unit : Datatype,
-                                  factor : Double) extends Template(SimplePropertyTemplate.NAME)
+                                  factor : Double) extends Template(SimplePropertyTemplate.NAME
+)
 
 object SimplePropertyTemplate {
 

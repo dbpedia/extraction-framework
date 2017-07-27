@@ -1,15 +1,20 @@
 package org.dbpedia.extraction.mappings.rml.model.factory
-import java.net.URI
 
 import com.fasterxml.jackson.databind.JsonNode
 import org.dbpedia.extraction.mappings.rml.model.template.{EndDateTemplate, SimplePropertyTemplate, _}
 import org.dbpedia.extraction.mappings.rml.util.JSONFactoryUtil
-import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 
 /**
-  * Created by wmaroy on 25.07.17.
+  * Implementation of a TemplateFactory
+  * Templates are created based on a bundle that contains a JsonNode (com.fasterxml.jackson.databind)
   */
 object JSONTemplateFactory extends TemplateFactory {
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Interface Implementation
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
   /**
     * Creates a ConstantTemplate object from a JSONBundle object
@@ -17,6 +22,7 @@ object JSONTemplateFactory extends TemplateFactory {
     * @return
     */
   override def createConstantTemplate(templateFactoryBundle: TemplateFactoryBundle): ConstantTemplate = {
+
     // get bundle
     val bundle = getBundle(templateFactoryBundle)
 
@@ -37,6 +43,7 @@ object JSONTemplateFactory extends TemplateFactory {
     * @return
     */
   override def createStartDateTemplate(templateFactoryBundle: TemplateFactoryBundle): StartDateTemplate = {
+
     // get bundle
     val bundle = getBundle(templateFactoryBundle)
 
@@ -55,6 +62,7 @@ object JSONTemplateFactory extends TemplateFactory {
     * @return
     */
   override def createEndDateTemplate(templateFactoryBundle: TemplateFactoryBundle): EndDateTemplate = {
+
     // get bundle
     val bundle = getBundle(templateFactoryBundle)
 
@@ -73,6 +81,7 @@ object JSONTemplateFactory extends TemplateFactory {
     * @return
     */
   override def createGeocoordinateTemplate(templateFactoryBundle: TemplateFactoryBundle): GeocoordinateTemplate = {
+
     // get bundle
     val bundle = getBundle(templateFactoryBundle)
 
@@ -115,6 +124,7 @@ object JSONTemplateFactory extends TemplateFactory {
     * @return
     */
   override def createSimplePropertyTemplate(templateFactoryBundle: TemplateFactoryBundle): SimplePropertyTemplate = {
+
     // get bundle
     val bundle = getBundle(templateFactoryBundle)
 
@@ -136,34 +146,72 @@ object JSONTemplateFactory extends TemplateFactory {
 
   }
 
+  /**
+    * Creates a ConditionalTemplate object from a JSONBundle object
+    * @param templateFactoryBundle
+    * @return
+    */
   override def createConditionalTemplate(templateFactoryBundle: TemplateFactoryBundle): ConditionalTemplate = {
 
+    ///////////////////
+    // Inner methods
+    //////////////////
+
     def getFallbackTemplate(bundle: JSONBundle) : ConditionalTemplate = {
-      if(bundle.templateNode.has("fallback")) {
+      if(hasParameter("fallback", bundle.templateNode)) {
         val fallbackNode = getParameterNode("fallback", bundle.templateNode)
         createConditionalTemplate(JSONBundle(fallbackNode, bundle.ontology))
       } else null
     }
+
+    def createCondition(conditionNode : JsonNode) : Condition = {
+      val operator = JSONFactoryUtil.get("operator", conditionNode)
+      val property = getParameter("property", conditionNode)
+      val value = getParameter("value", conditionNode)
+
+      val condition = operator match {
+        case Condition.ISSET => IsSetCondition(property)
+        case Condition.EQUALS => EqualsCondition(property, value)
+        case Condition.CONTAINS => ContainsCondition(property, value)
+        case Condition.OTHERWISE => OtherwiseCondition()
+        case _ => throw new IllegalArgumentException(Condition.ILLEGALARGUMENTMSG)
+      }
+      condition
+    }
+
+    def getCondition(templateNode: JsonNode) : Condition = {
+      if(hasParameter("condition", templateNode)) {
+        val conditionNode = getParameterNode("condition", templateNode)
+        createCondition(conditionNode)
+      } else null
+    }
+
+    ////////////////
+    // Main method
+    ////////////////
 
     // get bundle
     val bundle = JSONFactoryUtil.getBundle(templateFactoryBundle)
     val templateNode = bundle.templateNode
     val ontology = bundle.ontology
 
-    val conditionNode = getParameterNode("condition", templateNode)
-    val condition = createCondition(conditionNode)
-
+    // set parameters
+    val condition = getCondition(templateNode)
     val ontologyClassString = getParameter("class", templateNode)
     val ontologyClass = JSONFactoryUtil.getOntologyClass(ontologyClassString, ontology)
-
     val templateListNode = getParameterNode("templates", templateNode)
     val templates = getTemplates(JSONBundle(templateListNode, ontology))
-
     val fallbackTemplate = getFallbackTemplate(bundle)
 
     new ConditionalTemplate(condition, templates, ontologyClass, fallbackTemplate)
 
   }
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Util private methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
   private def getBundle(bundle : TemplateFactoryBundle) : JSONBundle = {
     JSONFactoryUtil.getBundle(bundle)
@@ -177,10 +225,14 @@ object JSONTemplateFactory extends TemplateFactory {
     JSONFactoryUtil.parametersNode(key, node)
   }
 
+  private def hasParameter(key : String, node : JsonNode) : Boolean = {
+    JSONFactoryUtil.hasParameter(key, node)
+  }
+
   private def getTemplates(bundle : JSONBundle) : Seq[Template] = {
 
-    def convertToTemplate(templateNode : JsonNode) : Template = {
-      val name = JSONFactoryUtil.get("name", templateNode)
+    def convertToTemplate(bundle : JSONBundle) : Template = {
+      val name = JSONFactoryUtil.get("name", bundle.templateNode)
       name match {
         case SimplePropertyTemplate.NAME => createSimplePropertyTemplate(bundle)
         case GeocoordinateTemplate.NAME => createGeocoordinateTemplate(bundle)
@@ -191,28 +243,10 @@ object JSONTemplateFactory extends TemplateFactory {
     }
 
     val templatesSeq = JSONFactoryUtil.jsonNodeToSeq(bundle.templateNode)
-    templatesSeq.map(template => convertToTemplate(template))
+    templatesSeq.map(template => {
+      val newBundle = JSONBundle(template, bundle.ontology)
+      convertToTemplate(newBundle)
+    })
   }
-
-  private def createCondition(conditionNode : JsonNode) : Condition = {
-    val operator = JSONFactoryUtil.get("operator", conditionNode)
-    val property = getParameter("property", conditionNode)
-    val value = getParameter("value", conditionNode)
-
-    val condition = operator match {
-      case Condition.ISSET => IsSetCondition(property)
-      case Condition.EQUALS => EqualsCondition(property, value)
-      case Condition.CONTAINS => ContainsCondition(property, value)
-      case Condition.OTHERWISE => OtherwiseCondition()
-    }
-
-    condition
-  }
-
-
-
-
-
-
 
 }
