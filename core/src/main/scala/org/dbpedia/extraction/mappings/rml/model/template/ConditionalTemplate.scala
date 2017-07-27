@@ -7,7 +7,7 @@ import org.dbpedia.extraction.ontology.OntologyClass
   */
 case class ConditionalTemplate(condition : Condition, templates : Seq[Template], ontologyClass: OntologyClass, fallback : ConditionalTemplate) extends Template(ConditionalTemplate.NAME)
 
-class Condition(operator: String)
+class Condition(val operator: String)
 
 case class IsSetCondition(property: String) extends Condition(Condition.ISSET)
 

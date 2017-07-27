@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyPropertyException}
 import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
 import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler
+import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLEditModelJSONFactory}
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
 import org.dbpedia.extraction.mappings.rml.model.template._
@@ -61,6 +62,7 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addSimplePropertyMapping(input : String) = {
+
     try {
 
       // validate the input
@@ -69,10 +71,10 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getTemplate(input, SimplePropertyTemplate.NAME).asInstanceOf[SimplePropertyTemplate]
+      val template = getTemplate(input, SimplePropertyTemplate.NAME)
 
       // assemble (side-effects)
-      TemplateAssembler.assembleSimplePropertyTemplate(mapping, template, mapping.language, mapping.count(RMLUri.SIMPLEPROPERTYMAPPING))
+      assemble(mapping, template, RMLUri.SIMPLEPROPERTYMAPPING)
 
       // create the response
       val msg = "SimplePropertyMapping succesfully added."
@@ -100,6 +102,7 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addConstantMapping(input : String) = {
+
     try {
 
       // validate the input
@@ -108,10 +111,10 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getTemplate(input, ConstantTemplate.NAME).asInstanceOf[ConstantTemplate]
+      val template = getTemplate(input, ConstantTemplate.NAME)
 
       // assemble (side-effects)
-      TemplateAssembler.assembleConstantTemplate(mapping, template, mapping.language, mapping.count(RMLUri.CONSTANTMAPPING))
+      assemble(mapping, template, RMLUri.CONSTANTMAPPING)
 
       // create the response
       val msg = "Constant Mapping successfully added."
@@ -134,7 +137,6 @@ class RML {
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addGeocoordinateMapping(input : String) = {
 
-
     try {
       // validate input
       checkGeocoordinateInput(input)
@@ -142,9 +144,10 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getTemplate(input, GeocoordinateTemplate.NAME).asInstanceOf[GeocoordinateTemplate]
+      val template = getTemplate(input, GeocoordinateTemplate.NAME)
 
-      TemplateAssembler.assembleGeocoordinateTemplate(mapping, template, mapping.language, mapping.count(RMLUri.LATITUDEMAPPING))
+      // assemble (side-effects)
+      assemble(mapping, template, RMLUri.LATITUDEMAPPING)
 
       // create the response
       val msg = "Geocoordinate Mapping succesfully added."
@@ -168,6 +171,7 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addStartDateMapping(input : String) = {
+
     try {
 
       // validate the input
@@ -176,10 +180,10 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getTemplate(input, StartDateTemplate.NAME).asInstanceOf[StartDateTemplate]
+      val template = getTemplate(input, StartDateTemplate.NAME)
 
       // assemble (side-effects)
-      TemplateAssembler.assembleStartDateTemplate(mapping, template, mapping.language, mapping.count(RMLUri.STARTDATEMAPPING))
+      assemble(mapping, template, RMLUri.STARTDATEMAPPING)
 
       // create the response
       val msg = "Start Date Mapping successfully added."
@@ -208,10 +212,10 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getTemplate(input, EndDateTemplate.NAME).asInstanceOf[EndDateTemplate]
+      val template = getTemplate(input, EndDateTemplate.NAME)
 
       // assemble (side-effects)
-      TemplateAssembler.assembleEndDateTemplate(mapping, template, mapping.language, mapping.count(RMLUri.STARTDATEMAPPING))
+      assemble(mapping, template, RMLUri.ENDDATEMAPPING)
 
       // create the response
       val msg = "End Date Mapping successfully added."
@@ -242,12 +246,14 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
-      val template = getTemplate(input, ConditionalTemplate.NAME).asInstanceOf[ConditionalTemplate]
+      val template = getTemplate(input, ConditionalTemplate.NAME)
 
       // TODO: assemble the mapping
 
-      // create response
-      createNotImplementedResponse
+      // create the response
+      val msg = "Constant Mapping successfully added."
+      val response = createResponse(mapping, mappingNode, msg)
+      Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
       case e : OntologyClassException => createBadRequestExceptionResponse(e)
@@ -358,6 +364,16 @@ class RML {
 
     template
   }
+
+  /**
+    * Assembles a template to an RML Edit Model
+    */
+  private def assemble(mapping : RMLEditModel, template: Template, rmlURI : String) : Unit = {
+    val count = mapping.count(rmlURI)
+    val counter = Counter(simpleProperties = count)
+    TemplateAssembler.assembleTemplate(mapping, template, mapping.language, counter)
+  }
+
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Util private methods: response creation

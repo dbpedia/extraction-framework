@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.model.assembler
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
-import org.dbpedia.extraction.mappings.rml.model.resource.RMLTriplesMap
 import org.dbpedia.extraction.mappings.rml.model.template._
 import org.dbpedia.extraction.util.Language
 
@@ -12,6 +11,109 @@ import org.dbpedia.extraction.util.Language
   */
 object TemplateAssembler {
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Case classes
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  /**
+    * Keeps track of the count of templates (for nesting, generating meaningful uri's)
+    */
+  case class Counter(conditionals : Int = 0,
+                     subConditions : Int = 0,
+                     simpleProperties : Int = 0,
+                     geoCoordinates : Int = 0,
+                     constants : Int = 0,
+                     startDates : Int = 0,
+                     endDates : Int = 0) {
+
+
+    /**
+      * creates a new Counter object with updated values, parameters that are not given are standard set to current values
+      */
+    def update(conditionals : Int = conditionals, subConditions : Int = subConditions,
+               simpleProperties : Int = simpleProperties, geoCoordinates : Int = geoCoordinates,
+               constants :Int = constants, startDates : Int = startDates, endDates : Int = endDates) : Counter = {
+      Counter(conditionals, subConditions, simpleProperties, geoCoordinates, constants, startDates, endDates)
+    }
+
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Public methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  /**
+    * Assemble a template
+    * Add a template to an existing rml model
+    * @param rmlModel
+    * @param template
+    * @param language
+    * @param counter Object that counts templates for generating numbers in the template uri's
+    * @return
+    */
+  def assembleTemplate(rmlModel : RMLModel, baseUri : String, template : Template, language : String, counter : Counter) : Counter = {
+
+    template.name match {
+
+      case SimplePropertyTemplate.NAME => {
+        val templateInstance = template.asInstanceOf[SimplePropertyTemplate]
+        assembleSimplePropertyTemplate(rmlModel, templateInstance, language, counter.simpleProperties)
+        counter.update(simpleProperties = counter.simpleProperties + 1)
+      }
+
+      case ConstantTemplate.NAME => {
+        val templateInstance = template.asInstanceOf[ConstantTemplate]
+        assembleConstantTemplate(rmlModel, templateInstance, language, counter.constants)
+        counter.update(constants = counter.constants + 1)
+      }
+
+      case GeocoordinateTemplate.NAME => {
+        val templateInstance = template.asInstanceOf[GeocoordinateTemplate]
+        assembleGeocoordinateTemplate(rmlModel, templateInstance, language, counter.geoCoordinates)
+        counter.update(geoCoordinates = counter.geoCoordinates + 1)
+      }
+
+      case StartDateTemplate.NAME => {
+        val templateInstance = template.asInstanceOf[StartDateTemplate]
+        assembleStartDateTemplate(rmlModel, templateInstance, language, counter.startDates)
+        counter.update(startDates = counter.startDates + 1)
+      }
+
+      case EndDateTemplate.NAME => {
+        val templateInstance = template.asInstanceOf[EndDateTemplate]
+        assembleEndDateTemplate(rmlModel, templateInstance, language, counter.endDates)
+        counter.update(endDates = counter.endDates + 1)
+      }
+
+      case ConditionalTemplate.NAME => {
+       val templateInstance = template.asInstanceOf[ConditionalTemplate]
+        assembleConditionalTemplate(rmlModel, templateInstance, language, counter.conditionals)
+        counter.update(conditionals = counter.conditionals + 1)
+      }
+
+      case _ => throw new IllegalArgumentException("Unsupported template: " + template.name)
+    }
+
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Private methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  /**
+    * Assembles a template with standard as baseUri the main triples map uri
+    * @param rmlModel
+    * @param template
+    * @param language
+    * @param counter
+    * @return
+    */
+  def assembleTemplate(rmlModel : RMLModel, template : Template, language : String, counter : Counter) : Counter = {
+    val baseUri = rmlModel.triplesMap.resource.getURI
+    assembleTemplate(rmlModel, baseUri, template, language, counter)
+  }
+
+
   /**
     *
     * @param rmlModel
@@ -20,7 +122,7 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  def assembleSimplePropertyTemplate(rmlModel : RMLModel, simplePropertyTemplate: SimplePropertyTemplate, language: String, counter : Int) = {
+  private def assembleSimplePropertyTemplate(rmlModel : RMLModel, simplePropertyTemplate: SimplePropertyTemplate, language: String, counter : Int) = {
     val assembler = new SimplePropertyTemplateAssembler(rmlModel, language, simplePropertyTemplate, counter)
     assembler.assemble()
   }
@@ -33,7 +135,7 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  def assembleConstantTemplate(rmlModel: RMLModel, constantTemplate : ConstantTemplate, language: String, counter : Int) = {
+  private def assembleConstantTemplate(rmlModel: RMLModel, constantTemplate : ConstantTemplate, language: String, counter : Int) = {
     val assembler = new ConstantTemplateAssembler(rmlModel, language, constantTemplate, counter)
     assembler.assemble()
   }
@@ -46,7 +148,7 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  def assembleStartDateTemplate(rmlModel: RMLModel, startDateTemplate : StartDateTemplate, language: String, counter : Int) = {
+  private def assembleStartDateTemplate(rmlModel: RMLModel, startDateTemplate : StartDateTemplate, language: String, counter : Int) = {
     val assembler = new StartDateTemplateAssembler(rmlModel, language, startDateTemplate, counter)
     assembler.assemble()
   }
@@ -59,7 +161,7 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  def assembleEndDateTemplate(rmlModel: RMLModel, endDateTemplate : EndDateTemplate, language: String, counter : Int) = {
+  private def assembleEndDateTemplate(rmlModel: RMLModel, endDateTemplate : EndDateTemplate, language: String, counter : Int) = {
     val assembler = new EndDateTemplateAssembler(rmlModel, language, endDateTemplate, counter)
     assembler.assemble()
   }
@@ -72,8 +174,20 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  def assembleGeocoordinateTemplate(rmlModel: RMLModel, geocoordinateTemplate : GeocoordinateTemplate, language: String, counter : Int) = {
+  private def assembleGeocoordinateTemplate(rmlModel: RMLModel, geocoordinateTemplate : GeocoordinateTemplate, language: String, counter : Int) = {
     val assembler = new GeocoordinateTemplateAssembler(rmlModel, language, geocoordinateTemplate, counter)
+    assembler.assemble()
+  }
+
+  /**
+    *
+    * @param rMLModel
+    * @param conditionalTemplate
+    * @param language
+    * @param counter
+    */
+  private def assembleConditionalTemplate(rMLModel: RMLModel, conditionalTemplate: ConditionalTemplate, language: String, counter : Int) = {
+    val assembler = new ConditionalTemplateAssembler(rMLModel, conditionalTemplate, language, counter)
     assembler.assemble()
   }
 
