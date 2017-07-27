@@ -7,7 +7,6 @@ import javax.ws.rs.{Produces, _}
 import com.fasterxml.jackson.databind.node.{JsonNodeFactory, ObjectNode}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyPropertyException}
-import org.dbpedia.extraction.mappings.rml.model
 import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
 import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLEditModelJSONFactory}
@@ -245,7 +244,9 @@ class RML {
       val mapping = getMapping(mappingNode)
       val template = getTemplate(input, ConditionalTemplate.NAME).asInstanceOf[ConditionalTemplate]
 
-      
+      // TODO: assemble the mapping
+
+      // create response
       createNotImplementedResponse
 
     } catch {
@@ -265,7 +266,10 @@ class RML {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addIntermediateMapping(input : String) = {
-    Response.noContent()
+
+    // TODO: implement
+
+    createNotImplementedResponse
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
