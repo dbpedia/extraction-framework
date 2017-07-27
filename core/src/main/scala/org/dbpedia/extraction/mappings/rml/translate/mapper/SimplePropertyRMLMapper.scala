@@ -27,7 +27,7 @@ class SimplePropertyRMLMapper(rmlModel: RMLTranslationModel, mapping: SimpleProp
 
   def addIndependentSimplePropertyMapper() : List[RMLPredicateObjectMap] =
   {
-    val uri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
+    val uri = RMLUri(rmlModel.wikiTitle.resourceIri + "/SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
     val simplePropertyPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(uri)
     addSimplePropertyToPredicateObjectMap(simplePropertyPom)
 
@@ -37,12 +37,12 @@ class SimplePropertyRMLMapper(rmlModel: RMLTranslationModel, mapping: SimpleProp
   def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val simplePropertyMappingUri = new RMLUri(uri + "/SimplePropertyMapping/" + TemplateRMLMapper.simplePropertyCount)
+    val simplePropertyMappingUri = RMLUri(uri + "/SimplePropertyMapping/" + TemplateRMLMapper.simplePropertyCount)
     TemplateRMLMapper.increaseSimplePropertyCount() // this is needed to assign a number in the uri's
     val simplePmPom = triplesMap.addPredicateObjectMap(simplePropertyMappingUri)
 
     simplePmPom.addDCTermsType(new RMLLiteral("simplePropertyMapping"))
-    simplePmPom.addPredicate(new RMLUri(mapping.ontologyProperty.uri))
+    simplePmPom.addPredicate(RMLUri(mapping.ontologyProperty.uri))
     addSimplePropertyToPredicateObjectMap(simplePmPom)
 
     List(simplePmPom)
@@ -51,7 +51,7 @@ class SimplePropertyRMLMapper(rmlModel: RMLTranslationModel, mapping: SimpleProp
 
   private def addDatatype(objectMap: RMLObjectMap) = {
     if (mapping.unit != null) {
-      objectMap.addDatatype(new RMLUri(mapping.unit.uri))
+      objectMap.addDatatype(RMLUri(mapping.unit.uri))
     }
   }
 
@@ -79,13 +79,13 @@ class SimplePropertyRMLMapper(rmlModel: RMLTranslationModel, mapping: SimpleProp
 
       // the next few lines check if the SimplePropertyFunction already exists or not in the mapping file so that
       // there is always a maximum of one ExecutePOMs of this function in a mapping
-      if(!rmlModel.containsResource(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name)))
+      if(!rmlModel.containsResource(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name)))
       {
         createSimplePropertyFunction(functionValue)
       }
       else
       {
-        functionValue.addPredicateObjectMap(new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction"))
+        functionValue.addPredicateObjectMap(RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction"))
       }
 
       // add the remaining parameters
@@ -97,7 +97,7 @@ class SimplePropertyRMLMapper(rmlModel: RMLTranslationModel, mapping: SimpleProp
   {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
-    parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
+    parameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
     val parameterObjectMapUri = parameterPomUri.extend("/ObjectMap")
     val objectMap = parameterPom.addObjectMap(parameterObjectMapUri)
     objectMap.addRMLReference(new RMLLiteral(getParameterValue(param)))
@@ -107,7 +107,7 @@ class SimplePropertyRMLMapper(rmlModel: RMLTranslationModel, mapping: SimpleProp
   {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
-    parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
+    parameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
     parameterPom.addObject(new RMLLiteral(getParameterValue(param)))
   }
 
@@ -134,10 +134,10 @@ class SimplePropertyRMLMapper(rmlModel: RMLTranslationModel, mapping: SimpleProp
     * @return
     */
   private def createSimplePropertyFunction(functionValue : RMLTriplesMap) = {
-    val executePomUri = new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction") // to make the uri short and simple
+    val executePomUri = RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction") // to make the uri short and simple
     val executePom = functionValue.addPredicateObjectMap(executePomUri)
-    executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    executePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
+    executePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    executePom.addObject(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
   }
 
   /**

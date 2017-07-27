@@ -12,18 +12,15 @@ import org.dbpedia.extraction.util.Language
 /**
   * Created by wmaroy on 25.07.17.
   */
-class ConstantTemplateAssembler(rmlModel : RMLModel, language : String, template: ConstantTemplate, counter : Int) {
-
-  private lazy val constantCount = counter
+class ConstantTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: ConstantTemplate, counter : Int) {
 
   def assemble() = {
-    val uniqueUri = rmlModel.triplesMap.resource.getURI
-    addConstantMappingToTriplesMap(uniqueUri, rmlModel.triplesMap)
+    addConstantMappingToTriplesMap(baseUri, rmlModel.triplesMap)
   }
 
   def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap)  =
   {
-    val constantMappingUri = new RMLUri(uri + "/ConstantMapping/" + constantCount)
+    val constantMappingUri = RMLUri(uri + "/ConstantMapping/" + counter)
 
     val constantPom = triplesMap.addPredicateObjectMap(constantMappingUri)
     addConstantValuePredicateObjectMap(constantPom)
@@ -32,7 +29,7 @@ class ConstantTemplateAssembler(rmlModel : RMLModel, language : String, template
 
   private def addConstantValuePredicateObjectMap(constantPom: RMLPredicateObjectMap) =
   {
-    constantPom.addPredicate(new RMLUri(template.ontologyProperty.uri))
+    constantPom.addPredicate(RMLUri(template.ontologyProperty.uri))
 
     if(template.unit == null) {
 
@@ -47,7 +44,7 @@ class ConstantTemplateAssembler(rmlModel : RMLModel, language : String, template
           if (!uri.isAbsolute) Language(language).resourceUri.append(template.value)
           else uri.toString
 
-        constantPom.addObject(new RMLUri(valueURI))
+        constantPom.addObject(RMLUri(valueURI))
       } else {
         constantPom.addObject(new RMLLiteral(template.value))
       }
@@ -69,9 +66,9 @@ class ConstantTemplateAssembler(rmlModel : RMLModel, language : String, template
 
     val executePomUri = functionValueUri.extend("/ExecutePOM")
     val executePom = functionValue.addPredicateObjectMap(executePomUri)
-    executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    executePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
     val ExecuteObjectMapUri = executePomUri.extend("/ObjectMap")
-    executePom.addObjectMap(ExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.unitFunction.name))
+    executePom.addObjectMap(ExecuteObjectMapUri).addConstant(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.unitFunction.name))
 
     addParameterFunction(DbfFunction.unitFunction.unitParameter, functionValue)
     addParameterFunction(DbfFunction.unitFunction.valueParameter, functionValue)
@@ -82,7 +79,7 @@ class ConstantTemplateAssembler(rmlModel : RMLModel, language : String, template
   {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
-    parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
+    parameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
     val parameterObjectMapUri = parameterPomUri.extend("/ObjectMap")
     parameterPom.addObjectMap(parameterObjectMapUri).addRMLReference(new RMLLiteral(getParameterValue(param)))
   }

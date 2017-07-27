@@ -28,12 +28,12 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     val firstTemplateMapping = firstConditionMapping.mapping.asInstanceOf[TemplateMapping]
 
     //add first mapToClass
-    val mapToClassPomUri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/ConditionalMapping" + "/" +
+    val mapToClassPomUri = RMLUri(rmlModel.wikiTitle.resourceIri + "/ConditionalMapping" + "/" +
       firstConditionMapping.templateProperty + "_" + firstConditionMapping.operator + "_" + firstConditionMapping.value)
     val mapToClassPom = rmlModel.triplesMap.addConditionalPredicateObjectMap(mapToClassPomUri)
 
-    mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
-    mapToClassPom.addObject(new RMLUri(firstTemplateMapping.mapToClass.uri))
+    mapToClassPom.addPredicate(RMLUri(RdfNamespace.RDF.namespace + "type"))
+    mapToClassPom.addObject(RMLUri(firstTemplateMapping.mapToClass.uri))
 
     val conditionFunctionTermMap = addEqualCondition(firstConditionMapping, mapToClassPom)
 
@@ -67,10 +67,10 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     val condition = mapping.cases(index)
     val templateMapping = condition.mapping.asInstanceOf[TemplateMapping]
 
-    val mapToClassPomUri = new RMLUri(predicateObjectMap.resource.getURI).extend("/" + index)
+    val mapToClassPomUri = RMLUri(predicateObjectMap.resource.getURI).extend("/" + index)
     val mapToClassPom = predicateObjectMap.addFallbackMap(mapToClassPomUri)
-    mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
-    mapToClassPom.addObject(new RMLUri(templateMapping.mapToClass.uri))
+    mapToClassPom.addPredicate(RMLUri(RdfNamespace.RDF.namespace + "type"))
+    mapToClassPom.addObject(RMLUri(templateMapping.mapToClass.uri))
 
     val conditionFunctionTermMap = if(index < mapping.cases.size-1) {
        addEqualCondition(condition, mapToClassPom)
@@ -142,21 +142,21 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     functionValue.addLogicalSource(rmlModel.logicalSource)
     functionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
-    val executePom = functionValue.addPredicateObjectMap(new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/" + conditionMapping.operator))
-    executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    executePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator))
+    val executePom = functionValue.addPredicateObjectMap(RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/" + conditionMapping.operator))
+    executePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    executePom.addObject(RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator))
 
     // checks if this condition needs a value or not
     if(conditionMapping.value != null) {
       val paramValuePom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/ValueParameterPOM"))
-      paramValuePom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace  + conditionMapping.operator + "/" + DbfFunction.operatorFunction.valueParameter))
+      paramValuePom.addPredicate(RMLUri(RdfNamespace.DBF.namespace  + conditionMapping.operator + "/" + DbfFunction.operatorFunction.valueParameter))
       paramValuePom.addObject(new RMLLiteral(conditionMapping.value))
     }
 
     // checks if this condition needs a property or not
     if(conditionMapping.templateProperty != null) {
       val paramPropertyPom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/PropertyParameterPOM"))
-      paramPropertyPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator + "/" + DbfFunction.operatorFunction.propertyParameter))
+      paramPropertyPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator + "/" + DbfFunction.operatorFunction.propertyParameter))
       paramPropertyPom.addObjectMap(paramPropertyPom.uri.extend("/ObjectMap")).addRMLReference(new RMLLiteral(conditionMapping.templateProperty))
     }
 

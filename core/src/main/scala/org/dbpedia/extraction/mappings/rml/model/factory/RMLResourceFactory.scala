@@ -56,7 +56,7 @@ class RMLResourceFactory(model: Model) {
 
   def createRMLUri(uri: String) : RMLUri =
   {
-    new RMLUri(uri)
+    RMLUri(uri)
   }
 
   def createRMLLiteral(literal: String) : RMLLiteral =

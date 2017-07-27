@@ -11,14 +11,14 @@ import org.dbpedia.extraction.wikiparser.WikiTitle
   */
 class RMLTranslationModel(val wikiTitle: WikiTitle, val sourceUri : String) extends RMLModel {
 
-  protected val _triplesMap: RMLTriplesMap = rmlFactory.createRMLTriplesMap(new RMLUri(wikiTitle.resourceIri))
-  protected val _subjectMap: RMLSubjectMap = _triplesMap.addSubjectMap(new RMLUri(convertToSubjectMapUri(wikiTitle)))
-  protected val _logicalSource: RMLLogicalSource = _triplesMap.addLogicalSource(new RMLUri(convertToLogicalSourceUri(wikiTitle)))
-  protected val _functionSubjectMap: RMLSubjectMap = rmlFactory.createRMLSubjectMap(new RMLUri(convertToSubjectMapUri(wikiTitle) + "/Function"))
-    .addClass(new RMLUri(RdfNamespace.FNO.namespace + "Execution"))
+  protected val _triplesMap: RMLTriplesMap = rmlFactory.createRMLTriplesMap(RMLUri(wikiTitle.resourceIri))
+  protected val _subjectMap: RMLSubjectMap = _triplesMap.addSubjectMap(RMLUri(convertToSubjectMapUri(wikiTitle)))
+  protected val _logicalSource: RMLLogicalSource = _triplesMap.addLogicalSource(RMLUri(convertToLogicalSourceUri(wikiTitle)))
+  protected val _functionSubjectMap: RMLSubjectMap = rmlFactory.createRMLSubjectMap(RMLUri(convertToSubjectMapUri(wikiTitle) + "/Function"))
+    .addClass(RMLUri(RdfNamespace.FNO.namespace + "Execution"))
     .addBlankNodeTermType()
 
   _logicalSource.addIterator(new RMLLiteral("Infobox:" + wikiTitle.encoded))
-  _logicalSource.addReferenceFormulation(new RMLUri(RdfNamespace.QL.namespace + "wikitext"))
+  _logicalSource.addReferenceFormulation(RMLUri(RdfNamespace.QL.namespace + "wikitext"))
 
 }

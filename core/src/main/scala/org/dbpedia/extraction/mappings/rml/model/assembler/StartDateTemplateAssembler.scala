@@ -10,7 +10,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 26.07.17.
   */
-class StartDateTemplateAssembler(rmlModel : RMLModel, language : String, template: StartDateTemplate, counter : Int) {
+class StartDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: StartDateTemplate, counter : Int) {
 
   def assemble() = {
     addStartDateMapping()
@@ -18,13 +18,12 @@ class StartDateTemplateAssembler(rmlModel : RMLModel, language : String, templat
 
   def addStartDateMapping()  =
   {
-    val uri = rmlModel.triplesMap.resource.getURI
-    addStartDateMappingToTriplesMap(uri, rmlModel.triplesMap)
+    addStartDateMappingToTriplesMap(baseUri, rmlModel.triplesMap)
   }
 
   def addStartDateMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) = {
 
-    val startUri = new RMLUri(uri + "/" +  RMLUri.STARTDATEMAPPING + "/" + counter)
+    val startUri = RMLUri(uri + "/" +  RMLUri.STARTDATEMAPPING + "/" + counter)
     val startDateIntervalPom = triplesMap.addPredicateObjectMap(startUri)
 
     addStartDateMappingToPredicateObjectMaps(startDateIntervalPom)
@@ -33,7 +32,7 @@ class StartDateTemplateAssembler(rmlModel : RMLModel, language : String, templat
 
   private def addStartDateMappingToPredicateObjectMaps(startDateIntervalPom: RMLPredicateObjectMap) =
   {
-    startDateIntervalPom.addPredicate(new RMLUri(template.ontologyProperty.uri))
+    startDateIntervalPom.addPredicate(RMLUri(template.ontologyProperty.uri))
 
     val startFunctionTermMapUri = startDateIntervalPom.uri.extend("/FunctionTermMap")
     val startFunctionTermMap = startDateIntervalPom.addFunctionTermMap(startFunctionTermMapUri)
@@ -45,14 +44,14 @@ class StartDateTemplateAssembler(rmlModel : RMLModel, language : String, templat
     startFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
     // adding the execute pom of the start date function
-    val startExecutePom = startFunctionValue.addPredicateObjectMap(new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/StartDateFunction"))
-    startExecutePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    startExecutePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.name))
+    val startExecutePom = startFunctionValue.addPredicateObjectMap(RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/StartDateFunction"))
+    startExecutePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    startExecutePom.addObject(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.name))
 
     // adding the property parameter pom of the start date function
     val startParameterPomUri = startFunctionValueUri.extend("/PropertyParameterPOM")
     val startParameterPom = startFunctionValue.addPredicateObjectMap(startParameterPomUri)
-    startParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.startDateParameter))
+    startParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.startDateParameter))
     val startParameterObjectMapUri = startParameterPomUri.extend("/ObjectMap")
     startParameterPom.addObjectMap(startParameterObjectMapUri).addRMLReference(new RMLLiteral(template.property))
 

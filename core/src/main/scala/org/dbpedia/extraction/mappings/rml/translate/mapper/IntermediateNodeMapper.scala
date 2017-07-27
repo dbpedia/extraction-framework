@@ -20,7 +20,7 @@ class IntermediateNodeMapper(rmlModel: RMLTranslationModel, mapping: Intermediat
   def addIndependentIntermediateNodeMapping() : List[RMLPredicateObjectMap] =
   {
     //create the predicate object map and add it to the triples map
-    val uri = new RMLUri(rmlModel.wikiTitle.resourceIri +
+    val uri = RMLUri(rmlModel.wikiTitle.resourceIri +
                             "/IntermediateNodeMapping/" +
                             mapping.nodeClass.name +
                             "/" +
@@ -37,7 +37,7 @@ class IntermediateNodeMapper(rmlModel: RMLTranslationModel, mapping: Intermediat
   def addIntermediateNodeMapping() : List[RMLPredicateObjectMap] =
   {
 
-    val uri = new RMLUri(rmlModel.wikiTitle.resourceIri +
+    val uri = RMLUri(rmlModel.wikiTitle.resourceIri +
                           "/IntermediateNodeMapping/" +
                           mapping.nodeClass.name + "/" +
                           mapping.correspondingProperty.name +
@@ -56,7 +56,7 @@ class IntermediateNodeMapper(rmlModel: RMLTranslationModel, mapping: Intermediat
   {
 
 
-    intermediateNodePom.addPredicate(new RMLUri(mapping.correspondingProperty.uri))
+    intermediateNodePom.addPredicate(RMLUri(mapping.correspondingProperty.uri))
     intermediateNodePom.addDCTermsType(new RMLLiteral("intermediateNodeMapping"))
 
     val intermediateNodeObjectMapUri = intermediateNodePom.uri.extend("/ObjectMap")
@@ -67,7 +67,7 @@ class IntermediateNodeMapper(rmlModel: RMLTranslationModel, mapping: Intermediat
     parentTriplesMap.addLogicalSource(rmlModel.logicalSource)
 
     val parentSubjectMap = parentTriplesMap.addSubjectMap(parentTriplesMapUri.extend("/SubjectMap"))
-    parentSubjectMap.addClass(new RMLUri(mapping.nodeClass.uri))
+    parentSubjectMap.addClass(RMLUri(mapping.nodeClass.uri))
     parentSubjectMap.addIRITermType()
     parentSubjectMap.addTemplate(new RMLLiteral("http://en.dbpedia.org/resource/{wikititle}__" + intermedatiaNodeMappingsNumber))
     if(mapping.correspondingProperty != null) parentSubjectMap.addRMLReference(new RMLLiteral(mapping.correspondingProperty.uri))

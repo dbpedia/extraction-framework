@@ -10,23 +10,20 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   * Created by wmaroy on 24.07.17.
   *
   */
-class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, template: SimplePropertyTemplate, counter : Int) {
-
-  private lazy val simplePropertyCount = counter
+class SimplePropertyTemplateAssembler(rmlModel : RMLModel, baseUri: String, language : String, template: SimplePropertyTemplate, counter : Int) {
 
   def assemble() = {
     val triplesMap = rmlModel.triplesMap
-    val uri = triplesMap.resource.getURI
-    addSimplePropertyMappingToTriplesMap(uri, triplesMap)
+    addSimplePropertyMappingToTriplesMap(baseUri, triplesMap)
   }
 
-  def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  private def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val simplePropertyMappingUri = new RMLUri(uri + "/SimplePropertyMapping/" + simplePropertyCount )
+    val simplePropertyMappingUri = RMLUri(uri + "/SimplePropertyMapping/" + counter )
     val simplePmPom = triplesMap.addPredicateObjectMap(simplePropertyMappingUri)
 
-    simplePmPom.addPredicate(new RMLUri(template.ontologyProperty.uri))
+    simplePmPom.addPredicate(RMLUri(template.ontologyProperty.uri))
     addSimplePropertyToPredicateObjectMap(simplePmPom)
 
     List(simplePmPom)
@@ -54,13 +51,13 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, te
 
     // the next few lines check if the SimplePropertyFunction already exists or not in the mapping file so that
     // there is always a maximum of one ExecutePOMs of this function in a mapping
-    if(!rmlModel.containsResource(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name)))
+    if(!rmlModel.containsResource(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name)))
     {
       createSimplePropertyFunction(functionValue)
     }
     else
     {
-      functionValue.addPredicateObjectMap(new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction"))
+      functionValue.addPredicateObjectMap(RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction"))
     }
 
     // add the remaining parameters
@@ -75,15 +72,15 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, te
     * @return
     */
   private def createSimplePropertyFunction(functionValue : RMLTriplesMap) = {
-    val executePomUri = new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction") // to make the uri short and simple
+    val executePomUri = RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction") // to make the uri short and simple
     val executePom = functionValue.addPredicateObjectMap(executePomUri)
-    executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    executePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
+    executePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    executePom.addObject(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
   }
 
   private def addDatatype(objectMap: RMLObjectMap) = {
     if (template.unit != null) {
-      objectMap.addDatatype(new RMLUri(template.unit.uri))
+      objectMap.addDatatype(RMLUri(template.unit.uri))
     }
 
 
@@ -141,7 +138,7 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, te
   {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
-    parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
+    parameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
     val parameterObjectMapUri = parameterPomUri.extend("/ObjectMap")
     val objectMap = parameterPom.addObjectMap(parameterObjectMapUri)
     objectMap.addRMLReference(new RMLLiteral(getParameterValue(param)))
@@ -151,7 +148,7 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, language : String, te
   {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
-    parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
+    parameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
     parameterPom.addObject(new RMLLiteral(getParameterValue(param)))
   }
 

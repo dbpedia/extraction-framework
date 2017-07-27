@@ -22,6 +22,10 @@ import scala.xml.Elem
 
 /**
   * Created by wmaroy on 22.07.17.
+  *
+  * RML resource
+  * Contains RML Template API
+  *
   */
 
 @Path("rml/")
@@ -35,7 +39,7 @@ class RML {
   @Produces(Array("application/xhtml+xml"))
   def get: Elem = {
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-      {ServerHeader.getHeader("RML API")}
+      {ServerHeader.getHeader("RML API 1.0")}
       <body>
         <h3>RML API 1.0.0</h3>
       </body>
@@ -74,7 +78,9 @@ class RML {
       val template = getTemplate(input, SimplePropertyTemplate.NAME)
 
       // assemble (side-effects)
-      assemble(mapping, template, RMLUri.SIMPLEPROPERTYMAPPING)
+      val count = mapping.count(RMLUri.SIMPLEPROPERTYMAPPING)
+      val counter = Counter(simpleProperties = count)
+      TemplateAssembler.assembleTemplate(mapping, template, mapping.language, counter)
 
       // create the response
       val msg = "SimplePropertyMapping succesfully added."
@@ -88,6 +94,7 @@ class RML {
         e.printStackTrace()
         createInternalServerErrorResponse(e)
     }
+
   }
 
   /**
@@ -114,7 +121,9 @@ class RML {
       val template = getTemplate(input, ConstantTemplate.NAME)
 
       // assemble (side-effects)
-      assemble(mapping, template, RMLUri.CONSTANTMAPPING)
+      val count = mapping.count(RMLUri.CONSTANTMAPPING)
+      val counter = Counter(constants = count)
+      TemplateAssembler.assembleTemplate(mapping, template, mapping.language, counter)
 
       // create the response
       val msg = "Constant Mapping successfully added."
@@ -147,7 +156,9 @@ class RML {
       val template = getTemplate(input, GeocoordinateTemplate.NAME)
 
       // assemble (side-effects)
-      assemble(mapping, template, RMLUri.LATITUDEMAPPING)
+      val count = mapping.count(RMLUri.LATITUDEMAPPING)
+      val counter = Counter(geoCoordinates = count)
+      TemplateAssembler.assembleTemplate(mapping, template, mapping.language, counter)
 
       // create the response
       val msg = "Geocoordinate Mapping succesfully added."
@@ -183,7 +194,9 @@ class RML {
       val template = getTemplate(input, StartDateTemplate.NAME)
 
       // assemble (side-effects)
-      assemble(mapping, template, RMLUri.STARTDATEMAPPING)
+      val count = mapping.count(RMLUri.LATITUDEMAPPING)
+      val counter = Counter(startDates = count)
+      TemplateAssembler.assembleTemplate(mapping, template, mapping.language, counter)
 
       // create the response
       val msg = "Start Date Mapping successfully added."
@@ -215,7 +228,9 @@ class RML {
       val template = getTemplate(input, EndDateTemplate.NAME)
 
       // assemble (side-effects)
-      assemble(mapping, template, RMLUri.ENDDATEMAPPING)
+      val count = mapping.count(RMLUri.ENDDATEMAPPING)
+      val counter = Counter(endDates = count)
+      TemplateAssembler.assembleTemplate(mapping, template, mapping.language, counter)
 
       // create the response
       val msg = "End Date Mapping successfully added."
@@ -363,15 +378,6 @@ class RML {
     }
 
     template
-  }
-
-  /**
-    * Assembles a template to an RML Edit Model
-    */
-  private def assemble(mapping : RMLEditModel, template: Template, rmlURI : String) : Unit = {
-    val count = mapping.count(rmlURI)
-    val counter = Counter(simpleProperties = count)
-    TemplateAssembler.assembleTemplate(mapping, template, mapping.language, counter)
   }
 
 

@@ -9,7 +9,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 26.07.17.
   */
-class EndDateTemplateAssembler(rmlModel : RMLModel, language : String, template: EndDateTemplate, counter : Int) {
+class EndDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: EndDateTemplate, counter : Int) {
 
   def assemble() = {
     addEndDateMapping()
@@ -17,13 +17,12 @@ class EndDateTemplateAssembler(rmlModel : RMLModel, language : String, template:
 
   def addEndDateMapping()  =
   {
-    val uri = rmlModel.triplesMap.resource.getURI
-    addEndDateMappingToTriplesMap(uri, rmlModel.triplesMap)
+    addEndDateMappingToTriplesMap(baseUri, rmlModel.triplesMap)
   }
 
   def addEndDateMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) = {
 
-    val endUri = new RMLUri(uri + "/" +  RMLUri.ENDDATEMAPPING + "/" + counter)
+    val endUri = RMLUri(uri + "/" +  RMLUri.ENDDATEMAPPING + "/" + counter)
     val endDateIntervalPom = triplesMap.addPredicateObjectMap(endUri)
 
     addEndDateMappingToPredicateObjectMaps(endDateIntervalPom)
@@ -32,7 +31,7 @@ class EndDateTemplateAssembler(rmlModel : RMLModel, language : String, template:
 
   private def addEndDateMappingToPredicateObjectMaps(endDateIntervalPom: RMLPredicateObjectMap) =
   {
-    endDateIntervalPom.addPredicate(new RMLUri(template.ontologyProperty.uri))
+    endDateIntervalPom.addPredicate(RMLUri(template.ontologyProperty.uri))
 
     val endFunctionTermMapUri = endDateIntervalPom.uri.extend("/FunctionTermMap")
     val endFunctionTermMap = endDateIntervalPom.addFunctionTermMap(endFunctionTermMapUri)
@@ -44,14 +43,14 @@ class EndDateTemplateAssembler(rmlModel : RMLModel, language : String, template:
     endFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
     // adding the execute pom of the end date function
-    val endExecutePom = endFunctionValue.addPredicateObjectMap(new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/EndDateFunction"))
-    endExecutePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    endExecutePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.name))
+    val endExecutePom = endFunctionValue.addPredicateObjectMap(RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/EndDateFunction"))
+    endExecutePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    endExecutePom.addObject(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.name))
 
     // adding the property parameter pom of the end date function
     val endParameterPomUri = endFunctionValueUri.extend("/PropertyParameterPOM")
     val endParameterPom = endFunctionValue.addPredicateObjectMap(endParameterPomUri)
-    endParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.endDateParameter))
+    endParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.endDateParameter))
     val endParameterObjectMapUri = endParameterPomUri.extend("/ObjectMap")
     endParameterPom.addObjectMap(endParameterObjectMapUri).addRMLReference(new RMLLiteral(template.property))
 

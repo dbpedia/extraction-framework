@@ -12,7 +12,7 @@ class RMLResource(val resource: Resource) {
   protected val model = resource.getModel
   protected val factory = new RMLResourceFactory(model)
 
-  private val _uri = new RMLUri(resource.getURI)
+  private val _uri = RMLUri(resource.getURI)
 
   def uri = _uri
 

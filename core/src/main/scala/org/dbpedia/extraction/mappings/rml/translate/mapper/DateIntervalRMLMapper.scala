@@ -27,11 +27,11 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
 
   def addIndependentDateIntervalMapping() : List[RMLPredicateObjectMap] = {
     val uri = rmlModel.wikiTitle.resourceIri
-    val startUri = new RMLUri(uri + "/StartDateMapping/" + TemplateRMLMapper.startDateCount)
+    val startUri = RMLUri(uri + "/StartDateMapping/" + TemplateRMLMapper.startDateCount)
     val startPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(startUri)
     TemplateRMLMapper.increaseStartDateCount()
 
-    val endUri = new RMLUri(uri + "/EndDateMapping/" + TemplateRMLMapper.endDateCount)
+    val endUri = RMLUri(uri + "/EndDateMapping/" + TemplateRMLMapper.endDateCount)
     val endPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(endUri)
     TemplateRMLMapper.increaseEndDateCount()
 
@@ -42,11 +42,11 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
 
   def addDateIntervalMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) : List[RMLPredicateObjectMap] = {
 
-    val startUri = new RMLUri(uri + "/StartDateMapping/" + TemplateRMLMapper.startDateCount)
+    val startUri = RMLUri(uri + "/StartDateMapping/" + TemplateRMLMapper.startDateCount)
     val startDateIntervalPom = triplesMap.addPredicateObjectMap(startUri)
     TemplateRMLMapper.increaseStartDateCount()
 
-    val endUri = new RMLUri(uri + "/EndDateMapping/" + TemplateRMLMapper.endDateCount)
+    val endUri = RMLUri(uri + "/EndDateMapping/" + TemplateRMLMapper.endDateCount)
     val endDateIntervalPom = triplesMap.addPredicateObjectMap(endUri)
     TemplateRMLMapper.increaseEndDateCount()
 
@@ -58,8 +58,8 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
 
   private def addDateIntervalMappingToPredicateObjectMaps(startDateIntervalPom: RMLPredicateObjectMap, endDateIntervalPom: RMLPredicateObjectMap) =
   {
-    startDateIntervalPom.addPredicate(new RMLUri(mapping.startDateOntologyProperty.uri))
-    endDateIntervalPom.addPredicate(new RMLUri(mapping.endDateOntologyProperty.uri))
+    startDateIntervalPom.addPredicate(RMLUri(mapping.startDateOntologyProperty.uri))
+    endDateIntervalPom.addPredicate(RMLUri(mapping.endDateOntologyProperty.uri))
 
     val startFunctionTermMapUri = startDateIntervalPom.uri.extend("/FunctionTermMap")
     val startFunctionTermMap = startDateIntervalPom.addFunctionTermMap(startFunctionTermMapUri)
@@ -77,14 +77,14 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
     startFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
     // adding the execute pom of the start date function
-    val startExecutePom = startFunctionValue.addPredicateObjectMap(new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/StartDateFunction"))
-    startExecutePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    startExecutePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.name))
+    val startExecutePom = startFunctionValue.addPredicateObjectMap(RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/StartDateFunction"))
+    startExecutePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    startExecutePom.addObject(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.name))
 
     // adding the property parameter pom of the start date function
     val startParameterPomUri = startFunctionValueUri.extend("/PropertyParameterPOM")
     val startParameterPom = startFunctionValue.addPredicateObjectMap(startParameterPomUri)
-    startParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.startDateParameter))
+    startParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.startDateFunction.startDateParameter))
     val startParameterObjectMapUri = startParameterPomUri.extend("/ObjectMap")
     startParameterPom.addObjectMap(startParameterObjectMapUri).addRMLReference(new RMLLiteral(mapping.templateProperty))
 
@@ -92,14 +92,14 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
     endFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
     // adding the execute pom of the end date function
-    val endExecutePom = endFunctionValue.addPredicateObjectMap(new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/EndDateFunction"))
-    endExecutePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    endExecutePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.name))
+    val endExecutePom = endFunctionValue.addPredicateObjectMap(RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/EndDateFunction"))
+    endExecutePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    endExecutePom.addObject(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.name))
 
     // adding the property parameter pom of the end date function
     val endParameterPomUri = endFunctionValueUri.extend("/PropertyParameterPOM")
     val endParameterPom = endFunctionValue.addPredicateObjectMap(endParameterPomUri)
-    endParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace +  DbfFunction.endDateFunction.endDateParameter))
+    endParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace +  DbfFunction.endDateFunction.endDateParameter))
     val endParameterObjectMapUri = endParameterPomUri.extend("/ObjectMap")
     endParameterPom.addObjectMap(endParameterObjectMapUri).addRMLReference(new RMLLiteral(mapping.templateProperty))
 

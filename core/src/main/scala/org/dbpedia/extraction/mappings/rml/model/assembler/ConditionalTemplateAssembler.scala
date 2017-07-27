@@ -11,7 +11,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 27.07.17.
   */
-class ConditionalTemplateAssembler(rmlModel: RMLModel, conditionalTemplate: ConditionalTemplate, language: String, counter : Int) {
+class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditionalTemplate: ConditionalTemplate, language: String, counter : Int) {
 
   def assemble() = {
 
@@ -22,11 +22,11 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, conditionalTemplate: Cond
     val firstConditionMapping = conditionalTemplate.condition
 
     //add first mapToClass
-    val mapToClassPomUri = new RMLUri(rmlModel.triplesMap.resource.getURI + "/ConditionalMapping" + "/" + counter)
+    val mapToClassPomUri = RMLUri(rmlModel.triplesMap.resource.getURI + "/ConditionalMapping" + "/" + counter)
     val mapToClassPom = rmlModel.triplesMap.addConditionalPredicateObjectMap(mapToClassPomUri)
 
-    mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
-    mapToClassPom.addObject(new RMLUri(conditionalTemplate.ontologyClass.uri))
+    mapToClassPom.addPredicate(RMLUri(RdfNamespace.RDF.namespace + "type"))
+    mapToClassPom.addObject(RMLUri(conditionalTemplate.ontologyClass.uri))
 
     val conditionFunctionTermMap = addEqualCondition(firstConditionMapping, mapToClassPom)
 
@@ -61,10 +61,10 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, conditionalTemplate: Cond
     val condition = mapping.cases(index)
     val templateMapping = condition.mapping.asInstanceOf[TemplateMapping]
 
-    val mapToClassPomUri = new RMLUri(predicateObjectMap.resource.getURI).extend("/" + index)
+    val mapToClassPomUri = RMLUri(predicateObjectMap.resource.getURI).extend("/" + index)
     val mapToClassPom = predicateObjectMap.addFallbackMap(mapToClassPomUri)
-    mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
-    mapToClassPom.addObject(new RMLUri(templateMapping.mapToClass.uri))
+    mapToClassPom.addPredicate(RMLUri(RdfNamespace.RDF.namespace + "type"))
+    mapToClassPom.addObject(RMLUri(templateMapping.mapToClass.uri))
 
     val conditionFunctionTermMap = if(index < mapping.cases.size-1) {
       addEqualCondition(condition, mapToClassPom)
@@ -105,19 +105,19 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, conditionalTemplate: Cond
     functionValue.addLogicalSource(rmlModel.logicalSource)
     functionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
-    val executePom = functionValue.addPredicateObjectMap(new RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/" + condition.operator))
-    executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
-    executePom.addObject(new RMLUri(RdfNamespace.DBF.namespace + condition.operator))
+    val executePom = functionValue.addPredicateObjectMap(RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/" + condition.operator))
+    executePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    executePom.addObject(RMLUri(RdfNamespace.DBF.namespace + condition.operator))
 
     def addValueParameter(value : String, operator : String) = {
       val paramValuePom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/ValueParameterPOM"))
-      paramValuePom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace  + operator + "/" + DbfFunction.operatorFunction.valueParameter))
+      paramValuePom.addPredicate(RMLUri(RdfNamespace.DBF.namespace  + operator + "/" + DbfFunction.operatorFunction.valueParameter))
       paramValuePom.addObject(new RMLLiteral(value))
     }
 
     def addPropertyParameter(property : String, operator : String) = {
       val paramPropertyPom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/PropertyParameterPOM"))
-      paramPropertyPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + operator + "/" + DbfFunction.operatorFunction.propertyParameter))
+      paramPropertyPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + operator + "/" + DbfFunction.operatorFunction.propertyParameter))
       paramPropertyPom.addObjectMap(paramPropertyPom.uri.extend("/ObjectMap")).addRMLReference(new RMLLiteral(property))
     }
 

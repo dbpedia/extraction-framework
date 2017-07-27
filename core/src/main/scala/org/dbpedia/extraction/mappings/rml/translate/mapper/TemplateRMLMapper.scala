@@ -64,8 +64,8 @@ class TemplateRMLMapper(rmlModel: RMLTranslationModel, templateMapping: Template
   private def addCorrespondingPropertyAndClassToSubjectMap() =
   {
     if(templateMapping.correspondingProperty != null) {
-      val predicateObjectMap = rmlModel.triplesMap.addPredicateObjectMap(new RMLUri(rmlModel.wikiTitle.resourceIri + "/CorrespondingProperty"))
-      predicateObjectMap.addPredicate(new RMLUri(templateMapping.correspondingProperty.uri))
+      val predicateObjectMap = rmlModel.triplesMap.addPredicateObjectMap(RMLUri(rmlModel.wikiTitle.resourceIri + "/CorrespondingProperty"))
+      predicateObjectMap.addPredicate(RMLUri(templateMapping.correspondingProperty.uri))
       addCorrespondingClassToPredicateObjectMap(predicateObjectMap: RMLPredicateObjectMap)
     }
   }
@@ -76,7 +76,7 @@ class TemplateRMLMapper(rmlModel: RMLTranslationModel, templateMapping: Template
       val objectMap = predicateObjectMap.addObjectMap(predicateObjectMap.uri.extend("/ObjectMap"))
       val parentTriplesMap = objectMap.addParentTriplesMap(objectMap.uri.extend("/ParentTriplesMap"))
       val subjectMap = parentTriplesMap.addSubjectMap(parentTriplesMap.uri.extend("/SubjectMap"))
-      subjectMap.addClass(new RMLUri(templateMapping.correspondingClass.uri))
+      subjectMap.addClass(RMLUri(templateMapping.correspondingClass.uri))
       parentTriplesMap.addLogicalSource(rmlModel.logicalSource)
     }
   }
@@ -91,7 +91,7 @@ class TemplateRMLMapper(rmlModel: RMLTranslationModel, templateMapping: Template
     val relatedClasses = templateMapping.mapToClass.relatedClasses
     for(cls <- relatedClasses) {
       if(!cls.uri.contains("%3E")) {
-        subjectMap.addClass(new RMLUri(cls.uri))
+        subjectMap.addClass(RMLUri(cls.uri))
       }
     }
   }

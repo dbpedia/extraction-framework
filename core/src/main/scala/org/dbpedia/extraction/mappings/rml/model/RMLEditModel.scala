@@ -19,10 +19,10 @@ class RMLEditModel(private val mapping : Model,
   model.add(mapping)
 
   override protected val _triplesMap: RMLTriplesMap = getMainTriplesMap
-  override protected val _subjectMap: RMLSubjectMap = _triplesMap.addSubjectMap(new RMLUri(base + "SubjectMap"))
-  override protected val _logicalSource: RMLLogicalSource = _triplesMap.addLogicalSource(new RMLUri(base + "LogicalSource"))
-  override protected val _functionSubjectMap: RMLSubjectMap = rmlFactory.createRMLSubjectMap(new RMLUri(base + "SubjectMap/Function"))
-                                                                        .addClass(new RMLUri(RdfNamespace.FNO.namespace + "Execution"))
+  override protected val _subjectMap: RMLSubjectMap = _triplesMap.addSubjectMap(RMLUri(base + "SubjectMap"))
+  override protected val _logicalSource: RMLLogicalSource = _triplesMap.addLogicalSource(RMLUri(base + "LogicalSource"))
+  override protected val _functionSubjectMap: RMLSubjectMap = rmlFactory.createRMLSubjectMap(RMLUri(base + "SubjectMap/Function"))
+                                                                        .addClass(RMLUri(RdfNamespace.FNO.namespace + "Execution"))
                                                                         .addBlankNodeTermType()
 
   def count(templateName : String) : Int = {
@@ -39,7 +39,7 @@ class RMLEditModel(private val mapping : Model,
   private def getMainTriplesMap : RMLTriplesMap = {
     val triplesMapResourceIRI = base.substring(0, base.lastIndexOf('/'))
     val triplesMap = model.getResource(triplesMapResourceIRI)
-    rmlFactory.createRMLTriplesMap(new RMLUri(triplesMap.getURI))
+    rmlFactory.createRMLTriplesMap(RMLUri(triplesMap.getURI))
   }
 
   override def toString : String = {

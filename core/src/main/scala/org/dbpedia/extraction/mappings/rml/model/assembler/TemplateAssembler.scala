@@ -57,37 +57,37 @@ object TemplateAssembler {
 
       case SimplePropertyTemplate.NAME => {
         val templateInstance = template.asInstanceOf[SimplePropertyTemplate]
-        assembleSimplePropertyTemplate(rmlModel, templateInstance, language, counter.simpleProperties)
+        assembleSimplePropertyTemplate(rmlModel, templateInstance, baseUri, language, counter.simpleProperties)
         counter.update(simpleProperties = counter.simpleProperties + 1)
       }
 
       case ConstantTemplate.NAME => {
         val templateInstance = template.asInstanceOf[ConstantTemplate]
-        assembleConstantTemplate(rmlModel, templateInstance, language, counter.constants)
+        assembleConstantTemplate(rmlModel, templateInstance, baseUri, language, counter.constants)
         counter.update(constants = counter.constants + 1)
       }
 
       case GeocoordinateTemplate.NAME => {
         val templateInstance = template.asInstanceOf[GeocoordinateTemplate]
-        assembleGeocoordinateTemplate(rmlModel, templateInstance, language, counter.geoCoordinates)
+        assembleGeocoordinateTemplate(rmlModel, templateInstance, baseUri, language, counter.geoCoordinates)
         counter.update(geoCoordinates = counter.geoCoordinates + 1)
       }
 
       case StartDateTemplate.NAME => {
         val templateInstance = template.asInstanceOf[StartDateTemplate]
-        assembleStartDateTemplate(rmlModel, templateInstance, language, counter.startDates)
+        assembleStartDateTemplate(rmlModel, templateInstance, baseUri, language, counter.startDates)
         counter.update(startDates = counter.startDates + 1)
       }
 
       case EndDateTemplate.NAME => {
         val templateInstance = template.asInstanceOf[EndDateTemplate]
-        assembleEndDateTemplate(rmlModel, templateInstance, language, counter.endDates)
+        assembleEndDateTemplate(rmlModel, templateInstance, baseUri, language, counter.endDates)
         counter.update(endDates = counter.endDates + 1)
       }
 
       case ConditionalTemplate.NAME => {
        val templateInstance = template.asInstanceOf[ConditionalTemplate]
-        assembleConditionalTemplate(rmlModel, templateInstance, language, counter.conditionals)
+        assembleConditionalTemplate(rmlModel, templateInstance, baseUri, language, counter.conditionals)
         counter.update(conditionals = counter.conditionals + 1)
       }
 
@@ -113,7 +113,6 @@ object TemplateAssembler {
     assembleTemplate(rmlModel, baseUri, template, language, counter)
   }
 
-
   /**
     *
     * @param rmlModel
@@ -122,8 +121,8 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  private def assembleSimplePropertyTemplate(rmlModel : RMLModel, simplePropertyTemplate: SimplePropertyTemplate, language: String, counter : Int) = {
-    val assembler = new SimplePropertyTemplateAssembler(rmlModel, language, simplePropertyTemplate, counter)
+  private def assembleSimplePropertyTemplate(rmlModel : RMLModel, simplePropertyTemplate: SimplePropertyTemplate, baseUri: String, language: String, counter : Int) = {
+    val assembler = new SimplePropertyTemplateAssembler(rmlModel, baseUri, language, simplePropertyTemplate, counter)
     assembler.assemble()
   }
 
@@ -135,8 +134,8 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  private def assembleConstantTemplate(rmlModel: RMLModel, constantTemplate : ConstantTemplate, language: String, counter : Int) = {
-    val assembler = new ConstantTemplateAssembler(rmlModel, language, constantTemplate, counter)
+  private def assembleConstantTemplate(rmlModel: RMLModel, constantTemplate : ConstantTemplate, baseUri: String, language: String, counter : Int) = {
+    val assembler = new ConstantTemplateAssembler(rmlModel, baseUri, language, constantTemplate, counter)
     assembler.assemble()
   }
 
@@ -148,8 +147,8 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  private def assembleStartDateTemplate(rmlModel: RMLModel, startDateTemplate : StartDateTemplate, language: String, counter : Int) = {
-    val assembler = new StartDateTemplateAssembler(rmlModel, language, startDateTemplate, counter)
+  private def assembleStartDateTemplate(rmlModel: RMLModel, startDateTemplate : StartDateTemplate, baseUri: String, language: String, counter : Int) = {
+    val assembler = new StartDateTemplateAssembler(rmlModel, baseUri,language, startDateTemplate, counter)
     assembler.assemble()
   }
 
@@ -161,8 +160,8 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  private def assembleEndDateTemplate(rmlModel: RMLModel, endDateTemplate : EndDateTemplate, language: String, counter : Int) = {
-    val assembler = new EndDateTemplateAssembler(rmlModel, language, endDateTemplate, counter)
+  private def assembleEndDateTemplate(rmlModel: RMLModel, endDateTemplate : EndDateTemplate, baseUri: String, language: String, counter : Int) = {
+    val assembler = new EndDateTemplateAssembler(rmlModel, baseUri, language, endDateTemplate, counter)
     assembler.assemble()
   }
 
@@ -174,8 +173,8 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  private def assembleGeocoordinateTemplate(rmlModel: RMLModel, geocoordinateTemplate : GeocoordinateTemplate, language: String, counter : Int) = {
-    val assembler = new GeocoordinateTemplateAssembler(rmlModel, language, geocoordinateTemplate, counter)
+  private def assembleGeocoordinateTemplate(rmlModel: RMLModel, geocoordinateTemplate : GeocoordinateTemplate, baseUri: String, language: String, counter : Int) = {
+    val assembler = new GeocoordinateTemplateAssembler(rmlModel, baseUri, language, geocoordinateTemplate, counter)
     assembler.assemble()
   }
 
@@ -186,8 +185,8 @@ object TemplateAssembler {
     * @param language
     * @param counter
     */
-  private def assembleConditionalTemplate(rMLModel: RMLModel, conditionalTemplate: ConditionalTemplate, language: String, counter : Int) = {
-    val assembler = new ConditionalTemplateAssembler(rMLModel, conditionalTemplate, language, counter)
+  private def assembleConditionalTemplate(rMLModel: RMLModel, conditionalTemplate: ConditionalTemplate, baseUri: String, language: String, counter : Int) = {
+    val assembler = new ConditionalTemplateAssembler(rMLModel, baseUri, conditionalTemplate, language, counter)
     assembler.assemble()
   }
 
