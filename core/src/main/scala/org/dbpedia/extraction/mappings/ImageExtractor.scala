@@ -100,15 +100,15 @@ extends PageNodeExtractor
                  else
                    fileName
                  if checkImageRights(encodedFileName)) {
-              return Some((encodedFileName, textNode))
-            }
+                  return Some((encodedFileName, textNode))
+                }
             searchImage(children, sections).foreach(s => return Some(s))
           }
           case (linkNode@InternalLinkNode(destination, _, _, _)) if destination.namespace == Namespace.File => {
             for (fileName <- ImageExtractorConfig.ImageLinkRegex.findFirstIn(destination.encoded);
                  if checkImageRights(fileName)) {
-              return Some((fileName, linkNode))
-            }
+                    return Some((fileName, linkNode))
+                  }
           }
           case _ => {
             searchImage(node.children, sections).foreach(s => return Some(s))

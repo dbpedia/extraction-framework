@@ -15,7 +15,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
 import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, HashSet}
+import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**

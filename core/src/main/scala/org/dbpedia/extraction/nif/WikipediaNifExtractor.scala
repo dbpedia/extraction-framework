@@ -169,7 +169,7 @@ class WikipediaNifExtractor(
       }
     }
 
-    nodes = nodes.dropWhile(node => node.nodeName() != "p")    //move cursor to infobox / abstract
+    nodes = nodes.dropWhile(node => node.nodeName() != "p" || node.childNodeSize() == 0)    //move cursor to abstract
     val ab = nodes.takeWhile(node => !isWikiNextTitle(node) && !isWikiToc(node) && !isWikiPageEnd(node))
 
     tocMap.append(new PageSection(                     //save abstract (abstract = section 0)
