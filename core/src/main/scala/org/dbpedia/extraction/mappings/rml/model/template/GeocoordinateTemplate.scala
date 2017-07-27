@@ -16,4 +16,10 @@ case class GeocoordinateTemplate(ontologyProperty: OntologyProperty,
                                  longitudeDegrees : String,
                                  longitudeMinutes : String,
                                  longitudeSeconds : String,
-                                 longitudeDirection: String) extends Template
+                                 longitudeDirection: String) extends Template(GeocoordinateTemplate.NAME)
+
+object GeocoordinateTemplate {
+
+  val NAME = "GeocoordinateTemplate"
+
+}

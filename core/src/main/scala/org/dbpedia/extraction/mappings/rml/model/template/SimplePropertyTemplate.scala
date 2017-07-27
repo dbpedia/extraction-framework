@@ -13,25 +13,10 @@ case class SimplePropertyTemplate(property : String,
                                   suffix : String,
                                   transform : String,
                                   unit : Datatype,
-                                  factor : Double) extends Template {
+                                  factor : Double) extends Template(SimplePropertyTemplate.NAME)
 
-  override def toString = {
-    val builder = new StringBuilder
-    builder.append("Simple Property Template:\n" )
-    builder.append(createIfNotNull("Property", property))
-    builder.append(createIfNotNull("Ontology Property", ontologyProperty.name))
-    builder.append(createIfNotNull("Select", select))
-    builder.append(createIfNotNull("Prefix", prefix))
-    builder.append(createIfNotNull("Suffix", suffix))
-    if(unit != null) {
-      builder.append(createIfNotNull("unit", unit.name))
-    }
-    builder.append(createIfNotNull("factor", factor.toString))
-    builder.toString()
-  }
+object SimplePropertyTemplate {
 
-  private def createIfNotNull(name : String, value : String) : String = {
-    if(value != "null") name + ": " + value + "\n" else ""
-  }
+  val NAME = "SimplePropertyTemplate"
 
 }

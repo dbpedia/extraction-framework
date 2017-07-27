@@ -42,7 +42,6 @@ object RMLOntologyUtil {
       } catch {
         case _: NoSuchElementException => throw new IllegalArgumentException("Ontology class not found: " + ontologyClassName)
       }
-
   }
 
   def loadOntologyProperty(ontologyPropertyName: String, context: {def ontology: Ontology}): OntologyProperty = {

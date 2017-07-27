@@ -8,8 +8,10 @@ import org.dbpedia.extraction.ontology.datatypes.Datatype
   */
 class ConstantTemplate(val ontologyProperty: OntologyProperty,
                        val value: String,
-                       val unit: Datatype) extends Template {
+                       val unit: Datatype) extends Template(ConstantTemplate.NAME)
 
+object ConstantTemplate {
 
+  val NAME = "ConstantTemplate"
 
 }

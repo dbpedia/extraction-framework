@@ -18,11 +18,11 @@ object JSONTemplateFactory extends TemplateFactory {
     */
   override def createConstantTemplate(templateFactoryBundle: TemplateFactoryBundle): ConstantTemplate = {
     // get bundle
-    val bundle = JSONFactoryUtil.getBundle(templateFactoryBundle)
+    val bundle = getBundle(templateFactoryBundle)
 
     // set parameters
     val ontologyProperty = JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
-    val value = JSONFactoryUtil.parameters("value", bundle.templateNode)
+    val value = getParameter("value", bundle.templateNode)
     val unit = JSONFactoryUtil.getUnit(bundle.templateNode, bundle.ontology)
 
     // create template
@@ -38,18 +38,16 @@ object JSONTemplateFactory extends TemplateFactory {
     */
   override def createStartDateTemplate(templateFactoryBundle: TemplateFactoryBundle): StartDateTemplate = {
     // get bundle
-    val bundle = JSONFactoryUtil.getBundle(templateFactoryBundle)
+    val bundle = getBundle(templateFactoryBundle)
 
     // set parameters
     val ontologyProperty = JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
-    val property = JSONFactoryUtil.parameters("property", bundle.templateNode)
+    val property = getParameter("property", bundle.templateNode)
 
     // create template
     new StartDateTemplate(property, ontologyProperty)
 
   }
-
-  override def createConditionalTemplate(templateFactoryBundle: TemplateFactoryBundle): ConditionalTemplate = ???
 
   /**
     * Creates an EndDateTemplate object from a JSONBundle object
@@ -58,11 +56,11 @@ object JSONTemplateFactory extends TemplateFactory {
     */
   override def createEndDateTemplate(templateFactoryBundle: TemplateFactoryBundle): EndDateTemplate = {
     // get bundle
-    val bundle = JSONFactoryUtil.getBundle(templateFactoryBundle)
+    val bundle = getBundle(templateFactoryBundle)
 
     // set parameters
     val ontologyProperty = JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
-    val property = JSONFactoryUtil.parameters("property", bundle.templateNode)
+    val property = getParameter("property", bundle.templateNode)
 
     // create template
     new EndDateTemplate(property, ontologyProperty)
@@ -76,23 +74,23 @@ object JSONTemplateFactory extends TemplateFactory {
     */
   override def createGeocoordinateTemplate(templateFactoryBundle: TemplateFactoryBundle): GeocoordinateTemplate = {
     // get bundle
-    val bundle = JSONFactoryUtil.getBundle(templateFactoryBundle)
+    val bundle = getBundle(templateFactoryBundle)
 
     // set parameters
-    val ontologyProperty = if(JSONFactoryUtil.parameters("ontologyProperty", bundle.templateNode) != null) {
+    val ontologyProperty = if(getParameter("ontologyProperty", bundle.templateNode) != null) {
       JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
     } else null
-    val coordinate = JSONFactoryUtil.parameters("coordinate", bundle.templateNode)
-    val latitude = JSONFactoryUtil.parameters("latitude", bundle.templateNode)
-    val longitude = JSONFactoryUtil.parameters("longitude", bundle.templateNode)
-    val latitudeDegrees = JSONFactoryUtil.parameters("latitudeDegrees", bundle.templateNode)
-    val latitudeMinutes = JSONFactoryUtil.parameters("latitudeMinutes", bundle.templateNode)
-    val latitudeSeconds = JSONFactoryUtil.parameters("latitudeSeconds", bundle.templateNode)
-    val latitudeDirection = JSONFactoryUtil.parameters("latitudeDirection", bundle.templateNode)
-    val longitudeDegrees = JSONFactoryUtil.parameters("longitudeDegrees", bundle.templateNode)
-    val longitudeMinutes = JSONFactoryUtil.parameters("longitudeMinutes", bundle.templateNode)
-    val longitudeSeconds = JSONFactoryUtil.parameters("longitudeSeconds", bundle.templateNode)
-    val longitudeDirection = JSONFactoryUtil.parameters("longitudeDirection", bundle.templateNode)
+    val coordinate = getParameter("coordinate", bundle.templateNode)
+    val latitude = getParameter("latitude", bundle.templateNode)
+    val longitude = getParameter("longitude", bundle.templateNode)
+    val latitudeDegrees = getParameter("latitudeDegrees", bundle.templateNode)
+    val latitudeMinutes = getParameter("latitudeMinutes", bundle.templateNode)
+    val latitudeSeconds = getParameter("latitudeSeconds", bundle.templateNode)
+    val latitudeDirection = getParameter("latitudeDirection", bundle.templateNode)
+    val longitudeDegrees = getParameter("longitudeDegrees", bundle.templateNode)
+    val longitudeMinutes = getParameter("longitudeMinutes", bundle.templateNode)
+    val longitudeSeconds = getParameter("longitudeSeconds", bundle.templateNode)
+    val longitudeDirection = getParameter("longitudeDirection", bundle.templateNode)
 
     // create template
     val template = GeocoordinateTemplate(ontologyProperty,
@@ -118,17 +116,17 @@ object JSONTemplateFactory extends TemplateFactory {
     */
   override def createSimplePropertyTemplate(templateFactoryBundle: TemplateFactoryBundle): SimplePropertyTemplate = {
     // get bundle
-    val bundle = JSONFactoryUtil.getBundle(templateFactoryBundle)
+    val bundle = getBundle(templateFactoryBundle)
 
     // set parameters
-    val property = JSONFactoryUtil.parameters("property", bundle.templateNode)
+    val property = getParameter("property", bundle.templateNode)
     val ontologyProperty = JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
-    val select = JSONFactoryUtil.parameters("select", bundle.templateNode)
-    val prefix = JSONFactoryUtil.parameters("prefix", bundle.templateNode)
-    val suffix = JSONFactoryUtil.parameters("suffix", bundle.templateNode)
-    val transform = JSONFactoryUtil.parameters("transform", bundle.templateNode)
+    val select = getParameter("select", bundle.templateNode)
+    val prefix = getParameter("prefix", bundle.templateNode)
+    val suffix = getParameter("suffix", bundle.templateNode)
+    val transform = getParameter("transform", bundle.templateNode)
     val unit = JSONFactoryUtil.getUnit(bundle.templateNode, bundle.ontology)
-    val factor = JSONFactoryUtil.parameters("factor", bundle.templateNode)
+    val factor = getParameter("factor", bundle.templateNode)
     val doubleFactor = if(factor == null || factor.equals("null")) 1.0 else factor.toDouble
 
     //create template
@@ -137,4 +135,84 @@ object JSONTemplateFactory extends TemplateFactory {
     template
 
   }
+
+  override def createConditionalTemplate(templateFactoryBundle: TemplateFactoryBundle): ConditionalTemplate = {
+
+    def getFallbackTemplate(bundle: JSONBundle) : ConditionalTemplate = {
+      if(bundle.templateNode.has("fallback")) {
+        val fallbackNode = getParameterNode("fallback", bundle.templateNode)
+        createConditionalTemplate(JSONBundle(fallbackNode, bundle.ontology))
+      } else null
+    }
+
+    // get bundle
+    val bundle = JSONFactoryUtil.getBundle(templateFactoryBundle)
+    val templateNode = bundle.templateNode
+    val ontology = bundle.ontology
+
+    val conditionNode = getParameterNode("condition", templateNode)
+    val condition = createCondition(conditionNode)
+
+    val ontologyClassString = getParameter("class", templateNode)
+    val ontologyClass = JSONFactoryUtil.getOntologyClass(ontologyClassString, ontology)
+
+    val templateListNode = getParameterNode("templates", templateNode)
+    val templates = getTemplates(JSONBundle(templateListNode, ontology))
+
+    val fallbackTemplate = getFallbackTemplate(bundle)
+
+    new ConditionalTemplate(condition, templates, ontologyClass, fallbackTemplate)
+
+  }
+
+  private def getBundle(bundle : TemplateFactoryBundle) : JSONBundle = {
+    JSONFactoryUtil.getBundle(bundle)
+  }
+  
+  private def getParameter(key : String, node : JsonNode) : String = {
+    JSONFactoryUtil.parameters(key, node)
+  }
+  
+  private def getParameterNode(key: String, node : JsonNode) : JsonNode = {
+    JSONFactoryUtil.parametersNode(key, node)
+  }
+
+  private def getTemplates(bundle : JSONBundle) : Seq[Template] = {
+
+    def convertToTemplate(templateNode : JsonNode) : Template = {
+      val name = JSONFactoryUtil.get("name", templateNode)
+      name match {
+        case SimplePropertyTemplate.NAME => createSimplePropertyTemplate(bundle)
+        case GeocoordinateTemplate.NAME => createGeocoordinateTemplate(bundle)
+        case StartDateTemplate.NAME => createStartDateTemplate(bundle)
+        case EndDateTemplate.NAME => createEndDateTemplate(bundle)
+        case _ => throw new IllegalArgumentException("Incorrect template name is found: " + name)
+      }
+    }
+
+    val templatesSeq = JSONFactoryUtil.jsonNodeToSeq(bundle.templateNode)
+    templatesSeq.map(template => convertToTemplate(template))
+  }
+
+  private def createCondition(conditionNode : JsonNode) : Condition = {
+    val operator = JSONFactoryUtil.get("operator", conditionNode)
+    val property = getParameter("property", conditionNode)
+    val value = getParameter("value", conditionNode)
+
+    val condition = operator match {
+      case Condition.ISSET => IsSetCondition(property)
+      case Condition.EQUALS => EqualsCondition(property, value)
+      case Condition.CONTAINS => ContainsCondition(property, value)
+      case Condition.OTHERWISE => OtherwiseCondition()
+    }
+
+    condition
+  }
+
+
+
+
+
+
+
 }

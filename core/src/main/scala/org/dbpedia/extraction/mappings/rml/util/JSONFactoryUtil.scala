@@ -4,16 +4,32 @@ import com.fasterxml.jackson.databind.JsonNode
 import org.dbpedia.extraction.mappings.rml.exception.{OntologyPropertyException, TemplateFactoryBundleException}
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, TemplateFactoryBundle}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty, RdfNamespace}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty, RdfNamespace}
+
+import scala.collection.JavaConverters._
 
 /**
   * Created by wmaroy on 25.07.17.
   */
 object JSONFactoryUtil {
 
+  def get(key : String, node: JsonNode) : String = {
+    val text = node.get(key).asText()
+    if(text.equals("null")) null else text
+  }
+
   def parameters(key : String, templateNode: JsonNode) : String = {
     val text = templateNode.get("parameters").get(key).asText()
     if(text.equals("null")) null else text
+  }
+
+  def parametersNode(key : String, templateNode: JsonNode) : JsonNode = {
+    templateNode.get("parameters").get(key)
+  }
+
+  def jsonNodeToSeq(listNode : JsonNode) : Seq[JsonNode] = {
+    if(listNode.isArray) listNode.iterator().asScala.toSeq
+    else throw new IllegalArgumentException("Json Node is not an array."); null
   }
 
   def getOntologyProperty(templateNode: JsonNode, ontology: Ontology) : OntologyProperty = {
@@ -56,6 +72,11 @@ object JSONFactoryUtil {
       result
     }
 
+  }
+
+  def getOntologyClass(ontologyClass : String, ontology: Ontology) : OntologyClass = {
+    val context = ContextCreator.createOntologyContext(ontology)
+    RMLOntologyUtil.loadOntologyClass(ontologyClass, context)
   }
 
   /**
