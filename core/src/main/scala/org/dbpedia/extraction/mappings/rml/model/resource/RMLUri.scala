@@ -44,4 +44,6 @@ object RMLUri {
   val STARTDATEMAPPING = "StartDateMapping"
 
   val ENDDATEMAPPING = "EndDateMapping"
+
+  val CONDITIONALMAPPING = "ConditionalMapping"
 }

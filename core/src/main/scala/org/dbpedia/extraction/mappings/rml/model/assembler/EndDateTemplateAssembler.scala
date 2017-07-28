@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.assembler
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.{EndDateTemplate, StartDateTemplate}
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
@@ -9,23 +10,33 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 26.07.17.
   */
-class EndDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: EndDateTemplate, counter : Int) {
+class EndDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: EndDateTemplate, counter : Counter) {
 
-  def assemble() = {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Public methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  def assemble() : List[RMLPredicateObjectMap] = {
     addEndDateMapping()
   }
 
-  def addEndDateMapping()  =
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Private methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  def addEndDateMapping() : List[RMLPredicateObjectMap]  =
   {
     addEndDateMappingToTriplesMap(baseUri, rmlModel.triplesMap)
   }
 
-  def addEndDateMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) = {
+  def addEndDateMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap): List[RMLPredicateObjectMap] = {
 
-    val endUri = RMLUri(uri + "/" +  RMLUri.ENDDATEMAPPING + "/" + counter)
+    val endUri = RMLUri(uri + "/" +  RMLUri.ENDDATEMAPPING + "/" + counter.endDates)
     val endDateIntervalPom = triplesMap.addPredicateObjectMap(endUri)
 
     addEndDateMappingToPredicateObjectMaps(endDateIntervalPom)
+
+    List(endDateIntervalPom)
 
   }
 

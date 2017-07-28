@@ -5,7 +5,21 @@ import org.dbpedia.extraction.ontology.OntologyClass
 /**
   * Created by wmaroy on 24.07.17.
   */
-case class ConditionalTemplate(condition : Condition, templates : Seq[Template], ontologyClass: OntologyClass, fallback : ConditionalTemplate) extends Template(ConditionalTemplate.NAME)
+case class ConditionalTemplate(condition : Condition, templates : Seq[Template], ontologyClass: OntologyClass, fallback : ConditionalTemplate) extends Template(ConditionalTemplate.NAME) {
+
+  def hasFallback : Boolean = {
+    fallback != null
+  }
+
+  def hasCondition : Boolean = {
+    condition != null
+  }
+
+  def hasClass : Boolean = {
+    ontologyClass != null
+  }
+
+}
 
 class Condition(val operator: String)
 

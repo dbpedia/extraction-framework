@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml
 
-import org.dbpedia.extraction.mappings.rml.loader.RMLInferencer
+import org.dbpedia.extraction.mappings.rml.load.RMLInferencer
 import org.dbpedia.extraction.util.Language
 import org.scalatest.FlatSpec
 import org.scalatest.matchers.ShouldMatchers

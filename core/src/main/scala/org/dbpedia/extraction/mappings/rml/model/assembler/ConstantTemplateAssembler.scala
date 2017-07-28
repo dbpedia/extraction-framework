@@ -3,6 +3,7 @@ package org.dbpedia.extraction.mappings.rml.model.assembler
 import java.net.URI
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.ConstantTemplate
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
@@ -12,15 +13,23 @@ import org.dbpedia.extraction.util.Language
 /**
   * Created by wmaroy on 25.07.17.
   */
-class ConstantTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: ConstantTemplate, counter : Int) {
+class ConstantTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: ConstantTemplate, counter : Counter) {
 
-  def assemble() = {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Public methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  def assemble() : List[RMLPredicateObjectMap] = {
     addConstantMappingToTriplesMap(baseUri, rmlModel.triplesMap)
   }
 
-  def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap)  =
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Private methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  private def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap]  =
   {
-    val constantMappingUri = RMLUri(uri + "/ConstantMapping/" + counter)
+    val constantMappingUri = RMLUri(uri + "/ConstantMapping/" + counter.constants)
 
     val constantPom = triplesMap.addPredicateObjectMap(constantMappingUri)
     addConstantValuePredicateObjectMap(constantPom)
@@ -52,6 +61,7 @@ class ConstantTemplateAssembler(rmlModel : RMLModel, baseUri : String, language 
 
       addUnitToPredicateObjectMap(constantPom)
     }
+
   }
 
 

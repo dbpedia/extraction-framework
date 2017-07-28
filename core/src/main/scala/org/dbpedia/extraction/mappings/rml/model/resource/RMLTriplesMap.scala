@@ -2,11 +2,14 @@ package org.dbpedia.extraction.mappings.rml.model.resource
 
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.ontology.RdfNamespace
+import scala.collection.JavaConverters._
 
 /**
   * Represents an RML Triples Map
   */
 class RMLTriplesMap(override val resource: Resource) extends RMLResource(resource) {
+
+  lazy val predicateObjectMaps : List[RMLPredicateObjectMap] = getPredicateObjectMaps
 
   def addPredicateObjectMap(uri: RMLUri) : RMLPredicateObjectMap =
   {
@@ -25,6 +28,12 @@ class RMLTriplesMap(override val resource: Resource) extends RMLResource(resourc
     val condPom = factory.createRMLConditionalPredicateObjectMap(uri)
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "predicateObjectMap"), condPom.resource)
     condPom
+  }
+
+  def addConditionalPredicateObjectMap(predicateObjectMap: RMLConditionalPredicateObjectMap) : RMLConditionalPredicateObjectMap =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "predicateObjectMap"), predicateObjectMap.resource)
+    predicateObjectMap
   }
 
   def addLogicalSource(uri: RMLUri) : RMLLogicalSource =
@@ -57,6 +66,12 @@ class RMLTriplesMap(override val resource: Resource) extends RMLResource(resourc
 
   def addLanguage(language : String) = {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "language"), language)
+  }
+
+  private def getPredicateObjectMaps: List[RMLPredicateObjectMap] =
+  {
+    val properties = resource.listProperties(createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")).toList
+    properties.asScala.map(property => new RMLPredicateObjectMap(property.getObject.asResource())).toList
   }
 
 

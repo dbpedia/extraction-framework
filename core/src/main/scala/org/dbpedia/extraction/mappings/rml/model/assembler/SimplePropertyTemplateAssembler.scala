@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.assembler
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template.SimplePropertyTemplate
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
@@ -10,17 +11,25 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   * Created by wmaroy on 24.07.17.
   *
   */
-class SimplePropertyTemplateAssembler(rmlModel : RMLModel, baseUri: String, language : String, template: SimplePropertyTemplate, counter : Int) {
+class SimplePropertyTemplateAssembler(rmlModel : RMLModel, baseUri: String, language : String, template: SimplePropertyTemplate, counter : Counter) {
 
-  def assemble() = {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Public methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  def assemble() : List[RMLPredicateObjectMap] = {
     val triplesMap = rmlModel.triplesMap
     addSimplePropertyMappingToTriplesMap(baseUri, triplesMap)
   }
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Private methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   private def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val simplePropertyMappingUri = RMLUri(uri + "/SimplePropertyMapping/" + counter )
+    val simplePropertyMappingUri = RMLUri(uri + "/SimplePropertyMapping/" + counter.simpleProperties)
     val simplePmPom = triplesMap.addPredicateObjectMap(simplePropertyMappingUri)
 
     simplePmPom.addPredicate(RMLUri(template.ontologyProperty.uri))

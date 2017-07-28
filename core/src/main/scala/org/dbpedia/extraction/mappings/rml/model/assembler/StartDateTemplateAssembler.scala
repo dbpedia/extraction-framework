@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.assembler
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.StartDateTemplate
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
@@ -10,23 +11,33 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 26.07.17.
   */
-class StartDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: StartDateTemplate, counter : Int) {
+class StartDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: StartDateTemplate, counter : Counter) {
 
-  def assemble() = {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Public methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  def assemble() : List[RMLPredicateObjectMap] = {
     addStartDateMapping()
   }
 
-  def addStartDateMapping()  =
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Private methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  private def addStartDateMapping() : List[RMLPredicateObjectMap]  =
   {
     addStartDateMappingToTriplesMap(baseUri, rmlModel.triplesMap)
   }
 
-  def addStartDateMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) = {
+  private def addStartDateMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) : List[RMLPredicateObjectMap] = {
 
-    val startUri = RMLUri(uri + "/" +  RMLUri.STARTDATEMAPPING + "/" + counter)
+    val startUri = RMLUri(uri + "/" +  RMLUri.STARTDATEMAPPING + "/" + counter.startDates)
     val startDateIntervalPom = triplesMap.addPredicateObjectMap(startUri)
 
     addStartDateMappingToPredicateObjectMaps(startDateIntervalPom)
+
+    List(startDateIntervalPom)
 
   }
 

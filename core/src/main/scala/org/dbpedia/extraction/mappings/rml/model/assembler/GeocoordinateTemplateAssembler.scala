@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.assembler
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.GeocoordinateTemplate
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
@@ -9,13 +10,21 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 26.07.17.
   */
-class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, language: String, template : GeocoordinateTemplate,  counter : Int) {
+class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, language: String, template : GeocoordinateTemplate,  counter : Counter) {
 
-  def assemble() = {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Public methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  def assemble() : List[RMLPredicateObjectMap] = {
     addGeoCoordinatesMapping()
   }
 
-  def addGeoCoordinatesMapping() : List[RMLPredicateObjectMap] =
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Private methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  private def addGeoCoordinatesMapping() : List[RMLPredicateObjectMap] =
   {
     if(template.ontologyProperty != null) {
       /**
@@ -39,7 +48,7 @@ class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, langu
     }
   }
 
-  def addGeoCoordinatesMappingToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap]  =
+  private def addGeoCoordinatesMappingToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap]  =
   {
 
     if(template.coordinate != null) {
@@ -57,11 +66,11 @@ class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, langu
     }
   }
 
-  def addCoordinatesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  private def addCoordinatesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val latPom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter))
-    val lonPom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter))
+    val latPom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
+    val lonPom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
 
     addCoordinatesToPredicateObjectMap(latPom, lonPom)
 
@@ -69,11 +78,11 @@ class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, langu
 
   }
 
-  def addLongitudeLatitudeToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  private def addLongitudeLatitudeToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val latitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING))
-    val longitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING))
+    val latitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
+    val longitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
 
     addLongitudeLatitudeToPredicateObjectMap(latitudePom, longitudePom)
 
@@ -81,11 +90,11 @@ class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, langu
 
   }
 
-  def addDegreesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  private def addDegreesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val latitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri +"/" + RMLUri.LATITUDEMAPPING))
-    val longitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri +"/" + RMLUri.LONGITUDEMAPPING))
+    val latitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri +"/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
+    val longitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri +"/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
 
     addDegreesToPredicateObjectMap(latitudePom, longitudePom)
 

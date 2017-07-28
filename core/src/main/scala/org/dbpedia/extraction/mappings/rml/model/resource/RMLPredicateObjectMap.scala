@@ -8,6 +8,8 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   */
 class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource(resource) {
 
+  lazy val predicate = getPredicate
+
   def addPredicate(uri: RMLUri) =
   {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "predicate"), createProperty(uri.toString()))
@@ -74,6 +76,12 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
   def addPartner(predicateObjectMap: RMLPredicateObjectMap) =
   {
     resource.addProperty(createProperty(RdfNamespace.DBF.namespace + "partner"), predicateObjectMap.resource)
+  }
+
+  private def getPredicate : String = {
+    val property = resource.listProperties(createProperty(RdfNamespace.RR.namespace + "predicate"))
+    val stmnt = property.nextStatement()
+    stmnt.getObject.asResource().getURI
   }
 
 }

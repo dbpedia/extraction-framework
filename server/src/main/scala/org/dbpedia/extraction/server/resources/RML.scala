@@ -263,7 +263,10 @@ class RML {
       val mapping = getMapping(mappingNode)
       val template = getTemplate(input, ConditionalTemplate.NAME)
 
-      // TODO: assemble the mapping
+      // assemble
+      val count = mapping.count(RMLUri.CONDITIONALMAPPING)
+      val counter = Counter(conditionals = count)
+      TemplateAssembler.assembleTemplate(mapping, template, mapping.language, counter)
 
       // create the response
       val msg = "Constant Mapping successfully added."
