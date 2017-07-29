@@ -17,14 +17,31 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, baseUri: String, lang
   //  Public methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  def assemble() : List[RMLPredicateObjectMap] = {
-    val triplesMap = rmlModel.triplesMap
-    addSimplePropertyMappingToTriplesMap(baseUri, triplesMap)
+  def assemble(independent : Boolean = false) : List[RMLPredicateObjectMap] = {
+    if(independent) {
+      val triplesMap = rmlModel.triplesMap
+      addSimplePropertyMappingToTriplesMap(baseUri, triplesMap)
+    } else {
+      addIndependentSimplePropertyMappingToTriplesMap(baseUri)
+    }
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Private methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  private def addIndependentSimplePropertyMappingToTriplesMap(uri: String) : List[RMLPredicateObjectMap] =
+  {
+
+    val simplePropertyMappingUri = RMLUri(uri + "/SimplePropertyMapping/" + counter.simpleProperties)
+    val simplePmPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(simplePropertyMappingUri)
+
+    simplePmPom.addPredicate(RMLUri(template.ontologyProperty.uri))
+    addSimplePropertyToPredicateObjectMap(simplePmPom)
+
+    List(simplePmPom)
+
+  }
 
   private def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
@@ -97,6 +114,7 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, baseUri: String, lang
 
   /**
     * Adds a rr:language if necessary
+    *
     * @param objectMap
     * @return
     */

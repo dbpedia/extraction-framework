@@ -48,7 +48,7 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
         (counter, null)
       }
       val conditionFunctionTermMap = tuple._2
-      val updatedCounter : Counter = tuple._1
+      val updatedCounter = tuple._1.update(simpleProperties = 0, geoCoordinates = 0, startDates = 0, endDates = 0)
 
       ////////////////////////////////////////////////////////////////////////////
       // Creates poms from all subtemplates and adds them as fallbacks
@@ -61,7 +61,7 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
       // every assembly returns a tuple (state) which is in turn passed through to the next assembly
       val finalState = subTemplates.foldLeft((updatedCounter, List[RMLPredicateObjectMap]()))((state, template) => {
 
-        val updatedState = TemplateAssembler.assembleTemplate(rmlModel, conditionalBaseUri, template, language, state._1)
+        val updatedState = TemplateAssembler.assembleTemplate(rmlModel, conditionalBaseUri + "/Condition/" + counter.subConditions, template, language, state._1)
         addFallbacksToResource(resource, updatedState)
 
         // returns the current counter and adds the RMLPredicateObjectMaps to the list
@@ -69,7 +69,6 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
 
       })
 
-      val finalCounter = finalState._1
       val finalPomList = finalState._2
 
       ////////////////////////////////////////////////////////////////////////////
@@ -83,7 +82,7 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
         // a mapping can only contain one class mapping, or one set of conditional class mappings
         if(containsClassMapping) throw new IllegalArgumentException("Class is already mapped. Only one class mapping is allowed.")
 
-        val mapToClassPom = createMapToClassPom(template)
+        val mapToClassPom = createMapToClassPom(template, counter)
         addFallbackToResource(resource, mapToClassPom)
         mapToClassPom
 
@@ -100,6 +99,7 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
       ////////////////////////////////////////////////////////////////////////////
 
       if(conditionFunctionTermMap != null) addConditionFTMToResource(resource, conditionFunctionTermMap, updatedResource, finalPomList)
+      val finalCounter = finalState._1.update(subConditions = finalState._1.subConditions + 1)
 
       //continue recursively
       if(template.hasFallback) {
@@ -108,10 +108,12 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
 
     }
 
+    addConditions(rmlModel.triplesMap, conditionalTemplate, counter)
+
   }
 
-  private def createMapToClassPom(template : ConditionalTemplate) : RMLConditionalPredicateObjectMap = {
-    val mapToClassPomUri = RMLUri(conditionalBaseUri + "/" + counter.subConditions + "/ClassMapping")
+  private def createMapToClassPom(template : ConditionalTemplate, counter : Counter) : RMLConditionalPredicateObjectMap = {
+    val mapToClassPomUri = RMLUri(conditionalBaseUri + "/Condition/" + counter.subConditions + "/ClassMapping")
     val mapToClassPom = rmlModel.rmlFactory.createRMLConditionalPredicateObjectMap(mapToClassPomUri)
     mapToClassPom.addPredicate(RMLUri(RdfNamespace.RDF.namespace + "type"))
     mapToClassPom.addObject(RMLUri(template.ontologyClass.uri))
@@ -204,9 +206,7 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
       }
     }
 
-    val updatedCounter : Counter = counter.update(subConditions = counter.subConditions + 1)
-
-    (updatedCounter, functionTermMap)
+    (counter, functionTermMap)
   }
 
   private def containsClassMapping : Boolean = {

@@ -261,6 +261,7 @@ class RML {
       // create the structures
       val mappingNode = getMappingNode(input)
       val mapping = getMapping(mappingNode)
+
       val template = getTemplate(input, ConditionalTemplate.NAME)
 
       // assemble
@@ -270,6 +271,7 @@ class RML {
 
       // create the response
       val msg = "Constant Mapping successfully added."
+      println(mapping.writeAsTurtle(mapping.base))
       val response = createResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 

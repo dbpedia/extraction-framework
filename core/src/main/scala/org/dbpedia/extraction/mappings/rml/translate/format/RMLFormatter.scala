@@ -14,6 +14,14 @@ object RMLFormatter extends Formatter {
   private val offset = "\n\n"
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Case classes
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  case class ConditionalMappingBundle() {
+    var conditions = List[String]()
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -50,6 +58,7 @@ object RMLFormatter extends Formatter {
 
   /**
     * Post process formatting for a complete preformatted mapping string
+    *
     * @param mapping
     * @return
     */
@@ -144,21 +153,24 @@ object RMLFormatter extends Formatter {
     val heading = hashtags(22) + "\n# Conditional Mappings\n" + hashtags(22) + "\n"
 
 
+    val bundle = ConditionalMappingBundle()
     val conditionals = statements.asScala.map(statement => {
 
       val predicateObjectMap = statement.getObject
       if(hasConditions(predicateObjectMap.asResource())) {
-        val tuple = getConditionalMapping(predicateObjectMap.asResource(), base)
-        tuple._1.concat(tuple._2)
+        val tuple = getConditionalMapping(predicateObjectMap.asResource(), base, bundle)
+        tuple
       } else {
-        "" // here
+        ("", "") // here
       }
 
-    }).filter(conditionString => !conditionString.equals(""))
+    }).filter(conditionString => !conditionString._1.equals(""))
 
-    val conditionalString = if(conditionals.nonEmpty) {
-      conditionals.reduce((first, second) => first.concat("\n" + second))
-    } else ""
+    val conditionalStrings = if(conditionals.nonEmpty) {
+      conditionals.reduce((a, b) => (a._1 + "\n" + b._1, a._2 + "\n" + b._2 ))
+    } else ("","")
+
+    val conditionalString = conditionalStrings._1 + conditionalStrings._2
 
     URLDecoder.decode(heading + offset + conditionalString, "UTF-8") // Jena uses URL encoding, no IRI encoding, for now this is the solution //TODO
 
@@ -200,26 +212,56 @@ object RMLFormatter extends Formatter {
   /**
     * Retrieves all necessary constructs for a conditional mapping
     *
-    * Returns a tuple: ._1 = PredicateObjectMaps itself, ._2 = FunctionTermMaps from the conditional function
+    * Returns a tuple: ._1 = PredicateObjectMaps itself, ._2 = Fallbacks
     *
     * @param resource
     * @param base
     * @return
     */
-  private def getConditionalMapping(resource : Resource, base : String) : (String, String) = {
-    val heading = hashtags(3) + " Conditional PredicateObjectMap" + "\n" + hashtags(35)
-    if(hasConditions(resource)) {
+  private def getConditionalMapping(resource : Resource, base : String, bundle : ConditionalMappingBundle) : (String, String) = {
+    val heading = hashtags(3) + " Conditional Mapping" + "\n" + hashtags(35)
+
+    if (hasConditions(resource) && !conditionExists(resource, bundle.conditions)) {
+
       val current_condition = getCondition(resource, base)
+      bundle.conditions = bundle.conditions :+ getConditionURI(resource)
+
       if(hasFallback(resource)) {
-        val fallbackMap = getFallbackMap(resource)
-        val other_conditions = getConditionalMapping(fallbackMap, base)
-        (heading + current_condition._1 + offset + current_condition._2 , other_conditions._1  + other_conditions._2)
+
+        val fallbackMaps = getFallbackMaps(resource)
+
+        val fallbackMapStrings = fallbackMaps.map( fallbackMap => {
+
+          val other_conditions  = getConditionalMapping(fallbackMap, base, bundle)
+          other_conditions
+
+        })
+
+        val head = current_condition._1 + "\n\n" + current_condition._2
+
+        val tailTupleReduced = fallbackMapStrings.reduce((a, b) => {
+          (a._1 + "\n" + b._1, a._2 + "\n" + b._2)
+        })
+
+        (heading + head, tailTupleReduced._1 + "\n" + tailTupleReduced._2)
       } else {
-        (heading + getResourceString(resource,base) + offset, "")
+        (heading + current_condition._1 + "\n" + current_condition._2, "")
       }
+
     } else {
-      (heading + getResourceString(resource,base) + offset, "")
+      (heading + getResourceString(resource, base) + offset, "")
     }
+  }
+
+  private def conditionExists(resource : Resource, conditions : List[String]) : Boolean = {
+    val uri = getConditionURI(resource)
+    conditions.exists(condition => condition.equals(uri))
+  }
+
+  private def getConditionURI(resource: Resource) : String = {
+    val property = resource.getModel.getProperty(RdfNamespace.CRML.namespace + "equalCondition")
+    val functionPOM = resource.getPropertyResourceValue(property).asResource()
+    functionPOM.getURI
   }
 
   /**
@@ -284,6 +326,17 @@ object RMLFormatter extends Formatter {
     resource.getPropertyResourceValue(property)
   }
 
+  /**
+    * Retrieves a crml:FallbackMap
+    *
+    * @param resource
+    * @return
+    */
+  private def getFallbackMaps(resource: Resource) : List[Resource] = {
+    val property = resource.getModel.getProperty(RdfNamespace.CRML.namespace + "fallbackMap")
+    val properties = resource.listProperties(property).asScala.toList
+    properties.map(property => property.getObject.asResource())
+  }
 
 
   /**
