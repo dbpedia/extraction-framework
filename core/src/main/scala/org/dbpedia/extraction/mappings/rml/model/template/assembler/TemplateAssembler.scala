@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.mappings.rml.model.assembler
+package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLPredicateObjectMap
@@ -21,6 +21,7 @@ object TemplateAssembler {
     */
   case class Counter(conditionals : Int = 0,
                      subConditions : Int = 0,
+                     intermediates : Int = 0,
                      simpleProperties : Int = 0,
                      geoCoordinates : Int = 0,
                      constants : Int = 0,
@@ -31,10 +32,10 @@ object TemplateAssembler {
     /**
       * creates a new Counter object with updated values, parameters that are not given are standard set to current values
       */
-    def update(conditionals : Int = conditionals, subConditions : Int = subConditions,
+    def update(conditionals : Int = conditionals, subConditions : Int = subConditions, intermediates : Int = intermediates,
                simpleProperties : Int = simpleProperties, geoCoordinates : Int = geoCoordinates,
                constants :Int = constants, startDates : Int = startDates, endDates : Int = endDates) : Counter = {
-      Counter(conditionals, subConditions, simpleProperties, geoCoordinates, constants, startDates, endDates)
+      Counter(conditionals, subConditions, intermediates, simpleProperties, geoCoordinates, constants, startDates, endDates)
     }
 
   }
@@ -95,6 +96,13 @@ object TemplateAssembler {
        val templateInstance = template.asInstanceOf[ConditionalTemplate]
         val pomList = assembleConditionalTemplate(rmlModel, templateInstance, baseUri, language, counter)
         val updatedCounter = counter.update(conditionals = counter.conditionals + 1)
+        (updatedCounter, pomList)
+      }
+
+      case IntermediateTemplate.NAME => {
+        val templateInstance = template.asInstanceOf[IntermediateTemplate]
+        val pomList = assembleIntermediateTemplate(rmlModel, templateInstance, baseUri, language, counter)
+        val updatedCounter = counter.update(intermediates = counter.intermediates + 1)
         (updatedCounter, pomList)
       }
 
@@ -194,6 +202,18 @@ object TemplateAssembler {
     */
   private def assembleConditionalTemplate(rMLModel: RMLModel, conditionalTemplate: ConditionalTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
     val assembler = new ConditionalTemplateAssembler(rMLModel, baseUri, conditionalTemplate, language, counter)
+    assembler.assemble()
+  }
+
+  /**
+    *
+    * @param rMLModel
+    * @param template
+    * @param language
+    * @param counter
+    */
+  private def assembleIntermediateTemplate(rMLModel: RMLModel, template: IntermediateTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
+    val assembler = new IntermediateTemplateAssembler(rMLModel, baseUri, language, template,  counter)
     assembler.assemble()
   }
 

@@ -1,8 +1,8 @@
-package org.dbpedia.extraction.mappings.rml.model.assembler
+package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
 import org.dbpedia.extraction.mappings.{ConditionMapping, TemplateMapping}
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
-import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler.Counter
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template._
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction

@@ -27,7 +27,8 @@ object JSONTemplateFactory extends TemplateFactory {
     val bundle = getBundle(templateFactoryBundle)
 
     // set parameters
-    val ontologyProperty = JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
+    val ontologyPropertyParameter = JSONFactoryUtil.parameters("ontologyProperty", bundle.templateNode)
+    val ontologyProperty = JSONFactoryUtil.getOntologyProperty(ontologyPropertyParameter, bundle.ontology)
     val value = getParameter("value", bundle.templateNode)
     val unit = JSONFactoryUtil.getUnit(bundle.templateNode, bundle.ontology)
 
@@ -35,7 +36,24 @@ object JSONTemplateFactory extends TemplateFactory {
     new ConstantTemplate(ontologyProperty, value, unit)
   }
 
-  override def createIntermediateTemplate(templateFactoryBundle: TemplateFactoryBundle): IntermediateTemplate = ???
+  override def createIntermediateTemplate(templateFactoryBundle: TemplateFactoryBundle): IntermediateTemplate = {
+
+    // get bundle
+    val bundle = getBundle(templateFactoryBundle)
+    val ontology = bundle.ontology
+
+    // set parameters
+    val ontologyClassString = getParameter("class", bundle.templateNode)
+    val ontologyClass = JSONFactoryUtil.getOntologyClass(ontologyClassString, ontology)
+    val propertyString = getParameter("property", bundle.templateNode)
+    val property = JSONFactoryUtil.getOntologyProperty(propertyString, bundle.ontology)
+    val templateListNode = getParameterNode("templates", bundle.templateNode)
+    val templates = getTemplates(JSONBundle(templateListNode, ontology)).toList
+
+    // create template
+    new IntermediateTemplate(ontologyClass, property, templates)
+
+  }
 
   /**
     * Creates a StartDateTemplate object from a JSONBundle object
@@ -48,7 +66,8 @@ object JSONTemplateFactory extends TemplateFactory {
     val bundle = getBundle(templateFactoryBundle)
 
     // set parameters
-    val ontologyProperty = JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
+    val ontologyPropertyParameter = JSONFactoryUtil.parameters("ontologyProperty", bundle.templateNode)
+    val ontologyProperty = JSONFactoryUtil.getOntologyProperty(ontologyPropertyParameter, bundle.ontology)
     val property = getParameter("property", bundle.templateNode)
 
     // create template
@@ -67,7 +86,8 @@ object JSONTemplateFactory extends TemplateFactory {
     val bundle = getBundle(templateFactoryBundle)
 
     // set parameters
-    val ontologyProperty = JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
+    val ontologyPropertyParameter = JSONFactoryUtil.parameters("ontologyProperty", bundle.templateNode)
+    val ontologyProperty = JSONFactoryUtil.getOntologyProperty(ontologyPropertyParameter, bundle.ontology)
     val property = getParameter("property", bundle.templateNode)
 
     // create template
@@ -87,7 +107,8 @@ object JSONTemplateFactory extends TemplateFactory {
 
     // set parameters
     val ontologyProperty = if(getParameter("ontologyProperty", bundle.templateNode) != null) {
-      JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
+      val ontologyPropertyParameter = JSONFactoryUtil.parameters("ontologyProperty", bundle.templateNode)
+      JSONFactoryUtil.getOntologyProperty(ontologyPropertyParameter, bundle.ontology)
     } else null
     val coordinate = getParameter("coordinate", bundle.templateNode)
     val latitude = getParameter("latitude", bundle.templateNode)
@@ -130,7 +151,8 @@ object JSONTemplateFactory extends TemplateFactory {
 
     // set parameters
     val property = getParameter("property", bundle.templateNode)
-    val ontologyProperty = JSONFactoryUtil.getOntologyProperty(bundle.templateNode, bundle.ontology)
+    val ontologyPropertyParameter = JSONFactoryUtil.parameters("ontologyProperty", bundle.templateNode)
+    val ontologyProperty = JSONFactoryUtil.getOntologyProperty(ontologyPropertyParameter, bundle.ontology)
     val select = getParameter("select", bundle.templateNode)
     val prefix = getParameter("prefix", bundle.templateNode)
     val suffix = getParameter("suffix", bundle.templateNode)

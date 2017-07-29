@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.node.{JsonNodeFactory, ObjectNode}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyPropertyException}
 import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
-import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler
-import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler.Counter
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLEditModelJSONFactory}
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
 import org.dbpedia.extraction.mappings.rml.model.template._
@@ -293,9 +293,36 @@ class RML {
   @Produces(Array(MediaType.APPLICATION_JSON))
   def addIntermediateMapping(input : String) = {
 
-    // TODO: implement
+    try {
 
-    createNotImplementedResponse
+      // check validity of the input
+      // TODO
+
+      // create the structures
+      val mappingNode = getMappingNode(input)
+      val mapping = getMapping(mappingNode)
+      val template = getTemplate(input, IntermediateTemplate.NAME)
+
+      // assemble
+      val count = mapping.count(RMLUri.INTERMEDIATEMAPPING)
+      val counter = Counter(conditionals = count)
+      TemplateAssembler.assembleTemplate(mapping, template, mapping.language, counter)
+
+      // create the response
+      val msg = "Intermediate Mapping successfully added."
+      println(mapping.writeAsTurtle(mapping.base))
+      val response = createResponse(mapping, mappingNode, msg)
+      Response.ok(response, MediaType.APPLICATION_JSON).build()
+
+    } catch {
+      case e : OntologyClassException => createBadRequestExceptionResponse(e)
+      case e : BadRequestException => createBadRequestExceptionResponse(e)
+      case e : IllegalArgumentException => createBadRequestExceptionResponse(e)
+      case e : Exception => {
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+      }
+    }
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -380,6 +407,8 @@ class RML {
       case StartDateTemplate.NAME => JSONTemplateFactory.createStartDateTemplate(JSONBundle(templateNode, ontology))
       case EndDateTemplate.NAME => JSONTemplateFactory.createEndDateTemplate(JSONBundle(templateNode, ontology))
       case ConditionalTemplate.NAME => JSONTemplateFactory.createConditionalTemplate(JSONBundle(templateNode, ontology))
+      case IntermediateTemplate.NAME => JSONTemplateFactory.createIntermediateTemplate(JSONBundle(templateNode, ontology))
+      case _ => throw new IllegalArgumentException("Unsupported template: " + templateName)
     }
 
     template
@@ -422,6 +451,7 @@ class RML {
 
   /**
     * Creates a NO CONTENT response
+ *
     * @return
     */
   private def createNotImplementedResponse : Response = {

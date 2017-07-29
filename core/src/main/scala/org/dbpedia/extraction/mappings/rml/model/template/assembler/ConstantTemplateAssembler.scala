@@ -1,9 +1,9 @@
-package org.dbpedia.extraction.mappings.rml.model.assembler
+package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
 import java.net.URI
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
-import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler.Counter
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.ConstantTemplate
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction

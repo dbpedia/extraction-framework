@@ -37,9 +37,9 @@ object JSONFactoryUtil {
     else throw new IllegalArgumentException("Json Node is not an array.")
   }
 
-  def getOntologyProperty(templateNode: JsonNode, ontology: Ontology) : OntologyProperty = {
+  def getOntologyProperty(ontologyPropertyParameter: String, ontology: Ontology) : OntologyProperty = {
     val context = ContextCreator.createOntologyContext(ontology)
-    getOntologyProperty(templateNode, context)
+    getOntologyProperty(ontologyPropertyParameter, context)
   }
 
   def getUnit(templateNode: JsonNode, ontology: Ontology) : Datatype = {
@@ -52,9 +52,8 @@ object JSONFactoryUtil {
     RMLOntologyUtil.loadOntologyDataType(unitName, context)
   }
 
-  def getOntologyProperty(templateNode: JsonNode, context : {def ontology: Ontology}) : OntologyProperty = {
+  def getOntologyProperty(ontologyPropertyParameter: String, context : {def ontology: Ontology}) : OntologyProperty = {
 
-    val ontologyPropertyParameter = JSONFactoryUtil.parameters("ontologyProperty", templateNode)
     val prefix = extractPrefix(ontologyPropertyParameter)
     val localName = extractLocalName(ontologyPropertyParameter)
 

@@ -17,7 +17,7 @@ object RMLFormatter extends Formatter {
   //  Case classes
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  case class ConditionalMappingBundle() {
+  private case class ConditionalMappingBundle() {
     var conditions = List[String]()
   }
 
@@ -224,7 +224,9 @@ object RMLFormatter extends Formatter {
     if (hasConditions(resource) && !conditionExists(resource, bundle.conditions)) {
 
       val current_condition = getCondition(resource, base)
-      bundle.conditions = bundle.conditions :+ getConditionURI(resource)
+      bundle.conditions = bundle.conditions :+ getConditionURI(resource) // add condition to list so it's only added one time
+
+      // add retrieval of function if present TODO
 
       if(hasFallback(resource)) {
 
@@ -245,11 +247,20 @@ object RMLFormatter extends Formatter {
 
         (heading + head, tailTupleReduced._1 + "\n" + tailTupleReduced._2)
       } else {
-        (heading + current_condition._1 + "\n" + current_condition._2, "")
+        (heading + current_condition._1 + "\n\n" + current_condition._2, "")
       }
 
     } else {
-      (heading + getResourceString(resource, base) + offset, "")
+
+      /** The case if a function is used:
+        * Checks if the rr:PredicateObjectMap contains a FunctionTermMap
+        */
+      val functionTermMapString = if(hasFunctionTermMap(resource)) {
+        val functionTermMap = getObjectMap(resource)
+        getFunctionTermMap(functionTermMap.listProperties(), base) + offset
+      } else ""
+
+      (heading + getResourceString(resource, base) + offset + functionTermMapString, "")
     }
   }
 

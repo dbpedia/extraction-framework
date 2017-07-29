@@ -1,7 +1,7 @@
-package org.dbpedia.extraction.mappings.rml.model.assembler
+package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
-import org.dbpedia.extraction.mappings.rml.model.assembler.TemplateAssembler.Counter
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template.SimplePropertyTemplate
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
@@ -18,7 +18,7 @@ class SimplePropertyTemplateAssembler(rmlModel : RMLModel, baseUri: String, lang
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   def assemble(independent : Boolean = false) : List[RMLPredicateObjectMap] = {
-    if(independent) {
+    if(!independent) {
       val triplesMap = rmlModel.triplesMap
       addSimplePropertyMappingToTriplesMap(baseUri, triplesMap)
     } else {
