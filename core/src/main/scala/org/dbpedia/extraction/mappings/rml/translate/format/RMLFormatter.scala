@@ -199,10 +199,9 @@ object RMLFormatter extends Formatter {
 
     val mappings = statements.asScala.map(statement => {
 
-      val predicateObjectMap = statement.getObject
-      if(!hasConditions(predicateObjectMap.asResource()) && !RMLPredicateObjectMap(predicateObjectMap.asResource()).hasParentTriplesMap) {
-        val properties = predicateObjectMap.asResource().listProperties()
-        getMapping(properties, base)
+      val predicateObjectMap = RMLPredicateObjectMap(statement.getObject.asResource())
+      if(!hasConditions(predicateObjectMap.resource.asResource()) && !predicateObjectMap.hasParentTriplesMap) {
+        getMapping(predicateObjectMap, base)
       } else {
         "" // skip conditionals here
       }
@@ -252,11 +251,12 @@ object RMLFormatter extends Formatter {
     * Retrieve all necessary constructs of a single mapping (rr:PredicateObjectMap)
     * This functions checks the properties of a rr:PredicateObjectMap
     *
-    * @param properties
+    * @param predicateObjectMap
     * @param base
     * @return
     */
-  private def getMapping(properties : StmtIterator, base : String) : String = {
+  private def getMapping(predicateObjectMap: RMLPredicateObjectMap, base : String) : String = {
+    val properties = predicateObjectMap.resource.listProperties()
     val propertiesArray: Array[Statement] = properties.toList.asScala.toArray
     val freshModel = new ModelWrapper
     freshModel.insertRDFNamespacePrefixes()
@@ -274,11 +274,20 @@ object RMLFormatter extends Formatter {
     } else ""
 
     /**
+      * The case that there is only a reference object map
+      */
+    val referenceObjectMapString = if(predicateObjectMap.objectMap.hasReference) {
+      val objectMap = predicateObjectMap.objectMap
+      val heading = "### ObjectMap"
+      heading + getResourceString(objectMap.resource, base) + offset
+    } else ""
+
+    /**
       * The case if the rr:PredicateObjectMap contains a rr:object --> this is a constant mapping, already covered
       * by adding all properties to the new model ()
       */
 
-    heading + predicateObjectMapString + offset + functionTermMapString
+    heading + predicateObjectMapString + offset + functionTermMapString + referenceObjectMapString
   }
 
   /**

@@ -15,4 +15,8 @@ object Property {
 
   val SUBJECTMAP = RdfNamespace.RR.namespace + "subjectMap"
 
+  val PREDICATEOBJECTMAP = RdfNamespace.RR.namespace + "predicateObjectMap"
+
+  val REFERENCE = RdfNamespace.RML.namespace + "reference"
+
 }

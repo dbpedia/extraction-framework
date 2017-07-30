@@ -47,6 +47,7 @@ object TemplateAssembler {
   /**
     * Assemble a template
     * Add a template to an existing rml model
+    *
     * @param rmlModel
     * @param template
     * @param language
@@ -117,6 +118,7 @@ object TemplateAssembler {
 
   /**
     * Assembles a template with standard as baseUri the main triples map uri
+    *
     * @param rmlModel
     * @param template
     * @param language
@@ -137,8 +139,13 @@ object TemplateAssembler {
     * @return
     */
   private def assembleSimplePropertyTemplate(rmlModel : RMLModel, simplePropertyTemplate: SimplePropertyTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
-    val assembler = new SimplePropertyTemplateAssembler(rmlModel, baseUri, language, simplePropertyTemplate, counter)
-    assembler.assemble(independent)
+    if(simplePropertyTemplate.isSimple) {
+      val assembler = new ShortSimplePropertyTemplateAssembler(rmlModel, baseUri, language, simplePropertyTemplate, counter)
+      assembler.assemble(independent)
+    } else {
+      val assembler = new SimplePropertyTemplateAssembler(rmlModel, baseUri, language, simplePropertyTemplate, counter)
+      assembler.assemble(independent)
+    }
   }
 
   /**

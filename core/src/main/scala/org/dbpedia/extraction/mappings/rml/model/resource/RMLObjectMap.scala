@@ -10,6 +10,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 class RMLObjectMap(override val resource: Resource) extends RMLResource(resource) {
 
   lazy val parentTriplesMap : RMLTriplesMap = getParentTriplesMap
+  lazy val reference : RMLLiteral = getReference
 
   def addRMLReference(literal: RMLLiteral) =
   {
@@ -56,12 +57,26 @@ class RMLObjectMap(override val resource: Resource) extends RMLResource(resource
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "language"), language)
   }
 
+  def hasReference : Boolean = {
+    reference != null
+  }
+
   private def getParentTriplesMap : RMLTriplesMap = {
     val property = resource.listProperties(createProperty(Property.PARENTTRIPLESMAP))
     if(property.hasNext) {
       val stmnt = property.nextStatement()
       val parentTriplesMapResource = stmnt.getObject.asResource()
       RMLTriplesMap(parentTriplesMapResource)
+    } else null
+  }
+
+  private def getReference : RMLLiteral = {
+    val property = resource.listProperties(createProperty(Property.REFERENCE))
+    if(property.hasNext) {
+      val stmnt = property.nextStatement()
+      val referenceString = stmnt.getObject.asLiteral().toString
+      val reference = RMLLiteral(referenceString)
+      reference
     } else null
   }
 
@@ -78,6 +93,8 @@ object RMLObjectMap {
   def apply(resource: Resource) : RMLObjectMap = {
     new RMLObjectMap(resource)
   }
+
+
 
 
 }

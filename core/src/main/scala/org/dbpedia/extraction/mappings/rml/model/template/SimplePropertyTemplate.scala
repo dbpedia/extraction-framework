@@ -13,8 +13,13 @@ case class SimplePropertyTemplate(property : String,
                                   suffix : String,
                                   transform : String,
                                   unit : Datatype,
-                                  factor : Double) extends Template(SimplePropertyTemplate.NAME
-)
+                                  factor : Double = 1) extends Template(SimplePropertyTemplate.NAME) {
+
+  def isSimple : Boolean = {
+    select == null && prefix == null && transform == null && factor == 1
+  }
+
+}
 
 object SimplePropertyTemplate {
 
