@@ -176,7 +176,7 @@ object RMLFormatter extends Formatter {
     poms.map(pom => {
       val pomString = getResourceString(pom.resource, base)
       val objectMap = pom.objectMap
-      val referenceObjectMapString = if(pom.objectMap.hasReference) {
+      val referenceObjectMapString = if(pom.hasReferenceObjectMap) {
         val objectMap = pom.objectMap
         val heading = "### ObjectMap"
         heading + getResourceString(objectMap.resource, base) + offset
@@ -284,7 +284,7 @@ object RMLFormatter extends Formatter {
     /**
       * The case that there is only a reference object map
       */
-    val referenceObjectMapString = if(predicateObjectMap.objectMap.hasReference) {
+    val referenceObjectMapString = if(predicateObjectMap.hasReferenceObjectMap) {
       val objectMap = predicateObjectMap.objectMap
       val heading = "### ObjectMap"
       heading + getResourceString(objectMap.resource, base) + offset

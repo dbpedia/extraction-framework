@@ -99,6 +99,12 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
     objectMap != null && objectMap.parentTriplesMap != null
   }
 
+  def hasReferenceObjectMap = {
+    if(objectMap != null) {
+      objectMap.hasReference
+    } else false
+  }
+
 }
 
 object RMLPredicateObjectMap {
