@@ -4,7 +4,7 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
 import org.dbpedia.extraction.mappings.rml.model.{RMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.model.resource._
-import org.dbpedia.extraction.ontology.{OntologyClass, RdfNamespace}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, RdfNamespace}
 
 import scala.language.reflectiveCalls
 

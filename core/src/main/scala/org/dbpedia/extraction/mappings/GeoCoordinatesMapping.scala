@@ -26,7 +26,7 @@ class GeoCoordinatesMapping(
   val latitudeMinutes : String,
   val latitudeSeconds : String,
   val latitudeDirection : String,
-  context : {
+  val context : {
     def ontology : Ontology
     def redirects : Redirects   // redirects required by GeoCoordinatesParser
     def language : Language 

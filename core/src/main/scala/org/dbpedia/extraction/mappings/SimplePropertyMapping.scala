@@ -23,7 +23,7 @@ class SimplePropertyMapping (
   val unit : Datatype,  // rml mappings require this to be public (e.g. ModelMapper)
   var language : Language,  // rml mappings require this to be public (e.g. ModelMapper)
   val factor : Double,  // rml mappings require this to be public (e.g. ModelMapper)
-  context : {
+  val context : {
     def ontology : Ontology
     def redirects : Redirects  // redirects required by DateTimeParser and UnitValueParser
     def language : Language

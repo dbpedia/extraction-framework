@@ -3,21 +3,12 @@ package org.dbpedia.extraction.mappings.rml.translate.mapper
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.mappings.rml.model.{RMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLSubjectMap, RMLUri}
+import org.dbpedia.extraction.ontology.Ontology
 
 /**
   * Creates an RML Template Mapping
   */
 class TemplateRMLMapper(rmlModel: RMLTranslationModel, templateMapping: TemplateMapping) {
-
-  private val triplesMapLabel = rmlModel.wikiTitle.decodedWithNamespace + " (Triples Map)"
-  private val triplesMapComment = "Main Triples Map of " + rmlModel.wikiTitle.decodedWithNamespace +
-                                  ". This defines the generation of triples that are extracted from " +
-                                  rmlModel.wikiTitle.decoded + "."
-
-  private val subjectMapLabel = rmlModel.wikiTitle.decodedWithNamespace + " (Subject Map)"
-  private val subjectMapComment = "Main Subject Map of " + rmlModel.wikiTitle.decodedWithNamespace +
-                                  ". This defines the generation of the subject for the triples that are extracted from " +
-                                  rmlModel.wikiTitle.decoded + "."
 
   def mapToModel() = {
     TemplateRMLMapper.resetState()
@@ -28,8 +19,6 @@ class TemplateRMLMapper(rmlModel: RMLTranslationModel, templateMapping: Template
   private def defineTriplesMap() =
   {
     rmlModel.triplesMap.addDCTermsType(new RMLLiteral("templateMapping"))
-    //rmlModel.triplesMap.addRdfsLabel(triplesMapLabel)
-    //rmlModel.triplesMap.addRdfsComment(triplesMapComment)
     defineSubjectMap()
     defineLogicalSource()
   }
@@ -39,9 +28,6 @@ class TemplateRMLMapper(rmlModel: RMLTranslationModel, templateMapping: Template
     val isocode = rmlModel.wikiTitle.language.isoCode
     rmlModel.subjectMap.addTemplate(rmlModel.rmlFactory.createRMLLiteral("http://"+ isocode +".dbpedia.org/resource/{wikititle}"))
     rmlModel.subjectMap.addClass(rmlModel.rmlFactory.createRMLUri(templateMapping.mapToClass.uri))
-    //rmlModel.subjectMap.addRdfsComment(subjectMapComment)
-    //rmlModel.subjectMap.addRdfsLabel(subjectMapLabel)
-    //addExtraClassesToSubjectMap(rmlModel.subjectMap)
     rmlModel.subjectMap.addIRITermType()
     addCorrespondingPropertyAndClassToSubjectMap()
   }

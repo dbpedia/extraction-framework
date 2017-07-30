@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings.rml.model.factory
 
 import org.dbpedia.extraction.mappings.Mappings
 import org.dbpedia.extraction.mappings.rml.model.RMLMapping
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.PageNode
 /**
