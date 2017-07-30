@@ -1,9 +1,12 @@
 package org.dbpedia.extraction.mappings.rml.translate.mapper
 
 import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.mappings.rml.model.factory.{WikiTextBundle, WikiTextTemplateFactory}
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
 import org.dbpedia.extraction.mappings.rml.model.{RMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.model.resource._
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, RdfNamespace}
 
 import scala.language.reflectiveCalls
@@ -24,6 +27,13 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
   }
 
   def addConditions() = {
+
+    val template = WikiTextTemplateFactory.createConditionalTemplate(WikiTextBundle(mapping))
+    val count = rmlModel.count(RMLUri.CONDITIONALMAPPING)
+    val counter = Counter(conditionals = count)
+    val language = rmlModel.wikiTitle.language.isoCode
+    TemplateAssembler.assembleTemplate(rmlModel, template, language , counter)
+    /**
     val firstConditionMapping = mapping.cases.head
     val firstTemplateMapping = firstConditionMapping.mapping.asInstanceOf[TemplateMapping]
 
@@ -53,6 +63,7 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
 
     //continue recursively
     addCondition(1, mapToClassPom)
+      **/
 
   }
 

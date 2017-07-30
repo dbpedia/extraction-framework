@@ -10,7 +10,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 26.07.17.
   */
-class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, language: String, template : GeocoordinateTemplate,  counter : Counter) {
+class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, language: String, template : GeocoordinateTemplate,  counter : Counter, independent : Boolean) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods
@@ -69,8 +69,17 @@ class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, langu
   private def addCoordinatesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val latPom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
-    val lonPom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
+    val latPom = if(!independent) {
+      triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
+    } else {
+      rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
+    }
+
+    val lonPom = if(!independent) {
+      triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
+    } else {
+      rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
+    }
 
     addCoordinatesToPredicateObjectMap(latPom, lonPom)
 
@@ -81,24 +90,42 @@ class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, langu
   private def addLongitudeLatitudeToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val latitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
-    val longitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
+    val latPom = if(!independent) {
+      triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
+    } else {
+      rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
+    }
 
-    addLongitudeLatitudeToPredicateObjectMap(latitudePom, longitudePom)
+    val lonPom = if(!independent) {
+      triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
+    } else {
+      rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
+    }
 
-    List(latitudePom, longitudePom)
+    addLongitudeLatitudeToPredicateObjectMap(latPom, lonPom)
+
+    List(latPom, lonPom)
 
   }
 
   private def addDegreesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val latitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri +"/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
-    val longitudePom = triplesMap.addPredicateObjectMap(RMLUri(baseUri +"/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
+    val latPom = if(!independent) {
+      triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
+    } else {
+      rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
+    }
 
-    addDegreesToPredicateObjectMap(latitudePom, longitudePom)
+    val lonPom = if(!independent) {
+      triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
+    } else {
+      rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
+    }
 
-    List(latitudePom, longitudePom)
+    addDegreesToPredicateObjectMap(latPom, lonPom)
+
+    List(latPom, lonPom)
 
   }
 

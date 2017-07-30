@@ -8,6 +8,8 @@ import org.dbpedia.extraction.ontology.OntologyProperty
   * Created by wmaroy on 30.07.17.
   */
 object WikiTextTemplateFactory extends TemplateFactory {
+
+
   /**
     * Creates a ConstantTemplate object from a TemplateFactoryBundle object
     *
@@ -144,7 +146,7 @@ object WikiTextTemplateFactory extends TemplateFactory {
     val longitudeDegrees = mapping.latitudeDegrees
     val longitudeMinutes = mapping.longitudeMinutes
     val longitudeSeconds = mapping.longitudeSeconds
-    val longitudeDirection = longitudeDirection
+    val longitudeDirection = mapping.longitudeDirection
 
     new GeocoordinateTemplate(ontologyProperty, coordinate, latitude, longitude, latitudeDegrees, latitudeMinutes, latitudeSeconds,
       latitudeDirection, longitudeDegrees, longitudeMinutes, longitudeSeconds, longitudeDirection)

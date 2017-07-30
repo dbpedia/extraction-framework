@@ -3,7 +3,7 @@ import org.apache.jena.rdf.model.Model
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLogicalSource, RMLSubjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.ontology.RdfNamespace
 
-import collection.JavaConverters._
+
 
 /**
   * Created by wmaroy on 21.07.17.
@@ -24,17 +24,6 @@ class RMLEditModel(private val mapping : Model,
   override protected val _functionSubjectMap: RMLSubjectMap = rmlFactory.createRMLSubjectMap(RMLUri(base + "SubjectMap/Function"))
                                                                         .addClass(RMLUri(RdfNamespace.FNO.namespace + "Execution"))
                                                                         .addBlankNodeTermType()
-
-  def count(templateName : String) : Int = {
-    // define resource and property to look for
-    val triplesMapResource = triplesMap.resource
-    val tmrURI = triplesMap.resource.getURI
-    val pomProperty = model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
-
-    // count the amount of statements that contain "SimplePropertyMapping"
-    val statements = model.listStatements(triplesMapResource, pomProperty, null).toList.asScala
-    statements.count(statement => statement.getObject.asResource().getURI.contains(templateName))
-  }
 
   private def getMainTriplesMap : RMLTriplesMap = {
     val triplesMapResourceIRI = base.substring(0, base.lastIndexOf('/'))

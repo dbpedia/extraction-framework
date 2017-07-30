@@ -5,6 +5,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.mappings.rml.model.factory.RMLResourceFactory
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.wikiparser.WikiTitle
+import collection.JavaConverters._
 
 /**
   * ModelWrapper that is used for resembling RML Mappings
@@ -46,6 +47,17 @@ abstract class RMLModel extends ModelWrapper {
   protected def convertToSubjectMapUri(title: WikiTitle): String =
   {
     title.resourceIri + "/SubjectMap"
+  }
+
+  def count(templateName : String) : Int = {
+    // define resource and property to look for
+    val triplesMapResource = triplesMap.resource
+    val tmrURI = triplesMap.resource.getURI
+    val pomProperty = model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
+
+    // count the amount of statements that contain "SimplePropertyMapping"
+    val statements = model.listStatements(triplesMapResource, pomProperty, null).toList.asScala
+    statements.count(statement => statement.getObject.asResource().getURI.contains(templateName))
   }
 
 

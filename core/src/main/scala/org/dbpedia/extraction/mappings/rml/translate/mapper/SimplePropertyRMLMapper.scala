@@ -1,9 +1,11 @@
 package org.dbpedia.extraction.mappings.rml.translate.mapper
 
 import org.dbpedia.extraction.mappings.SimplePropertyMapping
+import org.dbpedia.extraction.mappings.rml.model.factory.{WikiTextBundle, WikiTextTemplateFactory}
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
 import org.dbpedia.extraction.mappings.rml.model.{RMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.model.resource._
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 import scala.language.reflectiveCalls
@@ -16,6 +18,8 @@ class SimplePropertyRMLMapper(rmlModel: RMLTranslationModel, mapping: SimpleProp
   val language = mapping.language.isoCode
 
   def mapToModel() : List[RMLPredicateObjectMap] = {
+    //val template = WikiTextTemplateFactory.createSimplePropertyTemplate(WikiTextBundle(mapping))
+    //TemplateAssembler.assembleTemplate()
     addSimplePropertyMapping()
   }
 

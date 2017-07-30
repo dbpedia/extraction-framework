@@ -1,7 +1,11 @@
 package org.dbpedia.extraction.mappings.rml.translate.mapper
 
+import org.dbpedia.extraction.mappings.rml.model.factory.{WikiTextBundle, WikiTextTemplateFactory}
 import org.dbpedia.extraction.mappings.rml.model.{RMLModel, RMLTranslationModel}
-import org.dbpedia.extraction.mappings.rml.model.resource.{RMLPredicateObjectMap, RMLTriplesMap}
+import org.dbpedia.extraction.mappings.rml.model.resource.{RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
+import org.dbpedia.extraction.mappings.rml.model.template.GeocoordinateTemplate
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
 import org.dbpedia.extraction.wikiparser.TemplateNode
 
@@ -23,16 +27,62 @@ class RMLModelMapper(rmlModel: RMLTranslationModel) {
     }
   }
   
-  def addMapping(mapping: Extractor[TemplateNode], state : MappingState) :List[RMLPredicateObjectMap] =
+  def addMapping(mapping: Extractor[TemplateNode], state : MappingState) : List[RMLPredicateObjectMap] =
   {
+    val language = rmlModel.wikiTitle.language.isoCode
+
     mapping.getClass.getSimpleName match {
-      case "SimplePropertyMapping" => addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
+      case "SimplePropertyMapping" => {
+        ///addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
+        val simplePropertyMapping = mapping.asInstanceOf[SimplePropertyMapping]
+        val template = WikiTextTemplateFactory.createSimplePropertyTemplate(WikiTextBundle(simplePropertyMapping))
+        val count = rmlModel.count(RMLUri.SIMPLEPROPERTYMAPPING)
+        val counter = Counter(simpleProperties = count)
+        TemplateAssembler.assembleTemplate(rmlModel, template, language, counter)
+        List()
+      }
       case "CalculateMapping" => addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
       case "CombineDateMapping" => addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
-      case "DateIntervalMapping" => addDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
-      case "GeoCoordinatesMapping" => addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
-      case "IntermediateNodeMapping" => addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping], state)
-      case "ConstantMapping" => addConstantMapping(mapping.asInstanceOf[ConstantMapping])
+      case "DateIntervalMapping" => {
+        //addDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
+        val dateIntervalMapping = mapping.asInstanceOf[DateIntervalMapping]
+        val startDateTemplate = WikiTextTemplateFactory.createStartDateTemplate(WikiTextBundle(dateIntervalMapping))
+        val endDateTemplate = WikiTextTemplateFactory.createEndDateTemplate(WikiTextBundle(dateIntervalMapping))
+        val startDateCount = rmlModel.count(RMLUri.STARTDATEMAPPING)
+        val startDateCounter = Counter(startDates = startDateCount)
+        val endDateCount = rmlModel.count(RMLUri.STARTDATEMAPPING)
+        val endDateCounter = Counter(endDates = endDateCount)
+        TemplateAssembler.assembleTemplate(rmlModel, startDateTemplate, language, startDateCounter)
+        TemplateAssembler.assembleTemplate(rmlModel, endDateTemplate, language, endDateCounter)
+        List()
+      }
+      case "GeoCoordinatesMapping" => {
+        //addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
+        val geoCoordinatesMapping = mapping.asInstanceOf[GeoCoordinatesMapping]
+        val template = WikiTextTemplateFactory.createGeocoordinateTemplate(WikiTextBundle(geoCoordinatesMapping))
+        val count = rmlModel.count(RMLUri.LATITUDEMAPPING)
+        val counter = Counter(geoCoordinates = count)
+        TemplateAssembler.assembleTemplate(rmlModel, template, language, counter)
+        List()
+      }
+      case "IntermediateNodeMapping" => {
+        //addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping], state)
+        val intermediateMapping = mapping.asInstanceOf[IntermediateNodeMapping]
+        val template = WikiTextTemplateFactory.createIntermediateTemplate(WikiTextBundle(intermediateMapping))
+        val count = rmlModel.count(RMLUri.INTERMEDIATEMAPPING)
+        val counter = Counter(intermediates = count)
+        TemplateAssembler.assembleTemplate(rmlModel, template, language, counter)
+        List()
+      }
+      case "ConstantMapping" => {
+        //addConstantMapping(mapping.asInstanceOf[ConstantMapping])
+        val constantMapping = mapping.asInstanceOf[ConstantMapping]
+        val template = WikiTextTemplateFactory.createConstantTemplate(WikiTextBundle(constantMapping))
+        val count = rmlModel.count(RMLUri.CONSTANTMAPPING)
+        val counter = Counter(constants = count)
+        TemplateAssembler.assembleTemplate(rmlModel, template, language, counter)
+        List()
+      }
     }
   }
 

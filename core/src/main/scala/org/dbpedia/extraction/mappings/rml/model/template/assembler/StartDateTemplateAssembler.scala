@@ -11,7 +11,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 26.07.17.
   */
-class StartDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: StartDateTemplate, counter : Counter) {
+class StartDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: StartDateTemplate, counter : Counter, independent : Boolean) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods
@@ -33,7 +33,11 @@ class StartDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language
   private def addStartDateMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) : List[RMLPredicateObjectMap] = {
 
     val startUri = RMLUri(uri + "/" +  RMLUri.STARTDATEMAPPING + "/" + counter.startDates)
-    val startDateIntervalPom = triplesMap.addPredicateObjectMap(startUri)
+    val startDateIntervalPom = if(!independent) {
+      triplesMap.addPredicateObjectMap(startUri)
+    } else {
+      rmlModel.rmlFactory.createRMLPredicateObjectMap(startUri)
+    }
 
     addStartDateMappingToPredicateObjectMaps(startDateIntervalPom)
 

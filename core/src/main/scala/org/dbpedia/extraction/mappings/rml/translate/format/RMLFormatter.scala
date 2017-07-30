@@ -137,7 +137,7 @@ object RMLFormatter extends Formatter {
                                                 .reduce((a,b) => a.concat("\n" + b))
 
       val heading = hashtags(30) + "\n" + hashtags(3) + " Intermediate Mappings\n" + hashtags(30) + "\n\n"
-      heading + intermediateStrings
+      (heading + intermediateStrings).replaceAll(",", ",\n\t\t\t      ")
     } else ""
 
   }
@@ -176,9 +176,17 @@ object RMLFormatter extends Formatter {
     poms.map(pom => {
       val pomString = getResourceString(pom.resource, base)
       val objectMap = pom.objectMap
-      val functionTermMapString = getFunctionTermMap(objectMap, base)
+      val referenceObjectMapString = if(pom.objectMap.hasReference) {
+        val objectMap = pom.objectMap
+        val heading = "### ObjectMap"
+        heading + getResourceString(objectMap.resource, base) + offset
+      } else ""
+      val functionTermMapString = if(hasFunctionTermMap(pom.resource)) {
+        getFunctionTermMap(objectMap, base)
+      } else ""
+
       val heading = "## Predicate Object Map"
-      heading + pomString + "\n\n" + functionTermMapString
+      heading + pomString + "\n\n" + functionTermMapString + referenceObjectMapString
     }).toList
   }
 

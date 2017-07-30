@@ -10,7 +10,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 26.07.17.
   */
-class EndDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: EndDateTemplate, counter : Counter) {
+class EndDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: EndDateTemplate, counter : Counter, independent : Boolean) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods
@@ -32,7 +32,11 @@ class EndDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language :
   def addEndDateMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap): List[RMLPredicateObjectMap] = {
 
     val endUri = RMLUri(uri + "/" +  RMLUri.ENDDATEMAPPING + "/" + counter.endDates)
-    val endDateIntervalPom = triplesMap.addPredicateObjectMap(endUri)
+    val endDateIntervalPom = if(!independent) {
+      triplesMap.addPredicateObjectMap(endUri)
+    } else {
+      rmlModel.rmlFactory.createRMLPredicateObjectMap(endUri)
+    }
 
     addEndDateMappingToPredicateObjectMaps(endDateIntervalPom)
 

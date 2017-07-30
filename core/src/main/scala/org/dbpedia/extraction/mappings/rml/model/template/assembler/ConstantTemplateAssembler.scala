@@ -13,7 +13,7 @@ import org.dbpedia.extraction.util.Language
 /**
   * Created by wmaroy on 25.07.17.
   */
-class ConstantTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: ConstantTemplate, counter : Counter) {
+class ConstantTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: ConstantTemplate, counter : Counter, independent : Boolean) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods
@@ -31,7 +31,11 @@ class ConstantTemplateAssembler(rmlModel : RMLModel, baseUri : String, language 
   {
     val constantMappingUri = RMLUri(uri + "/ConstantMapping/" + counter.constants)
 
-    val constantPom = triplesMap.addPredicateObjectMap(constantMappingUri)
+    val constantPom = if(!independent) {
+      triplesMap.addPredicateObjectMap(constantMappingUri)
+    } else {
+      rmlModel.rmlFactory.createRMLPredicateObjectMap(constantMappingUri)
+    }
     addConstantValuePredicateObjectMap(constantPom)
     List(constantPom)
   }
