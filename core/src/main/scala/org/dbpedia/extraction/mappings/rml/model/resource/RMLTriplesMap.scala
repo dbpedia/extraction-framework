@@ -1,7 +1,9 @@
 package org.dbpedia.extraction.mappings.rml.model.resource
 
 import org.apache.jena.rdf.model.Resource
+import org.dbpedia.extraction.mappings.rml.model.voc.Property
 import org.dbpedia.extraction.ontology.RdfNamespace
+
 import scala.collection.JavaConverters._
 
 /**
@@ -10,6 +12,7 @@ import scala.collection.JavaConverters._
 class RMLTriplesMap(override val resource: Resource) extends RMLResource(resource) {
 
   lazy val predicateObjectMaps : List[RMLPredicateObjectMap] = getPredicateObjectMaps
+  lazy val subjectMap : RMLSubjectMap = getSubjectMap
 
   def addPredicateObjectMap(uri: RMLUri) : RMLPredicateObjectMap =
   {
@@ -74,5 +77,22 @@ class RMLTriplesMap(override val resource: Resource) extends RMLResource(resourc
     properties.asScala.map(property => new RMLPredicateObjectMap(property.getObject.asResource())).toList
   }
 
+  private def getSubjectMap : RMLSubjectMap = {
+    val property = resource.listProperties(createProperty(Property.SUBJECTMAP))
+    if(property.hasNext) {
+      val stmnt = property.nextStatement()
+      val subjectMapResource = stmnt.getObject.asResource()
+      RMLSubjectMap(subjectMapResource)
+    } else null
+  }
+
+
+}
+
+object RMLTriplesMap {
+
+  def apply(resource : Resource) = {
+    new RMLTriplesMap(resource)
+  }
 
 }

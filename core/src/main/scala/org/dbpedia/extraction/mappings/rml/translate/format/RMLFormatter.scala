@@ -1,6 +1,9 @@
 package org.dbpedia.extraction.mappings.rml.translate.format
 import java.net.URLDecoder
+
 import org.apache.jena.rdf.model.{Resource, Statement, StmtIterator}
+import org.dbpedia.extraction.mappings.rml.model.resource.{RMLObjectMap, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
+
 import collection.JavaConverters._
 import org.dbpedia.extraction.mappings.rml.model.{ModelWrapper, RMLModel}
 import org.dbpedia.extraction.ontology.RdfNamespace
@@ -33,6 +36,7 @@ object RMLFormatter extends Formatter {
       val subjectMapPart = getSubjectMapPart(model, base)
       val mappingsPart = getAllMappings(model, base)
       val conditionalsPart = getAllConditionalMappings(model, base)
+      val intermediatesPart = getAllIntermediates(model, base)
       val functionsPart = getFunctions(model, base)
       val logicalSourcePart = getLogicalSource(model, base)
       val subjectMapFunctionPart = if(!functionsPart.equals("")) getSubjectMapFunction(model, base) else ""
@@ -41,10 +45,11 @@ object RMLFormatter extends Formatter {
                           subjectMapPart,
                           logicalSourcePart,
                           mappingsPart,
+                          intermediatesPart,
                           conditionalsPart,
                           functionsPart,
                           subjectMapFunctionPart)
-                          .reduce((first, second) => first.concat('\n' + second))
+                          .reduce((first, second) => if(second != "") first.concat('\n' + second) else first)
       postProcess(formatted)
     } catch {
       case x : Exception => x.printStackTrace(); ""
@@ -65,7 +70,9 @@ object RMLFormatter extends Formatter {
   private def postProcess(mapping: String) : String = {
     mapping.split("\n")
            .map(line => line.replaceAll("/FunctionTermMap", "/FTM")
-                            .replaceAll("/FunctionValue", "/FV"))
+                            .replaceAll("/FunctionValue", "/FV")
+                            .replaceAll("/ObjectMap", "/OM")
+                            .replaceAll("ParentTriplesMap", "/PTM"))
           .reduce((first, second) => first.concat("\n" + second))
   }
 
@@ -113,6 +120,71 @@ object RMLFormatter extends Formatter {
   }
 
   /**
+    *
+    * @param model
+    * @param base
+    */
+  private def getAllIntermediates(model : RMLModel, base : String) : String = {
+    val tempModel = new ModelWrapper
+    val predicateObjectMaps = model.triplesMap.predicateObjectMaps
+    val intermediatePoms = predicateObjectMaps.filter(pom => {
+      pom.resource.getURI.contains(RMLUri.INTERMEDIATEMAPPING)
+    })
+
+
+    if(intermediatePoms.nonEmpty) {
+      val intermediateStrings = intermediatePoms.map(intermediatePom => getIntermediateString(intermediatePom, base))
+                                                .reduce((a,b) => a.concat("\n" + b))
+
+      val heading = hashtags(30) + "\n" + hashtags(3) + " Intermediate Mappings\n" + hashtags(30) + "\n\n"
+      heading + intermediateStrings
+    } else ""
+
+  }
+
+  /**
+    *
+    * @param pom
+    */
+  private def getIntermediateString(pom : RMLPredicateObjectMap, base : String) : String = {
+    val intermediatePomString = getResourceString(pom.resource, base)
+    val ptmObjectMap = pom.objectMap
+    val parentTriplesMapString = getParentTriplesMapString(ptmObjectMap, base)
+    val heading = hashtags(3) + " Intermediate Predicate Object Map\n" + hashtags(38)
+    heading + intermediatePomString + "\n\n" + parentTriplesMapString
+  }
+
+  private def getParentTriplesMapString(ptmObjectMap : RMLObjectMap, base : String) : String = {
+    val ptmObjectMapString = getResourceString(ptmObjectMap.resource, base)
+    val ptm = ptmObjectMap.parentTriplesMap
+    val ptmString = getResourceString(ptm.resource, base)
+    val subjectMap = ptm.subjectMap
+    val subjectMapString = getResourceString(subjectMap.resource, base)
+    val pomStrings = if(ptm.predicateObjectMaps.nonEmpty) {
+      getPredicateObjectMapStrings(ptm, base).reduce((a, b) => a.concat("\n\n" + b))
+    } else ""
+
+    val omHeading = "## Intermediate Object Map"
+    val ptmHeading = "## Intermediate Triples Map"
+    val smHeading = "## Intermediate Subject Map"
+
+    omHeading + ptmObjectMapString + "\n\n" + ptmHeading + ptmString + "\n\n" + smHeading + subjectMapString + "\n\n" + pomStrings
+  }
+
+  private def getPredicateObjectMapStrings(triplesMap : RMLTriplesMap, base : String) : List[String] = {
+    val poms = triplesMap.predicateObjectMaps
+    poms.map(pom => {
+      val pomString = getResourceString(pom.resource, base)
+      val objectMap = pom.objectMap
+      val functionTermMapString = getFunctionTermMap(objectMap, base)
+      val heading = "## Predicate Object Map"
+      heading + pomString + "\n\n" + functionTermMapString
+    }).toList
+  }
+
+
+
+  /**
     * Gets all the property mappings from a mapping
     *
     * @param model
@@ -128,7 +200,7 @@ object RMLFormatter extends Formatter {
     val mappings = statements.asScala.map(statement => {
 
       val predicateObjectMap = statement.getObject
-      if(!hasConditions(predicateObjectMap.asResource())) {
+      if(!hasConditions(predicateObjectMap.asResource()) && !RMLPredicateObjectMap(predicateObjectMap.asResource()).hasParentTriplesMap) {
         val properties = predicateObjectMap.asResource().listProperties()
         getMapping(properties, base)
       } else {
@@ -398,6 +470,11 @@ object RMLFormatter extends Formatter {
 
     heading + functionTermMapString + offset + functionValueString
 
+  }
+
+
+  private def getFunctionTermMap(objectMap: RMLObjectMap, base : String) : String = {
+    getFunctionTermMap(objectMap.resource.listProperties(), base)
   }
 
   /**

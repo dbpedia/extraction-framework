@@ -1,12 +1,15 @@
 package org.dbpedia.extraction.mappings.rml.model.resource
 
 import org.apache.jena.rdf.model.Resource
+import org.dbpedia.extraction.mappings.rml.model.voc.Property
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
   * Represents an object map
   */
 class RMLObjectMap(override val resource: Resource) extends RMLResource(resource) {
+
+  lazy val parentTriplesMap : RMLTriplesMap = getParentTriplesMap
 
   def addRMLReference(literal: RMLLiteral) =
   {
@@ -52,5 +55,29 @@ class RMLObjectMap(override val resource: Resource) extends RMLResource(resource
   def addLanguage(language : String) = {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "language"), language)
   }
+
+  private def getParentTriplesMap : RMLTriplesMap = {
+    val property = resource.listProperties(createProperty(Property.PARENTTRIPLESMAP))
+    if(property.hasNext) {
+      val stmnt = property.nextStatement()
+      val parentTriplesMapResource = stmnt.getObject.asResource()
+      RMLTriplesMap(parentTriplesMapResource)
+    } else null
+  }
+
+}
+
+object RMLObjectMap {
+
+  /**
+    * Creates an RMLObjectMap straight from a given resource
+    *
+    * @param resource
+    * @return
+    */
+  def apply(resource: Resource) : RMLObjectMap = {
+    new RMLObjectMap(resource)
+  }
+
 
 }

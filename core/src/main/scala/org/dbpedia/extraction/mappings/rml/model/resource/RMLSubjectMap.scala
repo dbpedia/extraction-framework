@@ -54,3 +54,11 @@ class RMLSubjectMap(override val resource: Resource) extends RMLResource(resourc
   }
 
 }
+
+object RMLSubjectMap {
+
+  def apply(resource : Resource) : RMLSubjectMap ={
+    new RMLSubjectMap(resource)
+  }
+
+}

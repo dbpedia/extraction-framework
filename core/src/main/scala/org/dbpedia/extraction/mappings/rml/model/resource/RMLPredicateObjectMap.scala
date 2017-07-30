@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.resource
 
 import org.apache.jena.rdf.model.Resource
+import org.dbpedia.extraction.mappings.rml.model.voc.Property
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
@@ -8,7 +9,8 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   */
 class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource(resource) {
 
-  lazy val predicate = getPredicate
+  lazy val predicatePropertyURI = getPredicate
+  lazy val objectMap : RMLObjectMap = getObjectMap
 
   def addPredicate(uri: RMLUri) =
   {
@@ -79,9 +81,30 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
   }
 
   private def getPredicate : String = {
-    val property = resource.listProperties(createProperty(RdfNamespace.RR.namespace + "predicate"))
+    val property = resource.listProperties(createProperty(Property.PREDICATE))
     val stmnt = property.nextStatement()
     stmnt.getObject.asResource().getURI
+  }
+
+  private def getObjectMap : RMLObjectMap = {
+    val property = resource.listProperties(createProperty(Property.OBJECTMAP))
+    if(property.hasNext) {
+      val stmnt = property.nextStatement()
+      val objectMapProperty = stmnt.getObject
+      if (objectMapProperty.isResource) RMLObjectMap(objectMapProperty.asResource()) else null
+    } else null
+  }
+
+  def hasParentTriplesMap : Boolean = {
+    objectMap != null && objectMap.parentTriplesMap != null
+  }
+
+}
+
+object RMLPredicateObjectMap {
+
+  def apply(resource : Resource) = {
+    new RMLPredicateObjectMap(resource)
   }
 
 }

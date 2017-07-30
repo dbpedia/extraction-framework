@@ -212,7 +212,7 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
   private def containsClassMapping : Boolean = {
 
     val subjectMapHasClass = rmlModel.subjectMap.resource.hasProperty(rmlModel.model.createProperty(RdfNamespace.RR.namespace + "class"))
-    val pomHasType = rmlModel.triplesMap.predicateObjectMaps.exists(pom => pom.predicate.equals(RdfNamespace.RDF.namespace + "type"))
+    val pomHasType = rmlModel.triplesMap.predicateObjectMaps.exists(pom => pom.predicatePropertyURI.equals(RdfNamespace.RDF.namespace + "type"))
 
     subjectMapHasClass || pomHasType
   }

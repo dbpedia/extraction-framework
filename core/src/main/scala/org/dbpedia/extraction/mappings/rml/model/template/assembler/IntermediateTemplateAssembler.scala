@@ -20,7 +20,7 @@ class IntermediateTemplateAssembler(rmlModel: RMLModel, baseUri : String, langua
   {
 
     val uri = RMLUri(baseUri +
-      "/IntermediateNodeMapping/" +
+      "/" + RMLUri.INTERMEDIATEMAPPING + "/" +
       counter.intermediates)
 
     val intermediateNodePom = rmlModel.triplesMap.addPredicateObjectMap(uri)
@@ -65,7 +65,7 @@ class IntermediateTemplateAssembler(rmlModel: RMLModel, baseUri : String, langua
 
   private def addPropertyMapping(template: Template, triplesMap: RMLTriplesMap, counter : Counter) : (Counter, List[RMLPredicateObjectMap]) =
   {
-    val bundle = TemplateAssembler.assembleTemplate(rmlModel, baseUri + "/IntermediateNodeMapping/" + counter.intermediates + "", template, language, counter, independent = true)
+    val bundle = TemplateAssembler.assembleTemplate(rmlModel, baseUri +  "/" + RMLUri.INTERMEDIATEMAPPING + "/"  + counter.intermediates + "", template, language, counter, independent = true)
     bundle
   }
 
