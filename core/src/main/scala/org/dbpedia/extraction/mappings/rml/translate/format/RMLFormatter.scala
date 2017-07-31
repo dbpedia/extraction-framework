@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.mappings.rml.translate.format
+import java.io.StringReader
 import java.net.URLDecoder
 
-import org.apache.jena.rdf.model.{Resource, Statement, StmtIterator}
+import org.apache.jena.rdf.model.{ModelFactory, Resource, Statement, StmtIterator}
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLObjectMap, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 
 import collection.JavaConverters._
-import org.dbpedia.extraction.mappings.rml.model.{ModelWrapper, RMLModel}
+import org.dbpedia.extraction.mappings.rml.model.{ModelWrapper, RMLEditModel, RMLModel}
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
@@ -27,6 +28,12 @@ object RMLFormatter extends Formatter {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  def format(input : String, base : String, language : String) : String = {
+    val model = ModelFactory.createDefaultModel().read(new StringReader(input), base, "TURTLE")
+    val rmlModel = new RMLEditModel(model, null, base, language)
+    format(rmlModel, base)
+  }
 
   override def format(model: RMLModel, base : String): String = {
 

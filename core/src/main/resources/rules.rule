@@ -28,4 +28,118 @@
 @prefix wikidata: 	<http://www.wikidata.org/entity/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-[r1: (?pom a rr:PredicateObjectMap) -> (?pom rdfs:type 'test')]
+# Contains all the post process rules to transform the compact RML mappings to the full version. The full version is
+# directly processable by the RML Processor
+
+# replaces objectmaps with simplepropertyfunctions
+[r1:
+     noValue(?x fnml:functionValue ?t),
+     (?t rr:predicateObjectMap ?p),
+     (?t rml:logicalSource ?l)
+     (?p rdf:type rr:PredicateObjectMap),
+     (?p rr:predicate ?pred),
+     (?p rr:objectMap ?o ),
+     (?o rdf:type rr:ObjectMap),
+     (?o rml:reference ?ref),
+     uriConcat(?p, '/FTM', ?ftm),
+     uriConcat(?ftm, '/FV', ?fv),
+     uriConcat(?t, '/Function/SimplePropertyFunction', ?fun)
+     uriConcat(?fv,'/ontologyPropertyParam', ?n)
+     uriConcat(?fv,'/languageParam', ?n2)
+     uriConcat(?fv,'/propertyParam', ?n3)
+     uriConcat(?n3,'/OM', ?n4)
+     uriConcat(?t, '/SubjectMap/Function', ?subfun)
+
+     ->
+                                                    drop(5,6,7)
+
+                                                    (?p rr:objectMap ?ftm)
+                                                    (?ftm rdf:type fnml:FunctionTermMap)
+                                                    (?ftm fnml:functionValue ?fv)
+
+                                                    (?fv rml:logicalSource ?l)
+
+                                                    (?fv rr:subjectMap ?subfun)
+                                                    (?subfun rdf:type rr:SubjectMap)
+                                                    (?subfun rr:class fno:Execution)
+                                                    (?subfun rr:termType rr:BlankNode)
+
+                                                    (?fv rr:predicateObjectMap ?n)
+                                                    (?n rdf:type rr:PredicateObjectMap)
+                                                    (?n rr:predicate dbf:ontologyPropertyParameter)
+                                                    (?n rr:object ?pred)
+
+                                                    (?fv rr:predicateObjectMap ?n2)
+                                                    (?n2 rdf:type rr:PredicateObjectMap)
+                                                    (?n2 rr:predicate dbf:languageParameter)
+                                                    (?n2 rr:object "{LANG}")
+
+                                                    (?fv rr:predicateObjectMap ?fun)
+                                                    (?fun rdf:type rr:PredicateObjectMap)
+                                                    (?fun rr:predicate fno:executes)
+                                                    (?fun rr:object dbf:simplePropertyFunction)
+
+                                                    (?fv rr:predicateObjectMap ?n3)
+                                                    (?n3 rdf:type rr:PredicateObjectMap)
+                                                    (?n3 rr:predicate dbf:propertyParameter)
+                                                    (?n3 rr:objectMap ?n4)
+                                                    (?n4 rdf:type rr:ObjectMap)
+                                                    (?n4 rml:reference ?ref)
+
+                                                    ]
+
+
+
+# adds ontology property parameter to simplepropertyfunctions
+[r2: (?p rdf:type rr:PredicateObjectMap),
+     (?p rr:objectMap ?o ),
+     (?p rr:predicate ?pred),
+     (?o fnml:functionValue ?fv),
+     (?fv rr:predicateObjectMap ?p2),
+     (?p2 rr:object dbf:simplePropertyFunction),
+     uriConcat(?fv,'/ontologyPropertyParam', ?n)
+
+     ->
+                                                    (?fv rr:predicateObjectMap ?n),
+                                                    (?n rdf:type rr:PredicateObjectMap),
+                                                    (?n rr:predicate dbf:ontologyPropertyParameter),
+                                                    (?n rr:object ?pred)]
+
+# adds language parameter to simplepropertyfunctions
+[r3: (?p rdf:type rr:PredicateObjectMap),
+     (?p rr:objectMap ?o ),
+     (?p rr:predicate ?pred),
+     (?o fnml:functionValue ?fv),
+     (?fv rr:predicateObjectMap ?p2),
+     (?p2 rr:object dbf:simplePropertyFunction),
+     uriConcat(?fv,'/languageParam', ?n) ->
+                                                    (?fv rr:predicateObjectMap ?n),
+                                                    (?n rdf:type rr:PredicateObjectMap),
+                                                    (?n rr:predicate dbf:languageParameter),
+                                                    (?n rr:object "{LANG}")]
+
+# adds ontology property parameter to startDateFunction
+[r4: (?p rdf:type rr:PredicateObjectMap),
+     (?p rr:objectMap ?o ),
+     (?p rr:predicate ?pred),
+     (?o fnml:functionValue ?fv),
+     (?fv rr:predicateObjectMap ?p2),
+     (?p2 rr:object dbf:startDateFunction),
+     uriConcat(?fv,'/ontologyPropertyParam', ?n) ->
+                                                    (?fv rr:predicateObjectMap ?n),
+                                                    (?n rdf:type rr:PredicateObjectMap),
+                                                    (?n rr:predicate dbf:ontologyPropertyParameter),
+                                                    (?n rr:object ?pred)]
+
+# adds ontology property parameter to endDateFunction
+[r5: (?p rdf:type rr:PredicateObjectMap),
+     (?p rr:objectMap ?o ),
+     (?p rr:predicate ?pred),
+     (?o fnml:functionValue ?fv),
+     (?fv rr:predicateObjectMap ?p2),
+     (?p2 rr:object dbf:endDateFunction),
+     uriConcat(?fv,'/ontologyPropertyParam', ?n) ->
+                                                    (?fv rr:predicateObjectMap ?n),
+                                                    (?n rdf:type rr:PredicateObjectMap),
+                                                    (?n rr:predicate dbf:ontologyPropertyParameter),
+                                                    (?n rr:object ?pred)]

@@ -1,20 +1,24 @@
 package org.dbpedia.extraction.mappings.rml.load
 
-import java.io.{File, InputStream}
-import java.nio.file.{Files, Path, Paths}
+import java.io._
+import java.nio.charset.Charset
+import java.nio.file.{Files, Path, Paths, StandardOpenOption}
 
 import be.ugent.mmlab.rml.model.RMLMapping
 import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.reasoner.rulesys.{GenericRuleReasoner, Rule}
 import org.apache.jena.util.FileManager
+import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.util.Language
 
 /**
   * Created by wmaroy on 10.07.17. //TODO finish this and include into the loading step
   */
-class RMLInferencer {
+object RMLInferencer {
 
-  def load(language :Language, pathToRMLMappingsDir : String) : Map[String, RMLMapping] = {
+  val LANGUAGE_TEMPLATE = "\\{LANG\\}"
+
+  def loadDir(language :Language, pathToRMLMappingsDir : String) : Map[String, RMLMapping] = {
 
     // create language specific rules from templated file
     val path = this.getClass.getClassLoader.getResource("rules.rule").getPath
@@ -26,14 +30,32 @@ class RMLInferencer {
     // get the language dir
     val languageDir = getPathToLanguageDir(language, pathToRMLMappingsDir)
 
-    val infDir = inferenceDir(rules, languageDir)
+    val infDirTuple = inferenceDir(rules, languageDir, language.isoCode)
 
-    println(infDir)
+    infDirTuple._2.foreach(mapping => {
+      println(mapping)
+    })
 
-    //TODO load inferenced dir with RMLLoader
+    val mappings = RMLProcessorParser.parseFromDir(infDirTuple._1)
+    mappings
+  }
 
-    // return nothing atm
-    null
+  def loadDump(language: Language, dump : String, name : String) : (String, RMLMapping) = {
+    // create language specific rules from templated file
+    val path = this.getClass.getClassLoader.getResource("rules.rule").getPath
+
+    val languageRulesPath = createLanguageRuleFile(language, path)
+
+    // load the language rules
+    val rules = Rule.rulesFromURL(languageRulesPath.toUri.getPath)
+
+    val tempMappingFilePath = createTempMappingFile(name, dump, path)
+
+    val tmpDir = Files.createTempDirectory(Paths.get(path).getParent, "inferences")
+    val inference = inferenceRMLMapping(rules, tempMappingFilePath.toAbsolutePath.toString, tmpDir.toAbsolutePath.toString, language.isoCode)
+
+    val mappings = RMLProcessorParser.parseFromDir(tmpDir.toAbsolutePath.toString)
+    mappings.head
   }
 
   /**
@@ -52,8 +74,16 @@ class RMLInferencer {
     tmpFile
   }
 
+  private def createTempMappingFile(name : String, dump:String, path : String) : Path = {
+    val file = new File(path)
+    val dir = Paths.get(file.getParent)
+    val tmpFile = Files.createTempFile(dir, name + ".ttl", null)
+    Files.write(Paths.get(tmpFile.toUri.getPath), dump.getBytes)
+    tmpFile
+  }
 
-  private def inferenceDir(rules : java.util.List[Rule], inputDirPath : String) : String = {
+
+  private def inferenceDir(rules : java.util.List[Rule], inputDirPath : String, language : String) : (String, List[String]) = {
     if(inputDirPath == null) return null
 
     val dir = new File(inputDirPath)
@@ -70,11 +100,9 @@ class RMLInferencer {
     }
 
     val tmpDir = Files.createTempDirectory(Paths.get(inputDirPath), "inferences")
-    files.foreach(file => inferenceRMLMapping(rules, file.getAbsolutePath, tmpDir.toUri.toString +
-                                                      concatDirAndFileName(tmpDir.toUri.toString, file.getName)))
+    val inferences = files.map(file => inferenceRMLMapping(rules, file.getAbsolutePath, tmpDir.toAbsolutePath.toString, language)).toList
 
-
-    tmpDir.toUri.toString
+    (tmpDir.toAbsolutePath.toString, inferences)
 
   }
 
@@ -83,26 +111,43 @@ class RMLInferencer {
     * @param inputPath
     * @param outputPath
     */
-  private def inferenceRMLMapping(rules : java.util.List[Rule], inputPath : String, outputPath : String) = {
+  private def inferenceRMLMapping(rules : java.util.List[Rule], inputPath : String, outputPath : String, language : String) : String = {
 
     // create an empty model
     val model = ModelFactory.createDefaultModel()
 
-    // create inputStream
+    // create inputStream for fetching base
+    val inBase = createInputStream(inputPath)
+    val readerBase = new BufferedReader(
+      new InputStreamReader(inBase))
+    val firstLine = readerBase.readLine()
+    val baseRegex = "http://[^>]*".r
+    val base = baseRegex.findFirstMatchIn(firstLine).orNull.toString()
+
     val in = createInputStream(inputPath)
 
     // read the InputStream into the model
-    model.read(in, "http://en.dbpedia.org/resource/Mapping_en:Infobox_martial_artist", "TURTLE")
-
+    model.read(in, base, "TURTLE")
     // create the reasoner
     val reasoner = new GenericRuleReasoner(rules)
     val infModel = ModelFactory.createInfModel(reasoner, model)
 
     //TODO write to rml/inferenced/{lan}
-    infModel.write(System.out, "TURTLE", "http://en.dbpedia.org/resource/Mapping_en:Infobox_martial_artist/")
+    val out = new StringWriter()
+    infModel.write(out, "TURTLE", "http://en.dbpedia.org/resource/Mapping_en:Infobox_person/")
+
+    // mapping name regex
+    val mappingNameRegex = "Mapping_[^/]+".r
+    val fileName = mappingNameRegex.findFirstIn(base).orNull.toString + ".ttl"
+
+    val formatted = RMLFormatter.format(out.toString, base, language)
+    val writer = new BufferedWriter(new FileWriter(outputPath + "/" + fileName))
+    writer.write(formatted)
+    writer.close()
 
     println("Final output would be written to:" + outputPath)
 
+    formatted
   }
 
   private def createInputStream(inputPath : String) : InputStream = {
@@ -130,11 +175,5 @@ class RMLInferencer {
     if (!dir.endsWith("/")) "/" else ""
   }
 
-
-}
-
-object RMLInferencer {
-
-  val LANGUAGE_TEMPLATE = "\\{LANG\\}"
 
 }

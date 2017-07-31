@@ -1,0 +1,1452 @@
+@base	          	<http://en.dbpedia.org/resource/Mapping_en:Infobox_person/> .
+@prefix schema: 	<http://schema.org/> .
+@prefix rr:    		<http://www.w3.org/ns/r2rml#> .
+@prefix owl:   		<http://www.w3.org/2002/07/owl#> .
+@prefix gml:   		<http://www.opengis.net/gml/> .
+@prefix xsd:   		<http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   		<http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  		<http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    		<http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   		<http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   		<http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   		<http://purl.org/dc/terms/> .
+@prefix fnml:  		<http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: 	<http://purl.org/dc/terms/> .
+@prefix ql:    		<http://semweb.mmlab.be/ns/ql#> .
+@prefix dbr-en: 	<http://en.dbpedia.org/resource/> .
+@prefix foaf:  		<http://xmlns.com/foaf/0.1/> .
+@prefix crml:  		<http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   		<http://w3id.org/function/ontology#> .
+@prefix georss: 	<http://www.georss.org/georss/> .
+@prefix dbf:   		<http://dbpedia.org/function/> .
+@prefix dbo:   		<http://dbpedia.org/ontology/> .
+@prefix mappings: 	<http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  		<http://purl.org/ontology/bibo/> .
+@prefix dul:   		<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: 	<http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: 	<http://www.wikidata.org/entity/> .
+@prefix dc:    		<http://purl.org/dc/elements/1.1/> .
+
+
+### Main TriplesMap
+####################
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_person>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <SimplePropertyMapping/42> ,
+			       <SimplePropertyMapping/28> ,
+			       <SimplePropertyMapping/13> ,
+			       <SimplePropertyMapping/30> ,
+			       <StartDateMapping/1> ,
+			       <SimplePropertyMapping/16> ,
+			       <SimplePropertyMapping/24> ,
+			       <SimplePropertyMapping/8> ,
+			       <SimplePropertyMapping/12> ,
+			       <SimplePropertyMapping/5> ,
+			       <SimplePropertyMapping/1> ,
+			       <SimplePropertyMapping/47> ,
+			       <SimplePropertyMapping/18> ,
+			       <EndDateMapping/1> ,
+			       <SimplePropertyMapping/39> ,
+			       <SimplePropertyMapping/41> ,
+			       <SimplePropertyMapping/27> ,
+			       <SimplePropertyMapping/35> ,
+			       <StartDateMapping/0> ,
+			       <SimplePropertyMapping/15> ,
+			       <SimplePropertyMapping/52> ,
+			       <SimplePropertyMapping/23> ,
+			       <SimplePropertyMapping/7> ,
+			       <SimplePropertyMapping/44> ,
+			       <SimplePropertyMapping/40> ,
+			       <SimplePropertyMapping/11> ,
+			       <SimplePropertyMapping/32> ,
+			       <SimplePropertyMapping/20> ,
+			       <SimplePropertyMapping/4> ,
+			       <SimplePropertyMapping/0> ,
+			       <EndDateMapping/0> ,
+			       <SimplePropertyMapping/38> ,
+			       <SimplePropertyMapping/46> ,
+			       <SimplePropertyMapping/26> ,
+			       <IntermediateMapping/1> ,
+			       <SimplePropertyMapping/49> ,
+			       <SimplePropertyMapping/34> ,
+			       <SimplePropertyMapping/14> ,
+			       <SimplePropertyMapping/51> ,
+			       <SimplePropertyMapping/37> ,
+			       <SimplePropertyMapping/22> ,
+			       <SimplePropertyMapping/43> ,
+			       <SimplePropertyMapping/29> ,
+			       <SimplePropertyMapping/25> ,
+			       <SimplePropertyMapping/10> ,
+			       <SimplePropertyMapping/31> ,
+			       <SimplePropertyMapping/17> ,
+			       <SimplePropertyMapping/9> ,
+			       <SimplePropertyMapping/3> ,
+			       <SimplePropertyMapping/6> ,
+			       <SimplePropertyMapping/45> ,
+			       <SimplePropertyMapping/2> ,
+			       <SimplePropertyMapping/48> ,
+			       <SimplePropertyMapping/33> ,
+			       <SimplePropertyMapping/19> ,
+			       <SimplePropertyMapping/50> ,
+			       <IntermediateMapping/0> ,
+			       <SimplePropertyMapping/36> ,
+			       <SimplePropertyMapping/21> ;
+        rr:subjectMap          <SubjectMap> .
+
+
+### Main SubjectMap
+####################
+<SubjectMap>  a      rr:SubjectMap ;
+        rr:class     dbo:Person ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+
+### LogicalSource
+##################
+
+<LogicalSource>  a                rml:LogicalSource ;
+        rml:iterator              "Infobox:Infobox_person" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "https://en.wikipedia.org/wiki/{wikititle}" .
+
+
+###########
+# Mappings
+###########
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/42>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/42/OM> ;
+        rr:predicate  dbo:spouse .
+
+### ObjectMap
+<SimplePropertyMapping/42/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "spouse" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/28>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/28/OM> ;
+        rr:predicate  dbo:hometown .
+
+### ObjectMap
+<SimplePropertyMapping/28/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "home_town" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/13>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/13/OM> ;
+        rr:predicate  dbo:alias .
+
+### ObjectMap
+<SimplePropertyMapping/13/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "other_names" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/30>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/30/OM> ;
+        rr:predicate  dbo:networth .
+
+### ObjectMap
+<SimplePropertyMapping/30/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "networth" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/1>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/1/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<StartDateMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <StartDateMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<StartDateMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<StartDateMapping/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/1/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<StartDateMapping/1/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "yearsactive" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/16>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/16/OM> ;
+        rr:predicate  dbo:occupation .
+
+### ObjectMap
+<SimplePropertyMapping/16/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "occupation" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/24>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/24/OM> ;
+        rr:predicate  dbo:citizenship .
+
+### ObjectMap
+<SimplePropertyMapping/24/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "citizenship" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/8>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/8/OM> ;
+        rr:predicate  dbo:deathYear .
+
+### ObjectMap
+<SimplePropertyMapping/8/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "death_date" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/12>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/12/OM> ;
+        rr:predicate  dbo:stateOfOrigin .
+
+### ObjectMap
+<SimplePropertyMapping/12/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "nationality" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/5>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/5/OM> ;
+        rr:predicate  dbo:birthPlace .
+
+### ObjectMap
+<SimplePropertyMapping/5/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_place" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/1/OM> ;
+        rr:predicate  dbo:birthDate .
+
+### ObjectMap
+<SimplePropertyMapping/1/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "birthdate" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/47>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/47/OM> ;
+        rr:predicate  dbo:relative .
+
+### ObjectMap
+<SimplePropertyMapping/47/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "relatives" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/18>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/18/OM> ;
+        rr:predicate  dbo:birthName .
+
+### ObjectMap
+<SimplePropertyMapping/18/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "birthname" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/1>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/1/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/1/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<EndDateMapping/1/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "yearsactive" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/39>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/39/OM> ;
+        rr:predicate  dbo:opponent .
+
+### ObjectMap
+<SimplePropertyMapping/39/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "opponents" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/41>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/41/OM> ;
+        rr:predicate  dbo:religion .
+
+### ObjectMap
+<SimplePropertyMapping/41/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "religion" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/27>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/27/OM> ;
+        rr:predicate  dbo:employer .
+
+### ObjectMap
+<SimplePropertyMapping/27/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "employer" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/35>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/35/OM> ;
+        rr:predicate  dbo:title .
+
+### ObjectMap
+<SimplePropertyMapping/35/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "title" .
+
+
+### Predicate Object Map
+#########################
+<StartDateMapping/0>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/0/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<StartDateMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <StartDateMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<StartDateMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			       <StartDateMapping/0/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<StartDateMapping/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <StartDateMapping/0/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<StartDateMapping/0/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "years_active" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/15>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/15/OM> ;
+        rr:predicate  dbo:knownFor .
+
+### ObjectMap
+<SimplePropertyMapping/15/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "known_for" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/52>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/52/OM> ;
+        rr:predicate  foaf:homepage .
+
+### ObjectMap
+<SimplePropertyMapping/52/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "homepage" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/23>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/23/OM> ;
+        rr:predicate  dbo:ethnicity .
+
+### ObjectMap
+<SimplePropertyMapping/23/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "ethnicity" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/7>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/7/OM> ;
+        rr:predicate  dbo:deathDate .
+
+### ObjectMap
+<SimplePropertyMapping/7/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "death_date" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/44>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/44/OM> ;
+        rr:predicate  dbo:child .
+
+### ObjectMap
+<SimplePropertyMapping/44/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "children" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/40>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/40/OM> ;
+        rr:predicate  dbo:board .
+
+### ObjectMap
+<SimplePropertyMapping/40/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "boards" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/11>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/11/OM> ;
+        rr:predicate  dbo:nationality .
+
+### ObjectMap
+<SimplePropertyMapping/11/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "nationality" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/32>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/32/OM> ;
+        rr:predicate  dbo:networth .
+
+### ObjectMap
+<SimplePropertyMapping/32/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "net worth" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/20>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/20/OM> ;
+        rr:predicate  dbo:deathCause .
+
+### ObjectMap
+<SimplePropertyMapping/20/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "death_cause" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/4>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/4/OM> ;
+        rr:predicate  dbo:birthPlace .
+
+### ObjectMap
+<SimplePropertyMapping/4/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "birthplace" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/0/OM> ;
+        rr:predicate  foaf:name .
+
+### ObjectMap
+<SimplePropertyMapping/0/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+
+### Predicate Object Map
+#########################
+<EndDateMapping/0>  a  rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/0/FTM> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+### Function Term Map
+<EndDateMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <EndDateMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<EndDateMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			       <EndDateMapping/0/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<EndDateMapping/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <EndDateMapping/0/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<EndDateMapping/0/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "years_active" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/38>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/38/OM> ;
+        rr:predicate  dbo:party .
+
+### ObjectMap
+<SimplePropertyMapping/38/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "party" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/46>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/46/OM> ;
+        rr:predicate  dbo:callSign .
+
+### ObjectMap
+<SimplePropertyMapping/46/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "callsign" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/26>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/26/OM> ;
+        rr:predicate  dbo:almaMater .
+
+### ObjectMap
+<SimplePropertyMapping/26/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "alma_mater" .
+
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/49>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/49/OM> ;
+        rr:predicate  dbo:pseudonym .
+
+### ObjectMap
+<SimplePropertyMapping/49/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "pseudonym" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/34>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/34/OM> ;
+        rr:predicate  dbo:weight .
+
+### ObjectMap
+<SimplePropertyMapping/34/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "weight" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/14>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/14/OM> ;
+        rr:predicate  dbo:alias .
+
+### ObjectMap
+<SimplePropertyMapping/14/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "othername" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/51>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/51/OM> ;
+        rr:predicate  foaf:homepage .
+
+### ObjectMap
+<SimplePropertyMapping/51/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/37>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/37/OM> ;
+        rr:predicate  dbo:successor .
+
+### ObjectMap
+<SimplePropertyMapping/37/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "successor" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/22>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/22/OM> ;
+        rr:predicate  dbo:residence .
+
+### ObjectMap
+<SimplePropertyMapping/22/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "residence" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/43>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/43/OM> ;
+        rr:predicate  dbo:partner .
+
+### ObjectMap
+<SimplePropertyMapping/43/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "partner" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/29>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/29/OM> ;
+        rr:predicate  dbo:salary .
+
+### ObjectMap
+<SimplePropertyMapping/29/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "salary" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/25>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/25/OM> ;
+        rr:predicate  dbo:education .
+
+### ObjectMap
+<SimplePropertyMapping/25/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "education" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/10>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/10/OM> ;
+        rr:predicate  dbo:deathPlace .
+
+### ObjectMap
+<SimplePropertyMapping/10/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "death_place" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/31>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/31/OM> ;
+        rr:predicate  dbo:networth .
+
+### ObjectMap
+<SimplePropertyMapping/31/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "net_worth" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/17>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/17/OM> ;
+        rr:predicate  dbo:birthName .
+
+### ObjectMap
+<SimplePropertyMapping/17/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_name" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/9>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/9/OM> ;
+        rr:predicate  dbo:deathPlace .
+
+### ObjectMap
+<SimplePropertyMapping/9/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "deathplace" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/3/OM> ;
+        rr:predicate  dbo:birthYear .
+
+### ObjectMap
+<SimplePropertyMapping/3/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_date" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/6>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/6/OM> ;
+        rr:predicate  dbo:deathDate .
+
+### ObjectMap
+<SimplePropertyMapping/6/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "deathdate" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/45>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/45/OM> ;
+        rr:predicate  dbo:relation .
+
+### ObjectMap
+<SimplePropertyMapping/45/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "relations" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/2/OM> ;
+        rr:predicate  dbo:birthDate .
+
+### ObjectMap
+<SimplePropertyMapping/2/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_date" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/48>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/48/OM> ;
+        rr:predicate  dbo:award .
+
+### ObjectMap
+<SimplePropertyMapping/48/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "awards" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/33>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/33/OM> ;
+        rr:predicate  dbo:height .
+
+### ObjectMap
+<SimplePropertyMapping/33/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/19>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/19/OM> ;
+        rr:predicate  dbo:bodyDiscovered .
+
+### ObjectMap
+<SimplePropertyMapping/19/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "body_discovered" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/50>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/50/OM> ;
+        rr:predicate  dbo:parent .
+
+### ObjectMap
+<SimplePropertyMapping/50/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "parents" .
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/36>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/36/OM> ;
+        rr:predicate  dbo:predecessor .
+
+### ObjectMap
+<SimplePropertyMapping/36/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "predecessor" .
+
+
+
+### Predicate Object Map
+#########################
+<SimplePropertyMapping/21>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <SimplePropertyMapping/21/OM> ;
+        rr:predicate  dbo:restingPlace .
+
+### ObjectMap
+<SimplePropertyMapping/21/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "resting_place" .
+
+
+##############################
+### Intermediate Mappings
+##############################
+
+### Intermediate Predicate Object Map
+######################################
+<IntermediateMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/1/OM> ;
+        rr:predicate  dbo:personFunction .
+
+## Intermediate Object Map
+<IntermediateMapping/1/OM>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <IntermediateMapping/1/OM//PTM> .
+
+## Intermediate Triples Map
+<IntermediateMapping/1/OM//PTM>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <IntermediateMapping/1/SimplePropertyMapping/0> ,
+			       <IntermediateMapping/1/StartDateMapping/0> ,
+			       <IntermediateMapping/1/EndDateMapping/0> ,
+			       <IntermediateMapping/1/StartDateMapping/1> ,
+			       <IntermediateMapping/1/EndDateMapping/1> ;
+        rr:subjectMap          <IntermediateMapping/1/OM//PTM/SubjectMap> .
+
+## Intermediate Subject Map
+<IntermediateMapping/1/OM//PTM/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:PersonFunction ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}__1" ;
+        rr:termType  rr:IRI .
+
+## Predicate Object Map
+<IntermediateMapping/1/EndDateMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/1/EndDateMapping/1/FTM> ;
+        rr:predicate  dbo:functionEndYear .
+
+### Function Term Map
+<IntermediateMapping/1/EndDateMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/1/EndDateMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/1/EndDateMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			      
+			       <IntermediateMapping/1/EndDateMapping/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/1/EndDateMapping/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/1/EndDateMapping/1/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<IntermediateMapping/1/EndDateMapping/1/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "term" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/1/StartDateMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/1/StartDateMapping/1/FTM> ;
+        rr:predicate  dbo:functionEndYear .
+
+### Function Term Map
+<IntermediateMapping/1/StartDateMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/1/StartDateMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/1/StartDateMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			      
+			       <IntermediateMapping/1/StartDateMapping/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/1/StartDateMapping/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/1/StartDateMapping/1/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<IntermediateMapping/1/StartDateMapping/1/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "term" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/1/EndDateMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/1/EndDateMapping/0/FTM> ;
+        rr:predicate  dbo:functionEndDate .
+
+### Function Term Map
+<IntermediateMapping/1/EndDateMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/1/EndDateMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/1/EndDateMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			      
+			       <IntermediateMapping/1/EndDateMapping/0/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/1/EndDateMapping/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/1/EndDateMapping/0/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<IntermediateMapping/1/EndDateMapping/0/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "term" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/1/StartDateMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/1/StartDateMapping/0/FTM> ;
+        rr:predicate  dbo:functionEndDate .
+
+### Function Term Map
+<IntermediateMapping/1/StartDateMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/1/StartDateMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/1/StartDateMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			      
+			       <IntermediateMapping/1/StartDateMapping/0/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/1/StartDateMapping/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/1/StartDateMapping/0/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<IntermediateMapping/1/StartDateMapping/0/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "term" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/1/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/1/SimplePropertyMapping/0/OM> ;
+        rr:predicate  dbo:title .
+
+### ObjectMap
+<IntermediateMapping/1/SimplePropertyMapping/0/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "title" .
+
+
+### Intermediate Predicate Object Map
+######################################
+<IntermediateMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/OM> ;
+        rr:predicate  dbo:occupation .
+
+## Intermediate Object Map
+<IntermediateMapping/0/OM>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <IntermediateMapping/0/OM//PTM> .
+
+## Intermediate Triples Map
+<IntermediateMapping/0/OM//PTM>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <IntermediateMapping/0/StartDateMapping/0> ,
+			       <IntermediateMapping/0/EndDateMapping/1> ,
+			       <IntermediateMapping/0/SimplePropertyMapping/0> ,
+			       <IntermediateMapping/0/EndDateMapping/0> ,
+			       <IntermediateMapping/0/StartDateMapping/2> ,
+			       <IntermediateMapping/0/EndDateMapping/3> ,
+			       <IntermediateMapping/0/EndDateMapping/2> ,
+			       <IntermediateMapping/0/StartDateMapping/3> ,
+			       <IntermediateMapping/0/StartDateMapping/1> ;
+        rr:subjectMap          <IntermediateMapping/0/OM//PTM/SubjectMap> .
+
+## Intermediate Subject Map
+<IntermediateMapping/0/OM//PTM/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:PersonFunction ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}__0" ;
+        rr:termType  rr:IRI .
+
+## Predicate Object Map
+<IntermediateMapping/0/StartDateMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/StartDateMapping/0/FTM> ;
+        rr:predicate  dbo:functionEndDate .
+
+### Function Term Map
+<IntermediateMapping/0/StartDateMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/0/StartDateMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/0/StartDateMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			      
+			       <IntermediateMapping/0/StartDateMapping/0/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/0/StartDateMapping/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/StartDateMapping/0/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<IntermediateMapping/0/StartDateMapping/0/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "years_active" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/0/EndDateMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/EndDateMapping/1/FTM> ;
+        rr:predicate  dbo:functionEndYear .
+
+### Function Term Map
+<IntermediateMapping/0/EndDateMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/0/EndDateMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/0/EndDateMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			      
+			       <IntermediateMapping/0/EndDateMapping/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/0/EndDateMapping/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/EndDateMapping/1/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<IntermediateMapping/0/EndDateMapping/1/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "years_active" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/0/SimplePropertyMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/SimplePropertyMapping/0/OM> ;
+        rr:predicate  dbo:title .
+
+### ObjectMap
+<IntermediateMapping/0/SimplePropertyMapping/0/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "occupation" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/0/EndDateMapping/0>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/EndDateMapping/0/FTM> ;
+        rr:predicate  dbo:functionEndDate .
+
+### Function Term Map
+<IntermediateMapping/0/EndDateMapping/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/0/EndDateMapping/0/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/0/EndDateMapping/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			      
+			       <IntermediateMapping/0/EndDateMapping/0/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/0/EndDateMapping/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/EndDateMapping/0/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<IntermediateMapping/0/EndDateMapping/0/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "years_active" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/0/StartDateMapping/2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/StartDateMapping/2/FTM> ;
+        rr:predicate  dbo:functionEndDate .
+
+### Function Term Map
+<IntermediateMapping/0/StartDateMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/0/StartDateMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/0/StartDateMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			      
+			       <IntermediateMapping/0/StartDateMapping/2/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/0/StartDateMapping/2/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/StartDateMapping/2/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<IntermediateMapping/0/StartDateMapping/2/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "yearsactive" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/0/EndDateMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/EndDateMapping/3/FTM> ;
+        rr:predicate  dbo:functionEndYear .
+
+### Function Term Map
+<IntermediateMapping/0/EndDateMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/0/EndDateMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/0/EndDateMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			      
+			       <IntermediateMapping/0/EndDateMapping/3/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/0/EndDateMapping/3/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/EndDateMapping/3/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<IntermediateMapping/0/EndDateMapping/3/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "yearsactive" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/0/EndDateMapping/2>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/EndDateMapping/2/FTM> ;
+        rr:predicate  dbo:functionEndDate .
+
+### Function Term Map
+<IntermediateMapping/0/EndDateMapping/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/0/EndDateMapping/2/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/0/EndDateMapping/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/EndDateFunction> ,
+			      
+			       <IntermediateMapping/0/EndDateMapping/2/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/0/EndDateMapping/2/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/EndDateMapping/2/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+### References
+<IntermediateMapping/0/EndDateMapping/2/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "yearsactive" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/0/StartDateMapping/3>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/StartDateMapping/3/FTM> ;
+        rr:predicate  dbo:functionEndYear .
+
+### Function Term Map
+<IntermediateMapping/0/StartDateMapping/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/0/StartDateMapping/3/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/0/StartDateMapping/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			      
+			       <IntermediateMapping/0/StartDateMapping/3/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/0/StartDateMapping/3/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/StartDateMapping/3/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<IntermediateMapping/0/StartDateMapping/3/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "yearsactive" .
+
+
+
+## Predicate Object Map
+<IntermediateMapping/0/StartDateMapping/1>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/StartDateMapping/1/FTM> ;
+        rr:predicate  dbo:functionEndYear .
+
+### Function Term Map
+<IntermediateMapping/0/StartDateMapping/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <IntermediateMapping/0/StartDateMapping/1/FTM/FV> .
+
+### Function Execution Mapping
+<IntermediateMapping/0/StartDateMapping/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/StartDateFunction> ,
+			      
+			       <IntermediateMapping/0/StartDateMapping/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<IntermediateMapping/0/StartDateMapping/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <IntermediateMapping/0/StartDateMapping/1/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+### References
+<IntermediateMapping/0/StartDateMapping/1/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "years_active" .
+
+
+######################
+# Conditional Mappings
+######################
+
+
+
+############
+# Functions
+############
+
+
+<Function/EndDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:endDateFunction ;
+        rr:predicate  fno:executes .
+
+<Function/StartDateFunction>
+        a             rr:PredicateObjectMap ;
+        rr:object     dbf:startDateFunction ;
+        rr:predicate  fno:executes .
+
+
+### Functions SubjectMap
+#########################
+
+<SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
