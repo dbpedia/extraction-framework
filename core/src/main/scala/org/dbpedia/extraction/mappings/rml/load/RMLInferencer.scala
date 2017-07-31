@@ -30,14 +30,18 @@ object RMLInferencer {
     // get the language dir
     val languageDir = getPathToLanguageDir(language, pathToRMLMappingsDir)
 
-    val infDirTuple = inferenceDir(rules, languageDir, language.isoCode)
+    try {
+      val infDirTuple = inferenceDir(rules, languageDir, language.isoCode)
 
-    infDirTuple._2.foreach(mapping => {
-      println(mapping)
-    })
+      infDirTuple._2.foreach(mapping => {
+        println(mapping)
+      })
 
-    val mappings = RMLProcessorParser.parseFromDir(infDirTuple._1)
-    mappings
+      val mappings = RMLProcessorParser.parseFromDir(infDirTuple._1)
+      mappings
+    } catch {
+      case e : Exception => Map()
+    }
   }
 
   def loadDump(language: Language, dump : String, name : String) : (String, RMLMapping) = {
@@ -60,6 +64,7 @@ object RMLInferencer {
 
   /**
     * Replaces all language templated constructs with the given language
+    *
     * @param language
     * @param path
     * @return
@@ -164,6 +169,7 @@ object RMLInferencer {
 
   /**
     * Creates the path to the mappings dir based on the language and path to all the RML mappings
+    *
     * @param language
     * @return
     */

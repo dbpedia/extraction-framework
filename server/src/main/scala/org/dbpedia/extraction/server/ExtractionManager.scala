@@ -5,7 +5,7 @@ import java.util.logging.{Level, Logger}
 
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.mappings.rml.load.RMLProcessorLoader
+import org.dbpedia.extraction.mappings.rml.load.{RMLInferencer, RMLProcessorLoader}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{Source, WikiPage, WikiSource, XMLSource}
@@ -201,7 +201,7 @@ abstract class ExtractionManager(
       new { val ontology = self.ontology
             val language = lang
             val mappings = self.mappings(lang)
-            val rmlMappings = RMLProcessorLoader.load(language, self.rmlMappingsDir)
+            val rmlMappings = RMLInferencer.loadDir(language, self.rmlMappingsDir)
             val redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
             val disambiguations = self.disambiguations
       }
