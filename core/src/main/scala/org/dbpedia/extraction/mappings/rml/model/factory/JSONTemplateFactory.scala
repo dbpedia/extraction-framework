@@ -18,6 +18,7 @@ object JSONTemplateFactory extends TemplateFactory {
 
   /**
     * Creates a ConstantTemplate object from a JSONBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
@@ -57,6 +58,7 @@ object JSONTemplateFactory extends TemplateFactory {
 
   /**
     * Creates a StartDateTemplate object from a JSONBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
@@ -77,6 +79,7 @@ object JSONTemplateFactory extends TemplateFactory {
 
   /**
     * Creates an EndDateTemplate object from a JSONBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
@@ -97,6 +100,7 @@ object JSONTemplateFactory extends TemplateFactory {
 
   /**
     * Creates a GeoCoordinateTemplate object from a JSONBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
@@ -141,6 +145,7 @@ object JSONTemplateFactory extends TemplateFactory {
 
   /**
     * Creates a SimplePropertyTemplate object from a JSONBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
@@ -170,6 +175,7 @@ object JSONTemplateFactory extends TemplateFactory {
 
   /**
     * Creates a ConditionalTemplate object from a JSONBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
@@ -220,7 +226,9 @@ object JSONTemplateFactory extends TemplateFactory {
     // set parameters
     val condition = getCondition(templateNode)
     val ontologyClassString = getParameter("class", templateNode)
-    val ontologyClass = JSONFactoryUtil.getOntologyClass(ontologyClassString, ontology)
+    val ontologyClass = if(ontologyClassString != null) {
+       JSONFactoryUtil.getOntologyClass(ontologyClassString, ontology)
+    } else null
     val templateListNode = getParameterNode("templates", templateNode)
     val templates = getTemplates(JSONBundle(templateListNode, ontology))
     val fallbackTemplate = getFallbackTemplate(bundle)

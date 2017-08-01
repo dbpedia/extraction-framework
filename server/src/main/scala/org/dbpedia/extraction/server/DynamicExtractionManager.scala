@@ -1,11 +1,15 @@
 package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.mappings.{WikiPageExtractor, Extractor, Redirects, Mappings}
+import org.dbpedia.extraction.mappings.{Extractor, Mappings, Redirects, WikiPageExtractor}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 import java.io.File
+
+import be.ugent.mmlab.rml.model.RMLMapping
+import org.dbpedia.extraction.mappings.rml.load.RMLInferencer
+
 import scala.actors.Actor
 import scala.collection.immutable.Map
 
@@ -40,6 +44,8 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
     private var _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages()
 
     private var _mappings : Map[Language, Mappings] = loadMappings()
+
+    private var _rmlMappings : Map[String, RMLMapping] = Map()
 
     private var _mappingTestExtractors : Map[Language, WikiPageExtractor] = loadMappingTestExtractors()
 
@@ -115,4 +121,6 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
         _customTestExtractors = _customTestExtractors.updated(language, loadExtractors(language, customTestExtractors(language)))
         update(language, mappings)
     }
+
+    //def rmlMappings() =
 }

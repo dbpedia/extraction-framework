@@ -43,6 +43,8 @@ abstract class ExtractionManager(
 
     def mappings(language : Language) : Mappings
 
+    //def rmlMappings(language : Language) : Mappings
+
     def updateOntologyPage(page : WikiPage)
 
     def removeOntologyPage(title : WikiTitle)

@@ -42,7 +42,7 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
       ////////////////////////////////////////////////////////////////////////////
 
       val condition = conditionalTemplate.condition
-      val tuple = if(condition != null || !condition.operator.equals(Condition.OTHERWISE)) {
+      val tuple = if(condition != null && !condition.isInstanceOf[OtherwiseCondition]) {
         createEqualCondition(condition, conditionalBaseUri, counter)
       } else {
         (counter, null)
@@ -57,7 +57,7 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
       //add predicate object maps
       val subTemplates = conditionalTemplate.templates
 
-      // foldLeft: assembles all templates from head to tail,
+      // foldLeft: assembles all templates from tail to head,
       // every assembly returns a tuple (state) which is in turn passed through to the next assembly
       val finalState = subTemplates.foldLeft((updatedCounter, List[RMLPredicateObjectMap]()))((state, template) => {
 
@@ -195,14 +195,13 @@ class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditio
         addValueParameter(conditionInstance.value, conditionInstance.operator)
       }
       case Condition.CONTAINS => {
-        val conditionInstance = condition.asInstanceOf[EqualsCondition]
+        val conditionInstance = condition.asInstanceOf[ContainsCondition]
         addPropertyParameter(conditionInstance.property, conditionInstance.operator)
         addValueParameter(conditionInstance.value, conditionInstance.operator)
       }
       case Condition.OTHERWISE => {
-        val conditionInstance = condition.asInstanceOf[EqualsCondition]
-        addPropertyParameter(conditionInstance.property, conditionInstance.operator)
-        addValueParameter(conditionInstance.value, conditionInstance.operator)
+        val conditionInstance = condition.asInstanceOf[OtherwiseCondition]
+        // cannot happen
       }
     }
 

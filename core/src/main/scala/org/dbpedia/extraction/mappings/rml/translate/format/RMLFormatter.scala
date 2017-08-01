@@ -351,12 +351,22 @@ object RMLFormatter extends Formatter {
       /** The case if a function is used:
         * Checks if the rr:PredicateObjectMap contains a FunctionTermMap
         */
-      val functionTermMapString = if(hasFunctionTermMap(resource)) {
+      val objectMapString = if(hasFunctionTermMap(resource)) {
         val functionTermMap = getObjectMap(resource)
         getFunctionTermMap(functionTermMap.listProperties(), base) + offset
-      } else ""
+      } else {
 
-      (heading + getResourceString(resource, base) + offset + functionTermMapString, "")
+        val pom = RMLPredicateObjectMap(resource)
+        val referenceObjectMapString = if (pom.hasReferenceObjectMap) {
+          val objectMap = pom.objectMap
+          val heading = "### ObjectMap"
+          heading + getResourceString(objectMap.resource, base) + offset
+
+        } else ""
+        referenceObjectMapString
+      }
+
+      (heading + getResourceString(resource, base) + offset + objectMapString, "")
     }
   }
 
@@ -390,7 +400,12 @@ object RMLFormatter extends Formatter {
     val functionValueString = getFunctionValue(functionValue.listProperties(), base)
 
     val conditionPOM = getResourceString(resource, base)
-    (conditionPOM, heading + functionPOMString.concat(offset + functionValueString))
+    val objectMap = if(RMLPredicateObjectMap(resource).hasReferenceObjectMap) {
+      val objectMap = RMLPredicateObjectMap(resource).objectMap
+      val heading = "### ObjectMap"
+      heading + getResourceString(objectMap.resource, base) + offset
+    } else ""
+    (conditionPOM + offset + objectMap, heading + functionPOMString.concat(offset + functionValueString))
   }
 
   /**

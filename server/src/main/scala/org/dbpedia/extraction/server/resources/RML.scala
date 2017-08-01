@@ -4,7 +4,7 @@ import java.io.{PrintWriter, StringWriter}
 import javax.ws.rs.core.{MediaType, Response}
 import javax.ws.rs.{Produces, _}
 
-import com.fasterxml.jackson.databind.node.{JsonNodeFactory, ObjectNode}
+import com.fasterxml.jackson.databind.node.{ArrayNode, JsonNodeFactory, ObjectNode}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyPropertyException}
 import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
@@ -296,7 +296,7 @@ class RML {
     try {
 
       // check validity of the input
-      // TODO
+      checkIntermediateInput(input)
 
       // create the structures
       val mappingNode = getMappingNode(input)
@@ -310,7 +310,6 @@ class RML {
 
       // create the response
       val msg = "Intermediate Mapping successfully added."
-      println(mapping.writeAsTurtle(mapping.base))
       val response = createResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
@@ -492,6 +491,7 @@ class RML {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Util private methods: request input validation
+  //  All of the following methods return nothing but all throw Exceptions when invalid input is found.
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
@@ -669,21 +669,67 @@ class RML {
     */
   private def checkConditionalInput(input : String) : Unit = {
 
-    def createTemplateInputString(node : JsonNode) : String = {
-      // little transformation to make it a valid input string
-      JsonNodeFactory.instance.objectNode().set("template", node).toString
-    }
-
     val parameterNode = getParameterNode(input)
 
     // check if all necessary fields are there (can be null)
     if(!parameterNode.has("condition")) throw new BadRequestException("Missing field: $.template.parameters.condition")
-    if(!parameterNode.has("templates")) throw new BadRequestException("Missing field: $.template.parameters.templates")
     if(!parameterNode.has("class")) throw new BadRequestException("Missing field: $.template.parameters.class")
     if(!parameterNode.has("fallback")) throw new BadRequestException("Missing field: $.template.parameters.fallback")
+    if(!parameterNode.has("templates")) throw new BadRequestException("Missing field: $.template.parameters.templates")
+
 
     // check if all templates are correct as well
+    checkTemplates(parameterNode)
+
+    // check if at least a class or mapping is given
+    if(!parameterNode.hasNonNull("class") && parameterNodeHasEmptyTemplates(parameterNode))
+      throw new BadRequestException("Missing field:  " +
+        "either $.template.parameters.templates or $.template.parameters.class must be given")
+
+    if(parameterNode.hasNonNull("fallback")) {
+      val fallbackNode = parameterNode.get("fallback")
+      val input = createTemplateInputString(fallbackNode)
+      checkConditionalInput(input)
+    }
+
+  }
+
+  /**
+    * Check the validity of an Intermediate request input
+    * @param input
+    */
+  private def checkIntermediateInput(input : String) : Unit = {
+
+    val parameterNode = getParameterNode(input)
+
+    // check if all necessary fields are there (can be null)
+    if(!parameterNode.has("property")) throw new BadRequestException("Missing field: $.template.parameters.property")
+    if(!parameterNode.has("class")) throw new BadRequestException("Missing field: $.template.parameters.class")
+    if(!parameterNode.has("templates")) throw new BadRequestException("Missing field: $.template.parameters.templates")
+
+    // check if all templates are correct as well
+    checkTemplates(parameterNode)
+
+    // check if at least a class or mapping is given
+    if(!parameterNode.hasNonNull("class") && parameterNodeHasEmptyTemplates(parameterNode))
+      throw new BadRequestException("Missing field:  " +
+        "either $.template.parameters.templates or $.template.parameters.class must be given")
+
+  }
+
+  private def parameterNodeHasEmptyTemplates(parameterNode : JsonNode) : Boolean = {
     if(parameterNode.hasNonNull("templates")) {
+      val templatesCount =  parameterNode.get("templates").asInstanceOf[ArrayNode].size()
+      templatesCount == 0
+    } else true
+  }
+
+  private def checkTemplates(parameterNode : JsonNode) = {
+
+    if(parameterNode.hasNonNull("templates")) {
+
+      if(!parameterNode.get("templates").isArray) throw new BadRequestException("Field needs to be an array: $.template.parameters.templates")
+
       val templates = JSONFactoryUtil.jsonNodeToSeq(parameterNode.get("templates"))
       templates.foreach( templateNode => {
         val templateNodeString = createTemplateInputString(templateNode)
@@ -698,12 +744,10 @@ class RML {
       })
     }
 
-    if(parameterNode.hasNonNull("fallback")) {
-      val fallbackNode = parameterNode.get("fallback")
-      val input = createTemplateInputString(fallbackNode)
-      checkConditionalInput(input)
-    }
-
   }
 
+  private def createTemplateInputString(node : JsonNode) : String = {
+    // little transformation to make it a valid input string
+    JsonNodeFactory.instance.objectNode().set("template", node).toString
+  }
 }
