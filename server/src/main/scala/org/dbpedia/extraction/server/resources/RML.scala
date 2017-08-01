@@ -1,12 +1,17 @@
 package org.dbpedia.extraction.server.resources
 
 import java.io.{PrintWriter, StringWriter}
+import java.net.URL
 import javax.ws.rs.core.{MediaType, Response}
 import javax.ws.rs.{Produces, _}
 
+import be.ugent.mmlab.rml.extraction.RMLTermExtractor
 import com.fasterxml.jackson.databind.node.{ArrayNode, JsonNodeFactory, ObjectNode}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
+import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
+import org.dbpedia.extraction.destinations.{DeduplicatingDestination, WriterDestination}
 import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyPropertyException}
+import org.dbpedia.extraction.mappings.rml.load.RMLInferencer
 import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
@@ -17,6 +22,10 @@ import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.mappings.rml.util.JSONFactoryUtil
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.server.resources.rml.BadRequestException
+import org.dbpedia.extraction.server.resources.stylesheets.TriX
+import org.dbpedia.extraction.sources.WikiSource
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.WikiTitle
 
 import scala.xml.Elem
 
@@ -30,6 +39,63 @@ import scala.xml.Elem
 
 @Path("rml/")
 class RML {
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Extraction API
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  @POST
+  @Path("extract")
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def extract(input : String) = {
+
+    try {
+
+      // get nodes
+      val mappingNode = getMappingNode(input)
+      val parameterNode = getParameterNode(input)
+
+      // get parameters
+      val dump = getMappingDump(input)
+      val language = Language(mappingNode.get("language").asText())
+      val name = mappingNode.get("name").asText()
+      val wikiTitle = parameterNode.get("wikititle").asText()
+      val format = parameterNode.get("format").asText()
+
+      // load the new mapping
+      val rmlMapping = RMLInferencer.loadDump(language, dump, name)._2
+
+      // update the in-memory mappings, this does not effect the real state of the mappings
+      Server.instance.extractor.updateRMLMapping(name, rmlMapping, language)
+
+      val writer = new StringWriter
+
+      val formatter = format match
+      {
+        case "turtle-triples" => new TerseFormatter(false, true)
+        case "turtle-quads" => new TerseFormatter(true, true)
+        case "n-triples" => new TerseFormatter(false, false)
+        case "n-quads" => new TerseFormatter(true, false)
+        case "rdf-json" => new RDFJSONFormatter()
+        case _ => TriX.writeHeader(writer, 2)
+      }
+
+      val source =  WikiSource.fromTitles(List(WikiTitle.parse(wikiTitle, language)), new URL(language.apiUri), language)
+      val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
+      Server.instance.extractor.extract(source, destination, language, useCustomExtraction = true)
+
+      createExtractionResponse(writer.toString, "Extraction successful")
+
+    } catch {
+      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : BadRequestException => createBadRequestExceptionResponse(e)
+      case e : Exception =>
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+    }
+
+  }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Template API
@@ -328,6 +394,7 @@ class RML {
   //  Util private methods: general
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
   /**
     * Retrieves the mapping dump from the input JSON string from a POST request
     *
@@ -373,9 +440,22 @@ class RML {
     * @param input
     * @return
     */
-  private def getParameterNode(input : String) : JsonNode = {
+  private def getTemplateParameterNode(input : String) : JsonNode = {
     val templateNode = getTemplateNode(input)
     templateNode.get("parameters")
+  }
+
+  /**
+    * Retrieves the parameters JSON node from a POST request
+    *
+    * @param input
+    * @return
+    */
+  private def getParameterNode(input : String) : JsonNode = {
+    val mapper = new ObjectMapper()
+    val tree = mapper.readTree(input)
+    val templateNode = tree.get("parameters")
+    templateNode
   }
 
   /**
@@ -433,6 +513,13 @@ class RML {
     responseNode.put("msg", msg)
     val response = responseNode.toString
     response
+  }
+
+  private def createExtractionResponse(dump : String, msg : String) : Response = {
+    val responseNode = JsonNodeFactory.instance.objectNode()
+    responseNode.put("dump", dump)
+    responseNode.put("msg", msg)
+    Response.status(Response.Status.ACCEPTED).entity(responseNode.toString).`type`(MediaType.APPLICATION_JSON).build()
   }
 
   /**
@@ -524,7 +611,7 @@ class RML {
 
     if(!nested) checkBasicRequest(input)
 
-    val parameterNode = getParameterNode(input)
+    val parameterNode = getTemplateParameterNode(input)
 
     if(!parameterNode.has("property")) throw new BadRequestException("Missing field: $.template.parameters.property")
     if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
@@ -549,7 +636,7 @@ class RML {
 
     if(!nested) checkBasicRequest(input)
 
-    val parameterNode = getParameterNode(input)
+    val parameterNode = getTemplateParameterNode(input)
 
     // check if all necessary fields are there (can be null)
     if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
@@ -570,7 +657,7 @@ class RML {
 
     if(!nested) checkBasicRequest(input)
 
-    val parameterNode = getParameterNode(input)
+    val parameterNode = getTemplateParameterNode(input)
 
     // check if all necessary fields are there (can be null)
     if(!parameterNode.has("coordinate")) throw new BadRequestException("Missing field: $.template.parameters.coordinate")
@@ -633,7 +720,7 @@ class RML {
 
     if(!nested) checkBasicRequest(input)
 
-    val parameterNode = getParameterNode(input)
+    val parameterNode = getTemplateParameterNode(input)
 
     // check if all necessary fields are there (can be null)
     if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
@@ -652,7 +739,7 @@ class RML {
 
     if(!nested) checkBasicRequest(input)
 
-    val parameterNode = getParameterNode(input)
+    val parameterNode = getTemplateParameterNode(input)
 
     // check if all necessary fields are there (can be null)
     if(!parameterNode.has("ontologyProperty")) throw new BadRequestException("Missing field: $.template.parameters.ontologyProperty")
@@ -669,7 +756,7 @@ class RML {
     */
   private def checkConditionalInput(input : String) : Unit = {
 
-    val parameterNode = getParameterNode(input)
+    val parameterNode = getTemplateParameterNode(input)
 
     // check if all necessary fields are there (can be null)
     if(!parameterNode.has("condition")) throw new BadRequestException("Missing field: $.template.parameters.condition")
@@ -700,7 +787,7 @@ class RML {
     */
   private def checkIntermediateInput(input : String) : Unit = {
 
-    val parameterNode = getParameterNode(input)
+    val parameterNode = getTemplateParameterNode(input)
 
     // check if all necessary fields are there (can be null)
     if(!parameterNode.has("property")) throw new BadRequestException("Missing field: $.template.parameters.property")

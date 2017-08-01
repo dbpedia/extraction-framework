@@ -7,6 +7,8 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 import java.io.File
 
+import be.ugent.mmlab.rml.model.RMLMapping
+
 /**
  * Lazily loads extraction context parameters when they are required, not before.
  * Is NOT able to update the ontology or the mappings.
@@ -73,4 +75,7 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
         throw new Exception("removeMappingPage not supported with this configuration; please use DynamicExtractionManager")
     }
 
+    override def rmlMappings(language: Language): Map[String, RMLMapping] = ???
+
+    override def updateRMLMapping(name: String, rmlMapping: RMLMapping, language: Language): Unit = ???
 }

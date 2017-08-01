@@ -207,6 +207,8 @@ class Mappings(@PathParam("lang") langCode : String)
     def getAllRMLMappings() : InputStream =
     {
 
+      //TODO: refactor this @wmaroy
+
       // write to the PipedOutputStream so that data is then available in the returned PipedInputStream
       val sink : PipedOutputStream = new PipedOutputStream
       val source : PipedInputStream = new PipedInputStream(sink)

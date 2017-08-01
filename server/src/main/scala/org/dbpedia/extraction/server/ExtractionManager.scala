@@ -3,6 +3,7 @@ package org.dbpedia.extraction.server
 import java.io.File
 import java.util.logging.{Level, Logger}
 
+import be.ugent.mmlab.rml.model.RMLMapping
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.mappings.rml.load.{RMLInferencer, RMLProcessorLoader}
@@ -43,13 +44,15 @@ abstract class ExtractionManager(
 
     def mappings(language : Language) : Mappings
 
-    //def rmlMappings(language : Language) : Mappings
+    def rmlMappings(language : Language) : Map[String, RMLMapping]
 
     def updateOntologyPage(page : WikiPage)
 
     def removeOntologyPage(title : WikiTitle)
 
     def updateMappingPage(page : WikiPage, language : Language)
+
+    def updateRMLMapping(name: String, rmlMapping: RMLMapping, language: Language)
 
     def removeMappingPage(title : WikiTitle, language : Language)
 
@@ -203,7 +206,7 @@ abstract class ExtractionManager(
       new { val ontology = self.ontology
             val language = lang
             val mappings = self.mappings(lang)
-            val rmlMappings = RMLInferencer.loadDir(language, self.rmlMappingsDir)
+            val rmlMappings = self.rmlMappings(language)
             val redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
             val disambiguations = self.disambiguations
       }
@@ -226,6 +229,11 @@ abstract class ExtractionManager(
 
         MappingsLoader.load(context)
     }
+
+  protected def loadRMLMappings() : Map[Language, Map[String, RMLMapping]] =
+  {
+    languages.map(lang => (lang, RMLInferencer.loadDir(lang, rmlMappingsDir))).toMap
+  }
 
 
 }

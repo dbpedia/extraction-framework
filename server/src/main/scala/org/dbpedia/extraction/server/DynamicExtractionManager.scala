@@ -45,7 +45,7 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
 
     private var _mappings : Map[Language, Mappings] = loadMappings()
 
-    private var _rmlMappings : Map[String, RMLMapping] = Map()
+    private var _rmlMappings : Map[Language, Map[String, RMLMapping]] = loadRMLMappings()
 
     private var _mappingTestExtractors : Map[Language, WikiPageExtractor] = loadMappingTestExtractors()
 
@@ -66,6 +66,10 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
     def mappingPageSource(language : Language) = synchronized { _mappingPages(language).values }
 
     def mappings(language : Language) : Mappings = synchronized { _mappings(language) }
+
+    def rmlMappings(language: Language) : Map[String, RMLMapping] = synchronized {
+        _rmlMappings(language)
+    }
 
     // TODO: don't start a new actor for each call, start one actor when this object is loaded
     // and send messages to it.
@@ -122,5 +126,10 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
         update(language, mappings)
     }
 
-    //def rmlMappings() =
+    def updateRMLMapping(name: String, rmlMapping: RMLMapping, language: Language) = asynchronous("updateRMLMapping") {
+        _rmlMappings(language).updated(name, rmlMapping)
+        _mappingTestExtractors = _mappingTestExtractors.updated(language, loadExtractors(language, mappingTestExtractors))
+        _customTestExtractors = _customTestExtractors.updated(language, loadExtractors(language, customTestExtractors(language)))
+    }
+
 }
