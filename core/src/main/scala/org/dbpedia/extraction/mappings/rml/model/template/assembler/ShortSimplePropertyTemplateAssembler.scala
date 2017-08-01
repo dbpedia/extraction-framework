@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
-import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
+import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template.SimplePropertyTemplate
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 
@@ -39,6 +39,8 @@ class ShortSimplePropertyTemplateAssembler(rmlModel : RMLModel, baseUri: String,
     val objectMapUri = simplePropertyMappingUri.extend("/ObjectMap")
     val objectMap = simplePmPom.addObjectMap(objectMapUri)
 
+    addLanguage(objectMap)
+
     val rmlReference = RMLLiteral(template.property)
     objectMap.addRMLReference(rmlReference)
 
@@ -57,11 +59,23 @@ class ShortSimplePropertyTemplateAssembler(rmlModel : RMLModel, baseUri: String,
     val objectMapUri = simplePropertyMappingUri.extend("/ObjectMap")
     val objectMap = simplePmPom.addObjectMap(objectMapUri)
 
+    addLanguage(objectMap)
+
     val rmlReference = RMLLiteral(template.property)
     objectMap.addRMLReference(rmlReference)
 
     List(simplePmPom)
 
+  }
+
+  /**
+    * Adds a rr:language if necessary
+    *
+    * @param objectMap
+    * @return
+    */
+  private def addLanguage(objectMap : RMLObjectMap) = {
+    if (template.ontologyProperty.range.name.equals("rdf:langString")) objectMap.addLanguage(language)
   }
 
 }
