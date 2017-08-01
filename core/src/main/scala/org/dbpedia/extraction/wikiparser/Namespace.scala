@@ -141,7 +141,10 @@ object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
       case Some(namespace) => namespace
       case None => throw new IllegalArgumentException("unknown namespace name '"+name+"' for language '"+lang.wikiCode+"'")
     }
+
+
   }
+
   
   def get(lang: Language, name: String): Option[Namespace] = {
     dbpedias.get(name.toLowerCase(Language.Mappings.locale)) match {
