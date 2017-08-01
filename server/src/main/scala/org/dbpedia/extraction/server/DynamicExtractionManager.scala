@@ -127,7 +127,8 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
     }
 
     def updateRMLMapping(name: String, rmlMapping: RMLMapping, language: Language) = asynchronous("updateRMLMapping") {
-        _rmlMappings(language).updated(name, rmlMapping)
+        val languageMapping = _rmlMappings(language).updated(name, rmlMapping)
+        _rmlMappings = _rmlMappings.updated(language, languageMapping)
         _mappingTestExtractors = _mappingTestExtractors.updated(language, loadExtractors(language, mappingTestExtractors))
         _customTestExtractors = _customTestExtractors.updated(language, loadExtractors(language, customTestExtractors(language)))
     }

@@ -36,7 +36,7 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
       */
 
     val parameters = new util.HashMap[String, String]()
-    val triplesMap = "http://en.dbpedia.org/resource/" + mappingName.replace("%3A", ":")
+    val triplesMap = "http://" + context.language.isoCode +".dbpedia.org/resource/" + mappingName.replace("%3A", ":")
     val exeTriplesMap = List[String](triplesMap)
     val engine = new StdRMLEngine()
     val dataset : RMLDataset = new StdRMLDataset()
@@ -96,7 +96,7 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
 
       val quad = if(ontologyProperty != null) {
 
-        //TODO: Datasets need to be applied correctly, solution need to be found!
+        //TODO: Datasets need to be applied correctly, solution need to be found! Probably quads ..
 
         val datatype = try {
           val regex = ".*/".r
