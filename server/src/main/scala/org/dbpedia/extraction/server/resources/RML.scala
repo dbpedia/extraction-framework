@@ -97,6 +97,80 @@ class RML {
 
   }
 
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Ontology API
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  @GET
+  @Path("ontology/properties")
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def properties =
+  {
+    val responseNode = JsonNodeFactory.instance.objectNode()
+    val propertiesNode = JsonNodeFactory.instance.arrayNode()
+    responseNode.set("properties", propertiesNode)
+    Server.instance.extractor.ontology().properties.values.foreach(property => {
+      val propertyNode = JsonNodeFactory.instance.objectNode()
+      propertyNode.put("name", property.name)
+      propertyNode.put("uri", property.uri)
+
+      val rangeNode = JsonNodeFactory.instance.objectNode()
+      rangeNode.put("name", property.range.name)
+      rangeNode.put("uri", property.range.uri)
+
+      val domainNode = JsonNodeFactory.instance.objectNode()
+      domainNode.put("name", property.range.name)
+      domainNode.put("uri", property.range.uri)
+
+      propertyNode.set("range", rangeNode)
+      propertyNode.set("domain", domainNode)
+
+      propertiesNode.add(propertyNode)
+    })
+    Response.status(Response.Status.ACCEPTED).entity(responseNode.toString).`type`(MediaType.APPLICATION_JSON).build()
+  }
+
+  @GET
+  @Path("ontology/classes")
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def classes =
+  {
+    val responseNode = JsonNodeFactory.instance.objectNode()
+    val classesNode = JsonNodeFactory.instance.arrayNode()
+    responseNode.set("classes", classesNode)
+
+    Server.instance.extractor.ontology().classes.values.foreach(ontologyProperty => {
+      val propertyNode = JsonNodeFactory.instance.objectNode()
+      propertyNode.put("name", ontologyProperty.name)
+      propertyNode.put("uri", ontologyProperty.uri)
+
+      classesNode.add(propertyNode)
+    })
+
+    Response.status(Response.Status.ACCEPTED).entity(responseNode.toString).`type`(MediaType.APPLICATION_JSON).build()
+  }
+
+  @GET
+  @Path("ontology/datatypes")
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def datatypes =
+  {
+    val responseNode = JsonNodeFactory.instance.objectNode()
+    val datatypesNode = JsonNodeFactory.instance.arrayNode()
+    responseNode.set("datatypes", datatypesNode)
+
+    Server.instance.extractor.ontology().datatypes.values.foreach(datatype => {
+      val propertyNode = JsonNodeFactory.instance.objectNode()
+      propertyNode.put("name", datatype.name)
+      propertyNode.put("uri", datatype.uri)
+
+      datatypesNode.add(propertyNode)
+    })
+
+    Response.status(Response.Status.ACCEPTED).entity(responseNode.toString).`type`(MediaType.APPLICATION_JSON).build()
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Template API
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
