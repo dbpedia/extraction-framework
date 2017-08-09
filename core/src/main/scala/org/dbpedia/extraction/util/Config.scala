@@ -52,6 +52,8 @@ class Config(val configPath: String) extends
 
   lazy val wikiName: String = this.getProperty("wiki-name", "wiki").trim
 
+  lazy val copyrightCheck: Boolean = Try(this.getProperty("copyrightCheck", "false").toBoolean).getOrElse(false)
+
   /**
    * Dump directory
    * Note: This is lazy to defer initialization until actually called (eg. this class is not used

@@ -204,7 +204,6 @@ class ConfigLoader(config: Config)
     getExtractionRecorder(lang).printLabeledLine("Finished image list preparation for ImageExtractor: " + imageCategories._1.size + " free images, " + imageCategories._2 + " nonfree images.", RecordSeverity.Info)
   }
 
-
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
       *
@@ -212,14 +211,20 @@ class ConfigLoader(config: Config)
      */
     def getExtractionJobs: Traversable[ExtractionJob] =
     {
-      //first check if some langs are extraction images, if so load the image category lists
-
-      val zw = config.extractorClasses.filter(x => x._2.map( y => y.getSimpleName).contains("ImageExtractor"))
-      val imageExtractorLanguages = zw match{
-        case filtered if filtered.nonEmpty => filtered.keySet.toList ++ List(Language.Commons)       //else: add Commons (see ImageExtractorScala for why)
-        case _ => List[Language]()                                                                   //no ImageExtractors selected
+      if(config.copyrightCheck) {
+        // Image Extractor pre-processing: Extract Free & Non-Free Images prior to the main Extraction
+        val zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
+        val imageExtractorLanguages = zw match {
+          case filtered if filtered.nonEmpty => filtered.keySet.toList ++ List(Language.Commons) //else: add Commons (see ImageExtractorScala for why)
+          case _ => List[Language]() //no ImageExtractors selected
+        }
+        Workers.work[Language](imageCategoryWorker, imageExtractorLanguages)
+      } else {
+        val zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
+        zw.keys.foreach(lang => this.nonFreeImages.put(lang, Seq[String]()))
+        this.nonFreeImages.put(Language.Commons, Seq[String]())
       }
-      Workers.work[Language](imageCategoryWorker, imageExtractorLanguages)
+
 
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier
@@ -292,4 +297,3 @@ class ConfigLoader(config: Config)
       finder.dates(fileName, isSuffixRegex = isSourceRegex).last
     }
 }
-
