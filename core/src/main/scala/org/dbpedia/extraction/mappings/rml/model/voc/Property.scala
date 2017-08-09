@@ -19,4 +19,6 @@ object Property {
 
   val REFERENCE = RdfNamespace.RML.namespace + "reference"
 
+  val ITERATOR = RdfNamespace.RML.namespace + "iterator"
+
 }

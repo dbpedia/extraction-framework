@@ -114,9 +114,18 @@ class RML {
       val parameterNode = getParameterNode(input)
       val templateTitle = parameterNode.get("template").asText()
       val language = parameterNode.get("language").asText()
+
       val base = RMLModel.createBase(templateTitle, language)
       val name = RMLModel.createName(templateTitle, language)
       val mapping = new RMLModel(null, name, base, language)
+
+      // check if a class is given or not
+      if(parameterNode.hasNonNull("class")) {
+        // add the class to the Subject Map
+        val className = parameterNode.get("class").asText()
+        val classUri = Server.instance.extractor.ontology().classes(className).uri
+        mapping.addClass(classUri)
+      }
 
       // create the response
       val msg = "New RML mapping successfully created."
