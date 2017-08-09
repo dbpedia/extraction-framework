@@ -187,7 +187,6 @@ object ConfigUtils {
     }
   }
 
-
   /**
     * This function was extracted from the ImageExtractor object, since
     *  the free & nonfree images are now extracted before starting the extraction jobs
