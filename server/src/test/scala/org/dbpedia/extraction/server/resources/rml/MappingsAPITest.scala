@@ -12,6 +12,10 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 class MappingsAPITest extends FlatSpec with Matchers {
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  SERVER MUST BE RUNNING AT LOCALHOST:9999
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   "POST /server/rml/mappings" should "work without errors" in {
     val resource = "/mappingsAPITest/resource.json"
     val expected = "/mappingsAPITest/expected.json"

@@ -144,6 +144,68 @@ class RML {
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Statistics API
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  /**
+    * Retrieves statistics per language
+    * @param language
+    * @return
+    */
+  @GET
+  @Path("/{language}/statistics/")
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def statistics(@PathParam("language") language: String) = {
+    try {
+
+      // check validity of the input
+      // TODO @wmaroy
+
+      val manager = Server.instance.managers(Language(language))
+      val statsHolder = manager.holder
+      val sortedStats = statsHolder.mappedStatistics.sortBy(ms => (- ms.templateCount, ms.templateName))
+
+      val responseNode = JsonNodeFactory.instance.objectNode()
+      val statsArrayNode = JsonNodeFactory.instance.arrayNode()
+
+      responseNode.set("statistics", statsArrayNode)
+      responseNode.put("language", language)
+
+      sortedStats.foreach(stat => {
+        val statNode = JsonNodeFactory.instance.objectNode()
+        val name = stat.templateName
+        val count = stat.templateCount.toInt
+        val propertiesCount = stat.propertyCount.toInt
+        val mappedPropertiesCount = 0
+
+        statNode.put("name", name)
+        statNode.put("count", count)
+        statNode.put("propertiesCount", propertiesCount)
+        statNode.put("mappedPropertiesCount", mappedPropertiesCount)
+
+        statsArrayNode.add(statNode)
+      })
+
+      responseNode.put("msg", "Statistics successfully retrieved.")
+
+      Response.status(Response.Status.ACCEPTED).entity(responseNode.toString).`type`(MediaType.APPLICATION_JSON).build()
+
+    } catch {
+      case e: OntologyClassException => createBadRequestExceptionResponse(e)
+      case e: BadRequestException => createBadRequestExceptionResponse(e)
+      case e: IllegalArgumentException => createBadRequestExceptionResponse(e)
+      case e: Exception => {
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+      }
+    }
+
+  }
+
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Ontology API
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

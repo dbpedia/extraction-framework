@@ -131,6 +131,7 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
         _rmlMappings = _rmlMappings.updated(language, languageMapping)
         _mappingTestExtractors = _mappingTestExtractors.updated(language, loadExtractors(language, mappingTestExtractors))
         _customTestExtractors = _customTestExtractors.updated(language, loadExtractors(language, customTestExtractors(language)))
+        update(language, new Mappings(Map(), List()))
     }
 
 }
