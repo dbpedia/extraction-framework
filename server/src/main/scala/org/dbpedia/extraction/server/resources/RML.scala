@@ -12,7 +12,7 @@ import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFo
 import org.dbpedia.extraction.destinations.{DeduplicatingDestination, WriterDestination}
 import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyPropertyException}
 import org.dbpedia.extraction.mappings.rml.load.RMLInferencer
-import org.dbpedia.extraction.mappings.rml.model.RMLEditModel
+import org.dbpedia.extraction.mappings.rml.model.RMLModel
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLEditModelJSONFactory}
@@ -97,6 +97,42 @@ class RML {
 
   }
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Mapping API
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  @POST
+  @Path("mappings/")
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def mappings(input : String) = {
+    try {
+
+      // check validity of the input
+      // TODO @wmaroy
+
+      // create the structures
+      val parameterNode = getParameterNode(input)
+      val templateTitle = parameterNode.get("template").asText()
+      val language = parameterNode.get("language").asText()
+      val base = RMLModel.createBase(templateTitle, language)
+      val name = RMLModel.createName(templateTitle, language)
+      val mapping = new RMLModel(null, name, base, language)
+
+      // create the response
+      val msg = "New RML mapping successfully created."
+      val response = createNewMappingResponse(mapping, msg)
+      response
+    } catch {
+      case e: OntologyClassException => createBadRequestExceptionResponse(e)
+      case e: BadRequestException => createBadRequestExceptionResponse(e)
+      case e: IllegalArgumentException => createBadRequestExceptionResponse(e)
+      case e: Exception => {
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+      }
+    }
+
+  }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Ontology API
@@ -224,7 +260,7 @@ class RML {
 
       // create the response
       val msg = "SimplePropertyMapping succesfully added."
-      val response = createResponse(mapping, mappingNode, msg)
+      val response = createUpdatedMappingResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
@@ -267,7 +303,7 @@ class RML {
 
       // create the response
       val msg = "Constant Mapping successfully added."
-      val response = createResponse(mapping, mappingNode, msg)
+      val response = createUpdatedMappingResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
@@ -302,7 +338,7 @@ class RML {
 
       // create the response
       val msg = "Geocoordinate Mapping succesfully added."
-      val response = createResponse(mapping, mappingNode, msg)
+      val response = createUpdatedMappingResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
@@ -340,7 +376,7 @@ class RML {
 
       // create the response
       val msg = "Start Date Mapping successfully added."
-      val response = createResponse(mapping, mappingNode, msg)
+      val response = createUpdatedMappingResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
@@ -374,7 +410,7 @@ class RML {
 
       // create the response
       val msg = "End Date Mapping successfully added."
-      val response = createResponse(mapping, mappingNode, msg)
+      val response = createUpdatedMappingResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
@@ -412,7 +448,7 @@ class RML {
       // create the response
       val msg = "Constant Mapping successfully added."
       println(mapping.writeAsTurtle(mapping.base))
-      val response = createResponse(mapping, mappingNode, msg)
+      val response = createUpdatedMappingResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
@@ -450,7 +486,7 @@ class RML {
 
       // create the response
       val msg = "Intermediate Mapping successfully added."
-      val response = createResponse(mapping, mappingNode, msg)
+      val response = createUpdatedMappingResponse(mapping, mappingNode, msg)
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
@@ -537,7 +573,7 @@ class RML {
     *
     * @return
     */
-  private def getMapping(mappingNode : JsonNode) : RMLEditModel = {
+  private def getMapping(mappingNode : JsonNode) : RMLModel = {
     val mappingFactory = new RMLEditModelJSONFactory(mappingNode)
     val mapping = mappingFactory.create
     mapping
@@ -573,13 +609,35 @@ class RML {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
+    * Creates a response for a new RML Mapping
+    * @param mapping
+    * @param msg
+    * @return
+    */
+  private def createNewMappingResponse(mapping : RMLModel, msg : String)  : Response = {
+    val dump = RMLFormatter.format(mapping, mapping.base)
+    val responseNode = JsonNodeFactory.instance.objectNode()
+    val mappingNode = JsonNodeFactory.instance.objectNode()
+
+    mappingNode.put("dump", dump)
+    mappingNode.put("name", mapping.name)
+    mappingNode.put("language", mapping.language)
+
+    responseNode.set("mapping", mappingNode)
+    responseNode.put("msg", msg)
+
+    Response.status(Response.Status.ACCEPTED).entity(responseNode.toString).`type`(MediaType.APPLICATION_JSON).build()
+  }
+
+
+  /**
     * Creates a JSON response
     * Updates the "dump" field
     *
     * @param mapping
     * @return
     */
-  private def createResponse(mapping : RMLEditModel, mappingNode: JsonNode, msg : String) : String = {
+  private def createUpdatedMappingResponse(mapping : RMLModel, mappingNode: JsonNode, msg : String) : String = {
     val updatedMapping = RMLFormatter.format(mapping, mapping.base)
     mappingNode.asInstanceOf[ObjectNode].put("dump", updatedMapping)
     val responseNode = JsonNodeFactory.instance.objectNode()
@@ -857,6 +915,7 @@ class RML {
 
   /**
     * Check the validity of an Intermediate request input
+    *
     * @param input
     */
   private def checkIntermediateInput(input : String) : Unit = {
