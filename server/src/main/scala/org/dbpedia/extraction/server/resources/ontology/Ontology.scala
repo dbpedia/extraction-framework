@@ -2,6 +2,8 @@ package org.dbpedia.extraction.server.resources.ontology
 
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
+import javax.ws.rs.core.{MediaType, Response}
+
 import xml.Elem
 import org.dbpedia.extraction.ontology.io.OntologyOWLWriter
 import org.dbpedia.extraction.server.resources.ServerHeader
@@ -44,4 +46,5 @@ class Ontology
     {
         new OntologyOWLWriter("latest-snapshot").write(Server.instance.extractor.ontology)
     }
+
 }
