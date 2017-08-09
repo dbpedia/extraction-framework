@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
-import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLPredicateObjectMap
 import org.dbpedia.extraction.mappings.rml.model.template._
 import org.dbpedia.extraction.util.Language
@@ -53,7 +53,7 @@ object TemplateAssembler {
     * @param counter Object that counts templates for generating numbers in the template uri's
     * @return
     */
-  def assembleTemplate(rmlModel : RMLModel, baseUri : String, template : Template, language : String, counter : Counter, independent : Boolean = false) : (Counter, List[RMLPredicateObjectMap]) = {
+  def assembleTemplate(rmlModel : AbstractRMLModel, baseUri : String, template : Template, language : String, counter : Counter, independent : Boolean = false) : (Counter, List[RMLPredicateObjectMap]) = {
 
     template.name match {
 
@@ -124,7 +124,7 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  def assembleTemplate(rmlModel : RMLModel, template : Template, language : String, counter : Counter) : (Counter, List[RMLPredicateObjectMap]) = {
+  def assembleTemplate(rmlModel : AbstractRMLModel, template : Template, language : String, counter : Counter) : (Counter, List[RMLPredicateObjectMap]) = {
     val baseUri = rmlModel.triplesMap.resource.getURI
     assembleTemplate(rmlModel, baseUri, template, language, counter)
   }
@@ -137,7 +137,7 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  private def assembleSimplePropertyTemplate(rmlModel : RMLModel, simplePropertyTemplate: SimplePropertyTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
+  private def assembleSimplePropertyTemplate(rmlModel : AbstractRMLModel, simplePropertyTemplate: SimplePropertyTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
     if(simplePropertyTemplate.isSimple) {
       val assembler = new ShortSimplePropertyTemplateAssembler(rmlModel, baseUri, language, simplePropertyTemplate, counter)
       assembler.assemble(independent)
@@ -155,7 +155,7 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  private def assembleConstantTemplate(rmlModel: RMLModel, constantTemplate : ConstantTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
+  private def assembleConstantTemplate(rmlModel: AbstractRMLModel, constantTemplate : ConstantTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
     val assembler = new ConstantTemplateAssembler(rmlModel, baseUri, language, constantTemplate, counter, independent)
     assembler.assemble()
   }
@@ -168,7 +168,7 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  private def assembleStartDateTemplate(rmlModel: RMLModel, startDateTemplate : StartDateTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
+  private def assembleStartDateTemplate(rmlModel: AbstractRMLModel, startDateTemplate : StartDateTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
     val assembler = new StartDateTemplateAssembler(rmlModel, baseUri,language, startDateTemplate, counter, independent)
     assembler.assemble()
   }
@@ -181,7 +181,7 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  private def assembleEndDateTemplate(rmlModel: RMLModel, endDateTemplate : EndDateTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
+  private def assembleEndDateTemplate(rmlModel: AbstractRMLModel, endDateTemplate : EndDateTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
     val assembler = new EndDateTemplateAssembler(rmlModel, baseUri, language, endDateTemplate, counter, independent)
     assembler.assemble()
   }
@@ -194,7 +194,7 @@ object TemplateAssembler {
     * @param counter
     * @return
     */
-  private def assembleGeocoordinateTemplate(rmlModel: RMLModel, geocoordinateTemplate : GeocoordinateTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
+  private def assembleGeocoordinateTemplate(rmlModel: AbstractRMLModel, geocoordinateTemplate : GeocoordinateTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
     val assembler = new GeocoordinateTemplateAssembler(rmlModel, baseUri, language, geocoordinateTemplate, counter, independent)
     assembler.assemble()
   }
@@ -206,7 +206,7 @@ object TemplateAssembler {
     * @param language
     * @param counter
     */
-  private def assembleConditionalTemplate(rMLModel: RMLModel, conditionalTemplate: ConditionalTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
+  private def assembleConditionalTemplate(rMLModel: AbstractRMLModel, conditionalTemplate: ConditionalTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
     val assembler = new ConditionalTemplateAssembler(rMLModel, baseUri, conditionalTemplate, language, counter)
     assembler.assemble()
   }
@@ -218,7 +218,7 @@ object TemplateAssembler {
     * @param language
     * @param counter
     */
-  private def assembleIntermediateTemplate(rMLModel: RMLModel, template: IntermediateTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
+  private def assembleIntermediateTemplate(rMLModel: AbstractRMLModel, template: IntermediateTemplate, baseUri: String, language: String, counter : Counter, independent : Boolean = false) : List[RMLPredicateObjectMap] = {
     val assembler = new IntermediateTemplateAssembler(rMLModel, baseUri, language, template,  counter)
     assembler.assemble()
   }

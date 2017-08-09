@@ -6,7 +6,7 @@ import org.apache.jena.rdf.model.{ModelFactory, Resource, Statement, StmtIterato
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLObjectMap, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 
 import collection.JavaConverters._
-import org.dbpedia.extraction.mappings.rml.model.{ModelWrapper, RMLEditModel, RMLModel}
+import org.dbpedia.extraction.mappings.rml.model.{ModelWrapper, RMLModel, AbstractRMLModel}
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
@@ -31,11 +31,11 @@ object RMLFormatter extends Formatter {
 
   def format(input : String, base : String, language : String) : String = {
     val model = ModelFactory.createDefaultModel().read(new StringReader(input), base, "TURTLE")
-    val rmlModel = new RMLEditModel(model, null, base, language)
+    val rmlModel = new RMLModel(model, null, base, language)
     format(rmlModel, base)
   }
 
-  override def format(model: RMLModel, base : String): String = {
+  override def format(model: AbstractRMLModel, base : String): String = {
 
     try {
       val prefixes = getPrefixes(model.writeAsTurtle(base))
@@ -91,7 +91,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getTriplesMapPart(model : RMLModel, base : String) : String = {
+  private def getTriplesMapPart(model : AbstractRMLModel, base : String) : String = {
 
     val freshModel = new ModelWrapper
     val triplesMapResource = model.triplesMap.resource
@@ -113,7 +113,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getSubjectMapPart(model : RMLModel, base : String) : String = {
+  private def getSubjectMapPart(model : AbstractRMLModel, base : String) : String = {
 
     val freshModel = new ModelWrapper
     val subjectMapResource = model.subjectMap.resource
@@ -131,7 +131,7 @@ object RMLFormatter extends Formatter {
     * @param model
     * @param base
     */
-  private def getAllIntermediates(model : RMLModel, base : String) : String = {
+  private def getAllIntermediates(model : AbstractRMLModel, base : String) : String = {
     val tempModel = new ModelWrapper
     val predicateObjectMaps = model.triplesMap.predicateObjectMaps
     val intermediatePoms = predicateObjectMaps.filter(pom => {
@@ -206,7 +206,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getAllMappings(model: RMLModel, base : String) : String = {
+  private def getAllMappings(model: AbstractRMLModel, base : String) : String = {
 
     // Get the normal (non-conditional) mappings first
     val triplesMapResource = model.triplesMap.resource
@@ -232,7 +232,7 @@ object RMLFormatter extends Formatter {
     heading + mappingsString
   }
 
-  private def getAllConditionalMappings(model: RMLModel, base : String) : String = {
+  private def getAllConditionalMappings(model: AbstractRMLModel, base : String) : String = {
 
     val triplesMapResource = model.triplesMap.resource
     val statements = triplesMapResource.listProperties(model.model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")).toList
@@ -415,7 +415,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getLogicalSource(model: RMLModel, base : String) : String = {
+  private def getLogicalSource(model: AbstractRMLModel, base : String) : String = {
     val logicalSource = model.logicalSource.resource
     val logicalSourceString = getResourceString(logicalSource, base)
     val heading = "### LogicalSource\n" + hashtags(18) + "\n"
@@ -739,7 +739,7 @@ object RMLFormatter extends Formatter {
     _hashtags
   }
 
-  private def getSubjectMapFunction(rmlModel: RMLModel, base : String) : String = {
+  private def getSubjectMapFunction(rmlModel: AbstractRMLModel, base : String) : String = {
     val resource = rmlModel.functionSubjectMap.resource
     val subjectMapFunctionString = getResourceString(resource, base)
     val heading = "### Functions SubjectMap\n" + hashtags(25) + "\n"

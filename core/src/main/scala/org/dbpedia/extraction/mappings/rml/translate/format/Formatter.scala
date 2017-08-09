@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.translate.format
 
-import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 
 /**
   * Created by wmaroy on 03.07.17.
@@ -10,6 +10,6 @@ import org.dbpedia.extraction.mappings.rml.model.RMLModel
   */
 trait Formatter {
 
-  def format(model : RMLModel, base : String) : String
+  def format(model : AbstractRMLModel, base : String) : String
 
 }

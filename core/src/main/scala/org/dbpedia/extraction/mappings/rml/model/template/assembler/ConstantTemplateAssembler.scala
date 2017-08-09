@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
 import java.net.URI
 
-import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.ConstantTemplate
@@ -13,7 +13,7 @@ import org.dbpedia.extraction.util.Language
 /**
   * Created by wmaroy on 25.07.17.
   */
-class ConstantTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: ConstantTemplate, counter : Counter, independent : Boolean) {
+class ConstantTemplateAssembler(rmlModel : AbstractRMLModel, baseUri : String, language : String, template: ConstantTemplate, counter : Counter, independent : Boolean) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods

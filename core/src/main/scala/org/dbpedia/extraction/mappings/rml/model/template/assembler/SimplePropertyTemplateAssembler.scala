@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
-import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template.SimplePropertyTemplate
@@ -11,7 +11,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   * Created by wmaroy on 24.07.17.
   *
   */
-class SimplePropertyTemplateAssembler(rmlModel : RMLModel, baseUri: String, language : String, template: SimplePropertyTemplate, counter : Counter) {
+class SimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: String, language : String, template: SimplePropertyTemplate, counter : Counter) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods

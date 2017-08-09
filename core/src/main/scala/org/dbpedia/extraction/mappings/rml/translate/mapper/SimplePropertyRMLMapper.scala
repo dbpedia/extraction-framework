@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings.rml.translate.mapper
 import org.dbpedia.extraction.mappings.SimplePropertyMapping
 import org.dbpedia.extraction.mappings.rml.model.factory.{WikiTextBundle, WikiTextTemplateFactory}
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
-import org.dbpedia.extraction.mappings.rml.model.{RMLModel, RMLTranslationModel}
+import org.dbpedia.extraction.mappings.rml.model.{AbstractRMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
 import org.dbpedia.extraction.ontology.RdfNamespace

@@ -11,13 +11,13 @@ import org.scalatest.{FlatSpec, Matchers}
 /**
   * Created by wmaroy on 25.07.17.
   */
-class TemplateAssemblerTest extends FlatSpec with Matchers {
+class TemplateAPITest extends FlatSpec with Matchers {
 
   // Server must be running!
 
   "SimplePropertyTemplates" should "be generated correctly" in {
 
-    val tuple = TemplateTestUtil.postTest("/simplePropertyTemplateTest/simplePropertyTemplate.json",
+    val tuple = postTest("/simplePropertyTemplateTest/simplePropertyTemplate.json",
                               "/simplePropertyTemplateTest/expected_simplePropertyTemplate.json",
                               "simpleproperty")
 
@@ -28,7 +28,7 @@ class TemplateAssemblerTest extends FlatSpec with Matchers {
 
   "ConstantTemplates" should "be generated correctly" in {
 
-    val tuple = TemplateTestUtil.postTest("/constantTemplateTest/constantTemplate.json",
+    val tuple = postTest("/constantTemplateTest/constantTemplate.json",
       "/constantTemplateTest/expected_constantTemplate.json",
       "constant")
 
@@ -38,7 +38,7 @@ class TemplateAssemblerTest extends FlatSpec with Matchers {
 
   "GeocoordinateTemplates" should "be generated correctly" in {
 
-    val tuple = TemplateTestUtil.postTest("/geocoordinateTemplateTest/geocoordinateTemplate.json",
+    val tuple = postTest("/geocoordinateTemplateTest/geocoordinateTemplate.json",
       "/geocoordinateTemplateTest/expected_geocoordinateTemplate.json",
       "geocoordinate")
 
@@ -48,7 +48,7 @@ class TemplateAssemblerTest extends FlatSpec with Matchers {
 
   "StartDateTemplates" should "be generated correctly" in {
 
-    val tuple = TemplateTestUtil.postTest("/startDateTemplateTest/template.json",
+    val tuple = postTest("/startDateTemplateTest/template.json",
       "/startDateTemplateTest/expected_response.json",
       "startdate")
 
@@ -58,11 +58,37 @@ class TemplateAssemblerTest extends FlatSpec with Matchers {
 
   "EndDateTemplates" should "be generated correctly" in {
 
-    val tuple = TemplateTestUtil.postTest("/endDateTemplateTest/template.json",
+    val tuple = postTest("/endDateTemplateTest/template.json",
       "/endDateTemplateTest/expected_response.json",
       "enddate")
 
     assert(tuple._1.equals(tuple._2))
+
+  }
+
+   private def postTest(resource : String, expected : String, template : String) : (String, String) = {
+
+    val stream : InputStream = getClass.getResourceAsStream(resource)
+    val json = scala.io.Source.fromInputStream( stream ).getLines.mkString
+
+    val stream2 : InputStream = getClass.getResourceAsStream(expected)
+    val expectedJson = scala.io.Source.fromInputStream( stream2 ).getLines.mkString
+
+    val httpClient = new DefaultHttpClient()
+    val requestEntity = new StringEntity(
+      json,
+      ContentType.APPLICATION_JSON)
+
+    val postMethod = new HttpPost("http://localhost:9999/server/rml/templates/" + template)
+    postMethod.setEntity(requestEntity)
+    val rawResponse = httpClient.execute(postMethod)
+    val responseString = new BasicResponseHandler().handleResponse(rawResponse)
+
+    println("++++ Response body:")
+    println(responseString)
+    println("++++")
+
+    (responseString, expectedJson)
 
   }
 

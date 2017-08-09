@@ -5,7 +5,7 @@ import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 /**
   * RML Template Mapping converted from the DBpedia mappings
   */
-class RMLTemplateMapping(val title: String, modelWrapper: RMLModel) extends RMLMapping(modelWrapper: RMLModel) {
+class RMLTemplateMapping(val title: String, modelWrapper: AbstractRMLModel) extends RMLMapping(modelWrapper: AbstractRMLModel) {
 
 
   def printAsNTriples: Unit =

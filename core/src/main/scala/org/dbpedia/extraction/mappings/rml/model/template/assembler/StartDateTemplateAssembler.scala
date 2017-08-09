@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
-import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.StartDateTemplate
@@ -11,7 +11,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 26.07.17.
   */
-class StartDateTemplateAssembler(rmlModel : RMLModel, baseUri : String, language : String, template: StartDateTemplate, counter : Counter, independent : Boolean) {
+class StartDateTemplateAssembler(rmlModel : AbstractRMLModel, baseUri : String, language : String, template: StartDateTemplate, counter : Counter, independent : Boolean) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods

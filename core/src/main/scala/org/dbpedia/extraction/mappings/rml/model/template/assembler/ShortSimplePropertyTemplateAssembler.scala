@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
-import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template.SimplePropertyTemplate
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
@@ -10,7 +10,7 @@ import scala.collection.JavaConverters._
 /**
   * Created by wmaroy on 25.07.17.
   */
-class ShortSimplePropertyTemplateAssembler(rmlModel : RMLModel, baseUri: String, language : String, template: SimplePropertyTemplate, counter : Counter) {
+class ShortSimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: String, language : String, template: SimplePropertyTemplate, counter : Counter) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods

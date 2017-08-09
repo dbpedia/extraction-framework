@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
 import org.dbpedia.extraction.mappings.{ConditionMapping, TemplateMapping}
-import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template._
@@ -16,7 +16,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   * must be understood very thoroughly.
   *
   */
-class ConditionalTemplateAssembler(rmlModel: RMLModel, baseUri: String, conditionalTemplate: ConditionalTemplate, language: String, counter : Counter) {
+class ConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, conditionalTemplate: ConditionalTemplate, language: String, counter : Counter) {
 
   private val conditionalBaseUri = baseUri + "/ConditionalMapping" + "/"+ counter.conditionals
 

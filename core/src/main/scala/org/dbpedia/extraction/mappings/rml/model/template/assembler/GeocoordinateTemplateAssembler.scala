@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
-import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.GeocoordinateTemplate
@@ -10,7 +10,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
 /**
   * Created by wmaroy on 26.07.17.
   */
-class GeocoordinateTemplateAssembler(rmlModel: RMLModel, baseUri : String, language: String, template : GeocoordinateTemplate,  counter : Counter, independent : Boolean) {
+class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : String, language: String, template : GeocoordinateTemplate, counter : Counter, independent : Boolean) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods

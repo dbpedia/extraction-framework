@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.translate.mapper
 
 import org.dbpedia.extraction.mappings.rml.model.factory.{WikiTextBundle, WikiTextTemplateFactory}
-import org.dbpedia.extraction.mappings.rml.model.{RMLModel, RMLTranslationModel}
+import org.dbpedia.extraction.mappings.rml.model.{AbstractRMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.GeocoordinateTemplate
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler

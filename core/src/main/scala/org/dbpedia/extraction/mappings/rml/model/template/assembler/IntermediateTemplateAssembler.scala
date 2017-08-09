@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
 import org.dbpedia.extraction.mappings.PropertyMapping
-import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.{GeocoordinateTemplate, IntermediateTemplate, Template}
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
@@ -10,7 +10,7 @@ import org.dbpedia.extraction.mappings.rml.translate.mapper.RMLModelMapper
 /**
   * Created by wmaroy on 29.07.17.
   */
-class IntermediateTemplateAssembler(rmlModel: RMLModel, baseUri : String, language: String, template : IntermediateTemplate,  counter : Counter) {
+class IntermediateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : String, language: String, template : IntermediateTemplate, counter : Counter) {
 
   def assemble() : List[RMLPredicateObjectMap] = {
     addIntermediateNodeMapping()

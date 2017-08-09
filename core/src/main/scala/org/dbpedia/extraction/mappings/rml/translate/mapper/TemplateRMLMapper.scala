@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.translate.mapper
 
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.mappings.rml.model.{RMLModel, RMLTranslationModel}
+import org.dbpedia.extraction.mappings.rml.model.{AbstractRMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLSubjectMap, RMLUri}
 import org.dbpedia.extraction.ontology.Ontology
 

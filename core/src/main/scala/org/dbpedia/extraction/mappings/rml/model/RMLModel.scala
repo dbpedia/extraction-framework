@@ -1,64 +1,57 @@
 package org.dbpedia.extraction.mappings.rml.model
-
-import org.apache.jena.rdf.model.{Property, Resource}
+import org.apache.jena.rdf.model.Model
+import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLogicalSource, RMLSubjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.mappings.rml.model.factory.RMLResourceFactory
-import org.dbpedia.extraction.mappings.rml.model.resource._
-import org.dbpedia.extraction.wikiparser.WikiTitle
-import collection.JavaConverters._
+
+
 
 /**
-  * ModelWrapper that is used for resembling RML Mappings
+  * Created by wmaroy on 21.07.17.
   */
-abstract class RMLModel extends ModelWrapper {
+class RMLModel(private val mapping : Model,
+               val name : String,
+               val base : String,
+               val language : String) extends AbstractRMLModel {
 
-  val rmlFactory = new RMLResourceFactory(model)
 
-  protected val _triplesMap: RMLTriplesMap
-  protected val _subjectMap: RMLSubjectMap
-  protected val _logicalSource: RMLLogicalSource
-  protected val _functionSubjectMap: RMLSubjectMap
 
-  def logicalSource = _logicalSource
-  def subjectMap = _subjectMap
-  def triplesMap = _triplesMap
-  def functionSubjectMap = _functionSubjectMap
-
-  //setting predefined prefixes
-  for(rdfNamespace <- RdfNamespace.prefixMap) {
-    model.setNsPrefix(rdfNamespace._2.prefix, rdfNamespace._2.namespace)
+  // add the mapping to the core model, if null: this will be a fresh mapping
+  if(model != null) {
+    model.add(mapping)
+  } else {
+    val triplesMapResourceIRI = RMLUri(base.substring(0, base.lastIndexOf('/')))
+    rmlFactory.createRMLTriplesMap(triplesMapResourceIRI)
   }
 
-  /**
-    * Checks if the Jena model contains the given RMLUri as a resource
-    *
-    * @param rmlUri
-    * @return
-    */
-  def containsResource(rmlUri: RMLUri) : Boolean = {
-    model.containsResource(model.createResource(rmlUri.toString))
+  override protected val _triplesMap: RMLTriplesMap = getMainTriplesMap
+  override protected val _subjectMap: RMLSubjectMap = _triplesMap.addSubjectMap(RMLUri(base + "SubjectMap"))
+  override protected val _logicalSource: RMLLogicalSource = _triplesMap.addLogicalSource(RMLUri(base + "LogicalSource"))
+  override protected val _functionSubjectMap: RMLSubjectMap = rmlFactory.createRMLSubjectMap(RMLUri(base + "SubjectMap/Function"))
+                                                                        .addClass(RMLUri(RdfNamespace.FNO.namespace + "Execution"))
+                                                                        .addBlankNodeTermType()
+
+  private def getMainTriplesMap : RMLTriplesMap = {
+    val triplesMapResourceIRI = base.substring(0, base.lastIndexOf('/'))
+    val triplesMap = model.getResource(triplesMapResourceIRI)
+    rmlFactory.createRMLTriplesMap(RMLUri(triplesMap.getURI))
   }
 
-  protected def convertToLogicalSourceUri(title: WikiTitle): String =
-  {
-    title.resourceIri + "/LogicalSource"
+  override def toString : String = {
+    "RML Mapping:\n" +
+    "Name: " + name + "\n" +
+    "Language: " + language + "\n"
   }
 
-  protected def convertToSubjectMapUri(title: WikiTitle): String =
-  {
-    title.resourceIri + "/SubjectMap"
+}
+
+object RMLModel {
+
+  def createBase(templateTitle : String, language : String) : String = {
+    "http://" + language + ".dbpedia.org/resource/Mapping_" + language + ":" + templateTitle + "/"
   }
 
-  def count(templateName : String) : Int = {
-    // define resource and property to look for
-    val triplesMapResource = triplesMap.resource
-    val tmrURI = triplesMap.resource.getURI
-    val pomProperty = model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
-
-    // count the amount of statements that contain "SimplePropertyMapping"
-    val statements = model.listStatements(triplesMapResource, pomProperty, null).toList.asScala
-    statements.count(statement => statement.getObject.asResource().getURI.contains(templateName))
+  def createName(templateTitle : String, language : String) : String = {
+    "Mapping_" + language + ":" + templateTitle
   }
-
 
 }
