@@ -68,9 +68,9 @@ object MappingsTrackerRepo {
     * Returns the content of the mappings-tracker repo as LanguageRMLModels
     * @return
     */
-  def getLanguageRMLModels : LanguageRMLModels = {
+  def getLanguageRMLModels(updatesPerLanguage : Map[String, Set[String]] = null) : LanguageRMLModels = {
 
-    val languageMappingDumps = getLanguageMappingDumps
+    val languageMappingDumps = getLanguageMappingDumps(updatesPerLanguage)
     val languageRMLModels = languageMappingDumps.map(entry => {
       val language = entry._1
       val mappingDumps = entry._2
@@ -96,22 +96,27 @@ object MappingsTrackerRepo {
     * with all the corresponding mapping files
     * @return
     */
-  def getLanguageMappingFiles : Map[String, List[File]]= {
+  def getLanguageMappingFiles(languages : Set[String] = null) : Map[String, List[File]] = {
 
     val languageDirs = getLanguageDirs
 
-    val languageMappingFiles = languageDirs.map(languageDir => {
-      val language = languageDir._1
-      val dir = languageDir._2
-      val mappingFiles = dir.listFiles() match {
-        case null => List()
-        case _ =>
-          dir.listFiles()
-            .filter(_.isFile)
-            .filter(_.length() > 0)
-            .filter(_.getName.contains(".ttl")).toList
-      }
-      language -> mappingFiles
+    val languageMappingFiles = languageDirs
+      .filter( languageDir => {
+        // languages set is null continue, else check if the language is needed
+        if(languages == null) true else languages.contains(languageDir._1)
+      })
+      .map(languageDir => {
+        val language = languageDir._1
+        val dir = languageDir._2
+        val mappingFiles = dir.listFiles() match {
+          case null => List()
+          case _ =>
+            dir.listFiles()
+              .filter(_.isFile)
+              .filter(_.length() > 0)
+              .filter(_.getName.contains(".ttl")).toList
+        }
+        language -> mappingFiles
     })
 
     languageMappingFiles
@@ -122,19 +127,25 @@ object MappingsTrackerRepo {
     * Returns the content of the mappings-tracker repo as a LanguageMappingDumps object
     * @return
     */
-  def getLanguageMappingDumps : LanguageMappingDumps = {
+  def getLanguageMappingDumps(updatesPerLanguage : Map[String, Set[String]] = null) : LanguageMappingDumps = {
 
-    val languageMappingFiles = getLanguageMappingFiles
+    val languageMappingFiles = if(updatesPerLanguage != null) getLanguageMappingFiles(updatesPerLanguage.keys.toSet)
+                               else getLanguageMappingFiles()
 
     val languageMappings = languageMappingFiles.map(entry => {
      val language = entry._1
      val files = entry._2
-     val dumpMap = files.map(file => {
-       val fileName = file.getName
-       val dump = new String(Files.readAllBytes(Paths.get(file.getAbsolutePath)), "UTF-8")
+     val dumpMap = files
+       // if there are updates, only read updates, else read everything
+       .filter(file => if (updatesPerLanguage != null) updatesPerLanguage(language).contains(file.getName) else true)
+       .map(file => {
 
-       val withoutSuffix = fileName.replace(".ttl", "")
-       withoutSuffix -> MappingDump(dump, withoutSuffix)
+         val fileName = file.getName
+         val dump = new String(Files.readAllBytes(Paths.get(file.getAbsolutePath)), "UTF-8")
+
+         val withoutSuffix = fileName.replace(".ttl", "")
+         withoutSuffix -> MappingDump(dump, withoutSuffix)
+
      }).toMap
      language -> dumpMap
     })

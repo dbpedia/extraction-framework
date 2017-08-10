@@ -24,7 +24,7 @@ class MappingsTrackerRepoTest extends FlatSpec with Matchers {
   "getLanguageRMLModels" should "work correctly" in {
 
     // everything should get loaded without errors
-    val languageRMLModels = MappingsTrackerRepo.getLanguageRMLModels
+    val languageRMLModels = MappingsTrackerRepo.getLanguageRMLModels()
 
     // this should not be empty
     assert(languageRMLModels.nonEmpty)

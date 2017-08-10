@@ -5,7 +5,6 @@ import java.net.URL
 import javax.ws.rs.core.{MediaType, Response}
 import javax.ws.rs.{Produces, _}
 
-import be.ugent.mmlab.rml.extraction.RMLTermExtractor
 import com.fasterxml.jackson.databind.node.{ArrayNode, JsonNodeFactory, ObjectNode}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
@@ -23,11 +22,11 @@ import org.dbpedia.extraction.mappings.rml.util.JSONFactoryUtil
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.server.resources.rml.{BadRequestException, MappingsTrackerRepo}
 import org.dbpedia.extraction.server.resources.stylesheets.TriX
-import org.dbpedia.extraction.server.util.CommandLineUtils
 import org.dbpedia.extraction.sources.WikiSource
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.WikiTitle
 
+import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.xml.Elem
 
@@ -164,7 +163,39 @@ class RML {
     // pulls new changes into the mappings-tracker subrepository
     val success = MappingsTrackerRepo.pull()
 
+    // analyze GitHub payload
+    val node = getNode(input)
+    val commits = node.get("commits").elements().asScala.toList
+
+    val langRegex = "/([\\w]*)/".r
+    val mappingRegex = "/(Mapping_.*)".r
+
+    val langMappingPairs = commits.flatMap(commit => {
+
+      val added = commit.get("added").elements().asScala.toList
+      val modified = commit.get("modified").elements().asScala.toList
+
+      val mappingsAdded = added.map(entry => {
+        val path = entry.asText()
+        val language = langRegex.findFirstMatchIn(path).get.group(1)
+        val mapping = mappingRegex.findFirstMatchIn(path).get.group(1)
+        (language, mapping)
+      })
+
+      val mappingsModified = modified.map(entry => {
+        val path = entry.asText()
+        val language = langRegex.findFirstMatchIn(path).get.group(1)
+        val mapping = mappingRegex.findFirstMatchIn(path).get.group(1)
+        (language, mapping)
+      })
+
+      mappingsAdded ++ mappingsModified
+    })
+
+    val groupedByLanguage = langMappingPairs.groupBy(_._1).mapValues(_.map(_._2).toSet)
+
     // updates statistics
+    Server.instance.extractor.updateRMLStatistics(groupedByLanguage)
 
     if(success) {
       Response.status(Response.Status.ACCEPTED).entity("{'msg':'Success'}").`type`(MediaType.APPLICATION_JSON).build()
@@ -214,8 +245,6 @@ class RML {
         if(languageStats.contains(normalizedName)) {
 
           val stats = Server.instance.extractor.rmlStatistics(language).mappingStats(normalizedName)
-
-
 
           val count = stat.templateCount.toInt
           val propertiesCount = stat.propertyCount.toInt
@@ -682,6 +711,17 @@ class RML {
     val tree = mapper.readTree(input)
     val templateNode = tree.get("parameters")
     templateNode
+  }
+
+  /**
+    * Retrieves the $. node of JSON input
+    * @param input
+    * @return
+    */
+  private def getNode(input : String) : JsonNode = {
+    val mapper = new ObjectMapper()
+    val tree = mapper.readTree(input)
+    tree
   }
 
   /**

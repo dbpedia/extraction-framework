@@ -81,4 +81,6 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
     override def updateRMLMapping(name: String, rmlMapping: RMLMapping, language: Language): Unit = ???
 
     override def rmlStatistics: RMLStatisticsHolder = ???
+
+    override def updateRMLStatistics(updatesPerLanguage: Map[String, Set[String]]): Unit = ???
 }

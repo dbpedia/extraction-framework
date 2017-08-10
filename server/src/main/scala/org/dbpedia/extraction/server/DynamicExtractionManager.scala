@@ -139,4 +139,8 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
         update(language, new Mappings(Map(), List()))
     }
 
+    def updateRMLStatistics(updatesPerLanguage : Map[String, Set[String]]) = asynchronous("updateRMLStats") {
+        _rmlStatistics = _rmlStatistics.updated(updatesPerLanguage)
+    }
+
 }

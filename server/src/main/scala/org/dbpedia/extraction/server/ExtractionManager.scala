@@ -57,6 +57,8 @@ abstract class ExtractionManager(
 
     def updateRMLMapping(name: String, rmlMapping: RMLMapping, language: Language)
 
+    def updateRMLStatistics(updatesPerLanguage : Map[String, Set[String]])
+
     def removeMappingPage(title : WikiTitle, language : Language)
 
     protected val disambiguations : Disambiguations = loadDisambiguations()
