@@ -190,19 +190,19 @@ class RML {
   def statistics(@PathParam("language") language: String) = {
     try {
 
-      // check validity of the input
-      // TODO @wmaroy
-
+      // Retrieve wikipedia statistics
       val manager = Server.instance.managers(Language(language))
       val statsHolder = manager.holder
       val sortedStats = statsHolder.mappedStatistics.sortBy(ms => (- ms.templateCount, ms.templateName))
 
+      // Create nodes for response
       val responseNode = JsonNodeFactory.instance.objectNode()
       val statsArrayNode = JsonNodeFactory.instance.arrayNode()
 
       responseNode.set("statistics", statsArrayNode)
       responseNode.put("language", language)
 
+      // Iterate over stats and create nodes accordingly
       sortedStats.foreach(stat => {
         val statNode = JsonNodeFactory.instance.objectNode()
         val name = stat.templateName
@@ -214,6 +214,8 @@ class RML {
         if(languageStats.contains(normalizedName)) {
 
           val stats = Server.instance.extractor.rmlStatistics(language).mappingStats(normalizedName)
+
+
 
           val count = stat.templateCount.toInt
           val propertiesCount = stat.propertyCount.toInt
