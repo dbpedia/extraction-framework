@@ -31,14 +31,23 @@ object RMLInferencer {
     val languageDir = getPathToLanguageDir(language, pathToRMLMappingsDir)
 
     try {
+
       val infDirTuple = inferenceDir(rules, languageDir, language.isoCode)
 
       infDirTuple._2.foreach(mapping => {
         println(mapping)
       })
 
-      val mappings = RMLProcessorParser.parseFromDir(infDirTuple._1)
+      val tempDir = infDirTuple._1
+      val mappings = RMLProcessorParser.parseFromDir(tempDir.toAbsolutePath.toString)
+
+
+      // delete temporary dir
+      tempDir.toFile.deleteOnExit()
+      tempDir.toFile.listFiles().foreach(file => file.delete())
+
       mappings
+
     } catch {
       case e : Exception => Map()
     }
@@ -57,8 +66,12 @@ object RMLInferencer {
 
     val tmpDir = Files.createTempDirectory(Paths.get(path).getParent, "inferences")
     val inference = inferenceRMLMapping(rules, tempMappingFilePath.toAbsolutePath.toString, tmpDir.toAbsolutePath.toString, language.isoCode)
-
     val mappings = RMLProcessorParser.parseFromDir(tmpDir.toAbsolutePath.toString)
+
+    // delete temporary dir
+    tmpDir.toFile.deleteOnExit()
+    tmpDir.toFile.listFiles().foreach(file => file.delete())
+
     mappings.head
   }
 
@@ -88,7 +101,7 @@ object RMLInferencer {
   }
 
 
-  private def inferenceDir(rules : java.util.List[Rule], inputDirPath : String, language : String) : (String, List[String]) = {
+  private def inferenceDir(rules : java.util.List[Rule], inputDirPath : String, language : String) : (Path, List[String]) = {
     if(inputDirPath == null) return null
 
     val dir = new File(inputDirPath)
@@ -107,7 +120,7 @@ object RMLInferencer {
     val tmpDir = Files.createTempDirectory(Paths.get(inputDirPath), "inferences")
     val inferences = files.map(file => inferenceRMLMapping(rules, file.getAbsolutePath, tmpDir.toAbsolutePath.toString, language)).toList
 
-    (tmpDir.toAbsolutePath.toString, inferences)
+    (tmpDir, inferences)
 
   }
 
