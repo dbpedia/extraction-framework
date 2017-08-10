@@ -9,6 +9,7 @@ import java.io.File
 
 import be.ugent.mmlab.rml.model.RMLMapping
 import org.dbpedia.extraction.mappings.rml.load.RMLInferencer
+import org.dbpedia.extraction.server.resources.rml.stats.RMLStatisticsHolder
 
 import scala.actors.Actor
 import scala.collection.immutable.Map
@@ -47,6 +48,8 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
 
     private var _rmlMappings : Map[Language, Map[String, RMLMapping]] = loadRMLMappings()
 
+    private var _rmlStatistics : RMLStatisticsHolder = loadRMLStatistics()
+
     private var _mappingTestExtractors : Map[Language, WikiPageExtractor] = loadMappingTestExtractors()
 
     private var _customTestExtractors : Map[Language, WikiPageExtractor] = loadCustomTestExtractors()
@@ -66,6 +69,8 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
     def mappingPageSource(language : Language) = synchronized { _mappingPages(language).values }
 
     def mappings(language : Language) : Mappings = synchronized { _mappings(language) }
+
+    def rmlStatistics : RMLStatisticsHolder = synchronized { _rmlStatistics }
 
     def rmlMappings(language: Language) : Map[String, RMLMapping] = synchronized {
         _rmlMappings(language)

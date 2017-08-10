@@ -10,7 +10,7 @@ import org.dbpedia.extraction.mappings.rml.model.RMLModel
 /**
   * Created by wmaroy on 21.07.17.
   */
-class RMLEditModelJSONFactory(mappingNode: JsonNode) {
+class RMLModelJSONFactory(mappingNode: JsonNode) {
 
   private lazy val dump = mappingNode.get("dump").asText()
   private lazy val name = mappingNode.get("name").asText()

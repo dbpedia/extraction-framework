@@ -99,7 +99,7 @@ object RMLFormatter extends Formatter {
     freshModel.model.add(triplesMapResource.listProperties())
     val turtle = freshModel.writeAsTurtle(base)
     val decoded = URLDecoder.decode(turtle, "UTF-8") // Jena uses URL encoding, no IRI encoding, for now this is the solution //TODO
-    val formatted = decoded.replaceAll(",", ",\n\t\t\t      ")
+    val formatted = decoded.replaceAll(", ", ",\n\t\t\t       ")
     val heading = hashtags(3) + " Main TriplesMap\n" + hashtags(20)
 
     heading + removePrefixes(formatted) + offset
@@ -120,7 +120,7 @@ object RMLFormatter extends Formatter {
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(subjectMapResource.listProperties())
     val turtle = freshModel.writeAsTurtle(base)
-    val formatted = turtle.replaceAll(",", ",\n\t\t    ")
+    val formatted = turtle.replaceAll(", ", ",\n\t\t     ")
     val heading = hashtags(3) + " Main SubjectMap\n" + hashtags(20)
 
     heading + removePrefixes(formatted) + offset
@@ -144,7 +144,7 @@ object RMLFormatter extends Formatter {
                                                 .reduce((a,b) => a.concat("\n" + b))
 
       val heading = hashtags(30) + "\n" + hashtags(3) + " Intermediate Mappings\n" + hashtags(30) + "\n\n"
-      (heading + intermediateStrings).replaceAll(",", ",\n\t\t\t      ")
+      (heading + intermediateStrings).replaceAll(", ", ",\n\t\t\t       ")
     } else ""
 
   }
@@ -530,7 +530,7 @@ object RMLFormatter extends Formatter {
     freshModel.model.add(propertiesArray)
 
     val heading = hashtags(3) + " Function Execution Mapping"
-    val functionValueString = removePrefixes(freshModel.writeAsTurtle(base : String).replaceAll(",", ",\n\t\t\t      "))
+    val functionValueString = removePrefixes(freshModel.writeAsTurtle(base : String).replaceAll(", ", ",\n\t\t\t       "))
 
     val predicateObjectMapProperty = freshModel.model.getProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
     val parameters = propertiesArray.head.getSubject.listProperties(predicateObjectMapProperty).toList.asScala.toArray
@@ -686,7 +686,7 @@ object RMLFormatter extends Formatter {
     */
   private def getPrefixes(turtle : String) = {
     val result = turtle.split("\n")
-                       .filter(line => line.contains("@"))
+                       .filter(line => line.contains("@base") || line.contains("@prefix"))
                        .map(line => {
                          val replace = if(line.indexOf(":") < 14) "\t\t<" else "\t<"
                          line.replaceFirst("<", replace).replace("@base", "@base\t")

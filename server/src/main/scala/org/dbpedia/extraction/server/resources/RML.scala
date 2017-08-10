@@ -15,18 +15,20 @@ import org.dbpedia.extraction.mappings.rml.load.RMLInferencer
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
-import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLEditModelJSONFactory}
+import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLModelJSONFactory}
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
 import org.dbpedia.extraction.mappings.rml.model.template._
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.mappings.rml.util.JSONFactoryUtil
 import org.dbpedia.extraction.server.Server
-import org.dbpedia.extraction.server.resources.rml.BadRequestException
+import org.dbpedia.extraction.server.resources.rml.{BadRequestException, MappingsTrackerRepo}
 import org.dbpedia.extraction.server.resources.stylesheets.TriX
+import org.dbpedia.extraction.server.util.CommandLineUtils
 import org.dbpedia.extraction.sources.WikiSource
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.WikiTitle
 
+import scala.io.Source
 import scala.xml.Elem
 
 /**
@@ -144,16 +146,46 @@ class RML {
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Webhook API
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  /**
+    * This WebHook API should be called by github for every new push event.
+    * This does not need any credentials or whatsoever.
+    *
+    * @param input It's assumed this will be the GitHub WebHook payload for a _ push _ event.
+    * @return
+    */
+  @POST
+  @Path("webhooks/mappings-tracker")
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def mappingsTrackerWebHook(input : String) = {
+
+    // pulls new changes into the mappings-tracker subrepository
+    val success = MappingsTrackerRepo.pull()
+
+    // updates statistics
+
+    if(success) {
+      Response.status(Response.Status.ACCEPTED).entity("{'msg':'Success'}").`type`(MediaType.APPLICATION_JSON).build()
+    } else {
+      Response.status(Response.Status.CONFLICT).entity("{'msg':'Something went wrong when pulling.'}").`type`(MediaType.APPLICATION_JSON).build()
+    }
+
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Statistics API
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
     * Retrieves statistics per language
+    *
     * @param language
     * @return
     */
   @GET
-  @Path("/{language}/statistics/")
+  @Path("{language}/statistics/")
   @Produces(Array(MediaType.APPLICATION_JSON))
   def statistics(@PathParam("language") language: String) = {
     try {
@@ -174,16 +206,27 @@ class RML {
       sortedStats.foreach(stat => {
         val statNode = JsonNodeFactory.instance.objectNode()
         val name = stat.templateName
-        val count = stat.templateCount.toInt
-        val propertiesCount = stat.propertyCount.toInt
-        val mappedPropertiesCount = 0
+        val normalizedName = RMLModel.normalize(name, language)
 
-        statNode.put("name", name)
-        statNode.put("count", count)
-        statNode.put("propertiesCount", propertiesCount)
-        statNode.put("mappedPropertiesCount", mappedPropertiesCount)
+        // get rml specific stat
+        val languageStats = Server.instance.extractor.rmlStatistics(language).mappingStats
 
-        statsArrayNode.add(statNode)
+        if(languageStats.contains(normalizedName)) {
+
+          val stats = Server.instance.extractor.rmlStatistics(language).mappingStats(normalizedName)
+
+          val count = stat.templateCount.toInt
+          val propertiesCount = stat.propertyCount.toInt
+          val mappedPropertiesCount = stats.mappedProperties.size.toDouble
+
+          statNode.put("name", name)
+          statNode.put("count", count)
+          statNode.put("propertiesCount", propertiesCount)
+          statNode.put("mappedPropertiesCount", mappedPropertiesCount)
+          statNode.put("mappedRatio", (mappedPropertiesCount / propertiesCount) * 100)
+
+          statsArrayNode.add(statNode)
+        }
       })
 
       responseNode.put("msg", "Statistics successfully retrieved.")
@@ -645,7 +688,7 @@ class RML {
     * @return
     */
   private def getMapping(mappingNode : JsonNode) : RMLModel = {
-    val mappingFactory = new RMLEditModelJSONFactory(mappingNode)
+    val mappingFactory = new RMLModelJSONFactory(mappingNode)
     val mapping = mappingFactory.create
     mapping
   }
@@ -681,6 +724,7 @@ class RML {
 
   /**
     * Creates a response for a new RML Mapping
+    *
     * @param mapping
     * @param msg
     * @return

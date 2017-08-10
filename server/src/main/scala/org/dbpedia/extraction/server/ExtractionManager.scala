@@ -9,6 +9,7 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.mappings.rml.load.{RMLInferencer, RMLProcessorLoader}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
+import org.dbpedia.extraction.server.resources.rml.stats.RMLStatisticsHolder
 import org.dbpedia.extraction.sources.{Source, WikiPage, WikiSource, XMLSource}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
@@ -45,6 +46,8 @@ abstract class ExtractionManager(
     def mappings(language : Language) : Mappings
 
     def rmlMappings(language : Language) : Map[String, RMLMapping]
+
+    def rmlStatistics : RMLStatisticsHolder
 
     def updateOntologyPage(page : WikiPage)
 
@@ -235,5 +238,9 @@ abstract class ExtractionManager(
     languages.map(lang => (lang, RMLInferencer.loadDir(lang, rmlMappingsDir))).toMap
   }
 
+  protected def loadRMLStatistics() : RMLStatisticsHolder = {
+    val holder = RMLStatisticsHolder()
+    holder
+  }
 
 }

@@ -1,7 +1,13 @@
 package org.dbpedia.extraction.mappings.rml.model
-import org.apache.jena.rdf.model.Model
+import java.io.StringReader
+
+import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.dbpedia.extraction.mappings.rml.model.resource._
+import org.dbpedia.extraction.mappings.rml.model.voc.Property
 import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.extraction.util.WikiUtil
+
+import scala.collection.JavaConverters._
 
 
 
@@ -50,6 +56,11 @@ class RMLModel(private val mapping : Model,
     _subjectMap.addClass(RMLUri(classURI))
   }
 
+  def getMappedProperties : List[String] = {
+    val references = model.listObjectsOfProperty(model.createProperty(Property.REFERENCE)).toList.asScala
+    references.map(reference => reference.asLiteral().getString).toList
+  }
+
   override def toString : String = {
     "RML Mapping:\n" +
       "Name: " + name + "\n" +
@@ -73,6 +84,25 @@ class RMLModel(private val mapping : Model,
 object RMLModel {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Apply method (factory method)
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  /**
+    *
+    * @param language iso code of the language
+    * @param templateName name of the infobox template
+    * @param dump turtle dump of the RML Mapping
+    * @return
+    */
+  def apply(language : String, templateName : String, dump: String) : RMLModel = {
+    val mappingBase = createBase(templateName, language)
+    val mappingName = createName(templateName, language)
+    val mappingModel = ModelFactory.createDefaultModel().read(new StringReader(dump), mappingBase, "TURTLE")
+
+    new RMLModel(mappingModel, mappingName, mappingBase, language)
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public static methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,8 +110,24 @@ object RMLModel {
     "http://" + language + ".dbpedia.org/resource/Mapping_" + language + ":" + templateTitle + "/"
   }
 
+  /**
+    * Creates a mapping name from a template title.
+    * If this is already a valid mapping name (prefix = Mapping_{language}:{Template Name}, then this mapping will
+    * just be returned.
+    * @param templateTitle
+    * @param language
+    * @return
+    */
   def createName(templateTitle : String, language : String) : String = {
-    "Mapping_" + language + ":" + templateTitle
+    if(!templateTitle.contains("Mapping_")) {
+      "Mapping_" + language + ":" + templateTitle
+    } else templateTitle // this means a valid title is already given
+  }
+
+  def normalize(templateTitle : String, language : String) : String = {
+    if(!templateTitle.contains("Mapping_")) {
+      "Mapping_" + language + ":" + WikiUtil.wikiEncode(templateTitle)
+    } else templateTitle // this means a valid title is already given
   }
 
 }
