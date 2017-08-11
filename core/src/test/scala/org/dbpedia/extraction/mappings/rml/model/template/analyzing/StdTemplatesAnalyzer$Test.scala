@@ -16,7 +16,9 @@ class StdTemplatesAnalyzer$Test extends FunSuite {
     val ontology = ContextCreator.ontologyObject
 
     val analyzer : TemplatesAnalyzer = new StdTemplatesAnalyzer(ontology)
-    analyzer.analyze(tm)
+    val templates = analyzer.analyze(tm)
+
+    templates.foreach(template => println(template))
 
   }
 

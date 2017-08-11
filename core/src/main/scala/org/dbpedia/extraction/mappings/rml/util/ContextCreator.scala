@@ -41,7 +41,7 @@ object ContextCreator {
     }
   }
 
-  def createOntologyContext(ontologyParam: Ontology):
+  def createOntologyContext(ontologyParam: Ontology = ontologyObject):
   {
     def ontology: Ontology
   } =
