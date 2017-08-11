@@ -212,7 +212,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
   {
     latPom.addPredicate(RMLUri(RdfNamespace.GEO.namespace + "lat"))
 
-    val latitudeOmUri = latPom.uri.extend("/ObjectMap")
+    val latitudeOmUri = latPom.uri.extend("/FunctionTermMap")
     val latitudeOm = latPom.addFunctionTermMap(latitudeOmUri)
 
     val latitudeFunctionValueUri = latitudeOmUri.extend("/FunctionValue")
@@ -267,7 +267,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
 
     lonPom.addPredicate(RMLUri(RdfNamespace.GEO.namespace + "long"))
 
-    val longitudeOmUri = lonPom.uri.extend("/ObjectMap")
+    val longitudeOmUri = lonPom.uri.extend("/FunctionTermMap")
     val longitudeOm = lonPom.addFunctionTermMap(longitudeOmUri)
 
     val longitudeFunctionValueUri = longitudeOmUri.extend("/FunctionValue")
