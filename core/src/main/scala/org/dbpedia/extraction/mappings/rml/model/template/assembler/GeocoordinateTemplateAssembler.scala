@@ -134,7 +134,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     latPom.addPredicate(RMLUri(RdfNamespace.GEO.namespace + "lat"))
     val latOmUri = latPom.uri.extend("/FunctionTermMap")
     val latOm = latPom.addFunctionTermMap(latOmUri)
-    val latFunctionValueUri = latOmUri
+    val latFunctionValueUri = latOmUri.extend("/FunctionValue")
     val latFunctionValue = latOm.addFunctionValue(latFunctionValueUri)
     latFunctionValue.addLogicalSource(rmlModel.logicalSource)
     latFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)
@@ -174,7 +174,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     latPom.addPredicate(RMLUri(RdfNamespace.GEO.namespace + "lat"))
     val latOmUri = latPom.uri.extend("/FunctionTermMap")
     val latOm = latPom.addFunctionTermMap(latOmUri)
-    val latFunctionValueUri = latOmUri
+    val latFunctionValueUri = latOmUri.extend("/FunctionValue")
     val latFunctionValue = latOm.addFunctionValue(latFunctionValueUri)
     latFunctionValue.addLogicalSource(rmlModel.logicalSource)
     latFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)

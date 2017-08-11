@@ -21,4 +21,10 @@ object Property {
 
   val ITERATOR = RdfNamespace.RML.namespace + "iterator"
 
+  val FUNCTIONVALUE = RdfNamespace.FNML.namespace +"functionValue"
+
+  val OBJECT = RdfNamespace.RR.namespace + "object"
+
+  val EXECUTES = RdfNamespace.FNO + "executes"
+
 }

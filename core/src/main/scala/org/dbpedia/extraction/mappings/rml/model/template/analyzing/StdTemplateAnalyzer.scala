@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.model.template.analyzing
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
-import org.dbpedia.extraction.mappings.rml.model.resource.RMLPredicateObjectMap
+import org.dbpedia.extraction.mappings.rml.model.resource.{RMLFunctionTermMap, RMLPredicateObjectMap}
 import org.dbpedia.extraction.mappings.rml.model.template._
 
 /**
@@ -50,35 +50,63 @@ object StdTemplateAnalyzer extends TemplateAnalyzer {
       case s : String if uri.contains(GeocoordinateTemplate.NAME) => analyzeGeocoordinateTemplate(pom)
 
     }
-    
+
   }
 
 
   private def analyzeSimplePropertyTemplate(pom : RMLPredicateObjectMap) : SimplePropertyTemplate = {
+
+    val ftm = pom.objectMap.asInstanceOf[RMLFunctionTermMap]
+    val fn = ftm.getFunction
+
     null
   }
 
   private def analyzeConstantTemplate(pom : RMLPredicateObjectMap) : ConstantTemplate = {
+
+    val ftm = pom.objectMap.asInstanceOf[RMLFunctionTermMap]
+    val fn = ftm.getFunction
+
     null
   }
 
   private def analyzeStartDateTemplate(pom : RMLPredicateObjectMap) : StartDateTemplate = {
+
+    val ftm = pom.objectMap.asInstanceOf[RMLFunctionTermMap]
+    val fn = ftm.getFunction
+
     null
   }
 
   private def analyzeEndDateTemplate(pom : RMLPredicateObjectMap) : EndDateTemplate = {
+
+    val ftm = pom.objectMap.asInstanceOf[RMLFunctionTermMap]
+    val fn = ftm.getFunction
+
     null
   }
 
   private def analyzeGeocoordinateTemplate(pom : RMLPredicateObjectMap) : GeocoordinateTemplate = {
+
+    val ftm = pom.objectMap.asInstanceOf[RMLFunctionTermMap]
+    val fn = ftm.getFunction
+
     null
   }
 
   private def analyzeIntermediateTemplate(pom : RMLPredicateObjectMap) : IntermediateTemplate = {
+
+    val ftm = pom.objectMap.asInstanceOf[RMLFunctionTermMap]
+    val fn = ftm.getFunction
+
     null
   }
 
   private def analyzeConditionalTemplate(pom : RMLPredicateObjectMap) : ConditionalTemplate = {
+
+    val ftm = pom.objectMap.asInstanceOf[RMLFunctionTermMap]
+    val fn = ftm.getFunction
+
     null
   }
 

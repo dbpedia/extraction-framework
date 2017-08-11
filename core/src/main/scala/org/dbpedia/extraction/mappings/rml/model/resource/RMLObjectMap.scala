@@ -61,6 +61,7 @@ class RMLObjectMap(override val resource: Resource) extends RMLResource(resource
     reference != null
   }
 
+
   private def getParentTriplesMap : RMLTriplesMap = {
     val property = resource.listProperties(createProperty(Property.PARENTTRIPLESMAP))
     if(property.hasNext) {
