@@ -17,7 +17,8 @@ object ContextCreator {
   private lazy val ontologyPath = "../ontology.xml"
   private lazy val ontologyFile = new File(ontologyPath)
   private lazy val ontologySource = XMLSource.fromFile(ontologyFile,Language.Mappings)
-  private lazy val ontologyObject = new OntologyReader().read(ontologySource)
+
+  lazy val ontologyObject = new OntologyReader().read(ontologySource)
 
   def createXMLContext(pathToXML: String, lang: Language):
   {
