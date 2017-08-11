@@ -3,7 +3,6 @@ import java.util.logging.Logger
 
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLFunctionTermMap, RMLPredicateObjectMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.{SimplePropertyTemplate, Template}
-import org.dbpedia.extraction.mappings.rml.util.{ContextCreator, RMLOntologyUtil}
 import org.dbpedia.extraction.ontology.{Ontology, RdfNamespace}
 
 /**
