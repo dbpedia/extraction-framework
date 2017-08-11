@@ -42,7 +42,9 @@ class StdTemplatesAnalyzer(ontology: Ontology) extends TemplatesAnalyzer {
       case s : String if uri.contains(RMLUri.STARTDATEMAPPING) => analyzeTemplate(new StartDateTemplateAnalyzer(ontology), pom)
       case s : String if uri.contains(RMLUri.ENDDATEMAPPING) => analyzeTemplate(new EndDateTemplateAnalyzer(ontology), pom)
       case s : String if uri.contains(RMLUri.INTERMEDIATEMAPPING) => analyzeTemplate(new IntermediateTemplateAnalyzer(ontology), pom)
-      case s : String if uri.contains(RMLUri.LONGITUDEMAPPING) => analyzeTemplate(new GeocoordinatesTemplateAnalyzer(ontology), pom)
+      case s : String if uri.contains(RMLUri.LATITUDEMAPPING) => analyzeTemplate(new LatitudeTemplateAnalyzer(ontology), pom)
+      case s : String if uri.contains(RMLUri.LONGITUDEMAPPING) => analyzeTemplate(new LongitudeTemplateAnalyzer(ontology), pom)
+      case _ => logger.info(uri + " contains no known template.") ; null
 
     }
 
