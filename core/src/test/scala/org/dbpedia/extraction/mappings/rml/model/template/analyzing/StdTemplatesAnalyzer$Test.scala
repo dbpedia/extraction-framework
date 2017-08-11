@@ -6,13 +6,14 @@ import org.scalatest.FunSuite
 /**
   * Created by wmaroy on 11.08.17.
   */
-class StdTemplateAnalyzer$Test extends FunSuite {
+class StdTemplatesAnalyzer$Test extends FunSuite {
 
   test("testAnalyze") {
 
     val model = RMLInferencer$Test.getInferencedMappingExampleAsRMLModel
+    val tm = model.triplesMap
 
-    StdTemplateAnalyzer.analyze(model)
+    StdTemplatesAnalyzer.analyze(tm)
 
   }
 
