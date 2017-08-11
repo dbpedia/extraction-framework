@@ -173,8 +173,6 @@ object RMLInferencer {
     // read the InputStream into the model
     model.read(in, base, "TURTLE")
     val empty = model.isEmpty
-    print(empty)
-    model.listStatements().toList.asScala.foreach(stmnt => print("test:" + stmnt.toString))
     // create the reasoner
     val reasoner = new GenericRuleReasoner(rules)
     reasoner.setDerivationLogging(true);
