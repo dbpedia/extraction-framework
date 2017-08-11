@@ -114,6 +114,12 @@ object StdTemplateAnalyzer extends TemplateAnalyzer {
 
     logger.info("Found " + RMLUri.INTERMEDIATEMAPPING)
 
+    val ptm = pom.objectMap.parentTriplesMap
+    val templates = ptm.predicateObjectMaps.map(pom => {
+      val template = getTemplateFromPom(pom)
+      template
+    })
+
     null
   }
 
