@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings.rml.model.template.analyzing
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLPredicateObjectMap, RMLUri}
-import org.dbpedia.extraction.mappings.rml.model.template.Template
+import org.dbpedia.extraction.mappings.rml.model.template.{IntermediateTemplate, Template}
 import org.dbpedia.extraction.ontology.Ontology
 
 /**
@@ -18,8 +18,8 @@ class IntermediateTemplateAnalyzer(ontology: Ontology) extends TemplateAnalyzer{
 
     val ptm = pom.objectMap.parentTriplesMap
     val analyzer : TemplatesAnalyzer = new StdTemplatesAnalyzer(ontology)
-    val templates = analyzer.analyze(ptm)
-    null
+    val templates = analyzer.analyze(ptm).toList
+    IntermediateTemplate(null, null, templates)
   }
 
 }
