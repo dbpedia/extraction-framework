@@ -10,7 +10,7 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   */
 class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource(resource) {
 
-  lazy val predicatePropertyURI = getPredicate
+  lazy val rrPredicate = getPredicate
   lazy val objectMap : RMLObjectMap = getObjectMap
   lazy val rrObject : String = getObject
 
@@ -116,6 +116,10 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
       else null
     } else null
 
+  }
+
+  def hasFunctionTermMap : Boolean = {
+    objectMap.isInstanceOf[RMLFunctionTermMap]
   }
 
   def hasParentTriplesMap : Boolean = {

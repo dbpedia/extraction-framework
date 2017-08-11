@@ -9,7 +9,7 @@ import org.dbpedia.extraction.ontology.{Ontology, RdfNamespace}
 /**
   * Created by wmaroy on 11.08.17.
   */
-class SimplePropertyTemplateAnalyzer(ontology: Ontology) extends TemplateAnalyzer {
+class SimplePropertyTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateAnalyzer(ontology) {
 
   val logger = Logger.getGlobal
 
@@ -29,8 +29,8 @@ class SimplePropertyTemplateAnalyzer(ontology: Ontology) extends TemplateAnalyze
     val suffixParameter = fn.constants.getOrElse(RdfNamespace.DBF.namespace + "suffixParameter", null)
     val transformParameter = fn.constants.getOrElse(RdfNamespace.DBF.namespace + "selectParameter", null)
 
-    val ontologyProperty = RMLOntologyUtil.loadOntologyPropertyFromIRI(ontologyParameter, ContextCreator.createOntologyContext())
-    val unit = if(unitParameter != null) RMLOntologyUtil.loadOntologyDataTypeFromIRI(unitParameter, ContextCreator.createOntologyContext()) else null
+    val ontologyProperty = loadProperty(ontologyParameter)
+    val unit = if(unitParameter != null) loadDatatype(unitParameter) else null
 
     SimplePropertyTemplate(propertyParameter, ontologyProperty, selectParameter, prefixParameter, suffixParameter, transformParameter, unit, factorParameter)
 

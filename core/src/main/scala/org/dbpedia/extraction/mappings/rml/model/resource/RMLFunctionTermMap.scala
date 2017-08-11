@@ -23,9 +23,9 @@ class RMLFunctionTermMap(resource: Resource) extends RMLObjectMap(resource) {
     // retrieve all objects and tuple them by reference and constant
     val objects = functionValue.predicateObjectMaps.map(pom => {
       if(pom.hasReferenceObjectMap) {
-        ("references", pom.predicatePropertyURI -> pom.objectMap.reference.toString())
+        ("references", pom.rrPredicate -> pom.objectMap.reference.toString())
       } else {
-        ("constants", pom.predicatePropertyURI -> pom.rrObject)
+        ("constants", pom.rrPredicate -> pom.rrObject)
       }
     })
 

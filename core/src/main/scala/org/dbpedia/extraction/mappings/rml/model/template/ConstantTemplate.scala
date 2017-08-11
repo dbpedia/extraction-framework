@@ -6,9 +6,9 @@ import org.dbpedia.extraction.ontology.datatypes.Datatype
 /**
   * Created by wmaroy on 24.07.17.
   */
-class ConstantTemplate(val ontologyProperty: OntologyProperty,
-                       val value: String,
-                       val unit: Datatype) extends Template(ConstantTemplate.NAME)
+case class ConstantTemplate(ontologyProperty: OntologyProperty,
+                            value: String,
+                            unit: Datatype) extends Template(ConstantTemplate.NAME)
 
 object ConstantTemplate {
 
