@@ -23,7 +23,8 @@ import scala.language.reflectiveCalls
 /**
   *
   * Runs the RML Processor
-  * //TODO: refactor this class please @wmaroy!
+  *
+  * //TODO: refactor this class @wmaroy!
   */
 class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
 

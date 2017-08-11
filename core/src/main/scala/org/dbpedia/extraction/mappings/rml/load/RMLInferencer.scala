@@ -13,6 +13,8 @@ import org.dbpedia.extraction.util.Language
 
 /**
   * Created by wmaroy on 10.07.17.
+  *
+  * TODO: document @wmaroy
   */
 object RMLInferencer {
 
