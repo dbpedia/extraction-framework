@@ -10,6 +10,7 @@ import org.apache.jena.reasoner.rulesys.{GenericRuleReasoner, Rule}
 import org.apache.jena.util.FileManager
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.util.Language
+import scala.collection.JavaConverters._
 
 /**
   * Created by wmaroy on 10.07.17.
@@ -77,6 +78,27 @@ object RMLInferencer {
     mappings.head
   }
 
+  def loadDumpAsString(language: Language, dump : String, name : String) : String = {
+    // create language specific rules from templated file
+    val path = this.getClass.getClassLoader.getResource("rules.rule").getPath
+
+    val languageRulesPath = createLanguageRuleFile(language, path)
+
+    // load the language rules
+    val rules = Rule.rulesFromURL(languageRulesPath.toUri.getPath)
+
+    val tempMappingFilePath = createTempMappingFile(name, dump, path)
+
+    val tmpDir = Files.createTempDirectory(Paths.get(path).getParent, "inferences")
+    val inference = inferenceRMLMapping(rules, tempMappingFilePath.toAbsolutePath.toString, tmpDir.toAbsolutePath.toString, language.isoCode)
+
+    // delete temporary dir
+    tmpDir.toFile.deleteOnExit()
+    tmpDir.toFile.listFiles().foreach(file => file.delete())
+
+    inference
+  }
+
   /**
     * Replaces all language templated constructs with the given language
     *
@@ -97,9 +119,11 @@ object RMLInferencer {
   private def createTempMappingFile(name : String, dump:String, path : String) : Path = {
     val file = new File(path)
     val dir = Paths.get(file.getParent)
-    val tmpFile = Files.createTempFile(dir, name + ".ttl", null)
-    Files.write(Paths.get(tmpFile.toUri.getPath), dump.getBytes)
-    tmpFile
+    val tmpFile = Files.createTempFile(dir, name + "-", ".ttl").toFile
+    val writer = new BufferedWriter(new FileWriter(tmpFile))
+    writer.write(dump)
+    writer.close()
+    tmpFile.toPath
   }
 
 
@@ -148,13 +172,17 @@ object RMLInferencer {
 
     // read the InputStream into the model
     model.read(in, base, "TURTLE")
+    val empty = model.isEmpty
+    print(empty)
+    model.listStatements().toList.asScala.foreach(stmnt => print("test:" + stmnt.toString))
     // create the reasoner
     val reasoner = new GenericRuleReasoner(rules)
+    reasoner.setDerivationLogging(true);
     val infModel = ModelFactory.createInfModel(reasoner, model)
 
     //TODO write to rml/inferenced/{lan}
     val out = new StringWriter()
-    infModel.write(out, "TURTLE", "http://en.dbpedia.org/resource/Mapping_en:Infobox_person/")
+    infModel.write(out, "TURTLE", base)
 
     // mapping name regex
     val mappingNameRegex = "Mapping_[^/]+".r
