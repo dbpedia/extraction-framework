@@ -107,7 +107,7 @@ object RMLModel {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   def createBase(templateTitle : String, language : String) : String = {
-    "http://" + language + ".dbpedia.org/resource/Mapping_" + language + ":" + templateTitle + "/"
+    "http://" + language + ".dbpedia.org/resource/" + createName(templateTitle, language) + "/"
   }
 
   /**

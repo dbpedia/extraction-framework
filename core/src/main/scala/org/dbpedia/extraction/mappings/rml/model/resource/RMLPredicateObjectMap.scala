@@ -91,7 +91,7 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
   private def getObject : String = {
     val property = resource.listProperties(createProperty(Property.OBJECT))
     val stmnt = property.nextStatement()
-    stmnt.getObject.asLiteral().toString
+    stmnt.getObject.toString
   }
 
   private def getObjectMap : RMLObjectMap = {

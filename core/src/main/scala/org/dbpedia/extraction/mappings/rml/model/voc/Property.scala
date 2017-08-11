@@ -25,6 +25,6 @@ object Property {
 
   val OBJECT = RdfNamespace.RR.namespace + "object"
 
-  val EXECUTES = RdfNamespace.FNO + "executes"
+  val EXECUTES = RdfNamespace.FNO.namespace + "executes"
 
 }

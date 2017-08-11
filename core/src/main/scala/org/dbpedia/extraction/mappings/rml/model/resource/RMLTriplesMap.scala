@@ -74,6 +74,7 @@ class RMLTriplesMap(override val resource: Resource) extends RMLResource(resourc
   private def getPredicateObjectMaps: List[RMLPredicateObjectMap] =
   {
     val properties = resource.listProperties(createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")).toList
+    val list = resource.listProperties().toList.asScala
     properties.asScala.map(property => new RMLPredicateObjectMap(property.getObject.asResource())).toList
   }
 
