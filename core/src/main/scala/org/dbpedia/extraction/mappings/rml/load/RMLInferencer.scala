@@ -175,7 +175,6 @@ object RMLInferencer {
     val empty = model.isEmpty
     // create the reasoner
     val reasoner = new GenericRuleReasoner(rules)
-    reasoner.setDerivationLogging(true);
     val infModel = ModelFactory.createInfModel(reasoner, model)
 
     //TODO write to rml/inferenced/{lan}
