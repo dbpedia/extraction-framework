@@ -381,9 +381,15 @@ class RML {
 
       // create the structures
       val mappingNode = getMappingNode(input)
-      val mapping: RMLModel = getMapping(mappingNode)
+
+      // the inferenced version (full RML mapping) is needed for analyzing
+      val mapping: RMLModel = getInferencedMapping(mappingNode)
+
+      // analyze the mapping
       val analyzer = new StdTemplatesAnalyzer(Server.instance.extractor.ontology())
       val templates: Set[Template] = analyzer.analyze(mapping.triplesMap)
+
+      // convert analyzed templates to JSON format
       val converter = new StdTemplatesJsonConverter
       val jsonTemplates = converter.convertAll(templates)
 
@@ -757,7 +763,18 @@ class RML {
     */
   private def getMapping(mappingNode : JsonNode) : RMLModel = {
     val mappingFactory = new RMLModelJSONFactory(mappingNode)
-    val mapping = mappingFactory.create
+    val mapping = mappingFactory.create()
+    mapping
+  }
+
+  /**
+    * Creates the RMLEditModel (the inferenced version) from the input JSON
+    *
+    * @return
+    */
+  private def getInferencedMapping(mappingNode : JsonNode) : RMLModel = {
+    val mappingFactory = new RMLModelJSONFactory(mappingNode)
+    val mapping = mappingFactory.create(inferenced = true)
     mapping
   }
 
