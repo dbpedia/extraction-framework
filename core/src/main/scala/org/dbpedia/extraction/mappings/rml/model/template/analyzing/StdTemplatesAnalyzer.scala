@@ -44,7 +44,7 @@ class StdTemplatesAnalyzer(ontology: Ontology) extends TemplatesAnalyzer {
       case s : String if uri.contains(RMLUri.INTERMEDIATEMAPPING) => analyzeTemplate(new IntermediateTemplateAnalyzer(ontology), pom)
       case s : String if uri.contains(RMLUri.LATITUDEMAPPING) => analyzeTemplate(new LatitudeTemplateAnalyzer(ontology), pom)
       case s : String if uri.contains(RMLUri.LONGITUDEMAPPING) => analyzeTemplate(new LongitudeTemplateAnalyzer(ontology), pom)
-      case _ => logger.info(uri + " contains no known template.") ; null
+      case _ => logger.info(uri + " contains no known/supported template.") ; null
 
     }
 
@@ -58,6 +58,12 @@ class StdTemplatesAnalyzer(ontology: Ontology) extends TemplatesAnalyzer {
     analyzer(pom)
   }
 
+  /**
+    * Search for Lon/Lat templates in a set of Templates and converts them to GeoTemplates
+    * Return a new set of Templates without the Lat/Lon templates, but with the GeoTemplate
+    * @param templates Set of templates
+    * @return
+    */
   private def convertLatLonTemplates(templates : Set[Template]) : Set[Template] = {
 
     case class LatLonGroup(lat : LatitudeTemplate = null, lon : LongitudeTemplate = null) {

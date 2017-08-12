@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.resource
 
 import org.apache.jena.rdf.model.Resource
+import org.dbpedia.extraction.mappings.rml.model.voc.Property
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
