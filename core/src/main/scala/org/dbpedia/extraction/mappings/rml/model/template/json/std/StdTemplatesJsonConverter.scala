@@ -30,7 +30,7 @@ class StdTemplatesJsonConverter extends TemplatesJsonConverter {
       }
 
       if(converter != null) {
-        val jsonTemplate = converter(template).asInstanceOf[AbstractStdJsonTemplate]
+        val jsonTemplate = converter(template).asInstanceOf[StdJsonTemplate]
         array.add(jsonTemplate.node)
       }
 

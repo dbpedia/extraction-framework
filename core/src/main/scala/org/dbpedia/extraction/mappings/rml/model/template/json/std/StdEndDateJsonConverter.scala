@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.template.json.std
 
-import org.dbpedia.extraction.mappings.rml.model.template.Template
+import com.fasterxml.jackson.databind.node.JsonNodeFactory
+import org.dbpedia.extraction.mappings.rml.model.template.{StartDateTemplate, Template}
 import org.dbpedia.extraction.mappings.rml.model.template.json.{JsonTemplate, TemplateJsonConverter}
 
 /**
@@ -8,6 +9,24 @@ import org.dbpedia.extraction.mappings.rml.model.template.json.{JsonTemplate, Te
   */
 class StdEndDateJsonConverter extends TemplateJsonConverter {
 
-  override def apply(template: Template): JsonTemplate = ???
+  override def apply(template: Template): JsonTemplate = {
+
+    val edTemplate = template.asInstanceOf[StartDateTemplate]
+
+    val node = JsonNodeFactory.instance.objectNode()
+    node.put("name", template.name)
+
+    val parameters = JsonNodeFactory.instance.objectNode()
+    node.set("parameters", parameters)
+
+    val ontologyProperty = if(edTemplate.ontologyProperty != null) {
+      edTemplate.ontologyProperty.uri
+    } else null
+    parameters.put("ontologyProperty", ontologyProperty)
+    parameters.put("property", edTemplate.property)
+
+    new StdJsonTemplate(node)
+
+  }
 
 }

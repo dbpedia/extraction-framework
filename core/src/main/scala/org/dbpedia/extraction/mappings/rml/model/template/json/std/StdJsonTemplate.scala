@@ -6,7 +6,7 @@ import org.dbpedia.extraction.mappings.rml.model.template.json.JsonTemplate
 /**
   * Created by wmaroy on 12.08.17.
   */
-abstract class AbstractStdJsonTemplate(_node: JsonNode) extends JsonTemplate {
+class StdJsonTemplate(_node: JsonNode) extends JsonTemplate {
 
   def node : JsonNode = _node
 
