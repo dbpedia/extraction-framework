@@ -49,7 +49,11 @@ object JSONFactoryUtil {
 
   def getUnit(templateNode: JsonNode, context : {def ontology: Ontology}) : Datatype = {
     val unitName = JSONFactoryUtil.parameters("unit", templateNode)
-    RMLOntologyUtil.loadOntologyDataType(unitName, context)
+
+    // unit is optional, so this can be null
+    if(unitName != null) {
+      RMLOntologyUtil.loadOntologyDataType(unitName, context)
+    } else null
   }
 
   def getOntologyProperty(ontologyPropertyParameter: String, context : {def ontology: Ontology}) : OntologyProperty = {

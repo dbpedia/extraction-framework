@@ -8,7 +8,7 @@ import org.dbpedia.extraction.ontology.Ontology
 /**
   * Created by wmaroy on 11.08.17.
   */
-class IntermediateTemplateAnalyzer(ontology: Ontology) extends TemplateAnalyzer{
+class IntermediateTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateAnalyzer(ontology) {
 
   val logger = Logger.getGlobal
 
@@ -19,7 +19,10 @@ class IntermediateTemplateAnalyzer(ontology: Ontology) extends TemplateAnalyzer{
     val ptm = pom.objectMap.parentTriplesMap
     val analyzer : TemplatesAnalyzer = new StdTemplatesAnalyzer(ontology)
     val templates = analyzer.analyze(ptm).toList
-    IntermediateTemplate(null, null, templates)
+
+    val ontologyClass = loadClass(ptm.subjectMap.`class`)
+    val ontologyProperty = loadProperty(pom.rrPredicate)
+    IntermediateTemplate(ontologyClass, ontologyProperty , templates)
   }
 
 }

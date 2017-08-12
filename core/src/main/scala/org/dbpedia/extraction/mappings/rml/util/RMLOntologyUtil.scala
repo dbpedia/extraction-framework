@@ -56,7 +56,7 @@ object RMLOntologyUtil {
     try {
       context.ontology.datatypes(ontologyDataTypeName)
     } catch {
-      case _ : NoSuchElementException => null
+      case _ : NoSuchElementException => throw new IllegalArgumentException("Ontology property not found: " + ontologyDataTypeName)
     }
   }
 

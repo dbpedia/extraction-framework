@@ -8,6 +8,8 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   */
 class RMLSubjectMap(override val resource: Resource) extends RMLResource(resource) {
 
+  lazy val `class` = retrieveClass
+
   def addConstant(literal: RMLLiteral) : RMLSubjectMap =
   {
     resource.addLiteral(createProperty(RdfNamespace.RR.namespace + "constant"), literal.toString())
@@ -51,6 +53,15 @@ class RMLSubjectMap(override val resource: Resource) extends RMLResource(resourc
   def addTemplate(literal : RMLLiteral) : RMLSubjectMap = {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "template"), literal.toString())
     this
+  }
+
+  private def retrieveClass : String = {
+    val it = resource.listProperties(createProperty(RdfNamespace.RR.namespace + "class"))
+    if(it.hasNext) {
+      it.nextStatement().getObject.toString
+    } else {
+      null
+    }
   }
 
 }

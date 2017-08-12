@@ -28,6 +28,34 @@ class TemplateAPITest extends FlatSpec with Matchers {
 
   }
 
+  "SimplePropertyTemplates" should "fail with wrong datatype" in {
+
+    try {
+      val tuple = postTest("/fail_simplePropertyTemplateTest/simplePropertyTemplate.json",
+        "/simplePropertyTemplateTest/expected_simplePropertyTemplate.json",
+        "simpleproperty")
+        assert(false)
+    } catch {
+      case e : Exception => assert(true)
+    }
+
+  }
+
+  "SimplePropertyTemplates" should "succeed with right datatype" in {
+
+    try {
+      val tuple = postTest("/success_simplePropertyTemplateTest/simplePropertyTemplate.json",
+        "/simplePropertyTemplateTest/expected_simplePropertyTemplate.json",
+        "simpleproperty")
+    } catch {
+      case e : Exception => assert(false)
+    }
+
+
+    assert(true)
+
+  }
+
   "ConstantTemplates" should "be generated correctly" in {
 
     val tuple = postTest("/constantTemplateTest/constantTemplate.json",

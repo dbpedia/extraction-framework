@@ -16,7 +16,7 @@ case class SimplePropertyTemplate(property : String,
                                   factor : Double = 1) extends Template(SimplePropertyTemplate.NAME) {
 
   def isSimple : Boolean = {
-    select == null && prefix == null && transform == null && factor == 1
+    select == null && prefix == null && transform == null && factor == 1 && unit == null
   }
 
 }
