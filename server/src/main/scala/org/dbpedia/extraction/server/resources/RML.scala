@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.node.{ArrayNode, JsonNodeFactory, ObjectNo
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
 import org.dbpedia.extraction.destinations.{DeduplicatingDestination, WriterDestination}
-import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyPropertyException}
+import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyException, OntologyPropertyException}
 import org.dbpedia.extraction.mappings.rml.load.RMLInferencer
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
@@ -89,7 +89,7 @@ class RML {
       createExtractionResponse(writer.toString, "Extraction successful")
 
     } catch {
-      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : OntologyException => createBadRequestExceptionResponse(e)
       case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : Exception =>
         e.printStackTrace()
@@ -133,7 +133,7 @@ class RML {
       val response = createNewMappingResponse(mapping, msg)
       response
     } catch {
-      case e: OntologyClassException => createBadRequestExceptionResponse(e)
+      case e: OntologyException => createBadRequestExceptionResponse(e)
       case e: BadRequestException => createBadRequestExceptionResponse(e)
       case e: IllegalArgumentException => createBadRequestExceptionResponse(e)
       case e: Exception => {
@@ -265,7 +265,7 @@ class RML {
       Response.status(Response.Status.ACCEPTED).entity(responseNode.toString).`type`(MediaType.APPLICATION_JSON).build()
 
     } catch {
-      case e: OntologyClassException => createBadRequestExceptionResponse(e)
+      case e: OntologyException => createBadRequestExceptionResponse(e)
       case e: BadRequestException => createBadRequestExceptionResponse(e)
       case e: IllegalArgumentException => createBadRequestExceptionResponse(e)
       case e: Exception => {
@@ -409,7 +409,7 @@ class RML {
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
-      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : OntologyException => createBadRequestExceptionResponse(e)
       case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : Exception =>
         e.printStackTrace()
@@ -452,7 +452,7 @@ class RML {
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
-      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : OntologyException => createBadRequestExceptionResponse(e)
       case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : Exception => {
         e.printStackTrace()
@@ -487,7 +487,7 @@ class RML {
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
-      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : OntologyException => createBadRequestExceptionResponse(e)
       case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : Exception => {
         e.printStackTrace()
@@ -525,7 +525,7 @@ class RML {
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
-      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : OntologyException => createBadRequestExceptionResponse(e)
       case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : Exception => {
         e.printStackTrace()
@@ -559,7 +559,7 @@ class RML {
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
-      case e : OntologyPropertyException => createBadRequestExceptionResponse(e)
+      case e : OntologyException => createBadRequestExceptionResponse(e)
       case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : Exception => {
         e.printStackTrace()
@@ -597,7 +597,7 @@ class RML {
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
-      case e : OntologyClassException => createBadRequestExceptionResponse(e)
+      case e : OntologyException => createBadRequestExceptionResponse(e)
       case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : IllegalArgumentException => createBadRequestExceptionResponse(e)
       case e : Exception => {
@@ -635,7 +635,7 @@ class RML {
       Response.ok(response, MediaType.APPLICATION_JSON).build()
 
     } catch {
-      case e : OntologyClassException => createBadRequestExceptionResponse(e)
+      case e : OntologyException => createBadRequestExceptionResponse(e)
       case e : BadRequestException => createBadRequestExceptionResponse(e)
       case e : IllegalArgumentException => createBadRequestExceptionResponse(e)
       case e : Exception => {

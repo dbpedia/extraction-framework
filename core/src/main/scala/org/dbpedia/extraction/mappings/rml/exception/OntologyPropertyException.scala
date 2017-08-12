@@ -3,6 +3,6 @@ package org.dbpedia.extraction.mappings.rml.exception
 /**
   * Created by wmaroy on 25.07.17.
   */
-class OntologyPropertyException(msg: String) extends Exception(msg){
+class OntologyPropertyException(msg: String) extends OntologyException(msg){
 
 }

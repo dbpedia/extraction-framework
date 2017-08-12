@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.util
 
 import com.fasterxml.jackson.databind.JsonNode
-import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyPropertyException, TemplateFactoryBundleException}
+import org.dbpedia.extraction.mappings.rml.exception._
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, TemplateFactoryBundle}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty, RdfNamespace}
@@ -52,7 +52,11 @@ object JSONFactoryUtil {
 
     // unit is optional, so this can be null
     if(unitName != null) {
-      RMLOntologyUtil.loadOntologyDataType(unitName, context)
+      try {
+        RMLOntologyUtil.loadOntologyDataType(unitName, context)
+      } catch {
+        case e : Exception => throw new OntologyDataTypeException("Ontology datatype not found in current ontology: " + unitName)
+      }
     } else null
   }
 

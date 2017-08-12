@@ -36,7 +36,7 @@ class TemplateAPITest extends FlatSpec with Matchers {
         "simpleproperty")
         assert(false)
     } catch {
-      case e : Exception => assert(true)
+      case e : Exception => println(e.getMessage); assert(true)
     }
 
   }
