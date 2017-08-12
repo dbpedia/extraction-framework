@@ -34,7 +34,9 @@ import scala.xml.Elem
   * Created by wmaroy on 22.07.17.
   *
   * RML resource
-  * Contains RML Template API
+  * Contains RML API intendend for dbpedia/mappings-ui
+  *
+  * also on swaggerhub: https://app.swaggerhub.com/apis/wmaroy/RMLTemplates/1.0.0
   *
   */
 

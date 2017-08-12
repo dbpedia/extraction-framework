@@ -20,6 +20,14 @@ case class GeocoordinateTemplate(ontologyProperty: OntologyProperty,
 
 object GeocoordinateTemplate {
 
+  def apply(lat : LatitudeTemplate, lon : LongitudeTemplate, ontologyProperty: OntologyProperty = null): GeocoordinateTemplate = {
+    GeocoordinateTemplate(ontologyProperty,
+      lon.coordinates,
+      lat.latitude, lon.longitude,
+      lat.degrees, lat.minutes, lat.seconds, lat.direction,
+      lon.degrees, lon.minutes, lon.seconds, lon.direction)
+  }
+
   val NAME = "GeocoordinateTemplate"
 
 }
