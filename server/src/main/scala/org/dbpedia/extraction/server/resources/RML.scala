@@ -17,6 +17,8 @@ import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAsse
 import org.dbpedia.extraction.mappings.rml.model.factory.{JSONBundle, JSONTemplateFactory, RMLModelJSONFactory}
 import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
 import org.dbpedia.extraction.mappings.rml.model.template._
+import org.dbpedia.extraction.mappings.rml.model.template.analyzing.StdTemplatesAnalyzer
+import org.dbpedia.extraction.mappings.rml.model.template.json.std.StdTemplatesJsonConverter
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.mappings.rml.util.JSONFactoryUtil
 import org.dbpedia.extraction.server.Server
@@ -375,6 +377,27 @@ class RML {
   @Produces(Array(MediaType.APPLICATION_JSON))
   def getTemplates(input : String) = {
 
+    try {
+
+      // create the structures
+      val mappingNode = getMappingNode(input)
+      val mapping: RMLModel = getMapping(mappingNode)
+      val analyzer = new StdTemplatesAnalyzer(Server.instance.extractor.ontology())
+      val templates: Set[Template] = analyzer.analyze(mapping.triplesMap)
+      val converter = new StdTemplatesJsonConverter
+      val jsonTemplates = converter.convertAll(templates)
+
+      Response.status(Response.Status.ACCEPTED).entity(jsonTemplates.toString).`type`(MediaType.APPLICATION_JSON).build()
+
+    } catch {
+      case e : OntologyException => createBadRequestExceptionResponse(e)
+      case e : BadRequestException => createBadRequestExceptionResponse(e)
+      case e : Exception =>
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+    }
+
+
   }
 
   /**
@@ -717,6 +740,7 @@ class RML {
 
   /**
     * Retrieves the $. node of JSON input
+    *
     * @param input
     * @return
     */
