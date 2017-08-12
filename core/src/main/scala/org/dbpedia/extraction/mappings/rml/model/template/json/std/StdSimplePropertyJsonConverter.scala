@@ -35,7 +35,7 @@ class StdSimplePropertyJsonConverter extends TemplateJsonConverter {
     val unit = if(spTemplate.unit != null) {
       spTemplate.unit.uri
     } else null
-    parameters.put("unit", spTemplate.unit.uri)
+    parameters.put("unit", unit)
 
     new StdJsonTemplate(node)
 

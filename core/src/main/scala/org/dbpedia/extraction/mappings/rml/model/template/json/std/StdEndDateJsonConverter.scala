@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.model.template.json.std
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
-import org.dbpedia.extraction.mappings.rml.model.template.{StartDateTemplate, Template}
+import org.dbpedia.extraction.mappings.rml.model.template.{EndDateTemplate, StartDateTemplate, Template}
 import org.dbpedia.extraction.mappings.rml.model.template.json.{JsonTemplate, TemplateJsonConverter}
 
 /**
@@ -11,7 +11,7 @@ class StdEndDateJsonConverter extends TemplateJsonConverter {
 
   override def apply(template: Template): JsonTemplate = {
 
-    val edTemplate = template.asInstanceOf[StartDateTemplate]
+    val edTemplate = template.asInstanceOf[EndDateTemplate]
 
     val node = JsonNodeFactory.instance.objectNode()
     node.put("name", template.name)
