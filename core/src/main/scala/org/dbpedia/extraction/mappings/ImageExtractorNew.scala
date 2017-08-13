@@ -31,7 +31,6 @@ extends PageNodeExtractor
   private val language = context.language
   require(ImageExtractorConfig.supportedLanguages.contains(wikiCode), "ImageExtractor's supported languages: "+ImageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+wikiCode)
 
-
   private val fileNamespaceIdentifier = Namespace.File.name(language)
 
   private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
@@ -56,7 +55,7 @@ extends PageNodeExtractor
     var quads = new ArrayBuffer[Quad]()
 
     imageSearch(node.children, 0).foreach(_ match {
-      case Some((imageFileName, sourceNode)) => {
+      case Some((imageFileName, sourceNode)) =>
         val lang = language
         val url = ExtractorUtils.getFileURL(imageFileName, lang)
         val thumbnailUrl = ExtractorUtils.getThumbnailURL(imageFileName, lang)
@@ -71,7 +70,6 @@ extends PageNodeExtractor
 
         quads += new Quad(language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
         quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
-      }
       case None =>
     })
     quads
@@ -89,25 +87,22 @@ extends PageNodeExtractor
     // Match every node for TextNode, InternalLinkNode & InterWikiLinkNode
     // for other types of node => recursive search for these types in their children
     nodes.foreach(node => node match {
-      case TextNode(_,_) => {
+      case TextNode(_,_) =>
         ImageExtractorConfig.ImageLinkRegex.findAllIn(node.toWikiText).foreach(file => {
           // remove unwanted leftovers from the wikiText
           images += processImageLink(file.split("[:=\\|]").last, node)
         })
-      }
-      case InternalLinkNode(_,_,_,_) => {
+      case InternalLinkNode(_,_,_,_) =>
         ImageExtractorConfig.ImageLinkRegex.findAllIn(node.toWikiText).foreach(file => {
           images += processImageLink(file.split("[:=\\|]").last, node)
         })
-      }
-      case InterWikiLinkNode(_,_,_,_) => {
+      case InterWikiLinkNode(_,_,_,_) =>
         ImageExtractorConfig.ImageLinkRegex.findAllIn(node.toWikiText).foreach(file => {
           images += processImageLink(file.split("[:=\\|]").last, node)
         })
-      }
       case _ => if(depth < recursionDepth) images ++= imageSearch(node.children, depth + 1)
     })
-    images.toSeq
+    images
   }
 
   /**
@@ -119,7 +114,7 @@ extends PageNodeExtractor
   private def processImageLink(fileName: String, node: Node) : Option[(String, Node)] = {
     // Encoding
     var encodedFileName = fileName
-    if (encodedLinkRegex.findFirstIn(fileName) == None)
+    if (encodedLinkRegex.findFirstIn(fileName).isEmpty)
       encodedFileName = WikiUtil.wikiEncode(fileName)
 
     // Copyright Check => Exclude Non-Free Images
@@ -128,58 +123,3 @@ extends PageNodeExtractor
     }
 
 }
-
-/* In between rework version of search image method. Leftover for reference if something goes wrong.
-   Might be deleted if everything works
-
-
-  private def searchImage(nodes: List[Node], sections: Int): ArrayBuffer[Option[(String, Node)]] = {
-    //nodes.foreach(node => ImageExtractorConfig.ImageLinkRegex.findAllIn(node.toPlainText).foreach(println))
-    var files = ArrayBuffer[Option[(String, Node)]]()
-    var currentSections = sections
-    imageSearch(nodes).foreach(println)
-    nodes.foreach(node =>
-      node match {
-//        case SectionNode(_, _, _, _) => { //Why was this needed?
-//          if (currentSections > 1) files += None
-//          currentSections += 1
-//        }
-        case TemplateNode(_, propertyNodes, _, _) => {
-          // extract text from the node structure and return the encoded file names,
-          // for the files that we have the rights to use.
-          propertyNodes.foreach(_.children.foreach(contentNode => {
-            contentNode match {
-              case TextNode(text, _) => {
-                ImageExtractorConfig.ImageRegex.findAllIn(text).foreach(fileName => {
-                  // encode if not already encoded
-                  var encodedFileName = fileName
-                  if (encodedLinkRegex.findFirstIn(fileName) == None)
-                    encodedFileName = WikiUtil.wikiEncode(fileName)
-                  files += Some((encodedFileName, contentNode))
-                  //println(encodedFileName)
-                })
-              }
-              case InternalLinkNode(destination, _, _, _) => //ImageExtractorConfig.ImageLinkRegex.findAllIn(destination.encoded).foreach(println)
-              case _ => //println("Unreviewed Content Node: " + nodeTypeCheck(contentNode))
-                contentNode.children.foreach(_ match {
-                  case PropertyNode(key, c, currentSections) => //searchImage(c, currentSections).foreach(a => files += a)
-                  case TextNode(text, _) => //ImageExtractorConfig.ImageLinkRegex.findAllIn(text).foreach(println)
-                })
-            }
-          }))
-        }
-        case InternalLinkNode(destination, _, _, _) if (destination.namespace == Namespace.File) => {
-          ImageExtractorConfig.ImageLinkRegex.findFirstIn(destination.encoded).foreach(fileName =>
-            //if(checkImageRights(fileName))
-            files += Some((fileName, node)))
-        }
-        case TextNode(text, _) => ImageExtractorConfig.ImageLinkRegex.findAllIn(text).foreach(println) // Wichtig!
-        case ExternalLinkNode(destination, _, _, _) =>
-        case InterWikiLinkNode(destination, _, _, _) => ImageExtractorConfig.ImageLinkRegex.findAllIn(destination.encoded).foreach(println)
-        case _ =>
-      })
-    files
-  }
-
-* */
-

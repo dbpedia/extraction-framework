@@ -213,7 +213,10 @@ class ConfigLoader(config: Config)
     {
       if(config.copyrightCheck) {
         // Image Extractor pre-processing: Extract Free & Non-Free Images prior to the main Extraction
-        val zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
+        var zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractorNew"))
+        if (zw.isEmpty) {
+          zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
+        }
         val imageExtractorLanguages = zw match {
           case filtered if filtered.nonEmpty => filtered.keySet.toList ++ List(Language.Commons) //else: add Commons (see ImageExtractorScala for why)
           case _ => List[Language]() //no ImageExtractors selected
