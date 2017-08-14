@@ -57,6 +57,9 @@ class RML {
 
     try {
 
+      // check validity of input
+      // TODO @wmaroy
+
       // get nodes
       val mappingNode = getMappingNode(input)
       val parameterNode = getParameterNode(input)
@@ -72,10 +75,11 @@ class RML {
       val rmlMapping = RMLInferencer.loadDump(language, dump, name)._2
 
       // update the in-memory mappings, this does not effect the real state of the mappings
+      // this happens synchronously, no actor is used
       Server.instance.extractor.updateRMLMapping(name, rmlMapping, language)
 
+      // prepare writer and formatter
       val writer = new StringWriter
-
       val formatter = format match
       {
         case "turtle-triples" => new TerseFormatter(false, true)
@@ -86,8 +90,11 @@ class RML {
         case _ => TriX.writeHeader(writer, 2)
       }
 
+      // prepare the destination and the source
       val source =  WikiSource.fromTitles(List(WikiTitle.parse(wikiTitle, language)), new URL(language.apiUri), language)
       val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
+
+      // extract!
       Server.instance.extractor.extract(source, destination, language, useCustomExtraction = true)
 
       createExtractionResponse(writer.toString, "Extraction successful")
