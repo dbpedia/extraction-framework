@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.model.template.analyzing
 
-import org.dbpedia.extraction.mappings.rml.model.resource.{Function, RMLConditionalPredicateObjectMap, RMLFunctionTermMap, RMLPredicateObjectMap}
+import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template._
 import org.dbpedia.extraction.mappings.rml.model.voc.Property
 import org.dbpedia.extraction.mappings.rml.util.{ContextCreator, RMLOntologyUtil}
@@ -15,6 +15,7 @@ class ConditionalTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateAn
   def apply(pom: RMLPredicateObjectMap): Template ={
 
     if(!pom.isInstanceOf[RMLConditionalPredicateObjectMap]) {
+      println(pom.rrObject)
       throw new IllegalArgumentException("Predicate Object Map is not conditional.")
     }
 
@@ -27,7 +28,9 @@ class ConditionalTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateAn
     val ontologyClass = getOntologyClass(pom)
 
     val analyzer = new StdTemplatesAnalyzer(ontology)
-    val templates = Seq(analyzer.analyze(condPom))
+
+    // if this is a classmapping do not search for templates
+    val templates = if(ontologyClass != null) Seq() else Seq(analyzer.analyze(condPom))
 
     val fallbackTemplate = retrieveFallbackTemplateFromFallbackPoms(fallbacks)
 
@@ -42,15 +45,18 @@ class ConditionalTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateAn
   def getCondition(function : Function) = {
 
     val conditionName = function.name
-    val conditionValueParam = function.references(RdfNamespace.DBF.namespace + conditionName + "/valueParameter")
-    val conditionPropertyParam = function.references(RdfNamespace.DBF.namespace + conditionName + "/propertyParameter")
+    val conditionValueParam = function.constants.getOrElse(conditionName + "/valueParameter", null)
+    val conditionPropertyParam = function.references.getOrElse(conditionName + "/propertyParameter", null)
 
-    val condition = conditionName match {
+    val prefix = RdfNamespace.DBF.namespace
+
+    val condition = conditionName.replaceFirst(prefix, "") match {
       case Condition.ISSET => IsSetCondition(conditionPropertyParam)
       case Condition.CONTAINS => ContainsCondition(conditionPropertyParam, conditionValueParam)
       case Condition.EQUALS => ContainsCondition(conditionPropertyParam, conditionValueParam)
       case Condition.OTHERWISE => OtherwiseCondition()
     }
+
 
     condition
   }

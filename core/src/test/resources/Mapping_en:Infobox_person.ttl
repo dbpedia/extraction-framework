@@ -66,6 +66,7 @@
 			       <SimplePropertyMapping/4> ,
 			       <SimplePropertyMapping/0> ,
 			       <EndDateMapping/0> ,
+			       <ConditionalMapping/0/Condition/0/ClassMapping>,
 			       <SimplePropertyMapping/38> ,
 			       <SimplePropertyMapping/46> ,
 			       <SimplePropertyMapping/26> ,
@@ -1559,6 +1560,255 @@ rml:reference "long_s" .
 # Conditional Mappings
 ######################
 
+### Conditional Mapping
+###################################
+<ConditionalMapping/0/Condition/0/ClassMapping>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <ConditionalMapping/0/Condition/0/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/0/Condition/1/ClassMapping> ;
+        rr:object            dbo:Band ;
+        rr:predicate         rdf:type .
+
+
+
+### Function Term Map
+<ConditionalMapping/0/Condition/0/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <ConditionalMapping/0/Condition/0/FTM/FV> .
+
+### Function Execution Mapping
+<ConditionalMapping/0/Condition/0/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/IsSet> ,
+			                   <ConditionalMapping/0/Condition/0/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<ConditionalMapping/0/Condition/0/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <ConditionalMapping/0/Condition/0/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+
+### References
+<ConditionalMapping/0/Condition/0/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "currentmembers" .
+
+### Conditional Mapping
+###################################
+<ConditionalMapping/0/Condition/1/ClassMapping>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <ConditionalMapping/0/Condition/1/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/0/Condition/2/ClassMapping> ;
+        rr:object            dbo:Band ;
+        rr:predicate         rdf:type .
+
+
+
+### Function Term Map
+<ConditionalMapping/0/Condition/1/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <ConditionalMapping/0/Condition/1/FTM/FV> .
+
+### Function Execution Mapping
+<ConditionalMapping/0/Condition/1/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/IsSet> ,
+			       <ConditionalMapping/0/Condition/1/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<ConditionalMapping/0/Condition/1/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <ConditionalMapping/0/Condition/1/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+
+### References
+<ConditionalMapping/0/Condition/1/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "currentmembers" .
+
+
+### Conditional Mapping
+###################################
+<ConditionalMapping/0/Condition/2/ClassMapping>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <ConditionalMapping/0/Condition/2/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/0/Condition/3/ClassMapping> ;
+        rr:object            dbo:Actor ;
+        rr:predicate         rdf:type .
+
+
+
+### Function Term Map
+<ConditionalMapping/0/Condition/2/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <ConditionalMapping/0/Condition/2/FTM/FV> .
+
+### Function Execution Mapping
+<ConditionalMapping/0/Condition/2/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/IsSet> ,
+			       <ConditionalMapping/0/Condition/2/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<ConditionalMapping/0/Condition/2/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <ConditionalMapping/0/Condition/2/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+
+### References
+<ConditionalMapping/0/Condition/2/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "currentmembers" .
+
+
+### Conditional Mapping
+###################################
+<ConditionalMapping/0/Condition/3/ClassMapping>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <ConditionalMapping/0/Condition/3/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/0/Condition/4/ClassMapping> ;
+        rr:object            dbo:Actor ;
+        rr:predicate         rdf:type .
+
+
+
+### Function Term Map
+<ConditionalMapping/0/Condition/3/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <ConditionalMapping/0/Condition/3/FTM/FV> .
+
+### Function Execution Mapping
+<ConditionalMapping/0/Condition/3/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/IsSet> ,
+			       <ConditionalMapping/0/Condition/3/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<ConditionalMapping/0/Condition/3/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <ConditionalMapping/0/Condition/3/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+
+### References
+<ConditionalMapping/0/Condition/3/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "currentmembers" .
+
+
+### Conditional Mapping
+###################################
+<ConditionalMapping/0/Condition/4/ClassMapping>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <ConditionalMapping/0/Condition/4/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/0/Condition/5/ClassMapping> ;
+        rr:object            dbo:MusicalArtist ;
+        rr:predicate         rdf:type .
+
+
+
+### Function Term Map
+<ConditionalMapping/0/Condition/4/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <ConditionalMapping/0/Condition/4/FTM/FV> .
+
+### Function Execution Mapping
+<ConditionalMapping/0/Condition/4/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/IsSet> ,
+			       <ConditionalMapping/0/Condition/4/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<ConditionalMapping/0/Condition/4/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <ConditionalMapping/0/Condition/4/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+
+### References
+<ConditionalMapping/0/Condition/4/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "currentmembers" .
+
+
+### Conditional Mapping
+###################################
+<ConditionalMapping/0/Condition/5/ClassMapping>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <ConditionalMapping/0/Condition/5/FTM> ;
+        crml:fallbackMap     <ConditionalMapping/0/Condition/6/ClassMapping> ;
+        rr:object            dbo:MusicalArtist ;
+        rr:predicate         rdf:type .
+
+
+
+### Function Term Map
+<ConditionalMapping/0/Condition/5/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <ConditionalMapping/0/Condition/5/FTM/FV> .
+
+### Function Execution Mapping
+<ConditionalMapping/0/Condition/5/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/IsSet> ,
+			       <ConditionalMapping/0/Condition/5/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<ConditionalMapping/0/Condition/5/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <ConditionalMapping/0/Condition/5/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+
+### References
+<ConditionalMapping/0/Condition/5/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "currentmembers" .
+
+
+### Conditional Mapping
+###################################
+<ConditionalMapping/0/Condition/6/ClassMapping>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <ConditionalMapping/0/Condition/6/FTM> ;
+        rr:object            dbo:Artist ;
+        rr:predicate         rdf:type .
+
+
+
+### Function Term Map
+<ConditionalMapping/0/Condition/6/FTM>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <ConditionalMapping/0/Condition/6/FTM/FV> .
+
+### Function Execution Mapping
+<ConditionalMapping/0/Condition/6/FTM/FV>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <LogicalSource> ;
+        rr:predicateObjectMap  <Function/IsSet> ,
+			       <ConditionalMapping/0/Condition/6/FTM/FV/PropertyParameterPOM> ;
+        rr:subjectMap          <SubjectMap/Function> .
+
+### Parameters
+<ConditionalMapping/0/Condition/6/FTM/FV/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <ConditionalMapping/0/Condition/6/FTM/FV/PropertyParameterPOM/OM> ;
+        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+
+### References
+<ConditionalMapping/0/Condition/6/FTM/FV/PropertyParameterPOM/OM>
+        a              rr:ObjectMap ;
+        rml:reference  "currentmembers" .
+
 
 
 ############
@@ -1585,6 +1835,10 @@ rml:reference "long_s" .
         a             rr:PredicateObjectMap ;
         rr:object     dbf:lonFunction ;
         rr:predicate fno:executes .
+
+<Function/IsSet>  a   rr:PredicateObjectMap ;
+        rr:object     dbf:IsSet ;
+        rr:predicate  fno:executes .
 
 
 ### Functions SubjectMap

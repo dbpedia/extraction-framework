@@ -65,7 +65,8 @@ class RMLConditionalPredicateObjectMap(resource: Resource) extends RMLPredicateO
     val iterator = resource.listProperties(createProperty(Property.FALLBACK_MAP))
     while(iterator.hasNext) {
       val stmnt = iterator.nextStatement()
-      val pom = RMLPredicateObjectMap(stmnt.getObject.asResource())
+      // if the pom is actually not a conditional pom, a normal pom will be returned
+      val pom = RMLConditionalPredicateObjectMap(stmnt.getObject.asResource())
       fallbacks = fallbacks :+ pom
     }
 
@@ -83,6 +84,7 @@ object RMLConditionalPredicateObjectMap {
     * @return
     */
   def apply(resource: Resource): RMLPredicateObjectMap = {
+    val properties = resource.listProperties().toList
     if(resource.hasProperty(resource.getModel.createProperty(Property.EQUAL_CONDITION))) {
       new RMLConditionalPredicateObjectMap(resource)
     } else {

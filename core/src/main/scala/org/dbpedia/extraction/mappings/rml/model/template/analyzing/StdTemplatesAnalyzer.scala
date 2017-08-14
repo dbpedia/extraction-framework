@@ -44,7 +44,8 @@ class StdTemplatesAnalyzer(ontology: Ontology) extends TemplatesAnalyzer {
       case s : String if uri.contains(RMLUri.LONGITUDEMAPPING) => analyzeTemplate(new LongitudeTemplateAnalyzer(ontology), pom)
 
       case s : String if uri.contains(RMLUri.INTERMEDIATEMAPPING) => analyzeTemplate(new IntermediateTemplateAnalyzer(ontology), pom)
-      case s : String if uri.contains(RMLUri.CONDITIONALMAPPING) => null //TODO
+      case s : String if uri.contains(RMLUri.CONDITIONALMAPPING) => analyzeTemplate(new ConditionalTemplateAnalyzer(ontology), pom)
+
       case _ => logger.info(uri + " contains no known/supported template.") ; null
 
     }

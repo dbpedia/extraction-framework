@@ -27,10 +27,10 @@ object Property {
 
   val EXECUTES = RdfNamespace.FNO.namespace + "executes"
 
-  val EQUAL_CONDITION = RdfNamespace.CRML + "equalCondition"
+  val EQUAL_CONDITION = RdfNamespace.CRML.namespace + "equalCondition"
 
-  val FALLBACK_MAP = RdfNamespace.CRML + "fallbackMap"
+  val FALLBACK_MAP = RdfNamespace.CRML.namespace + "fallbackMap"
 
-  val TYPE = RdfNamespace.RDF +"type"
+  val TYPE = RdfNamespace.RDF.namespace +"type"
 
 }
