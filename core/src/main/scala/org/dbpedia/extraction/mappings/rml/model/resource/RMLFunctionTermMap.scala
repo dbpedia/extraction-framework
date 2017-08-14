@@ -20,14 +20,18 @@ class RMLFunctionTermMap(resource: Resource) extends RMLObjectMap(resource) {
 
   def getFunction : Function = {
 
-    // retrieve all objects and tuple them by reference and constant
-    val objects = functionValue.predicateObjectMaps.map(pom => {
-      if(pom.hasReferenceObjectMap) {
-        ("references", pom.rrPredicate -> pom.objectMap.reference.toString())
-      } else {
-        ("constants", pom.rrPredicate -> pom.rrObject)
-      }
-    })
+    try {
+      // retrieve all objects and tuple them by reference and constant
+      val objects = functionValue.predicateObjectMaps.map(pom => {
+        if (pom.hasReferenceObjectMap) {
+          ("references", pom.rrPredicate -> pom.objectMap.reference.toString())
+        } else {
+          ("constants", pom.rrPredicate -> pom.rrObject)
+        }
+      })
+    } catch {
+      case e: Exception => throw new IllegalArgumentException("Can't extract function, maybe the mapping is missing the function definition.")
+    }
 
     // group the tuples by ._1 and convert the resulting ._2 list to a map
     val grouped = objects.groupBy(_._1).mapValues(_.map(_._2))

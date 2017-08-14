@@ -41,7 +41,7 @@ class ConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, 
       // Creates condition FTM and update the counter
       ////////////////////////////////////////////////////////////////////////////
 
-      val condition = conditionalTemplate.condition
+      val condition = template.condition
       val tuple = if(condition != null && !condition.isInstanceOf[OtherwiseCondition]) {
         createEqualCondition(condition, conditionalBaseUri, counter)
       } else {

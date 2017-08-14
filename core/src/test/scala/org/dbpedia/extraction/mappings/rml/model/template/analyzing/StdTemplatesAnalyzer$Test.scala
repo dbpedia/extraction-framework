@@ -19,7 +19,8 @@ class StdTemplatesAnalyzer$Test extends FunSuite {
     val analyzer : TemplatesAnalyzer = new StdTemplatesAnalyzer(ontology)
     val templates = analyzer.analyze(tm)
 
-    templates.foreach(template => println(template))
+    templates.foreach(template => println(template))  // check the templates manually
+                                                      // this test only ensures that no errors are thrown
 
   }
 

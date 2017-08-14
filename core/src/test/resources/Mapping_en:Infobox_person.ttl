@@ -1581,7 +1581,7 @@ rml:reference "long_s" .
         a                      rr:TriplesMap ;
         rml:logicalSource      <LogicalSource> ;
         rr:predicateObjectMap  <Function/IsSet> ,
-			                   <ConditionalMapping/0/Condition/0/FTM/FV/PropertyParameterPOM> ;
+			       <ConditionalMapping/0/Condition/0/FTM/FV/PropertyParameterPOM> ;
         rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
@@ -1628,7 +1628,7 @@ rml:reference "long_s" .
 ### References
 <ConditionalMapping/0/Condition/1/FTM/FV/PropertyParameterPOM/OM>
         a              rr:ObjectMap ;
-        rml:reference  "currentmembers" .
+        rml:reference  "pastmembers" .
 
 
 ### Conditional Mapping
@@ -1651,20 +1651,26 @@ rml:reference "long_s" .
 <ConditionalMapping/0/Condition/2/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <LogicalSource> ;
-        rr:predicateObjectMap  <Function/IsSet> ,
-			       <ConditionalMapping/0/Condition/2/FTM/FV/PropertyParameterPOM> ;
+        rr:predicateObjectMap  <Function/Contains> ,
+			       <ConditionalMapping/0/Condition/2/FTM/FV/PropertyParameterPOM> ,
+			       <ConditionalMapping/0/Condition/2/FTM/FV/ValueParameterPOM> ;
         rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
 <ConditionalMapping/0/Condition/2/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <ConditionalMapping/0/Condition/2/FTM/FV/PropertyParameterPOM/OM> ;
-        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+        rr:predicate  <http://dbpedia.org/function/Contains/propertyParameter> .
+
+<ConditionalMapping/0/Condition/2/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "actor" ;
+        rr:predicate  <http://dbpedia.org/function/Contains/valueParameter> .
 
 ### References
 <ConditionalMapping/0/Condition/2/FTM/FV/PropertyParameterPOM/OM>
         a              rr:ObjectMap ;
-        rml:reference  "currentmembers" .
+        rml:reference  "occupation" .
 
 
 ### Conditional Mapping
@@ -1687,20 +1693,26 @@ rml:reference "long_s" .
 <ConditionalMapping/0/Condition/3/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <LogicalSource> ;
-        rr:predicateObjectMap  <Function/IsSet> ,
-			       <ConditionalMapping/0/Condition/3/FTM/FV/PropertyParameterPOM> ;
+        rr:predicateObjectMap  <Function/Contains> ,
+			       <ConditionalMapping/0/Condition/3/FTM/FV/PropertyParameterPOM> ,
+			       <ConditionalMapping/0/Condition/3/FTM/FV/ValueParameterPOM> ;
         rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
+<ConditionalMapping/0/Condition/3/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "actress" ;
+        rr:predicate  <http://dbpedia.org/function/Contains/valueParameter> .
+
 <ConditionalMapping/0/Condition/3/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <ConditionalMapping/0/Condition/3/FTM/FV/PropertyParameterPOM/OM> ;
-        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+        rr:predicate  <http://dbpedia.org/function/Contains/propertyParameter> .
 
 ### References
 <ConditionalMapping/0/Condition/3/FTM/FV/PropertyParameterPOM/OM>
         a              rr:ObjectMap ;
-        rml:reference  "currentmembers" .
+        rml:reference  "occupation" .
 
 
 ### Conditional Mapping
@@ -1723,20 +1735,26 @@ rml:reference "long_s" .
 <ConditionalMapping/0/Condition/4/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <LogicalSource> ;
-        rr:predicateObjectMap  <Function/IsSet> ,
-			       <ConditionalMapping/0/Condition/4/FTM/FV/PropertyParameterPOM> ;
+        rr:predicateObjectMap  <Function/Contains> ,
+			       <ConditionalMapping/0/Condition/4/FTM/FV/PropertyParameterPOM> ,
+			       <ConditionalMapping/0/Condition/4/FTM/FV/ValueParameterPOM> ;
         rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
 <ConditionalMapping/0/Condition/4/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <ConditionalMapping/0/Condition/4/FTM/FV/PropertyParameterPOM/OM> ;
-        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+        rr:predicate  <http://dbpedia.org/function/Contains/propertyParameter> .
+
+<ConditionalMapping/0/Condition/4/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "singer" ;
+        rr:predicate  <http://dbpedia.org/function/Contains/valueParameter> .
 
 ### References
 <ConditionalMapping/0/Condition/4/FTM/FV/PropertyParameterPOM/OM>
         a              rr:ObjectMap ;
-        rml:reference  "currentmembers" .
+        rml:reference  "occupation" .
 
 
 ### Conditional Mapping
@@ -1759,56 +1777,34 @@ rml:reference "long_s" .
 <ConditionalMapping/0/Condition/5/FTM/FV>
         a                      rr:TriplesMap ;
         rml:logicalSource      <LogicalSource> ;
-        rr:predicateObjectMap  <Function/IsSet> ,
-			       <ConditionalMapping/0/Condition/5/FTM/FV/PropertyParameterPOM> ;
+        rr:predicateObjectMap  <Function/Contains> ,
+			       <ConditionalMapping/0/Condition/5/FTM/FV/PropertyParameterPOM> ,
+			       <ConditionalMapping/0/Condition/5/FTM/FV/ValueParameterPOM> ;
         rr:subjectMap          <SubjectMap/Function> .
 
 ### Parameters
+<ConditionalMapping/0/Condition/5/FTM/FV/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:object     "songwriter" ;
+        rr:predicate  <http://dbpedia.org/function/Contains/valueParameter> .
+
 <ConditionalMapping/0/Condition/5/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <ConditionalMapping/0/Condition/5/FTM/FV/PropertyParameterPOM/OM> ;
-        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
+        rr:predicate  <http://dbpedia.org/function/Contains/propertyParameter> .
 
 ### References
 <ConditionalMapping/0/Condition/5/FTM/FV/PropertyParameterPOM/OM>
         a              rr:ObjectMap ;
-        rml:reference  "currentmembers" .
+        rml:reference  "occupation" .
 
 
 ### Conditional Mapping
 ###################################
 <ConditionalMapping/0/Condition/6/ClassMapping>
-        a                    rr:PredicateObjectMap ;
-        crml:equalCondition  <ConditionalMapping/0/Condition/6/FTM> ;
-        rr:object            dbo:Artist ;
-        rr:predicate         rdf:type .
-
-
-
-### Function Term Map
-<ConditionalMapping/0/Condition/6/FTM>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <ConditionalMapping/0/Condition/6/FTM/FV> .
-
-### Function Execution Mapping
-<ConditionalMapping/0/Condition/6/FTM/FV>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <LogicalSource> ;
-        rr:predicateObjectMap  <Function/IsSet> ,
-			       <ConditionalMapping/0/Condition/6/FTM/FV/PropertyParameterPOM> ;
-        rr:subjectMap          <SubjectMap/Function> .
-
-### Parameters
-<ConditionalMapping/0/Condition/6/FTM/FV/PropertyParameterPOM>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <ConditionalMapping/0/Condition/6/FTM/FV/PropertyParameterPOM/OM> ;
-        rr:predicate  <http://dbpedia.org/function/IsSet/propertyParameter> .
-
-### References
-<ConditionalMapping/0/Condition/6/FTM/FV/PropertyParameterPOM/OM>
-        a              rr:ObjectMap ;
-        rml:reference  "currentmembers" .
-
+        rr:object     dbo:Artist ;
+        rr:predicate  rdf:type .
 
 
 ############
@@ -1838,6 +1834,11 @@ rml:reference "long_s" .
 
 <Function/IsSet>  a   rr:PredicateObjectMap ;
         rr:object     dbf:IsSet ;
+        rr:predicate  fno:executes .
+
+
+<Function/Contains>  a  rr:PredicateObjectMap ;
+        rr:object     dbf:Contains ;
         rr:predicate  fno:executes .
 
 
