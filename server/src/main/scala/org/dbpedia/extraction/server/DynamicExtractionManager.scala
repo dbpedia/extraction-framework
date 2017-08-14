@@ -78,7 +78,7 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
 
     // TODO: don't start a new actor for each call, start one actor when this object is loaded
     // and send messages to it.
-    private def asynchronous(name: String)(body: => Unit) = Actor actor synchronized { 
+    private def asynchronous(name: String)(body: => Unit) = Actor actor synchronized {
       val millis = System.currentTimeMillis
       body
       println(name+": "+(System.currentTimeMillis - millis)+" millis")
@@ -131,7 +131,7 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
         update(language, mappings)
     }
 
-    def updateRMLMapping(name: String, rmlMapping: RMLMapping, language: Language) = asynchronous("updateRMLMapping") {
+    def updateRMLMapping(name: String, rmlMapping: RMLMapping, language: Language) : Unit = {
         val languageMapping = _rmlMappings(language).updated(name, rmlMapping)
         _rmlMappings = _rmlMappings.updated(language, languageMapping)
         _mappingTestExtractors = _mappingTestExtractors.updated(language, loadExtractors(language, mappingTestExtractors))

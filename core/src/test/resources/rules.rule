@@ -129,7 +129,7 @@
      uriConcat(?fv,'/languageParam', ?l)->
                                                     (?fv rr:predicateObjectMap ?n),
                                                     (?n rdf:type rr:PredicateObjectMap),
-                                                    (?n rr:predicate dbf:startDateOntologyPropertyParameter),
+                                                    (?n rr:predicate dbf:startDateOntologyParameter),
                                                     (?n rr:object ?pred),
 
                                                     (?fv rr:predicateObjectMap ?l),
@@ -149,7 +149,7 @@
      uriConcat(?fv,'/languageParam', ?l)->
                                                     (?fv rr:predicateObjectMap ?n),
                                                     (?n rdf:type rr:PredicateObjectMap),
-                                                    (?n rr:predicate dbf:endDateOntologyPropertyParameter),
+                                                    (?n rr:predicate dbf:endDateOntologyParameter),
                                                     (?n rr:object ?pred),
 
                                                     (?fv rr:predicateObjectMap ?l),
@@ -158,40 +158,3 @@
                                                     (?l rr:object "{LANG}")]
 
 
-# adds ontology property parameter to latFunction
-[r6: (?p rdf:type rr:PredicateObjectMap),
-     (?p rr:objectMap ?o ),
-     (?p rr:predicate ?pred),
-     (?o fnml:functionValue ?fv),
-     (?fv rr:predicateObjectMap ?p2),
-     (?p2 rr:object dbf:latFunction),
-     uriConcat(?fv,'/ontologyPropertyParam', ?n),
-     uriConcat(?fv,'/languageParam', ?l)->
-                                                    (?fv rr:predicateObjectMap ?n),
-                                                    (?n rdf:type rr:PredicateObjectMap),
-                                                    (?n rr:predicate dbf:endDateOntologyPropertyParameter),
-                                                    (?n rr:object ?pred),
-
-                                                    (?fv rr:predicateObjectMap ?l),
-                                                    (?l rdf:type rr:PredicateObjectMap),
-                                                    (?l rr:predicate dbf:languageParameter),
-                                                    (?l rr:object "{LANG}")]
-
-# adds ontology property parameter to lonFunction
-[r7: (?p rdf:type rr:PredicateObjectMap),
-     (?p rr:objectMap ?o ),
-     (?p rr:predicate ?pred),
-     (?o fnml:functionValue ?fv),
-     (?fv rr:predicateObjectMap ?p2),
-     (?p2 rr:object dbf:lonDateFunction),
-     uriConcat(?fv,'/ontologyPropertyParam', ?n),
-     uriConcat(?fv,'/languageParam', ?l)->
-                                                    (?fv rr:predicateObjectMap ?n),
-                                                    (?n rdf:type rr:PredicateObjectMap),
-                                                    (?n rr:predicate dbf:endDateOntologyPropertyParameter),
-                                                    (?n rr:object ?pred),
-
-                                                    (?fv rr:predicateObjectMap ?l),
-                                                    (?l rdf:type rr:PredicateObjectMap),
-                                                    (?l rr:predicate dbf:languageParameter),
-                                                    (?l rr:object "{LANG}")]

@@ -14,6 +14,7 @@ import org.dbpedia.extraction.sources.{Source, WikiPage, WikiSource, XMLSource}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
+import scala.actors.Actor
 import scala.xml.Elem
 
 /**

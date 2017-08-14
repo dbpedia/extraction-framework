@@ -10,6 +10,8 @@ import java.io.File
 import be.ugent.mmlab.rml.model.RMLMapping
 import org.dbpedia.extraction.server.resources.rml.stats.RMLStatisticsHolder
 
+import scala.actors.Actor
+
 /**
  * Lazily loads extraction context parameters when they are required, not before.
  * Is NOT able to update the ontology or the mappings.
@@ -78,7 +80,7 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
 
     override def rmlMappings(language: Language): Map[String, RMLMapping] = ???
 
-    override def updateRMLMapping(name: String, rmlMapping: RMLMapping, language: Language): Unit = ???
+    override def updateRMLMapping(name: String, rmlMapping: RMLMapping, language: Language) = ???
 
     override def rmlStatistics: RMLStatisticsHolder = ???
 
