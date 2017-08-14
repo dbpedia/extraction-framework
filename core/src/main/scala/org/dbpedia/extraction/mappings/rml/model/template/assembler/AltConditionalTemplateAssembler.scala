@@ -1,12 +1,10 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
-import org.dbpedia.extraction.mappings.{ConditionMapping, TemplateMapping}
 import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
-import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template._
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
-import org.dbpedia.extraction.mappings.rml.translate.mapper.{MappingState, RMLModelMapper}
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
@@ -15,8 +13,10 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   * This is a very complicated class due to the workflow. Firstly the workflow of how conditional mappings are generated
   * must be understood very thoroughly.
   *
+  * TODO: this would generate an alternative Conditional Template, not implemented and not in use atm
+  *
   */
-class ConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, conditionalTemplate: ConditionalTemplate, language: String, counter : Counter) {
+class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, conditionalTemplate: ConditionalTemplate, language: String, counter : Counter) {
 
   private val conditionalBaseUri = baseUri + "/ConditionalMapping" + "/"+ counter.conditionals
 
@@ -42,13 +42,15 @@ class ConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, 
       ////////////////////////////////////////////////////////////////////////////
 
       val condition = conditionalTemplate.condition
-      val tuple = if(condition != null && !condition.isInstanceOf[OtherwiseCondition]) {
+      val tuple : (Counter, RMLFunctionTermMap) = if(condition != null && !condition.isInstanceOf[OtherwiseCondition]) {
         createEqualCondition(condition, conditionalBaseUri, counter)
       } else {
         (counter, null)
       }
       val conditionFunctionTermMap = tuple._2
-      val updatedCounter = tuple._1.update(simpleProperties = 0, geoCoordinates = 0, startDates = 0, endDates = 0)
+
+      // reset counter for conditional mappings
+      val updatedCounter = tuple._1.update(simpleProperties = 0, geoCoordinates = 0, startDates = 0, endDates = 0, constants = 0)
 
       ////////////////////////////////////////////////////////////////////////////
       // Creates poms from all subtemplates and adds them as fallbacks
@@ -57,11 +59,15 @@ class ConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, 
       //add predicate object maps
       val subTemplates = conditionalTemplate.templates
 
-      // foldLeft: assembles all templates from tail to head without attaching them to the main TM (independent = true),
+      // foldLeft: assembles all templates from tail to head,
       // every assembly returns a tuple (state) which is in turn passed through to the next assembly
       val finalState = subTemplates.foldLeft((updatedCounter, List[RMLPredicateObjectMap]()))((state, template) => {
 
-        val updatedState = TemplateAssembler.assembleTemplate(rmlModel, conditionalBaseUri + "/Condition/" + counter.subConditions, template, language, state._1, independent = true)
+        val updatedState : (Counter, List[RMLPredicateObjectMap]) =
+          TemplateAssembler.assembleTemplate(rmlModel,
+                                             conditionalBaseUri + "/Condition/" + counter.subConditions,
+                                             template, language, state._1)
+
         addFallbacksToResource(resource, updatedState)
 
         // returns the current counter and adds the RMLPredicateObjectMaps to the list
