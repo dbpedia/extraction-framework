@@ -136,7 +136,7 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
 
 object RMLPredicateObjectMap {
 
-  def apply(resource : Resource) = {
+  def apply(resource : Resource) : RMLPredicateObjectMap = {
     new RMLPredicateObjectMap(resource)
   }
 

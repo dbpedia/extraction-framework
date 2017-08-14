@@ -4,6 +4,11 @@ import org.dbpedia.extraction.ontology.OntologyClass
 
 /**
   * Created by wmaroy on 24.07.17.
+  *
+  * @param condition
+  * @param templates
+  * @param ontologyClass
+  * @param fallback
   */
 case class ConditionalTemplate(condition : Condition, templates : Seq[Template], ontologyClass: OntologyClass, fallback : ConditionalTemplate) extends Template(ConditionalTemplate.NAME) {
 
