@@ -29,9 +29,7 @@ class RMLFunctionTermMap(resource: Resource) extends RMLObjectMap(resource) {
           ("constants", pom.rrPredicate -> pom.rrObject)
         }
       })
-    } catch {
-      case e: Exception => throw new IllegalArgumentException("Can't extract function, maybe the mapping is missing the function definition.")
-    }
+
 
     // group the tuples by ._1 and convert the resulting ._2 list to a map
     val grouped = objects.groupBy(_._1).mapValues(_.map(_._2))
@@ -46,6 +44,10 @@ class RMLFunctionTermMap(resource: Resource) extends RMLObjectMap(resource) {
 
     val function = Function(name, references, constants)
     function
+
+    } catch {
+      case e: Exception => throw new IllegalArgumentException("Can't extract function, maybe the mapping is missing the function definition.")
+    }
   }
 
   def getFunctionValue : RMLTriplesMap = {

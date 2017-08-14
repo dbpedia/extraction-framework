@@ -26,15 +26,15 @@ case class ConditionalTemplate(condition : Condition, templates : Seq[Template],
 
 }
 
-class Condition(val operator: String)
+class Condition(val operator: String, val property : String, val value : String)
 
-case class IsSetCondition(property: String) extends Condition(Condition.ISSET)
+case class IsSetCondition(override val property: String) extends Condition(Condition.ISSET, property, null)
 
-case class ContainsCondition(property: String, value: String) extends Condition(Condition.CONTAINS)
+case class ContainsCondition(override val property: String, override val value: String) extends Condition(Condition.CONTAINS, property, value)
 
-case class EqualsCondition(property: String, value: String) extends Condition(Condition.EQUALS)
+case class EqualsCondition(override val property: String, override val value: String) extends Condition(Condition.EQUALS, property, value)
 
-case class OtherwiseCondition() extends Condition(Condition.OTHERWISE)
+case class OtherwiseCondition() extends Condition(Condition.OTHERWISE, property = null, value = null)
 
 object Condition {
 

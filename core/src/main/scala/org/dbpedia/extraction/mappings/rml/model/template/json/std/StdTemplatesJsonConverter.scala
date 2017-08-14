@@ -25,6 +25,7 @@ class StdTemplatesJsonConverter extends TemplatesJsonConverter {
         case template : IntermediateTemplate => new StdIntermediateJsonConverter
         case template : StartDateTemplate => new StdStartDateJsonConverter
         case template : EndDateTemplate => new StdEndDateJsonConverter
+        case template : ConditionalTemplate => new StdConditionalJsonConverter
         case _ => null
 
       }
