@@ -35,6 +35,9 @@ object RMLInferencer {
     // load the language rules
     val rules = Rule.rulesFromURL(languageRulesPath.toUri.getPath)
 
+    // delete language file
+    languageRulesPath.toFile.delete()
+
     // get the language dir
     val languageDir = getPathToLanguageDir(language, pathToRMLMappingsDir)
 
@@ -53,6 +56,7 @@ object RMLInferencer {
       // delete temporary dir
       tempDir.toFile.listFiles().foreach(file => file.delete())
       tempDir.toFile.delete()
+      languageRulesPath.toFile.delete()
 
       mappings
 
@@ -79,6 +83,8 @@ object RMLInferencer {
     // delete temporary dir
     tmpDir.toFile.deleteOnExit()
     tmpDir.toFile.listFiles().foreach(file => file.delete())
+    tempMappingFilePath.toFile.delete()
+    languageRulesPath.toFile.delete()
 
     mappings.head
   }
@@ -100,6 +106,8 @@ object RMLInferencer {
     // delete temporary dir
     tmpDir.toFile.deleteOnExit()
     tmpDir.toFile.listFiles().foreach(file => file.delete())
+    tempMappingFilePath.toFile.delete()
+    languageRulesPath.toFile.delete()
 
     inference
   }
