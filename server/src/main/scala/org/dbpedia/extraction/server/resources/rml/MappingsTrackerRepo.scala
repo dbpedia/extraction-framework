@@ -55,8 +55,8 @@ object MappingsTrackerRepo {
     val dir = new File(SERVER_RELATIVE_PATH)
     val listFiles = dir.listFiles
 
-    logger.info("Mapping dirs:")
-    logger.info(listFiles.toString)
+
+
 
     // check if language dir exists, if not return empty list
     val files = listFiles match {
@@ -66,6 +66,9 @@ object MappingsTrackerRepo {
           .filter(_.isDirectory)
           .toList
     }
+
+    logger.info("Mapping dirs:")
+    logger.info(files.toString())
 
     val languageDirs = files.map(file => file.getName -> file).toMap
     languageDirs
