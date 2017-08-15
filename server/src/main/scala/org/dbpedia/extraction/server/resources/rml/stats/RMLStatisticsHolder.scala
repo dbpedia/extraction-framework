@@ -17,7 +17,7 @@ class RMLStatisticsHolder(languagesStats: Map[String, RMLLanguageStats]) {
   private val logger = Logger.getLogger(RMLStatisticsHolder.getClass.getName)
 
   def apply(key : String) : RMLLanguageStats = {
-    logger.info(languagesStats.keySet.toString())
+    logger.info("Retrieving RML statistics for " + key)
     languagesStats(key)
   }
 
@@ -111,11 +111,8 @@ object RMLStatisticsHolder {
         name -> RMLMappingStats(mappedProperties)
       })
 
-      val stats = RMLLanguageStats(mappingStats)
       // retreive stats of current language
-      logger.info("Adding language: " + language)
-      logger.info("Adding stats: " + stats)
-
+      val stats = RMLLanguageStats(mappingStats)
       language -> stats
     })
   }

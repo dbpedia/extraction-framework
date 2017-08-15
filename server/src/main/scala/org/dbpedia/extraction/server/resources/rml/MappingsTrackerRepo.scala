@@ -42,6 +42,7 @@ object MappingsTrackerRepo {
     logger.info("Pulling updates from mappings-tracker from the github repository..")
     val result = CommandLineUtils.execute("git --git-dir=../mappings-tracker/.git pull", print = true)
     logger.info("Success: " + result)
+    result
   }
 
   /**
@@ -78,8 +79,6 @@ object MappingsTrackerRepo {
   def getLanguageRMLModels(updatesPerLanguage : Map[String, Set[String]] = null) : LanguageRMLModels = {
 
     val languageMappingDumps = getLanguageMappingDumps(updatesPerLanguage)
-
-    logger.info(languageMappingDumps.toString())
 
     val languageRMLModels = languageMappingDumps.map(entry => {
       val language = entry._1
@@ -146,7 +145,10 @@ object MappingsTrackerRepo {
                                else getLanguageMappingFiles()
 
     logger.info("Mapping files per language:")
-    logger.info(languageMappingFiles.toString())
+    val info = languageMappingFiles.map(lmf => {
+      lmf._1 + ": " + lmf._2.size
+    }).reduce((x,y) => x + "\n" + y)
+    logger.info(info)
 
     val languageMappings = languageMappingFiles.map(entry => {
      val language = entry._1
