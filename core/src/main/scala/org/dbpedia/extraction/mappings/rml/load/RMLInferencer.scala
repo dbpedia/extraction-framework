@@ -5,6 +5,7 @@ import java.nio.charset.Charset
 import java.nio.file.{Files, Path, Paths, StandardOpenOption}
 
 import be.ugent.mmlab.rml.model.RMLMapping
+import org.apache.commons.io.IOUtils
 import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.reasoner.rulesys.{GenericRuleReasoner, Rule}
 import org.apache.jena.util.FileManager
@@ -28,8 +29,8 @@ object RMLInferencer {
   def loadDir(language :Language, pathToRMLMappingsDir : String) : Map[String, RMLMapping] = {
 
     // create language specific rules from templated file
-    val path = this.getClass.getClassLoader.getResource("rules.rule").getPath
-    val languageRulesPath = createLanguageRuleFile(language, path)
+    val stream = this.getClass.getClassLoader.getResourceAsStream("rules.rule")
+    val languageRulesPath = createLanguageRuleFile(language, stream, "./")
 
     // load the language rules
     val rules = Rule.rulesFromURL(languageRulesPath.toUri.getPath)
@@ -62,16 +63,16 @@ object RMLInferencer {
 
   def loadDump(language: Language, dump : String, name : String) : (String, RMLMapping) = {
     // create language specific rules from templated file
-    val path = this.getClass.getClassLoader.getResource("rules.rule").getPath
+    val stream = this.getClass.getClassLoader.getResourceAsStream("rules.rule")
 
-    val languageRulesPath = createLanguageRuleFile(language, path)
+    val languageRulesPath = createLanguageRuleFile(language, stream, ".")
 
     // load the language rules
     val rules = Rule.rulesFromURL(languageRulesPath.toUri.getPath)
 
-    val tempMappingFilePath = createTempMappingFile(name, dump, path)
+    val tempMappingFilePath = createTempMappingFile(name, dump, "./")
 
-    val tmpDir = Files.createTempDirectory(Paths.get(path).getParent, "inferences")
+    val tmpDir = Files.createTempDirectory(Paths.get("./"), "inferences")
     val inference = inferenceRMLMapping(rules, tempMappingFilePath.toAbsolutePath.toString, tmpDir.toAbsolutePath.toString, language.isoCode)
     val mappings = RMLProcessorParser.parseFromDir(tmpDir.toAbsolutePath.toString)
 
@@ -84,16 +85,16 @@ object RMLInferencer {
 
   def loadDumpAsString(language: Language, dump : String, name : String) : String = {
     // create language specific rules from templated file
-    val path = this.getClass.getClassLoader.getResource("rules.rule").getPath
+    val stream = this.getClass.getClassLoader.getResourceAsStream("rules.rule")
 
-    val languageRulesPath = createLanguageRuleFile(language, path)
+    val languageRulesPath = createLanguageRuleFile(language, stream, "./")
 
     // load the language rules
     val rules = Rule.rulesFromURL(languageRulesPath.toUri.getPath)
 
-    val tempMappingFilePath = createTempMappingFile(name, dump, path)
+    val tempMappingFilePath = createTempMappingFile(name, dump, "./")
 
-    val tmpDir = Files.createTempDirectory(Paths.get(path).getParent, "inferences")
+    val tmpDir = Files.createTempDirectory(Paths.get("./"), "inferences")
     val inference = inferenceRMLMapping(rules, tempMappingFilePath.toAbsolutePath.toString, tmpDir.toAbsolutePath.toString, language.isoCode)
 
     // delete temporary dir
@@ -107,23 +108,27 @@ object RMLInferencer {
     * Replaces all language templated constructs with the given language
     *
     * @param language
-    * @param path
+    * @param dirPath
     * @return
     */
-  private def createLanguageRuleFile(language: Language, path : String) : Path = {
-    val templatedRuleString = new String(Files.readAllBytes(Paths.get(path)), "UTF-8")
+  private def createLanguageRuleFile(language: Language, stream : InputStream, dirPath : String) : Path = {
+    val templatedRuleString = IOUtils.toString(stream)
+    //new String(Files.readAllBytes(Paths.get(path)), "UTF-8")
     val languageRuleString = templatedRuleString.replaceAll(RMLInferencer.LANGUAGE_TEMPLATE, language.isoCode)
-    val file = new File(path)
-    val dir = Paths.get(file.getParent)
+    val file = new File(dirPath)
+    val absoluteFile = file.getAbsoluteFile
+    val dir = Paths.get(absoluteFile.getParent)
     val tmpFile = Files.createTempFile(dir, language.isoCode + "-rules.rule", null)
+    tmpFile.toFile.deleteOnExit()
     Files.write(Paths.get(tmpFile.toUri.getPath), languageRuleString.getBytes)
     tmpFile
   }
 
-  private def createTempMappingFile(name : String, dump:String, path : String) : Path = {
-    val file = new File(path)
+  private def createTempMappingFile(name : String, dump:String, dirPath : String) : Path = {
+    val file = new File(dirPath).getAbsoluteFile
     val dir = Paths.get(file.getParent)
     val tmpFile = Files.createTempFile(dir, name + "-", ".ttl").toFile
+    tmpFile.deleteOnExit()
     val writer = new BufferedWriter(new FileWriter(tmpFile))
     writer.write(dump)
     writer.close()

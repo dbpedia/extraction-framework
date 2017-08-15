@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.load
 
+import java.nio.file.{Files, Paths}
+
 import org.apache.log4j.{Level, Logger}
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
 import org.dbpedia.extraction.mappings.rml.util.Resources
@@ -35,6 +37,23 @@ class RMLInferencer$Test extends FunSuite {
     }).toMap
 
   }
+
+  test("Execution for dirs that contain mappings") {
+
+    RMLInferencer.loadDir(Language("en"), "/home/wmaroy/github/leipzig/inferencing_test/")
+
+  }
+
+  test("Execution work for dumps") {
+
+    val path = this.getClass.getClassLoader.getResource("Mapping_en:Infobox_person.ttl").getPath
+    val mappingDump = new String(Files.readAllBytes(Paths.get(path)), "UTF-8")
+
+    val result = RMLInferencer.loadDump(Language("en"), mappingDump, "Mapping_en:Infobox_person")
+    result
+
+  }
+
 
 }
 
