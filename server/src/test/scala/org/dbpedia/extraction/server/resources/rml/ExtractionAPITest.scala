@@ -35,12 +35,20 @@ class ExtractionAPITest extends FlatSpec with Matchers {
 
     val result = postTest("/extractNotLoadedSimpleTest/input.json", "/extractNotLoadedSimpleTest/output.json")
 
-    //result._1.split("\n").length should be > 20
+    result._1.split("\n").length should be > 20
 
   }
 
   "POST /extract with conditional templates" should "work properly" in {
 
+
+  }
+
+  "POST /extract with geo templates" should "work properly" in {
+
+    val result = postTest("/extractGeoTest/input.json", "/extractGeoTest/output.json")
+
+    result._1.contains("<http://en.dbpedia.org/resource/Egypt> <http://www.w3.org/2003/01/geo/wgs84_pos#long>")
 
   }
 
