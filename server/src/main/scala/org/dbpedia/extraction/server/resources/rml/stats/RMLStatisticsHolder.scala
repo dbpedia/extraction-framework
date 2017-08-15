@@ -68,6 +68,8 @@ class RMLStatisticsHolder(languagesStats: Map[String, RMLLanguageStats]) {
 
 object RMLStatisticsHolder {
 
+  private val logger = Logger.getLogger(this.getClass.getName)
+
   /**
     * Creates new RMLStatisticsHolder.
     * This calculates statistics for all mappings in the mappings-tracker repository.
@@ -76,7 +78,8 @@ object RMLStatisticsHolder {
     */
   def apply() : RMLStatisticsHolder = {
     val languagesStats = getLanguagesStats
-
+    logger.info(languagesStats.toString())
+    logger.info("Size = " + languagesStats.size)
     new RMLStatisticsHolder(languagesStats)
   }
 

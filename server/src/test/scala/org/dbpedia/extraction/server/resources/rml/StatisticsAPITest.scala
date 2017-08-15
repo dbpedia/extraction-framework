@@ -23,7 +23,6 @@ class StatisticsAPITest extends FlatSpec with Matchers {
   private def getTest() : String = {
 
 
-
     val httpClient = new DefaultHttpClient()
 
     val getMethod = new HttpGet("http://localhost:9999/server/rml/en/statistics")
