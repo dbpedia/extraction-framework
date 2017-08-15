@@ -244,18 +244,18 @@ class RML {
       responseNode.set("statistics", statsArrayNode)
       responseNode.put("language", language)
 
+      // get rml specific stat
+      val languageStats = Server.instance.extractor.rmlStatistics(language).mappingStats
+
       // Iterate over stats and create nodes accordingly
       sortedStats.foreach(stat => {
         val statNode = JsonNodeFactory.instance.objectNode()
         val name = stat.templateName
         val normalizedName = RMLModel.normalize(name, language)
 
-        // get rml specific stat
-        val languageStats = Server.instance.extractor.rmlStatistics(language).mappingStats
-
         if(languageStats.contains(normalizedName)) {
 
-          val stats = Server.instance.extractor.rmlStatistics(language).mappingStats(normalizedName)
+          val stats = languageStats(normalizedName)
 
           val count = stat.templateCount.toInt
           val propertiesCount = stat.propertyCount.toInt
