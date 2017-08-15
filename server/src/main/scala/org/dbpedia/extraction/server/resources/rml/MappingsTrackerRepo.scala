@@ -17,6 +17,8 @@ import scala.collection.immutable.HashMap
   */
 object MappingsTrackerRepo {
 
+  private val logger = Logger.getLogger(this.getClass.getName)
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public fields
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +39,9 @@ object MappingsTrackerRepo {
     * @return success or not as boolean
     */
   def pull() : Boolean = {
-    CommandLineUtils.execute("git --git-dir=../mappings-tracker/.git pull")
+    logger.info("Pulling updates from mappings-tracker from the github repository..")
+    val result = CommandLineUtils.execute("git --git-dir=../mappings-tracker/.git pull", print = true)
+    logger.info("Success: " + result)
   }
 
   /**
@@ -49,6 +53,9 @@ object MappingsTrackerRepo {
     // gets the "mappings" dir in the mappings-tracker repo
     val dir = new File(SERVER_RELATIVE_PATH)
     val listFiles = dir.listFiles
+
+    logger.info("Mapping dirs:")
+    logger.info(listFiles.toString)
 
     // check if language dir exists, if not return empty list
     val files = listFiles match {
@@ -71,6 +78,9 @@ object MappingsTrackerRepo {
   def getLanguageRMLModels(updatesPerLanguage : Map[String, Set[String]] = null) : LanguageRMLModels = {
 
     val languageMappingDumps = getLanguageMappingDumps(updatesPerLanguage)
+
+    logger.info(languageMappingDumps.toString())
+
     val languageRMLModels = languageMappingDumps.map(entry => {
       val language = entry._1
       val mappingDumps = entry._2
@@ -99,6 +109,9 @@ object MappingsTrackerRepo {
   def getLanguageMappingFiles(languages : Set[String] = null) : Map[String, List[File]] = {
 
     val languageDirs = getLanguageDirs
+
+    logger.info("Language mapping dirs:")
+    logger.info(languageDirs.toString())
 
     val languageMappingFiles = languageDirs
       .filter( languageDir => {
@@ -131,6 +144,9 @@ object MappingsTrackerRepo {
 
     val languageMappingFiles = if(updatesPerLanguage != null) getLanguageMappingFiles(updatesPerLanguage.keys.toSet)
                                else getLanguageMappingFiles()
+
+    logger.info("Mapping files per language:")
+    logger.info(languageMappingFiles.toString())
 
     val languageMappings = languageMappingFiles.map(entry => {
      val language = entry._1

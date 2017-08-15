@@ -1,11 +1,15 @@
 package org.dbpedia.extraction.server.util
 
+import java.util.logging.Logger
+
 import scala.io.Source
 
 /**
   * Utils for command line
   */
 object CommandLineUtils {
+
+  private val logger = Logger.getLogger(this.getClass.getName)
 
   /**
     * Execute commands
@@ -23,7 +27,7 @@ object CommandLineUtils {
       val is = pr.getInputStream
       val commandOutput = Source.fromInputStream(is).mkString
       pr.waitFor()
-      if(print) println(commandOutput)
+      if(print) logger.info(commandOutput)
       true
 
     } catch {
