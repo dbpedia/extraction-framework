@@ -111,8 +111,12 @@ object RMLStatisticsHolder {
         name -> RMLMappingStats(mappedProperties)
       })
 
+      val stats = RMLLanguageStats(mappingStats)
       // retreive stats of current language
-      language -> RMLLanguageStats(mappingStats)
+      logger.info("Adding language: " + language)
+      logger.info("Adding stats: " + stats)
+
+      language -> stats
     })
   }
 
