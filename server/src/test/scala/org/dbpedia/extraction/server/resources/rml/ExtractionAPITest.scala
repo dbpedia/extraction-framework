@@ -41,6 +41,9 @@ class ExtractionAPITest extends FlatSpec with Matchers {
 
   "POST /extract with conditional templates" should "work properly" in {
 
+    val result = postTest("/constantTest/input.json", "/constantTest/output.json")
+
+    result._1.contains("<http://en.dbpedia.org/resource/Sydney> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/City>")
 
   }
 
@@ -49,6 +52,14 @@ class ExtractionAPITest extends FlatSpec with Matchers {
     val result = postTest("/extractGeoTest/input.json", "/extractGeoTest/output.json")
 
     result._1.contains("<http://en.dbpedia.org/resource/Egypt> <http://www.w3.org/2003/01/geo/wgs84_pos#long>")
+
+  }
+
+  "POST /extract with constant templates" should "work properly" in {
+
+    val result = postTest("/constantTest/input.json", "/constantTest/output.json")
+
+    result._1.contains("<http://en.dbpedia.org/resource/Sydney> <http://dbpedia.org/ontology/country> <http://en.dbpedia.org/resource/Australia>")
 
   }
 
