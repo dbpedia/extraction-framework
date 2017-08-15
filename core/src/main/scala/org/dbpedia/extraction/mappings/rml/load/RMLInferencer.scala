@@ -8,8 +8,10 @@ import be.ugent.mmlab.rml.model.RMLMapping
 import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.reasoner.rulesys.{GenericRuleReasoner, Rule}
 import org.apache.jena.util.FileManager
+import org.apache.log4j.Logger
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.util.Language
+
 import scala.collection.JavaConverters._
 
 /**
@@ -20,6 +22,8 @@ import scala.collection.JavaConverters._
 object RMLInferencer {
 
   val LANGUAGE_TEMPLATE = "\\{LANG\\}"
+
+  val logger = Logger.getLogger(this.getClass)
 
   def loadDir(language :Language, pathToRMLMappingsDir : String) : Map[String, RMLMapping] = {
 
@@ -38,7 +42,7 @@ object RMLInferencer {
       val infDirTuple = inferenceDir(rules, languageDir, language.isoCode)
 
       infDirTuple._2.foreach(mapping => {
-        println(mapping)
+        logger.debug(mapping)
       })
 
       val tempDir = infDirTuple._1
@@ -46,8 +50,8 @@ object RMLInferencer {
 
 
       // delete temporary dir
-      tempDir.toFile.deleteOnExit()
       tempDir.toFile.listFiles().foreach(file => file.delete())
+      tempDir.toFile.delete()
 
       mappings
 
@@ -144,7 +148,11 @@ object RMLInferencer {
     }
 
     val tmpDir = Files.createTempDirectory(Paths.get(inputDirPath), "inferences")
-    val inferences = files.map(file => inferenceRMLMapping(rules, file.getAbsolutePath, tmpDir.toAbsolutePath.toString, language)).toList
+    val inferences = files.map(file => {
+      println("Inference mapping file: " + file.getName)
+
+      inferenceRMLMapping(rules, file.getAbsolutePath, tmpDir.toAbsolutePath.toString, language)
+    }).toList
 
     (tmpDir, inferences)
 
@@ -189,8 +197,6 @@ object RMLInferencer {
     val writer = new BufferedWriter(new FileWriter(outputPath + "/" + fileName))
     writer.write(formatted)
     writer.close()
-
-    println("Final output would be written to:" + outputPath)
 
     formatted
   }

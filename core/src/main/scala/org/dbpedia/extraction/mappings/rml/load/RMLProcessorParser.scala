@@ -7,6 +7,7 @@ import java.util
 import be.ugent.mmlab.rml.mapdochandler.extraction.std.StdRMLMappingFactory
 import be.ugent.mmlab.rml.mapdochandler.retrieval.RMLDocRetrieval
 import be.ugent.mmlab.rml.model.{RMLMapping, TriplesMap}
+import org.apache.log4j.Logger
 import org.eclipse.rdf4j.rio.RDFFormat
 
 /**
@@ -23,6 +24,8 @@ object RMLProcessorParser {
     * Parses RML document from a file and returns an RMLMapping object
     */
   def parseFromFile(pathToRmlDocument: String): RMLMapping = {
+
+
 
       val path = convertToAbsolutePath(pathToRmlDocument)
       try {
@@ -59,7 +62,11 @@ object RMLProcessorParser {
         .filter(_.getName.contains(".ttl")).toList
     }
 
-    val map = files.map(file => file.getName.replace(".ttl", "") -> RMLProcessorParser.parseFromFile(file.getAbsolutePath)).toMap
+    val map = files.map(file => {
+      println("Parsing mapping file: " + file.getName)
+      Logger.getLogger(this.getClass).info("Parsing mapping file: " + file.getName)
+      file.getName.replace(".ttl", "") -> RMLProcessorParser.parseFromFile(file.getAbsolutePath)
+    }).toMap
 
     map
   }
