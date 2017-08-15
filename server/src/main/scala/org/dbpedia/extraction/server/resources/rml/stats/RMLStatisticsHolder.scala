@@ -78,7 +78,6 @@ object RMLStatisticsHolder {
     */
   def apply() : RMLStatisticsHolder = {
     val languagesStats = getLanguagesStats
-    logger.info(languagesStats.toString())
     logger.info("Size = " + languagesStats.size)
     new RMLStatisticsHolder(languagesStats)
   }
