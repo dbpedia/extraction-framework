@@ -27,6 +27,13 @@ class RMLInferencerTest extends FlatSpec with Matchers
     val result = RMLInferencer.loadDump(Language("en"), mappingDump, "Mapping_en:Infobox_person")
     result
 
+    def function0() = {
+      println("This is a function!")
+    }
+
+    val function = (input : String) => { println(input) }
+    function.
+
   }
 
 }
