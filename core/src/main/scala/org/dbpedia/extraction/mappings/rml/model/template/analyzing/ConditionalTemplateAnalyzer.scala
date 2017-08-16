@@ -9,7 +9,7 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, RdfNamespace}
 /**
   * Created by wmaroy on 12.08.17.
   */
-class ConditionalTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateAnalyzer(ontology) {
+class ConditionalTemplateAnalyzer(ontology: Ontology, ignore : Boolean = false) extends AbstractTemplateAnalyzer(ontology) {
 
   @throws(classOf[IllegalArgumentException])
   def apply(pom: RMLPredicateObjectMap): Template ={
@@ -27,7 +27,8 @@ class ConditionalTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateAn
     val condition = getCondition(function)
     val ontologyClass = getOntologyClass(pom)
 
-    val analyzer = new StdTemplatesAnalyzer(ontology)
+    val ignoreURIPart = RMLUri.CONDITIONALMAPPING
+    val analyzer = new StdTemplatesAnalyzer(ontology, ignoreURIPart)
 
     // if this is a classmapping do not search for templates
     val templates = if(ontologyClass != null) Seq() else Seq(analyzer.analyze(condPom))
@@ -68,9 +69,21 @@ class ConditionalTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateAn
     }
   }
 
+  /**
+    *
+    * @param fallbacks
+    * @return A conditional template, returns null if the fallbacks parameter is an empty list
+    */
   def retrieveFallbackTemplateFromFallbackPoms(fallbacks : List[RMLPredicateObjectMap]) : ConditionalTemplate = {
 
-    val analyzer = new StdTemplatesAnalyzer(ontology)
+    if(fallbacks.isEmpty) {
+      // if not null is returned a ConditionalTemplate object with empty fields will be returned,
+      // which is not wanted
+      return null
+    }
+
+    val ignoreURIPart = RMLUri.CONDITIONALMAPPING
+    val analyzer = new StdTemplatesAnalyzer(ontology, ignoreURIPart)
 
     val ontologyClass = fallbacks.find(fallback => {
       getOntologyClass(fallback) != null

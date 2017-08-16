@@ -8,7 +8,7 @@ import org.dbpedia.extraction.ontology.Ontology
 /**
   * Created by wmaroy on 11.08.17.
   */
-class StdTemplatesAnalyzer(ontology: Ontology) extends TemplatesAnalyzer {
+class StdTemplatesAnalyzer(ontology: Ontology, ignoreURIPart : String = null) extends TemplatesAnalyzer {
 
   val logger = Logger.getGlobal
 
@@ -28,13 +28,17 @@ class StdTemplatesAnalyzer(ontology: Ontology) extends TemplatesAnalyzer {
     })
 
     val convertedTemplates = convertLatLonTemplates(templates.toSet)
-    convertedTemplates
+    val convertedTemplates2 = convertConditionals(convertedTemplates)
+    convertedTemplates2
   }
 
   def analyze(pom : RMLPredicateObjectMap) : Template = {
 
-    val uri = pom.resource.getURI
+    val uri = if(ignoreURIPart == null) pom.resource.getURI else pom.resource.getURI.replace(ignoreURIPart, "")
     uri match {
+
+      // check for these first!
+      case s : String if uri.contains(RMLUri.CONDITIONALMAPPING) => analyzeTemplate(new ConditionalTemplateAnalyzer(ontology), pom)
 
       case s : String if uri.contains(RMLUri.SIMPLEPROPERTYMAPPING) => analyzeTemplate(new SimplePropertyTemplateAnalyzer(ontology), pom)
       case s : String if uri.contains(RMLUri.CONSTANTMAPPING) => analyzeTemplate(new ConstantTemplateAnalyzer(ontology), pom)
@@ -42,9 +46,7 @@ class StdTemplatesAnalyzer(ontology: Ontology) extends TemplatesAnalyzer {
       case s : String if uri.contains(RMLUri.ENDDATEMAPPING) => analyzeTemplate(new EndDateTemplateAnalyzer(ontology), pom)
       case s : String if uri.contains(RMLUri.LATITUDEMAPPING) => analyzeTemplate(new LatitudeTemplateAnalyzer(ontology), pom)
       case s : String if uri.contains(RMLUri.LONGITUDEMAPPING) => analyzeTemplate(new LongitudeTemplateAnalyzer(ontology), pom)
-
       case s : String if uri.contains(RMLUri.INTERMEDIATEMAPPING) => analyzeTemplate(new IntermediateTemplateAnalyzer(ontology), pom)
-      case s : String if uri.contains(RMLUri.CONDITIONALMAPPING) => analyzeTemplate(new ConditionalTemplateAnalyzer(ontology), pom)
 
       case _ => logger.info(uri + " contains no known/supported template.") ; null
 
@@ -63,6 +65,7 @@ class StdTemplatesAnalyzer(ontology: Ontology) extends TemplatesAnalyzer {
   /**
     * Search for Lon/Lat templates in a set of Templates and converts them to GeoTemplates
     * Return a new set of Templates without the Lat/Lon templates, but with the GeoTemplate
+    *
     * @param templates Set of templates
     * @return
     */
@@ -103,6 +106,70 @@ class StdTemplatesAnalyzer(ontology: Ontology) extends TemplatesAnalyzer {
     })
 
     updatedSet
+
+  }
+
+  private def convertConditionals(templates : Set[Template]) : Set[Template] = {
+
+    // filter out conditional templates
+    val conditionalTemplates = templates.filter(template => template.isInstanceOf[ConditionalTemplate])
+                                        .map(template => template.asInstanceOf[ConditionalTemplate])
+
+
+    // group by their condition
+    val groupedTemplates = conditionalTemplates.groupBy(template => template.condition)
+
+    // for every group create the main Conditional Template
+    val set = groupedTemplates.flatMap(entry => {
+
+      val conditionalTemplates = entry._2
+
+      var _classMapping : ConditionalTemplate = null
+      var _templates = List[ConditionalTemplate]()
+
+      // extract the conditional with classmappings and the others
+      conditionalTemplates.foreach {
+        case template: ConditionalTemplate => {
+          if (template.ontologyClass != null) _classMapping = template else _templates = _templates :+ template
+        }
+        case _ =>
+      }
+
+      // make a distinction between the two cases, class mapping or not
+      if(_classMapping != null) {
+
+        // it is assumed that these will only contain a single template
+        val subTemplates = _templates.map(template => template.templates.head)
+
+        val updatedClassMapping = ConditionalTemplate(_classMapping.condition, subTemplates,
+          _classMapping.ontologyClass, _classMapping.fallback)
+
+        val returnSet : Set[Template] = templates - _classMapping -- _templates.toSet + updatedClassMapping
+        returnSet
+
+      } else {
+
+        // get the template with the fallback, if there is none just take the first
+        val templateWithFallback = _templates.find(template => template.hasFallback).getOrElse(templates.head).asInstanceOf[ConditionalTemplate]
+        val templateWithFallbackSubTemplate = templateWithFallback.templates.head
+
+        val conditionalTemplatesWithoutFallback = _templates.toSet - templateWithFallback
+        val templatesWithoutFallback = conditionalTemplatesWithoutFallback.map(template => {
+          // it is assumed that these will only contain a single template
+          template.asInstanceOf[ConditionalTemplate].templates.head
+        }).toSeq
+
+        val updatedTemplateWithFallback = ConditionalTemplate(templateWithFallback.condition, templatesWithoutFallback :+ templateWithFallbackSubTemplate , null, templateWithFallback.fallback)
+
+        val returnSet : Set[Template] = templates - templateWithFallback -- conditionalTemplatesWithoutFallback + updatedTemplateWithFallback
+        returnSet
+      }
+
+
+    }).toSet
+
+    // quick check fix
+    if(set.isEmpty) templates else set
 
   }
 

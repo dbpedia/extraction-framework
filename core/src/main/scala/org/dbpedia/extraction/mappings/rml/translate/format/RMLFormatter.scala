@@ -400,12 +400,30 @@ object RMLFormatter extends Formatter {
     val functionValueString = getFunctionValue(functionValue.listProperties(), base)
 
     val conditionPOM = getResourceString(resource, base)
+
+
     val objectMap = if(RMLPredicateObjectMap(resource).hasReferenceObjectMap) {
       val objectMap = RMLPredicateObjectMap(resource).objectMap
       val heading = "### ObjectMap"
       heading + getResourceString(objectMap.resource, base) + offset
     } else ""
-    (conditionPOM + offset + objectMap, heading + functionPOMString.concat(offset + functionValueString))
+
+
+    val objectMapString = if(hasFunctionTermMap(resource)) {
+      val functionTermMap = getObjectMap(resource)
+      getFunctionTermMap(functionTermMap.listProperties(), base) + offset
+    } else {
+      val pom = RMLPredicateObjectMap(resource)
+      val referenceObjectMapString = if (pom.hasReferenceObjectMap) {
+        val objectMap = pom.objectMap
+        val heading = "### ObjectMap"
+        heading + getResourceString(objectMap.resource, base) + offset
+
+      } else ""
+      referenceObjectMapString
+    }
+
+    (conditionPOM + offset + objectMapString, heading + functionPOMString.concat(offset + functionValueString))
   }
 
   /**

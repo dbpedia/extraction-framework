@@ -17,6 +17,9 @@ class SimplePropertyTemplateAnalyzer(ontology: Ontology) extends AbstractTemplat
     logger.info("Found " + RMLUri.SIMPLEPROPERTYMAPPING)
 
     val ftm = pom.objectMap.asInstanceOf[RMLFunctionTermMap]
+
+    if(ftm == null) throw new IllegalArgumentException("Invalid Simple Property definition: " + pom.resource.getURI)
+
     val fn = ftm.getFunction
 
     val ontologyParameter = fn.constants.getOrElse(RdfNamespace.DBF.namespace + "ontologyPropertyParameter", null)

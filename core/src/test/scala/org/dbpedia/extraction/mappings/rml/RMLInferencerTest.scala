@@ -31,8 +31,6 @@ class RMLInferencerTest extends FlatSpec with Matchers
       println("This is a function!")
     }
 
-    val function = (input : String) => { println(input) }
-    function.
 
   }
 

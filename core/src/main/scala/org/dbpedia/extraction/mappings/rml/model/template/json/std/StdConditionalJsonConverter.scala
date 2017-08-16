@@ -37,7 +37,11 @@ class StdConditionalJsonConverter extends TemplateJsonConverter {
     } else null
 
     parameters.set("condition", conditionNode)
-    parameters.put("class", condTemplate.ontologyClass.uri)
+
+    // it is allowed to be null
+    if(condTemplate.ontologyClass != null) {
+      parameters.put("class", condTemplate.ontologyClass.uri)
+    }
 
     val converter = new StdTemplatesJsonConverter
     val mapper = new ObjectMapper

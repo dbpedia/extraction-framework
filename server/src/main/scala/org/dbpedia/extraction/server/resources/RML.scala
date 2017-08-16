@@ -25,7 +25,7 @@ import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.server.resources.rml.{BadRequestException, MappingsTrackerRepo}
 import org.dbpedia.extraction.server.resources.stylesheets.TriX
 import org.dbpedia.extraction.sources.WikiSource
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser.WikiTitle
 
 import scala.collection.JavaConverters._
@@ -261,7 +261,7 @@ class RML {
           val propertiesCount = stat.propertyCount.toInt
           val mappedPropertiesCount = stats.mappedProperties.size.toDouble
 
-          statNode.put("name", name)
+          statNode.put("name", WikiUtil.wikiEncode(name))
           statNode.put("count", count)
           statNode.put("propertiesCount", propertiesCount)
           statNode.put("mappedPropertiesCount", mappedPropertiesCount)
@@ -391,6 +391,8 @@ class RML {
 
       // the inferenced version (full RML mapping) is needed for analyzing
       val mapping: RMLModel = getInferencedMapping(mappingNode)
+
+      val string = mapping.writeAsTurtle("")
 
       // analyze the mapping
       val analyzer = new StdTemplatesAnalyzer(Server.instance.extractor.ontology())

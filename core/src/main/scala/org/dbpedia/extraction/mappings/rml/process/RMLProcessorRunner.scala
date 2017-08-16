@@ -40,6 +40,7 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
     val triplesMap = "http://" + context.language.isoCode +".dbpedia.org/resource/" + mappingName.replace("%3A", ":")
     val exeTriplesMap = List[String](triplesMap)
     val engine = new StdRMLEngine()
+
     val dataset : RMLDataset = new StdRMLDataset()
     val templateNodeHashMap = convertTemplateNodeToMap(templateNode)
     val regex = ".*/".r
