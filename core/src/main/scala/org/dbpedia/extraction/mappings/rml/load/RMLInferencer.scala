@@ -80,7 +80,7 @@ object RMLInferencer {
     val inference = inferenceRMLMapping(rules, tempMappingFilePath.toAbsolutePath.toString, tmpDir.toAbsolutePath.toString, language.isoCode)
     val mappings = RMLProcessorParser.parseFromDir(tmpDir.toAbsolutePath.toString)
 
-    // delete temporary dir
+    // delete temporary files
     tmpDir.toFile.deleteOnExit()
     tmpDir.toFile.listFiles().foreach(file => file.delete())
     tempMappingFilePath.toFile.delete()
@@ -103,7 +103,7 @@ object RMLInferencer {
     val tmpDir = Files.createTempDirectory(Paths.get("./"), "inferences")
     val inference = inferenceRMLMapping(rules, tempMappingFilePath.toAbsolutePath.toString, tmpDir.toAbsolutePath.toString, language.isoCode)
 
-    // delete temporary dir
+    // delete temporary files
     tmpDir.toFile.deleteOnExit()
     tmpDir.toFile.listFiles().foreach(file => file.delete())
     tempMappingFilePath.toFile.delete()

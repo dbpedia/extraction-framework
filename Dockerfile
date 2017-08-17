@@ -2,7 +2,7 @@
 FROM maven:3.2.5-jdk-8
 
 ## clone repositories
-RUN git clone https://github.com/dbpedia/extraction-framework ##
+RUN git clone https://github.com/dbpedia/extraction-framework ###
 
 ## change to repo dir
 WORKDIR /extraction-framework

@@ -181,9 +181,9 @@ object JSONTemplateFactory extends TemplateFactory {
     */
   override def createConditionalTemplate(templateFactoryBundle: TemplateFactoryBundle): ConditionalTemplate = {
 
-    ///////////////////
-    // Inner methods
-    //////////////////
+    /////////////////////////////
+    // Inner methods definitions
+    /////////////////////////////
 
     def getFallbackTemplate(bundle: JSONBundle) : ConditionalTemplate = {
       if(hasParameter("fallback", bundle.templateNode)) {

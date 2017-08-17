@@ -55,7 +55,7 @@ class ConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, 
       ////////////////////////////////////////////////////////////////////////////
 
       //add predicate object maps
-      val subTemplates = conditionalTemplate.templates
+      val subTemplates = template.templates
 
       // foldLeft: assembles all templates from tail to head without attaching them to the main TM (independent = true),
       // every assembly returns a tuple (state) which is in turn passed through to the next assembly

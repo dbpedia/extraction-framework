@@ -96,6 +96,16 @@ class TemplateAPITest extends FlatSpec with Matchers {
 
   }
 
+  "ConditionalTemplates" should "be generated correctly" in {
+
+    val tuple = postTest("/conditionalTemplateTest/input.json",
+      "/conditionalTemplateTest/output.json",
+      "conditional")
+
+    assert(tuple._1.equals(tuple._2))
+
+  }
+
    private def postTest(resource : String, expected : String, template : String) : (String, String) = {
 
     val stream : InputStream = getClass.getResourceAsStream(resource)
