@@ -2,6 +2,7 @@ package org.dbpedia.extraction.server.resources.rml
 
 import java.io.InputStream
 
+import org.apache.http.client.HttpResponseException
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.{ContentType, StringEntity}
 import org.apache.http.impl.client.{BasicResponseHandler, DefaultHttpClient}
@@ -96,7 +97,20 @@ class TemplateAPITest extends FlatSpec with Matchers {
 
   }
 
-  "ConditionalTemplates" should "be generated correctly" in {
+  "ConditionalTemplates" should "fail when a class mapping is already present." in {
+
+    val thrown = try {
+      val tuple = postTest("/conditionalTemplateTest/input_fail.json",
+        "/conditionalTemplateTest/output.json",
+        "conditional")
+      assert(false)
+    } catch {
+      case e : HttpResponseException => assert(true)
+    }
+
+  }
+
+  "ConditionalTemplates" should "be generated correctly." in {
 
     val tuple = postTest("/conditionalTemplateTest/input.json",
       "/conditionalTemplateTest/output.json",

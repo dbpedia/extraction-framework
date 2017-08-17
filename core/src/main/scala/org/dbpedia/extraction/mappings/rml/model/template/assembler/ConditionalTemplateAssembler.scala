@@ -208,6 +208,10 @@ class ConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, 
     (counter, functionTermMap)
   }
 
+  /**
+    * Neither a conditional class mapping of subject map class mapping is present
+    * @return
+    */
   private def containsClassMapping : Boolean = {
 
     val subjectMapHasClass = rmlModel.subjectMap.resource.hasProperty(rmlModel.model.createProperty(RdfNamespace.RR.namespace + "class"))

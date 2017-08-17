@@ -35,6 +35,14 @@ class TemplatesAnalyzeAPITest extends FunSuite {
 
   }
 
+  test("testGetConditional3") {
+
+    val tuple = postTest("/otherwiseConditionalTest/input.json",
+      "/otherwiseConditionalTest/output.json")
+    assert(tuple._1.equals(tuple._2))
+
+  }
+
   private def postTest(resource : String, expected : String) : (String, String) = {
 
     val stream : InputStream = getClass.getResourceAsStream(resource)

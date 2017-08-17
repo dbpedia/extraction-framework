@@ -40,13 +40,13 @@ class RMLFunctionTermMap(resource: Resource) extends RMLObjectMap(resource) {
     // create the function
     val name = map("constants")(Property.EXECUTES)
     val constants = map("constants") - Property.EXECUTES
-    val references = map("references")
+    val references = map.getOrElse("references", Map()) // this can be empty
 
     val function = Function(name, references, constants)
     function
 
     } catch {
-      case e: Exception => throw new IllegalArgumentException("Can't extract function, maybe the mapping is missing the function definition.")
+      case e: Exception => throw new IllegalArgumentException("Can't extract function from " + resource.getURI + ", maybe the mapping is missing the function definition.")
     }
   }
 

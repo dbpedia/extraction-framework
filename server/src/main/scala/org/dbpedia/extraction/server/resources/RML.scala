@@ -7,6 +7,7 @@ import javax.ws.rs.{Produces, _}
 
 import com.fasterxml.jackson.databind.node.{ArrayNode, JsonNodeFactory, ObjectNode}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
+import org.apache.jena.shared.JenaException
 import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
 import org.dbpedia.extraction.destinations.{DeduplicatingDestination, WriterDestination}
 import org.dbpedia.extraction.mappings.rml.exception.{OntologyClassException, OntologyException, OntologyPropertyException}
@@ -22,7 +23,7 @@ import org.dbpedia.extraction.mappings.rml.model.template.json.std.StdTemplatesJ
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.mappings.rml.util.JSONFactoryUtil
 import org.dbpedia.extraction.server.Server
-import org.dbpedia.extraction.server.resources.rml.{BadRequestException, MappingsTrackerRepo}
+import org.dbpedia.extraction.server.resources.rml.{BadRequestException, InvalidMappingException, MappingsTrackerRepo}
 import org.dbpedia.extraction.server.resources.stylesheets.TriX
 import org.dbpedia.extraction.sources.WikiSource
 import org.dbpedia.extraction.util.{Language, WikiUtil}
@@ -106,6 +107,40 @@ class RML {
         e.printStackTrace()
         createInternalServerErrorResponse(e)
     }
+
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Validate API
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  @POST
+  @Path("validate/")
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def validate(input : String) = {
+
+    try {
+
+      // create the structures
+      val mappingNode = getMappingNode(input)
+
+      // validate the mapping
+      validateMapping(mappingNode)
+
+      createValidResponse("Validation success.", valid = true)
+
+
+    } catch {
+      case e: InvalidMappingException => createValidResponse(e.getMessage, valid = false)
+      case e: OntologyException => createBadRequestExceptionResponse(e)
+      case e: BadRequestException => createBadRequestExceptionResponse(e)
+      case e: IllegalArgumentException => createBadRequestExceptionResponse(e)
+      case e: Exception => {
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+      }
+    }
+
 
   }
 
@@ -391,8 +426,6 @@ class RML {
 
       // the inferenced version (full RML mapping) is needed for analyzing
       val mapping: RMLModel = getInferencedMapping(mappingNode)
-
-      val string = mapping.writeAsTurtle("")
 
       // analyze the mapping
       val analyzer = new StdTemplatesAnalyzer(Server.instance.extractor.ontology())
@@ -817,6 +850,19 @@ class RML {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
+    * Creates a response node for the validation of a mapping
+    * @param msg
+    * @param valid
+    * @return
+    */
+  private def createValidResponse(msg : String, valid : Boolean) : Response = {
+    val  responseNode = JsonNodeFactory.instance.objectNode()
+    responseNode.put("msg", msg)
+    responseNode.put("valid", valid)
+    Response.status(Response.Status.ACCEPTED).entity(responseNode.toString).`type`(MediaType.APPLICATION_JSON).build()
+  }
+
+  /**
     * Creates a response for a new RML Mapping
     *
     * @param mapping
@@ -1178,5 +1224,16 @@ class RML {
   private def createTemplateInputString(node : JsonNode) : String = {
     // little transformation to make it a valid input string
     JsonNodeFactory.instance.objectNode().set("template", node).toString
+  }
+
+  @throws(classOf[InvalidMappingException])
+  private def validateMapping(node : JsonNode) : String = {
+    try {
+      val mappingFactory = new RMLModelJSONFactory(node)
+      val mapping = mappingFactory.create(inferenced = true)
+    } catch {
+      case invalid : JenaException => throw new InvalidMappingException(invalid.getMessage)
+      case e : Exception => throw e
+    }
   }
 }

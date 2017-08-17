@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.dbpedia.extraction.mappings.rml.load.RMLInferencer
 import org.dbpedia.extraction.mappings.rml.model.RMLModel
+import org.dbpedia.extraction.mappings.rml.model.resource.RMLUri
 import org.dbpedia.extraction.util.Language
 
 /**
@@ -17,7 +18,7 @@ class RMLModelJSONFactory(mappingNode: JsonNode) {
   private lazy val dump = mappingNode.get("dump").asText()
   private lazy val name = mappingNode.get("name").asText()
   private lazy val language = mappingNode.get("language").asText()
-  private lazy val base = "http://" + language + ".dbpedia.org/resource/Mapping_" + language + ":" + name + "/"
+  private lazy val base = RMLModel.createBase(name, language)
 
   def create(inferenced : Boolean = false) : RMLModel = {
 
