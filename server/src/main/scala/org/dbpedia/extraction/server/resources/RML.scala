@@ -116,6 +116,7 @@ class RML {
 
   @POST
   @Path("validate/")
+  @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def validate(input : String) = {
 
