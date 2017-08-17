@@ -103,6 +103,7 @@ object TemplateTransformConfig {
       "Plainlist" -> extractChildren { p : PropertyNode => !(Set("class", "style", "indent").contains(p.key)) } _ ,
       "Hlist" ->  extractChildren { p : PropertyNode => !(Set("class", "style", "ul_style", "li_style", "indent").contains(p.key)) } _ ,
       "Unbulleted list" -> extractChildren { p : PropertyNode => !(Set("class", "style", "ul_style", "li_style", "indent").contains(p.key)) } _ ,
+      "Collapsible list" -> extractChildren { p : PropertyNode => !(Set("expand", "framestyle", "titlestyle", "title", "liststyle", "hlist", "bullets").contains(p.key)) } _ ,
       "Lang" -> ((node: TemplateNode, lang:Language) =>
         List(new TextNode("<br />" + extractTextFromPropertyNode(node.property("3")) + "<br />", node.line))), //TODO: we need to set the language in the TextNode
 
