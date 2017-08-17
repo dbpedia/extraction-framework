@@ -146,7 +146,6 @@ object ConfigUtils {
     }
 
     languages --= excludedLanguages
-    
     languages.toArray
   }
 

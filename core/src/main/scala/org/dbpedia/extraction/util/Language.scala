@@ -61,7 +61,7 @@ class Language private(
 
 object Language extends (String => Language)
 {
-  implicit val wikiCodeOrdering: Ordering[Language] = Ordering.by[Language, String](_.wikiCode)
+  implicit val wikiCodeOrdering: Ordering[Language] = Ordering.by[Language, Int](_.pages).reverse
 
   val logger: Logger = Logger.getLogger(Language.getClass.getName)
 

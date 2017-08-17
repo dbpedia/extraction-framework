@@ -27,6 +27,7 @@ class ImageExtractor(
     def language: Language
     def articlesSource: Source
     def commonsSource: Source
+
     def freeImages: Seq[String]
     def nonFreeImages: Seq[String]
   } 

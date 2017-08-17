@@ -40,23 +40,24 @@
 								<jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
 							</jvmArgs>
 							<args>
-								<!-- base folder of downloaded dumps -->
-								<arg>/data/extraction-data/2016-10</arg>
-								<!-- location of SQL file containing MediaWiki table definitions -->
-								<arg>/home/extractor/mediawikiTables.sql</arg>
+								<!-- ALL PARAMS MOVED TO: mysql.import.properties !!!!!!!!!!!!!!
+								
+								<arg>/data/extraction-data/2016-10</arg>-->
+								<!-- location of SQL file containing MediaWiki table definitions
+								<arg>/home/extractor/mediawikiTables.sql</arg>-->
 								<!-- JDBC URL of MySQL server. Import creates a new database for 
-									each wiki. -->
-								<arg>jdbc:mysql://localhost/?characterEncoding=UTF-8&amp;user=root</arg>
-								<!-- require-download-complete -->
-								<arg>true</arg> 
-								<!-- file name: pages-articles.xml{,.bz2,.gz} -->
-								<arg>pages-articles.xml.bz2</arg>
+									each wiki.
+								<arg>jdbc:mysql://localhost/?characterEncoding=UTF-8&amp;user=root</arg>-->
+								<!-- require-download-complete
+								<arg>true</arg> -->
+								<!-- file name: pages-articles.xml{,.bz2,.gz}
+								<arg>pages-articles.xml.bz2</arg>-->
 								<!-- number of parallel imports; this number depends on the number of processors in use
-									and the type of hard disc (hhd/ssd) and how many parallel files reads it can support -->
-								<arg>16</arg>
+									and the type of hard disc (hhd/ssd) and how many parallel files reads it can support
+								<arg>16</arg>-->
 								<!-- languages and article count ranges, comma-separated, e.g. "de,en" 
-									or "@mappings" etc. -->
-								<arg>@downloaded</arg>
+									or "@mappings" etc.
+								<arg>@downloaded</arg>-->
 							</args>
 						</launcher>
 

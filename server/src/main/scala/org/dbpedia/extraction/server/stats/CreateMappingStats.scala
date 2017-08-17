@@ -4,11 +4,12 @@ import java.io.File
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.util.Finder
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import org.dbpedia.extraction.util.{Finder,Language}
-import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.wikiparser.Namespace
+
+import org.dbpedia.extraction.util.ConfigUtils._
 
 /**
  * Script to gather statistics about templates and properties:
@@ -55,10 +56,10 @@ object CreateMappingStats
         val pretty = args(3).toBoolean
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        var languages: Seq[Language] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if lang.nonEmpty) yield Language(lang)
+        var languages = parseLanguages(null, args.drop(4))
           
         // if no languages are given, use all languages for which a mapping namespace is defined
-        if (languages.isEmpty) languages = Namespace.mappings.keySet.toSeq
+        if (languages.isEmpty) languages = Namespace.mappings.keySet.toArray
         
         languages.sorted.par.foreach(language =>  {
           

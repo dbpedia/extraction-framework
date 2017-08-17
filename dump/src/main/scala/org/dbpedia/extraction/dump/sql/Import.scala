@@ -1,31 +1,34 @@
 package org.dbpedia.extraction.dump.sql
 
 import java.io._
+
 import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
+
 import scala.io.Codec
 import scala.collection.mutable.Set
 import java.util.Properties
+
 import scala.io.Source
 
 object Import {
   
   def main(args: Array[String]) : Unit = {
 
-    //TODO put this into a properties file
-    val baseDir = new File(args(0))
-    val tablesFile = new File(args(1))
-    val url = args(2)
-    val requireComplete = args(3).toBoolean
-    val fileName = args(4)
-    val importThreads = args(5).toInt
+    val config = new Config(args(0))
 
-    // Use all remaining args as keys or comma or whitespace separated lists of keys
-    val languages = parseLanguages(baseDir, args.drop(6))
+    //TODO put this into a properties file
+    val baseDir = config.dumpDir
+    val tablesFile = config.getArbitraryStringProperty("tables-file").getOrElse(throw new IllegalArgumentException("tables-file entry is missing in the properties file"))
+    val url = config.getArbitraryStringProperty("jdbc-url").getOrElse(throw new IllegalArgumentException("jdbc-url entry is missing in the properties file"))
+    val requireComplete = config.requireComplete
+    val fileName = config.source.head
+    val importThreads = config.parallelProcesses
+    val languages = config.languages
     
     val source = Source.fromFile(tablesFile)(Codec.UTF8)
     val tables =
@@ -76,7 +79,9 @@ object Import {
                 }
                 finally stmt.close()
 
-                val pages = new Importer(conn, language).process(source)
+                val recorder = config.getDefaultExtractionRecorder[WikiPage](language, 2000)
+                recorder.initialize(language, "import")
+                val pages = new Importer(conn, language, recorder).process(source)
 
                 println(language.wikiCode + ": imported " + pages + " pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
               }

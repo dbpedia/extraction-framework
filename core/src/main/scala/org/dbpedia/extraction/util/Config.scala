@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.util
 
-import java.io.File
+import java.io.{File, FileOutputStream, OutputStreamWriter, Writer}
 import java.net.URL
 import java.util.Properties
 import java.util.logging.{Level, Logger}
 
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.mappings.Extractor
+import org.dbpedia.extraction.mappings.{ExtractionRecorder, Extractor}
 import org.dbpedia.extraction.util.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.wikiparser.Namespace
@@ -76,6 +76,28 @@ class Config(val configPath: String) extends
   lazy val logDir: Option[File] = Option(getString(this, "log-dir")) match {
     case Some(x) => Some(new File(x))
     case None => None
+  }
+
+  def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null): ExtractionRecorder[T] ={
+    val w = if(writer != null) writer
+      else openLogFile(lang.wikiCode) match{
+        case Some(s) => new OutputStreamWriter(s)
+        case None => null
+      }
+    new ExtractionRecorder[T](w, interval, preamble, slackCredentials.getOrElse(null))
+  }
+
+  private def openLogFile(langWikiCode: String): Option[FileOutputStream] ={
+    logDir match{
+      case Some(p) =>
+        var logname = configPath.replace("\\", "/")
+        logname = logname.substring(logname.lastIndexOf("/") + 1)
+        logname = logname + "_" + langWikiCode + ".log"
+        val logFile = new File(p, logname)
+        logFile.createNewFile()
+        Option(new FileOutputStream(logFile))
+      case None => None
+    }
   }
 
   /**
@@ -266,6 +288,7 @@ object Config{
   private val universalProperties: Properties = loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
 
   val universalConfig: Config = new Config(null)
+
 
   /**
     * The content of the wikipedias.csv in the base-dir (needs to be static)
