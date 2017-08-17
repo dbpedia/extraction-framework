@@ -127,6 +127,7 @@ class RML {
       // validate the mapping
       validateMapping(mappingNode)
 
+      // create the response
       createValidResponse("Validation success.", valid = true)
 
 
@@ -1227,7 +1228,7 @@ class RML {
   }
 
   @throws(classOf[InvalidMappingException])
-  private def validateMapping(node : JsonNode) : String = {
+  private def validateMapping(node : JsonNode) = {
     try {
       val mappingFactory = new RMLModelJSONFactory(node)
       val mapping = mappingFactory.create(inferenced = true)
