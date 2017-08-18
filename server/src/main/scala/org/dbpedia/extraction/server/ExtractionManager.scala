@@ -196,6 +196,12 @@ abstract class ExtractionManager(
         CompositeParseExtractor.load(classes,self.getExtractionContext(lang))
     }
 
+  /**
+    * Build the context for all extractors involved
+    * including the config itself
+    * @param lang
+    * @return
+    */
     protected def getExtractionContext(lang: Language) = {
       new { val ontology: Ontology = self.ontology
             val language: Language = lang

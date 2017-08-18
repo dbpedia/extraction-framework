@@ -183,7 +183,7 @@ class Config(val configPath: String) extends
   /**
     * the extractor classes to be used when extracting the XML dumps
     */
-  lazy val extractorClasses: Map[Language, Seq[Class[_ <: Extractor[_]]]] = loadExtractorClasses()
+  lazy val extractorClasses: Map[Language, Seq[Class[_ <: Extractor[_]]]] = ExtractorUtils.loadExtractorsMapFromConfig(languages, this)
 
   /**
     * namespaces loaded defined by the languages in use (see languages)
@@ -195,17 +195,6 @@ class Config(val configPath: String) extends
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template, Namespace.WikidataProperty)
     // Special case for namespace "Main" - its Wikipedia name is the empty string ""
     else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
-  }
-
-  /**
-   * Loads the extractors classes from the configuration.
-   * Loads only the languages defined in the languages property
-   *
-   * @return A Map which contains the extractor classes for each language
-   */
-  private def loadExtractorClasses() : Map[Language, Seq[Class[_ <: Extractor[_]]]] =
-  {
-    ExtractorUtils.loadExtractorsMapFromConfig(languages, this)
   }
 
   lazy val mediawikiConnection: MediaWikiConnection = Try {

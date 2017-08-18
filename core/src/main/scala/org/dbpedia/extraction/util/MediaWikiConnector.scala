@@ -22,19 +22,19 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
   protected def apiUrl: URL = new URL(connectionConfig.apiUrl)
   //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
 
-  protected val maxRetries = connectionConfig.maxRetries
+  protected val maxRetries: Int = connectionConfig.maxRetries
   require(maxRetries <= 10 && maxRetries > 0, "maxRetries has to be in the interval of [1,10]")
 
   /** timeout for connection to web server, milliseconds */
-  protected val connectMs = connectionConfig.connectMs
+  protected val connectMs: Int = connectionConfig.connectMs
   require(connectMs > 200, "connectMs shall be more than 200 ms!")
 
   /** timeout for result from web server, milliseconds */
-  protected val readMs = connectionConfig.readMs
+  protected val readMs: Int = connectionConfig.readMs
   require(readMs > 1000, "readMs shall be more than 1000 ms!")
 
   /** sleep between retries, milliseconds, multiplied by CPU load */
-  protected val sleepFactorMs = connectionConfig.sleepFactor
+  protected val sleepFactorMs: Int = connectionConfig.sleepFactor
   require(sleepFactorMs > 200, "sleepFactorMs shall be more than 200 ms!")
 
   //protected val xmlPath = connectionConfig.abstractTags.split(",").map(_.trim)
@@ -89,7 +89,7 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
       }
       catch
       {
-        case ex: Exception => {
+        case ex: Exception =>
 
           // The web server may still be trying to render the page. If we send new requests
           // at once, there will be more and more tasks running in the web server and the
@@ -107,15 +107,13 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
             sleepMs = (loadFactor * sleepFactorMs).toInt
           }
           ex match {
-            case e : java.net.SocketTimeoutException => {
+            case e : java.net.SocketTimeoutException =>
               if (counter < maxRetries)
                 Thread.sleep(sleepMs)
               else
                 throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, e)
-            }
             case _ => throw ex
           }
-        }
       }
     }
     throw new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded)
