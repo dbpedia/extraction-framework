@@ -89,14 +89,14 @@ class Config(val configPath: String) extends
 
   private def openLogFile(langWikiCode: String): Option[FileOutputStream] ={
     logDir match{
-      case Some(p) =>
+      case Some(p) if p.exists() =>
         var logname = configPath.replace("\\", "/")
         logname = logname.substring(logname.lastIndexOf("/") + 1)
         logname = logname + "_" + langWikiCode + ".log"
         val logFile = new File(p, logname)
         logFile.createNewFile()
         Option(new FileOutputStream(logFile))
-      case None => None
+      case _ => None
     }
   }
 

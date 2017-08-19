@@ -63,7 +63,7 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
     // Fill parameters
     val parameters = "uselang=" + pageTitle.language.wikiCode + (pageTitle.id match{
       case Some(id) if apiParameterString.contains("%d") =>
-        apiParameterString.replace("%s", "").format(id)
+        apiParameterString.replace("&page=%s", "").format(id)
       case _ => apiParameterString.replaceAll("&pageid=[^&]+", "").format(titleParam)
     })
 
