@@ -9,16 +9,10 @@ import org.dbpedia.extraction.util.{ProxyAuthenticator, WikiInfo}
 
 object Download
 {
-  /** name of marker file in wiki directory */
-  val Started = "download-started"
-  
-  /** name of marker file in wiki date directory */
-  // Note: also used in CreateMappingStats.scala
-  // TODO: move this constant to core, or use config value
-  val Complete = "download-complete"
-    
+
   def main(args: Array[String]) : Unit =
   {
+    assert(args.length == 1,"Download needs a single parameter: the path to the pertaining properties file (see: download.10000.properties).")
     val config = new DownloadConfig(args.head)
 
     if (config.languages.isEmpty) throw Usage("No files to download, because no languages were defined.")
@@ -44,7 +38,7 @@ object Download
     
     // sort them to have reproducible behavior
       config.languages.foreach { lang =>
-        val ld = new LanguageDownloader(config.baseUrl, config.dumpDir, config.wikiName, lang, config.source.map(x => (x, true)), downloader)
+        val ld = new LanguageDownloader(config, downloader, lang)
         config.dumpDate match{
           case Some(d) => if(!ld.downloadDate(d))
             System.err.println("An error occurred while trying to download a dump file (" + d + ")for language: " + lang.wikiCode)

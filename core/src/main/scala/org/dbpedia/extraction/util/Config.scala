@@ -11,6 +11,7 @@ import org.dbpedia.extraction.mappings.{ExtractionRecorder, Extractor}
 import org.dbpedia.extraction.util.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.util.RichFile.wrapFile
 
 import scala.collection.Map
 import scala.io.Codec
@@ -176,6 +177,24 @@ class Config(val configPath: String) extends
   lazy val requireComplete: Boolean = this.getProperty("require-download-complete", "false").trim.toBoolean
 
   /**
+    * determines if 1. the download has to be completed and if so 2. looks for the download-complete file
+    * @param lang - the language for which to check
+    * @return
+    */
+  def isDownloadComplete(lang:Language): Boolean ={
+    if(requireComplete){
+      val finder = new Finder[File](dumpDir, lang, wikiName)
+      val date = finder.dates(source.head).last
+      finder.file(date, Config.Complete) match {
+        case None => false
+        case Some(x) => x.exists()
+      }
+    }
+    else
+      true
+  }
+
+  /**
     * TODO experimental, ignore for now
     */
   lazy val retryFailedPages: Boolean = this.getProperty("retry-failed-pages", "false").trim.toBoolean
@@ -241,6 +260,10 @@ class Config(val configPath: String) extends
 }
 
 object Config{
+
+  /** name of marker file in wiki date directory */
+  val Complete = "download-complete"
+
   case class NifParameters(
     nifQuery: String,
     nifTags: String,

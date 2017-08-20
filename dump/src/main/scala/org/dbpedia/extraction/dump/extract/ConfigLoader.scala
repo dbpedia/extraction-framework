@@ -272,7 +272,7 @@ class ConfigLoader(config: Config)
   private def latestDate(finder: Finder[_]): String = {
     val isSourceRegex = config.source.startsWith("@")
     val source = if (isSourceRegex) config.source.head.substring(1) else config.source.head
-    val fileName = if (config.requireComplete) Download.Complete else source
+    val fileName = if (config.requireComplete) Config.Complete else source
     finder.dates(fileName, isSuffixRegex = isSourceRegex).last
   }
 }

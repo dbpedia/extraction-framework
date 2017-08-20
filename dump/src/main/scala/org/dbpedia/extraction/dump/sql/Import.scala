@@ -19,21 +19,20 @@ object Import {
   
   def main(args: Array[String]) : Unit = {
 
-    val config = new Config(args(0))
+    assert(args.length == 1,"Importer needs a single parameter: the path to the pertaining properties file (see: mysql.import.properties).")
+    val config = new Config(args.head)
 
-    //TODO put this into a properties file
     val baseDir = config.dumpDir
     val tablesFile = config.getArbitraryStringProperty("tables-file").getOrElse(throw new IllegalArgumentException("tables-file entry is missing in the properties file"))
     val url = config.getArbitraryStringProperty("jdbc-url").getOrElse(throw new IllegalArgumentException("jdbc-url entry is missing in the properties file"))
-    val requireComplete = config.requireComplete
     val fileName = config.source.head
     val importThreads = config.parallelProcesses
     val languages = config.languages
     
     val source = Source.fromFile(tablesFile)(Codec.UTF8)
     val tables =
-    try source.getLines.mkString("\n")
-    finally source.close()
+      try source.getLines.mkString("\n")
+      finally source.close()
     
     //With the new change in Abstract extractor we need all articles TODO FIX this sometime soon and use only categories
     val namespaces = Set(Namespace.Template, Namespace.Category, Namespace.Main, Namespace.Module)
@@ -48,12 +47,7 @@ object Import {
           val finder = new Finder[File](baseDir, language, "wiki")
           val date = finder.dates(fileName).last
 
-          val completeExists = finder.file(date, Download.Complete) match {
-            case None => false
-            case Some(x) => x.exists()
-          }
-
-          if (requireComplete && completeExists) {
+          if (config.isDownloadComplete(language)) {
             finder.file(date, fileName) match {
               case None =>
               case Some(file) => {
@@ -87,6 +81,8 @@ object Import {
               }
             }
           }
+          else
+            println(language.name + " could not be imported! Download was not complete.")
         }
           finally conn.close()
       }, languages.toList)
