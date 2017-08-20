@@ -2,17 +2,15 @@ package org.dbpedia.extraction.dump.sql
 
 import java.io._
 
-import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util._
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
 
 import scala.io.Codec
-import scala.collection.mutable.Set
 import java.util.Properties
 
+import scala.collection.mutable
 import scala.io.Source
 
 object Import {
@@ -33,9 +31,8 @@ object Import {
     val tables =
       try source.getLines.mkString("\n")
       finally source.close()
-    
-    //With the new change in Abstract extractor we need all articles TODO FIX this sometime soon and use only categories
-    val namespaces = Set(Namespace.Template, Namespace.Category, Namespace.Main, Namespace.Module)
+
+    val namespaces = mutable.Set(Namespace.Template, Namespace.Category, Namespace.Main, Namespace.Module)
     val namespaceList = namespaces.map(_.name).mkString("[",",","]")
 
       org.dbpedia.extraction.util.Workers.work(SimpleWorkers(importThreads, importThreads){ language : Language =>      //loadfactor: think about disk read speed and mysql processes
@@ -50,7 +47,7 @@ object Import {
           if (config.isDownloadComplete(language)) {
             finder.file(date, fileName) match {
               case None =>
-              case Some(file) => {
+              case Some(file) =>
                 val database = finder.wikiName
 
                 println(language.wikiCode + ": importing pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
@@ -78,7 +75,6 @@ object Import {
                 val pages = new Importer(conn, language, recorder).process(source)
 
                 println(language.wikiCode + ": imported " + pages + " pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
-              }
             }
           }
           else

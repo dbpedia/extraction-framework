@@ -24,9 +24,13 @@ class Importer(conn: Connection, lang: Language, recorder: ExtractionRecorder[Wi
     }
 
     recorder.printLabeledLine("Retrying all failed pages:", RecordSeverity.Warning, lang, null, noLabel = true)
-    for(fail <- recorder.listFailedPages(lang))
-      if(!insertPageContent(fail._1._2))
-        recorder.printLabeledLine("Retrying all failed pages:", RecordSeverity.Warning, lang)
+
+    recorder.listFailedPages.get(lang) match{
+      case None =>
+      case Some(fails) => for(fail <- fails.keys.map(x => x._2))
+        if(!insertPageContent(fail))
+          recorder.printLabeledLine("Retrying all failed pages:", RecordSeverity.Warning, lang)
+    }
 
     recorder.successfulPages(lang).toInt
   }
