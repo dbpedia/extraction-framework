@@ -58,7 +58,7 @@ class RMLModel(private val mapping : Model,
 
   def getMappedProperties : List[String] = {
     val references = model.listObjectsOfProperty(model.createProperty(Property.REFERENCE)).toList.asScala
-    references.map(reference => reference.asLiteral().getString).toList
+    references.map(reference => reference.asLiteral().getString).toList.distinct
   }
 
   override def toString : String = {
