@@ -297,8 +297,14 @@ class RML {
           val stats = languageStats(normalizedName)
 
           val count = stat.templateCount.toInt
-          val propertiesCount = stat.propertyCount.toInt
-          val mappedPropertiesCount = stats.mappedProperties.size.toDouble
+
+          // check which properties that are mapped are effectively a valid property of the infobox
+          val properties = stat.properties.keySet
+          val mappedProperties = stats.mappedProperties.toSet
+          val intersection = properties.intersect(mappedProperties)
+
+          val propertiesCount = stat.properties.size.toDouble
+          val mappedPropertiesCount = intersection.size.toDouble
 
           statNode.put("name", WikiUtil.wikiEncode(name))
           statNode.put("count", count)
