@@ -43,6 +43,32 @@ class TemplatesAnalyzeAPITest extends FunSuite {
 
   }
 
+  /**
+    * This mapping file has an other wise condition as the first condition, this is not allowed.
+    */
+  test("testGetConditional4") {
+
+    try {
+      val tuple = postTest("/conditionalTemplateAnalyzingTest3/input.json", "/conditionalTemplateAnalyzingTest3/output.json")
+      assert(false) // succeeded, so fail
+    } catch {
+      case e : Exception => assert(true)
+    }
+  }
+
+  /**
+    * This mapping file has an other wise condition as the first condition on a class mapping, this is not allowed.
+    */
+  test("testGetConditional5") {
+
+    try {
+      val tuple = postTest("/conditionalTemplateAnalyzingTest4/input.json", "/conditionalTemplateAnalyzingTest4/output.json")
+      assert(false) // succeeded, so fail
+    } catch {
+      case e : Exception => assert(true)
+    }
+  }
+
   private def postTest(resource : String, expected : String) : (String, String) = {
 
     val stream : InputStream = getClass.getResourceAsStream(resource)

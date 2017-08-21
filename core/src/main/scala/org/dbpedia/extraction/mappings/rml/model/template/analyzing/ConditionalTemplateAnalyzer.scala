@@ -15,7 +15,6 @@ class ConditionalTemplateAnalyzer(ontology: Ontology, ignore : Boolean = false) 
   def apply(pom: RMLPredicateObjectMap): Template ={
 
     if(!pom.isInstanceOf[RMLConditionalPredicateObjectMap]) {
-      println(pom.rrObject)
       throw new IllegalArgumentException("Predicate Object Map is not conditional.")
     }
 
