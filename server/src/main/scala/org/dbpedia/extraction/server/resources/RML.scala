@@ -26,8 +26,8 @@ import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.server.resources.rml.{BadRequestException, InvalidMappingException, MappingsTrackerRepo}
 import org.dbpedia.extraction.server.resources.stylesheets.TriX
 import org.dbpedia.extraction.sources.WikiSource
-import org.dbpedia.extraction.util.{Language, WikiUtil}
-import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.util.{Language, WikiApi, WikiUtil}
+import org.dbpedia.extraction.wikiparser.{TemplateNode, WikiParser, WikiTitle}
 
 import scala.collection.JavaConverters._
 import scala.io.Source
@@ -332,6 +332,60 @@ class RML {
 
   }
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  Wiki API
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  @GET
+  @Path("{language}/wiki/{title}/templates")
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def retrieveTemplatesFromWikiTitle(@PathParam("language") language: String, @PathParam("title") title: String): Response = {
+
+    def searchForTemplate(node: org.dbpedia.extraction.wikiparser.Node, templateNodes: Set[TemplateNode]): Set[TemplateNode] = {
+      val childTemplateNodes = node.children.flatMap(node => searchForTemplate(node, templateNodes))
+      node match {
+        case n: TemplateNode => templateNodes + n ++ childTemplateNodes
+        case _ => templateNodes ++ childTemplateNodes
+      }
+    }
+
+    //TODO clean up
+
+    try {
+
+      val url = new URL(Language(language).apiUri)
+      val source = WikiSource.fromTitles(List(WikiTitle.parse(title, Language(language))), url, Language(language))
+
+      val page = source.head
+      val wikiParser = WikiParser.getInstance()
+      val pageNodeOption = wikiParser(page)
+      val templates = if (pageNodeOption.isDefined) {
+        val pageNode = pageNodeOption.get
+        searchForTemplate(pageNode, Set())
+      } else Set()
+
+      templates.foreach(template => println(template.title.encoded))
+
+      val responseNode = JsonNodeFactory.instance.objectNode()
+      val templatesNode = JsonNodeFactory.instance.arrayNode()
+      responseNode.set("templates", templatesNode)
+      templates.foreach(template => templatesNode.add(template.title.encoded))
+
+      Response.status(Response.Status.ACCEPTED).entity(responseNode.toString).`type`(MediaType.APPLICATION_JSON).build()
+
+    } catch {
+      case e: BadRequestException => createBadRequestExceptionResponse(e)
+      case e: IllegalArgumentException => createBadRequestExceptionResponse(e)
+      case e: Exception => {
+        e.printStackTrace()
+        createInternalServerErrorResponse(e)
+      }
+    }
+
+
+
+  }
 
 
 
