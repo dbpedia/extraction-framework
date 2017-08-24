@@ -23,7 +23,7 @@ class WikiAPiTest extends FlatSpec with Matchers {
     val expectedJson = scala.io.Source.fromInputStream( stream2 ).getLines.mkString
 
     val httpClient = new DefaultHttpClient()
-    val getMethod = new HttpGet("http://localhost:9999/server/rml/en/wiki/Bill_gates/templates")
+    val getMethod = new HttpGet("http://localhost:9999/server/rml/en/wiki/Bill_Gates/templates")
     val rawResponse = httpClient.execute(getMethod)
     val responseString = new BasicResponseHandler().handleResponse(rawResponse)
 

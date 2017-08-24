@@ -103,8 +103,8 @@ class RML {
       createExtractionResponse(writer.toString, "Extraction successful")
 
     } catch {
-      case e : OntologyException => createBadRequestExceptionResponse(e)
-      case e : BadRequestException => createBadRequestExceptionResponse(e)
+      case e : OntologyException => e.printStackTrace(); createBadRequestExceptionResponse(e)
+      case e : BadRequestException => e.printStackTrace(); createBadRequestExceptionResponse(e)
       case e : Exception =>
         e.printStackTrace()
         createInternalServerErrorResponse(e)
@@ -371,6 +371,7 @@ class RML {
       val templatesNode = JsonNodeFactory.instance.arrayNode()
       responseNode.set("templates", templatesNode)
       templates.foreach(template => templatesNode.add(template.title.encoded))
+      responseNode.put("msg", "Success.")
 
       Response.status(Response.Status.ACCEPTED).entity(responseNode.toString).`type`(MediaType.APPLICATION_JSON).build()
 

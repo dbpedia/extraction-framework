@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.load
 
 import java.io._
+import java.net.{URLDecoder, URLEncoder}
 import java.nio.charset.Charset
 import java.nio.file.{Files, Path, Paths, StandardOpenOption}
 
@@ -193,7 +194,7 @@ object RMLInferencer {
 
     // read the InputStream into the model
     model.read(in, base, "TURTLE")
-    val empty = model.isEmpty
+
     // create the reasoner
     val reasoner = new GenericRuleReasoner(rules)
     val infModel = ModelFactory.createInfModel(reasoner, model)
@@ -202,11 +203,13 @@ object RMLInferencer {
     val out = new StringWriter()
     infModel.write(out, "TURTLE", base)
 
+    val decodedInfModelString = URLDecoder.decode(out.toString) //string writer does not decode
+
     // mapping name regex
     val mappingNameRegex = "Mapping_[^/]+".r
     val fileName = mappingNameRegex.findFirstIn(base).orNull.toString + ".ttl"
 
-    val formatted = RMLFormatter.format(out.toString, base, language)
+    val formatted = RMLFormatter.format(decodedInfModelString, base, language)
     val writer = new BufferedWriter(new FileWriter(outputPath + "/" + fileName))
     writer.write(formatted)
     writer.close()

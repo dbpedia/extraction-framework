@@ -24,8 +24,9 @@ import scala.language.reflectiveCalls
   *
   * Runs the RML Processor
   *
-  * //TODO: refactor this class @wmaroy!
-  */
+  * TODO: refactor this class @wmaroy!
+  * TODO: a new RML engine is under development, this class will change
+  **/
 class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
 
   def process(templateNode: TemplateNode, mappingName : String, subjectUri: String, context : { def language : Language
