@@ -4,12 +4,12 @@ import java.util.logging.Logger
 import java.io.IOException
 import java.net.{HttpURLConnection, URL, URLEncoder}
 import javax.net.ssl.HttpsURLConnection
-
-import scala.xml.{Elem, Node, XML}
+import scala.xml.{XML, Elem, Node}
 import scala.collection.immutable.Seq
 import scala.language.postfixOps
-import org.dbpedia.extraction.wikiparser.{Namespace, TemplateNode, WikiParser, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import org.dbpedia.extraction.sources.WikiPage
+
 import WikiApi._
 
 object WikiApi
@@ -263,23 +263,6 @@ class WikiApi(url: URL, language: Language)
         val continue = response \ "continue" \@ "continue"
         val pages = (response \ "query" \ "allpages" \ "p").theSeq
         (apcontinue, continue, pages)
-    }
-
-
-    def retrieveTemplatesFromTitle(title: WikiTitle) : Set[TemplateNode] = {
-
-        def searchForTemplate(node : Node) = {
-
-        }
-
-        val page = retrievePagesByTitle(List(title)).head
-        val wikiParser = WikiParser.getInstance()
-        val pageNodeOption = wikiParser(page)
-        if(pageNodeOption.isDefined) {
-            val pageNode = pageNodeOption.get
-            searchForTemplate(pageNode)
-        }
-
     }
 
     /**
