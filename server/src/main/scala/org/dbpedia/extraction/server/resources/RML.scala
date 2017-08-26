@@ -306,11 +306,16 @@ class RML {
           val propertiesCount = stat.properties.size.toDouble
           val mappedPropertiesCount = intersection.size.toDouble
 
+          // retrieve all properties of this stat
+          val propertiesArray = JsonNodeFactory.instance.arrayNode()
+          properties.foreach(property => propertiesArray.add(property))
+
           statNode.put("name", WikiUtil.wikiEncode(name))
           statNode.put("count", count)
           statNode.put("propertiesCount", propertiesCount)
           statNode.put("mappedPropertiesCount", mappedPropertiesCount)
           statNode.put("mappedRatio", (mappedPropertiesCount / propertiesCount) * 100)
+          statNode.set("properties", propertiesArray)
 
           statsArrayNode.add(statNode)
         }
