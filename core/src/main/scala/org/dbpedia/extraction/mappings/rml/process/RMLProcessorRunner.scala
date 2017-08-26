@@ -25,7 +25,7 @@ import scala.language.reflectiveCalls
   * Runs the RML Processor
   *
   * TODO: refactor this class @wmaroy!
-  * TODO: a new RML engine is under development, this class will change
+  * TODO: a new RML engine is under development with better library support, this class will change
   **/
 class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
 
@@ -126,7 +126,7 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
 
       } else {
 
-        // if the ontology is not in DBpedia!
+        // If the used property is not in the DBpedia ontology. This is for extracting data with other ontologies.
         val datatype = if(statement.getObject.isResource) {
           null
         } else {
@@ -140,7 +140,18 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
         quad
       }
 
+      // add quad
       seq :+= quad
+
+      // add related classes
+      if(ontologyProperty.name == "rdf:type") {
+        val ontologyClass = RMLOntologyUtil.loadOntologyClassFromIRI(objectValue, context)
+        ontologyClass.relatedClasses.foreach(cls => {
+          val typeDataset = if (cls.equals(ontologyClass)) DBpediaDatasets.OntologyTypes else DBpediaDatasets.OntologyTypesTransitive
+          seq :+= new Quad(context.language, typeDataset, subjectURIDecoded, ontologyProperty, cls.uri, templateNode.sourceUri+"&mappedTemplate="+templateNode.title.encoded)
+        })
+      }
+
 
     }
 
