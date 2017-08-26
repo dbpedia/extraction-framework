@@ -75,7 +75,12 @@ object RMLOntologyUtil {
   }
 
   def loadOntologyClassFromIRI(ontologyIRI : String, context : {def ontology: Ontology}): OntologyClass = {
-    val localOntologyClassName = ontologyIRI.replaceAll(".*/","")
+    val pattern = "(.*[/#])([^/#]+)".r
+    val pattern(namespace, localname) = ontologyIRI
+    val prefix = getPrefix(namespace)
+    val localOntologyClassName = if(prefix != "dbo") {
+      prefix + ":" + localname
+    } else localname
     try {
       loadOntologyClass(localOntologyClassName, context)
     } catch {
@@ -84,7 +89,12 @@ object RMLOntologyUtil {
   }
 
   def loadOntologyDataTypeFromIRI(ontologyIRI : String, context : { def ontology : Ontology}) : Datatype = {
-      val localOntologyDataTypeName = ontologyIRI.replaceAll(".*/","")
+    val pattern = "(.*[/#])([^/#]+)".r
+    val pattern(namespace, localname) = ontologyIRI
+    val prefix = getPrefix(namespace)
+    val localOntologyDataTypeName = if(prefix != "dbo") {
+      prefix + ":" + localname
+    } else localname
       loadOntologyDataType(localOntologyDataTypeName, context)
   }
 

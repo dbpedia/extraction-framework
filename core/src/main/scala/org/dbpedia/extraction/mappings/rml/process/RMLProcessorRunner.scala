@@ -152,7 +152,6 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
         })
       }
 
-
     }
 
     seq
