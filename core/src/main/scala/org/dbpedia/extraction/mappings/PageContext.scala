@@ -17,6 +17,16 @@ class PageContext()
     def generateUri(baseUri : String, name : String) = uriGenerator.generate(baseUri, name)
 }
 
+object PageContext {
+
+    private val uriGenerator = new UriGenerator()
+
+    def generateUri(baseUri : String, node : Node) = uriGenerator.generate(baseUri, node)
+
+    def generateUri(baseUri : String, name : String) = uriGenerator.generate(baseUri, name)
+
+}
+
 private class UriGenerator
 {
     var uris = Map[String, Int]()

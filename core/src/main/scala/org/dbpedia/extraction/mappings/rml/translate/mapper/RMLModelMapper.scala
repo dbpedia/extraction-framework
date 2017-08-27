@@ -61,7 +61,8 @@ class RMLModelMapper(rmlModel: RMLTranslationModel) {
         val geoCoordinatesMapping = mapping.asInstanceOf[GeoCoordinatesMapping]
         val template = WikiTextTemplateFactory.createGeocoordinateTemplate(WikiTextBundle(geoCoordinatesMapping))
         val count = rmlModel.count(RMLUri.LATITUDEMAPPING)
-        val counter = Counter(geoCoordinates = count)
+        val intermediateCount = rmlModel.count(RMLUri.INTERMEDIATEMAPPING)
+        val counter = Counter(geoCoordinates = count, intermediates = intermediateCount)
         TemplateAssembler.assembleTemplate(rmlModel, template, language, counter)
         List()
       }

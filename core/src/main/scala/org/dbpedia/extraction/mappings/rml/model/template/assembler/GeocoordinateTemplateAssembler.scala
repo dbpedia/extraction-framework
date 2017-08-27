@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
+import org.dbpedia.extraction.mappings.PageContext
 import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
@@ -27,46 +28,42 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
   private def addGeoCoordinatesMapping() : List[RMLPredicateObjectMap] =
   {
     if(template.ontologyProperty != null) {
-      /**
-        * val pom = rmlModel.triplesMap.addPredicateObjectMap(uri)
-        * pom.addDCTermsType(new RMLLiteral("intermediateGeoMapping"))
-        * val triplesMap = addParentTriplesMapToPredicateObjectMap(pom)
-        * triplesMap.addLogicalSource(rmlModel.logicalSource)
-        * val parentSubjectMap = triplesMap.addSubjectMap(triplesMap.uri.extend("/SubjectMap"))
-        * parentSubjectMap.addClass(RMLUri(RdfNamespace.GEO.namespace + "SpatialThing"))
-        * parentSubjectMap.addIRITermType()
-        * parentSubjectMap.addRMLReference(new RMLLiteral(mapping.ontologyProperty.name))
-        * addGeoCoordinatesMappingToTriplesMap(triplesMap)
-        * List(pom)
-        **
-        * TODO: enable these again
-        *
-        **/
-      List()
+      // change the base uri
+      val intermediateBaseUri = baseUri + "/" + RMLUri.INTERMEDIATEMAPPING + "/" + counter.intermediates
+      val pom = rmlModel.triplesMap.addPredicateObjectMap(RMLUri(intermediateBaseUri))
+      val triplesMap = addParentTriplesMapToPredicateObjectMap(pom)
+      triplesMap.addLogicalSource(rmlModel.logicalSource)
+      val parentSubjectMap = triplesMap.addSubjectMap(RMLUri(intermediateBaseUri + "/SubjectMap"))
+      parentSubjectMap.addClass(RMLUri(RdfNamespace.GEO.namespace + "SpatialThing"))
+      parentSubjectMap.addIRITermType()
+      val templateURI = PageContext.generateUri("http://"+ language +".dbpedia.org/resource/{wikititle}", template.ontologyProperty.name)
+      parentSubjectMap.addTemplate(RMLLiteral(templateURI))
+      addGeoCoordinatesMappingToTriplesMap(triplesMap, intermediateBaseUri)
+      List(pom)
     } else {
       addGeoCoordinatesMappingToTriplesMap(rmlModel.triplesMap)
     }
   }
 
-  private def addGeoCoordinatesMappingToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap]  =
+  private def addGeoCoordinatesMappingToTriplesMap(triplesMap: RMLTriplesMap, baseUri : String = baseUri) : List[RMLPredicateObjectMap]  =
   {
 
     if(template.coordinate != null) {
 
-      addCoordinatesToTriplesMap(triplesMap)
+      addCoordinatesToTriplesMap(triplesMap, baseUri : String)
 
     } else if(template.latitude != null && template.longitude != null) {
 
-      addLongitudeLatitudeToTriplesMap(triplesMap)
+      addLongitudeLatitudeToTriplesMap(triplesMap, baseUri : String)
 
     } else {
 
-      addDegreesToTriplesMap(triplesMap)
+      addDegreesToTriplesMap(triplesMap, baseUri : String)
 
     }
   }
 
-  private def addCoordinatesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  private def addCoordinatesToTriplesMap(triplesMap: RMLTriplesMap, baseUri : String) : List[RMLPredicateObjectMap] =
   {
 
     val latPom = if(!independent) {
@@ -87,7 +84,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
 
   }
 
-  private def addLongitudeLatitudeToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  private def addLongitudeLatitudeToTriplesMap(triplesMap: RMLTriplesMap, baseUri : String) : List[RMLPredicateObjectMap] =
   {
 
     val latPom = if(!independent) {
@@ -108,7 +105,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
 
   }
 
-  private def addDegreesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  private def addDegreesToTriplesMap(triplesMap: RMLTriplesMap, baseUri : String) : List[RMLPredicateObjectMap] =
   {
 
     val latPom = if(!independent) {

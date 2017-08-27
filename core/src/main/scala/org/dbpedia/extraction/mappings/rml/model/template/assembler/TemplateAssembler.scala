@@ -74,7 +74,14 @@ object TemplateAssembler {
       case GeocoordinateTemplate.NAME => {
         val templateInstance = template.asInstanceOf[GeocoordinateTemplate]
         val pomList = assembleGeocoordinateTemplate(rmlModel, templateInstance, baseUri, language, counter, independent)
-        val updatedCounter = counter.update(geoCoordinates = counter.geoCoordinates + 1)
+
+        // if ontology property != null then an intermediate mapping will be created as well, this was added later, a small design flaw :)
+        val updatedCounter = if(templateInstance.ontologyProperty == null) {
+          counter.update(geoCoordinates = counter.geoCoordinates + 1)
+        } else {
+          counter.update(geoCoordinates = counter.geoCoordinates + 1, intermediates = counter.intermediates + 1)
+        }
+
         (updatedCounter, pomList)
       }
 
