@@ -29,6 +29,12 @@ object ImageExtractorConfig
            "ru" -> """(?iu)\{\{\s?(CopyrightByWikimedia|Fairuse|несвободный файл|несвободная лицензия|запрещенная лицензия)\s?\}\}""".r
     )
 
+    val flagRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(flag|banner|pavillon|drapeau|bandera|pabellón|bandiera|флаг)([^\w]*|[_\s]+)""".r
+    val mapRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(map|karte|location|position|carte|carta|lage)([^\w]*|[_\s]+)""".r
+    val signatureRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(signature|unterschrift)""".r
+    val cOARegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(coat_of_arms|emblem|crest|wappen|grandes_armes|blason|armoiries)([^\w]*|[_\s]+)""".r
+
+
     val supportedLanguages = NonFreeRegex.keySet
 
     val ImageRegex = """(?i)[^\"/\*?<>|:]+\.(?:jpe?g|png|gif|svg)""".r

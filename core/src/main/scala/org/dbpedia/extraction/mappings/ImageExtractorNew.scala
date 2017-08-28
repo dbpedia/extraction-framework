@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import java.net.URLDecoder
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
@@ -9,7 +10,8 @@ import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{ExtractorUtils, Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.language.reflectiveCalls
 
 /**
@@ -20,6 +22,7 @@ class ImageExtractorNew(
                         def ontology: Ontology
                         def language: Language
                         def nonFreeImages: Seq[String]
+                        def freeImages: Seq[String]
                       }
 )
 extends PageNodeExtractor
@@ -48,30 +51,55 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.Images)
 
+  private var imagesInCommons = 0
+
+  private var mainImageFound = false
+
+  private var flagImage : ArrayBuffer[Option[(String, Node)]] = ArrayBuffer()
+  private var coatOfArmsImage : ArrayBuffer[Option[(String, Node)]] = ArrayBuffer()
+  private var mapImage : ArrayBuffer[Option[(String, Node)]] = ArrayBuffer()
+  private var signatureImage : ArrayBuffer[Option[(String, Node)]] = ArrayBuffer()
+  private var mainImage : Option[(String, Node)] = None
+
   override def extract(node: PageNode, subjectUri: String): Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Main) return Seq.empty
 
     var quads = new ArrayBuffer[Quad]()
+    var duplicateMap = mutable.HashMap[String, Boolean]()
 
+    var i = 1
     imageSearch(node.children, 0).foreach(_ match {
       case Some((imageFileName, sourceNode)) =>
-        val lang = language
-        val url = ExtractorUtils.getFileURL(imageFileName, lang)
-        val thumbnailUrl = ExtractorUtils.getThumbnailURL(imageFileName, lang)
+        // quick dublicate check
+        if(duplicateMap.get(imageFileName) == None) {
+          duplicateMap.put(imageFileName, true)
 
-        quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceIri)
-        quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceIri)
-        quads += new Quad(language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceIri)
-        quads += new Quad(language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceIri)
-        quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceIri)
+          val lang = if(context.freeImages.contains(URLDecoder.decode(imageFileName, "UTF-8")))
+            language else commonsLang
+          val url = ExtractorUtils.getFileURL(imageFileName, lang)
+          val thumbnailUrl = ExtractorUtils.getThumbnailURL(imageFileName, lang)
 
-        val wikipediaImageUrl = language.baseUri + "/wiki/" + fileNamespaceIdentifier + ":" + imageFileName
+          quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceIri)
+          quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceIri)
+          quads += new Quad(language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceIri)
+          quads += new Quad(language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceIri)
+          quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceIri)
 
-        quads += new Quad(language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
-        quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
+          val wikipediaImageUrl = language.baseUri + "/wiki/" + fileNamespaceIdentifier + ":" + imageFileName
+          println(i + ". " + url)
+          i += 1
+
+          quads += new Quad(language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
+          quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
+        }
       case None =>
     })
+//    mainImage.foreach(m => println("Main Image: " + ExtractorUtils.getFileURL(m._1, commonsLang)))
+//    flagImage.foreach(_.foreach(m => println("Flag: " + ExtractorUtils.getFileURL(m._1, commonsLang))))
+//    coatOfArmsImage.foreach(_.foreach(m => println("COA: " + ExtractorUtils.getFileURL(m._1, commonsLang))))
+//    mapImage.foreach(_.foreach(m => println("Map: " + ExtractorUtils.getFileURL(m._1, commonsLang))))
+//    signatureImage.foreach(_.foreach(m => println("Signature: " + ExtractorUtils.getFileURL(m._1, commonsLang))))
     quads
   }
 
@@ -88,19 +116,21 @@ extends PageNodeExtractor
     // for other types of node => recursive search for these types in their children
     nodes.foreach(node => node match {
       case TextNode(_,_) =>
+        // toWikiText is used instead of toPlainText because some images would get lost.
         ImageExtractorConfig.ImageLinkRegex.findAllIn(node.toWikiText).foreach(file => {
-          // remove unwanted leftovers from the wikiText
+          // split on "[:=\\|]" removes unwanted leftovers from the wikiText
           images += processImageLink(file.split("[:=\\|]").last, node)
         })
       case InternalLinkNode(_,_,_,_) =>
-        ImageExtractorConfig.ImageLinkRegex.findAllIn(node.toWikiText).foreach(file => {
-          images += processImageLink(file.split("[:=\\|]").last, node)
-        })
+          ImageExtractorConfig.ImageLinkRegex.findAllIn(node.toWikiText).foreach(file => {
+            images += processImageLink(file.split("[:=\\|]").last, node)
+          })
       case InterWikiLinkNode(_,_,_,_) =>
         ImageExtractorConfig.ImageLinkRegex.findAllIn(node.toWikiText).foreach(file => {
           images += processImageLink(file.split("[:=\\|]").last, node)
         })
-      case _ => if(depth < recursionDepth) images ++= imageSearch(node.children, depth + 1)
+      case _ =>
+        if(depth < recursionDepth) images ++= imageSearch(node.children, depth + 1)
     })
     images
   }
@@ -117,9 +147,35 @@ extends PageNodeExtractor
     if (encodedLinkRegex.findFirstIn(fileName).isEmpty)
       encodedFileName = WikiUtil.wikiEncode(fileName)
 
-    // Copyright Check => Exclude Non-Free Images
-    if(!context.nonFreeImages.contains(fileName)) Some((encodedFileName, node))
+    val result = if(!context.nonFreeImages.contains(fileName)) Some((encodedFileName, node))
     else None
-    }
 
+    // --------------- Special Images ---------------
+    var alreadyUsed = false
+      ImageExtractorConfig.flagRegex.findFirstIn(encodedFileName).foreach(_ => {
+        flagImage += result
+        alreadyUsed = true
+      })
+      ImageExtractorConfig.mapRegex.findFirstIn(encodedFileName).foreach(_ => {
+        mapImage += result
+        alreadyUsed = true
+      })
+      ImageExtractorConfig.cOARegex.findFirstIn(encodedFileName).foreach(_ => {
+        coatOfArmsImage += result
+        alreadyUsed = true
+      })
+      ImageExtractorConfig.signatureRegex.findFirstIn(encodedFileName).foreach(_ => {
+        signatureImage += result
+        alreadyUsed = true
+      })
+    if(!mainImageFound){
+      // First Image will be defined as main Image
+      mainImage = result
+      mainImageFound = true
+      alreadyUsed = true
+    }
+    // --------------- Normal Images ---------------
+    if(!alreadyUsed) result
+    else None
+  }
 }
