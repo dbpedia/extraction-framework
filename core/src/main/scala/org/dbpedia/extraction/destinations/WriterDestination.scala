@@ -1,17 +1,20 @@
 package org.dbpedia.extraction.destinations
 
 import java.io.Writer
+
+import org.apache.jena.shared.BadURIException
 import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.mappings.ExtractionRecorder
 import org.dbpedia.extraction.transform.Quad
 
-import scala.collection.mutable.{ListBuffer, ArrayBuffer}
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 /**
  * Writes quads to a writer.
  * 
  * @param called in open() to obtain the writer.
  */
-class WriterDestination(factory: () => Writer, formatter : Formatter)
+class WriterDestination(factory: () => Writer, formatter : Formatter, extractionRecorder: ExtractionRecorder[Quad] = null)
 extends Destination
 {
   private var writer: Writer = null
@@ -31,7 +34,9 @@ extends Destination
    */
   override def write(graph : Traversable[Quad]) = synchronized {
     for(quad <- graph) {
-      writer.write(formatter.render(quad))
+      val formatted = formatter.render(quad)
+      if(extractionRecorder != null) if(formatted.startsWith("#")) extractionRecorder.failedRecord(quad.subject, null, quad, new BadURIException(formatted))
+      writer.write(formatted)
     }
   }
 

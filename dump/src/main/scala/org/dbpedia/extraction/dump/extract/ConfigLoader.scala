@@ -39,6 +39,8 @@ class ConfigLoader(config: Config)
   private val nonFreeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
   private val freeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
 
+  private val extractionMonitor = new ExtractionMonitor[WikiPage]()
+
   def getExtractionRecorder(lang: Language): ExtractionRecorder[WikiPage] = {
     extractionRecorder.get(lang) match {
       case None => {

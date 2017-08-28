@@ -24,8 +24,9 @@ class ExtractionRecorder[T](
    val logWriter: Writer = null,
    val reportInterval: Int = 100000,
    val preamble: String = null,
-   val slackCredantials: SlackCredentials = null
- ) {
+   val slackCredantials: SlackCredentials = null,
+   val monitor: ExtractionMonitor[T] = null
+   ) {
 
   def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
 
@@ -46,6 +47,7 @@ class ExtractionRecorder[T](
   private var initialized = false
 
   private var writerOpen = if(logWriter == null) false else true
+
 
   /**
     * A map for failed pages, which could be used for a better way to record extraction fails than just a simple console output.
@@ -162,6 +164,9 @@ class ExtractionRecorder[T](
 
     if(slackCredantials != null && failedPages(lang) % (slackCredantials.exceptionThreshold * slackIncreaseExceptionThreshold) == 0)
       forwardExceptionWarning(lang)
+    
+    if(monitor != null) monitor.reportError(this, exception)
+
   }
 
   /**
@@ -289,6 +294,8 @@ class ExtractionRecorder[T](
     this.defaultLang = lang
     this.datasets = datasets
     this.task = task
+    
+    if(monitor != null) monitor.init(this)
 
     if(preamble != null)
       printLabeledLine(preamble, RecordSeverity.Info, lang)
@@ -304,6 +311,12 @@ class ExtractionRecorder[T](
     if(writerOpen){
       logWriter.close()
       writerOpen = false
+    }
+
+    if(monitor != null) {
+      val monitor_summary = monitor.summarize(this)
+      printLabeledLine(monitor_summary, RecordSeverity.Info, defaultLang)
+      forwardSimpleLine(monitor_summary)
     }
 
     val line = "Extraction finished for language: " + defaultLang.name + " (" + defaultLang.wikiCode + ") " +
