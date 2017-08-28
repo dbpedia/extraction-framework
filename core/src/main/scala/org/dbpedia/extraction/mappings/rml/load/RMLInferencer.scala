@@ -82,9 +82,9 @@ object RMLInferencer {
     val mappings = RMLProcessorParser.parseFromDir(tmpDir.toAbsolutePath.toString)
 
     // delete temporary files
-    tmpDir.toFile.deleteOnExit()
     tmpDir.toFile.listFiles().foreach(file => file.delete())
     tempMappingFilePath.toFile.delete()
+    tmpDir.toFile.delete()
     languageRulesPath.toFile.delete()
 
     mappings.head
