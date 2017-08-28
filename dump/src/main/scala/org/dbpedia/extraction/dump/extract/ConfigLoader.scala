@@ -3,16 +3,21 @@ package org.dbpedia.extraction.dump.extract
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{WikiPage, XMLSource, WikiSource, Source}
+import org.dbpedia.extraction.sources.{Source, WikiPage, WikiSource, XMLSource}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dump.download.Download
-import org.dbpedia.extraction.util.{Language, Finder, ExtractorUtils}
+import org.dbpedia.extraction.util.{ExtractorUtils, Finder, Language}
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import scala.collection.mutable.{ArrayBuffer,HashMap}
+
+import scala.collection.mutable.{ArrayBuffer, HashMap}
 import java.io._
 import java.net.URL
+
 import scala.io.Codec.UTF8
 import java.util.logging.Logger
+
+import be.ugent.mmlab.rml.model.RMLMapping
+import org.dbpedia.extraction.mappings.rml.load.RMLInferencer
 import org.dbpedia.extraction.util.IOUtils
 
 /**
@@ -57,11 +62,20 @@ class ConfigLoader(config: Config)
             def commonsSource = _commonsSource
     
             def language = lang
-    
+
+            //language-dependent val
+            private lazy val _rmlMappings = {
+
+              RMLInferencer.loadDir(lang, config.rmlMappingsDir.getAbsolutePath)
+
+            }
+
+            def rmlMappings : Map[String, RMLMapping] = _rmlMappings
+
             private lazy val _mappingPageSource =
             {
                 val namespace = Namespace.mappings(language)
-                
+
                 if (config.mappingsDir != null && config.mappingsDir.isDirectory)
                 {
                     val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
@@ -74,9 +88,9 @@ class ConfigLoader(config: Config)
                     WikiSource.fromNamespaces(namespaces,url,Language.Mappings)
                 }
             }
-            
+
             def mappingPageSource : Traversable[WikiPage] = _mappingPageSource
-    
+
             private lazy val _mappings =
             {
                 MappingsLoader.load(this)
@@ -189,6 +203,7 @@ class ConfigLoader(config: Config)
       
         new OntologyReader().read(ontologySource)
     }
+
 
     //language-independent val
     private lazy val _commonsSource =

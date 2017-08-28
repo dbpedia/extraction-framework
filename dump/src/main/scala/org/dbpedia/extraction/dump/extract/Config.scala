@@ -59,6 +59,8 @@ class Config(config: Properties)
 
   val namespaces = loadNamespaces()
 
+  lazy val rmlMappingsDir = getValue(config, "rmlMappings", false)(new File(_))
+
   private def loadNamespaces(): Set[Namespace] = {
     val names = getStrings(config, "namespaces", ',', false)
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template, Namespace.WikidataProperty)
