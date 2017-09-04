@@ -1,11 +1,14 @@
 package org.dbpedia.extraction.mappings
 
+import java.io.File
+
 import org.apache.jena.rdf.model._
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.util.{Config, ConfigUtils, Language}
+import org.dbpedia.extraction.util.{Config, ConfigUtils, Finder, Language}
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
+import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util._
 
 object ExtractionMonitor {
   // Config => Datei/Pfad Auswahl
@@ -15,15 +18,8 @@ object ExtractionMonitor {
     val monitor = new ExtractionMonitor()
     if(args.size > 0) {
       monitor.loadConf(args(0))
-      if(monitor.compareVersions) monitor.compareList.foreach(version => {
-        monitor.compare(version, monitor.currentVersion, monitor.languages.toList, "http://rdfs.org/ns/void#triples", true)
-        // Output Comparison
-      })
     }
-
   }
-
-
 }
 
 class ExtractionMonitor[T] {
@@ -32,35 +28,74 @@ class ExtractionMonitor[T] {
 
   private var currentVersion = Config.universalConfig.dbPediaVersion
   private var compareVersions = false
-  private var compareList = Array[String]()
+  private var oldDumpDir : File = null
+  private var newDumpDir : File = null
   private var languages = Array[String]()
+  private var dumpDir : File = null
 
-  def loadConf(configPath : String): Unit ={
-    val config = ConfigUtils.loadConfig(configPath)
-    compareVersions = config.getProperty("compareVersions").asInstanceOf[Boolean]
+  private val tripleProperty = "http://rdfs.org/ns/void#triples"
+  private val normalTriplecountchangeInterval = Array(0.99, 1.08)
+  private var compareDataID = false
+  private var olddatecode = ""
+  private var newdatecode = ""
+
+  this.loadConf()
+
+  def loadConf(configPath : String = null): Unit ={
+    val config = if(configPath == null) Config.universalConfig
+    else ConfigUtils.loadConfig(configPath)
+    compareVersions = config.getProperty("compareVersions").toBoolean
     if (compareVersions){
-      require(config.getProperty("compareTo") != null, "Versions to compare need to be defined in the config under 'compareTo'!")
-      require(config.getProperty("languages") != null, "languages to compare need to be defined in the config under 'languages'!")
-      compareList = config.getProperty("compareTo").split(",")
-      languages = config.getProperty("languages").split(",")
+      require(config.getProperty("oldDumpDir") != null, "Versions to compare need to be defined in the config under 'compareTo'!")
+      require(config.getProperty("newDumpDir") != null, "Versions to compare need to be defined in the config under 'compareTo'!")
+      require(config.getProperty("dataIDLangs") != null, "languages to compare need to be defined in the config under 'languages'!")
+      oldDumpDir = new File(config.getProperty("oldDumpDir"))
+      newDumpDir = new File(config.getProperty("newDumpDir"))
+      languages = config.getProperty("dataIDLangs").split(",")
+      dumpDir = Config.universalConfig.dumpDir
     }
 
   }
 
   def reportCrash(er : ExtractionRecorder[T], ex : Throwable): Unit ={
-    stats(er)("CRASHED") = 1
-    stats(er)("ERROR") += 1
+    stats(er).put("CRASHED", 1)
     errors(er) += ex
   }
 
   def reportError(er : ExtractionRecorder[T], ex : Throwable): Unit = {
-    stats(er)("ERROR") += 1
+    stats(er).put("ERROR", stats(er).get("ERROR").getOrElse(0) + 1)
     errors(er) += ex
   }
 
+  def reportPositive(er: ExtractionRecorder[T]): Unit ={
+    stats(er).put("POSITIVE", stats(er).get("POSITIVE").getOrElse(0) + 1)
+  }
+
   def summarize(er : ExtractionRecorder[T]): String ={
-    // TODO
-    ""
+    val crashed = if(stats(er).get("CRASHED").getOrElse(0) == 1) "yes" else "no"
+    var dataIDResults = ""
+    if(compareVersions) {
+      dataIDResults = "DATAIDRESULTS: "
+      languages.foreach(langCode => {
+        val oldfinder = new Finder[File](oldDumpDir, Language(langCode), "wiki")
+        val olddate = oldfinder.dates().last
+        val newfinder = new Finder[File](newDumpDir, Language(langCode), "wiki")
+        val newdate = newfinder.dates().last
+        olddatecode = olddate.substring(0,4) + "-" + olddate.substring(4,6)
+        newdatecode = newdate.substring(0,4) + "-" + newdate.substring(4,6)
+        val oldPath = oldDumpDir + "/" + langCode + "wiki/"+ olddate + "/" +
+          olddatecode + "_dataid_" + langCode + ".ttl"
+        val newPath = newDumpDir + "/" + langCode + "wiki/" + newdate + "/" +
+          newdatecode + "_dataid_" + langCode + ".ttl"
+        dataIDResults += "\n" + langCode + ":\n"
+        compareTripleCount(oldPath, newPath).foreach(r => dataIDResults += r._2 + ": " + r._1 + "\n")
+      })
+    }
+    "\n<------ EXTRACTION MONITOR STATISTICS ----->\n" +
+    "ERRORS:\t\t" + stats(er).get("ERROR").getOrElse(0) + "\n" +
+    "SUCCESSFUL:\t" + stats(er).get("POSITIVE").getOrElse(0) + "\n" +
+    "CRASHED:\t" + crashed + "\n" + dataIDResults +
+    "\n<------------------------------------------>"
   }
 
   def init(er : ExtractionRecorder[T]): Unit ={
@@ -68,6 +103,7 @@ class ExtractionMonitor[T] {
 
     new_map.put("ERROR", 0)
     new_map.put("CRASHED", 0)
+    new_map.put("POSITIVE", 0)
 
     stats.put(er, new_map)
   }
@@ -76,66 +112,46 @@ class ExtractionMonitor[T] {
     er_list.foreach(init)
   }
 
-  // TODO clean this
-  def compare(oldBuild : String, newBuild : String, languages : List[String], property : String, numberCompare : Boolean) : CompareResult = {
-    var list = ListBuffer[mutable.HashMap[String, RDFNode]]()
-    val sizeDiff = list(1).keySet.size - list(0).keySet.size
-    val diff_missing = ListBuffer[String]()
-    val diff_new = ListBuffer[String]()
-    var numberdiff : Option[mutable.HashMap[String, Float]] = None
+  def compareTripleCount(oldPath : String, newPath : String): mutable.HashMap[String, String] ={
+    val oldModel = ModelFactory.createDefaultModel()
+    val newModel = ModelFactory.createDefaultModel()
 
-    // get Property Values
-    languages.foreach(langCode => List(oldBuild,newBuild).foreach(build => {
-      val model = ModelFactory.createDefaultModel()
-      model.read("/home/termi/dbpedia/data/" + langCode +"wiki/" + build + "/" + currentVersion + "_dataid_" + langCode + ".ttl")
-      list += getPropertyValues(model, model.getProperty(property))
-    }))
+    oldModel.read(oldPath)
+    newModel.read(newPath)
 
+    val oldValues = getPropertyValues(oldModel, oldModel.getProperty(tripleProperty))
+    val newValues = getPropertyValues(newModel, newModel.getProperty(tripleProperty))
 
+    val diff = mutable.HashMap[String, Float]()
+    val result = mutable.HashMap[String, String]()
 
-    // Get Missing and New Subjects
-    list(0).keySet.foreach(key => {
-      if(!list(1).contains(key)) diff_missing += key
+    oldValues.keySet.foreach(key => {
+      if(newValues.keySet.contains(key)) // Get Difference between Files
+        diff += (key -> newValues(key).asLiteral().getFloat / oldValues(key).asLiteral().getFloat)
+      else result += (key -> "File missing in newer Build!") // File missing in new DataID
     })
-    list(1).keySet.foreach(key => {
-      if(!list(0).contains(key)) diff_new += key
+    newValues.keySet.foreach(key => {
+      if(!diff.keySet.contains(key)) result += (key -> "File added in newer Build!")// new File added to DataID
     })
-
-    // Compare Number Values
-    if(numberCompare) {
-      var map = mutable.HashMap[String, Float]()
-      list(0).keySet.foreach(key => {
-        val o = list(0).get(key) match {
-          case Some(node) => node.asLiteral().getLong
-          case None => 0
-        }
-        val n = list(1).get(key) match {
-          case Some(node) => node.asLiteral().getLong
-          case None => 0
-        }
-        val of : Float = o
-        val on : Float = n
-        val increase : Float = if(n >= o) (n/o) - 1 else - ((o/n) - 1)
-        map += key -> increase
-      })
-      numberdiff = Some(map)
-    }
-
-    new CompareResult(sizeDiff, diff_missing, diff_new, numberdiff)
+    diff.keySet.foreach(key => {
+      val v = diff(key)
+      if(v != -1.0 && v < normalTriplecountchangeInterval(0)) result += (key -> ("suspicious decrease by " + (math floor (v - 1) * 10000000)/100000 + "%"))
+      else if(v != 1 && v > normalTriplecountchangeInterval(1)) result += (key -> ("suspicious increase by " + (math floor (v - 1) * 10000000)/100000 + "%"))
+      else if(v == 1.0) result += (key -> "No Changes!")
+      else if(v == null) {}
+      else result += (key -> ("Triple count changed by " + (math floor (v - 1) * 100) + "%"))
+    })
+    result
   }
+
 
   def getPropertyValues(model: Model, property : Property) : mutable.HashMap[String, RDFNode] = {
     var map = mutable.HashMap[String, RDFNode]()
     val it = model.listResourcesWithProperty(property)
     while(it.hasNext) {
       val res = it.next()
-      map += res.getURI -> res.getProperty(property).getObject
+      map += res.getURI.split("\\?")(0).split("\\&")(0) -> res.getProperty(property).getObject
     }
     map
-  }
-
-  class CompareResult(sizeDiff : Long, diff_missing : ListBuffer[String], diff_new : ListBuffer[String], numberDiff : Option[mutable.HashMap[String, Float]] = None) {
-    def getSizeDiff() {sizeDiff}
-    def getNumberDiff() {numberDiff}
   }
 }

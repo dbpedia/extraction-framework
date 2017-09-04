@@ -177,6 +177,7 @@ class ExtractionRecorder[T](
     * @param logSuccessfulPage - indicates whether the event of a successful extraction shall be included in the log file (default = false)
     */
   def recordExtractedPage(id: Long, title: WikiTitle, logSuccessfulPage:Boolean = false): Unit = synchronized {
+    if(monitor != null) monitor.reportPositive(this)
     if(logSuccessfulPage) {
       successfulPagesMap.get(title.language) match {
         case Some(map) => map += (id -> title)
@@ -207,6 +208,7 @@ class ExtractionRecorder[T](
     * @param lang
     */
   def recordQuad(quad: Quad, severity: RecordSeverity.Value, lang:Language): Unit = synchronized {
+    if(monitor != null) monitor.reportPositive(this)
     if(increaseAndGetSuccessfulPages(lang) % reportInterval == 0)
       printLabeledLine("processed {page} quads; {mspp} per quad; {fail} failed quads", severity, lang)
   }
@@ -294,7 +296,7 @@ class ExtractionRecorder[T](
     this.defaultLang = lang
     this.datasets = datasets
     this.task = task
-    
+
     if(monitor != null) monitor.init(this)
 
     if(preamble != null)

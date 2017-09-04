@@ -60,38 +60,39 @@ class ExtractionJob(
   def run(): Unit =
   {
     extractionRecorder.initialize(language, "Main Extraction", extractor.datasets.toSeq)
-
     extractor.initializeExtractor()
-    
     destination.open()
-
     workers.start()
 
-    for (page <- source)
-      workers.process(page)
+    try {
+      for (page <- source)
+        workers.process(page)
 
-    extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordSeverity.Info, language)
+      extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordSeverity.Info, language)
 
-    if(retryFailedPages){
-      val fails = extractionRecorder.listFailedPages(language).keys.map(_._2)
-      extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", RecordSeverity.Warning, language)
-      extractionRecorder.resetFailedPages(language)
-      for(page <- fails) {
-        page.toggleRetry()
-        page match{
-          case p: WikiPage => workers.process(p)
-          case _ =>
+      if(retryFailedPages){
+        val fails = extractionRecorder.listFailedPages(language).keys.map(_._2)
+        extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", RecordSeverity.Warning, language)
+        extractionRecorder.resetFailedPages(language)
+        for(page <- fails) {
+          page.toggleRetry()
+          page match{
+            case p: WikiPage => workers.process(p)
+            case _ =>
+          }
         }
+        extractionRecorder.printLabeledLine("all failed pages were re-executed.", RecordSeverity.Info, language)
       }
-      extractionRecorder.printLabeledLine("all failed pages were re-executed.", RecordSeverity.Info, language)
+    }
+    catch {
+      case e : Throwable =>
+        extractionRecorder.monitor.reportCrash(extractionRecorder, e)
+    } finally {
+      workers.stop()
+      destination.close()
+      extractor.finalizeExtractor()
+      extractionRecorder.finalize()
     }
 
-    workers.stop()
-    
-    destination.close()
-
-    extractor.finalizeExtractor()
-
-    extractionRecorder.finalize()
   }
 }

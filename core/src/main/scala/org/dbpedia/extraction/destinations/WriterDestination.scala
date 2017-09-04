@@ -4,8 +4,9 @@ import java.io.Writer
 
 import org.apache.jena.shared.BadURIException
 import org.dbpedia.extraction.destinations.formatters.Formatter
-import org.dbpedia.extraction.mappings.ExtractionRecorder
+import org.dbpedia.extraction.mappings.{BadQuadException, ExtractionRecorder}
 import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.wikiparser.WikiPage
 
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
@@ -14,7 +15,7 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
  * 
  * @param called in open() to obtain the writer.
  */
-class WriterDestination(factory: () => Writer, formatter : Formatter, extractionRecorder: ExtractionRecorder[Quad] = null)
+class WriterDestination(factory: () => Writer, formatter : Formatter, extractionRecorder: ExtractionRecorder[WikiPage] = null)
 extends Destination
 {
   private var writer: Writer = null
@@ -35,7 +36,7 @@ extends Destination
   override def write(graph : Traversable[Quad]) = synchronized {
     for(quad <- graph) {
       val formatted = formatter.render(quad)
-      if(extractionRecorder != null) if(formatted.startsWith("#")) extractionRecorder.failedRecord(quad.subject, null, quad, new BadURIException(formatted))
+      if(extractionRecorder != null) if(formatted.startsWith("#")) extractionRecorder.failedRecord(quad.toString(), null, null, new BadQuadException(formatted))
       writer.write(formatted)
     }
   }

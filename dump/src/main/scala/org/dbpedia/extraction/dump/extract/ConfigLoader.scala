@@ -57,9 +57,9 @@ class ConfigLoader(config: Config)
             //  input._2.map(_.getSimpleName).mkString(",")+"), "+
             //  datasets.size+" datasets ("+datasets.mkString(",")+")"
 
-            new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null, config.slackCredentials.getOrElse(null))
+            new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null, config.slackCredentials.getOrElse(null), extractionMonitor)
           }
-          case None => new ExtractionRecorder[WikiPage](null, 2000, null, config.slackCredentials.getOrElse(null))
+          case None => new ExtractionRecorder[WikiPage](null, 2000, null, config.slackCredentials.getOrElse(null), extractionMonitor)
         }
         extractionRecorder(lang)
       }
@@ -163,7 +163,7 @@ class ConfigLoader(config: Config)
       val datasetDestinations = new HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
-          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
+          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format, getExtractionRecorder(dataset.language.getOrElse(Language.English))))
           case None =>
         }
       }
