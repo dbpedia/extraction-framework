@@ -45,6 +45,12 @@ extends PageNodeExtractor
   private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
   private val dcRightsProperty = context.ontology.properties("dc:rights")
 
+  private val mapProperty = context.ontology.properties("foaf:depiction") //TODO
+  private val signatureProperty = context.ontology.properties("foaf:depiction") //TODO
+  private val coatOfArmsProperty = context.ontology.properties("foaf:depiction") //TODO
+  private val mainImageProperty = context.ontology.properties("foaf:depiction") //TODO
+  private val flagImageProperty = context.ontology.properties("foaf:depiction") //TODO
+
   private val rdfType = context.ontology.properties("rdf:type")
 
   private val commonsLang = Language.Commons
@@ -67,12 +73,14 @@ extends PageNodeExtractor
 
     var quads = new ArrayBuffer[Quad]()
     var duplicateMap = mutable.HashMap[String, Boolean]()
+    // Each Page needs a new main image
+    mainImageFound = false
 
-    var i = 1
+    // --------------- Quad Gen: Normal Images ---------------
     imageSearch(node.children, 0).foreach(_ match {
       case Some((imageFileName, sourceNode)) =>
         // quick dublicate check
-        if(duplicateMap.get(imageFileName) == None) {
+        if(duplicateMap.get(imageFileName).isEmpty) {
           duplicateMap.put(imageFileName, true)
 
           val lang = if(context.freeImages.contains(URLDecoder.decode(imageFileName, "UTF-8")))
@@ -87,19 +95,37 @@ extends PageNodeExtractor
           quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceIri)
 
           val wikipediaImageUrl = language.baseUri + "/wiki/" + fileNamespaceIdentifier + ":" + imageFileName
-          println(i + ". " + url)
-          i += 1
 
           quads += new Quad(language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
           quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
         }
       case None =>
     })
-//    mainImage.foreach(m => println("Main Image: " + ExtractorUtils.getFileURL(m._1, commonsLang)))
-//    flagImage.foreach(_.foreach(m => println("Flag: " + ExtractorUtils.getFileURL(m._1, commonsLang))))
-//    coatOfArmsImage.foreach(_.foreach(m => println("COA: " + ExtractorUtils.getFileURL(m._1, commonsLang))))
-//    mapImage.foreach(_.foreach(m => println("Map: " + ExtractorUtils.getFileURL(m._1, commonsLang))))
-//    signatureImage.foreach(_.foreach(m => println("Signature: " + ExtractorUtils.getFileURL(m._1, commonsLang))))
+    // --------------- Quad Gen: Special Images ---------------
+    mainImage.foreach(img => {
+      val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
+        language else commonsLang
+      val url = ExtractorUtils.getFileURL(img._1, lang)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mainImageProperty, url, img._2.sourceIri)
+    })
+    flagImage.foreach(_.foreach(img => {
+      val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
+        language else commonsLang
+      val url = ExtractorUtils.getFileURL(img._1, lang)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, flagImageProperty, url, img._2.sourceIri)
+    }))
+    coatOfArmsImage.foreach(_.foreach(img => {
+      val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
+        language else commonsLang
+      val url = ExtractorUtils.getFileURL(img._1, lang)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mainImageProperty, url, img._2.sourceIri)
+    }))
+    signatureImage.foreach(_.foreach(img => {
+      val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
+        language else commonsLang
+      val url = ExtractorUtils.getFileURL(img._1, lang)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mainImageProperty, url, img._2.sourceIri)
+    }))
     quads
   }
 
@@ -151,31 +177,23 @@ extends PageNodeExtractor
     else None
 
     // --------------- Special Images ---------------
-    var alreadyUsed = false
       ImageExtractorConfig.flagRegex.findFirstIn(encodedFileName).foreach(_ => {
         flagImage += result
-        alreadyUsed = true
       })
       ImageExtractorConfig.mapRegex.findFirstIn(encodedFileName).foreach(_ => {
         mapImage += result
-        alreadyUsed = true
       })
       ImageExtractorConfig.cOARegex.findFirstIn(encodedFileName).foreach(_ => {
         coatOfArmsImage += result
-        alreadyUsed = true
       })
       ImageExtractorConfig.signatureRegex.findFirstIn(encodedFileName).foreach(_ => {
         signatureImage += result
-        alreadyUsed = true
       })
     if(!mainImageFound){
       // First Image will be defined as main Image
       mainImage = result
       mainImageFound = true
-      alreadyUsed = true
     }
-    // --------------- Normal Images ---------------
-    if(!alreadyUsed) result
-    else None
+    result
   }
 }
