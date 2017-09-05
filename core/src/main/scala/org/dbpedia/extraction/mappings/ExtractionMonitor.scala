@@ -3,24 +3,14 @@ package org.dbpedia.extraction.mappings
 import java.io.File
 
 import org.apache.jena.rdf.model._
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.util.{Config, ConfigUtils, Finder, Language}
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util._
 
-object ExtractionMonitor {
-  // Config => Datei/Pfad Auswahl
-  // DataID Comparison after Everything is done
-
-  def main(args: Array[String]): Unit = {
-    val monitor = new ExtractionMonitor()
-    if(args.size > 0) {
-      monitor.loadConf(args(0))
-    }
-  }
-}
+import scala.util.Try
 
 class ExtractionMonitor[T] {
   private var stats : mutable.HashMap[ExtractionRecorder[T], mutable.HashMap[String, Int]] = mutable.HashMap()
@@ -29,123 +19,164 @@ class ExtractionMonitor[T] {
   private var currentVersion = Config.universalConfig.dbPediaVersion
   private var compareVersions = false
   private var oldDumpDir : File = null
-  private var newDumpDir : File = null
-  private var languages = Array[String]()
   private var dumpDir : File = null
-
   private val tripleProperty = "http://rdfs.org/ns/void#triples"
-  private val normalTriplecountchangeInterval = Array(0.99, 1.08)
-  private var compareDataID = false
-  private var olddatecode = ""
-  private var newdatecode = ""
+  private var expectedChanges = Array(-1.0, 8.0)
+  private var oldVersion = ""
 
   this.loadConf()
 
+  /**
+    * Loads Config Values
+    * @param configPath path to config
+    */
   def loadConf(configPath : String = null): Unit ={
     val config = if(configPath == null) Config.universalConfig
     else ConfigUtils.loadConfig(configPath)
-    compareVersions = config.getProperty("compareVersions").toBoolean
+    compareVersions = Try[Boolean]{ config.getProperty("compareDatasetIDs").toBoolean }.getOrElse(false)
     if (compareVersions){
-      require(config.getProperty("oldDumpDir") != null, "Versions to compare need to be defined in the config under 'compareTo'!")
-      require(config.getProperty("newDumpDir") != null, "Versions to compare need to be defined in the config under 'compareTo'!")
-      require(config.getProperty("dataIDLangs") != null, "languages to compare need to be defined in the config under 'languages'!")
-      oldDumpDir = new File(config.getProperty("oldDumpDir"))
-      newDumpDir = new File(config.getProperty("newDumpDir"))
-      languages = config.getProperty("dataIDLangs").split(",")
+      require(config.getProperty("old-base-dir") != null, "Old build directory needs to be defined under 'old-base-dir' for the dataID comparison!")
+      oldDumpDir = new File(config.getProperty("old-base-dir"))
       dumpDir = Config.universalConfig.dumpDir
+      val changes = config.getProperty("expectedChanges")
+      if(changes != null) {
+        if(changes.split(",").length == 2) {
+          expectedChanges = Array(changes.split(",")(0).toFloat, changes.split(",")(1).toFloat)
+        }
+      }
     }
-
   }
 
+  /**
+    * Marks the ExtractionRecorder as crashed
+    * @param er ExtractionRecorder
+    * @param ex Exception
+    */
   def reportCrash(er : ExtractionRecorder[T], ex : Throwable): Unit ={
     stats(er).put("CRASHED", 1)
     errors(er) += ex
   }
 
+  /**
+    * Adds an Exception to the statistics for the Recorder
+    * @param er ExtractionRecorder
+    * @param ex Exception
+    */
   def reportError(er : ExtractionRecorder[T], ex : Throwable): Unit = {
     stats(er).put("ERROR", stats(er).get("ERROR").getOrElse(0) + 1)
     errors(er) += ex
   }
 
+  /**
+    * reports the success of an page extraction for the Recorder
+    * @param er ExtractionRecorder
+    */
   def reportPositive(er: ExtractionRecorder[T]): Unit ={
-    stats(er).put("POSITIVE", stats(er).get("POSITIVE").getOrElse(0) + 1)
+    stats(er).put("SUCCESSFUL", stats(er).get("POSITIVE").getOrElse(0) + 1)
   }
 
-  def summarize(er : ExtractionRecorder[T]): String ={
+  /**
+    * Summary of data for the ExtractionRecorder
+    * @param er ExtractionRecorder
+    * @param dataset Dataset that will be compared by DatasetID
+    * @return Summary-Report
+    */
+  def summarize(er : ExtractionRecorder[T], dataset : Dataset = null): String ={
     val crashed = if(stats(er).get("CRASHED").getOrElse(0) == 1) "yes" else "no"
-    var dataIDResults = ""
+    var dataIDResults = "\n"
     if(compareVersions) {
       dataIDResults = "DATAIDRESULTS: "
-      languages.foreach(langCode => {
-        val oldfinder = new Finder[File](oldDumpDir, Language(langCode), "wiki")
-        val olddate = oldfinder.dates().last
-        val newfinder = new Finder[File](newDumpDir, Language(langCode), "wiki")
-        val newdate = newfinder.dates().last
-        olddatecode = olddate.substring(0,4) + "-" + olddate.substring(4,6)
-        newdatecode = newdate.substring(0,4) + "-" + newdate.substring(4,6)
-        val oldPath = oldDumpDir + "/" + langCode + "wiki/"+ olddate + "/" +
-          olddatecode + "_dataid_" + langCode + ".ttl"
-        val newPath = newDumpDir + "/" + langCode + "wiki/" + newdate + "/" +
-          newdatecode + "_dataid_" + langCode + ".ttl"
-        dataIDResults += "\n" + langCode + ":\n"
-        compareTripleCount(oldPath, newPath).foreach(r => dataIDResults += r._2 + ": " + r._1 + "\n")
+      val language = er.language
+      val oldfinder = new Finder[File](oldDumpDir, language, "wiki")
+      val olddate = oldfinder.dates().last
+      val newfinder = new Finder[File](dumpDir, language, "wiki")
+      val newdate = newfinder.dates().last
+      oldVersion = olddate.substring(0,4) + "-" + olddate.substring(4,6)
+
+      val oldPath = oldDumpDir + "/" + language.wikiCode + "wiki/"+ olddate + "/" +
+        oldVersion + "_dataid_" + language.wikiCode + ".ttl"
+      val newPath = dumpDir + "/" + language.wikiCode + "wiki/" + newdate + "/" +
+        currentVersion + "_dataid_" + language.wikiCode + ".ttl"
+      compareTripleCount(oldPath, newPath).foreach(r => {
+        if(dataset != null){
+          if(dataset.canonicalUri == r._1) dataIDResults += r._1 + " : " + r._2 + "\n"
+        }
+        else dataIDResults += String.format("%-30s", r._2 + " : ") + r._1 + "\n"
       })
     }
+    val error = stats(er).get("ERROR").getOrElse(0)
+    val success = stats(er).get("SUCCESSFUL").getOrElse(0)
     "\n<------ EXTRACTION MONITOR STATISTICS ----->\n" +
-    "ERRORS:\t\t" + stats(er).get("ERROR").getOrElse(0) + "\n" +
-    "SUCCESSFUL:\t" + stats(er).get("POSITIVE").getOrElse(0) + "\n" +
-    "CRASHED:\t" + crashed + "\n" + dataIDResults +
-    "\n<------------------------------------------>"
+    String.format("%-20s", "EXCEPTIONS:") + s"$error\n" +
+    String.format("%-20s", "SUCCESSFUL:") + s"$success\n" +
+    String.format("%-20s", "CRASHED:") + s"$crashed\n" +
+    s"$dataIDResults<------------------------------------------>"
   }
 
+  /**
+    * Initializes the Extraction Monitor for a specific ExtractionRecorder
+    * @param er ExtractionRecorder
+    */
   def init(er : ExtractionRecorder[T]): Unit ={
     val new_map = mutable.HashMap[String, Int]()
 
     new_map.put("ERROR", 0)
     new_map.put("CRASHED", 0)
-    new_map.put("POSITIVE", 0)
+    new_map.put("SUCCESSFUL", 0)
 
     stats.put(er, new_map)
+    errors.put(er, ListBuffer())
   }
 
   def init(er_list: List[ExtractionRecorder[T]]): Unit ={
     er_list.foreach(init)
   }
 
+  /**
+    * Reads two RDF files and compares the triple-count-values.
+    * @param oldPath path to first RDF file
+    * @param newPath path to second RDF file
+    * @return HashMap: Subject -> Comparison Result
+    */
   def compareTripleCount(oldPath : String, newPath : String): mutable.HashMap[String, String] ={
+    // Load Graphs
     val oldModel = ModelFactory.createDefaultModel()
     val newModel = ModelFactory.createDefaultModel()
-
     oldModel.read(oldPath)
     newModel.read(newPath)
-
     val oldValues = getPropertyValues(oldModel, oldModel.getProperty(tripleProperty))
     val newValues = getPropertyValues(newModel, newModel.getProperty(tripleProperty))
 
+    // Compare Graphs
     val diff = mutable.HashMap[String, Float]()
     val result = mutable.HashMap[String, String]()
-
     oldValues.keySet.foreach(key => {
       if(newValues.keySet.contains(key)) // Get Difference between Files
         diff += (key -> newValues(key).asLiteral().getFloat / oldValues(key).asLiteral().getFloat)
-      else result += (key -> "File missing in newer Build!") // File missing in new DataID
+      else result += (key -> "File missing in newer Build") // File missing in new DataID
     })
     newValues.keySet.foreach(key => {
-      if(!diff.keySet.contains(key)) result += (key -> "File added in newer Build!")// new File added to DataID
+      if(!diff.keySet.contains(key)) result += (key -> "File added in newer Build")// new File added to DataID
     })
+
+    // Summarize Comparison
     diff.keySet.foreach(key => {
-      val v = diff(key)
-      if(v != -1.0 && v < normalTriplecountchangeInterval(0)) result += (key -> ("suspicious decrease by " + (math floor (v - 1) * 10000000)/100000 + "%"))
-      else if(v != 1 && v > normalTriplecountchangeInterval(1)) result += (key -> ("suspicious increase by " + (math floor (v - 1) * 10000000)/100000 + "%"))
-      else if(v == 1.0) result += (key -> "No Changes!")
-      else if(v == null) {}
-      else result += (key -> ("Triple count changed by " + (math floor (v - 1) * 100) + "%"))
+      val v = (math floor (diff(key) - 1) * 10000000)/100000
+      if(v != -1.0 && v < expectedChanges(0)) result += (key -> ("Suspicious: " + v + "%"))
+      else if(v != 1 && v > expectedChanges(1)) result += (key -> ("Suspicious: +" + v + "%"))
+      else if(v == 1.0) result += (key -> "No change in triple-count")
+      else result += (key -> ((if (v >= 1) " +" else "") + v + "%"))
     })
     result
   }
 
-
-  def getPropertyValues(model: Model, property : Property) : mutable.HashMap[String, RDFNode] = {
+  /**
+    * Queries over the graph and returns the property values
+    * @param model graph
+    * @param property property
+    * @return HashMap: Subject -> Value
+    */
+  private def getPropertyValues(model: Model, property : Property) : mutable.HashMap[String, RDFNode] = {
     var map = mutable.HashMap[String, RDFNode]()
     val it = model.listResourcesWithProperty(property)
     while(it.hasNext) {

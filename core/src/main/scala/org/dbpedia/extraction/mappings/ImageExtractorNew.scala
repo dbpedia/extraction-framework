@@ -79,7 +79,7 @@ extends PageNodeExtractor
     // --------------- Quad Gen: Normal Images ---------------
     imageSearch(node.children, 0).foreach(_ match {
       case Some((imageFileName, sourceNode)) =>
-        // quick dublicate check
+        // quick duplicate check
         if(duplicateMap.get(imageFileName).isEmpty) {
           duplicateMap.put(imageFileName, true)
 

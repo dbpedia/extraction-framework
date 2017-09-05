@@ -86,7 +86,7 @@ class ExtractionJob(
     }
     catch {
       case e : Throwable =>
-        extractionRecorder.monitor.reportCrash(extractionRecorder, e)
+        if(extractionRecorder.monitor != null) extractionRecorder.monitor.reportCrash(extractionRecorder, e)
     } finally {
       workers.stop()
       destination.close()

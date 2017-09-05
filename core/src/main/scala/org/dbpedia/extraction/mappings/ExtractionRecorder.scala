@@ -25,6 +25,8 @@ class ExtractionRecorder[T](
    val reportInterval: Int = 100000,
    val preamble: String = null,
    val slackCredantials: SlackCredentials = null,
+   val dataset: Dataset = null,
+   val language: Language = Language.English,
    val monitor: ExtractionMonitor[T] = null
    ) {
 
@@ -316,7 +318,7 @@ class ExtractionRecorder[T](
     }
 
     if(monitor != null) {
-      val monitor_summary = monitor.summarize(this)
+      val monitor_summary = monitor.summarize(this, dataset)
       printLabeledLine(monitor_summary, RecordSeverity.Info, defaultLang)
       forwardSimpleLine(monitor_summary)
     }
