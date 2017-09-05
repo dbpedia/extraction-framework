@@ -10,15 +10,27 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyPropert
 abstract class AbstractTemplateAnalyzer(ontology: Ontology) extends TemplateAnalyzer {
 
   protected def loadProperty(property : String) : OntologyProperty = {
-    RMLOntologyUtil.loadOntologyPropertyFromIRI(property, ContextCreator.createOntologyContext(ontology))
+    if(isIri(property)) {
+      RMLOntologyUtil.loadOntologyPropertyFromIRI(property, ContextCreator.createOntologyContext(ontology))
+    } else RMLOntologyUtil.loadOntologyProperty(property, ContextCreator.createOntologyContext(ontology))
   }
 
   protected def loadDatatype(datatype : String) : Datatype = {
-    RMLOntologyUtil.loadOntologyDataTypeFromIRI(datatype, ContextCreator.createOntologyContext(ontology))
+    if(isIri(datatype)) {
+      RMLOntologyUtil.loadOntologyDataTypeFromIRI(datatype, ContextCreator.createOntologyContext(ontology))
+    } else RMLOntologyUtil.loadOntologyDataType(datatype, ContextCreator.createOntologyContext(ontology))
   }
 
   protected def loadClass(_class : String) : OntologyClass = {
-    RMLOntologyUtil.loadOntologyClassFromIRI(_class, ContextCreator.createOntologyContext(ontology))
+    if(isIri(_class)) {
+      RMLOntologyUtil.loadOntologyClassFromIRI(_class, ContextCreator.createOntologyContext(ontology))
+    } else RMLOntologyUtil.loadOntologyClass(_class, ContextCreator.createOntologyContext(ontology))
+  }
+
+  // quick check if given uri is a uri
+  private def isIri(s: String) : Boolean = {
+    val pattern = "(.*[/#])([^/#]+)".r
+    pattern.findFirstIn(s).isDefined
   }
 
 }
