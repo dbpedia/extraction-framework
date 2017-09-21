@@ -85,14 +85,13 @@ class ExtractionJob(
       }
     }
     catch {
-      case e : Throwable =>
-        if(extractionRecorder.monitor != null) extractionRecorder.monitor.reportCrash(extractionRecorder, e)
+      case ex : Throwable =>
+        if(extractionRecorder.monitor != null) extractionRecorder.monitor.reportCrash(extractionRecorder, ex)
     } finally {
       workers.stop()
       destination.close()
       extractor.finalizeExtractor()
       extractionRecorder.finalize()
     }
-
   }
 }

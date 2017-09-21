@@ -49,15 +49,13 @@ extends PageNodeExtractor
   private val signatureProperty = context.ontology.properties("foaf:depiction") //TODO
   private val coatOfArmsProperty = context.ontology.properties("foaf:depiction") //TODO
   private val mainImageProperty = context.ontology.properties("foaf:depiction") //TODO
-  private val flagImageProperty = context.ontology.properties("foaf:depiction") //TODO
+  private val flagProperty = context.ontology.properties("foaf:depiction") //TODO
 
   private val rdfType = context.ontology.properties("rdf:type")
 
   private val commonsLang = Language.Commons
 
   override val datasets = Set(DBpediaDatasets.Images)
-
-  private var imagesInCommons = 0
 
   private var mainImageFound = false
 
@@ -69,10 +67,11 @@ extends PageNodeExtractor
 
   override def extract(node: PageNode, subjectUri: String): Seq[Quad] =
   {
+    throw new BadQuadException("Blub")
     if(node.title.namespace != Namespace.Main) return Seq.empty
 
     var quads = new ArrayBuffer[Quad]()
-    var duplicateMap = mutable.HashMap[String, Boolean]()
+    val duplicateMap = mutable.HashMap[String, Boolean]()
     // Each Page needs a new main image
     mainImageFound = false
 
@@ -112,20 +111,27 @@ extends PageNodeExtractor
       val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
         language else commonsLang
       val url = ExtractorUtils.getFileURL(img._1, lang)
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, flagImageProperty, url, img._2.sourceIri)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, flagProperty, url, img._2.sourceIri)
     }))
     coatOfArmsImage.foreach(_.foreach(img => {
       val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
         language else commonsLang
       val url = ExtractorUtils.getFileURL(img._1, lang)
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mainImageProperty, url, img._2.sourceIri)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, coatOfArmsProperty, url, img._2.sourceIri)
     }))
     signatureImage.foreach(_.foreach(img => {
       val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
         language else commonsLang
       val url = ExtractorUtils.getFileURL(img._1, lang)
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mainImageProperty, url, img._2.sourceIri)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, signatureProperty, url, img._2.sourceIri)
     }))
+    mapImage.foreach(_.foreach(img => {
+      val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
+        language else commonsLang
+      val url = ExtractorUtils.getFileURL(img._1, lang)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mapProperty, url, img._2.sourceIri)
+    }))
+
     quads
   }
 

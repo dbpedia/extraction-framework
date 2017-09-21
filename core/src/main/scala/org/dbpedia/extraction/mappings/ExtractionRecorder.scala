@@ -15,19 +15,20 @@ import org.dbpedia.extraction.util.{Language, StringUtils}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiPage, WikiTitle}
 
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 import scalaj.http.Http
 
 /**
   * Created by Chile on 11/3/2016.
   */
 class ExtractionRecorder[T](
-   val logWriter: Writer = null,
-   val reportInterval: Int = 100000,
-   val preamble: String = null,
-   val slackCredantials: SlackCredentials = null,
-   val dataset: Dataset = null,
-   val language: Language = Language.English,
-   val monitor: ExtractionMonitor[T] = null
+                             val logWriter: Writer = null,
+                             val reportInterval: Int = 100000,
+                             val preamble: String = null,
+                             val slackCredantials: SlackCredentials = null,
+                             val datasets: ListBuffer[Dataset] = ListBuffer(),
+                             val language: Language = Language.English,
+                             val monitor: ExtractionMonitor[T] = null
    ) {
 
   def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
@@ -44,7 +45,6 @@ class ExtractionRecorder[T](
 
   private var slackIncreaseExceptionThreshold = 1
 
-  private var datasets: Seq[Dataset] = Seq()
   private var task: String = "transformation"
   private var initialized = false
 
@@ -179,7 +179,7 @@ class ExtractionRecorder[T](
     * @param logSuccessfulPage - indicates whether the event of a successful extraction shall be included in the log file (default = false)
     */
   def recordExtractedPage(id: Long, title: WikiTitle, logSuccessfulPage:Boolean = false): Unit = synchronized {
-    if(monitor != null) monitor.reportPositive(this)
+    if(monitor != null) monitor.reportSuccess(this)
     if(logSuccessfulPage) {
       successfulPagesMap.get(title.language) match {
         case Some(map) => map += (id -> title)
@@ -195,6 +195,7 @@ class ExtractionRecorder[T](
   }
 
   def recordGenericPage(lang: Language, line: String = null): Unit ={
+    if(monitor != null) monitor.reportSuccess(this)
     val pages = increaseAndGetSuccessfulPages(lang)
     val l = if(line == null) "processed {page} instances; {mspp} per instance; {fail} failed instances" else line
     if(pages % reportInterval == 0)
@@ -210,7 +211,7 @@ class ExtractionRecorder[T](
     * @param lang
     */
   def recordQuad(quad: Quad, severity: RecordSeverity.Value, lang:Language): Unit = synchronized {
-    if(monitor != null) monitor.reportPositive(this)
+    if(monitor != null) monitor.reportSuccess(this)
     if(increaseAndGetSuccessfulPages(lang) % reportInterval == 0)
       printLabeledLine("processed {page} quads; {mspp} per quad; {fail} failed quads", severity, lang)
   }
@@ -235,7 +236,7 @@ class ExtractionRecorder[T](
     } else print
 
     val status = getStatusValues(lang)
-    val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; {task} at {time}{data}; ") + line
+    val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; {task} at {time} {data}; ") + line
     val pattern = "\\{\\s*\\w+\\s*\\}".r
     var lastend = 0
     var resultString = ""
@@ -296,7 +297,6 @@ class ExtractionRecorder[T](
 
     this.startTime.set(System.currentTimeMillis)
     this.defaultLang = lang
-    this.datasets = datasets
     this.task = task
 
     if(monitor != null) monitor.init(this)
@@ -318,9 +318,10 @@ class ExtractionRecorder[T](
     }
 
     if(monitor != null) {
-      val monitor_summary = monitor.summarize(this, dataset)
-      printLabeledLine(monitor_summary, RecordSeverity.Info, defaultLang)
-      forwardSimpleLine(monitor_summary)
+      val monitor_summary = monitor.summarize(this, datasets)
+      val summary = monitorSummaryToString(monitor_summary)
+      printLabeledLine(summary, RecordSeverity.Info, defaultLang)
+      forwardSimpleLine(summary)
     }
 
     val line = "Extraction finished for language: " + defaultLang.name + " (" + defaultLang.wikiCode + ") " +
@@ -473,6 +474,29 @@ class ExtractionRecorder[T](
     catch{
       case e : SocketTimeoutException => false
     }
+  }
+
+  def monitorSummaryToString(summaryMap : mutable.HashMap[String, Object]) : String = {
+    val error = summaryMap.getOrElse("EXCEPTIONCOUNT","0")
+    val success = summaryMap.getOrElse("SUCCESSFUL", "0")
+    val crashed = summaryMap.getOrElse("CRASHED", "no")
+    val dataIDResults = summaryMap.getOrElse("DATAID", "")
+    var exceptions = ""
+    summaryMap.getOrElse("EXCEPTIONS", ListBuffer[Throwable]())
+      .asInstanceOf[ListBuffer[Throwable]].map(ex => {
+      exceptions += ex.toString + "\n"
+      ex.getStackTrace.foreach(exceptions += _.toString + "\n")
+      exceptions += "\n"
+    })
+    if(exceptions != "") exceptions = "EXCEPTIONS:\n" + exceptions
+
+    // Return the Summary as formatted String
+    "\n----- ----- ----- EXTRACTION MONITOR STATISTICS ----- ----- -----\n" +
+      String.format("%-20s", "EXCEPTIONCOUNT:") + s"$error\n" +
+      String.format("%-20s", "SUCCESSFUL:") + s"$success\n" +
+      String.format("%-20s", "CRASHED:") + s"$crashed\n" +
+      s"$exceptions" +
+      s"$dataIDResults----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----"
   }
 
 }

@@ -12,8 +12,6 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 /**
  * Writes quads to a writer.
- * 
- * @param called in open() to obtain the writer.
  */
 class WriterDestination(factory: () => Writer, formatter : Formatter, extractionRecorder: ExtractionRecorder[WikiPage] = null)
 extends Destination

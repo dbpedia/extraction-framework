@@ -5,7 +5,7 @@ import java.net.URL
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Logger
 
-import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.mappings._
@@ -17,7 +17,7 @@ import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, HashMap}
+import scala.collection.mutable.{ArrayBuffer, HashMap, ListBuffer}
 
 /**
  * Loads the dump extraction configuration.
@@ -57,13 +57,15 @@ class ConfigLoader(config: Config)
             //  input._2.map(_.getSimpleName).mkString(",")+"), "+
             //  datasets.size+" datasets ("+datasets.mkString(",")+")"
 
-            new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null, config.slackCredentials.getOrElse(null), dataset, lang, extractionMonitor)
+            new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null, config.slackCredentials.getOrElse(null), ListBuffer(dataset), lang, extractionMonitor)
           }
-          case None => new ExtractionRecorder[WikiPage](null, 2000, null, config.slackCredentials.getOrElse(null), dataset, lang, extractionMonitor)
+          case None => new ExtractionRecorder[WikiPage](null, 2000, null, config.slackCredentials.getOrElse(null), ListBuffer(dataset), lang, extractionMonitor)
         }
         extractionRecorder(lang)
       }
-      case Some(er) => er
+      case Some(er) =>
+        if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
+        er
     }
   }
 
@@ -197,13 +199,13 @@ class ConfigLoader(config: Config)
     * Creates ab extraction job for a specific language.
     */
   val imageCategoryWorker = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
-    getExtractionRecorder(lang).initialize(lang, "Image Extraction")
-    getExtractionRecorder(lang).printLabeledLine("Start image list preparation for ImageExtractor.", RecordSeverity.Info)
+    getExtractionRecorder(lang, DBpediaDatasets.Images).initialize(lang, "Image Extraction")
+    getExtractionRecorder(lang, DBpediaDatasets.Images).printLabeledLine("Start image list preparation for ImageExtractor.", RecordSeverity.Info)
     val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
-    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang))
+    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang, DBpediaDatasets.Images))
     this.freeImages.put(lang, imageCategories._1)
     this.nonFreeImages.put(lang, imageCategories._2)
-    getExtractionRecorder(lang).printLabeledLine("Finished image list preparation for ImageExtractor: " + imageCategories._1.size + " free images, " + imageCategories._2 + " nonfree images.", RecordSeverity.Info)
+    getExtractionRecorder(lang, DBpediaDatasets.Images).printLabeledLine("Finished image list preparation for ImageExtractor: " + imageCategories._1.size + " free images, " + imageCategories._2 + " nonfree images.", RecordSeverity.Info)
   }
 
     /**
