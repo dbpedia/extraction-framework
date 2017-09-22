@@ -417,8 +417,8 @@ class RML {
       rangeNode.put("uri", property.range.uri)
 
       val domainNode = JsonNodeFactory.instance.objectNode()
-      domainNode.put("name", property.range.name)
-      domainNode.put("uri", property.range.uri)
+      domainNode.put("name", property.domain.name)
+      domainNode.put("uri", property.domain.uri)
 
       propertyNode.set("range", rangeNode)
       propertyNode.set("domain", domainNode)
