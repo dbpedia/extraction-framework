@@ -91,7 +91,7 @@ class WikidataSameAsToLanguageLinks_test(val baseDir: File, val wikiDataFile: Fi
           // generate quads for the current language and prepend the sameAs statement quad to the
           // wikidata entity
           var quads = List[Quad]()
-          quads :::= job.sameEntities.filterKeys(_ != language).toList.sortBy(_._1).map {
+          quads :::= job.sameEntities.filterKeys(_ != job.language).toList.sortBy(_._1).map {
             case (language, context) => new Quad(language.wikiCode, null, currentEntity.entityUri, sameAs, context.entityUri, context.context, null: String)
           }
           quads ::= new Quad(job.language.wikiCode, null, currentEntity.entityUri, sameAs, job.wikiDataEntity, currentEntity.context, null: String)
@@ -169,7 +169,7 @@ class WikidataSameAsToLanguageLinks_test(val baseDir: File, val wikiDataFile: Fi
         val file = outputFinder.file(outputDate, output + '.' + suffix).get
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
-      destinations += currentLanguage -> new CompositeDestination(formatDestinations.toSeq: _*)
+      destinations += currentLanguage -> new CompositeDestination(formatDestinations: _*)
     }
     destinations
   }

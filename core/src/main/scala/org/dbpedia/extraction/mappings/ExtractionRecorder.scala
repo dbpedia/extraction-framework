@@ -166,7 +166,7 @@ class ExtractionRecorder[T](
 
     if(slackCredantials != null && failedPages(lang) % (slackCredantials.exceptionThreshold * slackIncreaseExceptionThreshold) == 0)
       forwardExceptionWarning(lang)
-    
+
     if(monitor != null) monitor.reportError(this, exception)
 
   }
@@ -236,7 +236,7 @@ class ExtractionRecorder[T](
     } else print
 
     val status = getStatusValues(lang)
-    val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; {task} at {time} {data}; ") + line
+    val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; {task} at {time}for{data}; ") + line
     val pattern = "\\{\\s*\\w+\\s*\\}".r
     var lastend = 0
     var resultString = ""

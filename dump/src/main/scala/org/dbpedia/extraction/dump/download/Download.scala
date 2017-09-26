@@ -1,14 +1,13 @@
 package org.dbpedia.extraction.dump.download
 
 import java.io.File
+
 import scala.io.Codec
 import java.net.Authenticator
-import scala.collection.mutable.HashSet
-import org.dbpedia.extraction.util.{WikiInfo,Language,ProxyAuthenticator}
-import org.dbpedia.extraction.util.Language.wikiCodeOrdering
-import scala.collection.immutable.SortedSet
 
-object Download extends DownloadConfig
+import org.dbpedia.extraction.util.{ProxyAuthenticator, WikiInfo}
+
+object Download
 {
   /** name of marker file in wiki directory */
   val Started = "download-started"
@@ -20,57 +19,39 @@ object Download extends DownloadConfig
     
   def main(args: Array[String]) : Unit =
   {
-    parse(null, args)
-    
-    if (baseDir == null) throw Usage("No target directory")
-    if ((languages.nonEmpty || ranges.nonEmpty) && baseUrl == null) throw Usage("No base URL")
-    if (languages.isEmpty && ranges.isEmpty) throw Usage("No files to download")
-    if (! baseDir.exists && ! baseDir.mkdir) throw Usage("Target directory '"+baseDir+"' does not exist and cannot be created")
+    val config = new DownloadConfig(args.head)
+
+    if (config.languages.isEmpty) throw Usage("No files to download, because no languages were defined.")
+    if (! config.dumpDir.exists && ! config.dumpDir.mkdir) throw Usage("Target directory '"+config.dumpDir+"' does not exist and cannot be created")
     Authenticator.setDefault(new ProxyAuthenticator())
     
     class Downloader extends FileDownloader with Counter with LastModified with Retry {
-      val progressStep = 1L << 21 // 2M
-      val progressPretty = Download.this.progressPretty
-      val retryMax = Download.this.retryMax
-      val retryMillis = Download.this.retryMillis
+      val progressStep: Long = 1L << 21 // 2M
+      val progressPretty: Boolean = true
+      val retryMax: Int = config.retryMax
+      val retryMillis: Int = config.retryMillis
     }
     
     val downloader = 
-      if (unzip) new Downloader with Unzip 
-      else new Downloader 
-    
-    // resolve page count ranges to languages
-    if (ranges.nonEmpty)
-    {
-      val listFile = new File(baseDir, WikiInfo.FileName)
-      downloader.downloadFile(WikiInfo.URL, listFile)
-      
-      // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
-      // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
-      // these non-ASCII chars anyway, so we don't have to unescape them.
-      println("parsing "+listFile)
-      val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
-      
-      // for all wikis in one of the desired ranges...
-      for (((from, to), files) <- ranges; wiki <- wikis; if from <= wiki.pages && wiki.pages <= to)
-      {
-        // ...add files for this range to files for this language
-        Language.get(wiki.wikicode) match{
-          case Some(l) => languages.getOrElseUpdate(l, new HashSet[(String, Boolean)]) ++= files
-          case None =>
-        }
-      }
-    }
+      if (config.unzip) new Downloader with Unzip
+      else new Downloader
+
+
+    val listFile = new File(config.dumpDir, WikiInfo.FileName)
+    downloader.downloadFile(WikiInfo.URL, listFile)
+    val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
+
     
     // sort them to have reproducible behavior
-    val keys = SortedSet.empty[Language] ++ languages.keys
-    keys.foreach { key => 
-      val done = keys.until(key)
-      val todo = keys.from(key)
-      println("done: "+done.size+" - "+done.map(_.wikiCode).mkString(","))
-      println("todo: "+todo.size+" - "+keys.from(key).map(_.wikiCode).mkString(","))
-      new LanguageDownloader(baseUrl, baseDir, wikiName, key, languages(key), downloader).downloadDates(dateRange, dumpCount)
-    }
+      config.languages.foreach { lang =>
+        val ld = new LanguageDownloader(config.baseUrl, config.dumpDir, config.wikiName, lang, config.source.map(x => (x, true)), downloader)
+        config.dumpDate match{
+          case Some(d) => if(!ld.downloadDate(d))
+            System.err.println("An error occurred while trying to download a dump file (" + d + ")for language: " + lang.wikiCode)
+          case None => if(!ld.downloadMostRecent())
+            System.err.println("An error occurred while trying to download the most recent dump file for language: " + lang.wikiCode)
+        }
+      }
   }
   
 }

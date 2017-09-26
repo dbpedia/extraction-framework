@@ -34,14 +34,14 @@ class NifExtractor(
   extends WikiPageExtractor
 {
   //API parameters to geht HTML of first section
-  val apiParametersFormat = context.configFile.nifParameters.nifQuery
+  val apiParametersFormat: String = context.configFile.nifParameters.nifQuery
 
-  protected val isTestRun = context.configFile.nifParameters.isTestRun
-  protected val writeLinkAnchors = context.configFile.nifParameters.writeLinkAnchor
-  protected val writeStrings = context.configFile.nifParameters.writeAnchor
-  protected val shortAbstractLength = context.configFile.abstractParameters.shortAbstractMinLength
+  protected val isTestRun: Boolean = context.configFile.nifParameters.isTestRun
+  protected val writeLinkAnchors: Boolean = context.configFile.nifParameters.writeLinkAnchor
+  protected val writeStrings: Boolean = context.configFile.nifParameters.writeAnchor
+  protected val shortAbstractLength: Int = context.configFile.abstractParameters.shortAbstractMinLength
 
-  protected val dbpediaVersion = context.configFile.dbPediaVersion
+  protected val dbpediaVersion: String = context.configFile.dbPediaVersion
 
   override val datasets = Set(DBpediaDatasets.NifContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts, DBpediaDatasets.RawTables, DBpediaDatasets.Equations)
 

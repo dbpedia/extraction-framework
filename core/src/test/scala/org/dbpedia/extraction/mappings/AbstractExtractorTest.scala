@@ -8,6 +8,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.junit.{Ignore, Test}
 
 import scala.io.Source
+import scala.language.reflectiveCalls
 
 @Ignore  // unignore to test; MediaWiki server has to be in place
 class AbstractExtractorTest

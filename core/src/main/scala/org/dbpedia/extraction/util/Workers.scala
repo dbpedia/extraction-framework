@@ -8,6 +8,7 @@ import org.dbpedia.extraction.util.Workers._
 
 import scala.Console._
 import scala.collection.convert.decorateAsScala._
+import scala.language.reflectiveCalls
 
 
 /**
@@ -38,9 +39,9 @@ object SimpleWorkers {
   def apply[T <: AnyRef](threads: Int, queueLength: Int)(proc: T => Unit): Workers[T] = {
     new Workers[T](threads, queueLength, new Worker[T]() {
       private var state : WorkerState.Value = WorkerState.declared
-      def init() = {state = WorkerState.initialized}
-      def process(value: T) = proc(value)
-      def destroy() = {state = WorkerState.destroyed}
+      def init(): Unit = {state = WorkerState.initialized}
+      def process(value: T): Unit = proc(value)
+      def destroy(): Unit = {state = WorkerState.destroyed}
       def getState: _root_.org.dbpedia.extraction.util.WorkerState.Value = state
     })
   }
@@ -124,7 +125,7 @@ object Workers {
   /**
    * By default, use one thread per logical processor.
    */
-  private[util] val defaultThreads = Runtime.getRuntime().availableProcessors()
+  private[util] val defaultThreads = Runtime.getRuntime.availableProcessors()
 
 
   def work[T <: AnyRef](args : List[T])(proc : T => Unit) : Unit = {
@@ -209,7 +210,7 @@ class Workers[T <: AnyRef](availThreads: Int, queueLength: Int, factory: => Work
   private val threads =
   for (i <- 0 until availThreads) yield
     new Thread() {
-      val worker = factory
+      val worker: Worker[T] = factory
       override def run(): Unit = {
         try {
           if(worker.getState != WorkerState.initialized)
@@ -249,7 +250,7 @@ class Workers[T <: AnyRef](availThreads: Int, queueLength: Int, factory: => Work
         thread.worker.init()
       }
       if(thread.getState != Thread.State.NEW)
-        thread.resume()
+        thread.resume()                         //TODO replace this with something more scala like
       else
         thread.start()
     }
@@ -273,7 +274,8 @@ class Workers[T <: AnyRef](availThreads: Int, queueLength: Int, factory: => Work
    */
   final def stop(): Unit = {
     // enqueue one sentinel per thread - each thread removes one
-    for (thread <- threads) queue.put(sentinel)
+    for (thread <- threads)
+      queue.put(sentinel)
     // wait for the threads to find the sentinels and finish
     for (thread <- threads) {
       thread.join()

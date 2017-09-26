@@ -723,7 +723,7 @@ object DataIdGenerator {
     preamble = configMap.get("preamble").getAsString.value
 
     releaseDate = Option(configMap.get("releaseDate").getAsString.value) match{
-      case Some(x) => try{ dateformat.parse(x)}
+      case Some(x) => dateformat.parse(x)
       case None => new Date()
     }
 

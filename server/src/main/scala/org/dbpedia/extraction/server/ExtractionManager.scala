@@ -55,9 +55,9 @@ abstract class ExtractionManager(
     /**
      * Called by server to update all users of this extraction manager.
      */
-    def updateAll
+    def updateAll()
     
-    protected val parser = WikiParser.getInstance()
+    protected val parser: WikiParser = WikiParser.getInstance()
 
     def extract(source: Source, destination: Destination, language: Language, useCustomExtraction: Boolean = false): Unit = {
       val extract = if (useCustomExtraction) customExtractor(language) else mappingExtractor(language)
@@ -78,11 +78,11 @@ abstract class ExtractionManager(
 
         // context object that has only this mappingSource
         val context = new {
-          val ontology = self.ontology
-          val language = lang
+          val ontology: Ontology = self.ontology()
+          val language: Language = lang
           val redirects: Redirects = new Redirects(Map())
-          val mappingPageSource = mappingsPages
-          val disambiguations = self.disambiguations
+          val mappingPageSource: Traversable[WikiPage] = mappingsPages
+          val disambiguations: Disambiguations = self.disambiguations
         }
 
         //Load mappings
@@ -119,7 +119,7 @@ abstract class ExtractionManager(
     }
 
 
-    protected def loadOntologyPages() =
+    protected def loadOntologyPages(): Map[WikiTitle, PageNode] =
     {
         val source = if (paths.ontologyFile != null && paths.ontologyFile.isFile)
         {
@@ -138,7 +138,7 @@ abstract class ExtractionManager(
         source.map(parser).flatten.map(page => (page.title, page)).toMap
     }
 
-    protected def loadDisambiguations() =
+    protected def loadDisambiguations(): Disambiguations =
     {
         Disambiguations.empty()
     }
@@ -174,7 +174,7 @@ abstract class ExtractionManager(
 
     protected def loadOntology() : Ontology =
     {
-        new OntologyReader().read(ontologyPages.values)
+        new OntologyReader().read(ontologyPages().values)
     }
 
     protected def loadMappingTestExtractors(): Map[Language, WikiPageExtractor] =
@@ -197,11 +197,12 @@ abstract class ExtractionManager(
     }
 
     protected def getExtractionContext(lang: Language) = {
-      new { val ontology = self.ontology
-            val language = lang
-            val mappings = self.mappings(lang)
-            val redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
-            val disambiguations = self.disambiguations
+      new { val ontology: Ontology = self.ontology
+            val language: Language = lang
+            val mappings: Mappings = self.mappings(lang)
+            val redirects: Redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
+            val disambiguations: Disambiguations = self.disambiguations
+            val configFile: ServerConfiguration = Server.config
       }
     }
 
@@ -213,11 +214,11 @@ abstract class ExtractionManager(
     protected def loadMappings(lang : Language) : Mappings =
     {
         val context = new {
-          val ontology = self.ontology
-          val language = lang
+          val ontology: Ontology = self.ontology()
+          val language: Language = lang
           val redirects: Redirects = new Redirects(Map())
-          val mappingPageSource = self.mappingPageSource(lang)
-          val disambiguations = self.disambiguations
+          val mappingPageSource: Traversable[WikiPage] = self.mappingPageSource(lang)
+          val disambiguations: Disambiguations = self.disambiguations
         }
 
         MappingsLoader.load(context)

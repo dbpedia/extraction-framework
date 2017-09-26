@@ -1,16 +1,18 @@
 package org.dbpedia.extraction.dump.download
 
 import java.net.URL
-import java.io.{PrintWriter, File}
-import scala.collection.mutable.{Set,HashMap}
+import java.io.{File, PrintWriter}
+
 import scala.collection.immutable.SortedSet
-import scala.io.{Source,Codec}
-import org.dbpedia.extraction.util.{Finder,Language}
+import scala.io.{Codec, Source}
+import org.dbpedia.extraction.util.{Finder, Language}
 import org.dbpedia.extraction.util.RichFile.wrapFile
+
+import scala.collection.mutable
 
 /**
  */
-class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language: Language, fileNames: Set[(String, Boolean)], downloader: Downloader)
+class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language: Language, fileNames: Seq[(String, Boolean)], downloader: Downloader)
 {
   private val DateLink = """<a href="(\d{8})/">""".r
 
@@ -27,7 +29,7 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
 
     finder.file(Download.Started) match{
       case None =>
-      case Some(started) =>{
+      case Some(started) =>
         if (! started.createNewFile) throw new Exception("Another process may be downloading files to ["+mainDir+"] - stop that process and remove ["+started+"]")
         try {
 
@@ -39,7 +41,7 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
             DateLink.findAllIn(line).matchData.foreach(dates += _.group(1))
           }
 
-          if (dates.size == 0) throw new Exception("found no date - "+mainPage+" is probably broken or unreachable. check your network / proxy settings.")
+          if (dates.isEmpty) throw new Exception("found no date - "+mainPage+" is probably broken or unreachable. check your network / proxy settings.")
 
           var count = 0
 
@@ -48,15 +50,15 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
             if (count < dumpCount && date >= firstDate && date <= lastDate && downloadDate(date)) count += 1
           }
 
-          if (count == 0) throw new Exception("found no date on "+mainPage+" in range "+firstDate+"-"+lastDate+" with files "+fileNames.mkString(","))
+          if (count == 0)
+            throw new Exception("found no date on "+mainPage+" in range "+firstDate+"-"+lastDate+" with files "+fileNames.mkString(","))
         }
         finally started.delete
-      }
     }
 
   }
 
-  private def expandFilenameRegex(date: String, index: File, filenameRegexes: Set[String]): Set[String] = {
+  private def expandFilenameRegex(date: String, index: File, filenameRegexes: Seq[String]): Seq[String] = {
 
     // Prepare regexes
     val regexes = filenameRegexes.map { regex =>
@@ -64,13 +66,28 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
     }
 
     // Result
-    val filenames = Set[String]()
+    val filenames = mutable.Set[String]()
 
     forEachLine(index) { line =>
       regexes.foreach(regex => regex.findAllIn(line).matchData.foreach(filenames += _.group(1)))
     }
 
-    filenames
+    filenames.toSeq
+  }
+
+  def downloadMostRecent(): Boolean = {
+    // find all dates on the main page, sort them latest first
+    var dates = SortedSet.empty(Ordering[String].reverse)
+
+    downloader.downloadTo(mainPage, mainDir) // creates index.html, although it does not exist on the server
+    forEachLine(new File(mainDir, "index.html")) { line =>
+      DateLink.findAllIn(line).matchData.foreach(dates += _.group(1))
+    }
+
+    if (dates.isEmpty)
+      throw new Exception("found no date - "+mainPage+" is probably broken or unreachable. check your network / proxy settings.")
+
+    downloadDate(dates.head)
   }
 
   def downloadDate(date: String): Boolean = {
@@ -81,7 +98,7 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
 
     finder.file(date, Download.Complete) match{
       case None => false
-      case Some(complete) =>{
+      case Some(complete) =>
 
         // First download the files list to expand regexes
         downloader.downloadTo(datePage, dateDir) // creates index.html
@@ -114,7 +131,7 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
         }
 
         // all the links we need - only for non regexes (we have already checked regex ones)
-        val links = new HashMap[String, String]()
+        val links = new mutable.HashMap[String, String]()
         for (fileName <- staticFileNames) links(fileName) = "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
         // Here we should set "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
         // but "\"/"+wiki+"/"+date+"/" does not exists in incremental updates, keeping the trailing "\">" should do the trick
@@ -152,7 +169,6 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
           pw.close()
           true
         }
-      }
     }
   }
 

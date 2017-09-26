@@ -20,7 +20,6 @@ import scala.language.reflectiveCalls
  *
  * From now on we use MobileFrontend for MW <2.21 and TextExtracts for MW > 2.22
  * The patched mw instance is no longer needed except from minor customizations in LocalSettings.php
- * TODO: we need to adapt the TextExtracts extension to accept custom wikicode syntax.
  * TextExtracts now uses the article entry and extracts the abstract. The retional for
  * the new extension is that we will not need to load all articles in MySQL, just the templates
  * At the moment, setting up the patched MW takes longer than the loading of all articles in MySQL :)
@@ -28,7 +27,7 @@ import scala.language.reflectiveCalls
  * We leave the old code commented since we might re-use it soon
  */
 
-@deprecated("replaced by NifExtractor.scala: which will extract the whole page content including the abstract - to only extract the abstract refer to the java documentation")
+@deprecated("replaced by NifExtractor.scala: which will extract the whole page content including the abstract", "2016-10")
 @ExtractorAnnotation("abstract extractor")
 class AbstractExtractor(
   context : {

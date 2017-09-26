@@ -14,6 +14,7 @@ import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
+import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, HashSet}
 import scala.language.reflectiveCalls
 
@@ -40,7 +41,8 @@ extends WikiPageExtractor
 
     private val wikiCode = language.wikiCode
 
-    private val citationTemplatesRegex = List("cite.*".r, "citation.*".r) //TODO make I18n
+    //FIXME put this in a config!
+    private val citationTemplatesRegex = List("cite.*".r, "citation.*".r, "literatur.*".r, "internetquelle.*".r, "bib.*".r)
 
     private val typeProperty = ontology.properties("rdf:type")
     //private val rdfLangStrDt = ontology.datatypes("rdf:langString")
@@ -59,8 +61,8 @@ extends WikiPageExtractor
     private val TrailingNumberRegex = InfoboxExtractorConfig.TrailingNumberRegex
 
     private val splitPropertyNodeRegexInfobox = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(wikiCode))
-        DataParserConfig.splitPropertyNodeRegexInfobox.get(wikiCode).get
-    else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
+        DataParserConfig.splitPropertyNodeRegexInfobox(wikiCode)
+    else DataParserConfig.splitPropertyNodeRegexInfobox("en")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Parsers
@@ -89,7 +91,7 @@ extends WikiPageExtractor
     // State
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val seenProperties = HashSet[String]()
+    private val seenProperties = mutable.HashSet[String]()
     
     override val datasets = Set(DBpediaDatasets.CitationData, DBpediaDatasets.CitationLinks /*, DBpediaDatasets.CitationTypes*/)
 
@@ -118,7 +120,7 @@ extends WikiPageExtractor
         for {node <- SimpleWikiParser.apply(pageWithoutRefs)
              template <- ExtractorUtils.collectTemplatesFromNodeTransitive(node)
              resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
-             if citationTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined)
+             if citationTemplatesRegex.exists(regex => regex.findFirstMatchIn(resolvedTitle).isDefined)
         } {
 
             for (citationIri <- getCitationIRI(template)) {
@@ -156,7 +158,7 @@ extends WikiPageExtractor
         extractUnitValue(node).foreach(result => return List(result))
         extractDates(node) match
         {
-            case dates if !dates.isEmpty => return dates
+            case dates if dates.nonEmpty => return dates
             case _ => 
         }
         extractSingleCoordinate(node).foreach(result =>  return List(result))
@@ -164,7 +166,7 @@ extends WikiPageExtractor
         extractRankNumber(node).foreach(result => return List(result))
         extractLinks(node) match
         {
-            case links if !links.isEmpty => return links
+            case links if links.nonEmpty => return links
             case _ =>
         }
         StringParser.parse(node).map(value => (value, xsdStringDt)).toList
@@ -226,7 +228,7 @@ extends WikiPageExtractor
         //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
         val splitNodes = NodeUtil.splitPropertyNode(node, "(—|–|-|&mdash;|&ndash;|,|;)")
 
-        splitNodes.flatMap(extractDate(_)) match
+        splitNodes.flatMap(extractDate) match
         {
             case dates if dates.size == splitNodes.size => dates
             case _ => List.empty

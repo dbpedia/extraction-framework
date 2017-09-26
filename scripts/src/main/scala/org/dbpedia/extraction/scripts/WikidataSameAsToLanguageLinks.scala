@@ -3,14 +3,11 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 import java.util.regex.Matcher
 
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations.formatters.Formatter
-import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.scripts.WikidataSameAsToLanguageLinks.{DBPEDIA_URI_PATTERN, error, sameAs}
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.util.IOUtils._
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util._
@@ -177,9 +174,9 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
         val file = outputFinder.file(outputDate, output + '.' + suffix).get
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
-      destinations += currentLanguage.wikiCode -> new CompositeDestination(formatDestinations.toSeq: _*)
+      destinations += currentLanguage.wikiCode -> new CompositeDestination(formatDestinations: _*)
     }
-    destinations.toMap
+    destinations
   }
 
   /**
