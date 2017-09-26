@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.mappings
 
 import java.io.File
+import java.net.URL
+import java.util.concurrent.atomic.AtomicLong
 
 import org.apache.jena.rdf.model._
 import org.dbpedia.extraction.config.provenance.Dataset
@@ -8,21 +10,19 @@ import org.dbpedia.extraction.util._
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
-import org.dbpedia.extraction.util.RichFile.wrapFile
+
+import sys.process._
 
 import scala.util.Try
 
 class ExtractionMonitor[T] {
-  private var stats : mutable.HashMap[ExtractionRecorder[T], mutable.HashMap[String, Int]] = mutable.HashMap()
-  private var errors : mutable.HashMap[ExtractionRecorder[T], ListBuffer[Throwable]] = mutable.HashMap()
+  private val stats : mutable.HashMap[ExtractionRecorder[T], mutable.HashMap[String, Int]] = mutable.HashMap()
+  private val errors : mutable.HashMap[ExtractionRecorder[T], ListBuffer[Throwable]] = mutable.HashMap()
 
-  private var currentVersion = Config.universalConfig.dbPediaVersion
   private var compareVersions = false
-  private var oldDumpDir : File = null
-  private var dumpDir : File = null
+  private var old_version_URL : String = _
   private val tripleProperty = "http://rdfs.org/ns/void#triples"
   private var expectedChanges = Array(-1.0, 8.0)
-  private var oldVersion = ""
   private val ignorableExceptionsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("ignorableExceptions.json"))
   private val ignorableExceptions : mutable.HashMap[ExtractionRecorder[T], List[String]] = mutable.HashMap()
   private var summarizeExceptions : Boolean = false
@@ -38,9 +38,8 @@ class ExtractionMonitor[T] {
     else ConfigUtils.loadConfig(configPath)
     compareVersions = Try[Boolean]{ config.getProperty("compareDatasetIDs").toBoolean }.getOrElse(false)
     if (compareVersions){
-      require(config.getProperty("old-base-dir") != null, "Old build directory needs to be defined under 'old-base-dir' for the dataID comparison!")
-      oldDumpDir = new File(config.getProperty("old-base-dir"))
-      dumpDir = Config.universalConfig.dumpDir
+      require(config.getProperty("old-base-dir-url") != null, "Old build directory needs to be defined under 'old-base-dir-url' for the dataID comparison!")
+      old_version_URL = config.getProperty("old-base-dir-url")
       val changes = config.getProperty("expectedChanges")
       if(changes != null) {
         if(changes.split(",").length == 2) {
@@ -81,14 +80,6 @@ class ExtractionMonitor[T] {
   }
 
   /**
-    * reports the success of an page extraction for the Recorder
-    * @param er ExtractionRecorder
-    */
-  def reportSuccess(er: ExtractionRecorder[T]): Unit ={
-    stats(er).put("SUCCESSFUL", stats(er).get("SUCCESSFUL").getOrElse(0) + 1)
-  }
-
-  /**
     * Marks the ExtractionRecorder as crashed
     * @param er ExtractionRecorder
     * @param ex Exception
@@ -108,7 +99,7 @@ class ExtractionMonitor[T] {
     if(ignorableExceptions(er).contains(ex.getClass.getName.split("\\.").last)) ignorable = true
     if(!ignorable) {
       errors(er) += ex
-      stats(er).put("ERROR", stats(er).get("ERROR").getOrElse(0) + 1)
+      stats(er).put("ERROR", stats(er).getOrElse("ERROR", 0) + 1)
     }
   }
 
@@ -122,79 +113,72 @@ class ExtractionMonitor[T] {
     // Get the monitor stats for this ER
     val crashed = if(stats(er).getOrElse("CRASHED", 0) == 1) "yes" else "no"
     val error = stats(er).getOrElse("ERROR", 0)
-    val success = stats(er).getOrElse("SUCCESSFUL", 0)
     var dataIDResults = ""
 
     // DatasetID Comparison
     if(compareVersions) {
       // Find the DatasetID Files
       val language = er.language
-      val oldDate = new Finder[File](oldDumpDir, language, "wiki").dates().last
-      val newDate = new Finder[File](dumpDir, language, "wiki").dates().last
-      oldVersion = oldDate.substring(0,4) + "-" + oldDate.substring(4,6)
-      val oldPath = oldDumpDir + "/" + language.wikiCode + "wiki/"+ oldDate + "/" +
-        oldVersion + "_dataid_" + language.wikiCode + ".ttl"
-      val newPath = dumpDir + "/" + language.wikiCode + "wiki/" + newDate + "/" +
-        currentVersion + "_dataid_" + language.wikiCode + ".ttl"
+      val oldDate = old_version_URL.split("/")(3)
+      val url = old_version_URL + language.wikiCode + "/"+ oldDate + "_dataid_" + language.wikiCode + ".ttl"
+      new URL(url) #> new File("dataID-tmp.ttl")
 
       // Compare & Get the results
-      dataIDResults = "DATAIDRESULTS: \n"
-      compareTripleCount(oldPath, newPath).foreach(r => {
-        // Datasets for ER given => only compare these
-        if(datasets.nonEmpty){
-          datasets.foreach(dataset => if(dataset.canonicalUri == r._1) dataIDResults += r._1 + " : " + r._2 + "\n")
-        }
-        // Datasets for ER not given => Compare all datasets
-        else dataIDResults += String.format("%-30s", r._2 + " : ") + r._1 + "\n"
-      })
+      dataIDResults = "DATAIDRESULTS: \n" +
+      compareTripleCount("dataID-tmp.ttl", er, datasets)
     }
+    val exceptions = mutable.HashMap[String, Int]()
+    errors(er).foreach(ex => {
+      exceptions.put(ex.getClass.getName, exceptions.getOrElse(ex.getClass.getName, 0) + 1)
+    })
     val summary = mutable.HashMap[String, Object]()
     summary.put("EXCEPTIONCOUNT", error.asInstanceOf[Object])
-    summary.put("SUCCESSFUL", success.asInstanceOf[Object])
+
+    val s : AtomicLong = new AtomicLong(0)
+    val map = er.getSuccessfulPageCount()
+    map.keySet.foreach(key => s.set(s.get() + map(key).get()))
+    summary.put("SUCCESSFUL", s)
     summary.put("CRASHED", crashed.asInstanceOf[Object])
     summary.put("DATAID", dataIDResults.asInstanceOf[Object])
     summary.put("EXCEPTIONS",
-      if(summarizeExceptions) errors.getOrElse(er, ListBuffer[Throwable]()).asInstanceOf[Object]
-      else ListBuffer[Throwable]())
+      if(summarizeExceptions) exceptions.asInstanceOf[Object]
+      else mutable.HashMap[String, Int]())
     summary
   }
 
   /**
     * Reads two RDF files and compares the triple-count-values.
-    * @param oldPath path to first RDF file
-    * @param newPath path to second RDF file
-    * @return HashMap: Subject -> Comparison Result
     */
-  def compareTripleCount(oldPath : String, newPath : String): mutable.HashMap[String, String] ={
-    // Load Graphs
+  def compareTripleCount(dataIDfile : String, extractionRecorder: ExtractionRecorder[T], datasets : ListBuffer[Dataset]): String ={
+
+    var resultString = ""
+
+    // Load Graph
     val oldModel = ModelFactory.createDefaultModel()
-    val newModel = ModelFactory.createDefaultModel()
-    oldModel.read(oldPath)
-    newModel.read(newPath)
+
+    oldModel.read(dataIDfile)
     val oldValues = getPropertyValues(oldModel, oldModel.getProperty(tripleProperty))
-    val newValues = getPropertyValues(newModel, newModel.getProperty(tripleProperty))
 
-    // Compare Graphs
-    val diff = mutable.HashMap[String, Float]()
-    val result = mutable.HashMap[String, String]()
-    oldValues.keySet.foreach(key => {
-      if(newValues.keySet.contains(key)) // Get Difference between Files
-        diff += (key -> newValues(key).asLiteral().getFloat / oldValues(key).asLiteral().getFloat)
-      else result += (key -> "File missing in newer Build") // File missing in new DataID
+    // Compare Values
+    oldValues.keySet.foreach(fileName => {
+      if(datasets.nonEmpty) {
+        datasets.foreach(dataset =>
+          if(dataset.canonicalUri == fileName) {
+            val oldValue : Long = oldValues(fileName).asLiteral().getLong
+            val newValue : Long = extractionRecorder.successfulTriples(dataset)
+            val change : Float =
+              if(newValue > oldValue) (newValue.toFloat / oldValue.toFloat) * 10000000 / 100000
+              else (-1 * (1- (newValue.toFloat / oldValue.toFloat))) * 10000000 / 100000
+            if(change < expectedChanges(0) || change > expectedChanges(1)) resultString += "! "
+            resultString += dataset.canonicalUri + ": " + change + "%"
+          })
+      }
+      // Datasets for ER not given => Compare all datasets
+      else {
+        resultString += fileName + ": " + oldValues(fileName).asLiteral().getLong
+      }
     })
-    newValues.keySet.foreach(key => {
-      if(!diff.keySet.contains(key)) result += (key -> "File added in newer Build")// new File added to DataID
-    })
-
-    // Summarize Comparison
-    diff.keySet.foreach(key => {
-      val v = (math floor (diff(key) - 1) * 10000000)/100000
-      if(v != -1.0 && v < expectedChanges(0)) result += (key -> ("Suspicious: " + v + "%"))
-      else if(v != 1 && v > expectedChanges(1)) result += (key -> ("Suspicious: +" + v + "%"))
-      else if(v == 1.0) result += (key -> "No change in triple-count")
-      else result += (key -> ((if (v >= 1) " +" else "") + v + "%"))
-    })
-    result
+    resultString
   }
 
   /**

@@ -67,7 +67,6 @@ extends PageNodeExtractor
 
   override def extract(node: PageNode, subjectUri: String): Seq[Quad] =
   {
-    throw new BadQuadException("Blub")
     if(node.title.namespace != Namespace.Main) return Seq.empty
 
     var quads = new ArrayBuffer[Quad]()

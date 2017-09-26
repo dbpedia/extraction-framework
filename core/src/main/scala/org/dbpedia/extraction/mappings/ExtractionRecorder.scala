@@ -38,6 +38,7 @@ class ExtractionRecorder[T](
 
   private val startTime = new AtomicLong()
   private var successfulPageCount = Map[Language,AtomicLong]()
+  private var successfulTripleCount = Map[Dataset, AtomicLong]()
 
   private var defaultLang: Language = Language.English
 
@@ -69,6 +70,11 @@ class ExtractionRecorder[T](
     case None => 0
   }
 
+  def successfulTriples(dataset : Dataset): Long = successfulTripleCount.get(dataset) match {
+    case Some(m) => m.get()
+    case None => 0
+  }
+
   /**
     * get successful page count after increasing it by one
     *
@@ -78,10 +84,18 @@ class ExtractionRecorder[T](
   def increaseAndGetSuccessfulPages(lang: Language): Long ={
     successfulPageCount.get(lang) match {
       case Some(ai) => ai.incrementAndGet()
-      case None => {
+      case None =>
         successfulPageCount += (lang -> new AtomicLong(1))
         1
-      }
+    }
+  }
+
+  def increaseAndGetSuccessfulTriples(dataset: Dataset) : Long = {
+    successfulTripleCount.get(dataset) match {
+      case Some(ai) => ai.incrementAndGet()
+      case None =>
+        successfulTripleCount += (dataset -> new AtomicLong(1))
+        1
     }
   }
 
@@ -115,29 +129,25 @@ class ExtractionRecorder[T](
     for(record <- records) {
       //val count = increaseAndGetSuccessfulPages(record.language)
       record.page match{
-        case page: WikiPage => {
+        case page: WikiPage =>
           if (record.errorMsg != null)
             printLabeledLine(record.errorMsg, record.severity, page.title.language, Seq(PrinterDestination.err, PrinterDestination.file))
           Option(record.error) match {
             case Some(ex) => failedRecord(page.title.encoded, record.identifier, record.page, ex, record.language)
             case None => recordExtractedPage(page.id, page.title, record.logSuccessfulPage)
           }
-        }
-        case quad: Quad =>{
+        case quad: Quad =>
           Option(record.error) match {
             case Some(ex) => failedRecord(quad.subject, record.identifier, record.page, ex, record.language)
             case None => recordQuad(quad, record.severity, record.language)
           }
-        }
-        case _  => {
+        case _  =>
           val msg = Option(record.errorMsg) match{
             case Some(m) => m
-            case None => {
+            case None =>
               if(record.error != null) failedRecord(null, null, record.page, record.error, record.language)
               else recordGenericPage(record.language, record.page.toString)
-            }
           }
-        }
       }
     }
   }
@@ -179,7 +189,6 @@ class ExtractionRecorder[T](
     * @param logSuccessfulPage - indicates whether the event of a successful extraction shall be included in the log file (default = false)
     */
   def recordExtractedPage(id: Long, title: WikiTitle, logSuccessfulPage:Boolean = false): Unit = synchronized {
-    if(monitor != null) monitor.reportSuccess(this)
     if(logSuccessfulPage) {
       successfulPagesMap.get(title.language) match {
         case Some(map) => map += (id -> title)
@@ -195,7 +204,6 @@ class ExtractionRecorder[T](
   }
 
   def recordGenericPage(lang: Language, line: String = null): Unit ={
-    if(monitor != null) monitor.reportSuccess(this)
     val pages = increaseAndGetSuccessfulPages(lang)
     val l = if(line == null) "processed {page} instances; {mspp} per instance; {fail} failed instances" else line
     if(pages % reportInterval == 0)
@@ -211,7 +219,6 @@ class ExtractionRecorder[T](
     * @param lang
     */
   def recordQuad(quad: Quad, severity: RecordSeverity.Value, lang:Language): Unit = synchronized {
-    if(monitor != null) monitor.reportSuccess(this)
     if(increaseAndGetSuccessfulPages(lang) % reportInterval == 0)
       printLabeledLine("processed {page} quads; {mspp} per quad; {fail} failed quads", severity, lang)
   }
@@ -294,6 +301,7 @@ class ExtractionRecorder[T](
     this.failedPageMap = Map[Language, scala.collection.mutable.Map[(String, T), Throwable]]()
     this.successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
     this.successfulPageCount = Map[Language,AtomicLong]()
+    this.successfulTripleCount = Map[Dataset, AtomicLong]()
 
     this.startTime.set(System.currentTimeMillis)
     this.defaultLang = lang
@@ -318,10 +326,7 @@ class ExtractionRecorder[T](
     }
 
     if(monitor != null) {
-      val monitor_summary = monitor.summarize(this, datasets)
-      val summary = monitorSummaryToString(monitor_summary)
-      printLabeledLine(summary, RecordSeverity.Info, defaultLang)
-      forwardSimpleLine(summary)
+      printMonitorSummary(monitor.summarize(this, datasets))
     }
 
     val line = "Extraction finished for language: " + defaultLang.name + " (" + defaultLang.wikiCode + ") " +
@@ -333,10 +338,9 @@ class ExtractionRecorder[T](
   }
 
   def resetFailedPages(lang: Language) = failedPageMap.get(lang) match{
-    case Some(m) => {
+    case Some(m) =>
       m.clear()
       successfulPageCount(lang).set(0)
-    }
     case None =>
   }
 
@@ -476,27 +480,64 @@ class ExtractionRecorder[T](
     }
   }
 
-  def monitorSummaryToString(summaryMap : mutable.HashMap[String, Object]) : String = {
+  def printMonitorSummary(summaryMap : mutable.HashMap[String, Object]) : Unit = {
     val error = summaryMap.getOrElse("EXCEPTIONCOUNT","0")
-    val success = summaryMap.getOrElse("SUCCESSFUL", "0")
+    val success = summaryMap.getOrElse("SUCCESSFUL", new AtomicLong(0))
     val crashed = summaryMap.getOrElse("CRASHED", "no")
     val dataIDResults = summaryMap.getOrElse("DATAID", "")
-    var exceptions = ""
-    summaryMap.getOrElse("EXCEPTIONS", ListBuffer[Throwable]())
-      .asInstanceOf[ListBuffer[Throwable]].map(ex => {
-      exceptions += ex.toString + "\n"
-      ex.getStackTrace.foreach(exceptions += _.toString + "\n")
-      exceptions += "\n"
-    })
-    if(exceptions != "") exceptions = "EXCEPTIONS:\n" + exceptions
+    var exceptionString = ""
+    val exceptionMap = summaryMap.getOrElse("EXCEPTIONS", mutable.HashMap[String, Int]())
+      .asInstanceOf[mutable.HashMap[String,Int]]
+    exceptionMap.keySet.foreach(key => exceptionString += key + ": " + exceptionMap(key))
 
-    // Return the Summary as formatted String
-    "\n----- ----- ----- EXTRACTION MONITOR STATISTICS ----- ----- -----\n" +
-      String.format("%-20s", "EXCEPTIONCOUNT:") + s"$error\n" +
-      String.format("%-20s", "SUCCESSFUL:") + s"$success\n" +
-      String.format("%-20s", "CRASHED:") + s"$crashed\n" +
-      s"$exceptions" +
-      s"$dataIDResults----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----"
+    var errString = ""
+    var outString = ""
+
+    // Summary String Building:
+    // Complete Statistic on Severity-Level Info
+    // Critical Error Statistic on Severity-Level Exception
+
+    outString += (String.format("%-20s", "EXCEPTIONCOUNT:")+ s"$error")+ "\n"
+
+    if(error.toString.toInt > 0) {
+      errString += (String.format("%-20s", "EXCEPTIONCOUNT:")+ s"$error")+ "\n"
+    }
+
+    outString += String.format("%-20s", "SUCCESSFUL:") + success.asInstanceOf[AtomicLong].get() + "\n"
+    if(success.asInstanceOf[AtomicLong].get() == 0)
+      errString += String.format("%-20s", "SUCCESSFUL:") + success.asInstanceOf[AtomicLong].get()+ "\n"
+
+    outString += String.format("%-20s", "CRASHED:") + s"$crashed"+ "\n"
+    if(crashed == "yes")
+      errString += String.format("%-20s", "CRASHED:") + s"$crashed"+ "\n"
+
+    if(exceptionString != "") {
+      exceptionString = "EXCEPTIONS:\n" + exceptionString+ "\n"
+      errString += exceptionString
+    }
+
+    var errDataid = ""
+    dataIDResults.toString.lines.foreach(line => {
+      outString += line + "\n"
+      if(line.startsWith("!")) errDataid += line + "\n"
+    })
+
+    if(errDataid != "") errString += "DATAID:\n" + errDataid
+
+    outString = "\n----- ----- ----- EXTRACTION MONITOR STATISTICS ----- ----- -----\n" + outString +
+    "\n----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----"
+    printLabeledLine( outString, RecordSeverity.Info, defaultLang)
+
+    if(errString != "") {
+      errString = "\n----- ----- ----- EXTRACTION MONITOR STATISTICS ----- ----- -----\n" + errString +
+      "\n----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----"
+      printLabeledLine( errString, RecordSeverity.Exception, defaultLang)
+    }
+
+  }
+
+  def getSuccessfulPageCount(): Map[Language,AtomicLong] = {
+    successfulPageCount
   }
 
 }

@@ -55,6 +55,7 @@ class ExtractionJob(
       case ex: Exception =>
         page.addExtractionRecord(null, ex)
         extractionRecorder.record(page.getExtractionRecords():_*)
+        if(extractionRecorder.monitor != null) extractionRecorder.monitor.reportCrash(extractionRecorder, ex)
     }
   }
   
