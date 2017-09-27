@@ -1634,15 +1634,14 @@ broken --&gt;
   {{ PropertyMapping | templateProperty = OT | ontologyProperty = foaf:name }}
   {{ PropertyMapping | templateProperty = Deutscher Titel | ontologyProperty = foaf:name }}
   {{ PropertyMapping | templateProperty = DT | ontologyProperty = foaf:name }}
-}}</text></revision></page><page><title>Mapping de:Infobox Fluggesellschaft</title><ns>208</ns><id>3562</id><revision><id>13677</id><timestamp>2011-06-17T11:44:55Z</timestamp><text>{{ TemplateMapping
+}}</text></revision></page><page><title>Mapping de:Infobox Fluggesellschaft</title><ns>208</ns><id>3562</id><revision><id>51881</id><timestamp>2017-02-12T11:08:50Z</timestamp><text>{{ TemplateMapping
    | mapToClass = Airline
    | mappings =
        {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
        {{ PropertyMapping | templateProperty = Jahr | ontologyProperty = formationYear }}
        {{ PropertyMapping | templateProperty = Jahr_Ende | ontologyProperty = extinctionYear }}
        {{ PropertyMapping | templateProperty = Rufzeichen | ontologyProperty = callSign }}
-       {{ PropertyMapping | templateProperty = Sitz | ontologyProperty = locationCity }}
-       {{ PropertyMapping | templateProperty = Sitz | ontologyProperty = locationCountry }}
+       {{ PropertyMapping | templateProperty = Sitz | ontologyProperty = location }}
        {{ PropertyMapping | templateProperty = Mitarbeiterzahl | ontologyProperty = numberOfEmployees }}
        {{ PropertyMapping | templateProperty = Drehkreuz | ontologyProperty = hubAirport }}
        {{ PropertyMapping | templateProperty = Allianz | ontologyProperty = alliance }}
@@ -2660,7 +2659,25 @@ broken --&gt;
       Maybe useful properties but without a counterpart so far:
        {{ PropertyMapping | templateProperty = medaillen | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = medaillenspiegel | ontologyProperty = }}
---&gt;</text></revision></page><page><title>Mapping de:Infobox Golfer</title><ns>208</ns><id>3463</id><revision><id>47281</id><timestamp>2015-03-29T18:13:46Z</timestamp><text>{{ TemplateMapping
+--&gt;</text></revision></page><page><title>Mapping de:Infobox Gletscher</title><ns>208</ns><id>11817</id><revision><id>51971</id><timestamp>2017-03-03T13:09:06Z</timestamp><text>{{TemplateMapping | mapToClass = Glacier
+| mappings = 
+	&lt;!-- {{ PropertyMapping | templateProperty = BESONDERHEITEN | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = BILD | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = BILDBESCHREIBUNG | ontologyProperty = description }} --&gt;
+	{{ PropertyMapping | templateProperty = BREITE | ontologyProperty = width }}
+	&lt;!-- {{ PropertyMapping | templateProperty = DICKE | ontologyProperty = thickness }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = ENTWÄSSERUNG | ontologyProperty = drainage }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = FLÄCHE | ontologyProperty = Area}} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = GEBIRGE | ontologyProperty = MountainRange}} --&gt;
+	{{ PropertyMapping | templateProperty = LAGE | ontologyProperty = location }}
+	{{ PropertyMapping | templateProperty = LÄNGE | ontologyProperty = length }}
+	{{ PropertyMapping | templateProperty = NAME | ontologyProperty = foaf:name }}
+	{{ PropertyMapping | templateProperty = NAME-ZUSATZ | ontologyProperty = foaf:name }}
+	{{ PropertyMapping | templateProperty = REGION-ISO | ontologyProperty = region }}
+	{{ PropertyMapping | templateProperty = TYP | ontologyProperty = type }}
+{{GeocoordinatesMapping | latitudeDegrees = BREITENGRAD | longitudeDegrees = LÄNGENGRAD }}
+
+}}</text></revision></page><page><title>Mapping de:Infobox Golfer</title><ns>208</ns><id>3463</id><revision><id>47281</id><timestamp>2015-03-29T18:13:46Z</timestamp><text>{{ TemplateMapping
    | mapToClass = GolfPlayer
    | mappings =
        {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
@@ -8708,15 +8725,14 @@ Im Englischen nicht bekannt/verwendet:
  {{PropertyMapping | templateProperty = Eröffnet | ontologyProperty = openingDate }}
  {{PropertyMapping | templateProperty = Eröffnet | ontologyProperty = openingYear }}
  {{PropertyMapping | templateProperty = Homepage | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping de:Infobox Unternehmen</title><ns>208</ns><id>3616</id><revision><id>32030</id><timestamp>2014-02-23T10:20:18Z</timestamp><text>{{ TemplateMapping
+}}</text></revision></page><page><title>Mapping de:Infobox Unternehmen</title><ns>208</ns><id>3616</id><revision><id>51882</id><timestamp>2017-02-12T11:10:00Z</timestamp><text>{{ TemplateMapping
    | mapToClass = Company
    | mappings =
        {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
     {{ PropertyMapping | templateProperty = Logo | ontologyProperty = foaf:logo }}
        {{ PropertyMapping | templateProperty = Gründungsdatum | ontologyProperty = formationDate }}
        {{ PropertyMapping | templateProperty = Auflösungsdatum | ontologyProperty = extinctionDate }}
-       {{ PropertyMapping | templateProperty = Sitz | ontologyProperty = locationCity }}
-       {{ PropertyMapping | templateProperty = Sitz | ontologyProperty = locationCountry }}
+       {{ PropertyMapping | templateProperty = Sitz | ontologyProperty = location }}
        &lt;!-- Actually something like 'manager' would be more appropriate: --&gt;
        &lt;!-- Attention: words like "Vorstandsvorsitzender" are not filtered: --&gt;
        {{ PropertyMapping | templateProperty = Leitung | ontologyProperty = chairman }}
@@ -8757,7 +8773,7 @@ Im Englischen nicht bekannt/verwendet:
        {{ PropertyMapping | templateProperty = Direktorium | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = Geschäftsführer/in | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = Mitglieder | ontologyProperty = }}
---&gt;</text></revision></page><page><title>Mapping de:Infobox Verein</title><ns>208</ns><id>3619</id><revision><id>12852</id><timestamp>2011-05-17T13:52:54Z</timestamp><text>{{ TemplateMapping
+--&gt;</text></revision></page><page><title>Mapping de:Infobox Verein</title><ns>208</ns><id>3619</id><revision><id>51883</id><timestamp>2017-02-12T11:10:46Z</timestamp><text>{{ TemplateMapping
    | mapToClass = Organisation
    | mappings =
        {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
@@ -8766,8 +8782,7 @@ Im Englischen nicht bekannt/verwendet:
        {{ PropertyMapping | templateProperty = Zweck | ontologyProperty = purpose }}
        {{ PropertyMapping | templateProperty = Vorsitz | ontologyProperty = chairman }}
        {{ PropertyMapping | templateProperty = Gründung | ontologyProperty = formationDate }}
-       {{ PropertyMapping | templateProperty = Sitz | ontologyProperty = locationCity }}
-       {{ PropertyMapping | templateProperty = Sitz | ontologyProperty = locationCountry }}
+       {{ PropertyMapping | templateProperty = Sitz | ontologyProperty = location }}
        {{ PropertyMapping | templateProperty = Website | ontologyProperty = foaf:homepage }}
 }}
 

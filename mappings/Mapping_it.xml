@@ -355,8 +355,8 @@
     {{ PropertyMapping | templateProperty = anno | ontologyProperty = year }}
     {{ PropertyMapping | templateProperty = larghezza | ontologyProperty = width }}
     {{ PropertyMapping | templateProperty = nome della manifestazione | ontologyProperty = foaf:name }}
-}}</text></revision></page><page><title>Mapping it:Controllo di autorità</title><ns>212</ns><id>7253</id><revision><id>25913</id><timestamp>2013-06-13T08:58:23Z</timestamp><text>{{TemplateMapping
-| mapToClass = Person &lt;!-- as per http://en.wikipedia.org/wiki/Template:Authority_control VIAF and LCCN properties have scope People --&gt;
+}}</text></revision></page><page><title>Mapping it:Controllo di autorità</title><ns>212</ns><id>7253</id><revision><id>52185</id><timestamp>2017-09-27T18:41:54Z</timestamp><text>{{TemplateMapping
+| mapToClass = owl:Thing &lt;!-- Person as per http://en.wikipedia.org/wiki/Template:Authority_control VIAF and LCCN properties have scope People --&gt;
 | mappings =
 }}</text></revision></page><page><title>Mapping it:Corpo celeste</title><ns>212</ns><id>5764</id><revision><id>18638</id><timestamp>2012-05-24T14:26:55Z</timestamp><text>{{TemplateMapping
 | mapToClass = CelestialBody
@@ -491,6 +491,23 @@
     {{ PropertyMapping | templateProperty = stile | ontologyProperty = architecturalStyle }}
     {{ PropertyMapping | templateProperty = periodo costruzione | ontologyProperty = workArea }}
     {{ PropertyMapping | templateProperty = proprietario | ontologyProperty = operator }}
+}}</text></revision></page><page><title>Mapping it:Edificio civile/man</title><ns>212</ns><id>11844</id><revision><id>52061</id><timestamp>2017-05-21T14:22:44Z</timestamp><text>{{TemplateMapping
+| mapToClass = Building
+| mappings =
+	{{PropertyMapping | templateProperty = nome edificio | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = Indirizzo | ontologyProperty = address }}
+	{{PropertyMapping | templateProperty = architetto| ontologyProperty = architect }}
+	{{PropertyMapping | templateProperty = Ricostruito | ontologyProperty = rebuildingDate }}
+	{{PropertyMapping | templateProperty = proprietario | ontologyProperty = owner }}
+	{{PropertyMapping | templateProperty = Stile | ontologyProperty = architecturalStyle }}
+	{{PropertyMapping | templateProperty = costo | ontologyProperty = cost | unit = Currency }}
+	{{PropertyMapping | templateProperty = inaugurazione | ontologyProperty = openingDate }}
+	{{PropertyMapping | templateProperty = demolito | ontologyProperty = demolitionDate }}
+	{{PropertyMapping | templateProperty = distrutto | ontologyProperty = destructionDate }}
+	{{PropertyMapping | templateProperty = Pavimenti | ontologyProperty = floorCount }}
+	{{PropertyMapping | templateProperty = Altezza del tetto |  ontologyProperty = height | unit = Length }}
+	{{PropertyMapping | templateProperty = paese | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = Città | ontologyProperty = city }}	
 }}</text></revision></page><page><title>Mapping it:Edificio religioso</title><ns>212</ns><id>5769</id><revision><id>25093</id><timestamp>2013-04-22T10:23:57Z</timestamp><text>{{TemplateMapping
 | mapToClass = ReligiousBuilding
 | mappings =

@@ -48,6 +48,73 @@
    {{ PropertyMapping | templateProperty = další album | ontologyProperty = subsequentWork }}
    {{ PropertyMapping | templateProperty = další umělci | ontologyProperty = associatedMusicalArtist }}
    {{ PropertyMapping | templateProperty = jazyk | ontologyProperty = originalLanguage }}
+}}</text></revision></page><page><title>Mapping cs:Infobox - atlet</title><ns>224</ns><id>11790</id><revision><id>51852</id><timestamp>2017-01-17T20:04:11Z</timestamp><text>{{TemplateMapping 
+| mapToClass = Athlete
+| mappings = 
+   {{ PropertyMapping | templateProperty = jméno | ontologyProperty = foaf:name }}
+   {{ PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }}
+   &lt;!-- {{ PropertyMapping | templateProperty = velikost obrázku | ontologyProperty =  }} --&gt;
+   &lt;!-- {{ PropertyMapping | templateProperty = alt | ontologyProperty =  }} --&gt;
+   {{ PropertyMapping | templateProperty = popisek | ontologyProperty = depictionDescription }}
+   {{ PropertyMapping | templateProperty = datum narození | ontologyProperty = birthDate }}
+   {{ PropertyMapping | templateProperty = místo narození | ontologyProperty = birthPlace }}
+   {{ PropertyMapping | templateProperty = datum úmrtí | ontologyProperty = deathDate }}
+   {{ PropertyMapping | templateProperty = místo úmrtí | ontologyProperty = deathPlace }}
+   {{ PropertyMapping | templateProperty = země | ontologyProperty = country }}
+   {{ PropertyMapping | templateProperty = občanství | ontologyProperty = nationality }}
+   {{ PropertyMapping | templateProperty = výška | ontologyProperty = height }}
+   {{ PropertyMapping | templateProperty = váha | ontologyProperty = weight }}
+   {{ PropertyMapping | templateProperty = disciplína | ontologyProperty = athleticsDiscipline }}
+   {{ PropertyMapping | templateProperty = počet oh | ontologyProperty = olympicGames }}
+   {{ PropertyMapping | templateProperty = počet ms | ontologyProperty = worldTournament }}
+   {{ PropertyMapping | templateProperty = počet me | ontologyProperty = europeanChampionship }}
+   &lt;!-- {{ PropertyMapping | templateProperty = úspěchy | ontologyProperty =  }} --&gt;
+}}</text></revision></page><page><title>Mapping cs:Infobox - automobil</title><ns>224</ns><id>4809</id><revision><id>51858</id><timestamp>2017-01-20T20:38:43Z</timestamp><text>{{TemplateMapping
+|mapToClass = Automobile
+|correspondingClass = Automobile
+|correspondingProperty = variantOf
+|mappings =
+	{{PropertyMapping | templateProperty = název | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = obrázek | ontologyProperty = foaf:thumbnail }}
+	{{PropertyMapping | templateProperty = popis | ontologyProperty = dc:description }}
+	{{PropertyMapping | templateProperty = výrobce | ontologyProperty = manufacturer }}
+	{{PropertyMapping | templateProperty = jména | ontologyProperty = foaf:name }}
+	{{DateIntervalMapping | templateProperty = roky
+		| startDateOntologyProperty = modelStartDate
+		| endDateOntologyProperty = modelEndDate
+	}}
+	{{DateIntervalMapping | templateProperty = roky
+		| startDateOntologyProperty = modelStartYear
+		| endDateOntologyProperty = modelEndYear
+	}}
+	{{PropertyMapping | templateProperty = místa | ontologyProperty = assembly}}
+	{{PropertyMapping | templateProperty = předchůdce | ontologyProperty = predecessor}}
+	{{PropertyMapping | templateProperty = nástupce | ontologyProperty = successor}}
+	{{PropertyMapping | templateProperty = třída | ontologyProperty = class}}
+	{{PropertyMapping | templateProperty = platforma | ontologyProperty = automobilePlatform}}
+        {{PropertyMapping | templateProperty = karoserie | ontologyProperty = bodyStyle}}
+	{{IntermediateNodeMapping
+	| nodeClass = AutomobileEngine
+	| correspondingProperty = engine
+	| nodeURI = /{superResource}/Engine/{number}
+	| mappings =
+    	        {{PropertyMapping | templateProperty = pohon | ontologyProperty = powerOutput | unit = Power }}
+		{{PropertyMapping | templateProperty = pohon | ontologyProperty = displacement | unit = Volume }}
+		{{PropertyMapping | templateProperty = pohon | ontologyProperty = configuration | unit = engineConfiguration }}
+	}}
+	{{PropertyMapping | templateProperty = pohon| ontologyProperty = engine}}
+	{{PropertyMapping | templateProperty = stupňů | ontologyProperty = transmission}}
+	{{PropertyMapping | templateProperty = rozvor | ontologyProperty = wheelbase | unit = millimetre}}
+	{{PropertyMapping | templateProperty = délka | ontologyProperty = length | unit = Length}}
+	{{PropertyMapping | templateProperty = šířka | ontologyProperty = width | unit = Length}}
+	{{PropertyMapping | templateProperty = výška | ontologyProperty = height | unit = Length}}
+	{{PropertyMapping | templateProperty = šířka | ontologyProperty = weight | unit = Mass}}
+	{{PropertyMapping | templateProperty = příbuzné | ontologyProperty = relatedMeanOfTransportation}}
+	{{PropertyMapping | templateProperty = nádrž | ontologyProperty = fuelCapacity | unit = Volume }}
+	{{PropertyMapping | templateProperty = designer | ontologyProperty = designer}}
+	{{PropertyMapping | templateProperty = designer | ontologyProperty = designCompany}}
+	{{PropertyMapping | templateProperty = převodovka | ontologyProperty = transmission }}
+
 }}</text></revision></page><page><title>Mapping cs:Infobox - budova</title><ns>224</ns><id>11774</id><revision><id>51826</id><timestamp>2017-01-08T13:30:53Z</timestamp><text>{{TemplateMapping | mapToClass = Building
 | mappings = 
 {{GeocoordinatesMapping
@@ -546,6 +613,51 @@
    &lt;!-- {{ PropertyMapping | templateProperty = letadel | ontologyProperty =  }} --&gt;
    &lt;!-- {{ PropertyMapping | templateProperty = cargo | ontologyProperty =  }} --&gt;
    &lt;!-- {{ PropertyMapping | templateProperty = loc-map | ontologyProperty =  }} --&gt;
+}}</text></revision></page><page><title>Mapping cs:Infobox - modelka</title><ns>224</ns><id>11794</id><revision><id>51857</id><timestamp>2017-01-17T21:12:38Z</timestamp><text>{{TemplateMapping 
+| mapToClass = Model
+| mappings = 
+   {{ PropertyMapping | templateProperty = jméno | ontologyProperty = foaf:name }}
+   {{ PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }}
+   &lt;!-- {{ PropertyMapping | templateProperty = velikost obrázku | ontologyProperty =  }} --&gt;
+   {{ PropertyMapping | templateProperty = popisek | ontologyProperty = depictionDescription }}
+   {{ PropertyMapping | templateProperty = datum narození | ontologyProperty = birthDate }}
+   {{ PropertyMapping | templateProperty = místo narození | ontologyProperty = birthPlace }}
+   {{ PropertyMapping | templateProperty = datum úmrtí | ontologyProperty = deathDate }}
+   {{ PropertyMapping | templateProperty = místo úmrtí | ontologyProperty = deathPlace }}
+   {{ PropertyMapping | templateProperty = přezdívka | ontologyProperty = foaf:nick }}
+   &lt;!-- {{ PropertyMapping | templateProperty = místo zaměstnání | ontologyProperty =  }} --&gt;
+   {{ PropertyMapping | templateProperty = národnost | ontologyProperty = nationality }}
+   {{ PropertyMapping | templateProperty = výška | ontologyProperty = height }}
+   {{ PropertyMapping | templateProperty = barva vlasů | ontologyProperty = hairColor }}
+   {{ PropertyMapping | templateProperty = barva očí | ontologyProperty = eyeColor }}
+   {{ PropertyMapping | templateProperty = míry | ontologyProperty = bustWaistHipSize }}
+   {{ PropertyMapping | templateProperty = velikost oděvu | ontologyProperty = clothingSize }}
+   &lt;!-- {{ PropertyMapping | templateProperty = velikost límce | ontologyProperty =  }} --&gt;
+   {{ PropertyMapping | templateProperty = velikost bot | ontologyProperty = shoeSize }}
+   {{ PropertyMapping | templateProperty = agentura | ontologyProperty = agency }}
+   {{ PropertyMapping | templateProperty = choť | ontologyProperty = spouse }}
+   {{ PropertyMapping | templateProperty = příbuzní | ontologyProperty = relative }}
+   &lt;!-- {{ PropertyMapping | templateProperty = soutěž | ontologyProperty =  }} --&gt;
+   {{ PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
+}}</text></revision></page><page><title>Mapping cs:Infobox - moře</title><ns>224</ns><id>11798</id><revision><id>51863</id><timestamp>2017-01-20T21:53:56Z</timestamp><text>{{TemplateMapping | mapToClass = Sea
+| mappings = 
+        {{ GeocoordinatesMapping | latitude = zeměpisná šířka | longitude = zeměpisná délka }}
+	{{ PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }}
+	{{ PropertyMapping | templateProperty = maximální hloubka | ontologyProperty = maximumDepth }}
+	{{ PropertyMapping | templateProperty = popisek | ontologyProperty = depictionDescription }}
+	{{ PropertyMapping | templateProperty = stát | ontologyProperty = state }}
+	{{ PropertyMapping | templateProperty = přítok | ontologyProperty = inflow }}
+	{{ PropertyMapping | templateProperty = délka | ontologyProperty = length }}
+	{{ PropertyMapping | templateProperty = šířka | ontologyProperty = width }}
+	{{ PropertyMapping | templateProperty = rozloha | ontologyProperty = areaWater }}
+	{{ PropertyMapping | templateProperty = alt | ontologyProperty = depictionDescription }}
+	{{ PropertyMapping | templateProperty = poznámka | ontologyProperty = notes }}
+	&lt;!-- {{ PropertyMapping | templateProperty = podřazený | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = světadíl | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = nadřazený | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = soused | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = velikost obrázku | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = šířka boxu | ontologyProperty = }} --&gt;
 }}</text></revision></page><page><title>Mapping cs:Infobox - mrakodrap</title><ns>224</ns><id>11786</id><revision><id>51847</id><timestamp>2017-01-14T17:58:36Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Skyscraper
 | mappings = 
@@ -579,7 +691,7 @@
    &lt;!-- {{ PropertyMapping | templateProperty = adresa | ontologyProperty = foaf:homepage }} --&gt;
    {{ PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
    &lt;!-- {{ PropertyMapping | templateProperty = commons | ontologyProperty =  }} --&gt;
-}}</text></revision></page><page><title>Mapping cs:Infobox - osoba</title><ns>224</ns><id>10266</id><revision><id>51812</id><timestamp>2017-01-07T22:56:06Z</timestamp><text>{{TemplateMapping 
+}}</text></revision></page><page><title>Mapping cs:Infobox - osoba</title><ns>224</ns><id>10266</id><revision><id>51876</id><timestamp>2017-01-25T08:20:29Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Person
 | mappings = 
 {{ PropertyMapping | templateProperty = jméno | ontologyProperty = foaf:name }}
@@ -631,12 +743,11 @@
 {{ PropertyMapping | templateProperty = země | ontologyProperty = nationality }}
 {{ PropertyMapping | templateProperty = domovské město | ontologyProperty = hometown }}
 {{ PropertyMapping | templateProperty = etnikum | ontologyProperty = ethnicity }}
+{{ GeocoordinatesMapping | latitude = zeměpisná šířka | longitude = zeměpisná délka }}
+{{ PropertyMapping | templateProperty = poznámky | ontologyProperty = notes }}
 &lt;!--
 {{ PropertyMapping | templateProperty = citát | ontologyProperty = }}
 {{ PropertyMapping | templateProperty = titul před | ontologyProperty = }}
-{{ PropertyMapping | templateProperty = poznámky | ontologyProperty = }}
-{{ PropertyMapping | templateProperty = zeměpisná délka | ontologyProperty = }}
-{{ PropertyMapping | templateProperty = zeměpisná šířka | ontologyProperty = }}
 {{ PropertyMapping | templateProperty = titul za | ontologyProperty = }}
 {{ PropertyMapping | templateProperty = šířka boxu | ontologyProperty = }}
 {{ PropertyMapping | templateProperty = postavení | ontologyProperty = }}
@@ -644,6 +755,57 @@
 {{ PropertyMapping | templateProperty = oblíbené triky | ontologyProperty = }}
 {{ PropertyMapping | templateProperty = sponzoři | ontologyProperty = }}
 --&gt;
+}}</text></revision></page><page><title>Mapping cs:Infobox - panovník</title><ns>224</ns><id>4839</id><revision><id>51860</id><timestamp>2017-01-20T21:27:53Z</timestamp><text>{{TemplateMapping
+| mapToClass = Monarch
+| mappings =
+	{{PropertyMapping | templateProperty = jméno | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = titul | ontologyProperty = title }}
+	{{PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }}
+	{{DateIntervalMapping | templateProperty = vláda | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear }}
+	{{PropertyMapping | templateProperty = korunovace | ontologyProperty = dateOfBurial }}
+	{{PropertyMapping | templateProperty = tituly | ontologyProperty = title }}
+	{{PropertyMapping | templateProperty = celé jméno | ontologyProperty = longName }}
+	{{PropertyMapping | templateProperty = předchůdce | ontologyProperty = predecessor }}
+	{{PropertyMapping | templateProperty = následník | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = dědic | ontologyProperty = successor }}
+	{{PropertyMapping | templateProperty = královna | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = partner1 | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = partner2 | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = partner3 | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = partner4 | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = partner5 | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = potomstvo | ontologyProperty = child }}
+	{{PropertyMapping | templateProperty = rod | ontologyProperty = foaf:familyName }}
+	{{PropertyMapping | templateProperty = dynastie | ontologyProperty = foaf:familyName }}
+	{{PropertyMapping | templateProperty = hymna | ontologyProperty = royalAnthem }}
+	{{PropertyMapping | templateProperty = motto | ontologyProperty = motto }}
+	{{PropertyMapping | templateProperty = otec | ontologyProperty = parent }}
+	{{PropertyMapping | templateProperty = matka | ontologyProperty = parent }}
+	{{PropertyMapping | templateProperty = narozen | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = místo narození | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = úmrtí | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = místo úmrtí | ontologyProperty = deathPlace }}
+        {{PropertyMapping | templateProperty = podpis | ontologyProperty = signature }}
+        {{PropertyMapping | templateProperty = popisek | ontologyProperty = rdfs:label }} 
+
+
+}}</text></revision></page><page><title>Mapping cs:Infobox - profesionální hráč</title><ns>224</ns><id>11792</id><revision><id>51854</id><timestamp>2017-01-17T20:28:09Z</timestamp><text>{{TemplateMapping 
+| mapToClass = Person
+| mappings = 
+   {{ PropertyMapping | templateProperty = jméno | ontologyProperty = foaf:name }}
+   {{ PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }}
+   {{ PropertyMapping | templateProperty = popisek | ontologyProperty = depictionDescription }}
+   {{ PropertyMapping | templateProperty = datum narození | ontologyProperty = birthDate }}
+   {{ PropertyMapping | templateProperty = místo narození | ontologyProperty = birthPlace }}
+   {{ PropertyMapping | templateProperty = datum úmrtí | ontologyProperty = deathDate }}
+   {{ PropertyMapping | templateProperty = místo úmrtí | ontologyProperty = deathPlace }}
+   {{ PropertyMapping | templateProperty = celé jméno | ontologyProperty = foaf:name }}
+   {{ PropertyMapping | templateProperty = národnost | ontologyProperty = nationality }}
+   {{ PropertyMapping | templateProperty = přezdívka | ontologyProperty = foaf:nick }}
+   &lt;!-- {{ PropertyMapping | templateProperty = hra | ontologyProperty =  }} --&gt;
+   &lt;!-- {{ PropertyMapping | templateProperty = běžná role | ontologyProperty =  }} --&gt;
+   {{ PropertyMapping | templateProperty = aktuální tým | ontologyProperty = team }}
+   {{ PropertyMapping | templateProperty = bývalý tým | ontologyProperty = formerTeam }}
 }}</text></revision></page><page><title>Mapping cs:Infobox - region</title><ns>224</ns><id>10453</id><revision><id>51196</id><timestamp>2016-06-08T13:04:09Z</timestamp><text>{{TemplateMapping
 | mapToClass = Region
 | mappings =
@@ -663,6 +825,37 @@
       {{ PropertyMapping | templateProperty = popisek mapy | ontologyProperty = mapDescription }}
       {{ PropertyMapping | templateProperty = umístění mapy   | ontologyProperty = coordinates  }}
       {{ PropertyMapping | templateProperty = časové pásmo | ontologyProperty = timeZone}}
+}}</text></revision></page><page><title>Mapping cs:Infobox - režisér</title><ns>224</ns><id>11799</id><revision><id>51865</id><timestamp>2017-01-20T21:55:38Z</timestamp><text>{{TemplateMapping | mapToClass = MovieDirector
+| mappings = 
+	{{ PropertyMapping | templateProperty = jméno | ontologyProperty = foaf:name}}
+	{{ PropertyMapping | templateProperty = místo narození | ontologyProperty = birthPlace }}
+	{{ PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }}
+	{{ PropertyMapping | templateProperty = aktivní roky | ontologyProperty = activeYears }}
+	{{ PropertyMapping | templateProperty = rodné jméno | ontologyProperty = birthName }}
+	{{ PropertyMapping | templateProperty = datum narození | ontologyProperty = birthDate }}
+	{{ PropertyMapping | templateProperty = popisek | ontologyProperty = depictionDescription }}
+	{{ PropertyMapping | templateProperty = místo úmrtí | ontologyProperty = deathPlace }}
+	{{ PropertyMapping | templateProperty = významné filmy | ontologyProperty = movie }}
+	{{ PropertyMapping | templateProperty = choť | ontologyProperty = spouse }}
+	{{ PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
+	{{ PropertyMapping | templateProperty = datum úmrtí | ontologyProperty = deathDate }}
+	{{ PropertyMapping | templateProperty = děti | ontologyProperty = child }}
+	{{ PropertyMapping | templateProperty = rodiče | ontologyProperty = parent }}
+	{{ PropertyMapping | templateProperty = přezdívka | ontologyProperty = foaf:nick }}
+	{{ PropertyMapping | templateProperty = sídlo | ontologyProperty = livingPlace }}
+
+	&lt;!-- {{ PropertyMapping | templateProperty = oscar | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = další ceny | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = zlatý glóbus | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = cena bafta | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = zlatý lev | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = césar | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = cena emmy | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = zlatý medvěd | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = český lev | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = grammy | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = tony awards | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = zlatá malina | ontologyProperty = }} --&gt;
 }}</text></revision></page><page><title>Mapping cs:Infobox - singl</title><ns>224</ns><id>10454</id><revision><id>39691</id><timestamp>2015-01-25T17:39:46Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Single
 | mappings = 
@@ -680,6 +873,26 @@
    {{ PropertyMapping | templateProperty = certifikace | ontologyProperty = certification}}
    {{ PropertyMapping | templateProperty = vydavatelství | ontologyProperty = dc:publisher}}
 
+}}</text></revision></page><page><title>Mapping cs:Infobox - software</title><ns>224</ns><id>11797</id><revision><id>51862</id><timestamp>2017-01-20T21:53:48Z</timestamp><text>{{TemplateMapping | mapToClass = Software
+| mappings = 
+	{{ PropertyMapping | templateProperty = operační systém | ontologyProperty = operatingSystem }}
+	{{ PropertyMapping | templateProperty = vývojář | ontologyProperty = author }}
+	{{ PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
+	{{ PropertyMapping | templateProperty = licence | ontologyProperty = license }}
+	{{ PropertyMapping | templateProperty = aktuální verze | ontologyProperty = latestReleaseVersion }}
+	{{ PropertyMapping | templateProperty = datum aktuální verze | ontologyProperty = latestReleaseDate }}
+	{{ PropertyMapping | templateProperty = popisek | ontologyProperty = depictionDescription }}
+	{{ PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }}
+	{{ PropertyMapping | templateProperty = logo | ontologyProperty = foaf:logo }}
+	{{ PropertyMapping | templateProperty = programovací jazyk | ontologyProperty = programmingLanguage }}
+	{{ PropertyMapping | templateProperty = připravovaná verze | ontologyProperty = latestPreviewVersion }}
+	{{ PropertyMapping | templateProperty = datum připravované verze | ontologyProperty = latestPreviewDate }}
+	{{ PropertyMapping | templateProperty = český web | ontologyProperty = foaf:homepage }}
+	{{ PropertyMapping | templateProperty = platforma | ontologyProperty = computingPlatform }}
+	{{ PropertyMapping | templateProperty = name | ontologyProperty = originalTitle }}
+	{{ PropertyMapping | templateProperty = lokalizace | ontologyProperty = originalLanguage }}
+	&lt;!-- {{ PropertyMapping | templateProperty = bodystyle | ontologyProperty = }} --&gt;
+	&lt;!-- {{ PropertyMapping | templateProperty = typ softwaru | ontologyProperty = }} --&gt;
 }}</text></revision></page><page><title>Mapping cs:Infobox - spisovatel</title><ns>224</ns><id>4866</id><revision><id>51816</id><timestamp>2017-01-08T09:36:52Z</timestamp><text>{{TemplateMapping
 | mapToClass = Writer
 | mappings =
@@ -746,7 +959,32 @@
 |gutenberg        = 
 |nk               = 
 }}
---&gt;</text></revision></page><page><title>Mapping cs:Infobox - stadion</title><ns>224</ns><id>11782</id><revision><id>51846</id><timestamp>2017-01-14T16:33:48Z</timestamp><text>{{TemplateMapping 
+--&gt;</text></revision></page><page><title>Mapping cs:Infobox - sportovec</title><ns>224</ns><id>11791</id><revision><id>51853</id><timestamp>2017-01-17T20:18:14Z</timestamp><text>{{TemplateMapping 
+| mapToClass = Athlete
+| mappings = 
+   {{ PropertyMapping | templateProperty = jméno | ontologyProperty = foaf:name }}
+   {{ PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }}
+   {{ PropertyMapping | templateProperty = popisek | ontologyProperty = depictionDescription }}
+   {{ PropertyMapping | templateProperty = přezdívka | ontologyProperty = foaf:nick }}
+   {{ PropertyMapping | templateProperty = datum narození | ontologyProperty = birthDate }}
+   {{ PropertyMapping | templateProperty = místo narození | ontologyProperty = birthPlace }}
+   {{ PropertyMapping | templateProperty = datum úmrtí | ontologyProperty = deathDate }}
+   {{ PropertyMapping | templateProperty = místo úmrtí | ontologyProperty = deathPlace }}
+   {{ PropertyMapping | templateProperty = občanství | ontologyProperty = nationality }}
+   {{ PropertyMapping | templateProperty = výška | ontologyProperty = height }}
+   {{ PropertyMapping | templateProperty = váha | ontologyProperty = weight }}
+   {{ PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
+   {{ PropertyMapping | templateProperty = sport | ontologyProperty = sport }}
+   {{ PropertyMapping | templateProperty = disciplína | ontologyProperty = athleticsDiscipline }}
+   &lt;!-- {{ PropertyMapping | templateProperty = váhová kategorie | ontologyProperty =  }} --&gt;
+   {{ PropertyMapping | templateProperty = tým | ontologyProperty = team }}
+   &lt;!-- {{ PropertyMapping | templateProperty = pozice | ontologyProperty =  }} --&gt;
+   {{ PropertyMapping | templateProperty = účast na LOH | ontologyProperty = olympicGames }}
+   {{ PropertyMapping | templateProperty = účast na ZOH | ontologyProperty = olympicGames }}
+   &lt;!-- {{ PropertyMapping | templateProperty = účast na SH | ontologyProperty =  }} --&gt;
+   &lt;!-- {{ PropertyMapping | templateProperty = výsledky | ontologyProperty =  }} --&gt;
+   &lt;!-- {{ PropertyMapping | templateProperty = aktualizace | ontologyProperty =  }} --&gt;
+}}</text></revision></page><page><title>Mapping cs:Infobox - stadion</title><ns>224</ns><id>11782</id><revision><id>51846</id><timestamp>2017-01-14T16:33:48Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Stadium
 | mappings = 
    {{ PropertyMapping | templateProperty = název | ontologyProperty = foaf:name }}
@@ -774,6 +1012,41 @@
    {{ PropertyMapping | templateProperty = týmy | ontologyProperty = tenant }}
    {{ PropertyMapping | templateProperty = kapacita | ontologyProperty = seatingCapacity }}
    {{ PropertyMapping | templateProperty = rozměry | ontologyProperty = areaTotal }}
+}}</text></revision></page><page><title>Mapping cs:Infobox - stát</title><ns>224</ns><id>4838</id><revision><id>51884</id><timestamp>2017-02-14T15:11:35Z</timestamp><text>{{TemplateMapping
+| mapToClass = Country
+| mappings =
+	{{PropertyMapping | templateProperty = genitiv | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = úřední název česky | ontologyProperty = longName }}
+	{{PropertyMapping | templateProperty = úřední název | ontologyProperty = longName }}
+	{{PropertyMapping | templateProperty = hymna | ontologyProperty = anthem }}
+	{{PropertyMapping | templateProperty = motto | ontologyProperty = motto }}
+	{{PropertyMapping | templateProperty = motto překlad | ontologyProperty = motto }}
+	{{PropertyMapping | templateProperty = hlavní město | ontologyProperty = capital }}
+	{{PropertyMapping | templateProperty = rozloha | ontologyProperty = areaTotal | unit = squareKilometre }}
+	{{PropertyMapping | templateProperty = procent vody | ontologyProperty = percentageOfAreaWater }}
+	{{PropertyMapping | templateProperty = nejvyšší hora | ontologyProperty = highestMountain }}
+	{{PropertyMapping | templateProperty = čas | ontologyProperty = timeZone }}
+	{{PropertyMapping | templateProperty = obyvrok | ontologyProperty = populationAsOf }}
+	{{PropertyMapping | templateProperty = hustota | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
+	{{PropertyMapping | templateProperty = HDI | ontologyProperty = humanDevelopmentIndex }}
+	{{PropertyMapping | templateProperty = HDIvýše | ontologyProperty = humanDevelopmentIndexRankingCategory }}
+	{{PropertyMapping | templateProperty = HDIrok | ontologyProperty = humanDevelopmentIndexAsOf }}
+	{{PropertyMapping | templateProperty = jazyk | ontologyProperty = language }}
+	{{PropertyMapping | templateProperty = národnosti | ontologyProperty = ethnicGroup }}
+	{{PropertyMapping | templateProperty = náboženství | ontologyProperty = religion }}
+	{{PropertyMapping | templateProperty = státní zřízení | ontologyProperty = governmentType }}
+	{{PropertyMapping | templateProperty = datum vzniku | ontologyProperty = foundingDate }}
+	{{PropertyMapping | templateProperty = funkce1 | ontologyProperty = leaderTitle }}
+	{{PropertyMapping | templateProperty = vládce1 | ontologyProperty = leaderName }}
+	{{PropertyMapping | templateProperty = funkce2 | ontologyProperty = leaderTitle }}
+	{{PropertyMapping | templateProperty = vládce2 | ontologyProperty = leaderName }}
+	{{PropertyMapping | templateProperty = měna | ontologyProperty = currency }}
+	{{PropertyMapping | templateProperty = kód měny | ontologyProperty = currency }}
+	{{PropertyMapping | templateProperty = Gini | ontologyProperty = giniCoefficient }}
+	{{PropertyMapping | templateProperty = Ginirok | ontologyProperty = giniCoefficientAsOf }}
+	{{PropertyMapping | templateProperty = mpz | ontologyProperty = vehicleCode }}
+	{{PropertyMapping | templateProperty = předvolba | ontologyProperty = areaCode }}
+	{{PropertyMapping | templateProperty = doména | ontologyProperty = topLevelDomain }}
 }}</text></revision></page><page><title>Mapping cs:Infobox - sídlo</title><ns>224</ns><id>10340</id><revision><id>51198</id><timestamp>2016-06-08T13:04:32Z</timestamp><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
@@ -842,7 +1115,7 @@
    {{ PropertyMapping | templateProperty = ukončení kariéry | ontologyProperty = activeYearsEndYear }}
    {{ PropertyMapping | templateProperty = hraje | ontologyProperty = plays }}
    {{ PropertyMapping | templateProperty = výdělek | ontologyProperty = careerPrizeMoney }}
-}}</text></revision></page><page><title>Mapping cs:Infobox - umělec</title><ns>224</ns><id>4846</id><revision><id>51823</id><timestamp>2017-01-08T10:57:08Z</timestamp><text>{{ TemplateMapping | mapToClass = Actor | mappings = 
+}}</text></revision></page><page><title>Mapping cs:Infobox - umělec</title><ns>224</ns><id>4846</id><revision><id>51856</id><timestamp>2017-01-17T20:53:08Z</timestamp><text>{{ TemplateMapping | mapToClass = Artist | mappings = 
     {{ PropertyMapping | templateProperty = jméno | ontologyProperty = foaf:name }}
     {{ PropertyMapping | templateProperty = rodné jméno | ontologyProperty = birthName }}
     {{ PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }} 
@@ -856,7 +1129,7 @@
     {{ PropertyMapping | templateProperty = příbuzní | ontologyProperty = relative }}
     {{ PropertyMapping | templateProperty = hnutí | ontologyProperty = movement }}
     {{ PropertyMapping | templateProperty = reprezentativní díla | ontologyProperty = knownFor }}
-    {{ PropertyMapping | templateProperty = ovlivněný | ontologyProperty = influenced }}
+    {{ PropertyMapping | templateProperty = ovlivněný | ontologyProperty = influencedBy }}
     {{ PropertyMapping | templateProperty = vliv na | ontologyProperty = influenced }}
     {{ PropertyMapping | templateProperty = ocenění | ontologyProperty = award }}
 }}</text></revision></page><page><title>Mapping cs:Infobox - univerzita</title><ns>224</ns><id>4837</id><revision><id>51848</id><timestamp>2017-01-14T18:40:23Z</timestamp><text>{{TemplateMapping
@@ -885,6 +1158,27 @@
 	{{PropertyMapping | templateProperty = sídlo | ontologyProperty = city }}
 	{{PropertyMapping | templateProperty = kampus | ontologyProperty = campus }}
 	{{PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
+}}</text></revision></page><page><title>Mapping cs:Infobox - volejbalista</title><ns>224</ns><id>11793</id><revision><id>51855</id><timestamp>2017-01-17T20:37:56Z</timestamp><text>{{TemplateMapping 
+| mapToClass = VolleyballPlayer
+| mappings = 
+   {{ PropertyMapping | templateProperty = jméno | ontologyProperty = foaf:name }}
+   {{ PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }}
+   {{ PropertyMapping | templateProperty = popisek | ontologyProperty = depictionDescription }}
+   {{ PropertyMapping | templateProperty = datum narození | ontologyProperty = birthDate }}
+   {{ PropertyMapping | templateProperty = místo narození | ontologyProperty = birthPlace }}
+   {{ PropertyMapping | templateProperty = datum úmrtí | ontologyProperty = deathDate }}
+   {{ PropertyMapping | templateProperty = místo úmrtí | ontologyProperty = deathPlace }}
+   {{ PropertyMapping | templateProperty = národnost | ontologyProperty = nationality }}
+   {{ PropertyMapping | templateProperty = výška | ontologyProperty = height }}
+   {{ PropertyMapping | templateProperty = váha | ontologyProperty = weight }}
+   {{ PropertyMapping | templateProperty = dosah při smeči | ontologyProperty = block }}
+   {{ PropertyMapping | templateProperty = dosah v bloku | ontologyProperty = spike }}
+   {{ PropertyMapping | templateProperty = přezdívka | ontologyProperty = foaf:nick }}
+   {{ PropertyMapping | templateProperty = současný tým | ontologyProperty = team }}
+   {{ PropertyMapping | templateProperty = číslo dresu | ontologyProperty = number }}
+   {{ PropertyMapping | templateProperty = pozice | ontologyProperty = position }}
+   {{ PropertyMapping | templateProperty = předchozí týmy | ontologyProperty = formerTeam }}
+   &lt;!-- {{ PropertyMapping | templateProperty = úspěchy | ontologyProperty =  }} --&gt;
 }}</text></revision></page><page><title>Mapping cs:Infobox - válka</title><ns>224</ns><id>4824</id><revision><id>39010</id><timestamp>2015-01-04T23:05:09Z</timestamp><text>{{TemplateMapping
 | mapToClass = MilitaryConflict
 | mappings =
@@ -1022,53 +1316,7 @@
    {{ PropertyMapping | templateProperty = Předchozí album | ontologyProperty = previousWork }}
    {{ PropertyMapping | templateProperty = Další album | ontologyProperty = subsequentWork }}
    {{ PropertyMapping | templateProperty = další_umělci | ontologyProperty = associatedMusicalArtist }}
-}}</text></revision></page><page><title>Mapping cs:Infobox Automobil</title><ns>224</ns><id>4809</id><revision><id>16252</id><timestamp>2011-11-15T10:33:43Z</timestamp><text>{{TemplateMapping
-|mapToClass = Automobile
-|correspondingClass = Automobile
-|correspondingProperty = variantOf
-|mappings =
-	{{PropertyMapping | templateProperty = název | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = obrázek | ontologyProperty = foaf:thumbnail }}
-	{{PropertyMapping | templateProperty = popis | ontologyProperty = dc:description }}
-	{{PropertyMapping | templateProperty = výrobce | ontologyProperty = manufacturer }}
-	{{PropertyMapping | templateProperty = jména | ontologyProperty = foaf:name }}
-	{{DateIntervalMapping | templateProperty = roky
-		| startDateOntologyProperty = modelStartDate
-		| endDateOntologyProperty = modelEndDate
-	}}
-	{{DateIntervalMapping | templateProperty = roky
-		| startDateOntologyProperty = modelStartYear
-		| endDateOntologyProperty = modelEndYear
-	}}
-	{{PropertyMapping | templateProperty = místa | ontologyProperty = assembly}}
-	{{PropertyMapping | templateProperty = předchůdce | ontologyProperty = predecessor}}
-	{{PropertyMapping | templateProperty = nástupce | ontologyProperty = successor}}
-	{{PropertyMapping | templateProperty = třída | ontologyProperty = class}}
-	{{PropertyMapping | templateProperty = platforma | ontologyProperty = automobilePlatform}}
-        {{PropertyMapping | templateProperty = karoserie | ontologyProperty = bodyStyle}}
-	{{IntermediateNodeMapping
-	| nodeClass = AutomobileEngine
-	| correspondingProperty = engine
-	| nodeURI = /{superResource}/Engine/{number}
-	| mappings =
-    	        {{PropertyMapping | templateProperty = pohon | ontologyProperty = powerOutput | unit = Power }}
-		{{PropertyMapping | templateProperty = pohon | ontologyProperty = displacement | unit = Volume }}
-		{{PropertyMapping | templateProperty = pohon | ontologyProperty = configuration | unit = engineConfiguration }}
-	}}
-	{{PropertyMapping | templateProperty = pohon| ontologyProperty = engine}}
-	{{PropertyMapping | templateProperty = stupňů | ontologyProperty = transmission}}
-	{{PropertyMapping | templateProperty = rozvor | ontologyProperty = wheelbase | unit = millimetre}}
-	{{PropertyMapping | templateProperty = délka | ontologyProperty = length | unit = Length}}
-	{{PropertyMapping | templateProperty = šířka | ontologyProperty = width | unit = Length}}
-	{{PropertyMapping | templateProperty = výška | ontologyProperty = height | unit = Length}}
-	{{PropertyMapping | templateProperty = šířka | ontologyProperty = weight | unit = Mass}}
-	{{PropertyMapping | templateProperty = příbuzné | ontologyProperty = relatedMeanOfTransportation}}
-	{{PropertyMapping | templateProperty = nádrž | ontologyProperty = fuelCapacity | unit = Volume }}
-	{{PropertyMapping | templateProperty = designer | ontologyProperty = designer}}
-	{{PropertyMapping | templateProperty = designer | ontologyProperty = designCompany}}
-	{{PropertyMapping | templateProperty = převodovka | ontologyProperty = transmission }}
-
-}}</text></revision></page><page><title>Mapping cs:Infobox Chemická sloučenina</title><ns>224</ns><id>11785</id><revision><id>51843</id><timestamp>2017-01-14T01:56:16Z</timestamp><text>#REDIRECT [[Mapping cs:Infobox - chemická sloučenina]]</text></revision></page><page><title>Mapping cs:Infobox Choroba</title><ns>224</ns><id>4880</id><revision><id>38888</id><timestamp>2014-12-15T10:58:23Z</timestamp><text>{{TemplateMapping 
+}}</text></revision></page><page><title>Mapping cs:Infobox Automobil</title><ns>224</ns><id>11795</id><revision><id>51859</id><timestamp>2017-01-20T20:38:44Z</timestamp><text>#REDIRECT [[Mapping cs:Infobox - automobil]]</text></revision></page><page><title>Mapping cs:Infobox Chemická sloučenina</title><ns>224</ns><id>11785</id><revision><id>51843</id><timestamp>2017-01-14T01:56:16Z</timestamp><text>#REDIRECT [[Mapping cs:Infobox - chemická sloučenina]]</text></revision></page><page><title>Mapping cs:Infobox Choroba</title><ns>224</ns><id>4880</id><revision><id>38888</id><timestamp>2014-12-15T10:58:23Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Disease 
 | mappings = 
    {{ PropertyMapping | templateProperty = Název | ontologyProperty = foaf:name }}
@@ -2193,41 +2441,7 @@
 	{{PropertyMapping | templateProperty = NUTS | ontologyProperty = municipalityCode }}
 	{{PropertyMapping | templateProperty = SPZ | ontologyProperty = vehicleCode }}
 	{{PropertyMapping | templateProperty = mapa | ontologyProperty = map }}
-}}</text></revision></page><page><title>Mapping cs:Infobox panovník</title><ns>224</ns><id>4839</id><revision><id>38569</id><timestamp>2014-11-02T14:08:47Z</timestamp><text>{{TemplateMapping
-| mapToClass = Monarch
-| mappings =
-	{{PropertyMapping | templateProperty = jméno | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = titul | ontologyProperty = title }}
-	{{PropertyMapping | templateProperty = obrázek | ontologyProperty = picture }}
-	{{DateIntervalMapping | templateProperty = vláda | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear }}
-	{{PropertyMapping | templateProperty = korunovace | ontologyProperty = dateOfBurial }}
-	{{PropertyMapping | templateProperty = tituly | ontologyProperty = title }}
-	{{PropertyMapping | templateProperty = celé jméno | ontologyProperty = longName }}
-	{{PropertyMapping | templateProperty = předchůdce | ontologyProperty = predecessor }}
-	{{PropertyMapping | templateProperty = následník | ontologyProperty = successor }}
-	{{PropertyMapping | templateProperty = dědic | ontologyProperty = successor }}
-	{{PropertyMapping | templateProperty = královna | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = partner1 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = partner2 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = partner3 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = partner4 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = partner5 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = potomstvo | ontologyProperty = child }}
-	{{PropertyMapping | templateProperty = rod | ontologyProperty = foaf:familyName }}
-	{{PropertyMapping | templateProperty = dynastie | ontologyProperty = foaf:familyName }}
-	{{PropertyMapping | templateProperty = hymna | ontologyProperty = royalAnthem }}
-	{{PropertyMapping | templateProperty = motto | ontologyProperty = motto }}
-	{{PropertyMapping | templateProperty = otec | ontologyProperty = parent }}
-	{{PropertyMapping | templateProperty = matka | ontologyProperty = parent }}
-	{{PropertyMapping | templateProperty = narozen | ontologyProperty = birthDate }}
-	{{PropertyMapping | templateProperty = místo narození | ontologyProperty = birthPlace }}
-	{{PropertyMapping | templateProperty = úmrtí | ontologyProperty = deathDate }}
-	{{PropertyMapping | templateProperty = místo úmrtí | ontologyProperty = deathPlace }}
-        {{PropertyMapping | templateProperty = podpis | ontologyProperty = signature }}
-        {{PropertyMapping | templateProperty = popisek | ontologyProperty = rdfs:label }} 
-
-
-}}</text></revision></page><page><title>Mapping cs:Infobox planeta</title><ns>224</ns><id>4873</id><revision><id>38900</id><timestamp>2014-12-15T11:32:21Z</timestamp><text>{{TemplateMapping 
+}}</text></revision></page><page><title>Mapping cs:Infobox panovník</title><ns>224</ns><id>11796</id><revision><id>51861</id><timestamp>2017-01-20T21:27:53Z</timestamp><text>#REDIRECT [[Mapping cs:Infobox - panovník]]</text></revision></page><page><title>Mapping cs:Infobox planeta</title><ns>224</ns><id>4873</id><revision><id>38900</id><timestamp>2014-12-15T11:32:21Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Planet
 | mappings = 
    {{ PropertyMapping | templateProperty = popisek | ontologyProperty = foaf:name }}
@@ -2292,42 +2506,7 @@ afélium</text></revision></page><page><title>Mapping cs:Infobox politická stra
    {{ PropertyMapping | templateProperty = ovlivnil | ontologyProperty = successor }}
    {{ PropertyMapping | templateProperty = web | ontologyProperty = foaf:homepage }}
    {{ PropertyMapping | templateProperty = poslední_verze  | ontologyProperty = latestReleaseVersion }}
-}}</text></revision></page><page><title>Mapping cs:Infobox stát</title><ns>224</ns><id>4838</id><revision><id>16297</id><timestamp>2011-12-02T04:58:45Z</timestamp><text>{{TemplateMapping
-| mapToClass = Country
-| mappings =
-	{{PropertyMapping | templateProperty = genitiv | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = úřední název česky | ontologyProperty = longName }}
-	{{PropertyMapping | templateProperty = úřední název | ontologyProperty = longName }}
-	{{PropertyMapping | templateProperty = hymna | ontologyProperty = anthem }}
-	{{PropertyMapping | templateProperty = motto | ontologyProperty = motto }}
-	{{PropertyMapping | templateProperty = motto překlad | ontologyProperty = motto }}
-	{{PropertyMapping | templateProperty = hlavní město | ontologyProperty = capital }}
-	{{PropertyMapping | templateProperty = rozloha | ontologyProperty = areaTotal | unit = squareKilometre }}
-	{{PropertyMapping | templateProperty = procent vody | ontologyProperty = percentageOfAreaWater }}
-	{{PropertyMapping | templateProperty = nejvyšší hora | ontologyProperty = highestMountain }}
-	{{PropertyMapping | templateProperty = čas | ontologyProperty = timeZone }}
-	{{PropertyMapping | templateProperty = obyvrok | ontologyProperty = populationAsOf }}
-	{{PropertyMapping | templateProperty = hustota | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
-	{{PropertyMapping | templateProperty = HDI | ontologyProperty = humanDevelopmentIndex }}
-	{{PropertyMapping | templateProperty = HDIvýše | ontologyProperty = humanDevelopmentIndexRankingCategory }}
-	{{PropertyMapping | templateProperty = HDIrok | ontologyProperty = humanDevelopmentIndexAsOf }}
-	{{PropertyMapping | templateProperty = jazyk | ontologyProperty = language }}
-	{{PropertyMapping | templateProperty = národnosti | ontologyProperty = ethnicGroup }}
-	{{PropertyMapping | templateProperty = náboženství | ontologyProperty = religion }}
-	{{PropertyMapping | templateProperty = státní zřízení | ontologyProperty = governmentType }}
-	{{PropertyMapping | templateProperty = datum vzniku | ontologyProperty = foundingDate }}
-	{{PropertyMapping | templateProperty = funkce1 | ontologyProperty = leaderTitle }}
-	{{PropertyMapping | templateProperty = vládce1 | ontologyProperty = leaderName }}
-	{{PropertyMapping | templateProperty = funkce2 | ontologyProperty = leaderTitle }}
-	{{PropertyMapping | templateProperty = vládce2 | ontologyProperty = leaderName }}
-	{{PropertyMapping | templateProperty = měna | ontologyProperty = currency }}
-	{{PropertyMapping | templateProperty = kód měny | ontologyProperty = currency }}
-	{{PropertyMapping | templateProperty = Gini | ontologyProperty = giniCoefficient }}
-	{{PropertyMapping | templateProperty = Ginirok | ontologyProperty = giniCoefficientAsOf }}
-	{{PropertyMapping | templateProperty = mpz | ontologyProperty = vehicleCode }}
-	{{PropertyMapping | templateProperty = předvolba | ontologyProperty = areaCode }}
-	{{PropertyMapping | templateProperty = doména | ontologyProperty = topLevelDomain }}
-}}</text></revision></page><page><title>Mapping cs:Infobox svátek</title><ns>224</ns><id>4822</id><revision><id>16271</id><timestamp>2011-11-25T15:58:02Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping cs:Infobox stát</title><ns>224</ns><id>11800</id><revision><id>51885</id><timestamp>2017-02-14T15:11:36Z</timestamp><text>#REDIRECT [[Mapping cs:Infobox - stát]]</text></revision></page><page><title>Mapping cs:Infobox svátek</title><ns>224</ns><id>4822</id><revision><id>16271</id><timestamp>2011-11-25T15:58:02Z</timestamp><text>{{TemplateMapping
 | mapToClass = Holiday
 | mappings =
 	{{PropertyMapping | templateProperty = image | ontologyProperty = foaf:thumbnail }}
