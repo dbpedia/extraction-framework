@@ -198,14 +198,11 @@ class ConfigLoader(config: Config)
     * Creates ab extraction job for a specific language.
     */
   val imageCategoryWorker: Workers[Language] = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
-    getExtractionRecorder(lang, DBpediaDatasets.Images).initialize(lang, "Image Extraction")
-    getExtractionRecorder(lang, DBpediaDatasets.Images).printLabeledLine("Start image list preparation for ImageExtractor.", RecordSeverity.Info)
     val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
     val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang, DBpediaDatasets.Images))
     this.freeImages.put(lang, imageCategories._1)
     this.nonFreeImages.put(lang, imageCategories._2)
-    getExtractionRecorder(lang, DBpediaDatasets.Images).printLabeledLine("Finished image list preparation for ImageExtractor: " + imageCategories._1.size + " free images, " + imageCategories._2 + " nonfree images.", RecordSeverity.Info)
-  }
+    }
 
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.

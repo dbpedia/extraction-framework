@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.mappings
 
 import java.net.URLDecoder
-import java.util.logging.Logger
 
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
@@ -11,7 +10,7 @@ import org.dbpedia.extraction.util.{ExtractorUtils, Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, ListBuffer}
+import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**
@@ -35,8 +34,6 @@ extends PageNodeExtractor
   require(ImageExtractorConfig.supportedLanguages.contains(wikiCode), "ImageExtractor's supported languages: "+ImageExtractorConfig.supportedLanguages.mkString(", ")+"; not "+wikiCode)
 
   private val fileNamespaceIdentifier = Namespace.File.name(language)
-
-  private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
 
   private val encodedLinkRegex = """%[0-9a-fA-F][0-9a-fA-F]""".r
   private val imageClass = context.ontology.classes("Image")
