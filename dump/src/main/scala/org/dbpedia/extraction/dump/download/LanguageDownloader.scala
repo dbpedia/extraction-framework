@@ -5,21 +5,22 @@ import java.io.{File, PrintWriter}
 
 import scala.collection.immutable.SortedSet
 import scala.io.{Codec, Source}
-import org.dbpedia.extraction.util.{Finder, Language}
+import org.dbpedia.extraction.util.{Config, Finder, Language}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 
 import scala.collection.mutable
 
 /**
  */
-class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language: Language, fileNames: Seq[(String, Boolean)], downloader: Downloader)
+class LanguageDownloader(final val config: DownloadConfig, final val downloader: Downloader, final val lang: Language)
 {
   private val DateLink = """<a href="(\d{8})/">""".r
 
-  private val finder = new Finder[File](baseDir, language, wikiName)
+  private val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
   private val wiki = finder.wikiName
-  private val mainPage = new URL(baseUrl, wiki+"/") // here the server does NOT use index.html 
-  private val mainDir = new File(baseDir, wiki)
+  private val mainPage = new URL(config.baseUrl, wiki+"/") // here the server does NOT use index.html
+  private val mainDir = new File(config.dumpDir, wiki)
+  private val fileNames = config.source
   if (! mainDir.exists && ! mainDir.mkdirs) throw new Exception("Target directory ["+mainDir+"] does not exist and cannot be created")
 
   def downloadDates(dateRange: (String, String), dumpCount: Int): Unit = {
@@ -27,8 +28,8 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
     val firstDate = dateRange._1
     val lastDate = dateRange._2
 
-    finder.file(Download.Started) match{
-      case None =>
+
+    config.getDownloadStarted(lang) match{
       case Some(started) =>
         if (! started.createNewFile) throw new Exception("Another process may be downloading files to ["+mainDir+"] - stop that process and remove ["+started+"]")
         try {
@@ -54,8 +55,8 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
             throw new Exception("found no date on "+mainPage+" in range "+firstDate+"-"+lastDate+" with files "+fileNames.mkString(","))
         }
         finally started.delete
+      case None =>
     }
-
   }
 
   private def expandFilenameRegex(date: String, index: File, filenameRegexes: Seq[String]): Seq[String] = {
@@ -96,7 +97,7 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
     val dateDir = new File(mainDir, date)
     if (! dateDir.exists && ! dateDir.mkdirs) throw new Exception("Target directory '"+dateDir+"' does not exist and cannot be created")
 
-    finder.file(date, Download.Complete) match{
+    finder.file(date, Config.Complete) match{
       case None => false
       case Some(complete) =>
 
@@ -104,13 +105,10 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
         downloader.downloadTo(datePage, dateDir) // creates index.html
 
         // Collect regexes
-        val regexes = fileNames.filter(_._2).map(_._1)
-        val fileNamesFromRegexes = expandFilenameRegex(date, new File(dateDir, "index.html"), regexes)
-        val staticFileNames = fileNames.filter(!_._2).map(_._1)
+        val fileNamesFromRegexes = expandFilenameRegex(date, new File(dateDir, "index.html"), fileNames)
 
-        val allFileNames = fileNamesFromRegexes ++ staticFileNames
-        val urls = allFileNames.map {
-          fileName => new URL(baseUrl, wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName)
+        val urls = fileNamesFromRegexes.map {
+          fileName => new URL(config.baseUrl, wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName)
         }
 
         if (complete.exists) {
@@ -132,7 +130,7 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
 
         // all the links we need - only for non regexes (we have already checked regex ones)
         val links = new mutable.HashMap[String, String]()
-        for (fileName <- staticFileNames) links(fileName) = "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
+        for (fileName <- fileNamesFromRegexes) links(fileName) = "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
         // Here we should set "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
         // but "\"/"+wiki+"/"+date+"/" does not exists in incremental updates, keeping the trailing "\">" should do the trick
         // for (fileName <- fileNames) links(fileName) = wiki+"-"+date+"-"+fileName+"\">"
@@ -148,15 +146,14 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
         // - the user specified static file names and not all of them have been found
         // OR
         // - the user specified regular expressions and no file has been found that satisfied them
-        if ((staticFileNames.nonEmpty && links.nonEmpty) || (regexes.nonEmpty && fileNamesFromRegexes.isEmpty)) {
-          // TODO: Fix message
+/*        if ((staticFileNames.nonEmpty && links.nonEmpty) || (regexes.nonEmpty && fileNamesFromRegexes.isEmpty)) {
           val staticFilesMessage = if (links.nonEmpty) " has no links to ["+links.keys.mkString(",")+"]" else ""
           val dynamicFilesMessage = if (fileNamesFromRegexes.isEmpty && regexes.nonEmpty) " has no links that satisfies ["+regexes.mkString(",")+"]" else ""
           println("date page '"+datePage+ staticFilesMessage + dynamicFilesMessage)
           false
         }
-        else {
-          println("date page '"+datePage+"' has all files ["+allFileNames.mkString(",")+"]")
+        else {*/
+          println("date page '"+datePage+"' has all files ["+fileNamesFromRegexes.mkString(",")+"]")
 
           complete.createNewFile
           val pw = new PrintWriter(complete)
@@ -168,7 +165,6 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
           }
           pw.close()
           true
-        }
     }
   }
 

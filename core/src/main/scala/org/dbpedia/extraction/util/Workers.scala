@@ -205,7 +205,7 @@ class Workers[T <: AnyRef](availThreads: Int, queueLength: Int, factory: => Work
   private val queue = new ArrayBlockingQueue[AnyRef](queueLength)
 
   private val processLog = new ConcurrentHashMap[Int, WorkerObjectState.Value]().asScala
-  private var queueDependency = new ConcurrentHashMap[Int, Int]().asScala
+  private val queueDependency = new ConcurrentHashMap[Int, Int]().asScala
 
   private val threads =
   for (i <- 0 until availThreads) yield

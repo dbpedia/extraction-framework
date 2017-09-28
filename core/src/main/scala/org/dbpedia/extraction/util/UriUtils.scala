@@ -115,14 +115,6 @@ object UriUtils
     * @return
     */
   def uriToIri(uri: URI): String = {
-      // re-encode URI according to our own rules
-      // iriDecode: reserved characters excluded
-      // wikiEncode: unwise characters encoded to dbpedia rules
-      // BUT: wikiEncode encodes % to %25
-      // TODO:
-      // - if even necessary: handle "\u202A", "\u202B", "\u202C", "\u202D", "\u202E", "\u200E", "\u200F"
-      //   (direction change & embedding chars)
-      // - handle other Encoding Types (examples?)
     uri.getScheme + "://" +
         uri.getAuthority +
         WikiUtil.wikiEncode(iriDecode(uri.getRawPath)).replaceAll("%25", "%")  +

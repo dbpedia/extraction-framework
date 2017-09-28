@@ -81,20 +81,20 @@ class QuadReader(log: FileLike[File] = null, preamble: String = null) {
   def readQuads(language: Language, file: FileLike[_])(proc: Quad => Unit): Unit = {
     val dataset = "(?<=(.*wiki-\\d{8}-))([^\\.]+)".r.findFirstIn(file.toString) match {
       case Some(x) => DBpediaDatasets.getDataset(x, language) match{
-        case Success(d) => d
-        case Failure(f) => null
+        case Success(d) => Some(d)
+        case Failure(f) => None
       }
-      case None => null
+      case None => None
     }
 
-    getRecorder.initialize(language, "Processing Quads", if(dataset != null) Seq(dataset) else Seq())
+    getRecorder.initialize(language, "Processing Quads", if(dataset.nonEmpty) Seq(dataset.get) else Seq())
 
     IOUtils.readLines(file) { line =>
       line match {
         case null => // ignore last value
         case Quad(quad) => {
           val copy = quad.copy (
-            dataset = dataset.encoded
+              dataset = if(dataset.nonEmpty) dataset.get.encoded else null
           )
           proc(copy)
           addQuadRecord(copy, language)

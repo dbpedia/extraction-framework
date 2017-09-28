@@ -6334,6 +6334,94 @@
            {{PropertyMapping | templateProperty = Deuxième #5 | ontologyProperty = secondPlace }}
            {{PropertyMapping | templateProperty = Troisième #5 | ontologyProperty = thirdPlace }}
         }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Planète</title><ns>210</ns><id>11847</id><revision><id>52071</id><timestamp>2017-06-06T08:08:46Z</timestamp><text>{{TemplateMapping
+
+| mapToClass = Planet
+
+| mappings =
+
+{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+
+{{PropertyMapping | templateProperty = découvreur | ontologyProperty = discoverer }}
+
+{{PropertyMapping | templateProperty = discovery_site | ontologyProperty = foaf:homepage }}
+
+{{PropertyMapping | templateProperty = discovered | ontologyProperty = discovered }}
+
+{{PropertyMapping | templateProperty = discovery_method | ontologyProperty = detectionMethod }}
+
+{{PropertyMapping | templateProperty = alt_names| ontologyProperty = formerName }}
+
+{{PropertyMapping | templateProperty = epoch | ontologyProperty = epoch }}
+
+{{PropertyMapping | templateProperty = albédo | ontologyProperty = albedo }}
+
+{{PropertyMapping | templateProperty = periapsis | ontologyProperty = periapsis | unit = Length }}
+
+{{PropertyMapping | templateProperty = apoapsis | ontologyProperty = apoapsis | unit = Length }}
+
+{{PropertyMapping | templateProperty = périhélie | ontologyProperty = periapsis | unit = astronomicalUnit }}
+
+{{PropertyMapping | templateProperty = aphélie | ontologyProperty = apoapsis | unit = astronomicalUnit }}
+
+{{PropertyMapping | templateProperty = periastron | ontologyProperty = periapsis | unit = astronomicalUnit }}
+
+{{PropertyMapping | templateProperty = apoastron | ontologyProperty = apoapsis | unit = astronomicalUnit }}
+
+{{PropertyMapping | templateProperty = vitesse orbitale moyenne | ontologyProperty = averageSpeed | unit =
+
+kilometrePerSecond }}
+
+{{PropertyMapping | templateProperty = vitesse de libération | ontologyProperty = escapeVelocity | unit =
+
+kilometrePerSecond }}
+
+{{PropertyMapping | templateProperty = période de révolution | ontologyProperty = orbitalPeriod | unit = day }}
+
+{{PropertyMapping | templateProperty = période de rotation | ontologyProperty = rotationPeriod | unit = day }}
+
+{{PropertyMapping | templateProperty = rayon équatorial | ontologyProperty = meanRadius | unit = Length }}
+
+{{PropertyMapping | templateProperty = superficie | ontologyProperty = surfaceArea | unit = Area }}
+
+{{PropertyMapping | templateProperty = volume | ontologyProperty = volume | unit = cubicMetre }}
+
+{{PropertyMapping | templateProperty = masse volumique | ontologyProperty = density | unit = Density }}
+
+{{PropertyMapping | templateProperty = masse | ontologyProperty = mass | unit = Mass }}
+
+{{PropertyMapping | templateProperty = temp | ontologyProperty = temperature | unit = Temperature }}
+
+{{PropertyMapping | templateProperty = temp | ontologyProperty = temperature | unit = Temperature }}
+
+{{PropertyMapping | templateProperty = temp min_1 | ontologyProperty = minimumTemperature | unit =
+
+Temperature }}
+
+{{PropertyMapping | templateProperty = temp moy_1 | ontologyProperty = meanTemperature | unit =
+
+Temperature }}
+
+{{PropertyMapping | templateProperty = temp max_1 | ontologyProperty = maximumTemperature | unit =
+
+Temperature }}
+
+{{PropertyMapping | templateProperty = temp min _2 | ontologyProperty = minimumTemperature | unit =
+
+Temperature }}
+
+{{PropertyMapping | templateProperty = temp moy _2 | ontologyProperty = meanTemperature | unit =
+
+Temperature }}
+
+{{PropertyMapping | templateProperty = temp max _2 | ontologyProperty = maximumTemperature | unit =
+
+Temperature }}
+
+{{PropertyMapping | templateProperty = abs_magnitude | ontologyProperty = absoluteMagnitude }}
+
+{{PropertyMapping | templateProperty = magnitude | ontologyProperty = apparentMagnitude }}
+
 }}</text></revision></page><page><title>Mapping fr:Infobox Pornographie (personnalité)</title><ns>210</ns><id>7476</id><revision><id>27949</id><timestamp>2013-07-31T09:45:27Z</timestamp><text>{{TemplateMapping
 | mapToClass = AdultActor
 | mappings =
@@ -10435,6 +10523,28 @@
 	{{PropertyMapping | templateProperty = avant | ontologyProperty = predecessor }}
 	{{PropertyMapping | templateProperty = après | ontologyProperty = successor }}
     }}
+}}</text></revision></page><page><title>Mapping fr:Taxobox</title><ns>210</ns><id>11834</id><revision><id>52030</id><timestamp>2017-04-14T13:13:35Z</timestamp><text>{{TemplateMapping
+| mapToClass = owl:Thing
+| mappings =
+        {{PropertyMapping | templateProperty = phylum | ontologyProperty = phylum }}
+        {{PropertyMapping | templateProperty = embranchement | ontologyProperty = division }}
+        &lt;!-- {{PropertyMapping | templateProperty = sous-embranchement | ontologyProperty = }} --&gt;
+        {{PropertyMapping | templateProperty = classe | ontologyProperty = class }}
+        &lt;!-- {{PropertyMapping | templateProperty = sous-classe | ontologyProperty = }} --&gt;
+        &lt;!-- {{PropertyMapping | templateProperty = infra-classe | ontologyProperty = }} --&gt;
+        {{PropertyMapping | templateProperty = ordre | ontologyProperty = order }}
+        &lt;!-- {{PropertyMapping | templateProperty = sous-ordre | ontologyProperty = }} --&gt;
+        {{PropertyMapping | templateProperty = famille | ontologyProperty = family }}
+        &lt;!-- {{PropertyMapping | templateProperty = sous-famille | ontologyProperty =  }} --&gt;
+        {{PropertyMapping | templateProperty = genre | ontologyProperty = genus }}
+}}</text></revision></page><page><title>Mapping fr:Taxobox taxon</title><ns>210</ns><id>11835</id><revision><id>52026</id><timestamp>2017-04-11T08:38:03Z</timestamp><text>{{ ConditionalMapping | cases =
+  {{ Condition
+    | templateProperty = animal
+    | operator = isSet
+    | mapping = {{ TemplateMapping | mapToClass = owl:Thing | mappings =
+        {{ConstantMapping | ontologyProperty = kingdom | value = http://dbpedia.org/resource/Animal}}
+      }}
+  }}
 }}</text></revision></page><page><title>Mapping fr:Écrit</title><ns>210</ns><id>9594</id><revision><id>35536</id><timestamp>2014-06-29T18:02:00Z</timestamp><text>{{TemplateMapping
 | mapToClass            = WrittenWork
 | correspondingClass    = Writer

@@ -61,7 +61,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
 
     val sections = getRelevantParagraphs(html)
 
-    var context = ""
+    var  context = ""
     var offset = 0
     val quads = for(section <- sections) yield {
       extractTextFromHtml(section, new NifExtractorContext(language, subjectIri, templateString)) match {

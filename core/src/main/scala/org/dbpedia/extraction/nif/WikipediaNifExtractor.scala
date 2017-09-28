@@ -111,6 +111,8 @@ class WikipediaNifExtractor(
     val tocMap = new mutable.ListBuffer[PageSection]()
     val doc: Document = getJsoupDoc(html)
     var nodes = doc.select("body").first.childNodes.asScala
+    if(nodes.head.nodeName().matches("div") && nodes.head.attr("class").matches("mw-parser-output"))
+      nodes = nodes.head.childNodes.asScala
     val currentSection = new ListBuffer[Int]()                  //keeps track of section number
     currentSection.append(0)                                    //initialize on abstract section
 
@@ -169,7 +171,7 @@ class WikipediaNifExtractor(
       }
     }
 
-    nodes = nodes.dropWhile(node => node.nodeName() != "p")    //move cursor to infobox / abstract
+    nodes = nodes.dropWhile(node => node.nodeName() != "p" || node.childNodeSize() == 0)    //move cursor to abstract
     val ab = nodes.takeWhile(node => !isWikiNextTitle(node) && !isWikiToc(node) && !isWikiPageEnd(node))
 
     tocMap.append(new PageSection(                     //save abstract (abstract = section 0)

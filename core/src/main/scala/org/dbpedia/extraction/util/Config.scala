@@ -1,16 +1,17 @@
 package org.dbpedia.extraction.util
 
-import java.io.File
+import java.io.{File, FileOutputStream, OutputStreamWriter, Writer}
 import java.net.URL
 import java.util.Properties
 import java.util.logging.{Level, Logger}
 
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.mappings.Extractor
+import org.dbpedia.extraction.mappings.{ExtractionRecorder, Extractor}
 import org.dbpedia.extraction.util.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.util.RichFile.wrapFile
 
 import scala.collection.Map
 import scala.io.Codec
@@ -78,6 +79,28 @@ class Config(val configPath: String) extends
   lazy val logDir: Option[File] = Option(getString(this, "log-dir")) match {
     case Some(x) => Some(new File(x))
     case None => None
+  }
+
+  def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null): ExtractionRecorder[T] ={
+    val w = if(writer != null) writer
+      else openLogFile(lang.wikiCode) match{
+        case Some(s) => new OutputStreamWriter(s)
+        case None => null
+      }
+    new ExtractionRecorder[T](w, interval, preamble, slackCredentials.getOrElse(null))
+  }
+
+  private def openLogFile(langWikiCode: String): Option[FileOutputStream] ={
+    logDir match{
+      case Some(p) if p.exists() =>
+        var logname = configPath.replace("\\", "/")
+        logname = logname.substring(logname.lastIndexOf("/") + 1)
+        logname = logname + "_" + langWikiCode + ".log"
+        val logFile = new File(p, logname)
+        logFile.createNewFile()
+        Option(new FileOutputStream(logFile))
+      case _ => None
+    }
   }
 
   /**
@@ -156,6 +179,24 @@ class Config(val configPath: String) extends
   lazy val requireComplete: Boolean = this.getProperty("require-download-complete", "false").trim.toBoolean
 
   /**
+    * determines if 1. the download has to be completed and if so 2. looks for the download-complete file
+    * @param lang - the language for which to check
+    * @return
+    */
+  def isDownloadComplete(lang:Language): Boolean ={
+    if(requireComplete){
+      val finder = new Finder[File](dumpDir, lang, wikiName)
+      val date = finder.dates(source.head).last
+      finder.file(date, Config.Complete) match {
+        case None => false
+        case Some(x) => x.exists()
+      }
+    }
+    else
+      true
+  }
+
+  /**
     * TODO experimental, ignore for now
     */
   lazy val retryFailedPages: Boolean = this.getProperty("retry-failed-pages", "false").trim.toBoolean
@@ -163,7 +204,7 @@ class Config(val configPath: String) extends
   /**
     * the extractor classes to be used when extracting the XML dumps
     */
-  lazy val extractorClasses: Map[Language, Seq[Class[_ <: Extractor[_]]]] = loadExtractorClasses()
+  lazy val extractorClasses: Map[Language, Seq[Class[_ <: Extractor[_]]]] = ExtractorUtils.loadExtractorsMapFromConfig(languages, this)
 
   /**
     * namespaces loaded defined by the languages in use (see languages)
@@ -175,17 +216,6 @@ class Config(val configPath: String) extends
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template, Namespace.WikidataProperty)
     // Special case for namespace "Main" - its Wikipedia name is the empty string ""
     else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
-  }
-
-  /**
-   * Loads the extractors classes from the configuration.
-   * Loads only the languages defined in the languages property
-   *
-   * @return A Map which contains the extractor classes for each language
-   */
-  private def loadExtractorClasses() : Map[Language, Seq[Class[_ <: Extractor[_]]]] =
-  {
-    ExtractorUtils.loadExtractorsMapFromConfig(languages, this)
   }
 
   lazy val mediawikiConnection: MediaWikiConnection = Try {
@@ -232,6 +262,10 @@ class Config(val configPath: String) extends
 }
 
 object Config{
+
+  /** name of marker file in wiki date directory */
+  val Complete = "download-complete"
+
   case class NifParameters(
     nifQuery: String,
     nifTags: String,
@@ -268,6 +302,7 @@ object Config{
   private val universalProperties: Properties = loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
 
   val universalConfig: Config = new Config(null)
+
 
   /**
     * The content of the wikipedias.csv in the base-dir (needs to be static)

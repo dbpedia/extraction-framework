@@ -3,10 +3,12 @@ package org.dbpedia.extraction.dump.download
 import java.io.File
 import java.net.{MalformedURLException, URL}
 
-import org.dbpedia.extraction.util.{Config, ConfigUtils}
+import org.dbpedia.extraction.util.{Config, ConfigUtils, Finder, Language}
 
 import scala.collection.mutable
 import scala.util.matching.Regex
+
+import org.dbpedia.extraction.util.RichFile.wrapFile
 
 class DownloadConfig(path: String) extends Config(path)
 {
@@ -39,10 +41,26 @@ class DownloadConfig(path: String) extends Config(path)
   
   private def add[K](map: mutable.Map[K,mutable.Set[(String, Boolean)]], key: K, values: Array[(String, Boolean)]) =
     map.getOrElseUpdate(key, new mutable.HashSet[(String, Boolean)]) ++= values
+
+  def getDownloadStarted(lang:Language): Option[File] ={
+    if(requireComplete){
+      val finder = new Finder[File](dumpDir, lang, wikiName)
+      val date = finder.dates(source.head).last
+      finder.file(date, DownloadConfig.Started) match {
+        case None => finder.file(date, DownloadConfig.Started)
+        case Some(x) => Some(x)
+      }
+    }
+    else
+      None
+  }
 }
 
 object DownloadConfig
 {
+  /** name of marker file in wiki directory */
+  private val Started = "download-started"
+
   def toBoolean(s: String, arg: String): Boolean =
     if (s == "true" || s == "false") s.toBoolean else throw Usage("Invalid boolean value", arg) 
   

@@ -88,7 +88,6 @@ public class UriToIriDecoder {
             }
 
             bb.clear();
-            int ui = i;
             for (; ; ) {
                 assert (n - i >= 2);
                 if (i + 2 < n) {

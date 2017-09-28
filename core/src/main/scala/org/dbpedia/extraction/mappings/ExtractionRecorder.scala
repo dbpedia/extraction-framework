@@ -26,7 +26,7 @@ class ExtractionRecorder[T](
                              val reportInterval: Int = 100000,
                              val preamble: String = null,
                              val slackCredantials: SlackCredentials = null,
-                             val datasets: ListBuffer[Dataset] = ListBuffer(),
+                             val datasets: Seq[Dataset] = Seq(),
                              val language: Language = Language.English,
                              val monitor: ExtractionMonitor[T] = null
    ) {
@@ -46,6 +46,7 @@ class ExtractionRecorder[T](
 
   private var slackIncreaseExceptionThreshold = 1
 
+  private var datasets: Seq[Dataset] = Seq()
   private var task: String = "transformation"
   private var initialized = false
 
@@ -133,19 +134,19 @@ class ExtractionRecorder[T](
           if (record.errorMsg != null)
             printLabeledLine(record.errorMsg, record.severity, page.title.language, Seq(PrinterDestination.err, PrinterDestination.file))
           Option(record.error) match {
-            case Some(ex) => failedRecord(page.title.encoded, record.identifier, record.page, ex, record.language)
+            case Some(ex) => failedRecord(record.identifier, record.page, ex, record.language)
             case None => recordExtractedPage(page.id, page.title, record.logSuccessfulPage)
           }
         case quad: Quad =>
           Option(record.error) match {
-            case Some(ex) => failedRecord(quad.subject, record.identifier, record.page, ex, record.language)
+            case Some(ex) => failedRecord(record.identifier, record.page, ex, record.language)
             case None => recordQuad(quad, record.severity, record.language)
           }
         case _  =>
           val msg = Option(record.errorMsg) match{
             case Some(m) => m
             case None =>
-              if(record.error != null) failedRecord(null, null, record.page, record.error, record.language)
+              if(record.error != null) failedRecord(null, record.page, record.error, record.language)
               else recordGenericPage(record.language, record.page.toString)
           }
       }
@@ -159,7 +160,7 @@ class ExtractionRecorder[T](
     * @param node - PageNode of page
     * @param exception  - the Throwable responsible for the fail
     */
-  def failedRecord(name: String, id: String, node: T, exception: Throwable, language:Language = null): Unit = synchronized{
+  def failedRecord(id: String, node: T, exception: Throwable, language:Language = null): Unit = synchronized{
     val lang = if(language != null) language else defaultLang
     val tag = node match{
       case p: PageNode => "page"
@@ -170,7 +171,8 @@ class ExtractionRecorder[T](
       case Some(map) => map += ((id,node) -> exception)
       case None =>  failedPageMap += lang -> mutable.Map[(String, T), Throwable]((id, node) -> exception)
     }
-    printLabeledLine("extraction failed for " + tag + " " + id + ": " + name + ": " + exception.getMessage(), RecordSeverity.Exception, lang, Seq(PrinterDestination.err, PrinterDestination.file))
+    val line = "{task} failed for " + tag + " " + id + ": " + exception.getMessage
+    printLabeledLine(line, RecordSeverity.Exception, lang, Seq(PrinterDestination.err, PrinterDestination.file))
     for (ste <- exception.getStackTrace)
       printLabeledLine("\t" + ste.toString, RecordSeverity.Exception, lang, Seq(PrinterDestination.file), noLabel = true)
 
@@ -295,7 +297,7 @@ class ExtractionRecorder[T](
     )
   }
 
-  def initialize(lang: Language, task: String, datasets: Seq[Dataset] = Seq()): Boolean ={
+  def initialize(lang: Language, task: String = "transformation", datasets: Seq[Dataset] = Seq()): Boolean ={
     if(initialized)
       return false
     this.failedPageMap = Map[Language, scala.collection.mutable.Map[(String, T), Throwable]]()
@@ -564,3 +566,10 @@ class RecordEntry[T](
 object RecordSeverity extends Enumeration {
   val Info, Warning, Exception = Value
 }
+
+class WikiPageEntry(page : WikiPage) extends RecordEntry[WikiPage](
+  page = page,
+  identifier = page.uri,
+  severity = RecordSeverity.Info,
+  language = page.title.language
+)

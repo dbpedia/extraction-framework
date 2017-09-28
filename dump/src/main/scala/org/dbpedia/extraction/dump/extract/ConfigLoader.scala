@@ -61,6 +61,7 @@ class ConfigLoader(config: Config)
             new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null, config.slackCredentials.getOrElse(null), ListBuffer(dataset), lang, extractionMonitor)
           case None => new ExtractionRecorder[WikiPage](null, 2000, null, config.slackCredentials.getOrElse(null), ListBuffer(dataset), lang, extractionMonitor)
         }
+        extractionRecorder(lang) = config.getDefaultExtractionRecorder(lang, 2000)
         extractionRecorder(lang)
       case Some(er) =>
         if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
@@ -296,7 +297,8 @@ class ConfigLoader(config: Config)
   private def latestDate(finder: Finder[_]): String = {
     val isSourceRegex = config.source.startsWith("@")
     val source = if (isSourceRegex) config.source.head.substring(1) else config.source.head
-    val fileName = if (config.requireComplete) Download.Complete else source
+    val fileName = if (config.requireComplete) Config.Complete else source
     finder.dates(fileName, isSuffixRegex = isSourceRegex).last
   }
 }
+

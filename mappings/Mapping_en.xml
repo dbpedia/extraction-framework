@@ -4594,7 +4594,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = population_density_km2 | ontologyProperty = populationDensity | unit = inhabitantsPerSquareKilometre }}
 	{{PropertyMapping | templateProperty = population_density_sq_mi | ontologyProperty = populationDensity | unit = inhabitantsPerSquareMile }}
 	{{GeocoordinatesMapping | latitudeDegrees = latd  | latitudeMinutes = latm  | latitudeDirection = latNS  | longitudeDegrees = longd  | longitudeMinutes = longm  | longitudeDirection = longEW }}
-}}</text></revision></page><page><title>Mapping en:Infobox German location</title><ns>204</ns><id>108</id><revision><id>37746</id><timestamp>2014-09-12T12:51:36Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping en:Infobox German location</title><ns>204</ns><id>108</id><revision><id>52145</id><timestamp>2017-06-30T06:54:55Z</timestamp><text>{{ConditionalMapping
  | cases =
   {{Condition
     | templateProperty = type
@@ -4714,8 +4714,8 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = population_as_of | ontologyProperty = populationAsOf }}
 	{{PropertyMapping | templateProperty = postal_code | ontologyProperty = postalCode }}
 	{{PropertyMapping | templateProperty = area_code | ontologyProperty = areaCode }}
-	{{PropertyMapping | templateProperty = licence | ontologyProperty = areaCode }}
-	{{PropertyMapping | templateProperty = license | ontologyProperty = areaCode }}
+	{{PropertyMapping | templateProperty = licence | ontologyProperty = licenceNumber }}
+	{{PropertyMapping | templateProperty = license | ontologyProperty = licenceNumber }}
 	{{PropertyMapping | templateProperty = mayor | ontologyProperty = leaderName }}
 	{{PropertyMapping | templateProperty = party | ontologyProperty = leaderParty }}
 	{{PropertyMapping | templateProperty = year | ontologyProperty = foundingYear }}
@@ -15206,7 +15206,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = DorlandsPre | ontologyProperty = dorlandsPrefix }}
 	{{PropertyMapping | templateProperty = DorlandsSuf | ontologyProperty = dorlandsSuffix }}
 	{{PropertyMapping | templateProperty = Precursor | ontologyProperty = precursor }}
-}}</text></revision></page><page><title>Mapping en:Infobox artist</title><ns>204</ns><id>28</id><revision><id>46609</id><timestamp>2015-03-20T06:36:39Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping en:Infobox artist</title><ns>204</ns><id>28</id><revision><id>52057</id><timestamp>2017-05-12T05:18:46Z</timestamp><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = currentmembers
@@ -15324,6 +15324,8 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = mtvasiaawards | ontologyProperty = award }}
 	{{PropertyMapping | templateProperty = goldenmelodyawards | ontologyProperty = award }}
 	{{PropertyMapping | templateProperty = ntsawards | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = works | ontologyProperty = notableWork }}
+	{{PropertyMapping | templateProperty = notable_works | ontologyProperty = notableWork }}
 }}</text></revision></page><page><title>Mapping en:Infobox artist discography</title><ns>204</ns><id>6084</id><revision><id>20577</id><timestamp>2012-12-22T20:52:06Z</timestamp><text>{{TemplateMapping
 | mapToClass = ArtistDiscography
 | mappings = 
@@ -16804,7 +16806,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = depth | ontologyProperty = depth | unit = Length }}
 	{{PropertyMapping | templateProperty = length | ontologyProperty = length | unit = Length }}
 	{{GeocoordinatesMapping | coordinates = coordinates }}
-}}</text></revision></page><page><title>Mapping en:Infobox character</title><ns>204</ns><id>65</id><revision><id>11632</id><timestamp>2011-04-02T10:00:48Z</timestamp><text>{{ TemplateMapping | mapToClass = FictionalCharacter | mappings = 
+}}</text></revision></page><page><title>Mapping en:Infobox character</title><ns>204</ns><id>65</id><revision><id>51958</id><timestamp>2017-03-02T12:25:45Z</timestamp><text>{{ TemplateMapping | mapToClass = FictionalCharacter | mappings = 
     {{ PropertyMapping | templateProperty = cause | ontologyProperty = deathCause }}
     {{ PropertyMapping | templateProperty = occupation | ontologyProperty = occupation }}
     {{ PropertyMapping | templateProperty = religion | ontologyProperty = religion }}
@@ -16814,18 +16816,18 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
     {{ PropertyMapping | templateProperty = nationality | ontologyProperty = nationality }}
     {{ PropertyMapping | templateProperty = gender | ontologyProperty = gender }}
     {{ PropertyMapping | templateProperty = species | ontologyProperty = species }}
-    {{ PropertyMapping | ontologyProperty = foaf:name | templateProperty = name }}
-    {{ PropertyMapping | ontologyProperty = foaf:name | templateProperty = fullname }}
-    {{ PropertyMapping | ontologyProperty = birthName | templateProperty = birth_name }}
-    {{ PropertyMapping | ontologyProperty = birthName | templateProperty = birthname }}
-    {{ PropertyMapping | ontologyProperty = alias | templateProperty = alias }}
-    {{ PropertyMapping | ontologyProperty = foaf:nick | templateProperty = nickname }}
-    {{ PropertyMapping | ontologyProperty = series | templateProperty = series }}
-    {{ PropertyMapping | ontologyProperty = relative | templateProperty = family }}
-    {{ PropertyMapping | ontologyProperty = residence | templateProperty = residence }}
-    {{ PropertyMapping | ontologyProperty = birthDate | templateProperty = born }}
-    {{ PropertyMapping | ontologyProperty = deathDate | templateProperty = death }}
-    {{ PropertyMapping | ontologyProperty = deathDate | templateProperty = died }}
+    {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = fullname |  ontologyProperty = foaf:name}}
+    {{ PropertyMapping | templateProperty = birth_name | ontologyProperty = birthName }}
+    {{ PropertyMapping | templateProperty = birthname | ontologyProperty = birthName }}
+    {{ PropertyMapping | templateProperty = alias |  ontologyProperty = alias}}
+    {{ PropertyMapping | templateProperty = nickname |  ontologyProperty = foaf:nick}}
+    {{ PropertyMapping | templateProperty = series |  ontologyProperty = series}}
+    {{ PropertyMapping | templateProperty = family |  ontologyProperty = relative}}
+    {{ PropertyMapping | templateProperty = residence | ontologyProperty = residence }}
+    {{ PropertyMapping | templateProperty = born | ontologyProperty = birthDate }}
+    {{ PropertyMapping | templateProperty = death | ontologyProperty = deathDate }}
+    {{ PropertyMapping | templateProperty = died  |  ontologyProperty = deathDate}}
     {{ PropertyMapping | templateProperty = creator | ontologyProperty = creator }}
     {{ PropertyMapping | templateProperty = voice | ontologyProperty = voice }}
     {{ PropertyMapping | templateProperty = portrayer | ontologyProperty = portrayer }}
@@ -17214,7 +17216,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = alias | ontologyProperty = foaf:nick }}
 	{{PropertyMapping | templateProperty = awards | ontologyProperty = award }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping en:Infobox company</title><ns>204</ns><id>75</id><revision><id>38826</id><timestamp>2014-12-02T16:16:21Z</timestamp><text>{{ ConditionalMapping 
+}}</text></revision></page><page><title>Mapping en:Infobox company</title><ns>204</ns><id>75</id><revision><id>52169</id><timestamp>2017-07-24T07:47:22Z</timestamp><text>{{ ConditionalMapping 
 | cases =
  {{Condition 
     | templateProperty = industry
@@ -17278,6 +17280,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
     {{ PropertyMapping | templateProperty = parent | ontologyProperty = parentCompany }}
     {{ PropertyMapping | templateProperty = divisions | ontologyProperty = division }}
     {{ PropertyMapping | templateProperty = subsid | ontologyProperty = subsidiary }}
+
     {{ PropertyMapping | templateProperty = homepage | ontologyProperty = foaf:homepage }}
     {{ PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
 
@@ -18746,7 +18749,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = meaning | ontologyProperty = meaning}}
 	{{PropertyMapping | templateProperty = name day | ontologyProperty = nameDay}}
 	{{PropertyMapping | templateProperty = region | ontologyProperty = region}}
-}}</text></revision></page><page><title>Mapping en:Infobox glacier</title><ns>204</ns><id>8012</id><revision><id>28157</id><timestamp>2013-09-03T11:32:49Z</timestamp><text>{{TemplateMapping | mapToClass = Glacier
+}}</text></revision></page><page><title>Mapping en:Infobox glacier</title><ns>204</ns><id>8012</id><revision><id>51965</id><timestamp>2017-03-03T11:32:19Z</timestamp><text>{{TemplateMapping | mapToClass = Glacier
 | mappings = 
 	{{ PropertyMapping | templateProperty = location | ontologyProperty = location }}
 	{{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -18803,6 +18806,8 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = x% | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = y | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = y% | ontologyProperty = }} --&gt;
+
+         {{GeocoordinatesMapping | latitudeDegrees = lat_d  | latitudeMinutes = lat_m  | latitudeSeconds = lat_s  | latitudeDirection = lat_NS  | longitudeDegrees = long_d  | longitudeMinutes = long_m  | longitudeSeconds = long_s  | longitudeDirection = long_EW }}
 }}</text></revision></page><page><title>Mapping en:Infobox golf tournament</title><ns>204</ns><id>8191</id><revision><id>28788</id><timestamp>2013-11-26T09:13:31Z</timestamp><text>{{TemplateMapping | mapToClass = GolfTournament
 | mappings = 
 	{{ PropertyMapping | templateProperty = location | ontologyProperty = location }}
@@ -20238,36 +20243,6 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = parents | ontologyProperty = parent }}
 	{{PropertyMapping | templateProperty = relatives | ontologyProperty = relative }}
 	{{PropertyMapping | templateProperty = death_cause | ontologyProperty = deathCause }}
-}}</text></revision></page><page><title>Mapping en:Infobox monarch</title><ns>204</ns><id>149</id><revision><id>7351</id><timestamp>2010-05-12T14:36:09Z</timestamp><text>{{TemplateMapping
-| mapToClass = Monarch
-| mappings =
-	{{PropertyMapping | templateProperty = heir | ontologyProperty = heir }}
-	{{PropertyMapping | templateProperty = royal anthem | ontologyProperty = royalAnthem }}
-	{{PropertyMapping | templateProperty = date of burial | ontologyProperty = dateOfBurial }}
-	{{PropertyMapping | templateProperty = place of burial | ontologyProperty = placeOfBurial }}
-	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = title | ontologyProperty = title }}
-{{DateIntervalMapping | templateProperty = reign | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear }}
-	{{PropertyMapping | templateProperty = othertitles | ontologyProperty = alias }}
-	{{PropertyMapping | templateProperty = full name | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = predecessor | ontologyProperty = predecessor }}
-	{{PropertyMapping | templateProperty = successor | ontologyProperty = successor }}
-	{{PropertyMapping | templateProperty = spouse 1 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = spouse 2 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = spouse 3 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = spouse 4 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = spouse 5 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = spouse 6 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = spouse 7 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = spouse 8 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = spouse 9 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = spouse 10 | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = offspring | ontologyProperty = child }}
-	{{PropertyMapping | templateProperty = father | ontologyProperty = parent }}
-	{{PropertyMapping | templateProperty = date of birth | ontologyProperty = birthDate }}
-	{{PropertyMapping | templateProperty = place of birth | ontologyProperty = birthPlace }}
-	{{PropertyMapping | templateProperty = date of death | ontologyProperty = deathDate }}
-	{{PropertyMapping | templateProperty = place of death | ontologyProperty = deathPlace }}
 }}</text></revision></page><page><title>Mapping en:Infobox monument</title><ns>204</ns><id>6463</id><revision><id>51058</id><timestamp>2016-05-08T20:21:34Z</timestamp><text>{{ TemplateMapping 
  | mapToClass = Monument
  | mappings = 
@@ -23715,33 +23690,33 @@ Template Properties not mapped yet:
 	&lt;!-- {{ PropertyMapping | templateProperty = sitearea_sqft | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = speed | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = virtual queue image | ontologyProperty = }} --&gt;
-}}</text></revision></page><page><title>Mapping en:Infobox royalty</title><ns>204</ns><id>1680</id><revision><id>46252</id><timestamp>2015-03-18T14:37:23Z</timestamp><text>{{TemplateMapping
-| mapToClass = Royalty
+}}</text></revision></page><page><title>Mapping en:Infobox royalty</title><ns>204</ns><id>1680</id><revision><id>52182</id><timestamp>2017-09-07T07:37:34Z</timestamp><text>{{TemplateMapping
+| mapToClass = Royalty  &lt;!-- or Monarch ? --&gt;
 | mappings =
-	{{PropertyMapping | templateProperty = royal anthem | ontologyProperty = royalAnthem }}
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = title | ontologyProperty = title }}
-        {{DateIntervalMapping
-          | templateProperty          = reign 
-          | startDateOntologyProperty = activeYearsStartYear
-          | endDateOntologyProperty   = activeYearsEndYear
-        }}
 	{{PropertyMapping | templateProperty = predecessor | ontologyProperty = predecessor }}
 	{{PropertyMapping | templateProperty = successor | ontologyProperty = successor }}
 	{{PropertyMapping | templateProperty = spouse | ontologyProperty = spouse }}
-	{{PropertyMapping | templateProperty = full name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = father | ontologyProperty = parent }}
 	{{PropertyMapping | templateProperty = mother | ontologyProperty = parent }}
-	{{PropertyMapping | templateProperty = birth_date | ontologyProperty = birthDate }}
-	{{PropertyMapping | templateProperty = date of birth | ontologyProperty = birthDate }}
-	{{PropertyMapping | templateProperty = birth_place | ontologyProperty = birthPlace }}
-	{{PropertyMapping | templateProperty = place of birth | ontologyProperty = birthPlace }}
-	{{PropertyMapping | templateProperty = death_date | ontologyProperty = deathDate }}
-	{{PropertyMapping | templateProperty = date of death | ontologyProperty = deathDate }}
-	{{PropertyMapping | templateProperty = death_place | ontologyProperty = deathPlace }}
-	{{PropertyMapping | templateProperty = place of death | ontologyProperty = deathPlace }}
-	{{PropertyMapping | templateProperty = place of burial | ontologyProperty = restingPlace }}
+	{{PropertyMapping | templateProperty = issue | ontologyProperty = child }}
+	{{PropertyMapping | templateProperty = birthDate | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = birthPlace | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = deathDate | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = deathPlace | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = burialPlace | ontologyProperty = placeOfBurial }}
 	{{PropertyMapping | templateProperty = occupation | ontologyProperty = occupation }}
+        {{DateIntervalMapping | templateProperty = reign | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear }}
+
+&lt;!-- properties not in template:
+	{{PropertyMapping | templateProperty = royal anthem | ontologyProperty = royalAnthem }}
+	{{PropertyMapping | templateProperty = heir | ontologyProperty = heir }}
+	{{PropertyMapping | templateProperty = othertitles | ontologyProperty = alias }}
+	{{PropertyMapping | templateProperty = offspring | ontologyProperty = child }}
+	{{PropertyMapping | templateProperty = full name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = date of burial | ontologyProperty = dateOfBurial }}
+--&gt;
 }}</text></revision></page><page><title>Mapping en:Infobox rugby biography</title><ns>204</ns><id>224</id><revision><id>7424</id><timestamp>2010-05-12T14:45:22Z</timestamp><text>{{TemplateMapping
 | mapToClass = RugbyPlayer
 | mappings =
