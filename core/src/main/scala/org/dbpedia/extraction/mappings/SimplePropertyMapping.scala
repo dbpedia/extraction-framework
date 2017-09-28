@@ -206,7 +206,7 @@ extends PropertyMapping
 
             //get the property wikitext and plainText size
             val propertyNodeWikiLength = propertyNode.toWikiText.substring(propertyNode.toWikiText.indexOf('=')+1).trim.length // exclude '| propKey ='
-            val propertyNodeTextLength = propertyNode.propertyNodeValueToPalinText.trim.length
+            val propertyNodeTextLength = propertyNode.propertyNodeValueToPlainText.trim.length
 
             for( parseResult <- selector(parseResults) )
             {

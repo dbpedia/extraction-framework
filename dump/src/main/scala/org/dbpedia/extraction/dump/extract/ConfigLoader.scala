@@ -5,7 +5,7 @@ import java.net.URL
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Logger
 
-import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.mappings._
@@ -18,7 +18,7 @@ import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.{ArrayBuffer, HashMap, ListBuffer}
 
 /**
  * Loads the dump extraction configuration.
@@ -40,12 +40,16 @@ class ConfigLoader(config: Config)
   private val nonFreeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
   private val freeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
 
-  def getExtractionRecorder(lang: Language): ExtractionRecorder[WikiPage] = {
+  private val extractionMonitor = new ExtractionMonitor[WikiPage]()
+
+  def getExtractionRecorder(lang: Language, dataset : Dataset = null): ExtractionRecorder[WikiPage] = {
     extractionRecorder.get(lang) match {
       case None =>
-        extractionRecorder(lang) = config.getDefaultExtractionRecorder(lang, 2000)
+        extractionRecorder(lang) = config.getDefaultExtractionRecorder(lang, 2000, null, null,  ListBuffer(dataset), extractionMonitor)
         extractionRecorder(lang)
-      case Some(er) => er
+      case Some(er) =>
+        if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
+        er
     }
   }
 
@@ -145,7 +149,7 @@ class ConfigLoader(config: Config)
       val datasetDestinations = new mutable.HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
-          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
+          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format, getExtractionRecorder(context.language, dataset), dataset))
           case None =>
         }
       }
@@ -179,15 +183,11 @@ class ConfigLoader(config: Config)
     * Creates ab extraction job for a specific language.
     */
   val imageCategoryWorker: Workers[Language] = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
-    getExtractionRecorder(lang).initialize(lang, "Image Extraction")
-    getExtractionRecorder(lang).printLabeledLine("Start image list preparation for ImageExtractor.", RecordSeverity.Info)
     val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
-    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang))
+    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang, DBpediaDatasets.Images))
     this.freeImages.put(lang, imageCategories._1)
     this.nonFreeImages.put(lang, imageCategories._2)
-    getExtractionRecorder(lang).printLabeledLine("Finished image list preparation for ImageExtractor: " + imageCategories._1.size + " free images, " + imageCategories._2 + " nonfree images.", RecordSeverity.Info)
-  }
-
+    }
 
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
@@ -196,14 +196,23 @@ class ConfigLoader(config: Config)
      */
     def getExtractionJobs: Traversable[ExtractionJob] =
     {
-      //first check if some langs are extraction images, if so load the image category lists
-
-      val zw = config.extractorClasses.filter(x => x._2.map( y => y.getSimpleName).contains("ImageExtractor"))
-      val imageExtractorLanguages = zw match{
-        case filtered if filtered.nonEmpty => filtered.keySet.toList ++ List(Language.Commons)       //else: add Commons (see ImageExtractorScala for why)
-        case _ => List[Language]()                                                                   //no ImageExtractors selected
+      if(config.copyrightCheck) {
+        // Image Extractor pre-processing: Extract Free & Non-Free Images prior to the main Extraction
+        var zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractorNew"))
+        if (zw.isEmpty) {
+          zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
+        }
+        val imageExtractorLanguages = zw match {
+          case filtered if filtered.nonEmpty => filtered.keySet.toList ++ List(Language.Commons) //else: add Commons (see ImageExtractorScala for why)
+          case _ => List[Language]() //no ImageExtractors selected
+        }
+        Workers.work[Language](imageCategoryWorker, imageExtractorLanguages)
+      } else {
+        val zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
+        zw.keys.foreach(lang => this.nonFreeImages.put(lang, Seq[String]()))
+        this.nonFreeImages.put(Language.Commons, Seq[String]())
       }
-      Workers.work[Language](imageCategoryWorker, imageExtractorLanguages)
+
 
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier

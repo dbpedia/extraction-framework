@@ -2,7 +2,6 @@ package org.dbpedia.extraction.destinations.formatters
 
 import org.dbpedia.extraction.util.TurtleUtils.escapeTurtle
 import UriPolicy._
-import org.dbpedia.extraction.mappings.ExtractionRecorder
 
 /**
  * Helps to build one triple/quad line in Turtle/Turtle-Quads/N-Triples/N-Quads format.
@@ -10,7 +9,7 @@ import org.dbpedia.extraction.mappings.ExtractionRecorder
  * @param policies Mapping from URI positions (as defined in UriPolicy) to URI policy functions.
  * Must have five (UriPolicy.POSITIONS) elements. If null, URIs will not be modified.
 */
-class TerseBuilder(quads: Boolean, turtle: Boolean, policies: Array[Policy] = null)
+class TerseBuilder(quads: Boolean, turtle: Boolean, policies: Array[Policy] = null) 
 extends UriTripleBuilder(policies) {
   
   // Scala's StringBuilder doesn't have appendCodePoint
@@ -81,4 +80,5 @@ extends UriTripleBuilder(policies) {
     escapeTurtle(sb, input, turtle)
     this
   }
+  
 }
