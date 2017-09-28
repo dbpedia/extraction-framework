@@ -60,7 +60,7 @@ extends PageNodeExtractor {
             subjectUri,
             propertyUri,
             WikiTitle.parse(node.children.head.asInstanceOf[TextNode].text.split(", ").head, Language.apply(node.key)).resourceIri,
-            null,
+            page.sourceIri,
             null
           )
         )

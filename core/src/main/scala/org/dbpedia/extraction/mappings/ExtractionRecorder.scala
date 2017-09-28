@@ -281,7 +281,7 @@ class ExtractionRecorder[T](
     val pages = successfulPages(lang)
     val time = System.currentTimeMillis - startTime.get
     val failed = failedPages(lang)
-    val datasetss = if(datasets.nonEmpty && datasets.size <= 5)
+    val datasetss = if(datasets.nonEmpty && datasets.size <= 3)
       datasets.foldLeft[String]("")((x,y) => x + ", " + y.encoded).substring(2)
     else
       String.valueOf(datasets.size) + " datasets"

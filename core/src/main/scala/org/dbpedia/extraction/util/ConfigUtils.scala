@@ -110,6 +110,8 @@ object ConfigUtils {
    * @return languages, sorted by language code
    */
   def parseLanguages(baseDir: File, args: Seq[String], wikiPostFix: String = "wiki"): Array[Language] = {
+    if(!baseDir.exists())
+      throw new IllegalArgumentException("Base directory does not exist yet: " + baseDir)
     
     val keys = for(arg <- args; key <- arg.split("[,\\s]"); if key.nonEmpty) yield key
         

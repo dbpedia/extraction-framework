@@ -46,10 +46,10 @@ class CommonsResourceExtractor (
     {
       if (template.children.isEmpty){
         val commonsResourceURL = WikiTitle.parse(node.title.encoded.asInstanceOf[String], commonsLanguage).resourceIri
-        return Seq(new Quad(context.language, DBpediaDatasets.CommonsLink, subjectUri, propertyUri, commonsResourceURL, null, null))
+        return Seq(new Quad(context.language, DBpediaDatasets.CommonsLink, subjectUri, propertyUri, commonsResourceURL, node.sourceIri, null))
       } else{
         val commonsResourceURL = WikiTitle.parse(template.children.head.children.head.asInstanceOf[TextNode].text, commonsLanguage).resourceIri
-        return Seq(new Quad(context.language, DBpediaDatasets.CommonsLink, subjectUri, propertyUri, commonsResourceURL, null, null))
+        return Seq(new Quad(context.language, DBpediaDatasets.CommonsLink, subjectUri, propertyUri, commonsResourceURL, node.sourceIri, null))
       }
     }
     Seq.empty
