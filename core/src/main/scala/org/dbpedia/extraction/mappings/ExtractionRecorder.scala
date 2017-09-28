@@ -26,7 +26,7 @@ class ExtractionRecorder[T](
                              val reportInterval: Int = 100000,
                              val preamble: String = null,
                              val slackCredantials: SlackCredentials = null,
-                             val datasets: Seq[Dataset] = Seq(),
+                             val datasets: ListBuffer[Dataset] = ListBuffer[Dataset](),
                              val language: Language = Language.English,
                              val monitor: ExtractionMonitor[T] = null
    ) {
@@ -46,7 +46,6 @@ class ExtractionRecorder[T](
 
   private var slackIncreaseExceptionThreshold = 1
 
-  private var datasets: Seq[Dataset] = Seq()
   private var task: String = "transformation"
   private var initialized = false
 

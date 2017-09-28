@@ -34,7 +34,9 @@ extends Destination
     for(quad <- graph) {
       val formatted = formatter.render(quad)
       if(extractionRecorder != null) {
-        if(formatted.trim.startsWith("#")) if(formatted.contains("BAD URI:")) extractionRecorder.failedRecord(quad.toString(), null, null, new BadQuadException(formatted))
+        if(formatted.trim.startsWith("#")){
+          if(formatted.contains("BAD URI:")) extractionRecorder.failedRecord(quad.toString(), null, new BadQuadException(formatted))
+        }
         else if(dataset != null) extractionRecorder.increaseAndGetSuccessfulTriples(dataset)
       }
       writer.write(formatted)

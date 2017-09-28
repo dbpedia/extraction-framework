@@ -5,15 +5,17 @@ import java.net.URL
 import java.util.Properties
 import java.util.logging.{Level, Logger}
 
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.mappings.{ExtractionRecorder, Extractor}
+import org.dbpedia.extraction.mappings.{ExtractionMonitor, ExtractionRecorder, Extractor}
 import org.dbpedia.extraction.util.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.RichFile.wrapFile
 
 import scala.collection.Map
+import scala.collection.mutable.ListBuffer
 import scala.io.Codec
 import scala.util.{Failure, Success, Try}
 
@@ -81,13 +83,13 @@ class Config(val configPath: String) extends
     case None => None
   }
 
-  def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null): ExtractionRecorder[T] ={
+  def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null, datasets : ListBuffer[Dataset] = null, monitor : ExtractionMonitor[T] = null): ExtractionRecorder[T] ={
     val w = if(writer != null) writer
       else openLogFile(lang.wikiCode) match{
         case Some(s) => new OutputStreamWriter(s)
         case None => null
       }
-    new ExtractionRecorder[T](w, interval, preamble, slackCredentials.getOrElse(null))
+    new ExtractionRecorder[T](w, interval, preamble, slackCredentials.getOrElse(null), datasets, lang, monitor)
   }
 
   private def openLogFile(langWikiCode: String): Option[FileOutputStream] ={

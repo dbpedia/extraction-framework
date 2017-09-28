@@ -45,23 +45,7 @@ class ConfigLoader(config: Config)
   def getExtractionRecorder(lang: Language, dataset : Dataset = null): ExtractionRecorder[WikiPage] = {
     extractionRecorder.get(lang) match {
       case None =>
-        extractionRecorder(lang) = config.logDir match {
-          case Some(p) =>
-            var logname = config.configPath.replace("\\", "/")
-            logname = logname.substring(logname.lastIndexOf("/") + 1)
-            logname = logname + "_" + lang.wikiCode + ".log"
-            val logFile = new File(p, logname)
-            logFile.createNewFile()
-            val logStream = new FileOutputStream(logFile)
-
-            //TODO val preamble = input._1.wikiCode+": "+input._2.size+" extractors ("+
-            //  input._2.map(_.getSimpleName).mkString(",")+"), "+
-            //  datasets.size+" datasets ("+datasets.mkString(",")+")"
-
-            new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null, config.slackCredentials.getOrElse(null), ListBuffer(dataset), lang, extractionMonitor)
-          case None => new ExtractionRecorder[WikiPage](null, 2000, null, config.slackCredentials.getOrElse(null), ListBuffer(dataset), lang, extractionMonitor)
-        }
-        extractionRecorder(lang) = config.getDefaultExtractionRecorder(lang, 2000)
+        extractionRecorder(lang) = config.getDefaultExtractionRecorder(lang, 2000, null, null,  ListBuffer(dataset), extractionMonitor)
         extractionRecorder(lang)
       case Some(er) =>
         if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
