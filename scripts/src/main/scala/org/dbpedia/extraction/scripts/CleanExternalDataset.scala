@@ -47,19 +47,19 @@ object CleanExternalDataset {
       new QuadMapper().mapQuads(Language.Core, input, outFile, required = true) { quad =>
         try {
           var changed = false
-          val subj = UriUtils.uriToDbpediaIri(quad.subject)
+          val subj = UriUtils.uriToDbpediaIri(quad.subject).toString
           changed = changed || subj != quad.subject
-          val pred = UriUtils.uriToDbpediaIri(quad.predicate)
+          val pred = UriUtils.uriToDbpediaIri(quad.predicate).toString
           changed = changed || pred != quad.predicate
           val obj = if (quad.datatype == null)
-            UriUtils.uriToDbpediaIri(quad.value)
+            UriUtils.uriToDbpediaIri(quad.value).toString
           else if (quad.language != null || quad.datatype == "http://www.w3.org/2001/XMLSchema#string")
             StringEscapeUtils.unescapeJava(quad.value) //revert numeric and %- escape sequences
           else
             quad.value
           changed = changed || obj != quad.value
           val cont = if (quad.context != null)
-            UriUtils.uriToDbpediaIri(quad.context)
+            UriUtils.uriToDbpediaIri(quad.context).toString
           else
             quad.context
           changed = changed || cont != quad.context

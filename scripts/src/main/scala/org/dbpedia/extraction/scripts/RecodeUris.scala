@@ -77,7 +77,7 @@ object RecodeUris {
 
     def fixUri(uri: String): String =
       if(recodeToIris)
-        UriUtils.uriToDbpediaIri(uri)
+        UriUtils.uriToDbpediaIri(uri).toString
       else
         UriUtils.createIri(uri) match{
           case Success(s) => s.toASCIIString
