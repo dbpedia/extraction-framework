@@ -7,7 +7,6 @@ import java.util.logging.Logger
 
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations._
-import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
@@ -18,7 +17,7 @@ import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, HashMap, ListBuffer}
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 /**
  * Loads the dump extraction configuration.
@@ -42,7 +41,7 @@ class ConfigLoader(config: Config)
 
   private val extractionMonitor = new ExtractionMonitor[WikiPage]()
 
-  def getExtractionRecorder(lang: Language, dataset : Dataset = null): ExtractionRecorder[WikiPage] = {
+  def getExtractionRecorder(lang: Language, dataset : Dataset = null): org.dbpedia.extraction.util.ExtractionRecorder[WikiPage] = {
     extractionRecorder.get(lang) match {
       case None =>
         extractionRecorder(lang) = config.getDefaultExtractionRecorder(lang, 2000, null, null,  ListBuffer(dataset), extractionMonitor)

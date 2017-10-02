@@ -1,12 +1,12 @@
 package org.dbpedia.extraction.dump.sql
 
 import org.dbpedia.extraction.sources.Source
-import org.dbpedia.extraction.util.{Language, StringUtils}
+import org.dbpedia.extraction.util._
 import java.lang.StringBuilder
 import java.sql.Connection
 import java.sql.SQLException
 
-import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordSeverity, WikiPageEntry}
+import org.dbpedia.extraction.util.{RecordSeverity, WikiPageEntry}
 import org.dbpedia.extraction.wikiparser.WikiPage
 
 import scala.util.control.ControlThrowable

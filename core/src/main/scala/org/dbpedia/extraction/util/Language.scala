@@ -69,17 +69,19 @@ object Language extends (String => Language)
   
   val map: Map[String, Language] = locally {
     def language(code : String, name: String, iso_1: String, iso_3: String): Language = {
+      val c = code.trim.toLowerCase
+      val baseDomain = if(c.trim.toLowerCase == "en") "dbpedia.org" else c + ".dbpedia.org"
       new Language(
-        code,
-        name,
-        iso_1,
-        iso_3,
-        code+".dbpedia.org",
-        "http://"+code+".dbpedia.org",
-        new DBpediaNamespace("http://"+code+".dbpedia.org/resource/"),
-        new DBpediaNamespace("http://"+code+".dbpedia.org/property/"),
-        "http://"+code+".wikipedia.org",
-        "https://"+code+".wikipedia.org/w/api.php",
+        c,
+        name.trim,
+        iso_1.trim,
+        iso_3.trim,
+        baseDomain,
+        "http://" + baseDomain,
+        new DBpediaNamespace("http://" + baseDomain + "/resource/"),
+        new DBpediaNamespace("http://" + baseDomain + "/property/"),
+        "http://"+c+".wikipedia.org",
+        "https://"+c+".wikipedia.org/w/api.php",
         Config.wikiInfos.filter(x => x.wikicode == code) match{
           case e if e.nonEmpty => e.head.pages
           case _ => 0

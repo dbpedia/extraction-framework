@@ -209,6 +209,8 @@ abstract class ExtractionManager(
             val redirects: Redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
             val disambiguations: Disambiguations = self.disambiguations
             val configFile: ServerConfiguration = Server.config
+            val nonFreeImages = Seq()
+            val freeImages = Seq()
       }
     }
 

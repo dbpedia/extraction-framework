@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URI
 
+import org.apache.jena.iri.IRI
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
@@ -13,10 +14,12 @@ import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
+import org.dbpedia.iri.UriUtils
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
+import scala.util.{Failure, Success}
 
 /**
  * This extractor extract citation data from articles
@@ -35,6 +38,16 @@ extends WikiPageExtractor
     // Configuration
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private val preliminaryDomainMap: Map[String, String] = Map(
+        "doi" -> "http://doi.org/",
+        "pmc" -> "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC",
+        "jstor" -> "https://www.jstor.org/stable/",
+        "pmid" -> "https://www.ncbi.nlm.nih.gov/pubmed/",
+        "arxiv" -> "http://arxiv.org/abs/",
+        "isbn" -> "http://books.google.com/books?vid=ISBN",
+        "issn" -> "https://www.worldcat.org/ISSN/",
+        "oclc" -> "https://www.worldcat.org/oclc/"
+    )
     private val ontology = context.ontology
     
     private val language = context.language
@@ -123,32 +136,28 @@ extends WikiPageExtractor
              if citationTemplatesRegex.exists(regex => regex.findFirstMatchIn(resolvedTitle).isDefined)
         } {
 
-            for (citationIri <- getCitationIRI(template)) {
+            val citationIri = getCitationIRI(template).toString
 
-                quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceIri, null)
+            quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceIri, null)
 
-                for (property <- template.children; if !property.key.forall(_.isDigit)) {
-                    // exclude numbered properties
-                    // TODO clean HTML
+            for (property <- template.children; if !property.key.forall(_.isDigit)) {
+                // exclude numbered properties
+                // TODO clean HTML
 
-                    val cleanedPropertyNode = NodeUtil.removeParentheses(property)
+                val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
-                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
-                    for (splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode)) {
-                        val propertyUri = getPropertyUri(property.key)
-                        try {
-                            quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, value, splitNode.sourceIri, datatype)
-
-
-                        }
-                        catch {
-                            case ex: IllegalArgumentException => println(ex)
-                        }
+                val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
+                for (splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode)) {
+                    val propertyUri = getPropertyUri(property.key)
+                    try {
+                        quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, value, splitNode.sourceIri, datatype)
+                    }
+                    catch {
+                        case ex: IllegalArgumentException => println(ex)
                     }
                 }
             }
         }
-
         quads
     }
 
@@ -278,71 +287,50 @@ extends WikiPageExtractor
         language.propertyUri.append(result)
     }
 
-    private def getCitationIRI(templateNode: TemplateNode) : Option[String] =
+    private def createCitationIri(templateNode: TemplateNode, key: String): Option[IRI] ={
+        getPropertyValueAsStringForKeys(templateNode, List(key)) match{
+            case Some(x) => preliminaryDomainMap.get(key) match{
+                case Some(domain) => UriUtils.createIri(domain + x.trim.toLowerCase).toOption
+                case None => UriUtils.createIri(x.trim.toLowerCase).toOption
+            }
+            case None => None
+        }
+    }
+
+    private def getCitationIRI(templateNode: TemplateNode) : IRI =
     {
         //first try DOI
-        val doiId = getPropertyValueAsStringForKeys(templateNode, List("doi"))
-        if (doiId.isDefined) {
-            return Some("http://doi.org/" + doiId.get.trim.toLowerCase)
-        }
+        createCitationIri(templateNode, "doi").map(return _)
 
         //then jstor
-        val jstorId = getPropertyValueAsStringForKeys(templateNode, List("jstor"))
-        if (jstorId.isDefined) {
-            return Some("https://www.jstor.org/stable/" + jstorId.get.trim.toLowerCase)
-
-        }
+        createCitationIri(templateNode, "jstor").map(return _)
 
         // PMC (PUBMED Central)
-        val pmcId = getPropertyValueAsStringForKeys(templateNode, List("pmc"))
-        if (pmcId.isDefined) {
-            return Some("https://www.ncbi.nlm.nih.gov/pmc/articles/PMC" + pmcId.get.trim.toLowerCase)
-        }
+        createCitationIri(templateNode, "pmc").map(return _)
 
         // then PUBMED
-        val pmidId = getPropertyValueAsStringForKeys(templateNode, List("pmid"))
-        if (pmidId.isDefined) {
-            return Some("https://www.ncbi.nlm.nih.gov/pubmed/" + pmidId.get.trim.toLowerCase)
-        }
+        createCitationIri(templateNode, "pmid").map(return _)
 
         // then arxiv
-        val arxivId = getPropertyValueAsStringForKeys(templateNode, List("arxiv"))
-        if (arxivId.isDefined) {
-            return Some("http://arxiv.org/abs/" + arxivId.get.trim.toLowerCase)
-        }
+        createCitationIri(templateNode, "arxiv").map(return _)
 
         // Then ISBN
-        val isbn = getPropertyValueAsStringForKeys(templateNode, List("isbn"))
-        if (isbn.isDefined) {
-            return Some("http://books.google.com/books?vid=ISBN" + isbn.get.trim)
-        }
+        createCitationIri(templateNode, "isbn").map(return _)
 
         // then ISSN
-        val issn = getPropertyValueAsStringForKeys(templateNode, List("issn"))
-        if (issn.isDefined) {
-            return Some("https://www.worldcat.org/ISSN/" + issn.get.trim)
-        }
+        createCitationIri(templateNode, "issn").map(return _)
 
         // then oclc
-        val oclc = getPropertyValueAsStringForKeys(templateNode, List("oclc"))
-        if (oclc.isDefined) {
-            return Some("https://www.worldcat.org/oclc/" + oclc.get.trim)
-        }
+        createCitationIri(templateNode, "oclc").map(return _)
 
         // Then url / website
-        val webIri1 = getPropertyValueAsLinkForKeys(templateNode, List("url") )
-        if (webIri1.isDefined) {
-            return webIri1
-        }
+        createCitationIri(templateNode, "url").map(return _)
 
         // Then url / website
-        val webIri2 = getPropertyValueAsLinkForKeys(templateNode, List("website") )
-        if (webIri2.isDefined) {
-            return webIri2
-        }
+        createCitationIri(templateNode, "website").map(return _)
 
         //create a hash based IRI
-        createHashedCitationIRIFromTemplateNode(templateNode)
+        createHashedCitationIRIFromTemplateNode(templateNode).get
     }
 
     private def getPropertyKeyIgnoreCase(templateNode: TemplateNode, propertyNames: List[String]) : Option[PropertyNode] =
@@ -361,7 +349,7 @@ extends WikiPageExtractor
         }
     }
 
-    private def getPropertyValueAsLink(propertyNode: PropertyNode): Option[String] =
+    private def getPropertyValueAsLink(propertyNode: PropertyNode): Option[IRI] =
     {
         StringParser.parse(propertyNode) match {
             case Some(stringValue) if stringValue.trim.nonEmpty => Some(stringValue)
@@ -369,18 +357,14 @@ extends WikiPageExtractor
         }
 
         linkParser.parse(propertyNode) match {
-            case Some(linkFromParser) => Some(linkFromParser.toString)
-            case _ =>
-                try {
-                    val text = propertyNode.children.flatMap(_.toPlainText).mkString.trim
-                    val iri = new URI(text)
-                    if (iri.isAbsolute) Some(iri.toString)
+            case Some(linkFromParser) => Some(linkFromParser)
+            case _ => UriUtils.createIri(propertyNode.children.flatMap(_.toPlainText).mkString.trim) match{
+                case Success(iri) => if (iri.isAbsolute)
+                        Some(iri)
                     else None
-                } catch {
-                    case _: Throwable => None
-                }
+                case Failure(f) => None
+            }
         }
-
     }
 
     private def getPropertyValueAsStringForKeys(templateNode: TemplateNode, propertyNames: List[String]) : Option[String] =
@@ -391,7 +375,7 @@ extends WikiPageExtractor
         }
     }
 
-    private def getPropertyValueAsLinkForKeys(templateNode: TemplateNode, propertyNames: List[String]) : Option[String] =
+    private def getPropertyValueAsLinkForKeys(templateNode: TemplateNode, propertyNames: List[String]) : Option[IRI] =
     {
         getPropertyKeyIgnoreCase(templateNode, propertyNames) match {
             case Some(propertyNode) => getPropertyValueAsLink(propertyNode)
@@ -399,7 +383,7 @@ extends WikiPageExtractor
         }
     }
 
-    private def createHashedCitationIRIFromTemplateNode(templateNode: TemplateNode) : Option[String] =
+    private def createHashedCitationIRIFromTemplateNode(templateNode: TemplateNode) : Option[IRI] =
     {
         val template = new StringBuilder
 
@@ -415,17 +399,13 @@ extends WikiPageExtractor
         template append "}"
 
         //MD5 from https://stevenwilliamalexander.wordpress.com/2012/06/11/scala-md5-hash-function-for-scala-console/
-        try {
-            val shaHash = java.security.MessageDigest.getInstance("SHA-256").
-              digest(template.toString().getBytes())
-              .map(0xFF & _).map {
-                "%02x".format(_)
-                }.foldLeft("") {
-                  _ + _
-                }
-            Some("http://citation.dbpedia.org/hash/" + shaHash)
-        } catch {
-            case _: Throwable => None
-        }
+        val shaHash = java.security.MessageDigest.getInstance("SHA-256").
+          digest(template.toString().getBytes())
+          .map(0xFF & _).map {
+            "%02x".format(_)
+            }.foldLeft("") {
+              _ + _
+            }
+        UriUtils.createIri("http://citation.dbpedia.org/hash/" + shaHash).toOption
     }
 }

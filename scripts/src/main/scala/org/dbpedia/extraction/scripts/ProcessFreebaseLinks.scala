@@ -5,18 +5,18 @@ import java.io.File
 import org.dbpedia.extraction.transform.Quad
 
 import scala.Console.err
-import scala.collection.mutable.{ArrayBuffer,HashMap,TreeSet}
+import scala.collection.mutable.{ArrayBuffer, HashMap, TreeSet}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
+import org.dbpedia.extraction.util.ConfigUtils.{getString, getStrings, getValue, loadConfig, parseLanguages}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.destinations.{Destination,CompositeDestination,WriterDestination}
+import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
 import org.dbpedia.extraction.util.Finder
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.IOUtils.{readLines,writer}
+import org.dbpedia.extraction.util.IOUtils.{readLines, writer}
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.util.text.uri.UriDecoder
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.util.StringUtils
+import org.dbpedia.iri.UriDecoder
 
 /**
  * See https://developers.google.com/freebase/data for a reference of the Freebase RDF data dumps

@@ -8,7 +8,7 @@ import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.mappings.{ExtractionMonitor, ExtractionRecorder, Extractor}
+import org.dbpedia.extraction.mappings.{ExtractionMonitor, Extractor}
 import org.dbpedia.extraction.util.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.wikiparser.Namespace

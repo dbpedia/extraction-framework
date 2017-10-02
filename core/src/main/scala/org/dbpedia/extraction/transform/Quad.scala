@@ -1,12 +1,11 @@
 package org.dbpedia.extraction.transform
 
-import java.net.URI
-
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyType}
 import org.dbpedia.extraction.transform.Quad._
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.iri.UriUtils
 
 /**
  * Represents a statement.
@@ -53,7 +52,7 @@ with Equals
     datatype: Datatype
   ) = this(
     if (language == null) null else language.isoCode,
-      dataset.encoded,
+    if (dataset == null) null else dataset.encoded,
       subject,
       predicate,
       value,
@@ -103,7 +102,7 @@ with Equals
     datatype
   )
   
-  override def toString() = {
+  override def toString: String = {
    "Quad("+
    "dataset="+dataset+","+
    "subject="+subject+","+
@@ -131,14 +130,14 @@ with Equals
     c = safeCompare(this.language, that.language)
     if (c != 0) return c
     // ignore dataset and context
-    return 0
+    0
   }
   
   /**
    * sub classes that add new fields should override this method 
    */
   override def canEqual(obj: Any): Boolean = {
-    return obj.isInstanceOf[Quad] 
+    obj.isInstanceOf[Quad]
   }
 
   /**
@@ -169,12 +168,12 @@ with Equals
     hash = prime * hash + safeHash(datatype)
     hash = prime * hash + safeHash(language)
     // ignore dataset and context
-    return hash
+    hash
   }
 
   def hasObjectPredicate: Boolean =
   {
-    datatype == null && language == null && URI.create(value).isAbsolute
+    datatype == null && language == null && UriUtils.createIri(value).get.isAbsolute
   }
 }
 
@@ -199,8 +198,10 @@ object Quad
   private def findType(datatype: Datatype, range: OntologyType): Datatype =
   {
     if (datatype != null) datatype
-    else if (range.isInstanceOf[Datatype]) range.asInstanceOf[Datatype]
-    else null
+    else range match {
+      case datatype1: Datatype => datatype1
+      case _ => null
+    }
   }
 
   /**

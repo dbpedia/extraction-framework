@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicLong
 
 import org.apache.jena.rdf.model._
 import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.util.ExtractionRecorder
 import org.dbpedia.extraction.util._
 
 import scala.collection.mutable

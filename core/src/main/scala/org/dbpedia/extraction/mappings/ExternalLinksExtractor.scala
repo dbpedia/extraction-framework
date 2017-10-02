@@ -4,7 +4,9 @@ import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, UriUtils, ExtractorUtils}
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+import org.dbpedia.iri.UriUtils
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 

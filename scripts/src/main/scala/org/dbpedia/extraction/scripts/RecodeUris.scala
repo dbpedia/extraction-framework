@@ -1,8 +1,10 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{Language, SimpleWorkers, UriUtils, Workers}
+import org.dbpedia.extraction.util.{Language, SimpleWorkers, Workers}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import java.io.File
+
+import org.dbpedia.iri.UriUtils
 
 import scala.Console.err
 import scala.util.{Failure, Success}
@@ -75,9 +77,9 @@ object RecodeUris {
 
     def fixUri(uri: String): String =
       if(recodeToIris)
-        UriUtils.uriToIri(uri)
+        UriUtils.uriToDbpediaIri(uri)
       else
-        UriUtils.createUri(uri) match{
+        UriUtils.createIri(uri) match{
           case Success(s) => s.toASCIIString
           case Failure(f) => null
         }

@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.annotations
 
-import java.net.URI
-
+import org.apache.jena.iri.IRI
 import org.dbpedia.extraction.ontology.DBpediaNamespace
 
 import scala.annotation.StaticAnnotation
@@ -12,7 +11,7 @@ import scala.annotation.StaticAnnotation
   */
 trait GeneralDBpediaAnnotation extends StaticAnnotation{
 
-  def uri:URI
+  def uri:IRI
 
   def typ:AnnotationType.Value
 

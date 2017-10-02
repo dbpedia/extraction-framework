@@ -1,4 +1,4 @@
-package org.dbpedia.util.text.uri;
+package org.dbpedia.iri;
 
 import java.nio.charset.Charset;
 

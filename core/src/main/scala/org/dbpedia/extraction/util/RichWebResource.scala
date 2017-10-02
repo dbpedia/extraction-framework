@@ -1,9 +1,11 @@
 package org.dbpedia.extraction.util
 
 import java.io.{File, IOException, InputStream, OutputStream}
-import java.net.{HttpURLConnection, URI, URL}
+import java.net.{HttpURLConnection, URL}
 
 import org.apache.commons.io.FileUtils
+import org.apache.jena.iri.IRI
+import org.dbpedia.iri.UriUtils
 
 import scala.util.{Failure, Success, Try}
 
@@ -13,21 +15,21 @@ import scala.util.{Failure, Success, Try}
   *
   * Created by Chile on 1/30/2017.
   */
-class RichWebResource(targetString: String)  extends FileLike[URI] {
+class RichWebResource(targetString: String)  extends FileLike[IRI] {
 
   //TODO - defferentiating between Directories and Files?
 
-  val uri = new URI(targetString)
+  val uri: IRI = UriUtils.createIri(targetString).get
   /**
     * @return file name, or null if file path has no parts
     */
   override def name: String = uri.getPath
 
-  override def resolve(name: String): Try[URI] = Try{uri.resolve(name)}
+  override def resolve(name: String): Try[IRI] = Try{uri.resolve(name)}
 
   override def names: List[String] = List()
 
-  override def list: List[URI] = List()
+  override def list: List[IRI] = List()
 
   override def exists: Boolean = RichWebResource.testURL(uri.toURL)
 
@@ -47,7 +49,7 @@ class RichWebResource(targetString: String)  extends FileLike[URI] {
   override def outputStream(append: Boolean): OutputStream = throw new IOException("URIs will provide no output stream")
 
   override def getFile: File = {
-    val file = new File(uri)
+    val file = new File(uri.toURI)
     FileUtils.copyURLToFile(uri.toURL, file)
     file
   }

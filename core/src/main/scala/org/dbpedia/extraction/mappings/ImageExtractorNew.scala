@@ -8,6 +8,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{ExtractorUtils, Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.iri.UriUtils
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
@@ -50,8 +51,6 @@ extends PageNodeExtractor
 
   private val rdfType = context.ontology.properties("rdf:type")
 
-  private val commonsLang = Language.Commons
-
   override val datasets = Set(DBpediaDatasets.Images)
 
   private var mainImageFound = false
@@ -79,7 +78,7 @@ extends PageNodeExtractor
           duplicateMap.put(imageFileName, true)
 
           val lang = if(context.freeImages.contains(URLDecoder.decode(imageFileName, "UTF-8")))
-            language else commonsLang
+            language else Language.Commons
           val url = ExtractorUtils.getFileURL(imageFileName, lang)
           val thumbnailUrl = ExtractorUtils.getThumbnailURL(imageFileName, lang)
 
@@ -99,31 +98,31 @@ extends PageNodeExtractor
     // --------------- Quad Gen: Special Images ---------------
     mainImage.foreach(img => {
       val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
-        language else commonsLang
+        language else Language.Commons
       val url = ExtractorUtils.getFileURL(img._1, lang)
       quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mainImageProperty, url, img._2.sourceIri)
     })
     flagImage.foreach(_.foreach(img => {
       val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
-        language else commonsLang
+        language else Language.Commons
       val url = ExtractorUtils.getFileURL(img._1, lang)
       quads += new Quad(language, DBpediaDatasets.Images, subjectUri, flagProperty, url, img._2.sourceIri)
     }))
     coatOfArmsImage.foreach(_.foreach(img => {
       val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
-        language else commonsLang
+        language else Language.Commons
       val url = ExtractorUtils.getFileURL(img._1, lang)
       quads += new Quad(language, DBpediaDatasets.Images, subjectUri, coatOfArmsProperty, url, img._2.sourceIri)
     }))
     signatureImage.foreach(_.foreach(img => {
       val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
-        language else commonsLang
+        language else Language.Commons
       val url = ExtractorUtils.getFileURL(img._1, lang)
       quads += new Quad(language, DBpediaDatasets.Images, subjectUri, signatureProperty, url, img._2.sourceIri)
     }))
     mapImage.foreach(_.foreach(img => {
       val lang = if(context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
-        language else commonsLang
+        language else Language.Commons
       val url = ExtractorUtils.getFileURL(img._1, lang)
       quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mapProperty, url, img._2.sourceIri)
     }))
@@ -173,10 +172,12 @@ extends PageNodeExtractor
     // Encoding
     var encodedFileName = fileName
     if (encodedLinkRegex.findFirstIn(fileName).isEmpty)
-      encodedFileName = WikiUtil.wikiEncode(fileName)
+      encodedFileName = UriUtils.iriDecode(WikiUtil.wikiEncode(fileName))
 
-    val result = if(!context.nonFreeImages.contains(fileName)) Some((encodedFileName, node))
-    else None
+    val result = if(!context.nonFreeImages.contains(fileName))
+      Some((encodedFileName, node))
+    else
+      None
 
     // --------------- Special Images ---------------
       ImageExtractorConfig.flagRegex.findFirstIn(encodedFileName).foreach(_ => {

@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.util
 
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.util.text.uri.UriDecoder
 import java.util.Arrays
+
+import org.dbpedia.iri.UriDecoder
 
 /**
  * Contains several utility functions related to WikiText.
@@ -21,13 +22,47 @@ object WikiUtil
      * FIXME: There is no logic to our decoding / encoding of strings, URIs, etc. It's done 
      * in too many places. We must set a policy and use distinct classes, not generic strings.
      * 
-     * @param string string possibly using '_' instead of ' '
+     * @param name string possibly using '_' instead of ' '
      */
-    def cleanSpace(string: String): String =
+    def cleanSpace(name: String): String =
     {
-      // FIXME: removing these chars may avoid some errors, but also introduces others. 
+      // FIXME: removing these chars may avoid some errors, but also introduces others.
       // For example, the local name of the 'Project' namespace on fa wikipedia contains U+200C.
-      string.replaceChars("_\u00A0\u200E\u200F\u2028\u202A\u202B\u202C\u3000", "  ").replaceAll(" +", " ").trim
+      //name.replaceChars("_\u00A0\u200E\u200F\u2028\u202A\u202B\u202C\u3000", " ").replaceAll(" +", " ").trim
+
+      val replacementChar = ' '
+      val replacemanrMap: Map[Char, Char] = Map(
+        '_' -> replacementChar,
+        '\u00A0' -> replacementChar,
+        '\u200E' -> replacementChar,
+        '\u200F' -> replacementChar,
+        '\u2028' -> replacementChar,
+        '\u202A' -> replacementChar,
+        '\u202B' -> replacementChar,
+        '\u202C' -> replacementChar,
+        '\u3000' -> replacementChar
+      )
+        val sb = new StringBuilder()
+        val chars = name.toCharArray
+
+        var pos = 0
+        var l = replacementChar                         // since l is a ' ' any prefix underscores/whitespce will be ignored (replaceAll("^_+"))
+
+        while (pos < chars.length)
+        {
+          val c = chars(pos)
+          replacemanrMap.get(c) match{
+            case Some(r) =>
+              if(l != r)                // replaceAll(" +", " ")
+                sb.append(r)
+              l = r
+            case None =>
+              sb.append(c)
+              l = c
+          }
+          pos += 1
+        }
+        sb.toString().trim
     }
     
     /**

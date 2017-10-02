@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.nif;
 
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.dbpedia.extraction.util.UriUtils;
+import org.dbpedia.iri.UriUtils;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.NodeVisitor;
 
@@ -168,7 +168,7 @@ public class LinkExtractor implements NodeVisitor {
 			}
 		}
 
-		return UriUtils.uriToIri(uri);
+		return UriUtils.uriToDbpediaIri(uri).toString();
 	}
 	
 	public void tail(Node node, int depth) {

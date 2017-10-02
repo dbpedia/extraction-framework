@@ -1,13 +1,16 @@
 package org.dbpedia.extraction.mappings
 
-import java.net.{URI, URISyntaxException}
+import org.apache.jena.iri.IRIException
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, UriUtils}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.iri.UriUtils
+
 import scala.language.reflectiveCalls
+import scala.util.{Failure, Success}
 
 /**
  * Extracts links to the official homepage of an instance.
@@ -113,19 +116,16 @@ extends PageNodeExtractor
 
   private def generateStatement(subjectUri: String, url: String, node: Node): Seq[Quad] =
   {
-    try
-    {
-      for(link <- UriUtils.cleanLink(new URI(url)))
-      {
-        return Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceIri))
+    UriUtils.createIri(url) match{
+      case Success(u) => UriUtils.cleanLink(u) match{
+        case Some(c) => Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, c , node.sourceIri))
+        case None => Seq()
+      }
+      case Failure(f) => f match{
+        case _ : IRIException => Seq()  //   TODO: log
+        case _ => Seq()
       }
     }
-    catch
-    {
-      case _ : URISyntaxException => // TODO: log
-    }
-    
-    Seq.empty
   }
 
   private def extractUrlFromProperty(node: PropertyNode): Option[String] = {
@@ -146,13 +146,12 @@ extends PageNodeExtractor
     if (url.isEmpty) {
       None
     } else {
-      try {
         // UriUtils.encode fails if not scheme is provided
-        val urlWithScheme = if (UriUtils.hasKnownScheme(url)) url else ("http://" + url)
-        Some(new URI(urlWithScheme).toString)
-      } catch {
-        case _ : Exception => None
-      }
+        val urlWithScheme = if (UriUtils.hasKnownScheme(url))
+          url
+        else
+          ("http://" + url)
+        UriUtils.createIri(urlWithScheme).toOption.map(_.toString)
     }
   }
 

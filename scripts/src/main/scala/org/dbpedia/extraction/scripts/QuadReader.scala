@@ -3,7 +3,6 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.StringUtils.prettyMillis

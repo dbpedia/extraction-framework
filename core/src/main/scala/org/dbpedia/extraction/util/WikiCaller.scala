@@ -4,7 +4,7 @@ import java.io.{File,InputStream,FileInputStream,FileOutputStream,IOException}
 import java.net.{URL,HttpRetryException,HttpURLConnection}
 import java.net.HttpURLConnection.{HTTP_OK,HTTP_MOVED_PERM,HTTP_MOVED_TEMP}
 import scala.collection.{Map,Set}
-import org.dbpedia.util.text.uri.UriDecoder.decode
+import org.dbpedia.iri.UriDecoder.decode
 
 /**
  * @param file Target file. If file exists and overwrite is false, do not call url, 

@@ -157,7 +157,7 @@ class WikiApi(url: URL, language: Language)
             proc(
                 new WikiPage(
                     title           = WikiTitle.parse((page \ "@title").head.text, language),
-                    redirect        = null, // TODO: read redirect from XML
+                    redirect        = null, //WikiTitle.parse((page \ "redirect" \ "@title").text, language),
                     id              = (page \ "@pageid").head.text,
                     revision        = (rev \ "@revid").head.text,
                     timestamp       = (rev \ "@timestamp").head.text,

@@ -11,8 +11,11 @@ import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
+
 import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import org.dbpedia.iri.UriUtils
+
 import scala.language.reflectiveCalls
 
 /**

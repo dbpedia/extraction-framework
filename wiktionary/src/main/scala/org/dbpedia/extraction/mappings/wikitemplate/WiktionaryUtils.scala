@@ -4,8 +4,9 @@ import org.dbpedia.extraction.mappings.WiktionaryPageExtractor
 import org.dbpedia.extraction.mappings.wikitemplate.MyLinkNode._
 import org.dbpedia.extraction.mappings.wikitemplate.MyNode._
 import org.dbpedia.extraction.mappings.wikitemplate.MyNodeList._
-import org.dbpedia.extraction.util.{Language, UriUtils}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.iri.UriUtils
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer

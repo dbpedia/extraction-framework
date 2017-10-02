@@ -2,9 +2,9 @@ package org.dbpedia.extraction.wikiparser
 
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.{Language, WikiUtil}
+import org.dbpedia.iri.UriDecoder
 import org.dbpedia.util.text.ParseExceptionIgnorer
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
-import org.dbpedia.util.text.uri.UriDecoder
 
 /**
  * Represents a page title. Or a link to a page.

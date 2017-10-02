@@ -122,7 +122,7 @@ object StringUtils
     if (chars.isEmpty) {
       new Array[String](0)
     } else {
-      var max = chars.max(Ordering.Char)
+      val max = chars.max(Ordering.Char)
       if (max >= limit) throw new IllegalArgumentException("highest code point "+max.toInt+" exceeds limit "+limit)
       val replace = new Array[String](max + 1)
       var pos = 0

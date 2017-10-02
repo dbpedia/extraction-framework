@@ -3,10 +3,11 @@ package org.dbpedia.extraction.wikiparser
 import java.util.logging.Logger
 import java.net.{URI, URISyntaxException}
 
+import org.apache.jena.iri.IRIException
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.util.UriUtils
+import org.dbpedia.iri.UriUtils
 
-import scala.collection.mutable.ListBuffer
+import scala.util.{Failure, Success}
 
 /**
  * Utility functions for working with nodes.
@@ -76,7 +77,7 @@ object NodeUtil
             case "internal" => new InternalLinkNode(WikiTitle.parse(textNode.text, language), List(textNode), line)
             case "external" => try {
                 if (UriUtils.hasKnownScheme(textNode.text))
-                    new ExternalLinkNode(new URI(textNode.text), List(textNode), line)
+                    new ExternalLinkNode(UriUtils.createIri(textNode.text).get, List(textNode), line)
                 else
                     textNode
             } catch {
@@ -135,20 +136,20 @@ object NodeUtil
             case ExternalLinkNode(destinationURI, children, line, destinationNodes) =>
                 // In case of an external link node, transform the URI using the
                 // transform function and attempt to use the result as a URI.
-                try {
-                    currentNodes = new ExternalLinkNode(
-                        new URI(transformFunc(destinationURI.toString)),
-                        children, line, destinationNodes) :: currentNodes
-                } catch {
-                    // If the new URI doesn't make syntactical sense, produce
-                    // a warning and don't modify the original node.
-                    case e: URISyntaxException => {
-                        Logger.getLogger(NodeUtil.getClass.getName).warning(
-                            "(while processing template '" + inputTemplateNode.title.decodedWithNamespace + 
-                            "', property '" + inputNode.key + "')" +
-                            f" Adding prefix or suffix to '$child%s' caused an error, skipping: " + e.getMessage
-                        )
-                        currentNodes = child :: currentNodes
+                UriUtils.createIri(transformFunc(destinationURI.toString)) match{
+                    case Success(u) => currentNodes = ExternalLinkNode(u, children, line, destinationNodes) :: currentNodes
+                    case Failure(f) => f match{
+                        // If the new URI doesn't make syntactical sense, produce
+                        // a warning and don't modify the original node.
+                        case e: IRIException => {
+                            Logger.getLogger(NodeUtil.getClass.getName).warning(
+                                "(while processing template '" + inputTemplateNode.title.decodedWithNamespace +
+                                  "', property '" + inputNode.key + "')" +
+                                  f" Adding prefix or suffix to '$child%s' caused an error, skipping: " + e.getMessage
+                            )
+                            currentNodes = child :: currentNodes
+                        }
+                        case _ => throw f
                     }
                 }
             case _ => currentNodes = child :: currentNodes
