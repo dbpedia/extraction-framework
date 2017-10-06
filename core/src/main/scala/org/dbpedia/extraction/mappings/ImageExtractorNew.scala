@@ -139,7 +139,6 @@ class ImageExtractorNew(
 
   /**
     * Seaches for file names of images in the List of nodes.
-    *
     * @param nodes List of nodes that will be searched
     * @return List of filename and origin node
     */
@@ -194,10 +193,10 @@ class ImageExtractorNew(
 
     // --------------- Special Images ---------------
     val special = totallyNotSpecialImageRegex(encodedFileName)
-    if(special == "flag") flagImage += result
-    else if(special == "map") mapImage += result
-    else if(special == "coa") coatOfArmsImage += result
-    else if(special == "signature") signatureImage += result
+    if (special == "flag") flagImage += result
+    else if (special == "map") mapImage += result
+    else if (special == "coa") coatOfArmsImage += result
+    else if (special == "signature") signatureImage += result
     if (!mainImageFound) {
       // First Image will be defined as main Image
       mainImage = result
@@ -221,91 +220,65 @@ class ImageExtractorNew(
       var c = iterator.next()
       if (!imageFound) {
         //.svg,.jpe?g,.png
-        if (c.toLower == 'g') {
-          if (iterator.hasNext) {
+        if (c.toLower == 'g' && iterator.hasNext) {
+          c = iterator.next()
+          //.svg
+          if (c.toLower == 'v' && iterator.hasNext) {
             c = iterator.next()
-            //.svg
-            if (c.toLower == 'v') {
-              if (iterator.hasNext) {
-                c = iterator.next()
-                if (c.toLower == 's') {
-                  if (iterator.hasNext) {
-                    c = iterator.next()
-                    if (c.toLower == '.') {
-                      sb.append("gvs.")
-                      imageFound = true
-                    }
-                  }
-                }
+            if (c.toLower == 's' && iterator.hasNext) {
+              c = iterator.next()
+              if (c.toLower == '.') {
+                sb.append("gvs.")
+                imageFound = true
               }
             }
-            //.png
-            else if (c.toLower == 'n') {
-              if (iterator.hasNext) {
-                c = iterator.next()
-                if (c.toLower == 'p') {
-                  if (iterator.hasNext) {
-                    c = iterator.next()
-                    if (c.toLower == '.') {
-                      sb.append("gnp.")
-                      imageFound = true
-                    }
-                  }
-                }
+          }
+          //.png
+          else if (c.toLower == 'n' && iterator.hasNext) {
+            c = iterator.next()
+            if (c.toLower == 'p' && iterator.hasNext) {
+              c = iterator.next()
+              if (c.toLower == '.') {
+                sb.append("gnp.")
+                imageFound = true
               }
             }
-            //.jpeg
-            else if (c.toLower == 'e') {
-              if (iterator.hasNext) {
+          }
+          //.jpeg
+          else if (c.toLower == 'e' && iterator.hasNext) {
+            c = iterator.next()
+            if (c.toLower == 'p' && iterator.hasNext) {
+              c = iterator.next()
+              if (c.toLower == 'j' && iterator.hasNext) {
                 c = iterator.next()
-                if (c.toLower == 'p') {
-                  if (iterator.hasNext) {
-                    c = iterator.next()
-                    if (c.toLower == 'j') {
-                      if (iterator.hasNext) {
-                        c = iterator.next()
-                        if (c.toLower == '.') {
-                          sb.append("gepj.")
-                          imageFound = true
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            //.jpg
-            else if (c.toLower == 'p') {
-              if (iterator.hasNext) {
-                c = iterator.next()
-                if (c.toLower == 'j') {
-                  if (iterator.hasNext) {
-                    c = iterator.next()
-                    if (c.toLower == '.') {
-                      sb.append("gpj.")
-                      imageFound = true
-                    }
-                  }
+                if (c.toLower == '.') {
+                  sb.append("gepj.")
+                  imageFound = true
                 }
               }
             }
           }
-          //.gif
-        } else if (c.toLower == 'f') {
-          if (iterator.hasNext) {
+          //.jpg
+          else if (c.toLower == 'p' && iterator.hasNext) {
             c = iterator.next()
-            if (c.toLower == 'i') {
-              if (iterator.hasNext) {
-                c = iterator.next()
-                if (c.toLower == 'g') {
-                  if (iterator.hasNext) {
-                    c = iterator.next()
-                    if (c.toLower == '.') {
-                      sb.append("fig.")
-                      imageFound = true
-                    }
-                  }
-                }
+            if (c.toLower == 'j' && iterator.hasNext) {
+              c = iterator.next()
+              if (c.toLower == '.') {
+                sb.append("gpj.")
+                imageFound = true
+              }
+            }
+          }
+          //.gif
+        } else if (c.toLower == 'f' && iterator.hasNext) {
+          c = iterator.next()
+          if (c.toLower == 'i' && iterator.hasNext) {
+            c = iterator.next()
+            if (c.toLower == 'g' && iterator.hasNext) {
+              c = iterator.next()
+              if (c.toLower == '.') {
+                sb.append("fig.")
+                imageFound = true
               }
             }
           }
@@ -321,9 +294,8 @@ class ImageExtractorNew(
           images += sb.reverse.toString()
           sb.clear()
         }
-      // String ends => file name does too
+        // String ends => file name does too
       } else {
-
         sb.append(c)
         imageFound = false
         images += sb.reverse.toString()
@@ -335,6 +307,7 @@ class ImageExtractorNew(
 
   /**
     * We needed a faster way of checking a link for key words, than regex.
+    *
     * @param link link to search in
     * @return
     */
@@ -506,7 +479,7 @@ class ImageExtractorNew(
         }
       }
       // toggles a new word, so we don't get occurrences where the keyword is contained in another word.
-      firstChar = if(c == " " || c == "_")  true else false
+      firstChar = if (c == " " || c == "_") true else false
     }
     returnString
   }
