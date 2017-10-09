@@ -94,7 +94,7 @@ object TemplateTransformConfig {
   private def extractChildren(filter: PropertyNode => Boolean, split : Boolean = true)(node: TemplateNode, lang:Language) : List[Node] = {
     // We have to reverse because flatMap prepends to the final list
     // while we want to keep the original order
-    val children : List[Node] = node.children.filter(filter).flatMap(_.children)
+    val children : List[Node] = node.children.filter(filter)
 
     val splitChildren = new ArrayBuffer[Node]()
     val splitTxt = if (split) "<br />" else " "
@@ -106,25 +106,30 @@ object TemplateTransformConfig {
     if (split && splitChildren.nonEmpty) {
       splitChildren += TextNode(splitTxt, 0)
     }
-    splitChildren.toList
-
+    splitChildren.map(x => {
+      if(x.children.nonEmpty)
+        x.children.head
+      else
+        x
+    }).toList
   }
 
   private def extractAndReplace(filter: PropertyNode => Boolean, replace: String = null)(node: TemplateNode, lang:Language) : List[Node] = {
     val children = extractChildren(filter, replace == null)(node, lang)
-    if(replace != null)
+    if(replace != null) {
       //in this case we replace the position variables of a given replace-string with the children of the same number
       //also we frame the results in line breaks to create multiple triples
       textNode("<br />")(node, lang) :::
-      textNode(textNodeParamsRegex.replaceAllIn(replace, x => {
-        val ind = x.group(1).toInt-1
-        if(children.size > ind)
+        textNode(textNodeParamsRegex.replaceAllIn(replace, x => {
+          val ind = x.group(1).toInt - 1
+          if (children.size > ind)
           // prefix  +  main replacement         +  postfix
-          x.group(2) + children(ind).toPlainText + x.group(3)
-        else
-          ""
-      }))(node, lang) :::
-      textNode("<br />")(node, lang)
+            x.group(2) + children(ind).toPlainText + x.group(3)
+          else
+            ""
+        }))(node, lang) :::
+        textNode("<br />")(node, lang)
+    }
     else
       children
   }

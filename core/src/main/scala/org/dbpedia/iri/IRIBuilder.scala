@@ -38,7 +38,7 @@ object IRIBuilder{
   ))
   val ip4 = new AtomicIRISection("ip4", IriCharacters.L_DIGIT, IriCharacters.H_DIGIT, ".", "", 4, 4, false, { digits =>
     if(digits.count(x => x.length > 0 && x.length <= 3 && (if (x.length == 3 && x.head.toInt > 2) false else true)) != 4)
-      throw new Exception("")
+      throw new IRISyntaxException("Not a valid IP4 host address!")
     digits
   })
   val port = new AtomicIRISection("port", IriCharacters.L_DIGIT, IriCharacters.H_DIGIT, "", "", 0, 1)
@@ -133,9 +133,9 @@ class AtomicIRISection (
     else
       List()
     if(res.size > maxOcc)
-      throw new Exception("Too many occurrences of section found: " + res.size)
+      throw new IRISyntaxException("Too many occurrences of section found: " + res.size)
     if(res.size < minOcc)
-      throw new Exception("Too few occurrences of section found: " + res.size)
+      throw new IRISyntaxException("Too few occurrences of section found: " + res.size)
     postCondition(res)
   }
 
@@ -200,11 +200,11 @@ class SectionDeliniator(val name: String, val del: String) extends IRISection{
 
   override def traverse(iri: String, position: Int): List[String] = {
     if(iri == null)
-      throw new Exception("Deliminator was not found: " + del)
+      throw new IRISyntaxException("Deliminator was not found: " + del)
     for(i <- 0 until del.length){
       val chr = iri.charAt(position + i)
       if(del.charAt(i) != chr)
-        throw new Exception("Deliminator was not found: " + del)
+        throw new IRISyntaxException("Deliminator was not found: " + del)
     }
     List(del)
   }
@@ -247,9 +247,9 @@ class ComplexSeqIRISection(val name: String, val sections: List[IRISection], val
     else
       List()
     if(res.size > maxOcc)
-      throw new Exception("Too many occurrences of section found: " + res.size)
+      throw new IRISyntaxException("Too many occurrences of section found: " + res.size)
     if(res.size < minOcc)
-      throw new Exception("Too few occurrences of section found: " + res.size)
+      throw new IRISyntaxException("Too few occurrences of section found: " + res.size)
     res
   }
 
@@ -283,9 +283,9 @@ class ComplexAltIRISection(val name: String, val sections: List[IRISection], val
   override def traverse(iri: String, position: Int): List[String] = {
     val res = internalTraverse(iri, position)
     if(res.size > maxOcc)
-      throw new Exception("Too many occurrences of section found: " + res.size)
+      throw new IRISyntaxException("Too many occurrences of section found: " + res.size)
     if(res.size < minOcc)
-      throw new Exception("Too few occurrences of section found: " + res.size)
+      throw new IRISyntaxException("Too few occurrences of section found: " + res.size)
     res
   }
 

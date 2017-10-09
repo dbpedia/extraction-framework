@@ -24,7 +24,7 @@ class RichWebResource(targetString: String)  extends FileLike[IRI] {
     */
   override def name: String = uri.getPath
 
-  override def resolve(name: String): Try[IRI] = Try{new IRI(uri.resolve(name))}
+  override def resolve(name: String): Try[IRI] = Try{IRI.create(uri.resolve(name)).getOrElse(throw new Exception("IRI validation failed for: " + uri.resolve(name)))}
 
   override def names: List[String] = List()
 

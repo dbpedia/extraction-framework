@@ -64,8 +64,20 @@ class Config(val configPath: String) extends
    */
   lazy val dumpDir: File = getValue(this, "base-dir", required = true){ x => new File(x)}
 
+  /**
+    * Number of parallel processes allowed. Depends on the number of cores, type of disk and IO speed
+    */
   lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "4").trim.toInt
 
+  /**
+    * Normally extraction jobs are run sequentially (one language after the other), but for some jobs it makes sense to run these in parallel.
+    * This only should be used if a single extraction job does not take up the available computing power.
+    */
+  val runJobsInParallel: Boolean = this.getProperty("run-jobs-in-parallel", "false").trim.toBoolean
+
+  /**
+    * The version string of the DBpedia version being extracted
+    */
   lazy val dbPediaVersion: String = parseVersionString(getString(this, "dbpedia-version").trim) match{
     case Success(s) => s
     case Failure(e) => throw new IllegalArgumentException("dbpedia-version option in universal.properties was not defined or in a wrong format", e)
@@ -84,7 +96,7 @@ class Config(val configPath: String) extends
     case None => None
   }
 
-  def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null, datasets : ListBuffer[Dataset] = null, monitor : ExtractionMonitor[T] = null): ExtractionRecorder[T] ={
+  def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null, datasets : ListBuffer[Dataset] = null, monitor : ExtractionMonitor = null): ExtractionRecorder[T] ={
     val w = if(writer != null) writer
       else openLogFile(lang.wikiCode) match{
         case Some(s) => new OutputStreamWriter(s)

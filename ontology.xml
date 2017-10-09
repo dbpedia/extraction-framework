@@ -15134,16 +15134,17 @@ rdfs:subClassOf = Event
 {{label|en|external ornament}}
 | rdfs:domain = Person
 | rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:ExtinctionDate</title><ns>202</ns><id>857</id><revision><id>48614</id><timestamp>2015-08-06T12:23:12Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:ExtinctionDate</title><ns>202</ns><id>857</id><revision><id>52305</id><timestamp>2017-10-09T12:29:41Z</timestamp><text>{{DatatypeProperty
 | labels =
 {{label|en|extinction date}}
 {{label|nl|ontbindingsdatum}}
-| rdfs:comment@en = Date when an Organization (eg PoliticalParty, Company) or Species ceased to exist
+| rdfs:comment@en = !!! Do NOT use this property for non Species related dates!!! - Date when an Organization (eg PoliticalParty, Company) or Species ceased to exist
 | rdfs:range = xsd:date
-}}</text></revision></page><page><title>OntologyProperty:ExtinctionYear</title><ns>202</ns><id>858</id><revision><id>46624</id><timestamp>2015-03-20T08:22:26Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:ExtinctionYear</title><ns>202</ns><id>858</id><revision><id>52306</id><timestamp>2017-10-09T12:30:38Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = extinction year
 | rdfs:domain = Species
 | rdfs:range = xsd:gYear
+| rdfs:comment@en = !!! Do NOT use this property for non Species related dates!!! - Year this species went extinct.
 }}</text></revision></page><page><title>OntologyProperty:EyeColor</title><ns>202</ns><id>3292</id><revision><id>50340</id><timestamp>2016-02-12T20:50:22Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = eye color
 | rdfs:label@el = χρώμα ματιού
@@ -19315,7 +19316,7 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 | rdfs:label@el = μέγιστη θερμοκρασία
 | rdfs:domain = Planet
 | rdfs:range = Temperature
-}}</text></revision></page><page><title>OntologyProperty:Mayor</title><ns>202</ns><id>1116</id><revision><id>36272</id><timestamp>2014-07-08T14:02:10Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Mayor</title><ns>202</ns><id>1116</id><revision><id>52308</id><timestamp>2017-10-09T12:55:27Z</timestamp><text>
 {{ObjectProperty
 | labels =
 	{{label|en|mayor}}
@@ -19325,6 +19326,7 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 	{{label|fr|maire}}
 | rdfs:range = Mayor
 | rdfs:subPropertyOf = dul:coparticipatesWith
+| rdfs:subPropertyOf = Leader
 }}</text></revision></page><page><title>OntologyProperty:MayorArticle</title><ns>202</ns><id>7156</id><revision><id>25697</id><timestamp>2013-05-26T16:39:32Z</timestamp><text>{{DatatypeProperty
 | labels =
 {{label|en|mayor article}}
@@ -22061,11 +22063,10 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 {{label|de|Fraktion}}
 | rdfs:domain = Person
 | rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:Part</title><ns>202</ns><id>1259</id><revision><id>36379</id><timestamp>2014-07-08T14:09:13Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Part</title><ns>202</ns><id>1259</id><revision><id>52307</id><timestamp>2017-10-09T12:48:28Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = part
 | rdfs:label@de = Teil
-| rdfs:range = Place
 | rdfs:subPropertyOf = dul:hasPart
 }}</text></revision></page><page><title>OntologyProperty:PartialFailedLaunches</title><ns>202</ns><id>1260</id><revision><id>10411</id><timestamp>2010-11-10T14:45:25Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = partial failed launches
@@ -22611,6 +22612,15 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 {{label|en|political seats}}
 | rdfs:domain = Settlement
 | rdfs:range = xsd:nonNegativeInteger
+}}</text></revision></page><page><title>OntologyProperty:Politician</title><ns>202</ns><id>11911</id><revision><id>52312</id><timestamp>2017-10-09T13:53:04Z</timestamp><text>{{ObjectProperty
+| labels =
+	{{label|en|politician}}
+	{{label|de|Politiker}}
+| comments =
+	{{comment|en|The politician exercising this function.}}
+	{{comment|de|Der Politiker welcher dieses Amt hält (hielt).}}
+| rdfs:domain = PoliticalFunction
+| rdfs:range = Politician
 }}</text></revision></page><page><title>OntologyProperty:PopularVote</title><ns>202</ns><id>2507</id><revision><id>34097</id><timestamp>2014-04-04T16:28:59Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = Number of votes given to candidate
 | rdfs:label@de = Anzahl der Stimmen für Kandidaten

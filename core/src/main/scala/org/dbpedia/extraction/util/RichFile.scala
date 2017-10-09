@@ -73,9 +73,10 @@ class RichFile(file: File) extends FileLike[File] {
    */
   def relativize(child: File): String = {
     // Note: toURI encodes file paths, getPath decodes them
-    var path = UriUtils.relativize(new URI(file.toURI), new URI(child.toURI)).getPath
-    if (path endsWith "/") path = path.substring(0, path.length() - 1)
-    return path
+    var path = UriUtils.relativize(URI.create(file.toURI).get, URI.create(child.toURI).get).getPath
+    if (path endsWith "/")
+      path = path.substring(0, path.length() - 1)
+    path
   }
 
   /**

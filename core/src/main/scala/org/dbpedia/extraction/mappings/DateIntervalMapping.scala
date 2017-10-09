@@ -99,7 +99,7 @@ extends PropertyMapping
       }
 
       //Write start date quad
-      val quad1 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceIri)
+      val quad1 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, startDateOntologyProperty, startDate.value.toString, propertyNode.sourceIri)
 
       //Writing the end date is optional if "until present" is specified
       for(endDate <- endDateOpt)
@@ -112,7 +112,7 @@ extends PropertyMapping
         }
 
         //Write end year quad
-        val quad2 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceIri)
+        val quad2 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, endDateOntologyProperty, endDate.value.toString, propertyNode.sourceIri)
 
         return Seq(quad1, quad2)
       }

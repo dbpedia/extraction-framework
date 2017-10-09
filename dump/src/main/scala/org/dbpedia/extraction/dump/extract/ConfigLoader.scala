@@ -19,6 +19,7 @@ import org.dbpedia.extraction.wikiparser._
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
+import scala.reflect._
 
 /**
  * Loads the dump extraction configuration.
@@ -34,22 +35,27 @@ class ConfigLoader(config: Config)
 
   private val extractionJobs = new ConcurrentHashMap[Language, ExtractionJob]().asScala
 
-  private val extractionRecorder = new mutable.HashMap[Language, ExtractionRecorder[WikiPage]]()
+  private val extractionRecorder = new mutable.HashMap[ClassTag[_], mutable.HashMap[Language, ExtractionRecorder[_]]]()
 
   //these lists are used when the ImageExtractor is amongst the selected Extractors
   private val nonFreeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
   private val freeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
 
-  private val extractionMonitor = new ExtractionMonitor[WikiPage]()
+  private val extractionMonitor = new ExtractionMonitor()
 
-  def getExtractionRecorder(lang: Language, dataset : Dataset = null): org.dbpedia.extraction.util.ExtractionRecorder[WikiPage] = {
-    extractionRecorder.get(lang) match {
+  def getExtractionRecorder[T: ClassTag](lang: Language, dataset : Dataset = null): org.dbpedia.extraction.util.ExtractionRecorder[T] = {
+    extractionRecorder.get(classTag[T]) match{
+      case Some(s) => s.get(lang) match {
+        case None =>
+          s(lang) = config.getDefaultExtractionRecorder[T](lang, 2000, null, null,  ListBuffer(dataset), extractionMonitor)
+          s(lang).asInstanceOf[ExtractionRecorder[T]]
+        case Some(er) =>
+          if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
+          er.asInstanceOf[ExtractionRecorder[T]]
+      }
       case None =>
-        extractionRecorder(lang) = config.getDefaultExtractionRecorder(lang, 2000, null, null,  ListBuffer(dataset), extractionMonitor)
-        extractionRecorder(lang)
-      case Some(er) =>
-        if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
-        er
+        extractionRecorder(classTag[T]) = new mutable.HashMap[Language, ExtractionRecorder[_]]()
+        getExtractionRecorder[T](lang, dataset)
     }
   }
 
@@ -70,6 +76,8 @@ class ConfigLoader(config: Config)
       def commonsSource: Source = _commonsSource
 
       def language: Language = input._1
+
+      def recorder[_]: ExtractionRecorder[_] = getExtractionRecorder(input._1)
 
       private lazy val _mappingPageSource =
       {

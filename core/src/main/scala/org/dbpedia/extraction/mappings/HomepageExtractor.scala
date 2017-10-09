@@ -7,7 +7,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.iri.UriUtils
+import org.dbpedia.iri.{IRISyntaxException, UriUtils}
 
 import scala.language.reflectiveCalls
 import scala.util.{Failure, Success}
@@ -122,7 +122,7 @@ extends PageNodeExtractor
         case None => Seq()
       }
       case Failure(f) => f match{
-        case _ : IRIException => Seq()  //   TODO: log
+        case _ : IRISyntaxException => Seq()  //   TODO: log
         case _ => Seq()
       }
     }

@@ -8,7 +8,6 @@ import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.ontology._
-import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty,OntologyClass,OntologyProperty,DBpediaNamespace}
 import scala.collection.mutable.ArrayBuffer
@@ -66,7 +65,7 @@ extends PropertyMapping
     }
 
     if(language == null) language = context.language
-    val languageResourceNamespace = language.resourceUri.namespace
+    val languageResourceNamespace: String = language.resourceUri.namespace
 
     ontologyProperty match
     {

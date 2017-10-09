@@ -15,16 +15,16 @@ import scala.collection.mutable.ListBuffer
 import sys.process._
 import scala.util.Try
 
-class ExtractionMonitor[T] {
-  private val stats : mutable.HashMap[ExtractionRecorder[T], mutable.HashMap[String, Int]] = mutable.HashMap()
-  private val errors : mutable.HashMap[ExtractionRecorder[T], ListBuffer[Throwable]] = mutable.HashMap()
+class ExtractionMonitor {
+  private val stats : mutable.HashMap[ExtractionRecorder[_], mutable.HashMap[String, Int]] = mutable.HashMap()
+  private val errors : mutable.HashMap[ExtractionRecorder[_], ListBuffer[Throwable]] = mutable.HashMap()
 
   private var compareVersions = false
   private var old_version_URL : String = _
   private val tripleProperty = "http://rdfs.org/ns/void#triples"
   private var expectedChanges = Array(-1.0, 8.0)
   private val ignorableExceptionsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("ignorableExceptions.json"))
-  private val ignorableExceptions : mutable.HashMap[ExtractionRecorder[T], List[String]] = mutable.HashMap()
+  private val ignorableExceptions : mutable.HashMap[ExtractionRecorder[_], List[String]] = mutable.HashMap()
   private var summarizeExceptions : Boolean = false
 
   this.loadConf()
@@ -54,7 +54,7 @@ class ExtractionMonitor[T] {
     * Initializes the Extraction Monitor for a specific ExtractionRecorder
     * @param er ExtractionRecorder
     */
-  def init(er : ExtractionRecorder[T]): Unit ={
+  def init(er : ExtractionRecorder[_]): Unit ={
     val new_map = mutable.HashMap[String, Int]()
 
     new_map.put("ERROR", 0)
@@ -75,7 +75,7 @@ class ExtractionMonitor[T] {
     ignorableExceptions.put(er, exceptions.toList)
   }
 
-  def init(er_list: List[ExtractionRecorder[T]]): Unit ={
+  def init(er_list: List[ExtractionRecorder[_]]): Unit ={
     er_list.foreach(init)
   }
 
@@ -84,7 +84,7 @@ class ExtractionMonitor[T] {
     * @param er ExtractionRecorder
     * @param ex Exception
     */
-  def reportCrash(er : ExtractionRecorder[T], ex : Throwable): Unit ={
+  def reportCrash(er : ExtractionRecorder[_], ex : Throwable): Unit ={
     stats(er).put("CRASHED", 1)
     errors(er) += ex
   }
@@ -94,7 +94,7 @@ class ExtractionMonitor[T] {
     * @param er ExtractionRecorder
     * @param ex Exception
     */
-  def reportError(er : ExtractionRecorder[T], ex : Throwable): Unit = {
+  def reportError(er : ExtractionRecorder[_], ex : Throwable): Unit = {
     var ignorable = false
     if(ignorableExceptions(er).contains(ex.getClass.getName.split("\\.").last)) ignorable = true
     if(!ignorable) {
@@ -109,7 +109,7 @@ class ExtractionMonitor[T] {
     * @param datasets List of Datasets that will be compared by DatasetID
     * @return Summary-Report
     */
-  def summarize(er : ExtractionRecorder[T], datasets : ListBuffer[Dataset] = ListBuffer()): mutable.HashMap[String, Object] ={
+  def summarize(er : ExtractionRecorder[_], datasets : ListBuffer[Dataset] = ListBuffer()): mutable.HashMap[String, Object] ={
     // Get the monitor stats for this ER
     val crashed = if(stats(er).getOrElse("CRASHED", 0) == 1) "yes" else "no"
     val error = stats(er).getOrElse("ERROR", 0)
@@ -149,7 +149,7 @@ class ExtractionMonitor[T] {
   /**
     * Reads two RDF files and compares the triple-count-values.
     */
-  def compareTripleCount(dataIDfile : String, extractionRecorder: ExtractionRecorder[T], datasets : ListBuffer[Dataset]): String ={
+  def compareTripleCount(dataIDfile : String, extractionRecorder: ExtractionRecorder[_], datasets : ListBuffer[Dataset]): String ={
 
     var resultString = ""
 

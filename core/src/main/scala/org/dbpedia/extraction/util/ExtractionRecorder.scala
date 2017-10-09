@@ -27,7 +27,7 @@ class ExtractionRecorder[T](
                              val slackCredantials: SlackCredentials = null,
                              val datasets: ListBuffer[Dataset] = ListBuffer[Dataset](),
                              val language: Language = Language.English,
-                             val monitor: ExtractionMonitor[T] = null
+                             val monitor: ExtractionMonitor = null
    ) {
 
   def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
@@ -142,7 +142,7 @@ class ExtractionRecorder[T](
           }
         case _  =>
           val msg = Option(record.errorMsg) match{
-            case Some(m) => m
+            case Some(m) => printLabeledLine(m, record.severity, record.language)
             case None =>
               if(record.error != null) failedRecord(null, record.page, record.error, record.language)
               else recordGenericPage(record.language, record.page.toString)
@@ -306,6 +306,7 @@ class ExtractionRecorder[T](
     this.startTime.set(System.currentTimeMillis)
     this.defaultLang = lang
     this.task = task
+    this.datasets ++= datasets
 
     if(monitor != null)
       monitor.init(this)

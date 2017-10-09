@@ -7,16 +7,15 @@ import java.util.logging.{Level, Logger}
 import org.apache.jena.iri.impl.IRIFactoryImpl
 import org.apache.jena.iri.{IRIFactory, Violation}
 
+import scala.util.{Failure, Success, Try}
+
 /**
   * Created by chile on 30.09.17.
   * Overrides all functions using AbsIRIImpl.getCooked which is not implemented and returns the raw results instead
   */
-class IRI(iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri.IRI{
+class IRI private[iri](iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri.IRI{
 
   private val logger = Logger.getLogger(getClass.getName)
-
-  def this(iriString: String) = this(IRI.iriFactory.construct(iriString))
-  def this(uri: URI) = this(IRI.iriFactory.construct(uri))
 
   /**
     * Tells whether or not this URI is opaque.
@@ -96,7 +95,7 @@ class IRI(iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri.IRI{
       return false
     val other = o match {
       case iri1: IRI => iri1
-      case _ => throw new Exception("Expected an IRI for comparison, but was provided with: " + o.getClass.getName)
+      case _ => throw new RuntimeException("Expected an IRI for comparison, but was provided with: " + o.getClass.getName)
     }
     if(other.getScheme != this.getScheme)
       return false
@@ -170,4 +169,27 @@ object IRI{
   protected val iriFactory: IRIFactory = new IRIFactory()
   IRIFactory.setIriImplementation(iriFactory)
   iriFactory.allowUnwiseCharacters()
+
+  def create(iriString: String): Try[IRI] = prePublischValidation(new IRI(IRI.iriFactory.construct(iriString)))
+  def create(uri: URI): Try[IRI] = prePublischValidation(new IRI(IRI.iriFactory.construct(uri)))
+  def create(iri: org.apache.jena.iri.IRI): Try[IRI] = prePublischValidation(new IRI(iri))
+  def createReference(iriString: String): Try[IRI] = prePublischValidation(new IRI(IRI.iriFactory.construct(iriString)), allowPathOnly = true)
+  def createReference(uri: URI): Try[IRI] = prePublischValidation(new IRI(IRI.iriFactory.construct(uri)), allowPathOnly = true)
+  def createReference(iri: org.apache.jena.iri.IRI): Try[IRI] = prePublischValidation(new IRI(iri), allowPathOnly = true)
+
+  def prePublischValidation(iri: IRI, allowPathOnly: Boolean = false): Try[IRI] = {
+
+    if(allowPathOnly){
+      if(iri.getScheme == null && iri.getHost == null)
+        if(iri.getPath != null)
+          return Success(iri)
+    }
+
+    if(iri.getScheme != null && iri.getHost != null)
+      return Success(iri)
+
+    Failure(new IRISyntaxException("IRI validation failed for: " + iri.toString))
+  }
 }
+
+class IRISyntaxException(msg: String, tb: Throwable = null) extends Exception(msg, tb)

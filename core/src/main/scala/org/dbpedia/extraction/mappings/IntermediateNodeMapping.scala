@@ -1,12 +1,10 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.Logger
-
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
+import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode, WikiPage}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{ExtractionRecorder, Language, RecordEntry, RecordSeverity}
 
 import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
@@ -20,13 +18,12 @@ class IntermediateNodeMapping (
   val mappings : List[PropertyMapping], // must be public val for statistics
   context : {
     def ontology : Ontology
-    def language : Language 
+    def language : Language
+    def recorder : ExtractionRecorder[TemplateNode]
   }
 )
 extends PropertyMapping
 {
-  private val logger = Logger.getLogger(classOf[IntermediateNodeMapping].getName)
-
   private val splitRegex = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(context.language.wikiCode))
                              DataParserConfig.splitPropertyNodeRegexInfobox(context.language.wikiCode)
                            else DataParserConfig.splitPropertyNodeRegexInfobox("en")
@@ -48,24 +45,10 @@ extends PropertyMapping
     //more than one template proerty is affected (e.g. leader_name, leader_title)
     if(affectedTemplatePropertyNodes.size > 1)
     {
-      //require their values to be all singles
       if(valueNodes.forall(_.size <= 1))
-      {
-        createInstance(graph, node, subjectUri)
-      }
-      else
-      {
-        // TODO muliple properties having multiple values
-        // happens about 7000 times in the extraction of about 15 languages.
-        /**
-         * fictive example:
-         * leader_name = Bill_Gates<br>Steve_Jobs
-         * leader_title = Microsoft dictator<br>Apple evangelist
-         */
-        // TODO: better logging. include page name, template name and maybe even values in log message.
-        // But first, improve the logging configuration. Most log output should not go to stdout/stderr. 
-        // logger.warning("IntermediateNodeMapping for muliple properties having multiple values not implemented!")
-      }
+        context.recorder.record(new RecordEntry[TemplateNode](node, node.title.encoded, RecordSeverity.Info, context.language, "IntermediateNodeMapping for multiple properties have multiple values in: " + subjectUri))
+
+      createInstance(graph, node, subjectUri)
     }
     //one template property is affected (e.g. engine)
     else if(affectedTemplatePropertyNodes.size == 1)

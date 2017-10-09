@@ -5,7 +5,7 @@ import java.net.{URI, URISyntaxException}
 
 import org.apache.jena.iri.IRIException
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.iri.UriUtils
+import org.dbpedia.iri.{IRISyntaxException, UriUtils}
 
 import scala.util.{Failure, Success}
 
@@ -148,7 +148,7 @@ object NodeUtil
                     case Failure(f) => f match{
                         // If the new URI doesn't make syntactical sense, produce
                         // a warning and don't modify the original node.
-                        case e: IRIException => {
+                        case e: IRISyntaxException => {
                             Logger.getLogger(NodeUtil.getClass.getName).warning(
                                 "(while processing template '" + inputTemplateNode.title.decodedWithNamespace +
                                   "', property '" + inputNode.key + "')" +

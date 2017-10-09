@@ -3,15 +3,21 @@ package org.dbpedia.extraction.server
 import java.io.File
 import java.util.logging.{Level, Logger}
 
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{Source, WikiSource, XMLSource}
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
 import org.dbpedia.extraction.wikiparser._
 
+import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
+import scala.reflect.ClassTag
 import scala.xml.Elem
+
+import scala.reflect._
 
 /**
  * Base class for extraction managers.
@@ -195,7 +201,23 @@ abstract class ExtractionManager(
     {
         CompositeParseExtractor.load(classes,self.getExtractionContext(lang))
     }
-
+  private val extractionRecorder = new mutable.HashMap[ClassTag[_], mutable.HashMap[Language, ExtractionRecorder[_]]]()
+  def getExtractionRecorder[T: ClassTag](lang: Language, dataset : Dataset = null): org.dbpedia.extraction.util.ExtractionRecorder[T] = {
+    extractionRecorder.get(classTag[T]) match{
+      case Some(s) => s.get(lang) match {
+        case None =>
+          s(lang) = new ExtractionRecorder[T](null, 2000, null, null, if(dataset != null) ListBuffer(dataset) else ListBuffer())
+          s(lang).initialize(lang)
+          s(lang).asInstanceOf[ExtractionRecorder[T]]
+        case Some(er) =>
+          if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
+          er.asInstanceOf[ExtractionRecorder[T]]
+      }
+      case None =>
+        extractionRecorder(classTag[T]) = new mutable.HashMap[Language, ExtractionRecorder[_]]()
+        getExtractionRecorder[T](lang, dataset)
+    }
+  }
   /**
     * Build the context for all extractors involved
     * including the config itself
@@ -211,6 +233,7 @@ abstract class ExtractionManager(
             val configFile: ServerConfiguration = Server.config
             val nonFreeImages = Seq()
             val freeImages = Seq()
+            def recorder: ExtractionRecorder[_] = getExtractionRecorder(lang)
       }
     }
 
@@ -227,6 +250,10 @@ abstract class ExtractionManager(
           val redirects: Redirects = new Redirects(Map())
           val mappingPageSource: Traversable[WikiPage] = self.mappingPageSource(lang)
           val disambiguations: Disambiguations = self.disambiguations
+          val configFile: ServerConfiguration = Server.config
+          val nonFreeImages = Seq()
+          val freeImages = Seq()
+          def recorder: ExtractionRecorder[_] = getExtractionRecorder(lang)
         }
 
         MappingsLoader.load(context)

@@ -240,7 +240,7 @@ object UriPolicy {
   }
 
   def toUri(iri: String) : IRI = {
-    toUri(new IRI(iri))
+    toUri(IRI.create(iri).getOrElse(throw new Exception("Iri validation failed for:" + iri)))
   }
 
   def toUri(iri: IRI) : IRI = {
@@ -265,13 +265,13 @@ object UriPolicy {
         }
         host = IDN.toASCII(host)
 
-        new IRI(uri(iri.getScheme, user, host, port, iri.getPath, iri.getQuery, iri.getFragment).toASCIIString)
+        IRI.create(uri(iri.getScheme, user, host, port, iri.getPath, iri.getQuery, iri.getFragment).toASCIIString).get
       } catch {
-        case _: NumberFormatException | _: IllegalArgumentException => new IRI(iri.toASCIIString)
+        case _: NumberFormatException | _: IllegalArgumentException => IRI.create(iri.toASCIIString).get
       }
 
     } else {
-      new IRI(iri.toASCIIString)
+      IRI.create(iri.toASCIIString).get
     }
   }
 
@@ -393,7 +393,7 @@ object UriPolicy {
     }
 
     // We can't use the string as an XML name.
-    return tail+'_'
+    tail+'_'
   }
 
   private def uri(scheme: String, user: String, host: String, port: Int, path: String, query: String, frag: String): IRI = {
@@ -403,17 +403,17 @@ object UriPolicy {
     if (scheme != null) sb append scheme append ':'
 
     if (host != null) {
-      sb.append("//");
-      if (user != null) sb.append(user).append('@');
-      sb.append(host);
-      if (port != -1) sb.append(':').append(port);
+      sb.append("//")
+      if (user != null) sb.append(user).append('@')
+      sb.append(host)
+      if (port != -1) sb.append(':').append(port)
     }
 
-    if (path != null) sb.append(path);
-    if (query != null) sb.append('?').append(query);
-    if (frag != null) sb.append('#').append(frag);
+    if (path != null) sb.append(path)
+    if (query != null) sb.append('?').append(query)
+    if (frag != null) sb.append('#').append(frag)
 
-    new IRI(sb.toString)
+    IRI.create(sb.toString).get
   }
 
 }

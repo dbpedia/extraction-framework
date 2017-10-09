@@ -7,7 +7,7 @@ import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Redirect
-import org.dbpedia.iri.UriUtils
+import org.dbpedia.iri.{IRISyntaxException, UriUtils}
 
 import scala.util.{Failure, Success}
 import scala.util.matching.Regex
@@ -427,7 +427,7 @@ object SimpleWikiParser
                 case Success(u) => ExternalLinkNode(u, nodes, line, destinationNodes)
                 case Failure(f) => f match {
                     // As per URL.toURI documentation non-strictly RFC 2396 compliant URLs cannot be parsed to URIs
-                    case _: IRIException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
+                    case _: IRISyntaxException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
                     case _ => throw f
                 }
             }

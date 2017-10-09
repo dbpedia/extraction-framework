@@ -13,7 +13,7 @@ object UriUtils
 
   private val knownPrefixes = knownSchemes.map(_ + "://")
 
-  def hasKnownScheme(uri: String) : Boolean = hasKnownScheme(new IRI(uri))
+  def hasKnownScheme(uri: String) : Boolean = hasKnownScheme(IRI.create(uri).getOrElse(return false))
   def hasKnownScheme(uri: IRI) : Boolean = knownPrefixes.exists(uri.toString.startsWith(_))
 
   /**
@@ -21,7 +21,8 @@ object UriUtils
    */
   def cleanLink( uri : IRI ) : Option[String] =
   {
-    if (knownSchemes.contains(uri.getScheme)) Some(uri.toURI.normalize.toString) //IRI.normalize not yet implemented!
+    if (knownSchemes.contains(uri.getScheme))
+      Try{uri.toURI.normalize.toString}.toOption //IRI.normalize not yet implemented!
     else None
   }
 
@@ -38,22 +39,11 @@ object UriUtils
   {
       val path = parent.relativize(child)
       if (path eq child) throw new IllegalArgumentException("["+parent+"] is not a parent directory of ["+child+"]")
-      new IRI(path)
+      IRI.create(path).get
   }
 
   def createURI(uri: String): Try[URI] ={
-    Try {
-      // unescape all \\u escaped characters
-      val input = URLDecoder.decode(StringEscapeUtils.unescapeJava(uri), "UTF-8")
-
-      // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
-      // "#%<>?[\]^`{|}
-
-      // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
-      if (input.contains("\\"))
-        throw new IllegalArgumentException("URI contains backslash: [" + input + "]")
-      new URI(StringUtils.escape(input, WikiUtil.iriReplacements))
-    }
+      URI.create(uri)
   }
 
   /**
@@ -89,7 +79,10 @@ object UriUtils
             "#" + encodeAndClean(input.substring(fragment+1))
           else ""
 
-        new URI(prelude + resource + qu + frag)
+        URI.create(prelude + resource + qu + frag) match{
+          case Failure(f) => throw f
+          case Success(u) => u
+        }
       }
       else
         createURI(input) match{
@@ -110,7 +103,10 @@ object UriUtils
   }
 
 
-  def uriToIri(uri: String) : IRI = uriToIri(new URI(uri))
+  def uriToIri(uri: String) : IRI = URI.create(uri) match{
+    case Success(s) => uriToIri(s)
+    case Failure(f) => null
+  }
   /**
     * see uriToIri(uri: String)
     *
@@ -123,14 +119,13 @@ object UriUtils
     val path = WikiUtil.wikiEncode(iriDecode(uri.getPath)).replaceAll("%25", "%")    // we only want to wiki-encode the path!
     val query = if (uri.getQuery != null) "?" + iriDecode(uri.getRawQuery).replaceAll("%25", "%") else ""
     val fragment = if(uri.getFragment != null) "#" + iriDecode(uri.getRawFragment).replaceAll("%25", "%") else ""
-    val ne = new IRI(
+    IRI.create(
       scheme +
       authority +
       path +
       query +
       fragment
-    )
-    ne
+    ).get
   }
 
   private def encodeAndClean(uriPart: String): String={

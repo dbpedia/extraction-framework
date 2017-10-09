@@ -16,7 +16,7 @@ class IRITests extends FunSuite {
       info("Decoded: " + UriUtils.uriToIri(testUri))
       info("Exp.IRI: " + resultIri)
     }
-    assert(UriUtils.uriToIri(new URI(testUri)).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    assert(UriUtils.uriToIri(URI.create(testUri).get).equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
   test("+ character instead of %20") {
@@ -25,10 +25,10 @@ class IRITests extends FunSuite {
     val resultIri = "http://dbpedia.org/resource/Jeanne_Deroubaix"
     if (log == true) {
       info("TestURI: " + testUri)
-      info("Decoded: " + UriUtils.uriToIri(new URI(testUri)))
+      info("Decoded: " + UriUtils.uriToIri(URI.create(testUri).get))
       info("Exp.IRI: " + resultIri)
     }
-    assert(UriUtils.uriToIri(new URI(testUri)).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    assert(UriUtils.uriToIri(URI.create(testUri).get).equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
   test("reserved characters") {
@@ -37,10 +37,10 @@ class IRITests extends FunSuite {
     val resultIri = "http://dbpedia.org/resource/!%23%3F%5B%5D%7D*"
     if (log == true) {
       info("TestURI: " + testUri)
-      info("Decoded: " + UriUtils.uriToIri(new URI(testUri)))
+      info("Decoded: " + UriUtils.uriToIri(URI.create(testUri).get))
       info("Exp.IRI: " + resultIri)
     }
-    assert(UriUtils.uriToIri(new URI(testUri)).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    assert(UriUtils.uriToIri(URI.create(testUri).get).equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
   test("unwise characters and double whitespace") {
@@ -49,10 +49,10 @@ class IRITests extends FunSuite {
     val resultIri = "http://dbpedia.org/resource/%22%3C%3E%5C%5E%60%7B%7C_test"
     if (log == true) {
       info("TestURI: " + testUri)
-      info("Decoded: " + UriUtils.uriToIri(new URI(testUri)))
+      info("Decoded: " + UriUtils.uriToIri(URI.create(testUri).get))
       info("Exp.IRI: " + resultIri)
     }
-    assert(UriUtils.uriToIri(new URI(testUri)).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    assert(UriUtils.uriToIri(URI.create(testUri).get).equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
   test("double + instead of whitespace") {
@@ -61,10 +61,10 @@ class IRITests extends FunSuite {
     val resultIri = "http://dbpedia.org/resource/Jeanne_Deroubaix"
     if (log == true) {
       info("TestURI: " + testUri)
-      info("Decoded: " + UriUtils.uriToIri(new URI(testUri)))
+      info("Decoded: " + UriUtils.uriToIri(URI.create(testUri).get))
       info("Exp.IRI: " + resultIri)
     }
-    assert(UriUtils.uriToIri(new URI(testUri)).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    assert(UriUtils.uriToIri(URI.create(testUri).get).equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
   test("russian characters") {
@@ -73,10 +73,10 @@ class IRITests extends FunSuite {
     val resultIri = "http://dbpedia.org/resource/флэшбеках"
     if (log == true) {
       info("TestURI: " + testUri)
-      info("Decoded: " + UriUtils.uriToIri(new URI(testUri)))
+      info("Decoded: " + UriUtils.uriToIri(URI.create(testUri).get))
       info("Exp.IRI: " + resultIri)
     }
-    assert(UriUtils.uriToIri(new URI(testUri)).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    assert(UriUtils.uriToIri(URI.create(testUri).get).equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
   test("encoding-depth > 1") {
@@ -85,10 +85,10 @@ class IRITests extends FunSuite {
     val resultIri = "http://pt.dbpedia.org/resource/Área_de_Re…"
     if (log == true) {
       info("TestURI: " + testUri)
-      info("Decoded: " + UriUtils.uriToIri(new URI(testUri)))
+      info("Decoded: " + UriUtils.uriToIri(URI.create(testUri).get))
       info("Exp.IRI: " + resultIri)
     }
-    assert(UriUtils.uriToIri(new URI(testUri)).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    assert(UriUtils.uriToIri(URI.create(testUri).get).equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
   test("invalid Escape Sequence: too short") {
@@ -97,10 +97,10 @@ class IRITests extends FunSuite {
     val resultIri = "http://pt.dbpedia.org/resource/foo%3"
     if (log == true) {
       info("TestURI: " + testUri)
-      info("Decoded: " + UriUtils.uriToIri(new URI(testUri)))
+      info("Decoded: " + UriUtils.uriToIri(URI.create(testUri).get))
       info("Exp.IRI: " + resultIri)
     }
-    assert(UriUtils.uriToIri(new URI(testUri)).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    assert(UriUtils.uriToIri(URI.create(testUri).get).equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
   test("invalid Escape Sequence: not hexadecimal") {
@@ -109,10 +109,10 @@ class IRITests extends FunSuite {
     val resultIri = "http://pt.dbpedia.org/resource/foo%2K"
     if (log == true) {
       info("TestURI: " + testUri)
-      info("Decoded: " + UriUtils.uriToIri(new URI(testUri)))
+      info("Decoded: " + UriUtils.uriToIri(URI.create(testUri).get))
       info("Exp.IRI: " + resultIri)
     }
-    assert(UriUtils.uriToIri(new URI(testUri)).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    assert(UriUtils.uriToIri(URI.create(testUri).get).equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
   test("arabic characters") {
@@ -121,10 +121,10 @@ class IRITests extends FunSuite {
     val resultIri = "http://pt.dbpedia.org/resource/تمتلك"
     if (log == true) {
       info("TestURI: " + testUri)
-      info("Decoded: " + UriUtils.uriToIri(new URI(testUri)))
+      info("Decoded: " + UriUtils.uriToIri(URI.create(testUri).get))
       info("Exp.IRI: " + resultIri)
     }
-    assert(UriUtils.uriToIri(new URI(testUri)).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    assert(UriUtils.uriToIri(URI.create(testUri).get).equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
   test("query test") {
@@ -133,12 +133,12 @@ class IRITests extends FunSuite {
     val resultIri = "http://dbpedia-live.openlinksw.com/sparql/?default-graph-uri=http%3A%2F%2Fstatic.dbpedia.org&qtxt=describe+http%3A%2F%2Fdbpedia.org%2Fresource%2FAmsterdam&format=text%2Fx-html%2Bul&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on"
     if (log == true) {
       info("TestURI: " + testUri)
-      info("Decoded: " + UriUtils.uriToIri(new URI(testUri)))
+      info("Decoded: " + UriUtils.uriToIri(URI.create(testUri).get))
       info("Exp.IRI: " + resultIri)
     }
 
-    val res = UriUtils.uriToIri(new URI(testUri))
-    assert(res.equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(new URI(testUri)) + " does not equal Expected: " + resultIri)
+    val res = UriUtils.uriToIri(URI.create(testUri).get)
+    assert(res.equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
 
 }

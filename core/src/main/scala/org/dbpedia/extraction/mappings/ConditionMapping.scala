@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.wikiparser.TemplateNode
+import org.dbpedia.extraction.wikiparser.{InternalLinkNode, TemplateNode}
 
 class ConditionMapping(
   val templateProperty : String,
@@ -51,9 +51,10 @@ extends Extractor[TemplateNode]
       {
           case "isSet" => ! propertyText.isEmpty
           // FIXME: toLowerCase must use correct language locale
-          case "equals" => propertyText == value.toLowerCase
+          case "equals" => propertyText == value.trim.toLowerCase
           // FIXME: toLowerCase must use correct language locale
-          case "contains" => propertyText.contains(value.toLowerCase)
+          case "contains" => propertyText.contains(value.trim.toLowerCase)
+          case "hasLink" => property.children.exists(n => n.isInstanceOf[InternalLinkNode])
           case _ => false
       }
     }
