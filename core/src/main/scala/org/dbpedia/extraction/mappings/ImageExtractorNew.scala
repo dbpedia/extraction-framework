@@ -78,7 +78,7 @@ class ImageExtractorNew(
     mainImageFound = false
 
     // --------------- Quad Gen: Normal Images ---------------
-    imageSearch(node.children, 0).foreach(_ match {
+    imageSearch(node.children, 0).foreach {
       case Some((imageFileName, sourceNode)) =>
         // quick duplicate check
         if (duplicateMap.get(imageFileName).isEmpty) {
@@ -101,7 +101,7 @@ class ImageExtractorNew(
           quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
         }
       case None =>
-    })
+    }
     // --------------- Quad Gen: Special Images ---------------
     mainImage.foreach(img => {
       val lang = if (context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
@@ -149,27 +149,27 @@ class ImageExtractorNew(
     // Match every node for TextNode, InternalLinkNode & InterWikiLinkNode
     // for other types of node => recursive search for these types in their children
 
-    nodes.foreach(node => node match {
-      case TextNode(_, _) =>
+    nodes.foreach {
+      case node@TextNode(_, _, _) =>
         // toWikiText is used instead of toPlainText because some images would get lost.
         totallyNotImageLinkRegex(node.toWikiText).foreach(file => {
           images += processImageLink(file, node)
           imageCount += 1
         })
       //times += "ImageLinkRegex Finish: " -> System.currentTimeMillis()
-      case InternalLinkNode(_, _, _, _) =>
+      case node@InternalLinkNode(_, _, _, _) =>
         totallyNotImageLinkRegex(node.toWikiText).foreach(file => {
           images += processImageLink(file, node)
           imageCount += 1
         })
-      case InterWikiLinkNode(_, _, _, _) =>
+      case node@InterWikiLinkNode(_, _, _, _) =>
         totallyNotImageLinkRegex(node.toWikiText).foreach(file => {
           images += processImageLink(file, node)
           imageCount += 1
         })
-      case _ =>
+      case node =>
         if (depth < recursionDepth) images ++= imageSearch(node.children, depth + 1)
-    })
+    }
     images
   }
 
@@ -322,7 +322,7 @@ class ImageExtractorNew(
         c = iterator.next()
         if (c.toLower == 'a' && iterator.hasNext) {
           c = iterator.next()
-          if (c.toLower == 'p' && (!iterator.hasNext || (iterator.hasNext && (Array(' ', '_', '.').contains(iterator.next()))))) {
+          if (c.toLower == 'p' && (!iterator.hasNext || (iterator.hasNext && Array(' ', '_', '.').contains(iterator.next())))) {
             returnString = "map"
           }
         }
@@ -336,7 +336,7 @@ class ImageExtractorNew(
             c = iterator.next()
             if (c.toLower == 't' && iterator.hasNext) {
               c = iterator.next()
-              if (c.toLower == 'e' && (!iterator.hasNext || (iterator.hasNext && (Array(' ', '_', '.').contains(iterator.next()))))) {
+              if (c.toLower == 'e' && (!iterator.hasNext || (iterator.hasNext && Array(' ', '_', '.').contains(iterator.next())))) {
                 returnString = "map"
               }
             }
@@ -358,7 +358,7 @@ class ImageExtractorNew(
                   c = iterator.next()
                   if (c.toLower == 'o' && iterator.hasNext) {
                     c = iterator.next()
-                    if (c.toLower == 'n' && (!iterator.hasNext || (iterator.hasNext && (Array(' ', '_', '.').contains(iterator.next()))))) {
+                    if (c.toLower == 'n' && (!iterator.hasNext || (iterator.hasNext && Array(' ', '_', '.').contains(iterator.next())))) {
                       returnString = "map"
                     }
                   }
@@ -377,7 +377,7 @@ class ImageExtractorNew(
             c = iterator.next()
             if (c.toLower == 't' && iterator.hasNext) {
               c = iterator.next()
-              if (c.toLower == 'e' && (!iterator.hasNext || (iterator.hasNext && (Array(' ', '_', '.').contains(iterator.next()))))) {
+              if (c.toLower == 'e' && (!iterator.hasNext || (iterator.hasNext && Array(' ', '_', '.').contains(iterator.next())))) {
                 returnString = "map"
               }
             }
@@ -404,7 +404,7 @@ class ImageExtractorNew(
                           c = iterator.next()
                           if (c.toLower == 'm' && iterator.hasNext) {
                             c = iterator.next()
-                            if (c.toLower == 's' && (!iterator.hasNext || (iterator.hasNext && (Array(' ', '_', '.').contains(iterator.next()))))) {
+                            if (c.toLower == 's' && (!iterator.hasNext || (iterator.hasNext && Array(' ', '_', '.').contains(iterator.next())))) {
                               returnString = "coa"
                             }
                           }
@@ -425,7 +425,7 @@ class ImageExtractorNew(
           c = iterator.next()
           if (c.toLower == 'a' && iterator.hasNext) {
             c = iterator.next()
-            if (c.toLower == 'g' && (!iterator.hasNext || (iterator.hasNext && (Array(' ', '_', '.').contains(iterator.next()))))) {
+            if (c.toLower == 'g' && (!iterator.hasNext || (iterator.hasNext && Array(' ', '_', '.').contains(iterator.next())))) {
               returnString = "flag"
             }
           }
@@ -442,7 +442,7 @@ class ImageExtractorNew(
               c = iterator.next()
               if (c.toLower == 'e' && iterator.hasNext) {
                 c = iterator.next()
-                if (c.toLower == 'r' && (!iterator.hasNext || (iterator.hasNext && (Array(' ', '_', '.').contains(iterator.next()))))) {
+                if (c.toLower == 'r' && (!iterator.hasNext || (iterator.hasNext && Array(' ', '_', '.').contains(iterator.next())))) {
                   returnString = "flag"
                 }
               }
@@ -467,7 +467,7 @@ class ImageExtractorNew(
                     c = iterator.next()
                     if (c.toLower == 'r' && iterator.hasNext) {
                       c = iterator.next()
-                      if (c.toLower == 'e' && (!iterator.hasNext || (iterator.hasNext && (Array(' ', '_', '.').contains(iterator.next()))))) {
+                      if (c.toLower == 'e' && (!iterator.hasNext || (iterator.hasNext && Array(' ', '_', '.').contains(iterator.next())))) {
                         returnString = "signature"
                       }
                     }
@@ -479,7 +479,7 @@ class ImageExtractorNew(
         }
       }
       // toggles a new word, so we don't get occurrences where the keyword is contained in another word.
-      firstChar = if (c == " " || c == "_") true else false
+      firstChar = if (c == ' ' || c == '_') true else false
     }
     returnString
   }
