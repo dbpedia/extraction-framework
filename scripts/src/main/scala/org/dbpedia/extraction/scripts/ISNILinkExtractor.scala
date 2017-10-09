@@ -10,6 +10,7 @@ import org.jsoup.Jsoup
 
 import scala.collection.mutable.ListBuffer
 import scala.collection.convert.decorateAsScala._
+import scala.util.{Failure, Success}
 import scala.util.matching.Regex
 
 /**
@@ -48,12 +49,15 @@ object ISNILinkExtractor {
     if(error.isEmpty || !error.text().contains("data limit")){
       val links = Jsoup.parse(html.replaceAll("\n", "")).select(linksQuery).asScala
       for(node <- links){
-        val link = new URI(node.attr("href"))
-        baseUriMap.get(link.getScheme + "://" + link.getAuthority) match{
-          case Some(regex) =>
-            val target = regex._1.replaceAllIn(link.toString, regex._2)
-            list.append(SourceLink(id, error = false, target))
-          case None =>
+        URI.create(node.attr("href")) match {
+          case Success(link) =>
+            baseUriMap.get(link.getScheme + "://" + link.getAuthority) match {
+              case Some(regex) =>
+                val target = regex._1.replaceAllIn(link.toString, regex._2)
+                list.append(SourceLink(id, error = false, target))
+              case None =>
+            }
+          case Failure(f) =>
         }
       }
     }

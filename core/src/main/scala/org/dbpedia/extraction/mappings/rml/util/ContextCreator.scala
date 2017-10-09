@@ -2,13 +2,14 @@ package org.dbpedia.extraction.mappings.rml.util
 
 import java.io.File
 
-
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.XMLSource
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
 import org.dbpedia.extraction.wikiparser.WikiPage
+
+import scala.reflect.ClassTag
 
 /**
   * Generate context for xml and rml
@@ -26,6 +27,7 @@ object ContextCreator {
     def language: Language
     def redirects: Redirects
     def mappingPageSource: Traversable[WikiPage]
+    def recorder[T: ClassTag]: ExtractionRecorder[T]
   } =
   {
     val xmlMappingFile = new File(pathToXML)
@@ -38,6 +40,8 @@ object ContextCreator {
       def redirects: Redirects = null
 
       def mappingPageSource: Traversable[WikiPage] = xmlMapping
+
+      def recorder[T: ClassTag] = null.asInstanceOf[ExtractionRecorder[T]]
     }
   }
 

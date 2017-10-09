@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.live.extractor
 
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.mappings._
+
 import collection.mutable.ListBuffer
+import scala.reflect.ClassTag
 
 /**
  * Created by IntelliJ IDEA.
@@ -59,7 +61,7 @@ object LiveExtractor
 
         def mappingPageSource : Traversable[WikiPage] = _mappingsSource
 
-        private lazy val _mappings = MappingsLoader.load(this)
+        private lazy val _mappings: Mappings = MappingsLoader.load(this)
         def mappings : Mappings = _mappings
 
         def articlesSource : Source = _articlesSource
@@ -71,6 +73,8 @@ object LiveExtractor
         def disambiguations : Disambiguations = new Disambiguations(Set[Long]())
 
         def commonsSource : Source = _commonsSource
+
+        def recorder[T: ClassTag]: ExtractionRecorder[T] = null.asInstanceOf[ ExtractionRecorder[T]]
       }
   }
 

@@ -77,7 +77,7 @@ class ConfigLoader(config: Config)
 
       def language: Language = input._1
 
-      def recorder[_]: ExtractionRecorder[_] = getExtractionRecorder(input._1)
+      def recorder[T: ClassTag]: ExtractionRecorder[T] = getExtractionRecorder[T](input._1)
 
       private lazy val _mappingPageSource =
       {
@@ -98,7 +98,7 @@ class ConfigLoader(config: Config)
 
       def mappingPageSource : Traversable[WikiPage] = _mappingPageSource
 
-      private lazy val _mappings =
+      private lazy val _mappings: Mappings =
       {
         MappingsLoader.load(this)
       }

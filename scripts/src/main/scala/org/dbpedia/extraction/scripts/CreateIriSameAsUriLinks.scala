@@ -52,7 +52,7 @@ object CreateIriSameAsUriLinks {
 
       new QuadMapper().mapQuads(language, inputFile, destination, required = true) { quad =>
         val iri = quad.subject
-        val uri = new URI(iri).toASCIIString //in this case we actually want to use an URI not an IRI
+        val uri = URI.create(iri).toASCIIString //in this case we actually want to use an URI not an IRI
         if (uri == iri) List.empty
         else List(new Quad(null, null, iri, sameAs, uri, null, null: String))
       }

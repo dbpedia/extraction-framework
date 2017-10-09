@@ -82,17 +82,8 @@ abstract class ExtractionManager(
         logHandler.setLevel(Level.WARNING)
         logger.addHandler(logHandler)
 
-        // context object that has only this mappingSource
-        val context = new {
-          val ontology: Ontology = self.ontology()
-          val language: Language = lang
-          val redirects: Redirects = new Redirects(Map())
-          val mappingPageSource: Traversable[WikiPage] = mappingsPages
-          val disambiguations: Disambiguations = self.disambiguations
-        }
-
         //Load mappings
-        val mappings = MappingsLoader.load(context)
+        val mappings = loadMappings(lang)
         
         if (mappings.templateMappings.isEmpty && mappings.tableMappings.isEmpty)
           logger.severe("no mappings found")
@@ -201,23 +192,7 @@ abstract class ExtractionManager(
     {
         CompositeParseExtractor.load(classes,self.getExtractionContext(lang))
     }
-  private val extractionRecorder = new mutable.HashMap[ClassTag[_], mutable.HashMap[Language, ExtractionRecorder[_]]]()
-  def getExtractionRecorder[T: ClassTag](lang: Language, dataset : Dataset = null): org.dbpedia.extraction.util.ExtractionRecorder[T] = {
-    extractionRecorder.get(classTag[T]) match{
-      case Some(s) => s.get(lang) match {
-        case None =>
-          s(lang) = new ExtractionRecorder[T](null, 2000, null, null, if(dataset != null) ListBuffer(dataset) else ListBuffer())
-          s(lang).initialize(lang)
-          s(lang).asInstanceOf[ExtractionRecorder[T]]
-        case Some(er) =>
-          if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
-          er.asInstanceOf[ExtractionRecorder[T]]
-      }
-      case None =>
-        extractionRecorder(classTag[T]) = new mutable.HashMap[Language, ExtractionRecorder[_]]()
-        getExtractionRecorder[T](lang, dataset)
-    }
-  }
+
   /**
     * Build the context for all extractors involved
     * including the config itself
@@ -225,7 +200,7 @@ abstract class ExtractionManager(
     * @return
     */
     protected def getExtractionContext(lang: Language) = {
-      new { val ontology: Ontology = self.ontology
+      new { val ontology: Ontology = self.ontology()
             val language: Language = lang
             val mappings: Mappings = self.mappings(lang)
             val redirects: Redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
@@ -233,7 +208,7 @@ abstract class ExtractionManager(
             val configFile: ServerConfiguration = Server.config
             val nonFreeImages = Seq()
             val freeImages = Seq()
-            def recorder: ExtractionRecorder[_] = getExtractionRecorder(lang)
+            def recorder[T: ClassTag]: ExtractionRecorder[T] = Server.getExtractionRecorder[T](lang)
       }
     }
 
@@ -253,7 +228,7 @@ abstract class ExtractionManager(
           val configFile: ServerConfiguration = Server.config
           val nonFreeImages = Seq()
           val freeImages = Seq()
-          def recorder: ExtractionRecorder[_] = getExtractionRecorder(lang)
+          def recorder[T: ClassTag]: ExtractionRecorder[T] = Server.getExtractionRecorder[T](lang)
         }
 
         MappingsLoader.load(context)

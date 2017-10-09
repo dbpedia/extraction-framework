@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server.resources
 
 import org.dbpedia.extraction.mappings.{MappingsLoader, Redirects}
-import org.dbpedia.extraction.util.{Language, WikiApi}
+import org.dbpedia.extraction.util.{ExtractionRecorder, Language, WikiApi}
 import org.dbpedia.extraction.server.resources.stylesheets.{Log, TriX}
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
@@ -18,6 +18,8 @@ import xml.{Elem, NodeBuffer, ProcInstr, XML}
 import java.io.StringWriter
 
 import org.dbpedia.extraction.server.resources.rml.model.factories.RMLTemplateMappingFactory
+
+import scala.reflect.ClassTag
 
 /**
  * TODO: merge Extraction.scala and Mappings.scala
@@ -179,11 +181,13 @@ class Mappings(@PathParam("lang") langCode : String)
   //        throw new Exception("Cannot get page: " + title + ". Parsing failed")  //TODO??
 
       // context object that has only this mappingSource
+      val lang = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
       val context = new {
         val ontology = Server.instance.extractor.ontology()
-        val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language "+langCode), 404))
+        val language = lang
         val redirects: Redirects = new Redirects(Map())
         val mappingPageSource = page
+        def recorder[T: ClassTag]: ExtractionRecorder[T] = Server.getExtractionRecorder[T](lang)
       }
 
       //Load mappings

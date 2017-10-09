@@ -1,15 +1,18 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
+
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
-import java.util.logging.{Logger, Level, LogRecord}
+import java.util.logging.{Level, LogRecord, Logger}
+
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
-import java.lang.IllegalArgumentException
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
+
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
@@ -24,7 +27,9 @@ object MappingsLoader
                  def ontology : Ontology
                  def language : Language
                  def redirects : Redirects
-                 def mappingPageSource : Traversable[WikiPage] } ) : Mappings =
+                 def mappingPageSource : Traversable[WikiPage]
+                  def recorder[T: ClassTag] : ExtractionRecorder[T]
+    } ) : Mappings =
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
 
@@ -89,9 +94,11 @@ object MappingsLoader
     }
 
     private def loadTemplateMapping(tnode : TemplateNode, context : {
-                                                            def ontology : Ontology
-                                                            def redirects : Redirects
-                                                            def language : Language } ) =
+          def ontology : Ontology
+          def redirects : Redirects
+          def language : Language
+          def recorder[T: ClassTag] : ExtractionRecorder[T]
+    } ) =
     {
         new TemplateMapping( loadOntologyClass(tnode, "mapToClass", true, context.ontology),
                              loadOntologyClass(tnode, "correspondingClass", false, context.ontology),
@@ -101,9 +108,11 @@ object MappingsLoader
     }
 
     private def loadPropertyMappings(node : TemplateNode, propertyName : String, context : {
-                                                                                    def ontology : Ontology
-                                                                                    def redirects : Redirects
-                                                                                    def language : Language } ) : List[PropertyMapping] =
+                  def ontology : Ontology
+                  def redirects : Redirects
+                  def language : Language
+                  def recorder[T: ClassTag] : ExtractionRecorder[T]
+    } ) : List[PropertyMapping] =
     {
         var mappings = List[PropertyMapping]()
 
@@ -124,9 +133,11 @@ object MappingsLoader
     }
 
     private def loadPropertyMapping(tnode : TemplateNode, context : {
-                                                            def ontology : Ontology
-                                                            def redirects : Redirects
-                                                            def language : Language } ) = tnode.title.decoded match
+                                      def ontology : Ontology
+                                      def redirects : Redirects
+                                      def language : Language
+                                      def recorder[T: ClassTag] : ExtractionRecorder[T]}
+                                   ) = tnode.title.decoded match
     {
         case "PropertyMapping" =>
         {
@@ -204,9 +215,11 @@ object MappingsLoader
     }
     
     private def loadConditionalMapping(tnode : TemplateNode,  context : {
-                                                                 def ontology : Ontology
-                                                                 def redirects : Redirects
-                                                                 def language : Language } ) =
+         def ontology : Ontology
+         def redirects : Redirects
+         def language : Language
+          def recorder[T: ClassTag] : ExtractionRecorder[T]
+    } ) =
     {
         val conditionMappings =
             for( casesProperty <- tnode.property("cases").toList;
@@ -217,9 +230,11 @@ object MappingsLoader
     }
     
     private def loadConditionMapping(tnode : TemplateNode, context : {
-                                                              def ontology : Ontology
-                                                              def redirects : Redirects
-                                                              def language : Language } ) =
+      def ontology : Ontology
+      def redirects : Redirects
+      def language : Language
+      def recorder[T: ClassTag] : ExtractionRecorder[T]
+    } ) =
     {
         //Search for the template mapping in the first template node of the mapping property
         val mapping = tnode.property("mapping").flatMap(mappingNode =>

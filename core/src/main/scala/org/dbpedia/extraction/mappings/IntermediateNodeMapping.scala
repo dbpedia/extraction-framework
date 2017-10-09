@@ -11,6 +11,7 @@ import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 import scala.collection.mutable
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 class IntermediateNodeMapping (
   val nodeClass : OntologyClass, // public for rml mappings
@@ -19,7 +20,7 @@ class IntermediateNodeMapping (
   context : {
     def ontology : Ontology
     def language : Language
-    def recorder : ExtractionRecorder[TemplateNode]
+    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends PropertyMapping
@@ -46,7 +47,7 @@ extends PropertyMapping
     if(affectedTemplatePropertyNodes.size > 1)
     {
       if(valueNodes.forall(_.size <= 1))
-        context.recorder.record(new RecordEntry[TemplateNode](node, node.title.encoded, RecordSeverity.Info, context.language, "IntermediateNodeMapping for multiple properties have multiple values in: " + subjectUri))
+        context.recorder[TemplateNode].record(new RecordEntry[TemplateNode](node, node.title.encoded, RecordSeverity.Info, context.language, "IntermediateNodeMapping for multiple properties have multiple values in: " + subjectUri))
 
       createInstance(graph, node, subjectUri)
     }
