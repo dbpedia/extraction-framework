@@ -68,7 +68,7 @@ object WikiUtil
     /**
      * Replacement string array for StringUtils.escape
      */
-    def iriReplacements: Array[String] = StringUtils.replacements('%', "\"#%<>?[\\]^`{|}")
+    def iriReplacements: Array[String] = StringUtils.replacements('%', "#<>[]{}|\\")
     
     // store our own private copy of the mutable array
     private val replacements = iriReplacements

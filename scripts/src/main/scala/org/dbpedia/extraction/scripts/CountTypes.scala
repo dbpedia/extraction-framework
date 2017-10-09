@@ -3,7 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.config.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.{Finder, IOUtils}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 

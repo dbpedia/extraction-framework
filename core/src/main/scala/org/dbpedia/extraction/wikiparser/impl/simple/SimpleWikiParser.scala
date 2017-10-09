@@ -1,10 +1,8 @@
 package org.dbpedia.extraction.wikiparser.impl.simple
 
-import java.net.{URI, URISyntaxException}
 import java.util.logging.{Level, Logger}
 
 import org.apache.jena.iri.IRIException
-import org.apache.jena.iri.impl.IRIExamples
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
@@ -115,7 +113,7 @@ object SimpleWikiParser
 
         while(true)
         {
-            val m = source.find(matcher, false);
+            val m = source.find(matcher, throwIfNoMatch = false)
 
             //Add text
             if(m.matched && source.pos - lastPos > m.tag.length)
@@ -151,14 +149,14 @@ object SimpleWikiParser
             if(!m.matched)
             {
                 // FIXME: matcher.toString is not defined, message will be useless
-                throw new WikiParserException("Node not closed; expected "+matcher, line, source.findLine(line));
+                throw new WikiParserException("Node not closed; expected "+matcher, line, source.findLine(line))
             }
             else
             {
                 if(source.lastTag("<!--"))
                 {
                     //Skip html comment
-                    source.find(commentEnd, false)
+                    source.find(commentEnd, throwIfNoMatch = false)
                 }
                 else if(source.lastTag("<ref"))
                 {
@@ -204,15 +202,11 @@ object SimpleWikiParser
                     {
                         case ex : TooManyErrorsException => throw ex
                         case ex : WikiParserException =>
-                        {
                             logger.log(Level.FINE, "Error parsing node. "+ex.getMessage, ex)
-
                             source.pos = startPos
                             source.line = startLine
                             source.errors += 1
-
                             currentText += m.tag
-                        }
                     }
                 }
             }
@@ -226,7 +220,7 @@ object SimpleWikiParser
 
     private def skipHtmlTag(source : Source, matcher : Matcher)
     {
-        source.find(htmlTagEndOrStart, false)
+        source.find(htmlTagEndOrStart, throwIfNoMatch = false)
         if(source.lastTag("<"))
         {
             val endString = matcher.userTags.headOption
@@ -238,7 +232,7 @@ object SimpleWikiParser
             }
             else
             {
-                source.find(matcher, false)
+                source.find(matcher, throwIfNoMatch = false)
             }
         }
         //else we found "/>"
@@ -269,7 +263,7 @@ object SimpleWikiParser
             List(parseSection(source))
         }
         else
-            throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line));
+            throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line))
     }
 
   /**
@@ -296,12 +290,11 @@ object SimpleWikiParser
             val destination = parseUntil(internalLinkLabelOrEnd, source, level)
             //destination is the parsed destination (will be used by e.g. the witkionary module)
             val destinationUri =
-            if(destination.size == 0) {
+            if(destination.isEmpty) {
               ""
-            } else if(destination(0).isInstanceOf[TextNode]) {
-              destination(0).asInstanceOf[TextNode].text
-            } else {
-              throw new WikiParserException("Failed to parse internal link: " + destination, startLine, source.findLine(startLine))
+            } else destination.head match {
+                case node: TextNode => node.text
+                case _ => throw new WikiParserException("Failed to parse internal link: " + destination, startLine, source.findLine(startLine))
             }
 
             //Parse label
@@ -313,7 +306,7 @@ object SimpleWikiParser
                 else
                 {
                     //No label found => Use destination as label
-                    List(new TextNode(destinationUri, source.line))
+                    List(TextNode(destinationUri, source.line))
                 }
 
             /**
@@ -336,7 +329,7 @@ object SimpleWikiParser
                 val newNodes = parseUntil(new Matcher(List(), true), newSource, 0)
 
                 val newNodesToText = newNodes.map(_.toPlainText).mkString(" ").trim
-                if (newNodesToText.isEmpty && !newNodes.isEmpty)
+                if (newNodesToText.isEmpty && newNodes.nonEmpty)
                 {
                     return newNodes
                 } else if (!newNodesToText.contains('|')) // same target / label
@@ -368,15 +361,15 @@ object SimpleWikiParser
             val destination = parseUntil(externalLinkLabelOrEnd, source, level)
             //destination is the parsed destination (will be used by e.g. the witkionary module)
             val destinationURI = 
-            if (destination.size == 0) {
+            if (destination.isEmpty) {
               ""
-            } else if(destination(0).isInstanceOf[TextNode]) {
-              destination(0).asInstanceOf[TextNode].text
-            } else {
-              // The following line didn't make sense. createExternalLinkNode() will simply throw a NullPointerException.
-              // null // has a semantic within the wiktionary module, and should never occur for wikipedia
-              
-              throw new WikiParserException("Failed to parse external link: " + destination, startLine, source.findLine(startLine))
+            } else destination.head match {
+                case node: TextNode => node.text
+                case _ =>
+                    // The following line didn't make sense. createExternalLinkNode() will simply throw a NullPointerException.
+                    // null // has a semantic within the wiktionary module, and should never occur for wikipedia
+
+                    throw new WikiParserException("Failed to parse external link: " + destination, startLine, source.findLine(startLine))
             }
 
             var hasLabel = true
@@ -385,20 +378,20 @@ object SimpleWikiParser
             val nodes =
                 if(source.lastTag(" "))
                 {
-                    parseUntil(externalLinkEnd, source, level);
+                    parseUntil(externalLinkEnd, source, level)
                 }
                 else
                 {
                     //No label found => Use destination as label
                     hasLabel = false
-                    List(new TextNode(destinationURI, source.line))
+                    List(TextNode(destinationURI, source.line))
                 }
 
             try {
               List(createExternalLinkNode(source, destinationURI, nodes, startLine, destination))
             } catch {
               case _ : WikiParserException => // if the URL is not valid then it is a plain text node
-                List(new TextNode("[" + destinationURI + (if (hasLabel) " " + nodes.map(_.toPlainText).mkString else "") + "]", source.line))
+                List(TextNode("[" + destinationURI + (if (hasLabel) " " + nodes.map(_.toPlainText).mkString else "") + "]", source.line))
             }
         }
         else
@@ -410,7 +403,7 @@ object SimpleWikiParser
             //Set destination
             val destinationURI = source.getString(startPos - 4, source.pos).trim
             //Use destination as label
-            val nodes = List(new TextNode(destinationURI, source.line))
+            val nodes = List(TextNode(destinationURI, source.line))
 
             List(createExternalLinkNode(source, destinationURI, nodes, startLine, nodes))
         }
@@ -430,7 +423,7 @@ object SimpleWikiParser
 
             val sameHost = if (relProtocolDest.contains("{{SERVERNAME}}")) relProtocolDest.replace("{{SERVERNAME}}", source.language.baseUri.replace("http://", "")) else relProtocolDest
 
-            UriUtils.createIri(sameHost) match{
+            UriUtils.createURI(sameHost) match{
                 case Success(u) => ExternalLinkNode(u, nodes, line, destinationNodes)
                 case Failure(f) => f match {
                     // As per URL.toURI documentation non-strictly RFC 2396 compliant URLs cannot be parsed to URIs
@@ -470,9 +463,9 @@ object SimpleWikiParser
         // FIXME: parseUntil(templateParameterEnd) should be correct. Without it, we don't actually 
         // consume the source until the end of the template parameter. But if we use it, the parser
         // fails for roughly twice as many pages, so for now we deactivate it with "if (true)".
-        val nodes = if (true || source.lastTag("}}}")) List.empty else parseUntil(templateParameterEnd, source, level)
+        val nodes = if (source.lastTag("}}}")) List.empty else parseUntil(templateParameterEnd, source, level)
 
-        new TemplateParameterNode(key, nodes, line)
+        TemplateParameterNode(key, nodes, line)
     }
 
     private def parseTemplate(source : Source, level : Int) : List[Node] =
@@ -491,7 +484,7 @@ object SimpleWikiParser
 
                 val templateName = nodes match
                 {
-                    case TextNode(text, _) :: _ => text
+                    case TextNode(text, _, _) :: _ => text
                     case _ => throw new WikiParserException("Invalid Template name", startLine, source.findLine(startLine))
                 }
 
@@ -539,9 +532,9 @@ object SimpleWikiParser
             key = nodes.head.retrieveText.get.trim
 
             //Parse the corresponding value
-            nodes = parseUntil(propertyEnd, source, level);
+            nodes = parseUntil(propertyEnd, source, level)
         }
-        
+
         PropertyNode(key, nodes, line)
     }
 
@@ -589,8 +582,8 @@ object SimpleWikiParser
                     if(m2.tagIndex == 0 || m2.tagIndex == 1)
                     {
                         //Empty row
-                        nodes ::= new TableRowNode(List.empty, source.line)
-                        return TableNode(caption, nodes.reverse, line);
+                        nodes ::= TableRowNode(List.empty, source.line)
+                        return TableNode(caption, nodes.reverse, line)
                     }
                 }
                 
@@ -605,7 +598,7 @@ object SimpleWikiParser
             }
         }
         
-        TableNode(caption, nodes.reverse, line);
+        TableNode(caption, nodes.reverse, line)
     }
 
     private def parseTableRow(source : Source, level : Int) : TableRowNode =
@@ -621,7 +614,7 @@ object SimpleWikiParser
             //Reached row end?
             if(source.lastTag("|}") || source.lastTag("|-"))
             {
-                return new TableRowNode(nodes.reverse, line)
+                return TableRowNode(nodes.reverse, line)
             }
         }
         
@@ -642,7 +635,7 @@ object SimpleWikiParser
         {
             source.find(tableCellEnd2)
         }
-        else if((lookBack(1) == '|' || lookBack(1) == '!') && lookBack(0) != '\n' && lookBack(0) != '|' && lookBack(0) != '!' && !nodes.isEmpty)
+        else if((lookBack(1) == '|' || lookBack(1) == '!') && lookBack(0) != '\n' && lookBack(0) != '|' && lookBack(0) != '!' && nodes.nonEmpty)
         {
             //This cell contains formatting parameters
             val formattingStr = source.getString(startPos, source.pos - 1).trim
@@ -654,33 +647,33 @@ object SimpleWikiParser
             nodes = this.parseUntil(tableCellEnd3, source, level)
             if(source.lastTag("\n "))
             {
-                source.find(tableCellEnd2);
+                source.find(tableCellEnd2)
             }
         }
         
-        new TableCellNode(nodes, startLine, rowspan, colspan)
+        TableCellNode(nodes, startLine, rowspan, colspan)
     }
 
     private def parseTableParam(name : String, str : String) : Int =
     {
         //Find start index of the value
-        var start = str.indexOf(name);
+        var start = str.indexOf(name)
         if(start == -1)
         {
-            return 1;
+            return 1
         }
         start = str.indexOf('=', start)
         if(start == -1)
         {
-            return 1;
+            return 1
         }
-        start += 1;
+        start += 1
 
         //Find end index of the value
         var end = str.indexOf(' ', start)
         if(end == -1)
         {
-            end = str.length - 1;
+            end = str.length - 1
         }
 
         //Convert to integer
@@ -689,7 +682,7 @@ object SimpleWikiParser
 
         try
         {
-            valueStr.toInt;
+            valueStr.toInt
         }
         catch
         {
@@ -725,12 +718,13 @@ object SimpleWikiParser
         val name = source.getString(startPos, endPos).trim
 
         //Remove trailing '=' from section name
-        if(nodes.last.isInstanceOf[TextNode] && nodes.last.asInstanceOf[TextNode].text.endsWith("=")){
-          val lastTextNode = nodes.last.asInstanceOf[TextNode]
-          val cleanNodes = nodes.init :+ lastTextNode.copy(text = lastTextNode.text.dropRight(level - 1))
-          return SectionNode(name, level, cleanNodes, source.line - 1);
+        nodes.last match {
+            case lastTextNode: TextNode if lastTextNode.text.endsWith("=") =>
+                val cleanNodes = nodes.init :+ lastTextNode.copy(text = lastTextNode.text.dropRight(level - 1))
+                return SectionNode(name, level, cleanNodes, source.line - 1);
+            case _ =>
         }
 
-        SectionNode(name, level, nodes, source.line - 1);
+        SectionNode(name, level, nodes, source.line - 1)
     }
 }

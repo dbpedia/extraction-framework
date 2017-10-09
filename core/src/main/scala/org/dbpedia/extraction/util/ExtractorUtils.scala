@@ -3,7 +3,7 @@ package org.dbpedia.extraction.util
 import java.util.Properties
 
 import org.dbpedia.extraction.mappings.Extractor
-import org.dbpedia.extraction.util.ConfigUtils.getStrings
+import org.dbpedia.extraction.config.ConfigUtils.getStrings
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.wikiparser._
 

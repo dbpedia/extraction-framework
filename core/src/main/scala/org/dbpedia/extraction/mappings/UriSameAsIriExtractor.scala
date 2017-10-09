@@ -35,7 +35,7 @@ extends PageNodeExtractor
   override def extract(page: PageNode, subjectUri: String): Seq[Quad] =
   {
     // only extract triple if IRI is actually different from URI
-    val encodedUri = UriUtils.createIri(subjectUri) match{
+    val encodedUri = UriUtils.createURI(subjectUri) match{
       case Success(u) => u.toASCIIString
       case Failure(f) => throw f
     }

@@ -24,7 +24,6 @@ object UriUtils
     if (knownSchemes.contains(uri.getScheme)) Some(uri.toURI.normalize.toString) //IRI.normalize not yet implemented!
     else None
   }
-  def cleanLink( uri : org.apache.jena.iri.IRI ) : Option[String] = cleanLink(new IRI(uri))
 
   def relativize( parent : URI, child : URI ) : IRI = relativize(uriToIri(parent), uriToIri(child))
   /**
@@ -42,7 +41,7 @@ object UriUtils
       new IRI(path)
   }
 
-  def createIri(uri: String): Try[URI] ={
+  def createURI(uri: String): Try[URI] ={
     Try {
       // unescape all \\u escaped characters
       val input = URLDecoder.decode(StringEscapeUtils.unescapeJava(uri), "UTF-8")
@@ -53,7 +52,7 @@ object UriUtils
       // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
       if (input.contains("\\"))
         throw new IllegalArgumentException("URI contains backslash: [" + input + "]")
-      new URI(StringUtils.escape(input, StringUtils.replacements('%', "\"<>[\\]^`{|}")))
+      new URI(StringUtils.escape(input, WikiUtil.iriReplacements))
     }
   }
 
@@ -93,7 +92,7 @@ object UriUtils
         new URI(prelude + resource + qu + frag)
       }
       else
-        createIri(input) match{
+        createURI(input) match{
           case Success(s) => s
           case Failure(f) => null
         }
@@ -121,23 +120,24 @@ object UriUtils
   def uriToIri(uri: URI): IRI = {
     val scheme = uri.getScheme + "://"
     val authority = uri.getAuthority
-    val path = WikiUtil.wikiEncode(iriDecode(uri.getPath)).replaceAll("%25", "%")
-    val query = if (uri.getQuery != null) "?" + WikiUtil.wikiEncode(iriDecode(uri.getRawQuery)).replaceAll("%25", "%") else ""
-    val fragment = if(uri.getFragment != null) "#" + WikiUtil.wikiEncode(iriDecode(uri.getRawFragment)).replaceAll("%25", "%") else ""
-    new IRI(
+    val path = WikiUtil.wikiEncode(iriDecode(uri.getPath)).replaceAll("%25", "%")    // we only want to wiki-encode the path!
+    val query = if (uri.getQuery != null) "?" + iriDecode(uri.getRawQuery).replaceAll("%25", "%") else ""
+    val fragment = if(uri.getFragment != null) "#" + iriDecode(uri.getRawFragment).replaceAll("%25", "%") else ""
+    val ne = new IRI(
       scheme +
       authority +
       path +
       query +
       fragment
     )
+    ne
   }
 
   private def encodeAndClean(uriPart: String): String={
     var decoded = uriPart
     while(UriDecoder.decode(decoded) != decoded)
       decoded = UriDecoder.decode(decoded)
-    StringUtils.escape(decoded, StringUtils.replacements('%', "<>\"#%?[\\]^`{|}"))
+    StringUtils.escape(decoded, WikiUtil.iriReplacements)
   }
 
   def decode(uriPart: String): String={

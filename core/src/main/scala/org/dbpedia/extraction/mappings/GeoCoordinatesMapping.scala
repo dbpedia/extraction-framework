@@ -71,7 +71,7 @@ extends PropertyMapping
         geoCoordinate <- geoCoordinateParser.parse(coordProperty) 
       )
       {
-        return Some(geoCoordinate)
+        return Some(geoCoordinate.value)
       }
     }
 
@@ -106,17 +106,17 @@ extends PropertyMapping
         lonDeg <- doubleParser.parse(lonDegProperty) 
       )
       {
-        val latMin = node.property(latitudeMinutes).flatMap(doubleParser.parse).getOrElse(0.0)
-        val latSec = node.property(latitudeSeconds).flatMap(doubleParser.parse).getOrElse(0.0)
-        val latDir = node.property(latitudeDirection).flatMap(stringParser.parse).getOrElse("N")
+        val latMin = node.property(latitudeMinutes).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
+        val latSec = node.property(latitudeSeconds).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
+        val latDir = node.property(latitudeDirection).flatMap(stringParser.parse).getOrElse(ParseResult("N")).value
 
-        val lonMin = node.property(longitudeMinutes).flatMap(doubleParser.parse).getOrElse(0.0)
-        val lonSec = node.property(longitudeSeconds).flatMap(doubleParser.parse).getOrElse(0.0)
-        val lonDir = node.property(longitudeDirection).flatMap(stringParser.parse).getOrElse("E")
+        val lonMin = node.property(longitudeMinutes).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
+        val lonSec = node.property(longitudeSeconds).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
+        val lonDir = node.property(longitudeDirection).flatMap(stringParser.parse).getOrElse(ParseResult("E")).value
 
         try
         {
-          return Some(new GeoCoordinate(latDeg, latMin, latSec, latDir, lonDeg, lonMin, lonSec, lonDir, false))
+          return Some(new GeoCoordinate(latDeg.value, latMin, latSec, latDir, lonDeg.value, lonMin, lonSec, lonDir, false))
         }
         catch
         {
@@ -150,7 +150,7 @@ extends PropertyMapping
   }
 
   private def getSingleCoordinate(coordinateProperty: PropertyNode, rangeMin: Double, rangeMax: Double, wikiCode: String ): Option[Double] = {
-    singleGeoCoordinateParser.parse(coordinateProperty).map(_.toDouble) orElse doubleParser.parse(coordinateProperty) match {
+    singleGeoCoordinateParser.parse(coordinateProperty).map(_.value.toDouble) orElse doubleParser.parse(coordinateProperty).map(_.value) match {
       case Some(coordinateValue) =>
         //Check if the coordinate is in the correct range
         if (rangeMin <= coordinateValue && coordinateValue <= rangeMax) {
@@ -159,9 +159,9 @@ extends PropertyMapping
           // Sometimes coordinates are written with the English locale (. instead of ,)
           doubleParserEn.parse(coordinateProperty) match {
             case Some(enCoordinateValue) =>
-              if (rangeMin <= enCoordinateValue && enCoordinateValue <= rangeMax) {
+              if (rangeMin <= enCoordinateValue.value && enCoordinateValue.value <= rangeMax) {
                 // do not return invalid coordinates either way
-                Some(enCoordinateValue)
+                Some(enCoordinateValue.value)
               } else None
             case None => None
           }

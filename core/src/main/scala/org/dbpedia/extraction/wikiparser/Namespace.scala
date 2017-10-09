@@ -1,8 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
 import java.io.{File, FileInputStream, InputStreamReader}
+
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.sources.XMLSource
-import org.dbpedia.extraction.util.{Config, JsonConfig, Language}
+import org.dbpedia.extraction.util.{JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 
 import scala.collection.mutable.HashMap

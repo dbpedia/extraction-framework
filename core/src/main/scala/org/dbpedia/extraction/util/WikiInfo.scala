@@ -4,6 +4,8 @@ import java.io.File
 import java.net.URL
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.config.ConfigUtils
+
 import scala.collection.mutable.ArrayBuffer
 import scala.io.{Codec, Source}
 

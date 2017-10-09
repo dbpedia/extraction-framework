@@ -99,7 +99,9 @@ object NYTLinkExtractor {
       case Failure(f) => f match {
         case uc : JsonParseException if uc.getMessage.contains("Unexpected character") =>
           true
-        case _ => throw f
+        case _ =>
+          System.err.println("A json object does not match the expected format.")
+          true
       }
     }
   }
@@ -116,19 +118,22 @@ object NYTLinkExtractor {
     }
     while (gotoNextToken(jp)) {
       Try{String.valueOf(jp.getCurrentName).toInt} match{
-        case Failure(f) => throw new RuntimeException("Json file does not match the expected format.")
+        case Failure(f) => System.err.println("A json object does not match the expected format.")
         case Success(i) =>
           jp.nextToken()
-          readSingleResourceNode(jp.readValueAsTree[JsonNode]()) match{
-            case Some(r) => destination.write(convertLinks(r.links))
-            case None =>
+          Try{jp.readValueAsTree[JsonNode]()} match{
+            case Failure(f) => System.err.println("A json object does not match the expected format.")
+            case Success(s) => readSingleResourceNode(s) match{
+              case Some(r) => destination.write(convertLinks(r.links))
+              case None =>
+            }
           }
       }
     }
   }
 
   private def getNytResourceUri(res: NytConceptBase): String ={
-    UriUtils.createIri(nytBaseUri + res.conceptType + "/" + res.conceptName).get.toASCIIString
+    UriUtils.createURI(nytBaseUri + res.conceptType + "/" + res.conceptName).get.toASCIIString
   }
 
   private def fromDbpediaUri(link: NytLink): Quad ={
@@ -144,7 +149,7 @@ object NYTLinkExtractor {
   }
 
   private def fromWikipediaLink(link: NytLink): Quad ={
-    val subject =  UriUtils.uriToIri(UriUtils.createIri(Language.English.resourceUri.toString + link.targetName).get.toASCIIString).toString
+    val subject =  UriUtils.uriToIri(UriUtils.createURI(Language.English.resourceUri.toString + link.targetName).get.toASCIIString).toString
     val predicate = linkRelationMap.get(link.relation) match{
       case Some(r) => r
       case None =>
@@ -176,6 +181,7 @@ object NYTLinkExtractor {
 
     destination.open()
     for (file <- args.drop(1)) {
+      System.out.println("reading file: " + file)
       readRawApiResultFile(file)
     }
     destination.close()

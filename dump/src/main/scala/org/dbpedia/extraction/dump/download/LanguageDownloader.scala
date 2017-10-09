@@ -3,9 +3,11 @@ package org.dbpedia.extraction.dump.download
 import java.net.URL
 import java.io.{File, PrintWriter}
 
+import org.dbpedia.extraction.config.Config
+
 import scala.collection.immutable.SortedSet
 import scala.io.{Codec, Source}
-import org.dbpedia.extraction.util.{Config, Finder, Language}
+import org.dbpedia.extraction.util.{Finder, Language}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 
 import scala.collection.mutable

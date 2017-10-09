@@ -70,11 +70,10 @@ extends PropertyMapping
       }
 
       //Parse start; return if no start year has been found
-      val startDate = startDateParser.parse(splitNodes(0)).getOrElse(return Seq.empty)
+      val startDate = startDateParser.parse(splitNodes.head).getOrElse(return Seq.empty)
 
       //Parse end
-      val endDateOpt = splitNodes match
-      {
+      val endDateOpt = splitNodes match {
         //if there were two elements found
         case List(start, end) => end.retrieveText match
         {
@@ -89,8 +88,8 @@ extends PropertyMapping
         case List(start) => StringParser.parse(start) match
         {
           //if in a "since xxx" construct, don't write end triple
-          case Some(text : String) if (text.trim.toLowerCase.startsWith(sinceString) 
-                                    || text.trim.toLowerCase.endsWith(onwardString)) => None
+          case Some(pr) if (pr.value.trim.toLowerCase.startsWith(sinceString)
+                                    || pr.value.trim.toLowerCase.endsWith(onwardString)) => None
 
           //make start and end the same if there is no end specified
           case _ => Some(startDate)
@@ -106,7 +105,7 @@ extends PropertyMapping
       for(endDate <- endDateOpt)
       {
         //Validate interval
-        if(startDate > endDate)
+        if(startDate.value > endDate.value)
         {
           logger.fine("startDate > endDate")
           return Seq(quad1)
@@ -118,7 +117,7 @@ extends PropertyMapping
         return Seq(quad1, quad2)
       }
 
-      return Seq(quad1)
+      Seq(quad1)
   }
 
   private def splitIntervalNode(propertyNode : PropertyNode) : List[PropertyNode] =

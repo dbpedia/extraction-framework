@@ -95,7 +95,7 @@ extends PageNodeExtractor
           }
           case TemplateNode(_, children, _, _) => {
             for (property <- children;
-                 textNode@TextNode(text, _) <- property.children;
+                 textNode@TextNode(text, _, _) <- property.children;
                  fileName <- ImageExtractorConfig.ImageRegex.findFirstIn(text);
                  encodedFileName = if (encodedLinkRegex.findFirstIn(fileName) == None)
                    WikiUtil.wikiEncode(fileName).capitalize(language.locale)

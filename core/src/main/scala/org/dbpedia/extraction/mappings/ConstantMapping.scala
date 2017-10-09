@@ -42,7 +42,7 @@ extends PropertyMapping
   if (isObjectProperty)
   {
     require(datatype == null, "expected no datatype for object property '"+ontologyProperty+"', but found datatype '"+datatype+"'")
-    value = UriUtils.createIri(value) match{
+    value = UriUtils.createURI(value) match{
       case Success(u) => if(u.isAbsolute)
           context.language.resourceUri.append(value)
         else u.toString

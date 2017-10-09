@@ -21,20 +21,20 @@ class DoubleParser( context : { def language : Language },
 
     private val language = context.language.wikiCode
 
-    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexDouble.contains(language))
-                                            DataParserConfig.splitPropertyNodeRegexDouble.get(language).get
-                                          else DataParserConfig.splitPropertyNodeRegexDouble.get("en").get
+    override val splitPropertyNodeRegex: String = if (DataParserConfig.splitPropertyNodeRegexDouble.contains(language))
+                                            DataParserConfig.splitPropertyNodeRegexDouble(language)
+                                          else DataParserConfig.splitPropertyNodeRegexDouble("en")
 
     // we allow digits, minus, comma, dot and space in numbers
     private val DoubleRegex  = """\D*?(-?[0-9-,. ]+).*""".r
 
-    override def parse(node : Node) : Option[Double] =
+    override def parse(node : Node) : Option[ParseResult[Double]] =
     {
         for( text <- StringParser.parse(node);
-             convertedText = parserUtils.convertLargeNumbers(text);
+             convertedText = parserUtils.convertLargeNumbers(text.value);
              value <- parseFloatValue(convertedText) )
         {
-            return Some(value * multiplicationFactor)
+            return Some(ParseResult(value * multiplicationFactor))
         }
 
         None
@@ -46,36 +46,28 @@ class DoubleParser( context : { def language : Language },
         {
             case Some(s) => s.toString()
             case None =>
-            {
                 logger.log(Level.FINE, "Cannot convert '" + input + "' to a floating point number, DoubleRegex did not match")
                 return None
-            }
         }
 
         try
         {
             val result = parserUtils.parse(numberStr).doubleValue
-            val hasMinusSign = (!input.equals(numberStr) && DataParserConfig.dashVariations.contains(input.trim.charAt(0)))
+            val hasMinusSign = !input.equals(numberStr) && DataParserConfig.dashVariations.contains(input.trim.charAt(0))
             val negatize = if (result>=0 && hasMinusSign) -1 else 1
             Some(negatize * result)
         }
         catch
         {
             case ex : ParseException =>
-            {
                 logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
                 None
-            }
             case ex : NumberFormatException =>
-            {
                 logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
                 None
-            }
             case ex : ArrayIndexOutOfBoundsException =>
-            {
                 logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
                 None
-            }
         }
     }
 }

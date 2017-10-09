@@ -131,7 +131,7 @@ class FlagTemplateParserTest extends FlatSpec with ShouldMatchers
         val flagParser = new FlagTemplateParser(context)
     
         parser(page) match {
-          case Some(n) => Some(flagParser.parse(n.children.head).getOrElse(return None).decoded)
+          case Some(n) => Some(flagParser.parse(n.children.head).getOrElse(return None).value.decoded)
           case None => None
         }
 

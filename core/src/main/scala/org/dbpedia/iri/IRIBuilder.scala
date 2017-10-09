@@ -274,7 +274,7 @@ class ComplexAltIRISection(val name: String, val sections: List[IRISection], val
         section.traverse(iri, position)
       } match{
         case Success(r) => return r
-        case Failure(f) => System.err.println(f.getMessage)
+        case Failure(f) =>
       }
     }
     List()

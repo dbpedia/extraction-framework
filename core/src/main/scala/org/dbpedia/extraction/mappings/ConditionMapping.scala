@@ -42,7 +42,10 @@ extends Extractor[TemplateNode]
       // be omitted. This constructor argument should be true if this object is part of 
       // a ConditionalMapping (which calls matches() before extract()) and false otherwise.
       val property = node.property(templateProperty).getOrElse(return false)
-      val propertyText = StringParser.parse(property).getOrElse("").toLowerCase.trim
+      val propertyText = StringParser.parse(property) match{
+        case Some(s) => s.value.toLowerCase.trim
+        case None => ""
+      }
 
       operator match
       {

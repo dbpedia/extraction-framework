@@ -61,10 +61,12 @@ class WikidataRawExtractor(
               case mainSnak: ValueSnak => {
                 val value = mainSnak.getValue
 
-                val datatype = if (WikidataUtil.getDatatype(value) != null) context.ontology.datatypes(WikidataUtil.getDatatype(value)) else null
+                val datatypeiri = WikidataUtil.getDatatype(value)
+                val datatype = if (datatypeiri != null) context.ontology.datatypes(datatypeiri) else null
 
                 //Wikidata raw extractor without reification
-                quads += new Quad(context.language, DBpediaDatasets.WikidataRaw, subjectUri, property, WikidataUtil.getValue(value), page.wikiPage.sourceIri, datatype)
+                val valuei = WikidataUtil.getValue(value)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataRaw, subjectUri, property, valuei, page.wikiPage.sourceIri, datatype)
 
                 //unique statementUri created for reification. Same statementUri is used for reification mapping
                 val statementUri = WikidataUtil.getStatementUri(subjectUri, propertyId, value)
@@ -73,7 +75,7 @@ class WikidataRawExtractor(
                 quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfType, rdfStatement, page.wikiPage.sourceIri)
                 quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfSubject, subjectUri, page.wikiPage.sourceIri, null)
                 quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfPredicate, property, page.wikiPage.sourceIri, null)
-                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfObject, WikidataUtil.getValue(value), page.wikiPage.sourceIri, datatype)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfObject, valuei, page.wikiPage.sourceIri, datatype)
                 quads ++= getQualifiersQuad(page, statementUri, claim)
               }
               case _ =>

@@ -5,15 +5,14 @@ import java.net.URL
 import java.util.concurrent.atomic.AtomicLong
 
 import org.apache.jena.rdf.model._
+import org.dbpedia.extraction.config.{Config, ConfigUtils}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.util.ExtractionRecorder
 import org.dbpedia.extraction.util._
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
-
 import sys.process._
-
 import scala.util.Try
 
 class ExtractionMonitor[T] {

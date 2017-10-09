@@ -31,7 +31,7 @@ class ArticleCategoriesExtractor( context : {
 
     private def isCategoryForArticle(linkNode : InternalLinkNode) = linkNode.destinationNodes match
     {
-        case TextNode(text, _) :: Nil  => !text.startsWith(":")  // links starting wih ':' are actually only related, not the category of this article
+        case TextNode(text, _, _) :: Nil  => !text.startsWith(":")  // links starting wih ':' are actually only related, not the category of this article
         case _ => true
     }
 

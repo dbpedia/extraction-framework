@@ -7,8 +7,6 @@ import java.nio.CharBuffer;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Based on the decode-methods from the URI Class,
@@ -26,7 +24,7 @@ public class UriToIriDecoder {
      Most of them are allowed by DBpedia though,
      but dbpedia encodes the Pipe character (|) with %7D
     */
-    private List<String> reserved = Arrays.asList("%3F", "%23", "%5B", "%5D", "%7D");
+    //private List<String> reserved = Arrays.asList(StringUtils.replacements('%', "#<>[]{}|", 256));
 
 
     public String decode(String uri) {
@@ -73,14 +71,15 @@ public class UriToIriDecoder {
                     char c1 = s.charAt(++i);
                     char c2 = s.charAt(++i);
                     // Checks if the encoded symbol is not a reserved character or invalid
+                    int code = IriCharacters.decode("%" + c1 + c2).charAt(0);
 
-                    if (!reserved.contains("%" + c1 + c2) && c1 <= 'F' && c2 <= 'F')
+                    //if (reserved.get(code) == null)
                         bb.put(IriCharacters.decode(c1, c2));
-                    else {
-                        bb.put((byte) '%');
-                        bb.put((byte) c1);
-                        bb.put((byte) c2);
-                    }
+                    //else {
+                     //   bb.put((byte) '%');
+                     //   bb.put((byte) c1);
+                     //   bb.put((byte) c2);
+                    //}
                 } else if (i + 1 < length) {
                     bb.put((byte) '%');
                     bb.put((byte) s.charAt(++i));

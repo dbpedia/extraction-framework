@@ -9,7 +9,7 @@ import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, W
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.scripts.ProcessWikidataLinks._
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.ConfigUtils.{getString, getStrings, getValue, loadConfig, parseLanguages}
+import org.dbpedia.extraction.config.ConfigUtils.{getString, getStrings, getValue, loadConfig, parseLanguages}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.{Finder, IOUtils, Language, SimpleWorkers}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis

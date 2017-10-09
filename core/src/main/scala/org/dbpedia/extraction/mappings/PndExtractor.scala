@@ -81,7 +81,7 @@ extends PageNodeExtractor
   {
     node.children match
     {
-      case TextNode(text, _) :: Nil if (text.trim.matches(PndRegex)) => Some(text.trim)
+      case TextNode(text, _, _) :: Nil if (text.trim.matches(PndRegex)) => Some(text.trim)
       case _ => None
     }
   }

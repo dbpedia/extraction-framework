@@ -6,7 +6,7 @@ import scala.Console.err
 import java.io.File
 
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.ConfigUtils.{getString, getStrings, getValue, loadConfig, parseLanguages}
+import org.dbpedia.extraction.config.ConfigUtils.{getString, getStrings, getValue, loadConfig, parseLanguages}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 
 import scala.collection.mutable.{ArrayBuffer, HashSet}

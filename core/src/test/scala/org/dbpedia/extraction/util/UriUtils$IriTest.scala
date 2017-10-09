@@ -131,4 +131,121 @@ class UriUtils$IriTest extends FunSuite {
     assert(res.equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(testUri) + " does not equal Expected: " + resultIri)
   }
 
+  test("simple test") {
+    // should be decoded completely, special: direction change
+    val testUri = "http://www.example.org/red%09ros%C3%A9#red"
+    val resultIri = "http://www.example.org/red\trosé#red"
+    if (log == true) {
+      info("TestURI: " + testUri)
+      info("Decoded: " + UriUtils.uriToIri(testUri))
+      info("Exp.IRI: " + resultIri)
+    }
+
+    val res = UriUtils.uriToIri(testUri)
+    assert(res.equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(testUri) + " does not equal Expected: " + resultIri)
+  }
+
+  test("simple testNotSoSimple") {
+    // should be decoded completely, special: direction change
+    val testUri = "http://example.com/%F0%90%8C%80%F0%90%8C%81%F0%90%8C%82"
+    val resultIri = "http://example.com/\uD800\uDF00\uD800\uDF01\uD800\uDF02"
+    if (log == true) {
+      info("TestURI: " + testUri)
+      info("Decoded: " + UriUtils.uriToIri(testUri))
+      info("Exp.IRI: " + resultIri)
+    }
+
+    val res = UriUtils.uriToIri(testUri)
+    assert(res.equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(testUri) + " does not equal Expected: " + resultIri)
+  }
+
+  test("chinese") {
+    // should be decoded completely, special: direction change
+    val testUri = "http://example.com/base/%E6%A4%8D%E7%89%A9%2F%E5%90%8D%3D%E3%81%97%E3%81%9D%3B%E4%BD%BF%E7%94%A8%E9%83%A8%3D%E8%91%89"
+    val resultIri = "http://example.com/base/植物/名=しそ;使用部=葉"
+    if (log == true) {
+      info("TestURI: " + testUri)
+      info("Decoded: " + UriUtils.uriToIri(testUri))
+      info("Exp.IRI: " + resultIri)
+    }
+
+    val res = UriUtils.uriToIri(testUri)
+    assert(res.equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(testUri) + " does not equal Expected: " + resultIri)
+  }
+
+  test("testx1") {
+    // should be decoded completely, special: direction change
+    val testUri = "http://iris.test.ing/foo%3fbar"
+    val resultIri = "http://iris.test.ing/foo?bar"
+    if (log == true) {
+      info("TestURI: " + testUri)
+      info("Decoded: " + UriUtils.uriToIri(testUri))
+      info("Exp.IRI: " + resultIri)
+    }
+
+    val res = UriUtils.uriToIri(testUri)
+    assert(res.equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(testUri) + " does not equal Expected: " + resultIri)
+  }
+
+  test("testx3") {
+    // should be decoded completely, special: direction change
+    val testUri = "http://foo/path;a??e#f#g"
+    val resultIri = "http://foo/path;a??e#f#g"
+    if (log == true) {
+      info("TestURI: " + testUri)
+      info("Decoded: " + UriUtils.uriToIri(testUri))
+      info("Exp.IRI: " + resultIri)
+    }
+
+    val res = UriUtils.uriToIri(testUri)
+    assert(res.equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(testUri) + " does not equal Expected: " + resultIri)
+  }
+
+
+  test("testx2") {
+    // should be decoded completely, special: direction change
+    val testUri = "http://foo/abcd#foo?bar"
+    val resultIri = "http://foo/abcd#foo?bar"
+    val decoded = UriUtils.uriToIri(testUri)
+    if (log == true) {
+      info("TestURI: " + testUri)
+      info("Decoded: " + decoded)
+      info("Exp.IRI: " + resultIri)
+    }
+
+    val res = UriUtils.uriToIri(testUri)
+    assert(res.equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(testUri) + " does not equal Expected: " + resultIri)
+    assert(decoded.getFragment == "foo?bar", "Decoded: " +decoded.getFragment + " does not equal Expected: " + "foo?bar")
+
+  }
+
+
+  test("testx4") {
+    // should be decoded completely, special: direction change
+    val testUri = "http://user:pass@foo:21/bar;par?b#c"
+    val resultIri = "http://user:pass@foo:21/bar;par?b#c"
+    val decoded = UriUtils.uriToIri(testUri)
+    if (log == true) {
+      info("TestURI: " + testUri)
+      info("Decoded: " + decoded)
+      info("Exp.IRI: " + resultIri)
+    }
+
+    val res = UriUtils.uriToIri(testUri)
+    assert(res.equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(testUri) + " does not equal Expected: " + resultIri)
+    assert(decoded.getFragment == "c" && decoded.getQuery == "b" && decoded.getPath == "/bar;par" && decoded.getUserinfo == "user:pass", "zonk")
+
+  }
+
+  test("dbpedia uri") {
+    // should be decoded completely
+    val testUri = "http://nl.dbpedia.org/resource/Ren%C3%A9_Descartes"
+    val resultIri = "http://nl.dbpedia.org/resource/René_Descartes"
+    if (log == true) {
+      info("TestURI: " + testUri)
+      info("Decoded: " + UriUtils.uriToIri(testUri))
+      info("Exp.IRI: " + resultIri)
+    }
+    assert(UriUtils.uriToIri(testUri).equals(new IRI(resultIri)), "Decoded: " + UriUtils.uriToIri(testUri) + " does not equal Expected: " + resultIri)
+  }
 }

@@ -35,19 +35,19 @@ class GeoCoordinateParser(
     private val LatDir = ("""("""+latHemRegex+""")""").r
     
 
-    override def parse(node : Node) : Option[GeoCoordinate] =
+    override def parse(node : Node) : Option[ParseResult[GeoCoordinate]] =
     {
         try
         {
             for(coordinate <- catchTemplate(node))
             {
-                return Some(coordinate)        
+                return Some(ParseResult(coordinate) )
             }
 
             for( text <- StringParser.parse(node);
-                 coordinate <- parseGeoCoordinate(text) )
+                 coordinate <- parseGeoCoordinate(text.value) )
             {
-                return Some(coordinate)
+                return Some(ParseResult(coordinate))
             }
         }
         catch
@@ -70,7 +70,7 @@ class GeoCoordinateParser(
             }
             case _ =>
             {
-                node.children.flatMap(catchTemplate(_)).headOption
+                node.children.flatMap(catchTemplate).headOption
             }
         }
     }

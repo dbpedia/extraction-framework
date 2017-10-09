@@ -2,9 +2,9 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.ontology.datatypes._
+import org.dbpedia.extraction.ontology.datatypes.{Datatype, _}
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, Ontology, OntologyProperty}
-import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.TemplateNode
 
@@ -66,29 +66,37 @@ extends PropertyMapping
           val quad = (parseResult1, parseResult2) match
           {
               //UnitValueParser
-              case((value1 : Double, unit1 : UnitDatatype), (value2 : Double, unit2 : UnitDatatype)) =>
+              case(val1: ParseResult[Double], val2: ParseResult[Double]) if val1.unit.nonEmpty && val2.unit.nonEmpty =>
               {
+                val value1 = val1.unit.get match{
+                  case u : UnitDatatype => u.toStandardUnit(val1.value)
+                  case d : Datatype => val1.value
+                }
+                val value2 = val2.unit.get match{
+                  case u : UnitDatatype => u.toStandardUnit(val2.value)
+                  case d : Datatype => val2.value
+                }
                   val value = operation match
                   {
-                      case "add" => unit1.toStandardUnit(value1) + unit2.toStandardUnit(value2)
+                      case "add" => value1 + value2
                   }
-                  return writeUnitValue(value, unit1, subjectUri, node.sourceIri)
+                  return writeUnitValue(value, val1.unit.get, subjectUri, node.sourceIri)
               }
               //DoubleParser
-              case (value1 : Double, value2 : Double) =>
+              case (val1: ParseResult[Double], val2: ParseResult[Double]) =>
               {
                   val value = operation match
                   {
-                      case "add" => (value1 + value2).toString
+                      case "add" => (val1.value + val2.value).toString
                   }
                   staticType(subjectUri, value, node.sourceIri)
               }
               //IntegerParser
-              case (value1 : Int, value2 : Int) =>
+              case (val1: ParseResult[Double], val2: ParseResult[Double]) =>
               {
                   val value = operation match
                   {
-                      case "add" => (value1 + value2).toString
+                      case "add" => (val1.value + val2.value).toString
                   }
                   staticType(subjectUri, value, node.sourceIri)
               }
@@ -101,7 +109,7 @@ extends PropertyMapping
   }
 
   //TODO duplicated from SimplePropertyMapping
-  private def writeUnitValue(value : Double, unit : UnitDatatype, subjectUri : String, sourceUri : String) : Seq[Quad] =
+  private def writeUnitValue(value : Double, unit : Datatype, subjectUri : String, sourceUri : String) : Seq[Quad] =
   {
     //TODO better handling of inconvertible units
     if(unit.isInstanceOf[InconvertibleUnitDatatype])

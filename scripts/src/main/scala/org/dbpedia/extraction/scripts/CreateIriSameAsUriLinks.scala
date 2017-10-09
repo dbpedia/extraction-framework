@@ -8,9 +8,10 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
-import org.dbpedia.extraction.util.{Config, Finder, Language, SimpleWorkers}
+import org.dbpedia.extraction.util.{Finder, Language, SimpleWorkers}
 import java.net.URI
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 object CreateIriSameAsUriLinks {

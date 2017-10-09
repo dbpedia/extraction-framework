@@ -9,7 +9,7 @@ import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
-import org.dbpedia.extraction.util.Config.MediaWikiConnection
+import org.dbpedia.extraction.config.Config.MediaWikiConnection
 
 /**
   * The Mediawiki API connector

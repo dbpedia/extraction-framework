@@ -3,10 +3,11 @@ package org.dbpedia.extraction.mappings
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.annotations.ExtractorAnnotation
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.{Config, Language, MediaWikiConnector}
+import org.dbpedia.extraction.util.{Language, MediaWikiConnector}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls

@@ -2,7 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import java.io.{BufferedWriter, File, FileWriter}
 
-import org.dbpedia.extraction.util.ConfigUtils._
+import org.dbpedia.extraction.config.ConfigUtils._
 import org.dbpedia.extraction.util.DateFinder
 import org.dbpedia.extraction.util.RichFile.wrapFile
 

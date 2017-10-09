@@ -15,6 +15,7 @@ import scala.collection._
 import scala.collection.convert.decorateAsScala._
 import java.util.concurrent.ConcurrentHashMap
 
+import org.dbpedia.extraction.config.{Config, ConfigUtils}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.util._

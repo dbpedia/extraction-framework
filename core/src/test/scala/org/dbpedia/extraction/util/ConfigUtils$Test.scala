@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.util
 
+import org.dbpedia.extraction.config.Config
 import org.scalatest.FunSuite
 
 /**

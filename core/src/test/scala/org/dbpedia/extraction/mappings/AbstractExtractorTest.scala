@@ -2,8 +2,9 @@ package org.dbpedia.extraction.mappings
 
 import java.io.{File, FilenameFilter}
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.sources.FileSource
-import org.dbpedia.extraction.util.{Config, Language, MediaWikiConnector}
+import org.dbpedia.extraction.util.{Language, MediaWikiConnector}
 import org.dbpedia.extraction.wikiparser._
 import org.junit.{Ignore, Test}
 

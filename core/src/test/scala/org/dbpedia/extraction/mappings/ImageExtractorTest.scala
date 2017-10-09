@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.ConfigUtils
 import org.dbpedia.extraction.sources.MemorySource
-import org.dbpedia.extraction.util.{ConfigUtils, Language}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner

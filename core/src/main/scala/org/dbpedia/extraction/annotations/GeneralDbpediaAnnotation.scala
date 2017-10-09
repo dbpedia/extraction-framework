@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.annotations
 
-import org.apache.jena.iri.IRI
 import org.dbpedia.extraction.ontology.DBpediaNamespace
+import org.dbpedia.iri.IRI
 
 import scala.annotation.StaticAnnotation
 

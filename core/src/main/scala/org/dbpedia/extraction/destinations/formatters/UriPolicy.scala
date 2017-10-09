@@ -4,7 +4,7 @@ import java.util.Properties
 import java.net.{IDN, URISyntaxException}
 
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.util.ConfigUtils.getStrings
+import org.dbpedia.extraction.config.ConfigUtils.getStrings
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.iri.IRI
 

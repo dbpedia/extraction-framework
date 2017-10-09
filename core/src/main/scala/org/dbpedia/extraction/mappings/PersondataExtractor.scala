@@ -76,7 +76,7 @@ extends PageNodeExtractor
                 {
                     case key if key == name =>
                     {
-                        for(nameValue <- StringParser.parse(property))
+                        for(nameValue <- StringParser.parse(property).map(_.value))
                         {
                             val nameParts = nameValue.split(",")
                             if (nameParts.size == 2)
@@ -111,7 +111,7 @@ extends PageNodeExtractor
                         }
                         case key if key == description =>
                         {
-                            for(value <- StringParser.parse(property))
+                            for(value <- StringParser.parse(property).map(_.value))
                             {
                                 quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceIri, new Datatype("rdf:langString"))
                             }
@@ -157,19 +157,19 @@ extends PageNodeExtractor
     {
         for (date <- dateParser.parse(node))
         {
-            return Some((date.toString, date.datatype))
+            return Some((date.toString, date.value.datatype))
         }
         for (date <- monthYearParser.parse(node))
         {
-            return Some((date.toString, date.datatype))
+            return Some((date.toString, date.value.datatype))
         }
         for (date <- monthDayParser.parse(node))
         {
-            return Some((date.toString, date.datatype))
+            return Some((date.toString, date.value.datatype))
         }
         for (date <- yearParser.parse(node))
         {
-            return Some((date.toString, date.datatype))
+            return Some((date.toString, date.value.datatype))
         }
         None
     }

@@ -8,7 +8,7 @@ import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{OntologyProperty, _}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.{Config, JsonConfig, Language, WikidataUtil}
+import org.dbpedia.extraction.util.{JsonConfig, Language, WikidataUtil}
 import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 import org.wikidata.wdtk.datamodel.interfaces._
 
@@ -19,6 +19,7 @@ import scala.language.reflectiveCalls
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import org.dbpedia.extraction.config.Config
 
 import scala.collection.convert.decorateAsScala._
 import scala.language.{postfixOps, reflectiveCalls}

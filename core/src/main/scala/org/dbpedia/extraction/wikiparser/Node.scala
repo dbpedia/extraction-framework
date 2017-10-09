@@ -236,7 +236,7 @@ private class UriGenerator
     {
         node match
         {
-            case TextNode(text, _) => sb.append(text)
+            case TextNode(text, _, _) => sb.append(text)
             case null => //ignore
             case _ : TemplateNode => //ignore
             case _ : TableNode => //ignore

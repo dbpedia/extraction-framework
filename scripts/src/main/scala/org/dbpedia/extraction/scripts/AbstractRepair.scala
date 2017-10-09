@@ -4,7 +4,7 @@ import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 import org.dbpedia.extraction.destinations.{CompositeDestination, WriterDestination}
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.config.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.dbpedia.extraction.util.RichFile.wrapFile

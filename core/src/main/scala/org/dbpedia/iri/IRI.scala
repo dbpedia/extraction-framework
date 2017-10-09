@@ -2,6 +2,7 @@ package org.dbpedia.iri
 
 import java.net.{URISyntaxException, URL}
 import java.util
+import java.util.logging.{Level, Logger}
 
 import org.apache.jena.iri.impl.IRIFactoryImpl
 import org.apache.jena.iri.{IRIFactory, Violation}
@@ -11,6 +12,8 @@ import org.apache.jena.iri.{IRIFactory, Violation}
   * Overrides all functions using AbsIRIImpl.getCooked which is not implemented and returns the raw results instead
   */
 class IRI(iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri.IRI{
+
+  private val logger = Logger.getLogger(getClass.getName)
 
   def this(iriString: String) = this(IRI.iriFactory.construct(iriString))
   def this(uri: URI) = this(IRI.iriFactory.construct(uri))
@@ -28,45 +31,47 @@ class IRI(iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri.IRI{
   def isOpaque: Boolean = this.isAbsolute && this.getRawPath == null
 
   override def getUserinfo: String = {
-    if(IRIBuilder.user.validate(iri.getRawUserinfo))
+    if(iri.getRawUserinfo == null)
+      return null
+    if(!IRIBuilder.user.validate(iri.getRawUserinfo))
+      logger.log(Level.WARNING, "User info is not valid: " + iri)
       iri.getRawUserinfo
-    else
-      throw new URISyntaxException(iri.getRawUserinfo, "UserInfo is not valid.")
   }
 
   override def getAuthority: String = {
-    if(IRIBuilder.authoritySection.validate(iri.getRawAuthority))
+    if(!IRIBuilder.authoritySection.validate(iri.getRawAuthority))
+      logger.log(Level.WARNING, "Authority is not valid: " + iri)
       iri.getRawAuthority
-    else
-      throw new URISyntaxException(iri.getRawAuthority, "Authority is not valid.")
   }
 
   override def getPath: String = {
-    if(IRIBuilder.path.validate(iri.getRawPath))
-      iri.getRawPath
-    else
-      throw new URISyntaxException(iri.getRawPath, "Path is not valid.")
+    if(iri.getRawPath == null)
+      return null
+    if(!IRIBuilder.path.validate(iri.getRawPath))
+      logger.log(Level.WARNING, "Path is not valid: " + iri)
+    iri.getRawPath
   }
 
   override def getFragment: String = {
-    if(IRIBuilder.fragment.validate(iri.getRawFragment))
-      iri.getRawFragment
-    else
-      throw new URISyntaxException(iri.getRawFragment, "Fragment is not valid.")
+    if(iri.getRawFragment == null)
+      return null
+    if(!IRIBuilder.fragment.validate(iri.getRawFragment))
+      logger.log(Level.WARNING, "Fragment is not valid: " + iri)
+    iri.getRawFragment
   }
 
   override def getHost: String = {
-    if(IRIBuilder.host.validate(iri.getRawHost))
+    if(!IRIBuilder.host.validate(iri.getRawHost))
+      logger.log(Level.WARNING, "Host is not valid: " + iri)
       iri.getRawHost
-    else
-      throw new URISyntaxException(iri.getRawHost, "Host is not valid.")
   }
 
   override def getQuery: String = {
-    if(IRIBuilder.query.validate(iri.getRawQuery))
+    if(iri.getRawQuery == null)
+      return null
+    if(!IRIBuilder.query.validate(iri.getRawQuery))
+      logger.log(Level.WARNING, "Query is not valid: " + iri)
       iri.getRawQuery
-    else
-      throw new URISyntaxException(iri.getRawQuery, "Query is not valid.")
   }
 
   override def toString: String = {

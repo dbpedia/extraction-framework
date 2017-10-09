@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.util
+package org.dbpedia.extraction.config
 
 import java.io.{File, FileOutputStream, OutputStreamWriter, Writer}
 import java.net.URL
@@ -9,15 +9,16 @@ import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.mappings.{ExtractionMonitor, Extractor}
-import org.dbpedia.extraction.util.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
-import org.dbpedia.extraction.util.ConfigUtils._
-import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util._
+import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.Map
 import scala.collection.mutable.ListBuffer
 import scala.io.Codec
 import scala.util.{Failure, Success, Try}
+import ConfigUtils._
+import org.dbpedia.extraction.config.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 
 
 class Config(val configPath: String) extends

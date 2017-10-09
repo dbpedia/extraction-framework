@@ -45,7 +45,7 @@ extends PageNodeExtractor
       val property = link.destinationNodes match
       {
         // TODO: comment: What's going on here? What does it mean if text starts with ":"?
-        case TextNode(text, _) :: Nil  if text.startsWith(":") => skosRelatedProperty
+        case TextNode(text, _, _) :: Nil  if text.startsWith(":") => skosRelatedProperty
         case _ => skosBroaderProperty
       }
       

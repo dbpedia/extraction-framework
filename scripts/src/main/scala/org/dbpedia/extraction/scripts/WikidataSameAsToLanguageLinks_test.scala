@@ -3,6 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 import java.util.regex.Matcher
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}

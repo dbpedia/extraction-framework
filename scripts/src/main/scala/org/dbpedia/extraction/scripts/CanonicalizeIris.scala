@@ -3,6 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations.DestinationUtils
 import org.dbpedia.extraction.destinations.formatters.{Formatter, TerseFormatter}

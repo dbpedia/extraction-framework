@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.io.File
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.destinations.WriterDestination
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.nif.WikipediaNifExtractor

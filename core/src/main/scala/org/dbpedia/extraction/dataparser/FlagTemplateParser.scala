@@ -12,7 +12,7 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
 {
     private val templates = FlagTemplateParserConfig.templateMap.getOrElse(extractionContext.language.wikiCode, FlagTemplateParserConfig.templateMap("en"))
     
-    override def parse(node : Node) : Option[WikiTitle] =
+    override def parse(node : Node) : Option[ParseResult[WikiTitle]] =
     {
         node match
         {
@@ -24,15 +24,15 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
                 {
                     for (countryNameNode <- templateNode.property("1"))
                     {
-                        countryNameNode.children.collect{case TextNode(text, _) => text}.headOption match
+                        countryNameNode.children.collect{case TextNode(text, _, _) => text}.headOption match
                         {
                             case Some(countryCode : String) if(countryCode.length == 2||countryCode.length == 3)&&(countryCode == countryCode.toUpperCase) =>
                             {
                                 //getCodeMap returns en if language code is not configured
                                 val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
-                                langCodeMap.get(countryCode).foreach(countryName => return Some(new WikiTitle(countryName, Namespace.Main, extractionContext.language)))
+                                langCodeMap.get(countryCode).foreach(countryName => return Some(ParseResult(new WikiTitle(countryName, Namespace.Main, extractionContext.language))))
                             }
-                            case Some(countryName : String) => return Some(new WikiTitle(countryName, Namespace.Main, extractionContext.language))
+                            case Some(countryName : String) => return Some(ParseResult(new WikiTitle(countryName, Namespace.Main, extractionContext.language)))
                             case _ =>
                         }
                     }
@@ -42,7 +42,7 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
                 else if ((templateName.length == 2 || templateName.length == 3) && (templateName == templateName.toUpperCase))
                 {
                     val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
-                    langCodeMap.get(templateName).foreach(countryName => return Some(new WikiTitle(countryName, Namespace.Main, extractionContext.language)))
+                    langCodeMap.get(templateName).foreach(countryName => return Some(ParseResult(new WikiTitle(countryName, Namespace.Main, extractionContext.language))))
                 }
                 
                 else
@@ -50,7 +50,7 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
                     val fullCountryNames = FlagTemplateParserConfig.getFullCountryNames(extractionContext.language.wikiCode)
                     if (fullCountryNames.contains(templateName))
                     {
-                        return Some(new WikiTitle(templateName, Namespace.Main, extractionContext.language))
+                        return Some(ParseResult(new WikiTitle(templateName, Namespace.Main, extractionContext.language)))
                     }
                 }
 

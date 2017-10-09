@@ -45,7 +45,7 @@ extends PropertyMapping
       property <- node.property(templateProperty);
       parseResult <- parser.parse(property)
     )
-      dates += parseResult
+      dates += parseResult.value
     
     try {
       val mergedDate = Date.merge(dates, datatype)

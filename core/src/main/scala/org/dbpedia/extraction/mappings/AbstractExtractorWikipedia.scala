@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Config, Language}
+import org.dbpedia.extraction.util.Language
 
 import scala.language.reflectiveCalls
 

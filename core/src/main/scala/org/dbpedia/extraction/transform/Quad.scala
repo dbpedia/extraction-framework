@@ -173,7 +173,7 @@ with Equals
 
   def hasObjectPredicate: Boolean =
   {
-    datatype == null && language == null && UriUtils.createIri(value).get.isAbsolute
+    datatype == null && language == null && UriUtils.createURI(value).get.isAbsolute
   }
 }
 

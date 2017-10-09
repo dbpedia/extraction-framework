@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.scripts
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations.DestinationUtils
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.{Config, DateFinder, Language}
+import org.dbpedia.extraction.util.{DateFinder, Language}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 
 import scala.collection.mutable

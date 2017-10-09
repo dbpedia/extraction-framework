@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.server
 
-import org.dbpedia.extraction.util.ConfigUtils._
+import org.dbpedia.extraction.config.ConfigUtils._
 import java.io.File
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.mappings.Extractor
-import org.dbpedia.extraction.util.{Config, ExtractorUtils, Language}
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 
 /**
  * User: Dimitris Kontokostas

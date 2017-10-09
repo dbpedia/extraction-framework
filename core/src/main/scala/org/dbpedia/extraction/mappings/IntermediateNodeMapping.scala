@@ -1,13 +1,17 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
-import scala.collection.mutable.{Buffer,ArrayBuffer}
+
+import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+
+import scala.collection.mutable
 import scala.language.reflectiveCalls
 
 class IntermediateNodeMapping (
@@ -24,11 +28,11 @@ extends PropertyMapping
   private val logger = Logger.getLogger(classOf[IntermediateNodeMapping].getName)
 
   private val splitRegex = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(context.language.wikiCode))
-                             DataParserConfig.splitPropertyNodeRegexInfobox.get(context.language.wikiCode).get
-                           else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
+                             DataParserConfig.splitPropertyNodeRegexInfobox(context.language.wikiCode)
+                           else DataParserConfig.splitPropertyNodeRegexInfobox("en")
 
-  override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive, DBpediaDatasets.OntologyPropertiesObjects)
-    
+  override val datasets: Set[Dataset] = mappings.flatMap(_.datasets).toSet ++
+    Set(DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive, DBpediaDatasets.OntologyPropertiesObjects)
 
   override def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
@@ -76,17 +80,17 @@ extends PropertyMapping
     graph
   }
 
-  private def createInstance(graph: Buffer[Quad], node : TemplateNode, originalSubjectUri : String): Unit =
+  private def createInstance(graph: mutable.Buffer[Quad], node : TemplateNode, originalSubjectUri : String): Unit =
   {
-    val instanceUri = node.generateUri(originalSubjectUri, node)
+    val instanceUri = node.generateUri(originalSubjectUri, nodeClass.name)
     
     // extract quads
     val values = mappings.flatMap(_.extract(node, instanceUri))
 
     // only generate triples if we actually extracted some values
-    if(! values.isEmpty)
+    if(values.nonEmpty)
     {
-      graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, originalSubjectUri, correspondingProperty, instanceUri, node.sourceIri);
+      graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, originalSubjectUri, correspondingProperty, instanceUri, node.sourceIri)
       
       for (cls <- nodeClass.relatedClasses) {
         // Here we split the transitive types from the direct type assignment

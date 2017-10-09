@@ -2,7 +2,8 @@ package org.dbpedia.extraction.dump.extract
 
 import java.net.Authenticator
 
-import org.dbpedia.extraction.util.{Config, ProxyAuthenticator}
+import org.dbpedia.extraction.config.Config
+import org.dbpedia.extraction.util.ProxyAuthenticator
 
 /**
  * Dump extraction script.

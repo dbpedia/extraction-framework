@@ -3,11 +3,11 @@ package org.dbpedia.extraction.dump.download
 import java.io.File
 import java.net.{MalformedURLException, URL}
 
-import org.dbpedia.extraction.util.{Config, ConfigUtils, Finder, Language}
+import org.dbpedia.extraction.config.{Config, ConfigUtils}
+import org.dbpedia.extraction.util.{Finder, Language}
 
 import scala.collection.mutable
 import scala.util.matching.Regex
-
 import org.dbpedia.extraction.util.RichFile.wrapFile
 
 class DownloadConfig(path: String) extends Config(path)

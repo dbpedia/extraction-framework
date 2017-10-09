@@ -10,6 +10,8 @@ import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
 import scala.io.Codec
 import java.util.Properties
 
+import org.dbpedia.extraction.config.Config
+
 import scala.collection.mutable
 import scala.io.Source
 

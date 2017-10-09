@@ -38,12 +38,12 @@ extends PageNodeExtractor
     
     // Iterate through all root templates.
     // Not recursing into templates as these are presumed to be handled by template-based mechanisms (GeoCoordinatesMapping).
-    for( 
+    for(
       templateNode @ TemplateNode(_, _, _, _) <- page.children;
-      coordinate <- geoCoordinateParser.parse(templateNode) 
+      coordinate <- geoCoordinateParser.parse(templateNode)
     )
     {
-      return writeGeoCoordinate(coordinate, subjectUri, page.sourceIri)
+      return writeGeoCoordinate(coordinate.value, subjectUri, page.sourceIri)
     }
 
     Seq.empty

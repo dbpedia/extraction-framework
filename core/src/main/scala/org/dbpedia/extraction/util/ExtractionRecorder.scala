@@ -10,7 +10,7 @@ import org.apache.jena.atlas.json.{JSON, JsonArray, JsonObject}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.mappings.ExtractionMonitor
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.Config.SlackCredentials
+import org.dbpedia.extraction.config.Config.SlackCredentials
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiPage, WikiTitle}
 
 import scala.collection.mutable

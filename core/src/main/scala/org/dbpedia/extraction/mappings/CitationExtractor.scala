@@ -1,8 +1,5 @@
 package org.dbpedia.extraction.mappings
 
-import java.net.URI
-
-import org.apache.jena.iri.IRI
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
@@ -14,7 +11,7 @@ import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
-import org.dbpedia.iri.UriUtils
+import org.dbpedia.iri.{IRI, UriUtils}
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
@@ -147,10 +144,10 @@ extends WikiPageExtractor
                 val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
                 val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
-                for (splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode)) {
+                for (splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.unit.nonEmpty) {
                     val propertyUri = getPropertyUri(property.key)
                     try {
-                        quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, value, splitNode.sourceIri, datatype)
+                        quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.get)
                     }
                     catch {
                         case ex: IllegalArgumentException => println(ex)
@@ -161,7 +158,7 @@ extends WikiPageExtractor
         quads
     }
 
-    private def extractValue(node : PropertyNode) : List[(String, Datatype)] =
+    private def extractValue(node : PropertyNode) : List[ParseResult[String]] =
     {
         // TODO don't convert to SI units (what happens to {{convert|25|kg}} ?)
         extractUnitValue(node).foreach(result => return List(result))
@@ -178,24 +175,24 @@ extends WikiPageExtractor
             case links if links.nonEmpty => return links
             case _ =>
         }
-        StringParser.parse(node).map(value => (value, xsdStringDt)).toList
+        StringParser.parse(node).map(value => ParseResult(value.value, None, Some(xsdStringDt))).toList
     }
 
-    private def extractUnitValue(node : PropertyNode) : Option[(String, Datatype)] =
+    private def extractUnitValue(node : PropertyNode) : Option[ParseResult[String]] =
     {
         val unitValues =
         for (unitValueParser <- unitValueParsers;
-             (value, unit) <- unitValueParser.parse(node) )
-             yield (value, unit)
+             pr <- unitValueParser.parse(node) )
+             yield pr
 
         if (unitValues.size > 1)
         {
-            StringParser.parse(node).map(value => (value, xsdStringDt))
+            StringParser.parse(node).map(value => ParseResult(value.value, None, Some(xsdStringDt)))
         }
         else if (unitValues.size == 1)
         {
-            val (value, unit) = unitValues.head
-            Some((value.toString, unit))
+            val pr = unitValues.head
+            Some(ParseResult(pr.value.toString, None, pr.unit))
         }
         else
         {
@@ -212,22 +209,22 @@ extends WikiPageExtractor
     }
     */
 
-    private def extractRankNumber(node : PropertyNode) : Option[(String, Datatype)] =
+    private def extractRankNumber(node : PropertyNode) : Option[ParseResult[String]] =
     {
         StringParser.parse(node) match
         {
-            case Some(RankRegex(number)) => Some((number, new Datatype("xsd:integer")))
+            case Some(RankRegex(number)) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
             case _ => None
         }
     }
     
-    private def extractSingleCoordinate(node : PropertyNode) : Option[(String, Datatype)] =
+    private def extractSingleCoordinate(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        singleGeoCoordinateParser.parse(node).foreach(value => return Some((value.toDouble.toString, new Datatype("xsd:double"))))
+        singleGeoCoordinateParser.parse(node).foreach(value => return Some(ParseResult(value.value.toDouble.toString, None, Some(new Datatype("xsd:double")))))
         None
     }
 
-    private def extractDates(node : PropertyNode) : List[(String, Datatype)] =
+    private def extractDates(node : PropertyNode) : List[ParseResult[String]] =
     {
         for(date <- extractDate(node))
         {
@@ -244,31 +241,31 @@ extends WikiPageExtractor
         }
     }
     
-    private def extractDate(node : PropertyNode) : Option[(String, Datatype)] =
+    private def extractDate(node : PropertyNode) : Option[ParseResult[String]] =
     {
         for (dateTimeParser <- dateTimeParsers;
              date <- dateTimeParser.parse(node))
         {
-            return Some((date.toString, date.datatype))
+            return Some(ParseResult(date.value.toString, None, Some(date.value.datatype)))
         }
         None
     }
 
-    private def extractLinks(node : PropertyNode) : List[(String, Datatype)] =
+    private def extractLinks(node : PropertyNode) : List[ParseResult[String]] =
     {
         val splitNodes = NodeUtil.splitPropertyNode(node, """\s*\W+\s*""")
 
         splitNodes.flatMap(splitNode => objectParser.parse(splitNode)) match
         {
             // TODO: explain why we check links.size == splitNodes.size
-            case links if links.size == splitNodes.size => return links.map(link => (link, null))
+            case links if links.size == splitNodes.size => return links
             case _ => List.empty
         }
         
         splitNodes.flatMap(splitNode => linkParser.parse(splitNode)) match
         {
             // TODO: explain why we check links.size == splitNodes.size
-            case links if links.size == splitNodes.size => links.map(UriUtils.cleanLink).collect{case Some(link) => (link, null)}
+            case links if links.size == splitNodes.size => links.map(x => UriUtils.cleanLink(x.value)).collect{case Some(link) => ParseResult(link)}
             case _ => List.empty
         }
     }
@@ -290,8 +287,8 @@ extends WikiPageExtractor
     private def createCitationIri(templateNode: TemplateNode, key: String): Option[IRI] ={
         getPropertyValueAsStringForKeys(templateNode, List(key)) match{
             case Some(x) => preliminaryDomainMap.get(key) match{
-                case Some(domain) => UriUtils.createIri(domain + x.trim.toLowerCase).toOption
-                case None => UriUtils.createIri(x.trim.toLowerCase).toOption
+                case Some(domain) => UriUtils.createURI(domain + x.trim.toLowerCase).toOption
+                case None => UriUtils.createURI(x.trim.toLowerCase).toOption
             }
             case None => None
         }
@@ -344,7 +341,7 @@ extends WikiPageExtractor
     private def getPropertyValueAsString(propertyNode: PropertyNode): Option[String] =
     {
         StringParser.parse(propertyNode) match {
-            case Some(stringValue) if stringValue.trim.nonEmpty => Some(stringValue)
+            case Some(pr) if pr.value.trim.nonEmpty => Some(pr.value)
             case _ => None
         }
     }
@@ -352,13 +349,13 @@ extends WikiPageExtractor
     private def getPropertyValueAsLink(propertyNode: PropertyNode): Option[IRI] =
     {
         StringParser.parse(propertyNode) match {
-            case Some(stringValue) if stringValue.trim.nonEmpty => Some(stringValue)
+            case Some(pr) if pr.value.trim.nonEmpty => Some(pr.value)
             case _ => None
         }
 
         linkParser.parse(propertyNode) match {
-            case Some(linkFromParser) => Some(linkFromParser)
-            case _ => UriUtils.createIri(propertyNode.children.flatMap(_.toPlainText).mkString.trim) match{
+            case Some(pr) => Some(pr.value)
+            case _ => UriUtils.createURI(propertyNode.children.flatMap(_.toPlainText).mkString.trim) match{
                 case Success(iri) => if (iri.isAbsolute)
                         Some(iri)
                     else None
@@ -406,6 +403,6 @@ extends WikiPageExtractor
             }.foldLeft("") {
               _ + _
             }
-        UriUtils.createIri("http://citation.dbpedia.org/hash/" + shaHash).toOption
+        UriUtils.createURI("http://citation.dbpedia.org/hash/" + shaHash).toOption
     }
 }

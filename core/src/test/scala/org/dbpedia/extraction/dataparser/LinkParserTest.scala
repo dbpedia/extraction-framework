@@ -8,7 +8,7 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import java.net.URI
 
-import org.apache.jena.iri.IRI
+import org.dbpedia.iri.IRI
 
 @RunWith(classOf[JUnitRunner])
 class LinkParserTest extends FlatSpec with Matchers
@@ -110,7 +110,7 @@ class LinkParserTest extends FlatSpec with Matchers
 
     // Not strict parsing
     parser(page) match {
-      case Some(n) => notStrictParser.parse(n)
+      case Some(n) => notStrictParser.parse(n).map(_.value)
       case None => None
     }
   }

@@ -260,7 +260,7 @@ object MappingsLoader
 
         value match
         {
-            case Some(str) => str
+            case Some(str) => str.value
             case None =>
             {
                 if(required)

@@ -116,7 +116,7 @@ extends PageNodeExtractor
         case TemplateNode(_, children, _, _) =>
         {
           for (property <- children;
-               textNode @ TextNode(text, _) <- property.children;
+               textNode @ TextNode(text, _, _) <- property.children;
                fileName <- MediaExtractorConfig.MediaRegex.findFirstIn(text);
                encodedFileName = if (encodedLinkRegex.findFirstIn(fileName) == None)
                  WikiUtil.wikiEncode(fileName).capitalize(language.locale)
@@ -129,7 +129,7 @@ extends PageNodeExtractor
           searchMedia(children, sections).foreach(s => media += s)
         }
         // match Files included over galleries format("File:<filename>|<futherText>")
-        case (textNode @ TextNode(text, line)) if (text.contains("|")) =>
+        case (textNode @ TextNode(text, line, _)) if (text.contains("|")) =>
         {
           val textArray = text.split("\\|")
           if (textArray.nonEmpty) {

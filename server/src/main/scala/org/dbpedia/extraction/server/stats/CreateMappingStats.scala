@@ -9,7 +9,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.wikiparser.Namespace
 
-import org.dbpedia.extraction.util.ConfigUtils._
+import org.dbpedia.extraction.config.ConfigUtils._
 
 /**
  * Script to gather statistics about templates and properties:

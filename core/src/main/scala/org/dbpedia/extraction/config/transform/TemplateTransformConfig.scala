@@ -1,16 +1,15 @@
 package org.dbpedia.extraction.config.transform
 
-import java.net.URI
-import java.text.SimpleDateFormat
-import java.util.{Calendar, Locale}
-
+import com.fasterxml.jackson.databind.node.ArrayNode
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser.TextNode
 import org.dbpedia.iri.UriUtils
 
 import scala.collection.mutable.ArrayBuffer
 import scala.util.{Failure, Success}
+
+import scala.collection.convert.decorateAsScala._
 
 /**
  * Template transformations.
@@ -20,20 +19,74 @@ import scala.util.{Failure, Success}
  * http://en.wikipedia.org/wiki/Wikipedia:Template_messages
  *
  * and collect transformations for the commonly used templates
+  *
+  * TODO!!! We have to update the template name -> transform mappings!!!
  */
 object TemplateTransformConfig {
+
+  private val textNodeParamsRegex = "\\$\\(([0-9]+)\\|([^\\|]*)\\|([^\\)]*)\\)"r
+  private var transformerMap: Map[Language, Map[String, (TemplateNode, Language) => List[Node]]] = _
+
+  val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("templatetransform.json"))
+  transformerMap = (for (lang <- mappingsFile.keys() if lang != "comment") yield {
+    Language(lang) -> (for(trans <- mappingsFile.getMap(lang)) yield{
+      val templateNames = if(trans._1.contains("$(lang)"))
+        Language.map.keys.map(x => trans._1.replaceAll("\\$\\(lang\\)", x))
+      else
+        List(trans._1)
+
+      for(template <- templateNames) yield {
+        val keys = if (trans._2.get("keys") != null) trans._2.get("keys").asInstanceOf[ArrayNode].iterator().asScala.toList.map(_.asText()) else null
+        val contains = if (trans._2.get("whileList") != null) trans._2.get("whileList").asBoolean() else false
+        val replace = if (trans._2.get("replace") != null) trans._2.get("replace").asText() else null
+        template -> (trans._2.get("transformer").asText() match {
+          case "externalLinkNode" => externalLinkNode _
+          case "unwrapTemplates" => unwrapTemplates { p => if (contains) keys.contains(p.key) else !keys.contains(p.key) } _
+          case "extractChildren" => extractAndReplace(p => if (contains) keys.contains(p.key) else !keys.contains(p.key), replace) _
+          case "getLangText" => getLangText(p => if (contains) keys.contains(p.key) else !keys.contains(p.key), template.substring(5)) _
+          case "textNode" => textNode {
+            Option(replace) match {
+              case Some(s) => s
+              case None => ""
+            }
+          } _
+        })
+      }
+    }).flatten.toMap
+  }).toMap
 
   private def extractTextFromPropertyNode(node: Option[PropertyNode], prefix : String = "", suffix : String = "") : String = {
     node match {
       case Some(p) =>
-        val propertyText = p.children.collect { case TextNode(t, _) => t }.mkString.trim
+        val propertyText = p.children.collect {
+          case TextNode(t, _, _) => t
+          case ExternalLinkNode(iri, children, line, destinationNodes) => iri
+          case InternalLinkNode(destination, children , line, destinationNodes) => destination.decoded
+        }.mkString.trim
         if (propertyText.nonEmpty) prefix + propertyText + suffix else ""
       case None => ""
     }
   }
 
   // General functions
-  private def textNode(text: String)(node: TemplateNode, lang:Language) : List[TextNode] = List(TextNode(text, node.line))
+  private def textNode(text: String)(node: TemplateNode, lang:Language) : List[TextNode] = {
+    val resolved = textNodeParamsRegex.replaceAllIn(text, repl =>
+      extractTextFromPropertyNode(node.property(repl.group(1))))
+    List(TextNode(resolved, node.line))
+  }
+
+  // General functions
+  private def getLangText(filter: PropertyNode => Boolean, stringLang: String)(node: TemplateNode, lang:Language) : List[Node] = {
+    val children = extractChildren(filter, split = false)(node, lang)
+    val text = children.headOption match{
+      case Some(t) => t.toPlainText
+      case None => ""
+    }
+
+    textNode("<br />")(node, lang) :::
+    List(TextNode(text, node.line, Language(stringLang))) :::
+    textNode("<br />")(node, lang)
+  }
 
   /**
    * Extracts all the children of the PropertyNode's in the given TemplateNode
@@ -41,19 +94,39 @@ object TemplateTransformConfig {
   private def extractChildren(filter: PropertyNode => Boolean, split : Boolean = true)(node: TemplateNode, lang:Language) : List[Node] = {
     // We have to reverse because flatMap prepends to the final list
     // while we want to keep the original order
-    val children : List[Node] = node.children.filter(filter).flatMap(_.children).reverse
+    val children : List[Node] = node.children.filter(filter).flatMap(_.children)
 
     val splitChildren = new ArrayBuffer[Node]()
     val splitTxt = if (split) "<br />" else " "
     for ( c <- children) {
-      splitChildren += new TextNode(splitTxt, c.line)
+      if(split)
+        splitChildren += TextNode(splitTxt, c.line)
       splitChildren += c
     }
-    if (splitChildren.nonEmpty) {
-      splitChildren += new TextNode(splitTxt, 0)
+    if (split && splitChildren.nonEmpty) {
+      splitChildren += TextNode(splitTxt, 0)
     }
     splitChildren.toList
 
+  }
+
+  private def extractAndReplace(filter: PropertyNode => Boolean, replace: String = null)(node: TemplateNode, lang:Language) : List[Node] = {
+    val children = extractChildren(filter, replace == null)(node, lang)
+    if(replace != null)
+      //in this case we replace the position variables of a given replace-string with the children of the same number
+      //also we frame the results in line breaks to create multiple triples
+      textNode("<br />")(node, lang) :::
+      textNode(textNodeParamsRegex.replaceAllIn(replace, x => {
+        val ind = x.group(1).toInt-1
+        if(children.size > ind)
+          // prefix  +  main replacement         +  postfix
+          x.group(2) + children(ind).toPlainText + x.group(3)
+        else
+          ""
+      }))(node, lang) :::
+      textNode("<br />")(node, lang)
+    else
+      children
   }
 
   private def identity(node: TemplateNode, lang:Language) : List[Node] = List(node)
@@ -69,11 +142,10 @@ object TemplateTransformConfig {
       // The first parameter is parsed to see if it takes the form of a complete URL.
       // If it doesn't start with a URI scheme (such as "http:", "https:", or "ftp:"),
       // an "http://" prefix will be prepended to the specified generated target URL of the link.
-
-      UriUtils.createIri(extractTextFromPropertyNode(node.property("1"))) match{
+      UriUtils.createURI(extractTextFromPropertyNode(node.property("1"))) match{
         case Success(u) => {
           val iri = if (u.getScheme == null)
-            UriUtils.createIri("http://" + u.toString).get
+            UriUtils.createURI("http://" + u.toString).get
           else u
 
           List(
@@ -88,91 +160,6 @@ object TemplateTransformConfig {
         case Failure(f) => List(node)
       }
   }
-
-  private val transformMap : Map[String, Map[String, (TemplateNode, Language) => List[Node]]] = Map(
-
-    "en" -> Map(
-      "Dash" -> textNode(" - ") _ ,
-      "Spaced ndash" -> textNode(" - ") _ ,
-      "Ndash" -> textNode("-") _ ,
-      "Mdash" -> textNode(" - ") _ ,
-      "Marriage" -> extractChildren { p : PropertyNode => p.key != "end" && p.key != "()" }  _,
-      "Emdash" -> textNode(" - ") _ ,
-      "-" -> textNode("<br />") _ ,
-      "Clr" -> textNode("<br />") _ ,
-      "Nowrap" -> extractChildren { p => true }  _,
-      "Nobr" -> extractChildren { p => true }  _,
-      "Flatlist" -> extractChildren { p : PropertyNode => !(Set("class", "style", "indent").contains(p.key)) }  _,
-      "Plainlist" -> extractChildren { p : PropertyNode => !(Set("class", "style", "indent").contains(p.key)) } _ ,
-      "Hlist" ->  extractChildren { p : PropertyNode => !(Set("class", "style", "ul_style", "li_style", "indent").contains(p.key)) } _ ,
-      "Unbulleted list" -> extractChildren { p : PropertyNode => !(Set("class", "style", "ul_style", "li_style", "indent").contains(p.key)) } _ ,
-      "Collapsible list" -> extractChildren { p : PropertyNode => !(Set("expand", "framestyle", "titlestyle", "title", "liststyle", "hlist", "bullets").contains(p.key)) } _ ,
-      "Lang" -> ((node: TemplateNode, lang:Language) =>
-        List(new TextNode("<br />" + extractTextFromPropertyNode(node.property("3")) + "<br />", node.line))), //TODO: we need to set the language in the TextNode
-
-
-      "URL" -> externalLinkNode _ ,
-      "Official website" -> externalLinkNode _ ,
-
-      // http://en.wikipedia.org/wiki/Template:ICD10
-      // See https://github.com/dbpedia/extraction-framework/issues/40
-      "ICD10" ->
-        ((node: TemplateNode, lang:Language) =>
-          List(
-            new TextNode(extractTextFromPropertyNode(node.property("1")) +
-                         extractTextFromPropertyNode(node.property("2")) +
-                         extractTextFromPropertyNode(node.property("3"), "."), node.line)
-          )
-        )
-      ,
-      // http://en.wikipedia.org/wiki/Template:ICD9
-      // See https://github.com/dbpedia/extraction-framework/issues/40
-      "ICD9" -> extractChildren { p : PropertyNode => p.key == "1" } _ /*,
-
-      // see https://www.mediawiki.org/wiki/Help:Magic_words#Variables
-      // For now all these remain commented becase the SimpleWikiPArser cannot handle well nested templates and results in many errors
-      "CURRENTDAY" ->  textNode(" " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + " ") _ ,
-      "CURRENTDAY2" -> textNode(" " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + " ") _ ,
-      "CURRENTDOW" -> textNode(" " + Calendar.getInstance().get(Calendar.DAY_OF_WEEK) + " ") _ ,
-      "CURRENTDAYNAME" -> textNode(" " + Calendar.getInstance.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH) + " ") _ ,
-      "CURRENTHOUR" -> textNode(" " + Calendar.getInstance().get(Calendar.HOUR) + " ") _ ,
-      "CURRENTMONTH" ->  textNode(" " + Calendar.getInstance().get(Calendar.MONTH) + " ") _ ,
-      "CURRENTMONTHNAME" ->  textNode(" " + Calendar.getInstance.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH) + " ") _ ,
-      "CURRENTTIME" ->  textNode(" " + new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime) + " ") _ ,
-      "CURRENTTIMESTAMP" -> textNode(" " + new SimpleDateFormat("YYYYMMDDHHmmss").format(Calendar.getInstance().getTime) + " ") _ ,
-      "CURRENTWEEK" -> textNode(" " + Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) + " ") _ ,
-      "CURRENTYEAR" ->  textNode(" " + Calendar.getInstance().get(Calendar.YEAR) + " ") _ ,
-
-      "NAMESPACE" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.namespace.name + " ", node.line))),
-      "NAMESPACEE" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.namespace.name + " ", node.line))),
-      "NAMESPACENUMBER" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.namespace.code + " ", node.line))),
-      "REVISIONID" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.revision + " ", node.line))),
-      "REVISIONTIMESTAMP" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.timestamp + " ", node.line))),
-      "REVISIONUSER" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.contributorName + " ", node.line))),
-      //"REVISIONDAY2" -> textNode(" " + ((node: TemplateNode, lang:Language) => node.root.title.namespace.code) + " ") _ ,
-      //"REVISIONMONTH" -> textNode(" " + ((node: TemplateNode, lang:Language) => node.root.timestamp).distinct.mkString(" ")) + " ") _ ,
-      //"REVISIONYEAR" -> textNode(" " + ((node: TemplateNode, lang:Language) => node.root.title.namespace.code) + " ") _
-      //"TALKPAGENAME" -> textNode(" " + Calendar.getInstance().get(Calendar.YEAR) + " ") _ ,
-      "PAGEID" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.id + " ", node.line))),
-      "FULLPAGENAME" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.decodedWithNamespace + " ", node.line))),
-      "FULLPAGENAMEE" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.decodedWithNamespace + " ", node.line))),
-      "PAGENAME" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.decoded + " ", node.line))) ,
-      "PAGENAMEE" -> ((node: TemplateNode, lang:Language) => List( new TextNode(" " + node.root.title.decoded + " ", node.line)))  */
-
-    ),
-
-    "commons" -> Map(
-      "Self" -> unwrapTemplates { p: PropertyNode => !(Set("author", "attribution", "migration").contains(p.key)) } _,
-      "PD-Art" -> unwrapTemplates { p: PropertyNode => Set("1").contains(p.key) } _,
-      "PD-Art-two" -> unwrapTemplates { p: PropertyNode => !(Set("deathyear").contains(p.key)) } _,
-      "Licensed-PD-Art" -> unwrapTemplates { p: PropertyNode => Set("1", "2").contains(p.key) } _,
-      "Licensed-PD-Art-two" -> unwrapTemplates { p: PropertyNode => Set("1", "2", "3").contains(p.key) } _,
-      "Licensed-FOP" -> unwrapTemplates { p: PropertyNode => Set("1", "2").contains(p.key) } _,
-      "Copyright information" -> unwrapTemplates { p: PropertyNode => !(Set("13").contains(p.key)) } _,
-      "PD-scan" -> unwrapTemplates { p: PropertyNode => Set("1").contains(p.key) } _
-    )
-
-  )
 
   /*
    * Unwraps templates that contain other templates as arguments. Please ensure
@@ -209,7 +196,7 @@ object TemplateTransformConfig {
    */
   private def toTemplateNodes(nodes: List[Node], lang: Language): List[Node] =
       nodes.flatMap({
-        case TextNode(text, line) => List(TemplateNode(
+        case TextNode(text, line, _) => List(TemplateNode(
                 new WikiTitle(text.capitalize, templateNamespace, lang), 
                 List.empty, line
             ))
@@ -218,8 +205,14 @@ object TemplateTransformConfig {
 
   def apply(node: TemplateNode, lang: Language) : List[Node] = {
 
-     val mapKey = if (transformMap.contains(lang.wikiCode)) lang.wikiCode else "en"
+     val mapKey = if (transformerMap.contains(lang)) lang else Language.English
 
-     transformMap(mapKey).get(node.title.decoded).getOrElse(identity _)(node, lang)
+     val transformation = transformerMap(mapKey).get(node.title.decoded) match{
+       case Some(trans) => trans
+       case None =>
+         //TODO record un-transformed template to have statistics about which template to cover!
+         identity _
+     }
+    transformation(node, lang)
   }
 }

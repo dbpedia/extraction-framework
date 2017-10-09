@@ -2,6 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import java.io.File
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.RichFile.wrapFile

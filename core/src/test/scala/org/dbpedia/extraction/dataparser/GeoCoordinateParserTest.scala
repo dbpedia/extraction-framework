@@ -43,7 +43,7 @@ class GeoCoordinateParserTest extends FlatSpec with Matchers
 
       wikiParser(page) match
       {
-        case Some(n) => geoCoordinateParser.parse(n).map({x => (x.latitude, x.longitude)})
+        case Some(n) => geoCoordinateParser.parse(n).map({x => (x.value.latitude, x.value.longitude)})
         case None => None
       }
     }

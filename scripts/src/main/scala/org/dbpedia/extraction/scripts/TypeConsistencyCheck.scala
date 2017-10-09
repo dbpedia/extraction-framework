@@ -3,6 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.io.{File, Writer}
 import java.net.URL
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.Formatter

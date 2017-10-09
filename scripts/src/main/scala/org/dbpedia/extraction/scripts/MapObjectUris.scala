@@ -3,7 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 
 import org.apache.jena.ext.com.google.common.collect.{Multimaps, TreeMultimap}
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.config.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.{DateFinder, Language, SimpleWorkers, Workers}
 

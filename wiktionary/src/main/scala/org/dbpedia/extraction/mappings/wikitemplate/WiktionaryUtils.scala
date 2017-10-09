@@ -254,12 +254,12 @@ object MyStack {
     ).getOrElse(throw new Exception("Parser Error") )
     val nodes = new mutable.Stack[Node]()
 
-    if(appendedNewline && (page.children.last match {case TextNode("\n", _)=>true; case _ => false})){
+    if(appendedNewline && (page.children.last match {case TextNode("\n", _, _)=>true; case _ => false})){
       nodes.pushAll(page.children.reverse.tail) //without the last
     } else {
       nodes.pushAll(page.children.reverse)
     }
-    if(prependedNewline && (nodes.head match {case TextNode("\n", _)=>true; case _ => false})){
+    if(prependedNewline && (nodes.head match {case TextNode("\n", _, _)=>true; case _ => false})){
         nodes.pop
     }
 

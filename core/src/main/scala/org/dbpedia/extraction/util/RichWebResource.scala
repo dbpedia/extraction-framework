@@ -4,8 +4,7 @@ import java.io.{File, IOException, InputStream, OutputStream}
 import java.net.{HttpURLConnection, URL}
 
 import org.apache.commons.io.FileUtils
-import org.apache.jena.iri.IRI
-import org.dbpedia.iri.UriUtils
+import org.dbpedia.iri.{IRI, UriUtils}
 
 import scala.util.{Failure, Success, Try}
 
@@ -19,13 +18,13 @@ class RichWebResource(targetString: String)  extends FileLike[IRI] {
 
   //TODO - defferentiating between Directories and Files?
 
-  val uri: IRI = UriUtils.createIri(targetString).get
+  val uri: IRI = UriUtils.createURI(targetString).get
   /**
     * @return file name, or null if file path has no parts
     */
   override def name: String = uri.getPath
 
-  override def resolve(name: String): Try[IRI] = Try{uri.resolve(name)}
+  override def resolve(name: String): Try[IRI] = Try{new IRI(uri.resolve(name))}
 
   override def names: List[String] = List()
 

@@ -142,7 +142,7 @@ extends PageNodeExtractor
     // Match every node for TextNode, InternalLinkNode & InterWikiLinkNode
     // for other types of node => recursive search for these types in their children
     nodes.foreach(node => node match {
-      case TextNode(_,_) =>
+      case TextNode(_,_, _) =>
         // toWikiText is used instead of toPlainText because some images would get lost.
         ImageExtractorConfig.ImageLinkRegex.findAllIn(node.toWikiText).foreach(file => {
           // split on "[:=\\|]" removes unwanted leftovers from the wikiText

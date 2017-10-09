@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.scripts
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.ontology.{OntologyClass, RdfNamespace}

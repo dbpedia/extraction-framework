@@ -6,7 +6,7 @@ import org.dbpedia.extraction.nif.LinkExtractor.NifExtractorContext
 import org.dbpedia.extraction.nif.Paragraph.HtmlString
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.Config.NifParameters
+import org.dbpedia.extraction.config.Config.NifParameters
 import org.dbpedia.extraction.util.{CssConfigurationMap, RecordSeverity}
 import org.dbpedia.iri.UriUtils
 import org.jsoup.Jsoup
@@ -282,7 +282,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
         words += nifLinks(word, RdfNamespace.NIF.append("beginIndex"), (offset + link.getWordStart).toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
         words += nifLinks(word, RdfNamespace.NIF.append("endIndex"), (offset + link.getWordEnd).toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
         words += nifLinks(word, RdfNamespace.NIF.append("superString"), paragraphUri, sourceUrl, null)
-        UriUtils.createIri(link.getUri) match{
+        UriUtils.createURI(link.getUri) match{
           case Success(s) => words += nifLinks(word, "http://www.w3.org/2005/11/its/rdf#taIdentRef", s.toString, sourceUrl, null)  //TODO IRI's might throw exception in org.dbpedia.extraction.destinations.formatters please check this
           case Failure(f) =>
         }
@@ -431,10 +431,10 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
   }
 
   protected def getNifIri(nifClass: String, beginIndex: Int, endIndex: Int): String ={
-    UriUtils.createIri(nifContextIri) match{
+    UriUtils.createURI(nifContextIri) match{
       case Success(uri) =>
         var iri = uri.getScheme + "://" + uri.getHost + (if(uri.getPort > 0) ":" + uri.getPort else "") + uri.getPath + "?"
-        val m = uri.getQuery.split("&").map(_.trim).collect{ case x if !x.startsWith("nif=") => x}
+          val m = uri.getQuery.split("&").map(_.trim).collect{ case x if !x.startsWith("nif=") => x}
         iri += m.foldRight("")(_+"&"+_) + "nif=" + nifClass + "&char=" + beginIndex + "," + endIndex
         iri.replace("?&", "?")
       case Failure(f) => throw f

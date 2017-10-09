@@ -57,4 +57,4 @@ for i in $(seq $from $to); do
 	fi
 done;
 echo "}";
-) | perl -pe 's|(^\s*,"[0-9]+":)(\s*$)|$1null\n|g' | perl -pe 's/^(\s*"concept_rule":\s*"(?:.|\n)*?[^\\]".*)//g' | bzip2 -c > $targetFile
+) | perl -pe 's|(^\s*,"[0-9]+":)(\s*$)|$1null\n|g' | perl -pe 's/^(\s*"concept_rule":\s*"(?:.|\n)*?[^\\]".*)//mg' | bzip2 -c > $targetFile

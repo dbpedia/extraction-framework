@@ -100,7 +100,7 @@ extends PropertyMapping
         "Language can only be specified for datatype properties")
 
       // TODO: don't use string constant, use RdfNamespace
-      require(ontologyProperty.range.uri == "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+      require(ontologyProperty.range.uri == RdfNamespace.fullUri(RdfNamespace.RDF, "langString"),
         "Language can only be specified for rdf:langString datatype properties")
     }
     
@@ -115,63 +115,48 @@ extends PropertyMapping
           else {
             new ObjectParser(context)
           }
-        case dt : UnitDatatype      => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor)
-        case dt : DimensionDatatype => new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor)
+        case dt : UnitDatatype      =>
+          new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor)
+        case dt : DimensionDatatype =>
+          new UnitValueParser(context, if(unit != null) unit else dt, multiplicationFactor = factor)
         case dt : EnumerationDatatype =>
-        {
-            checkMultiplicationFactor("EnumerationDatatype")
-            new EnumerationParser(dt)
-        }
+          checkMultiplicationFactor("EnumerationDatatype")
+          new EnumerationParser(dt)
         case dt : Datatype => dt.name match
         {
             case "xsd:integer" => new IntegerParser(context, multiplicationFactor = factor)
-            case "xsd:positiveInteger"    => new IntegerParser(context, multiplicationFactor = factor, validRange = (i => i > 0))
-            case "xsd:nonNegativeInteger" => new IntegerParser(context, multiplicationFactor = factor, validRange = (i => i >=0))
-            case "xsd:nonPositiveInteger" => new IntegerParser(context, multiplicationFactor = factor, validRange = (i => i <=0))
-            case "xsd:negativeInteger"    => new IntegerParser(context, multiplicationFactor = factor, validRange = (i => i < 0))
+            case "xsd:positiveInteger"    => new IntegerParser(context, multiplicationFactor = factor, validRange = i => i > 0)
+            case "xsd:nonNegativeInteger" => new IntegerParser(context, multiplicationFactor = factor, validRange = i => i >= 0)
+            case "xsd:nonPositiveInteger" => new IntegerParser(context, multiplicationFactor = factor, validRange = i => i <= 0)
+            case "xsd:negativeInteger"    => new IntegerParser(context, multiplicationFactor = factor, validRange = i => i < 0)
             case "xsd:double" => new DoubleParser(context, multiplicationFactor = factor)
             case "xsd:float" => new DoubleParser(context, multiplicationFactor = factor)
             case "xsd:string" => // strings with no language tags
-            {
-                checkMultiplicationFactor("xsd:string")
-                StringParser
-            }
+              checkMultiplicationFactor("xsd:string")
+              StringParser
             case "rdf:langString" => // strings with language tags
-            {
               checkMultiplicationFactor("rdf:langString")
               StringParser
-            }
             case "xsd:anyURI" =>
-            {
-                checkMultiplicationFactor("xsd:anyURI")
-                new LinkParser(false)
-            }
+              checkMultiplicationFactor("xsd:anyURI")
+              new LinkParser(false)
             case "xsd:date" =>
-            {
-                checkMultiplicationFactor("xsd:date")
-                new DateTimeParser(context, dt)
-            }
+              checkMultiplicationFactor("xsd:date")
+              new DateTimeParser(context, dt)
             case "xsd:gYear" =>
-            {
-                checkMultiplicationFactor("xsd:gYear")
-                new DateTimeParser(context, dt)
-            }
+              checkMultiplicationFactor("xsd:gYear")
+              new DateTimeParser(context, dt)
             case "xsd:gYearMonth" =>
-            {
-                checkMultiplicationFactor("xsd:gYearMonth")
-                new DateTimeParser(context, dt)
-            }
+              checkMultiplicationFactor("xsd:gYearMonth")
+              new DateTimeParser(context, dt)
             case "xsd:gMonthDay" =>
-            {
-                checkMultiplicationFactor("xsd:gMonthDay")
-                new DateTimeParser(context, dt)
-            }
+              checkMultiplicationFactor("xsd:gMonthDay")
+              new DateTimeParser(context, dt)
             case "xsd:boolean" =>
-            {
-                checkMultiplicationFactor("xsd:boolean")
-                BooleanParser
-            }
-            case name => throw new IllegalArgumentException("Not implemented range " + name + " of property " + ontologyProperty)
+              checkMultiplicationFactor("xsd:boolean")
+              BooleanParser
+            case name =>
+              throw new IllegalArgumentException("Not implemented range " + name + " of property " + ontologyProperty)
         }
         case other => throw new IllegalArgumentException("Property " + ontologyProperty + " does have invalid range " + other)
     }
@@ -190,9 +175,8 @@ extends PropertyMapping
     {
         val graph = new ArrayBuffer[Quad]
 
-        for(propertyNode <- node.property(templateProperty) if propertyNode.children.size > 0)
+        for(propertyNode <- node.property(templateProperty) if propertyNode.children.nonEmpty)
         {
-
             val parseResults = try {
               parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
             } catch {
@@ -242,8 +226,8 @@ extends PropertyMapping
                     (if (isHashIri) "&objectHasFragment=" else "")
                 val g = parseResult match
                 {
-                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
-                    case value => writeValue(value, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
+                    case pr: ParseResult[Double] if pr.unit.nonEmpty => writeUnitValue(node, pr, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
+                    case pr: ParseResult[_] => writeValue(pr, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
                 }
 
                 graph ++= g
@@ -253,17 +237,20 @@ extends PropertyMapping
         graph
     }
 
-    private def writeUnitValue(node : TemplateNode, value : Double, unit : UnitDatatype, subjectUri : String, sourceUri : String): Seq[Quad] =
+    private def writeUnitValue(node : TemplateNode, pr: ParseResult[Double], subjectUri : String, sourceUri : String): Seq[Quad] =
     {
         //TODO better handling of inconvertible units
         if(unit.isInstanceOf[InconvertibleUnitDatatype])
         {
-            val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, value.toString, sourceUri, unit)
+            val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, unit)
             return Seq(quad)
         }
 
         //Write generic property
-        val stdValue = unit.toStandardUnit(value)
+        val stdValue = pr.unit match{
+          case Some(u) if u.isInstanceOf[UnitDatatype] => u.asInstanceOf[UnitDatatype].toStandardUnit(pr.value)
+          case None => pr.value  //should not happen
+        }
         
         val graph = new ArrayBuffer[Quad]
 
@@ -287,11 +274,14 @@ extends PropertyMapping
         graph
     }
 
-    private def writeValue(value : Any, subjectUri : String, sourceUri : String): Seq[Quad] =
+    private def writeValue(pr : ParseResult[_], subjectUri : String, sourceUri : String): Seq[Quad] =
     {
-        val datatype = if(ontologyProperty.range.isInstanceOf[Datatype]) ontologyProperty.range.asInstanceOf[Datatype] else null
+        val datatype = ontologyProperty.range match {
+          case datatype1: Datatype => datatype1
+          case _ => null
+        }
         val mapDataset = if (datatype == null) DBpediaDatasets.OntologyPropertiesObjects else DBpediaDatasets.OntologyPropertiesLiterals
 
-        Seq(new Quad(language, mapDataset, subjectUri, ontologyProperty, value.toString, sourceUri, datatype))
+        Seq(new Quad(pr.lang.getOrElse(language), mapDataset, subjectUri, ontologyProperty, pr.value.toString, sourceUri, datatype))
     }
 }

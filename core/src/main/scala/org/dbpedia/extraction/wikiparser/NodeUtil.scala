@@ -24,7 +24,7 @@ object NodeUtil
 
         for(child <- node.children) child match
         {
-            case TextNode(text, line) =>
+            case TextNode(text, line, _) =>
             {
                 val sb = new StringBuilder()
 
@@ -68,16 +68,23 @@ object NodeUtil
         propertyNode
     }
 
-    private def buildPropertyNode(text : String, line : Int, language : Language, transformCmd : String, transformFunc : String => String) : Node = {
+    private def buildPropertyNode(
+                                   text : String,
+                                   line : Int,
+                                   articleLanguage : Language,
+                                   transformCmd : String,
+                                   transformFunc : String => String,
+                                   literalLang: Language = null
+                                 ) : Node = {
 
-        val textNode = new TextNode(transformFunc(text), line)
+        val textNode = TextNode(transformFunc(text), line, literalLang)
 
         transformCmd match
         {
-            case "internal" => new InternalLinkNode(WikiTitle.parse(textNode.text, language), List(textNode), line)
+            case "internal" => InternalLinkNode(WikiTitle.parse(textNode.text, articleLanguage), List(textNode), line)
             case "external" => try {
                 if (UriUtils.hasKnownScheme(textNode.text))
-                    new ExternalLinkNode(UriUtils.createIri(textNode.text).get, List(textNode), line)
+                    ExternalLinkNode(UriUtils.createURI(textNode.text).get, List(textNode), line)
                 else
                     textNode
             } catch {
@@ -104,7 +111,7 @@ object NodeUtil
 
         for(child <- inputNode.children) child match
         {
-            case TextNode(text, line) =>
+            case TextNode(text, line, lang) =>
             {
                 val parts = text.split(fullRegex, -1)
 
@@ -112,9 +119,9 @@ object NodeUtil
                 {
                     if(parts.size > 1 && i < parts.size - 1)
                     {
-                        if(parts(i).size > 0) {
+                        if(parts(i).nonEmpty) {
 
-                          val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc)
+                          val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc, lang)
 
                           currentNodes = currentNode :: currentNodes
                         }
@@ -124,9 +131,9 @@ object NodeUtil
                     }
                     else
                     {
-                        if(parts(i).size > 0) {
+                        if(parts(i).nonEmpty) {
 
-                          val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc)
+                          val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc, lang)
 
                           currentNodes = currentNode :: currentNodes
                         }
@@ -136,7 +143,7 @@ object NodeUtil
             case ExternalLinkNode(destinationURI, children, line, destinationNodes) =>
                 // In case of an external link node, transform the URI using the
                 // transform function and attempt to use the result as a URI.
-                UriUtils.createIri(transformFunc(destinationURI.toString)) match{
+                UriUtils.createURI(transformFunc(destinationURI.toString)) match{
                     case Success(u) => currentNodes = ExternalLinkNode(u, children, line, destinationNodes) :: currentNodes
                     case Failure(f) => f match{
                         // If the new URI doesn't make syntactical sense, produce
@@ -186,7 +193,7 @@ object NodeUtil
 
         for(child <- inputNodes) child match
         {
-            case TextNode(text, line) =>
+            case TextNode(text, line, _) =>
             {
                 val parts = text.split(fullRegex, -1)
 

@@ -79,7 +79,7 @@ object RecodeUris {
       if(recodeToIris)
         UriUtils.uriToDbpediaIri(uri).toString
       else
-        UriUtils.createIri(uri) match{
+        UriUtils.createURI(uri) match{
           case Success(s) => s.toASCIIString
           case Failure(f) => null
         }

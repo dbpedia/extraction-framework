@@ -4,6 +4,7 @@ import java.io.{File, Writer}
 import java.util.logging.{Level, Logger}
 
 import org.apache.commons.lang3.SystemUtils
+import org.dbpedia.extraction.config.Config
 
 import scala.util.control.Breaks._
 import org.dbpedia.extraction.util._

@@ -1,8 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
-import java.net.URI
-
-import org.apache.jena.iri.IRI
+import org.dbpedia.iri.IRI
 
 /**
  * Represents a Link.

@@ -60,7 +60,7 @@ extends PageNodeExtractor
       for (child <- property.children) {
         child match
         {
-          case (textNode @ TextNode(text, _)) =>
+          case (textNode @ TextNode(text, _, _)) =>
           {
             val cleaned = cleanProperty(text)
             if (cleaned.nonEmpty) { // do not proceed if the property value is not a valid candidate
@@ -116,7 +116,7 @@ extends PageNodeExtractor
 
   private def generateStatement(subjectUri: String, url: String, node: Node): Seq[Quad] =
   {
-    UriUtils.createIri(url) match{
+    UriUtils.createURI(url) match{
       case Success(u) => UriUtils.cleanLink(u) match{
         case Some(c) => Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, c , node.sourceIri))
         case None => Seq()
@@ -139,7 +139,7 @@ extends PageNodeExtractor
     In 2) => PropertyNode("key", List(ExternalLinkNode(URI("http://example.com"), ...)))
      */
     val url = node.children.collect {
-      case TextNode(t, _) => t
+      case TextNode(t, _, _) => t
       case ExternalLinkNode(destination, _, _, _) => destination.toString
     }.mkString.trim
 
@@ -151,7 +151,7 @@ extends PageNodeExtractor
           url
         else
           ("http://" + url)
-        UriUtils.createIri(urlWithScheme).toOption.map(_.toString)
+        UriUtils.createURI(urlWithScheme).toOption.map(_.toString)
     }
   }
 
@@ -182,7 +182,7 @@ extends PageNodeExtractor
     // TODO: use for-loop instead of recursion
     nodes match
     {
-      case TextNode(listItemStartRegex(officialMatch), _) :: tail =>
+      case TextNode(listItemStartRegex(officialMatch), _, _) :: tail =>
       {
         findExternalLinkNodeInLine(tail, officialMatch != null) match
         {
@@ -200,7 +200,7 @@ extends PageNodeExtractor
     // TODO: use for-loop instead of recursion
     nodes match
     {
-      case ExternalLinkNode(destination, TextNode(label, _) :: Nil, _, _) :: tail =>
+      case ExternalLinkNode(destination, TextNode(label, _, _) :: Nil, _, _) :: tail =>
       {
         if (officialRegex.findFirstIn(label).isDefined)
         {
@@ -211,7 +211,7 @@ extends PageNodeExtractor
           findExternalLinkNodeInLine(tail, false, destination.toString)
         }
       }
-      case TextNode(officialAndLineEndRegex(), _) :: tail =>
+      case TextNode(officialAndLineEndRegex(), _, _) :: tail =>
       {
         if (link != null)
         {
@@ -222,7 +222,7 @@ extends PageNodeExtractor
           findExternalLinkNodeInLine(tail, true)
         }
       }
-      case TextNode(officialAndNoLineEndRegex(), _) :: tail =>
+      case TextNode(officialAndNoLineEndRegex(), _, _) :: tail =>
       {
         if (link != null)
         {
@@ -233,7 +233,7 @@ extends PageNodeExtractor
           findExternalLinkNodeInLine(tail, true)
         }
       }
-      case TextNode(lineEndRegex, _) :: _ => None
+      case TextNode(lineEndRegex, _, _) :: _ => None
       case head :: tail => findExternalLinkNodeInLine(tail, officialMatch, link)
       case _ => None
     }

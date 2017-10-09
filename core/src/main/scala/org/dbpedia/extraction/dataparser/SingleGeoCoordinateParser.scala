@@ -26,14 +26,14 @@ class SingleGeoCoordinateParser(context : { def language : Language }) extends D
 	private val LatitudeRegex = ("""([0-9]{1,2})/([0-9]{1,2})/([0-9]{0,2}(?:.[0-9]{1,2})?)[/]?[\s]?("""+ latHemRegex +""")""").r
 	
 
-    override def parse(node : Node) : Option[SingleGeoCoordinate] =
+    override def parse(node : Node) : Option[ParseResult[SingleGeoCoordinate]] =
     {
         try
         {
             for( text <- StringParser.parse(node);
-                 coordinate <- parseSingleCoordinate(text) )
+                 coordinate <- parseSingleCoordinate(text.value) )
             {
-                return Some(coordinate)
+                return Some(ParseResult(coordinate))
             }
         }
         catch

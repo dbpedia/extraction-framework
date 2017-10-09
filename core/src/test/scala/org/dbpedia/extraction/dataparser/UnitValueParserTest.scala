@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.mappings.Redirects
+import org.dbpedia.extraction.ontology.datatypes.UnitDatatype
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.MemorySource
 import org.dbpedia.extraction.util.Language
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers
-import org.scalatest.matchers.{MatchResult, BeMatcher}
+import org.scalatest.matchers.{BeMatcher, MatchResult}
+
 import scala.math._
 import org.dbpedia.extraction.ontology.{Ontology, OntologyDatatypes}
 import org.junit.runner.RunWith
@@ -655,7 +657,8 @@ class UnitValueParserTest extends FlatSpec with Matchers
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)
 
         wikiParser(page) match {
-          case Some(n) =>  unitValueParser.parse(n).map{case (value, dt) => dt.toStandardUnit(value)}
+          case Some(n) =>  unitValueParser.parse(n).map{case dt: ParseResult[_] if dt.unit.isDefined && dt.unit.get.isInstanceOf[UnitDatatype] =>
+            dt.unit.get.asInstanceOf[UnitDatatype].toStandardUnit(dt.value)}
           case None => None
         }
     }

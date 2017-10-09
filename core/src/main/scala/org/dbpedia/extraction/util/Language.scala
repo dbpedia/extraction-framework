@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.util
 
 import java.util.logging.{Level, Logger}
-import java.util.{MissingResourceException, Locale}
+import java.util.{Locale, MissingResourceException}
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 
 import scala.collection.mutable.HashMap

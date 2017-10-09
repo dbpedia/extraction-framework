@@ -256,16 +256,16 @@ final class SwebleWrapper extends WikiParser
                 }
             }
             case el : WtExternalLink => {
-                val destinationURL = UriUtils.createIri(el.getTarget) match{
+                val destinationURL = UriUtils.createURI(el.getTarget) match{
                     case Success(u) => u
-                    case Failure(f) => UriUtils.createIri("http://example.org").get
+                    case Failure(f) => UriUtils.createURI("http://example.org").get
                 }
                 val destinationNodes = List[Node](TextNode(el.getTarget.toString, start_line + line)) //parsing of target not yet supported
                 val titleNodes = transformNodes(el.getTitle, start_line)
                 List(ExternalLinkNode(destinationURL, titleNodes, start_line + line, destinationNodes))
             }
             case url : WtUrl => {
-                val destinationURL = UriUtils.createIri(url).get
+                val destinationURL = UriUtils.createURI(url).get
                 val destinationNodes = List[Node](TextNode(url, start_line + line)) //parsing of target not yet supported
                 List(ExternalLinkNode(destinationURL, destinationNodes, start_line + line, destinationNodes))
             }

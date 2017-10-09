@@ -239,7 +239,7 @@ class OntologyReader
     {
         node.property(propertyName) match
         {
-            case Some(PropertyNode(_, TextNode(text, _) :: Nil, _)) if !text.trim.isEmpty => Some(text.trim)
+            case Some(PropertyNode(_, TextNode(text, _, _) :: Nil, _)) if !text.trim.isEmpty => Some(text.trim)
             case _ => None
         }
     }
@@ -292,7 +292,7 @@ class OntologyReader
           case template @ TemplateNode(title, _, _, _) if title.decoded equalsIgnoreCase templateName => {
             readPropertyTemplate(template)
           }
-          case TextNode(text, _) if text.trim.isEmpty => {
+          case TextNode(text, _, _) if text.trim.isEmpty => {
             None // ignore space between templates
           }
           case _ => {
