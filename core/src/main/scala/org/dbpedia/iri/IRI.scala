@@ -1,8 +1,7 @@
 package org.dbpedia.iri
 
-import java.net.{URISyntaxException, URL}
+import java.net.URL
 import java.util
-import java.util.logging.{Level, Logger}
 
 import org.apache.jena.iri.impl.IRIFactoryImpl
 import org.apache.jena.iri.{IRIFactory, Violation}
@@ -14,8 +13,6 @@ import scala.util.{Failure, Success, Try}
   * Overrides all functions using AbsIRIImpl.getCooked which is not implemented and returns the raw results instead
   */
 class IRI private[iri](iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri.IRI{
-
-  private val logger = Logger.getLogger(getClass.getName)
 
   /**
     * Tells whether or not this URI is opaque.
@@ -33,13 +30,15 @@ class IRI private[iri](iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri
     if(iri.getRawUserinfo == null)
       return null
     if(!IRIBuilder.user.validate(iri.getRawUserinfo))
-      logger.log(Level.WARNING, "User info is not valid: " + iri)
+      null
+    else
       iri.getRawUserinfo
   }
 
   override def getAuthority: String = {
     if(!IRIBuilder.authoritySection.validate(iri.getRawAuthority))
-      logger.log(Level.WARNING, "Authority is not valid: " + iri)
+      null
+    else
       iri.getRawAuthority
   }
 
@@ -47,21 +46,24 @@ class IRI private[iri](iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri
     if(iri.getRawPath == null)
       return null
     if(!IRIBuilder.path.validate(iri.getRawPath))
-      logger.log(Level.WARNING, "Path is not valid: " + iri)
-    iri.getRawPath
+      null
+    else
+      iri.getRawPath
   }
 
   override def getFragment: String = {
     if(iri.getRawFragment == null)
       return null
     if(!IRIBuilder.fragment.validate(iri.getRawFragment))
-      logger.log(Level.WARNING, "Fragment is not valid: " + iri)
-    iri.getRawFragment
+      null
+    else
+      iri.getRawFragment
   }
 
   override def getHost: String = {
     if(!IRIBuilder.host.validate(iri.getRawHost))
-      logger.log(Level.WARNING, "Host is not valid: " + iri)
+      null
+    else
       iri.getRawHost
   }
 
@@ -69,7 +71,8 @@ class IRI private[iri](iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri
     if(iri.getRawQuery == null)
       return null
     if(!IRIBuilder.query.validate(iri.getRawQuery))
-      logger.log(Level.WARNING, "Query is not valid: " + iri)
+      null
+    else
       iri.getRawQuery
   }
 

@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentLinkedQueue
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.util.ProxyAuthenticator
 
-import scala.concurrent.{Future, Promise}
+import scala.concurrent.Future
 import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
 

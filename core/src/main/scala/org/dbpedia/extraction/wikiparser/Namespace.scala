@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.wikiparser
 
-import java.io.{File, FileInputStream, InputStreamReader}
+import java.io.File
 
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util.{JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 
-import scala.collection.mutable.HashMap
+import scala.collection.mutable
 
 /**
  * Namespaces codes.
@@ -25,10 +25,10 @@ class Namespace private[wikiparser](val code: Int, val name: String, dbpedia: Bo
     if (dbpedia) name
     else Namespaces.names(lang).getOrElse(code, throw new IllegalArgumentException("namespace number "+code+" not found for language '"+lang.wikiCode+"'")) 
   
-  override def toString = code+"/"+name
+  override def toString: String = code+"/"+name
   
   override def equals(other: Any): Boolean = other match {
-    case that: Namespace => (code == that.code && name == that.name)
+    case that: Namespace => code == that.code && name == that.name
     case _ => false
   }
 }
@@ -36,16 +36,16 @@ class Namespace private[wikiparser](val code: Int, val name: String, dbpedia: Bo
 object Namespace {
 
   // map from namespace code to namespace (all namespaces)
-  private val _values = new HashMap[Int, Namespace]
+  private val _values = new mutable.HashMap[Int, Namespace]
 
   // map from language to mapping namespace (only mapping namespaces)
-  private val _mappings = new HashMap[Language, Namespace]
+  private val _mappings = new mutable.HashMap[Language, Namespace]
 
   // map from chapter language to mapping namespace
-  private val _chapters = new HashMap[Language, Namespace]
+  private val _chapters = new mutable.HashMap[Language, Namespace]
 
   // map from namespace name to namespace (only dbpedia namespaces)
-  private val _dbpedias = new HashMap[String, Namespace]
+  private val _dbpedias = new mutable.HashMap[String, Namespace]
 
   private def create(code: Int, name: String, dbpedia: Boolean) : Namespace = {
     val namespace = new Namespace(code, name, dbpedia)
@@ -67,7 +67,7 @@ object Namespace {
   private val mediawiki = Map("Media"-> -2,"Special"-> -1,"Main"->0,"Talk"->1,"User"->2,"Project"->4,"File"->6,"MediaWiki"->8,"Template"->10,"Help"->12,"Category"->14)
 
   for ((name,code) <- mediawiki)
-    ns(code, name, false)
+    ns(code, name, dbpedia = false)
 
   // The following are used quite differently on different wikipedias, so we use generic names.
   // Most languages use 100-113, but hu uses 90-99.
@@ -76,20 +76,20 @@ object Namespace {
   // en added 2600 in July 2014. Let's go up to 2999. Namespaces > 3000 are discouraged according to
   // https://www.mediawiki.org/wiki/Extension_default_namespaces
   for (code <- (90 to 148 by 2) ++ (400 to 2998 by 2))
-    ns(code, "Namespace "+code, false)
+    ns(code, "Namespace "+code, dbpedia = false)
 
   // Namespaces used on http://mappings.dbpedia.org, sorted by number.
   // see http://mappings.dbpedia.org/api.php?action=query&meta=siteinfo&siprop=namespaces
-  ns(200, "OntologyClass", true)
-  ns(202, "OntologyProperty", true)
-  ns(206, "Datatype", true)
+  ns(200, "OntologyClass", dbpedia = true)
+  ns(202, "OntologyProperty", dbpedia = true)
+  ns(206, "Datatype", dbpedia = true)
 
   private val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("mappinglanguages.json"))
 
   for (lang <- mappingsFile.keys()) {
     val language = Language(lang)
     val properties = mappingsFile.getMap(lang)
-    val nns : Namespace = ns(new Integer(properties("code").asText), "Mapping " + lang, true)
+    val nns : Namespace = ns(new Integer(properties("code").asText), "Mapping " + lang, dbpedia = true)
 
     //test if mappings language has actual mappings!
     //load mappings to check if this language does have actual mappings!
