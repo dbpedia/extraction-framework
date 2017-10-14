@@ -56,7 +56,7 @@ object CreateMappingStats
         val pretty = args(3).toBoolean
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        var languages = parseLanguages(null, args.drop(4))
+        var languages = parseLanguages(inputDir, args.drop(4))
           
         // if no languages are given, use all languages for which a mapping namespace is defined
         if (languages.isEmpty) languages = Namespace.mappings.keySet.toArray

@@ -4,7 +4,9 @@ import org.dbpedia.extraction.util.{RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
+import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
+import scala.xml.Elem
 
 /**
  * Represents a wiki page
@@ -55,22 +57,27 @@ class WikiPage(
    def this(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, source: String) =
     this(title, redirect, id, revision, timestamp, 0, "", source, "")
 
-  override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
+  override def toString: String = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
 
-  def sourceIri : String = title.pageIri + (if (revision >= 0) "?oldid=" + revision else "")
+  private var _sourceIri: String = _
+  def sourceIri : String = {
+    if(_sourceIri == null)
+      _sourceIri = title.pageIri + "?" + (if (revision >= 0) "oldid=" + revision + "&" else "") + "ns=" + title.namespace.code
+    _sourceIri
+  }
 
   //Generate the page URI
-  def uri = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
+  def uri: String = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
 
-  def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
+  def toDumpXML: Elem = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
 
   private var isRetryy = false
 
-  def toggleRetry() = {
+  def toggleRetry(): Unit = {
     this.isRetryy = !this.isRetryy
   }
 
-  def isRetry = this.isRetryy
+  def isRetry: Boolean = this.isRetryy
 
 
   def addExtractionRecord(recordEntry: RecordEntry[WikiPage]): Unit ={
@@ -91,7 +98,7 @@ class WikiPage(
     addExtractionRecord(new RecordEntry[WikiPage](this, this.uri, severity, this.title.language, errorMsg, error))
   }
 
-  def getExtractionRecords() = this.extractionRecords.seq
+  def getExtractionRecords(): mutable.Seq[RecordEntry[WikiPage]] = this.extractionRecords.seq
 }
 
 object WikiPage {
@@ -102,7 +109,7 @@ object WikiPage {
    * TODO: use redirect
    * TODO: use <contributor> / <ip> if contributorID == 0
    */
-  def toDumpXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String) = {
+  def toDumpXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String): Elem = {
     <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.8/ http://www.mediawiki.org/xml/export-0.8.xsd"

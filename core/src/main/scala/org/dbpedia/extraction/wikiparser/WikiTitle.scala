@@ -56,17 +56,17 @@ class WikiTitle (
     /**
      * Returns useful info.
      */
-    override def toString() = {
+    override def toString(): String = {
       val frag = if (fragment == null) "" else ";fragment='"+fragment+"'"
-      "title="+decoded+";ns="+namespace+"/"+namespace.name(language)+";language:"+language+frag;
+      "title="+decoded+";ns="+namespace+"/"+namespace.name(language)+";language:"+language+frag
     }
 
     /**
      * TODO: also use fragment?
      */
-    override def equals(other : Any) = other match
+    override def equals(other : Any): Boolean = other match
     {
-        case title : WikiTitle => (language == title.language && namespace == title.namespace && decoded == title.decoded)
+        case title : WikiTitle => language == title.language && namespace == title.namespace && decoded == title.decoded
         case _ => false
     }
 
@@ -74,7 +74,7 @@ class WikiTitle (
      * TODO: do as Josh says in Effective Java, chapter 3.
      * TODO: also use fragment?
      */
-    override def hashCode() = language.hashCode ^ decoded.hashCode ^ namespace.hashCode
+    override def hashCode(): Int = language.hashCode ^ decoded.hashCode ^ namespace.hashCode
 
     /**
      * If somehow a different namespace is also given for this title, store it here. Otherwise,
@@ -87,7 +87,7 @@ class WikiTitle (
      * MySQL rightly complains about the duplicate title. As a workaround, we simply reject pages
      * for which the <ns> namespace doesn't fit the <title> namespace.
      */
-    var otherNamespace: Namespace = null
+    var otherNamespace: Namespace = _
 }
 
 object WikiTitle

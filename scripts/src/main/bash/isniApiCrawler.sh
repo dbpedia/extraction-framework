@@ -24,6 +24,8 @@ if [ -z ${to+x} ]; then
 	to=100000;
 fi
 
+proxy=$5;
+
 start=$(date +%s);
 all=0;
 (
@@ -36,7 +38,14 @@ while read line; do
     fi
 
     uri=$(echo "$line" | perl -pe 's|^\s*"([^"]+)".*|http://www.isni.org/isni/$1|');
-	curl -s "$uri" | perl -pe "s/^<\!DOCTYPE.*\n//";
+
+    if [ -z ${proxy+x} ]; then
+	    curl -s "$uri" | perl -pe "s/^<\!DOCTYPE.*\n//";
+	    echo "no proxy";
+    else
+	    curl -s -x "$proxy" "$uri" | perl -pe "s/^<\!DOCTYPE.*\n//";
+	    echo "with proxy";
+    fi
 
 	# giving summary reports every 100 ids
 	if [ $(( $all % 100 )) -eq 0 ]; then

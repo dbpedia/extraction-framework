@@ -143,5 +143,4 @@ object Namespace {
       case some => some // return what we found, don't un-wrap and re-wrap Some(namespace)
     }
   }
-
 }
