@@ -56,11 +56,12 @@
 							<id>stats</id>
 							<mainClass>org.dbpedia.extraction.server.stats.CreateMappingStats</mainClass>
 							<args>
-								<arg>/home/release/wikipedia</arg><!-- base dir -->
+								<arg>/data/extraction-data/2017-08</arg><!-- base dir -->
 								<arg>src/main/statistics</arg><!-- statistics files dir -->
-								<arg>.gz</arg><!-- file suffix: '.gz', '.bz2' or '' -->
-								<arg>false</arg><!-- pretty printing? ugly in log files. -->
-								<!-- all additional args are languages, comma or whitespace separated -->
+								<arg>.bz2</arg><!-- file suffix: '.gz', '.bz2' or '' -->
+								<arg>true</arg><!-- pretty printing? ugly in log files. -->
+<arg>de,en</arg>								
+<!-- all additional args are languages, comma or whitespace separated -->
 								<!-- if none are given, all languages with a mapping namespace are 
 									used -->
 								<!-- <arg>ar,bg,bn</arg> -->
