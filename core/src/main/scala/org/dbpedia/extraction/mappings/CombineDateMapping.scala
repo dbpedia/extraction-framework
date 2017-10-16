@@ -2,11 +2,12 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.dataparser.DateTimeParser
-import org.dbpedia.extraction.ontology.OntologyProperty
-import org.dbpedia.extraction.util.{Language, Date}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
+import org.dbpedia.extraction.util.{Date, Language}
+
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.Map
 import scala.language.reflectiveCalls
@@ -19,6 +20,7 @@ class CombineDateMapping (
   val templateProperties: Map[String, Datatype], // CreateMappingStats requires these to be public
   context : {
     def redirects : Redirects  // redirects required by DateTimeParser
+    def ontology: Ontology
     def language : Language
   }
 )

@@ -6,10 +6,11 @@ import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
 import java.util.logging.{Level, LogRecord, Logger}
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
-import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
+import org.dbpedia.extraction.util.Language
 
 import scala.language.reflectiveCalls
 import scala.reflect.ClassTag
@@ -210,6 +211,13 @@ object MappingsLoader
                                  loadTemplateProperty(tnode, "value", true),
                                  loadDatatype(tnode, "unit", false, context.ontology),
                                  context )
+        }
+        case "CombineSimpleMapping" =>
+        {
+          new CombineSimpleMapping( loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
+            tnode.keySet.filter(x => x.startsWith("templateProperty")).map(x => loadTemplateProperty(tnode, x, true)),
+            Option(loadTemplateProperty(tnode, "delineator", false)).getOrElse(""),
+            context )
         }
         case title => throw new IllegalArgumentException("Unknown property type " + title + " on page " + tnode.root.title)
     }

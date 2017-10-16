@@ -50,6 +50,7 @@ extends Extractor[TemplateNode]
       operator match
       {
           case "isSet" => ! propertyText.isEmpty
+          case "isIn" => value.split(",").map(_.trim.toLowerCase()).contains(propertyText)
           // FIXME: toLowerCase must use correct language locale
           case "equals" => propertyText == value.trim.toLowerCase
           // FIXME: toLowerCase must use correct language locale

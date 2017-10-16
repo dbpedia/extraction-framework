@@ -6,7 +6,7 @@ import java.lang.StringBuilder
 import java.sql.Connection
 import java.sql.SQLException
 
-import org.dbpedia.extraction.util.{RecordSeverity, WikiPageEntry}
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordSeverity, WikiPageEntry}
 import org.dbpedia.extraction.wikiparser.WikiPage
 
 import scala.util.control.ControlThrowable

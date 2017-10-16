@@ -5482,7 +5482,7 @@ bronmodel
 	                        | latitudeMinutes = lat_min | latitudeSeconds = lat_sec
                                 | latitudeDirection = lat_dir | longitudeDirection = lon_dir  }}  
 
-}}</text></revision></page><page><title>Mapping nl:Infobox geneesmiddel</title><ns>216</ns><id>6526</id><revision><id>51340</id><timestamp>2016-06-30T11:32:39Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping nl:Infobox geneesmiddel</title><ns>216</ns><id>6526</id><revision><id>52415</id><timestamp>2017-10-15T14:46:43Z</timestamp><text>{{TemplateMapping
 | mapToClass = Drug
 | mappings = 
 	{{PropertyMapping | templateProperty = naam               | ontologyProperty = name }}
@@ -5491,9 +5491,12 @@ bronmodel
 	{{PropertyMapping | templateProperty = afbeelding2        | ontologyProperty = picture }}
 	{{PropertyMapping | templateProperty = IUPAC_naam         | ontologyProperty = iupacName }}
 	{{PropertyMapping | templateProperty = IUPAC              | ontologyProperty = iupacName }}
-	{{PropertyMapping | templateProperty = ATC_prefix         | ontologyProperty = atcPrefix }}
-	{{PropertyMapping | templateProperty = ATC_suffix         | ontologyProperty = atcSuffix }}
-	{{PropertyMapping | templateProperty = ATC_supplemental   | ontologyProperty = atcSupplemental }}
+	{{CombineSimpleMapping
+	| templateProperty1 = ATC_prefix
+	| templateProperty2 = ATC_suffix
+	| ontologyProperty = atcCode
+	}}
+	{{PropertyMapping | templateProperty = ATC_supplemental   | ontologyProperty = atcCode }}
 	{{PropertyMapping | templateProperty = DrugBank           | ontologyProperty = drugbank }}
         {{PropertyMapping | templateProperty = PubChem            | ontologyProperty = pubchem }}
 	{{PropertyMapping | templateProperty = kleur              | ontologyProperty = colour }}

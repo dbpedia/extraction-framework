@@ -1,22 +1,22 @@
 package org.dbpedia.extraction.server.resources
 
 import org.dbpedia.extraction.mappings.{MappingsLoader, Redirects}
-import org.dbpedia.extraction.util.{ExtractionRecorder, Language, WikiApi}
+import org.dbpedia.extraction.util.{Language, WikiApi}
 import org.dbpedia.extraction.server.resources.stylesheets.{Log, TriX}
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
 import java.util.logging.{Level, Logger}
 
-import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiParser, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiParser, WikiTitle}
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.destinations.{LimitingDestination, WriterDestination}
-import java.net.{URI, URL}
-import java.lang.Exception
 
-import xml.{Elem, NodeBuffer, ProcInstr, XML}
+import xml.{Elem, NodeBuffer}
 import java.io.StringWriter
+import java.net.URL
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.server.resources.rml.model.factories.RMLTemplateMappingFactory
 
 import scala.reflect.ClassTag

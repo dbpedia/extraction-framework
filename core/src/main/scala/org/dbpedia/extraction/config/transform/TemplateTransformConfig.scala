@@ -29,7 +29,8 @@ object TemplateTransformConfig {
 
   val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("templatetransform.json"))
   transformerMap = (for (lang <- mappingsFile.keys() if lang != "comment") yield {
-    Language(lang) -> (for(trans <- mappingsFile.getMap(lang)) yield{
+    val language = Language(lang)
+    language -> (for(trans <- mappingsFile.getMap(lang)) yield{
       val templateNames = if(trans._1.contains("$(lang)"))
         Language.map.keys.map(x => trans._1.replaceAll("\\$\\(lang\\)", x))
       else
@@ -39,7 +40,7 @@ object TemplateTransformConfig {
         val keys = if (trans._2.get("keys") != null) trans._2.get("keys").asInstanceOf[ArrayNode].iterator().asScala.toList.map(_.asText()) else null
         val contains = if (trans._2.get("whileList") != null) trans._2.get("whileList").asBoolean() else false
         val replace = if (trans._2.get("replace") != null) trans._2.get("replace").asText() else null
-        template -> (trans._2.get("transformer").asText() match {
+        template.trim.toLowerCase(language.locale) -> (trans._2.get("transformer").asText() match {
           case "externalLinkNode" => externalLinkNode _
           case "unwrapTemplates" => unwrapTemplates { p => if (contains) keys.contains(p.key) else !keys.contains(p.key) } _
           case "extractChildren" => extractAndReplace(p => if (contains) keys.contains(p.key) else !keys.contains(p.key), replace) _
@@ -212,7 +213,7 @@ object TemplateTransformConfig {
 
      val mapKey = if (transformerMap.contains(lang)) lang else Language.English
 
-     val transformation = transformerMap(mapKey).get(node.title.decoded) match{
+     val transformation = transformerMap(mapKey).get(node.title.decoded.toLowerCase(lang.locale)) match{
        case Some(trans) => trans
        case None =>
          //TODO record un-transformed template to have statistics about which template to cover!

@@ -19,36 +19,33 @@ class Ontology (
   val wikidataPropertiesMap : Map[String,Set[OntologyProperty]],
   val wikidataClassesMap : Map[String,Set[OntologyClass]]
 ){
+
+  private def resolveId(id: String) = if(id == null)
+      ""
+    else if(id.contains("/"))
+      id.substring(id.lastIndexOf("/")+1)
+    else if(id.startsWith("dbo:"))
+      id.substring(4)
+    else
+      id
+
   def getOntologyClass(id: String): Option[OntologyClass] ={
-    val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
-    classes.get(iid)
+    classes.get(resolveId(id))
   }
 
   def getOntologyProperty(id: String): Option[OntologyProperty] ={
-    val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
-    properties.get(iid)
+    properties.get(resolveId(id))
   }
 
   def getOntologyDatatype(id: String): Option[Datatype] ={
-    val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
-    datatypes.get(iid)
+    datatypes.get(resolveId(id))
   }
 
   def getWikidataClass(id: String): Option[Set[OntologyClass]] ={
-    val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
-    wikidataClassesMap.get(iid)
+    wikidataClassesMap.get(resolveId(id))
   }
 
   def getWikidataProperty(id: String): Option[Set[OntologyProperty]] ={
-    val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
-    wikidataPropertiesMap.get(iid)
+    wikidataPropertiesMap.get(resolveId(id))
   }
-
-  def isSubclassOf(sub: OntologyClass, sup: OntologyClass): Boolean ={
-    if (sup eq sub)
-      return true
-    sub.baseClasses.map(isSubclassOf(_, sup)).foldLeft(false)(_||_)
-  }
-
-  def isSuperclassOf(sup: OntologyClass, sub: OntologyClass): Boolean = isSubclassOf(sub, sup)
 }

@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.mappings
 
-import org.apache.jena.iri.IRIException
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
@@ -51,7 +50,7 @@ extends PageNodeExtractor
     if(page.title.namespace != Namespace.Main) return Seq.empty
 
     val list = collectProperties(page).filter(p => propertyNames.contains(p.key.toLowerCase)).flatMap {
-      NodeUtil.splitPropertyNode(_, splitPropertyNodeLinkStrict, true)
+      NodeUtil.splitPropertyNode(_, splitPropertyNodeLinkStrict, trimResults = true)
     }
 
     list.foreach((property) =>
@@ -61,25 +60,21 @@ extends PageNodeExtractor
         child match
         {
           case (textNode @ TextNode(text, _, _)) =>
-          {
             val cleaned = cleanProperty(text)
             if (cleaned.nonEmpty) { // do not proceed if the property value is not a valid candidate
               val url = if (UriUtils.hasKnownScheme(cleaned)) cleaned else "http://" + cleaned
               val graph = generateStatement(subjectUri, url, textNode)
-              if (!graph.isEmpty)
+              if (graph.nonEmpty)
               {
                 return graph
               }
             }
-          }
           case (linkNode @ ExternalLinkNode(destination, _, _, _)) =>
-          {
             val graph = generateStatement(subjectUri, destination.toString, linkNode)
-            if (!graph.isEmpty)
+            if (graph.nonEmpty)
             {
               return graph
             }
-          }
           case _ =>
         }
       }
@@ -90,12 +85,12 @@ extends PageNodeExtractor
       for((url, sourceNode) <- findLinkTemplateInSection(externalLinkSectionChildren))
       {
         val graph = generateStatement(subjectUri, url, sourceNode)
-        if (!graph.isEmpty) return graph
+        if (graph.nonEmpty) return graph
       }
       for((url, sourceNode) <- findLinkInSection(externalLinkSectionChildren))
       {
         val graph = generateStatement(subjectUri, url, sourceNode)
-        if (!graph.isEmpty) return graph
+        if (graph.nonEmpty) return graph
       }
     }
 
@@ -150,7 +145,7 @@ extends PageNodeExtractor
         val urlWithScheme = if (UriUtils.hasKnownScheme(url))
           url
         else
-          ("http://" + url)
+          "http://" + url
         UriUtils.createURI(urlWithScheme).toOption.map(_.toString)
     }
   }
@@ -161,7 +156,6 @@ extends PageNodeExtractor
     nodes match
     {
       case (templateNode @ TemplateNode(title, _, _, _)) :: tail =>
-      {
         val templateRedirect = context.redirects.resolve(title).decoded
         if (templateOfficialWebsite.contains(templateRedirect)) {
           templateNode.property(templateOfficialWebsite(templateRedirect)) match
@@ -171,7 +165,6 @@ extends PageNodeExtractor
           }
         }
         else findLinkTemplateInSection(tail)
-      }
       case head :: tail => findLinkTemplateInSection(tail)
       case Nil => None
     }
@@ -183,13 +176,11 @@ extends PageNodeExtractor
     nodes match
     {
       case TextNode(listItemStartRegex(officialMatch), _, _) :: tail =>
-      {
         findExternalLinkNodeInLine(tail, officialMatch != null) match
         {
           case Some(linkAndNode) => Some(linkAndNode)
           case _ => findLinkInSection(tail)
         }
-      }
       case head :: tail => findLinkInSection(tail)
       case _ => None
     }
@@ -201,39 +192,33 @@ extends PageNodeExtractor
     nodes match
     {
       case ExternalLinkNode(destination, TextNode(label, _, _) :: Nil, _, _) :: tail =>
-      {
         if (officialRegex.findFirstIn(label).isDefined)
         {
           Some((destination.toString, nodes.head))
         }
         else
         {
-          findExternalLinkNodeInLine(tail, false, destination.toString)
+          findExternalLinkNodeInLine(tail, officialMatch = false, destination.toString)
         }
-      }
       case TextNode(officialAndLineEndRegex(), _, _) :: tail =>
-      {
         if (link != null)
         {
           Some((link, nodes.head))
         }
         else
         {
-          findExternalLinkNodeInLine(tail, true)
+          findExternalLinkNodeInLine(tail, officialMatch = true)
         }
-      }
       case TextNode(officialAndNoLineEndRegex(), _, _) :: tail =>
-      {
         if (link != null)
         {
           Some((link, nodes.head))
         }
         else
         {
-          findExternalLinkNodeInLine(tail, true)
+          findExternalLinkNodeInLine(tail, officialMatch = true)
         }
-      }
-      case TextNode(lineEndRegex, _, _) :: _ => None
+      case TextNode(_, _, _) :: _ => None
       case head :: tail => findExternalLinkNodeInLine(tail, officialMatch, link)
       case _ => None
     }
@@ -253,7 +238,7 @@ extends PageNodeExtractor
   {
     nodes match
     {
-      case SectionNode(name, level, _, _) :: tail if (level <= sectionLevel) => Nil
+      case SectionNode(name, level, _, _) :: tail if level <= sectionLevel => Nil
       case head :: tail => head :: collectSectionChildNodes(tail, sectionLevel)
       case Nil => Nil
     }

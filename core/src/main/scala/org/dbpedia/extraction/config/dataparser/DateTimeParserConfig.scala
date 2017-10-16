@@ -86,6 +86,7 @@ object DateTimeParserConfig
     )
 
     //specifies for a template name (lower-cased) the property keys of year, month and day
+    // KEYS HAVE TO BE LOWERCASE!!!
     val templateDateMap = Map(
         // Sometimes the templates are used wrong like the following, but this is handled properly
         // {{birth date|df=yes|1833|10|21}}
@@ -116,10 +117,24 @@ object DateTimeParserConfig
             "birthdeathage"       -> Map ("ifPropertyNum" -> "1", "ifPropertyNumHasValue" -> "B", //"BirthDeathAge"
                                           "year" -> "2", "month"-> "3", "day" -> "4",
                                           "elseYear" -> "4", "elseMonth"-> "5", "elseDay" -> "6"),
-            "NBA Year"            -> Map ("year" -> "1"),
-            "Nbay"                -> Map ("year" -> "1"),
-            "NHL_Year"            -> Map ("year" -> "1"),
-            "nhly"                -> Map ("year" -> "1")
+            "year"                -> Map ("year" -> "1"),
+            "bc year in topic"    -> Map ("year" -> "1"),
+            "imdb country year"   -> Map ("year" -> "2"),
+            "birth year and age"  -> Map ("year" -> "1"),
+            "death year and age"  -> Map ("year" -> "1"),
+            "year dab"            -> Map ("year" -> "1"),
+            "dash year"           -> Map ("year" -> "1", "year2" -> "2"),
+            "cfl year"            -> Map ("year" -> "1", "year2" -> "2"),
+            "cfly"                -> Map ("year" -> "1", "year2" -> "2"),
+            "nba year"            -> Map ("year" -> "1", "year2" -> "2"),
+            "nbay"                -> Map ("year" -> "1", "year2" -> "2"),
+            "nhl_year"            -> Map ("year" -> "1", "year2" -> "2"),
+            "nhly"                -> Map ("year" -> "1", "year2" -> "2"),
+            "baseball year"       -> Map ("year" -> "1", "year2" -> "2"),
+            "nfl_year"            -> Map ("year" -> "1", "year2" -> "2"),
+            "nfly"                -> Map ("year" -> "1", "year2" -> "2"),
+            "afl year"            -> Map ("year" -> "1", "year2" -> "2"),
+            "afly"                -> Map ("year" -> "1", "year2" -> "2")
         ),
 
         // alphabetically for other languages
@@ -301,6 +316,6 @@ object DateTimeParserConfig
             "Народився"           -> Map ("year" -> "3", "month"-> "2", "day" -> "1"),
             "Дата смерті"         -> Map ("year" -> "3", "month"-> "2", "day" -> "1")
         )
-    )
+    ).map( x=> x._1 -> x._2.map( y => y._1.toLowerCase.replace("_", " ") -> y._2)).toMap
 
 }

@@ -4126,18 +4126,18 @@ Estos terminos sobre capital y los mapeados arriba habría que revisarlos:
 | mappings =
 	{{PropertyMapping | templateProperty = país | ontologyProperty = country }}
 	{{PropertyMapping | templateProperty = nombre | ontologyProperty = foaf:name }}
-}}</text></revision></page><page><title>Mapping es:Ficha de proteína</title><ns>214</ns><id>4797</id><revision><id>16113</id><timestamp>2011-11-04T12:53:00Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping es:Ficha de proteína</title><ns>214</ns><id>4797</id><revision><id>52423</id><timestamp>2017-10-15T14:55:27Z</timestamp><text>{{TemplateMapping
 | mapToClass = Protein
 | mappings =
 	{{PropertyMapping | templateProperty = Símbolo | ontologyProperty = symbol }}
 	{{PropertyMapping | templateProperty = símbolos_alt | ontologyProperty = symbol }}
         {{PropertyMapping | templateProperty = AltSymbols | ontologyProperty = symbol }}
-	{{PropertyMapping | templateProperty = ATC_prefix | ontologyProperty = atcPrefix }}
-        {{PropertyMapping | templateProperty = ATC prefix | ontologyProperty = atcPrefix }}
-	{{PropertyMapping | templateProperty = ATC_suffix | ontologyProperty = atcSuffix }}
-	{{PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcSupplemental }}
-{{PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcSupplemental }}
-
+	{{CombineSimpleMapping
+	| templateProperty1 = ATC_prefix
+	| templateProperty2 = ATC_suffix
+	| ontologyProperty = atcCode
+	}}
+	{{PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcCode }}
 	{{PropertyMapping | templateProperty = CAS_number | ontologyProperty = casNumber }}
 	{{PropertyMapping | templateProperty = CAS_supplemental | ontologyProperty = casSupplemental }}
 	{{PropertyMapping | templateProperty = DrugBank | ontologyProperty = drugbank }}

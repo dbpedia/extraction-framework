@@ -2242,15 +2242,18 @@ stat4- 까지 작성 가능
 | 프로젝트 매니저 = 
 | 사용팀・개최대회 =
 | 규모            = 
---&gt;</text></revision></page><page><title>Mapping ko:약 정보</title><ns>242</ns><id>4590</id><revision><id>15473</id><timestamp>2011-09-30T00:22:10Z</timestamp><text>&lt;!--약_정보--&gt;
+--&gt;</text></revision></page><page><title>Mapping ko:약 정보</title><ns>242</ns><id>4590</id><revision><id>52414</id><timestamp>2017-10-15T14:46:15Z</timestamp><text>&lt;!--약_정보--&gt;
 {{TemplateMapping
 | mapToClass = Drug
 | mappings =
 	{{PropertyMapping | templateProperty = IUPAC_name | ontologyProperty = iupacName }}
 	{{PropertyMapping | templateProperty = CAS_number | ontologyProperty = casNumber }}
-	{{PropertyMapping | templateProperty = ATC_prefix | ontologyProperty = atcPrefix }}
-	{{PropertyMapping | templateProperty = ATC_suffix | ontologyProperty = atcSuffix }}
-	{{PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcSupplemental }}
+	{{CombineSimpleMapping
+	| templateProperty1 = ATC_prefix
+	| templateProperty2 = ATC_suffix
+	| ontologyProperty = atcCode
+	}}
+	{{PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcCode }}
 	{{PropertyMapping | templateProperty = PubChem | ontologyProperty = pubchem }}
 	{{PropertyMapping | templateProperty = DrugBank | ontologyProperty = drugbank }}
 }}

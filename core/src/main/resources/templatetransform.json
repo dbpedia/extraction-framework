@@ -88,6 +88,29 @@
       "whileList":true,
       "replace": "$(1||)$(2||)$(3|.|)"
     },
+    "drugs.com":{
+      "transformer":"extractChildren",
+      "keys": ["1", "2"],
+      "whileList":true,
+      "replace": "https://www.drugs.com/$(1||)/$(2||).html"
+    },
+    "ushr":{
+      "transformer":"extractChildren",
+      "keys": ["1", "2"],
+      "whileList":true,
+      "replace": "$(1||) $(2||)"
+    },
+    "ATC":{
+      "transformer":"extractChildren",
+      "keys": ["1", "2"],
+      "whileList":true,
+      "replace": "$(1||)$(2||)"
+    },
+    "CAS":{
+      "transformer":"extractChildren",
+      "keys": ["1"],
+      "whileList":true
+    },
     "Lang-$(lang)":{
       "transformer":"getLangText",
       "keys": ["1"],

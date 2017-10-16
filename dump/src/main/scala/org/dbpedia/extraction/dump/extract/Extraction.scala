@@ -14,10 +14,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
  * Dump extraction script.
  */
 object Extraction {
-  
-  val Started = "extraction-started"
-
-  val Complete = "extraction-complete"
 
   def main(args: Array[String]): Unit = {
     require(args != null && args.length >= 1 && args(0).nonEmpty, "missing required argument: config file name")

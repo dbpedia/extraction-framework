@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.io.File
 
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util.Language
@@ -119,6 +120,7 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
         val context = new
         {
             def language : Language = lang
+            def ontology: Ontology = ontology
             def redirects : Redirects = red
         }
         

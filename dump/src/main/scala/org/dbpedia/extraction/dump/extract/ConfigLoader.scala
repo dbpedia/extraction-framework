@@ -5,7 +5,7 @@ import java.net.URL
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Logger
 
-import org.dbpedia.extraction.config.{Config, ConfigUtils}
+import org.dbpedia.extraction.config.{Config, ConfigUtils, ExtractionMonitor, ExtractionRecorder}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
@@ -43,7 +43,7 @@ class ConfigLoader(config: Config)
 
   private val extractionMonitor = new ExtractionMonitor()
 
-  def getExtractionRecorder[T: ClassTag](lang: Language, dataset : Dataset = null): org.dbpedia.extraction.util.ExtractionRecorder[T] = {
+  def getExtractionRecorder[T: ClassTag](lang: Language, dataset : Dataset = null): ExtractionRecorder[T] = {
     extractionRecorder.get(classTag[T]) match{
       case Some(s) => s.get(lang) match {
         case None =>
@@ -166,7 +166,7 @@ class ConfigLoader(config: Config)
 
     val destination = new MarkerDestination(
       new CompositeDestination(formatDestinations: _*),
-      finder.file(date, Extraction.Complete).get,
+      finder.file(date, Config.ExtractionComplete).get,
       false
     )
 
@@ -289,7 +289,7 @@ class ConfigLoader(config: Config)
   private def latestDate(finder: Finder[_]): String = {
     val isSourceRegex = config.source.startsWith("@")
     val source = if (isSourceRegex) config.source.head.substring(1) else config.source.head
-    val fileName = if (config.requireComplete) Config.Complete else source
+    val fileName = if (config.requireComplete) Config.DownloadComplete else source
     finder.dates(fileName, isSuffixRegex = isSourceRegex).last
   }
 }

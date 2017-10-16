@@ -8,7 +8,7 @@ import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.mappings.{ExtractionMonitor, Extractor}
+import org.dbpedia.extraction.mappings.Extractor
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser.Namespace
@@ -39,12 +39,16 @@ class Config(val configPath: String) extends
     Option(getString(this, key))
   }
 
-  def throwMissingPropertyException(property: String, required: Boolean): Unit ={
-    if(required)
-      throw new IllegalArgumentException("The following required property is missing from the provided .properties file (or has an invalid format): '" + property + "'")
-    else
-      logger.log(Level.WARNING, "The following property is missing from the provided .properties file (or has an invalid format): '" + property + "'. It will not factor in.")
+  def getArbitraryStringProperty(key: String, required: Boolean = true): String = {
+    getArbitraryStringProperty(key) match{
+      case Some(s) => s
+      case None if required => throwMissingPropertyException(key)
+      case _ => null
+    }
   }
+
+  def throwMissingPropertyException(property: String) =
+      throw new IllegalArgumentException("The following required property is missing from the provided .properties file (or has an invalid format): '" + property + "'")
 
   /**
     * get all universal properties, check if there is an override in the provided config file
@@ -202,7 +206,7 @@ class Config(val configPath: String) extends
     if(requireComplete){
       val finder = new Finder[File](dumpDir, lang, wikiName)
       val date = finder.dates(source.head).last
-      finder.file(date, Config.Complete) match {
+      finder.file(date, Config.DownloadComplete) match {
         case None => false
         case Some(x) => x.exists()
       }
@@ -279,7 +283,9 @@ class Config(val configPath: String) extends
 object Config{
 
   /** name of marker file in wiki date directory */
-  val Complete = "download-complete"
+  val DownloadComplete = "download-complete"
+  val ExtractionStarted = "extraction-started"
+  val ExtractionComplete = "extraction-complete"
 
   case class NifParameters(
     nifQuery: String,

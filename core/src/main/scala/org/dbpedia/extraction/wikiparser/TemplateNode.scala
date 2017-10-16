@@ -16,7 +16,10 @@ case class TemplateNode (
     titleParsed : List[Node] = List())
   extends Node(children, line)
 {
-    private val propertyMap : Map[String, PropertyNode] = Map.empty ++ (for(property <- children) yield (property.key, property))
+    private val titleNode = PropertyNode("$TemplateName", List(TextNode(title.decoded.trim, 0)), 0)
+    private val propertyMap : Map[String, PropertyNode] = Map.empty ++
+          (for(property <- children) yield (property.key, property)) ++
+          List("$TemplateName" -> titleNode)
     
     /**
      * Retrieves a property by its key.

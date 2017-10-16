@@ -78,6 +78,14 @@ extends OntologyType(name, labels, comments)
     }
   }
 
+  def isSubclassOf(sup: OntologyClass): Boolean ={
+    if (sup eq this)
+      return true
+    this.baseClasses.map(_.isSubclassOf(sup)).foldLeft(false)(_||_)
+  }
+
+  def isSuperclassOf(sub: OntologyClass): Boolean = sub.isSubclassOf(this)
+
   override val uri = RdfNamespace.fullUri(DBpediaNamespace.ONTOLOGY, name)
 
     val isExternalClass = ! uri.startsWith(DBpediaNamespace.ONTOLOGY.namespace)

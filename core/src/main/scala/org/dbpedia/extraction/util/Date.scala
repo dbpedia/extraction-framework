@@ -22,6 +22,15 @@ extends Ordered[Date]
 
     datatype.name match
     {
+      case "xsd:dateTime" =>
+      {
+        require(!year.isEmpty && !month.isEmpty && !day.isEmpty, "Expected xsd:dateTime")
+        calendar.setDay(day.get)
+        calendar.setMonth(month.get)
+        calendar.setYear(year.get)
+        //setting time to 0:0.0 since we are parsing a date
+        calendar.setTime(0, 0, 0)
+      }
          case "xsd:date" =>
          {
              require(!year.isEmpty && !month.isEmpty && !day.isEmpty, "Expected xsd:date")

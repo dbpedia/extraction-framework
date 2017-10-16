@@ -36,6 +36,7 @@ object DateIntervalMappingConfig
 
     val sinceMap = Map(
         "en" -> "since",
+        "de" -> "seit",
         "ca" -> "des del",
         "es" -> "desde",
         "fr" -> "depuis",

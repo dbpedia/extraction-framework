@@ -126,7 +126,7 @@ class PropertyCollector(mapping: Extractor[TemplateNode]) {
     case m: CombineDateMapping => m.templateProperties.keys.foreach(this + _)
     case m: DateIntervalMapping => this + m.templateProperty
     case m: IntermediateNodeMapping => m.mappings.foreach(propertyMapping)
-    case m: ConstantMapping => // ignore
+    case _ => // ignore
   }
   
   private def +(name: String) : PropertyCollector = {

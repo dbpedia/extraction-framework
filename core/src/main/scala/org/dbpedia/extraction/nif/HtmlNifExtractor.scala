@@ -7,7 +7,8 @@ import org.dbpedia.extraction.nif.Paragraph.HtmlString
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.config.Config.NifParameters
-import org.dbpedia.extraction.util.{CssConfigurationMap, RecordSeverity}
+import org.dbpedia.extraction.config.RecordSeverity
+import org.dbpedia.extraction.util.{CssConfigurationMap}
 import org.dbpedia.iri.UriUtils
 import org.jsoup.Jsoup
 import org.jsoup.nodes.{Document, Element, TextNode}

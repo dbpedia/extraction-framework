@@ -1,11 +1,14 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import java.util.logging.{Logger, Level}
+import java.util.logging.{Level, Logger}
+
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.dataparser.{DataParserConfig, DateTimeParserConfig}
-import org.dbpedia.extraction.util.{Language, Date}
+import org.dbpedia.extraction.util.{Date, Language}
 import org.dbpedia.extraction.mappings.Redirects
+import org.dbpedia.extraction.ontology.Ontology
+
 import scala.language.reflectiveCalls
 
 /**
@@ -13,22 +16,31 @@ import scala.language.reflectiveCalls
  */
 class DateTimeParser ( context : {
                             def language : Language
+                            def ontology : Ontology
                             def redirects : Redirects },
                        datatype : Datatype,
                        val strict : Boolean = false) extends DataParser
 {
     require(datatype != null, "datatype != null")
 
-    private val logger = Logger.getLogger(getClass.getName)
+    protected val logger = Logger.getLogger(getClass.getName)
+
+  //datatypes
+  val dtDate = context.ontology.getOntologyDatatype("xsd:date").get
+  val dtDay = context.ontology.getOntologyDatatype("xsd:gDay").get
+  val dtMonth = context.ontology.getOntologyDatatype("xsd:gMonth").get
+  val dtYear = context.ontology.getOntologyDatatype("xsd:gYear").get
+  val dtYearMonth = context.ontology.getOntologyDatatype("xsd:gYearMonth").get
+  val dtMonthDay = context.ontology.getOntologyDatatype("xsd:gMonthDay").get
 
     // language-specific configurations
 
-    private val language = if(DateTimeParserConfig.supportedLanguages.contains(context.language.wikiCode)) context.language.wikiCode else "en"
+    protected val language = if(DateTimeParserConfig.supportedLanguages.contains(context.language.wikiCode)) context.language.wikiCode else "en"
 
-    private val months = DateTimeParserConfig.monthsMap.getOrElse(language, DateTimeParserConfig.monthsMap("en"))
-    private val eraStr = DateTimeParserConfig.eraStrMap.getOrElse(language, DateTimeParserConfig.eraStrMap("en"))
-    private val cardinalityRegex = DateTimeParserConfig.cardinalityRegexMap.getOrElse(language, DateTimeParserConfig.cardinalityRegexMap("en"))
-    private val templates = DateTimeParserConfig.templateDateMap.getOrElse(language, Map())
+    protected val months = DateTimeParserConfig.monthsMap.getOrElse(language, DateTimeParserConfig.monthsMap("en"))
+    protected val eraStr = DateTimeParserConfig.eraStrMap.getOrElse(language, DateTimeParserConfig.eraStrMap("en"))
+    protected val cardinalityRegex = DateTimeParserConfig.cardinalityRegexMap.getOrElse(language, DateTimeParserConfig.cardinalityRegexMap("en"))
+    protected val templates = DateTimeParserConfig.templateDateMap.getOrElse(language, Map())
 
     // parse logic configurations
 
@@ -37,45 +49,45 @@ class DateTimeParser ( context : {
                                                   else
                                                     DataParserConfig.splitPropertyNodeRegexDateTime("en")
 
-    private val monthRegex = months.keySet.mkString("|")
-    private val eraRegex = eraStr.keySet.mkString("|")
+    protected val monthRegex = months.keySet.mkString("|")
+    protected val eraRegex = eraStr.keySet.mkString("|")
 
-    private val prefix = if(strict) """\s*""" else """.*?"""
-    private val postfix = if(strict) """\s*""" else ".*"
+    protected val prefix = if(strict) """\s*""" else """.*?"""
+    protected val postfix = if(strict) """\s*""" else ".*"
 
     // catch dates like: "8 June 07" or "07 June 45"
-    private val DateRegex1 = ("""(?iu)""" + prefix + """([0-9]{1,2})\s*("""+monthRegex+""")\s*([0-9]{2})(?!\d)\s*(?!\s)(?!"""+ eraRegex +""").*""" + postfix).r
+    protected val DateRegex1 = ("""(?iu)""" + prefix + """([0-9]{1,2})\s*("""+monthRegex+""")\s*([0-9]{2})(?!\d)\s*(?!\s)(?!"""+ eraRegex +""").*""" + postfix).r
 
     // catch dates like: "[[29 January]] [[300 AD]]", "[[23 June]] [[2008]] (UTC)", "09:32, 6 March 2000 (UTC)" or "3 June 1981"
-    private val DateRegex2 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*("""+monthRegex+""")\]?\]?,? \[?\[?(-?[0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?(?!\d)""" + postfix).r
+    protected val DateRegex2 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*("""+monthRegex+""")\]?\]?,? \[?\[?(-?[0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?(?!\d)""" + postfix).r
 
     // catch dates like: "[[January 20]] [[1995 AD]]", "[[June 17]] [[2008]] (UTC)" or "January 20 1995"
-    private val DateRegex3 = ("""(?iu)""" + prefix + """\[?\[?("""+monthRegex+""")\s*,?\s+([0-9]{1,2})\]?\]?(?:""" + cardinalityRegex + """)?\s*[.,]?\s+\[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?""" + postfix).r
+    protected val DateRegex3 = ("""(?iu)""" + prefix + """\[?\[?("""+monthRegex+""")\s*,?\s+([0-9]{1,2})\]?\]?(?:""" + cardinalityRegex + """)?\s*[.,]?\s+\[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?\]?\]?""" + postfix).r
 
     // catch dates like: "24-06-1867", "24/06/1867" or "bla24-06-1867bla"
-    private val DateRegex4 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{1,2}+)[-/]([0-9]{1,2}+)[-/]([0-9]{3,4}+)(?!\d)""" + postfix).r
+    protected val DateRegex4 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{1,2}+)[-/]([0-9]{1,2}+)[-/]([0-9]{3,4}+)(?!\d)""" + postfix).r
 
     // catch dates like: "24-june-1867", "24/avril/1867" or "bla24|juillet|1867bla"
-    private val DateRegex5 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{1,2}+)[-/\|](""" + monthRegex + """)[-/\|]([0-9]{3,4}+)(?!\d)""" + postfix).r
+    protected val DateRegex5 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{1,2}+)[-/\|](""" + monthRegex + """)[-/\|]([0-9]{3,4}+)(?!\d)""" + postfix).r
 
     // catch dates like: "1990 06 24", "1990-06-24", "1990/06/24" or "1977-01-01 00:00:00.000000"
-    private val DateRegex6 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{3,4})[-/\s]([0-9]{1,2})[-/\s]([0-9]{1,2})(?!\d).*""").r
+    protected val DateRegex6 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{3,4})[-/\s]([0-9]{1,2})[-/\s]([0-9]{1,2})(?!\d).*""").r
 
     // catch dates like: "20 de Janeiro de 1999", "[[1º de Julho]] de [[2005]]"
-    private val DateRegex7 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*d?e?\s*(""" + monthRegex + """)\]?\]?\s*d?e?\s*\[?\[?([0-9]{0,4})\s*?\]?\]?(?!\d)""" + postfix).r
+    protected val DateRegex7 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*d?e?\s*(""" + monthRegex + """)\]?\]?\s*d?e?\s*\[?\[?([0-9]{0,4})\s*?\]?\]?(?!\d)""" + postfix).r
 
     // catch dates like: "1520, March 16"
-    private val DateRegex8 = ("""(?iu)""" + prefix + """([0-9]{3,4})[,]?\s+(""" + monthRegex + """)\s+([0-9]{1,2})(?:""" + cardinalityRegex + """)?\s*""").r
+    protected val DateRegex8 = ("""(?iu)""" + prefix + """([0-9]{3,4})[,]?\s+(""" + monthRegex + """)\s+([0-9]{1,2})(?:""" + cardinalityRegex + """)?\s*""").r
 
-    private val DayMonthRegex1 = ("""(?iu)""" + prefix + """("""+monthRegex+""")\]?\]?\s*\[?\[?([1-9]|0[1-9]|[12][0-9]|3[01])(?!\d)""" + postfix).r
+    protected val DayMonthRegex1 = ("""(?iu)""" + prefix + """("""+monthRegex+""")\]?\]?\s*\[?\[?([1-9]|0[1-9]|[12][0-9]|3[01])(?!\d)""" + postfix).r
 
-    private val DayMonthRegex2 = ("""(?iu)""" + prefix + """(?<!\d)([1-9]|0[1-9]|[12][0-9]|3[01])\s*(""" + cardinalityRegex + """)?\]?\]?\s*(of)?\s*\[?\[?("""+monthRegex+""")\]?\]?""" + postfix).r
+    protected val DayMonthRegex2 = ("""(?iu)""" + prefix + """(?<!\d)([1-9]|0[1-9]|[12][0-9]|3[01])\s*(""" + cardinalityRegex + """)?\]?\]?\s*(of)?\s*\[?\[?("""+monthRegex+""")\]?\]?""" + postfix).r
 
-    private val MonthYearRegex = ("""(?iu)""" + prefix + """("""+monthRegex+""")\]?\]?,?\s*\[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?""" + postfix).r
+    protected val MonthYearRegex = ("""(?iu)""" + prefix + """("""+monthRegex+""")\]?\]?,?\s*\[?\[?([0-9]{1,4})\s*(""" + eraRegex + """)?""" + postfix).r
 
-    private val YearRegex = ("""(?iu)""" + prefix + """(?<![\d\pL\w])(-?\d{1,4})(?!\d)\s*(""" + eraRegex + """)?""" + postfix).r
+    protected val YearRegex = ("""(?iu)""" + prefix + """(?<![\d\pL\w])(-?\d{1,4})(?!\d)\s*(""" + eraRegex + """)?""" + postfix).r
 
-    private val YearRegex2 = ("""(?iu)""" + prefix + """(""" + eraRegex + """)(?<![\d])(\d{1,4})(?!\d)\s*""" + postfix).r
+    protected val YearRegex2 = ("""(?iu)""" + prefix + """(""" + eraRegex + """)(?<![\d])(\d{1,4})(?!\d)\s*""" + postfix).r
 
     override def parse(node : Node) : Option[ParseResult[Date]] =
     {
@@ -142,45 +154,62 @@ class DateTimeParser ( context : {
                     }
                 }
 
-                // get values from defined year month day
-                for (yearProperty <- node.property(yearNum);
-                     monthProperty <- node.property(monthNum);
-                     dayProperty <- node.property(dayNum);
-                     year <- yearProperty.children.collect{case TextNode(text, _, _) => text}.headOption;
-                     month <- monthProperty.children.collect{case TextNode(text, _, _) => text}.headOption;
-                     day <- dayProperty.children.collect{case TextNode(text, _, _) => text}.headOption)
-                {
-                    try
-                    {
-                    	//month can be either given by its name or by its number 
-                    	val monthNum = months.get(month.toLowerCase) match {
-	                    	case Some(s) => s
-	                    	case None => month.toInt
-                    	}
-                    	//year can contain era
-                    	val yearNum = year match {
-                    	  case YearRegex(year, era) => {
-                    	    val eraIdentifier = getEraSign(era)
-                    	    (eraIdentifier+year).toInt
-                    	  }
-                          case YearRegex(year) => year.toInt
-                          case YearRegex2(era, year) => {
-                              val eraIdentifier = getEraSign(era)
-                              (eraIdentifier+year).toInt
-                          }
-                        }
-                        return Some(new Date(Some(yearNum), Some(monthNum), Some(day.toInt), datatype))
-                    }
-                    catch
-                    {
-                        case e : IllegalArgumentException =>
-                        case e : MatchError => 
-                    }
-                }
+                return getDateByParameters(node, yearNum, monthNum, dayNum)
             }
         }
 
         logger.log(Level.FINE, "Template unknown: " + node.title)
+        None
+    }
+
+    protected def getDateByParameters(node: TemplateNode, yearNum: String, monthNum: String, dayNum: String): Option[Date] = {
+        // get values from defined year month day
+      val year = node.property(yearNum) match{
+        case Some(yearProperty) => yearProperty.children.collect { case TextNode(text, _, _) => text }.headOption match{
+            case Some(yy) => yy match {
+              case YearRegex(y, era) =>
+                val eraIdentifier = getEraSign(era)
+                Some((eraIdentifier + y).toInt)
+              case YearRegex(y) => Some(y.toInt)
+              case YearRegex2(era, y) =>
+                val eraIdentifier = getEraSign(era)
+                Some((eraIdentifier + y).toInt)
+              case _ => None
+            }
+            case None => None
+        }
+        case None => None
+      }
+        val month = node.property(monthNum) match {
+          case Some(monthProperty) => monthProperty.children.collect { case TextNode(text, _, _) => text }.headOption match {
+            case Some(m) => months.get(m.toLowerCase) match {
+              case Some(s) => Some(s)
+              case None => Some(m.toInt)
+            }
+            case None => None
+          }
+          case None => None
+        }
+        val day = node.property(dayNum) match{
+            case Some(dayProperty) => dayProperty.children.collect { case TextNode(text, _, _) => text }.headOption match{
+              case Some(d) => Some(d.toInt)
+              case None => None
+            }
+            case None => None
+        }
+        //year can contain era
+      var dt = datatype
+      day match{
+        case None => dt = dtYearMonth
+        case Some(_) =>
+      }
+      month match{
+        case None => dt = dtYear
+        case Some(_) =>
+      }
+      if(year.nonEmpty)
+        Some(new Date(year, month, day, dt))
+      else
         None
     }
 
@@ -191,23 +220,23 @@ class DateTimeParser ( context : {
             return Some(date)
         }
 
-        datatype.name match
+        datatype match
         {
-            case "xsd:gDay" =>
+            case `dtDay` =>
                 logger.fine("Method for day Extraction not yet implemented.")
                 None
-            case "xsd:gMonth" =>
+            case `dtMonth` =>
                 logger.fine("Method for month Extraction not yet implemented.")
                 None
-            case "xsd:gYear" =>
+            case `dtYear` =>
                 for(date <- catchMonthYear(input))
                 {
                     return Some(date)
                 }
                 catchYear(input)
-            case "xsd:gMonthDay" =>
+            case `dtMonthDay` =>
                 catchDayMonth(input)
-            case "xsd:gYearMonth" =>
+            case `dtYearMonth` =>
                 catchMonthYear(input)
             case _ => None
         }
@@ -298,7 +327,13 @@ class DateTimeParser ( context : {
             }
         }
 
-        None
+      catchMonthYear(input) match{
+        case Some(d) => Some(new Date(year = d.year, month = d.month, day= Some(1), datatype = dtDate))
+        case None => catchYear(input) match{
+          case Some(d) => Some(new Date(year = d.year, month = Some(1), day= Some(1), datatype = dtDate))
+          case None => None
+        }
+      }
     }
 
     private def catchDayMonth(input: String) : Option[Date] =
@@ -309,7 +344,7 @@ class DateTimeParser ( context : {
             val day = result.group(2)
             months.get(month.toLowerCase) match
             {
-                case Some(monthNumber) => return Some(new Date(month = Some(monthNumber), day = Some(day.toInt), datatype = datatype))
+                case Some(monthNumber) => return Some(new Date(month = Some(monthNumber), day = Some(day.toInt), datatype = dtMonthDay))
                 case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
@@ -319,7 +354,7 @@ class DateTimeParser ( context : {
             val month = result.group(4)
             months.get(month.toLowerCase) match
             {
-                case Some(monthNumber) => return Some(new Date(month = Some(monthNumber), day = Some(day.toInt), datatype = datatype))
+                case Some(monthNumber) => return Some(new Date(month = Some(monthNumber), day = Some(day.toInt), datatype = dtMonthDay))
                 case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
@@ -336,7 +371,7 @@ class DateTimeParser ( context : {
             val eraIdentifier = getEraSign(era)
             months.get(month.toLowerCase) match
             {
-                case Some(monthNumber) => return Some(new Date(year = Some((eraIdentifier+year).toInt), month = Some(monthNumber), datatype = datatype))
+                case Some(monthNumber) => return Some(new Date(year = Some((eraIdentifier+year).toInt), month = Some(monthNumber), datatype = dtYearMonth))
                 case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
@@ -349,13 +384,13 @@ class DateTimeParser ( context : {
         {
             val year = result.group(1)
             val eraIdentifier = getEraSign(result.group(2))
-            return Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = datatype))
+            return Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = dtYear))
         }
         for(result <- YearRegex2.findFirstMatchIn(input))
         {
             val year = result.group(2)
             val eraIdentifier = getEraSign(result.group(1))
-            return Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = datatype))
+            return Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = dtYear))
         }
         None
     }

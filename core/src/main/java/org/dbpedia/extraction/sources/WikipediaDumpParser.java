@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.sources;
 
+import org.dbpedia.extraction.config.RecordSeverity;
 import org.dbpedia.extraction.util.Language;
-import org.dbpedia.extraction.util.RecordSeverity;
 import org.dbpedia.extraction.wikiparser.Namespace;
 import org.dbpedia.extraction.wikiparser.WikiPage;
 import org.dbpedia.extraction.wikiparser.WikiTitle;

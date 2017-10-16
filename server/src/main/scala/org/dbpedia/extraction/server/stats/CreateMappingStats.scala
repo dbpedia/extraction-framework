@@ -3,13 +3,14 @@ package org.dbpedia.extraction.server.stats
 import java.io.File
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.util.Finder
+import org.dbpedia.extraction.util.{Finder, Language, SimpleWorkers, Workers}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.wikiparser.Namespace
 
-import org.dbpedia.extraction.config.ConfigUtils._
+import scala.util.{Failure, Success, Try}
 
 /**
  * Script to gather statistics about templates and properties:
@@ -45,56 +46,60 @@ object CreateMappingStats
     
     def main(args: Array[String])
     {
-        require (args != null && args.length >= 3, "need at least four args: input dir, output dir, file suffix ('.gz', '.bz2' or ''), pretty-printing flag. may be followed by list of language codes.")
-        
-        val inputDir = new File(args(0))
-        
-        val statsDir = new File(args(1))
-        
-        val suffix = args(2).trim
+      require (args != null && args.length == 1, "No properties file was provided. Use create.mappings.stats.properties")
 
-        val pretty = args(3).toBoolean
-        
-        // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        var languages = parseLanguages(inputDir, args.drop(4))
-          
-        // if no languages are given, use all languages for which a mapping namespace is defined
-        if (languages.isEmpty) languages = Namespace.mappings.keySet.toArray
-        
-        languages.sorted.par.foreach(language =>  {
-          
-            val millis = System.currentTimeMillis()
-            
-            logger.info("creating statistics for "+language.wikiCode)
-            
-            val finder = new Finder[File](inputDir, language, "wiki")
-            
-            // Note: org.dbpedia.extraction.dump.extract.Extraction.Complete = "extraction-complete"
-            // TODO: move that constant to core, or use config value
-            val date = finder.dates("extraction-complete").last
-            
-            def inputFile(dataset: Dataset): File = {
-              finder.file(date, dataset.encoded.replace('_', '-')+".ttl"+suffix).get
-            }
-            
-            // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
-            val redirects = inputFile(DBpediaDatasets.Redirects)
-            
-            // extracted by org.dbpedia.extraction.mappings.ArticleTemplatesExtractor
-            val articleTemplates = inputFile(DBpediaDatasets.ArticleTemplates)
-            // extracted by org.dbpedia.extraction.mappings.TemplateParameterExtractor
-            val templateParameters = inputFile(DBpediaDatasets.TemplateParameters)
-            // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
-            val infoboxTest = inputFile(DBpediaDatasets.InfoboxTest)
-            
-            val builder = new MappingStatsBuilder(statsDir, language, pretty)
-    
-            builder.buildStats(redirects, articleTemplates, templateParameters, infoboxTest)
-            
-            // load them right back to check that the format is ok
-            new MappingStatsManager(statsDir, language)
-            
-            logger.info("created statistics for "+language.wikiCode+" in "+prettyMillis(System.currentTimeMillis - millis))
-        })
+      val config = new Config(args.head)
+      val inputDir = config.dumpDir
+
+      val statsDir = new File(config.getArbitraryStringProperty("statistics-dir", required = true))
+
+      val suffix = config.inputSuffix
+
+      val pretty = config.getArbitraryStringProperty("pretty-print") match{
+        case Some(s) => Try{s.toBoolean} match{
+          case Success(x) => x
+          case Failure(f) => throw new IllegalArgumentException("The provided value for property 'pretty-print' is not a Boolean.")
+        }
+        case None => false
+      }
+
+      // Use all remaining args as language codes or comma or whitespace separated lists of codes
+      var languages = config.languages
+
+      // if no languages are given, use all languages for which a mapping namespace is defined
+      if (languages.isEmpty) languages = Namespace.mappings.keySet.toArray
+
+      val worker = SimpleWorkers[Language](1.0, 1.5){ language: Language =>
+        val millis = System.currentTimeMillis()
+
+        logger.info("creating statistics for "+language.wikiCode)
+        val finder = new Finder[File](inputDir, language, "wiki")
+        val date = finder.dates(org.dbpedia.extraction.config.Config.ExtractionComplete).last
+
+        def inputFile(dataset: Dataset): File = {
+          finder.file(date, dataset.encoded.replace('_', '-')+suffix).get
+        }
+
+        // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
+        val redirects = inputFile(DBpediaDatasets.Redirects)
+
+        // extracted by org.dbpedia.extraction.mappings.ArticleTemplatesExtractor
+        val articleTemplates = inputFile(DBpediaDatasets.ArticleTemplates)
+        // extracted by org.dbpedia.extraction.mappings.TemplateParameterExtractor
+        val templateParameters = inputFile(DBpediaDatasets.TemplateParameters)
+        // extracted by org.dbpedia.extraction.mappings.InfoboxExtractor
+        val infoboxTest = inputFile(DBpediaDatasets.InfoboxTest)
+
+        val builder = new MappingStatsBuilder(statsDir, language, pretty)
+
+        builder.buildStats(redirects, articleTemplates, templateParameters, infoboxTest)
+
+        // load them right back to check that the format is ok
+        new MappingStatsManager(statsDir, language)
+
+        logger.info("created statistics for "+language.wikiCode+" in "+prettyMillis(System.currentTimeMillis - millis))
+      }
+
+      Workers.work(worker, languages)
     }
 }

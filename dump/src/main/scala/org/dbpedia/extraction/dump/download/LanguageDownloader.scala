@@ -99,7 +99,7 @@ class LanguageDownloader(final val config: DownloadConfig, final val downloader:
     val dateDir = new File(mainDir, date)
     if (! dateDir.exists && ! dateDir.mkdirs) throw new Exception("Target directory '"+dateDir+"' does not exist and cannot be created")
 
-    finder.file(date, Config.Complete) match{
+    finder.file(date, Config.DownloadComplete) match{
       case None => false
       case Some(complete) =>
 

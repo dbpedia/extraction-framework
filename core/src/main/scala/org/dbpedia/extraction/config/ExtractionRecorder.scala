@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.util
+package org.dbpedia.extraction.config
 
 import java.io.{ByteArrayOutputStream, Writer}
 import java.net.SocketTimeoutException
@@ -7,10 +7,10 @@ import java.text.DecimalFormat
 import java.util.concurrent.atomic.AtomicLong
 
 import org.apache.jena.atlas.json.{JSON, JsonArray, JsonObject}
-import org.dbpedia.extraction.config.provenance.Dataset
-import org.dbpedia.extraction.mappings.ExtractionMonitor
-import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.config.Config.SlackCredentials
+import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.{Language, StringUtils}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiPage, WikiTitle}
 
 import scala.collection.mutable

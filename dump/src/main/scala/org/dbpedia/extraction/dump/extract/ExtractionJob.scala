@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.dump.extract
 
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.WikiPageExtractor
-import org.dbpedia.extraction.util.{RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}

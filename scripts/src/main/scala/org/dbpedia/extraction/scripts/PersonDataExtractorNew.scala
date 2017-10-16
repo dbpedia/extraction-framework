@@ -62,7 +62,7 @@ class PersonDataExtractorNew(config: Config) {
   }
 
   //collect all sub-classes from dbo:Person
-  private val personTypes = ontology.classes.values.filter(x => ontology.isSubclassOf(x, person)).map(x => x.uri).toList
+  private val personTypes = ontology.classes.values.filter(x => x.isSubclassOf(person)).map(x => x.uri).toList
 
 
   private val dfinder = new DateFinder(config.dumpDir, Language.Wikidata)

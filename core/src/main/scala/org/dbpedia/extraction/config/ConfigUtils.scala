@@ -10,7 +10,7 @@ import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.extraction.util.{ExtractionRecorder, Language, RecordEntry, RecordSeverity}
+import org.dbpedia.extraction.util.{Language}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
 
 import scala.collection.immutable.SortedSet

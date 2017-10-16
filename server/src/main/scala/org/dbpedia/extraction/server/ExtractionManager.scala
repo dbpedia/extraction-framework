@@ -3,21 +3,18 @@ package org.dbpedia.extraction.server
 import java.io.File
 import java.util.logging.{Level, Logger}
 
-import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{Source, WikiSource, XMLSource}
-import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
-import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
 import scala.reflect.ClassTag
 import scala.xml.Elem
 
-import scala.reflect._
 
 /**
  * Base class for extraction managers.

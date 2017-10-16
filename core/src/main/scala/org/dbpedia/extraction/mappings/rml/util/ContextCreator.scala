@@ -2,11 +2,12 @@ package org.dbpedia.extraction.mappings.rml.util
 
 import java.io.File
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.XMLSource
-import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.WikiPage
 
 import scala.reflect.ClassTag

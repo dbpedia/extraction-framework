@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.live.extractor
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.mappings._
 
-import collection.mutable.ListBuffer
 import scala.reflect.ClassTag
 
 /**
