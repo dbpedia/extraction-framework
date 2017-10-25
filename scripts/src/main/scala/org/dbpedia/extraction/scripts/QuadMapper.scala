@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.File
-import java.lang.StringBuilder
 
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations._
@@ -9,7 +8,6 @@ import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.Policy
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.IOUtils.writer
-import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
 import org.dbpedia.extraction.util._
 import org.dbpedia.iri.UriUtils
 
@@ -26,8 +24,8 @@ class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends Q
   @Deprecated
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String)(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
-    val destination = new WriterDestination(() => writer(finder.byName(output, auto = false).get), new QuadMapperFormatter())
-    mapQuads(finder.language, finder.byName(input, auto = false).get, destination, required = true)(map)
+    val destination = new WriterDestination(() => writer(finder.byName(output).get), new QuadMapperFormatter())
+    mapQuads(finder.language, finder.byName(input).get, destination, required = true)(map)
   }
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, auto: Boolean, required: Boolean)(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
@@ -37,62 +35,17 @@ class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends Q
   }
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, required: Boolean )(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
-    val destination = new WriterDestination(() => writer(finder.byName(output, auto = false).get), new QuadMapperFormatter())
-    mapQuads(finder.language, finder.byName(input, auto = false).get, destination, required)(map)
+    val destination = new WriterDestination(() => writer(finder.byName(output).get), new QuadMapperFormatter())
+    mapQuads(finder.language, finder.byName(input).get, destination, required)(map)
   }
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, required: Boolean, quads: Boolean, turtle: Boolean, policies: Array[Policy])(map: Quad => Traversable[Quad]): Unit = {
-    mapQuads(finder.language, finder.byName(input, auto = false).get, finder.byName(output, auto = false).get, required, quads, turtle, policies)(map)
+    mapQuads(finder.language, finder.byName(input).get, finder.byName(output).get, required, quads, turtle, policies)(map)
   }
 
-  /**
-   * @deprecated use one of the map functions below
-   */
-  @Deprecated
-  def mapQuads(language: Language, inFile: FileLike[_], outFile: FileLike[_], required: Boolean = true, append: Boolean = false)(map: Quad => Traversable[Quad]): Unit = {
-    
-    if (! inFile.exists) {
-      if (required) throw new IllegalArgumentException(language.wikiCode+": file "+inFile+" does not exist")
-      err.println(language.wikiCode+": WARNING - file "+inFile+" does not exist")
-      return
-    }
+  def mapQuads(language: Language, inFile: FileLike[_], outFile: FileLike[_], required: Boolean = true, closeWriter: Boolean = true)(map: Quad => Traversable[Quad]): Unit = {
 
-    err.println(language.wikiCode+": writing "+outFile+" ...")
-    var mapCount = 0
-    val writer = IOUtils.writer(outFile, append)
-    try {
-      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
-      writer.write("# started "+formatCurrentTimestamp+"\n")
-      readQuads(language, inFile) { old =>
-        for (quad <- map(old)) {
-          writer.write(quadToString(quad))
-          mapCount += 1
-        }
-      }
-      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.header
-      writer.write("# completed "+formatCurrentTimestamp+"\n")
-    }
-    finally writer.close()
-    err.println(language.wikiCode+": mapped "+mapCount+" quads")
-  }
-
-  /**
-    * @deprecated don't use it any more!
-    */
-  @Deprecated
-  private def quadToString(quad: Quad): String = {
-    val sb = new StringBuilder
-    sb append '<' append quad.subject append "> <" append quad.predicate append "> "
-    if (quad.datatype == null) {
-      sb append '<' append quad.value append "> "
-    }
-    else {
-      sb append '"' append quad.value append '"'
-      if (quad.datatype != "http://www.w3.org/2001/XMLSchema#string") sb append "^^<" append quad.datatype append "> "
-      else if (quad.language != null) sb append '@' append quad.language append ' '
-    }
-    if (quad.context != null) sb append '<' append quad.context append "> "
-    sb append ".\n"
-    sb.toString
+    val destination = DestinationUtils.createWriterDestination(outFile)
+    mapQuads(language, inFile, destination, required, closeWriter)(map)
   }
 
   /**

@@ -76,6 +76,8 @@ class IRI private[iri](iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri
       iri.getRawQuery
   }
 
+  def isValid: Boolean = IRIBuilder.iri.validate(iri.toString)
+
   override def toString: String = {
     val sb = new StringBuilder()
     sb.append(getScheme)
@@ -185,10 +187,11 @@ object IRI{
     if(allowPathOnly){
       if(iri.getScheme == null && iri.getHost == null)
         if(iri.getPath != null)
-          return Success(iri)
+          if(iri.isValid)
+            return Success(iri)
     }
 
-    if(iri.getScheme != null && iri.getHost != null)
+    if(iri.getScheme != null && iri.getHost != null && iri.isValid)
       return Success(iri)
 
     Failure(new IRISyntaxException("IRI validation failed for: " + iri.toString))

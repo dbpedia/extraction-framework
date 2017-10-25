@@ -85,7 +85,7 @@ object UriUtils
         }
       }
       else
-        createURI(input) match{
+        URI.create(input) match{
           case Success(s) => s
           case Failure(f) => null
         }

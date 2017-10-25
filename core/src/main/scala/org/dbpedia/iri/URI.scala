@@ -34,14 +34,14 @@ object URI{
       // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
       if (input.contains("\\"))
         throw new IllegalArgumentException("URI contains backslash: [" + input + "]")
-
-      StringUtils.escape(uri, WikiUtil.iriReplacements)
+      input
+      //StringUtils.escape(uri, WikiUtil.iriReplacements)
     } match{
       case Failure(f) => f match {
           case g: IllegalArgumentException => Failure(new IRISyntaxException(null, g))
           case ff => Failure(ff)
         }
-      case Success(u) => IRI.prePublischValidation(new URI(URI.uriFactory.construct(u))).asInstanceOf[Try[URI]]
+      case Success(u) => IRI.prePublischValidation(new URI(URI.uriFactory.construct(u)), allowPathOnly = true).asInstanceOf[Try[URI]]
     }
   }
 

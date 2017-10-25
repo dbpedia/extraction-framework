@@ -10,12 +10,12 @@ import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.extraction.util.{Language}
+import org.dbpedia.extraction.util.{Language, RichFile}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
 
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable
-import scala.util.Try
+import scala.util.{Failure, Success, Try}
 import scala.util.matching.Regex
 
 
@@ -38,6 +38,8 @@ object ConfigUtils {
     */
   val RangeRegex: Regex = """(\d*)-(\d*)""".r
 
+  private [config] val propertiesFileKey = "properties-filename-9642"
+
   //val baseDir = getValue(universalConfig , "base-dir", true){
    // x => new File(x)
       //if (! dir.exists) throw error("dir "+dir+" does not exist")
@@ -46,7 +48,16 @@ object ConfigUtils {
 
   def loadConfig(filePath: String, charset: String = "UTF-8"): Properties = {
     val file = new File(filePath)
-    loadFromStream(new FileInputStream(file), charset)
+    val props = loadFromStream(new FileInputStream(file), charset)
+    props
+  }
+
+  private def addPropertiesName(uri: String, props: Properties)={
+    var logname = uri.replace("\\", "/").trim
+    logname = logname.substring(logname.lastIndexOf("/") + 1)
+    if(logname.contains("."))
+      logname = logname.substring(0, logname.indexOf("."))
+    props.put(propertiesFileKey, logname)
   }
 
   def loadConfig(url: URL): Object = {
@@ -55,8 +66,11 @@ object ConfigUtils {
       case selection =>
         if(selection.getFile.endsWith(".json"))
           loadJsonComfig(url)
-        else
-          loadFromStream(url.openStream())
+        else {
+          val props = loadFromStream(url.openStream())
+          addPropertiesName(url.toString, props)
+          props
+        }
     }
   }
 
@@ -207,5 +221,40 @@ object ConfigUtils {
     }
 
     (freeImages.toSeq, nonFreeImages.toSeq)
+  }
+
+
+  def getBaseDir(properties: Properties): RichFile ={
+    Try{new File(getString(properties , "base-dir", required = true))} match{
+      case Success(d) => if (! d.exists)
+        throw sys.error("dir "+d+" does not exist")
+      else
+        d
+      case Failure(f) => throw f
+    }
+  }
+
+  private def loadRichFile(properties: Properties, key: String, suffix: String = null, exists: Boolean = false): RichFile ={
+    val baseDir = getBaseDir(properties)
+    val fileStump = getString(properties, key, required = true)
+    val fs = baseDir.getFile.getAbsoluteFile + "/" + fileStump + (if(suffix != null) suffix else "")
+    loadRichFile(fs, exists)
+  }
+
+  def loadRichFile(file: String, exists: Boolean): RichFile ={
+    Try{new File(file)} match{
+      case Success(f) if !exists || exists && f.exists() => f
+      case _ => sys.error(file + " does not exist!")
+    }
+  }
+
+  def loadInputFile(properties: Properties, key: String, suffix: String = null): RichFile ={
+    val suf = if(suffix != null) suffix else getString(properties, "suffix")
+    loadRichFile(properties, key, suf, exists = true)
+  }
+
+  def loadOutputFile(properties: Properties, key: String, suffix: String = null): RichFile ={
+    val suf = if(suffix != null) suffix else getString(properties, "output-suffix")
+    loadRichFile(properties, key, suf)
   }
 }

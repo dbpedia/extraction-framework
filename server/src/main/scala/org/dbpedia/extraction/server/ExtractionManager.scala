@@ -9,6 +9,7 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{Source, WikiSource, XMLSource}
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
@@ -32,6 +33,14 @@ abstract class ExtractionManager(
   self =>
     
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
+
+    private val domainRegex = """^http://(\w+\.)?dbpedia.org/resource.*""".r
+    private val subjOrdering = Ordering.fromLessThan[Quad]{ (q1,q2) =>
+      q1.subject match{
+        case domainRegex() => true
+        case _ => false
+      }
+    }
 
     def mappingExtractor(language : Language) : WikiPageExtractor
 
@@ -65,8 +74,10 @@ abstract class ExtractionManager(
     def extract(source: Source, destination: Destination, language: Language, useCustomExtraction: Boolean = false): Unit = {
       val extract = if (useCustomExtraction) customExtractor(language) else mappingExtractor(language)
       destination.open()
-      for (page <- source)
-        destination.write(extract.extract(page, page.uri))
+      for (page <- source){
+        val quads = extract.extract(page, page.uri)
+        destination.write(quads.sorted(subjOrdering))
+      }
       destination.close()
     }
 

@@ -149,6 +149,7 @@ object DBpediaDatasets
     val ArticleCategories: Dataset = datasets("article_categories")
     val ArticleTemplates: Dataset = datasets("article_templates")
     val ArticleTemplatesNested: Dataset = datasets("article_templates_nested")
+    val TemplateDefinitions: Dataset = datasets("template_definitions")
     val SkosCategories: Dataset = datasets("skos_categories")
     val RevisionUris: Dataset = datasets("revision_uris")
     val RevisionIds: Dataset = datasets("revision_ids")

@@ -108,36 +108,53 @@ object NodeUtil
         var currentNodes = List[Node]()
 
         val fullRegex = if(trimResults) "\\s*(" + regex + ")\\s*" else regex
+        var addThisNode = true
 
         for(child <- inputNode.children) child match
         {
             case TextNode(text, line, lang) =>
             {
-                val parts = text.split(fullRegex, -1)
 
-                for(i <- 0 until parts.size)
-                {
-                    if(parts.size > 1 && i < parts.size - 1)
-                    {
-                        if(parts(i).nonEmpty) {
+                //if exclusive close tag -> set addThisNode to true
+                if(text.matches("\\s*<\\/br\\s*>\\s*")){
+                  addThisNode = false
+                  propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
+                  currentNodes = List[Node]()
+                }
 
-                          val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc, lang)
+                if(addThisNode) {
+                    val parts = text.replaceAll("""(<br\s*exclusive=[^>]+>)([^<]*)(<\/br\s*>)""", "$2").split(fullRegex, -1)
 
-                          currentNodes = currentNode :: currentNodes
+                    for (i <- 0 until parts.size) {
+                        if (parts.size > 1 && i < parts.size - 1) {
+                            if (parts(i).trim.nonEmpty) {
+
+                                val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc, lang)
+
+                                currentNodes = currentNode :: currentNodes
+                            }
+                            currentNodes = currentNodes.reverse
+                            propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
+                            currentNodes = List[Node]()
                         }
-                        currentNodes = currentNodes.reverse
-                        propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
-                        currentNodes = List[Node]()
-                    }
-                    else
-                    {
-                        if(parts(i).nonEmpty) {
+                        else {
+                            if (parts(i).trim.nonEmpty) {
 
-                          val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc, lang)
+                                val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc, lang)
 
-                          currentNodes = currentNode :: currentNodes
+                                currentNodes = currentNode :: currentNodes
+                            }
                         }
                     }
+                }
+                //if exclusive start tag -> set addThisNode to true
+                if(text.matches("\\s*<br\\s*exclusive=[^>]+>\\s*")){
+                    //if addThisNode is true, this is the first encounter of this tag -> we reset the propertylist
+                    if(addThisNode) {
+                      propertyNodes = List[PropertyNode]()
+                      currentNodes = List[Node]()
+                    }
+                    addThisNode = true
                 }
             }
             case ExternalLinkNode(destinationURI, children, line, destinationNodes) =>

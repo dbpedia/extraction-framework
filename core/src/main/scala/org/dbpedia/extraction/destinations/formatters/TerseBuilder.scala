@@ -23,7 +23,7 @@ extends UriTripleBuilder(policies) {
     val uri = parseUri(str, pos)
     // If URI is bad, comment out whole triple (may happen multiple times)
     if (uri.startsWith(BadUri)) sb.insert(0, "# ")
-    this add '<' escape uri add ">"
+    this add '<' add uri add ">"
     this add ' '
   }
   

@@ -28,16 +28,13 @@
       "transformer":"textNode",
       "replace": "<br />"
     },
-    "Lang":{
-      "transformer":"textNode",
-      "replace": "<br />$(3||)<br />"
-    },
     "Marriage":{
       "transformer":"extractChildren",
       "keys": ["end", "()"],
       "whileList":false
     },
     "Nowrap":{
+      "comment":"this is an example of how to extract all children",
       "transformer":"extractChildren",
       "keys": [],
       "whileList":false
@@ -48,6 +45,7 @@
       "whileList":false
     },
     "Flatlist":{
+      "comment":"blacklisting 3 children...",
       "transformer":"extractChildren",
       "keys": ["class", "style", "indent"],
       "whileList":false
@@ -78,21 +76,26 @@
       "whileList":false
     },
     "ICD9":{
+      "comment":"templatesOnly specifies that only the content of the templates is kept as values, surrounding text values are lost",
       "transformer":"extractChildren",
       "keys": ["1"],
-      "whileList":true
+      "whileList":true,
+      "templatesOnly":true
     },
     "ICD10":{
+      "comment":"concatenating 3 children, if the third is available, prefix it with a dot",
       "transformer":"extractChildren",
       "keys": ["1", "2", "3"],
       "whileList":true,
-      "replace": "$(1||)$(2||)$(3|.|)"
+      "replace": "$(1||)$(2||)$(3|.|)",
+      "templatesOnly":true
     },
     "drugs.com":{
       "transformer":"extractChildren",
       "keys": ["1", "2"],
       "whileList":true,
-      "replace": "https://www.drugs.com/$(1||)/$(2||).html"
+      "replace": "https://www.drugs.com/$(1||)/$(2||).html",
+      "templatesOnly":true
     },
     "ushr":{
       "transformer":"extractChildren",
@@ -112,11 +115,20 @@
       "whileList":true
     },
     "Lang-$(lang)":{
+      "comment":"getLangText point out the parameter which contains the language code of the pertaining literal (produces e.g.: 'lalalala'@fr)",
       "transformer":"getLangText",
       "keys": ["1"],
       "whileList":true
     },
+    "Lang":{
+      "transformer":"getLangText",
+      "langParameter":"1",
+      "keys": ["2"],
+      "whileList":true,
+      "replace": "<br />$(2||)<br />"
+    },
     "Official website":{
+      "comment":"creates links from content",
       "transformer":"externalLinkNode"
     },
     "URL":{

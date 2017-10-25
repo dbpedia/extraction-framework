@@ -62,7 +62,7 @@ class WikiPage(
   private var _sourceIri: String = _
   def sourceIri : String = {
     if(_sourceIri == null)
-      _sourceIri = title.pageIri + "?" + (if (revision >= 0) "oldid=" + revision + "&" else "") + "ns=" + title.namespace.code
+      _sourceIri = title.pageIri + "?" + (if (revision >= 0) "oldid=" + revision else "")
     _sourceIri
   }
 

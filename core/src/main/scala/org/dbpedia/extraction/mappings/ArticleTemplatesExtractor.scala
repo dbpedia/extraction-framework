@@ -22,16 +22,13 @@ class ArticleTemplatesExtractor(
     }
   ) extends PageNodeExtractor {
 
-  // FIXME: this uses the http://xx.dbpedia.org/property/ namespace, but the
-  // http://dbpedia.org/ontology/ namespace would probably make more sense.
-  private val usesTemplateProperty = context.language.propertyUri.append("wikiPageUsesTemplate")
-
+  private val usesTemplateProperty = context.ontology.getOntologyProperty("wikiPageUsesTemplate") match{
+    case Some(o) => o.uri
+    case None => throw new IllegalArgumentException("Could not find uri for dbo:wikiPageUsesTemplate")
+  }
   override val datasets = Set(DBpediaDatasets.ArticleTemplates, DBpediaDatasets.ArticleTemplatesNested)
 
   override def extract(node: PageNode, subjectUri: String): Seq[Quad] = {
-    var quads = new ArrayBuffer[Quad]()
-
-    val seenTemplates = new HashSet[String]()
 
     val topLevelTemplates = collectTemplatesTopLevel(node)
     val nestedTemplates = collectTemplatesTransitive(node).filter( !topLevelTemplates.contains(_))
@@ -43,10 +40,9 @@ class ArticleTemplatesExtractor(
   }
 
   private def templatesToQuads(templates: List[TemplateNode], subjectUri: String, dataset: Dataset) : Seq[Quad] = {
-    templates.map( t => {
+    templates.map(t => {
       val templateUri = context.language.resourceUri.append(t.title.decodedWithNamespace)
-      new Quad(context.language, dataset, subjectUri, usesTemplateProperty,
-        templateUri, t.sourceIri, null)
+      new Quad(context.language, dataset, subjectUri, usesTemplateProperty, templateUri, t.sourceIri, null)
     })
   }
 

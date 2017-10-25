@@ -3,7 +3,6 @@ package org.dbpedia.extraction.config
 import java.io.{File, FileOutputStream, OutputStreamWriter, Writer}
 import java.net.URL
 import java.util.Properties
-import java.util.logging.{Level, Logger}
 
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
@@ -21,14 +20,13 @@ import ConfigUtils._
 import org.dbpedia.extraction.config.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 
 
-class Config(val configPath: String) extends
+class Config(properties: Properties) extends
   Properties(Config.universalProperties)
 {
+  def this(configPath: String) = this(ConfigUtils.loadConfig(configPath))
 
-  if(configPath != null)
-    this.putAll(ConfigUtils.loadConfig(configPath))
+  this.putAll(properties)
 
-  private val logger = Logger.getLogger(getClass.getName)
   /**
     * load two config files:
     * 1. the universal config containing properties universal for a release
@@ -59,6 +57,11 @@ class Config(val configPath: String) extends
   lazy val wikiName: String = getString(this, "wiki-name", required = true).trim
 
   lazy val copyrightCheck: Boolean = Try(this.getProperty("copyrightCheck", "false").toBoolean).getOrElse(false)
+
+  /**
+    * The name of the properties file loaded
+    */
+  val propertiesFilename: String = getString(this, ConfigUtils.propertiesFileKey, required = true)
 
   /**
    * Dump directory
@@ -112,9 +115,7 @@ class Config(val configPath: String) extends
   private def openLogFile(langWikiCode: String): Option[FileOutputStream] ={
     logDir match{
       case Some(p) if p.exists() =>
-        var logname = configPath.replace("\\", "/")
-        logname = logname.substring(logname.lastIndexOf("/") + 1)
-        logname = logname + "_" + langWikiCode + ".log"
+        val logname = propertiesFilename + "_" + langWikiCode + ".log"
         val logFile = new File(p, logname)
         logFile.createNewFile()
         Option(new FileOutputStream(logFile))
@@ -322,7 +323,7 @@ object Config{
 
   private val universalProperties: Properties = loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
 
-  val universalConfig: Config = new Config(null)
+  val universalConfig: Config = new Config(universalProperties)
 
 
   /**

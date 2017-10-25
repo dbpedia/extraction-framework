@@ -16,6 +16,7 @@ import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.iri.UriUtils
 
+import scala.collection.mutable
 import scala.language.reflectiveCalls
 
 /**
@@ -74,8 +75,8 @@ extends PageNodeExtractor
     private val TrailingNumberRegex = InfoboxExtractorConfig.TrailingNumberRegex
 
     private val splitPropertyNodeRegexInfobox = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(wikiCode))
-                                                  DataParserConfig.splitPropertyNodeRegexInfobox.get(wikiCode).get
-                                                else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
+                                                  DataParserConfig.splitPropertyNodeRegexInfobox(wikiCode)
+                                                else DataParserConfig.splitPropertyNodeRegexInfobox("en")
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Parsers
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,7 +85,7 @@ extends PageNodeExtractor
                                    .filter(_.isInstanceOf[DimensionDatatype])
                                    .map(dimension => new UnitValueParser(context, dimension, true))
 
-    private val intParser = new IntegerParser(context, true, validRange = (i => i%1==0))
+    private val intParser = new IntegerParser(context, true, validRange = i => i % 1 == 0)
 
     private val doubleParser = new DoubleParser(context, true)
 
@@ -101,7 +102,7 @@ extends PageNodeExtractor
     // State
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val seenProperties = HashSet[String]()
+    private val seenProperties = mutable.HashSet[String]()
     
     override val datasets = Set(DBpediaDatasets.InfoboxProperties, DBpediaDatasets.InfoboxTest, DBpediaDatasets.InfoboxPropertyDefinitions)
 
@@ -118,7 +119,7 @@ extends PageNodeExtractor
           if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) 
         }
         {
-            val propertyList = template.children.filterNot(property => ignoreProperties.get(wikiCode).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
+            val propertyList = template.children.filterNot(property => ignoreProperties.getOrElse(wikiCode, ignoreProperties("en")).contains(property.key.toLowerCase))
 
             var propertiesFound = false
 
@@ -126,7 +127,7 @@ extends PageNodeExtractor
             val countExplicitPropertyKeys = propertyList.count(property => !property.key.forall(_.isDigit))
             if ((countExplicitPropertyKeys >= minPropertyCount) && (countExplicitPropertyKeys.toDouble / propertyList.size) > minRatioOfExplicitPropertyKeys)
             {
-                for(property <- propertyList; if (!property.key.forall(_.isDigit))) {
+                for(property <- propertyList; if !property.key.forall(_.isDigit)) {
                     // TODO clean HTML
 
                     val cleanedPropertyNode = NodeUtil.removeParentheses(property)
@@ -175,11 +176,11 @@ extends PageNodeExtractor
     {
         // TODO don't convert to SI units (what happens to {{convert|25|kg}} ?)
         extractUnitValue(node).foreach(result => return List(result))
-        extractDates(node) match
+/*        extractDates(node) match
         {
             case dates if dates.nonEmpty => return dates
             case _ => 
-        }
+        }*/
         extractSingleCoordinate(node).foreach(result =>  return List(result))
         extractNumber(node).foreach(result =>  return List(result))
         extractRankNumber(node).foreach(result => return List(result))
@@ -215,16 +216,16 @@ extends PageNodeExtractor
 
     private def extractNumber(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        intParser.parse(node).foreach(value => return Some(ParseResult(value.toString, None, Some(new Datatype("xsd:integer")))))
-        doubleParser.parse(node).foreach(value => return Some(ParseResult(value.toString, None, Some(new Datatype("xsd:double")))))
+        intParser.parse(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:integer")))))
+        doubleParser.parse(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:double")))))
         None
     }
 
     private def extractRankNumber(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        StringParser.parse(node) match
+        StringParser.parse(node).getOrElse(return None).value.toString match
         {
-            case Some(RankRegex(number)) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
+            case RankRegex(number) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
             case _ => None
         }
     }
@@ -245,7 +246,7 @@ extends PageNodeExtractor
         //Split the node. Note that even if some of these hyphens are looking similar, they represent different Unicode numbers.
         val splitNodes = NodeUtil.splitPropertyNode(node, "(—|–|-|&mdash;|&ndash;|,|;)")
 
-        splitNodes.flatMap(extractDate(_)) match
+        splitNodes.flatMap(extractDate) match
         {
             case dates if dates.size == splitNodes.size => dates
             case _ => List.empty
@@ -257,7 +258,7 @@ extends PageNodeExtractor
         for (dateTimeParser <- dateTimeParsers;
              date <- dateTimeParser.parse(node))
         {
-            return Some(ParseResult(date.toString, None, Some(date.value.datatype)))
+            return Some(ParseResult(date.value.toString, None, Some(date.value.datatype)))
         }
         None
     }

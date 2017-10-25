@@ -4195,6 +4195,14 @@ Includes concentration, extermination, transit, detention, internment, (forced) 
 {{label|de|historischer Kreis / Bezirk}}
 | comments        = {{comment|en|a place which used to be a district.}}
 | rdfs:subClassOf = District
+}}</text></revision></page><page><title>OntologyClass:HistoricalEvent</title><ns>200</ns><id>11954</id><revision><id>52513</id><timestamp>2017-10-18T10:03:14Z</timestamp><text>{{Class
+| labels =
+{{label|en|historical event}}
+{{label|fr|évènement historique}}
+{{label|de|historisches Ereignis}}
+| comments =
+{{comment|en|an event that is clearly different from strictly personal events and had historical impact}}
+| rdfs:subClassOf = SocietalEvent
 }}</text></revision></page><page><title>OntologyClass:HistoricalPeriod</title><ns>200</ns><id>5938</id><revision><id>48341</id><timestamp>2015-05-25T16:23:11Z</timestamp><text>{{Class 
 |labels= 
 {{label|en|historical period}} 
@@ -9016,6 +9024,15 @@ rdfs:subClassOf = Event
 {{label|ja|ウェブサイト}}
 | rdfs:subClassOf = Work
 | owl:equivalentClass = schema:WebSite
+}}</text></revision></page><page><title>OntologyClass:WikimediaTemplate</title><ns>200</ns><id>11965</id><revision><id>52544</id><timestamp>2017-10-25T11:24:41Z</timestamp><text>{{Class
+| labels=
+{{label|en|Wikimedia template}}
+{{label|de|Wikimedia-Vorlage}}
+{{label|fr|modèle de Wikimedia}}
+| comments=
+{{comment|en|DO NOT USE THIS CLASS! This is for internal use only!}}
+| owl:equivalentClass = wikidata:Q11266439
+| rdfs:subClassOf = Unknown
 }}</text></revision></page><page><title>OntologyClass:WindMotor</title><ns>200</ns><id>6313</id><revision><id>51158</id><timestamp>2016-06-06T12:37:19Z</timestamp><text>{{Class
 | labels =
 {{label|en|Wind motor}}
@@ -13180,6 +13197,13 @@ rdfs:subClassOf = Event
 | rdfs:range = Country
 | owl:equivalentProperty = wikidata:P17
 | rdfs:subPropertyOf = dul:hasLocation
+}}</text></revision></page><page><title>OntologyProperty:CountryCode</title><ns>202</ns><id>11955</id><revision><id>52514</id><timestamp>2017-10-18T10:29:06Z</timestamp><text>{{DatatypeProperty
+| labels =
+{{label|de|Ländervorwahl}}
+{{label|en|country code}}
+| rdfs:comment@en = Country code for telephone numbers.
+| rdfs:domain = Place
+| rdfs:range = xsd:string
 }}</text></revision></page><page><title>OntologyProperty:CountryOrigin</title><ns>202</ns><id>726</id><revision><id>35976</id><timestamp>2014-07-08T13:06:22Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = country origin
@@ -14216,14 +14240,15 @@ rdfs:subClassOf = Event
 {{label|de|Diplom}}
 | rdfs:domain = Person
 | rdfs:range = Diploma
-}}</text></revision></page><page><title>OntologyProperty:Director</title><ns>202</ns><id>788</id><revision><id>52370</id><timestamp>2017-10-10T14:43:05Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Director</title><ns>202</ns><id>788</id><revision><id>52540</id><timestamp>2017-10-23T10:16:53Z</timestamp><text>
 {{ObjectProperty
 | labels =
 	{{label|en|director}}
 	{{label|en|film director}}
 	{{label|nl|regisseur}}
 	{{label|da|instruktør}}
-	{{label|de|Regisseur}}
+	{{label|de|regisseur}}
+	{{label|ru|директор}}
 	{{label|el|σκηνοθέτης}}
 	{{label|es|director de cine}}
 	{{label|fr|réalisateur}}
@@ -16516,6 +16541,13 @@ rdfs:subClassOf = Event
 | rdfs:domain = Artist
 | rdfs:range = Award
 | rdfs:subPropertyOf = dul:coparticipatesWith
+}}</text></revision></page><page><title>OntologyProperty:GdpPerCapita</title><ns>202</ns><id>11956</id><revision><id>52517</id><timestamp>2017-10-18T12:02:26Z</timestamp><text>{{DatatypeProperty
+| rdfs:label@en = gross domestic product (GDP) per capita
+| rdfs:label@de = Bruttoinlandsprodukt pro Einwohner
+| rdfs:comment@en = The nominal gross domestic product of a country per capita.
+| rdfs:comment@de = Das nominale Bruttoinlandsprodukt eines Landes pro Einwohner.
+| rdfs:domain = PopulatedPlace
+| rdfs:range = xsd:float
 }}</text></revision></page><page><title>OntologyProperty:GeminiAward</title><ns>202</ns><id>930</id><revision><id>36111</id><timestamp>2014-07-08T13:27:12Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = Gemini Award
@@ -16928,11 +16960,13 @@ rdfs:subClassOf = Event
 | rdfs:label@el = ακαθάριστα
 | rdfs:domain = Film
 | rdfs:range = Currency
-}}</text></revision></page><page><title>OntologyProperty:GrossDomesticProduct</title><ns>202</ns><id>2384</id><revision><id>45842</id><timestamp>2015-03-14T19:10:04Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:GrossDomesticProduct</title><ns>202</ns><id>2384</id><revision><id>52516</id><timestamp>2017-10-18T12:00:25Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = gross domestic product (GDP)
 | rdfs:label@de = Bruttoinlandsprodukt
+| rdfs:comment@en = The nominal gross domestic product of a country (not per capita).
+| rdfs:comment@de = Das nominale Bruttoinlandsprodukt eines Landes (nicht pro Einwohner).
 | rdfs:domain = PopulatedPlace
-| rdfs:range = Currency
+| rdfs:range = xsd:float
 }}</text></revision></page><page><title>OntologyProperty:GrossDomesticProductAsOf</title><ns>202</ns><id>3266</id><revision><id>12121</id><timestamp>2011-04-13T13:26:22Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = gross domestic product as of
 | rdfs:label@pt = produto interno bruto em
@@ -18684,6 +18718,12 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 | rdfs:domain = Legislature
 | rdfs:range = xsd:string
 | rdfs:comment@en = The term of the on-going session (e.g.: "40th Canadian Parliament").
+}}</text></revision></page><page><title>OntologyProperty:Legislature</title><ns>202</ns><id>11953</id><revision><id>52511</id><timestamp>2017-10-18T09:42:52Z</timestamp><text>{{ObjectProperty
+| labels =
+	{{label|en|legislature}}
+	{{label|de|Gesetzgeber}}
+| rdfs:domain = PopulatedPlace
+| rdfs:range = Legislature
 }}</text></revision></page><page><title>OntologyProperty:Length</title><ns>202</ns><id>1056</id><revision><id>22223</id><timestamp>2013-01-10T23:13:13Z</timestamp><text>{{DatatypeProperty
 | labels =
 {{label|en|length}}
@@ -19663,18 +19703,18 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 	{{comment|fr|Celui qui sert de guide, de conseiller à quelqu’un. &lt;ref&gt;http://fr.wiktionary.org/wiki/mentor&lt;/ref&gt;}}
 | rdfs:subPropertyOf = dul:coparticipatesWith
 }}
-&lt;references/&gt;</text></revision></page><page><title>OntologyProperty:MergedIntoParty</title><ns>202</ns><id>3725</id><revision><id>36280</id><timestamp>2014-07-08T14:02:46Z</timestamp><text>
-{{ObjectProperty
-| rdfs:label@en = merged into party
-| rdfs:label@de = Aufgegangen in Partei
-| rdfs:domain = PoliticalParty
-| rdfs:range = PoliticalParty
-| rdfs:subPropertyOf = dul:coparticipatesWith
-}}</text></revision></page><page><title>OntologyProperty:MergedSettlement</title><ns>202</ns><id>7900</id><revision><id>27425</id><timestamp>2013-07-12T10:15:10Z</timestamp><text>{{ObjectProperty
+&lt;references/&gt;</text></revision></page><page><title>OntologyProperty:MergedIntoParty</title><ns>202</ns><id>11952</id><revision><id>52500</id><timestamp>2017-10-17T22:49:21Z</timestamp><text>#REDIRECT [[OntologyProperty:MergedWith]]</text></revision></page><page><title>OntologyProperty:MergedSettlement</title><ns>202</ns><id>7900</id><revision><id>27425</id><timestamp>2013-07-12T10:15:10Z</timestamp><text>{{ObjectProperty
 | labels =
 {{label|en|merged settlement}}
 | rdfs:domain = Settlement
 | rdfs:range = Settlement
+}}</text></revision></page><page><title>OntologyProperty:MergedWith</title><ns>202</ns><id>3725</id><revision><id>52502</id><timestamp>2017-10-17T22:50:47Z</timestamp><text>
+{{ObjectProperty
+| rdfs:label@en = merged with
+| rdfs:label@de = zusammengeschlossen
+| rdfs:domain = Organisation
+| rdfs:range = Organisation
+| rdfs:subPropertyOf = dul:coparticipatesWith
 }}</text></revision></page><page><title>OntologyProperty:MergerDate</title><ns>202</ns><id>7107</id><revision><id>25634</id><timestamp>2013-05-26T13:54:39Z</timestamp><text>{{DatatypeProperty
 | labels =
 {{label|en|merger date}}
@@ -22527,13 +22567,14 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 | rdfs:subPropertyOf = dul:isSpecializedBy
 }}
 == references ==
-&lt;references/&gt;</text></revision></page><page><title>OntologyProperty:Picture</title><ns>202</ns><id>3217</id><revision><id>45547</id><timestamp>2015-03-08T10:59:06Z</timestamp><text>{{ObjectProperty
+&lt;references/&gt;</text></revision></page><page><title>OntologyProperty:Picture</title><ns>202</ns><id>3217</id><revision><id>52532</id><timestamp>2017-10-23T09:02:36Z</timestamp><text>{{ObjectProperty
 | labels =
 	{{label|en|picture}}
 	{{label|el|εικόνα}}
 	{{label|nl|afbeelding}}
 	{{label|pt|figura}}
-	{{label|de|Bild}}
+	{{label|de|bild}}
+        {{label|ru|рисунок}}
 	{{label|fr|image}}
 | rdfs:domain = owl:Thing
 | rdfs:range = owl:Thing
@@ -23215,7 +23256,7 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 | rdfs:label@de = hergestellt durch
 | rdfs:domain = Film
 | rdfs:range = Company
-}}</text></revision></page><page><title>OntologyProperty:Producer</title><ns>202</ns><id>1322</id><revision><id>36434</id><timestamp>2014-07-08T14:12:33Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Producer</title><ns>202</ns><id>1322</id><revision><id>52529</id><timestamp>2017-10-19T08:21:39Z</timestamp><text>
 {{ObjectProperty
 | labels =
 	{{label|en|producer}}
@@ -23223,6 +23264,7 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 	{{label|de|Produzent}}
 	{{label|el|παραγωγός}}
 	{{label|pl|producent}}
+	{{label|ru|продюсер}}
 | rdfs:comment@en = The producer of the creative work.
 | rdfs:domain = Work
 | rdfs:range = Agent
@@ -24867,11 +24909,11 @@ http://rkd.nl/explore/artists/$1}}
 	{{label|nl|reeks}}
 	{{label|el|σειρά}}
 | rdfs:subPropertyOf = dul:isParticipantIn
-}}</text></revision></page><page><title>OntologyProperty:Service</title><ns>202</ns><id>1409</id><revision><id>36515</id><timestamp>2014-07-08T14:17:35Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Service</title><ns>202</ns><id>1409</id><revision><id>52508</id><timestamp>2017-10-17T23:06:34Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = service
 | rdfs:label@de = Dienst
-| rdfs:domain = Company
+| rdfs:domain = Organisation
 | rdfs:subPropertyOf = dul:sameSettingAs
 }}</text></revision></page><page><title>OntologyProperty:ServiceEndDate</title><ns>202</ns><id>1410</id><revision><id>8263</id><timestamp>2010-05-28T13:40:47Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = service end date
@@ -26465,6 +26507,14 @@ http://www.idref.fr/$1}}
 | rdfs:label@el = θερμοκρασία
 | rdfs:label@fr = température
 | rdfs:range = Temperature
+}}</text></revision></page><page><title>OntologyProperty:TemplateName</title><ns>202</ns><id>11967</id><revision><id>52546</id><timestamp>2017-10-25T11:37:03Z</timestamp><text>{{DatatypeProperty
+| labels =
+	{{label|en|template name}}
+	{{label|de|Templatename}}
+| comments =
+	{{comment|en|DO NOT USE THIS PROPERTY! For internal use only.}}
+| rdfs:domain = WikimediaTemplate
+| rdfs:range = xsd:string
 }}</text></revision></page><page><title>OntologyProperty:Temple</title><ns>202</ns><id>7795</id><revision><id>34360</id><timestamp>2014-04-08T13:40:41Z</timestamp><text>{{DatatypeProperty
 | labels =
 {{label|en|temple}}
@@ -27774,6 +27824,13 @@ http://vocab.getty.edu/ulan/$1}}
 | rdfs:range = owl:Thing
 | comments = 
 {{comment|en|Reserved for DBpedia. {{Reserved for DBpedia}}}}
+}}</text></revision></page><page><title>OntologyProperty:WikiPageUsesTemplate</title><ns>202</ns><id>11966</id><revision><id>52545</id><timestamp>2017-10-25T11:35:10Z</timestamp><text>{{ObjectProperty
+| labels =
+	{{label|en|wiki page uses template}}
+	{{label|de|Wikiseite verwendet Template}}
+| comments =
+	{{comment|en|DO NOT USE THIS PROPERTY! For internal use only.}}
+| rdfs:range = WikimediaTemplate
 }}</text></revision></page><page><title>OntologyProperty:WikiPageWikiLink</title><ns>202</ns><id>2431</id><revision><id>36658</id><timestamp>2014-07-08T14:26:25Z</timestamp><text>'''{{Reserved for DBpedia}}'''
 
 
