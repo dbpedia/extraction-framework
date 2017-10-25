@@ -160,7 +160,7 @@ private class XMLSource(xml : Elem, language: Language) extends Source
               case id => id
             }
             f( new WikiPage( title     = title,
-                             redirect  = _redirect,
+                             //redirect  = _redirect,
                              id        = (page \ "id").text,
                              revision  = (rev \ "id").text,
                              timestamp = (rev \ "timestamp").text,

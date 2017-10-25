@@ -47,7 +47,7 @@ class NifExtractorTest extends FunSuite {
     dest.open()
     for(title <- titles){
       val wt = new WikiTitle(title, Namespace.Main, context.language, false, null, true, None)
-      val wp = new WikiPage(wt, null, 4548, 4548, 4548, "")
+      val wp = new WikiPage(wt, 4548, 4548, 4548, "")
       val extractor = new WikipediaNifExtractor(context, wp)
       val html = getHtml(wt)
       dest.write(extractor.extractNif(html)(tt => System.err.println(tt.errorMsg)))

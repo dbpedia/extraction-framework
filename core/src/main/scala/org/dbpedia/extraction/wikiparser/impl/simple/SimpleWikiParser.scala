@@ -51,21 +51,6 @@ object SimpleWikiParser
 
     private val sectionEnd = new Matcher(List("=\n", "=\r", "\n"), true)
 
-    def getRedirectPattern(lang: Language): Regex ={
-
-      //Check if this page is a Redirect
-      // TODO: the regex used in org.dbpedia.extraction.mappings.Redirects.scala is probably a bit better
-      // TODO: also extract the redirect target.
-      // TODO: compare extracted redirect target to the one found by Wikipedia (stored in the WikiPage object).
-      // Problems:
-      // - if the WikiPage object was not read from XML dump or api.php, redirect may not be set in WikiPage
-      // - generating the XML dump files takes several days, and the wikitext is obviously not generated at the
-      //   same time as the redirect target, so sometimes they do not match.
-      // In a nutshell: if the redirect in WikiPage is different from what we find, we're probably correct.
-      val pattern = """(?is)\s*(?:""" + Redirect(lang).mkString("|") + """)\s*:?\s*\[\[.*"""
-      pattern.r
-    }
-
     /**
      * Parses WikiText source and builds an Abstract Syntax Tree.
      *

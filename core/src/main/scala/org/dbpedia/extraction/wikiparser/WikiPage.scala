@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.wikiparser
 
 import org.dbpedia.extraction.config.{RecordEntry, RecordSeverity}
+import org.dbpedia.extraction.dataparser.RedirectFinder
 import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
@@ -24,7 +25,7 @@ import scala.xml.Elem
  */
 class WikiPage(
     val title: WikiTitle,
-    val redirect: WikiTitle,
+    //val redirect: WikiTitle,
     val id: Long,
     val revision: Long,
     val timestamp: Long,
@@ -32,15 +33,21 @@ class WikiPage(
     val contributorName: String,
     val source : String,
     val format: String)
+extends WikiTitleHolder
 {
 
   private val extractionRecords = ListBuffer[RecordEntry[WikiPage]]()
 
   lazy val pageNode: Option[PageNode] = SimpleWikiParser(this)
 
-  def isRedirect: Boolean = SimpleWikiParser.getRedirectPattern(title.language).findFirstMatchIn(this.source) match{
-    case Some(x) => true
-    case None => false
+  lazy val isRedirect: Boolean = this.redirect != null
+
+  lazy val redirect: WikiTitle = {
+    val rf = RedirectFinder.getRedirectFinder(title.language)
+    rf.apply(this) match{
+      case Some(d) => d._2
+      case None => null.asInstanceOf[WikiTitle]   //legacy
+    }
   }
 
   def isDisambiguation: Boolean = pageNode match{
@@ -48,14 +55,14 @@ class WikiPage(
     case None => throw new WikiParserException("WikiPage " + title.encoded + " could not be extracted.")
   }
   //lazy val pageNode = SimpleWikiParser
-  def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String, format: String) =
-    this(title, redirect, WikiPage.parseLong(id), WikiPage.parseLong(revision), parseTimestamp(timestamp), WikiPage.parseLong(contributorID), contributorName, source, format)
+  def this(title: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String, format: String) =
+    this(title, WikiPage.parseLong(id), WikiPage.parseLong(revision), parseTimestamp(timestamp), WikiPage.parseLong(contributorID), contributorName, source, format)
 
   def this(title: WikiTitle, source : String) =
-    this(title, null, -1, -1, -1, 0, "", source, "")
+    this(title, -1, -1, -1, 0, "", source, "")
 
-   def this(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, source: String) =
-    this(title, redirect, id, revision, timestamp, 0, "", source, "")
+   def this(title: WikiTitle, id: Long, revision: Long, timestamp: Long, source: String) =
+    this(title, id, revision, timestamp, 0, "", source, "")
 
   override def toString: String = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
 
@@ -98,12 +105,11 @@ class WikiPage(
     addExtractionRecord(new RecordEntry[WikiPage](this, this.uri, severity, this.title.language, errorMsg, error))
   }
 
-  def getExtractionRecords(): mutable.Seq[RecordEntry[WikiPage]] = this.extractionRecords.seq
+  def getExtractionRecords: mutable.Seq[RecordEntry[WikiPage]] = this.extractionRecords.seq
 }
 
 object WikiPage {
-  
-  /**
+    /**
    * XML for one page, Wikipedia dump format.
    * TODO: make sure that XML is valid according to the schema. If not, add dummy elements / attributes where required.
    * TODO: use redirect

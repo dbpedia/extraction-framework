@@ -263,26 +263,26 @@ public class WikipediaDumpParser
 
     //Read page
     WikiPage page = null;
-    WikiTitle redirect = null;
+    //WikiTitle redirect = null;
     while (nextTag() == START_ELEMENT)
     {
       if (isStartElement(REDIRECT_ELEM))
       {
         String titleString = _reader.getAttributeValue(null, TITLE_ELEM);
-        try
+/*        try
         {
           redirect = parseTitle(titleString, null);
         }
         catch (Exception e)
         {
           records.add(new Tuple3<String, Throwable, Enumeration.Value>("Error parsing page title " + titleString, e, RecordSeverity.Warning()));
-        }
+        }*/
         nextTag();
         // now at </redirect>
       }
       else if (isStartElement(REVISION_ELEM))
       {
-        page = readRevision(title, redirect, pageId);
+        page = readRevision(title, pageId);
         // now at </revision>
       }
       else
@@ -316,7 +316,7 @@ public class WikipediaDumpParser
     while(! isEndElement(PAGE_ELEM)) _reader.next();
   }
 
-  private WikiPage readRevision(WikiTitle title, WikiTitle redirect, String pageId)
+  private WikiPage readRevision(WikiTitle title, String pageId)
   throws XMLStreamException
   {
     String text = null;
@@ -399,7 +399,7 @@ public class WikipediaDumpParser
     requireEndElement(REVISION_ELEM);
     // now at </revision>
     
-    return new WikiPage(title, redirect, pageId, revisionId, timestamp, contributorID, contributorName, text, format);
+    return new WikiPage(title, pageId, revisionId, timestamp, contributorID, contributorName, text, format);
   }
   
   /* Methods for low-level work. Ideally, only these methods would access _reader while the

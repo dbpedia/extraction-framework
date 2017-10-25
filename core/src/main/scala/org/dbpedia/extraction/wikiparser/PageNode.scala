@@ -1,7 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.dataparser.RedirectFinder
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Disambiguation
+
+import scala.xml.Elem
 
 /**
  * Represents a page.
@@ -24,22 +27,24 @@ class PageNode (
   val source: String,
   children: List[Node] = List.empty
 ) 
-extends Node(children, 0)
+extends Node(children, 0) with WikiTitleHolder
 {
-  def toWikiText = children.map(_.toWikiText).mkString
+  def toWikiText: String = children.map(_.toWikiText).mkString
 
-  def toPlainText = children.map(_.toPlainText).mkString
+  def toPlainText: String = children.map(_.toPlainText).mkString
 
-  def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText, "text/x-wiki")
+  def toDumpXML: Elem = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText, "text/x-wiki")
 
 
-  def isRedirect: Boolean ={
-    SimpleWikiParser.getRedirectPattern(title.language).findFirstMatchIn(this.source) match{
-      case Some(x) => true
-      case None => false
+  lazy val isRedirect: Boolean = this.redirect != null
+
+  lazy val redirect: WikiTitle = {
+    val rf = RedirectFinder.getRedirectFinder(title.language)
+    rf.apply(this) match{
+      case Some(d) => d._2
+      case None => null.asInstanceOf[WikiTitle]   //legacy
     }
   }
-
 
   def isDisambiguation: Boolean ={
     val disambiguationNames = Disambiguation.get(this.title.language).getOrElse(Set("Disambig"))
@@ -47,9 +52,9 @@ extends Node(children, 0)
   }
 
   //Generate the page URI
-  def uri = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
+  def uri: String = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
 
-  override def equals(other : Any) = other match
+  override def equals(other : Any): Boolean = other match
   {
 
       case otherPageNode : PageNode => ( otherPageNode.title == title && otherPageNode.id == id && otherPageNode.revision == revision && otherPageNode.timestamp == timestamp

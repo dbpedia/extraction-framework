@@ -116,7 +116,7 @@ extends WikiPageExtractor
         // with this hack we create a wikiPage close and remove all "<ref" from the source and then try to reparse the page
         val pageWithoutRefs = new WikiPage(
             title = page.title,
-            redirect = page.redirect,
+            //redirect = page.redirect,
             id = page.id,
             revision = page.revision,
             timestamp = page.timestamp,
