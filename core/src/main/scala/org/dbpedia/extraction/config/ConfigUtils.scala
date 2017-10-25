@@ -206,7 +206,7 @@ object ConfigUtils {
         ImageExtractorConfig.ImageLinkRegex() <- List(page.title.encoded) )
     {
       if(extractionRecorder != null) {
-        val records = page.getExtractionRecords() match {
+        val records = page.getExtractionRecords match {
           case seq: Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
           case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
         }

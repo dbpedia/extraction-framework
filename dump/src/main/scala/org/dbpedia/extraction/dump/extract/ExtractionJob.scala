@@ -43,7 +43,7 @@ class ExtractionJob(
         destination.write(graph)
       }
       //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
-      val records = page.getExtractionRecords() match{
+      val records = page.getExtractionRecords match{
         case seq :Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
         case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
       }
@@ -53,7 +53,7 @@ class ExtractionJob(
       case ex: Exception =>
         ex.printStackTrace()
         page.addExtractionRecord(null, ex)
-        extractionRecorder.record(page.getExtractionRecords():_*)
+        extractionRecorder.record(page.getExtractionRecords:_*)
         if(extractionRecorder.monitor != null)
           extractionRecorder.monitor.reportError(extractionRecorder, ex)
     }
