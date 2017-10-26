@@ -1,7 +1,5 @@
 package org.dbpedia.extraction.mappings
 
-import java.io.File
-import java.net.URL
 import java.util.concurrent.atomic.AtomicLong
 
 import org.apache.jena.rdf.model._
@@ -10,21 +8,18 @@ import org.dbpedia.extraction.util._
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
-
-import sys.process._
-
 import scala.util.Try
 
-class ExtractionMonitor[T] {
-  private val stats : mutable.HashMap[ExtractionRecorder[T], mutable.HashMap[String, Int]] = mutable.HashMap()
-  private val errors : mutable.HashMap[ExtractionRecorder[T], ListBuffer[Throwable]] = mutable.HashMap()
+class ExtractionMonitor {
+  private val stats : mutable.HashMap[ExtractionRecorder[_], mutable.HashMap[String, Int]] = mutable.HashMap()
+  private val errors : mutable.HashMap[ExtractionRecorder[_], ListBuffer[Throwable]] = mutable.HashMap()
 
   private var compareVersions = false
   private var old_version_URL : String = _
   private val tripleProperty = "http://rdfs.org/ns/void#triples"
   private var expectedChanges = Array(-1.0, 8.0)
   private val ignorableExceptionsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("ignorableExceptions.json"))
-  private val ignorableExceptions : mutable.HashMap[ExtractionRecorder[T], List[String]] = mutable.HashMap()
+  private val ignorableExceptions : mutable.HashMap[ExtractionRecorder[_], List[String]] = mutable.HashMap()
   private var summarizeExceptions : Boolean = false
 
   this.loadConf()
@@ -54,7 +49,7 @@ class ExtractionMonitor[T] {
     * Initializes the Extraction Monitor for a specific ExtractionRecorder
     * @param er ExtractionRecorder
     */
-  def init(er : ExtractionRecorder[T]): Unit ={
+  def init(er : ExtractionRecorder[_]): Unit ={
     val new_map = mutable.HashMap[String, Int]()
 
     new_map.put("ERROR", 0)
@@ -75,7 +70,7 @@ class ExtractionMonitor[T] {
     ignorableExceptions.put(er, exceptions.toList)
   }
 
-  def init(er_list: List[ExtractionRecorder[T]]): Unit ={
+  def init(er_list: List[ExtractionRecorder[_]]): Unit ={
     er_list.foreach(init)
   }
 
@@ -84,7 +79,7 @@ class ExtractionMonitor[T] {
     * @param er ExtractionRecorder
     * @param ex Exception
     */
-  def reportCrash(er : ExtractionRecorder[T], ex : Throwable): Unit ={
+  def reportCrash(er : ExtractionRecorder[_], ex : Throwable): Unit ={
     stats(er).put("CRASHED", 1)
     errors(er) += ex
   }
@@ -94,7 +89,7 @@ class ExtractionMonitor[T] {
     * @param er ExtractionRecorder
     * @param ex Exception
     */
-  def reportError(er : ExtractionRecorder[T], ex : Throwable): Unit = {
+  def reportError(er : ExtractionRecorder[_], ex : Throwable): Unit = {
     var ignorable = false
     if(ignorableExceptions(er).contains(ex.getClass.getName.split("\\.").last)) ignorable = true
     if(!ignorable) {
@@ -109,7 +104,7 @@ class ExtractionMonitor[T] {
     * @param datasets List of Datasets that will be compared by DatasetID
     * @return Summary-Report
     */
-  def summarize(er : ExtractionRecorder[T], datasets : ListBuffer[Dataset] = ListBuffer()): mutable.HashMap[String, Object] ={
+  def summarize(er : ExtractionRecorder[_], datasets : ListBuffer[Dataset] = ListBuffer()): mutable.HashMap[String, Object] ={
     // Get the monitor stats for this ER
     val crashed = if(stats(er).getOrElse("CRASHED", 0) == 1) "yes" else "no"
     val error = stats(er).getOrElse("ERROR", 0)
@@ -121,11 +116,14 @@ class ExtractionMonitor[T] {
       val language = er.language
       val oldDate = old_version_URL.split("/")(3)
       val url = old_version_URL + language.wikiCode + "/"+ oldDate + "_dataid_" + language.wikiCode + ".ttl"
-      new URL(url) #> new File("dataID-tmp.ttl")
 
       // Compare & Get the results
-      dataIDResults = "DATAIDRESULTS: \n" +
-      compareTripleCount("dataID-tmp.ttl", er, datasets)
+      compareTripleCount(url, er, datasets) match {
+        case Some(comparison) =>
+          dataIDResults = "DATAIDRESULTS: \n" + comparison
+        case None => dataIDResults = "! COULD NOT COMPARE DATAID !"
+      }
+
     }
     val exceptions = mutable.HashMap[String, Int]()
     errors(er).foreach(ex => {
@@ -149,36 +147,43 @@ class ExtractionMonitor[T] {
   /**
     * Reads two RDF files and compares the triple-count-values.
     */
-  def compareTripleCount(dataIDfile : String, extractionRecorder: ExtractionRecorder[T], datasets : ListBuffer[Dataset]): String ={
+  def compareTripleCount(dataIDUrl : String, extractionRecorder: ExtractionRecorder[_], datasets : ListBuffer[Dataset]): Option[String] ={
+    try {
+      var resultString = ""
+      // Load Graph
+      val model = ModelFactory.createDefaultModel()
 
-    var resultString = ""
+      model.read(dataIDUrl)
+      val oldValues = getPropertyValues(model, model.getProperty(tripleProperty))
 
-    // Load Graph
-    val oldModel = ModelFactory.createDefaultModel()
-
-    oldModel.read(dataIDfile)
-    val oldValues = getPropertyValues(oldModel, oldModel.getProperty(tripleProperty))
-
-    // Compare Values
-    oldValues.keySet.foreach(fileName => {
-      if(datasets.nonEmpty) {
-        datasets.foreach(dataset =>
-          if(dataset.canonicalUri == fileName) {
-            val oldValue : Long = oldValues(fileName).asLiteral().getLong
-            val newValue : Long = extractionRecorder.successfulTriples(dataset)
-            val change : Float =
-              if(newValue > oldValue) (newValue.toFloat / oldValue.toFloat) * 10000000 / 100000
-              else (-1 * (1- (newValue.toFloat / oldValue.toFloat))) * 10000000 / 100000
-            if(change < expectedChanges(0) || change > expectedChanges(1)) resultString += "! "
-            resultString += dataset.canonicalUri + ": " + change + "%"
-          })
-      }
-      // Datasets for ER not given => Compare all datasets
-      else {
-        resultString += fileName + ": " + oldValues(fileName).asLiteral().getLong
-      }
-    })
-    resultString
+      // Compare Values
+      oldValues.keySet.foreach(fileName => {
+        if (datasets.nonEmpty) {
+          datasets.foreach(dataset =>
+            if (dataset.canonicalUri == fileName) {
+              val oldValue: Long = oldValues(fileName).asLiteral().getLong
+              val newValue: Long = extractionRecorder.successfulTriples(dataset)
+              val change: Float =
+                if (newValue > oldValue) (newValue.toFloat / oldValue.toFloat) * 10000000 / 100000
+                else (-1 * (1 - (newValue.toFloat / oldValue.toFloat))) * 10000000 / 100000
+              if (change < expectedChanges(0) || change > expectedChanges(1)) resultString += "! "
+              resultString += dataset.canonicalUri + ": " + change + "%"
+            })
+        }
+        // Datasets for ER not given => Compare all datasets
+        else {
+          resultString += fileName + ": " + oldValues(fileName).asLiteral().getLong
+        }
+      })
+      if (resultString != "")
+        Some(resultString)
+      else
+        None
+    } catch {
+      case ex : Throwable =>
+        ex.printStackTrace()
+        None
+    }
   }
 
   /**
