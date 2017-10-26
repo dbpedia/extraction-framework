@@ -102,7 +102,7 @@ object Language extends (String => Language)
     var iso1Map = Map[String, String]()
     var iso2Map = Map[String, String]()
     val wfRegex = """^\s*<http://worldfacts.dbpedia.org/languages/([^>]+)>\s*<http://worldfacts.dbpedia.org/ontology/iso([^>]+)>\s*"(\w+)"\s*.\s*$""".r
-    IOUtils.readLines(new RichFile(new File(this.getClass.getClassLoader.getResource("worldfacts_dbpedia_data.ttl.bz2").toURI))) { line =>
+    IOUtils.readLines(this.getClass.getClassLoader.getResourceAsStream("worldfacts_dbpedia_data.ttl.bz2"), Codec.UTF8.charSet) { line =>
       if (line != null) {
         wfRegex.findFirstMatchIn(line) match {
           case Some(m) =>

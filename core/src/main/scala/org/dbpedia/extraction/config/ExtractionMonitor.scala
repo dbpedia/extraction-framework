@@ -64,7 +64,7 @@ class ExtractionMonitor {
 
     // Load ignorable Exceptions
     var exceptions = ListBuffer[String]()
-    er.datasets.foreach(dataset => ignorableExceptionsFile.get(dataset.canonicalUri).foreach(jsonNode => {
+    er.getDatasets.foreach(dataset => ignorableExceptionsFile.get(dataset.canonicalUri).foreach(jsonNode => {
       val it = jsonNode.elements()
       while(it.hasNext){
         exceptions += it.next().asText()

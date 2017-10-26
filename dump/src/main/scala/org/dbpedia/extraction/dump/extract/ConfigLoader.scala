@@ -47,11 +47,9 @@ class ConfigLoader(config: Config)
     extractionRecorder.get(classTag[T]) match{
       case Some(s) => s.get(lang) match {
         case None =>
-          s(lang) = config.getDefaultExtractionRecorder[T](lang, 2000, null, null,  ListBuffer(dataset), extractionMonitor)
+          s(lang) = config.getDefaultExtractionRecorder[T](lang, 2000, null, null,  List(dataset), extractionMonitor)
           s(lang).asInstanceOf[ExtractionRecorder[T]]
-        case Some(er) =>
-          if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
-          er.asInstanceOf[ExtractionRecorder[T]]
+        case Some(er) => er.asInstanceOf[ExtractionRecorder[T]]
       }
       case None =>
         extractionRecorder(classTag[T]) = new mutable.HashMap[Language, ExtractionRecorder[_]]()

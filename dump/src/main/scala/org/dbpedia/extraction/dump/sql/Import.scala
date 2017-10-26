@@ -5,7 +5,7 @@ import java.io._
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitleHolder}
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitleHolder}
 
 import scala.io.Codec
 import java.util.Properties

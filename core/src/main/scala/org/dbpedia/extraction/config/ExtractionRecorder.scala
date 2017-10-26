@@ -25,13 +25,15 @@ class ExtractionRecorder[T](
                              val reportInterval: Int = 100000,
                              val preamble: String = null,
                              val slackCredantials: SlackCredentials = null,
-                             val datasets: ListBuffer[Dataset] = ListBuffer[Dataset](),
+                             dataset: List[Dataset] = List[Dataset](),
                              val language: Language = Language.English,
                              val monitor: ExtractionMonitor = null
    ) {
 
   def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
 
+  private var datasets: ListBuffer[Dataset] = new ListBuffer()
+  datasets ++= dataset
   private var issuePages = mutable.Map[Language, mutable.Map[T, (String, RecordSeverity.Value, Option[Throwable])]]()
   private var successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
 
@@ -73,6 +75,8 @@ class ExtractionRecorder[T](
     case Some(m) => m.get()
     case None => 0
   }
+
+  def getDatasets: List[Dataset] = datasets.toList
 
   /**
     * get successful page count after increasing it by one
@@ -329,6 +333,7 @@ class ExtractionRecorder[T](
     this.startTime.set(System.currentTimeMillis)
     this.defaultLang = lang
     this.task = task
+    this.datasets.clear()
     this.datasets ++= datasets
 
     if(monitor != null)
