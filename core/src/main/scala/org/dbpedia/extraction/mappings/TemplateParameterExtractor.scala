@@ -21,7 +21,7 @@ extends PageNodeExtractor
 {
   private val templateParameterProperty = context.language.propertyUri.append("templateUsesParameter")
 
-  val parameterRegex = """(?s)\{\{\{([^|}{<>]*)[|}<>]""".r
+  private val parameterRegex = """(?s)\{\{\{([^|}{<>]*)[|}<>]""".r
   
   override val datasets = Set(DBpediaDatasets.TemplateParameters)
 
