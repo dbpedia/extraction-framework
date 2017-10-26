@@ -1,14 +1,16 @@
 package org.dbpedia.extraction.dataparser
 
-import java.util.logging.{Level, Logger}
 
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordSeverity}
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.{Date, Language}
-import org.dbpedia.extraction.wikiparser.{Node, TemplateNode, TextNode}
+import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
 
 import scala.util.{Failure, Success, Try}
+import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 /**
   * Created by chile on 15.10.17.
@@ -18,11 +20,13 @@ import scala.util.{Failure, Success, Try}
 class DateRangeParser ( context : {
   def language : Language
   def ontology: Ontology
-  def redirects : Redirects },
+  def redirects : Redirects
+  def recorder[T: ClassTag] : ExtractionRecorder[T] },
                        datatype : Datatype,
                        strict : Boolean = false) extends DateTimeParser(context, datatype, strict)
 {
   require(datatype != null, "datatype != null")
+  private val recorder = context.recorder[Node]
 
   def parseRange(node: Node): Option[ParseResult[(Date, Date)]] = {
     try
@@ -35,8 +39,10 @@ class DateRangeParser ( context : {
     }
     catch
       {
-        case ex : IllegalArgumentException  => logger.log(Level.FINE, "Error while parsing date", ex)
-        case ex : NumberFormatException => logger.log(Level.FINE, "Error while parsing date", ex)
+        case ex : IllegalArgumentException  =>
+          recorder.enterProblemRecord(node.root, "Error while parsing date", RecordSeverity.Warning, Some(ex), Language.getOrElse(language, Language.None))
+        case ex : NumberFormatException =>
+          recorder.enterProblemRecord(node.root, "Error while parsing date", RecordSeverity.Warning, Some(ex), Language.getOrElse(language, Language.None))
       }
 
     None

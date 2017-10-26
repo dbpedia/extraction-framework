@@ -5,6 +5,7 @@ import java.util.ArrayList
 
 import de.fau.cs.osr.ptk.common.ast.RtData
 import de.fau.cs.osr.ptk.common.{AstVisitor, Warning}
+import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.iri.UriUtils
 import org.sweble.wikitext.engine._
 import org.sweble.wikitext.engine.config.WikiConfigImpl
@@ -34,11 +35,11 @@ import org.dbpedia.extraction.wikiparser._
 final class SwebleWrapper extends WikiParser
 {
     var lastLine = 0
-    var language : Language = null
-    var pageId : PageId = null
+    var language : Language = _
+    var pageId : PageId = _
 
     // Set-up a simple wiki configuration
-    var config: WikiConfigImpl = DefaultConfigEnWp.generate();
+    var config: WikiConfigImpl = DefaultConfigEnWp.generate()
     /*var config1 = new SimpleWikiConfiguration(
         "classpath:/org/sweble/wikitext/engine/SimpleWikiConfiguration.xml");
     var configFile = new File("classpath:/org/sweble/wikitext/engine/SimpleWikiConfiguration.xml")
@@ -50,7 +51,7 @@ final class SwebleWrapper extends WikiParser
     var wikiNodeFactory = engine.getWikiConfig.getParserConfig.getNodeFactory
     var entityMap : WtEntityMap = new WtEntityMapImpl()
 
-    def apply(page : WikiPage) : Option[PageNode] =
+    def apply(page : WikiPage, templateRedirects: Redirects = new Redirects(Map())) : Option[PageNode] =
     {
         //TODO refactor, not safe
         language = page.title.language

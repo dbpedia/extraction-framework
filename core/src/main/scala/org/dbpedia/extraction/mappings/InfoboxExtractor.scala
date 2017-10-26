@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 
@@ -18,6 +19,7 @@ import org.dbpedia.iri.UriUtils
 
 import scala.collection.mutable
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 /**
  * This extractor extracts all properties from all infoboxes.
@@ -33,7 +35,8 @@ class InfoboxExtractor(
   context : {
     def ontology : Ontology
     def language : Language
-    def redirects : Redirects 
+    def redirects : Redirects
+    def recorder[T: ClassTag] : ExtractionRecorder[T]
   } 
 ) 
 extends PageNodeExtractor

@@ -5,6 +5,8 @@ import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.WikiPage
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
+import scala.language.reflectiveCalls
+
 /**
  * User: hadyelsahar
  * Date: 11/19/13
@@ -18,13 +20,13 @@ import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
  * @param extractors  Sequence of next level Extractors
  *
  * */
- class WikiParseExtractor(extractors: CompositePageNodeExtractor)extends WikiPageExtractor{
+ class WikiParseExtractor(extractors: CompositePageNodeExtractor, context : { def redirects : Redirects })extends WikiPageExtractor{
 
   override val datasets: Set[Dataset] = extractors.datasets
 
   override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
 
-    val node = SimpleWikiParser(page)
+    val node = SimpleWikiParser(page, context.redirects)
     node match {
       case Some(n) =>  extractors.extract(n, subjectUri)
       case None => Seq.empty

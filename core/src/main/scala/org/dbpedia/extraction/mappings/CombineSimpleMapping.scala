@@ -6,6 +6,7 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.TemplateNode
+import scala.language.reflectiveCalls
 
 /**
   * Created by chile on 15.10.17.

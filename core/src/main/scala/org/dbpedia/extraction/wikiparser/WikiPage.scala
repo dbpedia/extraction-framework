@@ -25,7 +25,6 @@ import scala.xml.Elem
  */
 class WikiPage(
     val title: WikiTitle,
-    //val redirect: WikiTitle,
     val id: Long,
     val revision: Long,
     val timestamp: Long,
@@ -54,6 +53,7 @@ extends WikiTitleHolder
     case Some(s) => s.isDisambiguation
     case None => throw new WikiParserException("WikiPage " + title.encoded + " could not be extracted.")
   }
+
   //lazy val pageNode = SimpleWikiParser
   def this(title: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String, format: String) =
     this(title, WikiPage.parseLong(id), WikiPage.parseLong(revision), parseTimestamp(timestamp), WikiPage.parseLong(contributorID), contributorName, source, format)
@@ -74,7 +74,7 @@ extends WikiTitleHolder
   }
 
   //Generate the page URI
-  def uri: String = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
+  lazy val uri: String = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
 
   def toDumpXML: Elem = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
 

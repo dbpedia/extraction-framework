@@ -6,4 +6,6 @@ package org.dbpedia.extraction.wikiparser
 trait WikiTitleHolder {
   val title: WikiTitle
   val source: String
+  val uri: String
+  val id: Long
 }

@@ -2,15 +2,13 @@ package org.dbpedia.extraction.wikiparser.impl.simple
 
 import java.util.logging.{Level, Logger}
 
-import org.apache.jena.iri.IRIException
+import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.extraction.util.{Language, WikiUtil}
+import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Redirect
 import org.dbpedia.iri.{IRISyntaxException, UriUtils}
 
 import scala.util.{Failure, Success}
-import scala.util.matching.Regex
 
 object SimpleWikiParser
 {
@@ -58,7 +56,7 @@ object SimpleWikiParser
      * @return The PageNode which represents the root of the AST
      * @throws WikiParserException if an error occured during parsing
      */
-    def apply(page : WikiPage) : Option[PageNode] =
+    def apply(page : WikiPage, templateRedirects: Redirects = new Redirects(Map())) : Option[PageNode] =
     {
 
       if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki")
@@ -68,14 +66,14 @@ object SimpleWikiParser
       else
       {
         //Parse source
-        val nodes = parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0)
+        val nodes = parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0, templateRedirects)
 
         //Return page node
         Some(new PageNode(page.title, page.id, page.revision, page.timestamp, page.contributorID, page.contributorName, page.source, nodes))
       }
     }
     
-    private def  parseUntil(matcher : Matcher, source : Source, level : Int) : List[Node] =
+    private def  parseUntil(matcher : Matcher, source : Source, level : Int, templateRedirects: Redirects) : List[Node] =
     {
         val line = source.line
 
@@ -171,7 +169,7 @@ object SimpleWikiParser
                     try
                     {
                          //Parse new node
-                         val newNode = createNodes(source, level + 1)
+                         val newNode = createNodes(source, level + 1, templateRedirects)
 
                          //Add text node
                          if(!currentText.isEmpty)
@@ -223,29 +221,29 @@ object SimpleWikiParser
         //else we found "/>"
     }
     
-    private def createNodes(source : Source, level : Int) : List[Node] =
+    private def createNodes(source : Source, level : Int, templateRedirects: Redirects) : List[Node] =
     {
         if(source.lastTag("[") || source.lastTag("http"))
         {
-            parseLink(source, level)
+            parseLink(source, level, templateRedirects)
         }
         else if(source.lastTag("{{"))
         {
             if (source.pos < source.length && source.getString(source.pos, source.pos+1) == "{")
             {
                 source.pos = source.pos+1   //advance 1 char
-                return List(parseTemplateParameter(source, level))
+                return List(parseTemplateParameter(source, level, templateRedirects))
             }
 
-            parseTemplate(source, level)
+            parseTemplate(source, level, templateRedirects)
         }
         else if(source.lastTag("{|"))
         {
-            List(parseTable(source, level))
+            List(parseTable(source, level, templateRedirects))
         }
         else if(source.lastTag("\n="))
         {
-            List(parseSection(source))
+            List(parseSection(source, templateRedirects))
         }
         else
             throw new WikiParserException("Unknown element type", source.line, source.findLine(source.line))
@@ -259,7 +257,7 @@ object SimpleWikiParser
    * @param level
    * @return
    */
-    private def parseLink(source : Source, level : Int) : List[Node] =
+    private def parseLink(source : Source, level : Int, templateRedirects: Redirects) : List[Node] =
     {
         val startPos = source.pos
         val startLine = source.line
@@ -272,7 +270,7 @@ object SimpleWikiParser
 
             //Set destination
             //val destination = source.getString(startPos, source.pos - m.tag.length).trim
-            val destination = parseUntil(internalLinkLabelOrEnd, source, level)
+            val destination = parseUntil(internalLinkLabelOrEnd, source, level, templateRedirects)
             //destination is the parsed destination (will be used by e.g. the witkionary module)
             val destinationUri =
             if(destination.isEmpty) {
@@ -286,7 +284,7 @@ object SimpleWikiParser
             val nodes =
                 if(source.lastTag("|"))
                 {
-                   parseUntil(internalLinkEnd, source, level)
+                   parseUntil(internalLinkEnd, source, level, templateRedirects)
                 }
                 else
                 {
@@ -311,7 +309,7 @@ object SimpleWikiParser
                 //reparse the text
                 val newSource = new Source(newText, source.language)
                 newSource.line = source.line
-                val newNodes = parseUntil(new Matcher(List(), true), newSource, 0)
+                val newNodes = parseUntil(new Matcher(List(), true), newSource, 0, templateRedirects)
 
                 val newNodesToText = newNodes.map(_.toPlainText).mkString(" ").trim
                 if (newNodesToText.isEmpty && newNodes.nonEmpty)
@@ -343,7 +341,7 @@ object SimpleWikiParser
 
             //Set destination
             //val destinationURI = source.getString(startPos, source.pos - 1).trim
-            val destination = parseUntil(externalLinkLabelOrEnd, source, level)
+            val destination = parseUntil(externalLinkLabelOrEnd, source, level, templateRedirects)
             //destination is the parsed destination (will be used by e.g. the witkionary module)
             val destinationURI = 
             if (destination.isEmpty) {
@@ -363,7 +361,7 @@ object SimpleWikiParser
             val nodes =
                 if(source.lastTag(" "))
                 {
-                    parseUntil(externalLinkEnd, source, level)
+                    parseUntil(externalLinkEnd, source, level, templateRedirects)
                 }
                 else
                 {
@@ -432,10 +430,10 @@ object SimpleWikiParser
         }
     }
 
-    private def parseTemplateParameter(source : Source, level : Int) : TemplateParameterNode =
+    private def parseTemplateParameter(source : Source, level : Int, templateRedirects: Redirects) : TemplateParameterNode =
     {
         val line = source.line
-        val keyNodes = parseUntil(templateParameterEnd , source, level)
+        val keyNodes = parseUntil(templateParameterEnd , source, level, templateRedirects)
 
         if(keyNodes.size != 1 || ! keyNodes.head.isInstanceOf[TextNode])
                 throw new WikiParserException("Template variable contains invalid elements", line, source.findLine(line))
@@ -448,12 +446,12 @@ object SimpleWikiParser
         // FIXME: parseUntil(templateParameterEnd) should be correct. Without it, we don't actually 
         // consume the source until the end of the template parameter. But if we use it, the parser
         // fails for roughly twice as many pages, so for now we deactivate it with "if (true)".
-        val nodes = if (source.lastTag("}}}")) List.empty else parseUntil(templateParameterEnd, source, level)
+        val nodes = if (source.lastTag("}}}")) List.empty else parseUntil(templateParameterEnd, source, level, templateRedirects)
 
         TemplateParameterNode(key, nodes, line)
     }
 
-    private def parseTemplate(source : Source, level : Int) : List[Node] =
+    private def parseTemplate(source : Source, level : Int, templateRedirects: Redirects) : List[Node] =
     {
         val startLine = source.line
         var title : WikiTitle = null;
@@ -465,7 +463,7 @@ object SimpleWikiParser
             //The first entry denotes the name of the template or parser function
             if(title == null)
             {
-                val nodes = parseUntil(propertyEndOrParserFunctionNameEnd, source, level)
+                val nodes = parseUntil(propertyEndOrParserFunctionNameEnd, source, level, templateRedirects)
 
                 val templateName = nodes match
                 {
@@ -476,13 +474,13 @@ object SimpleWikiParser
                 val decodedName = WikiUtil.cleanSpace(templateName).capitalize(source.language.locale)
                 if(source.lastTag(":"))
                 {
-                    return List(parseParserFunction(decodedName, source, level))
+                    return List(parseParserFunction(decodedName, source, level, templateRedirects))
                 }
                 title = new WikiTitle(decodedName, Namespace.Template, source.language)
             }
             else
             {
-                val propertyNode = parseProperty(source, curKeyIndex.toString, level)
+                val propertyNode = parseProperty(source, curKeyIndex.toString, level, templateRedirects)
                 properties ::= propertyNode
 
                 if(propertyNode.key == curKeyIndex.toString)
@@ -494,18 +492,17 @@ object SimpleWikiParser
             //Reached template end?
             if(source.lastTag("}}"))
             {
-                // TODO: Find a way to leverage template redirects!!!!
-                return TemplateNode.transform(new TemplateNode(title, properties.reverse, startLine))
+                return TemplateNode.transform(new TemplateNode(templateRedirects.resolve(title), properties.reverse, startLine))
             }
         }
         
         throw new WikiParserException("Template not closed", startLine, source.findLine(startLine))
     }
 
-    private def parseProperty(source : Source, defaultKey : String, level : Int) : PropertyNode =
+    private def parseProperty(source : Source, defaultKey : String, level : Int, templateRedirects: Redirects) : PropertyNode =
     {
         val line = source.line
-        var nodes = parseUntil(propertyValueOrEnd, source, level)
+        var nodes = parseUntil(propertyValueOrEnd, source, level, templateRedirects)
         var key = defaultKey
  
         if(source.lastTag("="))
@@ -517,21 +514,21 @@ object SimpleWikiParser
             key = nodes.head.retrieveText.get.trim
 
             //Parse the corresponding value
-            nodes = parseUntil(propertyEnd, source, level)
+            nodes = parseUntil(propertyEnd, source, level, templateRedirects)
         }
 
         PropertyNode(key, nodes, line)
     }
 
-    private def parseParserFunction(decodedName : String, source : Source, level : Int) : ParserFunctionNode =
+    private def parseParserFunction(decodedName : String, source : Source, level : Int, templateRedirects: Redirects) : ParserFunctionNode =
     {
-        val children = parseUntil(parserFunctionEnd, source, level)
+        val children = parseUntil(parserFunctionEnd, source, level, templateRedirects)
         val startLine = source.line
 
         ParserFunctionNode(decodedName, children, startLine)
     }
     
-    private def parseTable(source : Source, level : Int) : TableNode =
+    private def parseTable(source : Source, level : Int, templateRedirects: Redirects) : TableNode =
     {
         val startPos = source.pos
         val line = source.line
@@ -573,7 +570,7 @@ object SimpleWikiParser
                 }
                 
                 //Parse row
-                nodes ::= parseTableRow(source, level)
+                nodes ::= parseTableRow(source, level, templateRedirects)
     
                 //Reached table end?
                 if(source.lastTag("|}"))
@@ -586,7 +583,7 @@ object SimpleWikiParser
         TableNode(caption, nodes.reverse, line)
     }
 
-    private def parseTableRow(source : Source, level : Int) : TableRowNode =
+    private def parseTableRow(source : Source, level : Int, templateRedirects: Redirects) : TableRowNode =
     {
         val line = source.line
         var nodes = List[TableCellNode]()
@@ -594,7 +591,7 @@ object SimpleWikiParser
         while(true)
         {
             //Parse table cell
-            nodes ::= parseTableCell(source, level)
+            nodes ::= parseTableCell(source, level, templateRedirects)
 
             //Reached row end?
             if(source.lastTag("|}") || source.lastTag("|-"))
@@ -606,13 +603,13 @@ object SimpleWikiParser
         null
     }
 
-    private def parseTableCell(source : Source, level : Int) : TableCellNode =
+    private def parseTableCell(source : Source, level : Int, templateRedirects: Redirects) : TableCellNode =
     {
         val startPos = source.pos
         val startLine = source.line
         var rowspan = 1
         var colspan = 1
-        var nodes = parseUntil(tableCellEnd1, source, level)
+        var nodes = parseUntil(tableCellEnd1, source, level, templateRedirects)
 
         val lookBack = source.getString(source.pos - 2, source.pos)
 
@@ -629,7 +626,7 @@ object SimpleWikiParser
             colspan = parseTableParam("colspan", formattingStr)
 
             //Parse the cell contents
-            nodes = this.parseUntil(tableCellEnd3, source, level)
+            nodes = this.parseUntil(tableCellEnd3, source, level, templateRedirects)
             if(source.lastTag("\n "))
             {
                 source.find(tableCellEnd2)
@@ -675,7 +672,7 @@ object SimpleWikiParser
         }
     }
 
-    private def parseSection(source : Source) : SectionNode =
+    private def parseSection(source : Source, templateRedirects: Redirects) : SectionNode =
     {
         val line = source.line
 
@@ -689,7 +686,7 @@ object SimpleWikiParser
 
         //Get name
         val startPos = source.pos
-        val nodes = this.parseUntil(sectionEnd, source, level)
+        val nodes = this.parseUntil(sectionEnd, source, level, templateRedirects)
         source.seek(-1)
         if(nodes.isEmpty)
         {

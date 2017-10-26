@@ -18,8 +18,9 @@ class OntologyReader
     def read(source : Source) : Ontology =
     {
         logger.info("Loading ontology pages")
+      val parser = WikiParser.getInstance()
 
-        read(source.map(WikiParser.getInstance()).flatten)
+        read(source.flatMap(parser(_)))
     }
 
     /**

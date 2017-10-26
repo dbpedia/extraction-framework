@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -8,6 +9,7 @@ import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.mutable.ArrayBuffer
 import scala.language.{postfixOps, reflectiveCalls}
+import scala.reflect.ClassTag
 
 /**
   * ewxperimental extractor that extracts infobox facts that have a citation on the same line and places the citation in the context
@@ -18,6 +20,7 @@ class CitedFactsExtractor(
     def language : Language
     def mappings : Mappings
     def redirects : Redirects
+    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends WikiPageExtractor {
@@ -34,7 +37,7 @@ extends WikiPageExtractor {
     if(wikiPage.title.namespace != Namespace.Main) return Seq.empty
 
     val pageNodeOption = wikiPage match{
-      case page: WikiPage => WikiParser.getInstance().apply(page)
+      case page: WikiPage => WikiParser.getInstance().apply(page, context.redirects)
       case _ => throw new IllegalArgumentException("Input is no WikiPage")
     }
 

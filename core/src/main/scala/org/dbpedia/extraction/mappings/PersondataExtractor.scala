@@ -1,15 +1,18 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.dataparser.{ObjectParser, DateTimeParser, StringParser}
+import org.dbpedia.extraction.dataparser.{DateTimeParser, ObjectParser, StringParser}
 import org.dbpedia.extraction.config.mappings.PersondataExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 /**
  * Extracts information about persons (date and place of birth etc.) from the English and German Wikipedia, represented using the FOAF vocabulary.
@@ -18,7 +21,8 @@ class PersondataExtractor(
   context : {
     def ontology : Ontology
     def redirects : Redirects // redirects required by DateTimeParser
-    def language : Language 
+    def language : Language
+      def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends PageNodeExtractor

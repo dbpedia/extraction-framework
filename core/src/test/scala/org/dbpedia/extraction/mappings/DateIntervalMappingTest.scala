@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.io.File
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.XMLSource
@@ -11,6 +12,8 @@ import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.matchers.ShouldMatchers
+
+import scala.reflect.ClassTag
 
 @RunWith(classOf[JUnitRunner])
 class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
@@ -122,6 +125,7 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
             def language : Language = lang
             def ontology: Ontology = ontology
             def redirects : Redirects = red
+            def recorder[T: ClassTag] : ExtractionRecorder[T] = new ExtractionRecorder[T]()
         }
         
         val start = datatypeName match

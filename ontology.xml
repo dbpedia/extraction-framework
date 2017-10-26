@@ -4435,6 +4435,12 @@ A hormone is any member of a class of signaling molecules produced by glands in 
 {{label|ko|아이스하키 선수}}
 | rdfs:subClassOf = WinterSportPlayer
 | owl:equivalentClass = wikidata:Q11774891
+}}</text></revision></page><page><title>OntologyClass:Identifier</title><ns>200</ns><id>11969</id><revision><id>52548</id><timestamp>2017-10-26T10:23:03Z</timestamp><text>{{Class
+| labels=
+{{label|en|identifier}}
+{{label|de|Bezeichner}}
+{{label|fr|identifiant}}
+| owl:equivalentClass = wikidata:Q6545185
 }}</text></revision></page><page><title>OntologyClass:Ideology</title><ns>200</ns><id>3260</id><revision><id>50816</id><timestamp>2016-04-16T06:52:39Z</timestamp><text>{{Class
 | labels =
 	{{label|en|ideology}}
@@ -8560,6 +8566,14 @@ rdfs:subClassOf = Event
 {{label|fr|période temporelle}}
 {{label|es|periodo temporal}}
 | owl:disjointWith = Person 
+}}</text></revision></page><page><title>OntologyClass:TopLevelDomain</title><ns>200</ns><id>11968</id><revision><id>52549</id><timestamp>2017-10-26T10:23:39Z</timestamp><text>{{Class
+| labels=
+{{label|en|top level domain}}
+{{label|de|top level domain}}
+{{label|fr|domaine de premier niveau}}
+| specificProperties =
+| rdfs:subClassOf = Identifier
+| owl:equivalentClass = wikidata:Q14296
 }}</text></revision></page><page><title>OntologyClass:TopicalConcept</title><ns>200</ns><id>5115</id><revision><id>48191</id><timestamp>2015-05-25T15:20:19Z</timestamp><text>{{Class
 | labels =
 {{label|en|topical concept}}
@@ -12584,19 +12598,7 @@ rdfs:subClassOf = Event
 | rdfs:domain = MemberResistanceMovement
 | rdfs:range = xsd:string
 | rdfs:subPropertyOf = code
-}}</text></revision></page><page><title>OntologyProperty:CodeLandRegistry</title><ns>202</ns><id>6535</id><revision><id>24003</id><timestamp>2013-02-25T10:02:19Z</timestamp><text>{{DatatypeProperty
-| labels                 =
-{{label|en|code land registry}}
-{{label|nl|kadastercode}}
-| comments               =
-{{comment|en|Land Registry code designating a parcel of land  }}
-{{comment|nl|Kadastercode voor een perceel}}
-| rdfs:domain            = Place
-| rdfs:range             = xsd:string
-| rdf:type               =
-| rdfs:subPropertyOf     = Code
-| owl:equivalentProperty = 
-}}</text></revision></page><page><title>OntologyProperty:CodeListOfHonour</title><ns>202</ns><id>10244</id><revision><id>38528</id><timestamp>2014-10-03T15:24:47Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:CodeLandRegistry</title><ns>202</ns><id>11971</id><revision><id>52556</id><timestamp>2017-10-26T10:33:33Z</timestamp><text>#REDIRECT [[OntologyProperty:Registry]]</text></revision></page><page><title>OntologyProperty:CodeListOfHonour</title><ns>202</ns><id>10244</id><revision><id>38528</id><timestamp>2014-10-03T15:24:47Z</timestamp><text>{{DatatypeProperty
 | labels =
 {{label|en|code on List of Honour}}
 {{label|de|Code Ehrenliste}}
@@ -13719,12 +13721,11 @@ rdfs:subClassOf = Event
 |rdfs:comment@en = Dublin Core (dc) properties should only be used for media resources compatible with a [http://dublincore.org/documents/dcmi-type-vocabulary/ Dublin Core type].
 |rdfs:domain = Work
 |rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:Dc:identifier</title><ns>202</ns><id>9569</id><revision><id>49120</id><timestamp>2015-10-10T20:33:00Z</timestamp><text>{{ DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Dc:identifier</title><ns>202</ns><id>9569</id><revision><id>52553</id><timestamp>2017-10-26T10:28:39Z</timestamp><text>{{ DatatypeProperty
  | labels =
 {{label|en|identifier}}
  | comments = 
 {{comment|en|An identifier used to identify this thing.}}
- | rdfs:domain = Work
  | rdfs:range = xsd:string
 }}
 
@@ -17899,10 +17900,9 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 | rdfs:label@de = international
 | rdfs:domain = Company
 | rdfs:range = xsd:boolean
-}}</text></revision></page><page><title>OntologyProperty:Introduced</title><ns>202</ns><id>998</id><revision><id>33803</id><timestamp>2014-04-04T14:23:50Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Introduced</title><ns>202</ns><id>998</id><revision><id>52554</id><timestamp>2017-10-26T10:30:07Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = introduced
 | rdfs:label@de = eingeführt
-| rdfs:domain = Beverage
 | rdfs:range = xsd:date
 }}</text></revision></page><page><title>OntologyProperty:IntroductionDate</title><ns>202</ns><id>999</id><revision><id>33804</id><timestamp>2014-04-04T14:23:55Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = introduction date
@@ -24006,6 +24006,16 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 | rdfs:label@de = Anmeldung
 | rdfs:domain = Company
 | rdfs:range = xsd:string
+}}</text></revision></page><page><title>OntologyProperty:Registry</title><ns>202</ns><id>6535</id><revision><id>52561</id><timestamp>2017-10-26T13:16:08Z</timestamp><text>{{DatatypeProperty
+| labels                 =
+{{label|en|registry}}
+{{label|de|Register}}
+{{label|fr|registre}}
+| comments               =
+{{comment|en|A registry recording entires with associated codes. }}
+{{comment|de|Ein Register welches Einträge mit Kennungen versieht. }}
+| rdfs:range             = xsd:string
+| owl:equivalentProperty = 
 }}</text></revision></page><page><title>OntologyProperty:RegistryNumber</title><ns>202</ns><id>8410</id><revision><id>35490</id><timestamp>2014-06-27T22:04:12Z</timestamp><text>{{ DatatypeProperty
 	| rdfs:comment@en = Identification of the registry a document is in
 	| rdfs:label@en = registry number
@@ -24244,6 +24254,13 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 |rdfs:label@en=restore date
 | rdfs:label@el = ημερομηνία ανακαίνισης
 |rdfs:range=xsd:date
+}}</text></revision></page><page><title>OntologyProperty:Restriction</title><ns>202</ns><id>11972</id><revision><id>52559</id><timestamp>2017-10-26T10:44:38Z</timestamp><text>{{DatatypeProperty
+| rdfs:label@en = restriction
+| rdfs:label@de = Beschränkung
+| rdfs:comment@en = The use of a thing is restricted in a way.
+| rdfs:comment@de = Die Verwendung von etwas ist beschränkt.
+| rdfs:domain = owl:Thing
+| rdfs:range = xsd:string
 }}</text></revision></page><page><title>OntologyProperty:Result</title><ns>202</ns><id>1375</id><revision><id>34273</id><timestamp>2014-04-04T17:08:38Z</timestamp><text>{{DatatypeProperty
 | labels = 
 {{label|en|result}}
@@ -26741,13 +26758,13 @@ http://www.idref.fr/$1}}
 {{label|de|Höhe der höchsten Etage}}
 | rdfs:domain = Skyscraper
 | rdfs:range = xsd:nonNegativeInteger
-}}</text></revision></page><page><title>OntologyProperty:TopLevelDomain</title><ns>202</ns><id>3323</id><revision><id>16799</id><timestamp>2012-03-09T16:59:04Z</timestamp><text>TopLevelDomain
-{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:TopLevelDomain</title><ns>202</ns><id>3323</id><revision><id>52552</id><timestamp>2017-10-26T10:27:05Z</timestamp><text>TopLevelDomain
+{{ObjectProperty
 | rdfs:label@en = country top level (tld)
 | rdfs:label@pt = domínio de topo (tld)
 | rdfs:label@fr = domaine de premier niveau (tld)
 | rdfs:domain = Country
-| rdfs:range = xsd:string
+| rdfs:range = TopLevelDomain
 }}</text></revision></page><page><title>OntologyProperty:TopSpeed</title><ns>202</ns><id>1522</id><revision><id>18550</id><timestamp>2012-05-19T16:21:26Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = top speed
 | rdfs:label@de = Höchstgeschwindigkeit

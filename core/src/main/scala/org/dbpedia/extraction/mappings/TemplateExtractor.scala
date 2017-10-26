@@ -7,6 +7,7 @@ import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
 
 import scala.collection.mutable.ListBuffer
+import scala.language.reflectiveCalls
 
 /**
   * Created by chile on 25.10.17.

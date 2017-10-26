@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
@@ -11,6 +12,7 @@ import org.dbpedia.extraction.util.{Date, Language}
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.Map
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 /**
  * TODO: change the syntax on the mappings wiki to allow an arbitrary number of template properties.
@@ -22,6 +24,7 @@ class CombineDateMapping (
     def redirects : Redirects  // redirects required by DateTimeParser
     def ontology: Ontology
     def language : Language
+    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends PropertyMapping

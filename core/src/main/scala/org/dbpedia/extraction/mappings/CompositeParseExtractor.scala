@@ -9,7 +9,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * TODO: generic type may not be optimal.
  */
-class CompositeParseExtractor(extractors: Extractor[_]*)
+class CompositeParseExtractor(context : { def redirects : Redirects }, extractors: Extractor[_]*)
 extends WikiPageExtractor
 {
   override val datasets: Set[Dataset] = extractors.flatMap(_.datasets).toSet
@@ -21,14 +21,11 @@ extends WikiPageExtractor
   private val finalExtractors  = new ArrayBuffer[Extractor[WikiPage]]()
 
   //if extractor is not either PageNodeExtractor or JsonNodeExtractor so it accepts WikiPage as input
-  extractors foreach { extractor =>
-    extractor match {
-
-      case _ :PageNodeExtractor =>  pageNodeExtractors  += extractor.asInstanceOf[PageNodeExtractor]           //select all extractors which take PageNode to wrap them in WikiParseExtractor
-      case _ :JsonNodeExtractor =>  jsonNodeExtractors  += extractor.asInstanceOf[JsonNodeExtractor]
-      case _ :WikiPageExtractor =>  wikiPageExtractors  += extractor.asInstanceOf[WikiPageExtractor]           //select all extractors which take Wikipage to wrap them in a CompositeExtractor
-      case _ =>
-    }
+  extractors foreach {
+    case extractor@(_: PageNodeExtractor) => pageNodeExtractors += extractor.asInstanceOf[PageNodeExtractor] //select all extractors which take PageNode to wrap them in WikiParseExtractor
+    case extractor@(_: JsonNodeExtractor) => jsonNodeExtractors += extractor.asInstanceOf[JsonNodeExtractor]
+    case extractor@(_: WikiPageExtractor) => wikiPageExtractors += extractor.asInstanceOf[WikiPageExtractor] //select all extractors which take Wikipage to wrap them in a CompositeExtractor
+    case _ =>
   }
 
   if (wikiPageExtractors.nonEmpty)
@@ -36,7 +33,7 @@ extends WikiPageExtractor
 
   //create and load WikiParseExtractor here
   if (pageNodeExtractors.nonEmpty)
-    finalExtractors += new WikiParseExtractor(new CompositePageNodeExtractor(pageNodeExtractors :_*))
+    finalExtractors += new WikiParseExtractor(new CompositePageNodeExtractor(pageNodeExtractors :_*), context)
 
   //create and load JsonParseExtractor here
   if (jsonNodeExtractors.nonEmpty)
@@ -66,10 +63,10 @@ object CompositeParseExtractor
    * @param classes List of extractor classes to be instantiated
    * @param context Any type of object that implements the required parameter methods for the extractors
    */
-  def load(classes: Seq[Class[_ <: Extractor[_]]], context: AnyRef): WikiPageExtractor =
+  def load(classes: Seq[Class[_ <: Extractor[_]]], context : { def redirects : Redirects }): WikiPageExtractor =
   {
     val extractors = classes.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
-    new CompositeParseExtractor(extractors: _*)
+    new CompositeParseExtractor(context, extractors: _*)
   }
 }
 

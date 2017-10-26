@@ -28,7 +28,7 @@ object StringParser extends DataParser
         nodeToString(node, sb)
 
         //Clean text
-        val text = postProcess(sb.toString())
+        val text = postProcess(sb.toString)
         
         if(text.isEmpty)
         {
@@ -40,6 +40,7 @@ object StringParser extends DataParser
         }
     }
 
+    //FIXME this cleaning takes a lot of computing power
     // Replace text in <small></small> tags with an "equivalent" string representation
     // Simply extracting the content puts this data at the same level as other text appearing
     // in the node, which might not be the editor's semantics
@@ -49,6 +50,7 @@ object StringParser extends DataParser
         text = tagRegex.replaceAllIn(text, "") //strip tags
         text = WikiUtil.removeWikiEmphasis(text)
         text = text.replace("&nbsp;", " ")//TODO decode all html entities here
+        text = text.replaceAll("\\s+", " ")
         text.trim
     }
   
@@ -56,7 +58,7 @@ object StringParser extends DataParser
     {
         node match
         {
-            case TextNode(text, _, _) => sb.append(text)
+            case TextNode(text, _, _) => sb.append(" " + text)
             case _ : TemplateNode | _ : TableNode => //ignore
             case _ => node.children.foreach(child => nodeToString(child, sb))
         }

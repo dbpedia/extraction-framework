@@ -38,8 +38,8 @@ object MappingsLoader
         val tableMappings = new ArrayBuffer[TableMapping]()
         val parser = WikiParser.getInstance()
 
-        for ( page <- context.mappingPageSource.map(parser).flatten;
-              node <- page.children if node.isInstanceOf[TemplateNode] )
+        for (page <- context.mappingPageSource.flatMap(parser.apply(_, context.redirects));
+             node <- page.children if node.isInstanceOf[TemplateNode] )
         {
             val tnode = node.asInstanceOf[TemplateNode]
             val name = page.title.decoded

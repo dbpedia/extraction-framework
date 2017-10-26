@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.util
 
+import java.io.File
 import java.util.logging.{Level, Logger}
 import java.util.{Locale, MissingResourceException}
 
@@ -36,6 +37,7 @@ class Language private(
   val wikiCode: String,
   val name: String,
   val isoCode: String,
+  val iso639_2: String,
   val iso639_3: String,
   val dbpediaDomain: String,
   val dbpediaUri: String,
@@ -69,13 +71,14 @@ object Language extends (String => Language)
   val wikipediaLanguageUrl = "https://noc.wikimedia.org/conf/langlist"
   
   val map: Map[String, Language] = locally {
-    def language(code : String, name: String, iso_1: String, iso_3: String): Language = {
+    def language(code : String, name: String, iso_1: String, iso_2: String, iso_3: String): Language = {
       val c = code.trim.toLowerCase
       val baseDomain = if(c.trim.toLowerCase == "en") "dbpedia.org" else c + ".dbpedia.org"
       new Language(
         c,
         name.trim,
         iso_1.trim,
+        iso_2,
         iso_3.trim,
         baseDomain,
         "http://" + baseDomain,
@@ -94,8 +97,27 @@ object Language extends (String => Language)
     val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
     val wikiLanguageCodes = try source.getLines.toList finally source.close
 
-    val specialLangs: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("addonlangs.json"))
 
+    //extract additional iso codes from world fact dataset
+    var iso1Map = Map[String, String]()
+    var iso2Map = Map[String, String]()
+    val wfRegex = """^\s*<http://worldfacts.dbpedia.org/languages/([^>]+)>\s*<http://worldfacts.dbpedia.org/ontology/iso([^>]+)>\s*"(\w+)"\s*.\s*$""".r
+    IOUtils.readLines(new RichFile(new File(this.getClass.getClassLoader.getResource("worldfacts_dbpedia_data.ttl.bz2").toURI))) { line =>
+      if (line != null) {
+        wfRegex.findFirstMatchIn(line) match {
+          case Some(m) =>
+            m.group(2) match {
+              case "639-3" => assert(m.group(3) == m.group(1))
+              case "639-2B" => iso2Map += m.group(1) -> m.group(3)
+              case "639-1" => iso1Map += m.group(1) -> m.group(3)
+              case _ =>
+            }
+          case scala.None =>
+        }
+      }
+    }
+
+    val specialLangs: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("addonlangs.json"))
     for (lang <- specialLangs.keys()) {
       {
         val properties = specialLangs.getMap(lang)
@@ -104,6 +126,10 @@ object Language extends (String => Language)
             properties("wikiCode").asText,
             properties("name").asText,
             properties("isoCode").asText,
+            iso2Map.get(properties("iso639_3").asText) match{
+              case Some(s) => s
+              case scala.None => null
+            },
             properties("iso639_3").asText,
             dom.asText,
             properties("dbpediaUri").asText(),
@@ -117,6 +143,10 @@ object Language extends (String => Language)
             properties("wikiCode").asText,
             properties("name").asText,
             properties("isoCode").asText,
+            iso2Map.get(properties("iso639_3").asText) match{
+              case Some(s) => s
+              case scala.None => null
+            },
             properties("iso639_3").asText)
         }
       }
@@ -126,7 +156,11 @@ object Language extends (String => Language)
     {
       val loc = new Locale(langEntry)
       try {
-        languages(langEntry) = language(langEntry, loc.getDisplayName, loc.getLanguage, loc.getISO3Language)
+        val iso2 = iso2Map.get(loc.getISO3Language) match{
+          case Some(s) => s
+          case scala.None => null
+        }
+        languages(langEntry) = language(langEntry, loc.getDisplayName, loc.getLanguage, iso2, loc.getISO3Language)
       }
       catch{
         case mre : MissingResourceException =>
@@ -134,7 +168,8 @@ object Language extends (String => Language)
             logger.log(Level.WARNING, "Language not found: " + langEntry + ". To extract this language, please edit the addonLanguage.json in core.")
       }
     }
-
+    iso1Map = null
+    iso2Map = null
     languages.toMap // toMap makes immutable
   }
   
@@ -178,6 +213,30 @@ object Language extends (String => Language)
    * Gets a language object for a Wikipedia language code, or None if given code is unknown.
    */
   def get(code: String) : Option[Language] = map.get(code)
+
+  /**
+    * Will try every known iso639 code to resolve to a Language
+    * Only use this function to retrieve by iso codes (use get for wiki codes)
+    * test order: wiki code, iso639_3, iso639_2B, iso639_1
+    * @param code - the iso code
+    * @return
+    */
+  def getByIsoCode(code: String) : Option[Language] = {
+    get(code) match {
+      case scala.None =>
+        map.find(x => x._2.iso639_3 == code) match {
+          case scala.None => map.find(x => x._2.iso639_2 == code) match {
+            case scala.None => map.find(x => x._2.isoCode == code) match {
+              case scala.None => scala.None
+              case Some(l) => Some(l._2)
+            }
+            case Some(l) => Some(l._2)
+          }
+          case Some(l) => Some(l._2)
+        }
+      case Some(l) => Some(l)
+    }
+  }
   
   /**
    * Gets a language object for a Wikipedia language code, or the default if the given code is unknown.

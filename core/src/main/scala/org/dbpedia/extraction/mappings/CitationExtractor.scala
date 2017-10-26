@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
@@ -16,6 +17,7 @@ import org.dbpedia.iri.{IRI, UriUtils}
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
 
 /**
@@ -26,7 +28,8 @@ class CitationExtractor(
   context : {
     def ontology : Ontology
     def language : Language
-    def redirects : Redirects 
+    def redirects : Redirects
+      def recorder[T: ClassTag] : ExtractionRecorder[T]
   } 
 ) 
 extends WikiPageExtractor
@@ -127,7 +130,7 @@ extends WikiPageExtractor
         )
 
         /** Retrieve all templates on the page which are not ignored */
-        for {node <- SimpleWikiParser.apply(pageWithoutRefs)
+        for {node <- SimpleWikiParser.apply(pageWithoutRefs, context.redirects)
              template <- ExtractorUtils.collectTemplatesFromNodeTransitive(node)
              resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
              if citationTemplatesRegex.exists(regex => regex.findFirstMatchIn(resolvedTitle).isDefined)
@@ -213,7 +216,7 @@ extends WikiPageExtractor
     {
         StringParser.parse(node) match
         {
-            case Some(RankRegex(number)) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
+            case Some(ParseResult(RankRegex(number), _, _)) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
             case _ => None
         }
     }

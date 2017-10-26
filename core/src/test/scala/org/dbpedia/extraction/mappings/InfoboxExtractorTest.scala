@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.mappings
 
 import java.io.{File, FilenameFilter}
+
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
@@ -13,6 +15,7 @@ import org.junit.Test
 import scala.collection.mutable.ArrayBuffer
 import scala.io.Source
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 /**
  * Compares outpur from InfoboxExtractor to gold standard.
@@ -69,6 +72,7 @@ class InfoboxExtractorTest
 			}
 			def language = _language
 			def redirects = new Redirects(Map())
+			def recorder[T: ClassTag] : ExtractionRecorder[T] = new ExtractionRecorder[T]()
 		}
 
 		for(f <- folder.listFiles(filter) )
@@ -78,7 +82,7 @@ class InfoboxExtractorTest
 		}
 	}
 
-	def test(fileNameWiki : String, context : AnyRef{def ontology: Ontology; def language : Language; def redirects : Redirects}, folder:File)
+	def test(fileNameWiki : String, context : AnyRef{def ontology: Ontology; def language : Language; def redirects : Redirects; def recorder[T: ClassTag] : ExtractionRecorder[T]}, folder:File)
 	{
 		val goldFile = fileNameWiki.replace(".xml","-gold.tql")
 		
@@ -110,7 +114,7 @@ class InfoboxExtractorTest
 
 
 
-	private def render(file : String, context : AnyRef{def ontology: Ontology; def language : Language; def redirects : Redirects}, folder : File) : Seq[Quad] =
+	private def render(file : String, context : AnyRef{def ontology: Ontology; def language : Language; def redirects : Redirects; def recorder[T: ClassTag] : ExtractionRecorder[T]}, folder : File) : Seq[Quad] =
 	{
 		val extractor = new InfoboxExtractor(context)
 

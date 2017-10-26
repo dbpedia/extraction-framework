@@ -10,6 +10,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.util.{Failure, Success}
 
 import scala.collection.convert.decorateAsScala._
+import scala.language.postfixOps
 
 /**
  * Template transformations.
@@ -92,10 +93,16 @@ object TemplateTransformConfig {
       case None => ""
     }
 
-    val lString = langCode(node)
-    textNode("<br />")(node, lang) :::
-    List(TextNode(text, node.line, Language(lString))) :::
-    textNode("<br />")(node, lang)
+    Language.getByIsoCode(langCode(node)) match{
+      case Some(l) =>
+        textNode("<br />")(node, lang) :::
+          List(TextNode(text, node.line, l)) :::
+          textNode("<br />")(node, lang)
+      case None =>
+        textNode("<br />")(node, lang) :::
+          List(TextNode(text, node.line)) :::
+          textNode("<br />")(node, lang)
+    }
   }
 
   /**
@@ -104,7 +111,7 @@ object TemplateTransformConfig {
   private def extractChildren(filter: PropertyNode => Boolean, split : Boolean = true)(node: TemplateNode, lang:Language) : List[Node] = {
     // We have to reverse because flatMap prepends to the final list
     // while we want to keep the original order
-    val children : List[Node] = node.children.filter(filter)
+    val children : List[Node] = node.children.filter(filter).flatMap(_.children).reverse
 
     val splitChildren = new ArrayBuffer[Node]()
     val splitTxt = if (split) "<br />" else " "

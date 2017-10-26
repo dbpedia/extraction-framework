@@ -52,7 +52,7 @@ extends Node(children, 0) with WikiTitleHolder
   }
 
   //Generate the page URI
-  def uri: String = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
+  lazy val uri: String = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
 
   override def equals(other : Any): Boolean = other match
   {

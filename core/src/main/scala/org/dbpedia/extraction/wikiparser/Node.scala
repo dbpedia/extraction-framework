@@ -10,7 +10,7 @@ import org.dbpedia.extraction.util.WikiUtil
  * 
  * This class is NOT thread-safe.
  */
-abstract class Node( val children : List[Node], val line : Int)
+abstract class Node( val children : List[Node], val line : Int) extends Serializable
 {
     /**
      * CAUTION: code outside this class should change the parent only under very rare circumstances.

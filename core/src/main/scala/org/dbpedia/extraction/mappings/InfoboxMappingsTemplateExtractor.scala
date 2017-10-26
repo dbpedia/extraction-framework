@@ -13,6 +13,7 @@ import scala.collection.mutable.ArrayBuffer
 class InfoboxMappingsTemplateExtractor (context: {
   def ontology: Ontology
   def language : Language
+  def redirects: Redirects
 }
                                        )
 
@@ -29,7 +30,7 @@ class InfoboxMappingsTemplateExtractor (context: {
     if (!List(Namespace.Template, Namespace.Main).contains(page.title.namespace) ) return Seq.empty
 
     val simpleParser = WikiParser.getInstance("simple")
-    val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(simpleParser.apply(page).getOrElse(null))
+    val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(simpleParser.apply(page, context.redirects).orNull)
 
     val propertyParserFuncions = parserFunctions.filter(p => p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from"))
     val propertyParserFuncionsHints = propertyParserFuncions.map(_.children.head.toString)
@@ -49,7 +50,7 @@ class InfoboxMappingsTemplateExtractor (context: {
         p.toWikiText, page.sourceIri, context.ontology.datatypes("xsd:string"))
     )
 
-    val templateQuads = ExtractorUtils.collectTemplatesFromNodeTransitive(simpleParser.apply(page).getOrElse(null))
+    val templateQuads = ExtractorUtils.collectTemplatesFromNodeTransitive(simpleParser.apply(page, context.redirects).orNull)
       .filter(t => List("conditionalurl",/* "official_website",*/ "wikidatacheck").contains(t.title.encoded.toString.toLowerCase))
       .map(t => new Quad(context.language, hintDataset, subjectUri, templateParameterProperty,
         t.toWikiText, page.sourceIri, context.ontology.datatypes("xsd:string")))
@@ -82,11 +83,11 @@ class InfoboxMappingsTemplateExtractor (context: {
     var swebleParser = WikiParser.getInstance("sweble")
     var tempPageSweble = new WikiPage(page.title, page.source)
     var tempPageSimple = new WikiPage(page.title, cleanUp(page.source))
-    val templateNodesSweble = ExtractorUtils.collectTemplatesFromNodeTransitive(swebleParser.apply(tempPageSweble).getOrElse(null))
-    val templateNodesSimple = ExtractorUtils.collectTemplatesFromNodeTransitive(simpleParser.apply(tempPageSimple).getOrElse(null))
+    val templateNodesSweble = ExtractorUtils.collectTemplatesFromNodeTransitive(swebleParser.apply(tempPageSweble, context.redirects).orNull)
+    val templateNodesSimple = ExtractorUtils.collectTemplatesFromNodeTransitive(simpleParser.apply(tempPageSimple, context.redirects).orNull)
 
-    val infoboxesSweble = templateNodesSweble.filter(p => p.title.toString().contains(infoboxNameMap.get(lang.wikiCode).getOrElse("Infobox")))
-    val infoboxesSimple = templateNodesSimple.filter(p => p.title.toString().contains(infoboxNameMap.get(lang.wikiCode).getOrElse("Infobox")))
+    val infoboxesSweble = templateNodesSweble.filter(p => p.title.toString().contains(infoboxNameMap.getOrElse(lang.wikiCode, "Infobox")))
+    val infoboxesSimple = templateNodesSimple.filter(p => p.title.toString().contains(infoboxNameMap.getOrElse(lang.wikiCode, "Infobox")))
 
     var answerSweble = Set[(String, String, String)]()
     var answerSimple = Set[(String, String, String)]()

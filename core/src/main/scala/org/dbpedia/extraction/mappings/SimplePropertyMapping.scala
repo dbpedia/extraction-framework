@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
@@ -9,9 +10,11 @@ import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.wikiparser.TemplateNode
-import org.dbpedia.extraction.ontology.{OntologyDatatypeProperty,OntologyClass,OntologyProperty,DBpediaNamespace}
+import org.dbpedia.extraction.ontology.{DBpediaNamespace, OntologyClass, OntologyDatatypeProperty, OntologyProperty}
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 class SimplePropertyMapping (
   val templateProperty : String, // IntermediateNodeMapping and CreateMappingStats requires this to be public
@@ -27,6 +30,7 @@ class SimplePropertyMapping (
     def ontology : Ontology
     def redirects : Redirects  // redirects required by DateTimeParser and UnitValueParser
     def language : Language
+    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends PropertyMapping
@@ -225,7 +229,7 @@ extends PropertyMapping
                     (if (isHashIri) "&objectHasFragment=" else "")
                 val g = parseResult match
                 {
-                    case pr: ParseResult[Double] if pr.unit.nonEmpty => writeUnitValue(node, pr, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
+                    case ParseResult(_: Double, _, u) if u.nonEmpty => writeUnitValue(node, parseResult.asInstanceOf[ParseResult[Double]], subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
                     case pr: ParseResult[_] => writeValue(pr, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
                 }
 
@@ -238,16 +242,12 @@ extends PropertyMapping
 
     private def writeUnitValue(node : TemplateNode, pr: ParseResult[Double], subjectUri : String, sourceUri : String): Seq[Quad] =
     {
-        //TODO better handling of inconvertible units
-        if(unit.isInstanceOf[InconvertibleUnitDatatype])
-        {
-            val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, unit)
-            return Seq(quad)
-        }
-
         //Write generic property
         val stdValue = pr.unit match{
-          case Some(u) if u.isInstanceOf[UnitDatatype] => u.asInstanceOf[UnitDatatype].toStandardUnit(pr.value)
+          case Some(u) if u.isInstanceOf[InconvertibleUnitDatatype] =>
+            return Seq(new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, unit))
+          case Some(u) if u.isInstanceOf[UnitDatatype] =>
+            u.asInstanceOf[UnitDatatype].toStandardUnit(pr.value)
           case None => pr.value  //should not happen
         }
         
@@ -256,7 +256,6 @@ extends PropertyMapping
         graph += new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
         
         // Write specific properties
-        // FIXME: copy-and-paste in CalculateMapping
         for(templateClass <- node.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
             currentClass <- templateClass.relatedClasses)
         {

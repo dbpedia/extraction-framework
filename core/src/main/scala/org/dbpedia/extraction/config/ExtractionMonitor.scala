@@ -121,7 +121,7 @@ class ExtractionMonitor {
       val url = old_version_URL + language.wikiCode + "/"+ oldDate + "_dataid_" + language.wikiCode + ".ttl"
 
       // Compare & Get the results
-      compareTripleCount(new URL(url), er, datasets)
+      //compareTripleCount(new URL(url), er, datasets)
     }
     val exceptions = mutable.HashMap[String, Int]()
     errors(er).foreach(ex => {

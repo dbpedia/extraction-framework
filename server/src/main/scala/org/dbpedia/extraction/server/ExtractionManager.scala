@@ -34,14 +34,6 @@ abstract class ExtractionManager(
     
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
 
-    private val domainRegex = """^http://(\w+\.)?dbpedia.org/resource.*""".r
-    private val subjOrdering = Ordering.fromLessThan[Quad]{ (q1,q2) =>
-      q1.subject match{
-        case domainRegex() => true
-        case _ => false
-      }
-    }
-
     def mappingExtractor(language : Language) : WikiPageExtractor
 
     def customExtractor(language : Language) : WikiPageExtractor
@@ -76,7 +68,7 @@ abstract class ExtractionManager(
       destination.open()
       for (page <- source){
         val quads = extract.extract(page, page.uri)
-        destination.write(quads.sorted(subjOrdering))
+        destination.write(quads.sortBy(x => (x.subject, x.predicate)).reverse)
       }
       destination.close()
     }
@@ -110,7 +102,7 @@ abstract class ExtractionManager(
         logHandler.setLevel(Level.WARNING)
         Logger.getLogger(classOf[OntologyReader].getName).addHandler(logHandler)
 
-        val newOntologyPagesMap = newOntologyPages.map(parser).flatten.map(page => (page.title, page)).toMap
+        val newOntologyPagesMap = newOntologyPages.flatMap(parser.apply(_)).map(page => (page.title, page)).toMap
         val updatedOntologyPages = (ontologyPages ++ newOntologyPagesMap).values
 
         //Load ontology
@@ -140,7 +132,7 @@ abstract class ExtractionManager(
             WikiSource.fromNamespaces(namespaces, url, language)
         }
         
-        source.map(parser).flatten.map(page => (page.title, page)).toMap
+        source.flatMap(parser.apply(_)).map(page => (page.title, page)).toMap
     }
 
     protected def loadDisambiguations(): Disambiguations =
@@ -230,7 +222,7 @@ abstract class ExtractionManager(
         val context = new {
           val ontology: Ontology = self.ontology()
           val language: Language = lang
-          val redirects: Redirects = new Redirects(Map())
+          val redirects: Redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
           val mappingPageSource: Traversable[WikiPage] = self.mappingPageSource(lang)
           val disambiguations: Disambiguations = self.disambiguations
           val configFile: ServerConfiguration = Server.config

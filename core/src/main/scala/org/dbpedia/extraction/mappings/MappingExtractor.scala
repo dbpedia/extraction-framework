@@ -48,7 +48,8 @@ extends PageNodeExtractor
       {
         resolvedMappings.get(templateNode.title.decoded) match
         {
-          case Some(mapping) => mapping.extract(templateNode, subjectUri)
+          case Some(mapping) =>
+            mapping.extract(templateNode, subjectUri)
           case None => Seq.empty
         }
       }
