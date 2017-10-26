@@ -1,16 +1,14 @@
 package org.dbpedia.extraction.nif
 
-import java.net.URI
-
 import org.apache.commons.lang3.StringEscapeUtils
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.mappings.RecordSeverity
 import org.dbpedia.extraction.nif.LinkExtractor.NifExtractorContext
 import org.dbpedia.extraction.nif.Paragraph.HtmlString
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Config.NifParameters
-import org.dbpedia.extraction.util.{CssConfigurationMap, UriUtils}
+import org.dbpedia.extraction.util.{CssConfigurationMap, RecordSeverity}
+import org.dbpedia.iri.UriUtils
 import org.jsoup.Jsoup
 import org.jsoup.nodes.{Document, Element, TextNode}
 import org.jsoup.parser.Tag
@@ -284,7 +282,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
         words += nifLinks(word, RdfNamespace.NIF.append("beginIndex"), (offset + link.getWordStart).toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
         words += nifLinks(word, RdfNamespace.NIF.append("endIndex"), (offset + link.getWordEnd).toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
         words += nifLinks(word, RdfNamespace.NIF.append("superString"), paragraphUri, sourceUrl, null)
-        UriUtils.createUri(link.getUri) match{
+        UriUtils.createIri(link.getUri) match{
           case Success(s) => words += nifLinks(word, "http://www.w3.org/2005/11/its/rdf#taIdentRef", s.toString, sourceUrl, null)  //TODO IRI's might throw exception in org.dbpedia.extraction.destinations.formatters please check this
           case Failure(f) =>
         }
@@ -433,11 +431,14 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
   }
 
   protected def getNifIri(nifClass: String, beginIndex: Int, endIndex: Int): String ={
-    val uri = URI.create(nifContextIri)
-    var iri = uri.getScheme + "://" + uri.getHost + (if(uri.getPort > 0) ":" + uri.getPort else "") + uri.getPath + "?"
-    val m = uri.getQuery.split("&").map(_.trim).collect{ case x if !x.startsWith("nif=") => x}
-    iri += m.foldRight("")(_+"&"+_) + "nif=" + nifClass + "&char=" + beginIndex + "," + endIndex
-    iri.replace("?&", "?")
+    UriUtils.createIri(nifContextIri) match{
+      case Success(uri) =>
+        var iri = uri.getScheme + "://" + uri.getHost + (if(uri.getPort > 0) ":" + uri.getPort else "") + uri.getPath + "?"
+        val m = uri.getQuery.split("&").map(_.trim).collect{ case x if !x.startsWith("nif=") => x}
+        iri += m.foldRight("")(_+"&"+_) + "nif=" + nifClass + "&char=" + beginIndex + "," + endIndex
+        iri.replace("?&", "?")
+      case Failure(f) => throw f
+    }
   }
 
   protected class PageSection(

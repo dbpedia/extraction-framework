@@ -3,11 +3,15 @@ package org.dbpedia.extraction.wikiparser.impl.simple
 import java.net.{URI, URISyntaxException}
 import java.util.logging.{Level, Logger}
 
+import org.apache.jena.iri.IRIException
+import org.apache.jena.iri.impl.IRIExamples
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.extraction.util.{Language, UriUtils, WikiUtil}
+import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Redirect
+import org.dbpedia.iri.UriUtils
 
+import scala.util.{Failure, Success}
 import scala.util.matching.Regex
 
 object SimpleWikiParser
@@ -414,8 +418,6 @@ object SimpleWikiParser
 
     private def createExternalLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, destinationNodes : List[Node]) : LinkNode =
     {
-        try
-        {
             // TODO: Add a validation routine which conforms to Mediawiki
             // This will fail for news:// or gopher:// protocols
 
@@ -428,14 +430,14 @@ object SimpleWikiParser
 
             val sameHost = if (relProtocolDest.contains("{{SERVERNAME}}")) relProtocolDest.replace("{{SERVERNAME}}", source.language.baseUri.replace("http://", "")) else relProtocolDest
 
-            ExternalLinkNode(new URI(sameHost), nodes, line, destinationNodes)
-
-        }
-        catch
-        {
-            // As per URL.toURI documentation non-strictly RFC 2396 compliant URLs cannot be parsed to URIs
-            case _ : URISyntaxException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
-        }
+            UriUtils.createIri(sameHost) match{
+                case Success(u) => ExternalLinkNode(u, nodes, line, destinationNodes)
+                case Failure(f) => f match {
+                    // As per URL.toURI documentation non-strictly RFC 2396 compliant URLs cannot be parsed to URIs
+                    case _: IRIException => throw new WikiParserException("Invalid external link: " + destination, line, source.findLine(line))
+                    case _ => throw f
+                }
+            }
     }
     
     private def createInternalLinkNode(source : Source, destination : String, nodes : List[Node], line : Int, destinationNodes : List[Node]) : LinkNode =

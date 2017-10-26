@@ -41,7 +41,7 @@ class JsonWikiParser {
         getJacksonDocument(page,page.source)
       } catch {
         case e: JsonMappingException => {
-          if (page.redirect!=null){
+          if (page.isRedirect){
             None //redirect page, nothing to extract
           } else {
             getJacksonDocument(page,fixBrokenJson(page.source))

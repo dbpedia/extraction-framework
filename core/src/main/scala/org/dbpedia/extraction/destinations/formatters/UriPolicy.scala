@@ -1,31 +1,33 @@
 package org.dbpedia.extraction.destinations.formatters
 
 import java.util.Properties
-import java.net.{IDN, URISyntaxException, URI}
+import java.net.{IDN, URISyntaxException}
+
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.ConfigUtils.getStrings
 import org.dbpedia.extraction.util.RichString.wrapString
-import scala.xml.Utility.{isNameChar,isNameStart}
+import org.dbpedia.iri.IRI
+
+import scala.xml.Utility.{isNameChar, isNameStart}
 import scala.collection.Map
-import scala.collection.mutable.{ArrayBuffer,HashMap}
+import scala.collection.mutable.{ArrayBuffer, HashMap}
 import scala.collection.JavaConversions.asScalaSet
 
 /**
  * TODO: use scala.collection.Map[String, String] instead of java.util.Properties?
  */
 object UriPolicy {
-
   /**
    * A policy is a function takes a URI and may return the given URI or a transformed version of it.
    * Human-readable type alias.
    */
-  type Policy = URI => URI
+  type Policy = IRI => IRI
 
   /**
    * PolicyApplicable is a function that decides if a policy should be applied for the given DBpedia URI.
    * Human-readable type alias.
    */
-  type PolicyApplicable = URI => Boolean
+  type PolicyApplicable = IRI => Boolean
 
   // codes for URI positions
   val SUBJECT = 0
@@ -237,7 +239,11 @@ object UriPolicy {
       }
   }
 
-  def toUri(iri: URI) : URI = {
+  def toUri(iri: String) : IRI = {
+    toUri(new IRI(iri))
+  }
+
+  def toUri(iri: IRI) : IRI = {
     // In IDN URI parses the host as Authoriry
     // see https://github.com/dbpedia/extraction-framework/pull/300#issuecomment-67777966
     if (iri.getHost() == null && iri.getAuthority != null ) {
@@ -259,13 +265,13 @@ object UriPolicy {
         }
         host = IDN.toASCII(host)
 
-        new URI(uri(iri.getScheme, user, host, port, iri.getPath, iri.getQuery, iri.getFragment).toASCIIString)
+        new IRI(uri(iri.getScheme, user, host, port, iri.getPath, iri.getQuery, iri.getFragment).toASCIIString)
       } catch {
-        case _: NumberFormatException | _: IllegalArgumentException => new URI(iri.toASCIIString)
+        case _: NumberFormatException | _: IllegalArgumentException => new IRI(iri.toASCIIString)
       }
 
     } else {
-      new URI(iri.toASCIIString)
+      new IRI(iri.toASCIIString)
     }
   }
 
@@ -275,7 +281,7 @@ object UriPolicy {
       if (applicableTo(iri)) {
 
         val scheme = iri.getScheme
-        val user = iri.getRawUserInfo
+        val user = iri.getRawUserinfo
         val host = "dbpedia.org"
         val port = iri.getPort
         val path = iri.getRawPath
@@ -297,7 +303,8 @@ object UriPolicy {
     iri =>
       if (applicableTo(iri)) {
         val str = iri.toString
-        if (str.length > MAX_LENGTH) throw new URISyntaxException(str, "length "+str.length+" exceeds maximum "+MAX_LENGTH)
+        if (str.length > MAX_LENGTH)
+          throw new URISyntaxException(str, "length "+str.length+" exceeds maximum "+MAX_LENGTH)
       }
       iri
   }
@@ -338,7 +345,7 @@ object UriPolicy {
       if (applicableTo(iri)) {
 
         val scheme = iri.getScheme
-        val user = iri.getRawUserInfo
+        val user = iri.getRawUserinfo
 
         // When the URI is IDN the URI parser puts the domain name in Authority
         val host = if (iri.getHost == null && iri.getAuthority != null) iri.getAuthority else iri.getHost
@@ -389,7 +396,7 @@ object UriPolicy {
     return tail+'_'
   }
 
-  private def uri(scheme: String, user: String, host: String, port: Int, path: String, query: String, frag: String): URI = {
+  private def uri(scheme: String, user: String, host: String, port: Int, path: String, query: String, frag: String): IRI = {
 
     val sb = new StringBuilder
 
@@ -406,7 +413,7 @@ object UriPolicy {
     if (query != null) sb.append('?').append(query);
     if (frag != null) sb.append('#').append(frag);
 
-    new URI(sb.toString)
+    new IRI(sb.toString)
   }
 
 }

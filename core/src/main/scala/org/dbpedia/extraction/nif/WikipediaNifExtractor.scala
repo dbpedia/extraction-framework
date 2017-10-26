@@ -1,10 +1,9 @@
 package org.dbpedia.extraction.nif
 
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.mappings.{RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty, RdfNamespace}
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.{Config, Language}
+import org.dbpedia.extraction.util.{Config, Language, RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.jsoup.nodes.{Document, Element, Node}

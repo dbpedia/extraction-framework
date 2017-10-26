@@ -14,6 +14,7 @@ import org.apache.jena.rdf.model._
 import org.apache.jena.vocabulary.RDF
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.util.{Config, Language, OpenRdfUtils}
+import org.dbpedia.iri.UriUtils
 import org.openrdf.rio.RDFFormat
 
 import scala.Console._
@@ -714,7 +715,7 @@ object DataIdGenerator {
     require(URI.create(vocabulary) != null, "Please enter a valid ontology uri of ths DBpedia release")
 
     sparqlEndpoint = configMap.get("sparqlEndpoint").getAsString.value
-    require(configMap.get("sparqlEndpoint") == null || URI.create(sparqlEndpoint) != null, "Please specify a valid sparql endpoint!")
+    require(configMap.get("sparqlEndpoint") == null || UriUtils.createIri(sparqlEndpoint).isSuccess, "Please specify a valid sparql endpoint!")
 
     license = configMap.get("licenseUri").getAsString.value
     require(URI.create(license) != null, "Please enter a valid license uri (odrl license)")
@@ -874,8 +875,8 @@ object DataIdGenerator {
     if (targetModel == null || targetModel.isEmpty)
       return None
 
-    val uri = new URI(currentUri.getURI)
-    val params = URLEncodedUtils.parse(uri, "UTF-8").asScala
+    val uri = UriUtils.createIri(currentUri.getURI).get
+    val params = URLEncodedUtils.parse(uri.toURI, "UTF-8").asScala
     var target = uri.getScheme + "://" + uri.getHost + uri.getPath
     target = target.replace(dbpVersion, version)
     for(i <- params.indices)

@@ -8,6 +8,8 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import java.net.URI
 
+import org.apache.jena.iri.IRI
+
 @RunWith(classOf[JUnitRunner])
 class LinkParserTest extends FlatSpec with Matchers
 {
@@ -102,7 +104,7 @@ class LinkParserTest extends FlatSpec with Matchers
     URI.create(uri)
   }
 
-  private def parse(input : String) : Option[URI] =
+  private def parse(input : String) : Option[IRI] =
   {
     val page = new WikiPage(WikiTitle.parse("TestPage", Language.English), input)
 

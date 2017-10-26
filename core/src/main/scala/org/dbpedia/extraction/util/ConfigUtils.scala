@@ -7,7 +7,7 @@ import java.util.Properties
 import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper, ObjectReader}
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
-import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity}
+import org.dbpedia.extraction.util.RecordSeverity
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.RichString.wrapString
@@ -110,6 +110,8 @@ object ConfigUtils {
    * @return languages, sorted by language code
    */
   def parseLanguages(baseDir: File, args: Seq[String], wikiPostFix: String = "wiki"): Array[Language] = {
+    if(!baseDir.exists())
+      throw new IllegalArgumentException("Base directory does not exist yet: " + baseDir)
     
     val keys = for(arg <- args; key <- arg.split("[,\\s]"); if key.nonEmpty) yield key
         

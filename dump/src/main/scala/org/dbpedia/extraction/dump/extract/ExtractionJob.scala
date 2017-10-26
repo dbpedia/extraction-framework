@@ -2,9 +2,10 @@ package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.Destination
-import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity, WikiPageExtractor}
+import org.dbpedia.extraction.mappings.WikiPageExtractor
+import org.dbpedia.extraction.util.{RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.sources.Source
-import org.dbpedia.extraction.util.{Language, SimpleWorkers}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
 
 /**
@@ -41,9 +42,6 @@ class ExtractionJob(
         val graph = extractor.extract(page, page.uri)
         destination.write(graph)
       }
-      //TODO I don't think this will be necessary
-        //page.addExtractionRecord("Namespace did not match: " + page.title.namespace + " for page: " + page.title.encoded, null, RecordSeverity.Warning)
-
       //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
       val records = page.getExtractionRecords() match{
         case seq :Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
@@ -53,9 +51,11 @@ class ExtractionJob(
       extractionRecorder.record(records:_*)
     } catch {
       case ex: Exception =>
+        ex.printStackTrace()
         page.addExtractionRecord(null, ex)
         extractionRecorder.record(page.getExtractionRecords():_*)
-        if(extractionRecorder.monitor != null) extractionRecorder.monitor.reportCrash(extractionRecorder, ex)
+        if(extractionRecorder.monitor != null)
+          extractionRecorder.monitor.reportError(extractionRecorder, ex)
     }
   }
   

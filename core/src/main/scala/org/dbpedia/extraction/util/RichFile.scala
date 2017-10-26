@@ -4,6 +4,7 @@ import java.io._
 import java.util.regex.Pattern
 
 import org.dbpedia.extraction.util.RichFile._
+import org.dbpedia.iri.{URI, UriUtils}
 
 import scala.language.implicitConversions
 import scala.util.Try
@@ -72,7 +73,7 @@ class RichFile(file: File) extends FileLike[File] {
    */
   def relativize(child: File): String = {
     // Note: toURI encodes file paths, getPath decodes them
-    var path = UriUtils.relativize(file.toURI, child.toURI).getPath
+    var path = UriUtils.relativize(new URI(file.toURI), new URI(child.toURI)).getPath
     if (path endsWith "/") path = path.substring(0, path.length() - 1)
     return path
   }

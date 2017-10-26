@@ -21,6 +21,7 @@ import scala.language.reflectiveCalls
  * 
  * FIXME: we're sometimes dealing with encoded links, sometimes with decoded links. It's quite a mess.
  */
+@deprecated("replaced by ImageExtractorNew", "2017-08")
 class ImageExtractor( 
   context: {
     def ontology: Ontology

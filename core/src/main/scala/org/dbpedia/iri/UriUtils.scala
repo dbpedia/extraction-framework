@@ -1,46 +1,48 @@
-package org.dbpedia.extraction.util
+package org.dbpedia.iri
 
-import java.net._
+import java.net.{URLDecoder, URLEncoder}
 
 import org.apache.commons.lang3.StringEscapeUtils
-import org.dbpedia.util.text.uri.{UriDecoder, UriToIriDecoder}
+import org.dbpedia.extraction.util.{StringUtils, WikiUtil}
 
 import scala.util.{Failure, Success, Try}
 
 object UriUtils
 {
-    private val knownSchemes = Set("http", "https", "ftp")
+  private val knownSchemes = Set("http", "https", "ftp")
 
-    private val knownPrefixes = knownSchemes.map(_ + "://")
+  private val knownPrefixes = knownSchemes.map(_ + "://")
 
-    def hasKnownScheme(uri: String) : Boolean = knownPrefixes.exists(uri.startsWith(_))
+  def hasKnownScheme(uri: String) : Boolean = hasKnownScheme(new IRI(uri))
+  def hasKnownScheme(uri: IRI) : Boolean = knownPrefixes.exists(uri.toString.startsWith(_))
 
-    /**
-     * TODO: comment
-     */
-    def cleanLink( uri : URI ) : Option[String] =
-    {
-      if (knownSchemes.contains(uri.getScheme)) Some(uri.normalize.toString)
-      else None
-    }
+  /**
+   * TODO: comment
+   */
+  def cleanLink( uri : IRI ) : Option[String] =
+  {
+    if (knownSchemes.contains(uri.getScheme)) Some(uri.toURI.normalize.toString) //IRI.normalize not yet implemented!
+    else None
+  }
+  def cleanLink( uri : org.apache.jena.iri.IRI ) : Option[String] = cleanLink(new IRI(uri))
 
-    /**
-     * Relativizes the given parent URI against a child URI.
-     *
-     * @param parent
-     * @param child
-     * @return path from parent to child
-     * @throws IllegalArgumentException if parent is not a parent directory of child.
-     */
-    def relativize( parent : URI, child : URI ) : URI =
-    {
-        val path = parent.relativize(child)
-        if (path eq child) throw new IllegalArgumentException("["+parent+"] is not a parent directory of ["+child+"]")
-        path
-    }
+  def relativize( parent : URI, child : URI ) : IRI = relativize(uriToIri(parent), uriToIri(child))
+  /**
+   * Relativizes the given parent URI against a child URI.
+   *
+   * @param parent
+   * @param child
+   * @return path from parent to child
+   * @throws IllegalArgumentException if parent is not a parent directory of child.
+   */
+  def relativize( parent : IRI, child : IRI ) : IRI =
+  {
+      val path = parent.relativize(child)
+      if (path eq child) throw new IllegalArgumentException("["+parent+"] is not a parent directory of ["+child+"]")
+      new IRI(path)
+  }
 
-  def createUri(uri: String): Try[URI] ={
-    //TODO revise this method!
+  def createIri(uri: String): Try[URI] ={
     Try {
       // unescape all \\u escaped characters
       val input = URLDecoder.decode(StringEscapeUtils.unescapeJava(uri), "UTF-8")
@@ -91,7 +93,7 @@ object UriUtils
         new URI(prelude + resource + qu + frag)
       }
       else
-        createUri(input) match{
+        createIri(input) match{
           case Success(s) => s
           case Failure(f) => null
         }
@@ -103,23 +105,32 @@ object UriUtils
     * @param uri
     * @return
     */
-  def uriToIri(uri: String): String = {
+  def uriToDbpediaIri(uri: String): IRI = {
     val urii = toDbpediaUri(uri)
     uriToIri(urii)
   }
 
+
+  def uriToIri(uri: String) : IRI = uriToIri(new URI(uri))
   /**
     * see uriToIri(uri: String)
     *
     * @param uri
     * @return
     */
-  def uriToIri(uri: URI): String = {
-    uri.getScheme + "://" +
-        uri.getAuthority +
-        WikiUtil.wikiEncode(iriDecode(uri.getRawPath)).replaceAll("%25", "%")  +
-        (if(uri.getQuery != null) "?" + WikiUtil.wikiEncode(iriDecode(uri.getRawQuery)).replaceAll("%25", "%") else "")+
-        (if(uri.getFragment != null) "#" + WikiUtil.wikiEncode(iriDecode(uri.getRawFragment)).replaceAll("%25", "%") else "")
+  def uriToIri(uri: URI): IRI = {
+    val scheme = uri.getScheme + "://"
+    val authority = uri.getAuthority
+    val path = WikiUtil.wikiEncode(iriDecode(uri.getPath)).replaceAll("%25", "%")
+    val query = if (uri.getQuery != null) "?" + WikiUtil.wikiEncode(iriDecode(uri.getRawQuery)).replaceAll("%25", "%") else ""
+    val fragment = if(uri.getFragment != null) "#" + WikiUtil.wikiEncode(iriDecode(uri.getRawFragment)).replaceAll("%25", "%") else ""
+    new IRI(
+      scheme +
+      authority +
+      path +
+      query +
+      fragment
+    )
   }
 
   private def encodeAndClean(uriPart: String): String={
@@ -129,7 +140,7 @@ object UriUtils
     StringUtils.escape(decoded, StringUtils.replacements('%', "<>\"#%?[\\]^`{|}"))
   }
 
-  private def decode(uriPart: String): String={
+  def decode(uriPart: String): String={
     var decoded = uriPart
     while(UriDecoder.decode(decoded) != decoded)
       decoded = UriDecoder.decode(decoded)
@@ -137,7 +148,7 @@ object UriUtils
     decoded.replaceAll("[<>#%\\?\\[\\\\\\]]", "_")
   }
 
-  private def iriDecode(uriPart: String): String={
+  def iriDecode(uriPart: String): String={
     var decoded = uriPart
     val decoder = new UriToIriDecoder
     while(decoder.decode(decoded) != decoded)

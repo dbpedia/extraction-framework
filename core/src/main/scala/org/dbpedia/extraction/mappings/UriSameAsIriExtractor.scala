@@ -7,7 +7,10 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 import java.net.URI
 
+import org.dbpedia.iri.UriUtils
+
 import scala.language.reflectiveCalls
+import scala.util.{Failure, Success}
 
 /**
  * Extracts sameAs links for resources with themselves. Only makes sense when serialization is
@@ -32,8 +35,13 @@ extends PageNodeExtractor
   override def extract(page: PageNode, subjectUri: String): Seq[Quad] =
   {
     // only extract triple if IRI is actually different from URI
-    val encodedUri = new URI(subjectUri).toASCIIString
-    if (encodedUri == subjectUri) Seq.empty
-    else Seq(quad(encodedUri, subjectUri, page.sourceIri))
+    val encodedUri = UriUtils.createIri(subjectUri) match{
+      case Success(u) => u.toASCIIString
+      case Failure(f) => throw f
+    }
+    if (encodedUri == subjectUri)
+      Seq.empty
+    else
+      Seq(quad(encodedUri, subjectUri, page.sourceIri))
   }
 }

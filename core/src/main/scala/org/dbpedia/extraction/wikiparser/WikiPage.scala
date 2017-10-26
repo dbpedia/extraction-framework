@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.mappings.{RecordEntry, RecordSeverity}
+import org.dbpedia.extraction.util.{RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 

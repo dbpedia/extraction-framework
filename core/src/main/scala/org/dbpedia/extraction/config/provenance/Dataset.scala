@@ -3,9 +3,11 @@ package org.dbpedia.extraction.config.provenance
 import java.net.URI
 import java.util.MissingFormatArgumentException
 
+import org.apache.jena.iri.IRI
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 import org.dbpedia.extraction.util.{ConfigUtils, Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser.WikiParserException
+import org.dbpedia.iri.UriUtils
 
 import scala.util.{Failure, Success, Try}
 
@@ -36,10 +38,10 @@ class Dataset private[provenance](
   val description = Option(descr)
   val language = Option(lang)
 
-  val inputFor: Seq[Try[URI]] = input.map(x => Try{new URI(x)})
+  val inputFor: Seq[Try[IRI]] = input.map(x => UriUtils.createIri(x))
 
-  val resultOf: Try[URI] = Option(result) match{
-    case Some(u) => Try{new URI(u)}
+  val resultOf: Try[IRI] = Option(result) match{
+    case Some(u) => UriUtils.createIri(u)
     case None => Failure(new IllegalArgumentException("No target class for inputFor provided."))
   }
 

@@ -2,13 +2,15 @@ package org.dbpedia.extraction.config.transform
 
 import java.net.URI
 import java.text.SimpleDateFormat
-import java.util.{Locale, Calendar}
+import java.util.{Calendar, Locale}
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.util.{UriUtils, Language}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.TextNode
+import org.dbpedia.iri.UriUtils
 
 import scala.collection.mutable.ArrayBuffer
+import scala.util.{Failure, Success}
 
 /**
  * Template transformations.
@@ -58,8 +60,6 @@ object TemplateTransformConfig {
 
   private def externalLinkNode(node: TemplateNode, lang:Language) : List[Node] = {
 
-    try {
-
       def defaultLinkTitle(node: Node) : PropertyNode = {
         PropertyNode("link-title", List(TextNode("", node.line)), node.line)
       }
@@ -69,21 +69,24 @@ object TemplateTransformConfig {
       // The first parameter is parsed to see if it takes the form of a complete URL.
       // If it doesn't start with a URI scheme (such as "http:", "https:", or "ftp:"),
       // an "http://" prefix will be prepended to the specified generated target URL of the link.
-      val uri = new URI(extractTextFromPropertyNode(node.property("1")))
-      val uriWithScheme = if (uri.getScheme() == null) new URI("http://" + uri.toString)
-                          else uri
 
-      List(
-        ExternalLinkNode(
-          uriWithScheme,
-          node.property("2").getOrElse(defaultLinkTitle(node)).children,
-          node.line
-        )
-      )
-    } catch {
-      // In case there are problems with the URL/URI just bail and return the original node
-      case _ : Throwable => List(node)
-    }
+      UriUtils.createIri(extractTextFromPropertyNode(node.property("1"))) match{
+        case Success(u) => {
+          val iri = if (u.getScheme == null)
+            UriUtils.createIri("http://" + u.toString).get
+          else u
+
+          List(
+            ExternalLinkNode(
+              iri,
+              node.property("2").getOrElse(defaultLinkTitle(node)).children,
+              node.line
+            )
+          )
+        }
+        // In case there are problems with the URL/URI just bail and return the original node
+        case Failure(f) => List(node)
+      }
   }
 
   private val transformMap : Map[String, Map[String, (TemplateNode, Language) => List[Node]]] = Map(

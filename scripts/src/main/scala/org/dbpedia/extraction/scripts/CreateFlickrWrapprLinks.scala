@@ -4,20 +4,22 @@ import org.dbpedia.extraction.transform.Quad
 
 import scala.Console.err
 import java.io.File
+
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
+import org.dbpedia.extraction.util.ConfigUtils.{getString, getStrings, getValue, loadConfig, parseLanguages}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import scala.collection.mutable.{ArrayBuffer,HashSet}
-import org.dbpedia.extraction.destinations.{Destination,CompositeDestination,WriterDestination}
+
+import scala.collection.mutable.{ArrayBuffer, HashSet}
+import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
 import org.dbpedia.extraction.util.Finder
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.TurtleUtils
-import org.dbpedia.util.text.uri.UriDecoder
 import org.dbpedia.extraction.util.StringUtils
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.iri.UriDecoder
 
 object CreateFlickrWrapprLinks {
   

@@ -1,17 +1,16 @@
-package org.dbpedia.extraction.mappings
+package org.dbpedia.extraction.util
 
 import java.io.{ByteArrayOutputStream, Writer}
 import java.net.SocketTimeoutException
 import java.nio.charset.Charset
 import java.text.DecimalFormat
-import java.util.Date
 import java.util.concurrent.atomic.AtomicLong
 
 import org.apache.jena.atlas.json.{JSON, JsonArray, JsonObject}
 import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.mappings.ExtractionMonitor
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Config.SlackCredentials
-import org.dbpedia.extraction.util.{Language, StringUtils}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiPage, WikiTitle}
 
 import scala.collection.mutable
@@ -244,7 +243,7 @@ class ExtractionRecorder[T](
     } else print
 
     val status = getStatusValues(lang)
-    val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; {task} at {time}for{data}; ") + line
+    val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; {task} at {time} for {data}; ") + line
     val pattern = "\\{\\s*\\w+\\s*\\}".r
     var lastend = 0
     var resultString = ""
@@ -281,7 +280,7 @@ class ExtractionRecorder[T](
     val pages = successfulPages(lang)
     val time = System.currentTimeMillis - startTime.get
     val failed = failedPages(lang)
-    val datasetss = if(datasets.nonEmpty && datasets.size <= 5)
+    val datasetss = if(datasets.nonEmpty && datasets.size <= 3)
       datasets.foldLeft[String]("")((x,y) => x + ", " + y.encoded).substring(2)
     else
       String.valueOf(datasets.size) + " datasets"
@@ -308,7 +307,8 @@ class ExtractionRecorder[T](
     this.defaultLang = lang
     this.task = task
 
-    if(monitor != null) monitor.init(this)
+    if(monitor != null)
+      monitor.init(this)
 
     if(preamble != null)
       printLabeledLine(preamble, RecordSeverity.Info, lang)
@@ -352,7 +352,7 @@ class ExtractionRecorder[T](
   /**
     * the following methods will post messages to a Slack webhook if the Slack-Cedentials are available in the config file
     */
-  var lastExceptionMsg = new Date().getTime
+  var lastExceptionMsg = new java.util.Date().getTime
 
   /**
     * forward an exception summary to slack
@@ -364,9 +364,9 @@ class ExtractionRecorder[T](
     if(slackCredantials == null)
       return
     //if error warnings are less than 2 min apart increase threshold
-    if((new Date().getTime - lastExceptionMsg) / 1000 < 120)
+    if((new java.util.Date().getTime - lastExceptionMsg) / 1000 < 120)
       slackIncreaseExceptionThreshold = slackIncreaseExceptionThreshold*2
-    lastExceptionMsg = new Date().getTime
+    lastExceptionMsg = new java.util.Date().getTime
 
     val attachments = new JsonArray()
     val attachment = getAttachment("Multiple pages failed to be extracted.", if(slackIncreaseExceptionThreshold < 5) "warning" else "danger")

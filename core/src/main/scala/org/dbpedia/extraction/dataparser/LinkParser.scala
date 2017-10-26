@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.dataparser
 
 import java.net.URI
+
+import org.apache.jena.iri.IRI
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
@@ -11,7 +13,7 @@ class LinkParser(val strict : Boolean = false) extends DataParser
 {
     override val splitPropertyNodeRegex = DataParserConfig.splitPropertyNodeRegexLink.get("en").get
 
-    override def parse(node : Node) : Option[URI] =
+    override def parse(node : Node) : Option[IRI] =
     {
         if (!strict)
         {

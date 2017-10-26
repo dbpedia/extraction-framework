@@ -4,8 +4,9 @@ import java.io.Writer
 
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
-import org.dbpedia.extraction.mappings.{BadQuadException, ExtractionRecorder}
+import org.dbpedia.extraction.mappings.BadQuadException
 import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.ExtractionRecorder
 import org.dbpedia.extraction.wikiparser.WikiPage
 
 
@@ -35,9 +36,12 @@ extends Destination
       val formatted = formatter.render(quad)
       if(extractionRecorder != null) {
         if(formatted.trim.startsWith("#")){
-          if(formatted.contains("BAD URI:")) extractionRecorder.failedRecord(quad.toString(), null, new BadQuadException(formatted))
+          if(formatted.contains("BAD URI:"))
+            //TODO create trait 'Recordable'
+            extractionRecorder.failedRecord(quad.toString(), null, new BadQuadException(formatted))
         }
-        else if(dataset != null) extractionRecorder.increaseAndGetSuccessfulTriples(dataset)
+        else if(dataset != null)
+          extractionRecorder.increaseAndGetSuccessfulTriples(dataset)
       }
       writer.write(formatted)
     }

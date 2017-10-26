@@ -3,9 +3,9 @@ package org.dbpedia.extraction.destinations
 import java.io.File
 
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.destinations.formatters.{Formatter, TerseFormatter}
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.{DateFinder, FileLike, Finder, IOUtils}
+import org.dbpedia.extraction.util._
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
@@ -40,5 +40,9 @@ object DestinationUtils {
 
   def createWriterDestination(file: FileLike[_], format: Formatter): WriterDestination ={
     new WriterDestination(() => IOUtils.writer(file), format)
+  }
+
+  def createWriterDestination(file: FileLike[_]): WriterDestination ={
+    new WriterDestination(() => IOUtils.writer(file), new TerseFormatter(false, true))
   }
 }

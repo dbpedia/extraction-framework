@@ -11,6 +11,7 @@ import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.IOUtils.writer
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
 import org.dbpedia.extraction.util._
+import org.dbpedia.iri.UriUtils
 
 import scala.Console.err
 
