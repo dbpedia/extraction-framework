@@ -20,12 +20,9 @@ import ConfigUtils._
 import org.dbpedia.extraction.config.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 
 
-class Config(properties: Properties) extends
-  Properties(Config.universalProperties)
+class Config(properties: Properties) extends Properties(Config.combineProperties(Config.universalProperties, properties))
 {
   def this(configPath: String) = this(ConfigUtils.loadConfig(configPath))
-
-  this.putAll(properties)
 
   /**
     * load two config files:
@@ -321,15 +318,18 @@ object Config{
      exceptionThreshold: Int
    )
 
-  private val universalProperties: Properties = loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
+  private val universalProperties: Properties = loadConfig(this.getClass.getClassLoader.getResource("universal.properties"))
 
   val universalConfig: Config = new Config(universalProperties)
-
-
   /**
     * The content of the wikipedias.csv in the base-dir (needs to be static)
     */
   private val wikisinfoFile = new File(getString(universalProperties , "base-dir", required = true), WikiInfo.FileName)
   private lazy val wikiinfo = if(wikisinfoFile.exists()) WikiInfo.fromFile(wikisinfoFile, Codec.UTF8) else Seq()
   def wikiInfos: Seq[WikiInfo] = wikiinfo
+
+  def combineProperties(props1: Properties, props2: Properties): Properties ={
+    props1.putAll(props2)
+    props1
+  }
 }

@@ -40,15 +40,14 @@ object ConfigUtils {
 
   private [config] val propertiesFileKey = "properties-filename-9642"
 
-  //val baseDir = getValue(universalConfig , "base-dir", true){
-   // x => new File(x)
-      //if (! dir.exists) throw error("dir "+dir+" does not exist")
-      //dir
-  //}
-
-  def loadConfig(filePath: String, charset: String = "UTF-8"): Properties = {
+  def loadConfig(filePath: String): Properties = {
     val file = new File(filePath)
-    val props = loadFromStream(new FileInputStream(file), charset)
+    loadConfig(file.toURI.toURL)
+  }
+
+  def loadConfig(url: URL): Properties = {
+    val props = loadFromStream(url.openStream())
+    addPropertiesName(url.toString, props)
     props
   }
 
@@ -58,20 +57,6 @@ object ConfigUtils {
     if(logname.contains("."))
       logname = logname.substring(0, logname.indexOf("."))
     props.put(propertiesFileKey, logname)
-  }
-
-  def loadConfig(url: URL): Object = {
-
-    url match {
-      case selection =>
-        if(selection.getFile.endsWith(".json"))
-          loadJsonComfig(url)
-        else {
-          val props = loadFromStream(url.openStream())
-          addPropertiesName(url.toString, props)
-          props
-        }
-    }
   }
 
   def loadJsonComfig(url: URL): JsonNode ={

@@ -21,13 +21,13 @@ import scalaj.http.Http
   * Created by Chile on 11/3/2016.
   */
 class ExtractionRecorder[T](
-                             val logWriter: Writer = null,
-                             val reportInterval: Int = 100000,
-                             val preamble: String = null,
-                             val slackCredantials: SlackCredentials = null,
-                             dataset: List[Dataset] = List[Dataset](),
-                             val language: Language = Language.English,
-                             val monitor: ExtractionMonitor = null
+     val logWriter: Writer = null,
+     val reportInterval: Int = 100000,
+     val preamble: String = null,
+     val slackCredantials: SlackCredentials = null,
+     dataset: List[Dataset] = List[Dataset](),
+     val language: Language = Language.English,
+     val monitor: ExtractionMonitor = null
    ) {
 
   def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
@@ -263,8 +263,8 @@ class ExtractionRecorder[T](
 
     val printOptions = if(print == null || print.isEmpty) severity match{
       case RecordSeverity.Exception => Seq(PrinterDestination.err, PrinterDestination.out, PrinterDestination.file)
-      case RecordSeverity.Warning => Seq(PrinterDestination.out, PrinterDestination.file)
-      case RecordSeverity.Info => Seq(PrinterDestination.file)
+      case RecordSeverity.Warning => Seq(PrinterDestination.file)
+      case RecordSeverity.Info => Seq(PrinterDestination.out, PrinterDestination.file)
       case _ => Seq(PrinterDestination.sink)
     }
     else print
@@ -337,14 +337,20 @@ class ExtractionRecorder[T](
     this.datasets.clear()
     this.datasets ++= datasets.filter(x => x != null)
 
+
     if(monitor != null)
       monitor.init(this)
 
     if(preamble != null)
       printLabeledLine(preamble, RecordSeverity.Info, lang)
 
-    val line = "Extraction started for language: " + lang.name + " (" + lang.wikiCode + ")" + (if (datasets.nonEmpty) " on " + datasets.size + " datasets." else "")
+    val line = "Extraction started for language: " + lang.name + " (" + lang.wikiCode + ")" + (if (datasets.nonEmpty) " on " + datasets.size + " datasets:" else "")
     printLabeledLine(line, RecordSeverity.Info, lang)
+
+    for(dataset <- datasets.sortBy(x => x.encoded)){
+      printLabeledLine("\t" + dataset.name, RecordSeverity.Info, lang, Seq(), noLabel = true)
+    }
+
     forwardExtractionOverview(lang, line)
     initialized = true
     true
@@ -501,7 +507,7 @@ class ExtractionRecorder[T](
       JSON.write(baos, data)
       val resp = Http(url).postData(new String(baos.toByteArray, Charset.defaultCharset())).asString
       if (resp.code != 200) {
-        System.err.println(resp.body)
+        System.err.println("The provided Slack webhook cannot be reached: " + resp.body)
       }
       true
     }

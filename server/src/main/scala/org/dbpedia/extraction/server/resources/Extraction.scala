@@ -1,19 +1,23 @@
 package org.dbpedia.extraction.server.resources
 
-import java.net.{URL, URI}
+import java.net.{URI, URL}
+
 import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{IOUtils, Language, RichFile}
 import javax.ws.rs._
 import javax.ws.rs.core.{HttpHeaders, MediaType, Response}
-import java.util.logging.{Logger,Level}
+import java.util.logging.{Level, Logger}
+
 import scala.xml.Elem
-import scala.io.{Source,Codec}
+import scala.io.{Codec, Source}
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import org.dbpedia.extraction.destinations.{DeduplicatingDestination, WriterDestination}
-import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
+import org.dbpedia.extraction.destinations.{DeduplicatingDestination, DestinationUtils, WriterDestination}
+import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import stylesheets.TriX
-import java.io.StringWriter
+import java.io.{File, StringWriter}
+
+import scala.collection.mutable.ListBuffer
 
 object Extraction
 {
@@ -42,6 +46,16 @@ object Extraction
                 Map()
         }
     }
+
+  def getFormatter(format: String, writer: StringWriter = null) = format match
+  {
+    case "turtle-triples" => new TerseFormatter(false, true)
+    case "turtle-quads" => new TerseFormatter(true, true)
+    case "n-triples" => new TerseFormatter(false, false)
+    case "n-quads" => new TerseFormatter(true, false)
+    case "rdf-json" => new RDFJSONFormatter()
+    case _ => TriX.writeHeader(writer, 2)
+  }
 }
 
 /**
@@ -104,15 +118,7 @@ class Extraction(@PathParam("lang") langCode : String)
         
         val writer = new StringWriter
 
-        val formatter = format match
-        {
-            case "turtle-triples" => new TerseFormatter(false, true)
-            case "turtle-quads" => new TerseFormatter(true, true)
-            case "n-triples" => new TerseFormatter(false, false)
-            case "n-quads" => new TerseFormatter(true, false)
-            case "rdf-json" => new RDFJSONFormatter()
-            case _ => TriX.writeHeader(writer, 2)
-        }
+        val formatter = Extraction.getFormatter(format, writer)
 
       val customExtraction = extractors match
       {
@@ -134,6 +140,43 @@ class Extraction(@PathParam("lang") langCode : String)
           .header(HttpHeaders.CONTENT_TYPE, selectContentType(format)+"; charset=UTF-8" )
           .build()
     }
+
+  @GET
+  @Path("extract-all")
+  def extractAll(@QueryParam("url") url: String, @QueryParam("format") format: String, @QueryParam("extractors") extractors: String){
+    val titles = new ListBuffer[String]()
+    var lastTitle = ""
+    val zw = """^\s*<http://dbpedia.org/resource/([^>]+).*""".r
+
+    val formatter = Extraction.getFormatter(format, null)
+    val destination = DestinationUtils.createWriterDestination(new RichFile(new File("/home/chile/sci-graph-links/LD/data-samples/random/DBpedia90000-enriched.ttl.bz2")), formatter)
+
+    val u = if(new URI(url).getRawAuthority != null)
+      new URI(url).toURL.openStream()
+        else
+      new URI("file://" + url).toURL.openStream()
+
+    IOUtils.readLines(u, Codec.UTF8.charSet){ line =>
+      if(line != null) {
+        zw.findFirstMatchIn(line) match {
+          case Some(m) if m.group(1) != lastTitle =>
+            titles.append(m.group(1))
+            lastTitle = m.group(1)
+          case _ =>
+        }
+      }
+    }
+
+    destination.open()
+    var c = 0
+    for(title <- titles) {
+      Server.instance.extractor.extract(title, destination, Language.English)
+      c = c+1
+      if(c%100 == 0)
+        System.out.println(c + " titles extracted")
+    }
+    destination.close()
+  }
 
     private def selectContentType(format: String): String = {
 

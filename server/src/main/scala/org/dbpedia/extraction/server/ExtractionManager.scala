@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.server
 
 import java.io.File
+import java.net.URL
 import java.util.logging.{Level, Logger}
 
 import org.dbpedia.extraction.config.ExtractionRecorder
@@ -62,6 +63,15 @@ abstract class ExtractionManager(
     def updateAll()
     
     protected val parser: WikiParser = WikiParser.getInstance()
+
+  def extract(title: String, destination: Destination, language: Language): Unit = {
+    val extract = mappingExtractor(language)
+    val source = WikiSource.fromTitles(List(WikiTitle.parse(title, Language.English)), new URL(Language.English.apiUri), Language.English)
+    for (page <- source){
+      val quads = extract.extract(page, page.uri)
+      destination.write(quads.sortBy(x => (x.subject, x.predicate)).reverse)
+    }
+  }
 
     def extract(source: Source, destination: Destination, language: Language, useCustomExtraction: Boolean = false): Unit = {
       val extract = if (useCustomExtraction) customExtractor(language) else mappingExtractor(language)

@@ -165,7 +165,7 @@ class DateTimeParser ( context : {
             }
         }
 
-      recorder.enterProblemRecord(node.root, "Template unknown: " + node.title, RecordSeverity.Info, None, Language.getOrElse(language, Language.None))
+      recorder.enterProblemRecord(node.root, "Template unknown: " + node.title, RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
       None
     }
 
