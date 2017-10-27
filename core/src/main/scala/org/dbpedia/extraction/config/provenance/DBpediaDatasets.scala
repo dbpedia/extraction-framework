@@ -199,6 +199,7 @@ object DBpediaDatasets
      */
     val InfoboxProperties: Dataset = datasets("infobox_properties")
     val InfoboxPropertiesMapped: Dataset = datasets("infobox_properties_mapped")
+    val InfoboxPropertiesExtended: Dataset = datasets("infobox_properties_extended")
     val InfoboxPropertyDefinitions: Dataset = datasets("infobox_property_definitions")
     val TemplateParameters: Dataset = datasets("template_parameters")
     val TemplateMappings: Dataset = datasets("template_mappings")

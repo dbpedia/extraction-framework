@@ -47,7 +47,7 @@ class ConfigLoader(config: Config)
     extractionRecorder.get(classTag[T]) match{
       case Some(s) => s.get(lang) match {
         case None =>
-          s(lang) = config.getDefaultExtractionRecorder[T](lang, 2000, null, null,  List(dataset), extractionMonitor)
+          s(lang) = config.getDefaultExtractionRecorder[T](lang, 2000, null, null,  List(dataset))
           s(lang).asInstanceOf[ExtractionRecorder[T]]
         case Some(er) => er.asInstanceOf[ExtractionRecorder[T]]
       }

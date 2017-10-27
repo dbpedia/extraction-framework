@@ -145,13 +145,13 @@ extends PropertyMapping
               new LinkParser(false)
             case "xsd:date" =>
               checkMultiplicationFactor("xsd:date")
-              new DateTimeParser(context, dt)
+              new DateTimeParser(context, dt, strict = false, tryMinorTypes = true)
             case "xsd:gYear" =>
               checkMultiplicationFactor("xsd:gYear")
               new DateTimeParser(context, dt)
             case "xsd:gYearMonth" =>
               checkMultiplicationFactor("xsd:gYearMonth")
-              new DateTimeParser(context, dt)
+              new DateTimeParser(context, dt, strict = false, tryMinorTypes = true)
             case "xsd:gMonthDay" =>
               checkMultiplicationFactor("xsd:gMonthDay")
               new DateTimeParser(context, dt)

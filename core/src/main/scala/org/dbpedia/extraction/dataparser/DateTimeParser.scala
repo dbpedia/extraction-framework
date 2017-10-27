@@ -13,15 +13,20 @@ import scala.language.reflectiveCalls
 import scala.reflect.ClassTag
 
 /**
- * Parses a data time.
- */
+  * Parse date time
+  * @param context - the extraction context
+  * @param datatype - the target datatype
+  * @param strict - TODO not sure
+  * @param tryMinorTypes - if true, after unsuccessfully trying to parse a string into xsd:date (time) we will try to parse it into monthYear and finally year.
+  */
 class DateTimeParser ( context : {
       def language : Language
       def ontology : Ontology
       def redirects : Redirects
       def recorder[T: ClassTag] : ExtractionRecorder[T] },
      datatype : Datatype,
-     val strict : Boolean = false) extends DataParser
+     val strict : Boolean = false,
+     val tryMinorTypes : Boolean = false) extends DataParser
 {
     require(datatype.!=(null), "datatype != null")
 
@@ -108,9 +113,8 @@ class DateTimeParser ( context : {
       }
       catch
       {
-          case ex : IllegalArgumentException  => recorder.enterProblemRecord(node.root, "Error while parsing date", RecordSeverity.Warning, Some(ex), Language.getOrElse(language, Language.None))
-            //logger.log(Level.FINE, "Error while parsing date", ex)
-          case ex : NumberFormatException => recorder.enterProblemRecord(node.root, "Error while parsing date", RecordSeverity.Warning, Some(ex), Language.getOrElse(language, Language.None))
+          case ex : IllegalArgumentException  => recorder.enterProblemRecord(node.root, "Error while parsing date", RecordSeverity.Internal, Some(ex), Language.getOrElse(language, Language.None))
+          case ex : NumberFormatException => recorder.enterProblemRecord(node.root, "Error while parsing date", RecordSeverity.Internal, Some(ex), Language.getOrElse(language, Language.None))
       }
 
       None
@@ -161,7 +165,7 @@ class DateTimeParser ( context : {
             }
         }
 
-      recorder.enterProblemRecord(node.root, "Template unknown: " + node.title, RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+      recorder.enterProblemRecord(node.root, "Template unknown: " + node.title, RecordSeverity.Info, None, Language.getOrElse(language, Language.None))
       None
     }
 
@@ -227,10 +231,10 @@ class DateTimeParser ( context : {
         datatype match
         {
             case `dtDay` =>
-              recorder.enterProblemRecord(node.root, "Method for day Extraction not yet implemented.", RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+              recorder.enterProblemRecord(node.root, "Method for day Extraction not yet implemented.", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
               None
             case `dtMonth` =>
-              recorder.enterProblemRecord(node.root, "Method for month Extraction not yet implemented.", RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+              recorder.enterProblemRecord(node.root, "Method for month Extraction not yet implemented.", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
               None
             case `dtYear` =>
                 for(date <- catchMonthYear(input, node))
@@ -272,7 +276,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((century+year).toInt), Some.apply(monthNumber.toInt), Some.apply(day.toInt), datatype))
                 case None =>
-                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
             }
         }
 
@@ -282,7 +286,7 @@ class DateTimeParser ( context : {
             months.get(month.toLowerCase) match
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((eraIdentifier+year).toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
-                case None => recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+                case None => recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
             }
         }
 
@@ -292,7 +296,7 @@ class DateTimeParser ( context : {
             months.get(month.toLowerCase) match
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((eraIdentifier+year).toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
-                case None => recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+                case None => recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
             }
         }
 
@@ -311,7 +315,7 @@ class DateTimeParser ( context : {
             catch
             {
                 case ex: NoSuchElementException =>
-                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
             }
         }
 
@@ -331,17 +335,17 @@ class DateTimeParser ( context : {
             {
               case Some(monthNumber) => return Some.apply(new Date(Some.apply(year.toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
               case None =>
-                recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+                recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
             }
         }
 
-      catchMonthYear(input, node) match{
-        case Some(d) => Some.apply(new Date(year = d.year, month = d.month, day= Some.apply(1), datatype = dtDate))
-        case None => catchYear(input) match{
-          case Some(d) => Some.apply(new Date(year = d.year, month = Some.apply(1), day= Some.apply(1), datatype = dtDate))
+      if(tryMinorTypes)
+        catchMonthYear(input, node) match{
+          case Some(d) => Some.apply(new Date(year = d.year, month = d.month, day= Some.apply(1), datatype = dtDate))
           case None => None
         }
-      }
+      else
+        None
     }
 
     private def catchDayMonth(input: String, node: Node) : Option[Date] =
@@ -354,7 +358,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(month = Some.apply(monthNumber), day = Some.apply(day.toInt), datatype = dtMonthDay))
                 case None =>
-                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
             }
         }
         for(result <- DayMonthRegex2.findFirstMatchIn(input))
@@ -365,7 +369,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(month = Some.apply(monthNumber), day = Some.apply(day.toInt), datatype = dtMonthDay))
                 case None =>
-                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
             }
         }
         None
@@ -383,9 +387,14 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(year = Some.apply((eraIdentifier+year).toInt), month = Some.apply(monthNumber), datatype = dtYearMonth))
                 case None =>
-                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Warning, None, Language.getOrElse(language, Language.None))
+                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
             }
         }
+        if(tryMinorTypes)
+          catchYear(input) match{
+            case Some(d) => Some.apply(new Date(year = d.year, month = Some.apply(1), day= Some.apply(1), datatype = dtDate))
+            case None =>
+          }
         None
     }
 

@@ -33,7 +33,7 @@ class ExtractionRecorder[T](
   def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
 
   private var datasets: ListBuffer[Dataset] = new ListBuffer()
-  datasets ++= dataset
+  datasets ++= dataset.filter(x => x != null)
   private var issuePages = mutable.Map[Language, mutable.Map[T, (String, RecordSeverity.Value, Option[Throwable])]]()
   private var successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
 
@@ -183,7 +183,7 @@ class ExtractionRecorder[T](
     }
 
     val line = "{task} failed for " + tag + " " + id + ": " + msg
-    printLabeledLine(line, severity, language, Seq(PrinterDestination.err, PrinterDestination.file))
+    printLabeledLine(line, severity, language, Seq())
 
     ex match{
       case Some(e) =>
@@ -260,14 +260,14 @@ class ExtractionRecorder[T](
     */
   def printLabeledLine(line:String, severity: RecordSeverity.Value, language: Language = null, print: Seq[PrinterDestination.Value] = null, noLabel: Boolean = false): Unit ={
     val lang = if(language != null) language else defaultLang
-    val printOptions = if(print == null) {
-      if(severity == RecordSeverity.Exception )
-        Seq(PrinterDestination.err, PrinterDestination.out, PrinterDestination.file)
-      else if(severity == RecordSeverity.Info)
-        Seq(PrinterDestination.out, PrinterDestination.file)
-      else
-        Seq(PrinterDestination.file)
-    } else print
+
+    val printOptions = if(print == null || print.isEmpty) severity match{
+      case RecordSeverity.Exception => Seq(PrinterDestination.err, PrinterDestination.out, PrinterDestination.file)
+      case RecordSeverity.Warning => Seq(PrinterDestination.out, PrinterDestination.file)
+      case RecordSeverity.Info => Seq(PrinterDestination.file)
+      case _ => Seq(PrinterDestination.sink)
+    }
+    else print
 
     val status = getStatusValues(lang)
     val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; {task} at {time} for {data}; ") + line
@@ -299,6 +299,7 @@ class ExtractionRecorder[T](
         case PrinterDestination.err => System.err.println(resultString)
         case PrinterDestination.out => System.out.println(resultString)
         case PrinterDestination.file if writerOpen => logWriter.append(resultString + "\n")
+        case PrinterDestination.sink => //TODO record stack trace somewhere (Thread.currentThread().getStackTrace())
         case _ =>
       }
   }
@@ -334,7 +335,7 @@ class ExtractionRecorder[T](
     this.defaultLang = lang
     this.task = task
     this.datasets.clear()
-    this.datasets ++= datasets
+    this.datasets ++= datasets.filter(x => x != null)
 
     if(monitor != null)
       monitor.init(this)
@@ -374,7 +375,7 @@ class ExtractionRecorder[T](
   }
 
   object PrinterDestination extends Enumeration {
-    val out, err, file = Value
+    val out, err, file, sink = Value
   }
 
   /**
@@ -591,7 +592,7 @@ case class RecordEntry[T](
 )
 
 object RecordSeverity extends Enumeration {
-  val Info, Warning, Exception = Value
+  val Internal, Info, Warning, Exception = Value
 }
 
 class WikiPageEntry(p : WikiTitleHolder, s: RecordSeverity.Value = RecordSeverity.Info) extends RecordEntry[WikiTitleHolder](

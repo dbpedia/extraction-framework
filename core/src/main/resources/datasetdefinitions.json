@@ -318,7 +318,13 @@
     "infobox_properties_mapped": {
       "name": "Infobox Properties Mapped",
       "traits":"LinkedData, Published",
-      "desc": "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data. This dataset contains facts that have equivalent mapped facts in the mapping-based datasets. ",
+      "desc": "Information that has been extracted from Wikipedia infoboxes. The information of these particular triples are represented in the mapping-based datasets and is therefore not contained in the main Infobox Properties dataset to avoid redundancy.",
+      "defaultgraph": "dataset"
+    },
+    "infobox_properties_extended": {
+      "name": "Extended Infobox Properties",
+      "traits":"LinkedData, Temporary",
+      "desc": "Information that has been extracted from Wikipedia infoboxes by any possible parser available. This dataset supplements the other datasets of infobox properties with additional parse results for all infobox properties. This dataset is only used for statistical analysis.",
       "defaultgraph": "dataset"
     },
     "infobox_property_definitions": {

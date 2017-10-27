@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.config.ExtractionRecorder
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordSeverity}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 
-import collection.mutable.HashSet
+import collection.mutable.{ArrayBuffer, ListBuffer}
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
@@ -12,8 +12,6 @@ import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
-
-import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.iri.UriUtils
 
@@ -41,6 +39,7 @@ class InfoboxExtractor(
 ) 
 extends PageNodeExtractor
 {
+    private val recorder = context.recorder[PageNode]
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Configuration
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,9 +50,9 @@ extends PageNodeExtractor
 
     private val wikiCode = language.wikiCode
 
-    private val minPropertyCount = InfoboxExtractorConfig.minPropertyCount
+    //private val minPropertyCount = InfoboxExtractorConfig.minPropertyCount
 
-    private val minRatioOfExplicitPropertyKeys = InfoboxExtractorConfig.minRatioOfExplicitPropertyKeys
+    //private val minRatioOfExplicitPropertyKeys = InfoboxExtractorConfig.minRatioOfExplicitPropertyKeys
 
     private val ignoreTemplates = InfoboxExtractorConfig.ignoreTemplates
 
@@ -107,92 +106,101 @@ extends PageNodeExtractor
 
     private val seenProperties = mutable.HashSet[String]()
     
-    override val datasets = Set(DBpediaDatasets.InfoboxProperties, DBpediaDatasets.InfoboxTest, DBpediaDatasets.InfoboxPropertyDefinitions)
+    override val datasets = Set(DBpediaDatasets.InfoboxProperties, DBpediaDatasets.InfoboxPropertiesExtended, DBpediaDatasets.InfoboxTest, DBpediaDatasets.InfoboxPropertyDefinitions)
 
     override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) return Seq.empty
-        
-        val quads = new ArrayBuffer[Quad]()
+      if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) return Seq.empty
 
-        /** Retrieve all templates on the page which are not ignored */
-        for { template <- InfoboxExtractor.collectTemplates(node)
-          resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
-          if !ignoreTemplates.contains(resolvedTitle)
-          if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) 
-        }
+      val quads = new ArrayBuffer[Quad]()
+
+      /** Retrieve all templates on the page which are not ignored */
+      for { template <- InfoboxExtractor.collectTemplates(node)
+        resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
+        if !ignoreTemplates.contains(resolvedTitle)
+        if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined)
+      }
+      {
+        val propertyList = template.children.filterNot(property => ignoreProperties.getOrElse(wikiCode, ignoreProperties("en")).contains(property.key.toLowerCase))
+
+        // check how many property keys are explicitly defined
+        val countExplicitPropertyKeys = propertyList.count(property => !property.key.forall(_.isDigit))
+        if ((countExplicitPropertyKeys >= InfoboxExtractorConfig.minPropertyCount)
+          && (countExplicitPropertyKeys.toDouble / propertyList.size) > InfoboxExtractorConfig.minRatioOfExplicitPropertyKeys)
         {
-            val propertyList = template.children.filterNot(property => ignoreProperties.getOrElse(wikiCode, ignoreProperties("en")).contains(property.key.toLowerCase))
+          for(property <- propertyList; if !property.key.forall(_.isDigit)) {
+            // TODO clean HTML
 
-            var propertiesFound = false
+            val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
-            // check how many property keys are explicitly defined
-            val countExplicitPropertyKeys = propertyList.count(property => !property.key.forall(_.isDigit))
-            if ((countExplicitPropertyKeys >= minPropertyCount) && (countExplicitPropertyKeys.toDouble / propertyList.size) > minRatioOfExplicitPropertyKeys)
+            val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
+            for(splitNode <- splitPropertyNodes)
             {
-                for(property <- propertyList; if !property.key.forall(_.isDigit)) {
-                    // TODO clean HTML
+              val zw = extractValue(splitNode)
+              for(parseResults <- zw; if parseResults.nonEmpty) {
+                val propertyUri = getPropertyUri(property.key)
+                for (pr <- parseResults) {
+                  try {
 
-                    val cleanedPropertyNode = NodeUtil.removeParentheses(property)
-
-                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
-                    for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.unit.nonEmpty)
-                    {
-                        val propertyUri = getPropertyUri(property.key)
-                        try
-                        {
-                            quads += new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.get)
-
-                            if (InfoboxExtractorConfig.extractTemplateStatistics) 
-                            {
-                            	val stat_template = language.resourceUri.append(template.title.decodedWithNamespace)
-                            	val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
-                            	quads += new Quad(language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
-                                               stat_property, node.sourceIri, ontology.datatypes("xsd:string"))
-                            }
-                        }
-                        catch
-                        {
-                            case ex : IllegalArgumentException => println(ex)
-                        }
-                        propertiesFound = true
-                        seenProperties.synchronized
-                        {
-                            if (!seenProperties.contains(propertyUri))
-                            {
-                                val propertyLabel = getPropertyLabel(property.key)
-                                seenProperties += propertyUri
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceIri)
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceIri, rdfLangStrDt)
-                            }
-                        }
+                    //only the first result will be forwarded to the official infobox properties dataset
+                    if(pr == parseResults.head){
+                      quads += new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.orNull)
+                      quads += new Quad(language, DBpediaDatasets.InfoboxPropertiesExtended, subjectUri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.orNull)
                     }
+                    else
+                      quads += new Quad(language, DBpediaDatasets.InfoboxPropertiesExtended, subjectUri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.orNull)
 
+                    if (InfoboxExtractorConfig.extractTemplateStatistics) {
+                      val stat_template = language.resourceUri.append(template.title.decodedWithNamespace)
+                      val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
+                      quads += new Quad(language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
+                        stat_property, node.sourceIri, ontology.datatypes("xsd:string"))
+                    }
+                  }
+                  catch {
+                    case ex: IllegalArgumentException => recorder.enterProblemRecord(node, ex.getMessage, RecordSeverity.Info, Some(ex), node.title.language)
+                  }
                 }
+                seenProperties.synchronized {
+                  if (!seenProperties.contains(propertyUri)) {
+                    val propertyLabel = getPropertyLabel(property.key)
+                    seenProperties += propertyUri
+                    quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceIri)
+                    quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceIri, rdfLangStrDt)
+                  }
+                }
+              }
             }
+          }
         }
-        
-        quads
+      }
+
+      quads
     }
 
-    private def extractValue(node : PropertyNode) : List[ParseResult[String]] =
+    private def extractValue(node : PropertyNode) : List[List[ParseResult[String]]] =
     {
-        // TODO don't convert to SI units (what happens to {{convert|25|kg}} ?)
-        extractUnitValue(node).foreach(result => return List(result))
-/*        extractDates(node) match
-        {
-            case dates if dates.nonEmpty => return dates
-            case _ => 
-        }*/
-        extractSingleCoordinate(node).foreach(result =>  return List(result))
-        extractNumber(node).foreach(result =>  return List(result))
-        extractRankNumber(node).foreach(result => return List(result))
-        extractLinks(node) match
-        {
-            case links if links.nonEmpty => return links
-            case _ =>
-        }
-        StringParser.parse(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt))).toList
+      var results = new ListBuffer[List[ParseResult[String]]]()
+
+      // TODO don't convert to SI units (what happens to {{convert|25|kg}} ?)
+      extractUnitValue(node).foreach(result => results += List(result))
+      extractDates(node) match
+      {
+          case dates if dates.nonEmpty => results += dates
+          case _ =>
+      }
+      extractSingleCoordinate(node).foreach(result =>  results += List(result))
+      extractNumber(node).foreach(result =>  results += List(result))
+      extractRankNumber(node).foreach(result => results += List(result))
+      extractLinks(node) match
+      {
+          case links if links.nonEmpty => results += links
+          case _ =>
+      }
+      val stringRes = StringParser.parse(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt)))
+      results += stringRes.toList
+
+      results.toList
     }
 
     private def extractUnitValue(node : PropertyNode) : Option[ParseResult[String]] =
@@ -273,14 +281,16 @@ extends PageNodeExtractor
         splitNodes.flatMap(splitNode => objectParser.parse(splitNode)) match
         {
             // TODO: explain why we check links.size == splitNodes.size
-            case links if links.size == splitNodes.size => return links
+            case links if links.size == splitNodes.size =>
+              return links
             case _ => List.empty
         }
         
         splitNodes.flatMap(splitNode => linkParser.parse(splitNode)) match
         {
             // TODO: explain why we check links.size == splitNodes.size
-            case links if links.size == splitNodes.size => links.map(x => UriUtils.cleanLink(x.value)).collect{case Some(link) => ParseResult(link)}
+            case links if links.size == splitNodes.size =>
+              links.map(x => UriUtils.cleanLink(x.value)).collect{case Some(link) => ParseResult(link)}
             case _ => List.empty
         }
     }

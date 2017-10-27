@@ -117,12 +117,10 @@ object Server
         extractionRecorder.get(classTag[T]) match{
             case Some(s) => s.get(lang) match {
                 case None =>
-                    s(lang) = new ExtractionRecorder[T](null, 2000, null, null, if(dataset != null) ListBuffer(dataset) else ListBuffer())
+                    s(lang) = new ExtractionRecorder[T](null, 2000, null, null, if(dataset != null) List(dataset) else List())
                     s(lang).initialize(lang)
                     s(lang).asInstanceOf[ExtractionRecorder[T]]
-                case Some(er) =>
-                    if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
-                    er.asInstanceOf[ExtractionRecorder[T]]
+                case Some(er) => er.asInstanceOf[ExtractionRecorder[T]]
             }
             case None =>
                 extractionRecorder(classTag[T]) = new mutable.HashMap[Language, ExtractionRecorder[_]]()

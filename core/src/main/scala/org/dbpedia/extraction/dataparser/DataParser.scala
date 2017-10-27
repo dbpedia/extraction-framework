@@ -36,4 +36,11 @@ abstract class DataParser
 
 }
 
+/**
+  * Warpper object for parse results
+  * @param value - the parse result
+  * @param lang - optional language parameter for language tags
+  * @param unit - carries a unit if property was attributed with it
+  * @tparam T - Type of the value
+  */
 case class ParseResult[T](value: T, lang: Option[Language] = None, unit: Option[Datatype] = None)
