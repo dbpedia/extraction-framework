@@ -26,7 +26,7 @@ object CreateFlickrWrapprLinks {
   def main(args: Array[String]): Unit = {
     require(args != null && args.length == 1 && args(0).nonEmpty, "missing required argument: config file name")
 
-    val config = loadConfig(args(0), "UTF-8")
+    val config = loadConfig(args(0))
     
     val baseDir = getValue(config, "base-dir", true)(new File(_))
     if (! baseDir.exists) throw error("dir "+baseDir+" does not exist")
