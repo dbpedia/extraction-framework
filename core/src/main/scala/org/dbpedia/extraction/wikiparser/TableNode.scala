@@ -13,7 +13,7 @@ package org.dbpedia.extraction.wikiparser
 case class TableNode( caption : Option[String],
                       override val children : List[TableRowNode],
                       override val line : Int )
-  extends Node(children, line)
+  extends Node
 {
     def toWikiText = ""  //TODO implement!!!
     def toPlainText = ""  //TODO implement!!!
@@ -32,13 +32,13 @@ case class TableNode( caption : Option[String],
  * @param line The (first) line where this table row is located in the source
  */
 case class TableRowNode( override val children : List[TableCellNode],
-                         override val line : Int ) extends Node(children, line)
+                         override val line : Int ) extends Node
 {
     def toWikiText = ""  //TODO implement!!!
     def toPlainText = ""  //TODO implement!!!
     override def equals(obj: scala.Any) = obj match
         {
-            case otherTableRowNode : TableRowNode => (NodeUtil.filterEmptyTextNodes(otherTableRowNode.children) == NodeUtil.filterEmptyTextNodes(children))
+            case otherTableRowNode : TableRowNode => NodeUtil.filterEmptyTextNodes(otherTableRowNode.children) == NodeUtil.filterEmptyTextNodes(children)
             case _ => false
         }
 }
@@ -56,7 +56,7 @@ case class TableCellNode (
   var colSpan: Int // FIXME: var for TableMapping.preprocessTable()
 
 ) 
-extends Node(children, line)
+extends Node
 {
     def toWikiText = ""  //TODO implement!!!
     def toPlainText = ""  //TODO implement!!!

@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.nif
 
-import org.dbpedia.extraction.config.{Config, RecordEntry, RecordSeverity}
+import org.dbpedia.extraction.config.{Config, RecordCause, RecordEntry}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty, RdfNamespace}
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
+import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.jsoup.nodes.{Document, Element, Node}
 import org.jsoup.select.Elements
@@ -53,9 +53,9 @@ class WikipediaNifExtractor(
   }
 
   def extractNif(html: String)(exceptionHandle: RecordEntry[WikiPage] => Unit): Seq[Quad] = {
-    super.extractNif(wikiPage.sourceIri, wikiPage.uri, html){ (msg:String, severity:RecordSeverity.Value, error:Throwable) =>
+    super.extractNif(wikiPage.sourceIri, wikiPage.uri, html){ (msg:String, severity:RecordCause.Value, error:Throwable) =>
       //deal with any exception recorded in the super class
-      new RecordEntry[WikiPage](wikiPage, wikiPage.uri, severity, context.language, msg, error)
+      new RecordEntry[PageNode](wikiPage, severity, context.language, msg, error)
     }
   }
 

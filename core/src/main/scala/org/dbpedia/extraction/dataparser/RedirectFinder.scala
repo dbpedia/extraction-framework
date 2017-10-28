@@ -14,7 +14,7 @@ import scala.util.matching.Regex
   * Extracted from org.dbpedia.extraction.mappings.Redirects.scala and made public
   */
 
-class RedirectFinder private(lang : Language) extends (WikiTitleHolder => Option[(WikiTitle, WikiTitle)])
+class RedirectFinder private(lang : Language) extends (PageNode => Option[(WikiTitle, WikiTitle)])
 {
   val regex: Regex = buildRegex
 
@@ -34,7 +34,7 @@ class RedirectFinder private(lang : Language) extends (WikiTitleHolder => Option
     ("""(?ius)^\s*(?:"""+redirects+""")\s*:?\s*\[\[([^\[\]{}|<>\n]+(?:#[^\n]*?)?)(?:\|[^\n]*?)?\]\].*""").r
   }
 
-  override def apply(page : WikiTitleHolder) : Option[(WikiTitle, WikiTitle)]=
+  override def apply(page : PageNode) : Option[(WikiTitle, WikiTitle)]=
   {
     val destinationTitle : WikiTitle =
       page.source match {

@@ -5,7 +5,7 @@ import java.io._
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitleHolder}
+import org.dbpedia.extraction.wikiparser.{Namespace, PageNode}
 
 import scala.io.Codec
 import java.util.Properties
@@ -72,7 +72,7 @@ object Import {
                 }
                 finally stmt.close()
 
-                val recorder = config.getDefaultExtractionRecorder[WikiTitleHolder](language, 2000)
+                val recorder = config.getDefaultExtractionRecorder[PageNode](language, 2000)
                 recorder.initialize(language, "import")
                 val pages = new Importer(conn, language, recorder).process(source)
 

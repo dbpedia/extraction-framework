@@ -6,15 +6,15 @@ import java.lang.StringBuilder
 import java.sql.Connection
 import java.sql.SQLException
 
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordSeverity, WikiPageEntry}
-import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitleHolder}
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, WikiPageEntry}
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiPage}
 
 import scala.util.control.ControlThrowable
 
 /**
  * This class is basically mwdumper's SqlWriter ported to Scala.
  */
-class Importer(conn: Connection, lang: Language, recorder: ExtractionRecorder[WikiTitleHolder]) {
+class Importer(conn: Connection, lang: Language, recorder: ExtractionRecorder[PageNode]) {
 
 
   def process(source: Source): Int = {
@@ -23,14 +23,14 @@ class Importer(conn: Connection, lang: Language, recorder: ExtractionRecorder[Wi
       recorder.record(new WikiPageEntry(page))
     }
 
-    recorder.printLabeledLine("Retrying all failed pages:", RecordSeverity.Warning, lang, null, noLabel = true)
+    recorder.printLabeledLine("Retrying all failed pages:", RecordCause.Warning, lang, null, noLabel = true)
 
     recorder.listFailedPages(lang) match{
       case None =>
-      case Some(fails) => for(fail <- fails.keys)
+      case Some(fails) => for(fail <- fails)
         fail match{
           case w: WikiPage => if(!insertPageContent(w))
-            recorder.printLabeledLine("Retrying all failed pages:", RecordSeverity.Warning, lang)
+            recorder.printLabeledLine("Retrying all failed pages:", RecordCause.Warning, lang)
           case _ =>
         }
     }

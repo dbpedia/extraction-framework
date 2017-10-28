@@ -7,8 +7,9 @@ import org.dbpedia.extraction.nif.Paragraph.HtmlString
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.config.Config.NifParameters
-import org.dbpedia.extraction.config.RecordSeverity
-import org.dbpedia.extraction.util.{CssConfigurationMap}
+import org.dbpedia.extraction.config.RecordCause
+import org.dbpedia.extraction.mappings.Extractor
+import org.dbpedia.extraction.util.CssConfigurationMap
 import org.dbpedia.iri.UriUtils
 import org.jsoup.Jsoup
 import org.jsoup.nodes.{Document, Element, TextNode}
@@ -56,7 +57,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
     * @param exceptionHandle
     * @return
     */
-  def extractNif(graphIri: String, subjectIri: String, html: String)(exceptionHandle: (String, RecordSeverity.Value, Throwable) => Unit): Seq[Quad] = {
+  def extractNif(graphIri: String, subjectIri: String, html: String)(exceptionHandle: (String, RecordCause.Value, Throwable) => Unit): Seq[Quad] = {
 
     val sections = getRelevantParagraphs(html)
 
@@ -83,11 +84,11 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
           //collect additional triples
           quads ++= extendSectionTriples(extractionResults, graphIri, subjectIri)
           //forward exceptions
-          extractionResults.errors.foreach(exceptionHandle(_, RecordSeverity.Warning, null))
+          extractionResults.errors.foreach(exceptionHandle(_, RecordCause.Warning, null))
           quads
         }
         case Failure(e) => {
-          exceptionHandle(e.getMessage, RecordSeverity.Exception, e)
+          exceptionHandle(e.getMessage, RecordCause.Exception, e)
           List()
         }
       }

@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordSeverity}
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 
@@ -158,7 +158,7 @@ extends PageNodeExtractor
                     }
                   }
                   catch {
-                    case ex: IllegalArgumentException => recorder.enterProblemRecord(node, ex.getMessage, RecordSeverity.Info, Some(ex), node.title.language)
+                    case ex: IllegalArgumentException => recorder.failedRecord(node, ex, node.title.language)
                   }
                 }
                 seenProperties.synchronized {

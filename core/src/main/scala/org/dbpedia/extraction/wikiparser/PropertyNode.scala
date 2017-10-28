@@ -9,7 +9,7 @@ import org.dbpedia.extraction.util.{Language, StringUtils}
  * @param children The contents of the value of this property
  * @param line The source line number of this property
  */
-case class PropertyNode(key : String, override val children : List[Node], override val line : Int) extends Node(children, line)
+case class PropertyNode(key : String, override val children : List[Node], override val line : Int) extends Node
 {
     def toWikiText: String =
     {

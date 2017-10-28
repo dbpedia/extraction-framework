@@ -11,7 +11,7 @@ import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.{Language, RichFile}
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
+import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
 
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable
@@ -182,7 +182,7 @@ object ConfigUtils {
     * @param wikiCode the wikicode of a given language
     * @return two lists: ._1: list of free images, ._2: list of nonfree images
     */
-  def loadImages(source: Source, wikiCode: String, extractionRecorder: ExtractionRecorder[WikiPage] = null): (Seq[String], Seq[String]) =
+  def loadImages(source: Source, wikiCode: String, extractionRecorder: ExtractionRecorder[PageNode] = null): (Seq[String], Seq[String]) =
   {
     val freeImages = new mutable.HashSet[String]()
     val nonFreeImages = new mutable.HashSet[String]()
@@ -191,10 +191,7 @@ object ConfigUtils {
         ImageExtractorConfig.ImageLinkRegex() <- List(page.title.encoded) )
     {
       if(extractionRecorder != null) {
-        val records = page.getExtractionRecords match {
-          case seq: Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
-          case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
-        }
+        val records = page.recordEntries
         //forward all records to the recorder
         extractionRecorder.record(records:_*)
       }

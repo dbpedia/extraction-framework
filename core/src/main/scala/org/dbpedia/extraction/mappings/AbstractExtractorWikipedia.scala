@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.config.Config
+import org.dbpedia.extraction.config.{Config, ExtractionRecorder}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 /**
  * User: Dimitris Kontokostas
@@ -18,6 +19,7 @@ class AbstractExtractorWikipedia(
     def ontology : Ontology
     def language : Language
     def configFile : Config
+    def recorder[T: ClassTag] : ExtractionRecorder[T]
   })
   extends NifExtractor (context)
 {

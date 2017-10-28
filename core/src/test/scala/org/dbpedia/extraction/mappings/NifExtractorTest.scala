@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.io.File
 
-import org.dbpedia.extraction.config.Config
+import org.dbpedia.extraction.config.{Config, ExtractionRecorder}
 import org.dbpedia.extraction.destinations.WriterDestination
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.nif.WikipediaNifExtractor
@@ -11,6 +11,7 @@ import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 import org.scalatest.FunSuite
 
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 
 /**
@@ -34,6 +35,7 @@ class NifExtractorTest extends FunSuite {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
     def language = Language.map("eu")
     def configFile = new Config("C:\\Users\\Chile\\IdeaProjects\\extraction-framework-temp\\dump\\extraction.nif.abstracts.properties")
+    def recorder[T: ClassTag] = new ExtractionRecorder[T]
   }
   private val wikipageextractor = new NifExtractor(context)
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
@@ -50,7 +52,7 @@ class NifExtractorTest extends FunSuite {
       val wp = new WikiPage(wt, 4548, 4548, 4548, "")
       val extractor = new WikipediaNifExtractor(context, wp)
       val html = getHtml(wt)
-      dest.write(extractor.extractNif(html)(tt => System.err.println(tt.errorMsg)))
+      dest.write(extractor.extractNif(html)(tt => System.err.println(tt.msg)))
     }
     dest.close()
   }

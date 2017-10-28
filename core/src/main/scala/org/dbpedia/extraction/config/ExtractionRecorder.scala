@@ -34,7 +34,7 @@ class ExtractionRecorder[T](
 
   private var datasets: ListBuffer[Dataset] = new ListBuffer()
   datasets ++= dataset.filter(x => x != null)
-  private var issuePages = mutable.Map[Language, mutable.Map[T, (String, RecordSeverity.Value, Option[Throwable])]]()
+  private var issuePages = mutable.Map[Language, ListBuffer[RecordEntry[T]]]()
   private var successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
 
   private val startTime = new AtomicLong()
@@ -58,7 +58,7 @@ class ExtractionRecorder[T](
     *
     * @return the failed pages (id, title) for every Language
     */
-  def listFailedPages(lang: Language): Option[Map[T, (String, RecordSeverity.Value, Option[Throwable])]] = issuePages.get(lang).map(_.toMap)
+  def listFailedPages(lang: Language): Option[List[RecordEntry[T]]] = issuePages.get(lang).map(_.toList)
 
   /**
     * successful page count
@@ -121,6 +121,8 @@ class ExtractionRecorder[T](
     */
   def runningPageNumber(lang:Language): Long = successfulPages(lang) + failedPages(lang)
 
+
+  def record(recordable: Recordable[T]): Unit = record(recordable.recordEntries: _*)
   /**
     * prints a message of a RecordEntry if available and
     * assesses a RecordEntry for the existence of a Throwable and forwards
@@ -130,25 +132,25 @@ class ExtractionRecorder[T](
     */
   def record(records: RecordEntry[T]*): Unit = {
     for(record <- records) {
-      record.page match{
-        case page: WikiTitleHolder =>
-          if (record.errorMsg != null)
-            printLabeledLine(record.errorMsg, record.severity, page.title.language, Seq(PrinterDestination.err, PrinterDestination.file))
+      record.record match{
+        case page: PageNode =>
+          if (record.msg != null)
+            printLabeledLine(record.msg, record.cause, page.title.language, Seq(PrinterDestination.err, PrinterDestination.file))
           Option(record.error) match {
-            case Some(ex) => failedRecord(record.page, ex, record.language)
+            case Some(ex) => failedRecord(record.record, ex, record.language)
             case None => recordExtractedPage(page.id, page.title, record.logSuccessfulPage)
           }
         case quad: Quad =>
           Option(record.error) match {
-            case Some(ex) => failedRecord(record.page, ex, record.language)
-            case None => recordQuad(quad, record.severity, record.language)
+            case Some(ex) => failedRecord(record.record, ex, record.language)
+            case None => recordQuad(quad, record.cause, record.language)
           }
         case _  =>
-          Option(record.errorMsg) match{
-            case Some(m) => printLabeledLine(m, record.severity, record.language)
+          Option(record.msg) match{
+            case Some(m) => printLabeledLine(m, record.cause, record.language)
             case None =>
-              if(record.error != null) failedRecord(record.page, record.error, record.language)
-              else recordGenericPage(record.language, record.page.toString)
+              if(record.error != null) failedRecord(record.record, record.error, record.language)
+              else recordGenericPage(record.language, record.record.toString)
           }
       }
     }
@@ -157,37 +159,34 @@ class ExtractionRecorder[T](
   /**
     * The default method to record any entry which was not extracted without any issue.
     * Recorded issues do not have to be exceptions, but are recorded here as well.
-    * @param node
-    * @param msg
-    * @param ex
-    * @param language
+    * @param entry
     */
-  def enterProblemRecord(node: T, msg: String, severity: RecordSeverity.Value = RecordSeverity.Info, ex: Option[Throwable] = None, language:Language = Language.None): Unit ={
-    val tag = node match{
-      case _: WikiTitleHolder => "page"
+  def enterProblemRecord(entry: RecordEntry[T]): Unit ={
+    val tag = entry.record match{
+      case _: PageNode => "page"
       case _: Node => "node"
       case _: Quad => "quad"
       case _ => "instance"
     }
 
-    val id = node match{
-      case p: WikiTitleHolder => p.uri
+    val id = entry.record match{
+      case p: PageNode => p.uri
       case p: Node => p.root.uri
       case p: Quad => "<" + p.subject + "> <" + p.predicate + "> <" + p.value + ">."
       case _ => "unknown"
     }
 
     issuePages.get(language) match{
-      case Some(map) => map += node -> (msg, severity, ex)
-      case None =>  issuePages += language -> mutable.Map[T, (String, RecordSeverity.Value, Option[Throwable])]()
+      case Some(map) => map += entry
+      case None =>  issuePages += language -> new ListBuffer[RecordEntry[T]]()
     }
 
-    val line = "{task} failed for " + tag + " " + id + ": " + msg
-    printLabeledLine(line, severity, language, Seq())
+    val line = "{task} failed for " + tag + " " + id + ": " + entry.msg
+    printLabeledLine(line, entry.cause, language, Seq())
 
-    ex match{
+    Option(entry.error) match{
       case Some(e) =>
-        e.getStackTrace.foreach(x => printLabeledLine("\t" + x.toString, severity, language, Seq(PrinterDestination.file), noLabel = true))
+        e.getStackTrace.foreach(x => printLabeledLine("\t" + x.toString, entry.cause, language, Seq(PrinterDestination.file), noLabel = true))
         if(monitor != null)
           monitor.reportError(this, e)
       case None =>
@@ -203,8 +202,8 @@ class ExtractionRecorder[T](
     * @param node - PageNode of page
     * @param exception  - the Throwable responsible for the fail
     */
-  def failedRecord(node: T, exception: Throwable, language:Language = Language.None): Unit = synchronized{
-    enterProblemRecord( node, exception.getMessage, RecordSeverity.Exception, Some(exception), language)
+  def failedRecord(node: Recordable[T], exception: Throwable, language:Language = Language.None): Unit = synchronized{
+    enterProblemRecord(new RecordEntry[T](node, RecordCause.Exception, language, exception.getMessage, exception))
   }
 
   /**
@@ -221,11 +220,11 @@ class ExtractionRecorder[T](
         case Some(map) => map += (id -> title)
         case None => successfulPagesMap += title.language -> mutable.Map[Long, WikiTitle](id -> title)
       }
-      printLabeledLine("page " + id + ": " + title.encoded + " extracted", RecordSeverity.Info, title.language, Seq(PrinterDestination.file))
+      printLabeledLine("page " + id + ": " + title.encoded + " extracted", RecordCause.Info, title.language, Seq(PrinterDestination.file))
     }
     val pages = increaseAndGetSuccessfulPages(title.language)
     if(pages % reportInterval == 0)
-      printLabeledLine("extracted {page} pages; {mspp} per page; {fail} failed pages", RecordSeverity.Info, title.language)
+      printLabeledLine("extracted {page} pages; {mspp} per page; {fail} failed pages", RecordCause.Info, title.language)
     if(slackCredantials != null && pages % slackCredantials.summaryThreshold == 0)
       forwardSummary(title.language)
   }
@@ -234,7 +233,7 @@ class ExtractionRecorder[T](
     val pages = increaseAndGetSuccessfulPages(lang)
     val l = if(line == null) "processed {page} instances; {mspp} per instance; {fail} failed instances" else line
     if(pages % reportInterval == 0)
-      printLabeledLine(l, RecordSeverity.Info, lang)
+      printLabeledLine(l, RecordCause.Info, lang)
     if(slackCredantials != null && pages % slackCredantials.summaryThreshold == 0)
       forwardSummary(lang)
   }
@@ -245,7 +244,7 @@ class ExtractionRecorder[T](
     * @param quad
     * @param lang
     */
-  def recordQuad(quad: Quad, severity: RecordSeverity.Value, lang:Language): Unit = synchronized {
+  def recordQuad(quad: Quad, severity: RecordCause.Value, lang:Language): Unit = synchronized {
     if(increaseAndGetSuccessfulPages(lang) % reportInterval == 0)
       printLabeledLine("processed {page} quads; {mspp} per quad; {fail} failed quads", severity, lang)
   }
@@ -258,13 +257,13 @@ class ExtractionRecorder[T](
     * @param print - enum values for printer destinations (err, out, file - null mean all of them)
     * @param noLabel - the initial label (lang: time passed) is omitted
     */
-  def printLabeledLine(line:String, severity: RecordSeverity.Value, language: Language = null, print: Seq[PrinterDestination.Value] = null, noLabel: Boolean = false): Unit ={
+  def printLabeledLine(line:String, severity: RecordCause.Value, language: Language = null, print: Seq[PrinterDestination.Value] = null, noLabel: Boolean = false): Unit ={
     val lang = if(language != null) language else defaultLang
 
     val printOptions = if(print == null || print.isEmpty) severity match{
-      case RecordSeverity.Exception => Seq(PrinterDestination.err, PrinterDestination.out, PrinterDestination.file)
-      case RecordSeverity.Warning => Seq(PrinterDestination.file)
-      case RecordSeverity.Info => Seq(PrinterDestination.out, PrinterDestination.file)
+      case RecordCause.Exception => Seq(PrinterDestination.err, PrinterDestination.out, PrinterDestination.file)
+      case RecordCause.Warning => Seq(PrinterDestination.file)
+      case RecordCause.Info => Seq(PrinterDestination.out, PrinterDestination.file)
       case _ => Seq(PrinterDestination.sink)
     }
     else print
@@ -326,7 +325,7 @@ class ExtractionRecorder[T](
   def initialize(lang: Language, task: String = "transformation", datasets: Seq[Dataset] = Seq()): Boolean ={
     if(initialized)
       return false
-    this.issuePages = mutable.Map[Language, mutable.Map[T, (String, RecordSeverity.Value, Option[Throwable])]]()
+    this.issuePages = mutable.Map[Language, ListBuffer[RecordEntry[T]]]()
     this.successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
     this.successfulPageCount = Map[Language,AtomicLong]()
     this.successfulTripleCount = Map[Dataset, AtomicLong]()
@@ -342,13 +341,13 @@ class ExtractionRecorder[T](
       monitor.init(this)
 
     if(preamble != null)
-      printLabeledLine(preamble, RecordSeverity.Info, lang)
+      printLabeledLine(preamble, RecordCause.Info, lang)
 
     val line = "Extraction started for language: " + lang.name + " (" + lang.wikiCode + ")" + (if (datasets.nonEmpty) " on " + datasets.size + " datasets:" else "")
-    printLabeledLine(line, RecordSeverity.Info, lang)
+    printLabeledLine(line, RecordCause.Info, lang)
 
     for(dataset <- datasets.sortBy(x => x.encoded)){
-      printLabeledLine("\t" + dataset.name, RecordSeverity.Info, lang, Seq(), noLabel = true)
+      printLabeledLine("\t" + dataset.name, RecordCause.Info, lang, Seq(), noLabel = true)
     }
 
     forwardExtractionOverview(lang, line)
@@ -368,13 +367,13 @@ class ExtractionRecorder[T](
 
     val line = "Extraction finished for language: " + defaultLang.name + " (" + defaultLang.wikiCode + ") " +
       (if(datasets.nonEmpty) ", extracted " + successfulPages(defaultLang) + " pages for " + datasets.size + " datasets after " + StringUtils.prettyMillis(System.currentTimeMillis - startTime.get) + " minutes." else "")
-    printLabeledLine(line, RecordSeverity.Info, defaultLang)
+    printLabeledLine(line, RecordCause.Info, defaultLang)
     forwardSimpleLine(line)
 
     super.finalize()
   }
 
-  def resetFailedPages(lang: Language) = issuePages.get(lang) match{
+  def resetFailedPages(lang: Language): Unit = issuePages.get(lang) match{
     case Some(_) =>
       successfulPageCount(lang).set(0)
     case None =>
@@ -387,7 +386,7 @@ class ExtractionRecorder[T](
   /**
     * the following methods will post messages to a Slack webhook if the Slack-Cedentials are available in the config file
     */
-  var lastExceptionMsg = new java.util.Date().getTime
+  var lastExceptionMsg: Long = new java.util.Date().getTime
 
   /**
     * forward an exception summary to slack
@@ -562,58 +561,18 @@ class ExtractionRecorder[T](
 
     outString = "\n----- ----- ----- EXTRACTION MONITOR STATISTICS ----- ----- -----\n" + outString +
     "\n----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----"
-    printLabeledLine( outString, RecordSeverity.Info, defaultLang)
+    printLabeledLine( outString, RecordCause.Info, defaultLang)
 
     if(errString != "") {
       errString = "\n----- ----- ----- EXTRACTION MONITOR STATISTICS ----- ----- -----\n" + errString +
       "\n----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----"
-      printLabeledLine( errString, RecordSeverity.Exception, defaultLang)
+      printLabeledLine( errString, RecordCause.Exception, defaultLang)
     }
 
   }
 
-  def getSuccessfulPageCount(): Map[Language,AtomicLong] = {
+  def getSuccessfulPageCount: Map[Language,AtomicLong] = {
     successfulPageCount
   }
 
 }
-
-/**
-  * This class provides the necessary attributes to record either a successful or failed extraction
-  *
-  * @param page
-  * @param language
-  * @param errorMsg
-  * @param error
-  * @param logSuccessfulPage
-  */
-case class RecordEntry[T](
-  page: T,
-  identifier: String,
-  severity: RecordSeverity.Value,
-  language: Language,
-  errorMsg: String= null,
-  error:Throwable = null,
-  logSuccessfulPage:Boolean = false
-)
-
-object RecordSeverity extends Enumeration {
-  val Internal, Info, Warning, Exception = Value
-}
-
-class WikiPageEntry(p : WikiTitleHolder, s: RecordSeverity.Value = RecordSeverity.Info) extends RecordEntry[WikiTitleHolder](
-  page = p,
-  identifier = p.uri,
-  s,
-  language = p.title.language
-)
-
-class QuadEntry(p : Quad, s: RecordSeverity.Value = RecordSeverity.Info) extends RecordEntry[Quad](
-  page = p,
-  identifier = p.toString,
-  s,
-  language = Option(p.language) match{
-    case Some(l) => Language(l)
-    case None => Language.None
-  }
-)

@@ -9,9 +9,10 @@ import org.dbpedia.iri.IRI
  * If the source does not define a label explicitly, a TextNode containing the link destination will be the only child.
  */
 sealed abstract class LinkNode(children : List[Node], line : Int)
-extends Node(children, line)
+extends Node
 {
     def toPlainText = children.map(_.toPlainText).mkString
+
 }
 
 sealed abstract class WikiLinkNode(destination: WikiTitle, children: List[Node], line: Int, destinationNodes: List[Node]) 

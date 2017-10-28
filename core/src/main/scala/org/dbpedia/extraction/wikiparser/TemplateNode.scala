@@ -14,7 +14,7 @@ case class TemplateNode (
     override val children : List[PropertyNode],
     override val line : Int,
     titleParsed : List[Node] = List())
-  extends Node(children, line)
+  extends Node
 {
     private val titleNode = PropertyNode("$TemplateName", List(TextNode(title.decoded.trim, 0)), 0)
     private val propertyMap : Map[String, PropertyNode] = Map.empty ++

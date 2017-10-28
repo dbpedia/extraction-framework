@@ -106,10 +106,10 @@ class ConfigLoader(config: Config)
 
       private val _redirects =
       {
-        finder.file(date, "template-redirects.obj") match{
-          case Some(cache) => Redirects.load(articlesSource, cache, language)
-          case None => new Redirects(Map())
-        }
+          finder.file(date, "template-redirects.obj") match {
+            case Some(cache) => Redirects.load(articlesSource, cache, language)
+            case None => new Redirects(Map())
+          }
 
       }
 

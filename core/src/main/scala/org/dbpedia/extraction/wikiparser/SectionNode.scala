@@ -8,7 +8,7 @@ package org.dbpedia.extraction.wikiparser
  * @param children The nodes of the section name
  * @param line The source line number of this section
  */
-case class SectionNode(name : String, level : Int, override val children : List[Node], override val line : Int) extends Node(children, line)
+case class SectionNode(name : String, level : Int, override val children : List[Node], override val line : Int) extends Node
 {
     def toWikiText = ("="*level)+name+("="*level)+"\n"+children.map(_.toWikiText).mkString
     

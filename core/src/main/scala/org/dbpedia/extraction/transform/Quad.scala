@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.transform
 
+import org.dbpedia.extraction.config.Recordable
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyType}
@@ -37,7 +38,7 @@ class Quad(
   val context: String,
   val datatype: String
 )
-extends Ordered[Quad]
+extends Ordered[Quad] with Recordable[Quad]
 with Equals
 {
   //updated for allowing addition of Wikidata String properties with unknown language
@@ -175,6 +176,9 @@ with Equals
   {
     datatype == null && language == null && UriUtils.createURI(value).get.isAbsolute
   }
+
+  override val id: Long = hashCode().longValue()
+  override def recordEntries: Nothing = ???
 }
 
 object Quad

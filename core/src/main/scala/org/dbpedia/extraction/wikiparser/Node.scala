@@ -1,8 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.config.Recordable
+
 import scala.collection.mutable
 import scala.collection.mutable.HashMap
-import org.dbpedia.extraction.util.StringUtils.{escape,replacements}
+import org.dbpedia.extraction.util.StringUtils.{escape, replacements}
 import org.dbpedia.extraction.util.WikiUtil
 
 /**
@@ -10,8 +12,12 @@ import org.dbpedia.extraction.util.WikiUtil
  * 
  * This class is NOT thread-safe.
  */
-abstract class Node( val children : List[Node], val line : Int) extends Serializable
+trait Node extends Serializable
 {
+    def children : List[Node]
+
+    val line : Int
+
     /**
      * CAUTION: code outside this class should change the parent only under very rare circumstances.
      */

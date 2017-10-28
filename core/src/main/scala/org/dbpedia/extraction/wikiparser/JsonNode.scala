@@ -11,7 +11,11 @@ class JsonNode  (
                   val wikiPage : WikiPage,
                   val wikiDataDocument : JacksonTermedStatementDocument
                   )
-  extends Node(List.empty, 0) {
+  extends Node {
   def toPlainText: String = ""
   def toWikiText: String = ""
+
+  override def children = List()
+
+  override val line = 0
 }

@@ -8,7 +8,7 @@ import org.dbpedia.extraction.util.Language
  * @param text The text
  * @param line The source line number where this text begins
  */
-case class TextNode(text : String, override val line : Int, lang: Language = null) extends Node(List.empty, line)
+case class TextNode(text : String, override val line : Int, lang: Language = null) extends Node
 {
     def toWikiText: String = text
     
@@ -27,4 +27,5 @@ case class TextNode(text : String, override val line : Int, lang: Language = nul
 
     }
 
+    override def children = List()
 }

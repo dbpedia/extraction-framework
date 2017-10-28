@@ -8,7 +8,6 @@ import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.mappings.BadQuadException
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitleHolder}
 
 
 /**

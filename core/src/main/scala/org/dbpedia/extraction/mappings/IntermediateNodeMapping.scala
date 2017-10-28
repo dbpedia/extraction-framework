@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry, RecordSeverity}
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode, WikiPage}
+import org.dbpedia.extraction.wikiparser.{NodeUtil, PageNode, TemplateNode, WikiPage}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 
 import scala.collection.mutable.ArrayBuffer
@@ -49,7 +49,7 @@ extends PropertyMapping
     if(affectedTemplatePropertyNodes.size > 1)
     {
       if(valueNodes.forall(_.size <= 1))
-        context.recorder[TemplateNode].record(new RecordEntry[TemplateNode](node, node.title.encoded, RecordSeverity.Internal, context.language, "IntermediateNodeMapping for multiple properties have multiple values in: " + subjectUri))
+        context.recorder[PageNode].record(new RecordEntry[PageNode](node.root, RecordCause.Internal, context.language, "IntermediateNodeMapping for multiple properties have multiple values in: " + subjectUri))
 
       createInstance(graph, node, subjectUri)
     }

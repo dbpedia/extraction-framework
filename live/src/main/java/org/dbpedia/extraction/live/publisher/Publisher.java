@@ -3,7 +3,6 @@ package org.dbpedia.extraction.live.publisher;
 import org.dbpedia.extraction.transform.Quad;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
-import org.dbpedia.extraction.live.publisher.RDFDiffWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

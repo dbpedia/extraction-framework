@@ -1,9 +1,11 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.config._
 import org.dbpedia.extraction.dataparser.RedirectFinder
-import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Disambiguation
 
+import scala.collection.mutable.ListBuffer
 import scala.xml.Elem
 
 /**
@@ -15,26 +17,56 @@ import scala.xml.Elem
  * @param timestamp The timestamp of the revision, in milliseconds since 1970-01-01 00:00:00 UTC
  * @param contributorID The ID of the latest contributor
  * @param contributorName The name of the latest contributor
- * @param children The contents of this page
+ * @param childNodes The contents of this page
  */
 class PageNode (
-  val title: WikiTitle, 
-  val id: Long, 
+  val title: WikiTitle,
+  val id: Long,
   val revision: Long,
   val timestamp: Long,
   val contributorID: Long,
   val contributorName: String,
   val source: String,
-  children: List[Node] = List.empty
+  private var childNodes: List[Node] = List()
 ) 
-extends Node(children, 0) with WikiTitleHolder
+extends Node with Recordable[PageNode]
 {
+  override def children: List[Node] = childNodes
+
+  override val line = 0
+
+  private var extractionRecords: ListBuffer[RecordEntry[PageNode]] = null
+  override def recordEntries: List[RecordEntry[PageNode]] = {
+    if(extractionRecords == null || extractionRecords.isEmpty)
+      List(new WikiPageEntry(this, RecordCause.Internal))
+    else
+      extractionRecords.toList
+  }
+
+  private[extraction] def addExtractionRecord(recordEntry: RecordEntry[_]): Unit ={
+    assert(recordEntry != null)
+    if(extractionRecords == null)
+      extractionRecords = new ListBuffer[RecordEntry[PageNode]]()
+    recordEntry match{
+      case re: RecordEntry[PageNode] => extractionRecords.append(re)
+      case de: RecordEntry[DefaultEntry] => extractionRecords.append(new RecordEntry[PageNode](this, de.cause, Option(de.language).getOrElse(Language.None), de.msg, de.error))
+      case _ =>
+    }
+  }
+
+  private[extraction] def recordError(msg: String): Unit =
+    addExtractionRecord(new RecordEntry[PageNode](this, RecordCause.Warning, this.title.language, msg))
+  private[extraction] def recordException(ex: Throwable, msg: String = null): Unit =
+    addExtractionRecord(new RecordEntry[PageNode](this, RecordCause.Exception, this.title.language, if(msg != null) msg else ex.getMessage, ex))
+  private[extraction] def recordMessage(msg: String): Unit =
+    addExtractionRecord(new RecordEntry[PageNode](this, RecordCause.Info, this.title.language, msg))
+  private[extraction] def recordProvenance = ???
+
   def toWikiText: String = children.map(_.toWikiText).mkString
 
   def toPlainText: String = children.map(_.toPlainText).mkString
 
   def toDumpXML: Elem = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText, "text/x-wiki")
-
 
   lazy val isRedirect: Boolean = this.redirect != null
 
@@ -69,4 +101,5 @@ extends Node(children, 0) with WikiTitleHolder
     case TemplateNode(title, _, _, _) => names.contains(title.decoded)
     case _ => node.children.exists(node => findTemplate(node, names))
   }
+
 }

@@ -1,8 +1,7 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordSeverity}
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.dataparser.{DataParserConfig, DateTimeParserConfig}
 import org.dbpedia.extraction.util.{Date, Language}
@@ -113,8 +112,8 @@ class DateTimeParser ( context : {
       }
       catch
       {
-          case ex : IllegalArgumentException  => recorder.enterProblemRecord(node.root, "Error while parsing date", RecordSeverity.Internal, Some(ex), Language.getOrElse(language, Language.None))
-          case ex : NumberFormatException => recorder.enterProblemRecord(node.root, "Error while parsing date", RecordSeverity.Internal, Some(ex), Language.getOrElse(language, Language.None))
+          case ex : IllegalArgumentException  => recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Exception, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
+          case ex : NumberFormatException => recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Exception, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
       }
 
       None
@@ -165,7 +164,7 @@ class DateTimeParser ( context : {
             }
         }
 
-      recorder.enterProblemRecord(node.root, "Template unknown: " + node.title, RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+      recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Template unknown: " + node.title))
       None
     }
 
@@ -231,10 +230,10 @@ class DateTimeParser ( context : {
         datatype match
         {
             case `dtDay` =>
-              recorder.enterProblemRecord(node.root, "Method for day Extraction not yet implemented.", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+              recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Method for day Extraction not yet implemented."))
               None
             case `dtMonth` =>
-              recorder.enterProblemRecord(node.root, "Method for month Extraction not yet implemented.", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+              recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Method for day Extraction not yet implemented."))
               None
             case `dtYear` =>
                 for(date <- catchMonthYear(input, node))
@@ -276,7 +275,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((century+year).toInt), Some.apply(monthNumber.toInt), Some.apply(day.toInt), datatype))
                 case None =>
-                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+                  recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -286,7 +285,7 @@ class DateTimeParser ( context : {
             months.get(month.toLowerCase) match
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((eraIdentifier+year).toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
-                case None => recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+                case None => recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -296,7 +295,7 @@ class DateTimeParser ( context : {
             months.get(month.toLowerCase) match
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((eraIdentifier+year).toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
-                case None => recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+                case None => recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -315,7 +314,7 @@ class DateTimeParser ( context : {
             catch
             {
                 case ex: NoSuchElementException =>
-                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+                  recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -335,7 +334,7 @@ class DateTimeParser ( context : {
             {
               case Some(monthNumber) => return Some.apply(new Date(Some.apply(year.toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
               case None =>
-                recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+                recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -358,7 +357,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(month = Some.apply(monthNumber), day = Some.apply(day.toInt), datatype = dtMonthDay))
                 case None =>
-                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+                  recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
         for(result <- DayMonthRegex2.findFirstMatchIn(input))
@@ -369,7 +368,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(month = Some.apply(monthNumber), day = Some.apply(day.toInt), datatype = dtMonthDay))
                 case None =>
-                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+                  recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
         None
@@ -387,7 +386,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(year = Some.apply((eraIdentifier+year).toInt), month = Some.apply(monthNumber), datatype = dtYearMonth))
                 case None =>
-                  recorder.enterProblemRecord(node.root, "Month with name '"+month+"' (language: "+language+") is unknown", RecordSeverity.Internal, None, Language.getOrElse(language, Language.None))
+                  recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
         if(tryMinorTypes)

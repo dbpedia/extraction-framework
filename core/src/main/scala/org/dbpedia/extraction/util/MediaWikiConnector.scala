@@ -48,10 +48,8 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
     * @param pageTitle The encoded title of the page
     * @return The page as an Option
     */
-  def retrievePage(pageTitle : WikiTitle, apiParameterString: String, isRetry: Boolean = false) : Option[String] =
+  def retrievePage(pageTitle : WikiTitle, apiParameterString: String) : Option[String] =
   {
-    val retryFactor = if(isRetry) 2 else 1
-
     // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
     // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
     // TODO: test this in detail!!! there may be other characters that need to be escaped.
@@ -73,8 +71,8 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
       {
         val conn = apiUrl.openConnection
         conn.setDoOutput(true)
-        conn.setConnectTimeout(retryFactor * connectMs)
-        conn.setReadTimeout(retryFactor * readMs)
+        conn.setConnectTimeout(connectMs)
+        conn.setReadTimeout(readMs)
 
         val writer = new OutputStreamWriter(conn.getOutputStream)
         writer.write(parameters)

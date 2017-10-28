@@ -131,7 +131,7 @@ class ExtractionMonitor {
     summary.put("EXCEPTIONCOUNT", error.asInstanceOf[Object])
 
     val s : AtomicLong = new AtomicLong(0)
-    val map = er.getSuccessfulPageCount()
+    val map = er.getSuccessfulPageCount
     map.keySet.foreach(key => s.set(s.get() + map(key).get()))
     summary.put("SUCCESSFUL", s)
     summary.put("CRASHED", crashed.asInstanceOf[Object])

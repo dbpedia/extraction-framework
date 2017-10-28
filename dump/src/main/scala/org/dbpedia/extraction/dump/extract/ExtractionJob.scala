@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry, RecordSeverity}
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry, RecordCause}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.WikiPageExtractor
@@ -24,7 +24,7 @@ class ExtractionJob(
    val destination: Destination,
    val language: Language,
    val retryFailedPages: Boolean,
-   val extractionRecorder: ExtractionRecorder[WikiPage])
+   val extractionRecorder: ExtractionRecorder[PageNode])
 {
 /*  val myAnnotatedClass: ClassSymbol = runtimeMirror(Thread.currentThread().getContextClassLoader).classSymbol(ExtractorAnnotation.getClass)
   val annotation: Option[Annotation] = myAnnotatedClass.annotations.find(_.tree.tpe =:= typeOf[ExtractorAnnotation])
@@ -43,17 +43,17 @@ class ExtractionJob(
         destination.write(graph)
       }
       //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
-      val records = page.getExtractionRecords match{
-        case seq :Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
-        case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
+      val records = page.recordEntries match{
+        case seq :Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
+        case _ =>  Seq[RecordEntry[PageNode]]()
       }
       //forward all records to the recorder
       extractionRecorder.record(records:_*)
     } catch {
       case ex: Exception =>
-        ex.printStackTrace()
-        page.addExtractionRecord(null, ex)
-        extractionRecorder.record(page.getExtractionRecords:_*)
+        //ex.printStackTrace()
+        page.recordException(ex)
+        extractionRecorder.record(page)
         if(extractionRecorder.monitor != null)
           extractionRecorder.monitor.reportError(extractionRecorder, ex)
     }
@@ -70,24 +70,23 @@ class ExtractionJob(
       for (page <- source)
         workers.process(page)
 
-      extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordSeverity.Info, language)
+      extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordCause.Info, language)
 
       if(retryFailedPages){
         val fails = extractionRecorder.listFailedPages(language) match{
-          case Some(m) => m.keys
+          case Some(m) => m
           case None => Iterable.empty
         }
 
-        extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", RecordSeverity.Warning, language)
+        extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", RecordCause.Warning, language)
         extractionRecorder.resetFailedPages(language)
         for(page <- fails) {
-          page.toggleRetry()
           page match{
             case p: WikiPage => workers.process(p)
             case _ =>
           }
         }
-        extractionRecorder.printLabeledLine("all failed pages were re-executed.", RecordSeverity.Info, language)
+        extractionRecorder.printLabeledLine("all failed pages were re-executed.", RecordCause.Info, language)
       }
     }
     catch {

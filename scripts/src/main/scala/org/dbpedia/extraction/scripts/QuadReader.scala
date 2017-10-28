@@ -2,7 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import java.io.File
 
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry, RecordSeverity}
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry, RecordCause}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util._
@@ -28,13 +28,10 @@ class QuadReader(log: FileLike[File] = null, preamble: String = null) {
   def getRecorder = recorder
 
   def addQuadRecord(quad: Quad, lang: Language, errorMsg: String = null, error: Throwable = null): Unit ={
-    if(quad == null)
-      recorder.record(new RecordEntry[Quad](null, "", RecordSeverity.Warning, lang, errorMsg, error))
-    else if(errorMsg == null && error == null)
-      recorder.record(new RecordEntry[Quad](quad, quad.toString(), RecordSeverity.Info, lang, errorMsg, error))
+    if(errorMsg == null && error == null)
+      recorder.record(new RecordEntry[Quad](quad, RecordCause.Info, lang, errorMsg, error))
     else if(error != null)
-      recorder.record(new RecordEntry[Quad](quad, quad.toString(), RecordSeverity.Exception, lang, errorMsg, error))
-
+      recorder.record(new RecordEntry[Quad](quad, RecordCause.Exception, lang, errorMsg, error))
   }
 
   /**
