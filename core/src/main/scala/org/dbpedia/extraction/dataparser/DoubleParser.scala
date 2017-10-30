@@ -1,16 +1,21 @@
 package org.dbpedia.extraction.dataparser
 
-import java.util.logging.{Logger,Level}
+import java.util.logging.{Level, Logger}
+
 import org.dbpedia.extraction.wikiparser.Node
 import java.text.ParseException
+
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+
 import scala.language.reflectiveCalls
 
 /**
  * Parses double-precision floating-point numbers.
  */
 //TODO a lot of copied code from IntegerParser!
+@SoftwareAgentAnnotation(classOf[DoubleParser], AnnotationType.Parser)
 class DoubleParser( context : { def language : Language },
                     strict : Boolean = false,
                     multiplicationFactor : Double = 1.0) extends DataParser

@@ -2,21 +2,24 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.ExtractionRecorder
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord, ProvenanceRecord}
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.ontology._
-import org.dbpedia.extraction.wikiparser.TemplateNode
+import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, OntologyClass, OntologyDatatypeProperty, OntologyProperty}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 import scala.reflect.ClassTag
 
+@SoftwareAgentAnnotation(classOf[SimplePropertyMapping], AnnotationType.Extractor)
 class SimplePropertyMapping (
+  val templateName: String,
   val templateProperty : String, // IntermediateNodeMapping and CreateMappingStats requires this to be public
   val ontologyProperty : OntologyProperty,
   val select : String,  // rml mappings require this to be public (e.g. ModelMapper)
@@ -35,7 +38,7 @@ class SimplePropertyMapping (
 )
 extends PropertyMapping
 {
-    val selector: List[_] => List[_] =
+    val selector: List[ParseResult[_]] => List[ParseResult[_]] =
         select match {
             case "first" => _.take(1)
             case "last" => _.reverse.take(1)
@@ -178,17 +181,21 @@ extends PropertyMapping
     {
         val graph = new ArrayBuffer[Quad]
 
+        val templatesIncluded = Node.collectTemplates(node, Set.empty).map(x => x.title.decoded)
+
+        TemplateNode.transformAll(node) //TODO transforming nodes on the fly - not yet implemented
+
         for(propertyNode <- node.property(templateProperty) if propertyNode.children.nonEmpty)
         {
             val parseResults = try {
               parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
             } catch {
-              case e: Throwable =>
-                Logger
+              case e: Throwable => throw e
+/*                Logger
                   .getLogger(this.getClass.getName)
                   .warning("Failed to parse '" + propertyNode.key + "' from template '" + node.title.decoded
                     + "' in page '" + node.root.title.decoded + " reason: " + e.toString)
-                List()
+                List()*/
             }
 
             //get the property wikitext and plainText size
@@ -227,11 +234,35 @@ extends PropertyMapping
                     "&plainTextSize=" + propertyNodeTextLength +
                     "&valueSize=" + resultLength +
                     (if (isHashIri) "&objectHasFragment=" else "")
-                val g = parseResult match
-                {
-                    case ParseResult(_: Double, _, u) if u.nonEmpty => writeUnitValue(node, parseResult.asInstanceOf[ParseResult[Double]], subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
-                    case pr: ParseResult[_] => writeValue(pr, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
+                val g = parseResult match {
+                    case ParseResult(_: Double, _, u, _) if u.nonEmpty =>
+                      writeUnitValue(node, parseResult.asInstanceOf[ParseResult[Double]], subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
+                    case pr: ParseResult[_] =>
+                      writeValue(pr, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
                 }
+
+              val annotation = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
+
+              g.foreach(q => q.setProvenanceRecord(
+                new ProvenanceRecord(
+                  q.longHashCode(),
+                  q.provenanceIri.toString,
+                  q.getTripleRecord,
+                  node.getNodeRecord,
+                  if(q.dataset != null) Seq(RdfNamespace.fullUri(DBpediaNamespace.DATASET, q.dataset)) else Seq(),
+                  Seq.empty,
+                  Some(ExtractorRecord(
+                    annotation.toString,
+                    parseResult.provenance.getOrElse(throw new IllegalArgumentException("No ParserRecord found.")),
+                    Some(parseResults.size),
+                    Some(templateName),
+                    Some(templateProperty),
+                    Some("Mapping " + language.wikiCode + ":" + templateName),
+                    Node.collectTemplates(propertyNode, Set.empty).map(x => x.title.decoded)
+                  )),
+                  None
+                )
+              ))
 
                 graph ++= g
             }
@@ -244,8 +275,9 @@ extends PropertyMapping
     {
         //Write generic property
         val stdValue = pr.unit match{
-          case Some(u) if u.isInstanceOf[InconvertibleUnitDatatype] =>
+          case Some(u) if u.isInstanceOf[InconvertibleUnitDatatype] => {
             return Seq(new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, unit))
+          }
           case Some(u) if u.isInstanceOf[UnitDatatype] =>
             u.asInstanceOf[UnitDatatype].toStandardUnit(pr.value)
           case None => pr.value  //should not happen
@@ -263,8 +295,7 @@ extends PropertyMapping
             {
                  val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
                  val propertyUri = DBpediaNamespace.ONTOLOGY.append(currentClass.name+'/'+ontologyProperty.name)
-                 val quad = new Quad(language, DBpediaDatasets.SpecificProperties, subjectUri,
-                                     propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
+                 val quad = new Quad(language, DBpediaDatasets.SpecificProperties, subjectUri, propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
                  graph += quad
             }
         }
@@ -282,4 +313,10 @@ extends PropertyMapping
 
         Seq(new Quad(pr.lang.getOrElse(language), mapDataset, subjectUri, ontologyProperty, pr.value.toString, sourceUri, datatype))
     }
+
+  /**
+    * provides a summary about this extractor used for provenance
+    *
+    * @return
+    */
 }

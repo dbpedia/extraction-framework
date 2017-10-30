@@ -1,13 +1,16 @@
 package org.dbpedia.extraction.dataparser
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.wikiparser._
+
 import scala.util.matching.Regex.Match
 
 /**
  * Parses a human-readable character string from a node. 
  */
-object StringParser extends DataParser
+@SoftwareAgentAnnotation(classOf[StringParser], AnnotationType.Parser)
+class StringParser extends DataParser
 {
     private val smallTagRegex = """<small[^>]*>\(?(.*?)\)?<\/small>""".r
     private val tagRegex = """\<.*?\>""".r
@@ -63,4 +66,10 @@ object StringParser extends DataParser
             case _ => node.children.foreach(child => nodeToString(child, sb))
         }
     }
+}
+
+
+object StringParser extends DataParser{
+    private val parser = new StringParser()
+    def parse(node : Node) : Option[ParseResult[String]] = parser.parse(node)
 }

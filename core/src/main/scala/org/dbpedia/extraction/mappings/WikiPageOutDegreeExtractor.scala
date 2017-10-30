@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -14,6 +15,7 @@ import scala.language.reflectiveCalls
  * or for ranking DBpedia instances using Page Rank or similar algorithms. In Degree cannot be
  * calculated at extraction time but with a post processing step from the PageLinks dataset
  */
+@SoftwareAgentAnnotation(classOf[WikiPageOutDegreeExtractor], AnnotationType.Extractor)
 class WikiPageOutDegreeExtractor (
   context : {
     def ontology : Ontology

@@ -1,13 +1,17 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
+
+@SoftwareAgentAnnotation(classOf[TableMapping], AnnotationType.Extractor)
 class TableMapping( 
   mapToClass : OntologyClass,
   correspondingClass : OntologyClass,

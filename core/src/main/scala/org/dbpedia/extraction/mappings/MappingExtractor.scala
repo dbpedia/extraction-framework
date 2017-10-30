@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.ExtractorUtils
@@ -10,6 +11,7 @@ import scala.language.reflectiveCalls
 /**
  *  Extracts structured data based on hand-generated mappings of Wikipedia infoboxes to the DBpedia ontology.
  */
+@SoftwareAgentAnnotation(classOf[MappingExtractor], AnnotationType.Extractor)
 class MappingExtractor(
   context : {
     def mappings : Mappings

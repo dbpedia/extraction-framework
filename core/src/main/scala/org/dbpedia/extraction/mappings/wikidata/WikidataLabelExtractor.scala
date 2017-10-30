@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.mappings
 
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
-import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
+import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ArrayBuffer
@@ -17,6 +18,7 @@ import scala.language.reflectiveCalls
  * http://data.dbpedia.org/Q64 rdfs:label "new York"@fr
  * http://data.dbpedia.org/Q64 rdfs:label "new York City"@en
  */
+@SoftwareAgentAnnotation(classOf[WikidataLabelExtractor], AnnotationType.Extractor)
 class WikidataLabelExtractor(
                               context: {
                                 def ontology: Ontology

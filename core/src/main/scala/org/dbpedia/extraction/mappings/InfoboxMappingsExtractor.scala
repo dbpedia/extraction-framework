@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.dataparser.InfoboxMappingsExtractorConfig._
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.{ExtractorUtils, Language, InfoboxMappingsUtils}
+import org.dbpedia.extraction.util.{ExtractorUtils, InfoboxMappingsUtils, Language}
 import org.dbpedia.extraction.wikiparser.Node
 import org.dbpedia.extraction.wikiparser._
-
 
 import scala.collection.mutable.ListBuffer
 import scala.language.reflectiveCalls
@@ -16,6 +16,7 @@ import scala.util.matching.Regex
 /**
   * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)
   */
+@SoftwareAgentAnnotation(classOf[InfoboxMappingsExtractor], AnnotationType.Extractor)
 class InfoboxMappingsExtractor(context: {
   def ontology: Ontology
   def language : Language

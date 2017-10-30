@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.dataparser
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
 import org.dbpedia.extraction.wikiparser._
@@ -18,6 +19,7 @@ import scala.reflect.ClassTag
   * @param strict - TODO not sure
   * @param tryMinorTypes - if true, after unsuccessfully trying to parse a string into xsd:date (time) we will try to parse it into monthYear and finally year.
   */
+@SoftwareAgentAnnotation(classOf[DateTimeParser], AnnotationType.Parser)
 class DateTimeParser ( context : {
       def language : Language
       def ontology : Ontology

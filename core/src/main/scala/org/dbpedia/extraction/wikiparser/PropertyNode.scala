@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.config.provenance.{NodeRecord, ProvenanceRecord}
 import org.dbpedia.extraction.util.{Language, StringUtils}
 
 /**
@@ -23,6 +24,8 @@ case class PropertyNode(key : String, override val children : List[Node], overri
     
     // properties are skipped for plain text
     def toPlainText = ""
+
+  override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
 
     def propertyNodeValueToPlainText: String = children.map(_.toPlainText).mkString
 

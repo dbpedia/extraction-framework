@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
@@ -15,6 +16,7 @@ import scala.reflect.ClassTag
  *  Combines the raw infobox and mappings extractor and tries to split the triples of the raw infobox extractor
   *  in triples that were mapped from the mappings extractors and triples that were not mapped
  */
+@SoftwareAgentAnnotation(classOf[HybridRawAndMappingExtractor], AnnotationType.Extractor)
 class HybridRawAndMappingExtractor(
   context : {
     def ontology : Ontology

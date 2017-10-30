@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URI
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{OntologyObjectProperty, OntologyProperty}
@@ -24,6 +25,7 @@ import scala.util.{Failure, Success}
  *   ...
  * }}
  */
+@SoftwareAgentAnnotation(classOf[ConstantMapping], AnnotationType.Extractor)
 class ConstantMapping (
   val ontologyProperty: OntologyProperty,
   var value : String,

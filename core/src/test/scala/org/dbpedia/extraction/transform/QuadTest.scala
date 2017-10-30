@@ -1,6 +1,5 @@
-package org.dbpedia.extraction.destinations
+package org.dbpedia.extraction.transform
 
-import org.dbpedia.extraction.transform.Quad
 import org.junit.Assert._
 
 /**

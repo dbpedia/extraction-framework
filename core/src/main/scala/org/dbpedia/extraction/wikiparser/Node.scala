@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.config.Recordable
+import org.dbpedia.extraction.config.provenance.NodeRecord
 
 import scala.collection.mutable
-import scala.collection.mutable.HashMap
 import org.dbpedia.extraction.util.StringUtils.{escape, replacements}
 import org.dbpedia.extraction.util.WikiUtil
+
+import scala.collection.mutable.ListBuffer
 
 /**
  * Base class of all nodes in the abstract syntax tree.
@@ -21,21 +22,21 @@ trait Node extends Serializable
     /**
      * CAUTION: code outside this class should change the parent only under very rare circumstances.
      */
-    var parent: Node = null
+    var parent: Node = _
     
     //Set the parent of all children
     for(child <- children) child.parent = this
 
-    private val annotations = new HashMap[AnnotationKey[_], Any]()
+    private val annotations = new mutable.HashMap[AnnotationKey[_], Any]()
 
   /**
     * TODO the UriGenerator class needs to be replaced (see bottom)
     */
     private val uriGenerator = new UriGenerator()
 
-    def generateUri(baseUri : String, node : Node) = uriGenerator.generate(baseUri, node)
+    def generateUri(baseUri : String, node : Node): String = uriGenerator.generate(baseUri, node)
 
-    def generateUri(baseUri : String, name : String) = uriGenerator.generate(baseUri, name)
+    def generateUri(baseUri : String, name : String): String = uriGenerator.generate(baseUri, name)
 
     /**
      * Convert back to original (or equivalent) wiki markup string.
@@ -55,14 +56,14 @@ trait Node extends Serializable
      */
     lazy val root : PageNode =
     {
-        var node = this
-        
-        while(node.parent != null)
-        {
-            node = node.parent
-        }
-        
-        node.asInstanceOf[PageNode]
+      var node = this
+
+      while(node.parent != null)
+      {
+          node = node.parent
+      }
+
+      node.asInstanceOf[PageNode]
     }
    
     /**
@@ -74,22 +75,20 @@ trait Node extends Serializable
     
     private def findSection : SectionNode = {
       
-        var section : SectionNode = null
-        
-        for(node <- root.children)
-        {
-            if(node.line > line)
-            {
-                return section
-            }
+      var section : SectionNode = null
 
-            if(node.isInstanceOf[SectionNode])
-            {
-                section = node.asInstanceOf[SectionNode]
-            }
+      for(node <- root.children)
+      {
+        if(node.line > line)
+            return section
+
+        node match {
+          case n: SectionNode => section = n
+          case _ =>
         }
-        
-        section
+      }
+
+      section
     }
 
     /**
@@ -103,7 +102,7 @@ trait Node extends Serializable
     final def retrieveText: Option[String] = retrieveText(true)
 
     protected def retrieveText(recurse: Boolean): Option[String] = {
-      if (recurse && children.length == 1) children(0).retrieveText(false) else None
+      if (recurse && children.length == 1) children.head.retrieveText(false) else None
     }
 
     /**
@@ -126,31 +125,57 @@ trait Node extends Serializable
     def setAnnotation[T](key: AnnotationKey[T], value: T): Unit = {
       annotations(key) = value
     }
+
+
+  /**
+    * sub classes that add new fields should override this method
+    */
+  override def hashCode(): Int = {
+    val prime = 41
+    var hash = root.revision.hashCode()
+    hash = prime*hash + line.hashCode()
+    hash = prime*hash + toWikiText.hashCode
+    hash
+  }
     
     /**
      * IRI of source page and line number.
      */
     def sourceIri : String =
     {
-        val sb = new java.lang.StringBuilder
-        
-        sb append root.title.pageIri
-        if (root.revision >= 0) sb append "?oldid=" append root.revision
+      val sb = new java.lang.StringBuilder
 
-        if (section != null)
-        {
-            sb append '#' append "section="
-            escape(sb, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes)
-            sb append "&relative-line=" append (line - section.line)
-            sb append "&absolute-line=" append line
-        }
-        else if (line >= 1)
-        {
-            sb append '#' append "absolute-line=" append line
-        }
-        
-        sb.toString
+      sb append root.title.pageIri
+      if (root.revision >= 0) {
+        sb append "?oldid=" append root.revision
+        sb append "&ns=" append root.title.namespace.code
+      }
+
+      if (section != null)
+      {
+        sb append '#' append "section="
+        escape(sb, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes)
+        sb append "&relative-line=" append (line - section.line)
+        sb append "&absolute-line=" append line
+      }
+      else if (line >= 1)
+      {
+        sb append '#' append "absolute-line=" append line
+      }
+
+      sb.toString
     }
+
+  def replaceChild(child: Node, replacements: List[Node]): Unit ={
+    val span = this.children.span(c => c != child)
+    //this.setChildren(span._1 ::: replacements ::: span._2.tail)
+  }
+
+  //private[wikiparser] def setChildren(childs: List[Node])
+
+  def hasTemplate(names : Set[String] = Set.empty) : Boolean = Node.collectTemplates(this, names).nonEmpty
+
+  def getNodeRecord: NodeRecord
 
 }
 
@@ -158,95 +183,103 @@ object Node {
   // For this list of characters, see ifragment in RFC 3987 and 
   // https://sourceforge.net/mailarchive/message.php?msg_id=28982391
   // Only difference to ipchar: don't escape '?'. We don't escape '/' anyway.
-  val fragmentEscapes = {
+  val fragmentEscapes: Array[String] = {
     val chars = ('\u0000' to '\u001F').mkString + "\"#%<>[\\]^`{|}" + ('\u007F' to '\u009F').mkString
     val replace = replacements('%', chars)
     // don't escape space, replace it by underscore
     replace(' ') = "_"
     replace
   }
+
+  def collectTemplates(node : Node, names : Set[String]) : List[TemplateNode] = {
+    val ts = new ListBuffer[TemplateNode]()
+    node match {
+      case tn: TemplateNode if names.isEmpty => ts.append(tn)
+      case tn: TemplateNode if names.contains(tn.title.decoded) => ts.append(tn)
+      case _ => node.children.foreach(node => ts.appendAll(collectTemplates(node, names)))
+    }
+    ts.toList
+  }
 }
 
 
 private class UriGenerator
 {
-    var uris = Map[String, Int]()
+    var uris: Map[String, Int] = Map[String, Int]()
 
     def generate(baseUri : String, node : Node) : String =
     {
         node match
         {
             case _ : Node =>
-            {
-                val sb = new StringBuilder()
-                nodeToString(node, sb)
-                generate(baseUri, sb.toString())
-            }
+            val sb = new StringBuilder()
+              nodeToString(node, sb)
+              generate(baseUri, sb.toString())
             case null => generate(baseUri, "") //TODO forbid node==null ?
         }
     }
 
     def generate(baseUri : String, name : String) : String =
     {
-        var uri : String = baseUri
+      var uri : String = baseUri
 
-        if(name != "")
+      if(name != "")
+      {
+        var text = name
+
+        //Normalize text
+        text = WikiUtil.removeWikiEmphasis(text)
+        text = text.replace("&nbsp;", " ")//TODO decode all html entities here
+        text = text.replace('(', ' ')
+        text = text.replace(')', ' ')
+        text = text.replace('\n', ' ')
+        text = text.replace('\r', ' ')
+        text = text.replace('\t', ' ')
+        text = text.replace('\u0091', ' ')
+        text = text.replace('\u0092', ' ')
+        text = text.replaceAll("\\<.*?\\>", "") //strip tags
+        text = WikiUtil.cleanSpace(text)
+        if(text.length > 50) text = text.substring(0, 50)
+        text = WikiUtil.wikiEncode(text)
+
+        //Test if the base URI ends with a prefix of text
+        var i = Math.max(baseUri.lastIndexOf('_'), baseUri.lastIndexOf('/')) + 1
+        var done = false
+        while(!done && i > 0 && baseUri.length - i < text.length)
         {
-            var text = name
+          if(baseUri.regionMatches(true, i, text, 0, baseUri.length - i))
+          {
+              text = text.substring(baseUri.length - i)
+              done = true
+          }
 
-            //Normalize text
-            text = WikiUtil.removeWikiEmphasis(text)
-            text = text.replace("&nbsp;", " ")//TODO decode all html entities here
-            text = text.replace('(', ' ')
-            text = text.replace(')', ' ')
-            text = text.replace('\n', ' ')
-            text = text.replace('\r', ' ')
-            text = text.replace('\t', ' ')
-            text = text.replace('\u0091', ' ')
-            text = text.replace('\u0092', ' ')
-            text = text.replaceAll("\\<.*?\\>", "") //strip tags
-            text = WikiUtil.cleanSpace(text)
-            if(text.length > 50) text = text.substring(0, 50)
-            text = WikiUtil.wikiEncode(text)
-
-            //Test if the base URI ends with a prefix of text
-            var i = Math.max(baseUri.lastIndexOf('_'), baseUri.lastIndexOf('/')) + 1
-            var done = false
-            while(!done && i > 0 && baseUri.length - i < text.length)
-            {
-                if(baseUri.regionMatches(true, i, text, 0, baseUri.length - i))
-                {
-                    text = text.substring(baseUri.length - i)
-                    done = true
-                }
-
-                i -= 1
-            }
-
-            //Remove leading underscore
-            if(!text.isEmpty && text(0) == '_')
-            {
-                text = text.substring(1)
-            }
-
-            //Generate URI
-            uri = baseUri + "__" + text
+          i -= 1
         }
 
-        val index = uris.getOrElse(uri, 0) + 1
-        uris = uris.updated(uri, index)
-        uri + "__" + index.toString
+        //Remove leading underscore
+        if(!text.isEmpty && text(0) == '_')
+        {
+          text = text.substring(1)
+        }
+
+        //Generate URI
+        uri = baseUri + "__" + text
+      }
+
+      val index = uris.getOrElse(uri, 0) + 1
+      uris = uris.updated(uri, index)
+      uri + "__" + index.toString
     }
 
     private def nodeToString(node : Node, sb : mutable.StringBuilder)
     {
-        node match
-        {
-            case TextNode(text, _, _) => sb.append(text)
-            case null => //ignore
-            case _ : TemplateNode => //ignore
-            case _ : TableNode => //ignore
-            case _ => node.children.foreach(child => nodeToString(child, sb))
-        }
+      node match
+      {
+        case TextNode(text, _, _) => sb.append(text)
+        case null => //ignore
+        case _ : TemplateNode => //ignore
+        case _ : TableNode => //ignore
+        case _ => node.children.foreach(child => nodeToString(child, sb))
+      }
     }
 }

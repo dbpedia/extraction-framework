@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
@@ -17,6 +18,7 @@ import scala.reflect.ClassTag
 /**
  * TODO: change the syntax on the mappings wiki to allow an arbitrary number of template properties.
  */
+@SoftwareAgentAnnotation(classOf[CombineDateMapping], AnnotationType.Extractor)
 class CombineDateMapping (
   ontologyProperty : OntologyProperty,
   val templateProperties: Map[String, Datatype], // CreateMappingStats requires these to be public

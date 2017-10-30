@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 
@@ -24,6 +25,7 @@ import scala.collection.mutable.ArrayBuffer
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
  * date 28.05.2016.
  */
+@SoftwareAgentAnnotation(classOf[CommonsResourceExtractor], AnnotationType.Extractor)
 class CommonsResourceExtractor (
   context : {
     def ontology : Ontology

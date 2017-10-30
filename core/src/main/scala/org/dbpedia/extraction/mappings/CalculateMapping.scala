@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, _}
@@ -11,6 +12,7 @@ import org.dbpedia.extraction.wikiparser.TemplateNode
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
+@SoftwareAgentAnnotation(classOf[CalculateMapping], AnnotationType.Extractor)
 class CalculateMapping (
   val templateProperty1 : String,
   val templateProperty2 : String,
@@ -67,7 +69,7 @@ extends PropertyMapping
       val quad = (parseResult1, parseResult2) match
       {
           //UnitValueParser
-        case (ParseResult(val1: Double, _, u1),ParseResult(val2: Double, _, u2))  if u1.nonEmpty && u2.nonEmpty =>
+        case (ParseResult(val1: Double, _, u1, _),ParseResult(val2: Double, _, u2, _))  if u1.nonEmpty && u2.nonEmpty =>
             val value1 = u1.get match{
               case u : UnitDatatype => u.toStandardUnit(val1)
               case d : Datatype => val1
@@ -82,14 +84,14 @@ extends PropertyMapping
             }
             return writeUnitValue(value, u1.get, subjectUri, node.sourceIri)
           //DoubleParser
-        case (ParseResult(val1: Double, _, _),ParseResult(val2: Double, _, _)) =>
+        case (ParseResult(val1: Double, _, _, _),ParseResult(val2: Double, _, _, _)) =>
           val value = operation match
           {
               case "add" => (val1 + val2).toString
           }
           staticType(subjectUri, value, node.sourceIri)
           //IntegerParser
-        case (ParseResult(val1: Int, _, _),ParseResult(val2: Int, _, _)) =>
+        case (ParseResult(val1: Int, _, _, _),ParseResult(val2: Int, _, _, _)) =>
           val value = operation match
           {
               case "add" => (val1 + val2).toString

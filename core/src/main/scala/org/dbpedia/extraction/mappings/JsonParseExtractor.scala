@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.WikiPage
@@ -18,6 +19,7 @@ import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
  * @param extractors a Sequence of CompositeJsonNodeExtractor
  *
  * */
+@SoftwareAgentAnnotation(classOf[JsonParseExtractor], AnnotationType.Extractor)
  class JsonParseExtractor(extractors: CompositeJsonNodeExtractor)extends WikiPageExtractor{
 
   override val datasets: Set[Dataset] = extractors.datasets

@@ -492,7 +492,9 @@ object SimpleWikiParser
             //Reached template end?
             if(source.lastTag("}}"))
             {
-                return TemplateNode.transform(new TemplateNode(templateRedirects.resolve(title), properties.reverse, startLine))
+                //return TemplateNode.transform(new TemplateNode(templateRedirects.resolve(title), properties.reverse, startLine))
+                // templates are now transformed when needed, not while parsing
+                return List(new TemplateNode(templateRedirects.resolve(title), properties.reverse, startLine))
             }
         }
         

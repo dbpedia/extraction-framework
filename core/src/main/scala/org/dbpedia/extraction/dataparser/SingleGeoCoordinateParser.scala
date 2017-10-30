@@ -1,16 +1,21 @@
 package org.dbpedia.extraction.dataparser
 
 import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+
 import util.control.ControlThrowable
-import org.dbpedia.extraction.wikiparser.{TemplateNode, Node}
+import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
 import org.dbpedia.extraction.mappings.Redirects
+
 import scala.language.reflectiveCalls
 
 /**
  * Parses a single geographical coordinate, ie. either a latitude or a longitude.
  */
+@SoftwareAgentAnnotation(classOf[SingleGeoCoordinateParser], AnnotationType.Parser)
 class SingleGeoCoordinateParser(context : { def language : Language }) extends DataParser
 {
     private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)

@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.mappings.TopicalConceptsExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
@@ -20,6 +21,7 @@ import scala.language.reflectiveCalls
  * @author pablomendes
  * @author maxjakob
  */
+@SoftwareAgentAnnotation(classOf[TopicalConceptsExtractor], AnnotationType.Extractor)
 class TopicalConceptsExtractor(
   context : {
     def ontology : Ontology

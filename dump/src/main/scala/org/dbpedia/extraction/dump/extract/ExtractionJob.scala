@@ -40,6 +40,7 @@ class ExtractionJob(
     try {
       if (namespaces.contains(page.title.namespace)) {
         val graph = extractor.extract(page, page.uri)
+        graph.foreach(q => extractionRecorder.record(q))
         destination.write(graph)
       }
       //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced

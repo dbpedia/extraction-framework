@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.dataparser
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.iri.IRI
@@ -7,6 +8,7 @@ import org.dbpedia.iri.IRI
 /**
  * Parses external links.
  */
+@SoftwareAgentAnnotation(classOf[LinkParser], AnnotationType.Parser)
 class LinkParser(val strict : Boolean = false) extends DataParser
 {
     override val splitPropertyNodeRegex: String = DataParserConfig.splitPropertyNodeRegexLink("en")

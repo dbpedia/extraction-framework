@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.transform.Quad
@@ -28,6 +29,7 @@ import scala.language.reflectiveCalls
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
  * date 28.05.2016.
  */
+@SoftwareAgentAnnotation(classOf[DBpediaResourceExtractor], AnnotationType.Extractor)
 class DBpediaResourceExtractor (
   context : {
     def ontology : Ontology

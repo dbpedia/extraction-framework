@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.annotations.ExtractorAnnotation
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.{Config, ExtractionRecorder, RecordEntry}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.nif.WikipediaNifExtractor
@@ -25,7 +25,7 @@ import scala.reflect.ClassTag
   * It will be expanded to cover the whole wikipage in the future.
   */
 
-@ExtractorAnnotation("nif extractor")
+@SoftwareAgentAnnotation(classOf[NifExtractor], AnnotationType.Extractor)
 class NifExtractor(
      context : {
        def ontology : Ontology

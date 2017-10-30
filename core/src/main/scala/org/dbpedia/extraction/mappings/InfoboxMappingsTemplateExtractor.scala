@@ -1,15 +1,17 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.dataparser.InfoboxMappingsExtractorConfig._
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{ExtractorUtils, InfoboxMappingsUtils, Language}
 import org.dbpedia.extraction.wikiparser._
-import scala.language.reflectiveCalls
 
+import scala.language.reflectiveCalls
 import scala.collection.mutable.ArrayBuffer
 
+@SoftwareAgentAnnotation(classOf[InfoboxMappingsTemplateExtractor], AnnotationType.Extractor)
 class InfoboxMappingsTemplateExtractor (context: {
   def ontology: Ontology
   def language : Language

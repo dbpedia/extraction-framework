@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.wikiparser.impl.sweble
 
-import java.net.URI
 import java.util.ArrayList
 
 import de.fau.cs.osr.ptk.common.ast.RtData
@@ -21,7 +20,6 @@ import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
 import scala.language.implicitConversions
 import scala.util.{Failure, Success}
-//import de.fau.cs.osr.ptk.nodegen.parser._
 
 
 import org.dbpedia.extraction.util.{Language, WikiUtil}

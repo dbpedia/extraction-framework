@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -29,6 +30,7 @@ import scala.language.reflectiveCalls
  * wd:Q64_P6_Q8863 wikidata:P582 "2014-12-11"^^xsd:date.
  *
  */
+@SoftwareAgentAnnotation(classOf[WikidataRawExtractor], AnnotationType.Extractor)
 class WikidataRawExtractor(
                             context: {
                               def ontology: Ontology

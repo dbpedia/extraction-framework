@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
@@ -14,6 +15,7 @@ import scala.reflect.ClassTag
 /**
   * ewxperimental extractor that extracts infobox facts that have a citation on the same line and places the citation in the context
  */
+@SoftwareAgentAnnotation(classOf[CitedFactsExtractor], AnnotationType.Extractor)
 class CitedFactsExtractor(
   context : {
     def ontology : Ontology

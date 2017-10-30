@@ -74,7 +74,7 @@ object IOUtils {
     val reader = this.reader(file)
     try {
       for (line <- reader) {
-        proc(line)
+          proc(line)
       }
     }
     finally reader.close()
@@ -89,7 +89,7 @@ object IOUtils {
     val reader = new InputStreamReader(stream, charset)
     try {
       for (line <- reader) {
-        proc(line)
+          proc(line)
       }
     }
     finally reader.close()

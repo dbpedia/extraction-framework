@@ -1,13 +1,16 @@
 package org.dbpedia.extraction.dataparser
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.dataparser.FlagTemplateParserConfig
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
+
 import scala.language.reflectiveCalls
 
 /**
  * Handling of flag templates.
  */
+@SoftwareAgentAnnotation(classOf[FlagTemplateParser], AnnotationType.Parser)
 class FlagTemplateParser( extractionContext : { def language : Language } ) extends DataParser
 {
     private val templates = FlagTemplateParserConfig.templateMap.getOrElse(extractionContext.language.wikiCode, FlagTemplateParserConfig.templateMap("en"))

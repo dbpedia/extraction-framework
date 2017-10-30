@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.mappings.MediaExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
@@ -20,6 +21,7 @@ import scala.language.reflectiveCalls
   *
   * FIXME: we're sometimes dealing with encoded links, sometimes with decoded links. It's quite a mess.
   */
+@SoftwareAgentAnnotation(classOf[MediaExtractor], AnnotationType.Extractor)
 class MediaExtractor(
   context: {
     def ontology: Ontology

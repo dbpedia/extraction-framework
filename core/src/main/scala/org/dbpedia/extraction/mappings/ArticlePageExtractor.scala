@@ -1,16 +1,19 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**
  * Extracts links to corresponding Articles in Wikipedia.
  */
+@SoftwareAgentAnnotation(classOf[ArticlePageExtractor], AnnotationType.Extractor)
 class ArticlePageExtractor(
   context : {
     def ontology : Ontology

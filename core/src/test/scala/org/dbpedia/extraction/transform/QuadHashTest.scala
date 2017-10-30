@@ -1,0 +1,45 @@
+package org.dbpedia.extraction.transform
+
+import java.io.ByteArrayInputStream
+import java.nio.ByteBuffer
+
+import org.dbpedia.extraction.util.IOUtils
+import org.scalatest.FunSuite
+
+import scala.io.Codec
+
+class QuadHashTest extends FunSuite {
+
+  val quads = "<http://dbpedia.org/resource/Animalia_(book)?dbpv=2016-10&nif=context> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Context> .\n" +
+    "<http://dbpedia.org/resource/Animalia_(book)?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex> \"0\"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .\n" +
+    "<http://dbpedia.org/resource/Animalia_(book)?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex> \"2294\"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .\n" +
+    "<http://dbpedia.org/resource/Animalia_(book)?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#sourceUrl> <http://en.wikipedia.org/wiki/Animalia_(book)?oldid=741600610> .\n" +
+    "<http://dbpedia.org/resource/Animalia_(book)?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#isString> \"Animalia is an illustrated children's book by Graeme Base. It was originally published in 1986, followed by a tenth anniversary edition in 1996, and a 25th anniversary edition in 2012. Over three million copies have been sold. A special numbered and signed anniversary edition was also published in 1996, with an embossed gold jacket.\\n\\nSynopsis\\nAnimalia is an alliterative alphabet book and contains twenty-six illustrations, one for each letter of the alphabet. Each illustration features an animal from the animal kingdom (A is for alligator, B is for butterfly, etc.) along with a short poem utilizing the letter of the page for many of the words. The illustrations contain many other objects beginning with that letter that the reader can try to identify. As an additional challenge, the author has hidden a picture of himself as a child in every picture.\\n\\nRelated products\\nJulia MacRae Books published an Animalia colouring book in 2008. H. N. Abrams also published a wall calendar colouring book version for children the same year. H. N. Abrams published The Animalia Wall Frieze, a fold-out over 26 feet in length, in which the author created new riddles for each letter. The Great American Puzzle Factory created a 300-piece jigsaw puzzle based on the book's cover.\\n\\nAdaptations\\nA television series was also created, based on the book, which airs in the United States, Australia, Canada, the United Kingdom, Norway and Venezuela. It also airs on Minimax for the Czech Republic and Slovakia. And recently in Greece on the channel ET1. The Australian Children's Television Foundation released a teaching resource DVD-ROM in 2011 to accompany the TV series with teaching aids for classroom use. In 2010, The Base Factory and AppBooks released Animalia as an application for iPad and iPhone/iPod Touch.\\n\\nAwards\\nAnimalia won the Young Australian's Best Book Award in 1987 for Best Picture Story Book. The Children's Book Council of Australia designated Animalia a 1987 Picture Book of the Year: Honour Book. Kid's Own Australian Literature Awards named Animalia the 1988 Picture Book Winner.\\n\\nReferences\\n\\n\\nExternal links\\n\\n*  Graeme Base's official website \\n*  Animalia The Television Series official website \\n*  A Learning Time activity guide for Animalia created by The Little Big Book Club\" .\n" +
+    "<http://dbpedia.org/resource/Animalia_(book)?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#predLang> <http://lexvo.org/id/iso639-3/eng> .\n" +
+  "<http://dbpedia.org/resource/Animalia> <http://persistence.uni-leipzig.org/nlp2rdf> \"\" .\n"
+    /*"<http://dbpedia.org/resource/Actrius?dbpv=2016-10&nif=context> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Context> .\n" +
+    "<http://dbpedia.org/resource/Actrius?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex> \"0\"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .\n" +
+    "<http://dbpedia.org/resource/Actrius?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex> \"2462\"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .\n" +
+    "<http://dbpedia.org/resource/Actrius?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#sourceUrl> <http://en.wikipedia.org/wiki/Actrius?oldid=741600772> .\n" +
+    "<http://dbpedia.org/resource/Actrius?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#isString> \"Actresses (Catalan: Actrius) is a 1997 Catalan language Spanish drama film produced and directed by Ventura Pons and based on the award-winning stage play E.R. by Josep Maria Benet i Jornet. The film has no male actors, with all roles played by females. The film was produced in 1996.\\n\\nSynopsis\\nIn order to prepare herself to play a role commemorating the life of legendary actress Empar Ribera, young actress (Mercè Pons) interviews three established actresses who had been the Ribera's pupils: the international diva Glòria Marc (Núria Espert), the television star Assumpta Roca (Rosa Maria Sardà), and dubbing director Maria Caminal (Anna Lizaran).\\n\\nCast\\n\\n*  Núria Espert as Glòria Marc \\n*  Rosa Maria Sardà as Assumpta Roca \\n*  Anna Lizaran as Maria Caminal \\n*  Mercè Pons as Estudiant\\n\\nRecognition\\n\\n\\nScreenings\\nActrius screened in 2001 at the Grauman's Egyptian Theatre in an American Cinematheque retrospective of the works of its director. The film had first screened at the same location in 1998. It was also shown at the 1997 Stockholm International Film Festival.\\n\\nReception\\nIn Movie - Film - Review, Daily Mail staffer Christopher Tookey wrote that though the actresses were \\\"competent in roles that may have some reference to their own careers\\\", the film \\\"is visually unimaginative, never escapes its stage origins, and is almost totally lacking in revelation or surprising incident\\\". Noting that there were \\\"occasional, refreshing moments of intergenerational bitchiness\\\", they did not \\\"justify comparisons to All About Eve\\\", and were \\\"insufficiently different to deserve critical parallels with Rashomon\\\". He also wrote that The Guardian called the film a \\\"slow, stuffy chamber-piece\\\", and that The Evening Standard stated the film's \\\"best moments exhibit the bitchy tantrums seething beneath the threesome's composed veneers\\\". MRQE wrote \\\"This cinematic adaptation of a theatrical work is true to the original, but does not stray far from a theatrical rendering of the story.\\\"\\n\\nAwards and nominations\\n\\n*  1997, won 'Best Catalan Film' at Butaca Awards for Ventura Pons \\n*  1997, won 'Best Catalan Film Actress' at Butaca Awards, shared by Núria Espert, Rosa Maria Sardà, Anna Lizaran, and Mercè Pons \\n*  1998, nominated for 'Best Screenplay' at Goya Awards, shared by Josep Maria Benet i Jornet and Ventura Pons\\n\\nReferences\\n\\n\\nExternal links\\n\\n*  Actresses  at the Internet Movie Database \\n*  Official website as archived February 17, 2009 (Spanish)\" .\n" +
+    "<http://dbpedia.org/resource/Actrius?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#predLang> <http://lexvo.org/id/iso639-3/eng> .\n" +
+    "<http://dbpedia.org/resource/Alain_Connes?dbpv=2016-10&nif=context> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Context> .\n" +
+    "<http://dbpedia.org/resource/Alain_Connes?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex> \"0\"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .\n" +
+    "<http://dbpedia.org/resource/Alain_Connes?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex> \"2606\"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .\n" +
+    "<http://dbpedia.org/resource/Alain_Connes?dbpv=2016-10&nif=context> <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#sourceUrl> <http://en.wikipedia.org/wiki/Alain_Connes?oldid=702093022> ."
+*/
+
+  test("testLongHashCode") {
+    IOUtils.readLines(new ByteArrayInputStream(quads.getBytes()), Codec.UTF8.charSet){ line =>
+      if(line != null)
+        Quad.unapply(line) match{
+          case Some(quad) =>
+            val long = quad.longHashCode()
+            val bi = new java.math.BigInteger(1, ByteBuffer.allocate(java.lang.Long.SIZE/java.lang.Byte.SIZE).putLong(long).array())
+            assert(bi.toString() == java.lang.Long.toUnsignedString(long))
+            info("unsigned long: " + bi.toString)
+          case None => throw new IllegalArgumentException()
+        }
+    }
+  }
+}

@@ -7,6 +7,7 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 import java.net.URI
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.iri.UriUtils
 
 import scala.language.reflectiveCalls
@@ -16,6 +17,7 @@ import scala.util.{Failure, Success}
  * Extracts sameAs links for resources with themselves. Only makes sense when serialization is
  * configured such that subjects are IRIs and objects are URIs (or vice versa).
  */
+@SoftwareAgentAnnotation(classOf[UriSameAsIriExtractor], AnnotationType.Extractor)
 class UriSameAsIriExtractor(
   context : {
     def ontology : Ontology

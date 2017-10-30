@@ -1,16 +1,19 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**
  * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)
  */
+@SoftwareAgentAnnotation(classOf[TemplateParameterExtractor], AnnotationType.Extractor)
 class TemplateParameterExtractor(
   context: { 
     def ontology: Ontology

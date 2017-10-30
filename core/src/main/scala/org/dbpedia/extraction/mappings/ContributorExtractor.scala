@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URLEncoder
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -18,6 +19,7 @@ import scala.language.reflectiveCalls
  * Extracts the information that describes the contributor (editor) of a Wikipedia page, such as his username, and his ID.
  */
 
+@SoftwareAgentAnnotation(classOf[ContributorExtractor], AnnotationType.Extractor)
 class ContributorExtractor( context : {
   def ontology : Ontology
   def language : Language } ) extends WikiPageExtractor

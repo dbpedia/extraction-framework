@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.wikiparser
 
 import org.dbpedia.extraction.config._
+import org.dbpedia.extraction.config.provenance.NodeRecord
 import org.dbpedia.extraction.dataparser.RedirectFinder
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Disambiguation
@@ -80,7 +81,7 @@ extends Node with Recordable[PageNode]
 
   def isDisambiguation: Boolean ={
     val disambiguationNames = Disambiguation.get(this.title.language).getOrElse(Set("Disambig"))
-    children.exists(node => findTemplate(node, disambiguationNames))
+    children.exists(node => node.hasTemplate(disambiguationNames))
   }
 
   //Generate the page URI
@@ -95,11 +96,12 @@ extends Node with Recordable[PageNode]
       case _ => false
   }
 
-
-  private def findTemplate(node : Node, names : Set[String]) : Boolean = node match
-  {
-    case TemplateNode(title, _, _, _) => names.contains(title.decoded)
-    case _ => node.children.exists(node => findTemplate(node, names))
-  }
-
+  def getNodeRecord = NodeRecord(
+    uri = this.uri,
+    rootRev = this.revision,
+    timeStamp = this.timestamp,
+    namespace = this.title.namespace.code,
+    line = this.line,
+    language = this.title.language.wikiCode
+  )
 }

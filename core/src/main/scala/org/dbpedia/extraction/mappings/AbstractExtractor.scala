@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 
-import org.dbpedia.extraction.annotations.ExtractorAnnotation
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
@@ -29,7 +29,7 @@ import scala.language.reflectiveCalls
  */
 
 @deprecated("replaced by NifExtractor.scala: which will extract the whole page content including the abstract", "2016-10")
-@ExtractorAnnotation("abstract extractor")
+@SoftwareAgentAnnotation(classOf[AbstractExtractor], AnnotationType.Extractor)
 class AbstractExtractor(
   context : {
     def ontology : Ontology

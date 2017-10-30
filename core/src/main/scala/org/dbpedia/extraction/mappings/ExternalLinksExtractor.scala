@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
@@ -13,6 +14,7 @@ import scala.language.reflectiveCalls
 /**
  * Extracts links to external web pages.
  */
+@SoftwareAgentAnnotation(classOf[ExternalLinksExtractor], AnnotationType.Extractor)
 class ExternalLinksExtractor (
   context : {
     def ontology : Ontology

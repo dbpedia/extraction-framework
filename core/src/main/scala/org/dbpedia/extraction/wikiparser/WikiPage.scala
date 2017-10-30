@@ -1,10 +1,8 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.config.{RecordEntry, RecordCause}
 import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
-import scala.collection.mutable.ListBuffer
 import scala.xml.Elem
 
 /**
@@ -46,22 +44,7 @@ extends PageNode(title, id, revision, timestamp, contributorID, contributorName,
 
   override def toString: String = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
 
-/*  private var _sourceIri: String = _
-  def sourceIri : String = {
-    if(_sourceIri == null)
-      _sourceIri = title.pageIri + "?" + (if (revision >= 0) "oldid=" + revision else "")
-    _sourceIri
-  }*/
-
   override def toDumpXML: Elem = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
-
-/*  private var isRetryy = false
-
-  def toggleRetry(): Unit = {
-    this.isRetryy = !this.isRetryy
-  }
-
-  def isRetry: Boolean = this.isRetryy*/
 
 }
 
@@ -100,7 +83,7 @@ object WikiPage {
    * XML for one page, api.php format.
    * TODO: use redirect
    */
-  def toApiXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, source: String, format: String) = {
+  def toApiXML(title: WikiTitle, id: Long, revision: Long, timestamp: Long, source: String, format: String): Elem = {
     <api>
       <query>
         <pages>

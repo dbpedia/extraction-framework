@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.transform.Quad
@@ -14,6 +15,7 @@ import scala.collection.mutable
 import scala.language.reflectiveCalls
 import scala.reflect.ClassTag
 
+@SoftwareAgentAnnotation(classOf[IntermediateNodeMapping], AnnotationType.Extractor)
 class IntermediateNodeMapping (
   val nodeClass : OntologyClass, // public for rml mappings
   val correspondingProperty : OntologyProperty, //public for rml mappings

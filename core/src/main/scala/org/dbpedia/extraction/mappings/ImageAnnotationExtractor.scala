@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -17,6 +18,7 @@ import scala.language.reflectiveCalls
  * The RDF produced uses the W3C Media Fragments 1.0 to identify parts of
  * an image: http://www.w3.org/TR/2012/REC-media-frags-20120925/ 
  */
+@SoftwareAgentAnnotation(classOf[ImageAnnotationExtractor], AnnotationType.Extractor)
 class ImageAnnotationExtractor (
   context : {
     def ontology : Ontology

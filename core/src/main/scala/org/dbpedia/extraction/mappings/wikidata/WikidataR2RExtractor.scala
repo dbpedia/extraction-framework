@@ -19,6 +19,7 @@ import scala.language.reflectiveCalls
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.Config
 
 import scala.collection.convert.decorateAsScala._
@@ -41,6 +42,7 @@ import scala.language.{postfixOps, reflectiveCalls}
  * wd:Q64_P6_Q8863 dbo:startDate "2001-6-16"^^xsd:date.
  * wd:Q64_P6_Q8863 dbo:endDate "2014-12-11"^^xsd:date.
  */
+@SoftwareAgentAnnotation(classOf[WikidataR2RExtractor], AnnotationType.Extractor)
 class WikidataR2RExtractor(
                             context: {
                               def ontology: Ontology

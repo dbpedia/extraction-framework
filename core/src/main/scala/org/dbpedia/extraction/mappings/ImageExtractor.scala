@@ -3,6 +3,7 @@ package org.dbpedia.extraction.mappings
 import java.net.URLDecoder
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
@@ -22,6 +23,7 @@ import scala.language.reflectiveCalls
  * FIXME: we're sometimes dealing with encoded links, sometimes with decoded links. It's quite a mess.
  */
 @deprecated("replaced by ImageExtractorNew", "2017-08")
+@SoftwareAgentAnnotation(classOf[ImageExtractor], AnnotationType.Extractor)
 class ImageExtractor( 
   context: {
     def ontology: Ontology

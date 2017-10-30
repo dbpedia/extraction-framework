@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.config.provenance.{Dataset, ExtractorRecord}
 import org.dbpedia.extraction.transform.Quad
 
 /**
@@ -10,7 +10,7 @@ trait Extractor[-N] {
 
     var state = ExtractorState.Instantiated
     /**
-     * @param page The source node
+     * @param input The source node
      * @param subjectUri The subject URI of the generated triples
      * @return A graph holding the extracted data
      */

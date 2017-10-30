@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong
 
 import org.apache.jena.atlas.json.{JSON, JsonArray, JsonObject}
 import org.dbpedia.extraction.config.Config.SlackCredentials
-import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.config.provenance.{Dataset, ProvenanceRecord}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, StringUtils}
 import org.dbpedia.extraction.wikiparser._
@@ -28,14 +28,14 @@ class ExtractionRecorder[T](
      dataset: List[Dataset] = List[Dataset](),
      val language: Language = Language.English,
      val monitor: ExtractionMonitor = null
-   ) {
+  ) {
 
   def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
 
   private var datasets: ListBuffer[Dataset] = new ListBuffer()
   datasets ++= dataset.filter(x => x != null)
-  private var issuePages = mutable.Map[Language, ListBuffer[RecordEntry[T]]]()
-  private var successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
+  private var issuePages = mutable.Map[Language, mutable.Map[Long, RecordEntry[_]]]()
+  private var successfulPagesMap = Map[Language, mutable.Map[Long, RecordEntry[_]]]()
 
   private val startTime = new AtomicLong()
   private var successfulPageCount = Map[Language,AtomicLong]()
@@ -58,7 +58,7 @@ class ExtractionRecorder[T](
     *
     * @return the failed pages (id, title) for every Language
     */
-  def listFailedPages(lang: Language): Option[List[RecordEntry[T]]] = issuePages.get(lang).map(_.toList)
+  def listFailedPages(lang: Language): Option[Map[Long, RecordEntry[_]]] = issuePages.get(lang).map(_.toMap)
 
   /**
     * successful page count
@@ -122,7 +122,7 @@ class ExtractionRecorder[T](
   def runningPageNumber(lang:Language): Long = successfulPages(lang) + failedPages(lang)
 
 
-  def record(recordable: Recordable[T]): Unit = record(recordable.recordEntries: _*)
+  def record(recordable: Recordable[_]): Unit = record(recordable.recordEntries: _*)
   /**
     * prints a message of a RecordEntry if available and
     * assesses a RecordEntry for the existence of a Throwable and forwards
@@ -130,21 +130,23 @@ class ExtractionRecorder[T](
     *
     * @param records - the RecordEntries for a WikiPage
     */
-  def record(records: RecordEntry[T]*): Unit = {
+  def record(records: RecordEntry[_]*): Unit = {
     for(record <- records) {
       record.record match{
         case page: PageNode =>
           if (record.msg != null)
             printLabeledLine(record.msg, record.cause, page.title.language, Seq(PrinterDestination.err, PrinterDestination.file))
           Option(record.error) match {
-            case Some(ex) => failedRecord(record.record, ex, record.language)
+            case Some(ex) => failedRecord(page, ex, record.language)
             case None => recordExtractedPage(page.id, page.title, record.logSuccessfulPage)
           }
         case quad: Quad =>
           Option(record.error) match {
-            case Some(ex) => failedRecord(record.record, ex, record.language)
+            case Some(ex) => failedRecord(quad, ex, record.language)
             case None => recordQuad(quad, record.cause, record.language)
           }
+        case prov: ProvenanceRecord =>
+          System.out.println(prov.toString + ",")  //TODO
         case _  =>
           Option(record.msg) match{
             case Some(m) => printLabeledLine(m, record.cause, record.language)
@@ -161,7 +163,7 @@ class ExtractionRecorder[T](
     * Recorded issues do not have to be exceptions, but are recorded here as well.
     * @param entry
     */
-  def enterProblemRecord(entry: RecordEntry[T]): Unit ={
+  def enterProblemRecord[S](entry: RecordEntry[S]): Unit ={
     val tag = entry.record match{
       case _: PageNode => "page"
       case _: Node => "node"
@@ -177,8 +179,8 @@ class ExtractionRecorder[T](
     }
 
     issuePages.get(language) match{
-      case Some(map) => map += entry
-      case None =>  issuePages += language -> new ListBuffer[RecordEntry[T]]()
+      case Some(map) => map += entry.record.id -> entry
+      case None =>  issuePages += language -> mutable.Map[Long, RecordEntry[_]]()
     }
 
     val line = "{task} failed for " + tag + " " + id + ": " + entry.msg
@@ -202,8 +204,8 @@ class ExtractionRecorder[T](
     * @param node - PageNode of page
     * @param exception  - the Throwable responsible for the fail
     */
-  def failedRecord(node: Recordable[T], exception: Throwable, language:Language = Language.None): Unit = synchronized{
-    enterProblemRecord(new RecordEntry[T](node, RecordCause.Exception, language, exception.getMessage, exception))
+  def failedRecord[S](node: Recordable[S], exception: Throwable, language:Language = Language.None): Unit = synchronized{
+    enterProblemRecord(new RecordEntry[S](node, RecordCause.Exception, language, exception.getMessage, exception))
   }
 
   /**
@@ -217,8 +219,9 @@ class ExtractionRecorder[T](
     require(title != null)
     if(logSuccessfulPage) {
       successfulPagesMap.get(title.language) match {
-        case Some(map) => map += (id -> title)
-        case None => successfulPagesMap += title.language -> mutable.Map[Long, WikiTitle](id -> title)
+        case Some(map) => map += id -> null
+        case None =>
+          successfulPagesMap += title.language -> mutable.Map[Long, RecordEntry[_]](id -> null)
       }
       printLabeledLine("page " + id + ": " + title.encoded + " extracted", RecordCause.Info, title.language, Seq(PrinterDestination.file))
     }
@@ -325,8 +328,8 @@ class ExtractionRecorder[T](
   def initialize(lang: Language, task: String = "transformation", datasets: Seq[Dataset] = Seq()): Boolean ={
     if(initialized)
       return false
-    this.issuePages = mutable.Map[Language, ListBuffer[RecordEntry[T]]]()
-    this.successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
+    this.issuePages = mutable.Map[Language, mutable.Map[Long, RecordEntry[_]]]()
+    this.successfulPagesMap = Map[Language, mutable.Map[Long, RecordEntry[_]]]()
     this.successfulPageCount = Map[Language,AtomicLong]()
     this.successfulTripleCount = Map[Dataset, AtomicLong]()
 

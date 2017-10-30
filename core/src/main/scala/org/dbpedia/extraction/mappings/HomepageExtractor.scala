@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
@@ -14,6 +15,7 @@ import scala.util.{Failure, Success}
 /**
  * Extracts links to the official homepage of an instance.
  */
+@SoftwareAgentAnnotation(classOf[HomepageExtractor], AnnotationType.Extractor)
 class HomepageExtractor(
   context : {
     def ontology : Ontology

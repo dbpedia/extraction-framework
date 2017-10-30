@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
@@ -16,6 +17,7 @@ import org.dbpedia.extraction.wikiparser.{NodeUtil, PropertyNode, TemplateNode}
 import scala.language.reflectiveCalls
 import scala.reflect.ClassTag
 
+@SoftwareAgentAnnotation(classOf[DateIntervalMapping], AnnotationType.Extractor)
 class DateIntervalMapping ( 
   val templateProperty : String, //TODO CreateMappingStats requires this to be public. Is there a better way?
   val startDateOntologyProperty : OntologyProperty, //TODO: rml mappings need this to be public (e.g. ModelMapper)

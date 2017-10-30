@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.dataparser
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.wikiparser.Node
 
 import scala.language.postfixOps
@@ -10,7 +11,8 @@ import scala.language.postfixOps
  * None for other strings.
  * TODO: also look for "0"/"1"? "on"/"off"?
  */
-object BooleanParser extends DataParser
+@SoftwareAgentAnnotation(BooleanParser.getClass, AnnotationType.Parser)
+class BooleanParser extends DataParser
 {
   private val FALSE_REGEX = """(?i)(?:.*\s)*(no|false)(?:\s.*)*""".r
   private val TRUE_REGEX = """(?i)(?:.*\s)*(yes|true)(?:\s.*)*""".r
@@ -30,4 +32,9 @@ object BooleanParser extends DataParser
     
     None
   }
+}
+
+object BooleanParser extends DataParser{
+  private val parser = new BooleanParser()
+  def parse( node : Node ) : Option[ParseResult[Boolean]] = parser.parse(node)
 }

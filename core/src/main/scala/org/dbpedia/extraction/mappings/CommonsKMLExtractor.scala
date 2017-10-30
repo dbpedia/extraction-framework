@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.Datatype
@@ -19,6 +20,7 @@ import scala.language.reflectiveCalls
  * These are currently used as overlays, documented at
  * https://commons.wikimedia.org/wiki/Commons:Geocoding/Overlay 
  */
+@SoftwareAgentAnnotation(classOf[CommonsKMLExtractor], AnnotationType.Extractor)
 class CommonsKMLExtractor (
   context: {
     def ontology: Ontology

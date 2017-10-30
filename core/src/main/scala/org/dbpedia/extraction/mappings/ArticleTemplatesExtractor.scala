@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.transform.Quad
 
@@ -7,6 +8,7 @@ import collection.mutable.HashSet
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
@@ -14,6 +16,7 @@ import scala.language.reflectiveCalls
  * This extractor extracts all templates that exist in an article.
  * This data can be used for Wikipedia administrative tasks.
  */
+@SoftwareAgentAnnotation(classOf[ArticleTemplatesExtractor], AnnotationType.Extractor)
 class ArticleTemplatesExtractor(
     context: {
      def ontology: Ontology

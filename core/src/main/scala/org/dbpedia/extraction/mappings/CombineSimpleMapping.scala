@@ -1,16 +1,19 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.TemplateNode
+
 import scala.language.reflectiveCalls
 
 /**
   * Created by chile on 15.10.17.
   */
+@SoftwareAgentAnnotation(classOf[CombineSimpleMapping], AnnotationType.Extractor)
 class CombineSimpleMapping (
                            ontologyProperty : OntologyProperty,
                            val templateProperties: scala.collection.Set[String], // CreateMappingStats requires these to be public

@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.Quad
@@ -7,6 +8,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.PndExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
@@ -16,6 +18,7 @@ import scala.language.reflectiveCalls
  * occupation connected with a unique identifier, the PND number.
  * TODO: also use http://en.wikipedia.org/wiki/Template:Authority_control and other templates.
  */
+@SoftwareAgentAnnotation(classOf[PndExtractor], AnnotationType.Extractor)
 class PndExtractor (
   context : {
     def ontology : Ontology

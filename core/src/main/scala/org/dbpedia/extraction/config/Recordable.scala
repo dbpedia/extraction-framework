@@ -16,10 +16,11 @@ trait Recordable[T] {
 /**
   * This class provides the necessary attributes to record either a successful or failed extraction
   *
-  * @param record
-  * @param language
-  * @param msg
-  * @param error
+  * @param record - the Recordable
+  * @param cause - the cause for recording it
+  * @param language - optional language of the recordable
+  * @param msg - optional message
+  * @param error - the throwable causing this record
   * @param logSuccessfulPage
   */
 case class RecordEntry[T] (
@@ -31,6 +32,9 @@ case class RecordEntry[T] (
      logSuccessfulPage:Boolean = false
  )
 
+/**
+  *
+  */
 object RecordCause extends Enumeration {
   val Provenance, Internal, Info, Warning, Exception = Value
 }
@@ -66,7 +70,7 @@ class DefaultEntry(
 private[config] class DefaultRecordable extends Recordable[DefaultRecordable]{
   override val id: Long = DefaultRecordable.getId
 
-  override def recordEntries = ???
+  override def recordEntries = List()
 }
 
 private object DefaultRecordable{

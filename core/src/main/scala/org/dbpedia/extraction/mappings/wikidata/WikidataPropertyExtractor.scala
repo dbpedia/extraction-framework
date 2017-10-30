@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
-import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
+import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 import org.wikidata.wdtk.datamodel.interfaces._
 
 import scala.collection.JavaConversions._
@@ -30,6 +31,7 @@ import scala.language.reflectiveCalls
  *
  *
  */
+@SoftwareAgentAnnotation(classOf[WikidataPropertyExtractor], AnnotationType.Extractor)
 class WikidataPropertyExtractor(
                                  context: {
                                    def ontology: Ontology

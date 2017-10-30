@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -11,6 +12,7 @@ import scala.language.reflectiveCalls
 /**
  * Extracts links from concepts to categories using the SKOS vocabulary.
  */
+@SoftwareAgentAnnotation(classOf[ArticleCategoriesExtractor], AnnotationType.Extractor)
 class ArticleCategoriesExtractor( context : {
                                       def ontology : Ontology
                                       def language : Language } ) extends PageNodeExtractor

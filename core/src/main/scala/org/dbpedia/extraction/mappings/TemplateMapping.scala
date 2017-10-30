@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.transform.Quad
@@ -10,6 +11,8 @@ import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
+
+@SoftwareAgentAnnotation(classOf[TemplateMapping], AnnotationType.Extractor)
 class   TemplateMapping(
   val mapToClass : OntologyClass,
   val correspondingClass : OntologyClass, // must be public val for converting to rml

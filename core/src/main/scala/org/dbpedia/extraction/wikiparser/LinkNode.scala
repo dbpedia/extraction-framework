@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.config.provenance.{NodeRecord, ProvenanceRecord}
 import org.dbpedia.iri.IRI
 
 /**
@@ -8,11 +9,12 @@ import org.dbpedia.iri.IRI
  * The children of this node represent the label of the link.
  * If the source does not define a label explicitly, a TextNode containing the link destination will be the only child.
  */
-sealed abstract class LinkNode(children : List[Node], line : Int)
+sealed abstract class LinkNode(children : List[Node], override val line : Int)
 extends Node
 {
     def toPlainText = children.map(_.toPlainText).mkString
 
+    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
 }
 
 sealed abstract class WikiLinkNode(destination: WikiTitle, children: List[Node], line: Int, destinationNodes: List[Node]) 

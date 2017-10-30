@@ -4,15 +4,19 @@ import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.{PropertyNode, TemplateNode}
 import org.dbpedia.extraction.dataparser._
-import java.util.logging.{Logger, Level}
+import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.Language
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**
  * Extracts geo-coodinates.
  */
+@SoftwareAgentAnnotation(classOf[GeoCoordinatesMapping], AnnotationType.Extractor)
 class GeoCoordinatesMapping( 
   val ontologyProperty : OntologyProperty,
   //TODO CreateMappingStats requires this properties to be public. Is there a better way?

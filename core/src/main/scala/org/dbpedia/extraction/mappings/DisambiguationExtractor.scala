@@ -1,16 +1,19 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.DisambiguationExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+
 import scala.language.reflectiveCalls
 
 /**
  * Extracts disambiguation links.
  */
+@SoftwareAgentAnnotation(classOf[DisambiguationExtractor], AnnotationType.Extractor)
 class DisambiguationExtractor(
   context : {
     def disambiguations : Disambiguations

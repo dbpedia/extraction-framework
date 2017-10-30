@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URLDecoder
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
@@ -17,6 +18,7 @@ import scala.language.reflectiveCalls
 /**
   * Reworked Image Extractor
   */
+@SoftwareAgentAnnotation(classOf[ImageExtractorNew], AnnotationType.Extractor)
 class ImageExtractorNew(
                          context: {
                            def ontology: Ontology

@@ -1,15 +1,20 @@
 package org.dbpedia.extraction.dataparser
 
-import java.util.logging.{Logger,Level}
+import java.util.logging.{Level, Logger}
+
 import org.dbpedia.extraction.wikiparser.Node
 import java.text.ParseException
+
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+
 import scala.language.reflectiveCalls
 
 /**
  * Parses integer numbers.
  */
+@SoftwareAgentAnnotation(classOf[IntegerParser], AnnotationType.Parser)
 class IntegerParser( context : { def language : Language } ,
                      strict : Boolean = false,
                      multiplicationFactor : Double = 1.0,

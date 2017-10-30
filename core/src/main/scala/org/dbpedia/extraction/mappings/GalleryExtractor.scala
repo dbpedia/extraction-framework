@@ -1,11 +1,14 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
+
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+
 import scala.language.reflectiveCalls
 
 /**
@@ -16,6 +19,7 @@ import scala.language.reflectiveCalls
  *
  * The gallery tag is documented at https://en.wikipedia.org/wiki/Help:Gallery_tag
  */
+@SoftwareAgentAnnotation(classOf[GalleryExtractor], AnnotationType.Extractor)
 class GalleryExtractor (
   context: {
     def ontology: Ontology

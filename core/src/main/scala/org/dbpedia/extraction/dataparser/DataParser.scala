@@ -1,9 +1,11 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.wikiparser.{Node, NodeUtil, PropertyNode}
+import org.dbpedia.extraction.annotations.SoftwareAgentAnnotation
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
-import org.dbpedia.extraction.ontology.datatypes.{Datatype, UnitDatatype}
+import org.dbpedia.extraction.config.provenance.ParserRecord
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.{Node, NodeUtil, PropertyNode}
 
 /**
  * Extracts data from a node in the abstract syntax tree.
@@ -26,14 +28,28 @@ abstract class DataParser
     {
         if(split)
         {
-            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, transformCmd = transformCmd, transformFunc = transformFunc).flatMap( node => parse(node).toList )
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, transformCmd = transformCmd, transformFunc = transformFunc)
+              .flatMap( node => parseWithProvenance(node).toList )
         }
         else
         {
-            parse(propertyNode).toList
+            parseWithProvenance(propertyNode).toList
         }
     }
 
+    def parseWithProvenance( node : Node ) : Option[ParseResult[_]] = {
+      this.parse(node) match{
+        case Some(pr) =>
+          val annotation = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
+          val rec = ParserRecord(
+            uri = annotation.toString,
+            wikiText = node.toWikiText,
+            resultValue = pr.value.toString
+          )
+          Some(ParseResult(pr.value, pr.lang, pr.unit, Some(rec)))
+        case None => None
+      }
+    }
 }
 
 /**
@@ -41,6 +57,7 @@ abstract class DataParser
   * @param value - the parse result
   * @param lang - optional language parameter for language tags
   * @param unit - carries a unit if property was attributed with it
+  * @param provenance - an provenance record covering only information pertaining to the Parser (needs to be extended with info from Extractor)
   * @tparam T - Type of the value
   */
-case class ParseResult[T](value: T, lang: Option[Language] = None, unit: Option[Datatype] = None)
+case class ParseResult[T](value: T, lang: Option[Language] = None, unit: Option[Datatype] = None, provenance: Option[ParserRecord] = None)

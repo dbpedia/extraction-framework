@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
@@ -24,6 +25,7 @@ import scala.util.{Failure, Success}
  * This extractor extract citation data from articles
  * to boostrap this it is based on the infoboxExtractor
  */
+@SoftwareAgentAnnotation(classOf[CitationExtractor], AnnotationType.Extractor)
 class CitationExtractor(
   context : {
     def ontology : Ontology
@@ -216,7 +218,7 @@ extends WikiPageExtractor
     {
         StringParser.parse(node) match
         {
-            case Some(ParseResult(RankRegex(number), _, _)) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
+            case Some(ParseResult(RankRegex(number), _, _, _)) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
             case _ => None
         }
     }

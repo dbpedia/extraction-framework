@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -12,6 +13,7 @@ import scala.language.reflectiveCalls
 /**
   * Created by chile on 25.10.17.
   */
+@SoftwareAgentAnnotation(classOf[TemplateExtractor], AnnotationType.Extractor)
 class TemplateExtractor (
       context : {
         def ontology : Ontology

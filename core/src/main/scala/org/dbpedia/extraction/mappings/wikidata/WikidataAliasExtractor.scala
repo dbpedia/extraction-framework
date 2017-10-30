@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
-import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
+import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ArrayBuffer
@@ -17,6 +18,7 @@ import scala.language.reflectiveCalls
  * <http://wikidata.dbpedia.org/resource/Q446> <http://dbpedia.org/ontology/alias> "alias"@lang .
  */
 
+@SoftwareAgentAnnotation(classOf[WikidataAliasExtractor], AnnotationType.Extractor)
 class WikidataAliasExtractor(
                               context: {
                                 def ontology: Ontology

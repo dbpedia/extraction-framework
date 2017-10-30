@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -17,6 +18,7 @@ import scala.language.reflectiveCalls
  * <http://wikidata.dbpedia.org/resource/Q18>  owl:sameAs <http://fr.dbpedia.org/resource/London>
  * <http://wikidata.dbpedia.org/resource/Q18>  owl:sameAs <http://co.dbpedia.org/resource/London>
  */
+@SoftwareAgentAnnotation(classOf[WikidataSameAsExtractor], AnnotationType.Extractor)
 class WikidataSameAsExtractor(
        context: {
          def ontology: Ontology

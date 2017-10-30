@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.config.provenance.{NodeRecord, ProvenanceRecord}
 import org.dbpedia.extraction.util.Language
 
 /**
@@ -28,4 +29,6 @@ case class TextNode(text : String, override val line : Int, lang: Language = nul
     }
 
     override def children = List()
+
+    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
 }

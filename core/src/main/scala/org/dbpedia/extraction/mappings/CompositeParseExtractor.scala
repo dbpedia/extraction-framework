@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.WikiPage
@@ -9,6 +10,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * TODO: generic type may not be optimal.
  */
+@SoftwareAgentAnnotation(classOf[CompositeParseExtractor], AnnotationType.Extractor)
 class CompositeParseExtractor(context : { def redirects : Redirects }, extractors: Extractor[_]*)
 extends WikiPageExtractor
 {

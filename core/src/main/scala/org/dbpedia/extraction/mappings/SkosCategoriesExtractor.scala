@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord, ParserRecord, ProvenanceRecord}
+import org.dbpedia.extraction.ontology.{DBpediaNamespace, Ontology, RdfNamespace}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
@@ -13,6 +14,7 @@ import scala.language.reflectiveCalls
 /**
  * Extracts information about which concept is a category and how categories are related using the SKOS Vocabulary.
  */
+@SoftwareAgentAnnotation(classOf[SkosCategoriesExtractor], AnnotationType.Extractor)
 class SkosCategoriesExtractor(
   context : {
     def ontology : Ontology
@@ -35,6 +37,8 @@ extends PageNodeExtractor
   {
     if(node.title.namespace != Namespace.Category) return Seq.empty
 
+    val classUri = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
+
     var quads = new ArrayBuffer[Quad]()
 
     quads += new Quad(language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceIri)
@@ -51,9 +55,29 @@ extends PageNodeExtractor
       
       val objectUri = language.resourceUri.append(link.destination.decodedWithNamespace)
 
-      quads += quad(subjectUri, property, objectUri, link.sourceIri)
+      val q = quad(subjectUri, property, objectUri, link.sourceIri)
+      q.setProvenanceRecord(
+        new ProvenanceRecord(
+          q.longHashCode(),
+          q.provenanceIri.toString,
+          q.getTripleRecord,
+          node.getNodeRecord,
+          if(q.dataset != null) Seq(RdfNamespace.fullUri(DBpediaNamespace.DATASET, q.dataset)) else Seq(),
+          Seq.empty,
+          Some(ExtractorRecord(
+            classUri.toString,
+            ParserRecord(
+              "", //TODO
+              link.toWikiText,
+              objectUri
+            ),
+            None, None, None, None
+          )),
+          None
+        )
+      )
+      quads += q
     }
-
     quads
   }
 

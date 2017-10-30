@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings.fr
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
@@ -12,6 +13,7 @@ import scala.language.reflectiveCalls
 /**
  * Extracts links to the official homepage of an instance.
  */
+@SoftwareAgentAnnotation(classOf[PopulationExtractor], AnnotationType.Extractor)
 class PopulationExtractor(
     context : {
         def ontology : Ontology

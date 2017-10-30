@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.config.provenance.{NodeRecord, ProvenanceRecord}
+
 /**
  * Represents a table.
  * 
@@ -23,6 +25,8 @@ case class TableNode( caption : Option[String],
               && NodeUtil.filterEmptyTextNodes(otherTableNode.children) == NodeUtil.filterEmptyTextNodes( children))
             case _ => false
         }
+
+    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
 }
 
 /**
@@ -41,6 +45,8 @@ case class TableRowNode( override val children : List[TableCellNode],
             case otherTableRowNode : TableRowNode => NodeUtil.filterEmptyTextNodes(otherTableRowNode.children) == NodeUtil.filterEmptyTextNodes(children)
             case _ => false
         }
+
+    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
 }
 
 /**
@@ -67,4 +73,6 @@ extends Node
             case _ => false
 
     }
+
+    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
 }

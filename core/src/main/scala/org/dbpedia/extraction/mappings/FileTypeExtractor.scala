@@ -1,17 +1,21 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
+
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.mappings.FileTypeExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.wikiparser._
+
 import scala.language.reflectiveCalls
 
 /**
  * Identifies the type of a File page.
  */
+@SoftwareAgentAnnotation(classOf[FileTypeExtractor], AnnotationType.Extractor)
 class FileTypeExtractor(context: {
     def ontology: Ontology
     def language : Language

@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+
 import scala.language.reflectiveCalls
 import scala.collection.mutable.ListBuffer
 
@@ -14,6 +16,7 @@ import scala.collection.mutable.ListBuffer
  *
  * @author Michael Moore
  */
+@SoftwareAgentAnnotation(classOf[AnchorTextExtractor], AnnotationType.Extractor)
 class AnchorTextExtractor(
                   context: {
                     def ontology: Ontology

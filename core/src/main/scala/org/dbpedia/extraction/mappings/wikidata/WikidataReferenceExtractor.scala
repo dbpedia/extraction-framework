@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -17,6 +18,7 @@ import scala.language.reflectiveCalls
  * wd:Q76_P140_V39759 dbo:reference "http://www.christianitytoday.com/ct/2008/januaryweb-only/104-32.0.html?start=2"^^ xsd:string.
  *
  */
+@SoftwareAgentAnnotation(classOf[WikidataReferenceExtractor], AnnotationType.Extractor)
 class WikidataReferenceExtractor(
                                   context: {
                                     def ontology: Ontology

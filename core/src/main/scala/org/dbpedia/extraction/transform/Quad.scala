@@ -1,12 +1,15 @@
 package org.dbpedia.extraction.transform
 
-import org.dbpedia.extraction.config.Recordable
-import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.config.{RecordCause, RecordEntry, Recordable}
+import org.dbpedia.extraction.config.provenance.{Dataset, ProvenanceRecord, TripleRecord}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyType}
+import org.dbpedia.extraction.ontology.{DBpediaNamespace, OntologyProperty, OntologyType, RdfNamespace}
 import org.dbpedia.extraction.transform.Quad._
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.iri.UriUtils
+import org.dbpedia.iri.{IRI, UriUtils}
+
+import scala.collection.mutable.ListBuffer
+import scala.util.{Failure, Success}
 
 /**
  * Represents a statement.
@@ -37,6 +40,7 @@ class Quad(
   val value: String,
   val context: String,
   val datatype: String
+  //provenance: Option[ProvenanceRecord] = None
 )
 extends Ordered[Quad] with Recordable[Quad]
 with Equals
@@ -51,6 +55,7 @@ with Equals
     value: String,
     context: String,
     datatype: Datatype
+    //provenance: Option[ProvenanceRecord] = None
   ) = this(
     if (language == null) null else language.isoCode,
     if (dataset == null) null else dataset.encoded,
@@ -59,6 +64,7 @@ with Equals
       value,
       context,
       if (datatype == null) null else datatype.uri
+      //provenance
     )
 
   def this(
@@ -69,6 +75,7 @@ with Equals
     value: String,
     context: String,
     datatype: Datatype = null
+    //provenance: Option[ProvenanceRecord] = None
   ) = this(
       language,
       dataset,
@@ -77,8 +84,10 @@ with Equals
       value,
       context,
       findType(datatype, predicate.range)
+      //provenance
     )
 
+  private var provenanceRecord: Option[ProvenanceRecord] = None
 
   // Validate input
   if (subject == null) throw new NullPointerException("subject")
@@ -93,6 +102,7 @@ with Equals
     datatype: String = this.datatype,
     language: String = this.language,
     context: String = this.context
+    //provenance: Option[ProvenanceRecord] = None
   ) = new Quad(
     language,
     dataset,
@@ -101,6 +111,7 @@ with Equals
     value,
     context,
     datatype
+    //provenance
   )
   
   override def toString: String = {
@@ -172,17 +183,77 @@ with Equals
     hash
   }
 
-  def hasObjectPredicate: Boolean =
-  {
-    datatype == null && language == null && UriUtils.createURI(value).get.isAbsolute
+  /**
+    * Creates hash like hashCode but as Long
+    * This is used for creating the triple provenance ids, using the unsigned version of the returned Long values
+    * use java.lang.Long.toUnsignedString(long) to get the correct triple ids
+    * to convert to the unsigned values as BigInt:
+    * val bytes = ByteBuffer.allocate(java.lang.Long.SIZE/java.lang.Byte.SIZE).putLong(hash).array()
+    * new java.math.BigInteger(1, bytes)
+    * @return - hashCode as Long
+    */
+  def longHashCode(): Long = {
+    val prime = 41L
+    var hash = 1L
+    hash = prime * hash + subject.hashCode
+    hash = prime * hash + predicate.hashCode
+    hash = prime * hash + value.hashCode
+    hash = prime * hash + safeHash(datatype)
+    hash = prime * hash + safeHash(language)
+    // ignore dataset and context
+    hash
   }
 
+  def shaHash(): String = {
+    val subjHash = sha256Hash(subject)
+    val predHash = sha256Hash(predicate)
+    val objHash = sha256Hash(value)
+    val ladaHash = sha256Hash(if(language != null) language else if (datatype != null) datatype else "")
+    sha256Hash(subjHash+predHash+objHash+ladaHash)
+  }
+
+  lazy val provenanceIri : IRI = IRI.create(RdfNamespace.fullUri(DBpediaNamespace.PROVENANCE, "triple/" + shaHash())) match{
+    case Success(i) => i
+    case Failure(f) => throw f
+  }
+
+  def hasObjectPredicate: Boolean =
+    datatype == null && language == null && UriUtils.createURI(value).get.isAbsolute
+
   override val id: Long = hashCode().longValue()
-  override def recordEntries: Nothing = ???
+
+  def setProvenanceRecord(rec: ProvenanceRecord): Unit = provenanceRecord = Option(rec)
+  def getProvenanceRecord: Option[ProvenanceRecord] = provenanceRecord
+
+  private var records: ListBuffer[RecordEntry[Quad]] = new ListBuffer[RecordEntry[Quad]]()
+  def addRecord(rec: RecordEntry[Quad]): Unit = {
+    rec match{
+      case RecordEntry(_: ProvenanceRecord,_,_,_,_,_) => throw new IllegalArgumentException("Add a ProvenanceRecord only with method setProvenanceRecord().")
+      case _ => records += rec
+    }
+  }
+
+  def getTripleRecord: TripleRecord = TripleRecord(subject, predicate, value)
+
+  override def recordEntries: List[RecordEntry[Quad]] = {
+    provenanceRecord match{
+      case Some(r) => records.toList ::: List(RecordEntry[Quad](r, RecordCause.Provenance))
+      case None => records.toList
+    }
+  }
 }
 
 object Quad
 {
+
+  /**
+    * Creates a sha256 hash from any given string
+    * @param text - the message
+    * @return - the sha hash
+    */
+  private def sha256Hash(text: String) : String =
+    String.format("%064x", new java.math.BigInteger(1, java.security.MessageDigest.getInstance("SHA-256").digest(text.getBytes("UTF-8"))))
+
   /**
    * null-safe comparison. null is equal to null and less than any non-null string.
    */
@@ -226,6 +297,9 @@ object Quad
    * - triples or quads?
    */
   def unapply(line: String): Option[Quad] =  {
+    if(line == null)
+      return None
+
     val length = line.length
     var index = 0
     

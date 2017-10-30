@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -11,6 +12,7 @@ import scala.language.reflectiveCalls
 /**
  * Extracts labels to articles based on their title.
  */
+@SoftwareAgentAnnotation(classOf[LabelExtractor], AnnotationType.Extractor)
 class LabelExtractor( 
   context : {
     def ontology : Ontology

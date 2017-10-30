@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.config.provenance.{NodeRecord, ProvenanceRecord}
+
 /**
  * Represents a template property.
  *
@@ -24,4 +26,6 @@ case class TemplateParameterNode(parameter : String, override val children : Lis
     case _ => false
 
   }
+
+  override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
 }

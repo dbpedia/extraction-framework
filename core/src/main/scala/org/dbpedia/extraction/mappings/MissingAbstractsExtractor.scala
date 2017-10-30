@@ -4,6 +4,7 @@ import java.io._
 import java.net.URL
 import java.util.logging.{Level, Logger}
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
@@ -30,6 +31,7 @@ import scala.xml.XML
  * We leave the old code commented since we might re-use it soon
  */
 
+@SoftwareAgentAnnotation(classOf[MissingAbstractsExtractor], AnnotationType.Extractor)
 class MissingAbstractsExtractor(
   context : {
     def ontology : Ontology

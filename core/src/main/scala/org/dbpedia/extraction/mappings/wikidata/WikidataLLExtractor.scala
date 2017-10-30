@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -11,15 +12,16 @@ import scala.collection.JavaConversions._
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
-/*
+/**
 * Extract Wikidata sitelinks on the form of
 *   <http://L1.dbpedia.org/resource/xxx> owl:sameAs <http://L2.dbpedia.org/resource/xxx> .
 *Sample:
 *   <http://dbpedia.org/resource/Lithuania> owl:sameAs <http://mt.dbpedia.org/resource/Litwanja>  .
 *   <http://dbpedia.org/resource/Lithuania> owl:sameAs <http://yi.dbpedia.org/resource/ליטע>  .
 *   <http://dbpedia.org/resource/Lithuania> owl:sameAs <http://sk.dbpedia.org/resource/Južná_Amerika> .
-**/
+*/
 
+@SoftwareAgentAnnotation(classOf[WikidataLLExtractor], AnnotationType.Extractor)
 class WikidataLLExtractor(
      context: {
        def ontology: Ontology

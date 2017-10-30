@@ -29,7 +29,7 @@ object MappingsLoader
                  def language : Language
                  def redirects : Redirects
                  def mappingPageSource : Traversable[WikiPage]
-                  def recorder[T: ClassTag] : ExtractionRecorder[T]
+                 def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) : Mappings =
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
@@ -52,7 +52,7 @@ object MappingsLoader
                     {
                         if(! classMappings.contains(name))
                         {
-                             classMappings(name) = loadTemplateMapping(tnode, context)
+                             classMappings(name) = loadTemplateMapping(tnode, name, context)
                         }
                         else
                         {
@@ -66,14 +66,14 @@ object MappingsLoader
                                                            loadOntologyProperty(tnode, "correspondingProperty", false, context.ontology),
                                                            loadTemplateProperty(tnode, "keywords"),
                                                            loadTemplateProperty(tnode, "header"),
-                                                           loadPropertyMappings(tnode, "mappings", context),
+                                                           loadPropertyMappings(tnode, "mappings", name, context),
                                                            context )
                     }
                     case "ConditionalMapping" =>
                     {
                         if(! classMappings.contains(name))
                         {
-                             classMappings(name) = loadConditionalMapping(tnode, context)
+                             classMappings(name) = loadConditionalMapping(tnode, name, context)
                         }
                         else
                         {
@@ -94,7 +94,7 @@ object MappingsLoader
         new Mappings(classMappings.toMap, tableMappings.toList)
     }
 
-    private def loadTemplateMapping(tnode : TemplateNode, context : {
+    private def loadTemplateMapping(tnode : TemplateNode, topLevelTemplate: String, context : {
           def ontology : Ontology
           def redirects : Redirects
           def language : Language
@@ -104,11 +104,11 @@ object MappingsLoader
         new TemplateMapping( loadOntologyClass(tnode, "mapToClass", true, context.ontology),
                              loadOntologyClass(tnode, "correspondingClass", false, context.ontology),
                              loadOntologyProperty(tnode, "correspondingProperty", false, context.ontology),
-                             loadPropertyMappings(tnode, "mappings", context),
+                             loadPropertyMappings(tnode, "mappings", topLevelTemplate, context),
                              context )
     }
 
-    private def loadPropertyMappings(node : TemplateNode, propertyName : String, context : {
+    private def loadPropertyMappings(node : TemplateNode, propertyName : String, topLevelTemplate: String, context : {
                   def ontology : Ontology
                   def redirects : Redirects
                   def language : Language
@@ -122,7 +122,7 @@ object MappingsLoader
         {
             try
             {
-                mappings ::= loadPropertyMapping(mappingNode.asInstanceOf[TemplateNode], context)
+                mappings ::= loadPropertyMapping(mappingNode.asInstanceOf[TemplateNode], topLevelTemplate, context)
             }
             catch
             {
@@ -133,16 +133,18 @@ object MappingsLoader
         mappings.reverse
     }
 
-    private def loadPropertyMapping(tnode : TemplateNode, context : {
+    private def loadPropertyMapping(tnode : TemplateNode, topLevelTemplate: String, context : {
                                       def ontology : Ontology
                                       def redirects : Redirects
                                       def language : Language
                                       def recorder[T: ClassTag] : ExtractionRecorder[T]}
-                                   ) = tnode.title.decoded match
+                                   ) =
+      tnode.title.decoded match
     {
         case "PropertyMapping" =>
         {
-            new SimplePropertyMapping( loadTemplateProperty(tnode, "templateProperty"),
+            new SimplePropertyMapping( topLevelTemplate,
+                                       loadTemplateProperty(tnode, "templateProperty"),
                                        loadOntologyProperty(tnode, "ontologyProperty", true, context.ontology),
                                        loadTemplateProperty(tnode, "select", false),
                                        loadTemplateProperty(tnode, "prefix", false),
@@ -157,7 +159,7 @@ object MappingsLoader
         {
             new IntermediateNodeMapping( loadOntologyClass(tnode, "nodeClass", true, context.ontology),
                                          loadOntologyProperty(tnode, "correspondingProperty", true, context.ontology),
-                                         loadPropertyMappings(tnode, "mappings", context),
+                                         loadPropertyMappings(tnode, "mappings", topLevelTemplate, context),
                                          context )
         }
         case "DateIntervalMapping" =>
@@ -222,7 +224,7 @@ object MappingsLoader
         case title => throw new IllegalArgumentException("Unknown property type " + title + " on page " + tnode.root.title)
     }
     
-    private def loadConditionalMapping(tnode : TemplateNode,  context : {
+    private def loadConditionalMapping(tnode : TemplateNode, topLevelTemplate: String,  context : {
          def ontology : Ontology
          def redirects : Redirects
          def language : Language
@@ -232,12 +234,12 @@ object MappingsLoader
         val conditionMappings =
             for( casesProperty <- tnode.property("cases").toList;
                  conditionNode @ TemplateNode(_,_,_,_) <- casesProperty.children )
-            yield loadConditionMapping(conditionNode, context)
+            yield loadConditionMapping(conditionNode, topLevelTemplate, context)
         
-        new ConditionalMapping(conditionMappings, loadPropertyMappings(tnode, "defaultMappings", context))
+        new ConditionalMapping(conditionMappings, loadPropertyMappings(tnode, "defaultMappings", topLevelTemplate, context))
     }
     
-    private def loadConditionMapping(tnode : TemplateNode, context : {
+    private def loadConditionMapping(tnode : TemplateNode, topLevelTemplate: String, context : {
       def ontology : Ontology
       def redirects : Redirects
       def language : Language
@@ -256,7 +258,7 @@ object MappingsLoader
                               loadTemplateProperty(tnode, "value", false),
                               // TODO: allow nested ConditionalMapping - don't use loadTemplateMapping() 
                               // here, move the switch block in load() to its own method and use that
-                              loadTemplateMapping(mapping, context))
+                              loadTemplateMapping(mapping, topLevelTemplate, context))
     }
     
     private def loadOntologyClass(node : TemplateNode, propertyName : String, required : Boolean, ontology : Ontology) : OntologyClass = {

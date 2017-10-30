@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -17,6 +18,7 @@ import scala.language.reflectiveCalls
  * Extracts page's meta-information e.g. editlink, revisonlink, ....
  */
 
+@SoftwareAgentAnnotation(classOf[MetaInformationExtractor], AnnotationType.Extractor)
 class MetaInformationExtractor( context : {
   def ontology : Ontology
   def language : Language } ) extends WikiPageExtractor

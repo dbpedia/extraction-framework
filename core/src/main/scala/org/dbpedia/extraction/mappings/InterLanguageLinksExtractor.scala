@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
@@ -12,6 +14,7 @@ import scala.language.reflectiveCalls
 /**
  * Extracts interwiki links
  */
+@SoftwareAgentAnnotation(classOf[InterLanguageLinksExtractor], AnnotationType.Extractor)
 class InterLanguageLinksExtractor(context: { def ontology : Ontology; def language : Language }) extends PageNodeExtractor
 {
   private val interLanguageLinksProperty = context.ontology.properties("wikiPageInterLanguageLink")

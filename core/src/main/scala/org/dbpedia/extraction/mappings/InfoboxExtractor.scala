@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
@@ -29,6 +30,7 @@ import scala.reflect.ClassTag
  * The infobox extractor performs only a minimal amount of property value clean-up, e.g., by converting a value like “June 2009” to the XML Schema format “2009–06”.
  * You should therefore use the infobox dataset only if your application requires complete coverage of all Wikipeda properties and you are prepared to accept relatively noisy data.
  */
+@SoftwareAgentAnnotation(classOf[InfoboxExtractor], AnnotationType.Extractor)
 class InfoboxExtractor(
   context : {
     def ontology : Ontology

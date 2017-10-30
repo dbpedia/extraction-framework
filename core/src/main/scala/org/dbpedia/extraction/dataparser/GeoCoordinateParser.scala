@@ -1,16 +1,21 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.wikiparser.{TemplateNode, Node}
+import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
 import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+
 import util.control.ControlThrowable
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
 import org.dbpedia.extraction.mappings.Redirects
+
 import scala.language.reflectiveCalls
 
 /**
  * Parses geographical coordinates.
  */
+@SoftwareAgentAnnotation(classOf[GeoCoordinateParser], AnnotationType.Parser)
 class GeoCoordinateParser( 
     extractionContext : {  
       def language : Language  

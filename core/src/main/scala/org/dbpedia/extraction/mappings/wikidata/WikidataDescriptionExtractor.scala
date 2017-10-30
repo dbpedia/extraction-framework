@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
-import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
+import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ArrayBuffer
@@ -15,6 +16,7 @@ import scala.language.reflectiveCalls
  * Extracts descriptions triples from Wikidata sources
  * on the form of <http://wikidata.dbpedia.org/resource/Q139> <http://dbpedia.org/ontology/description> "description"@lang.
  */
+@SoftwareAgentAnnotation(classOf[WikidataDescriptionExtractor], AnnotationType.Extractor)
 class WikidataDescriptionExtractor(
                                     context: {
                                       def ontology: Ontology

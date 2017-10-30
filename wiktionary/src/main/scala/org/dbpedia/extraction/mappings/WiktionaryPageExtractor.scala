@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URL
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.mappings.wikitemplate._
 import org.dbpedia.extraction.transform.Quad
@@ -41,6 +42,7 @@ import scala.language.reflectiveCalls
  * @author Sebastian Hellmann <hellmann@informatik.uni-leipzig.de>
  */
 
+@SoftwareAgentAnnotation(classOf[WiktionaryPageExtractor], AnnotationType.Extractor)
 class WiktionaryPageExtractor(
   context : {
    def redirects : Redirects

@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
@@ -17,6 +18,7 @@ import scala.reflect.ClassTag
 /**
  * Extracts information about persons (date and place of birth etc.) from the English and German Wikipedia, represented using the FOAF vocabulary.
  */
+@SoftwareAgentAnnotation(classOf[PersondataExtractor], AnnotationType.Extractor)
 class PersondataExtractor(
   context : {
     def ontology : Ontology
