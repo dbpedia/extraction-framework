@@ -1,9 +1,8 @@
 package org.dbpedia.extraction.wikiparser
 
 import java.util.logging.Logger
-import java.net.{URI, URISyntaxException}
 
-import org.apache.jena.iri.IRIException
+import org.dbpedia.extraction.config.transform.TemplateTransformConfig
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.iri.{IRISyntaxException, UriUtils}
 
@@ -56,7 +55,7 @@ object NodeUtil
 
                 nodes ::= TextNode(sb.toString(), line)
             }
-            case _  if (parenthesesCount <= 0) => nodes ::= child
+            case _  if parenthesesCount <= 0 => nodes ::= child
             case _ =>
         }
 
@@ -101,100 +100,102 @@ object NodeUtil
      */
     def splitPropertyNode(inputNode : PropertyNode, regex : String, trimResults : Boolean = false, transformCmd : String = null, transformFunc : String => String = identity) : List[PropertyNode] =
     {
-        // Store a reference to the TemplateNode this PropertyNode belongs to.
-        val inputTemplateNode = inputNode.parent.asInstanceOf[TemplateNode]
+      // Store a reference to the TemplateNode this PropertyNode belongs to.
+      val inputTemplateNode = inputNode.parent.asInstanceOf[TemplateNode]
 
-        var propertyNodes = List[PropertyNode]()
-        var currentNodes = List[Node]()
+      var propertyNodes = List[PropertyNode]()
+      var currentNodes = List[Node]()
 
-        val fullRegex = if(trimResults) "\\s*(" + regex + ")\\s*" else regex
-        var addThisNode = true
+      val fullRegex = if(trimResults) "\\s*(" + regex + ")\\s*" else regex
+      var addThisNode = true
 
-        for(child <- inputNode.children) child match
-        {
-            case TextNode(text, line, lang) =>
-            {
+      def traverseChildNodes(children: List[Node]): Unit = {
+        for (child <- children ) child match {
+          case TextNode(text, line, lang) => {
 
-                //if exclusive close tag -> set addThisNode to true
-                if(text.matches("\\s*<\\/br\\s*>\\s*")){
-                  addThisNode = false
+            //if exclusive close tag -> set addThisNode to true
+            if (text.matches("\\s*<\\/br\\s*>\\s*")) {
+              addThisNode = false
+              propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
+              currentNodes = List[Node]()
+            }
+
+            if (addThisNode) {
+              val parts = text.replaceAll("""(<br\s*exclusive=[^>]+>)([^<]*)(<\/br\s*>)""", "$2").split(fullRegex, -1)
+
+              for (i <- 0 until parts.size) {
+                if (parts.size > 1 && i < parts.size - 1) {
+                  if (parts(i).trim.nonEmpty) {
+
+                    val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc, lang)
+
+                    currentNodes = currentNode :: currentNodes
+                  }
+                  currentNodes = currentNodes.reverse
                   propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
                   currentNodes = List[Node]()
                 }
+                else {
+                  if (parts(i).trim.nonEmpty) {
 
-                if(addThisNode) {
-                    val parts = text.replaceAll("""(<br\s*exclusive=[^>]+>)([^<]*)(<\/br\s*>)""", "$2").split(fullRegex, -1)
+                    val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc, lang)
 
-                    for (i <- 0 until parts.size) {
-                        if (parts.size > 1 && i < parts.size - 1) {
-                            if (parts(i).trim.nonEmpty) {
-
-                                val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc, lang)
-
-                                currentNodes = currentNode :: currentNodes
-                            }
-                            currentNodes = currentNodes.reverse
-                            propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
-                            currentNodes = List[Node]()
-                        }
-                        else {
-                            if (parts(i).trim.nonEmpty) {
-
-                                val currentNode = buildPropertyNode(parts(i), line, inputNode.root.title.language, transformCmd, transformFunc, lang)
-
-                                currentNodes = currentNode :: currentNodes
-                            }
-                        }
-                    }
+                    currentNodes = currentNode :: currentNodes
+                  }
                 }
-                //if exclusive start tag -> set addThisNode to true
-                if(text.matches("\\s*<br\\s*exclusive=[^>]+>\\s*")){
-                    //if addThisNode is true, this is the first encounter of this tag -> we reset the propertylist
-                    if(addThisNode) {
-                      propertyNodes = List[PropertyNode]()
-                      currentNodes = List[Node]()
-                    }
-                    addThisNode = true
-                }
+              }
             }
-            case ExternalLinkNode(destinationURI, children, line, destinationNodes) =>
-                // In case of an external link node, transform the URI using the
-                // transform function and attempt to use the result as a URI.
-                UriUtils.createURI(transformFunc(destinationURI.toString)) match{
-                    case Success(u) => currentNodes = ExternalLinkNode(u, children, line, destinationNodes) :: currentNodes
-                    case Failure(f) => f match{
-                        // If the new URI doesn't make syntactical sense, produce
-                        // a warning and don't modify the original node.
-                        case e: IRISyntaxException => {
-                            Logger.getLogger(NodeUtil.getClass.getName).warning(
-                                "(while processing template '" + inputTemplateNode.title.decodedWithNamespace +
-                                  "', property '" + inputNode.key + "')" +
-                                  f" Adding prefix or suffix to '$child%s' caused an error, skipping: " + e.getMessage
-                            )
-                            currentNodes = child :: currentNodes
-                        }
-                        case _ => throw f
-                    }
+            //if exclusive start tag -> set addThisNode to true
+            if (text.matches("\\s*<br\\s*exclusive=[^>]+>\\s*")) {
+              //if addThisNode is true, this is the first encounter of this tag -> we reset the propertylist
+              if (addThisNode) {
+                propertyNodes = List[PropertyNode]()
+                currentNodes = List[Node]()
+              }
+              addThisNode = true
+            }
+          }
+          case ExternalLinkNode(destinationURI, children, line, destinationNodes) =>
+            // In case of an external link node, transform the URI using the
+            // transform function and attempt to use the result as a URI.
+            UriUtils.createURI(transformFunc(destinationURI.toString)) match {
+              case Success(u) => currentNodes = ExternalLinkNode(u, children, line, destinationNodes) :: currentNodes
+              case Failure(f) => f match {
+                // If the new URI doesn't make syntactical sense, produce
+                // a warning and don't modify the original node.
+                case e: IRISyntaxException => {
+                  Logger.getLogger(NodeUtil.getClass.getName).warning(
+                    "(while processing template '" + inputTemplateNode.title.decodedWithNamespace +
+                      "', property '" + inputNode.key + "')" +
+                      f" Adding prefix or suffix to '$child%s' caused an error, skipping: " + e.getMessage
+                  )
+                  currentNodes = child :: currentNodes
                 }
-            case _ => currentNodes = child :: currentNodes
+                case _ => throw f
+              }
+            }
+          case _ => currentNodes = child :: currentNodes
         }
+      }
 
-        //Add last property node
-        currentNodes = currentNodes.reverse
-        if(currentNodes.nonEmpty)
-        {
-            propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
-        }
+      traverseChildNodes(inputNode.children)
 
-        propertyNodes = propertyNodes.reverse
+      //Add last property node
+      currentNodes = currentNodes.reverse
+      if(currentNodes.nonEmpty)
+      {
+          propertyNodes = PropertyNode(inputNode.key, currentNodes, inputNode.line) :: propertyNodes
+      }
 
-        //Create a synthetic template node for each property node
-        val templateNodes = for(propertyNode <- propertyNodes) yield TemplateNode(inputTemplateNode.title, propertyNode :: Nil, inputTemplateNode.line)
+      propertyNodes = propertyNodes.reverse
 
-        //Set link to the original AST
-        templateNodes.foreach(tnode => tnode.parent = inputTemplateNode.parent)
+      //Create a synthetic template node for each property node
+      val templateNodes = for(propertyNode <- propertyNodes) yield TemplateNode(inputTemplateNode.title, propertyNode :: Nil, inputTemplateNode.line)
 
-        propertyNodes
+      //Set link to the original AST
+      templateNodes.foreach(tnode => tnode.parent = inputTemplateNode.parent)
+
+      propertyNodes
     }
 
     /**
@@ -218,14 +219,14 @@ object NodeUtil
                 {
                     if(parts.size > 1 && i < parts.size - 1)
                     {
-                        if(parts(i).size > 0) currentNodes = new TextNode(parts(i), line) :: currentNodes
+                        if(parts(i).length > 0) currentNodes = TextNode(parts(i), line) :: currentNodes
                         currentNodes = currentNodes.reverse
                         splitNodes = currentNodes :: splitNodes
                         currentNodes = List[Node]()
                     }
                     else
                     {
-                        if(parts(i).size > 0) currentNodes = new TextNode(parts(i), line) :: currentNodes
+                        if(parts(i).length > 0) currentNodes = TextNode(parts(i), line) :: currentNodes
                     }
                 }
             }
@@ -240,16 +241,16 @@ object NodeUtil
     }
 
     def filterEmptyTextNodes(list : List[Node]) : List[Node] = {
-        return list.filter(x => isEmptyTextNode(x))
+        list.filter(x => isEmptyTextNode(x))
     }
 
     def isEmptyTextNode(node : Node) : Boolean = {
 
         if(!node.isInstanceOf[TextNode]){
-            return true;
+            return true
         }
 
-        return ! node.asInstanceOf[TextNode].text.trim.isEmpty
+        ! node.asInstanceOf[TextNode].text.trim.isEmpty
 
     }
 

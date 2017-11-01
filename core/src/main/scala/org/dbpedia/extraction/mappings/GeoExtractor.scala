@@ -43,7 +43,7 @@ extends PageNodeExtractor
     // Not recursing into templates as these are presumed to be handled by template-based mechanisms (GeoCoordinatesMapping).
     for(
       templateNode @ TemplateNode(_, _, _, _) <- page.children;
-      coordinate <- geoCoordinateParser.parse(templateNode)
+      coordinate <- geoCoordinateParser.parseWithProvenance(templateNode)
     )
     {
       return writeGeoCoordinate(coordinate.value, subjectUri, page.sourceIri)

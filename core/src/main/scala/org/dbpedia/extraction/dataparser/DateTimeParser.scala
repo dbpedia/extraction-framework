@@ -27,7 +27,7 @@ class DateTimeParser ( context : {
       def recorder[T: ClassTag] : ExtractionRecorder[T] },
      datatype : Datatype,
      val strict : Boolean = false,
-     val tryMinorTypes : Boolean = false) extends DataParser
+     val tryMinorTypes : Boolean = false) extends DataParser[Date]
 {
     require(datatype.!=(null), "datatype != null")
 
@@ -97,7 +97,7 @@ class DateTimeParser ( context : {
 
     protected val YearRegex2: scala.util.matching.Regex = ("""(?iu)""" + prefix + """(""" + eraRegex + """)(?<![\d])(\d{1,4})(?!\d)\s*""" + postfix).r
 
-    override def parse(node : Node) : Option[ParseResult[Date]] =
+  private[dataparser] override def parse(node : Node) : Option[ParseResult[Date]] =
     {
       try
       {

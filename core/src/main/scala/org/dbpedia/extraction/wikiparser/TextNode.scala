@@ -30,5 +30,5 @@ case class TextNode(text : String, override val line : Int, lang: Language = nul
 
     override def children = List()
 
-    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(Some(this.line))
 }

@@ -10,12 +10,12 @@ import scala.util.matching.Regex.Match
  * Parses a human-readable character string from a node. 
  */
 @SoftwareAgentAnnotation(classOf[StringParser], AnnotationType.Parser)
-class StringParser extends DataParser
+class StringParser extends DataParser[String]
 {
     private val smallTagRegex = """<small[^>]*>\(?(.*?)\)?<\/small>""".r
     private val tagRegex = """\<.*?\>""".r
 
-    override def parse(node : Node) : Option[ParseResult[String]] =
+    private[dataparser] override def parse(node : Node) : Option[ParseResult[String]] =
     {
         //Build text from node
         node match {
@@ -69,7 +69,7 @@ class StringParser extends DataParser
 }
 
 
-object StringParser extends DataParser{
+object StringParser extends DataParser[String]{
     private val parser = new StringParser()
-    def parse(node : Node) : Option[ParseResult[String]] = parser.parse(node)
+    override private[dataparser] def parse(node: Node) = parser.parse(node)
 }

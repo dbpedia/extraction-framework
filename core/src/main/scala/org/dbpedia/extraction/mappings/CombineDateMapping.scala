@@ -50,7 +50,7 @@ extends PropertyMapping
       (templateProperty, unit) <- templateProperties;
       parser <- parserOption(unit);
       property <- node.property(templateProperty);
-      parseResult <- parser.parse(property)
+      parseResult <- parser.parseWithProvenance(property)
     )
       dates += parseResult.value
     

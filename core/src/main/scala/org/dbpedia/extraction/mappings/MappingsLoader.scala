@@ -281,7 +281,7 @@ object MappingsLoader
     
     private def loadTemplateProperty(node : TemplateNode, propertyName : String, required : Boolean = true) : String = 
     {
-        val value = node.property(propertyName).flatMap(propertyNode => StringParser.parse(propertyNode))
+        val value = node.property(propertyName).flatMap(propertyNode => StringParser.parseWithProvenance(propertyNode))
 
         value match
         {

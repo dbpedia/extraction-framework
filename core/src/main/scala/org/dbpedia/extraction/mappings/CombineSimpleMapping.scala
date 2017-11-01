@@ -41,7 +41,7 @@ class CombineSimpleMapping (
     for (
       templateProperty <- templateProperties;
       property <- node.property(templateProperty);
-      parseResult <- StringParser.parse(property)
+      parseResult <- StringParser.parseWithProvenance(property)
     )
       res += delineator + parseResult.value
 

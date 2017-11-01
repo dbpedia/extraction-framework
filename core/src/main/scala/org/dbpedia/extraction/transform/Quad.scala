@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.transform
 
+import com.sun.xml.internal.ws.api.databinding.MetadataReader
 import org.dbpedia.extraction.config.{RecordCause, RecordEntry, Recordable}
-import org.dbpedia.extraction.config.provenance.{Dataset, ProvenanceRecord, TripleRecord}
+import org.dbpedia.extraction.config.provenance.{Dataset, ProvenanceMetadata, ProvenanceRecord, TripleRecord}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, OntologyProperty, OntologyType, RdfNamespace}
 import org.dbpedia.extraction.transform.Quad._
@@ -132,15 +133,20 @@ with Equals
   def compare(that: Quad): Int = {
     var c = 0
     c = this.subject.compareTo(that.subject)
-    if (c != 0) return c
+    if (c != 0) 
+return c
     c = this.predicate.compareTo(that.predicate)
-    if (c != 0) return c
+    if (c != 0) 
+return c
     c = this.value.compareTo(that.value)
-    if (c != 0) return c
+    if (c != 0) 
+return c
     c = safeCompare(this.datatype, that.datatype)
-    if (c != 0) return c
+    if (c != 0) 
+return c
     c = safeCompare(this.language, that.language)
-    if (c != 0) return c
+    if (c != 0) 
+return c
     // ignore dataset and context
     0
   }
@@ -185,12 +191,14 @@ with Equals
 
   /**
     * Creates hash like hashCode but as Long
-    * This is used for creating the triple provenance ids, using the unsigned version of the returned Long values
+    * This is used for creating the triple provenance ids, using the unsigned version of the 
+returned Long values
     * use java.lang.Long.toUnsignedString(long) to get the correct triple ids
     * to convert to the unsigned values as BigInt:
     * val bytes = ByteBuffer.allocate(java.lang.Long.SIZE/java.lang.Byte.SIZE).putLong(hash).array()
     * new java.math.BigInteger(1, bytes)
-    * @return - hashCode as Long
+    * @
+return - hashCode as Long
     */
   def longHashCode(): Long = {
     val prime = 41L
@@ -205,11 +213,15 @@ with Equals
   }
 
   def shaHash(): String = {
-    val subjHash = sha256Hash(subject)
-    val predHash = sha256Hash(predicate)
-    val objHash = sha256Hash(value)
-    val ladaHash = sha256Hash(if(language != null) language else if (datatype != null) datatype else "")
-    sha256Hash(subjHash+predHash+objHash+ladaHash)
+    val lada = Option(datatype) match{
+      case Some(d) => if(d == langString && language.nonEmpty)
+          language
+        else
+          d
+      case None => null
+    }
+    // if lada == null flatMap(Option(_)) reduces the list to s,p,o, resulting not in a trailing comma
+    sha256Hash(List(subject,predicate,value,lada).flatMap(Option(_)).mkString(","))
   }
 
   lazy val provenanceIri : IRI = IRI.create(RdfNamespace.fullUri(DBpediaNamespace.PROVENANCE, "triple/" + shaHash())) match{
@@ -220,9 +232,13 @@ with Equals
   def hasObjectPredicate: Boolean =
     datatype == null && language == null && UriUtils.createURI(value).get.isAbsolute
 
-  override val id: Long = hashCode().longValue()
+  override val id: Long = longHashCode()
 
-  def setProvenanceRecord(rec: ProvenanceRecord): Unit = provenanceRecord = Option(rec)
+  //set the triple level metadata object one may want to append to this quad
+  def setProvenanceRecord(metadata: ProvenanceMetadata): Unit = provenanceRecord =
+    Option(new ProvenanceRecord(id, provenanceIri.toString, getTripleRecord, System.currentTimeMillis(), metadata ))
+
+  // get the metadata obeject
   def getProvenanceRecord: Option[ProvenanceRecord] = provenanceRecord
 
   private var records: ListBuffer[RecordEntry[Quad]] = new ListBuffer[RecordEntry[Quad]]()
@@ -233,7 +249,7 @@ with Equals
     }
   }
 
-  def getTripleRecord: TripleRecord = TripleRecord(subject, predicate, value)
+  def getTripleRecord: TripleRecord = TripleRecord(subject, predicate, value, Option(language), Option(datatype))
 
   override def recordEntries: List[RecordEntry[Quad]] = {
     provenanceRecord match{
@@ -246,10 +262,13 @@ with Equals
 object Quad
 {
 
+  val langString = "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+  val string = "http://www.w3.org/2001/XMLSchema#string"
   /**
     * Creates a sha256 hash from any given string
     * @param text - the message
-    * @return - the sha hash
+    * @
+return - the sha hash
     */
   private def sha256Hash(text: String) : String =
     String.format("%064x", new java.math.BigInteger(1, java.security.MessageDigest.getInstance("SHA-256").digest(text.getBytes("UTF-8"))))
@@ -298,7 +317,7 @@ object Quad
    */
   def unapply(line: String): Option[Quad] =  {
     if(line == null)
-      return None
+     return None
 
     val length = line.length
     var index = 0
@@ -307,72 +326,105 @@ object Quad
     var datatype: String = null
     
     index = skipSpace(line, index)
-    val subject = findUri(line, index)
-    if (subject != null) index += subject.length + 2
-    else return None
-    
-    // TODO: N-Triples requires space here. Not sure about Turtle.
+    val subject = findUri(line, index) match{
+      case Some(p) =>
+        index += p.length + 2
+        p
+      case None => return None
+    }
+
     index = skipSpace(line, index)
-    val predicate = findUri(line, index)
-    if (predicate != null) index += predicate.length + 2
-    else return None
-    
-    // TODO: N-Triples requires space here. Not sure about Turtle.
+    val predicate = findUri(line, index) match{
+      case Some(p) =>
+        index += p.length + 2
+        p
+      case None => return None
+    }
+
     index = skipSpace(line, index)
-    var value = findUri(line, index)
-    if (value != null) index += value.length + 2
-    else { // literal
-      if (index == length || line.charAt(index) != '"') return None
-      index += 1 // skip "
-      if (index == length) return None
-      var start = index
-      while (line.charAt(index) != '"') {
-        if (line.charAt(index) == '\\') index += 1
-        index += 1
-        if (index >= length) return None
-      } 
-      value = line.substring(start, index)
-      index += 1 // skip "
-      if (index == length) return None
-      datatype = "http://www.w3.org/2001/XMLSchema#string" // set default type
-      var c = line.charAt(index)
-      if (c == '@') {
-        // FIXME: This code matches: @[a-z][a-z0-9-]*
-        // NT spec says: '@' [a-z]+ ('-' [a-z0-9]+ )*
-        // Turtle spec says: "@" [a-zA-Z]+ ( "-" [a-zA-Z0-9]+ )*
-        index += 1 // skip @
-        start = index
-        if (index == length) return None
-        c = line.charAt(index)
-        if (c < 'a' || c > 'z') return None
-        do {
-          index += 1 // skip last lang char
-          if (index == length) return None
+    val value = findUri(line, index) match {
+      case Some(v) =>
+        index += v.length + 2
+        v
+      case None => // literal
+        if (index == length || line.charAt(index) != '"')
+          return None
+        index += 1 // skip "
+        if (index == length)
+          return None
+        var start = index
+        while (line.charAt(index) != '"') {
+          if (line.charAt(index) == '\\') index += 1
+          index += 1
+          if (index >= length)
+            return None
+        }
+        val v = line.substring(start, index)
+        index += 1 // skip "
+        if (index == length)
+          return None
+        datatype = string // set default type
+        var c = line.charAt(index)
+        if (c == '@') {
+          // UPDATE: both specs in version 1.1 : '@' [a-zA-Z]+ ('-' [a-zA-Z0-9]+)*
+          index += 1 // skip @
+          start = index
+          if (index == length)
+            return None
           c = line.charAt(index)
-        } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z'))
-        language = line.substring(start, index)
-        datatype = "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString" // when there is a language we have an rdf:langString
-      }
-      else if (c == '^') { // type uri: ^^<...>
-        if (! line.startsWith("^^<", index)) return None
-        start = index + 3 // skip ^^<
-        index = line.indexOf('>', start)
-        if (index == -1) return None
-        datatype = line.substring(start, index)
-        index += 1 // skip '>'
-      } 
+          //make sure there is at least one char as lang tag
+          if((c < 'A' || c > 'Z') && (c < 'a' || c > 'z'))
+            return None
+          index += 1
+          c = line.charAt(index)
+          //test for additional tag chars
+          while ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
+            index += 1 // skip last lang char
+            if (index == length)
+              return None
+            c = line.charAt(index)
+          }
+          //tags maybe using by '-'
+          if (c == '-') {
+            do {
+              index += 1 // skip last lang char
+              if (index == length)
+                return None
+              c = line.charAt(index)
+            } while (c == '-' || (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+          }
+          language = line.substring(start, index)
+          datatype = langString // when there is a language we have an rdf:langString
+        }
+        else if (c == '^') { // type uri: ^^<...>
+          if (!line.startsWith("^^<", index))
+            return None
+          start = index + 3 // skip ^^<
+          index = line.indexOf('>', start)
+          if (index == -1)
+            return None
+          datatype = line.substring(start, index)
+          index += 1 // skip '>'
+        }
+        v
     }
     
     index = skipSpace(line, index)
-    val context = findUri(line, index)
-    if (context != null) index += context.length + 2
+    val context = findUri(line, index) match{
+      case Some(u) =>
+        index += u.length + 2
+        u
+      case None => null
+    }
     
     index = skipSpace(line, index)
-    if (index == length || line.charAt(index) != '.') return None
+    if (index == length || line.charAt(index) != '.') 
+      return None
     index += 1 // skip .
     
     index = skipSpace(line, index)
-    if (index != length) return None
+    if (index != length) 
+      return None
     
     Some(new Quad(language, null, subject, predicate, value, context, datatype))
   }
@@ -382,16 +434,30 @@ object Quad
     var index = start
     while (index < length) {
       val c = line.charAt(index)
-      if (c != ' ' && c != '\t') return index
+      if (c != ' ' && c != '\t') 
+        return index
       index += 1
     } 
     index
   }
   
-  private def findUri(line: String, start: Int): String = {
-    if (start == line.length || line.charAt(start) != '<') return null
-    val end = line.indexOf('>', start + 1) // TODO: turtle allows escaping > as \>
-    if (end == -1) null else line.substring(start + 1, end)
+  private def findUri(line: String, start: Int): Option[String] = {
+    if (start == line.length || line.charAt(start) != '<' || line.length <= start+1)
+      return None
+    var ind = start+1
+    var c1 = 'h'
+    var c2 = '<'
+    var c3 = line.charAt(ind)
+
+    while(c3 != '>' || (c2 == '\\' && c1 != '\\')){
+      ind = ind+1
+      c1 = c2
+      c2 = c3
+      if(ind == line.length)
+        return None
+      c3 = line.charAt(ind)
+    }
+    Some(line.substring(start + 1, ind))
   }
   
 }

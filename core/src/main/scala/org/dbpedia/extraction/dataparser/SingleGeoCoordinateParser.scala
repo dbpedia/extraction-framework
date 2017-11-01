@@ -16,7 +16,7 @@ import scala.language.reflectiveCalls
  * Parses a single geographical coordinate, ie. either a latitude or a longitude.
  */
 @SoftwareAgentAnnotation(classOf[SingleGeoCoordinateParser], AnnotationType.Parser)
-class SingleGeoCoordinateParser(context : { def language : Language }) extends DataParser
+class SingleGeoCoordinateParser(context : { def language : Language }) extends DataParser[SingleGeoCoordinate]
 {
     private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
     private val language = context.language.wikiCode
@@ -29,9 +29,9 @@ class SingleGeoCoordinateParser(context : { def language : Language }) extends D
 	
 	private val latHemRegex = latHemLetterMap.keySet.mkString("|")
 	private val LatitudeRegex = ("""([0-9]{1,2})/([0-9]{1,2})/([0-9]{0,2}(?:.[0-9]{1,2})?)[/]?[\s]?("""+ latHemRegex +""")""").r
-	
 
-    override def parse(node : Node) : Option[ParseResult[SingleGeoCoordinate]] =
+
+  private[dataparser]   override def parse(node : Node) : Option[ParseResult[SingleGeoCoordinate]] =
     {
         try
         {

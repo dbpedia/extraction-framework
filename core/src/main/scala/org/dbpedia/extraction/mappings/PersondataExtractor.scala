@@ -82,7 +82,7 @@ extends PageNodeExtractor
                 {
                     case key if key == name =>
                     {
-                        for(nameValue <- StringParser.parse(property).map(_.value))
+                        for(nameValue <- StringParser.parseWithProvenance(property).map(_.value))
                         {
                             val nameParts = nameValue.split(",")
                             if (nameParts.size == 2)
@@ -111,13 +111,13 @@ extends PageNodeExtractor
                     {
                         case key if key == alternativeNames =>
                         {
-                            for(value <- StringParser.parse(property))
+                            for(value <- StringParser.parseWithProvenance(property))
                             {
                             }
                         }
                         case key if key == description =>
                         {
-                            for(value <- StringParser.parse(property).map(_.value))
+                            for(value <- StringParser.parseWithProvenance(property).map(_.value))
                             {
                                 quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceIri, new Datatype("rdf:langString"))
                             }
@@ -161,19 +161,19 @@ extends PageNodeExtractor
 
     private def getDate(node: Node) : Option[(String, Datatype)] =
     {
-        for (date <- dateParser.parse(node))
+        for (date <- dateParser.parseWithProvenance(node))
         {
             return Some((date.toString, date.value.datatype))
         }
-        for (date <- monthYearParser.parse(node))
+        for (date <- monthYearParser.parseWithProvenance(node))
         {
             return Some((date.toString, date.value.datatype))
         }
-        for (date <- monthDayParser.parse(node))
+        for (date <- monthDayParser.parseWithProvenance(node))
         {
             return Some((date.toString, date.value.datatype))
         }
-        for (date <- yearParser.parse(node))
+        for (date <- yearParser.parseWithProvenance(node))
         {
             return Some((date.toString, date.value.datatype))
         }

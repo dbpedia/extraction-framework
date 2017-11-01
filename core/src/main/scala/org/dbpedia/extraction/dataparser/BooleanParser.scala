@@ -12,12 +12,12 @@ import scala.language.postfixOps
  * TODO: also look for "0"/"1"? "on"/"off"?
  */
 @SoftwareAgentAnnotation(BooleanParser.getClass, AnnotationType.Parser)
-class BooleanParser extends DataParser
+class BooleanParser extends DataParser[Boolean]
 {
   private val FALSE_REGEX = """(?i)(?:.*\s)*(no|false)(?:\s.*)*""".r
   private val TRUE_REGEX = """(?i)(?:.*\s)*(yes|true)(?:\s.*)*""".r
-  
-  override def parse( node : Node ) : Option[ParseResult[Boolean]] =
+
+  private[dataparser] override def parse( node : Node ) : Option[ParseResult[Boolean]] =
   {
     // Note: BooleanParser.php only checked the children, not the node itself.
     for (child <- node :: node.children; string <- child retrieveText)
@@ -34,7 +34,8 @@ class BooleanParser extends DataParser
   }
 }
 
-object BooleanParser extends DataParser{
+object BooleanParser extends DataParser[Boolean]{
   private val parser = new BooleanParser()
-  def parse( node : Node ) : Option[ParseResult[Boolean]] = parser.parse(node)
+
+  override private[dataparser] def parse(node: Node) = parser.parse(node)
 }

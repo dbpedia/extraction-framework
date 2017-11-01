@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.ExtractorUtils
 import org.dbpedia.extraction.wikiparser._
@@ -25,7 +25,7 @@ extends PageNodeExtractor
 
   private val resolvedMappings = context.redirects.resolveMap(templateMappings)
 
-  override val datasets = templateMappings.values.flatMap(_.datasets).toSet ++ tableMappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyPropertiesLiterals)
+  override val datasets: Set[Dataset] = templateMappings.values.flatMap(_.datasets).toSet ++ tableMappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyPropertiesLiterals)
 
   override def extract(page : PageNode, subjectUri : String) : Seq[Quad] =
   {

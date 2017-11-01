@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord, ParserRecord, ProvenanceRecord}
+import org.dbpedia.extraction.config.provenance._
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, Ontology, RdfNamespace}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
@@ -37,7 +37,7 @@ extends PageNodeExtractor
   {
     if(node.title.namespace != Namespace.Category) return Seq.empty
 
-    val classUri = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
+    val softwareAgentUri = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
 
     var quads = new ArrayBuffer[Quad]()
 
@@ -56,26 +56,22 @@ extends PageNodeExtractor
       val objectUri = language.resourceUri.append(link.destination.decodedWithNamespace)
 
       val q = quad(subjectUri, property, objectUri, link.sourceIri)
-      q.setProvenanceRecord(
-        new ProvenanceRecord(
-          q.longHashCode(),
-          q.provenanceIri.toString,
-          q.getTripleRecord,
-          node.getNodeRecord,
-          if(q.dataset != null) Seq(RdfNamespace.fullUri(DBpediaNamespace.DATASET, q.dataset)) else Seq(),
-          Seq.empty,
-          Some(ExtractorRecord(
-            classUri.toString,
-            ParserRecord(
-              "", //TODO
-              link.toWikiText,
-              objectUri
-            ),
-            None, None, None, None
-          )),
-          None
-        )
-      )
+      q.setProvenanceRecord(new DBpediaMetadata(
+        node.getNodeRecord,
+        if(q.dataset != null) Seq(RdfNamespace.fullUri(DBpediaNamespace.DATASET, q.dataset)) else Seq(),
+        Some(ExtractorRecord(
+          softwareAgentUri.toString,
+          ParserRecord(
+            softwareAgentUri.toString, //the software agent creating the object value is the same as the extractor
+            link.root.getOriginWikiText(link.line),
+            link.toWikiText,
+            objectUri
+          ),
+          None, None, None, None
+        )),
+        None,
+        Seq.empty
+      ))
       quads += q
     }
     quads

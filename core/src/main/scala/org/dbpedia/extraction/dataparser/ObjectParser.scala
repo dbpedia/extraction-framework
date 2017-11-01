@@ -20,7 +20,7 @@ import scala.language.reflectiveCalls
  */
 
 @SoftwareAgentAnnotation(classOf[ObjectParser], AnnotationType.Parser)
-class ObjectParser( context : { def language : Language }, val strict : Boolean = false) extends DataParser
+class ObjectParser( context : { def language : Language }, val strict : Boolean = false) extends DataParser[String]
 {
     private val flagTemplateParser = new FlagTemplateParser(context)
 
@@ -42,7 +42,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
         }
     }
 
-    override def parse(node : Node) : Option[ParseResult[String]] =
+    private[dataparser] override def parse(node : Node) : Option[ParseResult[String]] =
     {
         val pageNode = node.root
 

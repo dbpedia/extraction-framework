@@ -65,6 +65,20 @@ extends Node with Recordable[PageNode]
 
   def toWikiText: String = children.map(_.toWikiText).mkString
 
+  private lazy val _sourcelines = List.empty ++ "x" ++ this.source.lines.toList
+
+  /**
+    * returns the original wikitext content of the slice of lines specified
+    * @param fromLine - start line of the slice
+    * @param toLine - end line of the slice (exclusive), if this parameter is not provided or less than 0, only the fromLine will be returned
+    * @return - the concatenated result of all requested lines
+    */
+  def getOriginWikiText(fromLine: Int, toLine: Int = -1): String = {
+    assert(fromLine >= 0)
+    val to = if(toLine < 0) fromLine+1 else toLine
+    _sourcelines.slice(fromLine, to).mkString("\n")
+  }
+
   def toPlainText: String = children.map(_.toPlainText).mkString
 
   def toDumpXML: Elem = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText, "text/x-wiki")
@@ -98,8 +112,7 @@ extends Node with Recordable[PageNode]
 
   def getNodeRecord = NodeRecord(
     uri = this.uri,
-    rootRev = this.revision,
-    timeStamp = this.timestamp,
+    revision = this.revision,
     namespace = this.title.namespace.code,
     line = this.line,
     language = this.title.language.wikiCode

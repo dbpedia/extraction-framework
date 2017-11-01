@@ -21,7 +21,7 @@ class GeoCoordinateParser(
       def language : Language  
       def redirects : Redirects 
       } 
-    ) extends DataParser
+    ) extends DataParser[GeoCoordinate]
 {
     private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 
@@ -38,9 +38,9 @@ class GeoCoordinateParser(
     
     private val Coordinate = ("""([0-9]{1,2})º([0-9]{1,2})\'([0-9]{1,2}(?:\.[0-9]{1,2})?)?\"?[\s]?("""+ latHemRegex +""")[\s]([0-9]{1,3})º([0-9]{1,2})\'([0-9]{1,2}(?:\.[0-9]{1,2})?)?\"?[\s]?("""+ lonHemRegex +""")""").r
     private val LatDir = ("""("""+latHemRegex+""")""").r
-    
 
-    override def parse(node : Node) : Option[ParseResult[GeoCoordinate]] =
+
+  private[dataparser] override def parse(node : Node) : Option[ParseResult[GeoCoordinate]] =
     {
         try
         {

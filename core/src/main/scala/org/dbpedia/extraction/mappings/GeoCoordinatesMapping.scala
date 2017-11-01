@@ -72,7 +72,7 @@ extends PropertyMapping
     {
       for ( 
         coordProperty <- node.property(coordinates);
-        geoCoordinate <- geoCoordinateParser.parse(coordProperty) 
+        geoCoordinate <- geoCoordinateParser.parseWithProvenance(coordProperty)
       )
       {
         return Some(geoCoordinate.value)
@@ -106,17 +106,17 @@ extends PropertyMapping
       for( 
         latDegProperty <- node.property(latitudeDegrees);
         lonDegProperty <- node.property(longitudeDegrees);
-        latDeg <- doubleParser.parse(latDegProperty);
-        lonDeg <- doubleParser.parse(lonDegProperty) 
+        latDeg <- doubleParser.parseWithProvenance(latDegProperty);
+        lonDeg <- doubleParser.parseWithProvenance(lonDegProperty)
       )
       {
-        val latMin = node.property(latitudeMinutes).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
-        val latSec = node.property(latitudeSeconds).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
-        val latDir = node.property(latitudeDirection).flatMap(stringParser.parse).getOrElse(ParseResult("N")).value
+        val latMin = node.property(latitudeMinutes).flatMap(doubleParser.parseWithProvenance).getOrElse(ParseResult(0.0)).value
+        val latSec = node.property(latitudeSeconds).flatMap(doubleParser.parseWithProvenance).getOrElse(ParseResult(0.0)).value
+        val latDir = node.property(latitudeDirection).flatMap(stringParser.parseWithProvenance).getOrElse(ParseResult("N")).value
 
-        val lonMin = node.property(longitudeMinutes).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
-        val lonSec = node.property(longitudeSeconds).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
-        val lonDir = node.property(longitudeDirection).flatMap(stringParser.parse).getOrElse(ParseResult("E")).value
+        val lonMin = node.property(longitudeMinutes).flatMap(doubleParser.parseWithProvenance).getOrElse(ParseResult(0.0)).value
+        val lonSec = node.property(longitudeSeconds).flatMap(doubleParser.parseWithProvenance).getOrElse(ParseResult(0.0)).value
+        val lonDir = node.property(longitudeDirection).flatMap(stringParser.parseWithProvenance).getOrElse(ParseResult("E")).value
 
         try
         {
@@ -154,14 +154,14 @@ extends PropertyMapping
   }
 
   private def getSingleCoordinate(coordinateProperty: PropertyNode, rangeMin: Double, rangeMax: Double, wikiCode: String ): Option[Double] = {
-    singleGeoCoordinateParser.parse(coordinateProperty).map(_.value.toDouble) orElse doubleParser.parse(coordinateProperty).map(_.value) match {
+    singleGeoCoordinateParser.parseWithProvenance(coordinateProperty).map(_.value.toDouble) orElse doubleParser.parseWithProvenance(coordinateProperty).map(_.value) match {
       case Some(coordinateValue) =>
         //Check if the coordinate is in the correct range
         if (rangeMin <= coordinateValue && coordinateValue <= rangeMax) {
           Some(coordinateValue)
         } else if (!wikiCode.equals("en"))  {
           // Sometimes coordinates are written with the English locale (. instead of ,)
-          doubleParserEn.parse(coordinateProperty) match {
+          doubleParserEn.parseWithProvenance(coordinateProperty) match {
             case Some(enCoordinateValue) =>
               if (rangeMin <= enCoordinateValue.value && enCoordinateValue.value <= rangeMax) {
                 // do not return invalid coordinates either way

@@ -22,7 +22,7 @@ class UnitValueParser( extractionContext : {
                            def redirects : Redirects },
                         inputDatatype : Datatype,
                         strict : Boolean = false,
-                        multiplicationFactor : Double = 1.0) extends DataParser
+                        multiplicationFactor : Double = 1.0) extends DataParser[Double]
 {
     private val logger = Logger.getLogger(getClass.getName)
 
@@ -94,7 +94,7 @@ class UnitValueParser( extractionContext : {
     private lazy val FeetUnitDataType = extractionContext.ontology.datatypes("foot").asInstanceOf[UnitDatatype]
     private lazy val InchUnitDataType = extractionContext.ontology.datatypes("inch").asInstanceOf[UnitDatatype]
 
-    override def parse(node : Node) : Option[ParseResult[Double]] =
+    private[dataparser] override def parse(node : Node) : Option[ParseResult[Double]] =
     {
         val errors = if(logger.isLoggable(Level.FINE)) Some(new ParsingErrors()) else None
 

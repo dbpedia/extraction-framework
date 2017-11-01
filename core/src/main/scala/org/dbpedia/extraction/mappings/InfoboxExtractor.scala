@@ -199,7 +199,7 @@ extends PageNodeExtractor
           case links if links.nonEmpty => results += links
           case _ =>
       }
-      val stringRes = StringParser.parse(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt)))
+      val stringRes = StringParser.parseWithProvenance(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt)))
       results += stringRes.toList
 
       results.toList
@@ -209,12 +209,12 @@ extends PageNodeExtractor
     {
         val unitValues =
         for (unitValueParser <- unitValueParsers;
-             pr <- unitValueParser.parse(node) )
+             pr <- unitValueParser.parseWithProvenance(node) )
              yield pr
 
         if (unitValues.size > 1)
         {
-            StringParser.parse(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt)))
+            StringParser.parseWithProvenance(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt)))
         }
         else if (unitValues.size == 1)
         {
@@ -229,14 +229,14 @@ extends PageNodeExtractor
 
     private def extractNumber(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        intParser.parse(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:integer")))))
-        doubleParser.parse(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:double")))))
+        intParser.parseWithProvenance(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:integer")))))
+        doubleParser.parseWithProvenance(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:double")))))
         None
     }
 
     private def extractRankNumber(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        StringParser.parse(node).getOrElse(return None).value.toString match
+        StringParser.parseWithProvenance(node).getOrElse(return None).value.toString match
         {
             case RankRegex(number) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
             case _ => None
@@ -245,7 +245,7 @@ extends PageNodeExtractor
     
     private def extractSingleCoordinate(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        singleGeoCoordinateParser.parse(node).foreach(value => return Some(ParseResult(value.value.toDouble.toString, None, Some(new Datatype("xsd:double")))))
+        singleGeoCoordinateParser.parseWithProvenance(node).foreach(value => return Some(ParseResult(value.value.toDouble.toString, None, Some(new Datatype("xsd:double")))))
         None
     }
 
@@ -269,7 +269,7 @@ extends PageNodeExtractor
     private def extractDate(node : PropertyNode) : Option[ParseResult[String]] =
     {
         for (dateTimeParser <- dateTimeParsers;
-             date <- dateTimeParser.parse(node))
+             date <- dateTimeParser.parseWithProvenance(node))
         {
             return Some(ParseResult(date.value.toString, None, Some(date.value.datatype)))
         }
@@ -280,7 +280,7 @@ extends PageNodeExtractor
     {
         val splitNodes = NodeUtil.splitPropertyNode(node, """\s*\W+\s*""")
 
-        splitNodes.flatMap(splitNode => objectParser.parse(splitNode)) match
+        splitNodes.flatMap(splitNode => objectParser.parseWithProvenance(splitNode)) match
         {
             // TODO: explain why we check links.size == splitNodes.size
             case links if links.size == splitNodes.size =>
@@ -288,7 +288,7 @@ extends PageNodeExtractor
             case _ => List.empty
         }
         
-        splitNodes.flatMap(splitNode => linkParser.parse(splitNode)) match
+        splitNodes.flatMap(splitNode => linkParser.parseWithProvenance(splitNode)) match
         {
             // TODO: explain why we check links.size == splitNodes.size
             case links if links.size == splitNodes.size =>

@@ -88,7 +88,7 @@ extends PropertyMapping
     }
 
     //Parse start; return if no start year has been found
-    val startDate = startDateParser.parse(splitNodes.head).getOrElse(return Seq.empty)
+    val startDate = startDateParser.parseWithProvenance(splitNodes.head).getOrElse(return Seq.empty)
 
     //Parse end
     val endDateOpt = splitNodes match {
@@ -99,11 +99,11 @@ extends PropertyMapping
         case Some(text : String) if presentStrings.contains(text.trim.toLowerCase) => None
 
         //normal case of specified end date
-        case _ => endDateParser.parse(end)
+        case _ => endDateParser.parseWithProvenance(end)
       }
 
       //if there was only one element found
-      case List(start) => StringParser.parse(start) match
+      case List(start) => StringParser.parseWithProvenance(start) match
       {
         //if in a "since xxx" construct, don't write end triple
         case Some(pr) if (pr.value.trim.toLowerCase.startsWith(sinceString)

@@ -18,7 +18,7 @@ import scala.language.reflectiveCalls
 @SoftwareAgentAnnotation(classOf[DoubleParser], AnnotationType.Parser)
 class DoubleParser( context : { def language : Language },
                     strict : Boolean = false,
-                    multiplicationFactor : Double = 1.0) extends DataParser
+                    multiplicationFactor : Double = 1.0) extends DataParser[Double]
 {
     private val parserUtils = new ParserUtils(context)
 
@@ -33,7 +33,7 @@ class DoubleParser( context : { def language : Language },
     // we allow digits, minus, comma, dot and space in numbers
     private val DoubleRegex  = """\D*?(-?[0-9-,. ]+).*""".r
 
-    override def parse(node : Node) : Option[ParseResult[Double]] =
+    private[dataparser] override def parse(node : Node) : Option[ParseResult[Double]] =
     {
         for( text <- StringParser.parse(node);
              convertedText = parserUtils.convertLargeNumbers(text.value);

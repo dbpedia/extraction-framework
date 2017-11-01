@@ -9,11 +9,11 @@ import org.dbpedia.iri.IRI
  * Parses external links.
  */
 @SoftwareAgentAnnotation(classOf[LinkParser], AnnotationType.Parser)
-class LinkParser(val strict : Boolean = false) extends DataParser
+class LinkParser(val strict : Boolean = false) extends DataParser[IRI]
 {
     override val splitPropertyNodeRegex: String = DataParserConfig.splitPropertyNodeRegexLink("en")
 
-    override def parse(node : Node) : Option[ParseResult[IRI]] =
+    private[dataparser] override def parse(node : Node) : Option[ParseResult[IRI]] =
     {
         if (!strict)
         {

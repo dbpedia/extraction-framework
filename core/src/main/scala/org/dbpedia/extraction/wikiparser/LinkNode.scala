@@ -14,7 +14,7 @@ extends Node
 {
     def toPlainText = children.map(_.toPlainText).mkString
 
-    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(Some(this.line))
 }
 
 sealed abstract class WikiLinkNode(destination: WikiTitle, children: List[Node], line: Int, destinationNodes: List[Node]) 

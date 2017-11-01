@@ -25,7 +25,7 @@ case class PropertyNode(key : String, override val children : List[Node], overri
     // properties are skipped for plain text
     def toPlainText = ""
 
-  override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
+  override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(Some(this.line))
 
     def propertyNodeValueToPlainText: String = children.map(_.toPlainText).mkString
 

@@ -30,17 +30,17 @@ extends PropertyMapping
 {
   require(operation == "add", "Operation '" + operation + "' is not supported. Supported operations: 'add'")
 
-  def parser(unit: Datatype): DataParser = ontologyProperty.range match
+  def parser(unit: Datatype): DataParser[_] = ontologyProperty.range match
   {
       case dt : UnitDatatype => new UnitValueParser(context, unit)
       case dt : DimensionDatatype => new UnitValueParser(context, unit)
       case dt : Datatype => dt.name match
       {
           case "xsd:integer" => new IntegerParser(context)
-          case "xsd:positiveInteger"    => new IntegerParser(context, validRange = (i => i > 0))
-          case "xsd:nonNegativeInteger" => new IntegerParser(context, validRange = (i => i >=0))
-          case "xsd:nonPositiveInteger" => new IntegerParser(context, validRange = (i => i <=0))
-          case "xsd:negativeInteger"    => new IntegerParser(context, validRange = (i => i < 0))
+          case "xsd:positiveInteger"    => new IntegerParser(context, validRange = i => i > 0)
+          case "xsd:nonNegativeInteger" => new IntegerParser(context, validRange = i => i >= 0)
+          case "xsd:nonPositiveInteger" => new IntegerParser(context, validRange = i => i <= 0)
+          case "xsd:negativeInteger"    => new IntegerParser(context, validRange = i => i < 0)
           case "xsd:double" => new DoubleParser(context)
           case "xsd:float" => new DoubleParser(context)
           case name => throw new IllegalArgumentException("Datatype " + name + " is not supported by CalculateMapping")
@@ -62,8 +62,8 @@ extends PropertyMapping
   {
     for( property1 <- node.property(templateProperty1);
          property2 <- node.property(templateProperty2);
-         parseResult1 <- parser1.parse(property1);
-         parseResult2 <- parser2.parse(property2) )
+         parseResult1 <- parser1.parseWithProvenance(property1);
+         parseResult2 <- parser2.parseWithProvenance(property2) )
     {
 
       val quad = (parseResult1, parseResult2) match

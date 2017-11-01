@@ -1087,6 +1087,19 @@
 {{label|ja|バスケットボールチーム}}
 {{label|ko| 농구 팀   }}
 | rdfs:subClassOf = SportsTeam
+}}</text></revision></page><page><title>OntologyClass:Battery</title><ns>200</ns><id>11978</id><revision><id>52604</id><timestamp>2017-10-31T11:06:16Z</timestamp><text>{{Class
+| labels = {{label|it|batteria}}
+{{label|nl|batterij}}
+{{label|es|batería}}
+{{label|pt|bateria}}
+{{label|fr|pile}}
+{{label|de|Batterie}}
+{{label|en|battery}}
+| comments =
+{{comment|en|The battery (type) used as energy source in vehicles.}}
+| rdfs:domain = MeanOfTransportation
+| rdfs:subClassOf = Device
+| owl:equivalentClass = wikidata:Q267298
 }}</text></revision></page><page><title>OntologyClass:Bay</title><ns>200</ns><id>11293</id><revision><id>51078</id><timestamp>2016-05-14T15:11:09Z</timestamp><text>{{Class
 |labels = 
 {{label|en|bay}}
@@ -2071,6 +2084,16 @@
 |rdfs:label@en = E4 Period
 |rdfs:label@nl = E4 Periode
 |rdfs:label@ga = An Tréimhse E4
+}}</text></revision></page><page><title>OntologyClass:Cinema</title><ns>200</ns><id>11982</id><revision><id>52620</id><timestamp>2017-10-31T16:01:59Z</timestamp><text>{{Class
+| labels =
+{{label|en|cinema (movie theater)}}
+{{label|fr|cinéma}}
+{{label|el|κινηματογράφος}}
+{{label|de|Theater}}
+| rdfs:subClassOf = Venue
+| comments =
+{{comment|en|A building for viewing films.}}
+| owl:equivalentClass = wikidata:Q41253
 }}</text></revision></page><page><title>OntologyClass:City</title><ns>200</ns><id>332</id><revision><id>52108</id><timestamp>2017-06-19T10:58:54Z</timestamp><text>{{Class
 | labels =
 {{label|it|città}}
@@ -8083,7 +8106,7 @@ rdfs:subClassOf = Event
 {{label|ko|스쿼시 선수}}
 | rdfs:subClassOf = Athlete
 | owl:equivalentClass = wikidata:Q16278103
-}}</text></revision></page><page><title>OntologyClass:Stadium</title><ns>200</ns><id>473</id><revision><id>48178</id><timestamp>2015-05-25T15:18:58Z</timestamp><text>{{Class
+}}</text></revision></page><page><title>OntologyClass:Stadium</title><ns>200</ns><id>473</id><revision><id>52619</id><timestamp>2017-10-31T15:56:13Z</timestamp><text>{{Class
 | labels =
 {{label|en|stadium}}
 {{label|ga|staidiam}}
@@ -8094,7 +8117,7 @@ rdfs:subClassOf = Event
 {{label|ja|スタジアム}}
 {{label|nl|stadion}}
 
-| rdfs:subClassOf = SportFacility
+| rdfs:subClassOf = Venue
 | owl:equivalentClass = schema:StadiumOrArena
 }}</text></revision></page><page><title>OntologyClass:Standard</title><ns>200</ns><id>11244</id><revision><id>50927</id><timestamp>2016-04-22T07:58:44Z</timestamp><text>{{Class
 | labels=
@@ -8813,7 +8836,7 @@ rdfs:subClassOf = Event
 {{label|nl|ader}}
 | rdfs:subClassOf = AnatomicalStructure
 | owl:equivalentClass = wikidata:Q9609
-}}</text></revision></page><page><title>OntologyClass:Venue</title><ns>200</ns><id>7347</id><revision><id>51156</id><timestamp>2016-06-06T12:31:34Z</timestamp><text>{{Class
+}}</text></revision></page><page><title>OntologyClass:Venue</title><ns>200</ns><id>7347</id><revision><id>52614</id><timestamp>2017-10-31T13:45:29Z</timestamp><text>{{Class
 | labels =
 {{label|en|venue}}
 {{label|ga|ionad}}
@@ -8821,7 +8844,7 @@ rdfs:subClassOf = Event
 {{label|el|τόπος συνάντησης}}
 {{label|fr|lieu}}
 {{label|ko|경기장}}
-| rdfs:subClassOf = ArchitecturalStructure
+| rdfs:subClassOf = Building
 }}</text></revision></page><page><title>OntologyClass:Vicar</title><ns>200</ns><id>8169</id><revision><id>48322</id><timestamp>2015-05-25T15:32:59Z</timestamp><text>{{Class
 | labels =
 {{label|en|vicar}}
@@ -9391,12 +9414,12 @@ rdfs:subClassOf = Event
 | rdfs:comment@el = ποιό πρόσφατες μέσες βαθμολογίες ACT
 | rdfs:domain = School
 | rdfs:subPropertyOf = dul:hasQuality
-}}</text></revision></page><page><title>OntologyProperty:ActingHeadteacher</title><ns>202</ns><id>501</id><revision><id>35784</id><timestamp>2014-07-08T12:36:20Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:ActingHeadteacher</title><ns>202</ns><id>501</id><revision><id>52575</id><timestamp>2017-10-31T08:24:27Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = acting headteacher
 | rdfs:label@el = διευθυντής σχολείου
 | rdfs:label@sr = вд шефа наставе
-| rdfs:domain = School
+| rdfs:domain = EducationalInstitution
 | rdfs:range = Person
 | rdfs:subPropertyOf = dul:coparticipatesWith
 }}</text></revision></page><page><title>OntologyProperty:ActiveYears</title><ns>202</ns><id>7752</id><revision><id>45963</id><timestamp>2015-03-16T10:40:38Z</timestamp><text>{{DatatypeProperty
@@ -9552,16 +9575,15 @@ rdfs:subClassOf = Event
 {{label|de|administrativer Status}}
 {{label|sr|административни статус}}
 | rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:Administrator</title><ns>202</ns><id>510</id><revision><id>47275</id><timestamp>2015-03-29T17:03:37Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Administrator</title><ns>202</ns><id>510</id><revision><id>52574</id><timestamp>2017-10-31T08:21:57Z</timestamp><text>
 {{ObjectProperty
 | labels =
 {{label|en|administrator}}
-{{label|de|Schulverwalter}}
+{{label|de|Verwalter}}
 {{label|sr|управник}}
 {{label|el|διαχειριστής}}
-| rdfs:domain = School
+| rdfs:domain = Organisation
 | rdfs:range = Person
-| rdfs:subPropertyOf = http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#coparticipatesWith, dul:coparticipatesWith
 }}</text></revision></page><page><title>OntologyProperty:AfdbId</title><ns>202</ns><id>3301</id><revision><id>45970</id><timestamp>2015-03-16T13:31:56Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = afdb id
 | rdfs:label@el = afdb id
@@ -9581,14 +9603,13 @@ rdfs:subClassOf = Event
 {{label|en|affiliate}}
 | rdfs:domain = FictionalCharacter
 | rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:Affiliation</title><ns>202</ns><id>511</id><revision><id>35791</id><timestamp>2014-07-08T12:37:18Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Affiliation</title><ns>202</ns><id>511</id><revision><id>52612</id><timestamp>2017-10-31T13:35:06Z</timestamp><text>
 {{ObjectProperty
 | labels =
 	{{label|en|affiliation}}
 	{{label|el|ιστολόγιο}}
-	{{label|nl|Europees lidmaatschap}}
+	{{label|nl|lidmaatschap}}
 	{{label|sr|припадност}}
-| rdfs:domain = Organisation
 | rdfs:range = Organisation
 | rdfs:subPropertyOf = dul:coparticipatesWith
 }}</text></revision></page><page><title>OntologyProperty:AfiAward</title><ns>202</ns><id>512</id><revision><id>35792</id><timestamp>2014-07-08T12:37:30Z</timestamp><text>
@@ -10589,12 +10610,12 @@ rdfs:subClassOf = Event
 {{comment|en| Assets and liabilities are part of a companis balance sheet. In financial accounting, assets are economic resources. Anything tangible or intangible that is capable of being owned or controlled to produce value and that is held to have positive economic value is considered an asset.
 }}
 {{comment|el|Περιουσιακά στοιχεία και υποχρεώσεις αποτελούν μέρος του ισολογισμού μιας εταιρείας.Σε χρηματοοικονομική λογιστική,τα περιουσιακά στοιχεία είναι οι οικονομικοί πόροι. Οτιδήποτε ενσώματο ή άυλο, που είναι ικανό να ανήκει ή να ελέγχεται για να παράγει αξία και που κατέχεται για να έχει θετική οικονομική αξία θεωρείται ένα περιουσιακό στοιχείο.}}
-}}</text></revision></page><page><title>OntologyProperty:AssistantPrincipal</title><ns>202</ns><id>3129</id><revision><id>35839</id><timestamp>2014-07-08T12:44:51Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:AssistantPrincipal</title><ns>202</ns><id>3129</id><revision><id>52576</id><timestamp>2017-10-31T08:26:03Z</timestamp><text>
 {{ObjectProperty
 | labels =
 	{{label|en|assistant principal}}
 	{{label|el|κύριος βοηθός}}
-| rdfs:domain = School
+| rdfs:domain = EducationalInstitution
 | rdfs:subPropertyOf = dul:coparticipatesWith
 }}</text></revision></page><page><title>OntologyProperty:Associate</title><ns>202</ns><id>2349</id><revision><id>35840</id><timestamp>2014-07-08T12:45:11Z</timestamp><text>
 {{ObjectProperty
@@ -10987,6 +11008,17 @@ rdfs:subClassOf = Event
 | rdfs:range = Work
 | rdfs:subPropertyOf = dul:coparticipatesWith
 | owl:equivalentProperty = wikidata:P144
+}}</text></revision></page><page><title>OntologyProperty:Battery</title><ns>202</ns><id>11979</id><revision><id>52607</id><timestamp>2017-10-31T11:12:38Z</timestamp><text>{{ObjectProperty
+| labels = {{label|it|batteria}}
+{{label|nl|batterij}}
+{{label|es|batería}}
+{{label|pt|bateria}}
+{{label|fr|pile}}
+{{label|de|Batterie}}
+{{label|en|battery}}
+| comments =
+	{{comment|en|Points out the battery used with/in a thing.}}
+| rdfs:range = Battery
 }}</text></revision></page><page><title>OntologyProperty:BattingSide</title><ns>202</ns><id>592</id><revision><id>52272</id><timestamp>2017-10-08T13:53:34Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = batting side
 | rdfs:label@de = Schlagarm
@@ -11690,9 +11722,9 @@ rdfs:subClassOf = Event
 | rdfs:label@en = campus size
 | rdfs:domain = School
 | rdfs:range = Area
-}}</text></revision></page><page><title>OntologyProperty:CampusType</title><ns>202</ns><id>638</id><revision><id>34828</id><timestamp>2014-05-15T05:06:15Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:CampusType</title><ns>202</ns><id>638</id><revision><id>52578</id><timestamp>2017-10-31T08:28:01Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = campus type
-| rdfs:domain = School
+| rdfs:domain = EducationalInstitution
 | rdfs:range = rdf:langString
 }}</text></revision></page><page><title>OntologyProperty:CanBaggageChecked</title><ns>202</ns><id>3237</id><revision><id>12060</id><timestamp>2011-04-07T16:08:26Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = can baggage checked
@@ -11937,7 +11969,7 @@ rdfs:subClassOf = Event
 {{label|en|cca state}}
 | rdfs:domain = PopulatedPlace
 | rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:Ceeb</title><ns>202</ns><id>661</id><revision><id>7908</id><timestamp>2010-05-28T12:52:15Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Ceeb</title><ns>202</ns><id>661</id><revision><id>52580</id><timestamp>2017-10-31T08:30:04Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = ceeb
 | rdfs:domain = School
 | rdfs:range = xsd:string
@@ -12015,13 +12047,12 @@ rdfs:subClassOf = Event
 | rdfs:comment@en = ChEMBL is a manually curated chemical database of bioactive molecules with drug-like properties.
 | rdfs:domain = ChemicalSubstance
 | rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:Chain</title><ns>202</ns><id>2516</id><revision><id>35911</id><timestamp>2014-07-08T12:56:17Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Chain</title><ns>202</ns><id>2516</id><revision><id>52611</id><timestamp>2017-10-31T11:55:23Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = chain
-| rdfs:label@de = kette
+| rdfs:label@de = Kette
 | rdfs:label@el = αλυσίδα
-| rdfs:comment@en = The chain of Hotels this instance is associated with.
-| rdfs:domain = Hotel
+| rdfs:comment@en = The (business) chain this instance is associated with.
 | rdfs:range = Company
 | rdfs:subPropertyOf = dul:isMemberOf
 }}</text></revision></page><page><title>OntologyProperty:ChairLabel</title><ns>202</ns><id>3118</id><revision><id>35912</id><timestamp>2014-07-08T12:56:26Z</timestamp><text>
@@ -12160,11 +12191,11 @@ rdfs:subClassOf = Event
 | rdfs:label@nl = kanaal
 | rdfs:range = Broadcaster
 | rdfs:subPropertyOf = dul:coparticipatesWith
-}}</text></revision></page><page><title>OntologyProperty:Chaplain</title><ns>202</ns><id>672</id><revision><id>35925</id><timestamp>2014-07-08T12:58:24Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Chaplain</title><ns>202</ns><id>672</id><revision><id>52581</id><timestamp>2017-10-31T08:31:13Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = chaplain
 | rdfs:label@de = Kaplan
-| rdfs:domain = School
+| rdfs:domain = Organisation
 | rdfs:range = Person
 | rdfs:subPropertyOf = dul:coparticipatesWith
 }}</text></revision></page><page><title>OntologyProperty:CharacterInPlay</title><ns>202</ns><id>3825</id><revision><id>13345</id><timestamp>2011-06-06T10:20:12Z</timestamp><text>{{DatatypeProperty
@@ -13545,11 +13576,11 @@ rdfs:subClassOf = Event
 | rdfs:domain = ArchitecturalStructure
 | rdfs:range = xsd:string
 | rdfs:comment@en = Current use of the architectural structure, if it is currently being used as anything other than its original purpose.
-}}</text></revision></page><page><title>OntologyProperty:Custodian</title><ns>202</ns><id>751</id><revision><id>35999</id><timestamp>2014-07-08T13:09:48Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Custodian</title><ns>202</ns><id>751</id><revision><id>52583</id><timestamp>2017-10-31T08:37:41Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = custodian
 | rdfs:label@de = Aufsichtsperson
-| rdfs:domain = School
+| rdfs:domain = EducationalInstitution
 | rdfs:range = Person
 | rdfs:subPropertyOf = dul:coparticipatesWith
 }}</text></revision></page><page><title>OntologyProperty:CyclistGenre</title><ns>202</ns><id>7868</id><revision><id>27287</id><timestamp>2013-07-10T10:16:12Z</timestamp><text>{{ObjectProperty
@@ -14050,11 +14081,12 @@ rdfs:subClassOf = Event
 | rdfs:label@fr = démonyme
 | rdfs:label@nl = naam bevolkingsgroep
 | rdfs:range = rdf:langString
-}}</text></revision></page><page><title>OntologyProperty:Denomination</title><ns>202</ns><id>776</id><revision><id>52153</id><timestamp>2017-07-11T09:46:17Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Denomination</title><ns>202</ns><id>776</id><revision><id>52585</id><timestamp>2017-10-31T08:40:59Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = denomination
 |rdfs:comment@en = Religious denomination of a church, religious school, etc. Examples: Haredi_Judaism, Sunni_Islam, Seventh-day_Adventist_Church, Non-Denominational, Multi-denominational, Non-denominational_Christianity
 | rdfs:subPropertyOf = dul:isExpressedBy
+| rdfs:domain = Agent
 }}</text></revision></page><page><title>OntologyProperty:Density</title><ns>202</ns><id>777</id><revision><id>35357</id><timestamp>2014-06-18T22:31:54Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = density
 | rdfs:label@de = Dichte
@@ -14138,10 +14170,9 @@ rdfs:subClassOf = Event
         | rdfs:label@de = Beschreibung
 	| rdfs:label@nl = omschrijving
 	| rdfs:range = rdf:langString
-}}</text></revision></page><page><title>OntologyProperty:DesignCompany</title><ns>202</ns><id>781</id><revision><id>36014</id><timestamp>2014-07-08T13:12:13Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:DesignCompany</title><ns>202</ns><id>781</id><revision><id>52599</id><timestamp>2017-10-31T10:21:44Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = designer company
-| rdfs:domain = MeanOfTransportation
 | rdfs:range = Company
 | rdfs:subPropertyOf = dul:coparticipatesWith
 }}</text></revision></page><page><title>OntologyProperty:Designer</title><ns>202</ns><id>782</id><revision><id>47559</id><timestamp>2015-04-03T09:09:30Z</timestamp><text>{{ObjectProperty
@@ -16887,7 +16918,7 @@ rdfs:subClassOf = Event
 {{label|fr|GARDNum}}
 | rdfs:domain = Disease
 | rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:Grades</title><ns>202</ns><id>3132</id><revision><id>36133</id><timestamp>2014-07-08T13:30:44Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Grades</title><ns>202</ns><id>3132</id><revision><id>52587</id><timestamp>2017-10-31T08:47:19Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = grades
 | rdfs:label@el = βαθμοί
@@ -19329,6 +19360,10 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 {{label|en|political mandate}}
 {{label|de|politisches Mandat}}
 | rdfs:range = xsd:string
+}}</text></revision></page><page><title>OntologyProperty:Manufactory</title><ns>202</ns><id>11976</id><revision><id>52598</id><timestamp>2017-10-31T10:17:53Z</timestamp><text>{{ObjectProperty
+| rdfs:label@en = manufactory
+| rdfs:label@de = Fabrik
+| rdfs:range = Factory
 }}</text></revision></page><page><title>OntologyProperty:Manufacturer</title><ns>202</ns><id>1101</id><revision><id>47608</id><timestamp>2015-04-03T10:00:41Z</timestamp><text>{{ObjectProperty
 | rdfs:label@en = manufacturer
 | rdfs:label@de = Hersteller
@@ -19413,12 +19448,10 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 {{label|en|match point}}
 | rdfs:domain = Person
 | rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:Material</title><ns>202</ns><id>1108</id><revision><id>33877</id><timestamp>2014-04-04T14:57:14Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Material</title><ns>202</ns><id>1108</id><revision><id>52616</id><timestamp>2017-10-31T13:55:39Z</timestamp><text>{{ObjectProperty
 | rdfs:label@en = material
 | rdfs:label@de = Material
 | rdfs:label@fr = matériel
-| rdfs:domain = Island
-| rdfs:range = xsd:string
 }}</text></revision></page><page><title>OntologyProperty:Max</title><ns>202</ns><id>7917</id><revision><id>27622</id><timestamp>2013-07-15T13:27:31Z</timestamp><text>{{DatatypeProperty
 | labels =
 {{label|en|max}}
@@ -20435,9 +20468,9 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 | rdfs:label@nl = nationaal Olympisch commité
 | rdfs:domain = OlympicResult
 | rdfs:subPropertyOf = dul:hasParticipant
-}}</text></revision></page><page><title>OntologyProperty:NationalRanking</title><ns>202</ns><id>1171</id><revision><id>10456</id><timestamp>2010-11-10T15:05:56Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:NationalRanking</title><ns>202</ns><id>1171</id><revision><id>52588</id><timestamp>2017-10-31T08:54:03Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = national ranking
-| rdfs:domain = School
+| rdfs:domain = EducationalInstitution
 | rdfs:range = xsd:positiveInteger
 }}</text></revision></page><page><title>OntologyProperty:NationalSelection</title><ns>202</ns><id>7875</id><revision><id>33936</id><timestamp>2014-04-04T15:02:25Z</timestamp><text>{{ObjectProperty
 | rdfs:label@en = national selection
@@ -20601,11 +20634,10 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 | rdfs:label@en = networth
 | rdfs:domain = Person
 | rdfs:range = Currency
-}}</text></revision></page><page><title>OntologyProperty:Newspaper</title><ns>202</ns><id>7702</id><revision><id>33945</id><timestamp>2014-04-04T15:03:03Z</timestamp><text>{{ObjectProperty
+}}</text></revision></page><page><title>OntologyProperty:Newspaper</title><ns>202</ns><id>7702</id><revision><id>52570</id><timestamp>2017-10-30T23:49:12Z</timestamp><text>{{ObjectProperty
 | labels =
 {{label|en|newspaper}}
 {{label|de|Zeitung}}
-| rdfs:domain = Person
 | rdfs:range = PeriodicalLiterature
 }}</text></revision></page><page><title>OntologyProperty:NextEntity</title><ns>202</ns><id>7182</id><revision><id>36324</id><timestamp>2014-07-08T14:05:45Z</timestamp><text>
 {{ObjectProperty
@@ -20992,6 +21024,11 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 | rdfs:label@de = Anzahl der Doktoranden
 | rdfs:domain = University
 | rdfs:range = xsd:nonNegativeInteger
+}}</text></revision></page><page><title>OntologyProperty:NumberOfDoors</title><ns>202</ns><id>11977</id><revision><id>52601</id><timestamp>2017-10-31T10:44:54Z</timestamp><text>{{DatatypeProperty
+| rdfs:label@en = number of doors
+| rdfs:label@pt = Türenanzahl
+| rdfs:domain = Automobile
+| rdfs:range = xsd:positiveInteger
 }}</text></revision></page><page><title>OntologyProperty:NumberOfEmployees</title><ns>202</ns><id>1198</id><revision><id>33972</id><timestamp>2014-04-04T15:28:35Z</timestamp><text>{{DatatypeProperty
 | labels =
 {{label|en|number of employees}}
@@ -21345,12 +21382,12 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 	| rdfs:domain = Aircraft
 	| rdfs:range = xsd:nonNegativeInteger
 
-}}</text></revision></page><page><title>OntologyProperty:NumberOfRooms</title><ns>202</ns><id>2513</id><revision><id>34003</id><timestamp>2014-04-04T15:31:07Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:NumberOfRooms</title><ns>202</ns><id>2513</id><revision><id>52615</id><timestamp>2017-10-31T13:48:05Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = number of rooms
 | rdfs:label@de = Anzahl der Zimmer
 | rdfs:label@el = αριθμός δωματίων
 | rdfs:label@nl = aantal kamers
-| rdfs:domain = Hotel
+| rdfs:domain = Building
 | rdfs:range = xsd:nonNegativeInteger
 }}</text></revision></page><page><title>OntologyProperty:NumberOfRun</title><ns>202</ns><id>7805</id><revision><id>27111</id><timestamp>2013-07-05T14:02:02Z</timestamp><text>{{DatatypeProperty
 | labels =
@@ -21449,6 +21486,11 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 | rdfs:domain = RouteOfTransportation
 | rdfs:range = xsd:nonNegativeInteger
 | rdfs:comment@en = Number of stations or stops.
+}}</text></revision></page><page><title>OntologyProperty:NumberOfStores</title><ns>202</ns><id>11981</id><revision><id>52613</id><timestamp>2017-10-31T13:40:38Z</timestamp><text>{{DatatypeProperty
+| rdfs:label@en = number of sores
+| rdfs:label@de = Anzahl an Geschäften
+| rdfs:domain = ShoppingMall
+| rdfs:range = xsd:nonNegativeInteger
 }}</text></revision></page><page><title>OntologyProperty:NumberOfStudents</title><ns>202</ns><id>2149</id><revision><id>34012</id><timestamp>2014-04-04T15:31:57Z</timestamp><text>{{DatatypeProperty
 |labels=
 {{label|en|number of students}}
@@ -21580,9 +21622,9 @@ See also [[OntologyProperty:CurrentlyUsedFor]]</text></revision></page><page><ti
 | rdfs:domain = WrittenWork
 | rdfs:range = xsd:string
 | rdfs:comment@en = Online Computer Library Center number
-}}</text></revision></page><page><title>OntologyProperty:OfferedClasses</title><ns>202</ns><id>1217</id><revision><id>8177</id><timestamp>2010-05-28T13:29:02Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:OfferedClasses</title><ns>202</ns><id>1217</id><revision><id>52582</id><timestamp>2017-10-31T08:33:23Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = offered classes
-| rdfs:domain = School
+| rdfs:domain = EducationalInstitution
 | rdfs:range = xsd:string
 }}</text></revision></page><page><title>OntologyProperty:Office</title><ns>202</ns><id>2324</id><revision><id>52482</id><timestamp>2017-10-16T07:27:04Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = (political) office
@@ -22363,11 +22405,9 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 | rdfs:domain = MilitaryUnit
 | rdfs:range = Person
 | rdfs:subPropertyOf = dul:sameSettingAs
-}}</text></revision></page><page><title>OntologyProperty:PatronSaint</title><ns>202</ns><id>6852</id><revision><id>36386</id><timestamp>2014-07-08T14:09:45Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:PatronSaint</title><ns>202</ns><id>6852</id><revision><id>52590</id><timestamp>2017-10-31T08:59:33Z</timestamp><text>
 {{ObjectProperty
-| labels =
-	{{label|en|patron saint}}
-| rdfs:domain = Settlement
+| labels = {{label|en|patron saint}}
 | rdfs:range = Person
 | rdfs:subPropertyOf = dul:sameSettingAs
 }}</text></revision></page><page><title>OntologyProperty:PccSecretary</title><ns>202</ns><id>7229</id><revision><id>25877</id><timestamp>2013-06-11T12:57:31Z</timestamp><text>{{DatatypeProperty
@@ -22955,10 +22995,10 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 {{label|de|Macht}}
 | rdfs:domain = FictionalCharacter
 | rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:PowerOutput</title><ns>202</ns><id>1310</id><revision><id>34102</id><timestamp>2014-04-04T16:29:21Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:PowerOutput</title><ns>202</ns><id>1310</id><revision><id>52602</id><timestamp>2017-10-31T10:50:13Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = power output
 | rdfs:label@de = Ausgangsleistung
-| rdfs:domain = AutomobileEngine
+| rdfs:domain = Engine
 | rdfs:range = Power
 | rdf:type = owl:FunctionalProperty
 }}</text></revision></page><page><title>OntologyProperty:PowerType</title><ns>202</ns><id>2535</id><revision><id>36414</id><timestamp>2014-07-08T14:11:31Z</timestamp><text>
@@ -23716,11 +23756,11 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 | rdfs:range = owl:Thing
 | rdfs:comment@en = Types of rolling stock used on the rail line (http://en.wikipedia.org/wiki/Template:Infobox_rail_line). Stock of engins and vehicles that run on the railway (International Union of Railways - www.uic.org/IMG/doc/listealph_en.doc).
 | rdfs:subPropertyOf = dul:coparticipatesWith
-}}</text></revision></page><page><title>OntologyProperty:Range</title><ns>202</ns><id>1346</id><revision><id>48820</id><timestamp>2015-09-08T17:24:28Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Range</title><ns>202</ns><id>1346</id><revision><id>52600</id><timestamp>2017-10-31T10:39:10Z</timestamp><text>{{DatatypeProperty
 | labels =
 {{label|en|range}}
 {{label|nl|bereik}}
-| rdfs:domain = MeanOfTransportation , Instrument
+| rdfs:domain = MeanOfTransportation
 | rdfs:comment@en = Maximum distance without refueling
 | rdfs:range = xsd:positiveInteger
 }}</text></revision></page><page><title>OntologyProperty:Rank</title><ns>202</ns><id>6421</id><revision><id>48619</id><timestamp>2015-08-06T12:39:55Z</timestamp><text>{{DatatypeProperty
@@ -23748,10 +23788,10 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 {{label|en|rank of a population}}
 | rdfs:domain = PopulatedPlace
 | rdfs:range = xsd:nonNegativeInteger
-}}</text></revision></page><page><title>OntologyProperty:Ranking</title><ns>202</ns><id>1348</id><revision><id>34155</id><timestamp>2014-04-04T16:33:03Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Ranking</title><ns>202</ns><id>1348</id><revision><id>52591</id><timestamp>2017-10-31T09:06:03Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = ranking
 | rdfs:label@de = Rangliste
-| rdfs:domain = School
+| rdfs:domain = Organisation
 | rdfs:range = xsd:positiveInteger
 }}</text></revision></page><page><title>OntologyProperty:RankingWins</title><ns>202</ns><id>3540</id><revision><id>12674</id><timestamp>2011-05-07T13:48:35Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = ranking wins
@@ -24147,10 +24187,10 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 	{{label|ja|宗教}}
 | owl:equivalentProperty = wikidata:P140
 | rdfs:subPropertyOf = dul:conceptualizes
-}}</text></revision></page><page><title>OntologyProperty:ReligiousHead</title><ns>202</ns><id>3116</id><revision><id>36471</id><timestamp>2014-07-08T14:14:48Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:ReligiousHead</title><ns>202</ns><id>3116</id><revision><id>52592</id><timestamp>2017-10-31T09:09:15Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = religious head
-| rdfs:domain = School
+| rdfs:range = Person
 | rdfs:subPropertyOf = dul:hasMember
 }}</text></revision></page><page><title>OntologyProperty:ReligiousHeadLabel</title><ns>202</ns><id>3115</id><revision><id>36472</id><timestamp>2014-07-08T14:14:53Z</timestamp><text>
 {{ObjectProperty
@@ -24165,10 +24205,9 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 | rdfs:domain = Monastry
 | rdfs:range = ClericalOrder
 | rdfs:subPropertyOf = dul:sameSettingAs
-}}</text></revision></page><page><title>OntologyProperty:Reopened</title><ns>202</ns><id>1370</id><revision><id>34179</id><timestamp>2014-04-04T16:35:07Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Reopened</title><ns>202</ns><id>1370</id><revision><id>52593</id><timestamp>2017-10-31T09:10:25Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = reopened
 | rdfs:label@de = wieder eröffnet
-| rdfs:domain = School
 | rdfs:range = xsd:date
 }}</text></revision></page><page><title>OntologyProperty:ReopeningDate</title><ns>202</ns><id>3836</id><revision><id>34180</id><timestamp>2014-04-04T16:35:12Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = reopening date
@@ -24343,7 +24382,7 @@ Domain is unrestricted since Organization is Agent but City is Place. Range is u
 | rdfs:domain = River
 | rdfs:range = River
 | rdfs:subPropertyOf = dul:hasCommonBoundary
-}}</text></revision></page><page><title>OntologyProperty:Rival</title><ns>202</ns><id>1385</id><revision><id>36481</id><timestamp>2014-07-08T14:15:33Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:Rival</title><ns>202</ns><id>11975</id><revision><id>52595</id><timestamp>2017-10-31T09:11:26Z</timestamp><text>#REDIRECT [[OntologyProperty:RivalSchool]]</text></revision></page><page><title>OntologyProperty:RivalSchool</title><ns>202</ns><id>1385</id><revision><id>52594</id><timestamp>2017-10-31T09:11:26Z</timestamp><text>
 {{ObjectProperty
 | rdfs:label@en = rival
 | rdfs:label@de = Rivale
@@ -25855,11 +25894,11 @@ http://rkd.nl/explore/artists/$1}}
 	{{label|el|στάδιο}}
 | rdfs:range = Stadium
 | rdfs:subPropertyOf = dul:sameSettingAs
-}}</text></revision></page><page><title>OntologyProperty:Staff</title><ns>202</ns><id>1461</id><revision><id>34323</id><timestamp>2014-04-08T13:37:35Z</timestamp><text>{{DatatypeProperty
+}}</text></revision></page><page><title>OntologyProperty:Staff</title><ns>202</ns><id>1461</id><revision><id>52589</id><timestamp>2017-10-31T08:56:00Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = staff
 | rdfs:label@de = Personal
 | rdfs:label@el = προσωπικό
-| rdfs:domain = EducationalInstitution
+| rdfs:domain = Organisation
 | rdfs:range = xsd:nonNegativeInteger
 }}</text></revision></page><page><title>OntologyProperty:StarRating</title><ns>202</ns><id>2510</id><revision><id>10013</id><timestamp>2010-10-25T09:40:59Z</timestamp><text>{{DatatypeProperty
 | rdfs:label@en = star rating
@@ -27113,7 +27152,7 @@ http://vocab.getty.edu/ulan/$1}}
 | rdfs:label@sr = ID националног моста у Сједињеним Америчким Државама 
 | rdfs:domain = Bridge
 | rdfs:range = xsd:string
-}}</text></revision></page><page><title>OntologyProperty:University</title><ns>202</ns><id>1547</id><revision><id>36635</id><timestamp>2014-07-08T14:24:57Z</timestamp><text>
+}}</text></revision></page><page><title>OntologyProperty:University</title><ns>202</ns><id>1547</id><revision><id>52569</id><timestamp>2017-10-30T23:24:56Z</timestamp><text>
 {{ObjectProperty
 | labels =
 	{{label|en|university}}
@@ -27124,7 +27163,6 @@ http://vocab.getty.edu/ulan/$1}}
 | comments =
 	{{comment|en|university a person goes or went to.}}
 	{{comment|el|To πανεπιστήμιο είναι εκπαιδευτικό ίδρυμα ανώτατης εκπαίδευσης και επιστημονικής έρευνας που παρέχει πτυχίο πιστοποίησης ακαδημαϊκής εκπαίδευσης.}}
-| rdfs:domain = Person
 | rdfs:range = EducationalInstitution
 | rdfs:subPropertyOf = dul:coparticipatesWith
 }}</text></revision></page><page><title>OntologyProperty:UnknownOutcomes</title><ns>202</ns><id>1548</id><revision><id>30618</id><timestamp>2014-01-22T08:11:42Z</timestamp><text>{{DatatypeProperty

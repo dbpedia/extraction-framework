@@ -18,7 +18,7 @@ import scala.language.reflectiveCalls
 class IntegerParser( context : { def language : Language } ,
                      strict : Boolean = false,
                      multiplicationFactor : Double = 1.0,
-                     validRange : Double => Boolean = i => true) extends DataParser
+                     validRange : Double => Boolean = i => true) extends DataParser[Long]
 {
     private val parserUtils = new ParserUtils(context)
 
@@ -33,7 +33,7 @@ class IntegerParser( context : { def language : Language } ,
     // we allow digits, minus, comma, dot and space in numbers
     private val IntegerRegex = """\D*?(?:\D\d+\s+)?(-?[0-9,\. ]+).*""".r
 
-    override def parse(node : Node) : Option[ParseResult[Long]] =
+    private[dataparser] override def parse(node : Node) : Option[ParseResult[Long]] =
     {
         for( text <- StringParser.parse(node);
              convertedText = parserUtils.convertLargeNumbers(text.value);

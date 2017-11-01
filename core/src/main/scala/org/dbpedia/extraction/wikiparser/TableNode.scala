@@ -26,7 +26,7 @@ case class TableNode( caption : Option[String],
             case _ => false
         }
 
-    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(Some(this.line))
 }
 
 /**
@@ -46,7 +46,7 @@ case class TableRowNode( override val children : List[TableCellNode],
             case _ => false
         }
 
-    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(Some(this.line))
 }
 
 /**
@@ -74,5 +74,5 @@ extends Node
 
     }
 
-    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(Some(this.line))
 }

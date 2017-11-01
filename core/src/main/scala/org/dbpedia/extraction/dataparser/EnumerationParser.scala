@@ -8,9 +8,9 @@ import org.dbpedia.extraction.ontology.datatypes.EnumerationDatatype
  * Parses enumerations.
  */
 @SoftwareAgentAnnotation(classOf[EnumerationParser], AnnotationType.Parser)
-class EnumerationParser(datatype : EnumerationDatatype) extends DataParser
+class EnumerationParser(datatype : EnumerationDatatype) extends DataParser[String]
 {
-    override def parse(node : Node) : Option[ParseResult[String]] =
+    private[dataparser] override def parse(node : Node) : Option[ParseResult[String]] =
     {
         node match
         {

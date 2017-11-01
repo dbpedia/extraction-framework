@@ -24,5 +24,5 @@ case class SectionNode(name : String, level : Int, override val children : List[
 
     }
 
-    override def getNodeRecord: NodeRecord = ProvenanceRecord.copyNodeRecord(this.root.getNodeRecord, Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(Some(this.line))
 }

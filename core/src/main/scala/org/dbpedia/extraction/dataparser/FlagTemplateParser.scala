@@ -11,11 +11,11 @@ import scala.language.reflectiveCalls
  * Handling of flag templates.
  */
 @SoftwareAgentAnnotation(classOf[FlagTemplateParser], AnnotationType.Parser)
-class FlagTemplateParser( extractionContext : { def language : Language } ) extends DataParser
+class FlagTemplateParser( extractionContext : { def language : Language } ) extends DataParser[WikiTitle]
 {
     private val templates = FlagTemplateParserConfig.templateMap.getOrElse(extractionContext.language.wikiCode, FlagTemplateParserConfig.templateMap("en"))
-    
-    override def parse(node : Node) : Option[ParseResult[WikiTitle]] =
+
+    private[dataparser] override def parse(node : Node) : Option[ParseResult[WikiTitle]] =
     {
         node match
         {

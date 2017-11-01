@@ -1,10 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.Logger
-
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.ExtractionRecorder
-import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord, ProvenanceRecord}
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, DBpediaMetadata, ExtractorRecord, ProvenanceRecord}
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.transform.Quad
@@ -38,6 +36,8 @@ class SimplePropertyMapping (
 )
 extends PropertyMapping
 {
+    private val recorder = context.recorder[Node]
+
     val selector: List[ParseResult[_]] => List[ParseResult[_]] =
         select match {
             case "first" => _.take(1)
@@ -81,17 +81,17 @@ extends PropertyMapping
             //Check if unit is compatible to the range of the ontology property
             (unit, datatypeProperty.range) match
             {
-                case (dt1 : UnitDatatype, dt2 : UnitDatatype) => require(dt1.dimension == dt2.dimension,
-                    "Unit must conform to the dimension of the range of the ontology property")
+                case (dt1 : UnitDatatype, dt2 : UnitDatatype) =>
+                  require(dt1.dimension == dt2.dimension, "Unit must conform to the dimension of the range of the ontology property")
 
-                case (dt1 : UnitDatatype, dt2 : DimensionDatatype) => require(dt1.dimension == dt2,
-                    "Unit must conform to the dimension of the range of the ontology property")
+                case (dt1 : UnitDatatype, dt2 : DimensionDatatype) =>
+                  require(dt1.dimension == dt2, "Unit must conform to the dimension of the range of the ontology property")
 
-                case (dt1 : DimensionDatatype, dt2 : UnitDatatype) => require(dt1 == dt2.dimension,
-                    "The dimension of unit must match the range of the ontology property")
+                case (dt1 : DimensionDatatype, dt2 : UnitDatatype) =>
+                  require(dt1 == dt2.dimension, "The dimension of unit must match the range of the ontology property")
 
-                case (dt1 : DimensionDatatype, dt2 : DimensionDatatype) => require(dt1 == dt2,
-                    "Unit must match the range of the ontology property")
+                case (dt1 : DimensionDatatype, dt2 : DimensionDatatype) =>
+                  require(dt1 == dt2,"Unit must match the range of the ontology property")
 
                 case _ if unit != null => require(unit == ontologyProperty.range, "Unit must be compatible to the range of the ontology property")
                 case _ =>
@@ -110,7 +110,7 @@ extends PropertyMapping
         "Language can only be specified for rdf:langString datatype properties")
     }
     
-    private val parser : DataParser = ontologyProperty.range match
+    private val parser : DataParser[_] = ontologyProperty.range match
     {
         //TODO
         case c : OntologyClass =>
@@ -181,21 +181,14 @@ extends PropertyMapping
     {
         val graph = new ArrayBuffer[Quad]
 
-        val templatesIncluded = Node.collectTemplates(node, Set.empty).map(x => x.title.decoded)
-
-        TemplateNode.transformAll(node) //TODO transforming nodes on the fly - not yet implemented
-
         for(propertyNode <- node.property(templateProperty) if propertyNode.children.nonEmpty)
         {
             val parseResults = try {
               parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
             } catch {
-              case e: Throwable => throw e
-/*                Logger
-                  .getLogger(this.getClass.getName)
-                  .warning("Failed to parse '" + propertyNode.key + "' from template '" + node.title.decoded
-                    + "' in page '" + node.root.title.decoded + " reason: " + e.toString)
-                List()*/
+              case e: Throwable =>
+                //recorder.record(new RecordEntry[_](node, RecordCause.Warning, node.root.title.language, "Failed to parse '" + propertyNode.key + "' from template '" + node.title.decoded + "' in page '" + node.root.title.decoded, e))
+                List()
             }
 
             //get the property wikitext and plainText size
@@ -243,28 +236,23 @@ extends PropertyMapping
 
               val annotation = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
 
-              g.foreach(q => q.setProvenanceRecord(
-                new ProvenanceRecord(
-                  q.longHashCode(),
-                  q.provenanceIri.toString,
-                  q.getTripleRecord,
-                  node.getNodeRecord,
-                  if(q.dataset != null) Seq(RdfNamespace.fullUri(DBpediaNamespace.DATASET, q.dataset)) else Seq(),
-                  Seq.empty,
-                  Some(ExtractorRecord(
-                    annotation.toString,
-                    parseResult.provenance.getOrElse(throw new IllegalArgumentException("No ParserRecord found.")),
-                    Some(parseResults.size),
-                    Some(templateName),
-                    Some(templateProperty),
-                    Some("Mapping " + language.wikiCode + ":" + templateName),
-                    Node.collectTemplates(propertyNode, Set.empty).map(x => x.title.decoded)
-                  )),
-                  None
-                )
-              ))
+              g.foreach(q => q.setProvenanceRecord(new DBpediaMetadata(
+                propertyNode.getNodeRecord,
+                if(q.dataset != null) Seq(RdfNamespace.fullUri(DBpediaNamespace.DATASET, q.dataset)) else Seq(),
+                Some(ExtractorRecord(
+                  annotation.toString,
+                  parseResult.provenance.getOrElse(throw new IllegalArgumentException("No ParserRecord found.")),
+                  Some(parseResults.size),
+                  Some(templateName),
+                  Some(templateProperty),
+                  Some("Mapping " + language.wikiCode + ":" + templateName),
+                  Node.collectTemplates(propertyNode, Set.empty).map(x => x.title.decoded)
+                )),
+                None,
+                Seq.empty
+              )))
 
-                graph ++= g
+              graph ++= g
             }
         }
         

@@ -11,10 +11,10 @@ import org.dbpedia.extraction.wikiparser.{Node, NodeUtil, PropertyNode}
  * Extracts data from a node in the abstract syntax tree.
  * The type of the data which is extracted depends on the specific parser e.g. The IntegerParser extracts integers.
  */
-abstract class DataParser
+abstract class DataParser[T]
 {
 
-    def parse( node : Node ) : Option[ParseResult[_]]
+    private[dataparser] def parse( node : Node ) : Option[ParseResult[T]]
 
     /**
      * Parser dependent splitting of nodes. Default is overridden by some parsers.
@@ -37,16 +37,25 @@ abstract class DataParser
         }
     }
 
-    def parseWithProvenance( node : Node ) : Option[ParseResult[_]] = {
+  /**
+    * Executes the parse function and appends a ParseRecord for provenance
+    * @param node - the node to be parsed
+    * @return - parse result
+    */
+    def parseWithProvenance( node : Node ) : Option[ParseResult[T]] = {
       this.parse(node) match{
-        case Some(pr) =>
-          val annotation = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
-          val rec = ParserRecord(
-            uri = annotation.toString,
-            wikiText = node.toWikiText,
-            resultValue = pr.value.toString
-          )
-          Some(ParseResult(pr.value, pr.lang, pr.unit, Some(rec)))
+        case Some(pr) => pr.provenance match{
+          case Some(_) => Some(pr)
+          case None =>
+            val annotation = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
+            val rec = ParserRecord(
+              uri = annotation.toString,
+              wikiText = node.root.getOriginWikiText(node.line),
+              transformed = node.toWikiText,
+              resultValue = pr.value.toString
+            )
+            Some(ParseResult(pr.value, pr.lang, pr.unit, Some(rec)))
+        }
         case None => None
       }
     }
