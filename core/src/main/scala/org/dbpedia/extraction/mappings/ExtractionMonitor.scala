@@ -36,8 +36,8 @@ class ExtractionMonitor {
     else ConfigUtils.loadConfig(configPath)
     compareVersions = Try[Boolean]{ config.getProperty("compareDatasetIDs").toBoolean }.getOrElse(false)
     if (compareVersions){
-      require(config.getProperty("old-base-dir-url") != null, "Old build directory needs to be defined under 'old-base-dir-url' for the dataID comparison!")
-      old_version_URL = config.getProperty("old-base-dir-url")
+      require(config.getProperty("previousBaseDir") != null, "Old build directory needs to be defined under 'previousBaseDir' for the dataID comparison!")
+      old_version_URL = config.getProperty("previousBaseDir")
       val changes = config.getProperty("expectedChanges")
       if(changes != null) {
         if(changes.split(",").length == 2) {
