@@ -17,7 +17,7 @@ class IntegerParser( context : { def language : Language } ,
 {
     private val parserUtils = new ParserUtils(context)
 
-    private val logger = Logger.getLogger(getClass.getName)
+//    private val logger = Logger.getLogger(getClass.getName)
 
     private val language = context.language.wikiCode
 
@@ -47,7 +47,7 @@ class IntegerParser( context : { def language : Language } ,
             case Some(s) => s.subgroups.head.toString // s is the WHOLE MATCH, while we want the matching subgroup
             case None =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + input + "' to an integer, IntegerRegex did not match")
+//                logger.log(Level.FINE, "Cannot convert '" + input + "' to an integer, IntegerRegex did not match")
                 return None
             }
         }
@@ -70,17 +70,17 @@ class IntegerParser( context : { def language : Language } ,
         {
             case ex : ParseException =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
+//                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
                 None
             }
             case ex : NumberFormatException =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
+//                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
                 None
             }
             case ex : ArrayIndexOutOfBoundsException =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
+//                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
                 None
             }
         }

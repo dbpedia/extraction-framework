@@ -21,7 +21,7 @@ import scala.collection.mutable.{HashMap, HashSet}
 // FIXME: this class does basically the same thing as RedirectExtractor, just differently.
 //TODO make map private?
 //TODO language dependent
-class Redirects(val map : Map[String, String])
+class Redirects(val map : Map[String, String]) extends java.io.Serializable
 {
     /**
      * Resolves a redirect.

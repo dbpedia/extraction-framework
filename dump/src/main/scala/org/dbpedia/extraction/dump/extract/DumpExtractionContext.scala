@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.dump.extract
 
+import org.apache.spark.broadcast.Broadcast
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.sources.Source
@@ -17,25 +18,16 @@ import org.dbpedia.extraction.wikiparser.WikiPage
  *   - reflection when the extractor objects are created
  *   - structural types in extractor constructors
  */
-trait DumpExtractionContext
+trait DumpExtractionContext extends java.io.Serializable
 {
     def ontology : Ontology
 
-    // TODO: remove this, only used by ImageExtractor
-    def commonsSource : Source
-
     def language : Language
-
-    // TODO: remove this, only used by MappingExtractor
-    def mappingPageSource : Traversable[WikiPage]
-
-    // TODO: remove this, only used by MappingExtractor
-    def mappings : Mappings
-
-    def articlesSource : Source
 
     def redirects : Redirects
 
-    def disambiguations : Disambiguations
+    //def mappings : Mappings
+
+    def mappingPageSource : Traversable[WikiPage]
 }
 

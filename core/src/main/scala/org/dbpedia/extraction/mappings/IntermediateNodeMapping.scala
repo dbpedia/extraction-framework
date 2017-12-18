@@ -20,7 +20,7 @@ class IntermediateNodeMapping (
   context : {
     def ontology : Ontology
     def language : Language
-    def recorder[T: ClassTag] : ExtractionRecorder[T]
+//    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends PropertyMapping
@@ -46,8 +46,8 @@ extends PropertyMapping
     //more than one template proerty is affected (e.g. leader_name, leader_title)
     if(affectedTemplatePropertyNodes.size > 1)
     {
-      if(valueNodes.forall(_.size <= 1))
-        context.recorder[TemplateNode].record(new RecordEntry[TemplateNode](node, node.title.encoded, RecordSeverity.Info, context.language, "IntermediateNodeMapping for multiple properties have multiple values in: " + subjectUri))
+//      if(valueNodes.forall(_.size <= 1))
+//        context.recorder[TemplateNode].record(new RecordEntry[TemplateNode](node, node.title.encoded, RecordSeverity.Info, context.language, "IntermediateNodeMapping for multiple properties have multiple values in: " + subjectUri))
 
       createInstance(graph, node, subjectUri)
     }

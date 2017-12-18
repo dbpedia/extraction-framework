@@ -1,14 +1,15 @@
 package org.dbpedia.extraction.dump.extract
 
 import java.net.Authenticator
-import java.util.concurrent.ConcurrentLinkedQueue
 
+import org.apache.spark.{SparkConf, SparkContext}
 import org.dbpedia.extraction.config.Config
-import org.dbpedia.extraction.util.ProxyAuthenticator
-
-import scala.concurrent.Future
-import scala.util.{Failure, Success}
-import scala.concurrent.ExecutionContext.Implicits.global
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.mappings.{CompositeParseExtractor, Extractor}
+import org.dbpedia.extraction.ontology.datatypes.EnumerationDatatype
+import org.dbpedia.extraction.ontology.{Ontology, OntologyEntity, RdfNamespace}
+import org.dbpedia.extraction.util.{Language, ProxyAuthenticator}
+import org.dbpedia.extraction.wikiparser.WikiPage
 
 /**
  * Dump extraction script.
@@ -23,26 +24,31 @@ object Extraction {
     require(args != null && args.length >= 1 && args(0).nonEmpty, "missing required argument: config file name")
     Authenticator.setDefault(new ProxyAuthenticator())
 
-    //Load extraction jobs from configuration
+    // Create SparkConfig
+    val sparkConf = new SparkConf().setAppName("MainExtraction").setMaster("local[2]")
+    sparkConf.set("spark.eventLog.enabled","false")
+
+    // Setup Serialization with Kryo
+    sparkConf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+    sparkConf.registerKryoClasses(
+      Array(classOf[WikiPage],
+        DBpediaDatasets.getClass,
+        classOf[Extractor[_]],
+        classOf[Language],
+        classOf[Ontology],
+        classOf[OntologyEntity],
+        classOf[EnumerationDatatype],
+        classOf[RdfNamespace]))
+
+    // Create SparkContext
+    val sparkContext = new SparkContext(sparkConf)
+    sparkContext.setLogLevel("WARN")
+
+    // Load extraction jobs from configuration
     val config = new Config(args.head)
     val configLoader = new ConfigLoader(config)
 
-    val parallelProcesses = if(config.runJobsInParallel) config.parallelProcesses else 1
-    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
-    //Execute the extraction jobs one by one
-    for (job <- configLoader.getExtractionJobs) {
-      while(jobsRunning.size() >= parallelProcesses)
-        Thread.sleep(1000)
-
-      val future = Future{job.run()}
-      jobsRunning.add(future)
-      future.onComplete {
-        case Failure(f) => throw f
-        case Success(_) => jobsRunning.remove(future)
-      }
-    }
-
-    while(jobsRunning.size() > 0)
-      Thread.sleep(1000)
+    // Run extraction jobs
+    configLoader.getExtractionJobs.foreach(_.run(sparkContext, config))
   }
 }

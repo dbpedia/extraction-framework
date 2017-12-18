@@ -1,99 +1,128 @@
 package org.dbpedia.extraction.dump.extract
 
+import java.io.File
+import java.net.URL
+
+import org.apache.spark.SparkContext
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.Destination
-import org.dbpedia.extraction.mappings.WikiPageExtractor
-import org.dbpedia.extraction.util.{RecordEntry, RecordSeverity}
-import org.dbpedia.extraction.sources.Source
-import org.dbpedia.extraction.util._
-import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
+import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.ontology.io.OntologyReader
+import org.dbpedia.extraction.sources.{Source, WikiSource, XMLSource}
+import org.dbpedia.extraction.util.{RecordSeverity, _}
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
+
 
 /**
  * Executes a extraction.
  *
- * @param extractor The Extractor
- * @param source The extraction source
+ * @param extractors The Extractors
+ * @param context The Extraction Context
  * @param namespaces Only extract pages in these namespaces
- * @param destination The extraction destination. Will be closed after the extraction has been finished.
- * @param language the language of this extraction.
+ * @param lang the language of this extraction.
  */
 class ExtractionJob(
-   extractor: WikiPageExtractor,
-   source: Source,
-   val namespaces: Set[Namespace],
-   val destination: Destination,
-   val language: Language,
-   val retryFailedPages: Boolean,
-   val extractionRecorder: ExtractionRecorder[WikiPage])
+   extractors: Seq[Class[_ <: Extractor[_]]],
+   context: DumpExtractionContext,
+   articleSource : Source,
+   namespaces: Set[Namespace],
+   destination: Destination,
+   lang: Language,
+   retryFailedPages: Boolean,
+   extractionRecorder: ExtractionRecorder[WikiPage])
 {
-/*  val myAnnotatedClass: ClassSymbol = runtimeMirror(Thread.currentThread().getContextClassLoader).classSymbol(ExtractorAnnotation.getClass)
-  val annotation: Option[Annotation] = myAnnotatedClass.annotations.find(_.tree.tpe =:= typeOf[ExtractorAnnotation])
-  val result = annotation.flatMap { a =>
-    a.tree.children.tail.collect({ case Literal(Constant(name: String)) => name }).headOption
-  }
 
-  result.foreach( x => println(x.toString))*/
-
-  def datasets: Set[Dataset] = extractor.datasets
-
-  private val workers = SimpleWorkers { page: WikiPage =>
-    try {
-      if (namespaces.contains(page.title.namespace)) {
-        val graph = extractor.extract(page, page.uri)
-        destination.write(graph)
-      }
-      //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
-      val records = page.getExtractionRecords() match{
-        case seq :Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
-        case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
-      }
-      //forward all records to the recorder
-      extractionRecorder.record(records:_*)
-    } catch {
-      case ex: Exception =>
-        ex.printStackTrace()
-        page.addExtractionRecord(null, ex)
-        extractionRecorder.record(page.getExtractionRecords():_*)
-        if(extractionRecorder.monitor != null)
-          extractionRecorder.monitor.reportError(extractionRecorder, ex)
-    }
-  }
-  
-  def run(): Unit =
+  def run(sparkContext: SparkContext, config : Config): Unit =
   {
-    extractionRecorder.initialize(language, "Main Extraction", extractor.datasets.toSeq)
+
+    // Broadcasts
+    val bc_namespaces = sparkContext.broadcast(namespaces)
+
+    val bc_ontology = sparkContext.broadcast(context.ontology)
+    val bc_language = sparkContext.broadcast(context.language)
+    val bc_redirects= sparkContext.broadcast(context.redirects)
+
+    val bc_mappingPageSource = sparkContext.broadcast(context.mappingPageSource)
+
+    def worker_context = new DumpExtractionContext {
+      def ontology: Ontology = bc_ontology.value
+
+      def language: Language = bc_language.value
+
+      def redirects: Redirects = bc_redirects.value
+
+      //val mappings = MappingsLoader.load(this)
+
+      def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
+
+    }
+
+    // Create Extractors
+    val extractor = CompositeParseExtractor.load(extractors, worker_context)
+
+    val bc_extractor = sparkContext.broadcast(extractor)
+
+    // Source -> RDD[WikiPage]
+    val source = sparkContext.parallelize(articleSource.toSeq)
+
+    extractionRecorder.initialize(lang, "Main Extraction", extractor.datasets.toSeq)
     extractor.initializeExtractor()
     destination.open()
-    workers.start()
 
     try {
-      for (page <- source)
-        workers.process(page)
-
-      extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordSeverity.Info, language)
-
-      if(retryFailedPages){
-        val fails = extractionRecorder.listFailedPages(language).keys.map(_._2)
-        extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", RecordSeverity.Warning, language)
-        extractionRecorder.resetFailedPages(language)
-        for(page <- fails) {
-          page.toggleRetry()
-          page match{
-            case p: WikiPage => workers.process(p)
-            case _ =>
-          }
+      // Run Extraction on Spark RDD
+      source.map(page => {
+        if (bc_namespaces.value.exists(_.equals(page.title.namespace)))
+          Some(bc_extractor.value.extract(page, page.uri))
+        else
+          None
+      })
+      // Collect Quads
+        .collect()
+      // Write Quads to Destination
+        .foreach {
+          case Some(quads) =>
+            quads.foreach(q => println("s: " + q.subject + "\np: " + q.predicate + "\no: " + q.value + "\n\n"))
+            destination.write(quads)
+          case None =>
         }
-        extractionRecorder.printLabeledLine("all failed pages were re-executed.", RecordSeverity.Info, language)
+
+      extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordSeverity.Info, lang)
+
+      // Retry Extraction of failed pages
+      if(retryFailedPages) {
+        val failedPages = extractionRecorder.listFailedPages(lang).keys.map(_._2).toSeq
+
+        // Failed Pages -> SparkRDD[WikiPage]
+        val fails = sparkContext.parallelize(failedPages)
+        extractionRecorder.printLabeledLine("retrying " + failedPages.length + " failed pages", RecordSeverity.Warning, lang)
+        extractionRecorder.resetFailedPages(lang)
+
+        // Rerun Extraction on SparkRDD
+        fails.map(page => {
+          page.toggleRetry()
+          extractor.extract(page, page.uri)
+        })
+        // Collect Quads
+          .collect()
+        // Write Quads to Destination
+          .foreach(destination.write)
+        extractionRecorder.printLabeledLine("all failed pages were re-executed.", RecordSeverity.Info, lang)
       }
     }
     catch {
       case ex : Throwable =>
         if(extractionRecorder.monitor != null) extractionRecorder.monitor.reportCrash(extractionRecorder, ex)
+        ex.printStackTrace()
     } finally {
-      workers.stop()
       destination.close()
       extractor.finalizeExtractor()
       extractionRecorder.finalize()
     }
   }
+
 }
+

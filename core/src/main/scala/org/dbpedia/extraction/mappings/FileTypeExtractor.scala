@@ -18,7 +18,7 @@ class FileTypeExtractor(context: {
 }) extends WikiPageExtractor
 {
     // For writing warnings.
-    private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
+//    private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
 
     // To store the Commons language.
     private val commonsLang = Language.Commons
@@ -140,8 +140,8 @@ class FileTypeExtractor(context: {
 
         // Warn the user on long extensions.
         val page_title = page.title.decodedWithNamespace
-        if(extension.length > 4)
-            logger.warning(f"Page '$page_title%s' has an unusually long extension '$extension%s'")
+//        if(extension.length > 4)
+//            logger.warning(f"Page '$page_title%s' has an unusually long extension '$extension%s'")
 
         Some(extension)
     }

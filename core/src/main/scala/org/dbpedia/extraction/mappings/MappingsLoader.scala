@@ -18,20 +18,19 @@ import scala.reflect.ClassTag
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
  * This should be replaced by a general loader later on, which loads the mapping objects based on the grammar (which can be defined using annotations)
  */
-object MappingsLoader
+object MappingsLoader extends java.io.Serializable
 {
     // Note: we pass the encoded page title as log parameter so we can render a link on the server
-    private val logger = Logger.getLogger(MappingsLoader.getClass.getName)
+//    private val logger = Logger.getLogger(MappingsLoader.getClass.getName)
     
     def load( context : {
                  def ontology : Ontology
                  def language : Language
                  def redirects : Redirects
                  def mappingPageSource : Traversable[WikiPage]
-                  def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) : Mappings =
     {
-        logger.info("Loading mappings ("+context.language.wikiCode+")")
+//        logger.info("Loading mappings ("+context.language.wikiCode+")")
 
         val classMappings = new HashMap[String, Extractor[TemplateNode]]()
         val tableMappings = new ArrayBuffer[TableMapping]()
@@ -55,7 +54,7 @@ object MappingsLoader
                         }
                         else
                         {
-                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
+//                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
                         }
                     }
                     case "TableMapping" =>
@@ -76,7 +75,7 @@ object MappingsLoader
                         }
                         else
                         {
-                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
+//                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
                         }
                     }
                     case _ => throw new IllegalArgumentException("Unknown mapping element "+tnode.title.decoded)
@@ -88,7 +87,7 @@ object MappingsLoader
             }
         }
 
-        logger.info("Mappings loaded ("+context.language.wikiCode+")")
+//        logger.info("Mappings loaded ("+context.language.wikiCode+")")
 
         new Mappings(classMappings.toMap, tableMappings.toList)
     }
@@ -97,7 +96,7 @@ object MappingsLoader
           def ontology : Ontology
           def redirects : Redirects
           def language : Language
-          def recorder[T: ClassTag] : ExtractionRecorder[T]
+
     } ) =
     {
         new TemplateMapping( loadOntologyClass(tnode, "mapToClass", true, context.ontology),
@@ -111,7 +110,6 @@ object MappingsLoader
                   def ontology : Ontology
                   def redirects : Redirects
                   def language : Language
-                  def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) : List[PropertyMapping] =
     {
         var mappings = List[PropertyMapping]()
@@ -136,7 +134,7 @@ object MappingsLoader
                                       def ontology : Ontology
                                       def redirects : Redirects
                                       def language : Language
-                                      def recorder[T: ClassTag] : ExtractionRecorder[T]}
+                                      }
                                    ) = tnode.title.decoded match
     {
         case "PropertyMapping" =>
@@ -218,7 +216,6 @@ object MappingsLoader
          def ontology : Ontology
          def redirects : Redirects
          def language : Language
-          def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) =
     {
         val conditionMappings =
@@ -233,7 +230,6 @@ object MappingsLoader
       def ontology : Ontology
       def redirects : Redirects
       def language : Language
-      def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) =
     {
         //Search for the template mapping in the first template node of the mapping property
@@ -320,11 +316,11 @@ object MappingsLoader
      */
     private def log(level: Level, msg: String, params: Array[Object], thrown: Throwable): Unit =
     {
-      if (! logger.isLoggable(level)) return
-      val lr = new LogRecord(level, msg)
-      lr.setLoggerName(logger.getName())
-      lr.setParameters(params)
-      lr.setThrown(thrown)
-      logger.log(lr)
+//      if (! logger.isLoggable(level)) return
+//      val lr = new LogRecord(level, msg)
+//      lr.setLoggerName(logger.getName())
+//      lr.setParameters(params)
+//      lr.setThrown(thrown)
+//      logger.log(lr)
     }
 }

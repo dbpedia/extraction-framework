@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.apache.spark.SparkContext
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
@@ -14,11 +15,12 @@ import scala.language.reflectiveCalls
 class LabelExtractor( 
   context : {
     def ontology : Ontology
-    def language : Language 
-  } 
+    def language : Language
+  }
 ) 
 extends WikiPageExtractor
 {
+
   val labelProperty = context.ontology.properties("rdfs:label")
   
   override val datasets = Set(DBpediaDatasets.Labels)

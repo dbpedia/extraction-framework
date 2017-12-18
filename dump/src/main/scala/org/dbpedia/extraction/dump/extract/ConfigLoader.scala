@@ -62,22 +62,32 @@ class ConfigLoader(config: Config)
   /**
     * Creates ab extraction job for a specific language.
     */
-  val extractionJobWorker: Workers[(Language, Seq[Class[_ <: Extractor[_]]])] = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { input: (Language,  Seq[Class[_ <: Extractor[_]]]) =>
-
-    val finder = new Finder[File](config.dumpDir, input._1, config.wikiName)
+  def buildExtractionJob(lang: Language, extractors : Seq[Class[_ <: Extractor[_]]]) : Option[ExtractionJob] = {
+    val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
 
     val date = latestDate(finder)
+
+    def articlesSource: Source = getArticlesSource(lang, finder)
+
 
     //Extraction Context
     val context = new DumpExtractionContext
     {
       def ontology: Ontology = _ontology
+      def language: Language = lang
 
-      def commonsSource: Source = _commonsSource
+      private val _redirects =
+      {
+        finder.file(date, "template-redirects.obj") match{
+          case Some(cache) => Redirects.load(articlesSource, cache, language)
+          case None => new Redirects(Map())
+        }
 
-      def language: Language = input._1
+      }
 
-      def recorder[T: ClassTag]: ExtractionRecorder[T] = getExtractionRecorder[T](input._1)
+      def redirects : Redirects = _redirects
+
+      def recorder[T: ClassTag]: ExtractionRecorder[T] = getExtractionRecorder[T](lang)
 
       private lazy val _mappingPageSource =
       {
@@ -104,52 +114,10 @@ class ConfigLoader(config: Config)
       }
       def mappings : Mappings = _mappings
 
-      def articlesSource: Source = getArticlesSource(language, finder)
-
-      private val _redirects =
-      {
-        finder.file(date, "template-redirects.obj") match{
-          case Some(cache) => Redirects.load(articlesSource, cache, language)
-          case None => new Redirects(Map())
-        }
-
-      }
-
-      def redirects : Redirects = _redirects
-
-      private val _disambiguations =
-      {
-        try {
-          Disambiguations.load(reader(finder.file(date, config.disambiguations).get), finder.file(date, "disambiguations-ids.obj").get, language)
-        } catch {
-          case ex: Exception =>
-            logger.info("Could not load disambiguations - error: " + ex.getMessage)
-            null
-        }
-      }
-
-      def disambiguations : Disambiguations =
-        if (_disambiguations != null)
-          _disambiguations
-        else
-          new Disambiguations(Set[Long]())
-
-      def configFile: Config = config
-
-      def freeImages : Seq[String] = ConfigLoader.this.freeImages.get(language) match{
-        case Some(s) => s
-        case None => Seq()
-      }
-
-      def nonFreeImages : Seq[String] = ConfigLoader.this.nonFreeImages.get(language) match{
-        case Some(s) => s ++ ConfigLoader.this.nonFreeImages(Language.Commons)                //always add commons to the list of non free images
-        case None => Seq()
-      }
     }
 
-    //Extractors
-    val extractor = CompositeParseExtractor.load(input._2, context)
-    val datasets = extractor.datasets
+    // TODO: Find a better way to do this (?)
+    val datasets = CompositeParseExtractor.load(extractors, context).datasets
 
     val formatDestinations = new ArrayBuffer[Destination]()
 
@@ -157,7 +125,7 @@ class ConfigLoader(config: Config)
       val datasetDestinations = new mutable.HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
-          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format, getExtractionRecorder(context.language, dataset), dataset))
+          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format, getExtractionRecorder(Language("de"), dataset), dataset))
           case None =>
         }
       }
@@ -170,32 +138,33 @@ class ConfigLoader(config: Config)
       false
     )
 
-    val extractionJobNS = if(context.language == Language.Commons)
+    val extractionJobNS = if(Language("de") == Language.Commons)
       ExtractorUtils.commonsNamespacesContainingMetadata
     else config.namespaces
 
     val extractionJob = new ExtractionJob(
-      extractor,
-      context.articlesSource,
+      extractors,
+      context,
+      articlesSource,
       extractionJobNS,
       destination,
-      context.language,
+      Language("de"),
       config.retryFailedPages,
-      getExtractionRecorder(context.language)
+      getExtractionRecorder(Language("de"))
     )
 
-    extractionJobs.put(context.language, extractionJob)
+    extractionJobs.put(Language("de"), extractionJob)
   }
 
   /**
     * Creates ab extraction job for a specific language.
     */
-  val imageCategoryWorker: Workers[Language] = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
-    val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
-    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang, DBpediaDatasets.Images))
-    this.freeImages.put(lang, imageCategories._1)
-    this.nonFreeImages.put(lang, imageCategories._2)
-    }
+//  val imageCategoryWorker: Workers[Language] = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
+//    val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
+//    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang, DBpediaDatasets.Images))
+//    this.freeImages.put(lang, imageCategories._1)
+//    this.nonFreeImages.put(lang, imageCategories._2)
+//    }
 
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
@@ -204,27 +173,23 @@ class ConfigLoader(config: Config)
      */
     def getExtractionJobs: Traversable[ExtractionJob] =
     {
-      if(config.copyrightCheck) {
-        // Image Extractor pre-processing: Extract Free & Non-Free Images prior to the main Extraction
-        var zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractorNew"))
-        if (zw.isEmpty) {
-          zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
-        }
-        val imageExtractorLanguages = zw match {
-          case filtered if filtered.nonEmpty => filtered.keySet.toList ++ List(Language.Commons) //else: add Commons (see ImageExtractorScala for why)
-          case _ => List[Language]() //no ImageExtractors selected
-        }
-        Workers.work[Language](imageCategoryWorker, imageExtractorLanguages)
-      } else {
-        val zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
-        zw.keys.foreach(lang => this.nonFreeImages.put(lang, Seq[String]()))
-        this.nonFreeImages.put(Language.Commons, Seq[String]())
-      }
-
-
-      // Create a non-strict view of the extraction jobs
-      // non-strict because we want to create the extraction job when it is needed, not earlier
-      Workers.work[(Language, Seq[Class[_ <: Extractor[_]]])](extractionJobWorker, config.extractorClasses.toList)
+//      if(config.copyrightCheck) {
+//        // Image Extractor pre-processing: Extract Free & Non-Free Images prior to the main Extraction
+//        var zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractorNew"))
+//        if (zw.isEmpty) {
+//          zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
+//        }
+//        val imageExtractorLanguages = zw match {
+//          case filtered if filtered.nonEmpty => filtered.keySet.toList ++ List(Language.Commons) //else: add Commons (see ImageExtractorScala for why)
+//          case _ => List[Language]() //no ImageExtractors selected
+//        }
+//        Workers.work[Language](imageCategoryWorker, imageExtractorLanguages)
+//      } else {
+//        val zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
+//        zw.keys.foreach(lang => this.nonFreeImages.put(lang, Seq[String]()))
+//        this.nonFreeImages.put(Language.Commons, Seq[String]())
+//      }
+      config.extractorClasses.toList.foreach(input => buildExtractionJob(input._1, input._2))
       extractionJobs.values
     }
 
@@ -257,8 +222,8 @@ class ConfigLoader(config: Config)
         val ontologySource = if (config.ontologyFile != null && config.ontologyFile.isFile)
         {
           XMLSource.fromFile(config.ontologyFile, Language.Mappings)
-        } 
-        else 
+        }
+        else
         {
           val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
           val url = new URL(Language.Mappings.apiUri)

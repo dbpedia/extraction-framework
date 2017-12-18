@@ -22,7 +22,7 @@ import org.dbpedia.extraction.config.Config.{AbstractParameters, MediaWikiConnec
 
 
 class Config(val configPath: String) extends
-  Properties(Config.universalProperties)
+  Properties(Config.universalProperties) with java.io.Serializable
 {
 
   if(configPath != null)

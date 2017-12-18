@@ -13,7 +13,7 @@ import scala.language.reflectiveCalls
  */
 class SingleGeoCoordinateParser(context : { def language : Language }) extends DataParser
 {
-    private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
+//    private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
     private val language = context.language.wikiCode
     
     private val lonHemLetterMap = GeoCoordinateParserConfig.longitudeLetterMap.getOrElse(language,GeoCoordinateParserConfig.longitudeLetterMap("en"))
@@ -39,7 +39,8 @@ class SingleGeoCoordinateParser(context : { def language : Language }) extends D
         catch
         {
             case ex : ControlThrowable => throw ex
-            case ex : Exception => logger.log(Level.FINE, "Could not extract coordinates", ex)
+            case ex : Exception =>
+//              logger.log(Level.FINE, "Could not extract coordinates", ex)
         }
 
         None

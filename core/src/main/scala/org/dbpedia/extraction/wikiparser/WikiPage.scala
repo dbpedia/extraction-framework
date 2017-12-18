@@ -31,7 +31,7 @@ class WikiPage(
     val contributorID: Long,
     val contributorName: String,
     val source : String,
-    val format: String)
+    val format: String) extends java.io.Serializable
 {
 
   private val extractionRecords = ListBuffer[RecordEntry[WikiPage]]()

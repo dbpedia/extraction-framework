@@ -8,7 +8,7 @@ import scala.util.matching.Regex
  * Represents an enumeration of literals.
  */
 //TODO make immutable
-class EnumerationDatatype(name : String) extends Datatype(name)
+class EnumerationDatatype(name : String) extends Datatype(name) with java.io.Serializable
 {
     private var literals = List[Literal]()
 
@@ -30,7 +30,7 @@ class EnumerationDatatype(name : String) extends Datatype(name)
         None
     }
 
-    private class Literal(val name : String, val keywords : List[String])
+    private class Literal(val name : String, val keywords : List[String]) extends java.io.Serializable
     {
         val regex = new Regex("(?iu)\\b(?:" + (name :: keywords).mkString("|") + ")\\b")
     }

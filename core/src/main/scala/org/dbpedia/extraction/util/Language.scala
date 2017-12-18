@@ -44,7 +44,7 @@ class Language private(
   val baseUri: String,
   val apiUri: String,
   val pages: Int
-)
+) extends java.io.Serializable
 {
     val locale = new Locale(isoCode)
     

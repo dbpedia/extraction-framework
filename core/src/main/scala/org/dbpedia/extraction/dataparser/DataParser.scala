@@ -9,7 +9,7 @@ import org.dbpedia.extraction.util.Language
  * Extracts data from a node in the abstract syntax tree.
  * The type of the data which is extracted depends on the specific parser e.g. The IntegerParser extracts integers.
  */
-abstract class DataParser
+abstract class DataParser extends java.io.Serializable
 {
 
     def parse( node : Node ) : Option[ParseResult[_]]
@@ -36,4 +36,4 @@ abstract class DataParser
 
 }
 
-case class ParseResult[T](value: T, lang: Option[Language] = None, unit: Option[Datatype] = None)
+case class ParseResult[T](value: T, lang: Option[Language] = None, unit: Option[Datatype] = None) extends java.io.Serializable

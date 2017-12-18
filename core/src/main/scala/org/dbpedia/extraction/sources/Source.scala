@@ -16,7 +16,7 @@ import scala.collection.immutable.Traversable
  * waste. Even calling head() causes a big overhead, for example a file or a network connection
  * is opened. Is there a more appropriate Scala type?
  */
-trait Source extends Traversable[WikiPage]
+trait Source extends Traversable[WikiPage] with java.io.Serializable
 {
     /**
      * True, if this source is guaranteed to have a finite size.

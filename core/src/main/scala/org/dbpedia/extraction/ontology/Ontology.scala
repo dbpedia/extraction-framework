@@ -18,7 +18,7 @@ class Ontology (
   val specializations : Map[(OntologyClass, OntologyProperty), UnitDatatype],
   val wikidataPropertiesMap : Map[String,Set[OntologyProperty]],
   val wikidataClassesMap : Map[String,Set[OntologyClass]]
-){
+) extends java.io.Serializable {
   def getOntologyClass(id: String): Option[OntologyClass] ={
     val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
     classes.get(iid)
