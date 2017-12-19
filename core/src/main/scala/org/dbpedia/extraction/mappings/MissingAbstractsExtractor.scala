@@ -54,7 +54,7 @@ extends PageNodeExtractor
 
     private val language = context.language.wikiCode
 
-//    private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
+    private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
 
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s"
@@ -103,7 +103,7 @@ extends PageNodeExtractor
           text = postProcess(pageNode.title, text)
 
           if (text.trim.isEmpty) {
-//            logger.info(s"Empty abstract for subject $subjectUri")
+            logger.info(s"Empty abstract for subject $subjectUri")
             return Seq.empty
           }
 
@@ -194,19 +194,19 @@ extends PageNodeExtractor
             }
 
             if (counter < maxRetries) {
-//              logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying after " + sleepMs + " ms. Load factor: " + loadFactor, ex)
+              logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying after " + sleepMs + " ms. Load factor: " + loadFactor, ex)
               Thread.sleep(sleepMs)
             }
             else {
               ex match {
                 case e : java.net.SocketTimeoutException =>
-//                  logger.log(Level.INFO,
-//                  "Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
-//                    loadFactor, ex)
+                  logger.log(Level.INFO,
+                  "Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
+                    loadFactor, ex)
                 case _ =>
-//                  logger.log(Level.INFO,
-//                  "Error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
-//                    loadFactor, ex)
+                  logger.log(Level.INFO,
+                  "Error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
+                    loadFactor, ex)
               }
             }
           }
@@ -363,7 +363,7 @@ extends PageNodeExtractor
 }
 
 object MissingAbstractsExtractor {
-//  private val logger = Logger.getLogger(classOf[MissingAbstractsExtractor].getName)
+  private val logger = Logger.getLogger(classOf[MissingAbstractsExtractor].getName)
 
   /**
    * List of all characters which are reserved in a query component according to RFC 2396
@@ -384,15 +384,15 @@ object MissingAbstractsExtractor {
 
   lazy val existingAbstracts = {
     val file = new File("existing-abstracts.tsv")
-//    logger.info(s"Starting to read list of existing abstracts from file '${file.getAbsolutePath}'")
+    logger.info(s"Starting to read list of existing abstracts from file '${file.getAbsolutePath}'")
 
     val reader = try {
       new BufferedReader(new FileReader("existing-abstracts.tsv"))
     }
     catch {
       case e: FileNotFoundException =>
-//        logger.severe(s"Unable to find file '${file.getAbsolutePath}'." +
-//        s"Please generate it and put it in the given location.")
+        logger.severe(s"Unable to find file '${file.getAbsolutePath}'." +
+        s"Please generate it and put it in the given location.")
         throw e
       case e : Throwable => throw e
     }
@@ -415,7 +415,7 @@ object MissingAbstractsExtractor {
 
     reader.close()
 
-//    logger.info(s"Done reading existing abstract names: ${set.size} abstracts already existing")
+    logger.info(s"Done reading existing abstract names: ${set.size} abstracts already existing")
     set
   }
 }

@@ -17,7 +17,7 @@ class DoubleParser( context : { def language : Language },
 {
     private val parserUtils = new ParserUtils(context)
 
-//    private val logger = Logger.getLogger(getClass.getName)
+    @transient private val logger = Logger.getLogger(getClass.getName)
 
     private val language = context.language.wikiCode
 
@@ -46,7 +46,7 @@ class DoubleParser( context : { def language : Language },
         {
             case Some(s) => s.toString()
             case None =>
-//                logger.log(Level.FINE, "Cannot convert '" + input + "' to a floating point number, DoubleRegex did not match")
+                logger.log(Level.FINE, "Cannot convert '" + input + "' to a floating point number, DoubleRegex did not match")
                 return None
         }
 
@@ -60,13 +60,13 @@ class DoubleParser( context : { def language : Language },
         catch
         {
             case ex : ParseException =>
-//                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
+                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
                 None
             case ex : NumberFormatException =>
-//                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
+                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
                 None
             case ex : ArrayIndexOutOfBoundsException =>
-//                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
+                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
                 None
         }
     }

@@ -25,7 +25,7 @@ class GalleryExtractor (
 extends WikiPageExtractor
 {
     // Logger.
-//    private val logger = Logger.getLogger(classOf[GalleryExtractor].getName)
+    @transient private val logger = Logger.getLogger(classOf[GalleryExtractor].getName)
 
     /** Property that links a gallery page with each image on it */
     private val galleryItemProperty = context.ontology.properties("galleryItem")
@@ -103,10 +103,10 @@ extends WikiPageExtractor
                             case e: WikiParserException =>
                                 // If there's a WikiParserException, report the
                                 // error and keep going.
-//                                logger.warning("Could not parse file line '" +
-//                                  fileLineMatch.group("filename") +
-//                                  "' in gallery on page '" + subjectUri + "': " + e.getMessage
-//                                )
+                                logger.warning("Could not parse file line '" +
+                                  fileLineMatch.group("filename") +
+                                  "' in gallery on page '" + subjectUri + "': " + e.getMessage
+                                )
 
                                 // Just skip this line and keep going.
                                 Seq.empty

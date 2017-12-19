@@ -21,7 +21,7 @@ class DateTimeParser ( context :
 {
     require(datatype != null, "datatype != null")
 
-//    private val logger = Logger.getLogger(getClass.getName)
+    @transient private val logger = Logger.getLogger(getClass.getName)
 
     // language-specific configurations
 
@@ -97,9 +97,9 @@ class DateTimeParser ( context :
         catch
         {
             case ex : IllegalArgumentException  =>
-//                logger.log(Level.FINE, "Error while parsing date", ex)
+                logger.log(Level.FINE, "Error while parsing date", ex)
             case ex : NumberFormatException =>
-//                logger.log(Level.FINE, "Error while parsing date", ex)
+                logger.log(Level.FINE, "Error while parsing date", ex)
         }
 
         None
@@ -184,7 +184,7 @@ class DateTimeParser ( context :
             }
         }
 
-//        logger.log(Level.FINE, "Template unknown: " + node.title)
+        logger.log(Level.FINE, "Template unknown: " + node.title)
         None
     }
 
@@ -198,10 +198,10 @@ class DateTimeParser ( context :
         datatype.name match
         {
             case "xsd:gDay" =>
-//                logger.fine("Method for day Extraction not yet implemented.")
+                logger.fine("Method for day Extraction not yet implemented.")
                 None
             case "xsd:gMonth" =>
-//                logger.fine("Method for month Extraction not yet implemented.")
+                logger.fine("Method for month Extraction not yet implemented.")
                 None
             case "xsd:gYear" =>
                 for(date <- catchMonthYear(input))
@@ -242,7 +242,7 @@ class DateTimeParser ( context :
             {
                 case Some(monthNumber) => return Some(new Date(Some((century+year).toInt), Some(monthNumber.toInt), Some(day.toInt), datatype))
                 case None =>
-//                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
 
@@ -253,7 +253,7 @@ class DateTimeParser ( context :
             {
                 case Some(monthNumber) => return Some(new Date(Some((eraIdentifier+year).toInt), Some(monthNumber), Some(day.toInt), datatype))
                 case None =>
-//                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
 
@@ -264,7 +264,7 @@ class DateTimeParser ( context :
             {
                 case Some(monthNumber) => return Some(new Date(Some((eraIdentifier+year).toInt), Some(monthNumber), Some(day.toInt), datatype))
                 case None =>
-//                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
 
@@ -283,7 +283,7 @@ class DateTimeParser ( context :
             catch
             {
                 case ex: NoSuchElementException =>
-//                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
 
@@ -303,7 +303,7 @@ class DateTimeParser ( context :
             {
               case Some(monthNumber) => return Some(new Date(Some(year.toInt), Some(monthNumber), Some(day.toInt), datatype))
               case None =>
-//                  logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                  logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
 
@@ -320,7 +320,7 @@ class DateTimeParser ( context :
             {
                 case Some(monthNumber) => return Some(new Date(month = Some(monthNumber), day = Some(day.toInt), datatype = datatype))
                 case None =>
-//                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
         for(result <- DayMonthRegex2.findFirstMatchIn(input))
@@ -331,7 +331,7 @@ class DateTimeParser ( context :
             {
                 case Some(monthNumber) => return Some(new Date(month = Some(monthNumber), day = Some(day.toInt), datatype = datatype))
                 case None =>
-//                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
         None
@@ -349,7 +349,7 @@ class DateTimeParser ( context :
             {
                 case Some(monthNumber) => return Some(new Date(year = Some((eraIdentifier+year).toInt), month = Some(monthNumber), datatype = datatype))
                 case None =>
-//                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
         None

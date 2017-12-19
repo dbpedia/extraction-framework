@@ -14,7 +14,7 @@ class DurationParser( context : { def language : Language } ) extends java.io.Se
 
     private val parserUtils = new ParserUtils(context)
 
-//    private val logger = Logger.getLogger(getClass.getName)
+    @transient private val logger = Logger.getLogger(getClass.getName)
 
     private val timeUnits = DurationParserConfig.timesMap.getOrElse(language, DurationParserConfig.timesMap("en"))
 
@@ -163,17 +163,17 @@ class DurationParser( context : { def language : Language } ) extends java.io.Se
         {
             case ex : ParseException =>
             {
-//                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
+                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
                 None
             }
             case ex : NumberFormatException =>
             {
-//                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
+                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
                 None
             }
             case ex : ArrayIndexOutOfBoundsException =>
             {
-//                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
+                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
                 None
             }
         }

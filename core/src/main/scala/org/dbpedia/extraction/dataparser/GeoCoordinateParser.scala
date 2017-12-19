@@ -20,7 +20,7 @@ class GeoCoordinateParser(
 {
     private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 
-//    private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
+    @transient private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
     
     private val singleCoordParser = new SingleGeoCoordinateParser(extractionContext)
     
@@ -54,7 +54,7 @@ class GeoCoordinateParser(
         {
             case ex : ControlThrowable => throw ex
             case ex : Exception =>
-//              logger.log(Level.FINE, "Could not extract coordinates", ex)
+              logger.log(Level.FINE, "Could not extract coordinates", ex)
         }
 
         None

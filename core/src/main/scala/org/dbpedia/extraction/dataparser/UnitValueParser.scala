@@ -19,7 +19,7 @@ class UnitValueParser( extractionContext : {
                         strict : Boolean = false,
                         multiplicationFactor : Double = 1.0) extends DataParser
 {
-//    private val logger = Logger.getLogger(getClass.getName)
+    @transient private val logger = Logger.getLogger(getClass.getName)
 
     private val parserUtils = new ParserUtils(extractionContext)
 
@@ -134,7 +134,7 @@ class UnitValueParser( extractionContext : {
 
         for(e <- errors)
         {
-//            logger.fine("Could not extract " + inputDatatype.name + " value from " + node + " on page " + node.root.title + " line " + node.line + ".\n" + e)
+            logger.fine("Could not extract " + inputDatatype.name + " value from " + node + " on page " + node.root.title + " line " + node.line + ".\n" + e)
         }
 
         None
