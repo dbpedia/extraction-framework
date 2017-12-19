@@ -12,6 +12,7 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{Source, WikiSource, XMLSource}
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{RecordSeverity, _}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
 
@@ -40,13 +41,12 @@ class ExtractionJob(
 
     // Broadcasts
     val bc_namespaces = sparkContext.broadcast(namespaces)
-
     val bc_ontology = sparkContext.broadcast(context.ontology)
     val bc_language = sparkContext.broadcast(context.language)
     val bc_redirects= sparkContext.broadcast(context.redirects)
-
     val bc_mappingPageSource = sparkContext.broadcast(context.mappingPageSource)
 
+    // Build new context with the broadcast values
     def worker_context = new DumpExtractionContext {
       def ontology: Ontology = bc_ontology.value
 
@@ -57,7 +57,6 @@ class ExtractionJob(
       //val mappings = MappingsLoader.load(this)
 
       def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
-
     }
 
     // Create Extractors
@@ -75,20 +74,48 @@ class ExtractionJob(
     try {
       // Run Extraction on Spark RDD
       source.map(page => {
-        if (bc_namespaces.value.exists(_.equals(page.title.namespace)))
-          Some(bc_extractor.value.extract(page, page.uri))
-        else
-          None
-      })
-      // Collect Quads
-        .collect()
-      // Write Quads to Destination
-        .foreach {
-          case Some(quads) =>
-            quads.foreach(q => println("s: " + q.subject + "\np: " + q.predicate + "\no: " + q.value + "\n\n"))
-            destination.write(quads)
-          case None =>
+        try {
+          // Create records for this page
+          val records = page.getExtractionRecords() match {
+            case seq: Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
+            case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
+          }
+
+          // extract quads if the namespace is requested
+          if (bc_namespaces.value.exists(_.equals(page.title.namespace))) {
+            val quads = bc_extractor.value.extract(page, page.uri)
+            new ExtractionResult(Some(quads), records)
+          }
+          else {
+            new ExtractionResult(None, records)
+          }
         }
+        catch {
+          case ex: Exception =>
+            page.addExtractionRecord(null, ex)
+            new ExtractionResult(None, page.getExtractionRecords())
+        }
+      })
+      // Collect Results
+        .collect()
+        .foreach(results => {
+          // Write quads to the destination
+          results.quads match {
+            case Some(quads) =>
+              quads.foreach(q => println("s: " + q.subject + "\np: " + q.predicate + "\no: " + q.value + "\n\n"))
+              destination.write(quads)
+            case None =>
+          }
+          // Push records to ExtractionRecorder
+          val records = results.records
+          extractionRecorder.record(records: _*)
+          // Report exceptions to the monitor
+          if(extractionRecorder.monitor != null) {
+            records.filter(_.error != null).foreach(
+              r => extractionRecorder.monitor.reportError(extractionRecorder, r.error)
+            )
+          }
+        })
 
       extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordSeverity.Info, lang)
 
@@ -104,12 +131,47 @@ class ExtractionJob(
         // Rerun Extraction on SparkRDD
         fails.map(page => {
           page.toggleRetry()
-          extractor.extract(page, page.uri)
+          try {
+            // Create records for this page
+            val records = page.getExtractionRecords() match {
+              case seq: Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
+              case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
+            }
+            // extract quads if the namespace is requested
+            if (bc_namespaces.value.exists(_.equals(page.title.namespace))) {
+              val quads = bc_extractor.value.extract(page, page.uri)
+              new ExtractionResult(Some(quads), records)
+            }
+            else {
+              new ExtractionResult(None, records)
+            }
+          }
+          catch {
+            case ex: Exception =>
+              page.addExtractionRecord(null, ex)
+              new ExtractionResult(None, page.getExtractionRecords())
+          }
         })
-        // Collect Quads
+          // Collect results
           .collect()
-        // Write Quads to Destination
-          .foreach(destination.write)
+          .foreach(results => {
+            // Write quads to the destination
+            results.quads match {
+              case Some(quads) =>
+                quads.foreach(q => println("s: " + q.subject + "\np: " + q.predicate + "\no: " + q.value + "\n\n"))
+                destination.write(quads)
+              case None =>
+            }
+            // Push records to ExtractionRecorder
+            val records = results.records
+            extractionRecorder.record(records: _*)
+            // Report exceptions to the monitor
+            if(extractionRecorder.monitor != null) {
+              records.filter(_.error != null).foreach(
+                r => extractionRecorder.monitor.reportError(extractionRecorder, r.error)
+              )
+            }
+          })
         extractionRecorder.printLabeledLine("all failed pages were re-executed.", RecordSeverity.Info, lang)
       }
     }
@@ -126,3 +188,4 @@ class ExtractionJob(
 
 }
 
+class ExtractionResult(val quads : Option[Seq[Quad]], val records : Seq[RecordEntry[WikiPage]]) extends java.io.Serializable
