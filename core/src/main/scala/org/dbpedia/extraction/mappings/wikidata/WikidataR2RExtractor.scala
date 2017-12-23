@@ -50,8 +50,7 @@ class WikidataR2RExtractor(
                             )
   extends JsonNodeExtractor {
 
-  val config: JsonConfig = new JsonConfig(JsonConfig.getClass.getClassLoader.getResource("wikidatar2r.json"))
-
+  val config: JsonConfig = new JsonConfig(getClass.getClassLoader.getResource("wikidatar2r.json"))
   var equivalentProperties: Map[String, Set[String]] = context.ontology.wikidataPropertiesMap.map(x => x._1 -> x._2.map(y => y.uri))
 
   //class mappings generated with script WikidataSubClassOf and written to json file.
@@ -276,7 +275,6 @@ class WikidataR2RExtractor(
       val mapper = new ObjectMapper() with ScalaObjectMapper
       mapper.registerModule(DefaultScalaModule)
       val mapFromJson = mapper.readValue[Map[String, String]](jsonString)
-
       mapFromJson.foreach{
         pair =>
           mapFromJson.get(pair._1) match {

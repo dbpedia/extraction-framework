@@ -39,19 +39,18 @@ object WikidataSubClassOf {
 
   def main(args: Array[String]) {
 
-    require(args != null && args.length == 1, "Two arguments required, extraction config file and extension to work with")
     require(args(0).nonEmpty, "missing required argument: config file name")
 
     val config = new Config(args(0))
-    val suffix = config.inputSuffix
-    val rawDataset = DBpediaDatasets.WikidataRawRedirected.encoded + suffix
+    val suffix = config.inputSuffix match { case Some(s) => s}
+    val rawDataset = DBpediaDatasets.WikidataRawRedirected.filenameEncoded + suffix
 
     val baseDir = config.dumpDir
     if (!baseDir.exists)
       throw new scala.IllegalArgumentException("dir " + baseDir + " does not exist")
 
     val finder = new DateFinder(baseDir, Language.Wikidata)
-    finder.byName("pages-articles.xml.bz2", auto = true)
+    finder.byName(rawDataset, auto = true)
     val ontology = new OntologyReader().read( XMLSource.fromFile(config.ontologyFile, Language.Mappings))
 
     // use integers in the map [superClass -> set[subclasses]]
