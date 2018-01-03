@@ -25,20 +25,11 @@ object Extraction {
     Authenticator.setDefault(new ProxyAuthenticator())
 
     // Create SparkConfig
-    val sparkConf = new SparkConf().setAppName("MainExtraction").setMaster("local[2]")
+    val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster("local[2]")
     sparkConf.set("spark.eventLog.enabled","false")
 
     // Setup Serialization with Kryo
     sparkConf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
-    sparkConf.registerKryoClasses(
-      Array(classOf[WikiPage],
-        DBpediaDatasets.getClass,
-        classOf[Extractor[_]],
-        classOf[Language],
-        classOf[Ontology],
-        classOf[OntologyEntity],
-        classOf[EnumerationDatatype],
-        classOf[RdfNamespace]))
 
     // Create SparkContext
     val sparkContext = new SparkContext(sparkConf)
