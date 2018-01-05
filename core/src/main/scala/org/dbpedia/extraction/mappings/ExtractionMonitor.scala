@@ -1,7 +1,5 @@
 package org.dbpedia.extraction.mappings
 
-import java.io.File
-import java.net.URL
 import java.util.concurrent.atomic.AtomicLong
 
 import org.apache.jena.rdf.model._
@@ -38,8 +36,8 @@ class ExtractionMonitor {
     else ConfigUtils.loadConfig(configPath)
     compareVersions = Try[Boolean]{ config.getProperty("compareDatasetIDs").toBoolean }.getOrElse(false)
     if (compareVersions){
-      require(config.getProperty("old-base-dir-url") != null, "Old build directory needs to be defined under 'old-base-dir-url' for the dataID comparison!")
-      old_version_URL = config.getProperty("old-base-dir-url")
+      require(config.getProperty("previousBaseDir") != null, "Old build directory needs to be defined under 'previousBaseDir' for the dataID comparison!")
+      old_version_URL = config.getProperty("previousBaseDir")
       val changes = config.getProperty("expectedChanges")
       if(changes != null) {
         if(changes.split(",").length == 2) {
@@ -121,11 +119,14 @@ class ExtractionMonitor {
       val language = er.language
       val oldDate = old_version_URL.split("/")(3)
       val url = old_version_URL + language.wikiCode + "/"+ oldDate + "_dataid_" + language.wikiCode + ".ttl"
-      new URL(url) #> new File("dataID-tmp.ttl")
 
       // Compare & Get the results
-      dataIDResults = "DATAIDRESULTS: \n" +
-      compareTripleCount("dataID-tmp.ttl", er, datasets)
+      compareTripleCount(url, er, datasets) match {
+        case Some(comparison) =>
+          dataIDResults = "DATAIDRESULTS: \n" + comparison
+        case None => dataIDResults = "! COULD NOT COMPARE DATAID !"
+      }
+
     }
     val exceptions = mutable.HashMap[String, Int]()
     errors(er).foreach(ex => {
@@ -149,36 +150,43 @@ class ExtractionMonitor {
   /**
     * Reads two RDF files and compares the triple-count-values.
     */
-  def compareTripleCount(dataIDfile : String, extractionRecorder: ExtractionRecorder[_], datasets : ListBuffer[Dataset]): String ={
+  def compareTripleCount(dataIDUrl : String, extractionRecorder: ExtractionRecorder[_], datasets : ListBuffer[Dataset]): Option[String] ={
+    try {
+      var resultString = ""
+      // Load Graph
+      val model = ModelFactory.createDefaultModel()
 
-    var resultString = ""
+      model.read(dataIDUrl)
+      val oldValues = getPropertyValues(model, model.getProperty(tripleProperty))
 
-    // Load Graph
-    val oldModel = ModelFactory.createDefaultModel()
-
-    oldModel.read(dataIDfile)
-    val oldValues = getPropertyValues(oldModel, oldModel.getProperty(tripleProperty))
-
-    // Compare Values
-    oldValues.keySet.foreach(fileName => {
-      if(datasets.nonEmpty) {
-        datasets.foreach(dataset =>
-          if(dataset.canonicalUri == fileName) {
-            val oldValue : Long = oldValues(fileName).asLiteral().getLong
-            val newValue : Long = extractionRecorder.successfulTriples(dataset)
-            val change : Float =
-              if(newValue > oldValue) (newValue.toFloat / oldValue.toFloat) * 10000000 / 100000
-              else (-1 * (1- (newValue.toFloat / oldValue.toFloat))) * 10000000 / 100000
-            if(change < expectedChanges(0) || change > expectedChanges(1)) resultString += "! "
-            resultString += dataset.canonicalUri + ": " + change + "%"
-          })
-      }
-      // Datasets for ER not given => Compare all datasets
-      else {
-        resultString += fileName + ": " + oldValues(fileName).asLiteral().getLong
-      }
-    })
-    resultString
+      // Compare Values
+      oldValues.keySet.foreach(fileName => {
+        if (datasets.nonEmpty) {
+          datasets.foreach(dataset =>
+            if (dataset.canonicalUri == fileName) {
+              val oldValue: Long = oldValues(fileName).asLiteral().getLong
+              val newValue: Long = extractionRecorder.successfulTriples(dataset)
+              val change: Float =
+                if (newValue > oldValue) (newValue.toFloat / oldValue.toFloat) * 10000000 / 100000
+                else (-1 * (1 - (newValue.toFloat / oldValue.toFloat))) * 10000000 / 100000
+              if (change < expectedChanges(0) || change > expectedChanges(1)) resultString += "! "
+              resultString += dataset.canonicalUri + ": " + change + "%"
+            })
+        }
+        // Datasets for ER not given => Compare all datasets
+        else {
+          resultString += fileName + ": " + oldValues(fileName).asLiteral().getLong
+        }
+      })
+      if (resultString != "")
+        Some(resultString)
+      else
+        None
+    } catch {
+      case ex : Throwable =>
+        ex.printStackTrace()
+        None
+    }
   }
 
   /**
