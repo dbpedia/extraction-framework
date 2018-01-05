@@ -25,7 +25,7 @@ object Extraction {
     Authenticator.setDefault(new ProxyAuthenticator())
 
     // Create SparkConfig
-    val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster("local[2]")
+    val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster("local[*]")
     sparkConf.set("spark.eventLog.enabled","false")
 
     // Setup Serialization with Kryo
