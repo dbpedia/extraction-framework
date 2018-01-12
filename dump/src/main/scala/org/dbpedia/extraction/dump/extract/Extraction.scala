@@ -24,8 +24,14 @@ object Extraction {
     require(args != null && args.length >= 1 && args(0).nonEmpty, "missing required argument: config file name")
     Authenticator.setDefault(new ProxyAuthenticator())
 
+    // Load configuration
+    val config = new Config(args.head)
+    val configLoader = new ConfigLoader(config)
+
+    val parallelProcesses = if(config.runJobsInParallel) config.parallelProcesses else 1
+
     // Create SparkConfig
-    val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster("local[*]")
+    val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster(s"local[$parallelProcesses]")
     sparkConf.set("spark.eventLog.enabled","false")
 
     // Setup Serialization with Kryo
@@ -34,10 +40,6 @@ object Extraction {
     // Create SparkContext
     val sparkContext = new SparkContext(sparkConf)
     sparkContext.setLogLevel("WARN")
-
-    // Load extraction jobs from configuration
-    val config = new Config(args.head)
-    val configLoader = new ConfigLoader(config)
 
     // Run extraction jobs
     configLoader.getExtractionJobs.foreach(_.run(sparkContext, config))
