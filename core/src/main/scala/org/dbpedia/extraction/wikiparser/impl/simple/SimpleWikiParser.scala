@@ -63,7 +63,7 @@ object SimpleWikiParser
       //   same time as the redirect target, so sometimes they do not match.
       // In a nutshell: if the redirect in WikiPage is different from what we find, we're probably correct.
 
-      val pattern = if (lang.wikiCode=="wikidata") Redirect(lang).mkString("")
+      val pattern = if (lang.wikiCode=="wikidata") Redirect(lang).mkString("|")
         else """(?is)\s*(?:""" + Redirect(lang).mkString("|") + """)\s*:?\s*\[\[.*"""
       pattern.r
     }
