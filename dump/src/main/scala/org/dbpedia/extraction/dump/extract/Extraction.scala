@@ -2,14 +2,10 @@ package org.dbpedia.extraction.dump.extract
 
 import java.net.Authenticator
 
+import org.apache.log4j.{Level, LogManager}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.dbpedia.extraction.config.Config
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.mappings.{CompositeParseExtractor, Extractor}
-import org.dbpedia.extraction.ontology.datatypes.EnumerationDatatype
-import org.dbpedia.extraction.ontology.{Ontology, OntologyEntity, RdfNamespace}
-import org.dbpedia.extraction.util.{Language, ProxyAuthenticator}
-import org.dbpedia.extraction.wikiparser.WikiPage
+import org.dbpedia.extraction.util.{ProxyAuthenticator}
 
 /**
  * Dump extraction script.
@@ -20,9 +16,13 @@ object Extraction {
 
   val Complete = "extraction-complete"
 
+  val logger = LogManager.getRootLogger()
+
   def main(args: Array[String]): Unit = {
     require(args != null && args.length >= 1 && args(0).nonEmpty, "missing required argument: config file name")
     Authenticator.setDefault(new ProxyAuthenticator())
+
+    logger.setLevel(Level.INFO)
 
     // Load configuration
     val config = new Config(args.head)
@@ -32,14 +32,13 @@ object Extraction {
 
     // Create SparkConfig
     val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster(s"local[$parallelProcesses]")
-    sparkConf.set("spark.eventLog.enabled","false")
 
     // Setup Serialization with Kryo
     sparkConf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
 
     // Create SparkContext
     val sparkContext = new SparkContext(sparkConf)
-    sparkContext.setLogLevel("WARN")
+    sparkContext.setLogLevel("ERROR")
 
     // Run extraction jobs
     configLoader.getExtractionJobs.foreach(_.run(sparkContext, config))
