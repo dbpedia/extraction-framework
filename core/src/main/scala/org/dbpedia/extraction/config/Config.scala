@@ -65,9 +65,15 @@ class Config(val configPath: String) extends
   lazy val dumpDir: File = getValue(this, "base-dir", required = true){ x => new File(x)}
 
   /**
-    * Number of parallel processes allowed. Depends on the number of cores, type of disk and IO speed
+    * Number of worker-nodes created by Spark
     */
   lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "4").trim.toInt
+
+  /**
+    * Number of WikiPages hold in memory to be distributed to the worker-nodes.
+    * Current suggested value: 100
+    */
+  lazy val chunkSize: Int = this.getProperty("chunk-size", "100").trim.toInt
 
   /**
     * Normally extraction jobs are run sequentially (one language after the other), but for some jobs it makes sense to run these in parallel.

@@ -28,10 +28,8 @@ object Extraction {
     val config = new Config(args.head)
     val configLoader = new ConfigLoader(config)
 
-    val parallelProcesses = if(config.runJobsInParallel) config.parallelProcesses else 1
-
     // Create SparkConfig
-    val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster(s"local[$parallelProcesses]")
+    val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster(s"local[${config.parallelProcesses}]")
 
     // Setup Serialization with Kryo
     sparkConf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")

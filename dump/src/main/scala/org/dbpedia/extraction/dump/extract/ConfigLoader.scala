@@ -150,6 +150,8 @@ class ConfigLoader(config: Config)
       destination,
       Language("de"),
       config.retryFailedPages,
+      Config.universalConfig.chunkSize,
+      Config.universalConfig.parallelProcesses,
       getExtractionRecorder(Language("de"))
     )
 
