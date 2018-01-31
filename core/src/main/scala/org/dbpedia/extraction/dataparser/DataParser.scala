@@ -36,4 +36,4 @@ abstract class DataParser extends java.io.Serializable
 
 }
 
-case class ParseResult[T](value: T, lang: Option[Language] = None, unit: Option[Datatype] = None) extends java.io.Serializable
+case class ParseResult[T](value: T, lang: Option[Language] = None, unit: Option[Datatype] = None)
