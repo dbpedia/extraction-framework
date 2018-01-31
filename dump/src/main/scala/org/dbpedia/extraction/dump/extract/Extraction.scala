@@ -29,7 +29,7 @@ object Extraction {
     val configLoader = new ConfigLoader(config)
 
     // Create SparkConfig
-    val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster(s"local[${config.parallelProcesses}]")
+    val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster("local[*]")
 
     // Setup Serialization with Kryo
     sparkConf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")

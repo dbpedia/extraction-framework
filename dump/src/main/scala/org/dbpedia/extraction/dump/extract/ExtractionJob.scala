@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.apache.log4j.LogManager
 import org.apache.spark.SparkContext
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.destinations.Destination
@@ -45,16 +44,12 @@ class ExtractionJob(
       val bc_language = sparkContext.broadcast(context.language)
       val bc_redirects = sparkContext.broadcast(context.redirects)
       val bc_mappingPageSource = sparkContext.broadcast(context.mappingPageSource)
-      val bc_destination = sparkContext.broadcast(destination)
 
       //build new context with the broadcast values
       def worker_context = new DumpExtractionContext {
         def ontology: Ontology = bc_ontology.value
-
         def language: Language = bc_language.value
-
         def redirects: Redirects = bc_redirects.value
-
         def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
       }
 
@@ -67,25 +62,31 @@ class ExtractionJob(
       extractionRecorder.printLabeledLine(s"starting extraction with a max chunk-size of $chunkSize pages", RecordSeverity.Info, lang)
       destination.open()
       var chunkNumber = 1
-      var prodFinished = false
-      val pageQueue = mutable.Queue[WikiPage]()
+      var readerFinished = false
+      val pageBuffer = mutable.Queue[WikiPage]()
       val times = ListBuffer[Long]()
 
+      // Start loading the WikiPages into memory
       Future {
         articleSource.foreach(page => {
-          while (pageQueue.length >= 8 * chunkSize) {
+          while (pageBuffer.lengthCompare(10 * chunkSize) >= 0) {
             Thread.sleep(1000)
           }
-          pageQueue.enqueue(page)
-
+          pageBuffer.enqueue(page)
         })
-      }.onComplete(_ => prodFinished = true)
+      }.onComplete(_ => readerFinished = true)
 
-      while (!(prodFinished && pageQueue.isEmpty)) {
-        if (!prodFinished) {
-          if (pageQueue.length >= chunkSize) {
-            val t = System.currentTimeMillis() // start timer
-            sparkContext.parallelize((0 until chunkSize).map(_ => pageQueue.dequeue()), parallelProcesses).map(page => {
+      // Execute Extraction on the loaded WikiPages
+      while (!readerFinished || pageBuffer.nonEmpty) {
+        if (pageBuffer.lengthCompare(chunkSize) >= 0 || readerFinished) {
+          // Set the size of the next chunk
+          val nextChunkSize = if(pageBuffer.lengthCompare(chunkSize) > 0) chunkSize else pageBuffer.length
+          // Start a timer
+          val t = System.currentTimeMillis()
+          // Queue[WikiPages] => RDD[WikiPage]
+          sparkContext.parallelize((0 until nextChunkSize).map(_ => pageBuffer.dequeue), parallelProcesses)
+          // WikiPage => Seq[Quad] => Write to Destination
+            .map(page => {
               try {
                 //create records for this page
                 val records = page.getExtractionRecords() match {
@@ -94,84 +95,51 @@ class ExtractionJob(
                 }
                 //extract quads, after checking the namespace
                 if (bc_namespaces.value.exists(_.equals(page.title.namespace))) {
-                  bc_destination.value.write(bc_extractor.value.extract(page, page.uri))
-                  records
+                  ExtractionResult(Some(bc_extractor.value.extract(page, page.uri)), records)
                 }
                 else {
-                  records
+                  ExtractionResult(None, records)
                 }
               }
               catch {
                 case ex: Exception =>
                   page.addExtractionRecord(null, ex)
-                  page.getExtractionRecords()
+                  ExtractionResult(None, page.getExtractionRecords())
               }
-            })
-              //execute transformations and collect results
-              .toLocalIterator
-              //write to destination and logging
-              .foreach(records => {
+          })
+          // Execute transformations and collect logs
+            .toLocalIterator
+          // Process logging at master
+            .foreach(results => {
+              results.quads match {
+                case Some(quads) => destination.write(quads)
+                case None =>
+              }
+              val records = results.records
               extractionRecorder.record(records: _*)
               if (extractionRecorder.monitor != null) {
                 records.filter(_.error != null).foreach(
                   r => extractionRecorder.monitor.reportError(extractionRecorder, r.error)
                 )
               }
-              times += (System.currentTimeMillis() - t) / chunkSize
-              if (times.length >= 1000) {
-                var median = 0f
-                times.foreach(median += _)
-                median /= times.length
+            // Log Time per Page
+              times += (System.currentTimeMillis() - t) / nextChunkSize
+              if (times.lengthCompare(1000) >= 0) {
+                var average = 0f
+                times.foreach(average += _)
+                average /= times.length
                 times.clear()
-                extractionRecorder.printLabeledLine(s"finished extraction of chunk-group ${chunkNumber / 1000} with ~${median} ms per page", RecordSeverity.Info, lang)
+                extractionRecorder.printLabeledLine(s"finished extraction of chunk-group ${chunkNumber / 1000} with ~$average ms per page", RecordSeverity.Info, lang)
               }
               chunkNumber += 1
             })
-          } else {
-            Thread.sleep(10)
-          }
-        } else {
-          if (pageQueue.nonEmpty) {
-            // Extract last chunk
-            val t = System.currentTimeMillis() // start timer
-            sparkContext.parallelize(pageQueue, parallelProcesses).map(page => {
-              try {
-                //create records for this page
-                val records = page.getExtractionRecords() match {
-                  case seq: Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
-                  case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
-                }
-                //extract quads, after checking the namespace
-                if (bc_namespaces.value.exists(_.equals(page.title.namespace))) {
-                  bc_destination.value.write(bc_extractor.value.extract(page, page.uri))
-                  records
-                }
-                else {
-                  records
-                }
-              }
-              catch {
-                case ex: Exception =>
-                  page.addExtractionRecord(null, ex)
-                  page.getExtractionRecords()
-              }
-            })
-              //execute transformations and collect results
-              .toLocalIterator
-              //write to destination and logging
-              .foreach(records => {
-              extractionRecorder.record(records: _*)
-              if (extractionRecorder.monitor != null) {
-                records.filter(_.error != null).foreach(
-                  r => extractionRecorder.monitor.reportError(extractionRecorder, r.error)
-                )
-              }
-              // print out time of last chunk
-              extractionRecorder.printLabeledLine(s"finished extraction of the last chunk with ~${(System.currentTimeMillis() - t) / chunkSize} ms per page", RecordSeverity.Info, lang)
-              pageQueue.clear()
-            })
-          }
-          if (retryFailedPages) {
+        }
+        else {
+          Thread.sleep(100)
+        }
+      }
+      // Retry failed pages
+      if (retryFailedPages) {
             val failedPages = extractionRecorder.listFailedPages(lang).keys.map(_._2).toSeq
             extractionRecorder.printLabeledLine("retrying " + failedPages.length + " failed pages", RecordSeverity.Warning, lang)
             extractionRecorder.resetFailedPages(lang)
@@ -186,35 +154,37 @@ class ExtractionJob(
                 }
                 //extract quads, after checking the namespace
                 if (bc_namespaces.value.exists(_.equals(page.title.namespace))) {
-                  bc_destination.value.write(bc_extractor.value.extract(page, page.uri))
-                  records
+                  new ExtractionResult(Some(bc_extractor.value.extract(page, page.uri)), records)
                 }
                 else {
-                  records
+                  new ExtractionResult(None, records)
                 }
               }
               catch {
                 case ex: Exception =>
                   page.addExtractionRecord(null, ex)
-                  page.getExtractionRecords()
+                  new ExtractionResult(None, page.getExtractionRecords())
               }
             })
               //execute transformations and collect results
               .toLocalIterator
               //write to destination and logging
-              .foreach(records => {
-              extractionRecorder.record(records: _*)
-              if (extractionRecorder.monitor != null) {
-                records.filter(_.error != null).foreach(
-                  r => extractionRecorder.monitor.reportError(extractionRecorder, r.error)
-                )
-              }
-              extractionRecorder.printLabeledLine(s"finished extraction of ${failedPages.length} failed pages with ~${System.currentTimeMillis() - t / failedPages.length} ms per page", RecordSeverity.Info, lang)
+              .foreach(results => {
+                results.quads match {
+                  case Some(quads) => destination.write(quads)
+                  case None =>
+                }
+                val records = results.records
+                extractionRecorder.record(records: _*)
+                if (extractionRecorder.monitor != null) {
+                  records.filter(_.error != null).foreach(
+                    r => extractionRecorder.monitor.reportError(extractionRecorder, r.error)
+                  )
+                }
             })
-          }
-          extractionRecorder.printLabeledLine(s"finished extraction with {mspp} per page", RecordSeverity.Info, lang)
-        }
+        extractionRecorder.printLabeledLine(s"finished extraction of ${failedPages.length} failed pages with ~${System.currentTimeMillis() - t / failedPages.length} ms per page", RecordSeverity.Info, lang)
       }
+      // Finish up Extraction
       extractionRecorder.printLabeledLine("finished complete extraction after {page} pages with {mspp} per page", RecordSeverity.Info, lang)
       destination.close()
       extractor.finalizeExtractor()
@@ -228,4 +198,7 @@ class ExtractionJob(
     }
   }
 }
+
+case class ExtractionResult(quads : Option[Seq[Quad]], records : Seq[RecordEntry[WikiPage]]) extends Serializable
+
 

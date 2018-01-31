@@ -17,6 +17,8 @@ import ExecutionContext.Implicits.global
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
+
+// SYNTAX TESTS
 object SparkExtraction {
   val logger = LogManager.getRootLogger()
 
