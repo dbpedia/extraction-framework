@@ -24,8 +24,7 @@ import scala.collection.mutable
   * @param namespaces Only extract pages in these namespaces
   * @param lang       the language of this extraction.
   */
-class ExtractionJob(
-                     extractors: Seq[Class[_ <: Extractor[_]]],
+class ExtractionJob( extractors: Seq[Class[_ <: Extractor[_]]],
                      context: DumpExtractionContext,
                      articleSource: Source,
                      namespaces: Set[Namespace],
@@ -85,15 +84,15 @@ class ExtractionJob(
           val t = System.currentTimeMillis()
           // Queue[WikiPages] => RDD[WikiPage]
           sparkContext.parallelize((0 until nextChunkSize).map(_ => pageBuffer.dequeue), parallelProcesses)
-          // WikiPage => Seq[Quad] => Write to Destination
+          // WikiPage => Seq[Quad]
             .map(page => {
               try {
-                //create records for this page
+                // records
                 val records = page.getExtractionRecords() match {
                   case seq: Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
                   case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
                 }
-                //extract quads, after checking the namespace
+                // extract, if in namespace
                 if (bc_namespaces.value.exists(_.equals(page.title.namespace))) {
                   ExtractionResult(Some(bc_extractor.value.extract(page, page.uri)), records)
                 }
@@ -109,12 +108,22 @@ class ExtractionJob(
           })
           // Execute transformations and collect logs
             .toLocalIterator
-          // Process logging at master
+          // Process Results & write Quads to Destination
             .foreach(results => {
-              results.quads match {
-                case Some(quads) => destination.write(quads)
-                case None =>
+              // write
+              try {
+                results.quads match {
+                  case Some(quads) => destination.write(quads)
+                  case None =>
+                }
+              } catch {
+                case ex : Throwable =>
+                  if (extractionRecorder.monitor != null) {
+                    extractionRecorder.monitor.reportError(extractionRecorder, ex)
+                  }
               }
+
+              // logging
               val records = results.records
               extractionRecorder.record(records: _*)
               if (extractionRecorder.monitor != null) {
@@ -122,7 +131,7 @@ class ExtractionJob(
                   r => extractionRecorder.monitor.reportError(extractionRecorder, r.error)
                 )
               }
-            // Log Time per Page
+              // time
               times += (System.currentTimeMillis() - t) / nextChunkSize
               if (times.lengthCompare(1000) >= 0) {
                 var average = 0f
@@ -154,16 +163,16 @@ class ExtractionJob(
                 }
                 //extract quads, after checking the namespace
                 if (bc_namespaces.value.exists(_.equals(page.title.namespace))) {
-                  new ExtractionResult(Some(bc_extractor.value.extract(page, page.uri)), records)
+                  ExtractionResult(Some(bc_extractor.value.extract(page, page.uri)), records)
                 }
                 else {
-                  new ExtractionResult(None, records)
+                  ExtractionResult(None, records)
                 }
               }
               catch {
                 case ex: Exception =>
                   page.addExtractionRecord(null, ex)
-                  new ExtractionResult(None, page.getExtractionRecords())
+                  ExtractionResult(None, page.getExtractionRecords())
               }
             })
               //execute transformations and collect results
