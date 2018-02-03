@@ -1,0 +1,17 @@
+package org.dbpedia.extraction.wikiparser.impl.wikipedia
+
+import org.dbpedia.extraction.util.Language
+
+/**
+ * Holds the category redirect identifiers of the different Wikipedia languages. Do not edit CategoryRedirect.scala!
+ * GenerateWikiSettings.scala uses the template file CategoryRedirect.scala.txt to generate CategoryRedirect.scala.
+ */
+object CategoryRedirect
+{
+    private val map : Map[String, Set[String]] =
+// @ insert categoryRedirects here @ //
+
+// @ insert errors here @ //
+
+    def apply(language : Language) = map(language.wikiCode)
+}

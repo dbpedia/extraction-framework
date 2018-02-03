@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
-import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, DBpediaMetadata, ExtractorRecord, ProvenanceRecord}
+import org.dbpedia.extraction.config.ExtractionRecorder
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, DBpediaMetadata, ExtractorRecord}
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.transform.Quad

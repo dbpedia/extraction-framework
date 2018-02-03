@@ -4,7 +4,7 @@ import org.dbpedia.extraction.config._
 import org.dbpedia.extraction.config.provenance.NodeRecord
 import org.dbpedia.extraction.dataparser.RedirectFinder
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Disambiguation
+import org.dbpedia.extraction.wikiparser.impl.wikipedia.{CategoryRedirect, Disambiguation}
 
 import scala.collection.mutable.ListBuffer
 import scala.xml.Elem
@@ -86,10 +86,22 @@ extends Node with Recordable[PageNode]
   lazy val isRedirect: Boolean = this.redirect != null
 
   lazy val redirect: WikiTitle = {
-    val rf = RedirectFinder.getRedirectFinder(title.language)
-    rf.apply(this) match{
-      case Some(d) => d._2
-      case None => null.asInstanceOf[WikiTitle]   //legacy
+    if(isCategory){
+      val categoryRedirects = CategoryRedirect(this.title.language)
+      val template = children.map(c => Node.collectTemplates(c, categoryRedirects)).filter(t => t.collectFirst{case y => y.children.size > 1}.isDefined).flatten
+      if(template.nonEmpty) {
+        val newCat = WikiTitle.parse(template.head.children.head.propertyNodeValueToPlainText, this.title.language)
+        new WikiTitle(newCat.decoded, Namespace.Category, newCat.language, newCat.isInterLanguageLink, newCat.fragment, newCat.capitalizeLink, newCat.id)
+      }
+      else
+        null.asInstanceOf[WikiTitle] //legacy
+    }
+    else {
+      val rf = RedirectFinder.getRedirectFinder(title.language)
+      rf.apply(this) match {
+        case Some((_, targetTitle)) => targetTitle
+        case None => null.asInstanceOf[WikiTitle] //legacy
+      }
     }
   }
 
@@ -97,6 +109,8 @@ extends Node with Recordable[PageNode]
     val disambiguationNames = Disambiguation.get(this.title.language).getOrElse(Set("Disambig"))
     children.exists(node => node.hasTemplate(disambiguationNames))
   }
+
+  def isCategory: Boolean = this.title.namespace == Namespace.Category
 
   //Generate the page URI
   lazy val uri: String = this.title.language.resourceUri.append(this.title.decodedWithNamespace)

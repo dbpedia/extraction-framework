@@ -1,9 +1,14 @@
 package org.dbpedia.extraction.util
 
-import scala.collection.{Map,Set}
-import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
+import java.io.File
+import java.net.URL
+
+import scala.collection.{Map, Set}
+import scala.collection.mutable.{LinkedHashMap, LinkedHashSet}
 import org.dbpedia.extraction.util.RichStartElement.richStartElement
 import javax.xml.stream.XMLEventReader
+
+import scala.util.Try
 
 class WikiSettings (
   /** name -> code */
@@ -23,10 +28,6 @@ object WikiSettingsReader {
    * Order of namespaces|namespacealiases|magicwords|interwikimap is important.
    */
   val query = "action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords|interwikimap&continue="
-    
-  def read(xml: XMLEventReader): WikiSettings = new WikiSettingsReader(xml).read()
-
-  def read(xml: XMLEventAnalyzer): WikiSettings = new WikiSettingsReader(xml).read()
 }
 
 /**
@@ -37,22 +38,26 @@ object WikiSettingsReader {
  * to make them immutable would destroy the order, so we simply return them, but as an immutable
  * interface. Malicious users could still downcast and mutate. Meh.
  */
-class WikiSettingsReader(in: XMLEventAnalyzer) {
-  
-  def this(reader: XMLEventReader) = this(new XMLEventAnalyzer(reader))
-  
+class WikiSettingsReader(language: Language) {
+
   /**
    * @return settings
    */
-  def read(): WikiSettings = {
-    in.document { _ =>
-      in.element("api") { _ =>
-        in.element("query") { _ =>
-          val namespaces = readNamespaces("namespaces", true)
-          val aliases = readNamespaces("namespacealiases", false)
-          val magicwords = readMagicWords()
-          val interwikis = readInterwikis()
-          new WikiSettings(namespaces, aliases, magicwords, interwikis)
+  def execute(file: File, overwrite: Boolean = true): Try[WikiSettings] = {
+
+    val url = new URL(language.apiUri + "?" + WikiSettingsReader.query)
+    val caller = new LazyWikiCaller(url, WikiDisambigReader.followRedirects, file, overwrite)
+    caller.execute { stream =>
+      val in = new XMLEventAnalyzer(WikiDisambigReader.factory.createXMLEventReader(stream))
+      in.document { _ =>
+        in.element("api") { _ =>
+          in.element("query") { _ =>
+            val namespaces = readNamespaces(in, "namespaces", true)
+            val aliases = readNamespaces(in, "namespacealiases", false)
+            val magicwords = readMagicWords(in)
+            val interwikis = readInterwikis(in)
+            new WikiSettings(namespaces, aliases, magicwords, interwikis)
+          }
         }
       }
     }
@@ -61,7 +66,7 @@ class WikiSettingsReader(in: XMLEventAnalyzer) {
   /**
    * @return namespaces or aliases (name -> code)
    */
-  private def readNamespaces(tag : String, canonical : Boolean) : Map[String, Int] = {
+  private def readNamespaces(in: XMLEventAnalyzer, tag : String, canonical : Boolean) : Map[String, Int] = {
     in.element(tag) { _ =>
       // LinkedHashMap to preserve order
       val namespaces = new LinkedHashMap[String, Int]
@@ -81,7 +86,7 @@ class WikiSettingsReader(in: XMLEventAnalyzer) {
   /**
    * @return magic words (name -> aliases)
    */
-  private def readMagicWords() : Map[String, Set[String]] = {
+  private def readMagicWords(in: XMLEventAnalyzer) : Map[String, Set[String]] = {
     in.element("magicwords") { _ =>
       // LinkedHashMap to preserve order (although it's probably not important)
       val magicwords = new LinkedHashMap[String, Set[String]]
@@ -101,7 +106,7 @@ class WikiSettingsReader(in: XMLEventAnalyzer) {
     }
   }
   
-  private def readInterwikis(): Map[String, String] = {
+  private def readInterwikis(in: XMLEventAnalyzer): Map[String, String] = {
     in.element("interwikimap") { _ =>
       // LinkedHashMap to preserve order (although it's probably not important)
       val interwikis = new LinkedHashMap[String, String]

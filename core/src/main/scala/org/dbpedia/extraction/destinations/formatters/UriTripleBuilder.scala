@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.destinations.formatters
 
 import UriPolicy._
-import org.apache.jena.iri.{IRIException, IRIFactory}
 import org.dbpedia.iri.{IRI, IRISyntaxException}
 
 /**

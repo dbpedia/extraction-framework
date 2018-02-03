@@ -196,24 +196,24 @@ class WikiApi(url: URL, language: Language)
      */
     def retrieveTemplateUsageIDs(title : WikiTitle, maxCount : Int = 500) : List[Long] =
     {
-        var pageList = List[Long]();
-        var  canContinue = false;
-        var eicontinue = "";
-        var appropriateQuery = "";
+        var pageList = List[Long]()
+        var  canContinue = false
+        var eicontinue = ""
+        var appropriateQuery = ""
 
         do{
             appropriateQuery = "?action=query&continue=&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace +
-                                "&einamespace=0&eifilterredir=nonredirects&eilimit=" + maxCount;
+                                "&einamespace=0&eifilterredir=nonredirects&eilimit=" + maxCount
             //Since the call can return only 500 matches at most we must use the eicontinue parameter to
             //get the other matches
             if(canContinue)
-                appropriateQuery = appropriateQuery + "&eicontinue=" + eicontinue;
+                appropriateQuery = appropriateQuery + "&eicontinue=" + eicontinue
 
-            val response = query(appropriateQuery);
+            val response = query(appropriateQuery)
 
-                val queryContinue = response \ "query-continue" \ "embeddedin";
-                val continueSeq = queryContinue \\ "@eicontinue";
-                eicontinue = continueSeq.text;
+                val queryContinue = response \ "query-continue" \ "embeddedin"
+                val continueSeq = queryContinue \\ "@eicontinue"
+                eicontinue = continueSeq.text
 
                 canContinue = false;
 
@@ -222,11 +222,11 @@ class WikiApi(url: URL, language: Language)
 
                 for(page <- response \ "query" \ "embeddedin" \ "ei";
                     title <- page \ "@pageid" ){
-                        pageList = pageList ::: List(title.text.toLong);
+                        pageList = pageList ::: List(title.text.toLong)
                 }
         }while(canContinue)
 
-      pageList;
+      pageList
     }
 
     /**

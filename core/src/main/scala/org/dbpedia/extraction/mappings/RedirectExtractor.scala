@@ -19,7 +19,7 @@ class RedirectExtractor (
     def language : Language
   }
 )
-  extends WikiPageExtractor
+  extends PageNodeExtractor
 {
   private val language = context.language
 
@@ -32,11 +32,9 @@ class RedirectExtractor (
 
   private val quad = QuadBuilder(language, DBpediaDatasets.Redirects, wikiPageRedirectsProperty, null) _
 
-  override def extract(page : WikiPage, subjectUri : String): Seq[Quad] = {
-    if (page.isRedirect && page.title.namespace == page.redirect.namespace) {
-      return Seq(quad(subjectUri, language.resourceUri.append(page.redirect.decodedWithNamespace), page.sourceIri))
-    }
-
+  override def extract(page : PageNode, subjectUri : String): Seq[Quad] = {
+      if (page.isRedirect && page.title.namespace == page.redirect.namespace)
+        return Seq(quad(subjectUri, language.resourceUri.append(page.redirect.decodedWithNamespace), page.sourceIri))
     Seq.empty
   }
 }

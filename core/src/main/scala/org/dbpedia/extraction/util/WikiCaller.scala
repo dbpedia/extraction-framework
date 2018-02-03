@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.util
 
-import java.io.{File,InputStream,FileInputStream,FileOutputStream,IOException}
-import java.net.{URL,HttpRetryException,HttpURLConnection}
-import java.net.HttpURLConnection.{HTTP_OK,HTTP_MOVED_PERM,HTTP_MOVED_TEMP}
-import scala.collection.{Map,Set}
+import java.io.{File, FileInputStream, FileOutputStream, IOException, InputStream}
+import java.net.{HttpRetryException, HttpURLConnection, URL}
+import java.net.HttpURLConnection.{HTTP_MOVED_PERM, HTTP_MOVED_TEMP, HTTP_OK}
+
 import org.dbpedia.iri.UriDecoder.decode
+
+import scala.util.Try
 
 /**
  * @param file Target file. If file exists and overwrite is false, do not call url, 
@@ -21,15 +23,17 @@ extends WikiCaller(url, followRedirects)
    * to another language. The message of the HttpRetryException is the target language.
    * @throws IOException if another error occurs
    */
-  override def execute[R](process: InputStream => R): R = {
+  override def execute[R](process: InputStream => R): Try[R] = {
     if (overwrite || ! file.exists) {
       super.execute { in => 
         val out = new FileOutputStream(file)
-        try IOUtils.copy(in, out) finally out.close 
+        try IOUtils.copy(in, out) finally out.close()
       } 
     }
     val in = new FileInputStream(file)
-    try process(in) finally in.close
+    val ret = Try(process(in))
+    in.close()
+    ret
   }
 }
   
@@ -49,14 +53,14 @@ class WikiCaller(url: URL, followRedirects: Boolean) {
    * to another language. The message of the HttpRetryException is the target language.
    * @throws IOException if another error occurs
    */
-  def execute[R](process: InputStream => R): R = { 
+  def execute[R](process: InputStream => R): Try[R] = {
     val conn = url.openConnection.asInstanceOf[HttpURLConnection]
-    try {
       checkResponse(conn)
       val in = conn.getInputStream
-      try process(in) finally in.close
-    }
-    finally conn.disconnect
+      val ret = Try(process(in))
+      in.close
+      conn.disconnect
+      ret
   }
   
   /**

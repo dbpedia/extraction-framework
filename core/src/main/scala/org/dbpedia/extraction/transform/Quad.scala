@@ -1,8 +1,7 @@
 package org.dbpedia.extraction.transform
 
-import com.sun.xml.internal.ws.api.databinding.MetadataReader
 import org.dbpedia.extraction.config.{RecordCause, RecordEntry, Recordable}
-import org.dbpedia.extraction.config.provenance.{Dataset, ProvenanceMetadata, ProvenanceRecord, TripleRecord}
+import org.dbpedia.extraction.config.provenance._
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, OntologyProperty, OntologyType, RdfNamespace}
 import org.dbpedia.extraction.transform.Quad._
@@ -41,7 +40,6 @@ class Quad(
   val value: String,
   val context: String,
   val datatype: String
-  //provenance: Option[ProvenanceRecord] = None
 )
 extends Ordered[Quad] with Recordable[Quad]
 with Equals
@@ -56,7 +54,6 @@ with Equals
     value: String,
     context: String,
     datatype: Datatype
-    //provenance: Option[ProvenanceRecord] = None
   ) = this(
     if (language == null) null else language.isoCode,
     if (dataset == null) null else dataset.encoded,
@@ -65,7 +62,6 @@ with Equals
       value,
       context,
       if (datatype == null) null else datatype.uri
-      //provenance
     )
 
   def this(
@@ -76,7 +72,6 @@ with Equals
     value: String,
     context: String,
     datatype: Datatype = null
-    //provenance: Option[ProvenanceRecord] = None
   ) = this(
       language,
       dataset,
@@ -85,10 +80,18 @@ with Equals
       value,
       context,
       findType(datatype, predicate.range)
-      //provenance
     )
 
   private var provenanceRecord: Option[ProvenanceRecord] = None
+
+  override val id: Long = longHashCode()
+
+  //set the triple level metadata object one may want to append to this quad
+  def setProvenanceRecord(metadata: ProvenanceMetadata): Unit = provenanceRecord =
+    Option(new ProvenanceRecord(id, provenanceIri.toString, getTripleRecord, System.currentTimeMillis(), metadata ))
+
+  // get the metadata obeject
+  def getProvenanceRecord: Option[ProvenanceRecord] = provenanceRecord
 
   // Validate input
   if (subject == null) throw new NullPointerException("subject")
@@ -103,7 +106,6 @@ with Equals
     datatype: String = this.datatype,
     language: String = this.language,
     context: String = this.context
-    //provenance: Option[ProvenanceRecord] = None
   ) = new Quad(
     language,
     dataset,
@@ -112,7 +114,6 @@ with Equals
     value,
     context,
     datatype
-    //provenance
   )
   
   override def toString: String = {
@@ -231,15 +232,6 @@ return - hashCode as Long
 
   def hasObjectPredicate: Boolean =
     datatype == null && language == null && UriUtils.createURI(value).get.isAbsolute
-
-  override val id: Long = longHashCode()
-
-  //set the triple level metadata object one may want to append to this quad
-  def setProvenanceRecord(metadata: ProvenanceMetadata): Unit = provenanceRecord =
-    Option(new ProvenanceRecord(id, provenanceIri.toString, getTripleRecord, System.currentTimeMillis(), metadata ))
-
-  // get the metadata obeject
-  def getProvenanceRecord: Option[ProvenanceRecord] = provenanceRecord
 
   private var records: ListBuffer[RecordEntry[Quad]] = new ListBuffer[RecordEntry[Quad]]()
   def addRecord(rec: RecordEntry[Quad]): Unit = {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper, ObjectWriter}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import org.dbpedia.extraction.config.Recordable
+import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 import org.dbpedia.extraction.transform.Quad
 
 @JsonIgnoreProperties(Array("id"))
@@ -42,7 +43,7 @@ trait ProvenanceMetadata{
 
 }
 
-case class DBpediaMetadata(
+class DBpediaMetadata(
     revision: Long,					                        // revision nr
     namespace: Int,					                        // namespace nr (important to distinguish between Category and Main)
     line: Int,						                          // line nr

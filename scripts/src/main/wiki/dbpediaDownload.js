@@ -237,6 +237,7 @@ function langLoaded(e)
             //init done
             datasetList = getDatasetList();
             reDrawTable(callbackParam);
+            
             initCallback();
         }
     }

@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.wikiparser.impl.wikipedia
 
-import scala.io.{Source, Codec}
-import javax.xml.stream.XMLInputFactory
-import scala.collection.{Map,Set}
-import scala.collection.mutable.{LinkedHashMap,LinkedHashSet}
+import scala.io.{Codec, Source}
+
+import scala.collection.{Map, Set}
+import scala.collection.mutable.LinkedHashMap
 import org.dbpedia.extraction.util._
-import java.io.{File,IOException,OutputStreamWriter,FileOutputStream,Writer}
-import java.net.{URL,HttpRetryException}
+import java.io.{File, FileOutputStream, IOException, OutputStreamWriter}
+import java.net.HttpRetryException
+
+import scala.util.{Failure, Success}
 
 /**
  * Generates Namespaces.scala and Redirect.scala. Must be run with core/ as the current directory.
@@ -24,6 +26,9 @@ object GenerateWikiSettings {
   
   private val inputDir = new File("src/test/resources/org/dbpedia/extraction/wikiparser/impl/wikipedia")
   private val outputDir = new File("src/main/scala/org/dbpedia/extraction/wikiparser/impl/wikipedia")
+
+  private val englishCategoryRedirectTemplate = "Template:Category redirect"
+
   // pattern for insertion point lines
   val Insert = """// @ insert (\w+) here @ //""".r
   
@@ -37,9 +42,7 @@ object GenerateWikiSettings {
     if (! baseDir.isDirectory) throw new IOException("["+baseDir+"] is not an existing directory")
     
     val overwrite = args(1).toBoolean
-    
-    val followRedirects = false
-    
+
     // language -> error message
     val errors = LinkedHashMap[String, String]()
     
@@ -48,6 +51,9 @@ object GenerateWikiSettings {
     
     // language -> redirect aliases
     val redirectMap = new LinkedHashMap[String, Set[String]]()
+
+    // language -> redirect aliases
+    val categoryRedirects = new LinkedHashMap[String, Set[String]]()
     
     // old language code -> new language code
     val languageMap = new LinkedHashMap[String, String]()
@@ -69,69 +75,60 @@ object GenerateWikiSettings {
     val source = Source.fromURL(Language.wikipediaLanguageUrl)(Codec.UTF8)
     val wikiLanguages = try source.getLines.toList finally source.close
     val languages = "mappings" :: "commons" :: "wikidata" :: wikiLanguages
-    
-    // newInstance is expensive, call it only once
-    val factory = XMLInputFactory.newInstance
-    
+
+    //collect category redirects (uses langlinks from a known category redirect page, to find the same in other languages)
+    new WikiLangLinkReader().execute(Language.English, englishCategoryRedirectTemplate)
+      .foreach(ent => categoryRedirects.put(ent._1.wikiCode, ent._2.map {
+        case WikiDisambigReader.TemplateNameRegex(templateName) => templateName
+        case d => d
+      }))
+
     println("generating wiki config for "+languages.length+" languages")
-    
-    languages.map { code =>
+    languages.foreach { code =>
       try {
         val language = Language(code)
         val file = new File(baseDir, language.wikiCode + "wiki-configuration.xml")
         val disambigFile = new File(baseDir, language.wikiCode + "wiki-disambiguation-templates.xml")
 
         try {
-          var url = new URL(language.apiUri + "?" + WikiSettingsReader.query)
-          var caller = new LazyWikiCaller(url, followRedirects, file, overwrite)
-          val settings = caller.execute { stream =>
-            val xml = factory.createXMLEventReader(stream)
-            WikiSettingsReader.read(xml)
+          val settings: WikiSettings = new WikiSettingsReader(language).execute(file, overwrite) match{
+            case Success(s) => s
+            case Failure(f) => throw f
           }
+
           namespaceMap(code) = settings.aliases ++ settings.namespaces // order is important - aliases first
+
+          //get redirects
           redirectMap(code) = settings.magicwords("redirect")
 
           if (wikiLanguages contains code) {
-            // Get disambiguation templates stored in MediaWiki:Disambiguationspage
-            url = new URL(language.apiUri + "?" + WikiDisambigReader.query)
-            caller = new LazyWikiCaller(url, followRedirects, disambigFile, overwrite)
 
-            var disambiguations = Set[String]()
-
-            try {
-              caller.execute { stream =>
-                val xml = factory.createXMLEventReader(stream)
-                disambiguations = WikiDisambigReader.read(language, xml)
-              }
-            } catch {
-              case ioex: IOException => {
-                // catch this and ignore. We are going to use curated disambiguations
-              }
+            new WikiDisambigReader(language).execute(disambigFile, overwrite) match{
+              case Success(s) => disambiguationsMap(code) = s
+              case Failure(f) => throw f
             }
-
-            disambiguations = disambiguations ++ CuratedDisambiguation.get(language).getOrElse(Set())
-            if (!disambiguations.isEmpty) disambiguationsMap(code) = disambiguations
           }
           // TODO: also use interwikis
-          println(s"${code} - OK")
+          println(s"$code - OK")
         } catch {
           case hrex: HttpRetryException => {
             val target = hrex.getMessage
             languageMap(code) = target
-            println(s"${code} - redirected to ${target}")
+            println(s"$code - redirected to $target")
           }
           case ioex: IOException => {
             val error = ioex.getMessage
             errors(code) = error
-            println(s"${code} - Error: ${error}")
+            println(s"$code - Error: $error")
           }
+          case i: Throwable =>   i.printStackTrace()
         }
       }
       catch {
         case uae: IllegalArgumentException =>
       }
     }
-    
+
     // LinkedHashMap to preserve order, which is important because in the reverse map 
     // in Namespaces.scala the canonical name must be overwritten by the localized value.
     val namespaceStr =
@@ -146,18 +143,25 @@ object GenerateWikiSettings {
       s +"\""+name+"\""
     }
 
+    val categoryRedirectStr =
+      build("categoryRedirects", "Set", languageMap, categoryRedirects) { (s, entry) =>
+        val name = entry
+        s +"\""+name+"\""
+      }
+
     val disambiguationsStr =
       build("disambiguations", "Set", languageMap, disambiguationsMap) { (s, entry) =>
         val name = entry
         s +"\""+name+"\""
       }
 
-    var s = new StringPlusser
+    val s = new StringPlusser
     for ((language, message) <- errors) s +"// "+language+" - "+message+"\n"
     val errorStr = s.toString
     
     generate("Namespaces.scala", Map("namespaces" -> namespaceStr, "errors" -> errorStr))
     generate("Redirect.scala", Map("redirects" -> redirectStr, "errors" -> errorStr))
+    generate("CategoryRedirect.scala", Map("categoryRedirects" -> categoryRedirectStr, "errors" -> errorStr))
     generate("Disambiguation.scala", Map("disambiguations" -> disambiguationsStr, "errors" -> errorStr))
 
     println("generated wiki config for "+languages.length+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))

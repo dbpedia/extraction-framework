@@ -43,7 +43,19 @@ extends PageNodeExtractor
       // Extract only links that contain the page title or that spell out the acronym page title
       val disambigLinks = allLinks.filter { linkNode =>
         val cleanLink = linkNode.destination.decoded.toUpperCase(language.locale)
-        cleanLink.contains(cleanPageTitle)|| isAcronym(cleanPageTitle, cleanLink)
+        val lineText = linkNode.root.getOriginWikiText(linkNode.line).toUpperCase(language.locale).trim
+        val titleSplits = cleanPageTitle.split(" ")
+
+        // link text contains at least half of all word in the title
+        val condition1a = titleSplits.count(s => cleanLink.contains(s)) >= titleSplits.size.toDouble / 2d
+        // the link appears at the start of the line and the line contains more than half of the title words
+        val condition1b = lineText.matches("^\\s*\\*\\s*\\[\\[" + cleanLink + "\\]\\].*") && titleSplits.count(s => lineText.contains(s)) > titleSplits.size.toDouble / 2d
+        // acronym appears in the whole line
+        val condition1c = isAcronym(cleanPageTitle, lineText)
+        // disallow redirects to page sections
+        val condition2 = ! cleanLink.contains("#")
+
+        condition2 && (condition1a || condition1b || condition1c)
       }
 
       return disambigLinks.map { link =>
@@ -70,16 +82,23 @@ extends PageNodeExtractor
 
   private def isAcronym(acronym : String, destination : String) : Boolean =
   {
-    val destinationWithoutDash = destination.replace("-", " ")
+    val destinationWithoutDash = destination.replace("-", " ").replaceAll("[^\\w\\s]", "")
     
     val destinationList =
-      if (destinationWithoutDash.contains(" ")) destinationWithoutDash.split(" ")
-      else destinationWithoutDash.split("")
+      if (destinationWithoutDash.contains(" "))
+        destinationWithoutDash.split(" ")
+      else
+        destinationWithoutDash.split("")
       
     var matchCount = 0
     for (word <- destinationList) {
-      if (word.toUpperCase(language.locale).startsWith(acronym(matchCount).toString)) matchCount += 1
-      if (matchCount == acronym.length) return true 
+      if (word.toUpperCase(language.locale).startsWith(acronym(matchCount).toString))
+        matchCount += 1
+      //acronyms matches minus one, if longer than 3 (this will allow for example: Harmful_algal_blooms for acronym HABs)
+      if(acronym.length > 3 && matchCount == acronym.length-1)
+        return true
+      if (matchCount == acronym.length)
+        return true
     }
     
     false
