@@ -4,7 +4,6 @@ import java.io.IOException
 import java.net.{URL, URLEncoder}
 import javax.xml.stream.events.StartElement
 
-import org.dbpedia.extraction.dataparser.RedirectFinder
 import org.dbpedia.extraction.util.RichStartElement.richStartElement
 import org.dbpedia.extraction.wikiparser.Namespace
 
@@ -12,8 +11,17 @@ import scala.collection.{Set, mutable}
 import scala.collection.mutable.ListBuffer
 import scala.util.{Failure, Success, Try}
 
+/**
+  * Collects all language links of a given wiki page
+  */
 class WikiLangLinkReader {
 
+  /**
+    * This heuristic will execute a query for each language link to collect all redirects.
+    * @param language - language of the given page
+    * @param title - title of the given page
+    * @return - Map of languages to a collection of all alias names (redirects, incl. the given page and language)
+    */
   def execute(language: Language, title: String): Map[Language, Set[String]] ={
 
     val url = new URL(language.apiUri + "?" + WikiLangLinkReader.getLangLinkQuery(title))
@@ -58,6 +66,12 @@ class WikiLangLinkReader {
     langMap.toMap
   }
 
+  /**
+    * Executes a new query to collect all redirects of a given page (and language)
+    * @param language - language of the given page
+    * @param title - title of the given page
+    * @return - Set of aliases (redirects)
+    */
   def queryRedirects(language: Language, title: String): Try[Set[String]] ={
 
     val url = new URL(language.apiUri + "?" + WikiLangLinkReader.getRedirectQuery(title))
@@ -66,9 +80,9 @@ class WikiLangLinkReader {
   }
 
   /**
-    * reads normal page tag or redirect
-    * @param page - page or rd element
-    * @return
+    * reads redirect tags
+    * @param page - page element
+    * @return - page title
     */
   private def readRedirect(page: StartElement): Option[String] ={
     if(page.attr("ns").toInt == Namespace.Template.code) {
@@ -79,8 +93,9 @@ class WikiLangLinkReader {
   }
 
   /**
-    * reads normal page tag or redirect
-    * @param page - page or rd element
+    * reads langlink tag (ll), returning a tuple of language and title
+    * @param page - langlink element
+    * @param in - page or rd element
     * @return
     */
   private def readLangLink(page: StartElement, in: XMLEventAnalyzer): Option[(Language, String)] ={
@@ -94,10 +109,15 @@ class WikiLangLinkReader {
 object WikiLangLinkReader{
 
   /**
-    * The query for api.php, without the leading '?'.
+    * The query for api.php, for all langlinks of a given page
     */
   def getLangLinkQuery(title: String) = "action=query&format=xml&prop=redirects%7Clanglinks&redirects=1&rdlimit=500&lllimit=500&titles=" + URLEncoder.encode(title, "UTF-8")
 
+  /**
+    * Query for all redirects of a given page
+    * @param title
+    * @return
+    */
   def getRedirectQuery(title: String) = "action=query&format=xml&prop=redirects&redirects=1&rdlimit=500&titles=" + URLEncoder.encode(title, "UTF-8")
 
 }

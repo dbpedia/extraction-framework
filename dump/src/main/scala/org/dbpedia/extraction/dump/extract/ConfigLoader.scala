@@ -41,8 +41,6 @@ class ConfigLoader(config: Config)
   private val nonFreeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
   private val freeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
 
-  private val extractionMonitor = new ExtractionMonitor()
-
   def getExtractionRecorder[T: ClassTag](lang: Language, dataset : Dataset = null): ExtractionRecorder[T] = {
     extractionRecorder.get(classTag[T]) match{
       case Some(s) => s.get(lang) match {

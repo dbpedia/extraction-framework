@@ -32,11 +32,11 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
   protected val writeStrings: Boolean = nifParameters.writeAnchor
   protected val cssSelectorConfigMap: CssConfigurationMap#CssLanguageConfiguration = new CssConfigurationMap(nifParameters.cssSelectorMap).getCssSelectors(language)
 
-  protected lazy val nifContext: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifContext.encoded) _
-  protected lazy val nifStructure: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifPageStructure.encoded) _
-  protected lazy val nifLinks: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifTextLinks.encoded) _
-  protected lazy val rawTables: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.RawTables.encoded) _
-  protected lazy val equations: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.Equations.encoded) _
+  protected lazy val nifContext: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language, DBpediaDatasets.NifContext.encoded)
+  protected lazy val nifStructure: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language, DBpediaDatasets.NifPageStructure.encoded)
+  protected lazy val nifLinks: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language, DBpediaDatasets.NifTextLinks.encoded)
+  protected lazy val rawTables: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language, DBpediaDatasets.RawTables.encoded)
+  protected lazy val equations: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language, DBpediaDatasets.Equations.encoded)
 
   protected val templateString = "Template"
 

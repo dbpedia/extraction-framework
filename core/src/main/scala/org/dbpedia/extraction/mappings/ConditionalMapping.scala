@@ -1,8 +1,10 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.TemplateNode
 
+@SoftwareAgentAnnotation(classOf[ConditionalMapping], AnnotationType.Extractor)
 class ConditionalMapping(
   val cases : List[ConditionMapping], // must be public val for statistics
   val defaultMappings : List[PropertyMapping] // must be public val for statistics

@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 
 import scala.language.reflectiveCalls
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{PageNode, TextNode, WikiTitle}
 
@@ -40,18 +41,21 @@ class CommonsResourceExtractor (
 
   override def extract(node : PageNode, subjectUri : String) : Seq[Quad] ={
 
-    val quads = new ArrayBuffer[Quad]()
+    val qb = QuadBuilder.staticSubject(context.language, DBpediaDatasets.CommonsLink, subjectUri, propertyUri, node.getNodeRecord, ExtractorRecord(
+      this.softwareAgentAnnotation
+    ))
+    qb.setSourceUri(node.sourceIri)
 
     for { template <- InfoboxExtractor.collectTemplates(node)
       if template.title.decoded.equalsIgnoreCase("Commons")
     }
     {
       if (template.children.isEmpty){
-        val commonsResourceURL = WikiTitle.parse(node.title.encoded.asInstanceOf[String], commonsLanguage).resourceIri
-        return Seq(new Quad(context.language, DBpediaDatasets.CommonsLink, subjectUri, propertyUri, commonsResourceURL, node.sourceIri, null))
+        qb.setValue(WikiTitle.parse(node.title.encoded.asInstanceOf[String], commonsLanguage).resourceIri)
+        return Seq(qb.getQuad)
       } else{
-        val commonsResourceURL = WikiTitle.parse(template.children.head.children.head.asInstanceOf[TextNode].text, commonsLanguage).resourceIri
-        return Seq(new Quad(context.language, DBpediaDatasets.CommonsLink, subjectUri, propertyUri, commonsResourceURL, node.sourceIri, null))
+        qb.setValue(WikiTitle.parse(template.children.head.children.head.asInstanceOf[TextNode].text, commonsLanguage).resourceIri)
+        return Seq(qb.getQuad)
       }
     }
     Seq.empty

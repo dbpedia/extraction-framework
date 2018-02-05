@@ -285,7 +285,8 @@ object DBpediaDatasets
     */
   val MainDataset: Dataset = datasets("main_dataset")
   val WiktionaryDataset: Dataset = datasets("wiktionary_dbpedia_org")
-  val TestDataset = new Dataset("test_dataset", "this is just a test", null, null, "test_dataset", Seq(MainDataset), null, Seq(), null, DatasetTrait.ValueSet(DatasetTrait.Ordered, DatasetTrait.Provenance))
+  val TestDataset = new Dataset("test_dataset", "this is just a test", null, null, "test_dataset", Seq(MainDataset), null, Seq(), null, DatasetTrait.ValueSet(DatasetTrait.Testeset, DatasetTrait.Ordered, DatasetTrait.Provenance))
+  val ParserResults = new Dataset("parser_results", "contains the origin wiki pages extracted by the parser", null, null, "parser_results", Seq(PagesArticles), null, Seq(), null, DatasetTrait.ValueSet(DatasetTrait.Provenance))
 
 
   def getDataset(dataset: Dataset, language: Language, version: String): Try[Dataset] = getDataset(dataset.encoded, language, version)

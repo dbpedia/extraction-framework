@@ -12,7 +12,7 @@ import scala.xml.Elem
 import scala.io.{Codec, Source}
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import org.dbpedia.extraction.destinations.{DeduplicatingDestination, DestinationUtils, WriterDestination}
+import org.dbpedia.extraction.destinations.{DeduplicatingDestination, DestinationUtils, ProvenanceDestination, WriterDestination}
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import stylesheets.TriX
 import java.io.{File, StringWriter}
@@ -46,6 +46,8 @@ object Extraction
                 Map()
         }
     }
+
+  private var lastExtractionQuery: (String, Long, String) = _
 
   def getFormatter(format: String, writer: StringWriter = null) = format match
   {
@@ -94,11 +96,14 @@ class Extraction(@PathParam("lang") langCode : String)
                   <option value="n-triples">N-Triples</option>
                   <option value="n-quads">N-Quads</option>
                   <option value="rdf-json">RDF/JSON</option>
-                </select><br/>
+                  <option value="json">Provenance</option>
+                </select>
+                <br/>
                 <select name="extractors">
                 <option value="mappings">Mappings Only</option>
                 <option value="custom">All Enabled Extractors </option>
-                </select><br/>
+                </select>
+                <br/>
               <input type="submit" value="Extract" />
             </form>
             </div>
@@ -115,10 +120,14 @@ class Extraction(@PathParam("lang") langCode : String)
     def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String, @QueryParam("extractors") extractors: String) : Response =
     {
         if (title == null && revid < 0) throw new WebApplicationException(new Exception("title or revid must be given"), Response.Status.NOT_FOUND)
-        
-        val writer = new StringWriter
 
-        val formatter = Extraction.getFormatter(format, writer)
+      if(format == "json")
+        return extractProvenance(title, revid, extractors)
+
+      Extraction.lastExtractionQuery = (title, revid, extractors)
+
+        val writer = new StringWriter
+      val formatter = Extraction.getFormatter(format, writer)
 
       val customExtraction = extractors match
       {
@@ -140,6 +149,45 @@ class Extraction(@PathParam("lang") langCode : String)
           .header(HttpHeaders.CONTENT_TYPE, selectContentType(format)+"; charset=UTF-8" )
           .build()
     }
+
+  /**
+    * Extracts a MediaWiki article
+    */
+  @GET
+  @Path("provenance")
+  def extractProvenance(@QueryParam("title") @DefaultValue("$default") title: String,
+                        @QueryParam("revid") @DefaultValue("-1") revid: Long,
+                        @QueryParam("extractors") @DefaultValue("$default") extractors: String) : Response =
+  {
+    val realTitle = if(title == "$default" && Extraction.lastExtractionQuery != null) Extraction.lastExtractionQuery._1 else title
+    val realRevId = if(revid < 0 && Extraction.lastExtractionQuery != null) Extraction.lastExtractionQuery._2 else revid
+    val realExtractors = if(extractors == "$default" && Extraction.lastExtractionQuery != null) Extraction.lastExtractionQuery._3 else extractors
+
+    if (realTitle == null && realRevId < 0)
+      throw new WebApplicationException(new Exception("title or revid must be given"), Response.Status.NOT_FOUND)
+
+    val writer = new StringWriter
+
+    val customExtraction = realExtractors match
+    {
+      case "mappings" => false
+      case "custom" => true
+      case _ => false
+    }
+
+    val source =
+      if (realRevId >= 0) WikiSource.fromRevisionIDs(List(realRevId), new URL(language.apiUri), language)
+      else WikiSource.fromTitles(List(WikiTitle.parse(realTitle, language)), new URL(language.apiUri), language)
+
+    // See https://github.com/dbpedia/extraction-framework/issues/144
+    // We should mimic the extraction framework behavior
+    val destination = new DeduplicatingDestination(new ProvenanceDestination(() => writer))
+    Server.instance.extractor.extract(source, destination, language, customExtraction)
+
+    Response.ok(writer.toString)
+      .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN +"; charset=UTF-8" )
+      .build()
+  }
 
   @GET
   @Path("extract-all")

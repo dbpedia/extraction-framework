@@ -206,7 +206,7 @@ object DataIdGenerator {
     }
     //run through all dataset again to add dataset relations
     if(pagesArticles != null) {
-      val pagesArticlesResource = mainModel.createResource(pagesArticles.versionUri)
+      val pagesArticlesResource = mainModel.createResource(pagesArticles.versionUri.toString)
       for (dis <- lbpMap.keys.toList.sorted) {
         if (dis.contains("_" + dir.getName)) {
           if (lastFile != dis.substring(0, dis.lastIndexOf("_" + dir.getName))) {
@@ -214,7 +214,7 @@ object DataIdGenerator {
             lastFile = dis.substring(0, dis.lastIndexOf("_" + dir.getName))
             Option(getDataset(dis, lang)) match {
               case Some(d) =>
-                val dResource = mainModel.createResource(d.versionUri)
+                val dResource = mainModel.createResource(d.versionUri.toString)
                 val relation = mainModel.createResource(d.getRelationUri("source", pagesArticles))
                 mainModel.add(dResource, getProperty("dataid", "relatedDataset"), pagesArticlesResource)
                 mainModel.add(dResource, getProperty("dataid", "qualifiedDatasetRelation"), relation)
@@ -521,7 +521,7 @@ object DataIdGenerator {
   }
 
   def addDataset(model: Model, lang: Language, dataset: Dataset, associatedAgent: Resource, lbpMap: Map[String, String], superset: Boolean): Resource = {
-    val datasetUri = model.createResource(dataset.versionUri)
+    val datasetUri = model.createResource(dataset.versionUri.toString)
     //add dataset to catalog
     catalogModel.add(catalogInUse, getProperty("dcat", "dataset"), datasetUri)
     if(superset) {

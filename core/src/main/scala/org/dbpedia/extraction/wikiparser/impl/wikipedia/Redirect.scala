@@ -308,4 +308,6 @@ object Redirect
 // mo - URL 'https://mo.wikipedia.org/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords|interwikimap&continue=' replied 301 Moved Permanently - Location: 'https://ro.wikipedia.org/wiki/Pagina_principală?action=query&format=xml&meta=siteinfo&siprop=namespaces|namespacealiases|magicwords|interwikimap&continue='
 
     def apply(language : Language) = map(language.wikiCode)
+
+    def get(language : Language) : Option[Set[String]] = map.get(language.wikiCode)
 }

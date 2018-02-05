@@ -107,7 +107,7 @@ object ResolveTransitiveLinks {
       }
       err.println(language.wikiCode + ": " + count + " redirects were suppressed since they have a wikidata uri")
 
-      val buildQuad = QuadBuilder.stringPredicate(language, DBpediaDatasets.RedirectsTransitive, predicate) _
+      val qb = QuadBuilder.stringPredicate(language, DBpediaDatasets.RedirectsTransitive, predicate)
 
       err.println("resolving "+map.size+" links...")
       val cycles = new TransitiveClosure(map).resolve()
@@ -119,7 +119,10 @@ object ResolveTransitiveLinks {
       try {
         destination.open()
         for ((subjUri, objUri) <- map) {
-          destination.write(Seq(buildQuad(subjUri, objUri, null, null)))
+          qb.setSubject(subjUri)
+          qb.setValue(objUri)
+          //TODO qb.setSourceUri() and provenance??
+          destination.write(Seq(qb.getQuad))
         }
       }
       finally destination.close

@@ -21,47 +21,47 @@ import scala.xml.Elem
  * @param childNodes The contents of this page
  */
 class PageNode (
-  val title: WikiTitle,
-  val id: Long,
-  val revision: Long,
-  val timestamp: Long,
-  val contributorID: Long,
-  val contributorName: String,
-  val source: String,
-  private var childNodes: List[Node] = List()
+   val title: WikiTitle,
+   override val id: Long,
+   val revision: Long,
+   val timestamp: Long,
+   val contributorID: Long,
+   val contributorName: String,
+   val source: String,
+   private var childNodes: List[Node] = List()
 ) 
-extends Node with Recordable[PageNode]
+extends Node with Recordable[Node]
 {
   override def children: List[Node] = childNodes
 
   override val line = 0
 
-  private var extractionRecords: ListBuffer[RecordEntry[PageNode]] = null
-  override def recordEntries: List[RecordEntry[PageNode]] = {
+  private var extractionRecords: ListBuffer[RecordEntry[Node]] = null
+  override def recordEntries: List[RecordEntry[Node]] = {
     if(extractionRecords == null || extractionRecords.isEmpty)
       List(new WikiPageEntry(this, RecordCause.Internal))
     else
       extractionRecords.toList
   }
 
-  private[extraction] def addExtractionRecord(recordEntry: RecordEntry[_]): Unit ={
+  private[extraction] override def addExtractionRecord(recordEntry: RecordEntry[_]): Unit ={
     assert(recordEntry != null)
     if(extractionRecords == null)
-      extractionRecords = new ListBuffer[RecordEntry[PageNode]]()
+      extractionRecords = new ListBuffer[RecordEntry[Node]]()
     recordEntry match{
-      case re: RecordEntry[PageNode] => extractionRecords.append(re)
-      case de: RecordEntry[DefaultEntry] => extractionRecords.append(new RecordEntry[PageNode](this, de.cause, Option(de.language).getOrElse(Language.None), de.msg, de.error))
+      case re: RecordEntry[Node] => extractionRecords.append(re)
+      case de: RecordEntry[DefaultEntry] => extractionRecords.append(new RecordEntry[Node](this, de.cause, Option(de.language).getOrElse(Language.None), de.msg, de.error))
       case _ =>
     }
   }
 
   private[extraction] def recordError(msg: String): Unit =
-    addExtractionRecord(new RecordEntry[PageNode](this, RecordCause.Warning, this.title.language, msg))
+    addExtractionRecord(new RecordEntry[Node](this, RecordCause.Warning, this.title.language, msg))
   private[extraction] def recordException(ex: Throwable, msg: String = null): Unit =
-    addExtractionRecord(new RecordEntry[PageNode](this, RecordCause.Exception, this.title.language, if(msg != null) msg else ex.getMessage, ex))
+    addExtractionRecord(new RecordEntry[Node](this, RecordCause.Exception, this.title.language, if(msg != null) msg else ex.getMessage, ex))
   private[extraction] def recordMessage(msg: String): Unit =
-    addExtractionRecord(new RecordEntry[PageNode](this, RecordCause.Info, this.title.language, msg))
-  private[extraction] def recordProvenance = ???
+    addExtractionRecord(new RecordEntry[Node](this, RecordCause.Info, this.title.language, msg))
+  private[extraction] def recordProvenance = ???   //TODO
 
   def toWikiText: String = children.map(_.toWikiText).mkString
 
@@ -87,8 +87,10 @@ extends Node with Recordable[PageNode]
 
   lazy val redirect: WikiTitle = {
     if(isCategory){
-      val categoryRedirects = CategoryRedirect(this.title.language)
-      val template = children.map(c => Node.collectTemplates(c, categoryRedirects)).filter(t => t.collectFirst{case y => y.children.size > 1}.isDefined).flatten
+      val template = CategoryRedirect.get(this.title.language) match{
+        case Some(crd) => children.map(c => Node.collectTemplates(c, crd)).filter(t => t.collectFirst{case y => y.children.size > 1}.isDefined).flatten
+        case None => Set()
+      }
       if(template.nonEmpty) {
         val newCat = WikiTitle.parse(template.head.children.head.propertyNodeValueToPlainText, this.title.language)
         new WikiTitle(newCat.decoded, Namespace.Category, newCat.language, newCat.isInterLanguageLink, newCat.fragment, newCat.capitalizeLink, newCat.id)
@@ -124,11 +126,11 @@ extends Node with Recordable[PageNode]
       case _ => false
   }
 
-  def getNodeRecord = NodeRecord(
-    uri = this.uri,
-    revision = this.revision,
-    namespace = this.title.namespace.code,
-    line = this.line,
-    language = this.title.language.wikiCode
+  override def getNodeRecord: NodeRecord = NodeRecord(
+    this.sourceIri,
+    this.revision,
+    this.title.namespace.code,
+    this.title.language,
+    Option(this.line)
   )
 }

@@ -49,7 +49,7 @@ abstract class DataParser[T]
           case None =>
             val annotation = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
             val rec = ParserRecord(
-              uri = annotation.toString,
+              uri = annotation,
               wikiText = node.root.getOriginWikiText(node.line),
               transformed = node.toWikiText,
               resultValue = pr.value.toString

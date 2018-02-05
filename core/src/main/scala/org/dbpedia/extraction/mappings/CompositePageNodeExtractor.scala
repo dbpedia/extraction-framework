@@ -1,8 +1,10 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.PageNode
 
+@SoftwareAgentAnnotation(classOf[CompositePageNodeExtractor], AnnotationType.Extractor)
 class CompositePageNodeExtractor(extractors: Extractor[PageNode]*)
 extends CompositeExtractor[PageNode](extractors: _*)
 with PageNodeExtractor

@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.config
 
-import java.io.File
 import java.net.URL
 import java.util.concurrent.atomic.AtomicLong
 
@@ -10,42 +9,30 @@ import org.dbpedia.extraction.util.JsonConfig
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
-import scala.sys.process._
 import scala.util.Try
 
-class ExtractionMonitor {
+class ExtractionMonitor(config: Config) {
   private val stats : mutable.HashMap[ExtractionRecorder[_], mutable.HashMap[String, Int]] = mutable.HashMap()
   private val errors : mutable.HashMap[ExtractionRecorder[_], ListBuffer[Throwable]] = mutable.HashMap()
 
-  private var compareVersions = false
   private var old_version_URL : String = _
   private val tripleProperty = "http://rdfs.org/ns/void#triples"
   private var expectedChanges = Array(-1.0, 8.0)
   private val ignorableExceptionsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("ignorableExceptions.json"))
   private val ignorableExceptions : mutable.HashMap[ExtractionRecorder[_], List[String]] = mutable.HashMap()
   private var summarizeExceptions : Boolean = false
+  private val compareVersions = Try[Boolean]{ config.getProperty("compareDatasetIDs").toBoolean }.getOrElse(false)
 
-  this.loadConf()
-
-  /**
-    * Loads Config Values
-    * @param configPath path to config
-    */
-  def loadConf(configPath : String = null): Unit ={
-    val config = if(configPath == null) Config.universalConfig
-    else ConfigUtils.loadConfig(configPath)
-    compareVersions = Try[Boolean]{ config.getProperty("compareDatasetIDs").toBoolean }.getOrElse(false)
-    if (compareVersions){
-      require(config.getProperty("old-base-dir-url") != null, "Old build directory needs to be defined under 'old-base-dir-url' for the dataID comparison!")
-      old_version_URL = config.getProperty("old-base-dir-url")
-      val changes = config.getProperty("expectedChanges")
-      if(changes != null) {
-        if(changes.split(",").length == 2) {
-          expectedChanges = Array(changes.split(",")(0).toFloat, changes.split(",")(1).toFloat)
-        }
+  if (compareVersions){
+    require(config.getProperty("old-base-dir-url") != null, "Old build directory needs to be defined under 'old-base-dir-url' for the dataID comparison!")
+    old_version_URL = config.getProperty("old-base-dir-url")
+    val changes = config.getProperty("expectedChanges")
+    if(changes != null) {
+      if(changes.split(",").length == 2) {
+        expectedChanges = Array(changes.split(",")(0).toFloat, changes.split(",")(1).toFloat)
       }
-      summarizeExceptions = Try[Boolean]{ config.getProperty("summarizeExceptions").toBoolean }.getOrElse(false)
     }
+    summarizeExceptions = Try[Boolean]{ config.getProperty("summarizeExceptions").toBoolean }.getOrElse(false)
   }
 
   /**
@@ -64,7 +51,7 @@ class ExtractionMonitor {
 
     // Load ignorable Exceptions
     var exceptions = ListBuffer[String]()
-    er.getDatasets.foreach(dataset => ignorableExceptionsFile.get(dataset.canonicalUri).foreach(jsonNode => {
+    er.getDatasets.foreach(dataset => ignorableExceptionsFile.get(dataset.canonicalUri.toString).foreach(jsonNode => {
       val it = jsonNode.elements()
       while(it.hasNext){
         exceptions += it.next().asText()

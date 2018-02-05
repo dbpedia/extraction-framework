@@ -91,16 +91,16 @@ class ImageExtractorNew(
           val url = ExtractorUtils.getFileURL(imageFileName, lang)
           val thumbnailUrl = ExtractorUtils.getThumbnailURL(imageFileName, lang)
 
-          quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceIri)
-          quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceIri)
-          quads += new Quad(language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceIri)
-          quads += new Quad(language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceIri)
-          quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceIri)
+          quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceIri, null)
+          quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceIri, null)
+          quads += new Quad(language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceIri, null)
+          quads += new Quad(language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceIri, null)
+          quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceIri, null)
 
           val wikipediaImageUrl = language.baseUri + "/wiki/" + fileNamespaceIdentifier + ":" + imageFileName
 
-          quads += new Quad(language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
-          quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri)
+          quads += new Quad(language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri, null)
+          quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceIri, null)
         }
       case None =>
     }
@@ -109,31 +109,31 @@ class ImageExtractorNew(
       val lang = if (context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
         language else Language.Commons
       val url = ExtractorUtils.getFileURL(img._1, lang)
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mainImageProperty, url, img._2.sourceIri)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mainImageProperty, url, img._2.sourceIri, null)
     })
     flagImage.foreach(_.foreach(img => {
       val lang = if (context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
         language else Language.Commons
       val url = ExtractorUtils.getFileURL(img._1, lang)
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, flagProperty, url, img._2.sourceIri)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, flagProperty, url, img._2.sourceIri, null)
     }))
     coatOfArmsImage.foreach(_.foreach(img => {
       val lang = if (context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
         language else Language.Commons
       val url = ExtractorUtils.getFileURL(img._1, lang)
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, coatOfArmsProperty, url, img._2.sourceIri)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, coatOfArmsProperty, url, img._2.sourceIri, null)
     }))
     signatureImage.foreach(_.foreach(img => {
       val lang = if (context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
         language else Language.Commons
       val url = ExtractorUtils.getFileURL(img._1, lang)
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, signatureProperty, url, img._2.sourceIri)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, signatureProperty, url, img._2.sourceIri, null)
     }))
     mapImage.foreach(_.foreach(img => {
       val lang = if (context.freeImages.contains(URLDecoder.decode(img._1, "UTF-8")))
         language else Language.Commons
       val url = ExtractorUtils.getFileURL(img._1, lang)
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mapProperty, url, img._2.sourceIri)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mapProperty, url, img._2.sourceIri, null)
     }))
 
     quads

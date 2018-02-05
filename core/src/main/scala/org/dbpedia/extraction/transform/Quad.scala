@@ -39,7 +39,8 @@ class Quad(
   val predicate: String,
   val value: String,
   val context: String,
-  val datatype: String
+  val datatype: String,
+  metadata: Option[ProvenanceMetadata] = None
 )
 extends Ordered[Quad] with Recordable[Quad]
 with Equals
@@ -71,7 +72,7 @@ with Equals
     predicate: OntologyProperty,
     value: String,
     context: String,
-    datatype: Datatype = null
+    datatype: Datatype
   ) = this(
       language,
       dataset,
@@ -82,16 +83,22 @@ with Equals
       findType(datatype, predicate.range)
     )
 
-  private var provenanceRecord: Option[ProvenanceRecord] = None
-
   override val id: Long = longHashCode()
 
+  private var provenanceRecord: Option[QuadProvenanceRecord] = None
+  //set metadata
+  metadata.foreach(m => setProvenanceRecord(m))
+
   //set the triple level metadata object one may want to append to this quad
-  def setProvenanceRecord(metadata: ProvenanceMetadata): Unit = provenanceRecord =
-    Option(new ProvenanceRecord(id, provenanceIri.toString, getTripleRecord, System.currentTimeMillis(), metadata ))
+  def setProvenanceRecord(metadata: ProvenanceMetadata): Unit = {
+    provenanceRecord = Some(new QuadProvenanceRecord(id, provenanceIri.toString, getTripleRecord, System.currentTimeMillis(), metadata))
+    metadata match{
+      case dbp: DBpediaMetadata => //TODO
+    }
+  }
 
   // get the metadata obeject
-  def getProvenanceRecord: Option[ProvenanceRecord] = provenanceRecord
+  def getProvenanceRecord: Option[QuadProvenanceRecord] = provenanceRecord
 
   // Validate input
   if (subject == null) throw new NullPointerException("subject")
@@ -105,7 +112,8 @@ with Equals
     value: String = this.value,
     datatype: String = this.datatype,
     language: String = this.language,
-    context: String = this.context
+    context: String = this.context,
+    metadata: Option[ProvenanceMetadata] = this.provenanceRecord.map(p => p.metadata)
   ) = new Quad(
     language,
     dataset,
@@ -113,7 +121,8 @@ with Equals
     predicate,
     value,
     context,
-    datatype
+    datatype,
+    metadata
   )
   
   override def toString: String = {
@@ -236,12 +245,15 @@ return - hashCode as Long
   private var records: ListBuffer[RecordEntry[Quad]] = new ListBuffer[RecordEntry[Quad]]()
   def addRecord(rec: RecordEntry[Quad]): Unit = {
     rec match{
-      case RecordEntry(_: ProvenanceRecord,_,_,_,_,_) => throw new IllegalArgumentException("Add a ProvenanceRecord only with method setProvenanceRecord().")
+      case RecordEntry(_: QuadProvenanceRecord,_,_,_,_,_) => throw new IllegalArgumentException("Add a ProvenanceRecord only with method setProvenanceRecord().")
       case _ => records += rec
     }
   }
 
-  def getTripleRecord: TripleRecord = TripleRecord(subject, predicate, value, Option(language), Option(datatype))
+  def getTripleRecord: TripleRecord = {
+    val lang = if(datatype == Quad.langString) language else null
+    TripleRecord(subject, predicate, value,  Option(lang), Option(datatype))
+  }
 
   override def recordEntries: List[RecordEntry[Quad]] = {
     provenanceRecord match{

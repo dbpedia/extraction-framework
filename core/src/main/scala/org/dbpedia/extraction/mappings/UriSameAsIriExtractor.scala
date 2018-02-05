@@ -30,7 +30,7 @@ extends PageNodeExtractor
 
   val sameAsProperty: OntologyProperty = context.ontology.properties("owl:sameAs")
   
-  val quad = QuadBuilder(context.language, DBpediaDatasets.UriSameAsIri, sameAsProperty, null) _
+  val qb = QuadBuilder(context.language, DBpediaDatasets.UriSameAsIri, sameAsProperty, null)
 
   override val datasets = Set(DBpediaDatasets.UriSameAsIri)
 
@@ -43,7 +43,13 @@ extends PageNodeExtractor
     }
     if (encodedUri == subjectUri)
       Seq.empty
-    else
-      Seq(quad(encodedUri, subjectUri, page.sourceIri))
+    else{
+      qb.setNodeRecord(page.getNodeRecord)
+      qb.setExtractor(this.softwareAgentAnnotation)
+      qb.setSubject(encodedUri)
+      qb.setValue(subjectUri)
+      qb.setSourceUri(page.sourceIri)
+      Seq(qb.getQuad)
+    }
   }
 }

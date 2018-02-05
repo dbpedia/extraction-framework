@@ -36,37 +36,35 @@ class ContributorExtractor( context : {
 
     if(node.contributorID <= 0) return Seq.empty
 
-    val pageURL = language.baseUri + "/wiki/" + node.title.encoded;
+    val pageURL = language.baseUri + "/wiki/" + node.title.encoded
 
     //Required predicates
-    val contributorPredicate = "http://dbpedia.org/meta/contributor";
+    val contributorPredicate = "http://dbpedia.org/meta/contributor"
     //val contributorNamePredicate = "http://dbpedia.org/property/contributorName";
-    val contributorIDPredicate = "http://dbpedia.org/meta/contributorID";
+    val contributorIDPredicate = "http://dbpedia.org/meta/contributorID"
 
     //Object values
-    val contributorName =  node.contributorName;
+    val contributorName =  node.contributorName
 
     //The username may contain spaces, so we should replace the spaces with underscores "_", as they ar not allowed in
     //URLs
-    val contributorNameWithoutSpaces = contributorName.replace (" ", "_");
-    val contributorURL =  "http://dbpedia.org/contributor/" + URLEncoder.encode (contributorNameWithoutSpaces,"UTF-8");
+    val contributorNameWithoutSpaces = contributorName.replace (" ", "_")
+    val contributorURL =  "http://dbpedia.org/contributor/" + URLEncoder.encode (contributorNameWithoutSpaces,"UTF-8")
 
-    val contributorID =  node.contributorID;
+    val contributorID =  node.contributorID
 
-    //    val quadPageWithContributor = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, contributorPredicate,
-    //      contributorName, node.sourceUri, context.ontology.getDatatype("xsd:string").get );
     //Required Quads
     val quadPageWithContributor = new Quad(language, DBpediaDatasets.RevisionMeta, pageURL, contributorPredicate,
-      contributorURL, node.sourceIri, null );
+      contributorURL, node.sourceIri, null )
 
     val quadContributorName = new Quad(language, DBpediaDatasets.RevisionMeta, contributorURL,
-      context.ontology.properties.get("rdfs:label").get,
-      contributorName, node.sourceIri, context.ontology.datatypes.get("xsd:string").get );
+      context.ontology.properties("rdfs:label"),
+      contributorName, node.sourceIri, context.ontology.datatypes("xsd:string") )
 
     val quadContributorID = new Quad(language, DBpediaDatasets.RevisionMeta, contributorURL, contributorIDPredicate,
-      contributorID.toString, node.sourceIri, context.ontology.datatypes.get("xsd:integer").get );
+      contributorID.toString, node.sourceIri, context.ontology.datatypes("xsd:integer") )
 
-    Seq(quadPageWithContributor, quadContributorName, quadContributorID);
+    Seq(quadPageWithContributor, quadContributorName, quadContributorID)
 
   }
 }

@@ -26,9 +26,14 @@ extends WikiPageExtractor
 
   override val datasets = Set(DBpediaDatasets.RevisionIds)
 
-  private val quad = QuadBuilder(context.language, DBpediaDatasets.RevisionIds, wikiPageRevisionIdProperty, context.ontology.datatypes("xsd:integer")) _
+  private val qb = QuadBuilder(context.language, DBpediaDatasets.RevisionIds, wikiPageRevisionIdProperty, context.ontology.datatypes("xsd:integer"))
 
   override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
-    Seq(quad(subjectUri, page.revision.toString, page.sourceIri))
+    qb.setNodeRecord(page.getNodeRecord)
+    qb.setExtractor(this.softwareAgentAnnotation)
+    qb.setSubject(subjectUri)
+    qb.setValue(page.revision.toString)
+    qb.setSourceUri(page.sourceIri)
+    Seq(qb.getQuad)
   }
 }

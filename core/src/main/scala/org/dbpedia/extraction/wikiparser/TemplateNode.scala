@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.config.provenance.{NodeRecord, ProvenanceRecord}
+import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecord}
 import org.dbpedia.extraction.config.transform.TemplateTransformConfig
 
 /**
@@ -39,7 +39,7 @@ case class TemplateNode (
     // templates are skipped for plain text
     def toPlainText = ""
 
-    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
 
     override def equals(obj: scala.Any): Boolean = obj match {
 

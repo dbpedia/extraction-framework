@@ -4,7 +4,7 @@ import java.util.logging.Logger
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.Config
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{Language, MediaWikiConnector}
@@ -56,8 +56,8 @@ extends WikiPageExtractor
     // lazy so testing does not need ontology
   protected lazy val longProperty = context.ontology.properties(context.configFile.abstractParameters.longAbstractsProperty)
 
-  protected lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.LongAbstracts, longProperty, null) _
-  protected lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null) _
+  protected lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.LongAbstracts, longProperty, null)
+  protected lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null)
 
   override val datasets = Set(DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
@@ -66,6 +66,7 @@ extends WikiPageExtractor
 
     override def extract(pageNode : WikiPage, subjectUri: String): Seq[Quad] =
     {
+
         //Only extract abstracts for pages from the Main namespace
         if(pageNode.title.namespace != Namespace.Main)
           return Seq.empty
@@ -88,16 +89,24 @@ extends WikiPageExtractor
         val shortText = short(text)
 
         //Create statements
-        val quadLong = longQuad(pageNode.uri, text, pageNode.sourceIri)
-        val quadShort = shortQuad(pageNode.uri, shortText, pageNode.sourceIri)
+        longQuad.setNodeRecord(pageNode.getNodeRecord)
+        longQuad.setExtractor(this.softwareAgentAnnotation.toString)
+        shortQuad.setNodeRecord(pageNode.getNodeRecord)
+        shortQuad.setExtractor(this.softwareAgentAnnotation)
+        longQuad.setSubject(pageNode.uri)
+        longQuad.setValue(text)
+        longQuad.setSourceUri(pageNode.sourceIri)
+        shortQuad.setSubject(pageNode.uri)
+        shortQuad.setValue(shortText)
+        shortQuad.setSourceUri(pageNode.sourceIri)
 
         if (shortText.isEmpty)
         {
-            Seq(quadLong)
+            Seq(longQuad.getQuad)
         }
         else
         {
-            Seq(quadLong, quadShort)
+            Seq(longQuad.getQuad, shortQuad.getQuad)
         }
     }
 

@@ -46,6 +46,10 @@ object UriUtils
       URI.create(uri)
   }
 
+  def createURI(i: IRI,  uriPart: String): Try[URI] ={
+    URI.create(i.toString + uriPart)
+  }
+
   /**
 
     */

@@ -74,7 +74,7 @@ class WikidataRawExtractor(
                 val statementUri = WikidataUtil.getStatementUri(subjectUri, propertyId, value)
 
                 //Wikidata raw extractor with reification
-                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfType, rdfStatement, page.wikiPage.sourceIri)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfType, rdfStatement, page.wikiPage.sourceIri, null)
                 quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfSubject, subjectUri, page.wikiPage.sourceIri, null)
                 quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfPredicate, property, page.wikiPage.sourceIri, null)
                 quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfObject, valuei, page.wikiPage.sourceIri, datatype)

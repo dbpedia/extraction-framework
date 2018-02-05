@@ -30,11 +30,18 @@ class RedirectExtractor (
   private val namespaces = if (language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
     else Set(Namespace.Main, Namespace.Template, Namespace.Category)
 
-  private val quad = QuadBuilder(language, DBpediaDatasets.Redirects, wikiPageRedirectsProperty, null) _
+  private val qb = QuadBuilder(language, DBpediaDatasets.Redirects, wikiPageRedirectsProperty, null)
 
   override def extract(page : PageNode, subjectUri : String): Seq[Quad] = {
-      if (page.isRedirect && page.title.namespace == page.redirect.namespace)
-        return Seq(quad(subjectUri, language.resourceUri.append(page.redirect.decodedWithNamespace), page.sourceIri))
-    Seq.empty
+    if (page.isRedirect && page.title.namespace == page.redirect.namespace) {
+      qb.setNodeRecord(page.getNodeRecord)
+      qb.setExtractor(this.softwareAgentAnnotation)
+      qb.setSubject(subjectUri)
+      qb.setValue(language.resourceUri.append(page.redirect.decodedWithNamespace))
+      qb.setSourceUri(page.sourceIri)
+      Seq(qb.getQuad)
+    }
+    else
+      Seq.empty
   }
 }

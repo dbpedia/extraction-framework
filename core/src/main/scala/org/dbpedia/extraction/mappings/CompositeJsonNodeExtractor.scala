@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.mappings
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.wikiparser.JsonNode
 
+@SoftwareAgentAnnotation(classOf[CompositeJsonNodeExtractor], AnnotationType.Extractor)
 class CompositeJsonNodeExtractor(extractors: Extractor[JsonNode]*)
 extends CompositeExtractor[JsonNode](extractors: _*)
 with JsonNodeExtractor

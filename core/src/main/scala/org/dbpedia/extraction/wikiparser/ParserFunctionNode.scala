@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.config.provenance.{NodeRecord, ProvenanceRecord}
+import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecord}
 
 /**
  * Represents a parser function.
@@ -17,7 +17,7 @@ case class ParserFunctionNode(title : String, override val children : List[Node]
     // parser functions are skipped for plain text
     def toPlainText = ""
 
-    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
 
     override def equals(obj: Any): Boolean = obj match{
 

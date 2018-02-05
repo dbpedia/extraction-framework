@@ -97,7 +97,7 @@ class ExtractionJob(
       workers.stop()
       destination.close()
       extractor.finalizeExtractor()
-      extractionRecorder.finalize()
+      extractionRecorder.close()
     }
   }
 }

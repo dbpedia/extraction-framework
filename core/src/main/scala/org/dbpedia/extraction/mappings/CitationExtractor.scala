@@ -4,11 +4,11 @@ import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotati
 import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord, ParserRecord}
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
@@ -138,25 +138,45 @@ extends WikiPageExtractor
              if citationTemplatesRegex.exists(regex => regex.findFirstMatchIn(resolvedTitle).isDefined)
         } {
 
-            val citationIri = getCitationIRI(template).toString
+            val qb = QuadBuilder.staticSubject(language, DBpediaDatasets.CitationLinks, getCitationIRI(template).toString, template.getNodeRecord, ExtractorRecord(
+                this.softwareAgentAnnotation
+            ))
 
-            quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceIri, null)
+            qb.setPredicate(isCitedProperty)
+            qb.setValue(subjectUri)
+            qb.setSourceUri(template.sourceIri)
+            quads += qb.getQuad
+
+            //all other quads move into the other dataset
+            qb.setDataset(DBpediaDatasets.CitationData)
 
             for (property <- template.children; if !property.key.forall(_.isDigit)) {
                 // exclude numbered properties
                 // TODO clean HTML
 
                 val cleanedPropertyNode = NodeUtil.removeParentheses(property)
-
                 val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
-                for (splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.unit.nonEmpty) {
-                    val propertyUri = getPropertyUri(property.key)
-                    try {
-                        quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.get)
-                    }
-                    catch {
-                        case ex: IllegalArgumentException => println(ex)
-                    }
+
+                for (splitNode <- splitPropertyNodes;
+                     pr <- extractValue(splitNode)
+                     if pr.unit.nonEmpty) {
+
+                    //create quad metadata
+                    qb.setExtractor(ExtractorRecord(
+                        this.softwareAgentAnnotation,
+                        pr.provenance.toSeq,
+                        Some(splitPropertyNodes.size),
+                        Some(property.key),
+                        None,
+                        Node.collectTemplates(splitNode, Set.empty).map(x => x.title.decoded)
+                    ))
+                    //fill quad
+                    qb.setPredicate(getPropertyUri(property.key))
+                    qb.setValue(pr.value)
+                    qb.setSourceUri(splitNode.sourceIri)
+                    qb.setDatatype(pr.unit.get)
+
+                    quads += qb.getQuad
                 }
             }
         }

@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.config._
 import org.dbpedia.extraction.config.provenance.NodeRecord
 
 import scala.collection.mutable
 import org.dbpedia.extraction.util.StringUtils.{escape, replacements}
-import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.extraction.util.{Language, WikiUtil}
 
 import scala.collection.mutable.ListBuffer
 
@@ -13,7 +14,7 @@ import scala.collection.mutable.ListBuffer
  * 
  * This class is NOT thread-safe.
  */
-trait Node extends Serializable
+trait Node extends Serializable with Recordable[Node]
 {
     def children : List[Node]
 
@@ -177,6 +178,31 @@ trait Node extends Serializable
 
   def getNodeRecord: NodeRecord
 
+  private var extractionRecords: ListBuffer[RecordEntry[Node]] = null
+  override def recordEntries: List[RecordEntry[Node]] = {
+    if(extractionRecords == null || extractionRecords.isEmpty)
+      List(new NodeEntry(this, RecordCause.Internal))
+    else
+      extractionRecords.toList
+  }
+
+  private[extraction] def addExtractionRecord(recordEntry: RecordEntry[_]): Unit ={
+    assert(recordEntry != null)
+    if(extractionRecords == null)
+      extractionRecords = new ListBuffer[RecordEntry[Node]]()
+    recordEntry match{
+      case re: RecordEntry[Node] => extractionRecords.append(re)
+      case de: RecordEntry[DefaultEntry] => extractionRecords.append(new RecordEntry[Node](this, de.cause, Option(de.language).getOrElse(Language.None), de.msg, de.error))
+      case _ =>
+    }
+  }
+
+  /**
+    * TODO find better id management for dependent nodes
+    * Override if unique id exists
+    * negative ids are not guaranteed to be unique
+    */
+  override def id: Long = Long.MinValue + this.hashCode()
 }
 
 object Node {

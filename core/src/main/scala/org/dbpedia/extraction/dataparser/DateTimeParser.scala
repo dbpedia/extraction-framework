@@ -114,8 +114,8 @@ class DateTimeParser ( context : {
       }
       catch
       {
-          case ex : IllegalArgumentException  => recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Exception, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
-          case ex : NumberFormatException => recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Exception, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
+          case ex : IllegalArgumentException  => recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Exception, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
+          case ex : NumberFormatException => recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Exception, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
       }
 
       None
@@ -166,7 +166,7 @@ class DateTimeParser ( context : {
             }
         }
 
-      recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Template unknown: " + node.title))
+      recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Template unknown: " + node.title))
       None
     }
 
@@ -232,10 +232,10 @@ class DateTimeParser ( context : {
         datatype match
         {
             case `dtDay` =>
-              recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Method for day Extraction not yet implemented."))
+              recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Method for day Extraction not yet implemented."))
               None
             case `dtMonth` =>
-              recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Method for day Extraction not yet implemented."))
+              recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Method for day Extraction not yet implemented."))
               None
             case `dtYear` =>
                 for(date <- catchMonthYear(input, node))
@@ -277,7 +277,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((century+year).toInt), Some.apply(monthNumber.toInt), Some.apply(day.toInt), datatype))
                 case None =>
-                  recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                  recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -287,7 +287,7 @@ class DateTimeParser ( context : {
             months.get(month.toLowerCase) match
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((eraIdentifier+year).toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
-                case None => recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                case None => recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -297,7 +297,7 @@ class DateTimeParser ( context : {
             months.get(month.toLowerCase) match
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((eraIdentifier+year).toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
-                case None => recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                case None => recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -316,7 +316,7 @@ class DateTimeParser ( context : {
             catch
             {
                 case ex: NoSuchElementException =>
-                  recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                  recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -336,7 +336,7 @@ class DateTimeParser ( context : {
             {
               case Some(monthNumber) => return Some.apply(new Date(Some.apply(year.toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
               case None =>
-                recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -359,7 +359,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(month = Some.apply(monthNumber), day = Some.apply(day.toInt), datatype = dtMonthDay))
                 case None =>
-                  recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                  recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
         for(result <- DayMonthRegex2.findFirstMatchIn(input))
@@ -370,7 +370,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(month = Some.apply(monthNumber), day = Some.apply(day.toInt), datatype = dtMonthDay))
                 case None =>
-                  recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                  recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
         None
@@ -388,7 +388,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(year = Some.apply((eraIdentifier+year).toInt), month = Some.apply(monthNumber), datatype = dtYearMonth))
                 case None =>
-                  recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                  recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
         if(tryMinorTypes)

@@ -22,13 +22,18 @@ class ProvenanceExtractor (
 )
 extends WikiPageExtractor
 {
-  private val derivedFromProperty = "http://www.w3.org/ns/prov#wasDerivedFrom"
+  private val propString = "http://www.w3.org/ns/prov#wasDerivedFrom"
 
   override val datasets = Set(DBpediaDatasets.RevisionUris)
 
-  private val quad = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.RevisionUris, derivedFromProperty, null) _
+  private val qb = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.RevisionUris, propString)
 
   override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
-    Seq(quad(subjectUri, page.sourceIri, page.sourceIri))
+    qb.setNodeRecord(page.getNodeRecord)
+    qb.setExtractor(this.softwareAgentAnnotation)
+    qb.setSubject(subjectUri)
+    qb.setValue(page.sourceIri)
+    qb.setSourceUri(page.sourceIri)
+    Seq(qb.getQuad)
   }
 }

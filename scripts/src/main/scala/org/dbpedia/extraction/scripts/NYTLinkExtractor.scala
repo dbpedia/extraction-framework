@@ -145,7 +145,7 @@ object NYTLinkExtractor {
         linkRelationMap("related")
     }
     val target = getNytResourceUri(link)
-    new Quad(null, null, subject, predicate, target, null)
+    new Quad(null, null, subject, predicate, target, null, null)
   }
 
   private def fromWikipediaLink(link: NytLink): Quad ={
@@ -157,7 +157,7 @@ object NYTLinkExtractor {
         linkRelationMap("related")
     }
     val target = getNytResourceUri(link)
-    new Quad(null, null, subject, predicate, target, null)
+    new Quad(null, null, subject, predicate, target, null, null)
   }
 
   private def convertLinks(links: List[NytLink]): List[Quad] ={

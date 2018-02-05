@@ -67,8 +67,8 @@ extends PageNodeExtractor
     // lazy so testing does not need ontology
     private lazy val longProperty = context.ontology.properties("abstract")
 
-    private lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.MissingLongAbstracts, longProperty, null) _
-    private lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.MissingShortAbstracts, shortProperty, null) _
+    private lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.MissingLongAbstracts, longProperty, null)
+    private lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.MissingShortAbstracts, shortProperty, null)
 
     override val datasets = Set(DBpediaDatasets.MissingLongAbstracts, DBpediaDatasets.MissingShortAbstracts)
 
@@ -113,14 +113,22 @@ extends PageNodeExtractor
           val shortText = short(text)
 
           //Create statements
-          val quadLong = longQuad(subjectUri, text, pageNode.sourceIri)
-          val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceIri)
+          longQuad.setNodeRecord(pageNode.getNodeRecord)
+          longQuad.setExtractor(this.softwareAgentAnnotation.toString)
+          shortQuad.setNodeRecord(pageNode.getNodeRecord)
+          shortQuad.setExtractor(this.softwareAgentAnnotation)
+          longQuad.setSubject(subjectUri)
+          longQuad.setValue(text)
+          longQuad.setSourceUri(pageNode.sourceIri)
+          shortQuad.setSubject(subjectUri)
+          shortQuad.setValue(shortText)
+          shortQuad.setSourceUri(pageNode.sourceIri)
 
           if (shortText.isEmpty) {
-            Seq(quadLong)
+            Seq(longQuad.getQuad)
           }
           else {
-            Seq(quadLong, quadShort)
+            Seq(longQuad.getQuad, shortQuad.getQuad)
           }
         }
     }

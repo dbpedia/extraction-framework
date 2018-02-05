@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
@@ -33,22 +33,41 @@ class AnchorTextExtractor(
       return Seq.empty
     }
 
+    val baseBuilder = QuadBuilder.stringPredicate(
+      context.language,
+      DBpediaDatasets.AnchorText,
+      wikiPageWikiLinkProperty,
+      context.ontology.datatypes("rdf:langString")
+    )
+    baseBuilder.setNodeRecord(node.getNodeRecord)
+
     val list = AnchorTextExtractor.collectInternalLinks(node)
     var buffer = new ListBuffer[Quad]()
-    for (nodes <- list) {
-      if (nodes.destination.namespace == Namespace.Main) {
-        val concated = nodes.children.map(_.toPlainText).mkString("")
-        buffer += new
-            Quad(context.language, DBpediaDatasets.AnchorText, getUri(nodes.destination), wikiPageWikiLinkProperty,
-              concated, nodes.sourceIri, context.ontology.datatypes("rdf:langString"))
+    for (node <- list) {
+      baseBuilder.setExtractor(ExtractorRecord(
+        this.softwareAgentAnnotation,
+        Seq(),
+        None,
+        None,
+        None,
+        Node.collectTemplates(node, Set.empty).map(x => x.title.decoded)
+      ))
+
+      if (node.destination.namespace == Namespace.Main) {
+        val qb = baseBuilder.clone
+        qb.setSubject(getUri(node.destination))
+        qb.setValue(node.children.map(_.toPlainText).mkString(""))
+        qb.setSourceUri(node.sourceIri)
+        buffer += qb.getQuad
       }
-      for (child <- nodes.children) {
+      for (child <- node.children) {
         child match {
-          case intlink: InternalLinkNode => if (nodes.destination.namespace == Namespace.Main) {
-            buffer += new
-                Quad(context.language, DBpediaDatasets.AnchorText, getUri(intlink.destination),
-                  wikiPageWikiLinkProperty,
-                  intlink.children(0).toPlainText, nodes.sourceIri, context.ontology.datatypes("rdf:langString"))
+          case intlink: InternalLinkNode => if (node.destination.namespace == Namespace.Main) {
+            val qb = baseBuilder.clone
+            qb.setSubject(getUri(intlink.destination))
+            qb.setValue(intlink.children.head.toPlainText)
+            qb.setSourceUri(node.sourceIri)
+            buffer += qb.getQuad
           }
           case _ =>
         }

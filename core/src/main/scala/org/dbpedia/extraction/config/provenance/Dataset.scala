@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.config.provenance
 
-import java.net.URI
 import java.util.MissingFormatArgumentException
 
 import org.dbpedia.extraction.config.ConfigUtils
@@ -53,7 +52,7 @@ class Dataset private[provenance](
 
   val filenameEncoded: String = encoded.replace("_", "-")
 
-  val canonicalUri: String = RdfNamespace.fullUri(DBpediaNamespace.DATASET, encoded)
+  val canonicalUri: IRI =  UriUtils.createURI(RdfNamespace.fullUri(DBpediaNamespace.DATASET, encoded)).get
 
   val version: Try[String] = ConfigUtils.parseVersionString(versionEntry)
 
@@ -65,29 +64,29 @@ class Dataset private[provenance](
     if(this.language.isEmpty || this.language.get == language) {
       Success(ConfigUtils.parseVersionString(version) match {
         case Success(v) => this.copyDataset(lang = language, versionEntry = v)
-        case Failure(e) => this.copyDataset(lang = language)
+        case Failure(_) => this.copyDataset(lang = language)
       })
     }
     else
       Failure(new IllegalArgumentException("The target Dataset is already language specific: " + this.language.get.name + ". Conversion to other languages is therefore not permitted."))
   }
 
-  def languageUri: String = this.language match{
-    case Some(lang) => canonicalUri + "?lang=" + lang.wikiCode
+  def languageUri: IRI = this.language match{
+    case Some(_) =>  UriUtils.createURI(canonicalUri, "?lang=" + lang.wikiCode).get
     case None => canonicalUri
   }
 
-  def versionUri: String = this.language match {
-    case Some(l) => version match
+  def versionUri: IRI = this.language match {
+    case Some(_) => version match
     {
-      case Success(v) => this.languageUri + "&dbpv=" + v
-      case Failure(e) => this.languageUri
+      case Success(v) => UriUtils.createURI(languageUri, "&dbpv=" + v).get
+      case Failure(_) => this.languageUri
     }
     case None => canonicalUri
   }
 
   def isCanonical: Boolean = language match {
-    case Some(lang) => false
+    case Some(_) => false
     case None => true
   }
 

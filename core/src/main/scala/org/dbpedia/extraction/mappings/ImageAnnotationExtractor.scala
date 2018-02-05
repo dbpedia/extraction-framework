@@ -128,7 +128,8 @@ extends PageNodeExtractor
                     subjectUri,
                     hasAnnotationProperty,
                     annotation_url,
-                    pageNode.sourceIri
+                    pageNode.sourceIri,
+                    null
                 ))
 
                 // Generate one quad each for plaintext and WikiText content.
@@ -139,7 +140,8 @@ extends PageNodeExtractor
                         annotation_url, 
                         descriptionProperty, 
                         contents_plaintext, 
-                        pageNode.sourceIri
+                        pageNode.sourceIri,
+                      null
                     )
                 )
 
@@ -150,7 +152,8 @@ extends PageNodeExtractor
                         annotation_url, 
                         asWikiTextProperty, 
                         contents_wikitext, 
-                        pageNode.sourceIri
+                        pageNode.sourceIri,
+                      null
                     )
                 )
 

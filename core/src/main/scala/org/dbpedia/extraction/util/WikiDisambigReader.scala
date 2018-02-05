@@ -41,6 +41,9 @@ object WikiDisambigReader {
   // newInstance is expensive, call it only once
   val factory = XMLInputFactory.newInstance
 
+  /**
+    * Some target domains of external links are exempt, since they are very close to Wikipedia
+    */
   val domainLinkExceptions = Set("tools.wmflabs.org", "www.wikidata.org", "meta.wikimedia.org")
 
   // Let's use a regex since the main usage of this is in GenerateWikiSettings
@@ -56,6 +59,12 @@ object WikiDisambigReader {
   // is entered if no others are available
   val defaultDisambig = "Disambig"
 
+  /**
+    * Executes a new query to collect all redirects of a given page (and language)
+    * @param caller - a WikiCaller set up with the necessary query URL
+    * @param redirectCallback - callback to process the redirects collected
+    * @return - Set of redirects
+    */
   def redirectExecute(caller: WikiCaller)(redirectCallback: StartElement => Option[String]): Try[Set[String]] = {
     caller.execute { stream =>
       val in = new XMLEventAnalyzer(WikiDisambigReader.factory.createXMLEventReader(stream))
@@ -77,8 +86,6 @@ object WikiDisambigReader {
           }
         }
       }
-      //add default
-      links.append(defaultDisambig)
       //return set
       links.toSet
     }
@@ -103,12 +110,15 @@ class WikiDisambigReader(language: Language) {
     }
     val url = new URL(language.apiUri + "?" + WikiDisambigReader.getDisambTemplatesQuery(categoryPage))
     val caller = new LazyWikiCaller(url, WikiDisambigReader.followRedirects, file, overwrite)
-    WikiDisambigReader.redirectExecute(caller)(readDisambElement)
+    WikiDisambigReader.redirectExecute(caller)(readDisambElement) match{
+      case Success(s) => Success{s ++ Set(WikiDisambigReader.defaultDisambig)}
+      case Failure(f) => Failure(f)
+    }
   }
 
   /**
     * executes a query for a given template, determining whether this template is used as redirect template or for other purposes
-    *
+    * for this purpose, we have a look at the external lniks of a page, since the rate of external links in disambig pages should be significantly lower
     * @param pageid
     * @return
     */

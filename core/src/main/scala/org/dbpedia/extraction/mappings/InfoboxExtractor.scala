@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause}
-import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, DBpediaMetadata, Dataset, ExtractorRecord}
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.config.ExtractionRecorder
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 
 import collection.mutable.{ArrayBuffer, ListBuffer}
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
-import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.wikiparser.{Node, _}
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.ontology.Ontology
@@ -42,7 +42,6 @@ class InfoboxExtractor(
 extends PageNodeExtractor
 {
     private val recorder = context.recorder[PageNode]
-    private val annotation = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Configuration
@@ -135,46 +134,52 @@ extends PageNodeExtractor
           for(property <- propertyList; if !property.key.forall(_.isDigit)) {
             // TODO clean HTML
 
+            val propertyUri = getPropertyUri(property.key)
             val cleanedPropertyNode = NodeUtil.removeParentheses(property)
+            val baseQuadBuilder = new QuadBuilder(Some(subjectUri), Some(propertyUri), None, None, Some(language), None, None)
 
             val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
             for(splitNode <- splitPropertyNodes)
             {
-              def createQuadMetadata(pr: ParseResult[_], datasets: List[Dataset]): DBpediaMetadata ={
-                new DBpediaMetadata(
-                  splitNode.getNodeRecord,
-                  datasets.map(_.canonicalUri),
-                  Some(ExtractorRecord(
-                    annotation.toString,
-                    pr.provenance.getOrElse(throw new IllegalArgumentException("No ParserRecord found.")),
-                    Some(splitPropertyNodes.size),
-                    Some(template.title.decoded),
-                    Some(property.key),
-                    Some("Mapping " + language.wikiCode + ":" + template.title.decoded),
-                    Node.collectTemplates(splitNode, Set.empty).map(x => x.title.decoded)
-                  )),
-                  None,
-                  Seq()
-                )
-              }
+              baseQuadBuilder.setNodeRecord(splitNode.getNodeRecord)
+              baseQuadBuilder.setSourceUri(splitNode.sourceIri)
+              baseQuadBuilder.setNamespace(node.title.namespace)
+              baseQuadBuilder.setRevision(node.root.revision)
+
               val zw = extractValue(splitNode)
               for(parseResults <- zw; if parseResults.nonEmpty) {
-                val propertyUri = getPropertyUri(property.key)
                 for (pr <- parseResults) {
+                  //set extractor metadata
+                  val er = ExtractorRecord(
+                    this.softwareAgentAnnotation,
+                    pr.provenance.toList,
+                    Some(splitPropertyNodes.size),
+                    Some(property.key),
+                    Some(template.title),
+                    Node.collectTemplates(splitNode, Set.empty).map(x => x.title.decoded)
+                  )
+
                   try {
                     //only the first result will be forwarded to the official infobox properties dataset
                     if(pr == parseResults.head){
-                      val metadata = createQuadMetadata(pr, List(DBpediaDatasets.InfoboxProperties, DBpediaDatasets.InfoboxPropertiesExtended))
-                      val q1 = new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.orNull)
-                      q1.setProvenanceRecord(metadata)
-                      val q2 = new Quad(language, DBpediaDatasets.InfoboxPropertiesExtended, subjectUri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.orNull)
-                      q2.setProvenanceRecord(metadata)
-                      quads ++= List(q1, q2)
+                      val qb1 = baseQuadBuilder.clone
+                      qb1.setExtractor(er)
+                      qb1.setValue(pr.value)
+                      qb1.setDatatype(pr.unit.orNull)
+                      qb1.setDataset(DBpediaDatasets.InfoboxProperties)
+
+                      //this quad moves into InfoboxPropertiesExtended
+                      val qb2 = qb1.clone
+                      qb2.setDataset(DBpediaDatasets.InfoboxPropertiesExtended)
+                      quads ++= List(qb1.getQuad, qb2.getQuad)
                     }
                     else {
-                      val q = new Quad(language, DBpediaDatasets.InfoboxPropertiesExtended, subjectUri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.orNull)
-                      q.setProvenanceRecord(createQuadMetadata(pr, List(DBpediaDatasets.InfoboxPropertiesExtended)))
-                      quads += q
+                      val qbs = baseQuadBuilder.clone
+                      qbs.setExtractor(er)
+                      qbs.setValue(pr.value)
+                      qbs.setDatatype(pr.unit.orNull)
+                      qbs.setDataset(DBpediaDatasets.InfoboxPropertiesExtended)
+                      quads += qbs.getQuad
                     }
 
                     if (InfoboxExtractorConfig.extractTemplateStatistics) {
@@ -185,31 +190,34 @@ extends PageNodeExtractor
                     }
                   }
                   catch {
-                    case ex: IllegalArgumentException => recorder.failedRecord(node, ex, node.title.language)
+                    case ex: IllegalArgumentException => recorder.failedRecord[Node](node, ex, node.title.language)
                   }
                 }
                 seenProperties.synchronized {
                   if (!seenProperties.contains(propertyUri)) {
                     val propertyLabel = getPropertyLabel(property.key)
                     seenProperties += propertyUri
-                    val metadata = new DBpediaMetadata(
-                        splitNode.getNodeRecord,
-                        List(DBpediaDatasets.InfoboxPropertyDefinitions).map(_.canonicalUri),
-                        Some(ExtractorRecord(
-                          annotation.toString,
-                          null,
-                          None,
-                          Some(template.title.decoded),
-                          Some(property.key)
-                        )),
-                        None,
-                        Seq()
-                      )
-                    val q1 = new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceIri)
-                    q1.setProvenanceRecord(metadata)
-                    val q2 = new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceIri, rdfLangStrDt)
-                    q2.setProvenanceRecord(metadata)
-                    quads ++= List(q1, q2)
+
+                    val er = ExtractorRecord(
+                      this.softwareAgentAnnotation,
+                      Seq(),
+                      None,
+                      Some(property.key),
+                      Some(template.title)
+                    )
+                    val qb1 = new QuadBuilder(Some(propertyUri), None, None, Some(splitNode.sourceIri), language, None, None, None)
+                    qb1.setExtractor(er)
+                    qb1.setNodeRecord(splitNode.getNodeRecord)
+                    qb1.setPredicate(typeProperty)
+                    qb1.setValue(propertyClass.uri)
+                    qb1.setDataset(DBpediaDatasets.InfoboxPropertyDefinitions)
+
+                    val qb2 = qb1.clone
+                    qb2.setPredicate(labelProperty)
+                    qb2.setValue(propertyLabel)
+                    qb2.setDatatype(rdfLangStrDt)
+
+                    quads ++= List(qb1.getQuad, qb2.getQuad)
                   }
                 }
               }

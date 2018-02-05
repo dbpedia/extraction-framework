@@ -3,10 +3,10 @@ package org.dbpedia.extraction.mappings
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.WikiPage
 
@@ -59,16 +59,18 @@ extends WikiPageExtractor
         // ends with '/overlay.kml', we can just take out the last 12 characters.
         val subjectUriWithoutOverlay = subjectUri.substring(0, subjectUri.length - 12)
 
+        val qb = QuadBuilder.staticSubject(Language.English, DBpediaDatasets.KMLFiles, subjectUriWithoutOverlay, hasKMLDataProperty, page.getNodeRecord, ExtractorRecord(
+            this.softwareAgentAnnotation
+        ))
+        qb.setDatatype(new Datatype("rdf:XMLLiteral"))
+        qb.setSourceUri(page.sourceIri)
+
         // Take out the initial '<source lang="xml">' and final '</source>' if present
         // and add the XML to the output as rdf:XMLLiterals.
-        val kmlContentQuads = sourceRegex.findAllMatchIn(page.source).map(result => new Quad(
-            Language.English, DBpediaDatasets.KMLFiles,
-            subjectUriWithoutOverlay,
-            hasKMLDataProperty,
-            result.group("kml_content"),
-            page.sourceIri,
-            new Datatype("rdf:XMLLiteral")
-        ))
+        val kmlContentQuads = sourceRegex.findAllMatchIn(page.source).map(result => {
+            qb.setValue(result.group("kml_content"))
+            qb.getQuad
+        })
 
         kmlContentQuads.toSeq
     }

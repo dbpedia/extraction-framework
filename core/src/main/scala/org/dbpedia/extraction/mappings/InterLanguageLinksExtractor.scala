@@ -24,7 +24,7 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
   private val namespaces = if (context.language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
     else Set(Namespace.Main, Namespace.Template, Namespace.Category)
   
-  private val quad = QuadBuilder.apply(context.language, DBpediaDatasets.InterLanguageLinks, interLanguageLinksProperty, null) _
+  private val qb = QuadBuilder.apply(context.language, DBpediaDatasets.InterLanguageLinks, interLanguageLinksProperty, null)
 
   override def extract(page : PageNode, subjectUri : String) : Seq[Quad] =
   {
@@ -35,10 +35,17 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
     for (node <- page.children) { // was page.children.reverse - why?
       node match {
         case link: InterWikiLinkNode => {
+
+          qb.setNodeRecord(node.getNodeRecord)
+          qb.setExtractor(this.softwareAgentAnnotation)
+          qb.setSubject(subjectUri)
+          qb.setSourceUri(link.sourceIri)
+          Seq(qb.getQuad)
+
           val dst = link.destination
           if (dst.isInterLanguageLink) {
-            val dstLang = dst.language
-            quads += quad(subjectUri, dstLang.resourceUri.append(dst.decodedWithNamespace), link.sourceIri)
+            qb.setValue(dst.language.resourceUri.append(dst.decodedWithNamespace))
+            quads += qb.getQuad
           }
         }
         case _ => // ignore

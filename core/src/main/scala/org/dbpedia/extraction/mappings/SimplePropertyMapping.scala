@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.ExtractionRecorder
-import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, DBpediaMetadata, ExtractorRecord}
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
@@ -112,7 +112,6 @@ extends PropertyMapping
     
     private val parser : DataParser[_] = ontologyProperty.range match
     {
-        //TODO
         case c : OntologyClass =>
           if (ontologyProperty.name == "foaf:homepage") {
             checkMultiplicationFactor("foaf:homepage")
@@ -179,92 +178,90 @@ extends PropertyMapping
 
     override def extract(node : TemplateNode, subjectUri : String): Seq[Quad] =
     {
-        val graph = new ArrayBuffer[Quad]
+      val graph = new ArrayBuffer[Quad]
+      val baseBuilder = new QuadBuilder(Some(subjectUri), Some(ontologyProperty), None, None, language, None, None, None)
 
         for(propertyNode <- node.property(templateProperty) if propertyNode.children.nonEmpty)
         {
-            val parseResults = try {
-              parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
-            } catch {
-              case e: Throwable =>
-                //recorder.record(new RecordEntry[_](node, RecordCause.Warning, node.root.title.language, "Failed to parse '" + propertyNode.key + "' from template '" + node.title.decoded + "' in page '" + node.root.title.decoded, e))
-                List()
+          val parseResults = try {
+            parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
+          } catch {
+            case e: Throwable =>
+              recorder.record(new RecordEntry[Node](node, RecordCause.Warning, node.root.title.language, "Failed to parse '" + propertyNode.key + "' from template '" + node.title.decoded + "' in page '" + node.root.title.decoded, e))
+              List()
+          }
+
+          //get the property wikitext and plainText size
+          val propertyNodeWikiLength = propertyNode.toWikiText.substring(propertyNode.toWikiText.indexOf('=')+1).trim.length // exclude '| propKey ='
+          val propertyNodeTextLength = propertyNode.propertyNodeValueToPlainText.trim.length
+
+          for( parseResult <- selector(parseResults) )
+          {
+            //TODO -> get this into a prov object
+              val resultString = parseResult.value.toString
+              val isDBpediaResource = resultString.startsWith(languageResourceNamespace)
+
+            // get the actual value length
+            val resultLength = {
+              val length = resultString.length
+              // if it is a dbpedia resource, do not count http://xx.dbpedia.org/resource/
+              if (isDBpediaResource) length - languageResourceNamespace.length else length
             }
 
-            //get the property wikitext and plainText size
-            val propertyNodeWikiLength = propertyNode.toWikiText.substring(propertyNode.toWikiText.indexOf('=')+1).trim.length // exclude '| propKey ='
-            val propertyNodeTextLength = propertyNode.propertyNodeValueToPlainText.trim.length
+            val iriHasFragment = {
+              if (isDBpediaResource) {
+                val linkTitle = resultString.replace(languageResourceNamespace, "")
 
-            for( parseResult <- selector(parseResults) )
-            {
-                val resultString = parseResult.toString
-                val isDBpediaResource = resultString.startsWith(languageResourceNamespace)
-
-                // get the actual value length
-                val resultLength = {
-                  val length = resultString.length
-                  // if it is a dbpedia resource, do not count http://xx.dbpedia.org/resource/
-                  if (isDBpediaResource) length - languageResourceNamespace.length else length
-                }
-
-                val isHashIri = {
-                  if (isDBpediaResource) {
-                    val linkTitle = resultString.replace(languageResourceNamespace, "")
-
-                    ExtractorUtils.collectInternalLinksFromNode(propertyNode) // find the link and check if it has a fragment
-                      .exists(p => p.destination.encoded.equals(linkTitle) && p.destination.fragment != null)
-
-
-                  } else false
-
-
-                }
-
-                //we add this in the triple context
-                val resultLengthPercentageTxt =
-                    "&split=" + parseResults.size +
-                    "&wikiTextSize=" + propertyNodeWikiLength +
-                    "&plainTextSize=" + propertyNodeTextLength +
-                    "&valueSize=" + resultLength +
-                    (if (isHashIri) "&objectHasFragment=" else "")
-                val g = parseResult match {
-                    case ParseResult(_: Double, _, u, _) if u.nonEmpty =>
-                      writeUnitValue(node, parseResult.asInstanceOf[ParseResult[Double]], subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
-                    case pr: ParseResult[_] =>
-                      writeValue(pr, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
-                }
-
-              val annotation = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
-
-              g.foreach(q => q.setProvenanceRecord(new DBpediaMetadata(
-                propertyNode.getNodeRecord,
-                if(q.dataset != null) Seq(RdfNamespace.fullUri(DBpediaNamespace.DATASET, q.dataset)) else Seq(),
-                Some(ExtractorRecord(
-                  annotation.toString,
-                  parseResult.provenance.getOrElse(throw new IllegalArgumentException("No ParserRecord found.")),
-                  Some(parseResults.size),
-                  Some(templateName),
-                  Some(templateProperty),
-                  Some("Mapping " + language.wikiCode + ":" + templateName),
-                  Node.collectTemplates(propertyNode, Set.empty).map(x => x.title.decoded)
-                )),
-                None,
-                Seq.empty
-              )))
-
-              graph ++= g
+                ExtractorUtils.collectInternalLinksFromNode(propertyNode) // find the link and check if it has a fragment
+                  .exists(p => p.destination.encoded.equals(linkTitle) && p.destination.fragment != null)
+              } else false
             }
+
+            //we add this in the triple context
+            val resultLengthPercentageTxt =
+                "&split=" + parseResults.size +
+                "&wikiTextSize=" + propertyNodeWikiLength +
+                "&plainTextSize=" + propertyNodeTextLength +
+                "&valueSize=" + resultLength +
+                (if (iriHasFragment) "&objectHasFragment=" else "")
+
+            baseBuilder.setSourceUri(propertyNode.sourceIri+resultLengthPercentageTxt)
+            baseBuilder.setExtractor(ExtractorRecord(
+              this.softwareAgentAnnotation,
+              parseResult.provenance.toList,
+              Some(parseResults.size),
+              Some(templateProperty),
+              Some(node.title),
+              Node.collectTemplates(propertyNode, Set.empty).map(x => x.title.decoded)
+            ))
+            baseBuilder.setNamespace(node.title.namespace)
+            baseBuilder.setRevision(node.root.revision)
+
+            val g = parseResult match {
+                case ParseResult(_: Double, _, u, _) if u.nonEmpty =>
+                  writeUnitValue(node, parseResult.asInstanceOf[ParseResult[Double]], baseBuilder)
+                case pr: ParseResult[_] =>
+                  writeValue(pr, baseBuilder)
+            }
+
+            graph ++= g
+          }
         }
         
         graph
     }
 
-    private def writeUnitValue(node : TemplateNode, pr: ParseResult[Double], subjectUri : String, sourceUri : String): Seq[Quad] =
+    private def writeUnitValue(node : TemplateNode, pr: ParseResult[Double], baseBuilder: QuadBuilder): Seq[Quad] =
     {
         //Write generic property
         val stdValue = pr.unit match{
           case Some(u) if u.isInstanceOf[InconvertibleUnitDatatype] => {
-            return Seq(new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, unit))
+            val qb = baseBuilder.clone
+            qb.setPredicate(ontologyProperty)
+            qb.setValue(pr.value.toString)
+            qb.setDataset(DBpediaDatasets.OntologyPropertiesLiterals)
+            qb.setDatatype(u)
+            return Seq(qb.getQuad)
           }
           case Some(u) if u.isInstanceOf[UnitDatatype] =>
             u.asInstanceOf[UnitDatatype].toStandardUnit(pr.value)
@@ -272,34 +269,46 @@ extends PropertyMapping
         }
         
         val graph = new ArrayBuffer[Quad]
-
-        graph += new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
+        val qb = baseBuilder.clone
+        qb.setPredicate(ontologyProperty)
+        qb.setValue(stdValue.toString)
+        qb.setDataset(DBpediaDatasets.OntologyPropertiesLiterals)
+        qb.setDatatype(new Datatype("xsd:double"))
+        graph += qb.getQuad
         
         // Write specific properties
         for(templateClass <- node.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
             currentClass <- templateClass.relatedClasses)
         {
-            for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
-            {
-                 val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
-                 val propertyUri = DBpediaNamespace.ONTOLOGY.append(currentClass.name+'/'+ontologyProperty.name)
-                 val quad = new Quad(language, DBpediaDatasets.SpecificProperties, subjectUri, propertyUri, outputValue.toString, sourceUri, specificPropertyUnit)
-                 graph += quad
-            }
+          for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
+          {
+            val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
+            val propertyUri = DBpediaNamespace.ONTOLOGY.append(currentClass.name+'/'+ontologyProperty.name)
+            val qbi = baseBuilder.clone
+            qbi.setPredicate(propertyUri)
+            qbi.setValue(outputValue.toString)
+            qbi.setDataset(DBpediaDatasets.SpecificProperties)
+            qbi.setDatatype(specificPropertyUnit)
+            graph += qbi.getQuad
+          }
         }
 
         graph
     }
 
-    private def writeValue(pr : ParseResult[_], subjectUri : String, sourceUri : String): Seq[Quad] =
+    private def writeValue(pr : ParseResult[_], baseBuilder: QuadBuilder): Seq[Quad] =
     {
         val datatype = ontologyProperty.range match {
           case datatype1: Datatype => datatype1
           case _ => null
         }
-        val mapDataset = if (datatype == null) DBpediaDatasets.OntologyPropertiesObjects else DBpediaDatasets.OntologyPropertiesLiterals
-
-        Seq(new Quad(pr.lang.getOrElse(language), mapDataset, subjectUri, ontologyProperty, pr.value.toString, sourceUri, datatype))
+        val qb = baseBuilder.clone
+        qb.setPredicate(ontologyProperty)
+        qb.setValue(pr.value.toString)
+        qb.setDatatype(datatype)
+        qb.setLanguage(pr.lang.getOrElse(language))
+        qb.setDataset(if (datatype == null) DBpediaDatasets.OntologyPropertiesObjects else DBpediaDatasets.OntologyPropertiesLiterals)
+        Seq(qb.getQuad)
     }
 
   /**

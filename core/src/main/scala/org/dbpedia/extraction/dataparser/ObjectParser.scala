@@ -30,11 +30,12 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
                                           else DataParserConfig.splitPropertyNodeRegexObject("en")
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
-    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean, transformCmd : String = null, transformFunc : String => String = identity ): List[ParseResult[_]] =
+    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean, transformCmd : String = null, transformFunc : String => String = identity ): List[ParseResult[String]] =
     {
         if(split)
         {
-            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true, transformCmd = transformCmd, transformFunc = transformFunc).flatMap( node => super.parseWithProvenance(node).toList )
+            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, trimResults = true, transformCmd = transformCmd, transformFunc = transformFunc)
+              .flatMap( node => super.parseWithProvenance(node).toList )
         }
         else
         {

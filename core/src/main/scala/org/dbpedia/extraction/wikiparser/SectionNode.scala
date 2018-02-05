@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.config.provenance.{NodeRecord, ProvenanceRecord}
+import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecord}
 
 /**
  * Represents a section.
@@ -24,5 +24,5 @@ case class SectionNode(name : String, level : Int, override val children : List[
 
     }
 
-    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
 }

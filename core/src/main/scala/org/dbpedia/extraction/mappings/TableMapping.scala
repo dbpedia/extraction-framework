@@ -58,13 +58,13 @@ extends Extractor[TableNode]
 
             //Add new ontology instance
             for (cls <- mapToClass.relatedClasses)
-              graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, rowNode.sourceIri)
+              graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, rowNode.sourceIri, null)
 
             //Link new instance to the corresponding Instance
             for(corUri <- correspondingInstance)
             {
                 //TODO write generic and specific properties
-                graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, corUri, correspondingProperty, instanceUri, rowNode.sourceIri)
+                graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, corUri, correspondingProperty, instanceUri, rowNode.sourceIri, null)
             }
 
             //Extract properties

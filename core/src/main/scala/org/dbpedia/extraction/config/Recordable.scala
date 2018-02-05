@@ -2,13 +2,13 @@ package org.dbpedia.extraction.config
 
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.PageNode
+import org.dbpedia.extraction.wikiparser.{Node, PageNode}
 
 /**
   * Interface for objects which need to ba handled by the ExtractionRecorder (e.g. WikiPage, PageNode, Quad, Provenance etc.)
   */
 trait Recordable[T] {
-  val id: Long
+  def id: Long
   def recordEntries: List[RecordEntry[T]]
 }
 
@@ -39,7 +39,12 @@ object RecordCause extends Enumeration {
   val Provenance, Internal, Info, Warning, Exception = Value
 }
 
-class WikiPageEntry(p : PageNode, cause: RecordCause.Value = RecordCause.Info) extends RecordEntry[PageNode](
+class NodeEntry(p : Node, cause: RecordCause.Value = RecordCause.Info) extends RecordEntry[Node](
+  record = p,
+  cause = cause
+)
+
+class WikiPageEntry(p : PageNode, cause: RecordCause.Value = RecordCause.Info) extends RecordEntry[Node](
   record = p,
   cause = cause,
   language = p.title.language

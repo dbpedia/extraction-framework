@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
@@ -35,13 +35,22 @@ extends PageNodeExtractor
   {
     if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) 
         return Seq.empty
-    
+
+
+    val qb = new QuadBuilder(None, None, None, Some(page.sourceIri), context.language, None, Some(DBpediaDatasets.LinksToWikipediaArticle), None)
+    qb.setNodeRecord(page.getNodeRecord)
+    qb.setExtractor(this.softwareAgentAnnotation)
+
     val quads = new ArrayBuffer[Quad]()
 
-    quads += new Quad(context.language, DBpediaDatasets.LinksToWikipediaArticle, subjectUri, isPrimaryTopicOf,  page.title.pageIri, page.sourceIri)
-    quads += new Quad(context.language, DBpediaDatasets.LinksToWikipediaArticle, page.title.pageIri, primaryTopic, subjectUri, page.sourceIri)
-    quads += new Quad(context.language, DBpediaDatasets.LinksToWikipediaArticle, page.title.pageIri, dcLanguage, context.language.wikiCode, page.sourceIri)
-    quads += new Quad(context.language, DBpediaDatasets.LinksToWikipediaArticle, page.title.pageIri, typeOntProperty, foafDocument.uri, page.sourceIri)
+    qb.setTriple(subjectUri, isPrimaryTopicOf.uri, page.title.pageIri)
+    quads += qb.getQuad
+    qb.setTriple(page.title.pageIri, primaryTopic.uri, subjectUri)
+    quads += qb.getQuad
+    qb.setTriple(page.title.pageIri, dcLanguage.uri, context.language.wikiCode)
+    quads += qb.getQuad
+    qb.setTriple(page.title.pageIri, typeOntProperty.uri, foafDocument.uri)
+    quads += qb.getQuad
 
     quads
   }

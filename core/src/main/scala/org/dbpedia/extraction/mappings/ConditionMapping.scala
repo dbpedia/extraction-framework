@@ -1,9 +1,11 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.{InternalLinkNode, TemplateNode}
 
+@SoftwareAgentAnnotation(classOf[ConditionMapping], AnnotationType.Extractor)
 class ConditionMapping(
   val templateProperty : String,
   val operator : String,

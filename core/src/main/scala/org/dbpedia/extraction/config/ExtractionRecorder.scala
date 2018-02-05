@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong
 
 import org.apache.jena.atlas.json.{JSON, JsonArray, JsonObject}
 import org.dbpedia.extraction.config.Config.SlackCredentials
-import org.dbpedia.extraction.config.provenance.{Dataset, ProvenanceRecord}
+import org.dbpedia.extraction.config.provenance.{Dataset, QuadProvenanceRecord}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, StringUtils}
 import org.dbpedia.extraction.wikiparser._
@@ -27,11 +27,13 @@ class ExtractionRecorder[T](
      val slackCredantials: SlackCredentials = null,
      dataset: List[Dataset] = List[Dataset](),
      val language: Language = Language.English,
-     val monitor: ExtractionMonitor = null
-  ) {
+     val monitor: ExtractionMonitor = null,
+     prm: ProvenanceRecordManager = null
+  ) extends AutoCloseable {
 
   def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
 
+  private val recordManager: ProvenanceRecordManager = prm
   private var datasets: ListBuffer[Dataset] = new ListBuffer()
   datasets ++= dataset.filter(x => x != null)
   private var issuePages = mutable.Map[Language, mutable.Map[Long, RecordEntry[_]]]()
@@ -145,8 +147,10 @@ class ExtractionRecorder[T](
             case Some(ex) => failedRecord(quad, ex, record.language)
             case None => recordQuad(quad, record.cause, record.language)
           }
-        case prov: ProvenanceRecord =>
-          System.out.println(prov.toString + ",")  //TODO
+          if(this.recordManager != null)
+            this.recordManager.ingestQuad(Seq(quad))
+
+        case prov: QuadProvenanceRecord => if(this.recordManager != null) this.recordManager.ingestRecord(Seq(prov))
         case _  =>
           Option(record.msg) match{
             case Some(m) => printLabeledLine(m, record.cause, record.language)
@@ -358,11 +362,14 @@ class ExtractionRecorder[T](
     true
   }
 
-  override def finalize(): Unit ={
+  override def close(): Unit ={
     if(writerOpen){
       logWriter.close()
       writerOpen = false
     }
+
+    if(recordManager != null)
+      recordManager.close()
 
     if(monitor != null) {
       printMonitorSummary(monitor.summarize(this, datasets))
@@ -373,7 +380,6 @@ class ExtractionRecorder[T](
     printLabeledLine(line, RecordCause.Info, defaultLang)
     forwardSimpleLine(line)
 
-    super.finalize()
   }
 
   def resetFailedPages(lang: Language): Unit = issuePages.get(lang) match{
@@ -447,7 +453,7 @@ class ExtractionRecorder[T](
     for(dataset <- datasets.sortBy(x => x.encoded)){
       val field = new JsonObject()
       field.put("title", dataset.name)
-      field.put("value", dataset.versionUri)
+      field.put("value", dataset.versionUri.toString)
       field.put("short", false)
       fields.add(field)
     }

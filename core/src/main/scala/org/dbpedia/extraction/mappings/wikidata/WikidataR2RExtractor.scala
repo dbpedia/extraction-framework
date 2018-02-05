@@ -174,7 +174,7 @@ class WikidataR2RExtractor(
   def getReificationQuads(page: JsonNode, statementUri: String, datatype: Datatype, quad: Quad): ArrayBuffer[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
-    quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfType, rdfStatement, page.wikiPage.sourceIri)
+    quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfType, rdfStatement, page.wikiPage.sourceIri, null)
     quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfSubject, quad.subject, page.wikiPage.sourceIri, null)
     quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfPredicate, quad.predicate, page.wikiPage.sourceIri, null)
     quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfObject, quad.value, page.wikiPage.sourceIri, datatype)
@@ -228,7 +228,7 @@ class WikidataR2RExtractor(
   }
 
   private def getDuplicates(statementGroup: StatementGroup): mutable.MutableList[String] = {
-    var duplicateList = mutable.MutableList[String]();
+    var duplicateList = mutable.MutableList[String]()
     statementGroup.getStatements.foreach {
       statement => {
         val claim = statement.getClaim
@@ -330,7 +330,7 @@ class WikidataR2RExtractor(
                 context.ontology.classes.get(q.value.replace("http://dbpedia.org/ontology/", "")) match {
                   case Some(clazz) =>
                     for (cls <- clazz.relatedClasses.filter(_ != clazz))
-                      adjustedGraph += new Quad(context.language, DBpediaDatasets.OntologyTypesTransitive, subjectUri, rdfType, cls.uri, page.wikiPage.sourceIri)
+                      adjustedGraph += new Quad(context.language, DBpediaDatasets.OntologyTypesTransitive, subjectUri, rdfType, cls.uri, page.wikiPage.sourceIri, null)
                   case None =>
                 }
             }

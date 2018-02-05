@@ -115,7 +115,7 @@ extends PageNodeExtractor
   {
     UriUtils.createURI(url) match{
       case Success(u) => UriUtils.cleanLink(u) match{
-        case Some(c) => Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, c , node.sourceIri))
+        case Some(c) => Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, c , node.sourceIri, null))
         case None => Seq()
       }
       case Failure(f) => f match{

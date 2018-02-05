@@ -52,6 +52,7 @@ extends PageNodeExtractor
     private val birthPlaceProperty = context.ontology.properties("birthPlace")
     private val deathDateProperty = context.ontology.properties("deathDate")
     private val deathPlaceProperty = context.ontology.properties("deathPlace")
+    private val alternativeNameProperty = context.ontology.properties("alternativeName")
 
     private val rdfTypeProperty = context.ontology.properties("rdf:type")
     private val foafNameProperty = context.ontology.properties("foaf:name")
@@ -96,7 +97,7 @@ extends PageNodeExtractor
                             {
                                 quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceIri, new Datatype("rdf:langString"))
                             }
-                            quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, rdfTypeProperty, foafPersonClass.uri, template.sourceIri)
+                            quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, rdfTypeProperty, foafPersonClass.uri, template.sourceIri, null)
                             nameFound = true
                         }
                     }
@@ -111,8 +112,9 @@ extends PageNodeExtractor
                     {
                         case key if key == alternativeNames =>
                         {
-                            for(value <- StringParser.parseWithProvenance(property))
+                            for(value <- StringParser.parseWithProvenance(property).map(_.value))
                             {
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, alternativeNameProperty, value, property.sourceIri, new Datatype("rdf:langString"))
                             }
                         }
                         case key if key == description =>
@@ -140,14 +142,14 @@ extends PageNodeExtractor
                         {
                             for(objUri <- objectParser.parsePropertyNode(property, split=true))
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, birthPlaceProperty, objUri.toString, property.sourceIri)
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, birthPlaceProperty, objUri.value, property.sourceIri, null)
                             }
                         }
                         case key if key == deathPlace =>
                         {
                             for(objUri <- objectParser.parsePropertyNode(property, split=true))
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, deathPlaceProperty, objUri.toString, property.sourceIri)
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, deathPlaceProperty, objUri.value, property.sourceIri, null)
                             }
                         }
                         case _ =>

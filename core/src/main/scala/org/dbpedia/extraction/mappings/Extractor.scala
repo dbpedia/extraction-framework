@@ -1,7 +1,9 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.SoftwareAgentAnnotation
 import org.dbpedia.extraction.config.provenance.{Dataset, ExtractorRecord}
 import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.iri.IRI
 
 /**
  * TODO: generic type may not be optimal.
@@ -31,6 +33,12 @@ trait Extractor[-N] {
      * does not return all datasets it produces, serialization may fail.
      */
     val datasets: Set[Dataset]
+
+  /**
+    * reflects the software agent annotation of an extractor class as an iri (e.g.:
+    * http://dbpedia.org/extractor/InfoboxExtractor?githash=fa56dddb6df1b97269c14ce25430729a12775549 )
+    */
+  val softwareAgentAnnotation: IRI = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
 }
 
 object ExtractorState extends Enumeration {

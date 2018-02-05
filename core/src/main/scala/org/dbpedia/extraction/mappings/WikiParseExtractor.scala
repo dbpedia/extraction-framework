@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.WikiPage
@@ -20,6 +21,7 @@ import scala.language.reflectiveCalls
  * @param extractors  Sequence of next level Extractors
  *
  * */
+@SoftwareAgentAnnotation(classOf[InfoboxExtractor], AnnotationType.Extractor)
  class WikiParseExtractor(extractors: CompositePageNodeExtractor, context : { def redirects : Redirects })extends WikiPageExtractor{
 
   override val datasets: Set[Dataset] = extractors.datasets

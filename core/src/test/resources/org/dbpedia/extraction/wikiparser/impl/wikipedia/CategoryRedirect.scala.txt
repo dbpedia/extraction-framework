@@ -13,5 +13,7 @@ object CategoryRedirect
 
 // @ insert errors here @ //
 
-    def apply(language : Language) = map(language.wikiCode)
+    def apply(language : Language): Set[String] = map(language.wikiCode)
+
+    def get(language : Language) : Option[Set[String]] = map.get(language.wikiCode)
 }

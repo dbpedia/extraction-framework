@@ -40,9 +40,9 @@ class DateRangeParser ( context : {
     catch
       {
         case ex : IllegalArgumentException  =>
-          recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Warning, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
+          recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Warning, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
         case ex : NumberFormatException =>
-          recorder.enterProblemRecord(new RecordEntry[PageNode](node.root, RecordCause.Warning, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
+          recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Warning, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
       }
 
     None

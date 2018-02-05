@@ -76,28 +76,28 @@ extends PageNodeExtractor
           val wikipediaMediaUrl = language.baseUri + "/wiki/" + fileNamespaceIdentifier + ":" + mediaFileName
 
           if (firstImage) {
-            quads += new Quad (language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceIri)
-            quads += new Quad (language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceIri)
-            quads += new Quad (language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaMediaUrl, sourceNode.sourceIri)
-            quads += new Quad (language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceIri)
+            quads += new Quad (language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceIri, null)
+            quads += new Quad (language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceIri, null)
+            quads += new Quad (language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaMediaUrl, sourceNode.sourceIri, null)
+            quads += new Quad (language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceIri, null)
 
           firstImage = false
           }
 
-          quads += new Quad (language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceIri)
-          quads += new Quad (language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaMediaUrl, sourceNode.sourceIri)
+          quads += new Quad (language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceIri, null)
+          quads += new Quad (language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaMediaUrl, sourceNode.sourceIri, null)
 
-          quads += new Quad (language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceIri)
+          quads += new Quad (language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceIri, null)
         }
       else if (mediaFileName.matches(MediaExtractorConfig.SoundRegex.regex)) {
-        quads += new Quad (language, DBpediaDatasets.Sounds, url, rdfType, soundClass.uri, sourceNode.sourceIri)
+        quads += new Quad (language, DBpediaDatasets.Sounds, url, rdfType, soundClass.uri, sourceNode.sourceIri, null)
       }
       else if (mediaFileName.matches(MediaExtractorConfig.VideoRegex.regex)) {
         // Do nothing for videos as of now
       }
 
       // Same quad for every media resource
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mediaItem, dbpediaUrl, sourceNode.sourceIri)
+      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mediaItem, dbpediaUrl, sourceNode.sourceIri, null)
     }
 
     quads
