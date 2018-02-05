@@ -152,18 +152,6 @@ trait Node extends Serializable with Recordable[Node]
         sb append "&ns=" append root.title.namespace.code
       }
 
-      if (section != null)
-      {
-        sb append '#' append "section="
-        escape(sb, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes)
-        sb append "&relative-line=" append (line - section.line)
-        sb append "&absolute-line=" append line
-      }
-      else if (line >= 1)
-      {
-        sb append '#' append "absolute-line=" append line
-      }
-
       sb.toString
     }
 
@@ -176,7 +164,17 @@ trait Node extends Serializable with Recordable[Node]
 
   def hasTemplate(names : Set[String] = Set.empty) : Boolean = Node.collectTemplates(this, names).nonEmpty
 
-  def getNodeRecord: NodeRecord
+  def getNodeRecord: NodeRecord = NodeRecord(
+    this.sourceIri,
+    this.root.revision,
+    this.root.title.namespace.code,
+    this.root.title.language,
+    Option(this.line),
+    if(section != null)
+      Some(escape(null, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes).toString)
+    else
+      None
+  )
 
   private var extractionRecords: ListBuffer[RecordEntry[Node]] = null
   override def recordEntries: List[RecordEntry[Node]] = {

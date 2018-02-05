@@ -114,8 +114,10 @@ class DateTimeParser ( context : {
       }
       catch
       {
-          case ex : IllegalArgumentException  => recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Exception, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
-          case ex : NumberFormatException => recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Exception, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
+          case ex : IllegalArgumentException  =>
+            //TODO recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Exception, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
+          case ex : NumberFormatException =>
+            //TODO recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Exception, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
       }
 
       None

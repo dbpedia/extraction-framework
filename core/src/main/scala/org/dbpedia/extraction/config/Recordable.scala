@@ -36,7 +36,7 @@ case class RecordEntry[T] (
   *
   */
 object RecordCause extends Enumeration {
-  val Provenance, Internal, Info, Warning, Exception = Value
+  val Provenance, Internal, Info, Warning, Exception, Fatal = Value
 }
 
 class NodeEntry(p : Node, cause: RecordCause.Value = RecordCause.Info) extends RecordEntry[Node](

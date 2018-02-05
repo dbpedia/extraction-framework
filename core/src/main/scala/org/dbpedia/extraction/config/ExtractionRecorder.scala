@@ -111,7 +111,7 @@ class ExtractionRecorder[T](
     * @return
     */
   def failedPages(lang: Language): Long = issuePages.get(lang) match{
-    case Some(m) => m.size
+    case Some(m) => m.values.count(x => x.cause == RecordCause.Exception)
     case None => 0
   }
 
@@ -142,6 +142,8 @@ class ExtractionRecorder[T](
             case Some(ex) => failedRecord(page, ex, record.language)
             case None => recordExtractedPage(page.id, page.title, record.logSuccessfulPage)
           }
+        case node: Node =>
+          node.line
         case quad: Quad =>
           Option(record.error) match {
             case Some(ex) => failedRecord(quad, ex, record.language)
@@ -187,7 +189,9 @@ class ExtractionRecorder[T](
       case None =>  issuePages += language -> mutable.Map[Long, RecordEntry[_]]()
     }
 
-    val line = "{task} failed for " + tag + " " + id + ": " + entry.msg
+    val msg = entry.msg + (if(entry.error != null) ": " + entry.error.getMessage else "")
+
+    val line = "{task} failed for " + tag + " " + id + ": " + msg
     printLabeledLine(line, entry.cause, language, Seq())
 
     Option(entry.error) match{
@@ -198,7 +202,8 @@ class ExtractionRecorder[T](
       case None =>
     }
 
-    if(slackCredantials != null && failedPages(language) % (slackCredantials.exceptionThreshold * slackIncreaseExceptionThreshold) == 0)
+    val failedRecords = failedPages(language)
+    if(slackCredantials != null && failedRecords > 0 && failedRecords % (slackCredantials.exceptionThreshold * slackIncreaseExceptionThreshold) == 0)
       forwardExceptionWarning(language)
   }
 

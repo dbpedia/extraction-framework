@@ -5,7 +5,7 @@ import java.net.URL
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Logger
 
-import org.dbpedia.extraction.config.{Config, ConfigUtils, ExtractionMonitor, ExtractionRecorder}
+import org.dbpedia.extraction.config.{Config, ConfigUtils, ExtractionRecorder}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
@@ -18,7 +18,7 @@ import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, ListBuffer}
+import scala.collection.mutable.ArrayBuffer
 import scala.reflect._
 
 /**

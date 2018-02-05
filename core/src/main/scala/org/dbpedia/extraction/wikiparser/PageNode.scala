@@ -125,12 +125,4 @@ extends Node with Recordable[Node]
         && otherPageNode.isDisambiguation == isDisambiguation && NodeUtil.filterEmptyTextNodes(otherPageNode.children) == NodeUtil.filterEmptyTextNodes(children))
       case _ => false
   }
-
-  override def getNodeRecord: NodeRecord = NodeRecord(
-    this.sourceIri,
-    this.revision,
-    this.title.namespace.code,
-    this.title.language,
-    Option(this.line)
-  )
 }

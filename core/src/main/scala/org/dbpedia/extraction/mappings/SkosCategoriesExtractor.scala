@@ -48,13 +48,10 @@ extends PageNodeExtractor
     val initQb = qb.clone
     initQb.setExtractor(this.softwareAgentAnnotation)
 
-    initQb.setPredicate(rdfTypeProperty)
-    initQb.setValue(skosConceptClass.uri)
+    initQb.setTriple(subjectUri, rdfTypeProperty, skosConceptClass.uri)
     quads += initQb.getQuad
 
-    initQb.setPredicate(skosPrefLabelProperty)
-    initQb.setValue(node.title.decoded)
-    initQb.setDatatype(new Datatype("rdf:langString"))
+    initQb.setTriple(subjectUri, skosPrefLabelProperty, node.title.decoded, new Datatype(Quad.langString))
     quads += initQb.getQuad
 
     for(link <- collectCategoryLinks(node))
@@ -77,8 +74,7 @@ extends PageNodeExtractor
           objectUri
         ))
       ))
-      qb.setPredicate(property)
-      qb.setValue(objectUri)
+      qb.setTriple(subjectUri, property, objectUri)
       qb.setSourceUri(link.sourceIri)
 
       quads += qb.getQuad

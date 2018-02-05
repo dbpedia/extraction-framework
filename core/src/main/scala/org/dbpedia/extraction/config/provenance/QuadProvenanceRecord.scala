@@ -41,7 +41,8 @@ case class NodeRecord(
    revision: Long, // revision nr
    namespace: Int, // namespace nr (important to distinguish between Category and Main)
    language: Language, // the associated wiki language
-   line: Option[Int] // line nr,
+   line: Option[Int] = Some(0), // line nr
+   section: Option[String] = None
     ) extends ProvenanceMetadata{
 
   def copy(
@@ -49,13 +50,15 @@ case class NodeRecord(
       revision: Option[Long] = Option(this.revision),
       namespace: Option[Int] = Option(this.namespace),
       language: Option[Language] = Option(this.language),
-      line: Option[Int] = this.line): NodeRecord ={
+      line: Option[Int] = this.line,
+      section: Option[String] = this.section): NodeRecord ={
     NodeRecord(
       sourceUri.getOrElse(this.sourceUri),
       revision.getOrElse(this.revision),
       namespace.getOrElse(this.namespace),
       language.getOrElse(this.language),
-      line.orElse(this.line)
+      line.orElse(this.line),
+      section.orElse(this.section)
     )
   }
 

@@ -8,7 +8,7 @@ import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.ontology._
-import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
+import org.dbpedia.extraction.wikiparser.{Node, PropertyNode, TemplateNode}
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, OntologyClass, OntologyDatatypeProperty, OntologyProperty}
 
 import scala.collection.mutable.ArrayBuffer
@@ -191,41 +191,10 @@ extends PropertyMapping
               List()
           }
 
-          //get the property wikitext and plainText size
-          val propertyNodeWikiLength = propertyNode.toWikiText.substring(propertyNode.toWikiText.indexOf('=')+1).trim.length // exclude '| propKey ='
-          val propertyNodeTextLength = propertyNode.propertyNodeValueToPlainText.trim.length
 
           for( parseResult <- selector(parseResults) )
           {
-            //TODO -> get this into a prov object
-              val resultString = parseResult.value.toString
-              val isDBpediaResource = resultString.startsWith(languageResourceNamespace)
-
-            // get the actual value length
-            val resultLength = {
-              val length = resultString.length
-              // if it is a dbpedia resource, do not count http://xx.dbpedia.org/resource/
-              if (isDBpediaResource) length - languageResourceNamespace.length else length
-            }
-
-            val iriHasFragment = {
-              if (isDBpediaResource) {
-                val linkTitle = resultString.replace(languageResourceNamespace, "")
-
-                ExtractorUtils.collectInternalLinksFromNode(propertyNode) // find the link and check if it has a fragment
-                  .exists(p => p.destination.encoded.equals(linkTitle) && p.destination.fragment != null)
-              } else false
-            }
-
-            //we add this in the triple context
-            val resultLengthPercentageTxt =
-                "&split=" + parseResults.size +
-                "&wikiTextSize=" + propertyNodeWikiLength +
-                "&plainTextSize=" + propertyNodeTextLength +
-                "&valueSize=" + resultLength +
-                (if (iriHasFragment) "&objectHasFragment=" else "")
-
-            baseBuilder.setSourceUri(propertyNode.sourceIri+resultLengthPercentageTxt)
+            baseBuilder.setSourceUri(propertyNode.sourceIri)
             baseBuilder.setExtractor(ExtractorRecord(
               this.softwareAgentAnnotation,
               parseResult.provenance.toList,
@@ -234,8 +203,7 @@ extends PropertyMapping
               Some(node.title),
               Node.collectTemplates(propertyNode, Set.empty).map(x => x.title.decoded)
             ))
-            baseBuilder.setNamespace(node.title.namespace)
-            baseBuilder.setRevision(node.root.revision)
+            baseBuilder.setNodeRecord(propertyNode.getNodeRecord)
 
             val g = parseResult match {
                 case ParseResult(_: Double, _, u, _) if u.nonEmpty =>
@@ -312,8 +280,42 @@ extends PropertyMapping
     }
 
   /**
-    * provides a summary about this extractor used for provenance
-    *
+    * Deprecated way of passing provenance information as fragment of the sourceUri
+    * @param pr
+    * @param propertyNode
     * @return
     */
+  @Deprecated
+    private def oldSourceUriExtension(pr: ParseResult[_], propertyNode: PropertyNode): String = {
+
+      //get the property wikitext and plainText size
+      val propertyNodeWikiLength = propertyNode.toWikiText.substring(propertyNode.toWikiText.indexOf('=')+1).trim.length // exclude '| propKey ='
+      val propertyNodeTextLength = propertyNode.propertyNodeValueToPlainText.trim.length
+      //TODO -> get this into a prov object
+      val resultString = pr.value.toString
+      val isDBpediaResource = resultString.startsWith(languageResourceNamespace)
+
+      // get the actual value length
+      val resultLength = {
+        val length = resultString.length
+        // if it is a dbpedia resource, do not count http://xx.dbpedia.org/resource/
+        if (isDBpediaResource) length - languageResourceNamespace.length else length
+      }
+
+      val iriHasFragment = {
+        if (isDBpediaResource) {
+          val linkTitle = resultString.replace(languageResourceNamespace, "")
+
+          ExtractorUtils.collectInternalLinksFromNode(propertyNode) // find the link and check if it has a fragment
+            .exists(p => p.destination.encoded.equals(linkTitle) && p.destination.fragment != null)
+        } else false
+      }
+
+      //we add this in the triple context
+      "&wikiTextSize=" + propertyNodeWikiLength +
+      "&plainTextSize=" + propertyNodeTextLength +
+      "&valueSize=" + resultLength +
+      (if (iriHasFragment) "&objectHasFragment=" else "")
+
+    }
 }

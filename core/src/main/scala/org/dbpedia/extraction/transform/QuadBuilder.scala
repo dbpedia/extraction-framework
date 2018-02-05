@@ -141,9 +141,7 @@ class QuadBuilder(
     metadata: Option[DBpediaMetadata]
   ) = this(subject, predicate.map(p => p.uri), value, context, Option(language), datatype.map(x => x.uri), dataset.map(d => d.canonicalUri), metadata)
 
-  var rootRevision: Option[Long] = metadata.flatMap(x => x.node.map(y => y.revision))					                    // revision nr
-  var namespace: Option[Int] = metadata.flatMap(x => x.node.map(y => y.namespace))			         // namespace nr (important to distinguish between Category and Main)
-  var wikiTextLine: Option[Int] = metadata.flatMap(x => x.node.flatMap(y => y.line))			          // line nr,
+  var nodeRecord: Option[NodeRecord] = metadata.flatMap(x => x.node)
   var extractor: Option[ExtractorRecord] = metadata.flatMap(x => x.extractor)			                // the extractor record
   var transformer: Option[TransformerRecord] = metadata.flatMap(x => x.transformer)	                // the transformer record
   var replacing: Seq[String] = metadata.map(x => x.replacing).getOrElse(Seq())
@@ -158,9 +156,7 @@ class QuadBuilder(
       this.datatype,
       this.dataset
     )
-    rootRevision.foreach(x => qb.setRevision(x))
-    namespace.foreach(x => qb.setNamespace(x))
-    wikiTextLine.foreach(x => qb.setLine(x))
+    nodeRecord.foreach(x => qb.setNodeRecord(x))
     extractor.foreach(x => qb.setExtractor(x))
     transformer.foreach(x => qb.setTransformer(x))
     replacing.foreach(x => qb.addReplacing(x))
@@ -172,10 +168,10 @@ class QuadBuilder(
   def setExtractor(t: ExtractorRecord): Unit = extractor = Option(t)
   def setExtractor(classIri: IRI): Unit = extractor = Option(classIri).map(ExtractorRecord(_))
   def setExtractor(classIri: String): Unit = setExtractor(IRI.create(classIri).getOrElse(null))
-  def setLine(t: Int) = wikiTextLine = Option(t)
-  def setNamespace(t: Int) = namespace = Option(t)
-  def setNamespace(t: Namespace) = namespace = Option(t).map(x => x.code)
-  def setRevision(t: Long) = rootRevision = Option(t)
+//  def setLine(t: Int) = wikiTextLine = Option(t)
+//  def setNamespace(t: Int) = namespace = Option(t)
+//  def setNamespace(t: Namespace) = namespace = Option(t).map(x => x.code)
+//  def setRevision(t: Long) = rootRevision = Option(t)
   def setLanguage(l: Language) = language = Option(l)
   def setDataset(ds: String) = dataset = Option(ds).map(d => IRI.create(d).get)
   def setDataset(ds: Dataset) = dataset = Option(ds).map(x => x.canonicalUri)
@@ -186,6 +182,7 @@ class QuadBuilder(
   def setSourceUri(t: String) = sourceUri = Option(t)
   def setDatatype(t: String) = datatype = Option(t)
   def setDatatype(t: Datatype) = datatype = Option(t).map(x => x.uri)
+  def setNodeRecord(nr: NodeRecord) = nodeRecord = Option(nr)
 
   def setTriple(s: String, p: String, v: String): Unit ={
     setSubject(s)
@@ -193,18 +190,15 @@ class QuadBuilder(
     setValue(v)
   }
 
-  def setNodeRecord(nr: NodeRecord) = {
-    this.namespace = Option(nr.namespace)
-    this.wikiTextLine = nr.line
-    this.rootRevision = Option(nr.revision)
-    if(this.language.isEmpty)
-      this.language = Option(nr.language)
+  def setTriple(s: String, p: OntologyProperty, v: String, d: Datatype = null): Unit ={
+    setSubject(s)
+    setPredicate(p)
+    setValue(v)
+    if(datatype != null)
+      setDatatype(d)
   }
 
-  def getNodeRecord = if(sourceUri.isDefined && rootRevision.isDefined && namespace.isDefined && language.isDefined)
-      Some(NodeRecord(sourceUri.get, rootRevision.get, namespace.get, language.get, wikiTextLine))
-    else
-      None
+  def getNodeRecord = nodeRecord
 
   def getQuad: Quad = if(subject.isDefined && predicate.isDefined && value.isDefined)
       new Quad(language.map(l => l.wikiCode).orNull, dataset.map(d => d.toString).orNull, subject.get, predicate.get, value.get, sourceUri.orNull, datatype.orNull, getMetadataRecord)
@@ -212,7 +206,7 @@ class QuadBuilder(
       throw new IllegalArgumentException("Inchoate information for building a new Quad!")
 
   def getMetadataRecord: Option[DBpediaMetadata] = if(dataset.isDefined && language.isDefined)
-      Some(new DBpediaMetadata(dataset.get, getNodeRecord, extractor, transformer, replacing))
+      Some(new DBpediaMetadata(dataset.get, nodeRecord, extractor, transformer, replacing))
     else
       None
 }

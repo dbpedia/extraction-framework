@@ -40,7 +40,6 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
           qb.setExtractor(this.softwareAgentAnnotation)
           qb.setSubject(subjectUri)
           qb.setSourceUri(link.sourceIri)
-          Seq(qb.getQuad)
 
           val dst = link.destination
           if (dst.isInterLanguageLink) {

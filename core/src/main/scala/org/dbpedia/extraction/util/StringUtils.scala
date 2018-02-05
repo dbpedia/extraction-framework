@@ -183,7 +183,7 @@ object StringUtils
    */
   def escape(target: StringBuilder, str: String, replace: Array[String]): StringBuilder = {
     
-    var sb = target
+    var sb = if(target == null) new StringBuilder() else target
     val chars = str.toCharArray
     
     var last = 0

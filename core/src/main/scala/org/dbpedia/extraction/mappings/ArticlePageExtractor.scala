@@ -5,6 +5,7 @@ import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecor
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 
 import scala.collection.mutable.ArrayBuffer
@@ -37,20 +38,22 @@ extends PageNodeExtractor
         return Seq.empty
 
 
-    val qb = new QuadBuilder(None, None, None, Some(page.sourceIri), context.language, None, Some(DBpediaDatasets.LinksToWikipediaArticle), None)
-    qb.setNodeRecord(page.getNodeRecord)
-    qb.setExtractor(this.softwareAgentAnnotation)
+    val resourceObjectBuilder = new QuadBuilder(None, None, None, Some(page.sourceIri), context.language, None, Some(DBpediaDatasets.LinksToWikipediaArticle), None)
+    resourceObjectBuilder.setNodeRecord(page.getNodeRecord)
+    resourceObjectBuilder.setExtractor(this.softwareAgentAnnotation)
+    val literalObjectBuilder = resourceObjectBuilder.clone
 
     val quads = new ArrayBuffer[Quad]()
 
-    qb.setTriple(subjectUri, isPrimaryTopicOf.uri, page.title.pageIri)
-    quads += qb.getQuad
-    qb.setTriple(page.title.pageIri, primaryTopic.uri, subjectUri)
-    quads += qb.getQuad
-    qb.setTriple(page.title.pageIri, dcLanguage.uri, context.language.wikiCode)
-    quads += qb.getQuad
-    qb.setTriple(page.title.pageIri, typeOntProperty.uri, foafDocument.uri)
-    quads += qb.getQuad
+    resourceObjectBuilder.setTriple(subjectUri, isPrimaryTopicOf.uri, page.title.pageIri)
+    quads += resourceObjectBuilder.getQuad
+    resourceObjectBuilder.setTriple(page.title.pageIri, primaryTopic.uri, subjectUri)
+    quads += resourceObjectBuilder.getQuad
+    literalObjectBuilder.setTriple(page.title.pageIri, dcLanguage.uri, context.language.wikiCode)
+    literalObjectBuilder.setDatatype(Quad.langString)
+    quads += literalObjectBuilder.getQuad
+    resourceObjectBuilder.setTriple(page.title.pageIri, typeOntProperty.uri, foafDocument.uri)
+    quads += resourceObjectBuilder.getQuad
 
     quads
   }

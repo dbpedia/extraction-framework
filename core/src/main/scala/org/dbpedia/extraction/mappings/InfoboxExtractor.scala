@@ -143,8 +143,6 @@ extends PageNodeExtractor
             {
               baseQuadBuilder.setNodeRecord(splitNode.getNodeRecord)
               baseQuadBuilder.setSourceUri(splitNode.sourceIri)
-              baseQuadBuilder.setNamespace(node.title.namespace)
-              baseQuadBuilder.setRevision(node.root.revision)
 
               val zw = extractValue(splitNode)
               for(parseResults <- zw; if parseResults.nonEmpty) {
@@ -278,8 +276,8 @@ extends PageNodeExtractor
 
     private def extractNumber(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        intParser.parseWithProvenance(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:integer")))))
-        doubleParser.parseWithProvenance(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:double")))))
+        intParser.parseWithProvenance(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:integer")), value.provenance)))
+        doubleParser.parseWithProvenance(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:double")), value.provenance)))
         None
     }
 

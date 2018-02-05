@@ -2,6 +2,7 @@ package org.dbpedia.extraction.nif
 
 import org.dbpedia.extraction.config.{Config, RecordCause, RecordEntry}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty, RdfNamespace}
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
@@ -42,8 +43,8 @@ class WikipediaNifExtractor(
   protected lazy val longProperty: OntologyProperty = context.ontology.properties(context.configFile.abstractParameters.longAbstractsProperty)
 
   protected val dbpediaVersion: String = context.configFile.dbPediaVersion
-  protected lazy val longQuad: (String, String, String) => Quad = QuadBuilder.applySimple(context.language, DBpediaDatasets.LongAbstracts, longProperty, null)
-  protected lazy val shortQuad: (String, String, String) => Quad = QuadBuilder.applySimple(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null)
+  protected lazy val longQuad: (String, String, String) => Quad = QuadBuilder.applySimple(context.language, DBpediaDatasets.LongAbstracts, longProperty, new Datatype(Quad.langString))
+  protected lazy val shortQuad: (String, String, String) => Quad = QuadBuilder.applySimple(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, new Datatype(Quad.langString))
   protected val recordAbstracts: Boolean = !context.configFile.nifParameters.isTestRun  //not! will create dbpedia short and long abstracts
   protected val shortAbstractLength: Int = context.configFile.abstractParameters.shortAbstractMinLength
   protected val abstractsOnly: Boolean = context.configFile.nifParameters.abstractsOnly

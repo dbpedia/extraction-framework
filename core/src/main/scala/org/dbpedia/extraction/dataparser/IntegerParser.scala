@@ -39,6 +39,7 @@ class IntegerParser( context : { def language : Language } ,
              convertedText = parserUtils.convertLargeNumbers(text.value);
              value <- parseValue(convertedText) )
         {
+            //FIXME why dont we provide a Datatype here?
             return Some(ParseResult((value * multiplicationFactor).round))
         }
 

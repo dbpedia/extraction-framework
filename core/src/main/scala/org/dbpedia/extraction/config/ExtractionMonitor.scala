@@ -19,7 +19,7 @@ class ExtractionMonitor(config: Config) {
   private val tripleProperty = "http://rdfs.org/ns/void#triples"
   private var expectedChanges = Array(-1.0, 8.0)
   private val ignorableExceptionsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("ignorableExceptions.json"))
-  private val ignorableExceptions : mutable.HashMap[ExtractionRecorder[_], List[String]] = mutable.HashMap()
+  private val ignorableExceptions = new mutable.HashMap[ExtractionRecorder[_], List[String]]()
   private var summarizeExceptions : Boolean = false
   private val compareVersions = Try[Boolean]{ config.getProperty("compareDatasetIDs").toBoolean }.getOrElse(false)
 
@@ -29,7 +29,7 @@ class ExtractionMonitor(config: Config) {
     val changes = config.getProperty("expectedChanges")
     if(changes != null) {
       if(changes.split(",").length == 2) {
-        expectedChanges = Array(changes.split(",")(0).toFloat, changes.split(",")(1).toFloat)
+        expectedChanges = Array(changes.split(",").head.toFloat, changes.split(",")(1).toFloat)
       }
     }
     summarizeExceptions = Try[Boolean]{ config.getProperty("summarizeExceptions").toBoolean }.getOrElse(false)
@@ -80,11 +80,11 @@ class ExtractionMonitor(config: Config) {
     * @param ex Exception
     */
   def reportError(er : ExtractionRecorder[_], ex : Throwable): Unit = {
-    var ignorable = false
-    if(ignorableExceptions(er).contains(ex.getClass.getName.split("\\.").last)) ignorable = true
-    if(!ignorable) {
-      errors(er) += ex
-      stats(er).put("ERROR", stats(er).getOrElse("ERROR", 0) + 1)
+    ignorableExceptions.get(er) match {
+      case Some(e) if e.contains(ex.getClass.getName.split("\\.").last) =>
+      case _ =>
+        errors(er) += ex
+        stats(er).put("ERROR", stats(er).getOrElse("ERROR", 0) + 1)
     }
   }
 

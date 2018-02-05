@@ -7,6 +7,7 @@ import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
@@ -67,8 +68,8 @@ extends PageNodeExtractor
     // lazy so testing does not need ontology
     private lazy val longProperty = context.ontology.properties("abstract")
 
-    private lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.MissingLongAbstracts, longProperty, null)
-    private lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.MissingShortAbstracts, shortProperty, null)
+    private lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.MissingLongAbstracts, longProperty, new Datatype(Quad.langString))
+    private lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.MissingShortAbstracts, shortProperty, new Datatype(Quad.langString))
 
     override val datasets = Set(DBpediaDatasets.MissingLongAbstracts, DBpediaDatasets.MissingShortAbstracts)
 

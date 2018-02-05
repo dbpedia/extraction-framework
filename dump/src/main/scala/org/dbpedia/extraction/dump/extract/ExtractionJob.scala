@@ -52,7 +52,6 @@ class ExtractionJob(
       extractionRecorder.record(records:_*)
     } catch {
       case ex: Exception =>
-        //ex.printStackTrace()
         page.recordException(ex)
         extractionRecorder.record(page)
         if(extractionRecorder.monitor != null)
@@ -62,7 +61,7 @@ class ExtractionJob(
   
   def run(): Unit =
   {
-    extractionRecorder.initialize(language, "Main Extraction", extractor.datasets.toSeq)
+    extractionRecorder.initialize(language, "Extraction", extractor.datasets.toSeq)
     extractor.initializeExtractor()
     destination.open()
     workers.start()
