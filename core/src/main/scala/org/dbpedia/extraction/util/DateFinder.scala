@@ -1,37 +1,36 @@
 package org.dbpedia.extraction.util
 
-
 /**
  */
-class DateFinder[T](val finder: Finder[T]){
+class DateFinder[T](baseDir: T, language: Language, wikiName: String = "wiki")(implicit wrap: T => FileLike[T])
+  extends Finder[T](baseDir, language, wikiName)(wrap){
   
-  def this(baseDir: T, language: Language)(implicit wrap: T => FileLike[T]) = this(new Finder[T](baseDir, language, "wiki"))
+  def this(f: Finder[T])(implicit wrap: T => FileLike[T]) =
+    this(f.baseDir, f.language, f.wikiName)
   
-  def baseDir = finder.baseDir
+  private var _date: String = _
   
-  def language = finder.language
-  
-  private var _date: String = null
-  
-  def date =
-    if (_date != null)
+  def date = if (_date == null) {
+    _date = this.dates().last
     _date
-  else throw new IllegalStateException("date not set")
+  }
+  else
+    _date
 
   def byName(name: String, auto: Boolean = false): Option[T] = {
     if (_date == null) {
       if (! auto)
         throw new IllegalStateException("date not set")
-      _date = finder.dates(name).last
+      _date = this.dates(name).last
     }
-    finder.file(_date, name)
+    this.file(_date, name)
   }
 
   def byPattern (pattern: String, auto: Boolean = false): Seq[T] = {
     if (_date == null) {
       if (! auto) throw new IllegalStateException("date not set")
-      _date = finder.dates(pattern, true, true).last
+      _date = this.dates(pattern, true, true).last
     }
-    finder.matchFiles(_date, pattern).toSeq
+    this.matchFiles(_date, pattern)
   }
 }

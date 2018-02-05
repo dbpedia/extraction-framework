@@ -44,6 +44,24 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
       println("Error: could not find file/path: " + wikiDir.toString + "/" + date)
       null.asInstanceOf[T]
   }
+
+  /**
+    * provenance directory for language & date
+    * @param date - the date
+    * @return - the prov dir
+    */
+  def provenanceDir(date: String): T = {
+    val dir = directory(date)
+    if(dir != null)
+      dir.resolve("provanance") match{
+        case Success(f) => f
+        case Failure(x) =>
+          println("Error: could not find file/path: " + dir.toString + "/provenance")
+          null.asInstanceOf[T]
+      }
+    else
+      null.asInstanceOf[T]
+  }
   
   /**
    * Finds the names (which are dates in format YYYYMMDD) of dump directories for the language.
@@ -56,8 +74,10 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
   def dates(suffix: String = null, required: Boolean = true, isSuffixRegex: Boolean = false): List[String] = {
     
     val suffixFilter: String => Boolean = 
-      if (suffix == null) {date => true}
-      else if (isSuffixRegex) {date => matchFiles(date, suffix).nonEmpty}
+      if (suffix == null) {
+        date => true}
+      else if (isSuffixRegex) {
+        date => matchFiles(date, suffix).nonEmpty}
       else {date => file(date, suffix)match{
         case Some(y) => y.exists
         case None => false

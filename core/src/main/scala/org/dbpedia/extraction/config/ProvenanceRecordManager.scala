@@ -5,32 +5,34 @@ import java.io.File
 import org.dbpedia.extraction.config.provenance.QuadProvenanceRecord
 import org.dbpedia.extraction.destinations.ProvenanceDestination
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.{IOUtils, Language, RichFile}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.iri.IRI
 
 import scala.collection.mutable
 
-private[config] class ProvenanceRecordManager(val recordDir: RichFile) extends AutoCloseable {
+private[config] class ProvenanceRecordManager(val baseDir: RichFile, val wikiName: String) extends AutoCloseable {
 
-  val dirMap = new mutable.HashMap[Language, RichFile]()
+  val finders = new mutable.HashMap[Language, DateFinder[File]]()
   val fileMap = new mutable.HashMap[(Language, IRI), ProvenanceDestination]()
 
   def getDestination(lang: Language, dataset: IRI): ProvenanceDestination ={
     fileMap.get((lang, dataset)) match{
       case Some(d) => d
       case None =>
-        val dir = dirMap.get(lang) match{
-          case Some(d) => d
+        val finder = finders.get(lang) match{
+          case Some(f) => f
           case None =>
-            val newDir = new File(recordDir.getFile, lang.wikiCode)
-            if(!newDir.exists())
-              newDir.mkdir()
-            dirMap.put(lang, newDir)
-            new RichFile(newDir)
+            val f = new DateFinder[File](baseDir.getFile, lang, wikiName)
+            finders.put(lang, f)
+            f
         }
-        val fileName = dataset.getPath.substring(dataset.getPath.lastIndexOf("/")+1)
-        val destFile: RichFile = new File(dir.getFile, fileName + "_prov.json.bz2")
+        val provDir = finder.provenanceDir(finder.date)
+        if(!provDir.exists())
+          provDir.mkdir()
+        val fileName = dataset.getPath.substring(dataset.getPath.lastIndexOf("/")+1).replace("_", "-")
+        val prefix = lang.wikiCode + wikiName + "-" + finder.date + "-"
+        val destFile: RichFile = new File(provDir, prefix + fileName + "-prov.json.bz2")
         destFile.getFile.createNewFile()
         val dest = new ProvenanceDestination(() => IOUtils.writer(destFile))
         dest.open()
