@@ -53,7 +53,7 @@ class RedirectFinder private(lang : Language) extends (PageNode => Option[(WikiT
         case _ => null
       }
 
-    if(destinationTitle != null && page.title.namespace == Namespace.Template && destinationTitle.namespace == Namespace.Template)
+    if(destinationTitle != null)
     {
       Some((page.title, destinationTitle))
     }

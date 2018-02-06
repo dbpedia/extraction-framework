@@ -50,7 +50,7 @@ extends LinkNode(children, line)
 case class InternalLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]())
 extends WikiLinkNode(destination, children, line, destinationNodes) {
     override def equals(obj: scala.Any) = obj match {
-        case otherLink : InternalLinkNode => (otherLink.destination == destination && NodeUtil.filterEmptyTextNodes(otherLink.children) == NodeUtil.filterEmptyTextNodes(children))
+        case otherLink : InternalLinkNode => otherLink.destination == destination && NodeUtil.filterEmptyTextNodes(otherLink.children) == NodeUtil.filterEmptyTextNodes(children)
         case _ => false
     }
 }

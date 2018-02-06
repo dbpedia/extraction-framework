@@ -49,7 +49,7 @@ object TemplateTransformConfig {
           case "extractChildren" => extractAndReplace(p => if (contains) keys.contains(p.key) else !keys.contains(p.key), templatesOnly, replace) _
           case "getLangText" => {
             val langcode = langParam match{
-              case Some(l) => (node: TemplateNode) => node.property(l).get.children.head.toPlainText
+              case Some(l) => (node: TemplateNode) => node.property(l).get.children.headOption.map(x => x.toPlainText).getOrElse("")
               case None => (node: TemplateNode) => template.substring(5)
             }
             getLangText(p => if (contains) keys.contains(p.key) else !keys.contains(p.key), langcode) _
