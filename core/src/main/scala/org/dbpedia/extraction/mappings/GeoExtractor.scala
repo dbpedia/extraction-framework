@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
 import org.dbpedia.extraction.dataparser.{GeoCoordinate, GeoCoordinateParser}
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
@@ -34,10 +34,13 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.GeoCoordinates)
 
+  private val qb = QuadBuilder.dynamicPredicate(context.language, DBpediaDatasets.GeoCoordinates)
+
   override def extract(page : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if (page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) 
       return Seq.empty
+
     
     // Iterate through all root templates.
     // Not recursing into templates as these are presumed to be handled by template-based mechanisms (GeoCoordinatesMapping).
@@ -46,19 +49,35 @@ extends PageNodeExtractor
       coordinate <- geoCoordinateParser.parseWithProvenance(templateNode)
     )
     {
-      return writeGeoCoordinate(coordinate.value, subjectUri, page.sourceIri)
+      qb.setSourceUri(templateNode.sourceIri)
+      qb.setNodeRecord(templateNode.getNodeRecord)
+      qb.setExtractor(ExtractorRecord(
+        this.softwareAgentAnnotation,
+        coordinate.provenance.toList,
+        None, None, Some(templateNode.title),
+        templateNode.containedTemplateNames()
+      ))
+
+      val quads = new ArrayBuffer[Quad]()
+      qb.setSubject(subjectUri)
+      qb.setPredicate(typeOntProperty)
+      qb.setValue(featureOntClass.uri)
+      quads += qb.getQuad
+
+      qb.setPredicate(latOntProperty)
+      qb.setValue(coordinate.value.latitude.toString)
+      quads += qb.getQuad
+
+      qb.setPredicate(lonOntProperty)
+      qb.setValue(coordinate.value.longitude.toString)
+      quads += qb.getQuad
+
+      qb.setPredicate(pointOntProperty)
+      qb.setValue(coordinate.value.latitude + " " + coordinate.value.latitude)
+      quads += qb.getQuad
+      quads
     }
 
     Seq.empty
-  }
-
-  private def writeGeoCoordinate(coord : GeoCoordinate, subjectUri : String, sourceUri : String) : Seq[Quad] =
-  {
-    val quads = new ArrayBuffer[Quad]()
-    quads += new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, typeOntProperty, featureOntClass.uri, sourceUri, null)
-    quads += new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, latOntProperty, coord.latitude.toString, sourceUri, null)
-    quads += new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, lonOntProperty, coord.longitude.toString, sourceUri, null)
-    quads += new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri, null)
-    quads
   }
 }

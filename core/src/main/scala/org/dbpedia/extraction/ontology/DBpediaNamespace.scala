@@ -38,12 +38,15 @@ object DBpediaNamespace {
     ns
   }
 
+  val PROVDOMAIN = "http://prov.dbpedia.org/"
+
   val ONTOLOGY: DBpediaNamespace = ns("ontology")
   val DATATYPE: DBpediaNamespace = ns("datatype")
-  val DATASET: DBpediaNamespace = ns("dataset")
-  val PARSER: DBpediaNamespace = ns("parser")
-  val EXTRACTOR: DBpediaNamespace = ns("extractor")
-  val TRANSFORMER: DBpediaNamespace = ns("transformer")
-  val PROVENANCE: DBpediaNamespace = ns("http://prov.dbpedia.org/", "provenance")
+  val DATASET: DBpediaNamespace = ns(PROVDOMAIN + "datasets/", "dataset")
+  val PARSER: DBpediaNamespace = ns(PROVDOMAIN + "parser/" , "parser")
+  val EXTRACTOR: DBpediaNamespace = ns(PROVDOMAIN + "extractor/" , "extractor")
+  val TRANSFORMER: DBpediaNamespace = ns(PROVDOMAIN + "transformer/" , "transformer")
+  val PROVENANCE: DBpediaNamespace = ns(PROVDOMAIN + "provenance/" , "provenance")
+  val WIKINODE: DBpediaNamespace = ns(PROVDOMAIN + "wikinode/" , "wikinode")
 
 }

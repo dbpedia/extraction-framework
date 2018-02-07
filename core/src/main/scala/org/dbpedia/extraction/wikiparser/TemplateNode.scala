@@ -1,7 +1,11 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.annotations.WikiNodeAnnotation
 import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecord}
 import org.dbpedia.extraction.config.transform.TemplateTransformConfig
+import org.dbpedia.extraction.util.StringUtils.escape
+import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.iri.IRI
 
 /**
  * Represents a template.
@@ -10,6 +14,7 @@ import org.dbpedia.extraction.config.transform.TemplateTransformConfig
  * @param children The properties of this template
  * @param line The source line number of this property
  */
+@WikiNodeAnnotation(classOf[TemplateNode])
 case class TemplateNode (
     title : WikiTitle,
     override val children : List[PropertyNode],
@@ -39,7 +44,26 @@ case class TemplateNode (
     // templates are skipped for plain text
     def toPlainText = ""
 
-    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
+
+    /**
+      * Creates a NodeRecord metadata object of this node
+      *
+      * @return
+      */
+    override def getNodeRecord = NodeRecord(
+        IRI.create(this.sourceIri).get,
+        this.wikiNodeAnnotation,
+        this.root.revision,
+        this.root.title.namespace.code,
+        this.id,
+        this.root.title.language,
+        Option(this.line),
+        Option(title.decoded),
+        if(section != null)
+            Some(escape(null, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes).toString)
+        else
+            None
+    )
 
     override def equals(obj: scala.Any): Boolean = obj match {
 

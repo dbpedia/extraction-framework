@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
@@ -27,16 +27,25 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.ExternalLinks)
 
+  private val qb = QuadBuilder(context.language, DBpediaDatasets.ExternalLinks, wikiPageExternalLinkProperty, null)
+
   override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
         return Seq.empty
 
+    qb.setSubject(subjectUri)
+    qb.setExtractor(this.softwareAgentAnnotation)
+
     var quads = new ArrayBuffer[Quad]()
     for(link <- collectExternalLinks(node);
         uri <- UriUtils.cleanLink(link.destination))
     {
-      quads += new Quad(context.language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty, uri, link.sourceIri, null)
+      val qbc = qb.clone
+      qbc.setNodeRecord(link.getNodeRecord)
+      qbc.setValue(uri)
+      qbc.setSourceUri(link.sourceIri)
+      quads += qbc.getQuad
     }
     
     quads

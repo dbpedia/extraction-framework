@@ -33,7 +33,7 @@ class AnchorTextExtractor(
       return Seq.empty
     }
 
-    val baseBuilder = QuadBuilder.stringPredicate(
+    val baseBuilder = QuadBuilder(
       context.language,
       DBpediaDatasets.AnchorText,
       wikiPageWikiLinkProperty,
@@ -50,7 +50,7 @@ class AnchorTextExtractor(
         None,
         None,
         None,
-        Node.collectTemplates(node, Set.empty).map(x => x.title.decoded)
+        node.containedTemplateNames()
       ))
 
       if (node.destination.namespace == Namespace.Main) {

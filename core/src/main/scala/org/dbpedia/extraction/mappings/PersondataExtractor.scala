@@ -18,6 +18,7 @@ import scala.reflect.ClassTag
 /**
  * Extracts information about persons (date and place of birth etc.) from the English and German Wikipedia, represented using the FOAF vocabulary.
  */
+@Deprecated
 @SoftwareAgentAnnotation(classOf[PersondataExtractor], AnnotationType.Extractor)
 class PersondataExtractor(
   context : {

@@ -1,6 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.annotations.WikiNodeAnnotation
 import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecord}
+import org.dbpedia.extraction.util.StringUtils.escape
+import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.iri.IRI
 
 /**
  * Represents a template property.
@@ -9,6 +13,7 @@ import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecor
  * @param children The contents of the value of this property
  * @param line The source line number of this property
  */
+@WikiNodeAnnotation(classOf[TemplateParameterNode])
 case class TemplateParameterNode(parameter : String, override val children : List[Node], override val line : Int) extends Node
 {
     def toWikiText = {
@@ -27,5 +32,24 @@ case class TemplateParameterNode(parameter : String, override val children : Lis
 
   }
 
-  override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
+
+  /**
+    * Creates a NodeRecord metadata object of this node
+    *
+    * @return
+    */
+  override def getNodeRecord = NodeRecord(
+    IRI.create(this.sourceIri).get,
+    this.wikiNodeAnnotation,
+    this.root.revision,
+    this.root.title.namespace.code,
+    this.id,
+    this.root.title.language,
+    Option(this.line),
+    Option(parameter),
+    if(section != null)
+      Some(escape(null, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes).toString)
+    else
+      None
+  )
 }

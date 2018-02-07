@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
@@ -96,7 +97,7 @@ extends Extractor[TemplateNode]
                 if (condition1_createCorrespondingProperty)
                 {
                     //Connect new instance to the instance created from the root template
-                    graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, instanceUri, correspondingProperty, subjectUri, node.sourceIri, null)
+                    graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, instanceUri, correspondingProperty, subjectUri, node.sourceIri, null.asInstanceOf[Datatype])
                 }
 
                 //Extract properties

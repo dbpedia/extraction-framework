@@ -57,7 +57,7 @@ with Equals
     datatype: Datatype
   ) = this(
     if (language == null) null else language.isoCode,
-    if (dataset == null) null else dataset.encoded,
+    if (dataset == null) null else dataset.canonicalUri.toString,
       subject,
       predicate,
       value,
@@ -230,7 +230,7 @@ return - hashCode as Long
           d
       case None => null
     }
-    // if lada == null flatMap(Option(_)) reduces the list to s,p,o, resulting not in a trailing comma
+    // if lada == null flatMap(Option(_)) reduces the list to s,p,o, resulting not in a trailing comma + null
     sha256Hash(List(subject,predicate,value,lada).flatMap(Option(_)).mkString(","))
   }
 

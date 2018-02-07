@@ -117,7 +117,7 @@ extends WikiPageExtractor
 
         val quads = new ArrayBuffer[Quad]()
 
-        // the simple wiki parser is confused with the <ref> ... </ref> hetml tags and ignores whatever is inside them
+        // the simple wiki parser is confused with the <ref> ... </ref> html tags and ignores whatever is inside them
         // with this hack we create a wikiPage close and remove all "<ref" from the source and then try to reparse the page
         val pageWithoutRefs = new WikiPage(
             title = page.title,
@@ -168,7 +168,7 @@ extends WikiPageExtractor
                         Some(splitPropertyNodes.size),
                         Some(property.key),
                         None,
-                        Node.collectTemplates(splitNode, Set.empty).map(x => x.title.decoded)
+                        splitNode.containedTemplateNames()
                     ))
                     //fill quad
                     qb.setPredicate(getPropertyUri(property.key))
@@ -185,7 +185,6 @@ extends WikiPageExtractor
 
     private def extractValue(node : PropertyNode) : List[ParseResult[String]] =
     {
-        // TODO don't convert to SI units (what happens to {{convert|25|kg}} ?)
         extractUnitValue(node).foreach(result => return List(result))
         extractDates(node) match
         {

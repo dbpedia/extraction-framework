@@ -38,7 +38,7 @@ class InfoboxMappingsExtractor(context: {
     val propertyParserFuncions = parserFunctions.filter(p => p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from"))
     val propertyParserFuncionsHints = propertyParserFuncions.map(_.children.head.toString)
     val propertyParserFuncionsMappings = getTemplateMappingsFromPropertyParserFunc(propertyParserFuncions)
-    val try12 = InfoboxExtractor.collectTemplates(page)
+    val try12 = ExtendedInfoboxExtractor.collectTemplates(page)
     val invokeFunc = parserFunctions.filter(p => p.title.equalsIgnoreCase("#invoke"))
     val wikidataParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("wikidata"))
     val propertyLinkParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("propertyLink"))

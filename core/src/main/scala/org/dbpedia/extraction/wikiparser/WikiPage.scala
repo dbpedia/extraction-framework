@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.annotations.WikiNodeAnnotation
 import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
@@ -19,6 +20,7 @@ import scala.xml.Elem
  * @param source The WikiText source of this page
  * @param format e.g. "text/x-wiki"
  */
+@WikiNodeAnnotation(classOf[WikiPage])
 class WikiPage(
     title: WikiTitle,
     id: Long,

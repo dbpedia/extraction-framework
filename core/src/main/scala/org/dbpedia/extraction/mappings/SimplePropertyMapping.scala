@@ -201,9 +201,10 @@ extends PropertyMapping
               Some(parseResults.size),
               Some(templateProperty),
               Some(node.title),
-              Node.collectTemplates(propertyNode, Set.empty).map(x => x.title.decoded)
+              propertyNode.containedTemplateNames()
             ))
-            baseBuilder.setNodeRecord(propertyNode.getNodeRecord)
+            val nr = propertyNode.getNodeRecord
+            baseBuilder.setNodeRecord(nr)
 
             val g = parseResult match {
                 case ParseResult(_: Double, _, u, _) if u.nonEmpty =>

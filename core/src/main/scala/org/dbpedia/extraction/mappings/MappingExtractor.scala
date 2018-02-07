@@ -44,7 +44,7 @@ extends PageNodeExtractor
   private def extractNode(node : Node, subjectUri : String) : Seq[Quad] =
   {
     //Try to extract data from the node itself
-    val graph = node match
+    var graph = node match
     {
       case templateNode : TemplateNode =>
       {
@@ -64,14 +64,8 @@ extends PageNodeExtractor
 
     //Check the result and return it if non-empty.
     //Otherwise continue with extracting the children of the current node.
-    if(graph.isEmpty)
-    {
-      node.children.flatMap(child => extractNode(child, subjectUri))
-    }
-    else
-    {
-      graph
-    }
+    graph ++= node.children.flatMap(child => extractNode(child, subjectUri))
+    graph
   }
 
   private def splitInferredFromDirectTypes(originalGraph: Seq[Quad], node : Node, subjectUri : String) : Seq[Quad] = {

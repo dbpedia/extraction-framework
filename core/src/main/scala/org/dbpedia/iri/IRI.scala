@@ -168,6 +168,13 @@ class IRI private[iri](iri: org.apache.jena.iri.IRI) extends org.apache.jena.iri
   override def create(i: org.apache.jena.iri.IRI): org.apache.jena.iri.IRI = iri.create(i)
 
   override def getFactory: IRIFactoryImpl = IRI.iriFactory
+
+  def getLastFileSegment: String = Option(this.getPath) match{
+    case Some(p) =>
+      val noTrailingSlash = if(p.trim.endsWith("/")) p.trim.substring(0, p.trim.length-1) else p.trim
+      noTrailingSlash.substring(noTrailingSlash.lastIndexOf("/")+1)
+    case None => ""
+  }
 }
 
 object IRI{

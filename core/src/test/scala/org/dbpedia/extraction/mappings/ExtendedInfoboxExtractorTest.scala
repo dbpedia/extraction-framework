@@ -24,7 +24,7 @@ import scala.reflect.ClassTag
  * 
  * Input files are named [title].xml, gold standard are given in files [title]-gold.tql
  */
-class InfoboxExtractorTest
+class ExtendedInfoboxExtractorTest
 {
 	private val testDataRootDir = new File("src/test/resources/org/dbpedia/extraction/mappings/InfoboxExtractor_samples")
 	
@@ -116,7 +116,7 @@ class InfoboxExtractorTest
 
 	private def render(file : String, context : AnyRef{def ontology: Ontology; def language : Language; def redirects : Redirects; def recorder[T: ClassTag] : ExtractionRecorder[T]}, folder : File) : Seq[Quad] =
 	{
-		val extractor = new InfoboxExtractor(context)
+		val extractor = new ExtendedInfoboxExtractor(context)
 
 		println("input file : " + folder + "/" + file)
 		val page = //new FileSource(folder, context.language, _ endsWith file).head

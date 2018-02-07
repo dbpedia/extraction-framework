@@ -46,7 +46,7 @@ class CommonsResourceExtractor (
     ))
     qb.setSourceUri(node.sourceIri)
 
-    for { template <- InfoboxExtractor.collectTemplates(node)
+    for { template <- ExtendedInfoboxExtractor.collectTemplates(node)
       if template.title.decoded.equalsIgnoreCase("Commons")
     }
     {

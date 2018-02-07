@@ -1,7 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.annotations.WikiNodeAnnotation
 import org.dbpedia.extraction.config.provenance.NodeRecord
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Language, WikiUtil}
+import org.dbpedia.extraction.util.StringUtils.escape
+import org.dbpedia.iri.IRI
 
 /**
  * Represents plain text.
@@ -9,6 +12,8 @@ import org.dbpedia.extraction.util.Language
  * @param text The text
  * @param line The source line number where this text begins
  */
+
+@WikiNodeAnnotation(classOf[TextNode])
 case class TextNode(text : String, override val line : Int, lang: Language = null) extends Node
 {
     def toWikiText: String = text
@@ -30,5 +35,24 @@ case class TextNode(text : String, override val line : Int, lang: Language = nul
 
     override def children = List()
 
-    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
+
+    /**
+      * Creates a NodeRecord metadata object of this node
+      *
+      * @return
+      */
+    override def getNodeRecord = NodeRecord(
+        IRI.create(this.sourceIri).get,
+        this.wikiNodeAnnotation,
+        this.root.revision,
+        this.root.title.namespace.code,
+        this.id,
+        this.root.title.language,
+        Option(this.line),
+        None,
+        if(section != null)
+            Some(escape(null, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes).toString)
+        else
+            None
+    )
 }

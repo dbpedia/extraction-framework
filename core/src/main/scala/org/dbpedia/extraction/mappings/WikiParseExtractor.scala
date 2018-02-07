@@ -21,7 +21,7 @@ import scala.language.reflectiveCalls
  * @param extractors  Sequence of next level Extractors
  *
  * */
-@SoftwareAgentAnnotation(classOf[InfoboxExtractor], AnnotationType.Extractor)
+@SoftwareAgentAnnotation(classOf[ExtendedInfoboxExtractor], AnnotationType.Extractor)
  class WikiParseExtractor(extractors: CompositePageNodeExtractor, context : { def redirects : Redirects })extends WikiPageExtractor{
 
   override val datasets: Set[Dataset] = extractors.datasets

@@ -1,5 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.annotations.WikiNodeAnnotation
+import org.dbpedia.extraction.config.provenance.NodeRecord
+import org.dbpedia.extraction.util.StringUtils.escape
+import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.iri.IRI
 import org.wikidata.wdtk.datamodel.json.jackson.JacksonTermedStatementDocument
 
 /**
@@ -7,6 +12,7 @@ import org.wikidata.wdtk.datamodel.json.jackson.JacksonTermedStatementDocument
  * @param wikiDataDocument wikidata toolkit ItemDocument
  */
 
+@WikiNodeAnnotation(classOf[JsonNode])
 class JsonNode  (
                   val wikiPage : WikiPage,
                   val wikiDataDocument : JacksonTermedStatementDocument
@@ -20,4 +26,5 @@ class JsonNode  (
   override val line = 0
 
   override def getNodeRecord = this.root.getNodeRecord
+
 }

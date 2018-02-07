@@ -5,14 +5,14 @@ import java.util.logging.Logger
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
-import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
 import org.dbpedia.extraction.dataparser.{DateRangeParser, DateTimeParser, StringParser}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.mappings.DateIntervalMappingConfig._
-import org.dbpedia.extraction.wikiparser.{NodeUtil, PropertyNode, TemplateNode}
+import org.dbpedia.extraction.wikiparser.{Node, NodeUtil, PropertyNode, TemplateNode}
 
 import scala.language.reflectiveCalls
 import scala.reflect.ClassTag
@@ -53,18 +53,31 @@ extends PropertyMapping
     // replicate standard mechanism implemented by dataparsers
     for(propertyNode <- node.property(templateProperty))
     {
-       // for now just return the first interval
-       // waiting to decide what to do when there are several
-       // see discussion at https://github.com/dbpedia/extraction-framework/pull/254
-       // return NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex).flatMap( node => extractInterval(node, subjectUri).toList )
-       return NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
-                      .map( node => extractInterval(node, subjectUri) )
-                      .dropWhile(e => e.isEmpty).headOption.getOrElse(return Seq.empty)
+      // for now just return the first interval
+      // waiting to decide what to do when there are several
+      // see discussion at https://github.com/dbpedia/extraction-framework/pull/254
+      // return NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex).flatMap( node => extractInterval(node, subjectUri).toList )
+      val splits =  NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex)
+
+      // set ER and NR
+      qb.setNodeRecord(propertyNode.getNodeRecord)
+      qb.setExtractor(ExtractorRecord(
+        this.softwareAgentAnnotation,
+        Seq(),
+        Some(splits.size),
+        Some(propertyNode.key),
+        Some(node.title),
+        propertyNode.containedTemplateNames()
+      ))
+
+      return splits.map( node => extractInterval(node, subjectUri) )
+              .dropWhile(e => e.isEmpty).headOption.getOrElse(return Seq.empty)
     }
     
     Seq.empty
   }
-  
+
+  private val qb = QuadBuilder.dynamicPredicate(context.language, DBpediaDatasets.OntologyPropertiesLiterals)
   
   def extractInterval(propertyNode : PropertyNode, subjectUri: String) : Seq[Quad] =
   {
@@ -77,12 +90,24 @@ extends PropertyMapping
       return Seq.empty
     }
 
+    //fill base QuadBuilder
+    qb.setSubject(subjectUri)
+    qb.setSourceUri(propertyNode.sourceIri)
+
     if(splitNodes.size == 1){
       dateIntervalParser.parseRange(propertyNode) match{
         case Some(i) =>
-          val quad1 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, startDateOntologyProperty, i.value._1.toString, propertyNode.sourceIri, i.value._1.datatype)
-          val quad2 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, endDateOntologyProperty, i.value._2.toString, propertyNode.sourceIri, i.value._2.datatype)
-          return Seq(quad1, quad2)
+          val qb1 = qb.clone
+          qb1.setPredicate(startDateOntologyProperty)
+          qb1.setValue(i.value._1.toString)
+          qb1.setDatatype(i.value._1.datatype)
+
+          val qb2 = qb.clone
+          qb2.setPredicate(endDateOntologyProperty)
+          qb2.setValue(i.value._2.toString)
+          qb2.setDatatype(i.value._2.datatype)
+
+          return Seq(qb1.getQuad, qb2.getQuad)
         case None =>
       }
     }
@@ -117,7 +142,10 @@ extends PropertyMapping
     }
 
     //Write start date quad
-    val quad1 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, startDateOntologyProperty, startDate.value.toString, propertyNode.sourceIri, startDate.value.datatype)
+    val qb1 = qb.clone
+    qb1.setPredicate(startDateOntologyProperty)
+    qb1.setValue(startDate.value.toString)
+    qb1.setDatatype(startDate.value.datatype)
 
     //Writing the end date is optional if "until present" is specified
     for(endDate <- endDateOpt)
@@ -126,16 +154,19 @@ extends PropertyMapping
       if(startDate.value > endDate.value)
       {
         logger.fine("startDate > endDate")
-        return Seq(quad1)
+        return Seq(qb1.getQuad)
       }
 
       //Write end year quad
-      val quad2 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, endDateOntologyProperty, endDate.value.toString, propertyNode.sourceIri, endDate.value.datatype)
+      val qb2 = qb.clone
+      qb2.setPredicate(endDateOntologyProperty)
+      qb2.setValue(endDate.value.toString)
+      qb2.setDatatype(endDate.value.datatype)
 
-      return Seq(quad1, quad2)
+      return Seq(qb1.getQuad, qb2.getQuad)
     }
 
-    Seq(quad1)
+    Seq(qb1.getQuad)
   }
 
   private def splitIntervalNode(propertyNode : PropertyNode) : List[PropertyNode] =

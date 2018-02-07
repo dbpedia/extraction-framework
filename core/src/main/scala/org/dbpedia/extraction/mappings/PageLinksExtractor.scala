@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
@@ -27,6 +27,9 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.PageLinks)
 
+  val qb = QuadBuilder(context.language, DBpediaDatasets.PageLinks, wikiPageWikiLinkProperty, null)
+  qb.setExtractor(this.softwareAgentAnnotation)
+
   override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
@@ -34,7 +37,13 @@ extends PageNodeExtractor
     
     val list = ExtractorUtils.collectInternalLinksFromNode(node)
 
-    list.map(link => new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty, getUri(link.destination), link.sourceIri, null))
+    list.map(link => {
+      qb.setSourceUri(link.sourceIri)
+      qb.setNodeRecord(link.getNodeRecord)
+      qb.setSubject(subjectUri)
+      qb.setValue(getUri(link.destination))
+      qb.getQuad
+    })
   }
 
   private def getUri(destination : WikiTitle) : String =

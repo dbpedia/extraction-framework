@@ -46,6 +46,7 @@ object TemplateTransformConfig {
         template.trim.toLowerCase(language.locale) -> (trans._2.get("transformer").asText() match {
           case "externalLinkNode" => externalLinkNode _
           case "unwrapTemplates" => unwrapTemplates { p => if (contains) keys.contains(p.key) else !keys.contains(p.key) } _
+          case "extractProperties" => extractProperties { p => if (contains) keys.contains(p.key) else !keys.contains(p.key) } _
           case "extractChildren" => extractAndReplace(p => if (contains) keys.contains(p.key) else !keys.contains(p.key), templatesOnly, replace) _
           case "getLangText" => {
             val langcode = langParam match{
@@ -129,6 +130,12 @@ object TemplateTransformConfig {
       else
         x
     }).toList
+  }
+
+  private def extractProperties(filter: PropertyNode => Boolean)(node: TemplateNode, lang:Language) : List[Node] = {
+    // We have to reverse because flatMap prepends to the final list
+    // while we want to keep the original order
+    node.children.filter(filter)
   }
 
   private def extractAndReplace(filter: PropertyNode => Boolean, templateOnly: Boolean = false, replace: String = null)(node: TemplateNode, lang:Language) : List[Node] = {

@@ -1,26 +1,16 @@
 package org.dbpedia.extraction.wikiparser.impl.wikipedia
 
 import scala.io.{Codec, Source}
-
-import scala.collection.{Map, Set}
-import scala.collection.mutable.LinkedHashMap
+import scala.collection.{Map, Set, mutable}
 import org.dbpedia.extraction.util._
 import java.io.{File, FileOutputStream, IOException, OutputStreamWriter}
 import java.net.HttpRetryException
 
+import scala.util.matching.Regex
 import scala.util.{Failure, Success}
 
 /**
- * Generates Namespaces.scala and Redirect.scala. Must be run with core/ as the current directory.
- * 
- * FIXME: This should be used to download the data for just one language and maybe store it in a 
- * text file or simply in memory. (Loading the stuff only takes between .2 and 2 seconds per language.) 
- * Currently this class is used to generate two huge configuration classes for all languages. 
- * That's not good.
- * 
- * TODO: error handling. So far, it didn't seem necessary. api.php seems to work, and this
- * class is so far used with direct human supervision.
- * 
+ * Generates Namespaces.scala, Redirect.scala, CategoryRedirect.scala and Disambiguation.scala. Must be run with core/ as the current directory.
  */
 object GenerateWikiSettings {
   
@@ -30,7 +20,7 @@ object GenerateWikiSettings {
   private val englishCategoryRedirectTemplate = "Template:Category redirect"
 
   // pattern for insertion point lines
-  val Insert = """// @ insert (\w+) here @ //""".r
+  val Insert: Regex = """// @ insert (\w+) here @ //""".r
   
   def main(args: Array[String]) : Unit = {
     
@@ -44,22 +34,22 @@ object GenerateWikiSettings {
     val overwrite = args(1).toBoolean
 
     // language -> error message
-    val errors = LinkedHashMap[String, String]()
+    val errors = mutable.LinkedHashMap[String, String]()
     
     // language -> (namespace name or alias -> code)
-    val namespaceMap = new LinkedHashMap[String, Map[String, Int]]()
+    val namespaceMap = new mutable.LinkedHashMap[String, Map[String, Int]]()
     
     // language -> redirect aliases
-    val redirectMap = new LinkedHashMap[String, Set[String]]()
+    val redirectMap = new mutable.LinkedHashMap[String, Set[String]]()
 
     // language -> redirect aliases
-    val categoryRedirects = new LinkedHashMap[String, Set[String]]()
+    val categoryRedirects = new mutable.LinkedHashMap[String, Set[String]]()
     
     // old language code -> new language code
-    val languageMap = new LinkedHashMap[String, String]()
+    val languageMap = new mutable.LinkedHashMap[String, String]()
 
     // language -> disambiguations
-    val disambiguationsMap = new LinkedHashMap[String, Set[String]]()
+    val disambiguationsMap = new mutable.LinkedHashMap[String, Set[String]]()
     
     // Note: langlist is sometimes not correctly sorted (done by hand), but no problem for us.
     //
@@ -68,10 +58,7 @@ object GenerateWikiSettings {
     // It's back, thanks to Omri and Krinkle (Wikimedia). If it goes away again, we may use the copy in git:
     // https://gerrit.wikimedia.org/r/gitweb?p=operations/mediawiki-config.git;a=blob_plain;f=langlist
     // I don't really trust that long and ugly URL though, so I will leave the old URL for now. JC 2013-04-21
-    //
-    // TODO: use http://noc.wikimedia.org/conf/wikipedia.dblist instead? It doesn't contain the languages that
-    // are rdirected. Do we need them? Are there other differences between wikipedia.dblist and langlist?
-    //
+
     val source = Source.fromURL(Language.wikipediaLanguageUrl)(Codec.UTF8)
     val wikiLanguages = try source.getLines.toList finally source.close
     val languages = "mappings" :: "commons" :: "wikidata" :: wikiLanguages
@@ -170,7 +157,7 @@ object GenerateWikiSettings {
   /**
    * Generate file by replacing insertion point lines by strings and copying all other lines.
     *
-    * @param map from insertion point name to replacement string
+    * @param fileName from insertion point name to replacement string
    */
   private def generate(fileName : String, strings : Map[String, String]) : Unit =
   {
@@ -182,7 +169,7 @@ object GenerateWikiSettings {
           case Insert(name) => writer write strings.getOrElse(name, throw new Exception("unknown insertion point "+line))
           case _ => writer.write(line); writer.write('\n')
         }
-      } finally writer.close
+      } finally writer.close()
     } finally source.close
   }
   

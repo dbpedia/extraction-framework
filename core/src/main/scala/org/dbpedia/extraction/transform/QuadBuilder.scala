@@ -17,18 +17,15 @@ object QuadBuilder {
     */
   def apply(language: Language, dataset: Dataset, predicate: OntologyProperty, datatype: Datatype) =
     new QuadBuilder(None, Option(predicate), None, None, language, Option(datatype), Option(dataset), None)
+
+  def withContext(language: Language, dataset: Dataset, predicate: OntologyProperty, context: String, datatype: Datatype) =
+    new QuadBuilder(None, Option(predicate), None, Option(context), language, Option(datatype), Option(dataset), None)
   
   def dynamicType(language: Language, dataset: Dataset, predicate: OntologyProperty) =
-    new QuadBuilder(None, Option(predicate), None, None, language, None, Option(dataset), None)
-  
-  def stringPredicate(language: Language, dataset: Dataset, predicate: OntologyProperty)  =
     new QuadBuilder(None, Option(predicate), None, None, language, None, Option(dataset), None)
 
   def stringPredicate(language: Language, dataset: Dataset, predicate: String)  =
     new QuadBuilder(None, Option(predicate), None, None, Option(language), None, Option(dataset.canonicalUri), None)
-
-  def stringPredicate(language: Language, dataset: Dataset, predicate: OntologyProperty, datatype: Datatype)=
-    new QuadBuilder(None, Option(predicate), None, None, language, Option(datatype), Option(dataset), None)
 
   def stringPredicate(language: Language, dataset: Dataset, predicate: OntologyProperty, nr: NodeRecord, extractorRecord: ExtractorRecord = null)  = {
     val qb = new QuadBuilder(None, Option(predicate), None, None, language, None, Option(dataset), None)
@@ -168,10 +165,6 @@ class QuadBuilder(
   def setExtractor(t: ExtractorRecord): Unit = extractor = Option(t)
   def setExtractor(classIri: IRI): Unit = extractor = Option(classIri).map(ExtractorRecord(_))
   def setExtractor(classIri: String): Unit = setExtractor(IRI.create(classIri).getOrElse(null))
-//  def setLine(t: Int) = wikiTextLine = Option(t)
-//  def setNamespace(t: Int) = namespace = Option(t)
-//  def setNamespace(t: Namespace) = namespace = Option(t).map(x => x.code)
-//  def setRevision(t: Long) = rootRevision = Option(t)
   def setLanguage(l: Language) = language = Option(l)
   def setDataset(ds: String) = dataset = Option(ds).map(d => IRI.create(d).get)
   def setDataset(ds: Dataset) = dataset = Option(ds).map(x => x.canonicalUri)
@@ -201,7 +194,7 @@ class QuadBuilder(
   def getNodeRecord = nodeRecord
 
   def getQuad: Quad = if(subject.isDefined && predicate.isDefined && value.isDefined)
-      new Quad(language.map(l => l.wikiCode).orNull, dataset.map(d => d.toString).orNull, subject.get, predicate.get, value.get, sourceUri.orNull, datatype.orNull, getMetadataRecord)
+      new Quad(language.map(l => l.isoCode).orNull, dataset.map(d => d.toString).orNull, subject.get, predicate.get, value.get, sourceUri.orNull, datatype.orNull, getMetadataRecord)
     else
       throw new IllegalArgumentException("Inchoate information for building a new Quad!")
 

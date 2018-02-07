@@ -1,6 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.annotations.WikiNodeAnnotation
 import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecord}
+import org.dbpedia.extraction.util.StringUtils.escape
+import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.iri.IRI
 
 /**
  * Represents a parser function.
@@ -9,6 +13,7 @@ import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecor
  * @param children The properties of this parser function
  * @param line The source line number of this parser function
  */
+@WikiNodeAnnotation(classOf[ParserFunctionNode])
 case class ParserFunctionNode(title : String, override val children : List[Node], override val line : Int) extends Node
 {
     // TODO: check that separating children by pipe is correct
@@ -17,7 +22,26 @@ case class ParserFunctionNode(title : String, override val children : List[Node]
     // parser functions are skipped for plain text
     def toPlainText = ""
 
-    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
+
+    /**
+      * Creates a NodeRecord metadata object of this node
+      *
+      * @return
+      */
+    override def getNodeRecord = NodeRecord(
+        IRI.create(this.sourceIri).get,
+        this.wikiNodeAnnotation,
+        this.root.revision,
+        this.root.title.namespace.code,
+        this.id,
+        this.root.title.language,
+        Option(this.line),
+        Option(title),
+        if(section != null)
+            Some(escape(null, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes).toString)
+        else
+            None
+    )
 
     override def equals(obj: Any): Boolean = obj match{
 

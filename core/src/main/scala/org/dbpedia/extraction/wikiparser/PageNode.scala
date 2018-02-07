@@ -1,10 +1,13 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.annotations.WikiNodeAnnotation
 import org.dbpedia.extraction.config._
 import org.dbpedia.extraction.config.provenance.NodeRecord
 import org.dbpedia.extraction.dataparser.RedirectFinder
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.StringUtils.escape
+import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{CategoryRedirect, Disambiguation}
+import org.dbpedia.iri.IRI
 
 import scala.collection.mutable.ListBuffer
 import scala.xml.Elem
@@ -20,6 +23,7 @@ import scala.xml.Elem
  * @param contributorName The name of the latest contributor
  * @param childNodes The contents of this page
  */
+@WikiNodeAnnotation(classOf[PageNode])
 class PageNode (
    val title: WikiTitle,
    override val id: Long,
@@ -88,7 +92,7 @@ extends Node with Recordable[Node]
   lazy val redirect: WikiTitle = {
     if(isCategory){
       val template = CategoryRedirect.get(this.title.language) match{
-        case Some(crd) => children.map(c => Node.collectTemplates(c, crd)).filter(t => t.collectFirst{case y => y.children.size > 1}.isDefined).flatten
+        case Some(crd) => children.map(c => c.containedTemplateNodes(crd)).filter(t => t.collectFirst{case y => y.children.size > 1}.isDefined).flatten
         case None => Set()
       }
       if(template.nonEmpty) {
@@ -125,4 +129,24 @@ extends Node with Recordable[Node]
         && otherPageNode.isDisambiguation == isDisambiguation && NodeUtil.filterEmptyTextNodes(otherPageNode.children) == NodeUtil.filterEmptyTextNodes(children))
       case _ => false
   }
+
+  /**
+    * Creates a NodeRecord metadata object of this node
+    *
+    * @return
+    */
+  override def getNodeRecord = NodeRecord(
+    IRI.create(this.sourceIri).get,
+    this.wikiNodeAnnotation,
+    this.root.revision,
+    this.root.title.namespace.code,
+    this.id,
+    this.root.title.language,
+    Option(this.line),
+    None,
+    if(section != null)
+      Some(escape(null, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes).toString)
+    else
+      None
+  )
 }

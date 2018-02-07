@@ -5,7 +5,7 @@ import java.util.logging.Logger
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.wikiparser._
 
@@ -35,6 +35,9 @@ extends PageNodeExtractor
   private val descriptionProperty = context.ontology.properties("description")
   private val asWikiTextProperty = context.ontology.properties("asWikiText")
 
+  private val qb = QuadBuilder.dynamicPredicate(context.language, DBpediaDatasets.ImageAnnotations)
+  qb.setExtractor(this.softwareAgentAnnotation)
+
   /** Extract image annotations from a particular page */
   override def extract(pageNode : PageNode, subjectUri : String) : Seq[Quad] =
   {
@@ -56,6 +59,11 @@ extends PageNodeExtractor
     if (imageNoteStarts.size != imageNoteEnds.size) {
         throw new RuntimeException("This page has an unequal number of {{ImageNote}} and {{ImageNoteEnd}} templates, skipping.")
     }
+
+    //set generic metadata
+    qb.setNodeRecord(pageNode.getNodeRecord)
+    qb.setSourceUri(pageNode.sourceIri)
+    qb.setSubject(subjectUri)
 
     // Zip the two lists so that we end up with a Seq of
     // corresponding (ImageNote, ImageNoteEnd) pairs.
@@ -122,40 +130,20 @@ extends PageNodeExtractor
                 val contents_wikitext = contents.map(_.toWikiText).mkString("").trim
 
                 // Generate a quad to link the annotation to the original file.
-                val quads_annotation = Seq(new Quad(
-                    context.language,
-                    DBpediaDatasets.ImageAnnotations,
-                    subjectUri,
-                    hasAnnotationProperty,
-                    annotation_url,
-                    pageNode.sourceIri,
-                    null
-                ))
+                qb.setPredicate(hasAnnotationProperty)
+                qb.setValue(annotation_url)
+                val quads_annotation = Seq(qb.getQuad)
 
                 // Generate one quad each for plaintext and WikiText content.
-                val quads_plaintext = if(contents_plaintext == "") Seq.empty else Seq(
-                    new Quad(
-                        context.language, 
-                        DBpediaDatasets.ImageAnnotations, 
-                        annotation_url, 
-                        descriptionProperty, 
-                        contents_plaintext, 
-                        pageNode.sourceIri,
-                      null
-                    )
-                )
+                qb.setSubject(annotation_url)
+                qb.setPredicate(descriptionProperty)
+                qb.setValue(contents_plaintext)
+                val quads_plaintext = if(contents_plaintext == "") Seq.empty else Seq(qb.getQuad)
 
-                val quads_wikitext = if(contents_wikitext == "") Seq.empty else Seq(
-                    new Quad(
-                        context.language, 
-                        DBpediaDatasets.ImageAnnotations, 
-                        annotation_url, 
-                        asWikiTextProperty, 
-                        contents_wikitext, 
-                        pageNode.sourceIri,
-                      null
-                    )
-                )
+                qb.setSubject(annotation_url)
+                qb.setPredicate(asWikiTextProperty)
+                qb.setValue(contents_wikitext)
+                val quads_wikitext = if(contents_wikitext == "") Seq.empty else Seq(qb.getQuad)
 
                 // Combine quads and return them
                 quads_annotation ++ quads_plaintext ++ quads_wikitext

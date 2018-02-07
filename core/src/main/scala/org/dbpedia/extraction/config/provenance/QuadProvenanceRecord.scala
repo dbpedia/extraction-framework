@@ -37,27 +37,36 @@ trait ProvenanceMetadata{
 }
 
 case class NodeRecord(
-   sourceUri: String,
-   revision: Long, // revision nr
-   namespace: Int, // namespace nr (important to distinguish between Category and Main)
-   language: Language, // the associated wiki language
-   line: Option[Int] = Some(0), // line nr
-   section: Option[String] = None
+       sourceUri: IRI, // the wikipedia source uri
+       nodeType: IRI, // uri id of the node
+       revision: Long, // revision nr
+       namespace: Int, // namespace nr (important to distinguish between Category and Main)
+       internalId: Long, // if page node -> wiki page id, else EF internal id (which is a negative Long to distinguish them from wiki page id)
+       language: Language, // the associated wiki language
+       absoluteLine: Option[Int] = Some(0), // section name if any
+       name: Option[String] = None, // property name (if property node)
+       section: Option[String] = None // absolute line nr
     ) extends ProvenanceMetadata{
 
   def copy(
-      sourceUri: Option[String] = Option(this.sourceUri),
-      revision: Option[Long] = Option(this.revision),
-      namespace: Option[Int] = Option(this.namespace),
-      language: Option[Language] = Option(this.language),
-      line: Option[Int] = this.line,
-      section: Option[String] = this.section): NodeRecord ={
+        sourceUri: Option[IRI] = Option(this.sourceUri),
+        nodeType: Option[IRI] = Option(this.nodeType),
+        revision: Option[Long] = Option(this.revision),
+        namespace: Option[Int] = Option(this.namespace),
+        internalId: Option[Long] = Option(this.internalId),
+        language: Option[Language] = Option(this.language),
+        absoluteLine: Option[Int] = this.absoluteLine,
+        name: Option[String] = this.section,
+        section: Option[String] = this.section): NodeRecord ={
     NodeRecord(
       sourceUri.getOrElse(this.sourceUri),
+      nodeType.getOrElse(this.nodeType),
       revision.getOrElse(this.revision),
       namespace.getOrElse(this.namespace),
+      internalId.getOrElse(this.internalId),
       language.getOrElse(this.language),
-      line.orElse(this.line),
+      absoluteLine.orElse(this.absoluteLine),
+      name.orElse(this.name),
       section.orElse(this.section)
     )
   }
@@ -105,11 +114,23 @@ case class ExtractorRecord(
   lazy val mappingTemplateUri: Option[String] = mappingTemplate.map(t => t.resourceIri.toString)
   lazy val mappingTemplateName: Option[String] = mappingTemplate.map(t => t.decoded)
 
+  /**
+    * Will add a new parse record on top of others
+    * @param parserRecord
+    */
   def addParserRecord(parserRecord: Option[ParserRecord]): Unit ={
     parserRecord match{
       case Some(p) => parser ++= Seq(p)
       case None =>
     }
+  }
+
+  /**
+    * Will remove any existing ParseRecord, replacing it with the new
+    * @param parserRecord
+    */
+  def setParseRecord(parserRecord: Option[ParserRecord]): Unit ={
+    parser = parserRecord.toList
   }
 }
 

@@ -692,7 +692,7 @@ object SimpleWikiParser
         {
             throw new WikiParserException("Section was not closed", line, source.findLine(line))
         }
-        val endPos = source.pos - level - 1
+        val endPos = source.pos - level
         if(endPos <= startPos)
         {
             throw new WikiParserException("Invalid section tag", line, source.findLine(line))

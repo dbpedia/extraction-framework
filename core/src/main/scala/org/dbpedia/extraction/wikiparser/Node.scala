@@ -1,11 +1,13 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.annotations.WikiNodeAnnotation
 import org.dbpedia.extraction.config._
 import org.dbpedia.extraction.config.provenance.NodeRecord
 
 import scala.collection.mutable
 import org.dbpedia.extraction.util.StringUtils.{escape, replacements}
 import org.dbpedia.extraction.util.{Language, WikiUtil}
+import org.dbpedia.iri.IRI
 
 import scala.collection.mutable.ListBuffer
 
@@ -128,6 +130,12 @@ trait Node extends Serializable with Recordable[Node]
     }
 
 
+    /**
+      * reflects the software agent annotation of an extractor class as an iri (e.g.:
+      * http://dbpedia.org/extractor/InfoboxExtractor?githash=fa56dddb6df1b97269c14ce25430729a12775549 )
+      */
+    val wikiNodeAnnotation: IRI = WikiNodeAnnotation.getAnnotationIri(this.getClass)
+
   /**
     * sub classes that add new fields should override this method
     */
@@ -138,43 +146,53 @@ trait Node extends Serializable with Recordable[Node]
     hash = prime*hash + toWikiText.hashCode
     hash
   }
-    
-    /**
-     * IRI of source page and line number.
-     */
-    def sourceIri : String =
-    {
-      val sb = new java.lang.StringBuilder
 
-      sb append root.title.pageIri
-      if (root.revision >= 0) {
-        sb append "?oldid=" append root.revision
-        sb append "&ns=" append root.title.namespace.code
-      }
-
-      sb.toString
-    }
-
-  def replaceChild(child: Node, replacements: List[Node]): Unit ={
-    val span = this.children.span(c => c != child)
-    //this.setChildren(span._1 ::: replacements ::: span._2.tail)
+  /**
+    * Collects every template matching the names provided (or all if none are provided)
+    * @param names - template names to look for
+    * @return - template names of nodes within
+    */
+  def containedTemplateNames(names : Set[String] = Set.empty): List[String] ={
+    Node.collectTemplates(this, Set.empty).map(x => x.title.encoded)
   }
 
-  //private[wikiparser] def setChildren(childs: List[Node])
+  /**
+    * Collects every template matching the names provided (or all if none are provided)
+    * @param names - template names to look for
+    * @return - template nodes within
+    */
+  def containedTemplateNodes(names : Set[String] = Set.empty): List[TemplateNode] ={
+    Node.collectTemplates(this, Set.empty)
+  }
+    
+    /**
+     * IRI of root source page
+    * containing revision no and namespace
+     */
+  lazy val sourceIri : String =
+  {
+    val sb = new java.lang.StringBuilder
 
-  def hasTemplate(names : Set[String] = Set.empty) : Boolean = Node.collectTemplates(this, names).nonEmpty
+    sb append root.title.pageIri
+    if (root.revision >= 0) {
+      sb append "?oldid=" append root.revision
+      sb append "&ns=" append root.title.namespace.code
+    }
+    sb.toString
+  }
 
-  def getNodeRecord: NodeRecord = NodeRecord(
-    this.sourceIri,
-    this.root.revision,
-    this.root.title.namespace.code,
-    this.root.title.language,
-    Option(this.line),
-    if(section != null)
-      Some(escape(null, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes).toString)
-    else
-      None
-  )
+  /**
+    * Returns a list of all templates matching the names provided (or all)
+    * @param names - template names to match
+    * @return
+    */
+  def hasTemplate(names : Set[String] = Set.empty) : Boolean = this.containedTemplateNodes(names).nonEmpty
+
+  /**
+    * Creates a NodeRecord metadata object of this node
+    * @return
+    */
+  def getNodeRecord: NodeRecord
 
   private var extractionRecords: ListBuffer[RecordEntry[Node]] = null
   override def recordEntries: List[RecordEntry[Node]] = {
@@ -196,11 +214,12 @@ trait Node extends Serializable with Recordable[Node]
   }
 
   /**
+    * Will produce negative longs based on the hash code
     * TODO find better id management for dependent nodes
-    * Override if unique id exists
+    * NOTE: Override if unique id exists
     * negative ids are not guaranteed to be unique
     */
-  override def id: Long = Long.MinValue + this.hashCode()
+  override def id: Long = Long.MinValue + Int.MaxValue + this.hashCode()
 }
 
 object Node {

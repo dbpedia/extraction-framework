@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
@@ -40,6 +40,8 @@ extends PageNodeExtractor {
 
   private val propertyUri : OntologyProperty = context.ontology.properties("owl:sameAs")
 
+  private val qb = QuadBuilder(context.language, DBpediaDatasets.CommonsLink, propertyUri, null)
+
   /**
     * @param page       The source node
     * @param subjectUri The subject URI of the generated triples
@@ -47,26 +49,25 @@ extends PageNodeExtractor {
     */
   override def extract(page: PageNode, subjectUri: String): Seq[Quad] = {
 
-    if(page.title.namespace != Namespace.Main) return Seq.empty
+    if(page.title.namespace != Namespace.Main)
+      return Seq.empty
+
+    qb.setSubject(subjectUri)
+    qb.setSourceUri(page.sourceIri)
+    qb.setExtractor(this.softwareAgentAnnotation)
 
     for {
-      template <- InfoboxExtractor.collectTemplates(page)
+      template <- ExtendedInfoboxExtractor.collectTemplates(page)
       if template.title.decoded == "VN"
     } {
       return template.children
         .filter((node : PropertyNode) => Seq("de", "en", "fr").contains(node.key))
-        .map((node : PropertyNode) =>
-          new Quad(
-            context.language,
-            DBpediaDatasets.CommonsLink,
-            subjectUri,
-            propertyUri,
-            WikiTitle.parse(node.children.head.asInstanceOf[TextNode].text.split(", ").head, Language.apply(node.key)).resourceIri,
-            page.sourceIri,
-            null
-          )
-        )
-
+        .map((node : PropertyNode) => {
+          val qbc = qb.clone
+          qbc.setValue(WikiTitle.parse(node.children.head.asInstanceOf[TextNode].text.split(", ").head, Language.apply(node.key)).resourceIri)
+          qbc.setNodeRecord(node.getNodeRecord)
+          qbc.getQuad
+        })
     }
     Seq.empty
   }

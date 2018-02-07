@@ -142,7 +142,7 @@ class Extraction(@PathParam("lang") langCode : String)
 
         // See https://github.com/dbpedia/extraction-framework/issues/144
         // We should mimic the extraction framework behavior
-        val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
+        val destination = new WriterDestination(() => writer, formatter)
         Server.instance.extractor.extract(source, destination, language, customExtraction)
 
         Response.ok(writer.toString)
@@ -181,7 +181,7 @@ class Extraction(@PathParam("lang") langCode : String)
 
     // See https://github.com/dbpedia/extraction-framework/issues/144
     // We should mimic the extraction framework behavior
-    val destination = new DeduplicatingDestination(new ProvenanceDestination(() => writer))
+    val destination = new ProvenanceDestination(() => writer)
     Server.instance.extractor.extract(source, destination, language, customExtraction)
 
     Response.ok(writer.toString)

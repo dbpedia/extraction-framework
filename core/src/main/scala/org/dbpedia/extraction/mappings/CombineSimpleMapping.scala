@@ -56,7 +56,7 @@ class CombineSimpleMapping (
       Some(parseResults.size),
       Some(templateProperties.reduce((t1, t2) => t1 + "," + t2)),
       Some(node.title),
-      Node.collectTemplates(node, Set.empty).map(x => x.title.decoded)
+      node.containedTemplateNames()
     ))
     //set values
     qb.setSubject(subjectUri)

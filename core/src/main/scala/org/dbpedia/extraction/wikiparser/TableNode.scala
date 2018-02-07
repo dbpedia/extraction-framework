@@ -1,6 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.annotations.WikiNodeAnnotation
 import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecord}
+import org.dbpedia.extraction.util.StringUtils.escape
+import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.iri.IRI
 
 /**
  * Represents a table.
@@ -12,6 +16,7 @@ import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecor
  * @param children The rows of this table
  * @param line The (first) line where this table is located in the source
  */
+@WikiNodeAnnotation(classOf[TableNode])
 case class TableNode( caption : Option[String],
                       override val children : List[TableRowNode],
                       override val line : Int )
@@ -26,7 +31,7 @@ case class TableNode( caption : Option[String],
             case _ => false
         }
 
-    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(absoluteLine = Some(this.line), name = caption)
 }
 
 /**
@@ -35,6 +40,7 @@ case class TableNode( caption : Option[String],
  * @param children The cells of this table row.
  * @param line The (first) line where this table row is located in the source
  */
+@WikiNodeAnnotation(classOf[TableRowNode])
 case class TableRowNode( override val children : List[TableCellNode],
                          override val line : Int ) extends Node
 {
@@ -46,7 +52,7 @@ case class TableRowNode( override val children : List[TableCellNode],
             case _ => false
         }
 
-    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
+    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(absoluteLine = Some(this.line))
 }
 
 /**
@@ -55,6 +61,7 @@ case class TableRowNode( override val children : List[TableCellNode],
  * @param children The contents of this cell
  * @param line  The (first) line where this table cell is located in the source
  */
+@WikiNodeAnnotation(classOf[TableCellNode])
 case class TableCellNode (
   override val children : List[Node],
   override val line: Int,
@@ -74,5 +81,23 @@ extends Node
 
     }
 
-    override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
+    /**
+      * Creates a NodeRecord metadata object of this node
+      *
+      * @return
+      */
+    override def getNodeRecord = NodeRecord(
+        IRI.create(this.sourceIri).get,
+        this.wikiNodeAnnotation,
+        this.root.revision,
+        this.root.title.namespace.code,
+        this.id,
+        this.root.title.language,
+        Option(this.line),
+        None,
+        if(section != null)
+            Some(escape(null, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes).toString)
+        else
+            None
+    )
 }

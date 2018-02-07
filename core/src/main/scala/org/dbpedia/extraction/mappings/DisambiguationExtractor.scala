@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.DisambiguationExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
@@ -31,6 +31,8 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.DisambiguationLinks)
 
+  private val qb = QuadBuilder(language, DBpediaDatasets.DisambiguationLinks, wikiPageDisambiguatesProperty, null)
+
   override def extract(page : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if (page.title.namespace == Namespace.Main && (page.isDisambiguation || context.disambiguations.isDisambiguation(page.id)))
@@ -58,16 +60,17 @@ extends PageNodeExtractor
         condition2 && (condition1a || condition1b || condition1c)
       }
 
-      return disambigLinks.map { link =>
-        new Quad(
-          language,
-          DBpediaDatasets.DisambiguationLinks,
-          subjectUri,
-          wikiPageDisambiguatesProperty,
-          language.resourceUri.append(link.destination.decodedWithNamespace),
-          link.sourceIri,
-          null
-        )
+      //construct Quad
+      qb.setSubject(subjectUri)
+      qb.setExtractor(this.softwareAgentAnnotation)
+
+      return disambigLinks.map { link => {
+        val qbc = qb.clone
+        qbc.setNodeRecord(link.getNodeRecord)
+        qbc.setSourceUri(link.sourceIri)
+        qbc.setValue(language.resourceUri.append(link.destination.decodedWithNamespace))
+        qbc.getQuad
+      }
       }
     }
 

@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
@@ -47,6 +47,9 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.Homepages)
 
+  private val qb = QuadBuilder(context.language, DBpediaDatasets.Homepages, homepageProperty, null)
+  qb.setExtractor(this.softwareAgentAnnotation)
+
   override def extract(page: PageNode, subjectUri: String): Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main) return Seq.empty
@@ -59,20 +62,23 @@ extends PageNodeExtractor
 
       // Find among children
       for (child <- property.children) {
+        qb.setSubject(subjectUri)
+        qb.setSourceUri(child.sourceIri)
+        qb.setNodeRecord(child.getNodeRecord)
         child match
         {
           case (textNode @ TextNode(text, _, _)) =>
             val cleaned = cleanProperty(text)
             if (cleaned.nonEmpty) { // do not proceed if the property value is not a valid candidate
               val url = if (UriUtils.hasKnownScheme(cleaned)) cleaned else "http://" + cleaned
-              val graph = generateStatement(subjectUri, url, textNode)
+              val graph = generateStatement(url, qb)
               if (graph.nonEmpty)
               {
                 return graph
               }
             }
           case (linkNode @ ExternalLinkNode(destination, _, _, _)) =>
-            val graph = generateStatement(subjectUri, destination.toString, linkNode)
+            val graph = generateStatement(destination.toString, qb)
             if (graph.nonEmpty)
             {
               return graph
@@ -86,12 +92,18 @@ extends PageNodeExtractor
     {
       for((url, sourceNode) <- findLinkTemplateInSection(externalLinkSectionChildren))
       {
-        val graph = generateStatement(subjectUri, url, sourceNode)
+        qb.setSubject(subjectUri)
+        qb.setSourceUri(sourceNode.sourceIri)
+        qb.setNodeRecord(sourceNode.getNodeRecord)
+        val graph = generateStatement(url, qb)
         if (graph.nonEmpty) return graph
       }
       for((url, sourceNode) <- findLinkInSection(externalLinkSectionChildren))
       {
-        val graph = generateStatement(subjectUri, url, sourceNode)
+        qb.setSubject(subjectUri)
+        qb.setSourceUri(sourceNode.sourceIri)
+        qb.setNodeRecord(sourceNode.getNodeRecord)
+        val graph = generateStatement(url, qb)
         if (graph.nonEmpty) return graph
       }
     }
@@ -111,11 +123,13 @@ extends PageNodeExtractor
     else ""
   }
 
-  private def generateStatement(subjectUri: String, url: String, node: Node): Seq[Quad] =
+  private def generateStatement(url: String, qb: QuadBuilder): Seq[Quad] =
   {
     UriUtils.createURI(url) match{
       case Success(u) => UriUtils.cleanLink(u) match{
-        case Some(c) => Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, c , node.sourceIri, null))
+        case Some(c) =>
+          qb.setValue(c)
+          Seq(qb.getQuad)
         case None => Seq()
       }
       case Failure(f) => f match{

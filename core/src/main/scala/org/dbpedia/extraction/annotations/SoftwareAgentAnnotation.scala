@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.annotations
 
 import java.io.File
+import java.util.MissingResourceException
 
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 import org.dbpedia.extraction.util.{IOUtils, WikiUtil}
@@ -20,16 +21,30 @@ object SoftwareAgentAnnotation{
 
   private val universe = scala.reflect.runtime.universe
 
-  def getAnnotationIri(clazz: Class[_]): IRI = {
+  private val acceptableAnnotations = Set(
+    "org.dbpedia.extraction.annotations.SoftwareAgentAnnotation",
+    "org.dbpedia.extraction.annotations.WikiNodeAnnotation"
+  )
+
+  def getAnnotationIri[T](implicit clazz: Class[T]): IRI = {
     val className = if(clazz.getName.endsWith("$")) clazz.getName.substring(0, clazz.getName.length-1) else clazz.getName
     val myAnnotatedClass = universe.runtimeMirror(Thread.currentThread().getContextClassLoader).staticClass(className)
-    val annotation: Option[universe.Annotation] = myAnnotatedClass.annotations.find(_.tree.tpe.toString == "org.dbpedia.extraction.annotations.SoftwareAgentAnnotation")
+    val annotation: Option[universe.Annotation] = myAnnotatedClass.annotations
+      .find(x => acceptableAnnotations.contains(x.tree.tpe.toString))
+
+    if(annotation.isEmpty)
+      throw new MissingSoftwareAgentAnnotation("Missing annotation at " + className)
+
     val vals = annotation.get.tree.children.tail.collect({
       case universe.Literal(cc) => "className" -> cc.value.toString
       case universe.Select(name) => "type" -> name._2
+      case _ => "none" -> ""
     }).toMap
     val name = vals("className").toString
-    val typ = vals("type").toString
+    val typ = vals.get("type") match{
+      case Some(t) => t.toString
+      case None => "wikinode"             //by default revert to wikinode
+    }
     var encoded = WikiUtil.wikiEncode((if(Option(name).nonEmpty && name.trim.nonEmpty) name.trim else name).replace("-", "_"))
     encoded = encoded.substring(encoded.lastIndexOf(".")+1)
 
@@ -53,6 +68,9 @@ object SoftwareAgentAnnotation{
     }
   }
 }
+
+class MissingSoftwareAgentAnnotation(msg: String)
+  extends MissingResourceException(msg, SoftwareAgentAnnotation.getClass.getName, "MissingSoftwareAgentAnnotation")
 
 object AnnotationType extends Enumeration{
   val Extractor = Value(DBpediaNamespace.EXTRACTOR.toString)

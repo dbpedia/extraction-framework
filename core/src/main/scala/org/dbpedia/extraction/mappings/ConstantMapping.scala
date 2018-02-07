@@ -6,7 +6,7 @@ import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotati
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{OntologyObjectProperty, OntologyProperty}
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.iri.UriUtils
@@ -54,9 +54,16 @@ extends PropertyMapping
 
   override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals)
 
+  private val qb = QuadBuilder(context.language, dataset, ontologyProperty, datatype)
+  qb.setValue(value)
+  qb.setExtractor(this.softwareAgentAnnotation)
+
   override def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
-    Seq(new Quad(context.language, dataset, subjectUri, ontologyProperty, value, node.sourceIri, datatype))
+    qb.setSubject(subjectUri)
+    qb.setSourceUri(node.sourceIri)
+    qb.setNodeRecord(node.getNodeRecord)
+    Seq(qb.getQuad)
   }
 
 

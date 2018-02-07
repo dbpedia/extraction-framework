@@ -1,7 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.config.provenance.{NodeRecord, QuadProvenanceRecord}
-import org.dbpedia.extraction.util.{Language, StringUtils}
+import org.dbpedia.extraction.annotations.WikiNodeAnnotation
+import org.dbpedia.extraction.config.provenance.NodeRecord
+import org.dbpedia.extraction.util.StringUtils.escape
+import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.iri.IRI
 
 /**
  * Represents a template property.
@@ -10,6 +13,7 @@ import org.dbpedia.extraction.util.{Language, StringUtils}
  * @param children The contents of the value of this property
  * @param line The source line number of this property
  */
+@WikiNodeAnnotation(classOf[PropertyNode])
 case class PropertyNode(key : String, override val children : List[Node], override val line : Int) extends Node
 {
     def toWikiText: String =
@@ -25,25 +29,22 @@ case class PropertyNode(key : String, override val children : List[Node], overri
     // properties are skipped for plain text
     def toPlainText = ""
 
-  override def getNodeRecord: NodeRecord = this.root.getNodeRecord.copy(line = Some(this.line))
+  override def getNodeRecord: NodeRecord = NodeRecord(
+    IRI.create(this.sourceIri).get,
+    this.wikiNodeAnnotation,
+    this.root.revision,
+    this.root.title.namespace.code,
+    this.id,
+    this.root.title.language,
+    Option(this.line),
+    Option(key),
+    if(section != null)
+      Some(escape(null, WikiUtil.cleanSpace(section.name), Node.fragmentEscapes).toString)
+    else
+      None
+  )
 
-    def propertyNodeValueToPlainText: String = children.map(_.toPlainText).mkString
-
-    override def sourceIri : String =
-    {
-
-      val sb = new StringBuilder
-
-      sb append super.sourceIri
-
-      if (this.parent != null && this.parent.isInstanceOf[TemplateNode]) {
-        sb append "&template="  append this.parent.asInstanceOf[TemplateNode].title.encoded
-      }
-
-      sb append  "&property=" append StringUtils.escape(this.key, Node.fragmentEscapes )
-
-      sb.toString
-    }
+  def propertyNodeValueToPlainText: String = children.map(_.toPlainText).mkString
 
   override def equals(obj: scala.Any): Boolean = obj match {
 

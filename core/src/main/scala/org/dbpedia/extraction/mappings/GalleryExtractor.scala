@@ -4,7 +4,7 @@ import java.util.logging.Logger
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -36,6 +36,8 @@ extends WikiPageExtractor
 
     override val datasets = Set(DBpediaDatasets.ImageGalleries)
 
+    private val qb = QuadBuilder.apply(context.language, datasets.head, galleryItemProperty, null)
+    qb.setExtractor(this.softwareAgentAnnotation)
     /*
      * Regular expressions
      */
@@ -60,11 +62,7 @@ extends WikiPageExtractor
     override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
         // Iterate over each <gallery> set.
         val galleryQuads = galleryRegex.findAllMatchIn(page.source).flatMap(matchData => {
-            // Figure out the line number by counting the newlines until the
-            // start of the gallery tag.
-            val lineNumber = page.source.substring(0, matchData.start).count(_ == '\n')
 
-            val tags = matchData.group("tags")
             val fileLines = matchData.group("files")
 
             // Quads generated from the file lines.
@@ -84,9 +82,6 @@ extends WikiPageExtractor
                     else {
                         val fileLineMatch = fileLineOption.get
 
-                        val sourceWithLineNumber = page.sourceIri + "#absolute-line=" +
-                          lineNumber
-
                         try {
                             // Parse the filename in the file line match.
                             val fileWikiTitle = WikiTitle.parse(
@@ -95,14 +90,11 @@ extends WikiPageExtractor
                             )
 
                             // Generate <subjectUri> <dbo:galleryItem> <imageUri>
-                            Seq(new Quad(Language.English, DBpediaDatasets.ImageGalleries,
-                                subjectUri,
-                                galleryItemProperty,
-                                context.language.resourceUri.append(fileWikiTitle.decodedWithNamespace),
-                                //                                fileWikiTitle.pageIri,
-                                sourceWithLineNumber,
-                                null
-                            ))
+                            qb.setNodeRecord(page.getNodeRecord)
+                            qb.setSubject(subjectUri)
+                            qb.setValue(context.language.resourceUri.append(fileWikiTitle.decodedWithNamespace))
+                            qb.setSourceUri(page.sourceIri)
+                            Seq(qb.getQuad)
                         } catch {
                             case e: WikiParserException =>
                                 // If there's a WikiParserException, report the

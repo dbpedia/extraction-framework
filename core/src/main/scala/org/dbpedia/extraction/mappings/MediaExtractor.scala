@@ -7,7 +7,7 @@ import org.dbpedia.extraction.config.mappings.MediaExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.Source
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{ExtractorUtils, Language, WikiApi, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.RichString.wrapString
