@@ -28,7 +28,8 @@ class ExtractionRecorder[T](
      dataset: List[Dataset] = List[Dataset](),
      val language: Language = Language.English,
      val monitor: ExtractionMonitor = null,
-     prm: ProvenanceRecordManager = null
+     prm: ProvenanceRecordManager = null,
+     logSuccessfulPage: Boolean = false
   ) extends AutoCloseable {
 
   def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
@@ -111,7 +112,7 @@ class ExtractionRecorder[T](
     * @return
     */
   def failedPages(lang: Language): Long = issuePages.get(lang) match{
-    case Some(m) => m.values.count(x => x.cause == RecordCause.Exception)
+    case Some(m) => m.values.count(x => x.cause == RecordCause.Exception || x.cause == RecordCause.Fatal)
     case None => 0
   }
 
@@ -140,7 +141,7 @@ class ExtractionRecorder[T](
             printLabeledLine(record.msg, record.cause, page.title.language, Seq(PrinterDestination.err, PrinterDestination.file))
           Option(record.error) match {
             case Some(ex) => failedRecord(page, ex, record.language)
-            case None => recordExtractedPage(page.id, page.title, record.logSuccessfulPage)
+            case None => recordExtractedPage(page.id, page.title)
           }
         case node: Node =>
           node.line
@@ -184,6 +185,8 @@ class ExtractionRecorder[T](
       case _ => "unknown"
     }
 
+    insertException(entry)
+
     val msg = entry.msg + (if(entry.error != null) ": " + entry.error.getMessage else "")
 
     val line = "{task} failed for " + tag + " " + id + ": " + msg
@@ -203,8 +206,9 @@ class ExtractionRecorder[T](
   }
 
   def insertException(entry: RecordEntry[_]): Unit ={
+    //clear RecordEntry
     issuePages.get(language) match{
-      case Some(map) => map += entry.record.id -> entry.copy(record = null)
+      case Some(map) => map += entry.record.id -> RecordEntry.copyEntry(entry)
       case None =>
         issuePages += language -> mutable.Map[Long, RecordEntry[_]]()
         insertException(entry)
@@ -226,9 +230,8 @@ class ExtractionRecorder[T](
     *
     * @param id - page id
     * @param title - page title
-    * @param logSuccessfulPage - indicates whether the event of a successful extraction shall be included in the log file (default = false)
     */
-  def recordExtractedPage(id: Long, title: WikiTitle, logSuccessfulPage:Boolean = false): Unit = synchronized {
+  def recordExtractedPage(id: Long, title: WikiTitle): Unit = synchronized {
     require(title != null)
     if(logSuccessfulPage) {
       successfulPagesMap.get(title.language) match {

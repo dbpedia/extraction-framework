@@ -245,7 +245,7 @@ return - hashCode as Long
   private var records: ListBuffer[RecordEntry[Quad]] = new ListBuffer[RecordEntry[Quad]]()
   def addRecord(rec: RecordEntry[Quad]): Unit = {
     rec match{
-      case RecordEntry(_: QuadProvenanceRecord,_,_,_,_,_) => throw new IllegalArgumentException("Add a ProvenanceRecord only with method setProvenanceRecord().")
+      case RecordEntry(_: QuadProvenanceRecord,_,_,_,_) => throw new IllegalArgumentException("Add a ProvenanceRecord only with method setProvenanceRecord().")
       case _ => records += rec
     }
   }

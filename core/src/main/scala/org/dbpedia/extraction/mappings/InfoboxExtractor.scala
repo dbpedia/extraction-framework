@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.ExtractionRecorder
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{PageNode, PropertyNode}
@@ -17,6 +18,10 @@ class InfoboxExtractor(
     def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 ) extends ExtendedInfoboxExtractor(context) {
+
+
+  override val datasets = Set(DBpediaDatasets.InfoboxProperties, DBpediaDatasets.InfoboxTest, DBpediaDatasets.InfoboxPropertyDefinitions)
+
   /**
     * Will try to execute every parser for the given property node.
     * Depending on the switch parameter, this will return either

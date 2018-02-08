@@ -119,7 +119,14 @@ extends PageNodeExtractor
       extractNode(node, subjectUri)
     }
 
-  private def extractTemplate(template: TemplateNode, subjectUri: String): Seq[Quad] = {
+  /**
+    *
+    * @param template
+    * @param subjectUri
+    * @param writeToBaseDestination
+    * @return
+    */
+  private def extractTemplate(template: TemplateNode, subjectUri: String, writeToBaseDestination: Boolean): Seq[Quad] = {
     val quads: ArrayBuffer[Quad] = new ArrayBuffer[Quad]()
     val propertyList = template.children.filterNot(property => ignoreProperties.getOrElse(wikiCode, ignoreProperties("en")).contains(property.key.toLowerCase))
 
@@ -161,7 +168,10 @@ extends PageNodeExtractor
                   qb1.setValue(pr.value)
                   qb1.setDatatype(pr.unit.orNull)
                   qb1.setDataset(DBpediaDatasets.InfoboxProperties)
-                  quads ++= List(qb1.getQuad)
+
+                  //only if so instructed do we write to DBpediaDatasets.InfoboxProperties
+                  if(writeToBaseDestination)
+                    quads ++= List(qb1.getQuad)
 
                   //this quad moves into InfoboxPropertiesExtended
                   val qb2 = qb1.clone
@@ -240,8 +250,9 @@ extends PageNodeExtractor
     {
       case templateNode : TemplateNode =>
         val resolvedTitle = context.redirects.resolve(templateNode.title).decoded.toLowerCase
-        if( !ignoreTemplates.contains(resolvedTitle) && !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined))
-          extractTemplate(templateNode, subjectUri)
+        if( !ignoreTemplates.contains(resolvedTitle) && !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined)) {
+          extractTemplate(templateNode, subjectUri, templateNode.children.exists(c => c.line != templateNode.line))
+        }
         else
           Seq.empty
       case _ => Seq.empty
@@ -314,7 +325,7 @@ extends PageNodeExtractor
             results += links
           case _ =>
       }
-      val stringRes = StringParser.parseWithProvenance(node)
+      val stringRes = StringParser.parseWithProvenance(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt), value.provenance))
       results += stringRes.toList
 
       results.toList
@@ -329,7 +340,7 @@ extends PageNodeExtractor
 
         if (unitValues.size > 1)
         {
-            StringParser.parseWithProvenance(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt)))
+            StringParser.parseWithProvenance(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt), value.provenance))
         }
         else if (unitValues.size == 1)
         {
@@ -351,10 +362,12 @@ extends PageNodeExtractor
 
     private def extractRankNumber(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        StringParser.parseWithProvenance(node).getOrElse(return None).value.toString match
-        {
-            case RankRegex(number) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
+        StringParser.parseWithProvenance(node) match{
+          case Some(pr) => pr.value.toString match {
+            case RankRegex(number) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer")), pr.provenance))
             case _ => None
+          }
+          case None => None
         }
     }
 

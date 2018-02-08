@@ -21,17 +21,26 @@ trait Recordable[T] {
   * @param language - optional language of the recordable
   * @param msg - optional message
   * @param error - the throwable causing this record
-  * @param logSuccessfulPage
   */
 case class RecordEntry[T] (
      record: Recordable[T],
      cause: RecordCause.Value = RecordCause.Info,
      language: Language = Language.None,
      msg: String= null,
-     error:Throwable = null,
-     logSuccessfulPage:Boolean = false
+     error:Throwable = null
  )
 
+object RecordEntry{
+  def copyEntry[T](record: RecordEntry[T]): RecordEntry[T] ={
+    RecordEntry[T] (
+      null.asInstanceOf[Recordable[T]],
+      record.cause,
+      record.language,
+      record.msg,
+      record.error
+    )
+  }
+}
 /**
   *
   */

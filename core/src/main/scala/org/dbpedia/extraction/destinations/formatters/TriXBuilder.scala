@@ -42,7 +42,7 @@ extends UriTripleBuilder(policies) {
    */
   override def plainLiteral(value: String, lang: String): Unit = {
     this add spaces(depth) add "<plainLiteral" 
-    if (lang != null) this add " xml:lang=" add '"' add(lang) add '"' 
+    if (lang != null) this add " xml:lang=" add '"' add lang add '"'
     this add '>' escape value add "</plainLiteral>\n"
   }
   

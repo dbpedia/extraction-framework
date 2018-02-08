@@ -48,9 +48,6 @@ class TriX
                         <a href="?namespace=File">File</a>,
                         <input name="namespace" value="Custom" />
                     </p>
-                  <p>Provenance:
-                    <a href="provenance">View Provenance Results</a>
-                  </p>
                 </form>
                   <table border="1" cellpadding="3" cellspacing="0">
                     <tr bgcolor="#CCCCFF">
@@ -84,6 +81,19 @@ class TriX
           <!-- generate links from <uri> elements -->
           <xsl:template match="trix:uri">
             <td><a href="{.}"><xsl:value-of select="."/></a></td>
+          </xsl:template>
+
+
+          <!-- just display text for other elements -->
+          <xsl:template match="trix:typedLiteral">
+            <xsl:variable name="type" select="./@datatype"/>
+            <td><xsl:value-of select="."/><sup> (<xsl:value-of select="$type"/>)</sup></td>
+          </xsl:template>
+
+          <!-- just display text for other elements -->
+          <xsl:template match="trix:plainLiteral">
+            <xsl:variable name="lang" select="./@xml:lang"/>
+            <td><xsl:value-of select="."/><sup> (@<xsl:value-of select="$lang"/>)</sup></td>
           </xsl:template>
 
           <!-- just display text for other elements -->

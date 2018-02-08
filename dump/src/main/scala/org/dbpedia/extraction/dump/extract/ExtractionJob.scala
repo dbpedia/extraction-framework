@@ -23,16 +23,8 @@ class ExtractionJob(
    val namespaces: Set[Namespace],
    val destination: Destination,
    val language: Language,
-   val retryFailedPages: Boolean,
    val extractionRecorder: ExtractionRecorder[PageNode])
 {
-/*  val myAnnotatedClass: ClassSymbol = runtimeMirror(Thread.currentThread().getContextClassLoader).classSymbol(ExtractorAnnotation.getClass)
-  val annotation: Option[Annotation] = myAnnotatedClass.annotations.find(_.tree.tpe =:= typeOf[ExtractorAnnotation])
-  val result = annotation.flatMap { a =>
-    a.tree.children.tail.collect({ case Literal(Constant(name: String)) => name }).headOption
-  }
-
-  result.foreach( x => println(x.toString))*/
 
   def datasets: Set[Dataset] = extractor.datasets
 
@@ -71,23 +63,6 @@ class ExtractionJob(
         workers.process(page)
 
       extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordCause.Info, language)
-
-      if(retryFailedPages){
-        val fails = extractionRecorder.listFailedPages(language) match{
-          case Some(m) => m
-          case None => Iterable.empty
-        }
-
-        extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", RecordCause.Warning, language)
-        extractionRecorder.resetFailedPages(language)
-        for(page <- fails) {
-          page match{
-            case p: WikiPage => workers.process(p)
-            case _ =>
-          }
-        }
-        extractionRecorder.printLabeledLine("all failed pages were re-executed.", RecordCause.Info, language)
-      }
     }
     catch {
       case ex : Throwable =>

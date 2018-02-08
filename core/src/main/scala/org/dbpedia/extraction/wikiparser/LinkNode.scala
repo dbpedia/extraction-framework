@@ -90,5 +90,6 @@ extends WikiLinkNode(destination, children, line, destinationNodes) {
  * @param children The nodes of the label of this link
  * @param line The source line number of this link
  */
+@WikiNodeAnnotation(classOf[InterWikiLinkNode])
 case class InterWikiLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]()) 
 extends WikiLinkNode(destination, children, line, destinationNodes)

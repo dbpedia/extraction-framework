@@ -55,6 +55,9 @@ extends PropertyMapping
   private val pointOntProperty = context.ontology.properties("georss:point")
   private val featureOntClass =  context.ontology.classes("geo:SpatialThing")
 
+  private val xsdFloat = context.ontology.datatypes("xsd:float")
+  private val xsdString =  context.ontology.datatypes("xsd:string")
+
   private val doubleType = new Datatype("xsd:double")
 
   override val datasets = Set(DBpediaDatasets.OntologyPropertiesGeo)
@@ -147,49 +150,55 @@ extends PropertyMapping
     var quads = new ArrayBuffer[Quad]()
     
     var instanceUri = subjectUri
+    
+    val qbs = qb.clone
 
     if(ontologyProperty != null)
     {
       instanceUri = node.generateUri(subjectUri, ontologyProperty.name)
 
-      qb.setSubject(subjectUri)
-      qb.setPredicate(ontologyProperty)
-      qb.setValue(instanceUri)
-      quads += qb.getQuad
+      qbs.setSubject(subjectUri)
+      qbs.setPredicate(ontologyProperty)
+      qbs.setValue(instanceUri)
+      quads += qbs.getQuad
     }
 
-    qb.setSubject(instanceUri)
-    qb.setPredicate(typeOntProperty)
-    qb.setValue(featureOntClass.uri)
-    quads += qb.getQuad
+    qbs.setSubject(instanceUri)
+    qbs.setPredicate(typeOntProperty)
+    qbs.setValue(featureOntClass.uri)
+    quads += qbs.getQuad
 
-    qb.setSubject(instanceUri)
-    qb.setPredicate(latOntProperty)
-    qb.setValue(coord.latitude.toString)
-    quads += qb.getQuad
+    qbs.setSubject(instanceUri)
+    qbs.setPredicate(pointOntProperty)
+    qbs.setValue(coord.latitude + " " + coord.longitude)
+    qbs.setDatatype(xsdString)
+    quads += qbs.getQuad
 
-    qb.setSubject(instanceUri)
-    qb.setPredicate(lonOntProperty)
-    qb.setValue(coord.longitude.toString)
-    quads += qb.getQuad
+    qbs.setSubject(instanceUri)
+    qbs.setPredicate(latOntProperty)
+    qbs.setValue(coord.latitude.toString)
+    qbs.setDatatype(xsdFloat)
+    quads += qbs.getQuad
 
-    qb.setSubject(instanceUri)
-    qb.setPredicate(pointOntProperty)
-    qb.setValue(coord.latitude + " " + coord.longitude)
-    quads += qb.getQuad
+    qbs.setSubject(instanceUri)
+    qbs.setPredicate(lonOntProperty)
+    qbs.setValue(coord.longitude.toString)
+    qbs.setDatatype(xsdFloat)
+    quads += qbs.getQuad
 
     quads
   }
 
+  @unchecked
   private def getSingleCoordinate(coordinateProperty: PropertyNode, rangeMin: Double, rangeMax: Double, wikiCode: String ): Option[ParseResult[Double]] = {
     singleGeoCoordinateParser.parseWithProvenance(coordinateProperty) orElse doubleParser.parseWithProvenance(coordinateProperty) match {
       case Some(coordinateValue) =>
         val doubleVal = coordinateValue match{
-          case sgc: ParseResult[SingleGeoCoordinate] => ParseResult(
-            sgc.value.toDouble,
-            sgc.lang,
-            Some(doubleType),
-            sgc.provenance
+          case ParseResult(value: SingleGeoCoordinate, lang, typ, prov) => ParseResult(
+            value.toDouble,
+            lang,
+            typ,
+            prov
           )
           case dpr: ParseResult[Double] => dpr
         }

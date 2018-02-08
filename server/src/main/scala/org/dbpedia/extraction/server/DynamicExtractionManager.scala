@@ -44,9 +44,9 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
 
     private var _customTestExtractors : Map[Language, WikiPageExtractor] = loadCustomTestExtractors()
 
-    def mappingExtractor(language : Language) = synchronized { _mappingTestExtractors(language) }
+    def mappingExtractor(language : Language): WikiPageExtractor = synchronized { _mappingTestExtractors(language) }
 
-    def customExtractor(language : Language) = synchronized { _customTestExtractors(language) }
+    def customExtractor(language : Language): WikiPageExtractor = synchronized { _customTestExtractors(language) }
 
     def ontology() = synchronized { _ontology }
 

@@ -51,7 +51,7 @@ extends PageNodeExtractor
         // link text contains at least half of all word in the title
         val condition1a = titleSplits.count(s => cleanLink.contains(s)) >= titleSplits.size.toDouble / 2d
         // the link appears at the start of the line and the line contains more than half of the title words
-        val condition1b = lineText.matches("^\\s*\\*\\s*\\[\\[" + cleanLink + "\\]\\].*") && titleSplits.count(s => lineText.contains(s)) > titleSplits.size.toDouble / 2d
+        val condition1b = lineText.startsWith("[[" + cleanLink + "]]") && titleSplits.count(s => lineText.contains(s)) > titleSplits.size.toDouble / 2d
         // acronym appears in the whole line
         val condition1c = isAcronym(cleanPageTitle, lineText)
         // disallow redirects to page sections

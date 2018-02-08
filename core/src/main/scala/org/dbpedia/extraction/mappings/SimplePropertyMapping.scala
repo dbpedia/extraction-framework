@@ -93,7 +93,7 @@ extends PropertyMapping
                 case (dt1 : DimensionDatatype, dt2 : DimensionDatatype) =>
                   require(dt1 == dt2,"Unit must match the range of the ontology property")
 
-                case _ if unit != null => require(unit == ontologyProperty.range, "Unit must be compatible to the range of the ontology property")
+                case _ if unit != null => require(unit == ontologyProperty.range, "Unit must be compatible to the range of the ontology property: " + templateProperty + " in " + templateName + ": " + unit + " vs. " + ontologyProperty.range)
                 case _ =>
             }
         }

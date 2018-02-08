@@ -176,7 +176,6 @@ class ConfigLoader(config: Config)
       extractionJobNS,
       destination,
       context.language,
-      config.retryFailedPages,
       getExtractionRecorder(context.language)
     )
 

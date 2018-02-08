@@ -65,21 +65,23 @@ abstract class ExtractionManager(
 
   def extract(title: String, destination: Destination, language: Language): Unit = {
     val extract = mappingExtractor(language)
+    val datasets = extract.datasets.map(x => x.canonicalUri.toString)
     val source = WikiSource.fromTitles(List(WikiTitle.parse(title, Language.English)), new URL(Language.English.apiUri), Language.English)
     val er = Server.getExtractionRecorder[Quad](language)
     for (page <- source){
-      val quads = extract.extract(page, page.uri)
+      val quads = extract.extract(page, page.uri).filter(q => datasets.contains(q.dataset))
       quads.foreach(q => er.record(q))
       destination.write(quads.sortBy(x => (x.subject, x.predicate)).reverse)
     }
   }
 
     def extract(source: Source, destination: Destination, language: Language, useCustomExtraction: Boolean = false): Unit = {
-      val extract = if (useCustomExtraction) customExtractor(language) else mappingExtractor(language)
+      val extractor = if (useCustomExtraction) customExtractor(language) else mappingExtractor(language)
+      val datasets = extractor.datasets.map(x => x.canonicalUri.toString)
       val er = Server.getExtractionRecorder[Quad](language)
       destination.open()
       for (page <- source){
-        val quads = extract.extract(page, page.uri)
+        val quads = extractor.extract(page, page.uri).filter(q => datasets.contains(q.dataset))
         quads.foreach(q => er.record(q))
         destination.write(quads.sortBy(x => (x.subject, x.predicate)).reverse)
       }

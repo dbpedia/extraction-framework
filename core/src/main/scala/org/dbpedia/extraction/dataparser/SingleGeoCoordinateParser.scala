@@ -54,8 +54,10 @@ class SingleGeoCoordinateParser(context : { def language : Language }) extends D
     def parseSingleCoordinate(coordStr : String) : Option[SingleGeoCoordinate] = 
     {
     	coordStr match {
-    	  case LatitudeRegex(latDeg, latMin, latSec, latHem) => Some(new Latitude(latDeg.toDouble, latMin.toDouble, ("0"+latSec).toDouble, latHemLetterMap.getOrElse(latHem,"N")))
-    	  case LongitudeRegex(lonDeg, lonMin, lonSec, lonHem) => Some(new Longitude(lonDeg.toDouble, lonMin.toDouble, ("0"+lonSec).toDouble, lonHemLetterMap.getOrElse(lonHem,"E")))
+    	  case LatitudeRegex(latDeg, latMin, latSec, latHem) =>
+          Some(new Latitude(latDeg.toDouble, latMin.toDouble, ("0"+latSec).toDouble, latHemLetterMap.getOrElse(latHem,"N")))
+    	  case LongitudeRegex(lonDeg, lonMin, lonSec, lonHem) =>
+          Some(new Longitude(lonDeg.toDouble, lonMin.toDouble, ("0"+lonSec).toDouble, lonHemLetterMap.getOrElse(lonHem,"E")))
     	  case _ => None
     	}
     }

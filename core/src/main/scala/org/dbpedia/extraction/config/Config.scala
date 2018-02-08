@@ -214,11 +214,6 @@ class Config(properties: Properties) extends Properties(Config.combineProperties
   }
 
   /**
-    * TODO experimental, ignore for now
-    */
-  lazy val retryFailedPages: Boolean = this.getProperty("retry-failed-pages", "false").trim.toBoolean
-
-  /**
     * the extractor classes to be used when extracting the XML dumps
     */
   lazy val extractorClasses: Map[Language, Seq[Class[_ <: Extractor[_]]]] = ExtractorUtils.loadExtractorsMapFromConfig(languages, this)

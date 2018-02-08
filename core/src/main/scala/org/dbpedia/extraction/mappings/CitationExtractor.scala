@@ -199,7 +199,7 @@ extends WikiPageExtractor
             case links if links.nonEmpty => return links
             case _ =>
         }
-        StringParser.parseWithProvenance(node).map(value => ParseResult(value.value, None, Some(xsdStringDt))).toList
+        StringParser.parseWithProvenance(node).map(value => ParseResult(value.value, None, Some(xsdStringDt), value.provenance)).toList
     }
 
     private def extractUnitValue(node : PropertyNode) : Option[ParseResult[String]] =
@@ -211,7 +211,7 @@ extends WikiPageExtractor
 
         if (unitValues.size > 1)
         {
-            StringParser.parseWithProvenance(node).map(value => ParseResult(value.value, None, Some(xsdStringDt)))
+            StringParser.parseWithProvenance(node).map(value => ParseResult(value.value, None, Some(xsdStringDt), value.provenance))
         }
         else if (unitValues.size == 1)
         {
@@ -237,7 +237,7 @@ extends WikiPageExtractor
     {
         StringParser.parseWithProvenance(node) match
         {
-            case Some(ParseResult(RankRegex(number), _, _, _)) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
+            case Some(ParseResult(RankRegex(number), _, _, prov)) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer")), prov))
             case _ => None
         }
     }
@@ -372,11 +372,6 @@ extends WikiPageExtractor
 
     private def getPropertyValueAsLink(propertyNode: PropertyNode): Option[IRI] =
     {
-        StringParser.parseWithProvenance(propertyNode) match {
-            case Some(pr) if pr.value.trim.nonEmpty => Some(pr.value)
-            case _ => None
-        }
-
         linkParser.parseWithProvenance(propertyNode) match {
             case Some(pr) => Some(pr.value)
             case _ => UriUtils.createURI(propertyNode.children.flatMap(_.toPlainText).mkString.trim) match{
