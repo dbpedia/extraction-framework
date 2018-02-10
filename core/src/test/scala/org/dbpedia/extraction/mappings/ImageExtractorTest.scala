@@ -21,7 +21,7 @@ class ImageExtractorTest extends FlatSpec with Matchers with PrivateMethodTester
     val loadImages = PrivateMethod[Unit]('loadImages)
     val source = new MemorySource(new WikiPage(new WikiTitle("Test.png", Namespace.File, Language("en")), "{{Free screenshot|template=BSD}}"))
     // def loadImages(source: Source, freeImages: MutableSet[String], nonFreeImages: MutableSet[String], wikiCode: String)
-    val res = ConfigUtils.loadImages(source, "en")
+    val res = ConfigUtils.loadImages(source, Language.English)
 
     res._1 should have size (1)
     res._2 should not be ('empty)

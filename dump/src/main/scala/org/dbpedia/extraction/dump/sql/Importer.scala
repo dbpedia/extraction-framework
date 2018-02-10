@@ -6,7 +6,8 @@ import java.lang.StringBuilder
 import java.sql.Connection
 import java.sql.SQLException
 
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, WikiPageEntry}
+import org.apache.log4j.Level
+import org.dbpedia.extraction.config.{ExtractionRecorder, WikiPageEntry}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiPage}
 
 import scala.util.control.ControlThrowable
@@ -23,14 +24,14 @@ class Importer(conn: Connection, lang: Language, recorder: ExtractionRecorder[Pa
       recorder.record(new WikiPageEntry(page))
     }
 
-    recorder.printLabeledLine("Retrying all failed pages:", RecordCause.Warning, lang, null, noLabel = true)
+    recorder.printLabeledLine("Retrying all failed pages:", Level.WARN, lang, noLabel = true)
 
     recorder.listFailedPages(lang) match{
       case None =>
       case Some(fails) => for(fail <- fails)
         fail match{
           case w: WikiPage => if(!insertPageContent(w))
-            recorder.printLabeledLine("Retrying all failed pages:", RecordCause.Warning, lang)
+            recorder.printLabeledLine("Retrying all failed pages:", Level.WARN, lang)
           case _ =>
         }
     }

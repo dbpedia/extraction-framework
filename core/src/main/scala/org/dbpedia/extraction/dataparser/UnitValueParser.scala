@@ -3,7 +3,6 @@ package org.dbpedia.extraction.dataparser
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype, UnitDatatype}
 import org.dbpedia.extraction.wikiparser._
 import java.text.ParseException
-import java.util.logging.{Level, Logger}
 
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -11,8 +10,10 @@ import org.dbpedia.extraction.mappings.Redirects
 import java.lang.Double
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.ExtractionLogger
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
+import scala.collection.mutable.ListBuffer
 import scala.language.reflectiveCalls
 
 @SoftwareAgentAnnotation(classOf[UnitValueParser], AnnotationType.Parser)
@@ -24,7 +25,7 @@ class UnitValueParser( extractionContext : {
                         strict : Boolean = false,
                         multiplicationFactor : Double = 1.0) extends DataParser[Double]
 {
-    private val logger = Logger.getLogger(getClass.getName)
+    private val logger = ExtractionLogger.getLogger(getClass, extractionContext.language)
 
     private val parserUtils = new ParserUtils(extractionContext)
 
@@ -96,7 +97,7 @@ class UnitValueParser( extractionContext : {
 
     private[dataparser] override def parse(node : Node) : Option[ParseResult[Double]] =
     {
-        val errors = if(logger.isLoggable(Level.FINE)) Some(new ParsingErrors()) else None
+        val errors = new ListBuffer[String]()
 
         for(result <- catchTemplates(node, errors))
             return Some(ParseResult(result._1, None, Some(result._2)))
@@ -129,7 +130,7 @@ class UnitValueParser( extractionContext : {
                     }
                     else
                     {
-                        errors.foreach(_.add("Could not find any unit value in '" + text + "'"))
+                        errors.append("Could not find any unit value in '" + text + "'")
                     }
                 }
             }
@@ -137,7 +138,7 @@ class UnitValueParser( extractionContext : {
 
         for(e <- errors)
         {
-            logger.fine("Could not extract " + inputDatatype.name + " value from " + node + " on page " + node.root.title + " line " + node.line + ".\n" + e)
+            logger.debug("Could not extract " + inputDatatype.name + " value from " + node + " on page " + node.root.title + " line " + node.line + ".\n" + e)
         }
 
         None
@@ -146,7 +147,7 @@ class UnitValueParser( extractionContext : {
     /**
      * This Method parse property templates like {{convert|...}
      */
-    private def catchTemplates(node : Node, errors : Option[ParsingErrors]) : Option[(Double, UnitDatatype)] =
+    private def catchTemplates(node : Node, errors : ListBuffer[String]) : Option[(Double, UnitDatatype)] =
     {
         // If the node is not a TemplateNode run catchTemplates() for all childs
         if(!node.isInstanceOf[TemplateNode])
@@ -372,7 +373,7 @@ class UnitValueParser( extractionContext : {
         // If there is no mapping defined for the template -> return null and log it
         else
         {
-            errors.foreach(_.add("Unknown template: \"" + templateName + "\""))
+            errors.append("Unknown template: \"" + templateName + "\"")
             return None
         }
         ///////////////////////////////////////////////////////////////////////////////////////
@@ -438,10 +439,10 @@ class UnitValueParser( extractionContext : {
      *
      * The value and Unit of the passed value will be returned in an Array
      *
-     * @param   string  $input  text
+     * @param   input  $input  text
      * @return  array   the value at offset[0] and a UnitDataType object at offset[1].
      */
-    private def catchUnitValue(input : String, errors : Option[ParsingErrors]) : Option[(Double, UnitDatatype)] =
+    private def catchUnitValue(input : String, errors : ListBuffer[String]) : Option[(Double, UnitDatatype)] =
     {
         val inputDimension = inputDatatype match
         {
@@ -500,7 +501,7 @@ class UnitValueParser( extractionContext : {
     /**
      * Creates the output tuple, the number at 0, the unit at 1.
      */
-    private def generateOutput(valueString : String, unitString : Option[String] = None, errors : Option[ParsingErrors]) : Option[(Double, UnitDatatype)] =
+    private def generateOutput(valueString : String, unitString : Option[String] = None, errors : ListBuffer[String]) : Option[(Double, UnitDatatype)] =
     {
         val value = 
         {
@@ -512,7 +513,7 @@ class UnitValueParser( extractionContext : {
             {
                 case ex : ParseException =>
                 {
-                    errors.foreach(_.add("Could not find number in '" + valueString + "'"))
+                    errors.append("Could not find number in '" + valueString + "'")
                     return None
                 }
             }
@@ -534,7 +535,7 @@ class UnitValueParser( extractionContext : {
                         case Some(unit) => unit
                         case None =>
                         {
-                            errors.foreach(_.add("Given unit '" + unitName + "' not found"))
+                            errors.append("Given unit '" + unitName + "' not found")
                             return None
                         }
                     }
@@ -549,7 +550,7 @@ class UnitValueParser( extractionContext : {
                         case Some(unit) => unit
                         case None =>
                         {
-                            errors.foreach(_.add("Given unit '" + unitName + "' not found in dimension " + inputDimension))
+                            errors.append("Given unit '" + unitName + "' not found in dimension " + inputDimension)
                             return None
                         }
                     }
@@ -562,7 +563,7 @@ class UnitValueParser( extractionContext : {
                 case inputUnit : UnitDatatype => inputUnit
                 case _ =>
                 {
-                    errors.foreach(_.add("Value '" + valueString + "' found without any unit"))
+                    errors.append("Value '" + valueString + "' found without any unit")
                     return None
                 }
             }

@@ -1,10 +1,9 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.Logger
-
+import org.apache.log4j.Logger
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.Config
-import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
+import org.dbpedia.extraction.config.{Config, ExtractionLogger, ExtractionRecorder}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
@@ -40,7 +39,7 @@ class AbstractExtractor(
 )
 extends WikiPageExtractor
 {
-  protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
   this.getClass.getClassLoader.getResource("myproperties.properties")
 
 

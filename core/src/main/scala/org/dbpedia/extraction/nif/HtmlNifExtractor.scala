@@ -1,15 +1,15 @@
 package org.dbpedia.extraction.nif
 
 import org.apache.commons.lang3.StringEscapeUtils
+import org.apache.log4j.Level
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.nif.LinkExtractor.NifExtractorContext
 import org.dbpedia.extraction.nif.Paragraph.HtmlString
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.config.Config.NifParameters
-import org.dbpedia.extraction.config.RecordCause
-import org.dbpedia.extraction.mappings.Extractor
-import org.dbpedia.extraction.util.CssConfigurationMap
+import org.dbpedia.extraction.config.ExtractionLogger
+import org.dbpedia.extraction.util.{CssConfigurationMap, Language}
 import org.dbpedia.iri.UriUtils
 import org.jsoup.Jsoup
 import org.jsoup.nodes.{Document, Element, TextNode}
@@ -24,19 +24,20 @@ import scala.util.{Failure, Success, Try}
 /**
   * Created by Chile on 1/19/2017.
   */
-abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifParameters : NifParameters) {
+abstract class HtmlNifExtractor(nifContextIri: String, language: Language, nifParameters : NifParameters) {
 
+  private val logger = ExtractionLogger.getLogger(getClass, language)
   assert(nifContextIri.contains("?"), "the nifContextIri needs a query part!")
 
   protected val writeLinkAnchors: Boolean = nifParameters.writeLinkAnchor
   protected val writeStrings: Boolean = nifParameters.writeAnchor
   protected val cssSelectorConfigMap: CssConfigurationMap#CssLanguageConfiguration = new CssConfigurationMap(nifParameters.cssSelectorMap).getCssSelectors(language)
 
-  protected lazy val nifContext: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language, DBpediaDatasets.NifContext.encoded)
-  protected lazy val nifStructure: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language, DBpediaDatasets.NifPageStructure.encoded)
-  protected lazy val nifLinks: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language, DBpediaDatasets.NifTextLinks.encoded)
-  protected lazy val rawTables: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language, DBpediaDatasets.RawTables.encoded)
-  protected lazy val equations: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language, DBpediaDatasets.Equations.encoded)
+  protected lazy val nifContext: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language.wikiCode, DBpediaDatasets.NifContext.encoded)
+  protected lazy val nifStructure: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language.wikiCode, DBpediaDatasets.NifPageStructure.encoded)
+  protected lazy val nifLinks: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language.wikiCode, DBpediaDatasets.NifTextLinks.encoded)
+  protected lazy val rawTables: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language.wikiCode, DBpediaDatasets.RawTables.encoded)
+  protected lazy val equations: (String, String, String, String, String) => Quad = QuadBuilder.dynamicPredicateSimple(language.wikiCode, DBpediaDatasets.Equations.encoded)
 
   protected val templateString = "Template"
 
@@ -54,10 +55,9 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
     * @param graphIri
     * @param subjectIri
     * @param html
-    * @param exceptionHandle
     * @return
     */
-  def extractNif(graphIri: String, subjectIri: String, html: String)(exceptionHandle: (String, RecordCause.Value, Throwable) => Unit): Seq[Quad] = {
+  def extractNif(graphIri: String, subjectIri: String, html: String): Seq[Quad] = {
 
     val sections = getRelevantParagraphs(html)
 
@@ -84,11 +84,11 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
           //collect additional triples
           quads ++= extendSectionTriples(extractionResults, graphIri, subjectIri)
           //forward exceptions
-          extractionResults.errors.foreach(exceptionHandle(_, RecordCause.Warning, null))
+          extractionResults.errors.foreach(e => logger.debug(e))
           quads
         }
         case Failure(e) => {
-          exceptionHandle(e.getMessage, RecordCause.Exception, e)
+          logger.debug(e.getMessage, e)
           List()
         }
       }

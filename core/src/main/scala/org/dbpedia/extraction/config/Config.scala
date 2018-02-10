@@ -100,7 +100,7 @@ class Config(properties: Properties) extends Properties(Config.combineProperties
     case None => None
   }
 
-  def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null, datasets : List[Dataset] = List()): ExtractionRecorder[T] ={
+  def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null, datasets : Seq[Dataset] = Seq()): ExtractionRecorder[T] ={
     val w = if(writer != null) writer
       else openLogFile(lang.wikiCode) match{
         case Some(s) => new OutputStreamWriter(s)
@@ -279,6 +279,8 @@ class Config(properties: Properties) extends Properties(Config.combineProperties
     case Success(s) => s
     case Failure(f) => throw new IllegalArgumentException("Not all necessary parameters for the 'NifParameters' class were provided or could not be parsed to the expected type.", f)
   }
+
+  Config.universalConfig = this
 }
 
 object Config{
@@ -323,12 +325,12 @@ object Config{
 
   private val universalProperties: Properties = loadConfig(this.getClass.getClassLoader.getResource("universal.properties"))
 
-  val universalConfig: Config = new Config(universalProperties)
+  var universalConfig: Config = new Config(universalProperties)
   /**
     * The content of the wikipedias.csv in the base-dir (needs to be static)
     */
   private val wikisinfoFile = new File(getString(universalProperties , "base-dir", required = true), WikiInfo.FileName)
-  private lazy val wikiinfo = if(wikisinfoFile.exists()) WikiInfo.fromFile(wikisinfoFile, Codec.UTF8) else Seq()
+  private lazy val wikiinfo = if(wikisinfoFile != null &&  wikisinfoFile.exists()) WikiInfo.fromFile(wikisinfoFile, Codec.UTF8) else Seq()
   def wikiInfos: Seq[WikiInfo] = wikiinfo
 
   def combineProperties(props1: Properties, props2: Properties): Properties ={

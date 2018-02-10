@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.apache.log4j.Level
 import org.dbpedia.extraction.annotations.WikiNodeAnnotation
 import org.dbpedia.extraction.config._
 import org.dbpedia.extraction.config.provenance.NodeRecord
@@ -40,31 +41,12 @@ extends Node with Recordable[Node]
 
   override val line = 0
 
-  private var extractionRecords: ListBuffer[RecordEntry[Node]] = null
-  override def recordEntries: List[RecordEntry[Node]] = {
-    if(extractionRecords == null || extractionRecords.isEmpty)
-      List(new WikiPageEntry(this, RecordCause.Internal))
-    else
-      extractionRecords.toList
-  }
-
-  private[extraction] override def addExtractionRecord(recordEntry: RecordEntry[_]): Unit ={
-    assert(recordEntry != null)
-    if(extractionRecords == null)
-      extractionRecords = new ListBuffer[RecordEntry[Node]]()
-    recordEntry match{
-      case re: RecordEntry[Node] => extractionRecords.append(re)
-      case de: RecordEntry[DefaultEntry] => extractionRecords.append(new RecordEntry[Node](this, de.cause, Option(de.language).getOrElse(Language.None), de.msg, de.error))
-      case _ =>
-    }
-  }
-
   private[extraction] def recordError(msg: String): Unit =
-    addExtractionRecord(new RecordEntry[Node](this, RecordCause.Warning, this.title.language, msg))
+    addExtractionRecord(new RecordEntry[Node](this, this.title.language, msg, null, Level.WARN))
   private[extraction] def recordException(ex: Throwable, msg: String = null): Unit =
-    addExtractionRecord(new RecordEntry[Node](this, RecordCause.Exception, this.title.language, if(msg != null) msg else ex.getMessage, ex))
+    addExtractionRecord(new RecordEntry[Node](this, this.title.language, if(msg != null) msg else ex.getMessage, ex, Level.ERROR))
   private[extraction] def recordMessage(msg: String): Unit =
-    addExtractionRecord(new RecordEntry[Node](this, RecordCause.Info, this.title.language, msg))
+    addExtractionRecord(new RecordEntry[Node](this, this.title.language, msg, null, Level.INFO))
   private[extraction] def recordProvenance = ???   //TODO
 
   def toWikiText: String = children.map(_.toWikiText).mkString
@@ -90,6 +72,7 @@ extends Node with Recordable[Node]
   lazy val isRedirect: Boolean = this.redirect != null
 
   lazy val redirect: WikiTitle = {
+    //first we try to redirect category redirects (these are "soft redirects" and we need to look for the CategoryRedirect templates - see CategoryRedirect.scala)
     if(isCategory){
       val template = CategoryRedirect.get(this.title.language) match{
         case Some(crd) => children.map(c => c.containedTemplateNodes(crd)).filter(t => t.collectFirst{case y => y.children.size > 1}.isDefined).flatten
@@ -103,6 +86,7 @@ extends Node with Recordable[Node]
         null.asInstanceOf[WikiTitle] //legacy
     }
     else {
+      //else we try to look for the #REDIRECT magic word using the RedirectFinder
       val rf = RedirectFinder.getRedirectFinder(title.language)
       rf.apply(this) match {
         case Some((_, targetTitle)) => targetTitle
@@ -112,6 +96,7 @@ extends Node with Recordable[Node]
   }
 
   def isDisambiguation: Boolean ={
+    //look up the disambig templates for the given language -> then just check if these exist in the page
     val disambiguationNames = Disambiguation.get(this.title.language).getOrElse(Set("Disambig"))
     children.exists(node => node.hasTemplate(disambiguationNames))
   }

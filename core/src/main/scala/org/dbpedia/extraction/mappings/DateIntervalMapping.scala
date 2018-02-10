@@ -1,9 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.Logger
-
+import org.apache.log4j.Logger
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.ExtractionRecorder
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
 import org.dbpedia.extraction.dataparser.{DateRangeParser, DateTimeParser, StringParser}
@@ -26,12 +25,11 @@ class DateIntervalMapping (
     def redirects : Redirects  // redirects required by DateTimeParser
     def ontology: Ontology
     def language : Language
-    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 ) 
 extends PropertyMapping
 {
-  private val logger = Logger.getLogger(classOf[DateIntervalMapping].getName)
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
   private val dateIntervalParser = new DateRangeParser(context, rangeType(startDateOntologyProperty))
   private val startDateParser = new DateTimeParser(context, rangeType(startDateOntologyProperty))
@@ -153,7 +151,7 @@ extends PropertyMapping
       //Validate interval
       if(startDate.value > endDate.value)
       {
-        logger.fine("startDate > endDate")
+        logger.trace("startDate > endDate")
         return Seq(qb1.getQuad)
       }
 

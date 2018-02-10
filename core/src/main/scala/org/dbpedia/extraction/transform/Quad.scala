@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.transform
 
-import org.dbpedia.extraction.config.{RecordCause, RecordEntry, Recordable}
+import org.apache.log4j.Level
+import org.dbpedia.extraction.config.{RecordEntry, Recordable}
 import org.dbpedia.extraction.config.provenance._
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, OntologyProperty, OntologyType, RdfNamespace}
@@ -255,9 +256,9 @@ return - hashCode as Long
     TripleRecord(subject, predicate, value,  Option(lang), Option(datatype))
   }
 
-  override def recordEntries: List[RecordEntry[Quad]] = {
+  override def recordEntries: Seq[RecordEntry[Quad]] = {
     provenanceRecord match{
-      case Some(r) => records.toList ::: List(RecordEntry[Quad](r, RecordCause.Provenance))
+      case Some(r) => records.toList ::: List(RecordEntry[Quad](r))
       case None => records.toList
     }
   }

@@ -1,8 +1,7 @@
 package org.dbpedia.extraction.wikiparser
 
-import java.util.logging.Logger
-
-import org.dbpedia.extraction.config.transform.TemplateTransformConfig
+import org.apache.log4j.Logger
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.iri.{IRISyntaxException, UriUtils}
 
@@ -13,6 +12,8 @@ import scala.util.{Failure, Success}
  */
 object NodeUtil
 {
+
+  private val logger = ExtractionLogger.getLogger(getClass, Language.None)
     /**
      * Removes the contents of parentheses in a property node.
      */
@@ -164,7 +165,7 @@ object NodeUtil
                 // If the new URI doesn't make syntactical sense, produce
                 // a warning and don't modify the original node.
                 case e: IRISyntaxException => {
-                  Logger.getLogger(NodeUtil.getClass.getName).warning(
+                  logger.warn(
                     "(while processing template '" + inputTemplateNode.title.decodedWithNamespace +
                       "', property '" + inputNode.key + "')" +
                       f" Adding prefix or suffix to '$child%s' caused an error, skipping: " + e.getMessage

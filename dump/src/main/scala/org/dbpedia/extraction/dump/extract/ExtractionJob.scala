@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry, RecordCause}
+import org.apache.log4j.Level
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.WikiPageExtractor
@@ -62,7 +63,7 @@ class ExtractionJob(
       for (page <- source)
         workers.process(page)
 
-      extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordCause.Info, language)
+      extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", Level.INFO, language)
     }
     catch {
       case ex : Throwable =>

@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
+import org.apache.log4j.Level
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder, RecordEntry}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
@@ -23,11 +24,12 @@ class IntermediateNodeMapping (
   context : {
     def ontology : Ontology
     def language : Language
-    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends PropertyMapping
 {
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
+
   private val splitRegex = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(context.language.wikiCode))
                              DataParserConfig.splitPropertyNodeRegexInfobox(context.language.wikiCode)
                            else DataParserConfig.splitPropertyNodeRegexInfobox("en")
@@ -55,7 +57,7 @@ extends PropertyMapping
     if(affectedTemplatePropertyNodes.size > 1)
     {
       if(valueNodes.forall(_.size <= 1))
-        context.recorder[PageNode].record(new RecordEntry[Node](node.root, RecordCause.Internal, context.language, "IntermediateNodeMapping for multiple properties have multiple values in: " + subjectUri))
+        logger.debug(new RecordEntry[Node](node.root, context.language, "IntermediateNodeMapping for multiple properties have multiple values in: " + subjectUri))
 
       createInstance(graph, node, subjectUri)
     }
@@ -84,6 +86,7 @@ extends PropertyMapping
       qb.setSubject(originalSubjectUri)
       qb.setPredicate(correspondingProperty)
       qb.setValue(instanceUri)
+      qb.setNodeRecord(node.getNodeRecord)
       qb.setSourceUri(node.sourceIri)
       graph += qb.getQuad
       

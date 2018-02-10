@@ -125,7 +125,6 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
             def language : Language = lang
             def ontology: Ontology = ontology
             def redirects : Redirects = red
-            def recorder[T: ClassTag] : ExtractionRecorder[T] = new ExtractionRecorder[T]()
         }
         
         val start = datatypeName match

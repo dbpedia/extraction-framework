@@ -4,7 +4,7 @@
 # I excluded some fields from the response, please compare to: https://developer.nytimes.com/semantic_api.json#/README
 # Since we don't really know where the last id is, this has to be stopped manually at some point
 # params:  (api-key, result file, start id, end id)
-# example call: sh api-crawler.sh eb1a30284ed023b88591fc5fa119a850 nyt-crawl-4.json 300001 400000
+# example call: sh api-crawler.sh eb1a30284ed023b88591fc5fa119a850 nyt-crawl-4.json 400001 500000
 # The result file will be compressed with bzip2 automatically and appended with .bz2
 #
 # Dependencies:

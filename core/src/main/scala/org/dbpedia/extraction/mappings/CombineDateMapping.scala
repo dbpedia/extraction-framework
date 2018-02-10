@@ -26,7 +26,6 @@ class CombineDateMapping (
     def redirects : Redirects  // redirects required by DateTimeParser
     def ontology: Ontology
     def language : Language
-    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends PropertyMapping

@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.{Config, ExtractionRecorder, RecordEntry}
+import org.dbpedia.extraction.config.{Config, ExtractionLogger, ExtractionRecorder, RecordEntry}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.nif.WikipediaNifExtractor
 import org.dbpedia.extraction.ontology.Ontology
@@ -10,7 +10,6 @@ import org.dbpedia.extraction.util.{Language, MediaWikiConnector}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
-import scala.reflect.ClassTag
 
 /**
   * Extracts page html.
@@ -31,11 +30,11 @@ class NifExtractor(
        def ontology : Ontology
        def language : Language
        def configFile : Config
-       def recorder[T: ClassTag] : ExtractionRecorder[T]
      }
    )
   extends WikiPageExtractor
 {
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
   //API parameters to geht HTML of first section
   val apiParametersFormat: String = context.configFile.nifParameters.nifQuery
 
@@ -64,7 +63,7 @@ class NifExtractor(
       case None => return Seq.empty
     }
 
-    new WikipediaNifExtractor(context, pageNode).extractNif(html)(err => context.recorder[PageNode].record(err.asInstanceOf[RecordEntry[PageNode]]))
+    new WikipediaNifExtractor(context, pageNode).extractNif(html)(err => logger.record(err))
   }
 
 }

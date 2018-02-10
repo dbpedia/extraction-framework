@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.wikiparser._
@@ -32,31 +32,44 @@ class MetaInformationExtractor( context : {
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
+  private val qb = QuadBuilder.dynamicPredicate(context.language, DBpediaDatasets.RevisionMeta)
+
   override def extract(page : WikiPage, subjectUri : String) : Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main) return Seq.empty
+
+    qb.setSubject(subjectUri)
+    qb.setExtractor(this.softwareAgentAnnotation)
+    qb.setNodeRecord(page.getNodeRecord)
+    qb.setSourceUri(page.sourceIri)
 
     val editLink     = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=edit"
     val revisionLink = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&oldid=" + page.revision
     val historyLink  = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=history"
 
-    val quadModificationDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, modificationDatePredicate,
-      formatTimestamp(page.timestamp), page.sourceIri, datetime )
+    val qb1 = qb.clone
+    qb1.setPredicate(modificationDatePredicate)
+    qb1.setValue(formatTimestamp(page.timestamp))
+    qb1.setDatatype(datetime)
 
-    val quadExtractionDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, extractionDatePredicate,
-      formatCurrentTimestamp, page.sourceIri, datetime )
+    val qb2 = qb.clone
+    qb2.setPredicate(extractionDatePredicate)
+    qb2.setValue(formatCurrentTimestamp)
+    qb2.setDatatype(datetime)
 
-    val quadEditlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, editLinkPredicate,
-      editLink, page.sourceIri, null )
+    val qb3 = qb.clone
+    qb3.setPredicate(editLinkPredicate)
+    qb3.setValue(editLink)
 
-    val quadRevisionlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, revisionPredicate,
-      revisionLink, page.sourceIri, null )
+    val qb4 = qb.clone
+    qb4.setPredicate(revisionPredicate)
+    qb4.setValue(revisionLink)
 
-    val quadHistorylink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, historyPredicate,
-      historyLink, page.sourceIri, null )
+    val qb5 = qb.clone
+    qb5.setPredicate(historyPredicate)
+    qb5.setValue(historyLink)
 
-
-    Seq(quadModificationDate, quadExtractionDate, quadEditlink, quadRevisionlink, quadHistorylink)
+    Seq(qb1.getQuad, qb2.getQuad, qb3.getQuad, qb4.getQuad, qb5.getQuad)
 
 
   }

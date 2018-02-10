@@ -2,7 +2,8 @@ package org.dbpedia.extraction.scripts
 
 import java.io.File
 
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry, RecordCause}
+import org.apache.log4j.Level
+import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util._
@@ -29,9 +30,9 @@ class QuadReader(log: FileLike[File] = null, preamble: String = null) {
 
   def addQuadRecord(quad: Quad, lang: Language, errorMsg: String = null, error: Throwable = null): Unit ={
     if(errorMsg == null && error == null)
-      recorder.record(new RecordEntry[Quad](quad, RecordCause.Info, lang, errorMsg, error))
+      recorder.record(new RecordEntry[Quad](quad, lang, errorMsg, error, Level.INFO))
     else if(error != null)
-      recorder.record(new RecordEntry[Quad](quad, RecordCause.Exception, lang, errorMsg, error))
+      recorder.record(new RecordEntry[Quad](quad, lang, errorMsg, error, Level.ERROR))
   }
 
   /**

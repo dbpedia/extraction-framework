@@ -1,14 +1,13 @@
 package org.dbpedia.extraction.dataparser
 
-import java.util.logging.{Level, Logger}
-
+import org.apache.log4j.{Level, Logger}
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 
 import util.control.ControlThrowable
-import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
+import org.dbpedia.extraction.wikiparser.Node
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
-import org.dbpedia.extraction.mappings.Redirects
 
 import scala.language.reflectiveCalls
 
@@ -18,7 +17,7 @@ import scala.language.reflectiveCalls
 @SoftwareAgentAnnotation(classOf[SingleGeoCoordinateParser], AnnotationType.Parser)
 class SingleGeoCoordinateParser(context : { def language : Language }) extends DataParser[SingleGeoCoordinate]
 {
-    private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
     private val language = context.language.wikiCode
     
     private val lonHemLetterMap = GeoCoordinateParserConfig.longitudeLetterMap.getOrElse(language,GeoCoordinateParserConfig.longitudeLetterMap("en"))
@@ -44,7 +43,7 @@ class SingleGeoCoordinateParser(context : { def language : Language }) extends D
         catch
         {
             case ex : ControlThrowable => throw ex
-            case ex : Exception => logger.log(Level.FINE, "Could not extract coordinates", ex)
+            case ex : Exception => logger.log(Level.INFO, "Could not extract coordinates", ex)
         }
 
         None

@@ -2,7 +2,7 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.dataparser.FlagTemplateParserConfig
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Country, Language}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
@@ -32,8 +32,20 @@ class FlagTemplateParser( extractionContext : { def language : Language } ) exte
                             case Some(countryCode : String) if(countryCode.length == 2||countryCode.length == 3)&&(countryCode == countryCode.toUpperCase) =>
                             {
                                 //getCodeMap returns en if language code is not configured
-                                val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
-                                langCodeMap.get(countryCode).foreach(countryName => return Some(ParseResult(new WikiTitle(countryName, Namespace.Main, extractionContext.language))))
+                                //val langCodeMap = FlagTemplateParserConfig.getCodeMap(extractionContext.language.wikiCode)
+                                //langCodeMap.get(countryCode).foreach(countryName => return Some(ParseResult(new WikiTitle(countryName, Namespace.Main, extractionContext.language))))
+
+                                val country = Option(Country(countryCode)) match{
+                                    case Some(c) => c
+                                    case None => return None
+                                }
+
+                                val countryName = country.getLangName(extractionContext.language) match{
+                                    case Some(l) => l
+                                    case None => return None
+                                }
+
+                                return Some(ParseResult(new WikiTitle(countryName, Namespace.Main, extractionContext.language)))
                             }
                             case Some(countryName : String) => return Some(ParseResult(new WikiTitle(countryName, Namespace.Main, extractionContext.language)))
                             case _ =>

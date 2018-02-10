@@ -22,7 +22,6 @@ class CitedFactsExtractor(
     def language : Language
     def mappings : Mappings
     def redirects : Redirects
-    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends WikiPageExtractor {

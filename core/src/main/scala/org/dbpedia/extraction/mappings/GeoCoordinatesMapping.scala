@@ -4,9 +4,9 @@ import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser.{PropertyNode, TemplateNode}
 import org.dbpedia.extraction.dataparser._
-import java.util.logging.{Level, Logger}
-
+import org.apache.log4j.{Level, Logger}
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.Language
@@ -40,7 +40,7 @@ class GeoCoordinatesMapping(
 ) 
 extends PropertyMapping
 {
-  private val logger = Logger.getLogger(classOf[GeoCoordinatesMapping].getName)
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
   private val geoCoordinateParser = new GeoCoordinateParser(context)
   private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
@@ -108,7 +108,7 @@ extends PropertyMapping
         }
         catch
         {
-          case ex : IllegalArgumentException  => logger.log(Level.FINE, "Invalid geo coordinate", ex); return None
+          case ex : IllegalArgumentException  => logger.log(Level.DEBUG, "Invalid geo coordinate", ex); return None
         }
       }
     }
@@ -137,7 +137,7 @@ extends PropertyMapping
         }
         catch
         {
-          case ex : IllegalArgumentException  => logger.log(Level.FINE, "Invalid geo coordinate", ex); return None
+          case ex : IllegalArgumentException  => logger.log(Level.DEBUG, "Invalid geo coordinate", ex); return None
         }
       }
     }

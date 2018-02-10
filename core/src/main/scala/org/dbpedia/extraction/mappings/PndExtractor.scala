@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.PndExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
@@ -39,9 +39,16 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.Pnd)
 
+  private val qb = QuadBuilder(context.language, DBpediaDatasets.Pnd, individualisedPndProperty, new Datatype("xsd:string"))
+  qb.setExtractor(this.softwareAgentAnnotation)
+
   override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if (node.title.namespace != Namespace.Main) return Seq.empty
+
+    qb.setSourceUri(node.sourceIri)
+    qb.setNodeRecord(node.getNodeRecord)
+    qb.setSubject(subjectUri)
     
     var quads = new ArrayBuffer[Quad]()
 
@@ -59,7 +66,8 @@ extends PageNodeExtractor
           {
             for (pnd <- getPnd(property)) 
             {
-                quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceIri, new Datatype("xsd:string"))
+              qb.setValue(pnd)
+              quads += qb.getQuad
             }
           }
         }
@@ -70,7 +78,8 @@ extends PageNodeExtractor
           {
             for (pnd <- getPnd(property))
             {
-                quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceIri, new Datatype("xsd:string"))
+              qb.setValue(pnd)
+              quads += qb.getQuad
             }
           }
         }
@@ -84,7 +93,7 @@ extends PageNodeExtractor
   {
     node.children match
     {
-      case TextNode(text, _, _) :: Nil if (text.trim.matches(PndRegex)) => Some(text.trim)
+      case TextNode(text, _, _) :: Nil if text.trim.matches(PndRegex) => Some(text.trim)
       case _ => None
     }
   }

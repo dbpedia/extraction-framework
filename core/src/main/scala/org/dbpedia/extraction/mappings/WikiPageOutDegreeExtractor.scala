@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.wikiparser._
 
@@ -28,14 +28,21 @@ extends PageNodeExtractor
   val nonNegativeInteger = context.ontology.datatypes("xsd:nonNegativeInteger")
 
   override val datasets = Set(DBpediaDatasets.OutDegree)
+  private val qb = QuadBuilder(context.language, DBpediaDatasets.OutDegree, wikiPageOutDegreeProperty, nonNegativeInteger)
+  qb.setExtractor(this.softwareAgentAnnotation)
 
   override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
         return Seq.empty
-    
-    val ìnternalLinks = ExtractorUtils.collectInternalLinksFromNode(node)
 
-    Seq(new Quad(context.language, DBpediaDatasets.OutDegree, subjectUri, wikiPageOutDegreeProperty, ìnternalLinks.size.toString, node.sourceIri, nonNegativeInteger) )
+
+    val ìnternalLinks = ExtractorUtils.collectInternalLinksFromNode(node)
+    qb.setNodeRecord(node.getNodeRecord)
+    qb.setSourceUri(node.sourceIri)
+    qb.setSubject(subjectUri)
+    qb.setValue(ìnternalLinks.size.toString)
+
+    Seq(qb.getQuad)
   }
 }

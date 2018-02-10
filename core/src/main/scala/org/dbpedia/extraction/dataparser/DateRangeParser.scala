@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dataparser
 
 
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
+import org.dbpedia.extraction.config.ExtractionRecorder
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.Datatype
@@ -20,14 +20,11 @@ import scala.reflect.ClassTag
 class DateRangeParser ( context : {
   def language : Language
   def ontology: Ontology
-  def redirects : Redirects
-  def recorder[T: ClassTag] : ExtractionRecorder[T] },
+  def redirects : Redirects },
                        datatype : Datatype,
                        strict : Boolean = false) extends DateTimeParser(context, datatype, strict)
 {
   require(datatype != null, "datatype != null")
-  private val recorder = context.recorder[PageNode]
-
   def parseRange(node: Node): Option[ParseResult[(Date, Date)]] = {
     try
     {

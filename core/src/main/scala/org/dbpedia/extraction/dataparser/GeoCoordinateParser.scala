@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
-import java.util.logging.{Level, Logger}
-
+import org.apache.log4j.{Level, Logger}
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 
 import util.control.ControlThrowable
 import org.dbpedia.extraction.util.Language
@@ -25,7 +25,7 @@ class GeoCoordinateParser(
 {
     private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 
-    private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
+  private val logger = ExtractionLogger.getLogger(getClass, extractionContext.language)
     
     private val singleCoordParser = new SingleGeoCoordinateParser(extractionContext)
     
@@ -58,7 +58,7 @@ class GeoCoordinateParser(
         catch
         {
             case ex : ControlThrowable => throw ex
-            case ex : Exception => logger.log(Level.FINE, "Could not extract coordinates", ex)
+            case ex : Exception => logger.log(Level.INFO, "Could not extract coordinates", ex)
         }
 
         None

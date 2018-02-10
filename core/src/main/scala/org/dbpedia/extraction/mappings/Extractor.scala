@@ -38,7 +38,7 @@ trait Extractor[-N] {
     * reflects the software agent annotation of an extractor class as an iri (e.g.:
     * http://dbpedia.org/extractor/InfoboxExtractor?githash=fa56dddb6df1b97269c14ce25430729a12775549 )
     */
-  val softwareAgentAnnotation: IRI = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
+  lazy val softwareAgentAnnotation: IRI = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
 }
 
 object ExtractorState extends Enumeration {

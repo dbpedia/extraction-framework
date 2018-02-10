@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.dataparser
 
+import org.apache.log4j.Level
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder, RecordEntry}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.dataparser.{DataParserConfig, DateTimeParserConfig}
 import org.dbpedia.extraction.util.{Date, Language}
@@ -23,15 +24,14 @@ import scala.reflect.ClassTag
 class DateTimeParser ( context : {
       def language : Language
       def ontology : Ontology
-      def redirects : Redirects
-      def recorder[T: ClassTag] : ExtractionRecorder[T] },
+      def redirects : Redirects },
      datatype : Datatype,
      val strict : Boolean = false,
      val tryMinorTypes : Boolean = false) extends DataParser[Date]
 {
     require(datatype.!=(null), "datatype != null")
 
-  private val recorder = context.recorder[PageNode]
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
   //datatypes
   val dtDate: Datatype = context.ontology.getOntologyDatatype("xsd:date").get
@@ -168,7 +168,7 @@ class DateTimeParser ( context : {
             }
         }
 
-      recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Template unknown: " + node.title))
+      logger.record(new RecordEntry[Node](node.root, Language.getOrElse(language, Language.None), "Template unknown: " + node.title, null, Level.DEBUG))
       None
     }
 
@@ -234,10 +234,10 @@ class DateTimeParser ( context : {
         datatype match
         {
             case `dtDay` =>
-              recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Method for day Extraction not yet implemented."))
+              logger.debug(node.root, Language.getOrElse(language, Language.None), null, "Method for day Extraction not yet implemented.")
               None
             case `dtMonth` =>
-              recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Method for day Extraction not yet implemented."))
+              logger.debug(node.root, Language.getOrElse(language, Language.None), null, "Method for day Extraction not yet implemented.")
               None
             case `dtYear` =>
                 for(date <- catchMonthYear(input, node))
@@ -279,7 +279,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((century+year).toInt), Some.apply(monthNumber.toInt), Some.apply(day.toInt), datatype))
                 case None =>
-                  recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                  logger.debug(new RecordEntry[Node](node.root, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -289,7 +289,7 @@ class DateTimeParser ( context : {
             months.get(month.toLowerCase) match
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((eraIdentifier+year).toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
-                case None => recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                case None => logger.debug(new RecordEntry[Node](node.root, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -299,7 +299,7 @@ class DateTimeParser ( context : {
             months.get(month.toLowerCase) match
             {
                 case Some(monthNumber) => return Some.apply(new Date(Some.apply((eraIdentifier+year).toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
-                case None => recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                case None => logger.debug(new RecordEntry[Node](node.root, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -318,7 +318,7 @@ class DateTimeParser ( context : {
             catch
             {
                 case ex: NoSuchElementException =>
-                  recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                  logger.debug(new RecordEntry[Node](node.root, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -338,7 +338,7 @@ class DateTimeParser ( context : {
             {
               case Some(monthNumber) => return Some.apply(new Date(Some.apply(year.toInt), Some.apply(monthNumber), Some.apply(day.toInt), datatype))
               case None =>
-                recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                logger.debug(new RecordEntry[Node](node.root, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
 
@@ -361,7 +361,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(month = Some.apply(monthNumber), day = Some.apply(day.toInt), datatype = dtMonthDay))
                 case None =>
-                  recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                  logger.debug(new RecordEntry[Node](node.root, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
         for(result <- DayMonthRegex2.findFirstMatchIn(input))
@@ -372,7 +372,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(month = Some.apply(monthNumber), day = Some.apply(day.toInt), datatype = dtMonthDay))
                 case None =>
-                  recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                  logger.debug(new RecordEntry[Node](node.root, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
         None
@@ -390,7 +390,7 @@ class DateTimeParser ( context : {
             {
                 case Some(monthNumber) => return Some.apply(new Date(year = Some.apply((eraIdentifier+year).toInt), month = Some.apply(monthNumber), datatype = dtYearMonth))
                 case None =>
-                  recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Internal, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
+                  logger.debug(new RecordEntry[Node](node.root, Language.getOrElse(language, Language.None), "Month with name '"+month+"' (language: "+language+") is unknown"))
             }
         }
         if(tryMinorTypes)

@@ -1,16 +1,16 @@
 package org.dbpedia.extraction.dump.extract
-
-import java.util.logging.{Level, Logger}
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong
-import org.dbpedia.extraction.util.StringUtils
+
+import org.dbpedia.extraction.config.{ExtractionLogger}
+import org.dbpedia.extraction.util.{Language, StringUtils}
 
 /**
  * Keeps track of the extraction progress.
  */
 class ExtractionProgress(label: String, description: String)
 {
-  private val logger = Logger.getLogger(getClass.getName)
+  private val logger = ExtractionLogger.getLogger(getClass, Language.None)
 
   /**
    * The time when the page extraction was started. Milliseconds since midnight, January 1, 1970 UTC.

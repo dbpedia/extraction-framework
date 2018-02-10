@@ -2,8 +2,9 @@ package org.dbpedia.extraction.statistics
 
 import java.io.{File, PrintWriter}
 import java.util.concurrent.ConcurrentHashMap
-import java.util.logging.{Level, Logger}
 
+import org.apache.log4j.{Level, Logger}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.scripts.QuadMapper
 import org.dbpedia.extraction.util.{Language, RichFile, SimpleWorkers, Workers}
 import org.dbpedia.extraction.wikiparser.Namespace
@@ -19,10 +20,9 @@ object TypeStatistics {
   private var localized = false
   private var writeProps = false
   private var writeObjects = false
-  private val logger = Logger.getLogger(getClass.getName)
+  private val logger = ExtractionLogger.getLogger(getClass, Language.None)
 
   def main(args: Array[String]): Unit = {
-
 
     require(args != null && args.length >= 7,
       "need at least 7 args: " +

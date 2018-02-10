@@ -6,6 +6,7 @@ import org.dbpedia.extraction.config.provenance.ParserRecord
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Node, NodeUtil, PropertyNode}
+import org.dbpedia.iri.IRI
 
 /**
  * Extracts data from a node in the abstract syntax tree.
@@ -28,14 +29,16 @@ abstract class DataParser[T]
     {
         if(split)
         {
-            NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, transformCmd = transformCmd, transformFunc = transformFunc)
-              .flatMap( node => parseWithProvenance(node).toList )
+            val zw = NodeUtil.splitPropertyNode(propertyNode, splitPropertyNodeRegex, transformCmd = transformCmd, transformFunc = transformFunc)
+            zw.flatMap( node => parseWithProvenance(node).toList )
         }
         else
         {
             parseWithProvenance(propertyNode).toList
         }
     }
+
+  lazy val softwareAgentAnnotation: IRI = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
 
   /**
     * Executes the parse function and appends a ParseRecord for provenance
@@ -47,9 +50,8 @@ abstract class DataParser[T]
         case Some(pr) => pr.provenance match{
           case Some(_) => Some(pr)
           case None =>
-            val annotation = SoftwareAgentAnnotation.getAnnotationIri(this.getClass)
             val rec = ParserRecord(
-              uri = annotation,
+              uri = this.softwareAgentAnnotation,
               wikiText = node.root.getOriginWikiText(node.line),
               transformed = node.toWikiText,
               resultValue = pr.value.toString

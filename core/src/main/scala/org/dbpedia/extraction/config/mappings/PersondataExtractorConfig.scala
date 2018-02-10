@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.config.mappings
 
-
+@Deprecated
 object PersondataExtractorConfig
 {
   // The French template is not used anymore. See http://fr.wikipedia.org/wiki/Wikipédia:Sondage/Limitation_du_modèle_Métadonnées_personne

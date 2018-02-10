@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.apache.log4j.Level
 import org.dbpedia.extraction.annotations.WikiNodeAnnotation
 import org.dbpedia.extraction.config._
 import org.dbpedia.extraction.config.provenance.NodeRecord
@@ -194,12 +195,9 @@ trait Node extends Serializable with Recordable[Node]
     */
   def getNodeRecord: NodeRecord
 
-  private var extractionRecords: ListBuffer[RecordEntry[Node]] = null
-  override def recordEntries: List[RecordEntry[Node]] = {
-    if(extractionRecords == null || extractionRecords.isEmpty)
-      List(new NodeEntry(this, RecordCause.Internal))
-    else
-      extractionRecords.toList
+  private var extractionRecords: ListBuffer[RecordEntry[Node]] = _
+  override def recordEntries: Seq[RecordEntry[Node]] = {
+      extractionRecords
   }
 
   private[extraction] def addExtractionRecord(recordEntry: RecordEntry[_]): Unit ={
@@ -208,7 +206,7 @@ trait Node extends Serializable with Recordable[Node]
       extractionRecords = new ListBuffer[RecordEntry[Node]]()
     recordEntry match{
       case re: RecordEntry[Node] => extractionRecords.append(re)
-      case de: RecordEntry[DefaultEntry] => extractionRecords.append(new RecordEntry[Node](this, de.cause, Option(de.language).getOrElse(Language.None), de.msg, de.error))
+      case de: RecordEntry[DefaultEntry] => extractionRecords.append(new RecordEntry[Node](this, Option(de.language).getOrElse(Language.None), de.msg, de.error, de.level))
       case _ =>
     }
   }

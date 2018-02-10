@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
@@ -32,6 +32,11 @@ extends Extractor[TableNode]
 
     override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyPropertiesObjects,DBpediaDatasets.OntologyTypes)
 
+    private val qbt = QuadBuilder(context.language, DBpediaDatasets.OntologyTypes, context.ontology.properties("rdf:type"), null)
+    qbt.setExtractor(this.softwareAgentAnnotation)
+    private val qbo = QuadBuilder(context.language, DBpediaDatasets.OntologyPropertiesObjects, correspondingProperty, null)
+    qbo.setExtractor(this.softwareAgentAnnotation)
+
     override def extract(tableNode : TableNode, subjectUri : String): Seq[Quad] =
     {
         val tableHeader = extractTableHeader(tableNode)
@@ -56,16 +61,24 @@ extends Extractor[TableNode]
             //Generate instance URI
             val instanceUri = tableNode.generateUri(correspondingInstance.getOrElse(subjectUri), rowNode.children.head)
 
+            qbt.setNodeRecord(rowNode.getNodeRecord)
+            qbt.setSourceUri(rowNode.sourceIri)
+            qbo.setNodeRecord(rowNode.getNodeRecord)
+            qbo.setSourceUri(rowNode.sourceIri)
+
             //Add new ontology instance
-            for (cls <- mapToClass.relatedClasses)
-              graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, rowNode.sourceIri, null)
+            graph ++= mapToClass.relatedClasses.map(cls =>{
+                qbt.setSubject(instanceUri)
+                qbt.setValue(cls.uri)
+                qbt.getQuad
+            })
 
             //Link new instance to the corresponding Instance
-            for(corUri <- correspondingInstance)
-            {
-                //TODO write generic and specific properties
-                graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, corUri, correspondingProperty, instanceUri, rowNode.sourceIri, null)
-            }
+            graph ++= correspondingInstance.map(corUri => {
+                qbo.setSubject(corUri)
+                qbo.setValue(instanceUri)
+                qbo.getQuad
+            })
 
             //Extract properties
             graph ++= mappings.flatMap(_.extract(templateNode, instanceUri))

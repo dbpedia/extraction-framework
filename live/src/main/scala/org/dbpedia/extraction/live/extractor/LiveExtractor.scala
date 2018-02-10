@@ -73,8 +73,6 @@ object LiveExtractor
         def disambiguations : Disambiguations = new Disambiguations(Set[Long]())
 
         def commonsSource : Source = _commonsSource
-
-        def recorder[T: ClassTag]: ExtractionRecorder[T] = null.asInstanceOf[ ExtractionRecorder[T]]
       }
   }
 

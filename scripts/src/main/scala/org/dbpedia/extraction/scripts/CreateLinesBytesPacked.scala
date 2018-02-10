@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.{File, Writer}
-import java.util.logging.{Level, Logger}
 
 import org.apache.commons.lang3.SystemUtils
-import org.dbpedia.extraction.config.Config
+import org.apache.log4j.{Level, Logger}
+import org.dbpedia.extraction.config.{Config, ExtractionLogger, ExtractionRecorder}
 
 import scala.util.control.Breaks._
 import org.dbpedia.extraction.util._
@@ -25,7 +25,7 @@ import scala.util.matching.Regex
   * ! only suitable for UNIX environments !
   */
 object CreateLinesBytesPacked {
-  private val logger = Logger.getLogger(getClass.getName)
+  private val logger = ExtractionLogger.getLogger(getClass, Language.None)
   private val pattern: Regex = ".*\\.bz2$".r
 
   def resolveSymLink(file: File): String ={
@@ -60,7 +60,7 @@ object CreateLinesBytesPacked {
 
         val splits = line.trim.split(";")
         if (splits.length != 5) {
-          logger.log(Level.WARNING, "The file " + file.getAbsoluteFile + " was not in the expected csv format of 5 columns.")
+          logger.log(Level.WARN, "The file " + file.getAbsoluteFile + " was not in the expected csv format of 5 columns.")
           break
         }
         val insert = new mutable.HashMap[String, String]()
@@ -111,7 +111,7 @@ object CreateLinesBytesPacked {
     val dirWorkers = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { path: FileLike[_] =>
 
       if (!path.exists || !path.isDirectory) {
-        logger.log(Level.SEVERE, "Directory does not exist : " + path.getFile.getAbsolutePath)
+        logger.log(Level.FATAL, "Directory does not exist : " + path.getFile.getAbsolutePath)
         return
       }
       //get all bz2 files of this directory and check if this list is empty
@@ -162,7 +162,7 @@ object CreateLinesBytesPacked {
         }
       } catch{
         case f: Throwable =>
-          logger.log(Level.SEVERE, "An exception for file " + lastFile + " arose: " + f.getMessage)
+          logger.log(Level.FATAL, "An exception for file " + lastFile + " arose: " + f.getMessage)
           writer.write("Exception: " + f.getMessage + "\n")
           writer.close()
       }

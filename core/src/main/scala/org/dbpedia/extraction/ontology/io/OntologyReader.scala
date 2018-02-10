@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.ontology.io
 
-import java.util.logging.Logger
+import org.dbpedia.extraction.config.{ExtractionLogger}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
@@ -13,7 +13,7 @@ import org.dbpedia.extraction.sources.Source
  */
 class OntologyReader
 {
-    private val logger = Logger.getLogger(classOf[OntologyReader].getName)
+  private val logger = ExtractionLogger.getLogger(getClass, Language.None)
 
     def read(source : Source) : Ontology =
     {
@@ -165,7 +165,7 @@ class OntologyReader
             case Some(text) if text == "owl:FunctionalProperty" => true
             case Some(text) =>
             {
-                logger.warning(node.root.title + " - Found property with an invalid type")
+                logger.warn(node.root.title + " - Found property with an invalid type")
                 false
             }
             case None => false
@@ -190,7 +190,7 @@ class OntologyReader
                 }
                 else
                 {
-                    logger.warning(node.root.title + " - Cannot load datatype property " + name + " because it does not define its range")
+                    logger.warn(node.root.title + " - Cannot load datatype property " + name + " because it does not define its range")
                     return None
                 }
             }
@@ -218,7 +218,7 @@ class OntologyReader
             case Some(text) => text
             case None =>
             {
-                logger.warning(node.root.title + " - SpecificProperty on " + className +" does not define a base property")
+                logger.warn(node.root.title + " - SpecificProperty on " + className +" does not define a base property")
                 return None
             }
         }
@@ -228,7 +228,7 @@ class OntologyReader
             case Some(text) => text
             case None =>
             {
-                logger.warning(node.root.title + " - SpecificProperty on " + className +" does not define a unit")
+                logger.warn(node.root.title + " - SpecificProperty on " + className +" does not define a unit")
                 return None
             }
         }
@@ -268,13 +268,13 @@ class OntologyReader
             }
             case _ =>
             {
-              logger.warning(node.root.title + " - Language code '" + langCode + "' is not supported. Ignoring corresponding " + propertyName)
+              logger.warn(node.root.title + " - Language code '" + langCode + "' is not supported. Ignoring corresponding " + propertyName)
               None
             }
           }
           case _ =>
           {
-            logger.warning(node.root.title + " - Property '" + property.key + "' could not be parsed. Ignoring corresponding " + propertyName)
+            logger.warn(node.root.title + " - Property '" + property.key + "' could not be parsed. Ignoring corresponding " + propertyName)
             None
           }
         }
@@ -297,7 +297,7 @@ class OntologyReader
             None // ignore space between templates
           }
           case _ => {
-            logger.warning(node.root.title+" - Ignoring invalid node '"+child.toWikiText+"' in value of property '"+propertyName+"'.")
+            logger.warn(node.root.title+" - Ignoring invalid node '"+child.toWikiText+"' in value of property '"+propertyName+"'.")
             None
           }
         }
@@ -323,7 +323,7 @@ class OntologyReader
         }
         case _ => // bad children
       }
-      logger.warning(template.root.title+" - Ignoring invalid template "+template.toWikiText)
+      logger.warn(template.root.title+" - Ignoring invalid template "+template.toWikiText)
       None
     }
     
@@ -374,11 +374,11 @@ class OntologyReader
                 val baseClasses = baseClassNames.flatMap { baseClassName => classMap.get(baseClassName) match {
                    case Some(baseClassBuilder) => baseClassBuilder.build(classMap)
                    case None if !RdfNamespace.validate(baseClassName) => {
-                     logger.config("base class '" + baseClassName + "' of class '" + name + "' was not found, but for its namespace this was expected")
+                     logger.debug("base class '" + baseClassName + "' of class '" + name + "' was not found, but for its namespace this was expected")
                      Some(new OntologyClass(baseClassName, Map(), Map(), List(), Set(), Set()))
                    }
                    case None => {
-                     logger.warning("base class '" + baseClassName + "' of class '" + name + "' not found")
+                     logger.warn("base class '" + baseClassName + "' of class '" + name + "' not found")
                      None
                    }
                  }
@@ -387,11 +387,11 @@ class OntologyReader
                 val equivClasses = equivClassNames.flatMap { equivClassName => classMap.get(equivClassName) match {
                   case Some(equivClassBuilder) => equivClassBuilder.build(classMap)
                   case None if !RdfNamespace.validate(equivClassName) => {
-                    logger.config("equivalent class '" + equivClassName + "' of class '" + name + "' was not found, but for its namespace this was expected")
+                    logger.debug("equivalent class '" + equivClassName + "' of class '" + name + "' was not found, but for its namespace this was expected")
                     Some(new OntologyClass(equivClassName, Map(), Map(), List(), Set(), Set()))
                   }
                   case None => {
-                    logger.warning("equivalent class '" + equivClassName + "' of class '" + name + "' not found")
+                    logger.warn("equivalent class '" + equivClassName + "' of class '" + name + "' not found")
                     None
                   }
                 }
@@ -400,11 +400,11 @@ class OntologyReader
                 val disjointClasses = disjClassNames.flatMap { disjClassNames => classMap.get(disjClassNames) match {
                   case Some(equivClassBuilder) => equivClassBuilder.build(classMap)
                   case None if !RdfNamespace.validate(disjClassNames) => {
-                    logger.config("equivalent class '" + disjClassNames + "' of class '" + name + "' was not found, but for its namespace this was expected")
+                    logger.debug("equivalent class '" + disjClassNames + "' of class '" + name + "' was not found, but for its namespace this was expected")
                     Some(new OntologyClass(disjClassNames, Map(), Map(), List(), Set(), Set()))
                   }
                   case None => {
-                    logger.warning("equivalent class '" + disjClassNames + "' of class '" + name + "' not found")
+                    logger.warn("equivalent class '" + disjClassNames + "' of class '" + name + "' not found")
                     None
                   }
                 }
@@ -446,28 +446,28 @@ class OntologyReader
                 case Some(domainClassBuilder) => domainClassBuilder.generatedClass match
                 {
                     case Some(cls) => cls
-                    case None => logger.warning("domain '"+domain+"' of property '"+name+"' could not be loaded"); return None
+                    case None => logger.warn("domain '"+domain+"' of property '"+name+"' could not be loaded"); return None
                 }
                 // TODO: do we want this? Maybe we should disallow external domain types.
                 case None if ! RdfNamespace.validate(domain) =>
                 {
-                    logger.config("domain '"+domain+"' of property '"+name+"' was not found, but for its namespace this was expected")
+                    logger.debug("domain '"+domain+"' of property '"+name+"' was not found, but for its namespace this was expected")
                     new OntologyClass(domain, Map(), Map(), List(), Set(), Set())
                 }
-                case None => logger.warning("domain '"+domain+"' of property '"+name+"' not found"); return None
+                case None => logger.warn("domain '"+domain+"' of property '"+name+"' not found"); return None
             }
 
             var equivProperties = Set.empty[OntologyProperty]
             for (name <- equivPropertyNames) {
               // FIXME: handle equivalent properties in namespaces that we validate
-              if (RdfNamespace.validate(name)) logger.warning("Cannot use equivalent property '"+name+"'")
+              if (RdfNamespace.validate(name)) logger.warn("Cannot use equivalent property '"+name+"'")
               else equivProperties += new OntologyProperty(name, Map(), Map(), null, null, false, Set(), Set())
             }
 
             var superProperties = Set.empty[OntologyProperty]
             for (name <- superPropertyNames) {
               // FIXME: handle equivalent properties in namespaces that we validate
-              if (RdfNamespace.validate(name)) logger.warning("Cannot use super property '"+name+"'")
+              if (RdfNamespace.validate(name)) logger.warn("Cannot use super property '"+name+"'")
               else superProperties += new OntologyProperty(name, Map(), Map(), null, null, false, Set(), Set())
             }
 
@@ -478,15 +478,15 @@ class OntologyReader
                     case Some(rangeClassBuilder) => rangeClassBuilder.generatedClass match
                     {
                         case Some(clazz) => clazz
-                        case None => logger.warning("range '"+range+"' of property '"+name+"' could not be loaded"); return None
+                        case None => logger.warn("range '"+range+"' of property '"+name+"' could not be loaded"); return None
                     }
                     // TODO: do we want this? Maybe we should disallow external range types.
                     case None if ! RdfNamespace.validate(range) =>
                     {
-                        logger.config("range '"+range+"' of property '"+name+"' was not found, but for its namespace this was expected")
+                        logger.debug("range '"+range+"' of property '"+name+"' was not found, but for its namespace this was expected")
                         new OntologyClass(range, Map(), Map(), List(), Set(), Set())
                     }
-                    case None => logger.warning("range '"+range+"' of property '"+name+"' not found"); return None
+                    case None => logger.warn("range '"+range+"' of property '"+name+"' not found"); return None
                 }
 
                 generatedProperty = Some(new OntologyObjectProperty(name, labels, comments, domainClass, rangeClass, isFunctional, equivProperties, superProperties))
@@ -496,7 +496,7 @@ class OntologyReader
                 val rangeType = typeMap.get(range) match
                 {
                     case Some(datatype) => datatype
-                    case None => logger.warning("range '"+range+"' of property '"+name+"' not found"); return None
+                    case None => logger.warn("range '"+range+"' of property '"+name+"' not found"); return None
                 }
 
                 generatedProperty = Some(new OntologyDatatypeProperty(name, labels, comments, domainClass, rangeType, isFunctional, equivProperties, superProperties))
@@ -522,9 +522,9 @@ class OntologyReader
                 case Some(domainClassBuilder) => domainClassBuilder.generatedClass match
                 {
                     case Some(clazz) => clazz
-                    case None => logger.warning("Cannot specialize property on class '" + className + "', since the class failed to load"); return None
+                    case None => logger.warn("Cannot specialize property on class '" + className + "', since the class failed to load"); return None
                 }
-                case None => logger.warning("Cannot specialize property on class '" + className + "', since the class has not been found"); return None
+                case None => logger.warn("Cannot specialize property on class '" + className + "', since the class has not been found"); return None
             }
 
             //Load the base property
@@ -533,23 +533,23 @@ class OntologyReader
                 case Some(propertyBuilder) => propertyBuilder.generatedProperty match
                 {
                     case Some(property) => property
-                    case None => logger.warning("Cannot specialize property '" + propertyName + "' on class '" + className + "', since the property failed to load"); return None
+                    case None => logger.warn("Cannot specialize property '" + propertyName + "' on class '" + className + "', since the property failed to load"); return None
                 }
-                case None => logger.warning("Cannot specialize property '" + propertyName + "' on class '" + className + "', since the property has not been found"); return None
+                case None => logger.warn("Cannot specialize property '" + propertyName + "' on class '" + className + "', since the property has not been found"); return None
             }
 
             //Load the specialized range of the property
             val specializedRange = typeMap.get(datatypeName) match
             {
                 case Some(datatype) => datatype
-                case None => logger.warning("Cannot specialize property " + propertyName + " on class " + className + ", " +
+                case None => logger.warn("Cannot specialize property " + propertyName + " on class " + className + ", " +
                         "since the range '" + datatypeName + "' has not been found"); return None
             }
 
             //Check if the range of the base property is a dimension
             if(!baseProperty.range.isInstanceOf[DimensionDatatype])
             {
-                logger.warning("Cannot specialize property " + propertyName + " on class " + className + ", " +
+                logger.warn("Cannot specialize property " + propertyName + " on class " + className + ", " +
                         "since the range of the base property '" + baseProperty.range + "' is not a dimension")
                 return None
             }
@@ -557,7 +557,7 @@ class OntologyReader
             //Check if the range of the specialized property is a unit
             if(!specializedRange.isInstanceOf[UnitDatatype])
             {
-                logger.warning("Cannot specialize property " + propertyName + " on class " + className + ", " +
+                logger.warn("Cannot specialize property " + propertyName + " on class " + className + ", " +
                         "since the range '" + specializedRange + "' is not a unit")
                 return None
             }
@@ -565,7 +565,7 @@ class OntologyReader
             //Check if the range of the specialized property is in the dimension of the base property range
             if(specializedRange.asInstanceOf[UnitDatatype].dimension != baseProperty.range)
             {
-                logger.warning("Cannot specialize property " + propertyName + " on class " + className + ", " +
+                logger.warn("Cannot specialize property " + propertyName + " on class " + className + ", " +
                         "since the range of the base property has another dimension")
                 return None
             }

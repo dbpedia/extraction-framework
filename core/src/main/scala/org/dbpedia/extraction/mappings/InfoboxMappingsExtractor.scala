@@ -4,7 +4,7 @@ import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotati
 import org.dbpedia.extraction.config.dataparser.InfoboxMappingsExtractorConfig._
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{ExtractorUtils, InfoboxMappingsUtils, Language}
 import org.dbpedia.extraction.wikiparser._
 
@@ -28,7 +28,12 @@ class InfoboxMappingsExtractor(context: {
   val hintDatasetInst: Dataset = DBpediaDatasets.TemplateMappingsHintsInstance
   val hintDataset: Dataset = DBpediaDatasets.TemplateMappingsHints
   val mapDataset: Dataset = DBpediaDatasets.TemplateMappings
+  val xsdString = context.ontology.datatypes("xsd:string")
   override val datasets = Set(hintDataset, mapDataset)
+
+  private val qb = QuadBuilder.stringPredicate(context.language, hintDataset, templateParameterProperty)
+  qb.setExtractor(this.softwareAgentAnnotation)
+  qb.setDatatype(xsdString)
 
   override def extract(page : PageNode, subjectUri : String): Seq[Quad] = {
     if (!List(Namespace.Template, Namespace.Main).contains(page.title.namespace) || page.isRedirect) return Seq.empty
@@ -43,23 +48,28 @@ class InfoboxMappingsExtractor(context: {
     val wikidataParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("wikidata"))
     val propertyLinkParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("propertyLink"))
 
+    qb.setSourceUri(page.sourceIri)
+    qb.setNodeRecord(page.getNodeRecord)
+    qb.setSubject(subjectUri)
 
     val mappingQuads = propertyParserFuncionsMappings.map( p => {
-      val value = p._1.toString + "=>" + p._2.toString
-      new Quad(context.language, mapDataset, subjectUri, templateParameterProperty,
-        value, page.sourceIri, context.ontology.datatypes("xsd:string")) })
+      val qbs = qb.clone
+      qbs.setDataset(mapDataset)
+      qbs.setValue(p._1.toString + "=>" + p._2.toString)
+      qbs.getQuad
+    })
 
-    val parserFuncQuads = (propertyParserFuncions ++ wikidataParserFunc ++ propertyLinkParserFunc).map( p =>
-      new Quad(context.language, hintDataset, subjectUri, templateParameterProperty,
-        p.toWikiText, page.sourceIri, context.ontology.datatypes("xsd:string"))
-    )
+    val parserFuncQuads = (propertyParserFuncions ++ wikidataParserFunc ++ propertyLinkParserFunc).map( p =>{
+      qb.setValue(p.toWikiText)
+      qb.getQuad
+    })
 
     val templateQuads = ExtractorUtils.collectTemplatesFromNodeTransitive(page)
       .filter(t => List("conditionalurl",/* "official_website",*/ "wikidatacheck").contains(t.title.encoded.toString.toLowerCase))
-      .map(t => new Quad(context.language, hintDataset, subjectUri, templateParameterProperty,
-        t.toWikiText, page.sourceIri, context.ontology.datatypes("xsd:string")))
-
-
+      .map(t => {
+        qb.setValue(t.toWikiText)
+        qb.getQuad
+      })
 
     parserFuncQuads ++ templateQuads ++ mappingQuads
 

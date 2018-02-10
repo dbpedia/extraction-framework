@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.Logger
-
+import org.apache.log4j.Logger
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.config.mappings.MediaExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.mappings.MappingsLoader.getClass
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
@@ -39,7 +40,7 @@ extends PageNodeExtractor
 
   private val fileNamespaceIdentifier = Namespace.File.name(language)
 
-  private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
   private val encodedLinkRegex = """%[0-9a-fA-F][0-9a-fA-F]""".r
 
@@ -54,7 +55,10 @@ extends PageNodeExtractor
 
   private val commonsLang = Language.Commons
 
-  override val datasets = Set(DBpediaDatasets.Images)
+  override val datasets = Set(DBpediaDatasets.Images, DBpediaDatasets.Sounds)
+
+  private val qb = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.Images)
+  qb.setExtractor(this.softwareAgentAnnotation)
 
   override def extract(node: PageNode, subjectUri: String): Seq[Quad] =
   {
@@ -68,6 +72,9 @@ extends PageNodeExtractor
          if (!mediaFileName.toLowerCase.startsWith("replace_this_image"))
            && (api.fileExistsOnWiki(mediaFileName, commonsLang)))
     {
+      qb.setSourceUri(sourceNode.sourceIri)
+      qb.setNodeRecord(node.getNodeRecord)
+
       val dbpediaUrl = ExtractorUtils.getDbpediaFileURL (mediaFileName, commonsLang)
       val url = ExtractorUtils.getFileURL (mediaFileName, commonsLang)
 
@@ -76,28 +83,61 @@ extends PageNodeExtractor
           val wikipediaMediaUrl = language.baseUri + "/wiki/" + fileNamespaceIdentifier + ":" + mediaFileName
 
           if (firstImage) {
-            quads += new Quad (language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceIri, null)
-            quads += new Quad (language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceIri, null)
-            quads += new Quad (language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaMediaUrl, sourceNode.sourceIri, null)
-            quads += new Quad (language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceIri, null)
+            qb.setSubject(url)
+            qb.setPredicate(foafThumbnailProperty)
+            qb.setValue(thumbnailUrl)
+            quads += qb.getQuad
+
+            qb.setSubject(thumbnailUrl)
+            qb.setPredicate(rdfType)
+            qb.setValue(imageClass.uri)
+            quads += qb.getQuad
+
+            qb.setSubject(thumbnailUrl)
+            qb.setPredicate(dcRightsProperty)
+            qb.setValue(wikipediaMediaUrl)
+            quads += qb.getQuad
+
+            qb.setSubject(subjectUri)
+            qb.setPredicate(dbpediaThumbnailProperty)
+            qb.setValue(thumbnailUrl)
+            quads += qb.getQuad
 
           firstImage = false
           }
 
-          quads += new Quad (language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceIri, null)
-          quads += new Quad (language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaMediaUrl, sourceNode.sourceIri, null)
+        qb.setSubject(url)
+        qb.setPredicate(rdfType)
+        qb.setValue(imageClass.uri)
+        quads += qb.getQuad
 
-          quads += new Quad (language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceIri, null)
-        }
+        qb.setSubject(url)
+        qb.setPredicate(dcRightsProperty)
+        qb.setValue(wikipediaMediaUrl)
+        quads += qb.getQuad
+
+        qb.setSubject(subjectUri)
+        qb.setPredicate(foafDepictionProperty)
+        qb.setValue(url)
+        quads += qb.getQuad
+      }
       else if (mediaFileName.matches(MediaExtractorConfig.SoundRegex.regex)) {
-        quads += new Quad (language, DBpediaDatasets.Sounds, url, rdfType, soundClass.uri, sourceNode.sourceIri, null)
+        val qbs = qb.clone
+        qbs.setDataset(DBpediaDatasets.Sounds)
+        qbs.setSubject(url)
+        qbs.setPredicate(rdfType)
+        qbs.setValue(soundClass.uri)
+        quads += qbs.getQuad
       }
       else if (mediaFileName.matches(MediaExtractorConfig.VideoRegex.regex)) {
-        // Do nothing for videos as of now
+        // FIXME Do nothing for videos as of now
       }
 
       // Same quad for every media resource
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, mediaItem, dbpediaUrl, sourceNode.sourceIri, null)
+      qb.setSubject(subjectUri)
+      qb.setPredicate(mediaItem)
+      qb.setValue(dbpediaUrl)
+      quads += qb.getQuad
     }
 
     quads

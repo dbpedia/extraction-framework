@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.dataparser
 
-import java.util.logging.{Level, Logger}
-
 import org.dbpedia.extraction.wikiparser.Node
 import java.text.ParseException
 
+import org.apache.log4j.{Level, Logger}
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
@@ -22,7 +22,7 @@ class IntegerParser( context : { def language : Language } ,
 {
     private val parserUtils = new ParserUtils(context)
 
-    private val logger = Logger.getLogger(getClass.getName)
+    private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
     private val language = context.language.wikiCode
 
@@ -53,7 +53,7 @@ class IntegerParser( context : { def language : Language } ,
             case Some(s) => s.subgroups.head.toString // s is the WHOLE MATCH, while we want the matching subgroup
             case None =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + input + "' to an integer, IntegerRegex did not match")
+                logger.log(Level.TRACE, "Cannot convert '" + input + "' to an integer, IntegerRegex did not match")
                 return None
             }
         }
@@ -76,17 +76,17 @@ class IntegerParser( context : { def language : Language } ,
         {
             case ex : ParseException =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
+                logger.log(Level.TRACE, "Cannot convert '" + numberStr + "' to an integer", ex)
                 None
             }
             case ex : NumberFormatException =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
+                logger.log(Level.TRACE, "Cannot convert '" + numberStr + "' to an integer", ex)
                 None
             }
             case ex : ArrayIndexOutOfBoundsException =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
+                logger.log(Level.TRACE, "Cannot convert '" + numberStr + "' to an integer", ex)
                 None
             }
         }

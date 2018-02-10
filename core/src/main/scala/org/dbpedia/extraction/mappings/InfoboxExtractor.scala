@@ -15,7 +15,6 @@ class InfoboxExtractor(
     def ontology : Ontology
     def language : Language
     def redirects : Redirects
-    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 ) extends ExtendedInfoboxExtractor(context) {
 

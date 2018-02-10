@@ -4,7 +4,7 @@ import java.io.File
 import java.net.URL
 import java.util.logging.{Level, Logger}
 
-import org.dbpedia.extraction.config.ExtractionRecorder
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
@@ -32,7 +32,7 @@ abstract class ExtractionManager(
     customTestExtractors: Map[Language, Seq[Class[_ <: Extractor[_]]]])
 {
   self =>
-    private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
+    private val logger = ExtractionLogger.getLogger(getClass, Language.None)
 
     def mappingExtractor(language : Language) : WikiPageExtractor
 
@@ -70,7 +70,7 @@ abstract class ExtractionManager(
     val er = Server.getExtractionRecorder[Quad](language)
     for (page <- source){
       val quads = extract.extract(page, page.uri).filter(q => datasets.contains(q.dataset))
-      quads.foreach(q => er.record(q))
+      quads.foreach(q => logger.debug(q))
       destination.write(quads.sortBy(x => (x.subject, x.predicate)).reverse)
     }
   }
@@ -82,7 +82,7 @@ abstract class ExtractionManager(
       destination.open()
       for (page <- source){
         val quads = extractor.extract(page, page.uri).filter(q => datasets.contains(q.dataset))
-        quads.foreach(q => er.record(q))
+        quads.foreach(q => logger.debug(q))
         destination.write(quads.sortBy(x => (x.subject, x.predicate)).reverse)
       }
       destination.close()
@@ -135,7 +135,7 @@ abstract class ExtractionManager(
     {
         val source = if (paths.ontologyFile != null && paths.ontologyFile.isFile)
         {
-            logger.warning("LOADING ONTOLOGY NOT FROM SERVER, BUT FROM LOCAL FILE ["+paths.ontologyFile+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
+            logger.warn("LOADING ONTOLOGY NOT FROM SERVER, BUT FROM LOCAL FILE ["+paths.ontologyFile+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
             XMLSource.fromFile(paths.ontologyFile, language = Language.Mappings)
         }
         else 
@@ -169,10 +169,10 @@ abstract class ExtractionManager(
         {
             val file = new File(paths.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
             if(!file.exists()) {
-              logger.warning("MAPPING FILE [" + file + "] DOES NOT EXIST! WILL BE IGNORED")
+              logger.warn("MAPPING FILE [" + file + "] DOES NOT EXIST! WILL BE IGNORED")
               return Map[WikiTitle, WikiPage]()
             }
-            logger.warning("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
+            logger.warn("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
             XMLSource.fromFile(file, language) // TODO: use Language.Mappings?
         }
         else
@@ -223,7 +223,6 @@ abstract class ExtractionManager(
             val configFile: ServerConfiguration = Server.config
             val nonFreeImages = Seq()
             val freeImages = Seq()
-            def recorder[T: ClassTag]: ExtractionRecorder[T] = Server.getExtractionRecorder[T](lang)
       }
     }
 
@@ -243,7 +242,6 @@ abstract class ExtractionManager(
           val configFile: ServerConfiguration = Server.config
           val nonFreeImages = Seq()
           val freeImages = Seq()
-          def recorder[T: ClassTag]: ExtractionRecorder[T] = Server.getExtractionRecorder[T](lang)
         }
 
         MappingsLoader.load(context)

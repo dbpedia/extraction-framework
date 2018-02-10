@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.ExtractionRecorder
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 
@@ -36,12 +36,12 @@ class ExtendedInfoboxExtractor(
     def ontology : Ontology
     def language : Language
     def redirects : Redirects
-    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends PageNodeExtractor
 {
-    private val recorder = context.recorder[PageNode]
+
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Configuration
@@ -202,7 +202,7 @@ extends PageNodeExtractor
                 }
               }
               catch {
-                case ex: IllegalArgumentException => recorder.failedRecord[Node](template.root, ex, language)
+                case ex: IllegalArgumentException => logger.debug(template.root, language, ex)
               }
             }
             seenProperties.synchronized {

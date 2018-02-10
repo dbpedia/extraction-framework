@@ -18,16 +18,15 @@ import scala.reflect.ClassTag
 /**
   * Extracts information about persons (date and place of birth etc.) from the English and German Wikipedia, represented using the FOAF vocabulary.
   */
-@Deprecated
 @SoftwareAgentAnnotation(classOf[PersondataExtractor], AnnotationType.Extractor)
+@Deprecated
 class PersondataExtractor(
-                           context : {
-                             def ontology : Ontology
-                             def redirects : Redirects // redirects required by DateTimeParser
-                             def language : Language
-                             def recorder[T: ClassTag] : ExtractionRecorder[T]
-                           }
-                         )
+    context : {
+     def ontology : Ontology
+     def redirects : Redirects // redirects required by DateTimeParser
+     def language : Language
+    }
+  )
   extends PageNodeExtractor
 {
   private val language = context.language

@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.Logger
-
+import org.apache.log4j.Logger
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
@@ -27,7 +27,7 @@ class ImageAnnotationExtractor (
 )
 extends PageNodeExtractor
 {
-  private val logger = Logger.getLogger(classOf[ImageAnnotationExtractor].getName)
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
   override val datasets = Set(DBpediaDatasets.ImageAnnotations)
 
   /* Properties */

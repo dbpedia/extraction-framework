@@ -26,7 +26,8 @@ class WikiTitle (
   var id: Option[Long] = None
 )
 {
-    if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
+    if (decoded.isEmpty)
+        throw new WikiParserException("page name must not be empty")
 
     /** Wiki-encoded page name (without namespace) e.g. Automobile_generation */
     val encoded = if (capitalizeLink)

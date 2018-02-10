@@ -20,7 +20,6 @@ class AbstractExtractorWikipedia(
     def ontology : Ontology
     def language : Language
     def configFile : Config
-    def recorder[T: ClassTag] : ExtractionRecorder[T]
   })
   extends NifExtractor (context)
 {

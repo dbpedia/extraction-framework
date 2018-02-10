@@ -35,7 +35,6 @@ class NifExtractorTest extends FunSuite {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
     def language = Language.map("eu")
     def configFile = new Config("C:\\Users\\Chile\\IdeaProjects\\extraction-framework-temp\\dump\\extraction.nif.abstracts.properties")
-    def recorder[T: ClassTag] = new ExtractionRecorder[T]
   }
   private val wikipageextractor = new NifExtractor(context)
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))

@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.nif;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.dbpedia.extraction.util.Language;
 import org.dbpedia.iri.UriUtils;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.NodeVisitor;
@@ -245,8 +246,8 @@ public class LinkExtractor implements NodeVisitor {
         private String resource;
         private String wikipediaTemplateString;
 
-        public NifExtractorContext(String language, String resource, String templateString){
-            this.language = language;
+        public NifExtractorContext(Language language, String resource, String templateString){
+            this.language = language.wikiCode();
             this.resource = resource;
             this.wikipediaTemplateString = templateString;
         }

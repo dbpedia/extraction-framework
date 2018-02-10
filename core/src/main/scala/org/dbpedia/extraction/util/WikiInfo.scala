@@ -2,9 +2,9 @@ package org.dbpedia.extraction.util
 
 import java.io.File
 import java.net.URL
-import java.util.logging.Logger
 
-import org.dbpedia.extraction.config.ConfigUtils
+import org.apache.log4j.Logger
+import org.dbpedia.extraction.config.{ConfigUtils, ExtractionLogger, ExtractionRecorder}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.io.{Codec, Source}
@@ -19,7 +19,6 @@ class WikiInfo(val wikicode: String, val pages: Int)
  */
 object WikiInfo
 {
-  val logger = Logger.getLogger(WikiInfo.getClass.getName)
   // hard-coded - there probably is no mirror, and the format is very specific.
   // TODO: user might want to use a local file...
   // TODO: mayby change this to XML serialization

@@ -17,6 +17,8 @@ private[config] class ProvenanceRecordManager(val baseDir: RichFile, val wikiNam
   val fileMap = new mutable.HashMap[(Language, IRI), ProvenanceDestination]()
 
   def getDestination(lang: Language, dataset: IRI): ProvenanceDestination ={
+    if(lang.wikiCode != "fr")
+      throw new Exception()
     fileMap.get((lang, dataset)) match{
       case Some(d) => d
       case None =>

@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.nif
 
-import org.dbpedia.extraction.config.{Config, RecordCause, RecordEntry}
+import org.apache.log4j.Level
+import org.dbpedia.extraction.config.{Config, ExtractionLogger, RecordEntry}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty, RdfNamespace}
@@ -28,13 +29,15 @@ class WikipediaNifExtractor(
      wikiPage: WikiPage
    ) extends HtmlNifExtractor(
       wikiPage.uri + "?dbpv=" + context.configFile.dbPediaVersion + "&nif=context",
-      context.language.isoCode,
+      context.language,
       context.configFile.nifParameters
   ) {
 
   /**
     * DBpedia relevant properties
     */
+
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
   // lazy so testing does not need ontology
   protected lazy val shortProperty: OntologyProperty = context.ontology.properties(context.configFile.abstractParameters.shortAbstractsProperty)
@@ -54,10 +57,7 @@ class WikipediaNifExtractor(
   }
 
   def extractNif(html: String)(exceptionHandle: RecordEntry[WikiPage] => Unit): Seq[Quad] = {
-    super.extractNif(wikiPage.sourceIri, wikiPage.uri, html){ (msg:String, severity:RecordCause.Value, error:Throwable) =>
-      //deal with any exception recorded in the super class
-      new RecordEntry[Node](wikiPage, severity, context.language, msg, error)
-    }
+    super.extractNif(wikiPage.sourceIri, wikiPage.uri, html)
   }
 
   /**

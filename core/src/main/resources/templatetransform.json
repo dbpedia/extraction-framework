@@ -75,7 +75,11 @@
       "keys": ["expand", "frame_style", "title_style", "framestyle", "titlestyle", "list_style", "title", "liststyle", "hlist", "bullets"],
       "whileList":false
     },
-
+    "ushr":{
+      "transformer":"ushr",
+      "keys": [],
+      "whileList":true
+    },
     "ICD9":{
       "comment":"templatesOnly specifies that only the content of the templates is kept as values, surrounding text values are lost",
       "transformer":"extractChildren",
@@ -97,12 +101,6 @@
       "whileList":true,
       "replace": "https://www.drugs.com/$(1||)/$(2||).html",
       "templatesOnly":true
-    },
-    "ushr":{
-      "transformer":"extractChildren",
-      "keys": ["1", "2"],
-      "whileList":true,
-      "replace": "$(1||) $(2||)"
     },
     "ATC":{
       "transformer":"extractChildren",

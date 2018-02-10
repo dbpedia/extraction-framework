@@ -1,15 +1,16 @@
 package org.dbpedia.extraction.dataparser
 
-import java.util.logging.{Level, Logger}
-
-import org.dbpedia.extraction.wikiparser.Node
+import org.dbpedia.extraction.wikiparser.{Node, WikiParserException}
 import java.text.ParseException
 
+import org.apache.log4j.{Level, Logger}
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 
 import scala.language.reflectiveCalls
+import scala.util.{Failure, Success, Try}
 
 /**
  * Parses double-precision floating-point numbers.
@@ -22,7 +23,7 @@ class DoubleParser( context : { def language : Language },
 {
     private val parserUtils = new ParserUtils(context)
 
-    private val logger = Logger.getLogger(getClass.getName)
+    private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
     private val language = context.language.wikiCode
 
@@ -37,7 +38,7 @@ class DoubleParser( context : { def language : Language },
     {
         for( text <- StringParser.parse(node);
              convertedText = parserUtils.convertLargeNumbers(text.value);
-             value <- parseFloatValue(convertedText) )
+             value <- parseFloatValue(convertedText, node.line) )
         {
             return Some(ParseResult(value * multiplicationFactor))
         }
@@ -45,14 +46,13 @@ class DoubleParser( context : { def language : Language },
         None
     }
 
-    private def parseFloatValue(input : String) : Option[Double] =
+    private def parseFloatValue(input : String, line: Int) : Try[Double] =
     {
         val numberStr = if(strict) input.trim else DoubleRegex.findFirstMatchIn(input.trim) match
         {
             case Some(s) => s.toString()
             case None =>
-                logger.log(Level.FINE, "Cannot convert '" + input + "' to a floating point number, DoubleRegex did not match")
-                return None
+                return Failure(new WikiParserException("Cannot convert '" + input + "' to a floating point number, DoubleRegex did not match", line, input, Level.TRACE))
         }
 
         try
@@ -60,19 +60,16 @@ class DoubleParser( context : { def language : Language },
             val result = parserUtils.parse(numberStr).doubleValue
             val hasMinusSign = !input.equals(numberStr) && DataParserConfig.dashVariations.contains(input.trim.charAt(0))
             val negatize = if (result>=0 && hasMinusSign) -1 else 1
-            Some(negatize * result)
+            Success(negatize * result)
         }
         catch
         {
             case ex : ParseException =>
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
-                None
+                Failure(new WikiParserException("Cannot convert '" + numberStr + "' to a floating point number", line, numberStr, Level.TRACE))
             case ex : NumberFormatException =>
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
-                None
+                Failure(new WikiParserException("Cannot convert '" + numberStr + "' to a floating point number", line, numberStr, Level.TRACE))
             case ex : ArrayIndexOutOfBoundsException =>
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
-                None
+                Failure(new WikiParserException("Cannot convert '" + numberStr + "' to an integer", line, numberStr, Level.TRACE))
         }
     }
 }

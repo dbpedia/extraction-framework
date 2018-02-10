@@ -1,10 +1,13 @@
 package org.dbpedia.extraction.dataparser
 
-import org.dbpedia.extraction.ontology.datatypes.{UnitDatatype, DimensionDatatype, Datatype}
+import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype, UnitDatatype}
 import org.dbpedia.extraction.config.dataparser.DurationParserConfig
 import org.dbpedia.extraction.util.Language
 import java.text.ParseException
-import java.util.logging.{Logger, Level}
+
+import org.apache.log4j.{Level, Logger}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
+
 import util.matching.Regex
 import scala.language.reflectiveCalls
 
@@ -14,7 +17,7 @@ class DurationParser( context : { def language : Language } )
 
     private val parserUtils = new ParserUtils(context)
 
-    private val logger = Logger.getLogger(getClass.getName)
+    private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
     private val timeUnits = DurationParserConfig.timesMap.getOrElse(language, DurationParserConfig.timesMap("en"))
 
@@ -163,17 +166,17 @@ class DurationParser( context : { def language : Language } )
         {
             case ex : ParseException =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
+                logger.log(Level.INFO, "Cannot convert '" + numberStr + "' to a floating point number", ex)
                 None
             }
             case ex : NumberFormatException =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to a floating point number", ex)
+                logger.log(Level.INFO, "Cannot convert '" + numberStr + "' to a floating point number", ex)
                 None
             }
             case ex : ArrayIndexOutOfBoundsException =>
             {
-                logger.log(Level.FINE, "Cannot convert '" + numberStr + "' to an integer", ex)
+                logger.log(Level.INFO, "Cannot convert '" + numberStr + "' to an integer", ex)
                 None
             }
         }

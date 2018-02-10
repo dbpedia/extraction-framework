@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
+import org.apache.log4j.Level
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordCause, RecordEntry}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder, RecordEntry}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, ExtractorRecord}
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
@@ -31,12 +32,12 @@ class SimplePropertyMapping (
     def ontology : Ontology
     def redirects : Redirects  // redirects required by DateTimeParser and UnitValueParser
     def language : Language
-    def recorder[T: ClassTag] : ExtractionRecorder[T]
   }
 )
 extends PropertyMapping
 {
-    private val recorder = context.recorder[Node]
+
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
     val selector: List[ParseResult[_]] => List[ParseResult[_]] =
         select match {
@@ -187,7 +188,7 @@ extends PropertyMapping
             parser.parsePropertyNode(propertyNode, !ontologyProperty.isFunctional, transform, valueTransformer)
           } catch {
             case e: Throwable =>
-              recorder.record(new RecordEntry[Node](node, RecordCause.Warning, node.root.title.language, "Failed to parse '" + propertyNode.key + "' from template '" + node.title.decoded + "' in page '" + node.root.title.decoded, e))
+              logger.warn(new RecordEntry[Node](node, node.root.title.language, "Failed to parse '" + propertyNode.key + "' from template '" + node.title.decoded + "' in page '" + node.root.title.decoded, e))
               List()
           }
 

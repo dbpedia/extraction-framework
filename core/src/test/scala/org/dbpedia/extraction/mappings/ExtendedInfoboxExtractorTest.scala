@@ -72,7 +72,6 @@ class ExtendedInfoboxExtractorTest
 			}
 			def language = _language
 			def redirects = new Redirects(Map())
-			def recorder[T: ClassTag] : ExtractionRecorder[T] = new ExtractionRecorder[T]()
 		}
 
 		for(f <- folder.listFiles(filter) )
@@ -82,7 +81,7 @@ class ExtendedInfoboxExtractorTest
 		}
 	}
 
-	def test(fileNameWiki : String, context : AnyRef{def ontology: Ontology; def language : Language; def redirects : Redirects; def recorder[T: ClassTag] : ExtractionRecorder[T]}, folder:File)
+	def test(fileNameWiki : String, context : AnyRef{def ontology: Ontology; def language : Language; def redirects : Redirects}, folder:File)
 	{
 		val goldFile = fileNameWiki.replace(".xml","-gold.tql")
 		
@@ -114,7 +113,7 @@ class ExtendedInfoboxExtractorTest
 
 
 
-	private def render(file : String, context : AnyRef{def ontology: Ontology; def language : Language; def redirects : Redirects; def recorder[T: ClassTag] : ExtractionRecorder[T]}, folder : File) : Seq[Quad] =
+	private def render(file : String, context : AnyRef{def ontology: Ontology; def language : Language; def redirects : Redirects}, folder : File) : Seq[Quad] =
 	{
 		val extractor = new ExtendedInfoboxExtractor(context)
 

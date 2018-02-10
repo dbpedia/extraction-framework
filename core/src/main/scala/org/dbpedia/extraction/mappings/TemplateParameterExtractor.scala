@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -25,14 +25,17 @@ extends PageNodeExtractor
   private val templateParameterProperty = context.language.propertyUri.append("templateUsesParameter")
 
   private val parameterRegex = """(?s)\{\{\{([^|}{<>]*)[|}<>]""".r
+  private val xsdString = context.ontology.datatypes("xsd:string")
   
   override val datasets = Set(DBpediaDatasets.TemplateParameters)
+  private val qb = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.TemplateParameters, templateParameterProperty)
+  qb.setExtractor(this.softwareAgentAnnotation)
 
   override def extract(page : PageNode, subjectUri : String): Seq[Quad] =
   {
     if (page.title.namespace != Namespace.Template || page.isRedirect) return Seq.empty
 
-    val quads = new ArrayBuffer[Quad]()
+
     val parameters = new ArrayBuffer[String]()
     val linkParameters = new ArrayBuffer[String]()
 
@@ -48,17 +51,17 @@ extends PageNodeExtractor
       })
     })
 
-    for (templatePar <- collectTemplateParameters(page) )  {
-      parameters += templatePar.parameter
-    }
 
-    for (parameter <- parameters.distinct if parameter.nonEmpty) {
-      // TODO: page.sourceUri does not include the line number
-      quads += new Quad(context.language, DBpediaDatasets.TemplateParameters, subjectUri, templateParameterProperty,
-          parameter, page.sourceIri, context.ontology.datatypes("xsd:string"))
-    }
+    val quads = collectTemplateParameters(page).groupBy(tp => tp.parameter).filter(tp => tp._1.nonEmpty).map(tp =>{
+      val tps = tp._2.head
+      qb.setNodeRecord(tps.getNodeRecord)
+      qb.setSourceUri(tps.sourceIri)
+      qb.setSubject(subjectUri)
+      qb.setValue(tps.parameter)
+      qb.getQuad
+    })
 
-    quads
+    quads.toSeq
   }
 
 

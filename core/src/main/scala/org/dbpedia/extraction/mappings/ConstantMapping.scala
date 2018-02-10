@@ -41,6 +41,10 @@ extends PropertyMapping
   //split to literal / object dataset
   val dataset = if (isObjectProperty) DBpediaDatasets.OntologyPropertiesObjects else DBpediaDatasets.OntologyPropertiesLiterals
 
+  override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals)
+
+  private val qb = QuadBuilder(context.language, dataset, ontologyProperty, datatype)
+
   if (isObjectProperty)
   {
     require(datatype == null, "expected no datatype for object property '"+ontologyProperty+"', but found datatype '"+datatype+"'")
@@ -50,11 +54,13 @@ extends PropertyMapping
         else u.toString
       case Failure(f) => context.language.resourceUri.append(value)
     }
+    qb.setDatatype(null.asInstanceOf[String])
   }
-
-  override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals)
-
-  private val qb = QuadBuilder(context.language, dataset, ontologyProperty, datatype)
+  else{
+    //if datatype property and no type was assigned, we assume a language string
+    if(datatype == null)
+      qb.setDatatype(Quad.langString)
+  }
   qb.setValue(value)
   qb.setExtractor(this.softwareAgentAnnotation)
 
@@ -65,6 +71,4 @@ extends PropertyMapping
     qb.setNodeRecord(node.getNodeRecord)
     Seq(qb.getQuad)
   }
-
-
 }

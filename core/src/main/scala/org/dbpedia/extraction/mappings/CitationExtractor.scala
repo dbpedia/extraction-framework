@@ -31,7 +31,6 @@ class CitationExtractor(
     def ontology : Ontology
     def language : Language
     def redirects : Redirects
-      def recorder[T: ClassTag] : ExtractionRecorder[T]
   } 
 ) 
 extends WikiPageExtractor
@@ -270,7 +269,7 @@ extends WikiPageExtractor
         for (dateTimeParser <- dateTimeParsers;
              date <- dateTimeParser.parseWithProvenance(node))
         {
-            return Some(ParseResult(date.value.toString, None, Some(date.value.datatype)))
+            return Some(ParseResult(date.value.toString, None, Some(date.value.datatype), date.provenance))
         }
         None
     }

@@ -14,10 +14,19 @@ import scala.Console.err
 
 /**
   * Created by chile on 17.10.17.
+  * Maps old object URIs in triple files to new object URIs:
+  * - read one or more triple files that contain the URI mapping:
+  *   - the predicate is ignored
+  * - read one or more files that need their object URI changed:
+  *   - the predicate is ignored
+  *   - literal values and quads without mapping for object URI are copied unchanged
   */
 object MapIriScript {
 
 
+  /**
+    * @param args - a properties file (see  map-iris.properties for details)
+    */
   def main(args: Array[String]): Unit = {
 
     require(args != null && args.length >= 1, "This script needs a single argument - the properties file config")

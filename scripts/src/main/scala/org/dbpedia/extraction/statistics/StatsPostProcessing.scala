@@ -1,9 +1,12 @@
 package org.dbpedia.extraction.statistics
 
-import java.io.{FileOutputStream, File}
-import java.util.logging.{Level, Logger}
+import java.io.{File, FileOutputStream}
 
-import org.apache.jena.atlas.json.{JsonNumber, JsonObject, JSON}
+import org.apache.jena.atlas.json.{JSON, JsonNumber, JsonObject}
+import org.apache.log4j.{Level, Logger}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
+import org.dbpedia.extraction.util.Language
+
 import scala.collection.JavaConverters._
 import scala.Console._
 
@@ -14,7 +17,7 @@ object StatsPostProcessing {
   //TODO have a look at the JsonValue problem before release
   def main(args: Array[String]): Unit = {
 
-    val logger = Logger.getLogger(getClass.getName)
+    val logger = ExtractionLogger.getLogger(getClass, Language.None)
 
     require(args != null && args.length == 9,
       "need at least three args: " +
@@ -155,7 +158,7 @@ object StatsPostProcessing {
         val map = inputMap.get(lang) match {
           case x : JsonObject => x
           case _ => {
-            logger.log(Level.WARNING, "no entry found do language: " + lang)
+            logger.log(Level.WARN, "no entry found do language: " + lang)
             new JsonObject()
           }
         }

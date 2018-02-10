@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.sources;
 
+import org.apache.log4j.Level;
 import org.dbpedia.extraction.config.DefaultEntry;
-import org.dbpedia.extraction.config.RecordCause;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.wikiparser.Namespace;
 import org.dbpedia.extraction.wikiparser.WikiPage;
@@ -9,7 +9,6 @@ import org.dbpedia.extraction.wikiparser.WikiTitle;
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces;
 import org.dbpedia.util.Exceptions;
 import org.dbpedia.util.text.xml.XMLStreamUtils;
-import scala.Enumeration;
 import scala.Function1;
 import scala.Tuple3;
 import scala.util.control.ControlThrowable;
@@ -198,7 +197,7 @@ public class WikipediaDumpParser
   throws XMLStreamException, InterruptedException
   {
     //record any error or warning
-    ArrayList<Tuple3<String, Throwable, scala.Enumeration.Value>> records = new ArrayList<>();
+    ArrayList<Tuple3<String, Throwable, Level>> records = new ArrayList<>();
 
     requireStartElement(PAGE_ELEM);
     nextTag();
@@ -230,7 +229,7 @@ public class WikipediaDumpParser
       }
       catch (Exception e)
       {
-          records.add(new Tuple3<String, Throwable, Enumeration.Value>("Error parsing page title " + titleStr, e, RecordCause.Warning()));
+          records.add(new Tuple3<String, Throwable, Level>("Error parsing page title " + titleStr, e, Level.WARN));
           //logger.log(Level.WARNING, _language.wikiCode() + ": error parsing page title ["+titleString+"]: "+Exceptions.toString(e, 200));
       }
 
@@ -242,13 +241,13 @@ public class WikipediaDumpParser
       try
       {
         Namespace expNs = new Namespace(nsCode, Namespaces.names(_language).get(nsCode).get(), false);
-        records.add(new Tuple3<String, Throwable, Enumeration.Value>("Error parsing title: found namespace " + title.namespace() + ", expected " + expNs + " in title " + titleStr, null, RecordCause.Info()));
+        records.add(new Tuple3<String, Throwable, Level>("Error parsing title: found namespace " + title.namespace() + ", expected " + expNs + " in title " + titleStr, null, Level.INFO));
         //logger.log(Level.WARNING, _language.wikiCode() + ": Error parsing title: found namespace " + title.namespace() + ", expected " + expNs + " in title " + titleStr);
         title.otherNamespace_$eq(expNs);
       }
       catch (NoSuchElementException e)
       {
-        records.add(new Tuple3<String, Throwable, Enumeration.Value>(String.format("Error parsing title: found namespace %s, title %s , key %s", title.namespace(),titleStr, nsCode), e, RecordCause.Warning()));
+        records.add(new Tuple3<String, Throwable, Level>(String.format("Error parsing title: found namespace %s, title %s , key %s", title.namespace(),titleStr, nsCode), e, Level.WARN));
         //logger.log(Level.WARNING, String.format(_language.wikiCode() + ": Error parsing title: found namespace %s, title %s , key %s", title.namespace(),titleStr, nsCode));
         skipTitle();
         return;
@@ -295,8 +294,8 @@ public class WikipediaDumpParser
     
     if (page != null)
     {
-      for(Tuple3<String, Throwable, scala.Enumeration.Value> record : records){
-        page.addExtractionRecord(new DefaultEntry(record._1(), RecordCause.Warning(), record._2(), null));
+      for(Tuple3<String, Throwable, Level> record : records){
+        page.addExtractionRecord(new DefaultEntry(record._1(), record._2(), null, Level.WARN));
       }
       try
       {
@@ -307,7 +306,7 @@ public class WikipediaDumpParser
         // emulate Scala exception handling. Ugly...
         if (e instanceof ControlThrowable) throw Exceptions.unchecked(e);
         if (e instanceof InterruptedException) throw (InterruptedException)e;
-        else page.addExtractionRecord(new DefaultEntry("Could not process page: " + page.title().encoded(), RecordCause.Warning(), e, null));
+        else page.addExtractionRecord(new DefaultEntry("Could not process page: " + page.title().encoded(), e, null, Level.WARN));
       }
     }
     requireEndElement(PAGE_ELEM);

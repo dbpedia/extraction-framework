@@ -1,10 +1,9 @@
 package org.dbpedia.extraction.util
 
-import java.io.File
-import java.util.logging.{Level, Logger}
 import java.util.{Locale, MissingResourceException}
 
-import org.dbpedia.extraction.config.Config
+import org.apache.log4j.{Level, Logger}
+import org.dbpedia.extraction.config.{Config, ExtractionRecorder}
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 
 import scala.collection.mutable.HashMap
@@ -66,7 +65,7 @@ object Language extends (String => Language)
 {
   implicit val wikiCodeOrdering: Ordering[Language] = Ordering.by[Language, String](_.name).reverse
 
-  val logger: Logger = Logger.getLogger(Language.getClass.getName)
+  private val logger = Logger.getLogger(getClass.getName)
 
   val wikipediaLanguageUrl = "https://noc.wikimedia.org/conf/langlist"
   
@@ -165,7 +164,7 @@ object Language extends (String => Language)
       catch{
         case mre : MissingResourceException =>
           if(!languages.keySet.contains(langEntry))
-            logger.log(Level.WARNING, "Language not found: " + langEntry + ". To extract this language, please edit the addonLanguage.json in core.")
+            logger.log(Level.WARN, "Language not found: " + langEntry + ". To extract this language, please edit the addonLanguage.json in core.")
       }
     }
     iso1Map = null

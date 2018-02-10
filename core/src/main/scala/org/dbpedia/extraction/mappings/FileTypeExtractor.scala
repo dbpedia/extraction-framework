@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.Logger
-
+import org.apache.log4j.Logger
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.config.mappings.FileTypeExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
@@ -22,7 +22,7 @@ class FileTypeExtractor(context: {
 }) extends WikiPageExtractor
 {
     // For writing warnings.
-    private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
+    private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
     // To store the Commons language.
     private val commonsLang = Language.Commons
@@ -129,7 +129,7 @@ class FileTypeExtractor(context: {
         // Warn the user on long extensions.
         val page_title = page.title.decodedWithNamespace
         if(extension.length > 4)
-            logger.warning(f"Page '$page_title%s' has an unusually long extension '$extension%s'")
+            logger.warn(f"Page '$page_title%s' has an unusually long extension '$extension%s'")
 
         Some(extension)
     }

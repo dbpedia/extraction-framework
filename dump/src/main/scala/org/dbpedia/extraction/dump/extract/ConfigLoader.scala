@@ -3,10 +3,9 @@ package org.dbpedia.extraction.dump.extract
 import java.io._
 import java.net.URL
 import java.util.concurrent.ConcurrentHashMap
-import java.util.logging.Logger
 
-import org.dbpedia.extraction.config.{Config, ConfigUtils, ExtractionRecorder}
-import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.config.{Config, ConfigUtils, ExtractionLogger, ExtractionRecorder}
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
@@ -31,29 +30,13 @@ import scala.reflect._
  */
 class ConfigLoader(config: Config)
 {
-  private val logger = Logger.getLogger(classOf[ConfigLoader].getName)
+  private val logger = ExtractionLogger.getLogger(getClass, Language.None)
 
   private val extractionJobs = new ConcurrentHashMap[Language, ExtractionJob]().asScala
-
-  private val extractionRecorder = new mutable.HashMap[ClassTag[_], mutable.HashMap[Language, ExtractionRecorder[_]]]()
 
   //these lists are used when the ImageExtractor is amongst the selected Extractors
   private val nonFreeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
   private val freeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
-
-  def getExtractionRecorder[T: ClassTag](lang: Language, dataset : Dataset = null): ExtractionRecorder[T] = {
-    extractionRecorder.get(classTag[T]) match{
-      case Some(s) => s.get(lang) match {
-        case None =>
-          s(lang) = config.getDefaultExtractionRecorder[T](lang, 2000, null, null,  List(dataset))
-          s(lang).asInstanceOf[ExtractionRecorder[T]]
-        case Some(er) => er.asInstanceOf[ExtractionRecorder[T]]
-      }
-      case None =>
-        extractionRecorder(classTag[T]) = new mutable.HashMap[Language, ExtractionRecorder[_]]()
-        getExtractionRecorder[T](lang, dataset)
-    }
-  }
 
   /**
     * Creates ab extraction job for a specific language.
@@ -72,8 +55,6 @@ class ConfigLoader(config: Config)
       def commonsSource: Source = _commonsSource
 
       def language: Language = input._1
-
-      def recorder[T: ClassTag]: ExtractionRecorder[T] = getExtractionRecorder[T](input._1)
 
       private lazy val _mappingPageSource =
       {
@@ -153,7 +134,7 @@ class ConfigLoader(config: Config)
       val datasetDestinations = new mutable.HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
-          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format, getExtractionRecorder(context.language, dataset), dataset))
+          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format, ExtractionLogger.getExtractionRecorder(context.language, Seq(dataset)), dataset))
           case None =>
         }
       }
@@ -176,7 +157,7 @@ class ConfigLoader(config: Config)
       extractionJobNS,
       destination,
       context.language,
-      getExtractionRecorder(context.language)
+      ExtractionLogger.getExtractionRecorder(context.language)
     )
 
     extractionJobs.put(context.language, extractionJob)
@@ -187,7 +168,7 @@ class ConfigLoader(config: Config)
     */
   val imageCategoryWorker: Workers[Language] = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
     val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
-    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang, DBpediaDatasets.Images))
+    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang)
     this.freeImages.put(lang, imageCategories._1)
     this.nonFreeImages.put(lang, imageCategories._2)
     }

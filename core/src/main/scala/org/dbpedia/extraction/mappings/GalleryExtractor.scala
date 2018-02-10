@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.Logger
-
+import org.apache.log4j.Logger
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.wikiparser._
@@ -29,7 +29,7 @@ class GalleryExtractor (
 extends WikiPageExtractor
 {
     // Logger.
-    private val logger = Logger.getLogger(classOf[GalleryExtractor].getName)
+    private val logger = ExtractionLogger.getLogger(getClass, context.language)
 
     /** Property that links a gallery page with each image on it */
     private val galleryItemProperty = context.ontology.properties("galleryItem")
@@ -99,7 +99,7 @@ extends WikiPageExtractor
                             case e: WikiParserException =>
                                 // If there's a WikiParserException, report the
                                 // error and keep going.
-                                logger.warning("Could not parse file line '" +
+                                logger.warn("Could not parse file line '" +
                                   fileLineMatch.group("filename") +
                                   "' in gallery on page '" + subjectUri + "': " + e.getMessage
                                 )

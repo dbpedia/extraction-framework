@@ -7,6 +7,8 @@ import java.text.DecimalFormat
 import java.util.concurrent.atomic.AtomicLong
 
 import org.apache.jena.atlas.json.{JSON, JsonArray, JsonObject}
+import org.apache.log4j.spi.LoggingEvent
+import org.apache.log4j.{AppenderSkeleton, Level, Logger}
 import org.dbpedia.extraction.config.Config.SlackCredentials
 import org.dbpedia.extraction.config.provenance.{Dataset, QuadProvenanceRecord}
 import org.dbpedia.extraction.transform.Quad
@@ -25,15 +27,16 @@ class ExtractionRecorder[T](
      val reportInterval: Int = 100000,
      val preamble: String = null,
      val slackCredantials: SlackCredentials = null,
-     dataset: List[Dataset] = List[Dataset](),
+     dataset: Seq[Dataset] = List[Dataset](),
      val language: Language = Language.English,
      val monitor: ExtractionMonitor = null,
      prm: ProvenanceRecordManager = null,
      logSuccessfulPage: Boolean = false
-  ) extends AutoCloseable {
+  ) extends AppenderSkeleton {
 
   def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
 
+  private val logger = Logger.getLogger(this.getClass)
   private val recordManager: ProvenanceRecordManager = prm
   private var datasets: ListBuffer[Dataset] = new ListBuffer()
   datasets ++= dataset.filter(x => x != null)
@@ -55,6 +58,7 @@ class ExtractionRecorder[T](
 
   private var writerOpen = if(logWriter == null) false else true
 
+  def isInitialized = initialized
 
   /**
     * A map for failed pages, which could be used for a better way to record extraction fails than just a simple console output.
@@ -87,7 +91,7 @@ class ExtractionRecorder[T](
     * @param lang - for this language
     * @return
     */
-  def increaseAndGetSuccessfulPages(lang: Language): Long ={
+  private[config] def increaseAndGetSuccessfulPages(lang: Language): Long ={
     successfulPageCount.get(lang) match {
       case Some(ai) => ai.incrementAndGet()
       case None =>
@@ -96,7 +100,7 @@ class ExtractionRecorder[T](
     }
   }
 
-  def increaseAndGetSuccessfulTriples(dataset: Dataset) : Long = {
+  private[config] def increaseAndGetSuccessfulTriples(dataset: Dataset) : Long = {
     successfulTripleCount.get(dataset) match {
       case Some(ai) => ai.incrementAndGet()
       case None =>
@@ -112,7 +116,7 @@ class ExtractionRecorder[T](
     * @return
     */
   def failedPages(lang: Language): Long = issuePages.get(lang) match{
-    case Some(m) => m.values.count(x => x.cause == RecordCause.Exception || x.cause == RecordCause.Fatal)
+    case Some(m) => m.values.count(x => x.level.isGreaterOrEqual(Level.ERROR))
     case None => 0
   }
 
@@ -122,10 +126,10 @@ class ExtractionRecorder[T](
     * @param lang - for this language
     * @return
     */
-  def runningPageNumber(lang:Language): Long = successfulPages(lang) + failedPages(lang)
+  private[config] def runningPageNumber(lang:Language): Long = successfulPages(lang) + failedPages(lang)
 
 
-  def record(recordable: Recordable[_]): Unit = record(recordable.recordEntries: _*)
+  private[config] def record(recordable: Recordable[_]): Unit = record(recordable.recordEntries: _*)
   /**
     * prints a message of a RecordEntry if available and
     * assesses a RecordEntry for the existence of a Throwable and forwards
@@ -133,12 +137,14 @@ class ExtractionRecorder[T](
     *
     * @param records - the RecordEntries for a WikiPage
     */
-  def record(records: RecordEntry[_]*): Unit = {
+  private[config] def record(records: RecordEntry[_]*): Unit = {
+    if(!initialized)
+      throw new IllegalStateException("ExtractioRecorder was not initialized")
     for(record <- records) {
       record.record match{
         case page: PageNode =>
           if (record.msg != null)
-            printLabeledLine(record.msg, record.cause, page.title.language, Seq(PrinterDestination.err, PrinterDestination.file))
+            printLabeledLine(record.msg, record.level, page.title.language)
           Option(record.error) match {
             case Some(ex) => failedRecord(page, ex, record.language)
             case None => recordExtractedPage(page.id, page.title)
@@ -148,7 +154,7 @@ class ExtractionRecorder[T](
         case quad: Quad =>
           Option(record.error) match {
             case Some(ex) => failedRecord(quad, ex, record.language)
-            case None => recordQuad(quad, record.cause, record.language)
+            case None => recordQuad(quad, record.level, record.language)
           }
           if(this.recordManager != null)
             this.recordManager.ingestQuad(Seq(quad))
@@ -156,7 +162,7 @@ class ExtractionRecorder[T](
         case prov: QuadProvenanceRecord => if(this.recordManager != null) this.recordManager.ingestRecord(Seq(prov))
         case _  =>
           Option(record.msg) match{
-            case Some(m) => printLabeledLine(m, record.cause, record.language)
+            case Some(m) => printLabeledLine(m, record.level, record.language)
             case None =>
               if(record.error != null) failedRecord(record.record, record.error, record.language)
               else recordGenericPage(record.language, record.record.toString)
@@ -170,7 +176,9 @@ class ExtractionRecorder[T](
     * Recorded issues do not have to be exceptions, but are recorded here as well.
     * @param entry
     */
-  def enterProblemRecord[S](entry: RecordEntry[S]): Unit ={
+  private[config] def enterProblemRecord[S](entry: RecordEntry[S]): Unit ={
+    if(!initialized)
+      throw new IllegalStateException("ExtractioRecorder was not initialized")
     val tag = entry.record match{
       case _: PageNode => "page"
       case _: Node => "node"
@@ -190,11 +198,11 @@ class ExtractionRecorder[T](
     val msg = entry.msg + (if(entry.error != null) ": " + entry.error.getMessage else "")
 
     val line = "{task} failed for " + tag + " " + id + ": " + msg
-    printLabeledLine(line, entry.cause, language, Seq())
+    printLabeledLine(line, entry.level, language)
 
     Option(entry.error) match{
       case Some(e) =>
-        e.getStackTrace.foreach(x => printLabeledLine("\t" + x.toString, entry.cause, language, Seq(PrinterDestination.file), noLabel = true))
+        e.getStackTrace.foreach(x => printLabeledLine("\t" + x.toString, entry.level, language, noLabel = true))
         if(monitor != null)
           monitor.reportError(this, e)
       case None =>
@@ -205,7 +213,9 @@ class ExtractionRecorder[T](
       forwardExceptionWarning(language)
   }
 
-  def insertException(entry: RecordEntry[_]): Unit ={
+  private[config] def insertException(entry: RecordEntry[_]): Unit ={
+    if(!initialized)
+      throw new IllegalStateException("ExtractioRecorder was not initialized")
     //clear RecordEntry
     issuePages.get(language) match{
       case Some(map) => map += entry.record.id -> RecordEntry.copyEntry(entry)
@@ -221,8 +231,10 @@ class ExtractionRecorder[T](
     * @param node - PageNode of page
     * @param exception  - the Throwable responsible for the fail
     */
-  def failedRecord[S](node: Recordable[S], exception: Throwable, language:Language = Language.None): Unit = synchronized{
-    enterProblemRecord(new RecordEntry[S](node, RecordCause.Exception, language, exception.getMessage, exception))
+  private[config] def failedRecord[S](node: Recordable[S], exception: Throwable, language:Language = Language.None): Unit = synchronized{
+    if(!initialized)
+      throw new IllegalStateException("ExtractioRecorder was not initialized")
+    enterProblemRecord(new RecordEntry[S](node, language, exception.getMessage, exception, Level.ERROR))
   }
 
   /**
@@ -231,7 +243,9 @@ class ExtractionRecorder[T](
     * @param id - page id
     * @param title - page title
     */
-  def recordExtractedPage(id: Long, title: WikiTitle): Unit = synchronized {
+  private[config] def recordExtractedPage(id: Long, title: WikiTitle): Unit = synchronized {
+    if(!initialized)
+      throw new IllegalStateException("ExtractioRecorder was not initialized")
     require(title != null)
     if(logSuccessfulPage) {
       successfulPagesMap.get(title.language) match {
@@ -239,20 +253,22 @@ class ExtractionRecorder[T](
         case None =>
           successfulPagesMap += title.language -> mutable.Map[Long, RecordEntry[_]](id -> null)
       }
-      printLabeledLine("page " + id + ": " + title.encoded + " extracted", RecordCause.Info, title.language, Seq(PrinterDestination.file))
+      printLabeledLine("page " + id + ": " + title.encoded + " extracted", Level.INFO, title.language)
     }
     val pages = increaseAndGetSuccessfulPages(title.language)
     if(pages % reportInterval == 0)
-      printLabeledLine("extracted {page} pages; {mspp} per page; {fail} failed pages", RecordCause.Info, title.language)
+      printLabeledLine("extracted {page} pages; {mspp} per page; {fail} failed pages", Level.INFO, title.language)
     if(slackCredantials != null && pages % slackCredantials.summaryThreshold == 0)
       forwardSummary(title.language)
   }
 
-  def recordGenericPage(lang: Language, line: String = null): Unit ={
+  private[config] def recordGenericPage(lang: Language, line: String = null): Unit ={
+    if(!initialized)
+      throw new IllegalStateException("ExtractioRecorder was not initialized")
     val pages = increaseAndGetSuccessfulPages(lang)
     val l = if(line == null) "processed {page} instances; {mspp} per instance; {fail} failed instances" else line
     if(pages % reportInterval == 0)
-      printLabeledLine(l, RecordCause.Info, lang)
+      printLabeledLine(l, Level.INFO, lang)
     if(slackCredantials != null && pages % slackCredantials.summaryThreshold == 0)
       forwardSummary(lang)
   }
@@ -263,7 +279,9 @@ class ExtractionRecorder[T](
     * @param quad
     * @param lang
     */
-  def recordQuad(quad: Quad, severity: RecordCause.Value, lang:Language): Unit = synchronized {
+  private[config] def recordQuad(quad: Quad, severity: Level, lang:Language): Unit = synchronized {
+    if(!initialized)
+      throw new IllegalStateException("ExtractioRecorder was not initialized")
     if(increaseAndGetSuccessfulPages(lang) % reportInterval == 0)
       printLabeledLine("processed {page} quads; {mspp} per quad; {fail} failed quads", severity, lang)
   }
@@ -273,28 +291,21 @@ class ExtractionRecorder[T](
     *
     * @param line - the line in question
     * @param language - langauge of current page
-    * @param print - enum values for printer destinations (err, out, file - null mean all of them)
     * @param noLabel - the initial label (lang: time passed) is omitted
     */
-  def printLabeledLine(line:String, severity: RecordCause.Value, language: Language = null, print: Seq[PrinterDestination.Value] = null, noLabel: Boolean = false): Unit ={
+  private[config] def printLabeledLine(line:String, severity: Level, language: Language = null, noLabel: Boolean = false): Unit ={
+    if(!initialized)
+      throw new IllegalStateException("ExtractioRecorder was not initialized")
     val lang = if(language != null) language else defaultLang
 
-    val printOptions = if(print == null || print.isEmpty) severity match{
-      case RecordCause.Exception => Seq(PrinterDestination.err, PrinterDestination.out, PrinterDestination.file)
-      case RecordCause.Warning => Seq(PrinterDestination.file)
-      case RecordCause.Info => Seq(PrinterDestination.out, PrinterDestination.file)
-      case _ => Seq(PrinterDestination.sink)
-    }
-    else print
-
     val status = getStatusValues(lang)
-    val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; {task} at {time} for {data}; ") + line
+    val replacedLine = (if (noLabel) "" else lang.wikiCode + "; {task} at {time} for {data}; ") + line
     val pattern = "\\{\\s*\\w+\\s*\\}".r
     var lastend = 0
-    var resultString = ""
+    val sb = new StringBuilder()
     for(matchh <- pattern.findAllMatchIn(replacedLine)){
-      resultString += replacedLine.substring(lastend, matchh.start)
-      resultString += (Option(matchh.matched) match{
+      sb append replacedLine.substring(lastend, matchh.start)
+      sb append (Option(matchh.matched) match{
         case Some(m) =>
           m match{
             case i if i == "{time}" => status("time")
@@ -310,19 +321,12 @@ class ExtractionRecorder[T](
       })
       lastend = matchh.end
     }
-    resultString += replacedLine.substring(lastend)
+    sb append replacedLine.substring(lastend)
 
-    for(pr <-printOptions)
-      pr match{
-        case PrinterDestination.err => System.err.println(resultString)
-        case PrinterDestination.out => System.out.println(resultString)
-        case PrinterDestination.file if writerOpen => logWriter.append(resultString + "\n")
-        case PrinterDestination.sink => //TODO record stack trace somewhere (Thread.currentThread().getStackTrace())
-        case _ =>
-      }
+    logger.log(severity, sb.toString())
   }
 
-  def getStatusValues(lang: Language): Map[String, String] = {
+  private[config] def getStatusValues(lang: Language): Map[String, String] = {
     val pages = successfulPages(lang)
     val time = System.currentTimeMillis - startTime.get
     val failed = failedPages(lang)
@@ -359,19 +363,36 @@ class ExtractionRecorder[T](
     if(monitor != null)
       monitor.init(this)
 
+    initialized = true
+
     if(preamble != null)
-      printLabeledLine(preamble, RecordCause.Info, lang)
+      printLabeledLine(preamble, Level.INFO, lang)
 
     val line = "Extraction started for language: " + lang.name + " (" + lang.wikiCode + ")" + (if (datasets.nonEmpty) " on " + datasets.size + " datasets:" else "")
-    printLabeledLine(line, RecordCause.Info, lang)
+    printLabeledLine(line, Level.INFO, lang)
 
     for(dataset <- datasets.sortBy(x => x.encoded)){
-      printLabeledLine("\t" + dataset.name, RecordCause.Info, lang, Seq(), noLabel = true)
+      printLabeledLine("\t" + dataset.name, Level.INFO, lang, noLabel = true)
     }
 
     forwardExtractionOverview(lang, line)
-    initialized = true
     true
+  }
+
+  override def requiresLayout() = true
+
+  override def append(event: LoggingEvent) = synchronized {
+    event.getMessage match{
+      case re: RecordEntry[_] => record(re)
+      case re: Array[RecordEntry[_]] => record(re:_*)
+      case re: Recordable[_] => record(re)
+      case _ => logger.log(event.getLevel, event.getMessage, Option(event.getThrowableInformation).map(t => t.getThrowable).orNull)  //forward unseen
+    }
+  }
+
+  override def activateOptions() = {
+    //init
+    super.activateOptions()
   }
 
   override def close(): Unit ={
@@ -389,12 +410,12 @@ class ExtractionRecorder[T](
 
     val line = "Extraction finished for language: " + defaultLang.name + " (" + defaultLang.wikiCode + ") " +
       (if(datasets.nonEmpty) ", extracted " + successfulPages(defaultLang) + " pages for " + datasets.size + " datasets after " + StringUtils.prettyMillis(System.currentTimeMillis - startTime.get) + " minutes." else "")
-    printLabeledLine(line, RecordCause.Info, defaultLang)
+    printLabeledLine(line, Level.INFO, defaultLang)
     forwardSimpleLine(line)
 
   }
 
-  def resetFailedPages(lang: Language): Unit = issuePages.get(lang) match{
+  private[config] def resetFailedPages(lang: Language): Unit = issuePages.get(lang) match{
     case Some(_) =>
       successfulPageCount(lang).set(0)
     case None =>
@@ -414,7 +435,7 @@ class ExtractionRecorder[T](
     * (will increase the slack-exception-threshold by factor 2 if two of these messages are fired within 2 minutes)
     * @param lang
     */
-  def forwardExceptionWarning(lang: Language) : Unit =
+  private[config] def forwardExceptionWarning(lang: Language) : Unit =
   {
     if(slackCredantials == null)
       return
@@ -435,7 +456,7 @@ class ExtractionRecorder[T](
     sendCurl(slackCredantials.webhook.toString, data)
   }
 
-  def forwardSummary(lang: Language) : Unit =
+  private[config] def forwardSummary(lang: Language) : Unit =
   {
     if(slackCredantials == null)
       return
@@ -455,7 +476,7 @@ class ExtractionRecorder[T](
     sendCurl(slackCredantials.webhook.toString, defaultMessage("Summary report for extraction of language " + lang.name + " (" + lang.wikiCode + ")", null, attachments))
   }
 
-  def forwardExtractionOverview(lang: Language, msg: String) : Unit ={
+  private[config] def forwardExtractionOverview(lang: Language, msg: String) : Unit ={
     if(slackCredantials == null || datasets.isEmpty)
       return
     val attachments = new JsonArray()
@@ -476,7 +497,7 @@ class ExtractionRecorder[T](
     sendCurl(slackCredantials.webhook.toString, defaultMessage(msg, null, attachments))
   }
 
-  def forwardSimpleLine(line: String) : Unit =
+  private[config] def forwardSimpleLine(line: String) : Unit =
   {
     if(slackCredantials == null)
       return
@@ -484,7 +505,7 @@ class ExtractionRecorder[T](
     sendCurl(slackCredantials.webhook.toString, defaultMessage(line, null))
   }
 
-  def getAttachment(attachMsg: String, color: String): JsonObject =
+  private[config] def getAttachment(attachMsg: String, color: String): JsonObject =
   {
     val attachment = new JsonObject()
     attachment.put("title", attachMsg)
@@ -494,7 +515,7 @@ class ExtractionRecorder[T](
     attachment
   }
 
-  def addKeyValue(array: JsonArray, key: String, value: String): Unit =
+  private[config] def addKeyValue(array: JsonArray, key: String, value: String): Unit =
   {
     val left = new JsonObject()
     left.put("value", key)
@@ -506,7 +527,7 @@ class ExtractionRecorder[T](
     array.add(right)
   }
 
-  def defaultMessage(mainText: String, subText: String, attachments: JsonArray = null): JsonObject =
+  private[config] def defaultMessage(mainText: String, subText: String, attachments: JsonArray = null): JsonObject =
   {
     val data = new JsonObject()
     data.put("text", mainText)
@@ -520,14 +541,18 @@ class ExtractionRecorder[T](
     data
   }
 
-  def sendCurl(url: String, data: JsonObject): Boolean =
+  private var isSlackReachable = true
+  private[config] def sendCurl(url: String, data: JsonObject): Boolean =
   {
+    if(! isSlackReachable)
+      return false
     try {
       val baos = new ByteArrayOutputStream()
       JSON.write(baos, data)
       val resp = Http(url).postData(new String(baos.toByteArray, Charset.defaultCharset())).asString
       if (resp.code != 200) {
-        System.err.println("The provided Slack webhook cannot be reached: " + resp.body)
+        logger.warn("The provided Slack webhook cannot be reached: " + resp.body)
+        isSlackReachable = false
       }
       true
     }
@@ -582,12 +607,12 @@ class ExtractionRecorder[T](
 
     outString = "\n----- ----- ----- EXTRACTION MONITOR STATISTICS ----- ----- -----\n" + outString +
     "\n----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----"
-    printLabeledLine( outString, RecordCause.Info, defaultLang)
+    printLabeledLine( outString, Level.INFO, defaultLang)
 
     if(errString != "") {
       errString = "\n----- ----- ----- EXTRACTION MONITOR STATISTICS ----- ----- -----\n" + errString +
       "\n----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----"
-      printLabeledLine( errString, RecordCause.Exception, defaultLang)
+      printLabeledLine( errString, Level.ERROR, defaultLang)
     }
 
   }
@@ -595,5 +620,4 @@ class ExtractionRecorder[T](
   def getSuccessfulPageCount: Map[Language,AtomicLong] = {
     successfulPageCount
   }
-
 }

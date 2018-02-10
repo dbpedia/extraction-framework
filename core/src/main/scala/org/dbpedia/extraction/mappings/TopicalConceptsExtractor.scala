@@ -4,7 +4,7 @@ import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotati
 import org.dbpedia.extraction.config.mappings.TopicalConceptsExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
@@ -36,9 +36,12 @@ extends PageNodeExtractor
 
     private val skosSubjectClass = context.ontology.classes("skos:Concept")
 
-    private val catMainTemplates = TopicalConceptsExtractorConfig.catMainTemplates;
+    private val catMainTemplates = TopicalConceptsExtractorConfig.catMainTemplates
 
     override val datasets = Set(DBpediaDatasets.TopicalConcepts)
+
+    private val qb = QuadBuilder.dynamicPredicate(context.language, DBpediaDatasets.TopicalConcepts)
+    qb.setExtractor(this.softwareAgentAnnotation)
 
     override def extract(page : PageNode, subjectUri : String): Seq[Quad] =
     {
@@ -50,22 +53,23 @@ extends PageNodeExtractor
 //                println("Found more than one cat main. %s".format(page.title))
 
             try {
-                val quads = allTemplates.flatMap{ template =>
+                val quads = allTemplates.flatMap{ template => {
                     val mainResource = context.language.resourceUri.append(template.property("1").get.retrieveText.get)
-                    (new Quad(context.language,
-                        DBpediaDatasets.TopicalConcepts,
-                        subjectUri,
-                        skosSubjectProperty,
-                        mainResource,
-                        template.sourceIri, null) ::
-                    new Quad(context.language,
-                        DBpediaDatasets.TopicalConcepts,
-                        mainResource,
-                        rdfTypeProperty,
-                        skosSubjectClass.uri,
-                        template.sourceIri, null)
-                    :: Nil)
-                }
+                    qb.setNodeRecord(template.getNodeRecord)
+                    qb.setSourceUri(template.sourceIri)
+                    qb.setSubject(subjectUri)
+                    qb.setPredicate(skosSubjectProperty)
+                    qb.setValue(mainResource)
+                    val skosSubQuad = qb.getQuad
+
+                    qb.setNodeRecord(template.getNodeRecord)
+                    qb.setSourceUri(template.sourceIri)
+                    qb.setSubject(mainResource)
+                    qb.setPredicate(rdfTypeProperty)
+                    qb.setValue(skosSubjectClass.uri)
+                    val typeQuad = qb.getQuad
+                    Seq(skosSubQuad, typeQuad)
+                }}
 
                 return quads
             } catch {

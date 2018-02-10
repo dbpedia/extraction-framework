@@ -1,11 +1,15 @@
 package org.dbpedia.extraction.sources
 
 import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitle}
-import java.util.logging.{Logger, Level}
-import java.io.{FileNotFoundException, File}
+import java.io.{File, FileNotFoundException}
+
+import org.apache.log4j.{Level, Logger}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
+import org.dbpedia.extraction.mappings.MappingsLoader.getClass
+
 import util.control.ControlThrowable
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.util.{WikiUtil, FileProcessor}
+import org.dbpedia.extraction.util.{FileProcessor, WikiUtil}
 import org.dbpedia.util.Exceptions
 
 /**
@@ -20,7 +24,7 @@ import org.dbpedia.util.Exceptions
  */
 class FileSource(baseDir : File, language : Language, filter : (String => Boolean) = (path => !path.startsWith(".") && !path.contains("/."))) extends Source
 {
-    private val logger = Logger.getLogger(classOf[FileSource].getName)
+    private val logger = ExtractionLogger.getLogger(getClass, language)
     private val fileProcessor = new FileProcessor(baseDir, filter)
 
     override def foreach[U](f : WikiPage => U) : Unit =
@@ -48,7 +52,7 @@ class FileSource(baseDir : File, language : Language, filter : (String => Boolea
             catch
             {
                 case ex : ControlThrowable => throw ex
-                case ex : Exception => logger.log(Level.WARNING, "error processing page '"+pageName+"': "+Exceptions.toString(ex, 200))
+                case ex : Exception => logger.log(Level.WARN, "error processing page '"+pageName+"': "+Exceptions.toString(ex, 200))
             }
         })
     }

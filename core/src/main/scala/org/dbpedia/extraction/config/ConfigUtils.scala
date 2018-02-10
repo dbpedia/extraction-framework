@@ -179,23 +179,22 @@ object ConfigUtils {
     * This function was extracted from the ImageExtractor object, since
     *  the free & nonfree images are now extracted before starting the extraction jobs
     * @param source pages_articles of a given language
-    * @param wikiCode the wikicode of a given language
+    * @param lang the wikicode of a given language
     * @return two lists: ._1: list of free images, ._2: list of nonfree images
     */
-  def loadImages(source: Source, wikiCode: String, extractionRecorder: ExtractionRecorder[PageNode] = null): (Seq[String], Seq[String]) =
+  def loadImages(source: Source, lang: Language): (Seq[String], Seq[String]) =
   {
+    val logger = ExtractionLogger.getLogger(getClass, lang)
     val freeImages = new mutable.HashSet[String]()
     val nonFreeImages = new mutable.HashSet[String]()
 
     for(page <- source if page.title.namespace == Namespace.File;
         ImageExtractorConfig.ImageLinkRegex() <- List(page.title.encoded) )
     {
-      if(extractionRecorder != null) {
-        val records = page.recordEntries
-        //forward all records to the recorder
-        extractionRecorder.record(records:_*)
-      }
-      ImageExtractorConfig.NonFreeRegex(wikiCode).findFirstIn(page.source) match
+      val records = page.recordEntries
+      logger.record(records:_*)
+
+      ImageExtractorConfig.NonFreeRegex(lang.wikiCode).findFirstIn(page.source) match
       {
         case Some(_) => nonFreeImages += page.title.encoded
         case None => if (freeImages != null) freeImages += page.title.encoded

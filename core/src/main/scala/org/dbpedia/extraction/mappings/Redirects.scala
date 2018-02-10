@@ -1,9 +1,11 @@
 package org.dbpedia.extraction.mappings
 
 import java.io._
-import java.util.logging.{Level, Logger}
 
+import org.apache.log4j.{Level, Logger}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.dataparser.RedirectFinder
+import org.dbpedia.extraction.mappings.MappingsLoader.getClass
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
@@ -100,7 +102,7 @@ class Redirects(val map : Map[String, String])
  */
 object Redirects
 {
-    private val logger = Logger.getLogger(classOf[Redirects].getName)
+    private val logger = ExtractionLogger.getLogger(getClass, Language.None)
 
     /**
      * Tries to load the redirects from a cache file.

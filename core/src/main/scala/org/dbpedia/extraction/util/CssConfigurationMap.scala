@@ -11,10 +11,10 @@ import com.fasterxml.jackson.databind.node.ArrayNode
   */
 class CssConfigurationMap(url: URL) extends JsonConfig(url){
 
-  def getCssSelectors(wikiLangCode: String): CssLanguageConfiguration ={
+  def getCssSelectors(lang: Language): CssLanguageConfiguration ={
     var default = this.getMap("default")
-    val langMap = if(this.keys().toList.contains(wikiLangCode))
-      this.getMap(wikiLangCode)
+    val langMap = if(this.keys().toList.contains(lang.wikiCode))
+      this.getMap(lang.wikiCode)
     else
       Map[String, JsonNode]()
 

@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dataparser
 
-import java.util.logging.{Level, Logger}
-
+import org.apache.log4j.{Level, Logger}
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
@@ -17,6 +17,7 @@ import scala.util.matching.Regex
 class RedirectFinder private(lang : Language) extends (PageNode => Option[(WikiTitle, WikiTitle)])
 {
   val regex: Regex = buildRegex
+  private val logger = ExtractionLogger.getLogger(getClass, lang)
 
   private def buildRegex = {
     val redirects = Redirect(lang).mkString("|")
@@ -45,7 +46,7 @@ class RedirectFinder private(lang : Language) extends (PageNode => Option[(WikiT
           }
           catch {
             case ex : WikiParserException => {
-              Logger.getLogger(Redirects.getClass.getName).log(Level.WARNING, "Couldn't parse redirect destination", ex)
+              logger.log(Level.WARN, "Couldn't parse redirect destination", ex)
               null
             }
           }

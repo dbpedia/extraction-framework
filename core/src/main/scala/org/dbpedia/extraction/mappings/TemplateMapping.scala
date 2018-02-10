@@ -2,9 +2,8 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
-import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{AnnotationKey, PropertyNode, TemplateNode}
 
@@ -32,10 +31,16 @@ extends Extractor[TemplateNode]
     private val propertyRdfType = context.ontology.properties("rdf:type")
     private val dboPerson = context.ontology.getOntologyClass("dbo:Person").get
 
+    private val qb = QuadBuilder.dynamicPredicate(context.language, DBpediaDatasets.OntologyTypes)
+    qb.setExtractor(this.softwareAgentAnnotation)
+
     override def extract(node: TemplateNode, subjectUri: String): Seq[Quad] =
     {
         val pageNode = node.root
         val graph = new ArrayBuffer[Quad]
+
+        qb.setNodeRecord(node.getNodeRecord)
+        qb.setSourceUri(node.sourceIri)
 
         pageNode.getAnnotation(TemplateMapping.CLASS_ANNOTATION) match
         {
@@ -97,7 +102,12 @@ extends Extractor[TemplateNode]
                 if (condition1_createCorrespondingProperty)
                 {
                     //Connect new instance to the instance created from the root template
-                    graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, instanceUri, correspondingProperty, subjectUri, node.sourceIri, null.asInstanceOf[Datatype])
+                    val qbs = qb.clone
+                    qbs.setDataset(DBpediaDatasets.OntologyPropertiesObjects)
+                    qbs.setSubject(instanceUri)
+                    qbs.setPredicate(correspondingProperty)
+                    qbs.setValue(subjectUri)
+                    graph += qbs.getQuad
                 }
 
                 //Extract properties
@@ -126,9 +136,16 @@ extends Extractor[TemplateNode]
         // Create missing type statements
         // Here we do not split the transitive and the direct types because different types may come from different mappings
         // Splitting the types of the main resource is done at the MappingExtractor.extract()
-        for (cls <- diffSet)
-          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, propertyRdfType, cls.uri, node.sourceIri, null)
 
+        val qbs = qb.clone
+        qbs.setDataset(DBpediaDatasets.OntologyPropertiesObjects)
+        qbs.setSubject(uri)
+        qbs.setPredicate(propertyRdfType)
+
+        graph ++= diffSet.map(cls =>{
+            qbs.setValue(cls.uri)
+            qbs.getQuad
+        })
     }
 
     private def createInstance(graph: mutable.Buffer[Quad], uri : String, node : TemplateNode): Unit =
@@ -145,11 +162,18 @@ extends Extractor[TemplateNode]
         }
         
         //Create type statements
-        for (cls <- classes) {
-          // Here we split the transitive types from the direct type assignment
-          val typeDataset = if (cls.equals(mapToClass)) DBpediaDatasets.OntologyTypes else DBpediaDatasets.OntologyTypesTransitive
-          graph += new Quad(context.language, typeDataset, uri, propertyRdfType, cls.uri, node.sourceIri, null)
-        }
+        val qbs = qb.clone
+        qbs.setSubject(uri)
+        qbs.setPredicate(propertyRdfType)
+
+        graph ++= classes.map(cls =>{
+            // Here we split the transitive types from the direct type assignment
+            val typeDataset = if (cls.equals(mapToClass)) DBpediaDatasets.OntologyTypes else DBpediaDatasets.OntologyTypesTransitive
+            graph += new Quad(context.language, typeDataset, uri, propertyRdfType, cls.uri, node.sourceIri, null)
+            qbs.setDataset(typeDataset)
+            qbs.setValue(cls.uri)
+            qbs.getQuad
+        })
     }
 
     /**

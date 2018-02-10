@@ -33,7 +33,7 @@ object SoftwareAgentAnnotation{
       .find(x => acceptableAnnotations.contains(x.tree.tpe.toString))
 
     if(annotation.isEmpty)
-      throw new MissingSoftwareAgentAnnotation("Missing annotation at " + className)
+      throw new MissingSoftwareAgentAnnotation("Missing SoftwareAgentAnnotation at " + className)
 
     val vals = annotation.get.tree.children.tail.collect({
       case universe.Literal(cc) => "className" -> cc.value.toString

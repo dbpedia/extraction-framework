@@ -16,7 +16,7 @@ object WikiNodeAnnotation{
   } match{
     case Success(s) => s
     case Failure(f) => f match{
-      case msa: MissingSoftwareAgentAnnotation => throw new MissingWikiNodeAnnotation(msa.getMessage)
+      case msa: MissingSoftwareAgentAnnotation => throw new MissingWikiNodeAnnotation(msa.getMessage.replace("SoftwareAgentAnnotation", "WikiNodeAnnotation"))
       case f: Throwable => throw f
     }
   }

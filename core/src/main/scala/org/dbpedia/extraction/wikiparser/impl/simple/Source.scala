@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.wikiparser.impl.simple
 
+import org.apache.log4j.Level
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.WikiParserException
 
@@ -77,7 +78,7 @@ private final class Source(source : String, val language : Language)
 
         if(!result.matched && throwIfNoMatch)
         {
-            throw new WikiParserException("Closing tag not found", line, findLine(line))
+            throw new WikiParserException("Closing tag not found", line, findLine(line), Level.DEBUG)
         }
 
         return result
