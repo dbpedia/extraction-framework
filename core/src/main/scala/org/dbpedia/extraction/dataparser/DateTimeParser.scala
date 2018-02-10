@@ -3,7 +3,7 @@ package org.dbpedia.extraction.dataparser
 import org.apache.log4j.Level
 import org.dbpedia.extraction.annotations.{AnnotationType, SoftwareAgentAnnotation}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder, RecordEntry}
+import org.dbpedia.extraction.config.{ExtractionLogger, RecordEntry}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.dataparser.{DataParserConfig, DateTimeParserConfig}
 import org.dbpedia.extraction.util.{Date, Language}
@@ -11,7 +11,6 @@ import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.Ontology
 
 import scala.language.reflectiveCalls
-import scala.reflect.ClassTag
 
 /**
   * Parse date time

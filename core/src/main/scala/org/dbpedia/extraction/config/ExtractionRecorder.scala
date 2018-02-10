@@ -187,7 +187,8 @@ class ExtractionRecorder[T](
 
     Option(entry.error) match{
       case Some(e) =>
-        e.getStackTrace.foreach(x => printLabeledLine("\t" + x.toString, entry.level, language, noLabel = true))
+        logger.log(entry.level, "", e)
+        //e.getStackTrace.foreach(x => printLabeledLine("\t" + x.toString, entry.level, language, noLabel = true))
         if(monitor != null)
           monitor.reportError(this, e)
       case None =>
