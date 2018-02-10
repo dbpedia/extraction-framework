@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dataparser
 
 
-import org.dbpedia.extraction.config.ExtractionRecorder
+import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.Datatype
@@ -24,6 +24,8 @@ class DateRangeParser ( context : {
                        datatype : Datatype,
                        strict : Boolean = false) extends DateTimeParser(context, datatype, strict)
 {
+  private val logger = ExtractionLogger.getLogger(getClass, context.language)
+
   require(datatype != null, "datatype != null")
   def parseRange(node: Node): Option[ParseResult[(Date, Date)]] = {
     try
@@ -37,9 +39,9 @@ class DateRangeParser ( context : {
     catch
       {
         case ex : IllegalArgumentException  =>
-          //TODO recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Warning, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
+          logger.debug(node.root, Language.getOrElse(language, Language.None), ex, "Error while parsing date")
         case ex : NumberFormatException =>
-          //TODO recorder.enterProblemRecord(new RecordEntry[Node](node.root, RecordCause.Warning, Language.getOrElse(language, Language.None), "Error while parsing date", ex))
+          logger.debug(node.root, Language.getOrElse(language, Language.None), ex, "Error while parsing date")
       }
 
     None
