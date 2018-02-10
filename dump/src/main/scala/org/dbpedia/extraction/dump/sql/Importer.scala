@@ -7,7 +7,7 @@ import java.sql.Connection
 import java.sql.SQLException
 
 import org.apache.log4j.Level
-import org.dbpedia.extraction.config.{ExtractionRecorder, WikiPageEntry}
+import org.dbpedia.extraction.config.{DefaultEntry, ExtractionLogger, ExtractionRecorder, WikiPageEntry}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiPage}
 
 import scala.util.control.ControlThrowable
@@ -15,28 +15,19 @@ import scala.util.control.ControlThrowable
 /**
  * This class is basically mwdumper's SqlWriter ported to Scala.
  */
-class Importer(conn: Connection, lang: Language, recorder: ExtractionRecorder[PageNode]) {
+class Importer(conn: Connection, lang: Language) {
 
+  private val logger = ExtractionLogger.getLogger(getClass, lang)
 
   def process(source: Source): Int = {
     for (page <- source) {
       insertPageContent(page)
-      recorder.record(new WikiPageEntry(page))
+      logger.record(new WikiPageEntry(page))
     }
 
-    recorder.printLabeledLine("Retrying all failed pages:", Level.WARN, lang, noLabel = true)
+    logger.record(new DefaultEntry("Retrying all failed pages:", null, lang, Level.WARN))
 
-    recorder.listFailedPages(lang) match{
-      case None =>
-      case Some(fails) => for(fail <- fails)
-        fail match{
-          case w: WikiPage => if(!insertPageContent(w))
-            recorder.printLabeledLine("Retrying all failed pages:", Level.WARN, lang)
-          case _ =>
-        }
-    }
-
-    recorder.successfulPages(lang).toInt
+    logger.recorder.successfulPages(lang).toInt
   }
   
   private def lengthUtf8(text: String): Int = {
@@ -128,7 +119,7 @@ class Importer(conn: Connection, lang: Language, recorder: ExtractionRecorder[Pa
     catch {
       // throw our own exception that our XML parser won't catch
       case e: Throwable =>
-        recorder.failedRecord(page, e, page.title.language)
+        logger.error(page, page.title.language, e)
         false
     }
     finally stmt.close()

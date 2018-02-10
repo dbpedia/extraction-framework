@@ -84,8 +84,6 @@ class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends Q
       return
     }
     destination.open()
-    this.getRecorder.initialize(language, "Mapping Quads", getTransitiveDatasets(destination))
-
     try {
       readQuads(language, inFile) { old =>
         destination.write(map(old))
@@ -113,7 +111,6 @@ class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends Q
 
     var mapCount = 0
     destination.open()
-    this.getRecorder.initialize(language, "Mapping Quads", getTransitiveDatasets(destination))
 
     try {
       readSortedQuads(language, inFile) { old =>

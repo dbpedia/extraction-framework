@@ -12,7 +12,7 @@ import scala.reflect.ClassTag
 import scala.reflect._
 import scala.util.{Failure, Success, Try}
 
-class ExtractionLogger protected(logger: Logger, er: ExtractionRecorder[_]) extends Logger(logger.getName){
+class ExtractionLogger protected(logger: Logger, val recorder: ExtractionRecorder[_]) extends Logger(logger.getName){
 
   def record(recordable: Recordable[_]): Unit ={
     this.record(recordable.recordEntries:_*)
@@ -114,16 +114,21 @@ object ExtractionLogger{
     }
   }
 
+  private val loggerMap = new mutable.HashMap[ExtractionRecorder[_], ExtractionLogger]()
   def getLogger[T](clazz: Class[T], lang: Language, datasets: Seq[Dataset] = Seq()): ExtractionLogger ={
     val er = getExtractionRecorder[T](lang, datasets)(ClassTag.apply(clazz))
     if(!er.isInitialized)
       er.initialize(lang, getTaskName(clazz), datasets)
-    val orig = Logger.getLogger(clazz)
-    val logger = new ExtractionLogger(orig, er)
-    setHierarchy(logger, orig.getLoggerRepository)
-    logger.addAppender(er)
-    logger.setLevel(RECORD)
-    logger
+    loggerMap.get(er) match{
+      case Some(l) => l
+      case None =>
+        val orig = Logger.getLogger(clazz)
+        val logger = new ExtractionLogger(orig, er)
+        setHierarchy(logger, orig.getLoggerRepository)
+        logger.addAppender(er)
+        logger.setLevel(RECORD)
+        logger
+    }
   }
 
   private val ExtractorNodePattern = ("^" + DBpediaNamespace.PROVDOMAIN + "(extractor|node|parser).*").r

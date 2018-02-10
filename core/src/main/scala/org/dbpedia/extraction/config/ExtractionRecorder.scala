@@ -45,7 +45,6 @@ class ExtractionRecorder[T](
 
   private val startTime = new AtomicLong()
   private var successfulPageCount = Map[Language,AtomicLong]()
-  private var successfulTripleCount = Map[Dataset, AtomicLong]()
 
   private var defaultLang: Language = Language.English
 
@@ -78,11 +77,6 @@ class ExtractionRecorder[T](
     case None => 0
   }
 
-  def successfulTriples(dataset : Dataset): Long = successfulTripleCount.get(dataset) match {
-    case Some(m) => m.get()
-    case None => 0
-  }
-
   def getDatasets: List[Dataset] = datasets.toList
 
   /**
@@ -96,15 +90,6 @@ class ExtractionRecorder[T](
       case Some(ai) => ai.incrementAndGet()
       case None =>
         successfulPageCount += (lang -> new AtomicLong(1))
-        1
-    }
-  }
-
-  private[config] def increaseAndGetSuccessfulTriples(dataset: Dataset) : Long = {
-    successfulTripleCount.get(dataset) match {
-      case Some(ai) => ai.incrementAndGet()
-      case None =>
-        successfulTripleCount += (dataset -> new AtomicLong(1))
         1
     }
   }
@@ -351,7 +336,6 @@ class ExtractionRecorder[T](
     this.issuePages = mutable.Map[Language, mutable.Map[Long, RecordEntry[_]]]()
     this.successfulPagesMap = Map[Language, mutable.Map[Long, RecordEntry[_]]]()
     this.successfulPageCount = Map[Language,AtomicLong]()
-    this.successfulTripleCount = Map[Dataset, AtomicLong]()
 
     this.startTime.set(System.currentTimeMillis)
     this.defaultLang = lang
@@ -617,7 +601,10 @@ class ExtractionRecorder[T](
 
   }
 
-  def getSuccessfulPageCount: Map[Language,AtomicLong] = {
-    successfulPageCount
+  def getSuccessfulPageCount(lang: Language): Long = {
+    successfulPageCount.get(lang) match{
+      case Some(s) => s.get()
+      case None => 0L
+    }
   }
 }

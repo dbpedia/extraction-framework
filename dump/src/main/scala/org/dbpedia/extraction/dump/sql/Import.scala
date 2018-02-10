@@ -71,10 +71,7 @@ object Import {
                   stmt.execute(tables)
                 }
                 finally stmt.close()
-
-                val recorder = config.getDefaultExtractionRecorder[PageNode](language, 2000)
-                recorder.initialize(language, "import")
-                val pages = new Importer(conn, language, recorder).process(source)
+                val pages = new Importer(conn, language).process(source)
 
                 println(language.wikiCode + ": imported " + pages + " pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
             }

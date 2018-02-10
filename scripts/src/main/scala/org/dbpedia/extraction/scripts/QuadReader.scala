@@ -2,8 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import java.io.File
 
-import org.apache.log4j.Level
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry}
+import org.dbpedia.extraction.config.{ExtractionLogger}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util._
@@ -17,22 +16,15 @@ import scala.util.{Failure, Success}
  */
 class QuadReader(log: FileLike[File] = null, preamble: String = null) {
 
-  private val recorder: ExtractionRecorder[Quad] =     Option(log) match{
-    case Some(f) => new ExtractionRecorder[Quad](IOUtils.writer(f, append = true), 100000, preamble)
-    case None => new ExtractionRecorder[Quad](null, 100000, preamble)
-  }
-
   def this(){
     this(null, null)
   }
 
-  def getRecorder = recorder
-
   def addQuadRecord(quad: Quad, lang: Language, errorMsg: String = null, error: Throwable = null): Unit ={
     if(errorMsg == null && error == null)
-      recorder.record(new RecordEntry[Quad](quad, lang, errorMsg, error, Level.INFO))
+      ExtractionLogger.getLogger(getClass, lang).trace(quad, lang, error, errorMsg)
     else if(error != null)
-      recorder.record(new RecordEntry[Quad](quad, lang, errorMsg, error, Level.ERROR))
+      ExtractionLogger.getLogger(getClass, lang).error(quad, lang, error, errorMsg)
   }
 
   /**
@@ -84,8 +76,6 @@ class QuadReader(log: FileLike[File] = null, preamble: String = null) {
       }
       case None => None
     }
-
-    getRecorder.initialize(language, "Processing Quads", if(dataset.nonEmpty) Seq(dataset.get) else Seq())
 
     IOUtils.readLines(file) { line =>
       line match {

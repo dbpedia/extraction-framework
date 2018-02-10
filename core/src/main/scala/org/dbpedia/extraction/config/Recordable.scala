@@ -43,18 +43,18 @@ object RecordEntry{
   }
 }
 
-class NodeEntry(p : Node, level: Level = Level.INFO) extends RecordEntry[Node](
+class NodeEntry(p : Node, level: Level = Level.TRACE) extends RecordEntry[Node](
   record = p,
   level = level
 )
 
-class WikiPageEntry(p : PageNode, level: Level = Level.INFO) extends RecordEntry[Node](
+class WikiPageEntry(p : PageNode, level: Level = Level.TRACE) extends RecordEntry[Node](
   record = p,
   level = level,
   language = p.title.language
 )
 
-class QuadEntry(q : Quad, level: Level = Level.INFO) extends RecordEntry[Quad](
+class QuadEntry(q : Quad, level: Level = Level.TRACE) extends RecordEntry[Quad](
   record = q,
   level = level,
   language = Option(q.language) match{

@@ -134,7 +134,7 @@ class ConfigLoader(config: Config)
       val datasetDestinations = new mutable.HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
-          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format, ExtractionLogger.getExtractionRecorder(context.language, Seq(dataset)), dataset))
+          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
           case None =>
         }
       }
@@ -156,8 +156,7 @@ class ConfigLoader(config: Config)
       context.articlesSource,
       extractionJobNS,
       destination,
-      context.language,
-      ExtractionLogger.getExtractionRecorder(context.language)
+      context.language
     )
 
     extractionJobs.put(context.language, extractionJob)

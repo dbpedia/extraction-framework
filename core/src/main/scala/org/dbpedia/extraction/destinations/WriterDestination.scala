@@ -2,7 +2,7 @@ package org.dbpedia.extraction.destinations
 
 import java.io.Writer
 
-import org.dbpedia.extraction.config.ExtractionRecorder
+import org.dbpedia.extraction.config.ExtractionLogger
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.mappings.BadQuadException
@@ -13,7 +13,7 @@ import org.dbpedia.extraction.util.Language
 /**
  * Writes quads to a writer.
  */
-class WriterDestination(factory: () => Writer, formatter : Formatter, extractionRecorder: ExtractionRecorder[Quad] = null, dataset : Dataset = null)
+class WriterDestination(factory: () => Writer, formatter : Formatter, dataset : Dataset = null)
 extends Destination
 {
   private var writer: Writer = null
@@ -34,13 +34,12 @@ extends Destination
   override def write(graph : Traversable[Quad]) = synchronized {
     for(quad <- graph) {
       val formatted = formatter.render(quad)
-      if(extractionRecorder != null) {
-        if(formatted.trim.startsWith("#")){
-          if(formatted.contains("BAD URI:"))
-            extractionRecorder.failedRecord(quad, new BadQuadException(formatted), Language.getOrElse(quad.language, Language.None))
+      if(formatted.trim.startsWith("#")){
+        if(formatted.contains("BAD URI:")){
+          quad.getProvenanceRecord.foreach(x => Option(x.metadata)
+            .foreach(m => ExtractionLogger.getLogger(getClass, m.language)
+            .warn(quad, m.language, new BadQuadException(formatted))))
         }
-        else if(dataset != null)
-          extractionRecorder.increaseAndGetSuccessfulTriples(dataset)
       }
       writer.write(formatted)
     }

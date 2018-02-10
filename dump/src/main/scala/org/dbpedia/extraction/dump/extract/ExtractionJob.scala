@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
 import org.apache.log4j.Level
-import org.dbpedia.extraction.config.{ExtractionRecorder, RecordEntry}
+import org.dbpedia.extraction.config.{DefaultEntry, ExtractionLogger, ExtractionRecorder, RecordEntry}
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.WikiPageExtractor
@@ -23,17 +23,16 @@ class ExtractionJob(
    source: Source,
    val namespaces: Set[Namespace],
    val destination: Destination,
-   val language: Language,
-   val extractionRecorder: ExtractionRecorder[PageNode])
+   val language: Language)
 {
-
+  private val logger = ExtractionLogger.getLogger(getClass, language)
   def datasets: Set[Dataset] = extractor.datasets
 
   private val workers = SimpleWorkers { page: WikiPage =>
     try {
       if (namespaces.contains(page.title.namespace)) {
         val graph = extractor.extract(page, page.uri)
-        graph.foreach(q => extractionRecorder.record(q))
+        graph.foreach(q => logger.record(q))
         destination.write(graph)
       }
       //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
@@ -42,19 +41,16 @@ class ExtractionJob(
         case _ =>  Seq[RecordEntry[PageNode]]()
       }
       //forward all records to the recorder
-      extractionRecorder.record(records:_*)
+      logger.record(records:_*)
     } catch {
       case ex: Exception =>
         page.recordException(ex)
-        extractionRecorder.record(page)
-        if(extractionRecorder.monitor != null)
-          extractionRecorder.monitor.reportError(extractionRecorder, ex)
+        logger.record(page)
     }
   }
   
   def run(): Unit =
   {
-    extractionRecorder.initialize(language, "Extraction", extractor.datasets.toSeq)
     extractor.initializeExtractor()
     destination.open()
     workers.start()
@@ -63,16 +59,15 @@ class ExtractionJob(
       for (page <- source)
         workers.process(page)
 
-      extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", Level.INFO, language)
+      logger.record(new DefaultEntry("finished extraction after {page} pages with {mspp} per page", null, language, Level.INFO))
     }
     catch {
       case ex : Throwable =>
-        if(extractionRecorder.monitor != null) extractionRecorder.monitor.reportCrash(extractionRecorder, ex)
+        logger.error(ex)
     } finally {
       workers.stop()
       destination.close()
       extractor.finalizeExtractor()
-      extractionRecorder.close()
     }
   }
 }

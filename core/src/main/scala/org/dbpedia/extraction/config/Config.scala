@@ -106,7 +106,9 @@ class Config(properties: Properties) extends Properties(Config.combineProperties
         case Some(s) => new OutputStreamWriter(s)
         case None => null
       }
-    new ExtractionRecorder[T](w, interval, preamble, slackCredentials.getOrElse(null), datasets, lang, new ExtractionMonitor(this), provenanceRecordManager.orNull)
+
+    //TODO reinstate Extraction Monitor
+    new ExtractionRecorder[T](w, interval, preamble, slackCredentials.getOrElse(null), datasets, lang, null, provenanceRecordManager.orNull)
   }
 
   private def openLogFile(langWikiCode: String): Option[FileOutputStream] ={

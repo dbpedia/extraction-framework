@@ -117,10 +117,9 @@ class ExtractionMonitor(config: Config) {
     val summary = mutable.HashMap[String, Object]()
     summary.put("EXCEPTIONCOUNT", error.asInstanceOf[Object])
 
-    val s : AtomicLong = new AtomicLong(0)
-    val map = er.getSuccessfulPageCount
-    map.keySet.foreach(key => s.set(s.get() + map(key).get()))
-    summary.put("SUCCESSFUL", s)
+    val map = er.getSuccessfulPageCount(er.language)
+
+    //summary.put("SUCCESSFUL", s)
     summary.put("CRASHED", crashed.asInstanceOf[Object])
     summary.put("DATAID", dataIDResults.asInstanceOf[Object])
     summary.put("EXCEPTIONS",
@@ -148,7 +147,7 @@ class ExtractionMonitor(config: Config) {
         datasets.foreach(dataset =>
           if(dataset.canonicalUri == fileName) {
             val oldValue : Long = oldValues(fileName).asLiteral().getLong
-            val newValue : Long = extractionRecorder.successfulTriples(dataset)
+            val newValue : Long = extractionRecorder.getSuccessfulPageCount(extractionRecorder.language)
             val change : Float =
               if(newValue > oldValue) (newValue.toFloat / oldValue.toFloat) * 10000000 / 100000
               else (-1 * (1- (newValue.toFloat / oldValue.toFloat))) * 10000000 / 100000
