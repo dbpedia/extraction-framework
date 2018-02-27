@@ -5,8 +5,8 @@ import java.net.URL
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Logger
 
-import org.dbpedia.extraction.config.{Config, ConfigUtils}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.config.{Config, ConfigUtils}
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
@@ -199,7 +199,6 @@ class ConfigLoader(config: Config)
 
     def articlesSource: Source = getArticlesSource(lang, finder)
 
-
     //Extraction Context
     val context = new DumpExtractionContext
     {
@@ -275,12 +274,10 @@ class ConfigLoader(config: Config)
     val sparkExtractionJob = new SparkExtractionJob(
       extractors,
       context,
-      articlesSource,
       extractionJobNS,
       destination,
       lang,
       config.retryFailedPages,
-      Config.universalConfig.chunkSize,
       getExtractionRecorder(lang)
     )
 

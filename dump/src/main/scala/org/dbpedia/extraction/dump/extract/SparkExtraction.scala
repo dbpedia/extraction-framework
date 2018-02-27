@@ -3,7 +3,7 @@ package org.dbpedia.extraction.dump.extract
 import java.net.Authenticator
 
 import org.apache.log4j.{Level, LogManager, Logger}
-import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.sql.SparkSession
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.util.ProxyAuthenticator
 
@@ -25,17 +25,17 @@ object SparkExtraction {
     val config = new Config(args.head)
     val configLoader = new ConfigLoader(config)
 
-    // Create SparkConfig
-    val sparkConf = new SparkConf().setAppName("Main Extraction").setMaster("local[*]")
-
-    // Setup Serialization with Kryo
-    sparkConf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+    val spark = SparkSession.builder()
+        .appName("MainExtraction")
+        .master("local[*]")
+        .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+        .getOrCreate()
 
     // Create SparkContext
-    val sparkContext = new SparkContext(sparkConf)
-    sparkContext.setLogLevel("ERROR")
+    val sparkContext = spark.sparkContext
+    sparkContext.setLogLevel("WARN")
 
     // Run extraction jobs
-    configLoader.getSparkExtractionJobs.foreach(_.run(sparkContext, config))
+    configLoader.getSparkExtractionJobs.foreach(_.run(spark, config))
   }
 }
