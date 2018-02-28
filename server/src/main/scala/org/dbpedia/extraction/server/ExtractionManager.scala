@@ -78,7 +78,6 @@ abstract class ExtractionManager(
     def extract(source: Source, destination: Destination, language: Language, useCustomExtraction: Boolean = false): Unit = {
       val extractor = if (useCustomExtraction) customExtractor(language) else mappingExtractor(language)
       val datasets = extractor.datasets.map(x => x.canonicalUri.toString)
-      val er = Server.getExtractionRecorder[Quad](language)
       destination.open()
       for (page <- source){
         val quads = extractor.extract(page, page.uri).filter(q => datasets.contains(q.dataset))
@@ -218,7 +217,7 @@ abstract class ExtractionManager(
       new { val ontology: Ontology = self.ontology()
             val language: Language = lang
             val mappings: Mappings = self.mappings(lang)
-            val redirects: Redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
+            val redirects: Redirects = self.redirects.getOrElse(lang, new Redirects())
             val disambiguations: Disambiguations = self.disambiguations
             val configFile: ServerConfiguration = Server.config
             val nonFreeImages = Seq()
@@ -236,7 +235,7 @@ abstract class ExtractionManager(
         val context = new {
           val ontology: Ontology = self.ontology()
           val language: Language = lang
-          val redirects: Redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
+          val redirects: Redirects = self.redirects.getOrElse(lang, new Redirects())
           val mappingPageSource: Traversable[WikiPage] = self.mappingPageSource(lang)
           val disambiguations: Disambiguations = self.disambiguations
           val configFile: ServerConfiguration = Server.config

@@ -72,26 +72,10 @@ extends Node with Recordable[Node]
   lazy val isRedirect: Boolean = this.redirect != null
 
   lazy val redirect: WikiTitle = {
-    //first we try to redirect category redirects (these are "soft redirects" and we need to look for the CategoryRedirect templates - see CategoryRedirect.scala)
-    if(isCategory){
-      val template = CategoryRedirect.get(this.title.language) match{
-        case Some(crd) => children.map(c => c.containedTemplateNodes(crd)).filter(t => t.collectFirst{case y => y.children.size > 1}.isDefined).flatten
-        case None => Set()
-      }
-      if(template.nonEmpty) {
-        val newCat = WikiTitle.parse(template.head.children.head.propertyNodeValueToPlainText, this.title.language)
-        new WikiTitle(newCat.decoded, Namespace.Category, newCat.language, newCat.isInterLanguageLink, newCat.fragment, newCat.capitalizeLink, newCat.id)
-      }
-      else
-        null.asInstanceOf[WikiTitle] //legacy
-    }
-    else {
-      //else we try to look for the #REDIRECT magic word using the RedirectFinder
-      val rf = RedirectFinder.getRedirectFinder(title.language)
-      rf.apply(this) match {
-        case Some((_, targetTitle)) => targetTitle
-        case None => null.asInstanceOf[WikiTitle] //legacy
-      }
+    val rf = RedirectFinder.getRedirectFinder(title.language)
+    rf.apply(this) match {
+      case Some((_, targetTitle)) => targetTitle
+      case None => null.asInstanceOf[WikiTitle] //legacy
     }
   }
 

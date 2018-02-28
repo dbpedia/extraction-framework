@@ -6,6 +6,8 @@ import org.dbpedia.extraction.util._
 import java.io.{File, FileOutputStream, IOException, OutputStreamWriter}
 import java.net.HttpRetryException
 
+import org.dbpedia.extraction.config.ExtractionLogger
+
 import scala.util.matching.Regex
 import scala.util.{Failure, Success}
 
@@ -13,11 +15,15 @@ import scala.util.{Failure, Success}
  * Generates Namespaces.scala, Redirect.scala, CategoryRedirect.scala and Disambiguation.scala. Must be run with core/ as the current directory.
  */
 object GenerateWikiSettings {
-  
+
+  private val logger = ExtractionLogger.getLogger(getClass, Language.English)
+
   private val inputDir = new File("src/test/resources/org/dbpedia/extraction/wikiparser/impl/wikipedia")
   private val outputDir = new File("src/main/scala/org/dbpedia/extraction/wikiparser/impl/wikipedia")
 
   private val englishCategoryRedirectTemplate = "Template:Category redirect"
+  val englishCategoryInfoboxTemplates = "Category:Infobox templates"
+  val dontQueryThoseLanguagesForInfoboxtemplates = List("ur")           //these are necessary since their category tree is HUGE (probably auto generated)
 
   // pattern for insertion point lines
   val Insert: Regex = """// @ insert (\w+) here @ //""".r
@@ -42,9 +48,9 @@ object GenerateWikiSettings {
     // language -> redirect aliases
     val redirectMap = new mutable.LinkedHashMap[String, Set[String]]()
 
-    // language -> redirect aliases
+    // language -> category redirect template name of that language
     val categoryRedirects = new mutable.LinkedHashMap[String, Set[String]]()
-    
+
     // old language code -> new language code
     val languageMap = new mutable.LinkedHashMap[String, String]()
 
@@ -63,6 +69,7 @@ object GenerateWikiSettings {
     val wikiLanguages = try source.getLines.toList finally source.close
     val languages = "mappings" :: "commons" :: "wikidata" :: wikiLanguages
 
+    logger.info("Collecting Category:Redirect templates.")
     //collect category redirects (uses langlinks from a known category redirect page, to find the same in other languages)
     new WikiLangLinkReader().execute(Language.English, englishCategoryRedirectTemplate)
       .foreach(ent => categoryRedirects.put(ent._1.wikiCode, ent._2.map {
@@ -70,7 +77,7 @@ object GenerateWikiSettings {
         case d => d
       }))
 
-    println("generating wiki config for "+languages.length+" languages")
+    logger.info("generating wiki config for "+languages.length+" languages")
     languages.foreach { code =>
       try {
         val language = Language(code)
@@ -96,23 +103,23 @@ object GenerateWikiSettings {
             }
           }
           // TODO: also use interwikis
-          println(s"$code - OK")
+          logger.info(s"$code - OK")
         } catch {
           case hrex: HttpRetryException => {
             val target = hrex.getMessage
             languageMap(code) = target
-            println(s"$code - redirected to $target")
+            logger.info(s"$code - redirected to $target")
           }
           case ioex: IOException => {
             val error = ioex.getMessage
             errors(code) = error
-            println(s"$code - Error: $error")
+            logger.warn(s"$code - Error: $error")
           }
-          case i: Throwable =>   i.printStackTrace()
+          case i: Throwable =>  logger.error("Error while generating settings: ", i)
         }
       }
       catch {
-        case uae: IllegalArgumentException =>
+        case uae: IllegalArgumentException => logger.error("Error while generating settings: ", uae)
       }
     }
 
@@ -151,7 +158,7 @@ object GenerateWikiSettings {
     generate("CategoryRedirect.scala", Map("categoryRedirects" -> categoryRedirectStr, "errors" -> errorStr))
     generate("Disambiguation.scala", Map("disambiguations" -> disambiguationsStr, "errors" -> errorStr))
 
-    println("generated wiki config for "+languages.length+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))
+    logger.info("generated wiki config for "+languages.length+" languages in "+StringUtils.prettyMillis(System.currentTimeMillis - millis))
   }
   
   /**

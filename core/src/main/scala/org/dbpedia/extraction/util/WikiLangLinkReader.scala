@@ -6,6 +6,7 @@ import javax.xml.stream.events.StartElement
 
 import org.dbpedia.extraction.util.RichStartElement.richStartElement
 import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.wikiparser.impl.wikipedia.GenerateWikiSettings
 
 import scala.collection.{Set, mutable}
 import scala.collection.mutable.ListBuffer
@@ -22,7 +23,7 @@ class WikiLangLinkReader {
     * @param title - title of the given page
     * @return - Map of languages to a collection of all alias names (redirects, incl. the given page and language)
     */
-  def execute(language: Language, title: String): Map[Language, Set[String]] ={
+  def execute(language: Language, title: String, getRedirects: Boolean = true): Map[Language, Set[String]] ={
 
     val url = new URL(language.apiUri + "?" + WikiLangLinkReader.getLangLinkQuery(title))
     val caller = new WikiCaller(url, WikiDisambigReader.followRedirects)
@@ -48,10 +49,13 @@ class WikiLangLinkReader {
                 in.ifElement("langlinks"){ _ =>
                   in.elements("ll"){ link =>
                     readLangLink(link, in).foreach(ll => {
-                      queryRedirects(ll._1, ll._2) match{
-                        case Success(s) => langMap.put(ll._1, s)
-                        case Failure(_) =>
-                      }
+                      if(getRedirects)
+                        queryRedirects(ll._1, ll._2) match{
+                          case Success(s) => langMap.put(ll._1, s ++ Set(ll._2))
+                          case Failure(_) =>
+                        }
+                      else
+                        langMap.put(ll._1, Set(ll._2))
                     })
                   }
                 }
@@ -100,9 +104,14 @@ class WikiLangLinkReader {
     */
   private def readLangLink(page: StartElement, in: XMLEventAnalyzer): Option[(Language, String)] ={
       page.getAttr("lang") match{
-        case Some(l) => Some(Language(l), in.text(link => link))
-        case None =>  None
+        case Some(l) => Language.get(l) match{
+          case Some(lang) => return Some(lang, in.text(link => link))
+          case None =>
+        }
+        case None =>
       }
+    ""  + in.text(link => link)  //collect link anyway
+    None
   }
 }
 
@@ -120,4 +129,8 @@ object WikiLangLinkReader{
     */
   def getRedirectQuery(title: String) = "action=query&format=xml&prop=redirects&redirects=1&rdlimit=500&titles=" + URLEncoder.encode(title, "UTF-8")
 
+  def getLangLinksFor(title: String, lang: Language, targetLang: Language): Option[Set[String]] = {
+    val map = new WikiLangLinkReader().execute(lang, title, getRedirects = false)
+    map.get(targetLang)
+  }
 }

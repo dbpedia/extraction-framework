@@ -129,9 +129,9 @@ class HomepageExtractorTest extends FlatSpec with Matchers
   {
     val page = new WikiPage(WikiTitle.parse(title, lang), input)
     val context = new {
-      def ontology = HomepageExtractorTest.ontology;
-      def language = lang;
-      def redirects = new Redirects(Map("Official" -> "Official website"))
+      def ontology = HomepageExtractorTest.ontology
+      def language = lang
+      def redirects = Redirects.fromMap(Map("Official" -> "Official website"))
     }
 
     val extractor = new HomepageExtractor(context)

@@ -13,7 +13,7 @@ import org.dbpedia.iri.IRI
  * If the source does not define a label explicitly, a TextNode containing the link destination will be the only child.
  */
 @WikiNodeAnnotation(classOf[LinkNode])
-sealed abstract class LinkNode(children : List[Node], override val line : Int)
+sealed abstract class LinkNode(children : List[Node], override val line : Int, val destinationNodes : List[Node])
 extends Node
 {
     def toPlainText = children.map(_.toPlainText).mkString
@@ -42,7 +42,7 @@ extends Node
 
 @WikiNodeAnnotation(classOf[WikiLinkNode])
 sealed abstract class WikiLinkNode(destination: WikiTitle, children: List[Node], line: Int, destinationNodes: List[Node]) 
-extends LinkNode(children, line)
+extends LinkNode(children, line, destinationNodes)
 {
     def toWikiText = "[[" + destination.decodedWithNamespace + "|" + children.map(_.toWikiText).mkString + "]]"
 }
@@ -57,8 +57,8 @@ extends LinkNode(children, line)
  * @param line The source line number of this link
  */
 @WikiNodeAnnotation(classOf[ExternalLinkNode])
-case class ExternalLinkNode(destination : IRI, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]())
-extends LinkNode(children, line)
+case class ExternalLinkNode(destination : IRI, override val children : List[Node], override val line : Int, override val destinationNodes : List[Node] = List[Node]())
+extends LinkNode(children, line, destinationNodes)
 {
     def toWikiText: String = "[" + destination.toString + " " + children.map(_.toWikiText).mkString + "]"
 }
@@ -73,7 +73,7 @@ extends LinkNode(children, line)
  * @param line The source line number of this link
  */
 @WikiNodeAnnotation(classOf[InternalLinkNode])
-case class InternalLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]())
+case class InternalLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, override val destinationNodes : List[Node] = List[Node]())
 extends WikiLinkNode(destination, children, line, destinationNodes) {
     override def equals(obj: scala.Any) = obj match {
         case otherLink : InternalLinkNode => otherLink.destination == destination && NodeUtil.filterEmptyTextNodes(otherLink.children) == NodeUtil.filterEmptyTextNodes(children)
@@ -91,5 +91,5 @@ extends WikiLinkNode(destination, children, line, destinationNodes) {
  * @param line The source line number of this link
  */
 @WikiNodeAnnotation(classOf[InterWikiLinkNode])
-case class InterWikiLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]()) 
+case class InterWikiLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, override val destinationNodes : List[Node] = List[Node]())
 extends WikiLinkNode(destination, children, line, destinationNodes)

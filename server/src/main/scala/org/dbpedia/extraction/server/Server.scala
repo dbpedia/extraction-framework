@@ -107,7 +107,7 @@ object Server
      * @return
      */
     def buildTemplateRedirects(redirects: Map[String, String], language: Language): Redirects = {
-      new Redirects(redirects.map { case (from, to) =>
+      Redirects.fromMap(redirects.map { case (from, to) =>
         (WikiTitle.parse(from, language).decoded, WikiTitle.parse(to, language).decoded)
       })
     }

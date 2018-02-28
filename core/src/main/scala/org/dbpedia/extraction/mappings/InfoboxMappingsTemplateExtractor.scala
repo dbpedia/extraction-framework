@@ -21,10 +21,11 @@ class InfoboxMappingsTemplateExtractor (context: {
 
   extends WikiPageExtractor
 {
-  override val datasets = Set(hintDataset, mapDataset)
   val hintDatasetInst: Dataset = DBpediaDatasets.TemplateMappingsHintsInstance
   val hintDataset: Dataset = DBpediaDatasets.TemplateMappingsHints
   val mapDataset: Dataset = DBpediaDatasets.TemplateMappings
+  override val datasets = Set(hintDataset, mapDataset)
+
   val xsdString = context.ontology.datatypes("xsd:string")
   private val templateParameterProperty = context.language.propertyUri.append("templateUsesWikidataProperty")
   private val qb = QuadBuilder.stringPredicate(context.language, hintDataset, templateParameterProperty)
@@ -33,7 +34,6 @@ class InfoboxMappingsTemplateExtractor (context: {
 
   override def extract(page : WikiPage, subjectUri : String): Seq[Quad] = {
     if (!List(Namespace.Template, Namespace.Main).contains(page.title.namespace) ) return Seq.empty
-
 
     val simpleParser = WikiParser.getInstance("simple")
     val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(simpleParser.apply(page, context.redirects).orNull)
@@ -101,66 +101,6 @@ class InfoboxMappingsTemplateExtractor (context: {
       return true
     false
   }
-
-  def getTuplesFromConditionalExpressions(page : WikiPage, lang : Language) : List[(String, String, String)] = {
-
-    val simpleParser = WikiParser.getInstance("simple")
-    val swebleParser = WikiParser.getInstance("sweble")
-    val tempPageSweble = new WikiPage(page.title, page.source)
-    val tempPageSimple = new WikiPage(page.title, cleanUp(page.source))
-    val templateNodesSweble = ExtractorUtils.collectTemplatesFromNodeTransitive(swebleParser.apply(tempPageSweble, context.redirects).orNull)
-    val templateNodesSimple = ExtractorUtils.collectTemplatesFromNodeTransitive(simpleParser.apply(tempPageSimple, context.redirects).orNull)
-
-    val infoboxesSweble = templateNodesSweble.filter(p => p.title.toString().contains(infoboxNameMap.getOrElse(lang.wikiCode, "Infobox")))
-    val infoboxesSimple = templateNodesSimple.filter(p => p.title.toString().contains(infoboxNameMap.getOrElse(lang.wikiCode, "Infobox")))
-
-    var answerSweble = Set[(String, String, String)]()
-    var answerSimple = Set[(String, String, String)]()
-
-
-    // Loop through all infoboxes
-    infoboxesSweble.foreach(infobox => {
-      // Loop through each property
-      for (propertyNode <- infobox.children) {
-
-        for( child <- propertyNode.children){
-          // Get list of all equivalent terms in the conditional expression foreg {{#ifeq: "string1" | "String2" | {{#property:p193}} | "string3"} }}
-          // should return string1, string2, string3 along with the associated property
-          val temp_answer = getListOfEquivalentTermsAndPropertySweble(child, getProp = false)
-          val cleansed_list = temp_answer._1.filter(str => !ltrim(rtrim(str)).isEmpty)
-          if (temp_answer._2 != "ERROR" && temp_answer._2 != "" && checkForPropertySyntax(temp_answer._2)) {
-            for (term <- cleansed_list) {
-              if ( !isBlackListed(term))
-                answerSweble += Tuple3(infobox.title.decoded, rtrim(ltrim(term)), temp_answer._2)
-            }
-          }
-        }
-      }
-    })
-    // Loop through all infoboxes
-    infoboxesSimple.foreach(infobox => {
-      // Loop through each property
-      for (propertyNode <- infobox.children) {
-        // The child should be a ParserFunctionNode with title #if...
-        if (propertyNode.children.nonEmpty && propertyNode.children.head.isInstanceOf[ParserFunctionNode] && propertyNode.children.head.asInstanceOf[ParserFunctionNode].title.substring(0, 3) == "#if") {
-          // Get list of all equivalent terms in the conditional expression foreg {{#ifeq: "string1" | "String2" | {{#property:p193}} | "string3"} }}
-          // should return string1, string2, string3 along with the associated property
-          val temp_answer = getListOfEquivalentTermsAndPropertySimple(propertyNode.children.head.asInstanceOf[ParserFunctionNode])
-          val cleansed_list = temp_answer._1.filter(str => !ltrim(rtrim(str)).isEmpty)
-          if (temp_answer._2 != "ERROR" && temp_answer._2 != "") {
-            for (term <- cleansed_list) {
-              if ( !isBlackListed(term))
-              answerSimple += Tuple3(infobox.title.decoded, rtrim(ltrim(term)), temp_answer._2)
-            }
-          }
-
-        }
-      }
-    })
-
-      (answerSimple ++ answerSweble).toList
-  }
-
   // tempNode is the node whose children is to be processed
   // answerList is the list of terms extracted
   // getProp is flag when set indicates to only extract the property and no more terms
@@ -230,14 +170,17 @@ class InfoboxMappingsTemplateExtractor (context: {
       var text : String = ltrim(rtrim(node.asInstanceOf[TextNode].text))
       if(text == null || text == "" || text.length < 2 ){
         return (answerList.toArray, property)
-      } else {
+      }
+      else {
         if ( text.contains("|") && !getProp){
-          answerList = answerList ++ text.split('|').filter(str => !checkForPropertySyntax(str))
-
-          val propertyArr =  text.split('|').filter(str => checkForPropertySyntax(str))
-          if ( propertyArr.length  == 1) property = propertyArr.head
-          else if (propertyArr.length > 1) property = "ERROR"
-        } else {
+          val propertyArr = text.split('|').filter(str => checkForPropertySyntax(str))
+          if ( propertyArr.length  == 1)
+            property = propertyArr.head
+          else if (propertyArr.length > 1)
+            property = "ERROR"
+          answerList = answerList ++ propertyArr
+        }
+        else {
           if(checkForPropertySyntax(text) )
             property += text
           else if(!getProp)
@@ -288,7 +231,7 @@ class InfoboxMappingsTemplateExtractor (context: {
 
   def cleanUp(str : String) : String = {
     val  pattern1 = """\{\{\{([0-9A-Za-z\_]+)\|?\}\}\}"""
-    val  pattern2 = """\{\{\{([0-9A-Za-z\_]+)\|?\}\}\}\}\}\}"""
+    val  pattern2 = """\{\{\{\{\{([0-9A-Za-z\_]+)\|?\}\}\}\}\}\}"""
     str.replaceAll(pattern2, "$1").replaceAll(pattern1, "$1")
   }
 

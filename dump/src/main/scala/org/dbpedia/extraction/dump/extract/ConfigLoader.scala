@@ -4,21 +4,23 @@ import java.io._
 import java.net.URL
 import java.util.concurrent.ConcurrentHashMap
 
-import org.dbpedia.extraction.config.{Config, ConfigUtils, ExtractionLogger, ExtractionRecorder}
+import org.apache.log4j.Level
+import org.dbpedia.extraction.config.{Config, ConfigUtils, ExtractionLogger}
 import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.dataparser.RedirectFinder
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.ontology.{DBpediaNamespace, Ontology}
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{Source, WikiSource, XMLSource}
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util._
+import org.dbpedia.extraction.util.{WikiCategoryMemberReader, _}
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.wikiparser.impl.wikipedia.GenerateWikiSettings
 
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
-import scala.reflect._
 
 /**
  * Loads the dump extraction configuration.
@@ -83,16 +85,21 @@ class ConfigLoader(config: Config)
 
       def articlesSource: Source = getArticlesSource(language, finder)
 
+      private val _validInfoboxTemplates = loadValidInfoboxTemplateNames(language, finder.file(date, "valid-infobox-templates.obj").get).toSet
+
+      def validInfoboxTemplates: Set[String] = _validInfoboxTemplates
+
       private val _redirects =
       {
-          finder.file(date, "template-redirects.obj") match {
-            case Some(cache) => Redirects.load(articlesSource, cache, language)
-            case None => new Redirects(Map())
-          }
+        val redirectsCache = finder.file(date, "template-redirects.obj").get
+        val templatessCache = finder.file(date, "template-property-redirects.obj").get
 
+        loadAllRedirects(articlesSource, redirectsCache, templatessCache, language, _validInfoboxTemplates)
       }
 
-      def redirects : Redirects = _redirects
+      def redirects : Redirects = _redirects._1
+
+      def templatePropertyRedirects : TemplatePropertyRedirects = _redirects._2
 
       private val _disambiguations =
       {
@@ -266,6 +273,92 @@ class ConfigLoader(config: Config)
     val source = if (isSourceRegex) config.source.head.substring(1) else config.source.head
     val fileName = if (config.requireComplete) Config.DownloadComplete else source
     finder.dates(fileName, isSuffixRegex = isSourceRegex).last
+  }
+
+  private def loadCategoryMembersTransitive(lang:Language, partentCat: String): Unit ={
+    new WikiCategoryMemberReader().execute(lang, partentCat, Seq(Namespace.Category))
+  }
+
+  private def loadValidInfoboxTemplateNames(lang: Language, cache: File): mutable.HashSet[String] ={
+
+    //Try to load this set from the cache
+    try
+    {
+      return IOUtils.loadSerializedObject[mutable.HashSet[String]](cache)
+    }
+    catch
+    {
+      case ex : Exception => logger.log(Level.INFO, "Will load infobox names from Wikipedia for "+lang.wikiCode+" wiki, could not load cache file.")
+    }
+
+    if(GenerateWikiSettings.dontQueryThoseLanguagesForInfoboxtemplates.contains(lang.wikiCode)){
+      logger.warn("Will not load template parameter redirects for language " + lang.name + " (" + lang.wikiCode + ")" + ", since it has proved to possess a HUGE category tree.")
+      return new mutable.HashSet[String]()
+    }
+
+    //collecting all Interlanguage Links for Category:Infobox templates, selecting our language and collecting transitively every category member
+    val validInfoboxes = WikiLangLinkReader.getLangLinksFor(GenerateWikiSettings.englishCategoryInfoboxTemplates, Language.English, lang) match{
+      case Some(templateNames) if templateNames.nonEmpty =>
+        logger.info("Collecting template parameter redirects for " + lang.name + " (" + lang.wikiCode + ")")
+        new WikiCategoryMemberReader().execute(lang, templateNames.head, Seq(Namespace.Template, Namespace.Category))
+          .map{
+            case WikiDisambigReader.TemplateNameRegex(templateName) =>  templateName
+            case n => n
+          }
+      case None => new mutable.HashSet[String]()
+    }
+
+    val ret = new mutable.HashSet[String]()
+    validInfoboxes.foreach(ret.add)
+
+    //save to cache file
+    IOUtils.serializeToObjectFile(cache, ret)
+    ret
+  }
+
+  /**
+    * Tries to load the redirects from a cache file.
+    * If not successful, loads the redirects from a source.
+    * Updates the cache after loading the redirects from the source.
+    */
+  private def loadAllRedirects(
+      source : Source,
+      redirectsCache : File,
+      templatesCache : File,
+      lang : Language,
+      validInfoboxTemplates: Set[String]
+    ) : (Redirects, TemplatePropertyRedirects) =
+  {
+    //Try to load redirects from the cache
+    try
+    {
+      val redirects = Redirects.loadFromCache(redirectsCache)
+      val templates = TemplatePropertyRedirects.loadFromCache(templatesCache, lang, validInfoboxTemplates)
+      return (redirects, templates)
+    }
+    catch
+    {
+      case ex : Exception => logger.log(Level.INFO, "Will extract redirects from source for "+lang.wikiCode+" wiki, could not load cache file.")
+    }
+
+    //Load redirects from source
+    val redirectFinder = RedirectFinder.getRedirectFinder(lang)
+    val templateFinder = TemplatePropertyExpander.multilineTemplateFinder(validInfoboxTemplates)
+
+    val redirects = new Redirects()
+    val templates = new TemplatePropertyRedirects(lang, validInfoboxTemplates)
+
+    source.foreach(x => {
+      //todo executed sequentially for now
+      redirectFinder.apply(x).foreach(r => redirects.enterRedirect(r._1.decoded, r._2.decoded))
+      templateFinder.apply(x).foreach(t => templates.enterTemplate(x.title.decoded, t))
+    })
+
+    //save both redirects to cache files
+    Redirects.saveToCache(redirectsCache, redirects)
+    TemplatePropertyRedirects.saveToCache(templatesCache, templates)
+
+    (redirects, templates)
   }
 }
 

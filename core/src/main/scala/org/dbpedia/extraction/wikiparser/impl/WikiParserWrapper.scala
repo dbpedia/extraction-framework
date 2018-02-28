@@ -32,7 +32,7 @@ class WikiParserWrapper(wikiTextParserName: String) extends  WikiParser{
     * @return The PageNode which represents the root of the AST
     * @throws WikiParserException if an error occured during parsing
     */
-  override def apply(page: WikiPage, templateRedirects: Redirects = new Redirects(Map())) = {
+  override def apply(page: WikiPage, templateRedirects: Redirects = new Redirects()) = {
     page.format match {
       case _ =>
         if (wikiTextParserName == null || wikiTextParserName.equals("simple")){

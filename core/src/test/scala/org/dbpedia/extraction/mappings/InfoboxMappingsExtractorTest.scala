@@ -365,9 +365,9 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
   {
     val page = new WikiPage(WikiTitle.parse(title, lang), input)
     val context = new {
-      def ontology = InfoboxMappingsExtractorTest.context.ontology;
-      def language = lang;
-      def redirects = new Redirects(Map("Official" -> "Official website"))
+      def ontology = InfoboxMappingsExtractorTest.context.ontology
+      def language = lang
+      def redirects = Redirects.fromMap(Map("Official" -> "Official website"))
     }
 
     val extractor = new InfoboxMappingsExtractor(context)
@@ -407,7 +407,7 @@ object InfoboxMappingsExtractorTest {
       new OntologyReader().read(ontologySource)
     }
     def language = "en"
-    def redirects = new Redirects(Map())
+    def redirects = new Redirects()
   }
 
 }

@@ -23,7 +23,8 @@ class WikiTitle (
   val isInterLanguageLink: Boolean = false,
   val fragment: String = null,
   val capitalizeLink : Boolean = true,
-  var id: Option[Long] = None
+  var id: Option[Long] = None,
+  var awaitsExpansion: Boolean = false
 )
 {
     if (decoded.isEmpty)
@@ -105,8 +106,9 @@ object WikiTitle
      *
      * @param title MediaWiki link e.g. "Template:Infobox Automobile"
      * @param sourceLanguage The source language of this link
+    * @param awaitsExpansion True if the destination title is only preliminary, since parser function nodes were detected => destination title will therefore change
      */
-    def parse(title : String, sourceLanguage : Language): WikiTitle =
+    def parse(title : String, sourceLanguage : Language, awaitsExpansion: Boolean = false): WikiTitle =
     {
         val coder = new HtmlCoder(XmlCodes.NONE)
         coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
@@ -175,7 +177,7 @@ object WikiTitle
         // FIXME: MediaWiki doesn't capitalize links to other wikis
         val decodedName = parts.mkString(":").trim.capitalize(sourceLanguage.locale)
 
-        new WikiTitle(decodedName, namespace, language, isInterLanguageLink, fragment)
+        new WikiTitle(decodedName, namespace, language, isInterLanguageLink, fragment, true, None, awaitsExpansion)
     }
 
     /**

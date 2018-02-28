@@ -641,7 +641,7 @@ class UnitValueParserTest extends FlatSpec with Matchers
     private def parse(language : String, datatypeName : String, input : String) : Option[Double] =
     {
         val lang = Language(language)
-        val red = new Redirects(Map())
+        val red = new Redirects()
 
         val context = new
         {

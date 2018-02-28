@@ -154,7 +154,7 @@ trait Node extends Serializable with Recordable[Node]
     * @return - template names of nodes within
     */
   def containedTemplateNames(names : Set[String] = Set.empty): List[String] ={
-    Node.collectTemplates(this, Set.empty).map(x => x.title.encoded)
+    Node.collectTemplates(this, names).map(x => x.title.encoded)
   }
 
   /**
@@ -163,7 +163,7 @@ trait Node extends Serializable with Recordable[Node]
     * @return - template nodes within
     */
   def containedTemplateNodes(names : Set[String] = Set.empty): List[TemplateNode] ={
-    Node.collectTemplates(this, Set.empty)
+    Node.collectTemplates(this, names)
   }
     
     /**
@@ -211,6 +211,9 @@ trait Node extends Serializable with Recordable[Node]
     }
   }
 
+
+  override def toString = toWikiText
+
   /**
     * Will produce negative longs based on the hash code
     * TODO find better id management for dependent nodes
@@ -237,8 +240,9 @@ object Node {
     node match {
       case tn: TemplateNode if names.isEmpty => ts.append(tn)
       case tn: TemplateNode if names.contains(tn.title.decoded) => ts.append(tn)
-      case _ => node.children.foreach(node => ts.appendAll(collectTemplates(node, names)))
+      case _ =>
     }
+    node.children.foreach(n => ts.appendAll(collectTemplates(n, names)))
     ts.toList
   }
 }

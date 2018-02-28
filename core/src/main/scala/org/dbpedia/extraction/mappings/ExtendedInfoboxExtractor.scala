@@ -116,7 +116,8 @@ extends PageNodeExtractor
     {
       if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) return Seq.empty
 
-      extractNode(node, subjectUri)
+      val graph = extractNode(node, subjectUri)
+      graph
     }
 
   /**

@@ -691,7 +691,7 @@ class DateTimeParserTest extends FlatSpec with Matchers
         {
             def language : Language = lang
             def ontology: Ontology = ontology
-            def redirects : Redirects = new Redirects(Map())
+            def redirects : Redirects = new Redirects()
         }
         val dateParser = new DateTimeParser(context, new Datatype(datatype), false)
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)

@@ -118,7 +118,7 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
     private def parse(language : String, datatypeName : String, input : String) : Seq[String] =
     {
         val lang = Language(language)
-        val red = new Redirects(Map())
+        val red = new Redirects()
 
         val context = new
         {

@@ -2,12 +2,10 @@ package org.dbpedia.extraction.mappings
 
 import java.io._
 
-import org.apache.log4j.{Level, Logger}
-import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
+import org.dbpedia.extraction.config.ExtractionLogger
 import org.dbpedia.extraction.dataparser.RedirectFinder
-import org.dbpedia.extraction.mappings.MappingsLoader.getClass
 import org.dbpedia.extraction.sources.Source
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{IOUtils, Language}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.mutable
@@ -15,16 +13,18 @@ import scala.collection.mutable
 /**
  * Holds the redirects between wiki pages
  * At the moment, only redirects between Templates are considered
- *
- * @param map Redirect map. Contains decoded template titles.
  */
 // FIXME: this class is a hack. Resolving redirects is a central part of DBpedia and should be done
 // right and more explicitly. This class is trying to do too much under the hood.
 // FIXME: this class does basically the same thing as RedirectExtractor, just differently.
-//TODO make map private?
-//TODO language dependent
-class Redirects(val map : Map[String, String])
+class Redirects()
 {
+    private val map = new mutable.HashMap[String, String]()
+
+    def enterRedirect(source: String, target: String): Unit ={
+        map.put(source, target)
+    }
+
     /**
      * Resolves a redirect.
      *
@@ -105,59 +105,32 @@ object Redirects
     private val logger = ExtractionLogger.getLogger(getClass, Language.None)
 
     /**
-     * Tries to load the redirects from a cache file.
-     * If not successful, loads the redirects from a source.
-     * Updates the cache after loading the redirects from the source.
-     */
-    def load(source : Source, cache : File, lang : Language) : Redirects =
-    {
-        //Try to load redirects from the cache
-        try
-        {
-           return loadFromCache(cache)
-        }
-        catch
-        {
-            case ex : Exception => logger.log(Level.INFO, "Will extract redirects from source for "+lang.wikiCode+" wiki, could not load cache file '"+cache+"': "+ex)
-        }
-
-        //Load redirects from source
-        val redirects = loadFromSource(source, lang)
-        
-        val dir = cache.getParentFile
-        if (! dir.exists && ! dir.mkdirs) throw new IOException("cache dir ["+dir+"] does not exist and cannot be created")
-        val outputStream = new ObjectOutputStream(new FileOutputStream(cache))
-        try
-        {
-            outputStream.writeObject(redirects.map)
-        }
-        finally
-        {
-            outputStream.close()
-        }
-        logger.info(redirects.map.size + " redirects written to cache file "+cache)
-
-        redirects
+      * load from an existing map
+      * @param map
+      * @return
+      */
+    def fromMap(map : Map[String, String]): Redirects ={
+        val reds = new Redirects
+        map.foreach(e => reds.enterRedirect(e._1, e._2))
+        reds
     }
 
     /**
      * Loads the redirects from a cache file.
      */
-    private def loadFromCache(cache : File) : Redirects =
+    def loadFromCache(cache : File) : Redirects =
     {
         logger.info("Loading redirects from cache file "+cache)
-        val inputStream = new ObjectInputStream(new FileInputStream(cache))
-        try
-        {
-            val redirects = new Redirects(inputStream.readObject().asInstanceOf[Map[String, String]])
+        Redirects.fromMap(IOUtils.loadSerializedObject[mutable.HashMap[String, String]](cache).toMap)
+    }
 
-            logger.info(redirects.map.size + " redirects loaded from cache file "+cache)
-            redirects
-        }
-        finally
-        {
-            inputStream.close()
-        }
+    /**
+      * Loads the redirects from a cache file.
+      */
+    def saveToCache(cache : File, red: Redirects) : Unit =
+    {
+        logger.info("Saving redirects to cache file "+cache)
+        IOUtils.serializeToObjectFile(cache, red.map)
     }
 
     /**
@@ -169,8 +142,10 @@ object Redirects
 
         val redirectFinder = RedirectFinder.getRedirectFinder(lang)
 
-        val redirects = new Redirects(source.map(redirectFinder).flatten
-          .map(x => x._1.decoded -> x._2.decoded).toMap)
+        val res = source.flatMap(x => {
+            redirectFinder.apply(x)
+        })
+        val redirects = Redirects.fromMap(res.map(x => x._1.decoded -> x._2.decoded).toMap)
 
         logger.info("Redirects loaded from source ("+lang.wikiCode+")")
         redirects

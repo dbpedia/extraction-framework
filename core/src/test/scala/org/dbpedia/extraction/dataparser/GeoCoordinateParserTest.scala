@@ -36,7 +36,7 @@ class GeoCoordinateParserTest extends FlatSpec with Matchers
         val context = new
         {
             def language : Language = lang
-            def redirects : Redirects = new Redirects(Map())
+            def redirects : Redirects = new Redirects()
         }
         val geoCoordinateParser = new GeoCoordinateParser(context)
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)

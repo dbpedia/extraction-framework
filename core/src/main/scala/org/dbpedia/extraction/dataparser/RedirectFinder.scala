@@ -5,7 +5,7 @@ import org.dbpedia.extraction.config.{ExtractionLogger, ExtractionRecorder}
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Redirect
+import org.dbpedia.extraction.wikiparser.impl.wikipedia.{CategoryRedirect, Redirect}
 
 import scala.util.matching.Regex
 
@@ -35,17 +35,29 @@ class RedirectFinder private(lang : Language) extends (PageNode => Option[(WikiT
     ("""(?ius)^\s*(?:"""+redirects+""")\s*:?\s*\[\[([^\[\]{}|<>\n]+(?:#[^\n]*?)?)(?:\|[^\n]*?)?\]\].*""").r
   }
 
-  override def apply(page : PageNode) : Option[(WikiTitle, WikiTitle)]=
-  {
-    val destinationTitle : WikiTitle =
+  override def apply(page : PageNode) : Option[(WikiTitle, WikiTitle)]= {
+    //first we try to redirect category redirects (these are "soft redirects" and we need to look for the CategoryRedirect templates - see CategoryRedirect.scala)
+    val destination =  if (page.isCategory) {
+      val template = CategoryRedirect.get(page.title.language) match {
+        case Some(crd) => page.children.map(c => c.containedTemplateNodes(crd)).filter(t => t.collectFirst { case y => y.children.size > 1 }.isDefined).flatten
+        case None => Set()
+      }
+      if (template.nonEmpty) {
+        val newCat = WikiTitle.parse(template.head.children.head.propertyNodeValueToPlainText, page.title.language)
+        new WikiTitle(newCat.decoded, Namespace.Category, newCat.language, newCat.isInterLanguageLink, newCat.fragment, newCat.capitalizeLink, newCat.id)
+      }
+      else
+        null.asInstanceOf[WikiTitle] //legacy
+    }
+    else {
       page.source match {
-        case regex(destination) => {
+        case regex(dest) => {
           try {
 
-            WikiTitle.parse(destination, page.title.language)
+            WikiTitle.parse(dest, page.title.language)
           }
           catch {
-            case ex : WikiParserException => {
+            case ex: WikiParserException => {
               logger.log(Level.WARN, "Couldn't parse redirect destination", ex)
               null
             }
@@ -53,15 +65,9 @@ class RedirectFinder private(lang : Language) extends (PageNode => Option[(WikiT
         }
         case _ => null
       }
+    }
 
-    if(destinationTitle != null)
-    {
-      Some((page.title, destinationTitle))
-    }
-    else
-    {
-      None
-    }
+    Option(destination).map(d => (page.title, d))
   }
 }
 

@@ -40,7 +40,7 @@ class SingleGeoCoordinateParserTest extends FlatSpec with Matchers
         val context = new
         {
             def language : Language = lang
-            def redirects : Redirects = new Redirects(Map())
+            def redirects : Redirects = new Redirects()
         }
         val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)

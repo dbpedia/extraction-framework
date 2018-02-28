@@ -1,11 +1,15 @@
 package org.dbpedia.extraction.util
 
-import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream,BZip2CompressorOutputStream}
-import java.util.zip.{GZIPInputStream,GZIPOutputStream}
+import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream, BZip2CompressorOutputStream}
+import java.util.zip.{GZIPInputStream, GZIPOutputStream}
 import java.io._
+
 import scala.io.Codec
 import org.dbpedia.extraction.util.RichReader.wrapReader
 import java.nio.charset.Charset
+
+import org.dbpedia.extraction.mappings.Redirects
+import org.dbpedia.extraction.mappings.Redirects.logger
 
 /**
  * TODO: modify the bzip code such that there are no run-time dependencies on commons-compress.
@@ -112,4 +116,39 @@ object IOUtils {
     }
   }
 
+  /**
+    * Will serialize a given object using the internal Java serializer
+    * @param file - target file
+    * @param obj - the object to serialize
+    */
+  def serializeToObjectFile(file: File, obj: Serializable): Unit ={
+    val dir = file.getParentFile
+    if (! dir.exists && ! dir.mkdirs) throw new IOException("cache dir ["+dir+"] does not exist and cannot be created")
+    val outputStream = new ObjectOutputStream(new FileOutputStream(file))
+    try
+    {
+      outputStream.writeObject(obj)
+    }
+    finally
+    {
+      outputStream.close()
+    }
+  }
+
+  /**
+    * Loads object from a cache file.
+    */
+  def loadSerializedObject[T <: Serializable](cache : File) : T =
+  {
+    val inputStream = new ObjectInputStream(new FileInputStream(cache))
+    val obj: T =  try
+    {
+      inputStream.readObject().asInstanceOf[T]
+    }
+    finally
+    {
+      inputStream.close()
+    }
+    obj
+  }
 }

@@ -17,7 +17,7 @@ trait WikiParser extends ((WikiPage, Redirects) => Option[PageNode])
      * @return The PageNode which represents the root of the AST
      * @throws WikiParserException if an error occured during parsing
      */
-    def apply(page : WikiPage, templateRedirects: Redirects = new Redirects(Map())) : Option[PageNode]
+    def apply(page : WikiPage, templateRedirects: Redirects = new Redirects()) : Option[PageNode]
 }
 
 /**

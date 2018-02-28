@@ -6,6 +6,8 @@ import org.dbpedia.extraction.util.StringUtils.escape
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.iri.IRI
 
+import scala.util.{Failure, Success, Try}
+
 /**
  * Represents a template property.
  *
@@ -19,10 +21,10 @@ case class PropertyNode(key : String, override val children : List[Node], overri
     def toWikiText: String =
     {
       // named arguments prefix name and "=", positional arguments use only the value
-      val prefix = 
-        try { key.toInt; "" }
-        catch { case e : NumberFormatException => key+"=" }
-        
+      val prefix = Try{ key.toInt; "" } match{
+        case Success(_) => ""
+        case Failure(_) => key+"="
+      }
       prefix+children.map(_.toWikiText).mkString
     }
     

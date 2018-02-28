@@ -386,18 +386,17 @@ class ExtractionRecorder[T](
       writerOpen = false
     }
 
-    if(recordManager != null)
-      recordManager.close()
+    //if(recordManager != null)
+    //  recordManager.close()
 
-    if(monitor != null) {
-      printMonitorSummary(monitor.summarize(this, datasets))
-    }
+    //if(monitor != null) {
+    //  printMonitorSummary(monitor.summarize(this, datasets))
+    //}
 
     val line = "Extraction finished for language: " + defaultLang.name + " (" + defaultLang.wikiCode + ") " +
       (if(datasets.nonEmpty) ", extracted " + successfulPages(defaultLang) + " pages for " + datasets.size + " datasets after " + StringUtils.prettyMillis(System.currentTimeMillis - startTime.get) + " minutes." else "")
     printLabeledLine(line, Level.INFO, defaultLang)
     forwardSimpleLine(line)
-
   }
 
   private[config] def resetFailedPages(lang: Language): Unit = issuePages.get(lang) match{

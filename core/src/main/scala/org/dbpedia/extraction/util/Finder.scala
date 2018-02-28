@@ -1,7 +1,9 @@
 package org.dbpedia.extraction.util
 
 import java.util.regex.Pattern
+
 import Finder._
+import org.dbpedia.extraction.config.ExtractionLogger
 
 import scala.util.{Failure, Success}
 
@@ -18,7 +20,9 @@ private object Finder {
  * be renamed to WikiCode or so)
  */
 class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: String)(implicit wrap: T => FileLike[T]) {
-  
+
+  private val logger = ExtractionLogger.getLogger(getClass, language)
+
   def this(baseDir: String, language: Language, wikiNameSuffix: String)(implicit parse: String => T, wrap: T => FileLike[T]) = 
     this(parse(baseDir), language, wikiNameSuffix)
   
@@ -41,7 +45,7 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
   def directory(date: String): T = wikiDir.resolve(date) match{
     case Success(f) => f
     case Failure(x) =>
-      println("Error: could not find file/path: " + wikiDir.toString + "/" + date)
+      logger.warn("Error: could not find file/path: " + wikiDir.toString + "/" + date)
       null.asInstanceOf[T]
   }
 
@@ -56,7 +60,7 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
       dir.resolve("provanance") match{
         case Success(f) => f
         case Failure(x) =>
-          println("Error: could not find file/path: " + dir.toString + "/provenance")
+          logger.warn("Error: could not find file/path: " + dir.toString + "/provenance")
           null.asInstanceOf[T]
       }
     else
@@ -108,7 +112,7 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
   def file(suffix: String): Option[T] = wikiDir.resolve(wikiName+'-'+suffix)match{
     case Success(f) => Some(f)
     case Failure(x) =>
-      println("Error: could not create file/path: " + wikiDir.toString + "/" + wikiName+'-'+suffix)
+      logger.warn("Error: could not create file/path: " + wikiDir.toString + "/" + wikiName+'-'+suffix)
       None
   }
   
@@ -119,7 +123,7 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
   def file(date: String, suffix: String): Option[T] = directory(date).resolve(wikiName+'-'+date+'-'+suffix) match{
     case Success(f) => Some(f)
     case Failure(x) =>
-      println("Error: could not create file/path: " + wikiDir.toString + "/" + wikiName+'-'+date+'-'+suffix)
+      logger.warn("Error: could not create file/path: " + wikiDir.toString + "/" + wikiName+'-'+date+'-'+suffix)
       None
   }
 

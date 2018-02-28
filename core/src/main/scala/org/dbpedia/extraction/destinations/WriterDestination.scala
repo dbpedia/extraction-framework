@@ -7,7 +7,6 @@ import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.mappings.BadQuadException
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.Language
 
 
 /**
@@ -16,9 +15,9 @@ import org.dbpedia.extraction.util.Language
 class WriterDestination(factory: () => Writer, formatter : Formatter, dataset : Dataset = null)
 extends Destination
 {
-  private var writer: Writer = null
+  private var writer: Writer = _
   
-  override def open() = {
+  override def open(): Unit = {
     if(writer == null) //to prevent errors when called twice
     {
       writer = factory()

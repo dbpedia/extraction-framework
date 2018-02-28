@@ -71,7 +71,7 @@ class ExtendedInfoboxExtractorTest
 					new OntologyReader().read(ontologySource)
 			}
 			def language = _language
-			def redirects = new Redirects(Map())
+			def redirects = new Redirects()
 		}
 
 		for(f <- folder.listFiles(filter) )

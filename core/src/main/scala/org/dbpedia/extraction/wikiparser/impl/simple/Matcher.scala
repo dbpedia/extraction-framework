@@ -1,9 +1,7 @@
 package org.dbpedia.extraction.wikiparser.impl.simple
 
-private final class Matcher(val userTags : List[String], matchStdTags : Boolean = false)
+private final class Matcher(val userTags : List[String], stdTags : List[String] = List())
 {
-    private val stdTags = if(matchStdTags) List("[[", "[", "http", "{{", "{|", "\n=", "<!--", "<ref", "<math", "<code", "<source") else List()
-
     /** Indicates whether all tags start with a special char (see: isSpecialChar) */
     private val onlySpecialChars = (stdTags ::: userTags).map(tag => tag(0)).forall(isSpecialChar)
 
@@ -24,7 +22,7 @@ private final class Matcher(val userTags : List[String], matchStdTags : Boolean 
         var tagLength = 0
 
         //Handle special case when a section begins in the first line
-        if(matchStdTags && pos == 0 && source.nonEmpty && source(0) == '=')
+        if(stdTags.nonEmpty && pos == 0 && source.nonEmpty && source(0) == '=')
         {
             return new MatchResult(true, 1, stdTags.indexOf("\n="), "\n=", true)
         }
@@ -37,10 +35,10 @@ private final class Matcher(val userTags : List[String], matchStdTags : Boolean 
                 tagIndex = 0
                 for(tag <- stdTags)
                 {
-                    tagLength = tag.length;
+                    tagLength = tag.length
                     if(pos + tagLength <= source.length && source.regionMatches(pos, tag, 0, tagLength))
                     {
-                        pos += tagLength;
+                        pos += tagLength
                         return new MatchResult(true, pos, tagIndex, tag, true)
                     }
 
@@ -51,10 +49,10 @@ private final class Matcher(val userTags : List[String], matchStdTags : Boolean 
                 tagIndex = 0
                 for(tag <- userTags)
                 {
-                    tagLength = tag.length;
+                    tagLength = tag.length
                     if(pos + tagLength <= source.length && source.regionMatches(pos, tag, 0, tagLength))
                     {
-                        pos += tagLength;
+                        pos += tagLength
                         return new MatchResult(true, pos, tagIndex, tag, false)
                     }
 
@@ -62,7 +60,7 @@ private final class Matcher(val userTags : List[String], matchStdTags : Boolean 
                 }
             }
             
-            pos += 1;
+            pos += 1
         }
 
         new MatchResult(false, pos)

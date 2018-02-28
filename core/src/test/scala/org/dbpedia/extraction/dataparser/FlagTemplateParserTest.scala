@@ -125,7 +125,7 @@ class FlagTemplateParserTest extends FlatSpec with ShouldMatchers
     private def parse(language : String, input : String) : Option[String] =
     {
         val lang = Language(language)
-        val red = new Redirects(Map())
+        val red = new Redirects()
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)
         val context = new
         {
