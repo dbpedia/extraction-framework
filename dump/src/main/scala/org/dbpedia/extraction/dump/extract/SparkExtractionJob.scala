@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
+import java.io.File
+
 import org.apache.log4j.LogManager
 import org.apache.spark.sql.SparkSession
 import org.dbpedia.extraction.config.Config
@@ -7,9 +9,11 @@ import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.{RecordEntry, RecordSeverity, _}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 
+import scala.sys.process._
 import scala.util.Try
 import scala.xml.XML.loadString
 
@@ -34,6 +38,8 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
                          retryFailedPages: Boolean,
                          extractionRecorder: ExtractionRecorder[WikiPage]) {
 
+  val logger = LogManager.getRootLogger()
+
   def run(spark: SparkSession, config: Config): Unit = {
     import spark.implicits._
 
@@ -48,113 +54,140 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
       val bc_mappingPageSource = sparkContext.broadcast(context.mappingPageSource)
 
       val bc_formats = sparkContext.broadcast(config.formats)
-      val bc_base_dir = sparkContext.broadcast(config.dumpDir)
       val bc_extractors = sparkContext.broadcast(extractors)
+
+      val finder = new Finder[File](config.dumpDir, context.language, config.wikiName)
+      val date = latestDate(finder, config)
+      val sources = config.source.flatMap(x => files(x, finder, date))
 
       //initialize extraction
       val extractor = CompositeParseExtractor.load(extractors, context)
       extractionRecorder.initialize(lang, sparkContext.appName, extractor.datasets.toSeq)
       extractor.initializeExtractor()
 
-      // ------- READING    -------
-      val df = spark.read
-        .format("com.databricks.spark.xml")
-        .option("rowTag", "page")
-        .load("/data/2016-10/dewiki/20161020/dewiki-20161020-pages-articles.xml.bz2")
+      sources.foreach(file => {
+        val source = file.getAbsolutePath
+        val bc_dir = sparkContext.broadcast(file.getParent)
+        extractionRecorder.printLabeledLine(s"Starting Extraction on ${file.getPath}.", RecordSeverity.Info)
 
-      // TODO: Might be even faster with Kafka and/or spark.readStream
+        // ------- READING    -------
+        val df = spark.read
+          .format("com.databricks.spark.xml")
+          .option("rowTag", "page")
+          .load(source)
+          .repartition(64)
 
-      // ------- PARSING    -------
-      val wikiPages = df.rdd.repartition(64).mapPartitions(xmlPages => {
-        @transient lazy val logger = LogManager.getRootLogger
+        // ------- PARSING    -------
+        val wikiPages = df.rdd.mapPartitions(xmlPages => {
+          @transient lazy val logger = LogManager.getRootLogger
+          // Helper-Objects
+          case class Page(id: Option[java.lang.Long], namespace: Long, revision: Revision, title: String)
+          case class Revision(contributor: Contributor, format: String, id: Long, text: Text, timestamp: String)
+          case class Text(value: String, space: String)
+          case class Contributor(id: Option[Long], username: Option[String])
+          case class _WikiPage(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String)
+          xmlPages.flatMap(row => {
+            try {
+              val rev = row.getStruct(2)
+              val contributor = rev.getStruct(0)
+              val contributorParsed = Contributor(Try {
+                contributor.getLong(0)
+              }.toOption, Try {
+                contributor.getString(1)
+              }.toOption)
+              val text = rev.getStruct(3)
+              val textParsed = Text(text.getString(0), text.getString(1))
+              val revParsed = Revision(contributorParsed, rev.getString(1), rev.getLong(2), textParsed, rev.getString(4))
+              val page = Page(Try {
+                row.getLong(0).asInstanceOf[java.lang.Long]
+              }.toOption, row.getLong(1), revParsed, row.getString(3))
+              val title = WikiTitle.parseCleanTitle(page.title, bc_language.value, page.id)
 
-        // Helper-Objects
-        case class Page(id: Option[java.lang.Long], namespace: Long, revision: Revision, title: String)
-        case class Revision(contributor: Contributor, format: String, id: Long, text: Text, timestamp: String)
-        case class Text(value: String, space: String)
-        case class Contributor(id: Option[Long], username: Option[String])
-
-        xmlPages.flatMap(row => {
-          try {
-            val rev = row.getStruct(2)
-            val contributor = rev.getStruct(0)
-            val contributorParsed = Contributor(Try{contributor.getLong(0)}.toOption, Try{contributor.getString(1)}.toOption)
-            val text = rev.getStruct(3)
-            val textParsed = Text(text.getString(0), text.getString(1))
-            val revParsed = Revision(contributorParsed, rev.getString(1), rev.getLong(2), textParsed, rev.getString(4))
-            val page = Page(Try{row.getLong(0).asInstanceOf[java.lang.Long]}.toOption, row.getLong(1), revParsed, row.getString(3))
-            val title = WikiTitle.parseCleanTitle(page.title, bc_language.value, page.id)
-            Some(new WikiPage(title,
-              null,
-              page.id.getOrElse("").toString,
-              page.revision.id.toString,
-              page.revision.timestamp,
-              page.revision.contributor.id.getOrElse("0").toString,
-              page.revision.contributor.username.getOrElse(""),
-              page.revision.text.value,
-              page.revision.format))
-          }
-          catch {
-            case ex : Throwable => logger.error("error parsing page", ex)
-              None
-          }
+              Some(new WikiPage(title,
+                null,
+                page.id.getOrElse("").toString,
+                page.revision.id.toString,
+                page.revision.timestamp,
+                page.revision.contributor.id.getOrElse("0").toString,
+                page.revision.contributor.username.getOrElse(""),
+                page.revision.text.value,
+                page.revision.format))
+            }
+            catch {
+              case ex: Throwable => logger.error("error parsing page", ex)
+                None
+            }
+          })
         })
-      })
 
-      // ------- EXTRACTION -------
-      val results = wikiPages.mapPartitions(pages => {
-        //create extractor from broadcasted values
-        def worker_context = new DumpExtractionContext {
-          def ontology: Ontology = bc_ontology.value
+        // ------- EXTRACTION -------
+        val results = wikiPages.mapPartitions(pages => {
+          case class _WikiPage(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String)
 
-          def language: Language = bc_language.value
+          //create extractor from broadcasted values
+          def worker_context = new DumpExtractionContext {
+            def ontology: Ontology = bc_ontology.value
+            def language: Language = bc_language.value
+            def redirects: Redirects = bc_redirects.value
+            def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
+          }
+          val localExtractor = CompositeParseExtractor.load(bc_extractors.value, worker_context)
+          pages.map(page => {
+            SerializableUtils.processPage(bc_namespaces.value, localExtractor, page).getOrElse(Seq[Quad]())
+          })
+        })
 
-          def redirects: Redirects = bc_redirects.value
+        val data = results.flatMap(identity).flatMap(quad => {
+          bc_formats.value.map(format => (quad.dataset, format._1, format._2.render(quad)))
+        }).toDF("dataset", "format", "string")
 
-          def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
+        // ------- WRITING    -------
+        try {
+          data.write.partitionBy("dataset", "format").option("compression", "bzip2").text(bc_dir.value + "/tmp_out/")
+          concatFiles(new File(sources.last.getParent + "/tmp_out/"), s"${lang.wikiCode}${config.wikiName}-$date-")
+        } catch {
+          case ex: Throwable => ex.printStackTrace()
         }
 
-        val localExtractor = CompositeParseExtractor.load(bc_extractors.value, worker_context)
-
-        pages.map(SerializableMethods.processPage(bc_namespaces.value, localExtractor, _))
+        extractionRecorder.printLabeledLine(s"Finished Extraction on ${file.getPath}.", RecordSeverity.Info)
       })
 
-      // ------- WRITE      -------
-      val quads = results.flatMap(quads => quads.getOrElse(Seq[Quad]()))
-        .map(quad => (quad.dataset, SerializableMethods.quadsToString(SerializableMethods.tql, quad)))
-        .toDF("dataset", "quads")
-      try {
-        quads.write.partitionBy("dataset").option("compression", "bzip2").text("/data/test_out/")
-      } catch {
-        case ex: Throwable => ex.printStackTrace()
-      }
-
-      //      // Retry failed pages
-      //      if (retryFailedPages) {
-      //            val failedPages = extractionRecorder.listFailedPages(lang).keys.map(_._2).toSeq
-      //            extractionRecorder.printLabeledLine("retrying " + failedPages.length + " failed pages", RecordSeverity.Warning, lang)
-      //            extractionRecorder.resetFailedPages(lang)
-      //            val t = System.currentTimeMillis() // start timer
-      //            sparkContext.parallelize(failedPages)
-      //              .mapPartitions(pages => {
-      //                //build new context with the broadcast values
-      //                def worker_context = new DumpExtractionContext {
-      //                  def ontology: Ontology = bc_ontology.value
-      //                  def language: Language = bc_language.value
-      //                  def redirects: Redirects = bc_redirects.value
-      //                  def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
-      //                }
-      //                val localExtractor = CompositeParseExtractor.load(bc_extractors.value, worker_context)
-      //                pages.map(SerializableMethods.processPage(bc_namespaces.value, localExtractor, _, extractionRecorder))
-      //            })
-      //              //execute transformations and collect results
-      //              .toLocalIterator
-      //              //write to destination and logging
-      //              .foreach(result => {
-      //                processResult(result, destination)
-      //            })
-      //        extractionRecorder.printLabeledLine(s"finished extraction of ${failedPages.length} failed pages with ~${System.currentTimeMillis() - t / failedPages.length} ms per page", RecordSeverity.Info, lang)
-      //      }
+//      // Retry failed pages
+//      if (retryFailedPages) {
+//        val dir = sources.last.getParent
+//
+//        val failedPages = extractionRecorder.listFailedPages(lang).keys.map(_._2).toSeq
+//        extractionRecorder.printLabeledLine("retrying " + failedPages.length + " failed pages", RecordSeverity.Warning, lang)
+//        extractionRecorder.resetFailedPages(lang)
+//        val failedPagesRDD = sparkContext.parallelize(failedPages)
+//
+//        // ------- EXTRACTION -------
+//        val failResults = failedPagesRDD.mapPartitions(pages => {
+//          case class _WikiPage(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String)
+//
+//          //create extractor from broadcasted values
+//          def worker_context = new DumpExtractionContext {
+//            def ontology: Ontology = bc_ontology.value
+//            def language: Language = bc_language.value
+//            def redirects: Redirects = bc_redirects.value
+//            def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
+//          }
+//          val localExtractor = CompositeParseExtractor.load(bc_extractors.value, worker_context)
+//          pages.map(page => {
+//            SerializableMethods.processPage(bc_namespaces.value, localExtractor, page)
+//          })
+//        })
+//
+//        // ------- WRITE      -------
+//        val failQuads = failResults.flatMap(quads => quads.getOrElse(Seq[Quad]()))
+//          .map(quad => (quad.dataset, ""))
+//          .toDF("dataset", "quads")
+//        try {
+//          failQuads.write.partitionBy("dataset").option("compression", "bzip2").text(dir + "/failed_out/")
+//        } catch {
+//          case ex: Throwable => ex.printStackTrace()
+//        }
+//      }
       // Finish up Extraction
       extractionRecorder.printLabeledLine("finished complete extraction after {page} pages with {mspp} per page", RecordSeverity.Info, lang)
       extractor.finalizeExtractor()
@@ -175,10 +208,44 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
     }
   }
 
+  private def latestDate(finder: Finder[_], config: Config): String = {
+    val isSourceRegex = config.source.startsWith("@")
+    val source = if (isSourceRegex) config.source.head.substring(1) else config.source.head
+    val fileName = if (config.requireComplete) Config.Complete else source
+    finder.dates(fileName, isSuffixRegex = isSourceRegex).last
+  }
 
+  private def files(source: String, finder: Finder[File], date: String): List[File] = {
+    val files = if (source.startsWith("@")) { // the articles source is a regex - we want to match multiple files
+      finder.matchFiles(date, source.substring(1))
+    } else List(finder.file(date, source)).collect{case Some(x) => x}
+    logger.info(s"Source is $source - ${files.size} file(s) matched")
+    files
+  }
+
+  private def concatFiles(dir : File, prefix: String): Unit = {
+    dir.listFiles().foreach(datasetDir => {
+      if(datasetDir.isDirectory) {
+        val ds = datasetDir.getName.split("=")(1).replace("_","-")
+        datasetDir.listFiles.foreach(formatDir => {
+          val format = formatDir.getName.split("=")(1)
+          Seq("bash", "./scripts/src/main/bash/concatFiles.sh",
+            formatDir.getAbsolutePath, s"${dir.getParent}/$prefix$ds.$format").!
+        })
+      }
+    })
+    deleteRecursively(dir)
+  }
+
+  private def deleteRecursively(file: File): Unit = {
+    if (file.isDirectory)
+      file.listFiles.foreach(deleteRecursively)
+    if (file.exists && !file.delete)
+      throw new Exception(s"Unable to delete ${file.getAbsolutePath}")
+  }
 }
 
-object SerializableMethods extends Serializable {
+object SerializableUtils extends Serializable {
   @transient lazy val logger = LogManager.getRootLogger
 
   def processPage(namespaces: Set[Namespace], extractor: Extractor[WikiPage], page: WikiPage): Option[Seq[Quad]] = {
@@ -248,23 +315,4 @@ object SerializableMethods extends Serializable {
     else None
   }
 
-  def quadsToString(func: Quad => String, quad: Quad): String = {
-    func(quad)
-  }
-
-  //  def record(records: Seq[RecordEntry[WikiPage]], extractionRecorder: ExtractionRecorder[WikiPage]): Unit = {
-  //    extractionRecorder.record(records: _*)
-  //    if (extractionRecorder.monitor != null) {
-  //      records.filter(_.error != null).foreach(
-  //        r => extractionRecorder.monitor.reportError(extractionRecorder, r.error)
-  //      )
-  //    }
-  //  }
-  def tql(quad: Quad) = {
-    s"<${quad.subject}> <${quad.predicate}> ${'"'}${quad.value}${'"'}@${quad.language} <${quad.context}> ."
-  }
-
-  def ttl(quad: Quad) = {
-    s"<${quad.subject}> <${quad.predicate}> ${'"'}${quad.value}${'"'}@${quad.language} ."
-  }
 }
