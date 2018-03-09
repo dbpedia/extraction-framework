@@ -2,6 +2,11 @@ package org.dbpedia.extraction.dump.extract
 
 import java.io.File
 
+import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.io.compress.BZip2Codec
+import org.apache.hadoop.io.{LongWritable, NullWritable, Text}
+import org.apache.hadoop.mapred.lib.MultipleTextOutputFormat
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat
 import org.apache.log4j.LogManager
 import org.apache.spark.sql.SparkSession
 import org.dbpedia.extraction.config.Config
@@ -13,17 +18,19 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.{RecordEntry, RecordSeverity, _}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 
+import scala.collection.mutable
 import scala.sys.process._
 import scala.util.Try
 import scala.xml.XML.loadString
 
 /**
   * Current time-comparison:
-  * Test Size:                10000 pages
+  * Test Specs:               10000 pages, dewiki, 8 cores
   * Live:                     ~1:22 min
   *                           ---------
   * spark-core:               ~1:51 min
-  * spark-sql with spark-xml: ~1:01 min
+  * spark-sql with spark-xml: ~1:08 min
+  * custom Hadoop In-/Output: ~0:43 min
   *
   * @param extractors The Extractors
   * @param context    The Extraction Context
@@ -41,7 +48,6 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
   val logger = LogManager.getRootLogger()
 
   def run(spark: SparkSession, config: Config): Unit = {
-    import spark.implicits._
 
     val sparkContext = spark.sparkContext
 
@@ -56,75 +62,47 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
       val bc_formats = sparkContext.broadcast(config.formats)
       val bc_extractors = sparkContext.broadcast(extractors)
 
+      //input files
       val finder = new Finder[File](config.dumpDir, context.language, config.wikiName)
       val date = latestDate(finder, config)
       val sources = config.source.flatMap(x => files(x, finder, date))
 
-      //initialize extraction
+      //number of worker-cores
+      val numberOfCores = sparkContext.defaultParallelism
+
+      //initialize extraction-recorder
       val extractor = CompositeParseExtractor.load(extractors, context)
       extractionRecorder.initialize(lang, sparkContext.appName, extractor.datasets.toSeq)
       extractor.initializeExtractor()
 
+      //extraction
       sources.foreach(file => {
+        extractionRecorder.printLabeledLine(s"Starting Extraction on ${file.getName}.", RecordSeverity.Info)
+
         val source = file.getAbsolutePath
         val bc_dir = sparkContext.broadcast(file.getParent)
-        extractionRecorder.printLabeledLine(s"Starting Extraction on ${file.getPath}.", RecordSeverity.Info)
 
-        // ------- READING    -------
-        val df = spark.read
-          .format("com.databricks.spark.xml")
-          .option("rowTag", "page")
-          .load(source)
-          .repartition(64)
+        /** ------- READING    -------
+          * Read XML-Dump from baseDir, delimit the text by the <page> tag
+          * and create an RDD from it
+          */
+        val conf = new Configuration
+        conf.set("textinputformat.record.delimiter", "<page>")
+        val xmlRDD =
+          sparkContext.newAPIHadoopFile(source, classOf[TextInputFormat], classOf[LongWritable], classOf[Text], conf)
+          .map(x => s"<page>${x._2.toString}") // repair the xml
+          .repartition(numberOfCores)
 
-        // ------- PARSING    -------
-        val wikiPages = df.rdd.mapPartitions(xmlPages => {
-          @transient lazy val logger = LogManager.getRootLogger
-          // Helper-Objects
-          case class Page(id: Option[java.lang.Long], namespace: Long, revision: Revision, title: String)
-          case class Revision(contributor: Contributor, format: String, id: Long, text: Text, timestamp: String)
-          case class Text(value: String, space: String)
-          case class Contributor(id: Option[Long], username: Option[String])
-          case class _WikiPage(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String)
-          xmlPages.flatMap(row => {
-            try {
-              val rev = row.getStruct(2)
-              val contributor = rev.getStruct(0)
-              val contributorParsed = Contributor(Try {
-                contributor.getLong(0)
-              }.toOption, Try {
-                contributor.getString(1)
-              }.toOption)
-              val text = rev.getStruct(3)
-              val textParsed = Text(text.getString(0), text.getString(1))
-              val revParsed = Revision(contributorParsed, rev.getString(1), rev.getLong(2), textParsed, rev.getString(4))
-              val page = Page(Try {
-                row.getLong(0).asInstanceOf[java.lang.Long]
-              }.toOption, row.getLong(1), revParsed, row.getString(3))
-              val title = WikiTitle.parseCleanTitle(page.title, bc_language.value, page.id)
+        /** ------- PARSING    -------
+          * Parse the String to WikiPage Objects
+          */
+        val wikiPageRDD = xmlRDD.flatMap(SerializableUtils.xmlToWikiPage)
 
-              Some(new WikiPage(title,
-                null,
-                page.id.getOrElse("").toString,
-                page.revision.id.toString,
-                page.revision.timestamp,
-                page.revision.contributor.id.getOrElse("0").toString,
-                page.revision.contributor.username.getOrElse(""),
-                page.revision.text.value,
-                page.revision.format))
-            }
-            catch {
-              case ex: Throwable => logger.error("error parsing page", ex)
-                None
-            }
-          })
-        })
-
-        // ------- EXTRACTION -------
-        val results = wikiPages.mapPartitions(pages => {
-          case class _WikiPage(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String)
-
-          //create extractor from broadcasted values
+        /** ------- EXTRACTION -------
+          * Build extractor-context from broadcasted values once per partition.
+          * Extract quads
+          */
+        val results = wikiPageRDD.mapPartitions(pages => {
           def worker_context = new DumpExtractionContext {
             def ontology: Ontology = bc_ontology.value
             def language: Language = bc_language.value
@@ -132,28 +110,31 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
             def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
           }
           val localExtractor = CompositeParseExtractor.load(bc_extractors.value, worker_context)
-          pages.map(page => {
-            SerializableUtils.processPage(bc_namespaces.value, localExtractor, page).getOrElse(Seq[Quad]())
-          })
+          pages.map(page =>
+            SerializableUtils.processPage(bc_namespaces.value, localExtractor, page)
+          )
         })
 
-        val data = results.flatMap(identity).flatMap(quad => {
-          bc_formats.value.map(format => (quad.dataset, format._1, format._2.render(quad)))
-        }).toDF("dataset", "format", "string")
-
-        // ------- WRITING    -------
-        try {
-          data.write.partitionBy("dataset", "format").option("compression", "bzip2").text(bc_dir.value + "/tmp_out/")
-          concatFiles(new File(sources.last.getParent + "/tmp_out/"), s"${lang.wikiCode}${config.wikiName}-$date-")
-        } catch {
-          case ex: Throwable => ex.printStackTrace()
-        }
-
+        /** ------- WRITING    -------
+          * Flatten the Quad Collections and then prepare the lines that will be written.
+          * => generate the key that determines the destination file, and let the formatter render the quad as string.
+          * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
+          */
+        results.flatMap(identity)
+          .mapPartitionsWithIndex(
+            (partition, quads) => quads.flatMap(quad =>
+              bc_formats.value.map(formats =>
+                (Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)
+              )
+            )
+          )
+          .saveAsHadoopFile(s"${bc_dir.value}/_temporary/", classOf[Key], classOf[String], classOf[OutputFormat], classOf[BZip2Codec])
+        concatFiles(new File(s"${bc_dir.value}/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$date-", bc_formats.value.keys)
         extractionRecorder.printLabeledLine(s"Finished Extraction on ${file.getPath}.", RecordSeverity.Info)
       })
 
-//      // Retry failed pages
-//      if (retryFailedPages) {
+      //TODO retry failed pages
+      if (retryFailedPages) {
 //        val dir = sources.last.getParent
 //
 //        val failedPages = extractionRecorder.listFailedPages(lang).keys.map(_._2).toSeq
@@ -187,8 +168,11 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
 //        } catch {
 //          case ex: Throwable => ex.printStackTrace()
 //        }
-//      }
-      // Finish up Extraction
+      }
+
+      //FIXME Extraction Monitor not working
+
+      // finalize extraction-recorder
       extractionRecorder.printLabeledLine("finished complete extraction after {page} pages with {mspp} per page", RecordSeverity.Info, lang)
       extractor.finalizeExtractor()
       extractionRecorder.finalize()
@@ -223,15 +207,13 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
     files
   }
 
-  private def concatFiles(dir : File, prefix: String): Unit = {
+  private def concatFiles(dir : File, prefix: String, formats: Iterable[String]): Unit = {
     dir.listFiles().foreach(datasetDir => {
       if(datasetDir.isDirectory) {
-        val ds = datasetDir.getName.split("=")(1).replace("_","-")
-        datasetDir.listFiles.foreach(formatDir => {
-          val format = formatDir.getName.split("=")(1)
+        val ds = datasetDir.getName.replace("_","-")
+        formats.foreach(format =>
           Seq("bash", "./scripts/src/main/bash/concatFiles.sh",
-            formatDir.getAbsolutePath, s"${dir.getParent}/$prefix$ds.$format").!
-        })
+          datasetDir.getAbsolutePath, s"${dir.getParent}/$prefix$ds.$format", format).!)
       }
     })
     deleteRecursively(dir)
@@ -245,23 +227,46 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
   }
 }
 
+/**
+  * Custom output format for the saveAsHadoopFile method.
+  * Each partition writes its own files, datasets get their own folder
+  */
+class OutputFormat extends MultipleTextOutputFormat[Any, Any] {
+  override def generateActualKey(key: Any, value: Any): Any =
+    NullWritable.get()
+
+  override def generateFileNameForKeyValue(key: Any, value: Any, name: String): String = {
+    val k = key.asInstanceOf[Key]
+    val format = k.format.split(".bz2")(0)
+    s"${k.dataset}/${k.partition}.${format}"
+  }
+}
+
+case class Key(dataset: String, format: String, partition: Int)
+
 object SerializableUtils extends Serializable {
   @transient lazy val logger = LogManager.getRootLogger
 
-  def processPage(namespaces: Set[Namespace], extractor: Extractor[WikiPage], page: WikiPage): Option[Seq[Quad]] = {
+  /**
+    * Extracts Quads from a WikiPage
+    * checks for correct namespace
+    * deduplication
+    * @param namespaces Set of correct namespaces
+    * @param extractor Wikipage Extractor
+    * @param page WikiPage
+    * @return Deduplicated Colection of Quads
+    */
+  def processPage(namespaces: Set[Namespace], extractor: Extractor[WikiPage], page: WikiPage): Seq[Quad] = {
+    //LinkedHashSet for deduplication
+    val uniqueQuads = new mutable.LinkedHashSet[Quad]()
     try {
-      //      // Generate Logs
-      //      val records = page.getExtractionRecords() match {
-      //        case seq: Seq[RecordEntry[WikiPage]] if seq.nonEmpty => seq
-      //        case _ => Seq(new RecordEntry[WikiPage](page, page.uri, RecordSeverity.Info, page.title.language))
-      //      }
-      // Extract Quads
       if (namespaces.exists(_.equals(page.title.namespace))) {
-        Some(extractor.extract(page, page.uri))
+        //Extract Quads
+        uniqueQuads ++= extractor.extract(page, page.uri)
       }
       else {
         logger.warn("wrong namespace for page " + page.title.decoded)
-        None
+        //FIXME: happens very often on big files
       }
     }
     catch {
@@ -269,50 +274,62 @@ object SerializableUtils extends Serializable {
         logger.error("error while processing page " + page.title.decoded, ex)
         page.addExtractionRecord(null, ex)
         page.getExtractionRecords()
-        None
     }
+    uniqueQuads.toSeq
   }
 
+  /**
+    * Parses a xml string to a wikipage.
+    * TODO: clean up
+    * @param xmlString xml
+    * @return WikiPage Option
+    */
   def xmlToWikiPage(xmlString: String): Option[WikiPage] = {
-    val xml = loadString(xmlString)
-    val language = Language("de")
-    val page = xml \ "page"
-    val rev = page \ "revision"
-    val title = WikiTitle.parseCleanTitle((page \ "title").text, language, Try {
-      new java.lang.Long(java.lang.Long.parseLong((page \ "id").text))
-    }.toOption)
-    val nsElem = page \ "ns"
-    if (nsElem.nonEmpty) {
-      try {
-        val nsCode = nsElem.text.toInt
-        require(title.namespace.code == nsCode, "XML Namespace (" + nsCode + ") does not match the computed namespace (" + title.namespace + ") in page: " + title.decodedWithNamespace)
+    if(!xmlString.trim.split("\n").last.contains("</page>")) None
+    else try {
+      val page = loadString(xmlString)
+      val language = Language("de")
+      val rev = page \ "revision"
+      val title = WikiTitle.parseCleanTitle((page \ "title").text, language, Try {
+        new java.lang.Long(java.lang.Long.parseLong((page \ "id").text))
+      }.toOption)
+      val nsElem = page \ "ns"
+      if (nsElem.nonEmpty) {
+        try {
+          val nsCode = nsElem.text.toInt
+          require(title.namespace.code == nsCode, "XML Namespace (" + nsCode + ") does not match the computed namespace (" + title.namespace + ") in page: " + title.decodedWithNamespace)
+        }
+        catch {
+          case e: NumberFormatException => throw new IllegalArgumentException("Cannot parse content of element [ns] as int", e)
+        }
       }
-      catch {
-        case e: NumberFormatException => throw new IllegalArgumentException("Cannot parse content of element [ns] as int", e)
+      //Skip bad titles
+      if (title != null) {
+        val _redirect = (page \ "redirect" \ "@title").text match {
+          case "" => null
+          case t => WikiTitle.parse(t, language)
+        }
+        val _contributorID = (rev \ "contributor" \ "id").text match {
+          case null => "0"
+          case id => id
+        }
+        Some(new WikiPage(title = title,
+          redirect = _redirect,
+          id = (page \ "id").text,
+          revision = (rev \ "id").text,
+          timestamp = (rev \ "timestamp").text,
+          contributorID = _contributorID,
+          contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip").text
+          else (rev \ "contributor" \ "username").text,
+          source = (rev \ "text").text,
+          format = (rev \ "format").text))
       }
+      else None
+    } catch {
+      case ex: Throwable =>
+        logger.warn("error parsing xml:" + ex.getMessage)
+        None
     }
-    //Skip bad titles
-    if (title != null) {
-      val _redirect = (page \ "redirect" \ "@title").text match {
-        case "" => null
-        case t => WikiTitle.parse(t, language)
-      }
-      val _contributorID = (rev \ "contributor" \ "id").text match {
-        case null => "0"
-        case id => id
-      }
-      Some(new WikiPage(title = title,
-        redirect = _redirect,
-        id = (page \ "id").text,
-        revision = (rev \ "id").text,
-        timestamp = (rev \ "timestamp").text,
-        contributorID = _contributorID,
-        contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip").text
-        else (rev \ "contributor" \ "username").text,
-        source = (rev \ "text").text,
-        format = (rev \ "format").text))
-    }
-    else None
   }
 
 }
