@@ -7,7 +7,7 @@ import org.apache.hadoop.io.compress.BZip2Codec
 import org.apache.hadoop.io.{LongWritable, NullWritable, Text}
 import org.apache.hadoop.mapred.lib.MultipleTextOutputFormat
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat
-import org.apache.log4j.LogManager
+import org.apache.log4j.{LogManager, Logger}
 import org.apache.spark.sql.SparkSession
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.destinations._
@@ -45,7 +45,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
                          retryFailedPages: Boolean,
                          extractionRecorder: ExtractionRecorder[WikiPage]) {
 
-  val logger = LogManager.getRootLogger()
+  val logger: Logger = LogManager.getRootLogger
 
   def run(spark: SparkSession, config: Config): Unit = {
 
@@ -77,12 +77,11 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
 
       //extraction
       sources.foreach(file => {
-        extractionRecorder.printLabeledLine(s"Starting Extraction on ${file.getName}.", RecordSeverity.Info)
-
         val source = file.getAbsolutePath
         val bc_dir = sparkContext.broadcast(file.getParent)
+        extractionRecorder.printLabeledLine(s"Starting Extraction on ${file.getName}.", RecordSeverity.Info)
 
-        /** ------- READING    -------
+        /* ------- READING    -------
           * Read XML-Dump from baseDir, delimit the text by the <page> tag
           * and create an RDD from it
           */
@@ -90,17 +89,16 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
         conf.set("textinputformat.record.delimiter", "<page>")
         val xmlRDD =
           sparkContext.newAPIHadoopFile(source, classOf[TextInputFormat], classOf[LongWritable], classOf[Text], conf)
-          .map(x => s"<page>${x._2.toString}") // repair the xml
+          .map("<page>" + _._2.toString.trim)
           .repartition(numberOfCores)
-
-        /** ------- PARSING    -------
+        /* ------- PARSING    -------
           * Parse the String to WikiPage Objects
           */
-        val wikiPageRDD = xmlRDD.flatMap(SerializableUtils.xmlToWikiPage)
+        val wikiPageRDD = xmlRDD.flatMap(SerializableUtils.xmlToWikiPage(_, bc_language.value))
 
-        /** ------- EXTRACTION -------
+        /* ------- EXTRACTION -------
           * Build extractor-context from broadcasted values once per partition.
-          * Extract quads
+          * Extract quads.
           */
         val results = wikiPageRDD.mapPartitions(pages => {
           def worker_context = new DumpExtractionContext {
@@ -115,7 +113,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           )
         })
 
-        /** ------- WRITING    -------
+        /* ------- WRITING    -------
           * Flatten the Quad Collections and then prepare the lines that will be written.
           * => generate the key that determines the destination file, and let the formatter render the quad as string.
           * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
@@ -130,44 +128,54 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           )
           .saveAsHadoopFile(s"${bc_dir.value}/_temporary/", classOf[Key], classOf[String], classOf[OutputFormat], classOf[BZip2Codec])
         concatFiles(new File(s"${bc_dir.value}/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$date-", bc_formats.value.keys)
-        extractionRecorder.printLabeledLine(s"Finished Extraction on ${file.getPath}.", RecordSeverity.Info)
+        extractionRecorder.printLabeledLine(s"Finished Extraction on ${file.getName}.", RecordSeverity.Info)
       })
 
-      //TODO retry failed pages
       if (retryFailedPages) {
-//        val dir = sources.last.getParent
-//
-//        val failedPages = extractionRecorder.listFailedPages(lang).keys.map(_._2).toSeq
-//        extractionRecorder.printLabeledLine("retrying " + failedPages.length + " failed pages", RecordSeverity.Warning, lang)
-//        extractionRecorder.resetFailedPages(lang)
-//        val failedPagesRDD = sparkContext.parallelize(failedPages)
-//
-//        // ------- EXTRACTION -------
-//        val failResults = failedPagesRDD.mapPartitions(pages => {
-//          case class _WikiPage(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String)
-//
-//          //create extractor from broadcasted values
-//          def worker_context = new DumpExtractionContext {
-//            def ontology: Ontology = bc_ontology.value
-//            def language: Language = bc_language.value
-//            def redirects: Redirects = bc_redirects.value
-//            def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
-//          }
-//          val localExtractor = CompositeParseExtractor.load(bc_extractors.value, worker_context)
-//          pages.map(page => {
-//            SerializableMethods.processPage(bc_namespaces.value, localExtractor, page)
-//          })
-//        })
-//
-//        // ------- WRITE      -------
-//        val failQuads = failResults.flatMap(quads => quads.getOrElse(Seq[Quad]()))
-//          .map(quad => (quad.dataset, ""))
-//          .toDF("dataset", "quads")
-//        try {
-//          failQuads.write.partitionBy("dataset").option("compression", "bzip2").text(dir + "/failed_out/")
-//        } catch {
-//          case ex: Throwable => ex.printStackTrace()
-//        }
+        //output dir
+        val dir = sources.last.getParent
+        //pages to retry
+        val failedPages = extractionRecorder.listFailedPages(lang).keys.map(_._2).toSeq
+        extractionRecorder.printLabeledLine("retrying " + failedPages.length + " failed pages", RecordSeverity.Warning, lang)
+        extractionRecorder.resetFailedPages(lang)
+        //since they are already in the memory -> use parallelize to create an RDD
+        val failedPagesRDD = sparkContext.parallelize(failedPages)
+
+
+        /* ------- EXTRACTION -------
+          * Build extractor-context from broadcasted values once per partition.
+          * Extract quads.
+          */
+        val failResults = failedPagesRDD.mapPartitions(pages => {
+          case class _WikiPage(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String)
+
+          def worker_context = new DumpExtractionContext {
+            def ontology: Ontology = bc_ontology.value
+            def language: Language = bc_language.value
+            def redirects: Redirects = bc_redirects.value
+            def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
+          }
+          val localExtractor = CompositeParseExtractor.load(bc_extractors.value, worker_context)
+          pages.map(page =>
+            SerializableUtils.processPage(bc_namespaces.value, localExtractor, page)
+          )
+        })
+
+        /* ------- WRITING    -------
+          * Flatten the Quad Collections and then prepare the lines that will be written.
+          * => generate the key that determines the destination file, and let the formatter render the quad as string.
+          * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
+          */
+        failResults.flatMap(identity)
+          .mapPartitionsWithIndex(
+            (partition, quads) => quads.flatMap(quad =>
+              bc_formats.value.map(formats =>
+                (Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)
+              )
+            )
+          )
+          .saveAsHadoopFile(s"${dir}/_temporary/", classOf[Key], classOf[String], classOf[OutputFormat], classOf[BZip2Codec])
+        concatFiles(new File(s"${dir}/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$date-", bc_formats.value.keys)
       }
 
       //FIXME Extraction Monitor not working
@@ -238,7 +246,7 @@ class OutputFormat extends MultipleTextOutputFormat[Any, Any] {
   override def generateFileNameForKeyValue(key: Any, value: Any, name: String): String = {
     val k = key.asInstanceOf[Key]
     val format = k.format.split(".bz2")(0)
-    s"${k.dataset}/${k.partition}.${format}"
+    s"${k.dataset}/${k.partition}.$format"
   }
 }
 
@@ -249,7 +257,7 @@ object SerializableUtils extends Serializable {
 
   /**
     * Extracts Quads from a WikiPage
-    * checks for correct namespace
+    * checks for desired namespace
     * deduplication
     * @param namespaces Set of correct namespaces
     * @param extractor Wikipage Extractor
@@ -264,10 +272,6 @@ object SerializableUtils extends Serializable {
         //Extract Quads
         uniqueQuads ++= extractor.extract(page, page.uri)
       }
-      else {
-        logger.warn("wrong namespace for page " + page.title.decoded)
-        //FIXME: happens very often on big files
-      }
     }
     catch {
       case ex: Exception =>
@@ -275,24 +279,38 @@ object SerializableUtils extends Serializable {
         page.addExtractionRecord(null, ex)
         page.getExtractionRecords()
     }
+
     uniqueQuads.toSeq
   }
 
   /**
     * Parses a xml string to a wikipage.
-    * TODO: clean up
     * @param xmlString xml
     * @return WikiPage Option
     */
-  def xmlToWikiPage(xmlString: String): Option[WikiPage] = {
-    if(!xmlString.trim.split("\n").last.contains("</page>")) None
-    else try {
-      val page = loadString(xmlString)
-      val language = Language("de")
+  def xmlToWikiPage(xmlString: String, language: Language): Option[WikiPage] = {
+    /* ------- Special Cases -------
+     * for normal pages:  add <page> in front
+     * for last page:     cut </mediawiki>
+     * first input:       skip
+     */
+    var validXML = xmlString
+    val length = xmlString.length
+    if(xmlString.startsWith("<page><mediawiki")){
+      return None
+    }
+    if(xmlString.charAt(length-12) == '<'){
+      validXML = xmlString.dropRight(12)
+    }
+
+    /* ------- Parse XML & Build WikiPage -------
+     * based on org.dbpedia.extraction.sources.XMLSource
+     */
+    try {
+      val page = loadString(validXML)
       val rev = page \ "revision"
-      val title = WikiTitle.parseCleanTitle((page \ "title").text, language, Try {
-        new java.lang.Long(java.lang.Long.parseLong((page \ "id").text))
-      }.toOption)
+      val title = WikiTitle.parseCleanTitle((page \ "title").text, language,
+        Try { new java.lang.Long(java.lang.Long.parseLong((page \ "id").text))}.toOption)
       val nsElem = page \ "ns"
       if (nsElem.nonEmpty) {
         try {
@@ -313,16 +331,18 @@ object SerializableUtils extends Serializable {
           case null => "0"
           case id => id
         }
-        Some(new WikiPage(title = title,
-          redirect = _redirect,
-          id = (page \ "id").text,
-          revision = (rev \ "id").text,
+        Some(new WikiPage(
+          title     = title,
+          redirect  = _redirect,
+          id        = (page \ "id").text,
+          revision  = (rev \ "id").text,
           timestamp = (rev \ "timestamp").text,
-          contributorID = _contributorID,
-          contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip").text
-          else (rev \ "contributor" \ "username").text,
-          source = (rev \ "text").text,
-          format = (rev \ "format").text))
+          contributorID   = _contributorID,
+          contributorName =
+            if (_contributorID == "0") (rev \ "contributor" \ "ip").text
+            else (rev \ "contributor" \ "username").text,
+          source    = (rev \ "text").text,
+          format    = (rev \ "format").text))
       }
       else None
     } catch {
