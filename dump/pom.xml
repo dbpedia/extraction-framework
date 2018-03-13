@@ -79,6 +79,19 @@
 						</launcher>
 
 						<launcher>
+							<id>sparkextraction</id>
+							<mainClass>org.dbpedia.extraction.dump.extract.SparkExtraction</mainClass>
+
+							<jvmArgs>
+								<jvmArg>-server</jvmArg>
+								<jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+								<jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+								<jvmArg>-Xmx16G</jvmArg>
+								<jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+							</jvmArgs>
+						</launcher>
+
+						<launcher>
 							<id>stats-extraction</id>
 							<mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
 							<jvmArgs>
