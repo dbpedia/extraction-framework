@@ -69,6 +69,8 @@ class Config(val configPath: String) extends
     */
   lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "4").trim.toInt
 
+  lazy val sparkMaster: String = Option(getString(this, "spark-master")).getOrElse("local[*]")
+
   /**
     * Normally extraction jobs are run sequentially (one language after the other), but for some jobs it makes sense to run these in parallel.
     * This only should be used if a single extraction job does not take up the available computing power.
