@@ -13,15 +13,12 @@ import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.{RecordEntry, RecordSeverity, _}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 
-import scala.collection.mutable
 import scala.sys.process._
 import scala.util.Try
-import scala.xml.XML.loadString
 
 /**
   * Current time-comparison:
@@ -48,7 +45,6 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
   val logger: Logger = LogManager.getRootLogger
 
   def run(spark: SparkSession, config: Config): Unit = {
-
     val sparkContext = spark.sparkContext
 
     try {
@@ -91,15 +87,16 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           sparkContext.newAPIHadoopFile(source, classOf[TextInputFormat], classOf[LongWritable], classOf[Text], conf)
           .map("<page>" + _._2.toString.trim)
           .repartition(numberOfCores)
+
         /* ------- PARSING    -------
-          * Parse the String to WikiPage Objects
-          */
+         * Parse the String to WikiPage Objects
+         */
         val wikiPageRDD = xmlRDD.flatMap(SerializableUtils.xmlToWikiPage(_, bc_language.value))
 
         /* ------- EXTRACTION -------
-          * Build extractor-context from broadcasted values once per partition.
-          * Extract quads.
-          */
+         * Build extractor-context from broadcasted values once per partition.
+         * Extract quads.
+         */
         val results = wikiPageRDD.mapPartitions(pages => {
           def worker_context = new DumpExtractionContext {
             def ontology: Ontology = bc_ontology.value
@@ -114,15 +111,15 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
         })
 
         /* ------- WRITING    -------
-          * Flatten the Quad Collections and then prepare the lines that will be written.
-          * => generate the key that determines the destination file, and let the formatter render the quad as string.
-          * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
-          */
+         * Flatten the Quad Collections and then prepare the lines that will be written.
+         * => generate the key that determines the destination file, and let the formatter render the quad as string.
+         * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
+         */
         results.flatMap(identity)
           .mapPartitionsWithIndex(
             (partition, quads) => quads.flatMap(quad =>
-              bc_formats.value.map(formats =>
-                (Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)
+              bc_formats.value.flatMap(formats =>
+                Try{(Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)}.toOption
               )
             )
           )
@@ -252,104 +249,4 @@ class OutputFormat extends MultipleTextOutputFormat[Any, Any] {
 
 case class Key(dataset: String, format: String, partition: Int)
 
-object SerializableUtils extends Serializable {
-  @transient lazy val logger = LogManager.getRootLogger
 
-  /**
-    * Extracts Quads from a WikiPage
-    * checks for desired namespace
-    * deduplication
-    * @param namespaces Set of correct namespaces
-    * @param extractor Wikipage Extractor
-    * @param page WikiPage
-    * @return Deduplicated Colection of Quads
-    */
-  def processPage(namespaces: Set[Namespace], extractor: Extractor[WikiPage], page: WikiPage): Seq[Quad] = {
-    //LinkedHashSet for deduplication
-    val uniqueQuads = new mutable.LinkedHashSet[Quad]()
-    try {
-      if (namespaces.exists(_.equals(page.title.namespace))) {
-        //Extract Quads
-        uniqueQuads ++= extractor.extract(page, page.uri)
-      }
-    }
-    catch {
-      case ex: Exception =>
-        logger.error("error while processing page " + page.title.decoded, ex)
-        page.addExtractionRecord(null, ex)
-        page.getExtractionRecords()
-    }
-
-    uniqueQuads.toSeq
-  }
-
-  /**
-    * Parses a xml string to a wikipage.
-    * @param xmlString xml
-    * @return WikiPage Option
-    */
-  def xmlToWikiPage(xmlString: String, language: Language): Option[WikiPage] = {
-    /* ------- Special Cases -------
-     * for normal pages:  add <page> in front
-     * for last page:     cut </mediawiki>
-     * first input:       skip
-     */
-    var validXML = xmlString
-    val length = xmlString.length
-    if(xmlString.startsWith("<page><mediawiki")){
-      return None
-    }
-    if(xmlString.charAt(length-12) == '<'){
-      validXML = xmlString.dropRight(12)
-    }
-
-    /* ------- Parse XML & Build WikiPage -------
-     * based on org.dbpedia.extraction.sources.XMLSource
-     */
-    try {
-      val page = loadString(validXML)
-      val rev = page \ "revision"
-      val title = WikiTitle.parseCleanTitle((page \ "title").text, language,
-        Try { new java.lang.Long(java.lang.Long.parseLong((page \ "id").text))}.toOption)
-      val nsElem = page \ "ns"
-      if (nsElem.nonEmpty) {
-        try {
-          val nsCode = nsElem.text.toInt
-          require(title.namespace.code == nsCode, "XML Namespace (" + nsCode + ") does not match the computed namespace (" + title.namespace + ") in page: " + title.decodedWithNamespace)
-        }
-        catch {
-          case e: NumberFormatException => throw new IllegalArgumentException("Cannot parse content of element [ns] as int", e)
-        }
-      }
-      //Skip bad titles
-      if (title != null) {
-        val _redirect = (page \ "redirect" \ "@title").text match {
-          case "" => null
-          case t => WikiTitle.parse(t, language)
-        }
-        val _contributorID = (rev \ "contributor" \ "id").text match {
-          case null => "0"
-          case id => id
-        }
-        Some(new WikiPage(
-          title     = title,
-          redirect  = _redirect,
-          id        = (page \ "id").text,
-          revision  = (rev \ "id").text,
-          timestamp = (rev \ "timestamp").text,
-          contributorID   = _contributorID,
-          contributorName =
-            if (_contributorID == "0") (rev \ "contributor" \ "ip").text
-            else (rev \ "contributor" \ "username").text,
-          source    = (rev \ "text").text,
-          format    = (rev \ "format").text))
-      }
-      else None
-    } catch {
-      case ex: Throwable =>
-        logger.warn("error parsing xml:" + ex.getMessage)
-        None
-    }
-  }
-
-}
