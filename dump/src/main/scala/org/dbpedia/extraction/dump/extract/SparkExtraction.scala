@@ -27,18 +27,24 @@ object SparkExtraction {
     val master = Config.universalConfig.sparkMaster
     val altLocalDir = Config.universalConfig.sparkLocalDir
 
-    val spark = SparkSession.builder()
-        .appName("MainExtraction")
-        .master(master)
-        .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
-        .getOrCreate()
-
+    val spark =
+      if(altLocalDir != "") {
+        SparkSession.builder()
+          .appName("MainExtraction")
+          .master(master)
+          .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+          .config("spark.local.dir", altLocalDir)
+          .getOrCreate()
+      } else {
+        logger.info(s"Set alternate spark-local-dir to: $altLocalDir")
+        SparkSession.builder()
+          .appName("MainExtraction")
+          .master(master)
+          .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+          .getOrCreate()
+      }
+    
     logger.info(s"Created Spark Session with master: $master")
-
-    if(altLocalDir != "") {
-      spark.conf.set("spark.local.dir", altLocalDir)
-      logger.info(s"Set alternate spark-local-dir to: $altLocalDir")
-    }
 
     // Create SparkContext
     val sparkContext = spark.sparkContext
