@@ -25,7 +25,6 @@ import scala.util.Try
   * Test Specs:               10000 pages, dewiki, 8 cores
   * Live:                     ~1:22 min
   *                           ---------
-  * spark-core:               ~1:51 min
   * spark-sql with spark-xml: ~1:08 min
   * custom Hadoop In-/Output: ~0:43 min
   *
@@ -171,8 +170,8 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
               )
             )
           )
-          .saveAsHadoopFile(s"${dir}/_temporary/", classOf[Key], classOf[String], classOf[OutputFormat], classOf[BZip2Codec])
-        concatFiles(new File(s"${dir}/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$date-", bc_formats.value.keys)
+          .saveAsHadoopFile(s"$dir/_temporary/", classOf[Key], classOf[String], classOf[OutputFormat], classOf[BZip2Codec])
+        concatFiles(new File(s"$dir/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$date-", bc_formats.value.keys)
       }
 
       //FIXME Extraction Monitor not working

@@ -24,12 +24,15 @@ object SparkExtraction {
     // Load configuration
     val config = new Config(args.head)
     val configLoader = new ConfigLoader(config)
+    val master = Config.universalConfig.sparkMaster
 
     val spark = SparkSession.builder()
         .appName("MainExtraction")
-        .master("local[*]")
+        .master(master)
         .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
         .getOrCreate()
+
+    logger.info(s"Created Spark Session with master: $master")
 
     // Create SparkContext
     val sparkContext = spark.sparkContext
