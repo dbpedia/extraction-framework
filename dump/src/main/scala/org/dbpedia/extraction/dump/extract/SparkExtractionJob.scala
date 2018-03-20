@@ -216,7 +216,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
       if(datasetDir.isDirectory) {
         val ds = datasetDir.getName.replace("_","-")
         formats.foreach(format =>
-          Seq("bash", "./scripts/src/main/bash/concatFiles.sh",
+          Seq("bash", "../scripts/src/main/bash/concatFiles.sh",
           datasetDir.getAbsolutePath, s"${dir.getParent}/$prefix$ds.$format", format).!)
       }
     })
