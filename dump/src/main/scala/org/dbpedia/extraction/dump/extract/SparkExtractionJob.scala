@@ -8,11 +8,13 @@ import org.apache.hadoop.io.{LongWritable, NullWritable, Text}
 import org.apache.hadoop.mapred.lib.MultipleTextOutputFormat
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat
 import org.apache.log4j.{LogManager, Logger}
+import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.{RecordEntry, RecordSeverity, _}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
@@ -82,21 +84,21 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           */
         val conf = new Configuration
         conf.set("textinputformat.record.delimiter", "<page>")
-        val xmlRDD =
+        val xmlRDD : RDD[String] =
           sparkContext.newAPIHadoopFile(source, classOf[TextInputFormat], classOf[LongWritable], classOf[Text], conf)
-          .map("<page>" + _._2.toString.trim)
-          .repartition(numberOfCores)
+          .map("<page>" + _._2.toString.trim).repartition(numberOfCores)
 
         /* ------- PARSING    -------
          * Parse the String to WikiPage Objects
          */
-        val wikiPageRDD = xmlRDD.flatMap(SerializableUtils.xmlToWikiPage(_, bc_language.value))
+        val wikiPageRDD : RDD[WikiPage] = xmlRDD.flatMap(SerializableUtils.xmlToWikiPage(_, bc_language.value))
 
         /* ------- EXTRACTION -------
          * Build extractor-context from broadcasted values once per partition.
          * Extract quads.
+         * Flatten the Quad Collections.
          */
-        val results = wikiPageRDD.mapPartitions(pages => {
+        val results : RDD[Quad] = wikiPageRDD.mapPartitions(pages => {
           def worker_context = new DumpExtractionContext {
             def ontology: Ontology = bc_ontology.value
             def language: Language = bc_language.value
@@ -105,17 +107,16 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           }
           val localExtractor = CompositeParseExtractor.load(bc_extractors.value, worker_context)
           pages.map(page =>
-            SerializableUtils.processPage(bc_namespaces.value, localExtractor, page)
+            SerializableUtils.processPage(bc_namespaces.value, localExtractor, page).distinct
           )
-        })
+        }).flatMap(identity)
 
         /* ------- WRITING    -------
-         * Flatten the Quad Collections and then prepare the lines that will be written.
+         * Prepare the lines that will be written.
          * => generate the key that determines the destination file, and let the formatter render the quad as string.
          * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
          */
-        results.flatMap(identity)
-          .mapPartitionsWithIndex(
+        results.mapPartitionsWithIndex(
             (partition, quads) => quads.flatMap(quad =>
               bc_formats.value.flatMap(formats =>
                 Try{(Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)}.toOption
@@ -134,13 +135,14 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
         val failedPages = extractionRecorder.listFailedPages(lang).keys.map(_._2).toSeq
         extractionRecorder.printLabeledLine("retrying " + failedPages.length + " failed pages", RecordSeverity.Warning, lang)
         extractionRecorder.resetFailedPages(lang)
-        //since they are already in the memory -> use parallelize to create an RDD
-        val failedPagesRDD = sparkContext.parallelize(failedPages)
 
+        //already in the memory -> use makeRDD
+        val failedPagesRDD = sparkContext.makeRDD(failedPages)
 
         /* ------- EXTRACTION -------
           * Build extractor-context from broadcasted values once per partition.
           * Extract quads.
+          * Flatten the Quad Collections.
           */
         val failResults = failedPagesRDD.mapPartitions(pages => {
           case class _WikiPage(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String)
@@ -155,15 +157,14 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           pages.map(page =>
             SerializableUtils.processPage(bc_namespaces.value, localExtractor, page)
           )
-        })
+        }).flatMap(identity)
 
         /* ------- WRITING    -------
-          * Flatten the Quad Collections and then prepare the lines that will be written.
+          * Prepare the lines that will be written.
           * => generate the key that determines the destination file, and let the formatter render the quad as string.
           * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
           */
-        failResults.flatMap(identity)
-          .mapPartitionsWithIndex(
+        failResults.mapPartitionsWithIndex(
             (partition, quads) => quads.flatMap(quad =>
               bc_formats.value.map(formats =>
                 (Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)

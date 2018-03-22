@@ -6,7 +6,6 @@ import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 
-import scala.collection.mutable
 import scala.util.Try
 import scala.xml.XML.loadString
 
@@ -23,12 +22,11 @@ object SerializableUtils extends Serializable {
     * @return Deduplicated Colection of Quads
     */
   def processPage(namespaces: Set[Namespace], extractor: Extractor[WikiPage], page: WikiPage): Seq[Quad] = {
-    //LinkedHashSet for deduplication
-    val uniqueQuads = new mutable.LinkedHashSet[Quad]()
+    var quads = Seq[Quad]()
     try {
       if (namespaces.exists(_.equals(page.title.namespace))) {
         //Extract Quads
-        uniqueQuads ++= extractor.extract(page, page.uri)
+        quads = extractor.extract(page, page.uri)
       }
     }
     catch {
@@ -37,7 +35,7 @@ object SerializableUtils extends Serializable {
         page.addExtractionRecord(null, ex)
         page.getExtractionRecords()
     }
-    uniqueQuads.toSeq
+    quads
   }
 
   /**

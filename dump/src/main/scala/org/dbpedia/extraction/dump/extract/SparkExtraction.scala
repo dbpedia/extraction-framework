@@ -29,6 +29,7 @@ object SparkExtraction {
 
     val spark =
       if(altLocalDir != "") {
+        logger.info(s"Set alternate spark-local-dir to: $altLocalDir")
         SparkSession.builder()
           .appName("MainExtraction")
           .master(master)
@@ -36,7 +37,6 @@ object SparkExtraction {
           .config("spark.local.dir", altLocalDir)
           .getOrCreate()
       } else {
-        logger.info(s"Set alternate spark-local-dir to: $altLocalDir")
         SparkSession.builder()
           .appName("MainExtraction")
           .master(master)
