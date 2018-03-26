@@ -164,7 +164,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           * => generate the key that determines the destination file, and let the formatter render the quad as string.
           * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
           */
-        failResults.mapPartitionsWithIndex(
+        failResults.distinct().mapPartitionsWithIndex(
             (partition, quads) => quads.flatMap(quad =>
               bc_formats.value.map(formats =>
                 (Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)
