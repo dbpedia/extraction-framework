@@ -164,14 +164,13 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           * => generate the key that determines the destination file, and let the formatter render the quad as string.
           * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
           */
-        failResults.distinct().mapPartitionsWithIndex(
+        failResults.mapPartitionsWithIndex(
             (partition, quads) => quads.flatMap(quad =>
-              bc_formats.value.map(formats =>
-                (Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)
-              )
+              bc_formats.value.toSeq.map(formats =>
+                (formats._1, formats._2.render(quad).trim)
+              ).distinct.map(x => (Key(quad.dataset, x._1, partition), x._2))
             )
-          )
-          .saveAsHadoopFile(s"$dir/_temporary/", classOf[Key], classOf[String], classOf[OutputFormat], classOf[BZip2Codec])
+          ).saveAsHadoopFile(s"$dir/_temporary/", classOf[Key], classOf[String], classOf[OutputFormat], classOf[BZip2Codec])
         concatFiles(new File(s"$dir/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$date-", bc_formats.value.keys)
       }
 
