@@ -200,7 +200,7 @@ class ConfigLoader(config: Config)
     def articlesSource: Source = getArticlesSource(lang, finder)
 
     //Extraction Context
-    val context = new DumpExtractionContext
+    val context = new SparkExtractionContext
     {
       def ontology: Ontology = _ontology
       def language: Language = lang

@@ -14,14 +14,12 @@ object SerializableUtils extends Serializable {
 
   /**
     * Extracts Quads from a WikiPage
-    * checks for desired namespace
-    * deduplication
-    * @param namespaces Set of correct namespaces
-    * @param extractor Wikipage Extractor
+    * @param namespaces Set of wanted namespaces
+    * @param extractor WikiPage Extractor
     * @param page WikiPage
-    * @return Deduplicated Colection of Quads
+    * @return Quad collection
     */
-  def processPage(namespaces: Set[Namespace], extractor: Extractor[WikiPage], page: WikiPage): Seq[Quad] = {
+  def extractQuadsFromPage(namespaces: Set[Namespace], extractor: Extractor[WikiPage], page: WikiPage): Seq[Quad] = {
     var quads = Seq[Quad]()
     try {
       if (namespaces.exists(_.equals(page.title.namespace))) {
@@ -40,22 +38,25 @@ object SerializableUtils extends Serializable {
 
   /**
     * Parses a xml string to a wikipage.
-    * @param xmlString xml
-    * @return WikiPage Option
+    * @param xmlString xml wiki page
+    * @return Option[WikiPage]
     */
-  def xmlToWikiPage(xmlString: String, language: Language): Option[WikiPage] = {
-    /* ------- Special Cases -------
-     * for normal pages:  add <page> in front
-     * for last page:     cut </mediawiki>
-     * first input:       skip
+  def parseXMLToWikiPage(xmlString: String, language: Language): Option[WikiPage] = {
+    /*
+     * Handle special cases occurring in the extraction
      */
-    var validXML = xmlString
     val length = xmlString.length
-    if(xmlString.startsWith("<page><mediawiki")){
+    var validXML : String = if(xmlString.startsWith("<page><mediawiki")){
+      // File head is no valid page => ignore
       return None
     }
-    if(xmlString.charAt(length-12) == '<'){
-      validXML = xmlString.dropRight(12)
+    else if(xmlString.charAt(length-12) == '<'){
+      // Cut </mediawiki> from last page
+      xmlString.dropRight(12)
+    }
+    else {
+      // Normal page
+      xmlString
     }
 
     /* ------- Parse XML & Build WikiPage -------
@@ -63,14 +64,16 @@ object SerializableUtils extends Serializable {
      */
     try {
       val page = loadString(validXML)
-      val rev = page \ "revision"
+      val revision = page \ "revision"
       val title = WikiTitle.parseCleanTitle((page \ "title").text, language,
         Try { new java.lang.Long(java.lang.Long.parseLong((page \ "id").text))}.toOption)
-      val nsElem = page \ "ns"
-      if (nsElem.nonEmpty) {
+      val namespaceElement = page \ "ns"
+      if (namespaceElement.nonEmpty) {
         try {
-          val nsCode = nsElem.text.toInt
-          require(title.namespace.code == nsCode, "XML Namespace (" + nsCode + ") does not match the computed namespace (" + title.namespace + ") in page: " + title.decodedWithNamespace)
+          val namespaceCode = namespaceElement.text.toInt
+          require(title.namespace.code == namespaceCode,
+            s"XML Namespace ($namespaceCode) does not match the computed namespace (${title.namespace}) in page: ${title.decodedWithNamespace}"
+          )
         }
         catch {
           case e: NumberFormatException => throw new IllegalArgumentException("Cannot parse content of element [ns] as int", e)
@@ -82,7 +85,7 @@ object SerializableUtils extends Serializable {
           case "" => null
           case t => WikiTitle.parse(t, language)
         }
-        val _contributorID = (rev \ "contributor" \ "id").text match {
+        val _contributorID = (revision \ "contributor" \ "id").text match {
           case null => "0"
           case id => id
         }
@@ -90,14 +93,14 @@ object SerializableUtils extends Serializable {
           title     = title,
           redirect  = _redirect,
           id        = (page \ "id").text,
-          revision  = (rev \ "id").text,
-          timestamp = (rev \ "timestamp").text,
+          revision  = (revision \ "id").text,
+          timestamp = (revision \ "timestamp").text,
           contributorID   = _contributorID,
           contributorName =
-            if (_contributorID == "0") (rev \ "contributor" \ "ip").text
-            else (rev \ "contributor" \ "username").text,
-          source    = (rev \ "text").text,
-          format    = (rev \ "format").text))
+            if (_contributorID == "0") (revision \ "contributor" \ "ip").text
+            else (revision \ "contributor" \ "username").text,
+          source    = (revision \ "text").text,
+          format    = (revision \ "format").text))
       }
       else None
     } catch {

@@ -36,7 +36,7 @@ import scala.util.Try
   * @param lang       the language of this extraction.
   */
 class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
-                         context: DumpExtractionContext,
+                         context: SparkExtractionContext,
                          namespaces: Set[Namespace],
                          destination: Destination,
                          lang: Language,
@@ -50,19 +50,19 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
 
     try {
       //broadcasts
-      val bc_namespaces = sparkContext.broadcast(namespaces)
-      val bc_ontology = sparkContext.broadcast(context.ontology)
-      val bc_language = sparkContext.broadcast(context.language)
-      val bc_redirects = sparkContext.broadcast(context.redirects)
-      val bc_mappingPageSource = sparkContext.broadcast(context.mappingPageSource)
+      val broadcastedNamespaces = sparkContext.broadcast(namespaces)
+      val broadcastedOntology = sparkContext.broadcast(context.ontology)
+      val broadcastedLanguage = sparkContext.broadcast(context.language)
+      val broadcastedRedirects = sparkContext.broadcast(context.redirects)
+      val broadcastedMappingPageSource = sparkContext.broadcast(context.mappingPageSource)
 
-      val bc_formats = sparkContext.broadcast(config.formats)
-      val bc_extractors = sparkContext.broadcast(extractors)
+      val broadcastedFormats = sparkContext.broadcast(config.formats)
+      val broadcastedExtractors = sparkContext.broadcast(extractors)
 
-      //input files
-      val finder = new Finder[File](config.dumpDir, context.language, config.wikiName)
-      val date = latestDate(finder, config)
-      val sources = config.source.flatMap(x => files(x, finder, date))
+      //finding the source files
+      val fileFinder = new Finder[File](config.dumpDir, context.language, config.wikiName)
+      val latestDate = getLatestDate(fileFinder, config)
+      val dumpSources = config.source.flatMap(x => getInputFiles(x, fileFinder, latestDate))
 
       //number of worker-cores
       val numberOfCores = sparkContext.defaultParallelism
@@ -73,41 +73,41 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
       extractor.initializeExtractor()
 
       //extraction
-      sources.foreach(file => {
-        val source = file.getAbsolutePath
-        val bc_dir = sparkContext.broadcast(file.getParent)
+      dumpSources.foreach(file => {
+        val sourcePath = file.getAbsolutePath
+        val broadcastedDir = sparkContext.broadcast(file.getParent)
         extractionRecorder.printLabeledLine(s"Starting Extraction on ${file.getName}.", RecordSeverity.Info)
 
         /* ------- READING    -------
           * Read XML-Dump from baseDir, delimit the text by the <page> tag
           * and create an RDD from it
           */
-        val conf = new Configuration
-        conf.set("textinputformat.record.delimiter", "<page>")
-        val xmlRDD : RDD[String] =
-          sparkContext.newAPIHadoopFile(source, classOf[TextInputFormat], classOf[LongWritable], classOf[Text], conf)
+        val inputConfiguration = new Configuration
+        inputConfiguration.set("textinputformat.record.delimiter", "<page>")
+        val wikipageXmlRDD : RDD[String] =
+          sparkContext.newAPIHadoopFile(sourcePath, classOf[TextInputFormat], classOf[LongWritable], classOf[Text], inputConfiguration)
           .map("<page>" + _._2.toString.trim).repartition(numberOfCores)
 
         /* ------- PARSING    -------
          * Parse the String to WikiPage Objects
          */
-        val wikiPageRDD : RDD[WikiPage] = xmlRDD.flatMap(SerializableUtils.xmlToWikiPage(_, bc_language.value))
+        val wikipageParsedRDD : RDD[WikiPage] = wikipageXmlRDD.flatMap(SerializableUtils.parseXMLToWikiPage(_, broadcastedLanguage.value))
 
         /* ------- EXTRACTION -------
          * Build extractor-context from broadcasted values once per partition.
          * Extract quads.
          * Flatten the Quad Collections.
          */
-        val results : RDD[Quad] = wikiPageRDD.mapPartitions(pages => {
-          def worker_context = new DumpExtractionContext {
-            def ontology: Ontology = bc_ontology.value
-            def language: Language = bc_language.value
-            def redirects: Redirects = bc_redirects.value
-            def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
+        val extractedDataRDD : RDD[Quad] = wikipageParsedRDD.mapPartitions(pages => {
+          def worker_context = new SparkExtractionContext {
+            def ontology: Ontology = broadcastedOntology.value
+            def language: Language = broadcastedLanguage.value
+            def redirects: Redirects = broadcastedRedirects.value
+            def mappingPageSource: Traversable[WikiPage] = broadcastedMappingPageSource.value
           }
-          val localExtractor = CompositeParseExtractor.load(bc_extractors.value, worker_context)
+          val localExtractor = CompositeParseExtractor.load(broadcastedExtractors.value, worker_context)
           pages.map(page =>
-            SerializableUtils.processPage(bc_namespaces.value, localExtractor, page)
+            SerializableUtils.extractQuadsFromPage(broadcastedNamespaces.value, localExtractor, page)
           )
         }).flatMap(identity)
 
@@ -116,21 +116,20 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
          * => generate the key that determines the destination file, and let the formatter render the quad as string.
          * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
          */
-        results.mapPartitionsWithIndex(
+        extractedDataRDD.mapPartitionsWithIndex(
             (partition, quads) => quads.flatMap(quad =>
-              bc_formats.value.flatMap(formats =>
+              broadcastedFormats.value.flatMap(formats =>
                 Try{(Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)}.toOption
               )
-            ).toSeq.distinct.toIterator
-          )
-          .saveAsHadoopFile(s"${bc_dir.value}/_temporary/", classOf[Key], classOf[String], classOf[OutputFormat], classOf[BZip2Codec])
-        concatFiles(new File(s"${bc_dir.value}/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$date-", bc_formats.value.keys)
+            )
+          ).saveAsHadoopFile(s"${broadcastedDir.value}/_temporary/", classOf[Key], classOf[String], classOf[CustomPartitionedOutputFormat], classOf[BZip2Codec])
+        concatOutputFiles(new File(s"${broadcastedDir.value}/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$latestDate-", broadcastedFormats.value.keys)
         extractionRecorder.printLabeledLine(s"Finished Extraction on ${file.getName}.", RecordSeverity.Info)
       })
 
       if (retryFailedPages) {
         //output dir
-        val dir = sources.last.getParent
+        val dir = dumpSources.last.getParent
         //pages to retry
         val failedPages = extractionRecorder.listFailedPages(lang).keys.map(_._2).toSeq
         extractionRecorder.printLabeledLine("retrying " + failedPages.length + " failed pages", RecordSeverity.Warning, lang)
@@ -147,15 +146,15 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
         val failResults = failedPagesRDD.mapPartitions(pages => {
           case class _WikiPage(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String)
 
-          def worker_context = new DumpExtractionContext {
-            def ontology: Ontology = bc_ontology.value
-            def language: Language = bc_language.value
-            def redirects: Redirects = bc_redirects.value
-            def mappingPageSource: Traversable[WikiPage] = bc_mappingPageSource.value
+          def worker_context = new SparkExtractionContext {
+            def ontology: Ontology = broadcastedOntology.value
+            def language: Language = broadcastedLanguage.value
+            def redirects: Redirects = broadcastedRedirects.value
+            def mappingPageSource: Traversable[WikiPage] = broadcastedMappingPageSource.value
           }
-          val localExtractor = CompositeParseExtractor.load(bc_extractors.value, worker_context)
+          val localExtractor = CompositeParseExtractor.load(broadcastedExtractors.value, worker_context)
           pages.map(page =>
-            SerializableUtils.processPage(bc_namespaces.value, localExtractor, page)
+            SerializableUtils.extractQuadsFromPage(broadcastedNamespaces.value, localExtractor, page)
           )
         }).flatMap(identity)
 
@@ -166,12 +165,12 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           */
         failResults.mapPartitionsWithIndex(
             (partition, quads) => quads.flatMap(quad =>
-              bc_formats.value.toSeq.flatMap(formats =>
+              broadcastedFormats.value.toSeq.flatMap(formats =>
                 Try{(Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)}.toOption
               )
             )
-          ).distinct().saveAsHadoopFile(s"$dir/_temporary/", classOf[Key], classOf[String], classOf[OutputFormat], classOf[BZip2Codec])
-        concatFiles(new File(s"$dir/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$date-", bc_formats.value.keys)
+          ).saveAsHadoopFile(s"$dir/_temporary/", classOf[Key], classOf[String], classOf[CustomPartitionedOutputFormat], classOf[BZip2Codec])
+        concatOutputFiles(new File(s"$dir/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$latestDate-", broadcastedFormats.value.keys)
       }
 
       //FIXME Extraction Monitor not working
@@ -196,14 +195,14 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
     }
   }
 
-  private def latestDate(finder: Finder[_], config: Config): String = {
+  private def getLatestDate(finder: Finder[_], config: Config): String = {
     val isSourceRegex = config.source.startsWith("@")
     val source = if (isSourceRegex) config.source.head.substring(1) else config.source.head
     val fileName = if (config.requireComplete) Config.Complete else source
     finder.dates(fileName, isSuffixRegex = isSourceRegex).last
   }
 
-  private def files(source: String, finder: Finder[File], date: String): List[File] = {
+  private def getInputFiles(source: String, finder: Finder[File], date: String): List[File] = {
     val files = if (source.startsWith("@")) { // the articles source is a regex - we want to match multiple files
       finder.matchFiles(date, source.substring(1))
     } else List(finder.file(date, source)).collect{case Some(x) => x}
@@ -211,7 +210,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
     files
   }
 
-  private def concatFiles(dir : File, prefix: String, formats: Iterable[String]): Unit = {
+  private def concatOutputFiles(dir : File, prefix: String, formats: Iterable[String]): Unit = {
     dir.listFiles().foreach(datasetDir => {
       if(datasetDir.isDirectory) {
         val ds = datasetDir.getName.replace("_","-")
@@ -220,12 +219,12 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           datasetDir.getAbsolutePath, s"${dir.getParent}/$prefix$ds.$format", format).!)
       }
     })
-    deleteRecursively(dir)
+    deleteFilesRecursively(dir)
   }
 
-  private def deleteRecursively(file: File): Unit = {
+  private def deleteFilesRecursively(file: File): Unit = {
     if (file.isDirectory)
-      file.listFiles.foreach(deleteRecursively)
+      file.listFiles.foreach(deleteFilesRecursively)
     if (file.exists && !file.delete)
       throw new Exception(s"Unable to delete ${file.getAbsolutePath}")
   }
@@ -235,7 +234,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
   * Custom output format for the saveAsHadoopFile method.
   * Each partition writes its own files, datasets get their own folder
   */
-class OutputFormat extends MultipleTextOutputFormat[Any, Any] {
+class CustomPartitionedOutputFormat extends MultipleTextOutputFormat[Any, Any] {
   override def generateActualKey(key: Any, value: Any): Any =
     NullWritable.get()
 
