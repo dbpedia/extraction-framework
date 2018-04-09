@@ -38,6 +38,7 @@ object SerializableUtils extends Serializable {
 
   /**
     * Parses a xml string to a wikipage.
+    * based on org.dbpedia.extraction.sources.XMLSource
     * @param xmlString xml wiki page
     * @return Option[WikiPage]
     */
