@@ -52,6 +52,10 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
   val temporaryDirectoryName = "/_temporary/"
 
   //FIXME Extraction Monitor not working
+  /** executes the spark-extraction-process
+    * @param spark current SparkSession
+    * @param config loaded config
+    */
   def run(spark: SparkSession, config: Config): Unit = {
     val sparkContext = spark.sparkContext
     try {
@@ -70,6 +74,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
       broadcastValues.put("language", sparkContext.broadcast(context.language))
       broadcastValues.put("redirects", sparkContext.broadcast(context.redirects))
       broadcastValues.put("dir", sparkContext.broadcast(dir))
+      broadcastValues.put("tempDirName", sparkContext.broadcast(temporaryDirectoryName))
 
       val extractor = CompositeParseExtractor.load(extractors, context)
       extractionRecorder.initialize(lang, sparkContext.appName, extractor.datasets.toSeq)
@@ -77,7 +82,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
 
       sources.foreach(file => {
         extractionRecorder.printLabeledLine(s"Starting Extraction on ${file.getName}", RecordSeverity.Info)
-        val wikiPageXmlRDD : RDD[String] = readDump(file.getAbsolutePath, sparkContext)
+        val wikiPageXmlRDD : RDD[String] = readSource(file.getAbsolutePath, sparkContext)
         val wikiPageParsedRDD : RDD[WikiPage] = parseXML(wikiPageXmlRDD, broadcastValues)
         val extractedDataRDD : RDD[Quad] = extractQuads(wikiPageParsedRDD, broadcastValues)
         writeData(extractedDataRDD, broadcastValues)
@@ -117,7 +122,12 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
     }
   }
 
-  private def readDump(path: String, sparkContext: SparkContext): RDD[String] = {
+  /** Reads Wikipedia XML Dump and returns an RDD of XML Strings
+    * @param path Path to the Source XML File
+    * @param sparkContext current SparkContext
+    * @return RDD of WikipPages in XML Format
+    */
+  private def readSource(path: String, sparkContext: SparkContext): RDD[String] = {
     val numberOfCores = sparkContext.defaultParallelism
     val inputConfiguration = new Configuration
     inputConfiguration.set("textinputformat.record.delimiter", "<page>")
@@ -125,12 +135,23 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
         .map("<page>" + _._2.toString.trim).repartition(numberOfCores)
   }
 
+  /** Parses the XML Strings into a WikiPage object
+    * @param rdd RDD of XML Strings
+    * @param broadcastMap broadcast context values
+    * @return RDD of WikiPage objects
+    */
   private def parseXML(rdd: RDD[String], broadcastMap: mutable.HashMap[String, Broadcast[Any]]): RDD[WikiPage] = {
     val broadcastLanguage = broadcastMap("language")
     rdd.flatMap(SerializableUtils.parseXMLToWikiPage(_, broadcastLanguage.value.asInstanceOf[Language]))
   }
 
+  /** Executes the extraction on the WikiPage objects
+    * @param rdd RDD of WikiPage objects
+    * @param broadcastMap broadcast context values
+    * @return RDD of Quad objects
+    */
   private def extractQuads(rdd: RDD[WikiPage], broadcastMap: mutable.HashMap[String, Broadcast[Any]]): RDD[Quad] = {
+    //extracting the values from the map prevents serialisation problems
     val broadcastOntology = broadcastMap("ontology")
     val broadcastLanguage = broadcastMap("language")
     val broadcastRedirects = broadcastMap("redirects")
@@ -150,16 +171,48 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
     }).flatMap(identity)
   }
 
+  /** Writes the quads to a temporary directory, each partition to its own file to prevent a bottleneck
+    * @param rdd RDD of Quad objects
+    * @param broadcastMap broadcast context values
+    */
   private def writeData(rdd: RDD[Quad],  broadcastMap: mutable.HashMap[String, Broadcast[Any]]): Unit = {
     val broadcastFormats = broadcastMap("formats")
     val broadcastDir = broadcastMap("dir")
+    val broadcastTempDir = broadcastMap("tempDirName")
+
     rdd.mapPartitionsWithIndex(
       (partition, quads) => quads.flatMap(quad =>
         broadcastFormats.value.asInstanceOf[Map[String, Formatter]].flatMap(formats =>
           Try{(Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)}.toOption
         )
       )
-    ).saveAsHadoopFile(s"${broadcastDir.value.asInstanceOf[String]}/_temporary/", classOf[Key], classOf[String], classOf[CustomPartitionedOutputFormat], classOf[BZip2Codec])
+    ).saveAsHadoopFile(s"${broadcastDir.value.asInstanceOf[String] + broadcastTempDir.value.asInstanceOf[String]}",
+      classOf[Key], classOf[String], classOf[CustomPartitionedOutputFormat], classOf[BZip2Codec])
+  }
+
+  /** Executes a bash script to concatenate all bz2 files in the temporary directory to the destination
+    * and deletes the temporary directory
+    * @param dir temporary directory
+    * @param prefix filename prefix for the destination
+    * @param formats List of formats fro the destination
+    */
+  private def concatOutputFiles(dir : File, prefix: String, formats: Iterable[String]): Unit = {
+    dir.listFiles().foreach(datasetDir => {
+      if(datasetDir.isDirectory) {
+        val ds = datasetDir.getName.replace("_","-")
+        formats.foreach(format =>
+          Seq("bash", "../scripts/src/main/bash/concatFiles.sh",
+            datasetDir.getAbsolutePath, s"${dir.getParent}/$prefix$ds.$format", format).!)
+      }
+    })
+    deleteFilesRecursively(dir)
+  }
+
+  private def deleteFilesRecursively(file: File): Unit = {
+    if (file.isDirectory)
+      file.listFiles.foreach(deleteFilesRecursively)
+    if (file.exists && !file.delete)
+      throw new Exception(s"Unable to delete ${file.getAbsolutePath}")
   }
 
   private def getLatestDate(finder: Finder[_], config: Config): String = {
@@ -176,27 +229,11 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
     logger.info(s"Source is $source - ${files.size} file(s) matched")
     files
   }
-
-  private def concatOutputFiles(dir : File, prefix: String, formats: Iterable[String]): Unit = {
-    dir.listFiles().foreach(datasetDir => {
-      if(datasetDir.isDirectory) {
-        val ds = datasetDir.getName.replace("_","-")
-        formats.foreach(format =>
-          Seq("bash", "../scripts/src/main/bash/concatFiles.sh",
-          datasetDir.getAbsolutePath, s"${dir.getParent}/$prefix$ds.$format", format).!)
-      }
-    })
-    deleteFilesRecursively(dir)
-  }
-
-  private def deleteFilesRecursively(file: File): Unit = {
-    if (file.isDirectory)
-      file.listFiles.foreach(deleteFilesRecursively)
-    if (file.exists && !file.delete)
-      throw new Exception(s"Unable to delete ${file.getAbsolutePath}")
-  }
 }
 
+/** Custom Hadoop Output Format
+  * Each partition writes its own files, divided by format and dataset
+  */
 class CustomPartitionedOutputFormat extends MultipleTextOutputFormat[Any, Any] {
   override def generateActualKey(key: Any, value: Any): Any =
     NullWritable.get()
