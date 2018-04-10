@@ -50,14 +50,15 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
   val logger: Logger = LogManager.getRootLogger
   val broadcastValues: mutable.HashMap[String, Broadcast[Any]] = mutable.HashMap[String, Broadcast[Any]]()
   val temporaryDirectoryName = "/_temporary/"
+
   //FIXME Extraction Monitor not working
   def run(spark: SparkSession, config: Config): Unit = {
     val sparkContext = spark.sparkContext
     try {
       val fileFinder = new Finder[File](config.dumpDir, context.language, config.wikiName)
       val latestDate = getLatestDate(fileFinder, config)
-      val dumpSources = config.source.flatMap(x => getInputFiles(x, fileFinder, latestDate))
-      val dir = dumpSources.head.getParent
+      val sources = config.source.flatMap(x => getInputFiles(x, fileFinder, latestDate))
+      val dir = sources.head.getParent
       val concatDir = new File(dir + temporaryDirectoryName)
       val prefix = s"${lang.wikiCode}${config.wikiName}-$latestDate-"
       val formatKeys = config.formats.keys
@@ -68,13 +69,13 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
       broadcastValues.put("ontology", sparkContext.broadcast(context.ontology))
       broadcastValues.put("language", sparkContext.broadcast(context.language))
       broadcastValues.put("redirects", sparkContext.broadcast(context.redirects))
-      broadcastValues.put("dir", sparkContext.broadcast(dumpSources.head.getParent))
+      broadcastValues.put("dir", sparkContext.broadcast(dir))
 
       val extractor = CompositeParseExtractor.load(extractors, context)
       extractionRecorder.initialize(lang, sparkContext.appName, extractor.datasets.toSeq)
       extractor.initializeExtractor()
 
-      dumpSources.foreach(file => {
+      sources.foreach(file => {
         extractionRecorder.printLabeledLine(s"Starting Extraction on ${file.getName}", RecordSeverity.Info)
         val wikiPageXmlRDD : RDD[String] = readDump(file.getAbsolutePath, sparkContext)
         val wikiPageParsedRDD : RDD[WikiPage] = parseXML(wikiPageXmlRDD, broadcastValues)
@@ -93,7 +94,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
         val failResults = extractQuads(failedPagesRDD, broadcastValues)
         writeData(failResults, broadcastValues)
         concatOutputFiles(concatDir, prefix, formatKeys)
-        extractionRecorder.printLabeledLine(s"Finished Extraction on the failed pages", RecordSeverity.Info)
+        extractionRecorder.printLabeledLine(s"finished Extraction on the failed pages", RecordSeverity.Info)
       }
 
       extractionRecorder.printLabeledLine("finished complete extraction after {page} pages with {mspp} per page", RecordSeverity.Info, lang)
@@ -158,7 +159,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           Try{(Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)}.toOption
         )
       )
-    ).saveAsHadoopFile(s"${broadcastDir.value.asInstanceOf[String]} /_temporary/", classOf[Key], classOf[String], classOf[CustomPartitionedOutputFormat], classOf[BZip2Codec])
+    ).saveAsHadoopFile(s"${broadcastDir.value.asInstanceOf[String]}/_temporary/", classOf[Key], classOf[String], classOf[CustomPartitionedOutputFormat], classOf[BZip2Codec])
   }
 
   private def getLatestDate(finder: Finder[_], config: Config): String = {
