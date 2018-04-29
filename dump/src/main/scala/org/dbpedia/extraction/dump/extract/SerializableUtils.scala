@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.apache.log4j.LogManager
 import org.dbpedia.extraction.mappings.Extractor
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
@@ -10,7 +9,7 @@ import scala.util.Try
 import scala.xml.XML.loadString
 
 object SerializableUtils extends Serializable {
-  @transient lazy val logger = LogManager.getRootLogger
+  //@transient lazy val logger = LogManager.getRootLogger
 
   /**
     * Extracts Quads from a WikiPage
@@ -29,7 +28,7 @@ object SerializableUtils extends Serializable {
     }
     catch {
       case ex: Exception =>
-        logger.error("error while processing page " + page.title.decoded, ex)
+        //logger.error("error while processing page " + page.title.decoded, ex)
         page.addExtractionRecord(null, ex)
         page.getExtractionRecords()
     }
@@ -46,18 +45,13 @@ object SerializableUtils extends Serializable {
     /*
      * Handle special cases occurring in the extraction
      */
+    var validXML = xmlString
     val length = xmlString.length
-    var validXML : String = if(xmlString.startsWith("<page><mediawiki")){
-      // File head is no valid page => ignore
+    if(xmlString.startsWith("<page><mediawiki")){
       return None
     }
-    else if(xmlString.charAt(length-12) == '<'){
-      // Cut </mediawiki> from last page
-      xmlString.dropRight(12)
-    }
-    else {
-      // Normal page
-      xmlString
+    if(xmlString.charAt(length-12) == '<'){
+      validXML = xmlString.dropRight(12)
     }
 
     /* ------- Parse XML & Build WikiPage -------
@@ -106,7 +100,7 @@ object SerializableUtils extends Serializable {
       else None
     } catch {
       case ex: Throwable =>
-        logger.warn("error parsing xml:" + ex.getMessage)
+        //logger.warn("error parsing xml:" + ex.getMessage)
         None
     }
   }
