@@ -24,8 +24,8 @@ object SparkExtraction {
     // Load configuration
     val config = new Config(args.head)
     val configLoader = new ConfigLoader(config)
-    val master = Config.universalConfig.sparkMaster
-    val altLocalDir = Config.universalConfig.sparkLocalDir
+    val master = config.sparkMaster
+    val altLocalDir = config.sparkLocalDir
 
     val spark =
       if(altLocalDir != "") {
