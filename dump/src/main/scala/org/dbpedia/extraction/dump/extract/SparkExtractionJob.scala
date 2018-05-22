@@ -2,7 +2,6 @@ package org.dbpedia.extraction.dump.extract
 
 import java.io.File
 
-import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.io.compress.BZip2Codec
 import org.apache.hadoop.io.{LongWritable, NullWritable, Text}
 import org.apache.hadoop.mapred.lib.MultipleTextOutputFormat
@@ -54,6 +53,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
       val broadcastedOntology = sparkContext.broadcast(context.ontology)
       val broadcastedLanguage = sparkContext.broadcast(context.language)
       val broadcastedRedirects = sparkContext.broadcast(context.redirects)
+      val broadcastedDisambiguations = sparkContext.broadcast(context.disambiguations)
 
       val broadcastedFormats = sparkContext.broadcast(config.formats)
       val broadcastedExtractors = sparkContext.broadcast(extractors)
@@ -81,7 +81,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           * Read XML-Dump from baseDir, delimit the text by the <page> tag
           * and create an RDD from it
           */
-        val inputConfiguration = new Configuration
+        val inputConfiguration = new org.apache.hadoop.conf.Configuration
         inputConfiguration.set("textinputformat.record.delimiter", "<page>")
         val wikipageXmlRDD : RDD[String] =
           sparkContext.newAPIHadoopFile(sourcePath, classOf[TextInputFormat], classOf[LongWritable], classOf[Text], inputConfiguration)
@@ -102,6 +102,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
             def ontology: Ontology = broadcastedOntology.value
             def language: Language = broadcastedLanguage.value
             def redirects: Redirects = broadcastedRedirects.value
+            def disambiguations: Disambiguations = broadcastedDisambiguations.value
           }
           val localExtractor = CompositeParseExtractor.load(broadcastedExtractors.value, worker_context)
           pages.map(page =>
@@ -148,6 +149,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
             def ontology: Ontology = broadcastedOntology.value
             def language: Language = broadcastedLanguage.value
             def redirects: Redirects = broadcastedRedirects.value
+            def disambiguations: Disambiguations = broadcastedDisambiguations.value
           }
           val localExtractor = CompositeParseExtractor.load(broadcastedExtractors.value, worker_context)
           pages.map(page =>

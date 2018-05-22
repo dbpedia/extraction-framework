@@ -243,6 +243,23 @@ class ConfigLoader(config: Config)
       }
       def mappings : Mappings = _mappings
 
+      private val _disambiguations =
+      {
+        try {
+          Disambiguations.load(reader(finder.file(date, config.disambiguations).get), finder.file(date, "disambiguations-ids.obj").get, language)
+        } catch {
+          case ex: Exception =>
+            logger.info("Could not load disambiguations - error: " + ex.getMessage)
+            null
+        }
+      }
+
+      def disambiguations : Disambiguations =
+        if (_disambiguations != null)
+          _disambiguations
+        else
+          new Disambiguations(Set[Long]())
+
     }
 
     // TODO: Find a better way to do this (?)

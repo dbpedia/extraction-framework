@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.{Level, Logger}
 import java.io._
+import java.util.logging.{Level, Logger}
+
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.RichReader._
-import collection.mutable.{HashSet}
+
+import scala.collection.mutable.HashSet
 
 /**
  */
@@ -22,7 +24,7 @@ class Disambiguations(val set : Set[Long])
  */
 object Disambiguations
 {
-  private val logger = Logger.getLogger(classOf[Disambiguations].getName)
+  @transient private val logger = Logger.getLogger(classOf[Disambiguations].getName)
 
   /**
    * return an empty Disambiguations object
