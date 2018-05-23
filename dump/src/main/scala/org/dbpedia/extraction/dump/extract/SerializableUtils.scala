@@ -28,7 +28,6 @@ object SerializableUtils extends Serializable {
     }
     catch {
       case ex: Exception =>
-        //logger.error("error while processing page " + page.title.decoded, ex)
         page.addExtractionRecord(null, ex)
         page.getExtractionRecords()
     }

@@ -40,7 +40,7 @@ object SparkExtraction {
         SparkSession.builder()
           .appName("MainExtraction")
           .master(master)
-          .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+          .config("spark.locality.wait","0")
           .getOrCreate()
       }
     
