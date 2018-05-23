@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
 import java.io.File
+import java.net.URL
 
 import org.apache.hadoop.io.compress.BZip2Codec
 import org.apache.hadoop.io.{LongWritable, NullWritable, Text}
@@ -13,6 +14,7 @@ import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.{RecordEntry, RecordSeverity, _}
@@ -49,14 +51,13 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
 
     try {
       //broadcasts
-      val broadcastedNamespaces = sparkContext.broadcast(namespaces)
-      val broadcastedOntology = sparkContext.broadcast(context.ontology)
-      val broadcastedLanguage = sparkContext.broadcast(context.language)
-      val broadcastedRedirects = sparkContext.broadcast(context.redirects)
-      val broadcastedDisambiguations = sparkContext.broadcast(context.disambiguations)
-
-      val broadcastedFormats = sparkContext.broadcast(config.formats)
-      val broadcastedExtractors = sparkContext.broadcast(extractors)
+      val broadcastNamespaces = sparkContext.broadcast(namespaces)
+      val broadcastOntology = sparkContext.broadcast(context.ontology)
+      val broadcastLanguage = sparkContext.broadcast(context.language)
+      val broadcastRedirects = sparkContext.broadcast(context.redirects)
+      val broadcastDisambiguations = sparkContext.broadcast(context.disambiguations)
+      val broadcastFormats = sparkContext.broadcast(config.formats)
+      val broadcastExtractors = sparkContext.broadcast(extractors)
 
       //finding the source files
       val fileFinder = new Finder[File](config.dumpDir, context.language, config.wikiName)
@@ -73,56 +74,78 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
 
       //extraction
       dumpSources.foreach(file => {
-        val sourcePath = file.getAbsolutePath
-        val broadcastedDir = sparkContext.broadcast(file.getParent)
         extractionRecorder.printLabeledLine(s"Starting Extraction on ${file.getName}.", RecordSeverity.Info)
-
         /* ------- READING    -------
           * Read XML-Dump from baseDir, delimit the text by the <page> tag
           * and create an RDD from it
           */
         val inputConfiguration = new org.apache.hadoop.conf.Configuration
         inputConfiguration.set("textinputformat.record.delimiter", "<page>")
-        val wikipageXmlRDD : RDD[String] =
-          sparkContext.newAPIHadoopFile(sourcePath, classOf[TextInputFormat], classOf[LongWritable], classOf[Text], inputConfiguration)
+        val wikiPageXmlRDD : RDD[String] =
+          sparkContext.newAPIHadoopFile(file.getAbsolutePath, classOf[TextInputFormat], classOf[LongWritable], classOf[Text], inputConfiguration)
             .map("<page>" + _._2.toString.trim).repartition(numberOfCores)
 
         /* ------- PARSING    -------
          * Parse the String to WikiPage Objects
          */
-        val wikipageParsedRDD : RDD[WikiPage] = wikipageXmlRDD.flatMap(SerializableUtils.parseXMLToWikiPage(_, broadcastedLanguage.value))
+        val wikiPageParsedRDD : RDD[WikiPage] = wikiPageXmlRDD.flatMap(SerializableUtils.parseXMLToWikiPage(_, broadcastLanguage.value))
 
         /* ------- EXTRACTION -------
-         * Build extractor-context from broadcasted values once per partition.
+         * Build extractor-context from broadcast values once per partition.
          * Extract quads.
          * Flatten the Quad Collections.
          */
-        val extractedDataRDD : RDD[Quad] = wikipageParsedRDD.mapPartitions(pages => {
-          def worker_context = new SparkExtractionContext {
-            def ontology: Ontology = broadcastedOntology.value
-            def language: Language = broadcastedLanguage.value
-            def redirects: Redirects = broadcastedRedirects.value
-            def disambiguations: Disambiguations = broadcastedDisambiguations.value
+        val extractedDataRDD : RDD[Quad] = wikiPageParsedRDD.mapPartitions(pages => {
+          // TODO: ImageExtractor
+          def worker_context = if(broadcastExtractors.value.contains(classOf[MappingExtractor])) {
+            // MappingsExtractor is used → Load Mappings
+            new SparkExtractionContext {
+              def ontology: Ontology = broadcastOntology.value
+              def language: Language = broadcastLanguage.value
+              def redirects: Redirects = broadcastRedirects.value
+              def disambiguations: Disambiguations = broadcastDisambiguations.value
+              def mappingPageSource: Traversable[WikiPage] = {
+                val namespace = Namespace.mappings(language)
+                if (config.mappingsDir != null && config.mappingsDir.isDirectory) {
+                  val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
+                  XMLSource.fromFile(file, Language.Mappings)
+                }
+                else {
+                  val namespaces = Set(namespace)
+                  val url = new URL(Language.Mappings.apiUri)
+                  WikiSource.fromNamespaces(namespaces,url,Language.Mappings)
+                }
+              }
+              def mappings: Mappings = MappingsLoader.load(this)
+            }
+          } else {
+            // MappingsExtractor is not used
+            new SparkExtractionContext {
+              def ontology: Ontology = broadcastOntology.value
+              def language: Language = broadcastLanguage.value
+              def redirects: Redirects = broadcastRedirects.value
+              def disambiguations: Disambiguations = broadcastDisambiguations.value
+            }
           }
-          val localExtractor = CompositeParseExtractor.load(broadcastedExtractors.value, worker_context)
+          val localExtractor = CompositeParseExtractor.load(broadcastExtractors.value, worker_context)
           pages.map(page =>
-            SerializableUtils.extractQuadsFromPage(broadcastedNamespaces.value, localExtractor, page)
+            SerializableUtils.extractQuadsFromPage(broadcastNamespaces.value, localExtractor, page)
           )
         }).flatMap(identity)
 
         /* ------- WRITING    -------
          * Prepare the lines that will be written.
-         * => generate the key that determines the destination file, and let the formatter render the quad as string.
+         * ⇒ generate the key that determines the destination file, and let the formatter render the quad as string.
          * Lastly let each worker write its own file and use a bash script to concat these files together afterwards.
          */
         extractedDataRDD.mapPartitionsWithIndex(
           (partition, quads) => quads.flatMap(quad =>
-            broadcastedFormats.value.flatMap(formats =>
+            broadcastFormats.value.flatMap(formats =>
               Try{(Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)}.toOption
             )
           )
-        ).saveAsHadoopFile(s"${broadcastedDir.value}/_temporary/", classOf[Key], classOf[String], classOf[CustomPartitionedOutputFormat], classOf[BZip2Codec])
-        concatOutputFiles(new File(s"${broadcastedDir.value}/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$latestDate-", broadcastedFormats.value.keys)
+        ).saveAsHadoopFile(s"${file.getParent}/_temporary/", classOf[Key], classOf[String], classOf[CustomPartitionedOutputFormat], classOf[BZip2Codec])
+        concatOutputFiles(new File(s"${file.getParent}/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$latestDate-", broadcastFormats.value.keys)
         extractionRecorder.printLabeledLine(s"Finished Extraction on ${file.getName}.", RecordSeverity.Info)
       })
 
@@ -134,26 +157,49 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
         extractionRecorder.printLabeledLine("retrying " + failedPages.length + " failed pages", RecordSeverity.Warning, lang)
         extractionRecorder.resetFailedPages(lang)
 
-        //already in the memory -> use makeRDD
+        //already in the memory → use makeRDD
         val failedPagesRDD = sparkContext.makeRDD(failedPages)
 
         /* ------- EXTRACTION -------
-          * Build extractor-context from broadcasted values once per partition.
+          * Build extractor-context from broadcast values once per partition.
           * Extract quads.
           * Flatten the Quad Collections.
           */
         val failResults = failedPagesRDD.mapPartitions(pages => {
-          case class _WikiPage(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, contributorID: Long, contributorName: String, source: String, format: String)
 
-          def worker_context = new SparkExtractionContext {
-            def ontology: Ontology = broadcastedOntology.value
-            def language: Language = broadcastedLanguage.value
-            def redirects: Redirects = broadcastedRedirects.value
-            def disambiguations: Disambiguations = broadcastedDisambiguations.value
+          def worker_context = if(broadcastExtractors.value.contains(classOf[MappingExtractor])) {
+            // MappingsExtractor is used → Load Mappings
+            new SparkExtractionContext {
+              def ontology: Ontology = broadcastOntology.value
+              def language: Language = broadcastLanguage.value
+              def redirects: Redirects = broadcastRedirects.value
+              def disambiguations: Disambiguations = broadcastDisambiguations.value
+              def mappingPageSource: Traversable[WikiPage] = {
+                val namespace = Namespace.mappings(language)
+                if (config.mappingsDir != null && config.mappingsDir.isDirectory) {
+                  val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
+                  XMLSource.fromFile(file, Language.Mappings)
+                }
+                else {
+                  val namespaces = Set(namespace)
+                  val url = new URL(Language.Mappings.apiUri)
+                  WikiSource.fromNamespaces(namespaces,url,Language.Mappings)
+                }
+              }
+              def mappings: Mappings = MappingsLoader.load(this)
+            }
+          } else {
+            // MappingsExtractor is not used
+            new SparkExtractionContext {
+              def ontology: Ontology = broadcastOntology.value
+              def language: Language = broadcastLanguage.value
+              def redirects: Redirects = broadcastRedirects.value
+              def disambiguations: Disambiguations = broadcastDisambiguations.value
+            }
           }
-          val localExtractor = CompositeParseExtractor.load(broadcastedExtractors.value, worker_context)
+          val localExtractor = CompositeParseExtractor.load(broadcastExtractors.value, worker_context)
           pages.map(page =>
-            SerializableUtils.extractQuadsFromPage(broadcastedNamespaces.value, localExtractor, page)
+            SerializableUtils.extractQuadsFromPage(broadcastNamespaces.value, localExtractor, page)
           )
         }).flatMap(identity)
 
@@ -164,12 +210,12 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           */
         failResults.mapPartitionsWithIndex(
           (partition, quads) => quads.flatMap(quad =>
-            broadcastedFormats.value.toSeq.flatMap(formats =>
+            broadcastFormats.value.toSeq.flatMap(formats =>
               Try{(Key(quad.dataset, formats._1, partition), formats._2.render(quad).trim)}.toOption
             )
           )
         ).saveAsHadoopFile(s"$dir/_temporary/", classOf[Key], classOf[String], classOf[CustomPartitionedOutputFormat], classOf[BZip2Codec])
-        concatOutputFiles(new File(s"$dir/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$latestDate-", broadcastedFormats.value.keys)
+        concatOutputFiles(new File(s"$dir/_temporary/"), s"${lang.wikiCode}${config.wikiName}-$latestDate-", broadcastFormats.value.keys)
       }
 
       //FIXME Extraction Monitor not working
@@ -181,7 +227,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
     }
     catch {
       case ex: Throwable =>
-        if (extractionRecorder.monitor != null) extractionRecorder.monitor.reportCrash(extractionRecorder, ex)
+//        if (extractionRecorder.monitor != null) extractionRecorder.monitor.reportCrash(extractionRecorder, ex)
         ex.printStackTrace()
         extractionRecorder.finalize()
     }

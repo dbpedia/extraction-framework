@@ -10,7 +10,7 @@ import scala.collection.mutable.HashSet
 
 /**
  */
-class Disambiguations(val set : Set[Long])
+class Disambiguations(val set : Set[Long]) extends java.io.Serializable
 {
   /**
    */

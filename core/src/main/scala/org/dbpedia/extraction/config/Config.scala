@@ -28,7 +28,7 @@ class Config(val configPath: String) extends
   if(configPath != null)
     this.putAll(ConfigUtils.loadConfig(configPath))
 
-  private val logger = Logger.getLogger(getClass.getName)
+  @transient private val logger = Logger.getLogger(getClass.getName)
   /**
     * load two config files:
     * 1. the universal config containing properties universal for a release
