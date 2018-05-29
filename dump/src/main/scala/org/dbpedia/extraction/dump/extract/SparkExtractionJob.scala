@@ -7,7 +7,6 @@ import org.apache.hadoop.io.compress.BZip2Codec
 import org.apache.hadoop.io.{LongWritable, NullWritable, Text}
 import org.apache.hadoop.mapred.lib.MultipleTextOutputFormat
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat
-import org.apache.log4j.{LogManager, Logger}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 import org.dbpedia.extraction.config.Config
@@ -44,8 +43,6 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
                          retryFailedPages: Boolean,
                          extractionRecorder: ExtractionRecorder[WikiPage]) {
 
-  val logger: Logger = LogManager.getRootLogger
-
   def run(spark: SparkSession, config: Config): Unit = {
     val sparkContext = spark.sparkContext
 
@@ -58,6 +55,9 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
       val broadcastDisambiguations = sparkContext.broadcast(context.disambiguations)
       val broadcastFormats = sparkContext.broadcast(config.formats)
       val broadcastExtractors = sparkContext.broadcast(extractors)
+
+      val mappingsString = scala.io.Source.fromFile(config.mappingsDir + "/" + Namespace.mappings(context.language).name(Language.Mappings).replace(' ','_')+".xml").mkString
+      val broadcastMappingsString = sparkContext.broadcast(mappingsString)
 
       //finding the source files
       val fileFinder = new Finder[File](config.dumpDir, context.language, config.wikiName)
@@ -105,16 +105,9 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
               def redirects: Redirects = broadcastRedirects.value
               def disambiguations: Disambiguations = broadcastDisambiguations.value
               def mappingPageSource: Traversable[WikiPage] = {
-                val namespace = Namespace.mappings(language)
-                if (config.mappingsDir != null && config.mappingsDir.isDirectory) {
-                  val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-                  XMLSource.fromFile(file, Language.Mappings)
-                }
-                else {
-                  val namespaces = Set(namespace)
-                  val url = new URL(Language.Mappings.apiUri)
-                  WikiSource.fromNamespaces(namespaces,url,Language.Mappings)
-                }
+                broadcastMappingsString.value.split("<page>")
+                  .map("<page>" + _)
+                  .flatMap(SerializableUtils.parseXMLToWikiPage(_, broadcastLanguage.value))
               }
               def mappings: Mappings = MappingsLoader.load(this)
             }
@@ -175,16 +168,9 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
               def redirects: Redirects = broadcastRedirects.value
               def disambiguations: Disambiguations = broadcastDisambiguations.value
               def mappingPageSource: Traversable[WikiPage] = {
-                val namespace = Namespace.mappings(language)
-                if (config.mappingsDir != null && config.mappingsDir.isDirectory) {
-                  val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-                  XMLSource.fromFile(file, Language.Mappings)
-                }
-                else {
-                  val namespaces = Set(namespace)
-                  val url = new URL(Language.Mappings.apiUri)
-                  WikiSource.fromNamespaces(namespaces,url,Language.Mappings)
-                }
+                broadcastMappingsString.value.split("<page>")
+                  .map("<page>" + _)
+                  .flatMap(SerializableUtils.parseXMLToWikiPage(_, broadcastLanguage.value))
               }
               def mappings: Mappings = MappingsLoader.load(this)
             }
@@ -251,7 +237,6 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
     val files = if (source.startsWith("@")) { // the articles source is a regex - we want to match multiple files
       finder.matchFiles(date, source.substring(1))
     } else List(finder.file(date, source)).collect{case Some(x) => x}
-    logger.info(s"Source is $source - ${files.size} file(s) matched")
     files
   }
 
