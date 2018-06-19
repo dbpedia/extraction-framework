@@ -30,8 +30,8 @@ class Root
             <table class="tablesorter table myTable" align="center" style="width:500px; margin:auto">
             <thead>
             <tr>
-              <th> Language</th>
-              <th> Action</th>
+              <th>Language</th>
+              <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -41,12 +41,12 @@ class Root
               for(lang <- Server.instance.managers.keys.toArray; code = lang.wikiCode) yield
               {
                 <tr>
-                <td> {code} </td>
+                <td>{code}</td>
                 <td>
-                <a href={"statistics/" + code + "/"}>Statistics </a> -
-                <a href={"mappings/" + code + "/"}>Mappings </a> -
-                <a href={"extraction/" + code + "/"}>Extractor </a> -
-                <a href={"ontology/labels/missing/" + code + "/"}>Missing labels </a>
+                <a href={"statistics/" + code + "/"}>Statistics</a> -
+                <a href={"mappings/" + code + "/"}>Mappings</a> -
+                <a href={"extraction/" + code + "/"}>Extractor</a> -
+                <a href={"ontology/labels/missing/" + code + "/"}>Missing labels</a>
                 </td>
                 </tr>
               }
@@ -77,8 +77,8 @@ class Root
     
     @GET @Path("extraction/") @Produces(Array("application/xhtml+xml"))
     def extraction = languageList("DBpedia Test Extractors", "Extractors", "Extractor for")
-
 }
+
 object ServerHeader {
   def getHeader(title:String, tableSorter : Boolean = false)={
     <head>

@@ -40,10 +40,10 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
-		<scala.version>2.11.4</scala.version>
+		<java.version>1.8</java.version>
+		<scala.version>2.11.12</scala.version>
 		<scalatest.scala.version>2.11</scalatest.scala.version>
-		<scalatest.version>2.2.1</scalatest.version>
+		<scalatest.version>3.0.5</scalatest.version>
 		<scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
 		<skipTests>true</skipTests>
 		<gpg.keyname>AKSW.GPG</gpg.keyname>
@@ -65,12 +65,12 @@
 				<plugin>
 					<groupId>net.alchim31.maven</groupId>
 					<artifactId>scala-maven-plugin</artifactId>
-					<version>3.2.0</version>
+					<version>3.4.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.1</version>
+					<version>3.7.0</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -162,6 +162,7 @@
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
 				<extensions>true</extensions>
 				<configuration>
 					<serverId>ossrh</serverId>
@@ -173,6 +174,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>

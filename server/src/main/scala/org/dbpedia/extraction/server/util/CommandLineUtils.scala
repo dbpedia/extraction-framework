@@ -18,7 +18,7 @@ object CommandLineUtils {
     * @param print
     * @return returns True if success, False otherwise
     */
-  def execute(command : String, print: Boolean = true) : Boolean = {
+  def execute(command: String, print: Boolean = true): Boolean = {
 
     try {
 
@@ -27,11 +27,11 @@ object CommandLineUtils {
       val is = pr.getInputStream
       val commandOutput = Source.fromInputStream(is).mkString
       pr.waitFor()
-      if(print) logger.info(commandOutput)
+      if (print) logger.info(commandOutput)
       true
 
     } catch {
-      case e : Exception => e.printStackTrace(); false
+      case e: Exception => e.printStackTrace(); false
     }
 
   }
