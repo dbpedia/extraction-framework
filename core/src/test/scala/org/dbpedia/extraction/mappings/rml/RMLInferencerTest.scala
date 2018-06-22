@@ -5,18 +5,14 @@ import java.nio.file.{Files, Paths}
 import org.dbpedia.extraction.mappings.rml.load.RMLInferencer
 import org.dbpedia.extraction.util.Language
 import org.scalatest.{FlatSpec, Matchers}
-import org.scalatest.matchers.ShouldMatchers
 
 /**
   * Created by wmaroy on 10.07.17.
   */
-class RMLInferencerTest extends FlatSpec with Matchers
-{
+class RMLInferencerTest extends FlatSpec with Matchers {
 
   "Execution " should " work for dirs that contain mappings" in {
-
     RMLInferencer.loadDir(Language("en"), "/home/wmaroy/github/leipzig/inferencing_test/")
-
   }
 
   "Execution " should " work for dumps" in {
@@ -31,7 +27,5 @@ class RMLInferencerTest extends FlatSpec with Matchers
       println("This is a function!")
     }
 
-
   }
-
 }

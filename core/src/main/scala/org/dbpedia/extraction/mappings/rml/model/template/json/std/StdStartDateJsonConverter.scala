@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings.rml.model.template.json.std
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
-import org.dbpedia.extraction.mappings.rml.model.template.{SimplePropertyTemplate, StartDateTemplate, Template}
 import org.dbpedia.extraction.mappings.rml.model.template.json.{JsonTemplate, TemplateJsonConverter}
+import org.dbpedia.extraction.mappings.rml.model.template.{StartDateTemplate, Template}
 
 /**
   * Created by wmaroy on 12.08.17.
@@ -19,7 +19,7 @@ class StdStartDateJsonConverter extends TemplateJsonConverter {
     val parameters = JsonNodeFactory.instance.objectNode()
     node.set("parameters", parameters)
 
-    val ontologyProperty = if(sdTemplate.ontologyProperty != null) {
+    val ontologyProperty = if (sdTemplate.ontologyProperty != null) {
       sdTemplate.ontologyProperty.uri
     } else null
     parameters.put("ontologyProperty", sdTemplate.ontologyProperty.uri)

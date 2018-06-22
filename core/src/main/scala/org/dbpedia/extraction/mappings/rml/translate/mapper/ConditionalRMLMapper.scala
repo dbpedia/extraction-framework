@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.mappings.rml.translate.mapper
 
 import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.mappings.rml.model.RMLTranslationModel
 import org.dbpedia.extraction.mappings.rml.model.factory.{WikiTextBundle, WikiTextTemplateFactory}
-import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
-import org.dbpedia.extraction.mappings.rml.model.{AbstractRMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
-import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, RdfNamespace}
+import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
+import org.dbpedia.extraction.ontology.RdfNamespace
 
 import scala.language.reflectiveCalls
 
@@ -32,7 +32,8 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     val count = rmlModel.count(RMLUri.CONDITIONALMAPPING)
     val counter = Counter(conditionals = count)
     val language = rmlModel.wikiTitle.language.isoCode
-    TemplateAssembler.assembleTemplate(rmlModel, template, language , counter)
+    TemplateAssembler.assembleTemplate(rmlModel, template, language, counter)
+
     /**
     val firstConditionMapping = mapping.cases.head
     val firstTemplateMapping = firstConditionMapping.mapping.asInstanceOf[TemplateMapping]
@@ -63,15 +64,13 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
 
     //continue recursively
     addCondition(1, mapToClassPom)
-      **/
-
+    **/
   }
 
   //recursively add conditions
-  def addCondition(index: Int, predicateObjectMap: RMLConditionalPredicateObjectMap) : Unit =
-  {
+  def addCondition(index: Int, predicateObjectMap: RMLConditionalPredicateObjectMap): Unit = {
 
-    if(index == mapping.cases.size) {
+    if (index == mapping.cases.size) {
       return
     }
 
@@ -83,19 +82,17 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     mapToClassPom.addPredicate(RMLUri(RdfNamespace.RDF.namespace + "type"))
     mapToClassPom.addObject(RMLUri(templateMapping.mapToClass.uri))
 
-    val conditionFunctionTermMap = if(index < mapping.cases.size-1) {
-       addEqualCondition(condition, mapToClassPom)
+    val conditionFunctionTermMap = if (index < mapping.cases.size - 1) {
+      addEqualCondition(condition, mapToClassPom)
     } else null
 
     val state = new MappingState
 
-    for(propertyMapping <- templateMapping.mappings)
-    {
+    for (propertyMapping <- templateMapping.mappings) {
       val pomList = rmlMapper.addIndependentMapping(propertyMapping, state)
-      for(pom <- pomList)
-      {
+      for (pom <- pomList) {
         val condPom = rmlFactory.transformToConditional(pom)
-        if(index < mapping.cases.size-1) {
+        if (index < mapping.cases.size - 1) {
           condPom.addEqualCondition(conditionFunctionTermMap)
         }
         mapToClassPom.addFallbackMap(condPom)
@@ -107,32 +104,28 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
 
   }
 
-  private def defineTriplesMap() =
-  {
+  private def defineTriplesMap() = {
     rmlModel.triplesMap.addDCTermsType(new RMLLiteral("conditionalMapping"))
     defineSubjectMap()
     defineLogicalSource()
   }
 
-  private def defineSubjectMap() =
-  {
+  private def defineSubjectMap() = {
     rmlModel.subjectMap.addTemplate(rmlModel.rmlFactory.createRMLLiteral("http://en.dbpedia.org/resource/{wikititle}"))
     rmlModel.subjectMap.addIRITermType()
   }
 
-  private def defineLogicalSource() =
-  {
+  private def defineLogicalSource() = {
     val source = "https://" + rmlModel.wikiTitle.language.isoCode + ".wikipedia.org/wiki/{wikititle}"
     rmlModel.logicalSource.addSource(rmlModel.rmlFactory.createRMLLiteral(source))
   }
 
 
-  def addDefaultMappings() =
-  {
+  def addDefaultMappings() = {
     val rmlMapper = new RMLModelMapper(rmlModel)
     val state = new MappingState
 
-    for(defaultMapping <- mapping.defaultMappings) {
+    for (defaultMapping <- mapping.defaultMappings) {
       rmlMapper.addMapping(defaultMapping, state)
     }
   }
@@ -144,8 +137,7 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     * @param pom
     * @return
     */
-  private def addEqualCondition(conditionMapping: ConditionMapping, pom: RMLConditionalPredicateObjectMap) : RMLFunctionTermMap =
-  {
+  private def addEqualCondition(conditionMapping: ConditionMapping, pom: RMLConditionalPredicateObjectMap): RMLFunctionTermMap = {
 
     val functionTermMapUri = pom.uri.extend("/FunctionTermMap")
     val functionTermMap = pom.addEqualCondition(functionTermMapUri)
@@ -158,14 +150,14 @@ class ConditionalRMLMapper(rmlModel: RMLTranslationModel, mapping: ConditionalMa
     executePom.addObject(RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator))
 
     // checks if this condition needs a value or not
-    if(conditionMapping.value != null) {
+    if (conditionMapping.value != null) {
       val paramValuePom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/ValueParameterPOM"))
-      paramValuePom.addPredicate(RMLUri(RdfNamespace.DBF.namespace  + conditionMapping.operator + "/" + DbfFunction.operatorFunction.valueParameter))
+      paramValuePom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator + "/" + DbfFunction.operatorFunction.valueParameter))
       paramValuePom.addObject(new RMLLiteral(conditionMapping.value))
     }
 
     // checks if this condition needs a property or not
-    if(conditionMapping.templateProperty != null) {
+    if (conditionMapping.templateProperty != null) {
       val paramPropertyPom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/PropertyParameterPOM"))
       paramPropertyPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator + "/" + DbfFunction.operatorFunction.propertyParameter))
       paramPropertyPom.addObjectMap(paramPropertyPom.uri.extend("/ObjectMap")).addRMLReference(new RMLLiteral(conditionMapping.templateProperty))

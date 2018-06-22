@@ -10,6 +10,6 @@ import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
   */
 trait Formatter {
 
-  def format(model : AbstractRMLModel, base : String) : String
+  def format(model: AbstractRMLModel, base: String): String
 
 }

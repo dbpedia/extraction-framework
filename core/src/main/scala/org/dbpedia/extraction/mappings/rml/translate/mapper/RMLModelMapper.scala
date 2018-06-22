@@ -1,9 +1,8 @@
 package org.dbpedia.extraction.mappings.rml.translate.mapper
 
+import org.dbpedia.extraction.mappings.rml.model.RMLTranslationModel
 import org.dbpedia.extraction.mappings.rml.model.factory.{WikiTextBundle, WikiTextTemplateFactory}
-import org.dbpedia.extraction.mappings.rml.model.{AbstractRMLModel, RMLTranslationModel}
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
-import org.dbpedia.extraction.mappings.rml.model.template.GeocoordinateTemplate
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
@@ -13,10 +12,9 @@ import org.dbpedia.extraction.wikiparser.TemplateNode
   * Class that adds rml mappings to a ModelWrapper
   */
 class RMLModelMapper(rmlModel: RMLTranslationModel) {
-  
-  
-  def  addMappingToTriplesMap(mapping: Extractor[TemplateNode], triplesMap: RMLTriplesMap) =
-  {
+
+
+  def addMappingToTriplesMap(mapping: Extractor[TemplateNode], triplesMap: RMLTriplesMap) = {
     mapping.getClass.getSimpleName match {
       case "SimplePropertyMapping" => addSimplePropertyMappingToTriplesMap(mapping.asInstanceOf[SimplePropertyMapping], triplesMap)
       case "CalculateMapping" => println("Intermediate Calculate Mapping not supported.")
@@ -26,9 +24,8 @@ class RMLModelMapper(rmlModel: RMLTranslationModel) {
       case "ConstantMapping" => addConstantMappingToTriplesMap(mapping.asInstanceOf[ConstantMapping], triplesMap)
     }
   }
-  
-  def addMapping(mapping: Extractor[TemplateNode], state : MappingState) : List[RMLPredicateObjectMap] =
-  {
+
+  def addMapping(mapping: Extractor[TemplateNode], state: MappingState): List[RMLPredicateObjectMap] = {
     val language = rmlModel.wikiTitle.language.isoCode
 
     mapping.getClass.getSimpleName match {
@@ -90,8 +87,7 @@ class RMLModelMapper(rmlModel: RMLTranslationModel) {
   /**
     * Create mapping that is not linked yet to a triples map
     */
-  def addIndependentMapping(mapping: Extractor[TemplateNode], state : MappingState) : List[RMLPredicateObjectMap] =
-  {
+  def addIndependentMapping(mapping: Extractor[TemplateNode], state: MappingState): List[RMLPredicateObjectMap] = {
     mapping.getClass.getSimpleName match {
       case "SimplePropertyMapping" => addIndependentSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
       case "CalculateMapping" => addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
@@ -103,112 +99,92 @@ class RMLModelMapper(rmlModel: RMLTranslationModel) {
     }
   }
 
-  def addTemplateMapping(mapping: TemplateMapping) =
-  {
+  def addTemplateMapping(mapping: TemplateMapping) = {
     new TemplateRMLMapper(rmlModel, mapping).mapToModel()
   }
 
-  def addConditionalMapping(mapping: ConditionalMapping) : Unit =
-  {
+  def addConditionalMapping(mapping: ConditionalMapping): Unit = {
     new ConditionalRMLMapper(rmlModel, mapping).mapToModel()
   }
 
 
-  def addSimplePropertyMapping(mapping: SimplePropertyMapping) : List[RMLPredicateObjectMap] =
-  {
+  def addSimplePropertyMapping(mapping: SimplePropertyMapping): List[RMLPredicateObjectMap] = {
     new SimplePropertyRMLMapper(rmlModel, mapping).mapToModel()
   }
 
-  def addSimplePropertyMappingToTriplesMap(mapping: SimplePropertyMapping, triplesMap: RMLTriplesMap) =
-  {
+  def addSimplePropertyMappingToTriplesMap(mapping: SimplePropertyMapping, triplesMap: RMLTriplesMap) = {
     new SimplePropertyRMLMapper(rmlModel, mapping)
-      .addSimplePropertyMappingToTriplesMap(rmlModel.wikiTitle.resourceIri,triplesMap)
+      .addSimplePropertyMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
   }
 
-  def addIndependentSimplePropertyMapping(mapping: SimplePropertyMapping) : List[RMLPredicateObjectMap] =
-  {
+  def addIndependentSimplePropertyMapping(mapping: SimplePropertyMapping): List[RMLPredicateObjectMap] = {
     new SimplePropertyRMLMapper(rmlModel, mapping).addIndependentSimplePropertyMapper()
   }
 
-  def addCalculateMapping(mapping: CalculateMapping) : List[RMLPredicateObjectMap] =
-  {
+  def addCalculateMapping(mapping: CalculateMapping): List[RMLPredicateObjectMap] = {
     //TODO: implement
     println("Calculate Mappings not supported")
     null
   }
 
 
-  def addCombineDateMapping(mapping: CombineDateMapping) : List[RMLPredicateObjectMap] =
-  {
+  def addCombineDateMapping(mapping: CombineDateMapping): List[RMLPredicateObjectMap] = {
     //TODO: implement
     println("Combine Date Mappings not supported")
     null
   }
 
 
-  def addDateIntervalMapping(mapping: DateIntervalMapping) : List[RMLPredicateObjectMap]  =
-  {
+  def addDateIntervalMapping(mapping: DateIntervalMapping): List[RMLPredicateObjectMap] = {
     new DateIntervalRMLMapper(rmlModel, mapping).mapToModel()
   }
 
-  def addDateIntervalMappingToTriplesMap(mapping: DateIntervalMapping, triplesMap: RMLTriplesMap) =
-  {
+  def addDateIntervalMappingToTriplesMap(mapping: DateIntervalMapping, triplesMap: RMLTriplesMap) = {
     new DateIntervalRMLMapper(rmlModel, mapping)
       .addDateIntervalMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
   }
 
-  def addIndependentDateIntervalMapping(mapping: DateIntervalMapping) : List[RMLPredicateObjectMap] =
-  {
+  def addIndependentDateIntervalMapping(mapping: DateIntervalMapping): List[RMLPredicateObjectMap] = {
     new DateIntervalRMLMapper(rmlModel, mapping).addIndependentDateIntervalMapping()
   }
 
 
-  def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) : List[RMLPredicateObjectMap] =
-  {
+  def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping): List[RMLPredicateObjectMap] = {
     new GeoCoordinatesRMLMapper(rmlModel, mapping).mapToModel()
   }
 
-  def addGeoCoordinatesMappingToTriplesMap(mapping: GeoCoordinatesMapping, triplesMap: RMLTriplesMap) =
-  {
+  def addGeoCoordinatesMappingToTriplesMap(mapping: GeoCoordinatesMapping, triplesMap: RMLTriplesMap) = {
     new GeoCoordinatesRMLMapper(rmlModel, mapping)
       .addGeoCoordinatesMappingToTriplesMap(triplesMap)
   }
 
-  def addIndependentGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) : List[RMLPredicateObjectMap] =
-  {
+  def addIndependentGeoCoordinatesMapping(mapping: GeoCoordinatesMapping): List[RMLPredicateObjectMap] = {
     new GeoCoordinatesRMLMapper(rmlModel, mapping).addIndependentGeoCoordinatesMapping()
   }
 
 
-  def addIntermediateNodeMapping(mapping: IntermediateNodeMapping, state: MappingState) : List[RMLPredicateObjectMap] =
-  {
-    new IntermediateNodeMapper(rmlModel, mapping, state : MappingState).mapToModel()
+  def addIntermediateNodeMapping(mapping: IntermediateNodeMapping, state: MappingState): List[RMLPredicateObjectMap] = {
+    new IntermediateNodeMapper(rmlModel, mapping, state: MappingState).mapToModel()
   }
 
-  def addIndependentIntermediateNodeMapping(mapping: IntermediateNodeMapping, state : MappingState) : List[RMLPredicateObjectMap] =
-  {
+  def addIndependentIntermediateNodeMapping(mapping: IntermediateNodeMapping, state: MappingState): List[RMLPredicateObjectMap] = {
     new IntermediateNodeMapper(rmlModel, mapping, state).addIndependentIntermediateNodeMapping()
   }
 
 
-  def addConstantMapping(mapping: ConstantMapping) : List[RMLPredicateObjectMap] =
-  {
+  def addConstantMapping(mapping: ConstantMapping): List[RMLPredicateObjectMap] = {
     new ConstantRMLMapper(rmlModel, mapping).mapToModel()
   }
 
-  def addConstantMappingToTriplesMap(mapping: ConstantMapping, triplesMap: RMLTriplesMap) =
-  {
+  def addConstantMappingToTriplesMap(mapping: ConstantMapping, triplesMap: RMLTriplesMap) = {
     new ConstantRMLMapper(rmlModel, mapping)
-        .addConstantMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
+      .addConstantMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
   }
 
-  def addIndependentConstantMapping(mapping: ConstantMapping) : List[RMLPredicateObjectMap] =
-  {
+  def addIndependentConstantMapping(mapping: ConstantMapping): List[RMLPredicateObjectMap] = {
     new ConstantRMLMapper(rmlModel, mapping)
-        .addIndependentConstantMapping(rmlModel.wikiTitle.resourceIri)
+      .addIndependentConstantMapping(rmlModel.wikiTitle.resourceIri)
   }
-
-
 
 
 }

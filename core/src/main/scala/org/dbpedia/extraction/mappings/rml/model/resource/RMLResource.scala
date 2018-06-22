@@ -26,24 +26,24 @@ class RMLResource(val resource: Resource) {
     this
   }
 
-  def addRMLResource(predicate: String, rmlResource: RMLResource) : RMLResource = {
+  def addRMLResource(predicate: String, rmlResource: RMLResource): RMLResource = {
     resource.addProperty(createProperty(predicate), rmlResource.resource)
     this
   }
 
-  def addRdfsComment(comment : String) = {
+  def addRdfsComment(comment: String) = {
     resource.addProperty(createProperty(RdfNamespace.RDFS.namespace + "comment"), comment)
   }
 
-  def addRdfsLabel(label : String) = {
+  def addRdfsLabel(label: String) = {
     resource.addProperty(createProperty(RdfNamespace.RDFS.namespace + "label"), label)
   }
 
-  protected def createProperty(property: String) : Property = {
+  protected def createProperty(property: String): Property = {
     model.createProperty(property)
   }
 
-  protected def createProperty(property: String, _type: String) : Property = {
+  protected def createProperty(property: String, _type: String): Property = {
     model.createProperty(property, _type)
   }
 

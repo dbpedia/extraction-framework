@@ -15,99 +15,97 @@ object RMLOntologyUtil {
   // "class" is the rml value
   private final val mapToClass: String = "class"
 
-  def loadMapToClassOntology(triplesMap: TriplesMap, context: {def ontology : Ontology}): OntologyClass =
-  {
-      loadTriplesMapOntologyClass(triplesMap, mapToClass, context)
+  def loadMapToClassOntology(triplesMap: TriplesMap, context: {def ontology: Ontology}): OntologyClass = {
+    loadTriplesMapOntologyClass(triplesMap, mapToClass, context)
   }
 
-  def loadMapToClassOntologyViaType(predicateObjectMap: PredicateObjectMap, context: {def ontology : Ontology}): OntologyClass =
-  {
-      val oms = predicateObjectMap.getObjectMaps
-      val om = oms.iterator().next()
-      val ontologyClassName = om.getConstantValue.stringValue().replace("http://dbpedia.org/ontology/", "")
-      loadOntologyClass(ontologyClassName, context)
+  def loadMapToClassOntologyViaType(predicateObjectMap: PredicateObjectMap, context: {def ontology: Ontology}): OntologyClass = {
+    val oms = predicateObjectMap.getObjectMaps
+    val om = oms.iterator().next()
+    val ontologyClassName = om.getConstantValue.stringValue().replace("http://dbpedia.org/ontology/", "")
+    loadOntologyClass(ontologyClassName, context)
   }
 
-  def loadCorrespondingPropertyOntology(triplesMap: TriplesMap, context: {def ontology : Ontology}): OntologyProperty = {
-      null //TODO: ? not defined in the rml mappings
+  def loadCorrespondingPropertyOntology(triplesMap: TriplesMap, context: {def ontology: Ontology}): OntologyProperty = {
+    null //TODO: ? not defined in the rml mappings
   }
 
-  def loadCorrespondingClassOntology(triplesMap: TriplesMap, context: {def ontology : Ontology}): OntologyClass = {
-      null //TODO: ? not defined in the rml mappings
+  def loadCorrespondingClassOntology(triplesMap: TriplesMap, context: {def ontology: Ontology}): OntologyClass = {
+    null //TODO: ? not defined in the rml mappings
   }
 
-  def loadOntologyClass(ontologyClassName : String, context: {def ontology: Ontology}): OntologyClass = {
-      try {
-        context.ontology.classes(ontologyClassName)
-      } catch {
-        case _: NoSuchElementException => throw new IllegalArgumentException("Ontology class not found: " + ontologyClassName)
-      }
+  def loadOntologyClass(ontologyClassName: String, context: {def ontology: Ontology}): OntologyClass = {
+    try {
+      context.ontology.classes(ontologyClassName)
+    } catch {
+      case _: NoSuchElementException => throw new IllegalArgumentException("Ontology class not found: " + ontologyClassName)
+    }
   }
 
   def loadOntologyProperty(ontologyPropertyName: String, context: {def ontology: Ontology}): OntologyProperty = {
-      try {
-        context.ontology.properties(ontologyPropertyName)
-      } catch {
-        case _ : NoSuchElementException => throw new IllegalArgumentException("Ontology property not found: " + ontologyPropertyName)
-      }
+    try {
+      context.ontology.properties(ontologyPropertyName)
+    } catch {
+      case _: NoSuchElementException => throw new IllegalArgumentException("Ontology property not found: " + ontologyPropertyName)
+    }
   }
 
   def loadOntologyDataType(ontologyDataTypeName: String, context: {def ontology: Ontology}): Datatype = {
     try {
       context.ontology.datatypes(ontologyDataTypeName)
     } catch {
-      case _ : NoSuchElementException => throw new IllegalArgumentException("Ontology datatype not found: " + ontologyDataTypeName)
+      case _: NoSuchElementException => throw new IllegalArgumentException("Ontology datatype not found: " + ontologyDataTypeName)
     }
   }
 
-  def loadOntologyPropertyFromIRI(ontologyIRI : String, context : {def ontology: Ontology}): OntologyProperty = {
-      val pattern = "(.*[/#])([^/#]+)".r
-      val pattern(namespace, localname) = ontologyIRI
-      val prefix = getPrefix(namespace)
-      val localOntologyPropertyName = if(prefix != "dbo") {
-        prefix + ":" + localname
-      } else localname
-      try {
-        loadOntologyProperty(localOntologyPropertyName, context)
-      } catch {
-        case _ : IllegalArgumentException => println("Skipping Ontology Property: " + localOntologyPropertyName); null
-      }
-  }
-
-  def loadOntologyClassFromIRI(ontologyIRI : String, context : {def ontology: Ontology}): OntologyClass = {
+  def loadOntologyPropertyFromIRI(ontologyIRI: String, context: {def ontology: Ontology}): OntologyProperty = {
     val pattern = "(.*[/#])([^/#]+)".r
     val pattern(namespace, localname) = ontologyIRI
     val prefix = getPrefix(namespace)
-    val localOntologyClassName = if(prefix != "dbo") {
+    val localOntologyPropertyName = if (prefix != "dbo") {
+      prefix + ":" + localname
+    } else localname
+    try {
+      loadOntologyProperty(localOntologyPropertyName, context)
+    } catch {
+      case _: IllegalArgumentException => println("Skipping Ontology Property: " + localOntologyPropertyName); null
+    }
+  }
+
+  def loadOntologyClassFromIRI(ontologyIRI: String, context: {def ontology: Ontology}): OntologyClass = {
+    val pattern = "(.*[/#])([^/#]+)".r
+    val pattern(namespace, localname) = ontologyIRI
+    val prefix = getPrefix(namespace)
+    val localOntologyClassName = if (prefix != "dbo") {
       prefix + ":" + localname
     } else localname
     try {
       loadOntologyClass(localOntologyClassName, context)
     } catch {
-      case _ : IllegalArgumentException => println("Skipping Ontology Property: " + localOntologyClassName); null
+      case _: IllegalArgumentException => println("Skipping Ontology Property: " + localOntologyClassName); null
     }
   }
 
-  def loadOntologyDataTypeFromIRI(ontologyIRI : String, context : { def ontology : Ontology}) : Datatype = {
+  def loadOntologyDataTypeFromIRI(ontologyIRI: String, context: {def ontology: Ontology}): Datatype = {
     val pattern = "(.*[/#])([^/#]+)".r
     val pattern(namespace, localname) = ontologyIRI
     val prefix = getPrefix(namespace)
-    val localOntologyDataTypeName = if(prefix != "dbo") {
+    val localOntologyDataTypeName = if (prefix != "dbo") {
       prefix + ":" + localname
     } else localname
-      loadOntologyDataType(localOntologyDataTypeName, context)
+    loadOntologyDataType(localOntologyDataTypeName, context)
   }
 
 
-  private def loadTriplesMapOntologyClass(triplesMap: TriplesMap, ontologyType : String, context: {def ontology : Ontology}): OntologyClass = {
-      val ontologyClassName = loadTriplesMapOntologyClassName(triplesMap)
-      loadOntologyClass(ontologyClassName, context)
+  private def loadTriplesMapOntologyClass(triplesMap: TriplesMap, ontologyType: String, context: {def ontology: Ontology}): OntologyClass = {
+    val ontologyClassName = loadTriplesMapOntologyClassName(triplesMap)
+    loadOntologyClass(ontologyClassName, context)
   }
 
   private def loadTriplesMapOntologyClassName(triplesMap: TriplesMap): String = {
     val namespace = triplesMap.getSubjectMap.getClassIRIs.toArray.head.asInstanceOf[IRI].getNamespace
     val localName = triplesMap.getSubjectMap.getClassIRIs.toArray.head.asInstanceOf[IRI].getLocalName
-    if(namespace != "http://dbpedia.org/ontology/") {
+    if (namespace != "http://dbpedia.org/ontology/") {
       val prefix = getPrefix(namespace)
       prefix + ":" + localName
     } else {
@@ -116,9 +114,9 @@ object RMLOntologyUtil {
   }
 
   //get prefix from namespace string
-  private def getPrefix(namespace: String) : String = {
-    for(key <- RdfNamespace.prefixMap.keySet) {
-      if(RdfNamespace.prefixMap(key).namespace == namespace) {
+  private def getPrefix(namespace: String): String = {
+    for (key <- RdfNamespace.prefixMap.keySet) {
+      if (RdfNamespace.prefixMap(key).namespace == namespace) {
         return key
       }
     }

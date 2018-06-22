@@ -3,13 +3,13 @@ package org.dbpedia.extraction.mappings.rml.model.template.analyzing
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLFunctionTermMap, RMLPredicateObjectMap, RMLUri}
-import org.dbpedia.extraction.mappings.rml.model.template.{EndDateTemplate, StartDateTemplate, Template}
+import org.dbpedia.extraction.mappings.rml.model.template.{EndDateTemplate, Template}
 import org.dbpedia.extraction.ontology.{Ontology, RdfNamespace}
 
 /**
   * Created by wmaroy on 11.08.17.
   */
-class EndDateTemplateAnalyzer(ontology : Ontology) extends AbstractTemplateAnalyzer(ontology) {
+class EndDateTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateAnalyzer(ontology) {
 
   val logger = Logger.getGlobal
 

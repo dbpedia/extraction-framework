@@ -10,23 +10,23 @@ import org.dbpedia.extraction.ontology.OntologyClass
   * @param ontologyClass
   * @param fallback
   */
-case class ConditionalTemplate(condition : Condition, templates : Seq[Template], ontologyClass: OntologyClass, fallback : ConditionalTemplate) extends Template(ConditionalTemplate.NAME) {
+case class ConditionalTemplate(condition: Condition, templates: Seq[Template], ontologyClass: OntologyClass, fallback: ConditionalTemplate) extends Template(ConditionalTemplate.NAME) {
 
-  def hasFallback : Boolean = {
+  def hasFallback: Boolean = {
     fallback != null
   }
 
-  def hasCondition : Boolean = {
+  def hasCondition: Boolean = {
     condition != null
   }
 
-  def hasClass : Boolean = {
+  def hasClass: Boolean = {
     ontologyClass != null
   }
 
 }
 
-class Condition(val operator: String, val property : String, val value : String)
+class Condition(val operator: String, val property: String, val value: String)
 
 case class IsSetCondition(override val property: String) extends Condition(Condition.ISSET, property, null)
 
@@ -43,10 +43,10 @@ object Condition {
   val OTHERWISE = "Otherwise"
   val ISSET = "IsSet"
   val ILLEGALARGUMENTMSG = "Condition operator cannot be found. Please select one of the following: " +
-                             Condition.OTHERWISE + ", " +
-                             Condition.CONTAINS + ", " +
-                             Condition.EQUALS + ", " +
-                             Condition.ISSET
+    Condition.OTHERWISE + ", " +
+    Condition.CONTAINS + ", " +
+    Condition.EQUALS + ", " +
+    Condition.ISSET
 }
 
 object ConditionalTemplate {

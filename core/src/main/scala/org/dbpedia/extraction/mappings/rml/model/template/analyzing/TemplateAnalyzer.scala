@@ -8,6 +8,6 @@ import org.dbpedia.extraction.mappings.rml.model.template.Template
   */
 trait TemplateAnalyzer {
 
-  def apply(pom : RMLPredicateObjectMap) : Template
+  def apply(pom: RMLPredicateObjectMap): Template
 
 }

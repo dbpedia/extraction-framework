@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.destinations.formatters.RDFJSONFormatter
+
 import scala.collection.Seq
-import util.Sorting
 import org.dbpedia.extraction.live.storage.JSONCache
 import org.dbpedia.extraction.util.StringUtils
+
+import scala.util.Sorting
 
 /**
  * Checks with the JSONCache to find the diffs per extractor, it feeds the output to the @pipe LiveDestination

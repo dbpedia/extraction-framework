@@ -7,6 +7,6 @@ import org.dbpedia.extraction.mappings.rml.model.template.Template
   */
 trait TemplateJsonConverter {
 
-  def apply(template : Template) : JsonTemplate
+  def apply(template: Template): JsonTemplate
 
 }

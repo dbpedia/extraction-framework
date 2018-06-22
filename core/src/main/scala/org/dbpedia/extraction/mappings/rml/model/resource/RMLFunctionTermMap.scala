@@ -11,14 +11,13 @@ class RMLFunctionTermMap(resource: Resource) extends RMLObjectMap(resource) {
 
   lazy val functionValue = getFunctionValue
 
-  def addFunctionValue(uri: RMLUri) : RMLTriplesMap =
-  {
+  def addFunctionValue(uri: RMLUri): RMLTriplesMap = {
     val functionValue = factory.createRMLTriplesMap(uri)
     resource.addProperty(createProperty(RdfNamespace.FNML.namespace + "functionValue"), functionValue.resource)
     functionValue
   }
 
-  def getFunction : Function = {
+  def getFunction: Function = {
 
     try {
       // retrieve all objects and tuple them by reference and constant
@@ -31,26 +30,26 @@ class RMLFunctionTermMap(resource: Resource) extends RMLObjectMap(resource) {
       })
 
 
-    // group the tuples by ._1 and convert the resulting ._2 list to a map
-    val grouped = objects.groupBy(_._1).mapValues(_.map(_._2))
-    val map = grouped.map(entry => {
-      entry._1 -> entry._2.toMap
-    })
+      // group the tuples by ._1 and convert the resulting ._2 list to a map
+      val grouped = objects.groupBy(_._1).mapValues(_.map(_._2))
+      val map = grouped.map(entry => {
+        entry._1 -> entry._2.toMap
+      })
 
-    // create the function
-    val name = map("constants")(Property.EXECUTES)
-    val constants = map("constants") - Property.EXECUTES
-    val references = map.getOrElse("references", Map()) // this can be empty
+      // create the function
+      val name = map("constants")(Property.EXECUTES)
+      val constants = map("constants") - Property.EXECUTES
+      val references = map.getOrElse("references", Map()) // this can be empty
 
-    val function = Function(name, references, constants)
-    function
+      val function = Function(name, references, constants)
+      function
 
     } catch {
       case e: Exception => throw new IllegalArgumentException("Can't extract function from " + resource.getURI + ", maybe the mapping is missing the function definition.")
     }
   }
 
-  def getFunctionValue : RMLTriplesMap = {
+  def getFunctionValue: RMLTriplesMap = {
     val stmnt = resource.listProperties(createProperty(Property.FUNCTIONVALUE)).nextStatement()
     val fvResource = stmnt.getObject.asResource()
     RMLTriplesMap(fvResource)
@@ -59,7 +58,7 @@ class RMLFunctionTermMap(resource: Resource) extends RMLObjectMap(resource) {
 
 }
 
-case class Function(name : String, references : Map[String, String], constants : Map[String, String])
+case class Function(name: String, references: Map[String, String], constants: Map[String, String])
 
 object RMLFunctionTermMap {
 

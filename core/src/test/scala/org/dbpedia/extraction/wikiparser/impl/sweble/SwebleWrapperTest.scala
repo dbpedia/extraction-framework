@@ -2,20 +2,21 @@ package org.dbpedia.extraction.wikiparser.impl.sweble
 
 
 import java.util
+import java.util.Collection
+
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
-import org.junit.Test
-import java.util.Collection
 import org.dbpedia.extraction.wikiparser.impl.WikiParserWrapper
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import org.junit.Assert._
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
-import org.junit.Assert._
 
 
 @RunWith(value = classOf[Parameterized])
-class SwebleWrapperTest (body : String) {
+class SwebleWrapperTest(body: String) {
   // Test if the formula equals its parsed and pretty-printed self
   @Test def test() = {
     val swebleWikiParser = new WikiParserWrapper("sweble")

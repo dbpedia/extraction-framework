@@ -13,15 +13,17 @@
     <groupId>org.dbpedia.extraction</groupId>
     <artifactId>core</artifactId>
     <name>DBpedia Core Libraries</name>
+
     <build>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
             </resource>
         </resources>
-        <plugins>
-            <plugin>
 
+        <plugins>
+
+            <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
 
@@ -30,19 +32,19 @@
                         <id>attach-docs-sources</id>
                         <goals>
                             <goal>add-source</goal>
-                            <goal>doc-jar</goal>
+                            <!-- <goal>doc-jar</goal> -->
                         </goals>
                     </execution>
                 </executions>
 
                 <configuration>
                     <launchers>
-                    
+
                         <launcher>
                             <id>download-ontology</id>
                             <mainClass>org.dbpedia.extraction.util.OntologyDownloader</mainClass>
                             <args>
-                                <arg>../ontology.xml</arg> 
+                                <arg>../ontology.xml</arg>
                                 <arg>../ontology.owl</arg>
                                 <arg>${project.version}</arg>
                             </args>
@@ -52,7 +54,7 @@
                             <id>download-mappings</id>
                             <mainClass>org.dbpedia.extraction.util.MappingsDownloader</mainClass>
                             <args>
-                                <arg>../mappings</arg> 
+                                <arg>../mappings</arg>
                             </args>
                         </launcher>
 
@@ -67,12 +69,13 @@
 
                     </launchers>
                 </configuration>
-
             </plugin>
+
         </plugins>
     </build>
 
     <dependencies>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
@@ -91,10 +94,10 @@
         </dependency>
 
         <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.8.2</version>
-          <scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -102,6 +105,7 @@
             <artifactId>swc-engine</artifactId>
             <version>2.1.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.sweble.wom3</groupId>
             <artifactId>sweble-wom3</artifactId>
@@ -109,19 +113,17 @@
             <type>pom</type>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.wikidata.wdtk</groupId>
+            <artifactId>wdtk-dumpfiles</artifactId>
+            <version>0.7.0</version>
+        </dependency>
 
         <dependency>
-		<groupId>org.wikidata.wdtk</groupId>
-		<artifactId>wdtk-dumpfiles</artifactId>
-		<version>0.7.0</version>
-	 </dependency>	
-	 
-	 <dependency>
-              <groupId>org.wikidata.wdtk</groupId>
-              <artifactId>wdtk-datamodel</artifactId>
-              <version>0.7.0</version>
-         </dependency>
+            <groupId>org.wikidata.wdtk</groupId>
+            <artifactId>wdtk-datamodel</artifactId>
+            <version>0.7.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -139,7 +141,7 @@
             <version>2.5.0</version>
         </dependency>
 
-		<dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-scala_2.11</artifactId>
             <version>2.5.0</version>
@@ -149,7 +151,7 @@
             <groupId>org.apache.jena</groupId>
             <artifactId>apache-jena-libs</artifactId>
             <type>pom</type>
-            <version>3.1.0</version>
+            <version>3.4.0</version>
         </dependency>
 
         <!-- This is temporary installed in local repo -->
@@ -159,10 +161,6 @@
             <version>1.1</version>
         </dependency>
 
-
     </dependencies>
 
-
-
 </project>
-

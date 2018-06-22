@@ -3,16 +3,16 @@ package org.dbpedia.extraction.mappings.rml.model.template
 /**
   * Created by wmaroy on 11.08.17.
   */
-case class LatitudeTemplate(coordinates : String,
-                            latitude : String,
-                            degrees : String,
+case class LatitudeTemplate(coordinates: String,
+                            latitude: String,
+                            degrees: String,
                             minutes: String,
-                            seconds : String,
-                            direction: String) extends Template(LatitudeTemplate.NAME){
+                            seconds: String,
+                            direction: String) extends Template(LatitudeTemplate.NAME) {
 
-  val kind = if(coordinates != null) {
+  val kind = if (coordinates != null) {
     LatitudeTemplate.TYPE_1
-  } else if(latitude != null) {
+  } else if (latitude != null) {
     LatitudeTemplate.TYPE_2
   } else {
     LatitudeTemplate.TYPE_3

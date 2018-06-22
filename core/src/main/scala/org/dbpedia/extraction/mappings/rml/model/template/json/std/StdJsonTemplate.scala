@@ -8,9 +8,9 @@ import org.dbpedia.extraction.mappings.rml.model.template.json.JsonTemplate
   */
 class StdJsonTemplate(_node: JsonNode) extends JsonTemplate {
 
-  def node : JsonNode = _node
+  def node: JsonNode = _node
 
-  override def toString : String = {
+  override def toString: String = {
     _node.toString
   }
 

@@ -7,9 +7,9 @@ import java.io.InputStream
   */
 object Resources {
 
-  def getAsString(resourcePath : String) : String = {
-    val stream : InputStream = getClass.getResourceAsStream(resourcePath)
-    val string = scala.io.Source.fromInputStream( stream ).getLines.mkString("\n")
+  def getAsString(resourcePath: String): String = {
+    val stream: InputStream = getClass.getResourceAsStream(resourcePath)
+    val string = scala.io.Source.fromInputStream(stream).getLines.mkString("\n")
     string
   }
 

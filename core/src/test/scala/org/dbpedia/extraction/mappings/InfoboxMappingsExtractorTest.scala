@@ -2,17 +2,15 @@ package org.dbpedia.extraction.mappings
 
 import java.io.File
 
-import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.ontology.{OntologyProperty, Ontology}
-import org.scalatest.{PrivateMethodTester, FlatSpec}
-import org.scalatest.Matchers
+import org.dbpedia.extraction.sources.{WikiPage, XMLSource}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.{WikiParser, WikiTitle}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import scala.collection.mutable.{Set => MutableSet, HashSet}
-import org.dbpedia.extraction.sources.{XMLSource, WikiPage, MemorySource}
-import org.dbpedia.extraction.wikiparser.{WikiParser, Namespace, WikiTitle}
-import org.dbpedia.extraction.util.Language
+import org.scalatest.{FlatSpec, Matchers, PrivateMethodTester}
+
+import scala.language.reflectiveCalls
 
 /**
   *
@@ -26,33 +24,33 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
 
     val parsed = parse(
       """{{YM
-            | |status                                 =
-            | |azərbaycan dilində adı       = Telqte
-            | |orijinal adı                          = Telgte
-            | |ölkə                                    = {{#property:P17}}
-            | |şəkil                                    ={{#property:P18}}
-            | |gerb                                    = {{#property:P94}}
-            | |bayraq                                = {{#property:P41}}
-            | |bayraq yazısı                      =
-            |  |lat_dir =N |lat_deg =51 |lat_min =58 |lat_sec =55
-            |  |lon_dir =E |lon_deg =7 |lon_min =47 |lon_sec = 8
-            | |ölkə xəritəsi                        = <!-- alternativ, eyni koordinatlı diyarlar -->
-            | |statuslu                             =
-            | |sahəsi                               = 90.6
-            | |əhalisi                              = 19522
-            | |saat qurşağı                    = +1
-            | |telefon kodu                    = {{#property:P473}}
-            | |nəqliyyat kodu                 = {{#property:P395}}
-            | |sayt                                 = {{#property:P856}}
-            | |saytın dili                         = de
-            |}}
-            |""", "TestPage", lang, "#property")
+        | |status                                 =
+        | |azərbaycan dilində adı       = Telqte
+        | |orijinal adı                          = Telgte
+        | |ölkə                                    = {{#property:P17}}
+        | |şəkil                                    ={{#property:P18}}
+        | |gerb                                    = {{#property:P94}}
+        | |bayraq                                = {{#property:P41}}
+        | |bayraq yazısı                      =
+        |  |lat_dir =N |lat_deg =51 |lat_min =58 |lat_sec =55
+        |  |lon_dir =E |lon_deg =7 |lon_min =47 |lon_sec = 8
+        | |ölkə xəritəsi                        = <!-- alternativ, eyni koordinatlı diyarlar -->
+        | |statuslu                             =
+        | |sahəsi                               = 90.6
+        | |əhalisi                              = 19522
+        | |saat qurşağı                    = +1
+        | |telefon kodu                    = {{#property:P473}}
+        | |nəqliyyat kodu                 = {{#property:P395}}
+        | |sayt                                 = {{#property:P856}}
+        | |saytın dili                         = de
+        |}}
+        |""", "TestPage", lang, "#property")
 
 
-      val answer = List(("YM", "ölkə", "P17"),(("YM"), "şəkil","P18"),(("YM"), "gerb", "P94"),
-        (("YM"), "bayraq", "P41"),(("YM"), "telefon kodu", "P473"),(("YM"), "nəqliyyat kodu","P395"),(("YM"), "sayt","P856"))
+    val answer = List(("YM", "ölkə", "P17"), (("YM"), "şəkil", "P18"), (("YM"), "gerb", "P94"),
+      (("YM"), "bayraq", "P41"), (("YM"), "telefon kodu", "P473"), (("YM"), "nəqliyyat kodu", "P395"), (("YM"), "sayt", "P856"))
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
   "InfoboxMappingsExtractor" should """return correct property id's for Infobox planet """ in {
@@ -78,9 +76,9 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         | eccentricity = {{val|0.046381}}
         }}""", "TestPage", lang, "#property")
 
-    val answer = List(("Infobox planet", "symbol", "P367"),("Infobox planet","discoverer","P61"))
+    val answer = List(("Infobox planet", "symbol", "P367"), ("Infobox planet", "discoverer", "P61"))
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
 
   }
   "InfoboxMappingsExtractor" should """return correct property id's for Commons Category """ in {
@@ -95,9 +93,9 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         |{{Commons category|{{#property:P373}}}}
         }}""", "TestPage", lang, "#property")
 
-    val answer = List(( "Commons category","1","P373"), ( "Commons category","1","P373"))
+    val answer = List(("Commons category", "1", "P373"), ("Commons category", "1", "P373"))
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
 
   }
   "InfoboxMappingsExtractor" should """return correct property id's for Infobox Politics """ in {
@@ -122,9 +120,9 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
          | population_density_km2  = auto
          }}""", "TestPage", lang, "#property")
 
-    val answer = List(("Infobox Politics","seat","P36"), ("Infobox Politics","leader_name","P6"))
+    val answer = List(("Infobox Politics", "seat", "P36"), ("Infobox Politics", "leader_name", "P6"))
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
   "InfoboxMappingsExtractor" should """return correct property id's for nest property functions """ in {
 
@@ -132,16 +130,16 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
 
     val parsed = parse(
       """|title=Philippine ZIP Codes Directory
-        ||area_code              = 0
-        ||blank_name             =
-        ||blank_info             =
-        ||blank1_name            =
-        ||blank1_info            =
-        ||website                = {{nowrap|{{URL|{{#property:P856}}}}}}""", "TestPage", lang, "#property")
+         ||area_code              = 0
+         ||blank_name             =
+         ||blank_info             =
+         ||blank1_name            =
+         ||blank1_info            =
+         ||website                = {{nowrap|{{URL|{{#property:P856}}}}}}""", "TestPage", lang, "#property")
 
-    val answer = List(("URL","1","P856"))
+    val answer = List(("URL", "1", "P856"))
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
 
   }
   "InfoboxMappingsExtractor" should """return correct property id's for Infobox test """ in {
@@ -161,9 +159,9 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
          | population_note         =
          }}""", "TestPage", lang, "#property")
 
-    val answer = List(("Infobox Test", "population_total" , "P1082"))
+    val answer = List(("Infobox Test", "population_total", "P1082"))
 
-   (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
   "InfoboxMappingsExtractor" should """return correct property id's for Infobox Tourism """ in {
@@ -179,9 +177,9 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
          | pushpin_label_position = left
          }}""", "TestPage", lang, "#property")
 
-    val answer = List(("Infobox Tourism", "image_map", "P242"),("Infobox Tourism", "map_caption", "P131"))
+    val answer = List(("Infobox Tourism", "image_map", "P242"), ("Infobox Tourism", "map_caption", "P131"))
 
-   (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
   "InfoboxMappingsExtractor" should """return correct property id's for Infobox Test """ in {
@@ -203,28 +201,28 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
          | profession        = [[Acteur|Actrice]]
          }}""", "TestPage", lang, "#property")
 
-    val answer = List(("Infobox Test", "surnom","p742"), ("Infobox Test","date de décès" ,"p570"), ("Infobox Test","lieu de décès", "p20"))
+    val answer = List(("Infobox Test", "surnom", "p742"), ("Infobox Test", "date de décès", "p570"), ("Infobox Test", "lieu de décès", "p20"))
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
   "InfoboxMappingsExtractor" should """return correct property id's for multiple #property in a line """ in {
 
     val lang = Language.get("fr").getOrElse(Language.English)
-    val answer = List(("Infobox Test","nom","P735"), ("Infobox Test","nom","P734"))
+    val answer = List(("Infobox Test", "nom", "P735"), ("Infobox Test", "nom", "P734"))
     val parsed = parse(
       """
         {{Infobox Test
         | nom               = {{#property:P735}} {{#property:P734}}
         }}""", "TestPage", lang, "#property")
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
   "InfoboxMappingsExtractor" should """return correct property id's for multiple info boxes """ in {
 
     val lang = Language.get("fr").getOrElse(Language.English)
-    val answer = List(("Infobox Test1","arg1","P1"), ("Infobox Test2","arg2","P2"))
+    val answer = List(("Infobox Test1", "arg1", "P1"), ("Infobox Test2", "arg2", "P2"))
     val parsed = parse(
       """
         {{Infobox Test1
@@ -236,13 +234,13 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         }}
       """, "TestPage", lang, "#property")
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
   "InfoboxMappingsExtractor" should """return correct property id's #invoke type parser function  """ in {
 
     val lang = Language.get("fr").getOrElse(Language.English)
-    val answer = List(("Infobox Test1","population_as_of","P1082/P585"))
+    val answer = List(("Infobox Test1", "population_as_of", "P1082/P585"))
     val parsed = parse(
       """
         {{Infobox Test1
@@ -253,14 +251,14 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         }}
       """, "TestPage", lang, "#invoke")
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
 
   "InfoboxMappingsExtractor" should """return correct property id's #invoke type parser function nested """ in {
 
     val lang = Language.get("fr").getOrElse(Language.English)
-    val answer = List(("Infobox Test1","data2","P137"))
+    val answer = List(("Infobox Test1", "data2", "P137"))
     val parsed = parse(
       """
         {{Infobox Test1
@@ -274,12 +272,12 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         }}
       """, "TestPage", lang, "#invoke")
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
   "InfoboxMappingsExtractor" should """return correct property id's #invoke type parser function for multiple infoboxes """ in {
 
     val lang = Language.get("fr").getOrElse(Language.English)
-    val answer = List(("Infobox Test1","arg1","P729"),("Infobox Test2","arg2","P87") )
+    val answer = List(("Infobox Test1", "arg1", "P729"), ("Infobox Test2", "arg2", "P87"))
     val parsed = parse(
       """
         {{Infobox Test1
@@ -291,12 +289,12 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         }
       """, "TestPage", lang, "#invoke")
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
   "InfoboxMappingsExtractor" should """return correct property id's #invoke type parser function for ProperyLink  """ in {
 
     val lang = Language.get("fr").getOrElse(Language.English)
-    val answer = List(("Infobox Test1","operating system","p306"),("Infobox Test1","license","p275"), ("Infobox Test1","website","p856"))
+    val answer = List(("Infobox Test1", "operating system", "p306"), ("Infobox Test1", "license", "p275"), ("Infobox Test1", "website", "p856"))
     val parsed = parse(
       """
         {{Infobox Test1
@@ -307,13 +305,13 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         }}
       """, "TestPage", lang, "#invoke")
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
   "InfoboxMappingsExtractor" should """return correct property id's for P856  """ in {
 
     val lang = Language.English
-    val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test1","website2","P856"), ("Infobox Test1","blog","P1581"))
+    val answer = List(("Infobox Test1", "website1", "P856"), ("Infobox Test1", "website2", "P856"), ("Infobox Test1", "blog", "P1581"))
     val parsed = parse(
       """
         {{Infobox Test1
@@ -323,13 +321,13 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         }}
       """, "TestPage", lang, "DTM")
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
   "InfoboxMappingsExtractor" should """return correct property id's for P856 for multiple infoboxes  """ in {
 
     val lang = Language.English
-    val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test2","website2","P856"))
+    val answer = List(("Infobox Test1", "website1", "P856"), ("Infobox Test2", "website2", "P856"))
     val parsed = parse(
       """
         {{Infobox Test1
@@ -341,13 +339,13 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         }}
       """, "TestPage", lang, "DTM")
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
   "InfoboxMappingsExtractor" should """return correct property id's for P856 for different Language  """ in {
 
     val lang = Language.getOrElse("no", Language.English)
-    val answer = List(("Infoboks Test1","website1","P856"))
+    val answer = List(("Infoboks Test1", "website1", "P856"))
     val parsed = parse(
       """
         {{Infoboks Test1
@@ -356,44 +354,45 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
 
       """, "TestPage", lang, "DTM")
 
-    (parsed) should be (answer)
+    (parsed) should be(answer)
   }
 
   private val parser = WikiParser.getInstance()
 
-  private def parse(input : String, title: String = "TestPage", lang: Language = Language.English, test : String) : List[(String,String, String)] =
-  {
+  private def parse(input: String, title: String = "TestPage", lang: Language = Language.English, test: String): List[(String, String, String)] = {
     val page = new WikiPage(WikiTitle.parse(title, lang), input)
     val context = new {
       def ontology = InfoboxMappingsExtractorTest.context.ontology;
+
       def language = lang;
+
       def redirects = new Redirects(Map("Official" -> "Official website"))
     }
 
     val extractor = new InfoboxMappingsExtractor(context)
-    var to_return : List[(String,String, String)]= List.empty
-    if ( test == "#property") {
-      to_return =  parser(page) match {
+    var to_return: List[(String, String, String)] = List.empty
+    if (test == "#property") {
+      to_return = parser(page) match {
         case Some(pageNode) => extractor.getPropertyTuples(pageNode)
         case None => List.empty
       }
-    } else if ( test == "#invoke"){
+    } else if (test == "#invoke") {
       to_return = parser(page) match {
         case Some(pageNode) => extractor.getInvokeTuples(pageNode)
         case None => List.empty
       }
-    } else if ( test == "DTM") {
+    } else if (test == "DTM") {
       to_return = parser(page) match {
         case Some(pageNode) => extractor.getDirectTemplateWikidataMappings(pageNode, lang)
         case None => List.empty
       }
-    } else if ( test == "all"){
+    } else if (test == "all") {
       to_return = parser(page) match {
         case Some(pageNode) => extractor.extractTuples(pageNode, lang)
         case None => List.empty
       }
     }
-      to_return
+    to_return
   }
 }
 
@@ -406,7 +405,9 @@ object InfoboxMappingsExtractorTest {
       val ontologySource = XMLSource.fromFile(ontoFile, Language.Mappings)
       new OntologyReader().read(ontologySource)
     }
+
     def language = "en"
+
     def redirects = new Redirects(Map())
   }
 

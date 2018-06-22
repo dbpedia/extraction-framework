@@ -3,7 +3,7 @@ package org.dbpedia.extraction.destinations
 import org.dbpedia.extraction.destinations.formatters.RDFJSONFormatter
 import org.slf4j.LoggerFactory
 import scala.collection.Seq
-import util.Sorting
+import scala.util.Sorting
 import collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.live.storage.JSONCache
 import java.util.HashSet

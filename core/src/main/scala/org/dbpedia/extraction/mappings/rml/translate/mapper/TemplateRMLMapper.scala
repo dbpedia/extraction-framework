@@ -1,9 +1,8 @@
 package org.dbpedia.extraction.mappings.rml.translate.mapper
 
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.mappings.rml.model.{AbstractRMLModel, RMLTranslationModel}
+import org.dbpedia.extraction.mappings.rml.model.RMLTranslationModel
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLSubjectMap, RMLUri}
-import org.dbpedia.extraction.ontology.Ontology
 
 /**
   * Creates an RML Template Mapping
@@ -16,49 +15,43 @@ class TemplateRMLMapper(rmlModel: RMLTranslationModel, templateMapping: Template
     addPropertyMappings()
   }
 
-  private def defineTriplesMap() =
-  {
+  private def defineTriplesMap() = {
     rmlModel.triplesMap.addDCTermsType(new RMLLiteral("templateMapping"))
     defineSubjectMap()
     defineLogicalSource()
   }
 
-  private def defineSubjectMap() =
-  {
+  private def defineSubjectMap() = {
     val isocode = rmlModel.wikiTitle.language.isoCode
-    rmlModel.subjectMap.addTemplate(rmlModel.rmlFactory.createRMLLiteral("http://"+ isocode +".dbpedia.org/resource/{wikititle}"))
+    rmlModel.subjectMap.addTemplate(rmlModel.rmlFactory.createRMLLiteral("http://" + isocode + ".dbpedia.org/resource/{wikititle}"))
     rmlModel.subjectMap.addClass(rmlModel.rmlFactory.createRMLUri(templateMapping.mapToClass.uri))
     rmlModel.subjectMap.addIRITermType()
     addCorrespondingPropertyAndClassToSubjectMap()
   }
 
-  private def defineLogicalSource() =
-  {
+  private def defineLogicalSource() = {
     val source = "https://" + rmlModel.wikiTitle.language.isoCode + ".wikipedia.org/wiki/{wikititle}"
     rmlModel.logicalSource.addSource(rmlModel.rmlFactory.createRMLLiteral(source))
   }
 
-  private def addPropertyMappings() =
-  {
+  private def addPropertyMappings() = {
     val state = new MappingState
     val mapper = new RMLModelMapper(rmlModel)
-    for(mapping <- templateMapping.mappings) {
+    for (mapping <- templateMapping.mappings) {
       addPropertyMapping(mapper, mapping, state)
     }
   }
 
-  private def addCorrespondingPropertyAndClassToSubjectMap() =
-  {
-    if(templateMapping.correspondingProperty != null) {
+  private def addCorrespondingPropertyAndClassToSubjectMap() = {
+    if (templateMapping.correspondingProperty != null) {
       val predicateObjectMap = rmlModel.triplesMap.addPredicateObjectMap(RMLUri(rmlModel.wikiTitle.resourceIri + "/CorrespondingProperty"))
       predicateObjectMap.addPredicate(RMLUri(templateMapping.correspondingProperty.uri))
       addCorrespondingClassToPredicateObjectMap(predicateObjectMap: RMLPredicateObjectMap)
     }
   }
 
-  private def addCorrespondingClassToPredicateObjectMap(predicateObjectMap: RMLPredicateObjectMap) =
-  {
-    if(templateMapping.correspondingClass != null) {
+  private def addCorrespondingClassToPredicateObjectMap(predicateObjectMap: RMLPredicateObjectMap) = {
+    if (templateMapping.correspondingClass != null) {
       val objectMap = predicateObjectMap.addObjectMap(predicateObjectMap.uri.extend("/ObjectMap"))
       val parentTriplesMap = objectMap.addParentTriplesMap(objectMap.uri.extend("/ParentTriplesMap"))
       val subjectMap = parentTriplesMap.addSubjectMap(parentTriplesMap.uri.extend("/SubjectMap"))
@@ -72,19 +65,17 @@ class TemplateRMLMapper(rmlModel: RMLTranslationModel, templateMapping: Template
     *
     * @param subjectMap
     */
-  private def addExtraClassesToSubjectMap(subjectMap: RMLSubjectMap) =
-  {
+  private def addExtraClassesToSubjectMap(subjectMap: RMLSubjectMap) = {
     val relatedClasses = templateMapping.mapToClass.relatedClasses
-    for(cls <- relatedClasses) {
-      if(!cls.uri.contains("%3E")) {
+    for (cls <- relatedClasses) {
+      if (!cls.uri.contains("%3E")) {
         subjectMap.addClass(RMLUri(cls.uri))
       }
     }
   }
 
 
-  private def addPropertyMapping(mapper: RMLModelMapper, mapping: PropertyMapping, state: MappingState) =
-  {
+  private def addPropertyMapping(mapper: RMLModelMapper, mapping: PropertyMapping, state: MappingState) = {
     mapper.addMapping(mapping, state)
   }
 
@@ -99,27 +90,27 @@ object TemplateRMLMapper {
   private var _longitudeCount = 0
   private var _constantCount = 0
 
-  def simplePropertyCount : Int = {
+  def simplePropertyCount: Int = {
     _simplePropertyCount
   }
 
-  def startDateCount : Int = {
+  def startDateCount: Int = {
     _startDateCount
   }
 
-  def endDateCount : Int = {
+  def endDateCount: Int = {
     _endDateCount
   }
 
-  def latitudeCount : Int = {
+  def latitudeCount: Int = {
     _latitudeCount
   }
 
-  def longitudeCount : Int = {
+  def longitudeCount: Int = {
     _longitudeCount
   }
 
-  def constantCount : Int = {
+  def constantCount: Int = {
     _constantCount
   }
 
@@ -136,23 +127,23 @@ object TemplateRMLMapper {
     _simplePropertyCount += 1
   }
 
-  def increaseStartDateCount() : Unit = {
+  def increaseStartDateCount(): Unit = {
     _startDateCount += 1
   }
 
-  def increaseEndDateCount() : Unit = {
+  def increaseEndDateCount(): Unit = {
     _endDateCount += 1
   }
 
-  def increaseLatitudeCount() : Unit = {
+  def increaseLatitudeCount(): Unit = {
     _latitudeCount += 1
   }
 
-  def increaseLongitudeCount() : Unit = {
+  def increaseLongitudeCount(): Unit = {
     _longitudeCount += 1
   }
 
-  def increaseConstantCount() : Unit = {
+  def increaseConstantCount(): Unit = {
     _constantCount += 1
   }
 

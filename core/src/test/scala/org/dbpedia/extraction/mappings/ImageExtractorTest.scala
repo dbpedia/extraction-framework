@@ -1,17 +1,17 @@
 package org.dbpedia.extraction.mappings
 
-import org.scalatest.{PrivateMethodTester, FlatSpec}
-import org.scalatest.Matchers
+import org.dbpedia.extraction.sources.{MemorySource, WikiPage}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import scala.collection.mutable.{Set => MutableSet, HashSet}
-import org.dbpedia.extraction.sources.{WikiPage, MemorySource}
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
-import org.dbpedia.extraction.util.Language
+import org.scalatest.{FlatSpec, Matchers, PrivateMethodTester}
+
+import scala.collection.mutable.{HashSet, Set => MutableSet}
 
 /**
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class ImageExtractorTest extends FlatSpec with Matchers with PrivateMethodTester {
 

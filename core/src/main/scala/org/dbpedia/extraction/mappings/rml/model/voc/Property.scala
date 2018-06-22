@@ -21,7 +21,7 @@ object Property {
 
   val ITERATOR = RdfNamespace.RML.namespace + "iterator"
 
-  val FUNCTIONVALUE = RdfNamespace.FNML.namespace +"functionValue"
+  val FUNCTIONVALUE = RdfNamespace.FNML.namespace + "functionValue"
 
   val OBJECT = RdfNamespace.RR.namespace + "object"
 
@@ -31,6 +31,6 @@ object Property {
 
   val FALLBACK_MAP = RdfNamespace.CRML.namespace + "fallbackMap"
 
-  val TYPE = RdfNamespace.RDF.namespace +"type"
+  val TYPE = RdfNamespace.RDF.namespace + "type"
 
 }

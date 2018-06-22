@@ -6,9 +6,9 @@ import org.dbpedia.extraction.mappings.rml.model.template.json.JsonTemplates
 /**
   * Created by wmaroy on 12.08.17.
   */
-class StdJsonTemplates(node : JsonNode) extends JsonTemplates {
+class StdJsonTemplates(node: JsonNode) extends JsonTemplates {
 
-  override def toString : String = {
+  override def toString: String = {
     node.toString
   }
 

@@ -1,13 +1,11 @@
 package org.dbpedia.extraction.dataparser
 
-import junit.framework.TestCase
 import junit.framework.Assert._
+import junit.framework.TestCase
 import org.dbpedia.extraction.util.Language
 
-class ParserUtilsTest extends TestCase
-{
-  def testConvertLargeNumbers() : Unit =
-  {
+class ParserUtilsTest extends TestCase {
+  def testConvertLargeNumbers(): Unit = {
     testConvertLargeNumbers("en", "100.5 million", "100500000")
     testConvertLargeNumbers("de", "100,5 million", "100500000")
 
@@ -29,15 +27,17 @@ class ParserUtilsTest extends TestCase
     testParse("en", ".1", 0.1)
   }
 
-  private def testConvertLargeNumbers( lang : String, value : String, expect : String ) : Unit =
-  {
-    val parser = new ParserUtils(new { def language = Language(lang) })
+  private def testConvertLargeNumbers(lang: String, value: String, expect: String): Unit = {
+    val parser = new ParserUtils(new {
+      def language = Language(lang)
+    })
     assertEquals(expect, parser.convertLargeNumbers(value))
   }
 
-  private def testParse( lang : String, value : String, expect : Number ) : Unit =
-  {
-    val parser = new ParserUtils(new { def language = Language(lang) })
+  private def testParse(lang: String, value: String, expect: Number): Unit = {
+    val parser = new ParserUtils(new {
+      def language = Language(lang)
+    })
     assertEquals(expect, parser.parse(value))
   }
 }

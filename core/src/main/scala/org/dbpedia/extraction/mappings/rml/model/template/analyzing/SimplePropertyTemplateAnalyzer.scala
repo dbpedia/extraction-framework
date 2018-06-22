@@ -1,4 +1,5 @@
 package org.dbpedia.extraction.mappings.rml.model.template.analyzing
+
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLFunctionTermMap, RMLPredicateObjectMap, RMLUri}
@@ -18,7 +19,7 @@ class SimplePropertyTemplateAnalyzer(ontology: Ontology) extends AbstractTemplat
 
     val ftm = pom.objectMap.asInstanceOf[RMLFunctionTermMap]
 
-    if(ftm == null) throw new IllegalArgumentException("Invalid Simple Property definition: " + pom.resource.getURI)
+    if (ftm == null) throw new IllegalArgumentException("Invalid Simple Property definition: " + pom.resource.getURI)
 
     val fn = ftm.getFunction
 
@@ -32,7 +33,7 @@ class SimplePropertyTemplateAnalyzer(ontology: Ontology) extends AbstractTemplat
     val transformParameter = fn.constants.getOrElse(RdfNamespace.DBF.namespace + "selectParameter", null)
 
     val ontologyProperty = loadProperty(ontologyParameter)
-    val unit = if(unitParameter != null) loadDatatype(unitParameter) else null
+    val unit = if (unitParameter != null) loadDatatype(unitParameter) else null
 
     SimplePropertyTemplate(propertyParameter, ontologyProperty, selectParameter, prefixParameter, suffixParameter, transformParameter, unit, factorParameter)
 

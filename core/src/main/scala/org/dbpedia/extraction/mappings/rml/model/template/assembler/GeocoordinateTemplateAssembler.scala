@@ -2,22 +2,22 @@ package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
 import org.dbpedia.extraction.mappings.PageContext
 import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
-import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.model.template.GeocoordinateTemplate
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
   * Created by wmaroy on 26.07.17.
   */
-class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : String, language: String, template : GeocoordinateTemplate, counter : Counter, independent : Boolean) {
+class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, language: String, template: GeocoordinateTemplate, counter: Counter, independent: Boolean) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  def assemble() : List[RMLPredicateObjectMap] = {
+  def assemble(): List[RMLPredicateObjectMap] = {
     addGeoCoordinatesMapping()
   }
 
@@ -25,9 +25,8 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
   //  Private methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  private def addGeoCoordinatesMapping() : List[RMLPredicateObjectMap] =
-  {
-    if(template.ontologyProperty != null) {
+  private def addGeoCoordinatesMapping(): List[RMLPredicateObjectMap] = {
+    if (template.ontologyProperty != null) {
       // change the base uri
       val intermediateBaseUri = baseUri + "/" + RMLUri.INTERMEDIATEMAPPING + "/" + counter.intermediates
       val pom = rmlModel.triplesMap.addPredicateObjectMap(RMLUri(intermediateBaseUri))
@@ -36,7 +35,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
       val parentSubjectMap = triplesMap.addSubjectMap(RMLUri(intermediateBaseUri + "/SubjectMap"))
       parentSubjectMap.addClass(RMLUri(RdfNamespace.GEO.namespace + "SpatialThing"))
       parentSubjectMap.addIRITermType()
-      val templateURI = PageContext.generateUri("http://"+ language +".dbpedia.org/resource/{wikititle}", template.ontologyProperty.name)
+      val templateURI = PageContext.generateUri("http://" + language + ".dbpedia.org/resource/{wikititle}", template.ontologyProperty.name)
       parentSubjectMap.addTemplate(RMLLiteral(templateURI))
       addGeoCoordinatesMappingToTriplesMap(triplesMap, intermediateBaseUri)
       List(pom)
@@ -45,34 +44,32 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     }
   }
 
-  private def addGeoCoordinatesMappingToTriplesMap(triplesMap: RMLTriplesMap, baseUri : String = baseUri) : List[RMLPredicateObjectMap]  =
-  {
+  private def addGeoCoordinatesMappingToTriplesMap(triplesMap: RMLTriplesMap, baseUri: String = baseUri): List[RMLPredicateObjectMap] = {
 
-    if(template.coordinate != null) {
+    if (template.coordinate != null) {
 
-      addCoordinatesToTriplesMap(triplesMap, baseUri : String)
+      addCoordinatesToTriplesMap(triplesMap, baseUri: String)
 
-    } else if(template.latitude != null && template.longitude != null) {
+    } else if (template.latitude != null && template.longitude != null) {
 
-      addLongitudeLatitudeToTriplesMap(triplesMap, baseUri : String)
+      addLongitudeLatitudeToTriplesMap(triplesMap, baseUri: String)
 
     } else {
 
-      addDegreesToTriplesMap(triplesMap, baseUri : String)
+      addDegreesToTriplesMap(triplesMap, baseUri: String)
 
     }
   }
 
-  private def addCoordinatesToTriplesMap(triplesMap: RMLTriplesMap, baseUri : String) : List[RMLPredicateObjectMap] =
-  {
+  private def addCoordinatesToTriplesMap(triplesMap: RMLTriplesMap, baseUri: String): List[RMLPredicateObjectMap] = {
 
-    val latPom = if(!independent) {
+    val latPom = if (!independent) {
       triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
     } else {
       rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
     }
 
-    val lonPom = if(!independent) {
+    val lonPom = if (!independent) {
       triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
     } else {
       rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
@@ -84,16 +81,15 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
 
   }
 
-  private def addLongitudeLatitudeToTriplesMap(triplesMap: RMLTriplesMap, baseUri : String) : List[RMLPredicateObjectMap] =
-  {
+  private def addLongitudeLatitudeToTriplesMap(triplesMap: RMLTriplesMap, baseUri: String): List[RMLPredicateObjectMap] = {
 
-    val latPom = if(!independent) {
+    val latPom = if (!independent) {
       triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
     } else {
       rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
     }
 
-    val lonPom = if(!independent) {
+    val lonPom = if (!independent) {
       triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
     } else {
       rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
@@ -105,16 +101,15 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
 
   }
 
-  private def addDegreesToTriplesMap(triplesMap: RMLTriplesMap, baseUri : String) : List[RMLPredicateObjectMap] =
-  {
+  private def addDegreesToTriplesMap(triplesMap: RMLTriplesMap, baseUri: String): List[RMLPredicateObjectMap] = {
 
-    val latPom = if(!independent) {
+    val latPom = if (!independent) {
       triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
     } else {
       rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LATITUDEMAPPING + "/" + counter.geoCoordinates))
     }
 
-    val lonPom = if(!independent) {
+    val lonPom = if (!independent) {
       triplesMap.addPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
     } else {
       rmlModel.rmlFactory.createRMLPredicateObjectMap(RMLUri(baseUri + "/" + RMLUri.LONGITUDEMAPPING + "/" + counter.geoCoordinates))
@@ -126,8 +121,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
 
   }
 
-  private def addCoordinatesToPredicateObjectMap(latPom: RMLPredicateObjectMap, lonPom: RMLPredicateObjectMap) =
-  {
+  private def addCoordinatesToPredicateObjectMap(latPom: RMLPredicateObjectMap, lonPom: RMLPredicateObjectMap) = {
     latPom.addPredicate(RMLUri(RdfNamespace.GEO.namespace + "lat"))
     val latOmUri = latPom.uri.extend("/FunctionTermMap")
     val latOm = latPom.addFunctionTermMap(latOmUri)
@@ -166,8 +160,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
 
   }
 
-  private def addLongitudeLatitudeToPredicateObjectMap(latPom: RMLPredicateObjectMap, lonPom: RMLPredicateObjectMap) =
-  {
+  private def addLongitudeLatitudeToPredicateObjectMap(latPom: RMLPredicateObjectMap, lonPom: RMLPredicateObjectMap) = {
     latPom.addPredicate(RMLUri(RdfNamespace.GEO.namespace + "lat"))
     val latOmUri = latPom.uri.extend("/FunctionTermMap")
     val latOm = latPom.addFunctionTermMap(latOmUri)
@@ -205,8 +198,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     lonParameterPom.addObjectMap(lonParameterOmUri).addRMLReference(new RMLLiteral(template.longitude))
   }
 
-  private def addDegreesToPredicateObjectMap(latPom: RMLPredicateObjectMap, lonPom: RMLPredicateObjectMap) =
-  {
+  private def addDegreesToPredicateObjectMap(latPom: RMLPredicateObjectMap, lonPom: RMLPredicateObjectMap) = {
     latPom.addPredicate(RMLUri(RdfNamespace.GEO.namespace + "lat"))
 
     val latitudeOmUri = latPom.uri.extend("/FunctionTermMap")
@@ -226,7 +218,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     val latDegreesParameterPom = latitudeFunctionValue.addPredicateObjectMap(latDegreesParameterPomUri)
     latDegreesParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.latFunction.latDegreesParameter))
     val latDegreesParameterOmUri = latDegreesParameterPomUri.extend("/ObjectMap")
-    if(template.latitudeDegrees != null) {
+    if (template.latitudeDegrees != null) {
       latDegreesParameterPom.addObjectMap(latDegreesParameterOmUri).addRMLReference(new RMLLiteral(template.latitudeDegrees))
     } else {
       latDegreesParameterPom.addObjectMap(latDegreesParameterOmUri).addRMLReference(new RMLLiteral("null"))
@@ -236,7 +228,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     val latMinutesParameterPom = latitudeFunctionValue.addPredicateObjectMap(latMinutesParameterPomUri)
     latMinutesParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.latFunction.latMinutesParameter))
     val latMinutesParameterOmUri = latMinutesParameterPomUri.extend("/ObjectMap")
-    if(template.latitudeMinutes != null) {
+    if (template.latitudeMinutes != null) {
       latMinutesParameterPom.addObjectMap(latMinutesParameterOmUri).addRMLReference(new RMLLiteral(template.latitudeMinutes))
     } else {
       latMinutesParameterPom.addObjectMap(latMinutesParameterOmUri).addRMLReference(new RMLLiteral("null"))
@@ -246,7 +238,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     val latSecondsParameterPom = latitudeFunctionValue.addPredicateObjectMap(latSecondsParameterPomUri)
     latSecondsParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.latFunction.latSecondsParameter))
     val latSecondsParameterOmUri = latSecondsParameterPomUri.extend("/ObjectMap")
-    if(template.latitudeSeconds != null) {
+    if (template.latitudeSeconds != null) {
       latSecondsParameterPom.addObjectMap(latSecondsParameterOmUri).addRMLReference(new RMLLiteral(template.latitudeSeconds))
     } else {
       latSecondsParameterPom.addObjectMap(latSecondsParameterOmUri).addRMLReference(new RMLLiteral("null"))
@@ -256,7 +248,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     val latDirectionParameterPom = latitudeFunctionValue.addPredicateObjectMap(latDirectionParameterPomUri)
     latDirectionParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.latFunction.latDirectionParameter))
     val latDirectionParameterOmUri = latDirectionParameterPomUri.extend("/ObjectMap")
-    if(template.latitudeDirection != null) {
+    if (template.latitudeDirection != null) {
       latDirectionParameterPom.addObjectMap(latDirectionParameterOmUri).addRMLReference(new RMLLiteral(template.latitudeDirection))
     } else {
       latDirectionParameterPom.addObjectMap(latDirectionParameterOmUri).addRMLReference(new RMLLiteral("null"))
@@ -282,7 +274,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     lonDegreesParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.lonFunction.lonDegreesParameter))
     val lonDegreesParameterOmUri = lonDegreesParameterPomUri.extend("/ObjectMap")
 
-    if(template.longitudeDegrees != null) {
+    if (template.longitudeDegrees != null) {
       lonDegreesParameterPom.addObjectMap(lonDegreesParameterOmUri).addRMLReference(new RMLLiteral(template.longitudeDegrees))
     } else {
       lonDegreesParameterPom.addObjectMap(lonDegreesParameterOmUri).addRMLReference(new RMLLiteral("null"))
@@ -292,7 +284,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     val lonMinutesParameterPom = longitudeFunctionValue.addPredicateObjectMap(lonMinutesParameterPomUri)
     lonMinutesParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.lonFunction.lonMinutesParameter))
     val lonMinutesParameterOmUri = lonMinutesParameterPomUri.extend("/ObjectMap")
-    if(template.longitudeMinutes != null) {
+    if (template.longitudeMinutes != null) {
       lonMinutesParameterPom.addObjectMap(lonMinutesParameterOmUri).addRMLReference(new RMLLiteral(template.longitudeMinutes))
     } else {
       lonMinutesParameterPom.addObjectMap(lonMinutesParameterOmUri).addRMLReference(new RMLLiteral("null"))
@@ -302,7 +294,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     val lonSecondsParameterPom = longitudeFunctionValue.addPredicateObjectMap(lonSecondsParameterPomUri)
     lonSecondsParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.lonFunction.lonSecondsParameter))
     val lonSecondsParameterOmUri = lonSecondsParameterPomUri.extend("/ObjectMap")
-    if(template.longitudeSeconds != null) {
+    if (template.longitudeSeconds != null) {
       lonSecondsParameterPom.addObjectMap(lonSecondsParameterOmUri).addRMLReference(new RMLLiteral(template.longitudeSeconds))
     } else {
       lonSecondsParameterPom.addObjectMap(lonSecondsParameterOmUri).addRMLReference(new RMLLiteral("null"))
@@ -312,7 +304,7 @@ class GeocoordinateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : Strin
     val lonDirectionParameterPom = longitudeFunctionValue.addPredicateObjectMap(lonDirectionParameterPomUri)
     lonDirectionParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.lonFunction.lonDirectionParameter))
     val lonDirectionParameterOmUri = lonDirectionParameterPomUri.extend("/ObjectMap")
-    if(template.longitudeDirection != null) {
+    if (template.longitudeDirection != null) {
       lonDirectionParameterPom.addObjectMap(lonDirectionParameterOmUri).addRMLReference(new RMLLiteral(template.longitudeDirection))
     } else {
       lonDirectionParameterPom.addObjectMap(lonDirectionParameterOmUri).addRMLReference(new RMLLiteral("null"))

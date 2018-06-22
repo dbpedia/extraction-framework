@@ -5,8 +5,7 @@ package org.dbpedia.extraction.mappings.rml.model.resource
   */
 case class RMLLiteral(literal: String) {
 
-  override def toString() =
-  {
+  override def toString() = {
     literal
   }
 

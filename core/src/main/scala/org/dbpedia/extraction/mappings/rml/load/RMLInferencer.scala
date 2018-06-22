@@ -1,9 +1,8 @@
 package org.dbpedia.extraction.mappings.rml.load
 
 import java.io._
-import java.net.{URLDecoder, URLEncoder}
-import java.nio.charset.Charset
-import java.nio.file.{Files, Path, Paths, StandardOpenOption}
+import java.net.URLDecoder
+import java.nio.file.{Files, Path, Paths}
 
 import be.ugent.mmlab.rml.model.RMLMapping
 import org.apache.commons.io.IOUtils
@@ -13,8 +12,6 @@ import org.apache.jena.util.FileManager
 import org.apache.log4j.Logger
 import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 import org.dbpedia.extraction.util.Language
-
-import scala.collection.JavaConverters._
 
 /**
   * Created by wmaroy on 10.07.17.
@@ -27,7 +24,7 @@ object RMLInferencer {
 
   val logger = Logger.getLogger(this.getClass)
 
-  def loadDir(language :Language, pathToRMLMappingsDir : String) : Map[String, RMLMapping] = {
+  def loadDir(language: Language, pathToRMLMappingsDir: String): Map[String, RMLMapping] = {
 
     // create language specific rules from templated file
     val stream = this.getClass.getClassLoader.getResourceAsStream("rules.rule")
@@ -62,11 +59,11 @@ object RMLInferencer {
       mappings
 
     } catch {
-      case e : Exception => Map()
+      case e: Exception => Map()
     }
   }
 
-  def loadDump(language: Language, dump : String, name : String) : (String, RMLMapping) = {
+  def loadDump(language: Language, dump: String, name: String): (String, RMLMapping) = {
     // create language specific rules from templated file
     val stream = this.getClass.getClassLoader.getResourceAsStream("rules.rule")
 
@@ -90,7 +87,7 @@ object RMLInferencer {
     mappings.head
   }
 
-  def loadDumpAsString(language: Language, dump : String, name : String) : String = {
+  def loadDumpAsString(language: Language, dump: String, name: String): String = {
     // create language specific rules from templated file
     val stream = this.getClass.getClassLoader.getResourceAsStream("rules.rule")
 
@@ -120,7 +117,7 @@ object RMLInferencer {
     * @param dirPath
     * @return
     */
-  private def createLanguageRuleFile(language: Language, stream : InputStream, dirPath : String) : Path = {
+  private def createLanguageRuleFile(language: Language, stream: InputStream, dirPath: String): Path = {
     val templatedRuleString = IOUtils.toString(stream)
     //new String(Files.readAllBytes(Paths.get(path)), "UTF-8")
     val languageRuleString = templatedRuleString.replaceAll(RMLInferencer.LANGUAGE_TEMPLATE, language.isoCode)
@@ -133,7 +130,7 @@ object RMLInferencer {
     tmpFile
   }
 
-  private def createTempMappingFile(name : String, dump:String, dirPath : String) : Path = {
+  private def createTempMappingFile(name: String, dump: String, dirPath: String): Path = {
     val file = new File(dirPath).getAbsoluteFile
     val dir = Paths.get(file.getParent)
     val tmpFile = Files.createTempFile(dir, name + "-", ".ttl").toFile
@@ -145,8 +142,8 @@ object RMLInferencer {
   }
 
 
-  private def inferenceDir(rules : java.util.List[Rule], inputDirPath : String, language : String) : (Path, List[String]) = {
-    if(inputDirPath == null) return null
+  private def inferenceDir(rules: java.util.List[Rule], inputDirPath: String, language: String): (Path, List[String]) = {
+    if (inputDirPath == null) return null
 
     val dir = new File(inputDirPath)
     val listFiles = dir.listFiles
@@ -177,7 +174,7 @@ object RMLInferencer {
     * @param inputPath
     * @param outputPath
     */
-  private def inferenceRMLMapping(rules : java.util.List[Rule], inputPath : String, outputPath : String, language : String) : String = {
+  private def inferenceRMLMapping(rules: java.util.List[Rule], inputPath: String, outputPath: String, language: String): String = {
 
     // create an empty model
     val model = ModelFactory.createDefaultModel()
@@ -203,7 +200,7 @@ object RMLInferencer {
     val out = new StringWriter()
     infModel.write(out, "TURTLE", base)
 
-    val decodedInfModelString = URLDecoder.decode(out.toString) //string writer does not decode
+    val decodedInfModelString = URLDecoder.decode(out.toString, "UTF-8") //string writer does not decode
 
     // mapping name regex
     val mappingNameRegex = "Mapping_[^/]+".r
@@ -217,7 +214,7 @@ object RMLInferencer {
     formatted
   }
 
-  private def createInputStream(inputPath : String) : InputStream = {
+  private def createInputStream(inputPath: String): InputStream = {
 
     // use the FileManager to find the input file
     val in = FileManager.get().open(inputPath)
@@ -235,11 +232,11 @@ object RMLInferencer {
     * @param language
     * @return
     */
-  private def getPathToLanguageDir(language: Language, dir : String) : String = {
-    dir + (if(!dir.endsWith("/"))"/" else "") + language.isoCode
+  private def getPathToLanguageDir(language: Language, dir: String): String = {
+    dir + (if (!dir.endsWith("/")) "/" else "") + language.isoCode
   }
 
-  private def concatDirAndFileName(dir : String, file : String) : String = {
+  private def concatDirAndFileName(dir: String, file: String): String = {
     if (!dir.endsWith("/")) "/" else ""
   }
 

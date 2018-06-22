@@ -17,8 +17,8 @@ import org.eclipse.rdf4j.rio.RDFFormat
 
 object RMLProcessorParser {
 
-  private val retriever : RMLDocRetrieval = new RMLDocRetrieval()
-  private val rmlMappingFactory : StdRMLMappingFactory = new StdRMLMappingFactory()
+  private val retriever: RMLDocRetrieval = new RMLDocRetrieval()
+  private val rmlMappingFactory: StdRMLMappingFactory = new StdRMLMappingFactory()
 
   /**
     * Parses RML document from a file and returns an RMLMapping object
@@ -26,17 +26,16 @@ object RMLProcessorParser {
   def parseFromFile(pathToRmlDocument: String): RMLMapping = {
 
 
+    val path = convertToAbsolutePath(pathToRmlDocument)
+    try {
+      val repo = retriever.getMappingDoc(path, RDFFormat.TURTLE)
+      val preparedRepo = rmlMappingFactory.prepareExtractRMLMapping(repo)
+      val rmlMapping = rmlMappingFactory.extractRMLMapping(preparedRepo)
 
-      val path = convertToAbsolutePath(pathToRmlDocument)
-      try {
-        val repo = retriever.getMappingDoc(path, RDFFormat.TURTLE)
-        val preparedRepo = rmlMappingFactory.prepareExtractRMLMapping(repo)
-        val rmlMapping = rmlMappingFactory.extractRMLMapping(preparedRepo)
-
-        rmlMapping
-      } catch {
-        case e : Exception => new RMLMapping(new util.ArrayList[TriplesMap]())
-      }
+      rmlMapping
+    } catch {
+      case e: Exception => new RMLMapping(new util.ArrayList[TriplesMap]())
+    }
 
   }
 
@@ -46,8 +45,8 @@ object RMLProcessorParser {
     * @param pathToDir
     * @return
     */
-  def parseFromDir(pathToDir : String) : Map[String, RMLMapping] = {
-    if(pathToDir == null) return Map()
+  def parseFromDir(pathToDir: String): Map[String, RMLMapping] = {
+    if (pathToDir == null) return Map()
 
     val dir = new File(pathToDir)
     val listFiles = dir.listFiles
@@ -57,9 +56,9 @@ object RMLProcessorParser {
       case null => List()
       case _ =>
         listFiles
-        .filter(_.isFile)
-        .filter(_.length() > 0)
-        .filter(_.getName.contains(".ttl")).toList
+          .filter(_.isFile)
+          .filter(_.length() > 0)
+          .filter(_.getName.contains(".ttl")).toList
     }
 
     val map = files.map(file => {
@@ -75,9 +74,9 @@ object RMLProcessorParser {
     * Converts path to absolute path
     */
   private def convertToAbsolutePath(path: String): String = {
-      val relativePath = Paths.get(path)
-      val absolutePath = relativePath.toAbsolutePath
-      return absolutePath.toString
+    val relativePath = Paths.get(path)
+    val absolutePath = relativePath.toAbsolutePath
+    return absolutePath.toString
   }
 
 

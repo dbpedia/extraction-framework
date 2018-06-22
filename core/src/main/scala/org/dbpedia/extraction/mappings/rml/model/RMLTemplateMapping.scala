@@ -8,30 +8,25 @@ import org.dbpedia.extraction.mappings.rml.translate.format.RMLFormatter
 class RMLTemplateMapping(val title: String, modelWrapper: AbstractRMLModel) extends RMLMapping(modelWrapper: AbstractRMLModel) {
 
 
-  def printAsNTriples: Unit =
-  {
+  def printAsNTriples: Unit = {
     modelWrapper.printAsNTriples
   }
 
-  def printAsTurtle: Unit =
-  {
+  def printAsTurtle: Unit = {
     modelWrapper.printAsTurtle
   }
 
-  def writeAsTurtle: String =
-  {
+  def writeAsTurtle: String = {
     modelWrapper.writeAsTurtle
   }
 
-  def writeAsTurtle(base : String) =
-  {
+  def writeAsTurtle(base: String) = {
     println(modelWrapper.writeAsTurtle(base))
     RMLFormatter.format(modelWrapper, base)
     //modelWrapper.writeAsTurtle(base : String)
   }
 
-  def writeAsNTriples: String =
-  {
+  def writeAsNTriples: String = {
     modelWrapper.writeAsNTriples
   }
 }

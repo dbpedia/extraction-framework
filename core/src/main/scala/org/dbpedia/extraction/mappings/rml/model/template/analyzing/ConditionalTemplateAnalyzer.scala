@@ -9,12 +9,12 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, RdfNamespace}
 /**
   * Created by wmaroy on 12.08.17.
   */
-class ConditionalTemplateAnalyzer(ontology: Ontology, ignore : Boolean = false) extends AbstractTemplateAnalyzer(ontology) {
+class ConditionalTemplateAnalyzer(ontology: Ontology, ignore: Boolean = false) extends AbstractTemplateAnalyzer(ontology) {
 
   @throws(classOf[IllegalArgumentException])
-  def apply(pom: RMLPredicateObjectMap): Template ={
+  def apply(pom: RMLPredicateObjectMap): Template = {
 
-    if(!pom.isInstanceOf[RMLConditionalPredicateObjectMap]) {
+    if (!pom.isInstanceOf[RMLConditionalPredicateObjectMap]) {
       throw new IllegalArgumentException("Predicate Object Map is not conditional.")
     }
 
@@ -30,7 +30,7 @@ class ConditionalTemplateAnalyzer(ontology: Ontology, ignore : Boolean = false) 
     val analyzer = new StdTemplatesAnalyzer(ontology, ignoreURIPart)
 
     // if this is a classmapping do not search for templates
-    val templates = if(ontologyClass != null) Seq() else Seq(analyzer.analyze(condPom))
+    val templates = if (ontologyClass != null) Seq() else Seq(analyzer.analyze(condPom))
 
     val fallbackTemplate = retrieveFallbackTemplateFromFallbackPoms(fallbacks)
 
@@ -42,7 +42,7 @@ class ConditionalTemplateAnalyzer(ontology: Ontology, ignore : Boolean = false) 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-  def getCondition(function : Function) = {
+  def getCondition(function: Function) = {
 
     val conditionName = function.name
     val conditionValueParam = function.constants.getOrElse(conditionName + "/valueParameter", null)
@@ -61,7 +61,7 @@ class ConditionalTemplateAnalyzer(ontology: Ontology, ignore : Boolean = false) 
     condition
   }
 
-  def getOntologyClass(pom : RMLPredicateObjectMap): OntologyClass = {
+  def getOntologyClass(pom: RMLPredicateObjectMap): OntologyClass = {
     pom.rrPredicate match {
       case Property.TYPE => RMLOntologyUtil.loadOntologyClassFromIRI(pom.rrObject, ContextCreator.createOntologyContext(ontology))
       case _ => null
@@ -73,9 +73,9 @@ class ConditionalTemplateAnalyzer(ontology: Ontology, ignore : Boolean = false) 
     * @param fallbacks
     * @return A conditional template, returns null if the fallbacks parameter is an empty list
     */
-  def retrieveFallbackTemplateFromFallbackPoms(fallbacks : List[RMLPredicateObjectMap]) : ConditionalTemplate = {
+  def retrieveFallbackTemplateFromFallbackPoms(fallbacks: List[RMLPredicateObjectMap]): ConditionalTemplate = {
 
-    if(fallbacks.isEmpty) {
+    if (fallbacks.isEmpty) {
       // if not null is returned a ConditionalTemplate object with empty fields will be returned,
       // which is not wanted
       return null
@@ -98,14 +98,14 @@ class ConditionalTemplateAnalyzer(ontology: Ontology, ignore : Boolean = false) 
       fallback.isInstanceOf[RMLConditionalPredicateObjectMap]
     }).orNull.asInstanceOf[RMLConditionalPredicateObjectMap]
 
-    val condition = if(condPom != null) {
+    val condition = if (condPom != null) {
       val function = condPom.equalCondition.getFunction
       getCondition(function)
     } else null
 
-    val fallbackPom = if(condPom != null && condPom.fallbacks.nonEmpty) {
-        retrieveFallbackTemplateFromFallbackPoms(condPom.fallbacks)
-      } else null
+    val fallbackPom = if (condPom != null && condPom.fallbacks.nonEmpty) {
+      retrieveFallbackTemplateFromFallbackPoms(condPom.fallbacks)
+    } else null
 
     ConditionalTemplate(condition, templates, ontologyClass, fallbackPom)
   }

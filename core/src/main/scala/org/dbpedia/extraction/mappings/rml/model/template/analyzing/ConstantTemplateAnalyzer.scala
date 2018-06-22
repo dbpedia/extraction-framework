@@ -19,7 +19,7 @@ class ConstantTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateAnaly
 
     val ontologyProperty = loadProperty(pom.rrPredicate)
 
-    if(pom.hasFunctionTermMap) {
+    if (pom.hasFunctionTermMap) {
 
       val ftm = pom.objectMap.asInstanceOf[RMLFunctionTermMap]
       val fn = ftm.getFunction

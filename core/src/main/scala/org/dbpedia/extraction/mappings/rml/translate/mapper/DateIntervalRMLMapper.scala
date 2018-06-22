@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.mappings.rml.translate.mapper
 
 import org.dbpedia.extraction.mappings.DateIntervalMapping
-import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
-import org.dbpedia.extraction.mappings.rml.model.{AbstractRMLModel, RMLTranslationModel}
+import org.dbpedia.extraction.mappings.rml.model.RMLTranslationModel
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
+import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 import scala.language.reflectiveCalls
@@ -15,17 +15,16 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
 
   //TODO refactor
 
-  def mapToModel() : List[RMLPredicateObjectMap] = {
+  def mapToModel(): List[RMLPredicateObjectMap] = {
     addDateIntervalMapping()
   }
 
-  def addDateIntervalMapping() : List[RMLPredicateObjectMap]  =
-  {
+  def addDateIntervalMapping(): List[RMLPredicateObjectMap] = {
     val uri = rmlModel.wikiTitle.resourceIri
     addDateIntervalMappingToTriplesMap(uri, rmlModel.triplesMap)
   }
 
-  def addIndependentDateIntervalMapping() : List[RMLPredicateObjectMap] = {
+  def addIndependentDateIntervalMapping(): List[RMLPredicateObjectMap] = {
     val uri = rmlModel.wikiTitle.resourceIri
     val startUri = RMLUri(uri + "/StartDateMapping/" + TemplateRMLMapper.startDateCount)
     val startPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(startUri)
@@ -40,7 +39,7 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
     List(startPom, endPom)
   }
 
-  def addDateIntervalMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) : List[RMLPredicateObjectMap] = {
+  def addDateIntervalMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap): List[RMLPredicateObjectMap] = {
 
     val startUri = RMLUri(uri + "/StartDateMapping/" + TemplateRMLMapper.startDateCount)
     val startDateIntervalPom = triplesMap.addPredicateObjectMap(startUri)
@@ -56,8 +55,7 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
 
   }
 
-  private def addDateIntervalMappingToPredicateObjectMaps(startDateIntervalPom: RMLPredicateObjectMap, endDateIntervalPom: RMLPredicateObjectMap) =
-  {
+  private def addDateIntervalMappingToPredicateObjectMaps(startDateIntervalPom: RMLPredicateObjectMap, endDateIntervalPom: RMLPredicateObjectMap) = {
     startDateIntervalPom.addPredicate(RMLUri(mapping.startDateOntologyProperty.uri))
     endDateIntervalPom.addPredicate(RMLUri(mapping.endDateOntologyProperty.uri))
 
@@ -99,7 +97,7 @@ class DateIntervalRMLMapper(rmlModel: RMLTranslationModel, mapping: DateInterval
     // adding the property parameter pom of the end date function
     val endParameterPomUri = endFunctionValueUri.extend("/PropertyParameterPOM")
     val endParameterPom = endFunctionValue.addPredicateObjectMap(endParameterPomUri)
-    endParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace +  DbfFunction.endDateFunction.endDateParameter))
+    endParameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.endDateFunction.endDateParameter))
     val endParameterObjectMapUri = endParameterPomUri.extend("/ObjectMap")
     endParameterPom.addObjectMap(endParameterObjectMapUri).addRMLReference(new RMLLiteral(mapping.templateProperty))
 

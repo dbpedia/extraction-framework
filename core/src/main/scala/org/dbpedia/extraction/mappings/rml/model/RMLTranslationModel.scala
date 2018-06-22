@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.mappings.rml.model
 
-import org.dbpedia.extraction.mappings.rml.model.factory.RMLResourceFactory
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.wikiparser.WikiTitle
@@ -9,7 +8,7 @@ import org.dbpedia.extraction.wikiparser.WikiTitle
   * Created by wmaroy on 21.07.17.
   * RMLModel that retrieves its triplesMap and etc from the WikiMappings
   */
-class RMLTranslationModel(val wikiTitle: WikiTitle, val sourceUri : String) extends AbstractRMLModel {
+class RMLTranslationModel(val wikiTitle: WikiTitle, val sourceUri: String) extends AbstractRMLModel {
 
   protected val _triplesMap: RMLTriplesMap = rmlFactory.createRMLTriplesMap(RMLUri(wikiTitle.resourceIri))
   protected val _subjectMap: RMLSubjectMap = _triplesMap.addSubjectMap(RMLUri(convertToSubjectMapUri(wikiTitle)))

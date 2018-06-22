@@ -29,20 +29,20 @@ import scala.language.reflectiveCalls
   **/
 class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
 
-  def process(templateNode: TemplateNode, mappingName : String, subjectUri: String, context : { def language : Language
-                                                                                                  def ontology: Ontology
-                                                                                                  def redirects: Redirects}) : Seq[Quad] = {
+  def process(templateNode: TemplateNode, mappingName: String, subjectUri: String, context: {def language: Language
+    def ontology: Ontology
+    def redirects: Redirects}): Seq[Quad] = {
 
     /**
-      *  Setting up the processor
+      * Setting up the processor
       */
 
     val parameters = new util.HashMap[String, String]()
-    val triplesMap = "http://" + context.language.isoCode +".dbpedia.org/resource/" + mappingName.replace("%3A", ":")
+    val triplesMap = "http://" + context.language.isoCode + ".dbpedia.org/resource/" + mappingName.replace("%3A", ":")
     val exeTriplesMap = List[String](triplesMap)
     val engine = new StdRMLEngine()
 
-    val dataset : RMLDataset = new StdRMLDataset()
+    val dataset: RMLDataset = new StdRMLDataset()
     val templateNodeHashMap = convertTemplateNodeToMap(templateNode)
     val regex = ".*/".r
     templateNodeHashMap.put("wikititle", regex.replaceAllIn(subjectUri, ""))
@@ -78,14 +78,14 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
       */
     val statementIterator = model.listStatements()
     var seq = Seq.empty[Quad]
-    while(statementIterator.hasNext) {
+    while (statementIterator.hasNext) {
 
       val statement = statementIterator.nextStatement()
 
       // extract object value
-      val objectValue = if(statement.getObject.isResource) {
+      val objectValue = if (statement.getObject.isResource) {
         statement.getObject.asResource().toString
-      } else if(statement.getObject.isLiteral) {
+      } else if (statement.getObject.isLiteral) {
         statement.getObject.asLiteral().getString
       } else {
         throw new RuntimeException(statement.getSubject.getURI + " has no valid object")
@@ -97,14 +97,14 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
       // extract predicate value
       val ontologyProperty = RMLOntologyUtil.loadOntologyPropertyFromIRI(statement.getPredicate.getURI, context)
 
-      val quad = if(ontologyProperty != null) {
+      val quad = if (ontologyProperty != null) {
 
         //TODO: Datasets need to be applied correctly, solution need to be found! Probably quads ..
 
         val datatype = try {
           val regex = ".*/".r
           val name = regex.replaceAllIn(statement.getObject.asLiteral.getDatatype.getURI, "")
-          val dt = RMLOntologyUtil.loadOntologyDataType(name , context)
+          val dt = RMLOntologyUtil.loadOntologyDataType(name, context)
           dt
         } catch {
           case e: Exception => ontologyProperty.range match {
@@ -127,7 +127,7 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
       } else {
 
         // If the used property is not in the DBpedia ontology. This is for extracting data with other ontologies.
-        val datatype = if(statement.getObject.isResource) {
+        val datatype = if (statement.getObject.isResource) {
           null
         } else {
           statement.getObject.asLiteral().getDatatypeURI
@@ -144,11 +144,11 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
       seq :+= quad
 
       // add related classes
-      if(ontologyProperty.name == "rdf:type") {
+      if (ontologyProperty.name == "rdf:type") {
         val ontologyClass = RMLOntologyUtil.loadOntologyClassFromIRI(objectValue, context)
         ontologyClass.relatedClasses.foreach(cls => {
           val typeDataset = if (cls.equals(ontologyClass)) DBpediaDatasets.OntologyTypes else DBpediaDatasets.OntologyTypesTransitive
-          seq :+= new Quad(context.language, typeDataset, subjectURIDecoded, ontologyProperty, cls.uri, templateNode.sourceUri+"&mappedTemplate="+templateNode.title.encoded)
+          seq :+= new Quad(context.language, typeDataset, subjectURIDecoded, ontologyProperty, cls.uri, templateNode.sourceUri + "&mappedTemplate=" + templateNode.title.encoded)
         })
       }
 
@@ -164,10 +164,10 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
     * @param templateNode
     * @return
     */
-  private def convertTemplateNodeToMap(templateNode: TemplateNode) : util.HashMap[String,String] = {
-    val hashMap = new util.HashMap[String,String]()
+  private def convertTemplateNodeToMap(templateNode: TemplateNode): util.HashMap[String, String] = {
+    val hashMap = new util.HashMap[String, String]()
     val keyset = templateNode.keySet
-    for(key <- keyset) {
+    for (key <- keyset) {
       val node = templateNode.property(key).get
       val pattern = ".*?=".r
       hashMap.put(key, pattern replaceFirstIn(node.toWikiText, ""))

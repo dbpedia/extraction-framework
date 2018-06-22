@@ -5,6 +5,6 @@ package org.dbpedia.extraction.mappings.rml.model.template.json
   */
 trait JsonTemplate {
 
-  override def toString : String
+  override def toString: String
 
 }

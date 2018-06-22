@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings.rml.model.template.json.std
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
-import org.dbpedia.extraction.mappings.rml.model.template.{GeocoordinateTemplate, StartDateTemplate, Template}
 import org.dbpedia.extraction.mappings.rml.model.template.json.{JsonTemplate, TemplateJsonConverter}
+import org.dbpedia.extraction.mappings.rml.model.template.{GeocoordinateTemplate, Template}
 
 /**
   * Created by wmaroy on 12.08.17.
@@ -21,10 +21,10 @@ class StdGeocoordinatesJsonConverter extends TemplateJsonConverter {
 
     parameters.put("coordinate", geoTemplate.coordinate)
 
-    val ontologyProperty = if(geoTemplate.ontologyProperty != null) {
+    val ontologyProperty = if (geoTemplate.ontologyProperty != null) {
       geoTemplate.ontologyProperty.uri
     } else null
-    parameters.put("ontologyProperty" , ontologyProperty)
+    parameters.put("ontologyProperty", ontologyProperty)
 
     parameters.put("latitude", geoTemplate.latitude)
     parameters.put("longitude", geoTemplate.longitude)

@@ -2,8 +2,8 @@ package org.dbpedia.extraction.mappings.rml.model.template.json.std
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
-import org.dbpedia.extraction.mappings.rml.model.template.{IntermediateTemplate, Template}
 import org.dbpedia.extraction.mappings.rml.model.template.json.{JsonTemplate, TemplateJsonConverter}
+import org.dbpedia.extraction.mappings.rml.model.template.{IntermediateTemplate, Template}
 
 /**
   * Created by wmaroy on 12.08.17.
@@ -20,12 +20,12 @@ class StdIntermediateJsonConverter extends TemplateJsonConverter {
     val parameters = JsonNodeFactory.instance.objectNode()
     node.set("parameters", parameters)
 
-    val _class = if(intermediateTemplate.ontologyClass != null) {
+    val _class = if (intermediateTemplate.ontologyClass != null) {
       intermediateTemplate.ontologyClass.uri
     } else null
     parameters.put("class", _class)
 
-    val ontologyProperty = if(intermediateTemplate.property != null) {
+    val ontologyProperty = if (intermediateTemplate.property != null) {
       intermediateTemplate.property.uri
     } else null
     parameters.put("property", ontologyProperty)

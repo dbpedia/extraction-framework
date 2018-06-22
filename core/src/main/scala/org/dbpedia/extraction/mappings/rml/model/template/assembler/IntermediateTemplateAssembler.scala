@@ -1,23 +1,20 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
-import org.dbpedia.extraction.mappings.PropertyMapping
 import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
-import org.dbpedia.extraction.mappings.rml.model.template.{GeocoordinateTemplate, IntermediateTemplate, Template}
 import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
-import org.dbpedia.extraction.mappings.rml.translate.mapper.RMLModelMapper
+import org.dbpedia.extraction.mappings.rml.model.template.{IntermediateTemplate, Template}
 
 /**
   * Created by wmaroy on 29.07.17.
   */
-class IntermediateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : String, language: String, template : IntermediateTemplate, counter : Counter) {
+class IntermediateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, language: String, template: IntermediateTemplate, counter: Counter) {
 
-  def assemble() : List[RMLPredicateObjectMap] = {
+  def assemble(): List[RMLPredicateObjectMap] = {
     addIntermediateNodeMapping()
   }
 
-  def addIntermediateNodeMapping() : List[RMLPredicateObjectMap] =
-  {
+  def addIntermediateNodeMapping(): List[RMLPredicateObjectMap] = {
 
     val uri = RMLUri(baseUri +
       "/" + RMLUri.INTERMEDIATEMAPPING + "/" +
@@ -31,8 +28,7 @@ class IntermediateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : String
 
   }
 
-  private def addIntermediateNodeMappingToPredicateObjectMap(intermediateNodePom: RMLPredicateObjectMap) =
-  {
+  private def addIntermediateNodeMappingToPredicateObjectMap(intermediateNodePom: RMLPredicateObjectMap) = {
 
 
     intermediateNodePom.addPredicate(RMLUri(template.property.uri))
@@ -63,12 +59,10 @@ class IntermediateTemplateAssembler(rmlModel: AbstractRMLModel, baseUri : String
     })
   }
 
-  private def addPropertyMapping(template: Template, triplesMap: RMLTriplesMap, counter : Counter) : (Counter, List[RMLPredicateObjectMap]) =
-  {
-    val bundle = TemplateAssembler.assembleTemplate(rmlModel, baseUri +  "/" + RMLUri.INTERMEDIATEMAPPING + "/"  + counter.intermediates + "", template, language, counter, independent = true)
+  private def addPropertyMapping(template: Template, triplesMap: RMLTriplesMap, counter: Counter): (Counter, List[RMLPredicateObjectMap]) = {
+    val bundle = TemplateAssembler.assembleTemplate(rmlModel, baseUri + "/" + RMLUri.INTERMEDIATEMAPPING + "/" + counter.intermediates + "", template, language, counter, independent = true)
     bundle
   }
-
 
 
 }

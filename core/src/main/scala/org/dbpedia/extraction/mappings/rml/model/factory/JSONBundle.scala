@@ -6,4 +6,4 @@ import org.dbpedia.extraction.ontology.Ontology
 /**
   * Created by wmaroy on 26.07.17.
   */
-case class JSONBundle(templateNode : JsonNode, ontology: Ontology) extends TemplateFactoryBundle
+case class JSONBundle(templateNode: JsonNode, ontology: Ontology) extends TemplateFactoryBundle

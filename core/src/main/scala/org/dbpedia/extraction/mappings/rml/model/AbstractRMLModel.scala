@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.mappings.rml.model
 
-import org.apache.jena.rdf.model.{Property, Resource}
-import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.mappings.rml.model.factory.RMLResourceFactory
 import org.dbpedia.extraction.mappings.rml.model.resource._
+import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import collection.JavaConverters._
+
+import scala.collection.JavaConverters._
 
 /**
   * ModelWrapper that is used for resembling RML Mappings
@@ -20,12 +20,15 @@ abstract class AbstractRMLModel extends ModelWrapper {
   protected val _functionSubjectMap: RMLSubjectMap
 
   def logicalSource = _logicalSource
+
   def subjectMap = _subjectMap
+
   def triplesMap = _triplesMap
+
   def functionSubjectMap = _functionSubjectMap
 
   //setting predefined prefixes
-  for(rdfNamespace <- RdfNamespace.prefixMap) {
+  for (rdfNamespace <- RdfNamespace.prefixMap) {
     model.setNsPrefix(rdfNamespace._2.prefix, rdfNamespace._2.namespace)
   }
 
@@ -35,21 +38,19 @@ abstract class AbstractRMLModel extends ModelWrapper {
     * @param rmlUri
     * @return
     */
-  def containsResource(rmlUri: RMLUri) : Boolean = {
+  def containsResource(rmlUri: RMLUri): Boolean = {
     model.containsResource(model.createResource(rmlUri.toString))
   }
 
-  protected def convertToLogicalSourceUri(title: WikiTitle): String =
-  {
+  protected def convertToLogicalSourceUri(title: WikiTitle): String = {
     title.resourceIri + "/LogicalSource"
   }
 
-  protected def convertToSubjectMapUri(title: WikiTitle): String =
-  {
+  protected def convertToSubjectMapUri(title: WikiTitle): String = {
     title.resourceIri + "/SubjectMap"
   }
 
-  def count(templateName : String) : Int = {
+  def count(templateName: String): Int = {
     // define resource and property to look for
     val triplesMapResource = triplesMap.resource
     val tmrURI = triplesMap.resource.getURI

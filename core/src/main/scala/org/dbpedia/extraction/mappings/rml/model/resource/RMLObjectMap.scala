@@ -9,71 +9,65 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   */
 class RMLObjectMap(override val resource: Resource) extends RMLResource(resource) {
 
-  lazy val parentTriplesMap : RMLTriplesMap = getParentTriplesMap
-  lazy val reference : RMLLiteral = getReference
+  lazy val parentTriplesMap: RMLTriplesMap = getParentTriplesMap
+  lazy val reference: RMLLiteral = getReference
 
-  def addRMLReference(literal: RMLLiteral) =
-  {
+  def addRMLReference(literal: RMLLiteral) = {
     resource.addLiteral(createProperty(RdfNamespace.RML.namespace + "reference"), literal.toString())
   }
 
-  def addParentTriplesMap(uri: RMLUri) : RMLTriplesMap =
-  {
+  def addParentTriplesMap(uri: RMLUri): RMLTriplesMap = {
     val parentTriplesMap = factory.createRMLTriplesMap(uri)
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "parentTriplesMap"), parentTriplesMap.resource)
     parentTriplesMap
   }
 
-  def addConstant(literal: RMLLiteral) : RMLObjectMap =
-  {
+  def addConstant(literal: RMLLiteral): RMLObjectMap = {
     resource.addLiteral(createProperty(RdfNamespace.RR.namespace + "constant"), literal.toString())
     this
   }
 
-  def addConstant(uri: RMLUri) : RMLObjectMap =
-  {
+  def addConstant(uri: RMLUri): RMLObjectMap = {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "constant"), createProperty(uri.toString))
     this
   }
 
-  def addIRITermType() : RMLObjectMap =
-  {
+  def addIRITermType(): RMLObjectMap = {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "termType"), createProperty(RdfNamespace.RR.namespace + "IRI"))
     this
   }
 
-  def addLiteralTermType() : RMLObjectMap =
-  {
+  def addLiteralTermType(): RMLObjectMap = {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "termType"), createProperty(RdfNamespace.RR.namespace + "Literal"))
     this
   }
 
-  def addDatatype(uri : RMLUri) = {
+  def addDatatype(uri: RMLUri) = {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "datatype"), createProperty(uri.toString))
     this
   }
 
-  def addLanguage(language : String) = {
+  def addLanguage(language: String) = {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "language"), language)
   }
 
-  def hasReference : Boolean = {
+  def hasReference: Boolean = {
     reference != null
   }
 
 
-  private def getParentTriplesMap : RMLTriplesMap = {
+  private def getParentTriplesMap: RMLTriplesMap = {
     val property = resource.listProperties(createProperty(Property.PARENTTRIPLESMAP))
-    if(property.hasNext) {
+    if (property.hasNext) {
       val stmnt = property.nextStatement()
       val parentTriplesMapResource = stmnt.getObject.asResource()
       RMLTriplesMap(parentTriplesMapResource)
     } else null
   }
 
-  private def getReference : RMLLiteral = {
+  private def getReference: RMLLiteral = {
     val property = resource.listProperties(createProperty(Property.REFERENCE))
-    if(property.hasNext) {
+    if (property.hasNext) {
       val stmnt = property.nextStatement()
       val referenceString = stmnt.getObject.asLiteral().toString
       val reference = RMLLiteral(referenceString)
@@ -91,11 +85,9 @@ object RMLObjectMap {
     * @param resource
     * @return
     */
-  def apply(resource: Resource) : RMLObjectMap = {
+  def apply(resource: Resource): RMLObjectMap = {
     new RMLObjectMap(resource)
   }
-
-
 
 
 }

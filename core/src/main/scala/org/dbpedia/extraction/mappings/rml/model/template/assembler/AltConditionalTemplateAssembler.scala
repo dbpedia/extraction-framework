@@ -16,15 +16,15 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   * TODO: this would generate an alternative Conditional Template, not implemented and not in use atm
   *
   */
-class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, conditionalTemplate: ConditionalTemplate, language: String, counter : Counter) {
+class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, conditionalTemplate: ConditionalTemplate, language: String, counter: Counter) {
 
-  private val conditionalBaseUri = baseUri + "/ConditionalMapping" + "/"+ counter.conditionals
+  private val conditionalBaseUri = baseUri + "/ConditionalMapping" + "/" + counter.conditionals
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  def assemble() : List[RMLPredicateObjectMap] = {
+  def assemble(): List[RMLPredicateObjectMap] = {
     addConditions()
     List()
   }
@@ -35,14 +35,14 @@ class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: Strin
 
   private def addConditions() = {
 
-    def addConditions(resource : RMLResource, template : ConditionalTemplate, counter : Counter): Unit = {
+    def addConditions(resource: RMLResource, template: ConditionalTemplate, counter: Counter): Unit = {
 
       ////////////////////////////////////////////////////////////////////////////
       // Creates condition FTM and update the counter
       ////////////////////////////////////////////////////////////////////////////
 
       val condition = conditionalTemplate.condition
-      val tuple : (Counter, RMLFunctionTermMap) = if(condition != null && !condition.isInstanceOf[OtherwiseCondition]) {
+      val tuple: (Counter, RMLFunctionTermMap) = if (condition != null && !condition.isInstanceOf[OtherwiseCondition]) {
         createEqualCondition(condition, conditionalBaseUri, counter)
       } else {
         (counter, null)
@@ -63,10 +63,10 @@ class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: Strin
       // every assembly returns a tuple (state) which is in turn passed through to the next assembly
       val finalState = subTemplates.foldLeft((updatedCounter, List[RMLPredicateObjectMap]()))((state, template) => {
 
-        val updatedState : (Counter, List[RMLPredicateObjectMap]) =
+        val updatedState: (Counter, List[RMLPredicateObjectMap]) =
           TemplateAssembler.assembleTemplate(rmlModel,
-                                             conditionalBaseUri + "/Condition/" + counter.subConditions,
-                                             template, language, state._1)
+            conditionalBaseUri + "/Condition/" + counter.subConditions,
+            template, language, state._1)
 
         addFallbacksToResource(resource, updatedState)
 
@@ -83,10 +83,10 @@ class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: Strin
       // fallbacks will be put onto the first pom from the sub templates
       ////////////////////////////////////////////////////////////////////////////
 
-      val updatedResource : RMLPredicateObjectMap = if(template.hasClass) {
+      val updatedResource: RMLPredicateObjectMap = if (template.hasClass) {
 
         // a mapping can only contain one class mapping, or one set of conditional class mappings
-        if(containsClassMapping) throw new IllegalArgumentException("Class is already mapped. Only one class mapping is allowed.")
+        if (containsClassMapping) throw new IllegalArgumentException("Class is already mapped. Only one class mapping is allowed.")
 
         val mapToClassPom = createMapToClassPom(template, counter)
         addFallbackToResource(resource, mapToClassPom)
@@ -104,11 +104,11 @@ class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: Strin
       // Only execute this if there is a condition ..
       ////////////////////////////////////////////////////////////////////////////
 
-      if(conditionFunctionTermMap != null) addConditionFTMToResource(resource, conditionFunctionTermMap, updatedResource, finalPomList)
+      if (conditionFunctionTermMap != null) addConditionFTMToResource(resource, conditionFunctionTermMap, updatedResource, finalPomList)
       val finalCounter = finalState._1.update(subConditions = finalState._1.subConditions + 1)
 
       //continue recursively
-      if(template.hasFallback) {
+      if (template.hasFallback) {
         addConditions(updatedResource, template.fallback, finalCounter)
       }
 
@@ -118,7 +118,7 @@ class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: Strin
 
   }
 
-  private def createMapToClassPom(template : ConditionalTemplate, counter : Counter) : RMLConditionalPredicateObjectMap = {
+  private def createMapToClassPom(template: ConditionalTemplate, counter: Counter): RMLConditionalPredicateObjectMap = {
     val mapToClassPomUri = RMLUri(conditionalBaseUri + "/Condition/" + counter.subConditions + "/ClassMapping")
     val mapToClassPom = rmlModel.rmlFactory.createRMLConditionalPredicateObjectMap(mapToClassPomUri)
     mapToClassPom.addPredicate(RMLUri(RdfNamespace.RDF.namespace + "type"))
@@ -126,7 +126,7 @@ class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: Strin
     mapToClassPom
   }
 
-  private def addConditionFTMToResource(resource : RMLResource, condFTM : RMLFunctionTermMap, updatedResource : RMLPredicateObjectMap, pomList : List[RMLPredicateObjectMap]) : Unit = {
+  private def addConditionFTMToResource(resource: RMLResource, condFTM: RMLFunctionTermMap, updatedResource: RMLPredicateObjectMap, pomList: List[RMLPredicateObjectMap]): Unit = {
     resource match {
       case triplesMap: RMLTriplesMap => {
         pomList.foreach(pom => {
@@ -136,21 +136,21 @@ class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: Strin
         val condPom = rmlModel.rmlFactory.transformToConditional(updatedResource)
         condPom.addEqualCondition(condFTM)
       }
-      case pom : RMLConditionalPredicateObjectMap => {
+      case pom: RMLConditionalPredicateObjectMap => {
         val condPom = rmlModel.rmlFactory.transformToConditional(updatedResource)
         condPom.addEqualCondition(condFTM)
       }
     }
   }
 
-  private def addFallbackToResource(resource : RMLResource, condPom : RMLConditionalPredicateObjectMap): Unit = {
+  private def addFallbackToResource(resource: RMLResource, condPom: RMLConditionalPredicateObjectMap): Unit = {
     resource match {
       case triplesMap: RMLTriplesMap => triplesMap.addConditionalPredicateObjectMap(condPom)
-      case pom : RMLConditionalPredicateObjectMap => pom.addFallbackMap(condPom)
+      case pom: RMLConditionalPredicateObjectMap => pom.addFallbackMap(condPom)
     }
   }
 
-  private def addFallbacksToResource(resource :RMLResource, state : (Counter, List[RMLPredicateObjectMap])) : Unit  = {
+  private def addFallbacksToResource(resource: RMLResource, state: (Counter, List[RMLPredicateObjectMap])): Unit = {
     // foreach: every pom in pomList is transformed to a conditional pom with an added condition
     val pomList = state._2
     pomList.foreach(pom => {
@@ -165,8 +165,7 @@ class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: Strin
     *
     * @return
     */
-  private def createEqualCondition(condition: Condition, conditionalBaseURI : String, counter : Counter) : (Counter, RMLFunctionTermMap) =
-  {
+  private def createEqualCondition(condition: Condition, conditionalBaseURI: String, counter: Counter): (Counter, RMLFunctionTermMap) = {
 
     val functionTermMapUri = RMLUri(conditionalBaseURI + "/Condition/" + counter.subConditions + "/FunctionTermMap")
     val functionTermMap = rmlModel.rmlFactory.createRMLFunctionTermMap(functionTermMapUri)
@@ -178,13 +177,13 @@ class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: Strin
     executePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
     executePom.addObject(RMLUri(RdfNamespace.DBF.namespace + condition.operator))
 
-    def addValueParameter(value : String, operator : String) = {
+    def addValueParameter(value: String, operator: String) = {
       val paramValuePom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/ValueParameterPOM"))
-      paramValuePom.addPredicate(RMLUri(RdfNamespace.DBF.namespace  + operator + "/" + DbfFunction.operatorFunction.valueParameter))
+      paramValuePom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + operator + "/" + DbfFunction.operatorFunction.valueParameter))
       paramValuePom.addObject(new RMLLiteral(value))
     }
 
-    def addPropertyParameter(property : String, operator : String) = {
+    def addPropertyParameter(property: String, operator: String) = {
       val paramPropertyPom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/PropertyParameterPOM"))
       paramPropertyPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + operator + "/" + DbfFunction.operatorFunction.propertyParameter))
       paramPropertyPom.addObjectMap(paramPropertyPom.uri.extend("/ObjectMap")).addRMLReference(new RMLLiteral(property))
@@ -214,7 +213,7 @@ class AltConditionalTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: Strin
     (counter, functionTermMap)
   }
 
-  private def containsClassMapping : Boolean = {
+  private def containsClassMapping: Boolean = {
 
     val subjectMapHasClass = rmlModel.subjectMap.resource.hasProperty(rmlModel.model.createProperty(RdfNamespace.RR.namespace + "class"))
     val pomHasType = rmlModel.triplesMap.predicateObjectMaps.exists(pom => pom.rrPredicate.equals(RdfNamespace.RDF.namespace + "type"))

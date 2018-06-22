@@ -3,13 +3,13 @@ package org.dbpedia.extraction.mappings.rml.model.template.analyzing
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLFunctionTermMap, RMLPredicateObjectMap, RMLUri}
-import org.dbpedia.extraction.mappings.rml.model.template.{GeocoordinateTemplate, LatitudeTemplate, Template}
+import org.dbpedia.extraction.mappings.rml.model.template.{LatitudeTemplate, Template}
 import org.dbpedia.extraction.ontology.{Ontology, RdfNamespace}
 
 /**
   * Created by wmaroy on 11.08.17.
   */
-class LatitudeTemplateAnalyzer(ontology: Ontology) extends TemplateAnalyzer{
+class LatitudeTemplateAnalyzer(ontology: Ontology) extends TemplateAnalyzer {
 
   val logger = Logger.getGlobal
 

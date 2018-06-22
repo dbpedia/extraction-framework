@@ -2,9 +2,8 @@ package org.dbpedia.extraction.mappings.rml.model
 
 import java.io.StringWriter
 
-import org.apache.jena.rdf.model.{Model, ModelFactory, Resource, Statement}
+import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.wikiparser.WikiTitle
 
 /**
   * Class that is a wrapper around a Jena model that adds behaviour
@@ -13,31 +12,27 @@ class ModelWrapper {
 
   val model: Model = ModelFactory.createDefaultModel()
 
-  def printAsNTriples(): Unit =
-  {
+  def printAsNTriples(): Unit = {
     model.write(System.out, "N-TRIPLES")
   }
 
-  def printAsTurtle(): Unit =
-  {
+  def printAsTurtle(): Unit = {
     model.write(System.out, "TURTLE")
   }
 
-  def writeAsTurtle: String =
-  {
+  def writeAsTurtle: String = {
     val out = new StringWriter()
     model.write(out, "TURTLE")
     out.toString
   }
 
-  def writeAsTurtle(base : String) = {
+  def writeAsTurtle(base: String) = {
     val out = new StringWriter()
     model.write(out, "TTL", base)
     out.toString
   }
 
-  def writeAsNTriples: String =
-  {
+  def writeAsNTriples: String = {
     val out = new StringWriter()
     model.write(out, "NTRIPLES")
     out.toString
@@ -45,7 +40,7 @@ class ModelWrapper {
 
   def insertRDFNamespacePrefixes() = {
     //setting predefined prefixes
-    for(rdfNamespace <- RdfNamespace.prefixMap) {
+    for (rdfNamespace <- RdfNamespace.prefixMap) {
       model.setNsPrefix(rdfNamespace._2.prefix, rdfNamespace._2.namespace)
     }
   }

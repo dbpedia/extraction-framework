@@ -16,11 +16,11 @@ class StdTemplatesAnalyzer$Test extends FunSuite {
     val tm = model.triplesMap
     val ontology = ContextCreator.ontologyObject
 
-    val analyzer : TemplatesAnalyzer = new StdTemplatesAnalyzer(ontology)
+    val analyzer: TemplatesAnalyzer = new StdTemplatesAnalyzer(ontology)
     val templates = analyzer.analyze(tm)
 
-    templates.foreach(template => println(template))  // check the templates manually
-                                                      // this test only ensures that no errors are thrown
+    templates.foreach(template => println(template)) // check the templates manually
+    // this test only ensures that no errors are thrown
 
   }
 
@@ -28,13 +28,13 @@ class StdTemplatesAnalyzer$Test extends FunSuite {
 
 object StdTemplatesAnalyzer$Test {
 
-  def getExampleTemplateSet : Set[Template] = {
+  def getExampleTemplateSet: Set[Template] = {
 
     val model = RMLInferencer$Test.getInferencedMappingExampleAsRMLModel
     val tm = model.triplesMap
     val ontology = ContextCreator.ontologyObject
 
-    val analyzer : TemplatesAnalyzer = new StdTemplatesAnalyzer(ontology)
+    val analyzer: TemplatesAnalyzer = new StdTemplatesAnalyzer(ontology)
     val templates = analyzer.analyze(tm)
     templates
 

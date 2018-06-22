@@ -2,7 +2,6 @@ package org.dbpedia.extraction.mappings.rml.util
 
 import java.io.File
 
-
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
@@ -16,18 +15,16 @@ object ContextCreator {
 
   private lazy val ontologyPath = "../ontology.xml"
   private lazy val ontologyFile = new File(ontologyPath)
-  private lazy val ontologySource = XMLSource.fromFile(ontologyFile,Language.Mappings)
+  private lazy val ontologySource = XMLSource.fromFile(ontologyFile, Language.Mappings)
 
   lazy val ontologyObject = new OntologyReader().read(ontologySource)
 
-  def createXMLContext(pathToXML: String, lang: Language):
-  {
+  def createXMLContext(pathToXML: String, lang: Language): {
     def ontology: Ontology
     def language: Language
     def redirects: Redirects
     def mappingPageSource: Traversable[WikiPage]
-  } =
-  {
+  } = {
     val xmlMappingFile = new File(pathToXML)
     val xmlMapping = XMLSource.fromFile(xmlMappingFile, Language.Mappings)
     new {
@@ -41,11 +38,9 @@ object ContextCreator {
     }
   }
 
-  def createOntologyContext(ontologyParam: Ontology = ontologyObject):
-  {
+  def createOntologyContext(ontologyParam: Ontology = ontologyObject): {
     def ontology: Ontology
-  } =
-  {
+  } = {
     new {
       def ontology: Ontology = ontologyParam
     }

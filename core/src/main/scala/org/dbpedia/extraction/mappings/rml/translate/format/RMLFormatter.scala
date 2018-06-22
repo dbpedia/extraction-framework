@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.mappings.rml.translate.format
+
 import java.io.StringReader
 import java.net.URLDecoder
 
 import org.apache.jena.rdf.model.{ModelFactory, Resource, Statement, StmtIterator}
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLObjectMap, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
-
-import collection.JavaConverters._
-import org.dbpedia.extraction.mappings.rml.model.{ModelWrapper, RMLModel, AbstractRMLModel}
+import org.dbpedia.extraction.mappings.rml.model.{AbstractRMLModel, ModelWrapper, RMLModel}
 import org.dbpedia.extraction.ontology.RdfNamespace
+
+import scala.collection.JavaConverters._
 
 /**
   * Created by wmaroy on 03.07.17.
@@ -29,13 +30,13 @@ object RMLFormatter extends Formatter {
   //  Public methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  def format(input : String, base : String, language : String) : String = {
+  def format(input: String, base: String, language: String): String = {
     val model = ModelFactory.createDefaultModel().read(new StringReader(input), base, "TURTLE")
     val rmlModel = new RMLModel(model, null, base, language)
     format(rmlModel, base)
   }
 
-  override def format(model: AbstractRMLModel, base : String): String = {
+  override def format(model: AbstractRMLModel, base: String): String = {
 
     try {
       val prefixes = getPrefixes(model.writeAsTurtle(base))
@@ -46,20 +47,20 @@ object RMLFormatter extends Formatter {
       val intermediatesPart = getAllIntermediates(model, base)
       val functionsPart = getFunctions(model, base)
       val logicalSourcePart = getLogicalSource(model, base)
-      val subjectMapFunctionPart = if(!functionsPart.equals("")) getSubjectMapFunction(model, base) else ""
+      val subjectMapFunctionPart = if (!functionsPart.equals("")) getSubjectMapFunction(model, base) else ""
       val formatted = Seq(prefixes,
-                          triplesMapPart,
-                          subjectMapPart,
-                          logicalSourcePart,
-                          mappingsPart,
-                          intermediatesPart,
-                          conditionalsPart,
-                          functionsPart,
-                          subjectMapFunctionPart)
-                          .reduce((first, second) => if(second != "") first.concat('\n' + second) else first)
+        triplesMapPart,
+        subjectMapPart,
+        logicalSourcePart,
+        mappingsPart,
+        intermediatesPart,
+        conditionalsPart,
+        functionsPart,
+        subjectMapFunctionPart)
+        .reduce((first, second) => if (second != "") first.concat('\n' + second) else first)
       postProcess(formatted)
     } catch {
-      case x : Exception => x.printStackTrace(); ""
+      case x: Exception => x.printStackTrace(); ""
     }
 
   }
@@ -74,13 +75,13 @@ object RMLFormatter extends Formatter {
     * @param mapping
     * @return
     */
-  private def postProcess(mapping: String) : String = {
+  private def postProcess(mapping: String): String = {
     mapping.split("\n")
-           .map(line => line.replaceAll("/FunctionTermMap", "/FTM")
-                            .replaceAll("/FunctionValue", "/FV")
-                            .replaceAll("/ObjectMap", "/OM")
-                            .replaceAll("ParentTriplesMap", "/PTM"))
-          .reduce((first, second) => first.concat("\n" + second))
+      .map(line => line.replaceAll("/FunctionTermMap", "/FTM")
+        .replaceAll("/FunctionValue", "/FV")
+        .replaceAll("/ObjectMap", "/OM")
+        .replaceAll("ParentTriplesMap", "/PTM"))
+      .reduce((first, second) => first.concat("\n" + second))
   }
 
 
@@ -91,7 +92,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getTriplesMapPart(model : AbstractRMLModel, base : String) : String = {
+  private def getTriplesMapPart(model: AbstractRMLModel, base: String): String = {
 
     val freshModel = new ModelWrapper
     val triplesMapResource = model.triplesMap.resource
@@ -113,7 +114,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getSubjectMapPart(model : AbstractRMLModel, base : String) : String = {
+  private def getSubjectMapPart(model: AbstractRMLModel, base: String): String = {
 
     val freshModel = new ModelWrapper
     val subjectMapResource = model.subjectMap.resource
@@ -131,7 +132,7 @@ object RMLFormatter extends Formatter {
     * @param model
     * @param base
     */
-  private def getAllIntermediates(model : AbstractRMLModel, base : String) : String = {
+  private def getAllIntermediates(model: AbstractRMLModel, base: String): String = {
     val tempModel = new ModelWrapper
     val predicateObjectMaps = model.triplesMap.predicateObjectMaps
     val intermediatePoms = predicateObjectMaps.filter(pom => {
@@ -139,9 +140,9 @@ object RMLFormatter extends Formatter {
     })
 
 
-    if(intermediatePoms.nonEmpty) {
+    if (intermediatePoms.nonEmpty) {
       val intermediateStrings = intermediatePoms.map(intermediatePom => getIntermediateString(intermediatePom, base))
-                                                .reduce((a,b) => a.concat("\n" + b))
+        .reduce((a, b) => a.concat("\n" + b))
 
       val heading = hashtags(30) + "\n" + hashtags(3) + " Intermediate Mappings\n" + hashtags(30) + "\n\n"
       (heading + intermediateStrings).replaceAll(", ", ",\n\t\t\t       ")
@@ -153,7 +154,7 @@ object RMLFormatter extends Formatter {
     *
     * @param pom
     */
-  private def getIntermediateString(pom : RMLPredicateObjectMap, base : String) : String = {
+  private def getIntermediateString(pom: RMLPredicateObjectMap, base: String): String = {
     val intermediatePomString = getResourceString(pom.resource, base)
     val ptmObjectMap = pom.objectMap
     val parentTriplesMapString = getParentTriplesMapString(ptmObjectMap, base)
@@ -161,13 +162,13 @@ object RMLFormatter extends Formatter {
     heading + intermediatePomString + "\n\n" + parentTriplesMapString
   }
 
-  private def getParentTriplesMapString(ptmObjectMap : RMLObjectMap, base : String) : String = {
+  private def getParentTriplesMapString(ptmObjectMap: RMLObjectMap, base: String): String = {
     val ptmObjectMapString = getResourceString(ptmObjectMap.resource, base)
     val ptm = ptmObjectMap.parentTriplesMap
     val ptmString = getResourceString(ptm.resource, base)
     val subjectMap = ptm.subjectMap
     val subjectMapString = getResourceString(subjectMap.resource, base)
-    val pomStrings = if(ptm.predicateObjectMaps.nonEmpty) {
+    val pomStrings = if (ptm.predicateObjectMaps.nonEmpty) {
       getPredicateObjectMapStrings(ptm, base).reduce((a, b) => a.concat("\n\n" + b))
     } else ""
 
@@ -178,17 +179,17 @@ object RMLFormatter extends Formatter {
     omHeading + ptmObjectMapString + "\n\n" + ptmHeading + ptmString + "\n\n" + smHeading + subjectMapString + "\n\n" + pomStrings
   }
 
-  private def getPredicateObjectMapStrings(triplesMap : RMLTriplesMap, base : String) : List[String] = {
+  private def getPredicateObjectMapStrings(triplesMap: RMLTriplesMap, base: String): List[String] = {
     val poms = triplesMap.predicateObjectMaps
     poms.map(pom => {
       val pomString = getResourceString(pom.resource, base)
       val objectMap = pom.objectMap
-      val referenceObjectMapString = if(pom.hasReferenceObjectMap) {
+      val referenceObjectMapString = if (pom.hasReferenceObjectMap) {
         val objectMap = pom.objectMap
         val heading = "### ObjectMap"
         heading + getResourceString(objectMap.resource, base) + offset
       } else ""
-      val functionTermMapString = if(hasFunctionTermMap(pom.resource)) {
+      val functionTermMapString = if (hasFunctionTermMap(pom.resource)) {
         getFunctionTermMap(objectMap, base)
       } else ""
 
@@ -198,7 +199,6 @@ object RMLFormatter extends Formatter {
   }
 
 
-
   /**
     * Gets all the property mappings from a mapping
     *
@@ -206,7 +206,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getAllMappings(model: AbstractRMLModel, base : String) : String = {
+  private def getAllMappings(model: AbstractRMLModel, base: String): String = {
 
     // Get the normal (non-conditional) mappings first
     val triplesMapResource = model.triplesMap.resource
@@ -215,7 +215,7 @@ object RMLFormatter extends Formatter {
     val mappings = statements.asScala.map(statement => {
 
       val predicateObjectMap = RMLPredicateObjectMap(statement.getObject.asResource())
-      if(!hasConditions(predicateObjectMap.resource.asResource()) && !predicateObjectMap.hasParentTriplesMap) {
+      if (!hasConditions(predicateObjectMap.resource.asResource()) && !predicateObjectMap.hasParentTriplesMap) {
         getMapping(predicateObjectMap, base)
       } else {
         "" // skip conditionals here
@@ -223,16 +223,16 @@ object RMLFormatter extends Formatter {
 
     })
 
-    val mappingsString = if(mappings.nonEmpty) {
+    val mappingsString = if (mappings.nonEmpty) {
       mappings.reduce((first, second) => first.concat("\n" + second)) // so return all concatenated mappings
     } else ""
 
-    val heading = hashtags(11)+ "\n# Mappings\n" + hashtags(11) + offset
+    val heading = hashtags(11) + "\n# Mappings\n" + hashtags(11) + offset
 
     heading + mappingsString
   }
 
-  private def getAllConditionalMappings(model: AbstractRMLModel, base : String) : String = {
+  private def getAllConditionalMappings(model: AbstractRMLModel, base: String): String = {
 
     val triplesMapResource = model.triplesMap.resource
     val statements = triplesMapResource.listProperties(model.model.createProperty(RdfNamespace.RR.namespace + "predicateObjectMap")).toList
@@ -243,7 +243,7 @@ object RMLFormatter extends Formatter {
     val conditionals = statements.asScala.map(statement => {
 
       val predicateObjectMap = statement.getObject
-      if(hasConditions(predicateObjectMap.asResource())) {
+      if (hasConditions(predicateObjectMap.asResource())) {
         val tuple = getConditionalMapping(predicateObjectMap.asResource(), base, bundle)
         tuple
       } else {
@@ -252,9 +252,9 @@ object RMLFormatter extends Formatter {
 
     }).filter(conditionString => !conditionString._1.equals(""))
 
-    val conditionalStrings = if(conditionals.nonEmpty) {
-      conditionals.reduce((a, b) => (a._1 + "\n" + b._1, a._2 + "\n" + b._2 ))
-    } else ("","")
+    val conditionalStrings = if (conditionals.nonEmpty) {
+      conditionals.reduce((a, b) => (a._1 + "\n" + b._1, a._2 + "\n" + b._2))
+    } else ("", "")
 
     val conditionalString = conditionalStrings._1 + conditionalStrings._2
 
@@ -270,7 +270,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getMapping(predicateObjectMap: RMLPredicateObjectMap, base : String) : String = {
+  private def getMapping(predicateObjectMap: RMLPredicateObjectMap, base: String): String = {
     val properties = predicateObjectMap.resource.listProperties()
     val propertiesArray: Array[Statement] = properties.toList.asScala.toArray
     val freshModel = new ModelWrapper
@@ -278,12 +278,12 @@ object RMLFormatter extends Formatter {
     freshModel.model.add(propertiesArray)
 
     val heading = hashtags(3) + " Predicate Object Map\n" + hashtags(25)
-    val predicateObjectMapString = removePrefixes(freshModel.writeAsTurtle(base : String))
+    val predicateObjectMapString = removePrefixes(freshModel.writeAsTurtle(base: String))
 
     /** The case if a function is used:
       * Checks if the rr:PredicateObjectMap contains a FunctionTermMap
       */
-    val functionTermMapString = if(hasFunctionTermMap(propertiesArray.head.getSubject)) {
+    val functionTermMapString = if (hasFunctionTermMap(propertiesArray.head.getSubject)) {
       val functionTermMap = getObjectMap(propertiesArray.head.getSubject)
       getFunctionTermMap(functionTermMap.listProperties(), base)
     } else ""
@@ -291,7 +291,7 @@ object RMLFormatter extends Formatter {
     /**
       * The case that there is only a reference object map
       */
-    val referenceObjectMapString = if(predicateObjectMap.hasReferenceObjectMap) {
+    val referenceObjectMapString = if (predicateObjectMap.hasReferenceObjectMap) {
       val objectMap = predicateObjectMap.objectMap
       val heading = "### ObjectMap"
       heading + getResourceString(objectMap.resource, base) + offset
@@ -314,7 +314,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getConditionalMapping(resource : Resource, base : String, bundle : ConditionalMappingBundle) : (String, String) = {
+  private def getConditionalMapping(resource: Resource, base: String, bundle: ConditionalMappingBundle): (String, String) = {
     val heading = hashtags(3) + " Conditional Mapping" + "\n" + hashtags(35)
 
     if (hasConditions(resource) && !conditionExists(resource, bundle.conditions)) {
@@ -324,13 +324,13 @@ object RMLFormatter extends Formatter {
 
       // add retrieval of function if present TODO
 
-      if(hasFallback(resource)) {
+      if (hasFallback(resource)) {
 
         val fallbackMaps = getFallbackMaps(resource)
 
-        val fallbackMapStrings = fallbackMaps.map( fallbackMap => {
+        val fallbackMapStrings = fallbackMaps.map(fallbackMap => {
 
-          val other_conditions  = getConditionalMapping(fallbackMap, base, bundle)
+          val other_conditions = getConditionalMapping(fallbackMap, base, bundle)
           other_conditions
 
         })
@@ -351,7 +351,7 @@ object RMLFormatter extends Formatter {
       /** The case if a function is used:
         * Checks if the rr:PredicateObjectMap contains a FunctionTermMap
         */
-      val objectMapString = if(hasFunctionTermMap(resource)) {
+      val objectMapString = if (hasFunctionTermMap(resource)) {
         val functionTermMap = getObjectMap(resource)
         getFunctionTermMap(functionTermMap.listProperties(), base) + offset
       } else {
@@ -370,12 +370,12 @@ object RMLFormatter extends Formatter {
     }
   }
 
-  private def conditionExists(resource : Resource, conditions : List[String]) : Boolean = {
+  private def conditionExists(resource: Resource, conditions: List[String]): Boolean = {
     val uri = getConditionURI(resource)
     conditions.exists(condition => condition.equals(uri))
   }
 
-  private def getConditionURI(resource: Resource) : String = {
+  private def getConditionURI(resource: Resource): String = {
     val property = resource.getModel.getProperty(RdfNamespace.CRML.namespace + "equalCondition")
     val functionPOM = resource.getPropertyResourceValue(property).asResource()
     functionPOM.getURI
@@ -388,7 +388,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getCondition(resource : Resource, base : String) : (String, String) = {
+  private def getCondition(resource: Resource, base: String): (String, String) = {
     val property = resource.getModel.getProperty(RdfNamespace.CRML.namespace + "equalCondition")
     val functionPOM = resource.getPropertyResourceValue(property).asResource()
     val functionPOMString = getResourceString(functionPOM, base)
@@ -402,14 +402,14 @@ object RMLFormatter extends Formatter {
     val conditionPOM = getResourceString(resource, base)
 
 
-    val objectMap = if(RMLPredicateObjectMap(resource).hasReferenceObjectMap) {
+    val objectMap = if (RMLPredicateObjectMap(resource).hasReferenceObjectMap) {
       val objectMap = RMLPredicateObjectMap(resource).objectMap
       val heading = "### ObjectMap"
       heading + getResourceString(objectMap.resource, base) + offset
     } else ""
 
 
-    val objectMapString = if(hasFunctionTermMap(resource)) {
+    val objectMapString = if (hasFunctionTermMap(resource)) {
       val functionTermMap = getObjectMap(resource)
       getFunctionTermMap(functionTermMap.listProperties(), base) + offset
     } else {
@@ -433,7 +433,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getLogicalSource(model: AbstractRMLModel, base : String) : String = {
+  private def getLogicalSource(model: AbstractRMLModel, base: String): String = {
     val logicalSource = model.logicalSource.resource
     val logicalSourceString = getResourceString(logicalSource, base)
     val heading = "### LogicalSource\n" + hashtags(18) + "\n"
@@ -448,7 +448,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getResourceString(resource : Resource, base : String) : String = {
+  private def getResourceString(resource: Resource, base: String): String = {
     val statements = resource.listProperties().toList.asScala.toArray
     val modelWrapper = createModelWrapper(statements)
     val turtle = modelWrapper.writeAsTurtle(base)
@@ -461,7 +461,7 @@ object RMLFormatter extends Formatter {
     * @param resource
     * @return
     */
-  private def getFallbackMap(resource: Resource) : Resource = {
+  private def getFallbackMap(resource: Resource): Resource = {
     val property = resource.getModel.getProperty(RdfNamespace.CRML.namespace + "fallbackMap")
     resource.getPropertyResourceValue(property)
   }
@@ -472,7 +472,7 @@ object RMLFormatter extends Formatter {
     * @param resource
     * @return
     */
-  private def getFallbackMaps(resource: Resource) : List[Resource] = {
+  private def getFallbackMaps(resource: Resource): List[Resource] = {
     val property = resource.getModel.getProperty(RdfNamespace.CRML.namespace + "fallbackMap")
     val properties = resource.listProperties(property).asScala.toList
     properties.map(property => property.getObject.asResource())
@@ -484,16 +484,16 @@ object RMLFormatter extends Formatter {
     *
     * @return
     */
-  private def getFunctions(modelWrapper : ModelWrapper, base : String): String = {
-    val predicate =  modelWrapper.model.getProperty(RdfNamespace.RR.namespace, "predicate")
+  private def getFunctions(modelWrapper: ModelWrapper, base: String): String = {
+    val predicate = modelWrapper.model.getProperty(RdfNamespace.RR.namespace, "predicate")
     val _object = modelWrapper.model.getResource(RdfNamespace.FNO.namespace + "executes")
     val statement = modelWrapper.model.listResourcesWithProperty(predicate, _object)
       .toList.asScala
-    val properties = modelWrapper.model.listStatements(null,null, _object)
+    val properties = modelWrapper.model.listStatements(null, null, _object)
       .toList.asScala
       .flatMap(statement => statement.getSubject.listProperties().toList.asScala)
 
-    if(properties.nonEmpty) {
+    if (properties.nonEmpty) {
       val freshWrapper = new ModelWrapper
       freshWrapper.insertRDFNamespacePrefixes()
       freshWrapper.model.add(properties.toArray)
@@ -512,14 +512,14 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getFunctionTermMap(properties : StmtIterator, base : String) : String = {
+  private def getFunctionTermMap(properties: StmtIterator, base: String): String = {
     val propertiesArray: Array[Statement] = properties.toList.asScala.toArray
     val freshModel = new ModelWrapper
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(propertiesArray)
 
     val heading = hashtags(3) + " Function Term Map"
-    val functionTermMapString = removePrefixes(freshModel.writeAsTurtle(base : String))
+    val functionTermMapString = removePrefixes(freshModel.writeAsTurtle(base: String))
 
     val functionValueProperty = freshModel.model.getProperty(RdfNamespace.FNML.namespace + "functionValue")
     val functionValue = propertiesArray.head.getSubject.getProperty(functionValueProperty).getObject.asResource()
@@ -530,7 +530,7 @@ object RMLFormatter extends Formatter {
   }
 
 
-  private def getFunctionTermMap(objectMap: RMLObjectMap, base : String) : String = {
+  private def getFunctionTermMap(objectMap: RMLObjectMap, base: String): String = {
     getFunctionTermMap(objectMap.resource.listProperties(), base)
   }
 
@@ -541,19 +541,19 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getFunctionValue(properties : StmtIterator, base : String) : String = {
+  private def getFunctionValue(properties: StmtIterator, base: String): String = {
     val propertiesArray: Array[Statement] = properties.toList.asScala.toArray
     val freshModel = new ModelWrapper
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(propertiesArray)
 
     val heading = hashtags(3) + " Function Execution Mapping"
-    val functionValueString = removePrefixes(freshModel.writeAsTurtle(base : String).replaceAll(", ", ",\n\t\t\t       "))
+    val functionValueString = removePrefixes(freshModel.writeAsTurtle(base: String).replaceAll(", ", ",\n\t\t\t       "))
 
     val predicateObjectMapProperty = freshModel.model.getProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
     val parameters = propertiesArray.head.getSubject.listProperties(predicateObjectMapProperty).toList.asScala.toArray
 
-    val parameterString = if(hasParameters(propertiesArray.head.getSubject)) {
+    val parameterString = if (hasParameters(propertiesArray.head.getSubject)) {
       getParameters(parameters, base)
     } else ""
 
@@ -568,12 +568,12 @@ object RMLFormatter extends Formatter {
     * @param parameterStatements
     * @return
     */
-  private def getParameters(parameterStatements : Array[Statement], base : String) : String = {
+  private def getParameters(parameterStatements: Array[Statement], base: String): String = {
     val paramStmtnsWithoutFunctions = parameterStatements
-                                        .filter(statement => !hasFunction(statement.getObject.asResource()))
+      .filter(statement => !hasFunction(statement.getObject.asResource()))
 
     val properties = paramStmtnsWithoutFunctions
-                      .flatMap(statement => statement.getObject.asResource().listProperties().toList.asScala)
+      .flatMap(statement => statement.getObject.asResource().listProperties().toList.asScala)
 
     val freshModel = new ModelWrapper
     freshModel.insertRDFNamespacePrefixes()
@@ -596,7 +596,7 @@ object RMLFormatter extends Formatter {
     * @param base
     * @return
     */
-  private def getReferences(statements : Array[Statement], base : String) : String = {
+  private def getReferences(statements: Array[Statement], base: String): String = {
 
     val properties = statements.filter(statement => hasObjectMap(statement.getObject.asResource()))
       .flatMap(statement => getObjectMap(statement.getObject.asResource()).listProperties().toList.asScala)
@@ -619,7 +619,7 @@ object RMLFormatter extends Formatter {
     * @param resource
     * @return
     */
-  private def hasParameters(resource : Resource) = {
+  private def hasParameters(resource: Resource) = {
     val property = resource.getModel.getProperty(RdfNamespace.RR.namespace + "predicateObjectMap")
     resource.listProperties(property).toList.asScala.size > 1
   }
@@ -630,7 +630,7 @@ object RMLFormatter extends Formatter {
     * @param resource
     * @return
     */
-  private def hasFunction(resource : Resource) : Boolean = {
+  private def hasFunction(resource: Resource): Boolean = {
     resource.listProperties().toList.asScala.exists(statement => {
       statement.getObject.toString.equals(RdfNamespace.FNO.namespace + "executes")
     })
@@ -642,7 +642,7 @@ object RMLFormatter extends Formatter {
     * @param resource
     * @return
     */
-  private def hasObjectMap(resource : Resource) : Boolean = {
+  private def hasObjectMap(resource: Resource): Boolean = {
     resource.listProperties().toList.asScala.exists(statement => {
       statement.getPredicate.getURI.equals(RdfNamespace.RR.namespace + "objectMap")
     })
@@ -654,8 +654,8 @@ object RMLFormatter extends Formatter {
     * @param resource
     * @return
     */
-  private def hasFunctionTermMap(resource : Resource) : Boolean = {
-    if(hasObjectMap(resource)) {
+  private def hasFunctionTermMap(resource: Resource): Boolean = {
+    if (hasObjectMap(resource)) {
       getObjectMap(resource).listProperties().toList.asScala.exists(statement => {
         statement.getObject.toString.equals(RdfNamespace.FNML.namespace + "FunctionTermMap")
       })
@@ -668,7 +668,7 @@ object RMLFormatter extends Formatter {
     * @param resource
     * @return
     */
-  private def hasFallback(resource: Resource) : Boolean = {
+  private def hasFallback(resource: Resource): Boolean = {
     val property = resource.getModel.createProperty(RdfNamespace.CRML.namespace + "fallbackMap")
     resource.hasProperty(property)
   }
@@ -679,7 +679,7 @@ object RMLFormatter extends Formatter {
     * @param resource
     * @return
     */
-  private def getObjectMap(resource: Resource) : Resource = {
+  private def getObjectMap(resource: Resource): Resource = {
     val objectMapProperty = resource.getModel.getProperty(RdfNamespace.RR.namespace + "objectMap")
     resource.getProperty(objectMapProperty).getObject.asResource()
   }
@@ -690,11 +690,10 @@ object RMLFormatter extends Formatter {
     * @param resource
     * @return
     */
-  private def hasConditions(resource : Resource) : Boolean = {
+  private def hasConditions(resource: Resource): Boolean = {
     val property = resource.getModel.createProperty(RdfNamespace.CRML.namespace + "equalCondition")
     resource.hasProperty(property)
   }
-
 
 
   /**
@@ -702,14 +701,14 @@ object RMLFormatter extends Formatter {
     *
     * @param turtle
     */
-  private def getPrefixes(turtle : String) = {
+  private def getPrefixes(turtle: String) = {
     val result = turtle.split("\n")
-                       .filter(line => line.contains("@base") || line.contains("@prefix"))
-                       .map(line => {
-                         val replace = if(line.indexOf(":") < 14) "\t\t<" else "\t<"
-                         line.replaceFirst("<", replace).replace("@base", "@base\t")
-                       })
-                       .reduce((first, second) => first.concat("\n" + second))
+      .filter(line => line.contains("@base") || line.contains("@prefix"))
+      .map(line => {
+        val replace = if (line.indexOf(":") < 14) "\t\t<" else "\t<"
+        line.replaceFirst("<", replace).replace("@base", "@base\t")
+      })
+      .reduce((first, second) => first.concat("\n" + second))
     result + offset
   }
 
@@ -719,12 +718,12 @@ object RMLFormatter extends Formatter {
     * @param turtle
     * @return
     */
-  private def removePrefixes(turtle : String) = {
+  private def removePrefixes(turtle: String) = {
 
     val result = turtle.split("\n")
-        .filter(line => !line.contains("@prefix"))
-        .filter(line => !line.contains("@base"))
-        .reduce((first, second) => first.concat("\n" + second))
+      .filter(line => !line.contains("@prefix"))
+      .filter(line => !line.contains("@base"))
+      .reduce((first, second) => first.concat("\n" + second))
 
     result
 
@@ -736,7 +735,7 @@ object RMLFormatter extends Formatter {
     * @param statements
     * @return
     */
-  private def createModelWrapper(statements : Array[Statement]) = {
+  private def createModelWrapper(statements: Array[Statement]) = {
     val freshModel = new ModelWrapper
     freshModel.insertRDFNamespacePrefixes()
     freshModel.model.add(statements)
@@ -749,15 +748,15 @@ object RMLFormatter extends Formatter {
     * @param amount
     * @return
     */
-  private def hashtags(amount : Integer) : String = {
+  private def hashtags(amount: Integer): String = {
     var _hashtags = ""
-    for(x <- 1 to amount) {
+    for (x <- 1 to amount) {
       _hashtags = _hashtags + "#"
     }
     _hashtags
   }
 
-  private def getSubjectMapFunction(rmlModel: AbstractRMLModel, base : String) : String = {
+  private def getSubjectMapFunction(rmlModel: AbstractRMLModel, base: String): String = {
     val resource = rmlModel.functionSubjectMap.resource
     val subjectMapFunctionString = getResourceString(resource, base)
     val heading = "### Functions SubjectMap\n" + hashtags(25) + "\n"

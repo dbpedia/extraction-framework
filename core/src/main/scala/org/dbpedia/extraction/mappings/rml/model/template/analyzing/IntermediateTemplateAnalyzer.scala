@@ -1,4 +1,5 @@
 package org.dbpedia.extraction.mappings.rml.model.template.analyzing
+
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLPredicateObjectMap, RMLUri}
@@ -17,12 +18,12 @@ class IntermediateTemplateAnalyzer(ontology: Ontology) extends AbstractTemplateA
     logger.info("Found " + RMLUri.INTERMEDIATEMAPPING)
 
     val ptm = pom.objectMap.parentTriplesMap
-    val analyzer : TemplatesAnalyzer = new StdTemplatesAnalyzer(ontology)
+    val analyzer: TemplatesAnalyzer = new StdTemplatesAnalyzer(ontology)
     val templates = analyzer.analyze(ptm).toList
 
     val ontologyClass = loadClass(ptm.subjectMap.`class`)
     val ontologyProperty = loadProperty(pom.rrPredicate)
-    IntermediateTemplate(ontologyClass, ontologyProperty , templates)
+    IntermediateTemplate(ontologyClass, ontologyProperty, templates)
   }
 
 }

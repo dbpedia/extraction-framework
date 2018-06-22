@@ -9,51 +9,58 @@ trait TemplateFactory {
 
   /**
     * Creates a ConstantTemplate object from a TemplateFactoryBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
-  def createConstantTemplate(templateFactoryBundle: TemplateFactoryBundle) : ConstantTemplate
+  def createConstantTemplate(templateFactoryBundle: TemplateFactoryBundle): ConstantTemplate
 
   /**
     * Creates a SimplePropertyTemplate object from a TemplateFactoryBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
-  def createSimplePropertyTemplate(templateFactoryBundle: TemplateFactoryBundle) : SimplePropertyTemplate
+  def createSimplePropertyTemplate(templateFactoryBundle: TemplateFactoryBundle): SimplePropertyTemplate
 
   /**
     * Creates a GeoCoordinateTemplate object from a TemplateFactoryBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
-  def createGeocoordinateTemplate(templateFactoryBundle: TemplateFactoryBundle) : GeocoordinateTemplate
+  def createGeocoordinateTemplate(templateFactoryBundle: TemplateFactoryBundle): GeocoordinateTemplate
 
   /**
     * Creates an IntermediateTemplate object from a TemplateFactoryBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
-  def createIntermediateTemplate(templateFactoryBundle: TemplateFactoryBundle) : IntermediateTemplate
+  def createIntermediateTemplate(templateFactoryBundle: TemplateFactoryBundle): IntermediateTemplate
 
   /**
     * Creates a StartDateTemplate object from a TemplateFactoryBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
-  def createStartDateTemplate(templateFactoryBundle: TemplateFactoryBundle) : StartDateTemplate
+  def createStartDateTemplate(templateFactoryBundle: TemplateFactoryBundle): StartDateTemplate
 
   /**
     * Creates an EndDateTemplate object from a TemplateFactoryBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
-  def createEndDateTemplate(templateFactoryBundle: TemplateFactoryBundle) : EndDateTemplate
+  def createEndDateTemplate(templateFactoryBundle: TemplateFactoryBundle): EndDateTemplate
 
   /**
     * Creates a ConditionalTemplate object from a TemplateFactoryBundle object
+    *
     * @param templateFactoryBundle
     * @return
     */
-  def createConditionalTemplate(templateFactoryBundle: TemplateFactoryBundle) : ConditionalTemplate
+  def createConditionalTemplate(templateFactoryBundle: TemplateFactoryBundle): ConditionalTemplate
 
 }

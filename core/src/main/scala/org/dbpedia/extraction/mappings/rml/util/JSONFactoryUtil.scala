@@ -13,72 +13,72 @@ import scala.collection.JavaConverters._
   */
 object JSONFactoryUtil {
 
-  def get(key : String, node: JsonNode) : String = {
+  def get(key: String, node: JsonNode): String = {
     val text = node.get(key).asText()
-    if(text.equals("null")) null else text
+    if (text.equals("null")) null else text
   }
 
-  def parameters(key : String, templateNode: JsonNode) : String = {
+  def parameters(key: String, templateNode: JsonNode): String = {
     val text = templateNode.get("parameters").get(key).asText()
-    if(text.equals("null")) null else text
+    if (text.equals("null")) null else text
   }
 
-  def parametersNode(key : String, templateNode: JsonNode) : JsonNode = {
+  def parametersNode(key: String, templateNode: JsonNode): JsonNode = {
     templateNode.get("parameters").get(key)
   }
 
-  def hasParameter(key : String, templateNode : JsonNode) : Boolean = {
+  def hasParameter(key: String, templateNode: JsonNode): Boolean = {
     val parameterNode = templateNode.get("parameters")
     parameterNode.has(key) && parameterNode.hasNonNull(key)
   }
 
-  def jsonNodeToSeq(listNode : JsonNode) : Seq[JsonNode] = {
-    if(listNode.isArray) listNode.iterator().asScala.toSeq
+  def jsonNodeToSeq(listNode: JsonNode): Seq[JsonNode] = {
+    if (listNode.isArray) listNode.iterator().asScala.toSeq
     else throw new IllegalArgumentException("Json Node is not an array.")
   }
 
-  def getOntologyProperty(ontologyPropertyParameter: String, ontology: Ontology) : OntologyProperty = {
+  def getOntologyProperty(ontologyPropertyParameter: String, ontology: Ontology): OntologyProperty = {
     val context = ContextCreator.createOntologyContext(ontology)
     getOntologyProperty(ontologyPropertyParameter, context)
   }
 
-  def getUnit(templateNode: JsonNode, ontology: Ontology) : Datatype = {
+  def getUnit(templateNode: JsonNode, ontology: Ontology): Datatype = {
     val context = ContextCreator.createOntologyContext(ontology)
     getUnit(templateNode, context)
   }
 
-  def getUnit(templateNode: JsonNode, context : {def ontology: Ontology}) : Datatype = {
+  def getUnit(templateNode: JsonNode, context: {def ontology: Ontology}): Datatype = {
     val unitName = JSONFactoryUtil.parameters("unit", templateNode)
 
     // unit is optional, so this can be null
-    if(unitName != null) {
+    if (unitName != null) {
       try {
         RMLOntologyUtil.loadOntologyDataType(unitName, context)
       } catch {
-        case e : Exception => throw new OntologyDataTypeException("Ontology datatype not found in current ontology: " + unitName)
+        case e: Exception => throw new OntologyDataTypeException("Ontology datatype not found in current ontology: " + unitName)
       }
     } else null
   }
 
-  def getOntologyProperty(ontologyPropertyParameter: String, context : {def ontology: Ontology}) : OntologyProperty = {
+  def getOntologyProperty(ontologyPropertyParameter: String, context: {def ontology: Ontology}): OntologyProperty = {
 
     val prefix = extractPrefix(ontologyPropertyParameter)
     val localName = extractLocalName(ontologyPropertyParameter)
 
     // load the property
-    val result = if(RdfNamespace.prefixMap.contains(prefix)) {
+    val result = if (RdfNamespace.prefixMap.contains(prefix)) {
       val ontologyPropertyIRI = RdfNamespace.prefixMap(prefix).namespace + localName
       RMLOntologyUtil.loadOntologyPropertyFromIRI(ontologyPropertyIRI, context)
     } else {
       try {
         RMLOntologyUtil.loadOntologyProperty(ontologyPropertyParameter, context)
       } catch {
-        case e : Exception => null
+        case e: Exception => null
       }
     }
 
     // throw exception if not found
-    if(result == null) {
+    if (result == null) {
       throw new OntologyPropertyException("Ontology Property cannot be found in current ontology: " + ontologyPropertyParameter)
     } else {
       result
@@ -86,26 +86,26 @@ object JSONFactoryUtil {
 
   }
 
-  def getOntologyClass(ontologyClass : String, ontology: Ontology) : OntologyClass = {
+  def getOntologyClass(ontologyClass: String, ontology: Ontology): OntologyClass = {
     val context = ContextCreator.createOntologyContext(ontology)
 
     val prefix = extractPrefix(ontologyClass)
     val localName = extractLocalName(ontologyClass)
 
     // load the property
-    val result = if(RdfNamespace.prefixMap.contains(prefix)) {
+    val result = if (RdfNamespace.prefixMap.contains(prefix)) {
       val ontologyPropertyIRI = RdfNamespace.prefixMap(prefix).namespace + localName
       RMLOntologyUtil.loadOntologyClassFromIRI(ontologyPropertyIRI, context)
     } else {
       try {
         RMLOntologyUtil.loadOntologyClass(ontologyClass, context)
       } catch {
-        case e : Exception => null
+        case e: Exception => null
       }
     }
 
     // throw exception if not found
-    if(result == null) {
+    if (result == null) {
       throw new OntologyClassException("Ontology Class cannot be found in current ontology: " + ontologyClass)
     } else {
       result
@@ -118,20 +118,20 @@ object JSONFactoryUtil {
     * @param bundle
     * @return
     */
-  def getBundle(bundle : TemplateFactoryBundle) : JSONBundle = {
-    if(!bundle.isInstanceOf[JSONBundle]) {
+  def getBundle(bundle: TemplateFactoryBundle): JSONBundle = {
+    if (!bundle.isInstanceOf[JSONBundle]) {
       throw new TemplateFactoryBundleException(TemplateFactoryBundleException.WRONG_BUNDLE_MSG)
     } else {
       bundle.asInstanceOf[JSONBundle]
     }
   }
 
-  private def extractPrefix(s: String) : String = {
+  private def extractPrefix(s: String): String = {
     val prefixPattern = "^[^:]*".r
     prefixPattern.findFirstIn(s).orNull
   }
 
-  private def extractLocalName(s: String) : String = {
+  private def extractLocalName(s: String): String = {
     val localNamePattern = "[^:]*$".r
     localNamePattern.findFirstIn(s).orNull
   }

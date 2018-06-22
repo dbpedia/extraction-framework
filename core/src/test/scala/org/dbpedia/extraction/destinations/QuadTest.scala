@@ -3,14 +3,14 @@ package org.dbpedia.extraction.destinations
 import org.junit.Assert._
 
 /**
- * TODO: turn this into an actual JUnit test.
- */
+  * TODO: turn this into an actual JUnit test.
+  */
 object QuadTest {
-  
+
   def main(args: Array[String]) {
-    
+
     val string = "http://www.w3.org/2001/XMLSchema#string"
-      
+
     good("""<> <> <> .""", "", "", "", null, null, null)
     good(""" <> <> <> . """, "", "", "", null, null, null)
     good("\t<>\t<>\t<>\t.\t", "", "", "", null, null, null)
@@ -25,28 +25,28 @@ object QuadTest {
     good("""<s> <p> "v"^^<t> <c>. """, "s", "p", "v", "t", null, "c")
     good("""<s> <p> "v"@l <c>. """, "s", "p", "v", string, "l", "c")
     good("""<s> <p> "v"@en-us <c>. """, "s", "p", "v", string, "en-us", "c")
-    
+
     // N-Triples requires space between tokens (not sure about Turtle), but we accept lines without spaces.
     good("""<><><>.""", "", "", "", null, null, null)
     good("""<><>"".""", "", "", "", string, null, null)
     good("""<s><p>"v"@l<c>.""", "s", "p", "v", string, "l", "c")
-    
+
     // these should all be bad, but some aren't...
     good("""< <> <> <> <>.""", " <", "", "", null, null, "") // unclosed value
     good("""<> < <> <> <>.""", "", " <", "", null, null, "") // unclosed value
     good("""<> <> < <> <>.""", "", "", " <", null, null, "") // unclosed value
     good("""<> <> <> < <>.""", "", "", "", null, null, " <") // unclosed value
-    bad ("""<> <> <> <> <.""") // unclosed value
+    bad("""<> <> <> <> <.""") // unclosed value
     good("""< <> <> <>.""", " <", "", "", null, null, null) // unclosed value
     good("""<> < <> <>.""", "", " <", "", null, null, null) // unclosed value
     good("""<> <> < <>.""", "", "", " <", null, null, null) // unclosed value
-    bad ("""<> <> <> <.""") // unclosed value
+    bad("""<> <> <> <.""") // unclosed value
     good("""<s> <p> "v"@en--us <c>. """, "s", "p", "v", string, "en--us", "c") // multiple -- should not be allowed
     good("""<s> <p> "v"@en- <c>. """, "s", "p", "v", string, "en-", "c") // trailing - should not be allowed
-    
+
     // these should probably be good...
     bad("""<s> <p> "v"@en-US <c>. """) // we don't allow uppercase in language tag
-    
+
     bad("") // empty line
     bad("# <> <> <> .") // comment line
     bad("""<""") // missing value
@@ -74,10 +74,10 @@ object QuadTest {
     bad("""<s> <p> "v"@l^^<t> <c>. """) // language and datatype must not both be present
     bad("""<s> <p> "v"^^<t>@l <c>. """) // language and datatype must not both be present
   }
-  
+
   def good(line: String, subject: String, predicate: String, value: String, datatype: String, language: String, context: String): Unit = {
     val option = Quad.unapply(line)
-    assertTrue("failed to parse line ["+line+"]", option.isDefined)
+    assertTrue("failed to parse line [" + line + "]", option.isDefined)
     val quad = option.get
     assertEquals("subject", subject, quad.subject)
     assertEquals("predicate", predicate, quad.predicate)
@@ -89,6 +89,6 @@ object QuadTest {
 
   def bad(line: String): Unit = {
     val option = Quad.unapply(line)
-    assertFalse("didn't expect result for line ["+line+"], but got "+option, option.isDefined)
+    assertFalse("didn't expect result for line [" + line + "], but got " + option, option.isDefined)
   }
 }

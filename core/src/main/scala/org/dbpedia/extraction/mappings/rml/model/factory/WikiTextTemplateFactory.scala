@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings.rml.model.factory
+
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.mappings.rml.exception.TemplateFactoryBundleException
 import org.dbpedia.extraction.mappings.rml.model.template._
-import org.dbpedia.extraction.ontology.OntologyProperty
 
 /**
   * Created by wmaroy on 30.07.17.
@@ -80,7 +80,7 @@ object WikiTextTemplateFactory extends TemplateFactory {
     val bundle = getBundle(templateFactoryBundle)
     val mapping = bundle.propertyMapping.asInstanceOf[ConditionalMapping]
 
-    val conditionalTemplate = mapping.cases.foldRight(null : ConditionalTemplate)((conditionalMapping, fallback) => {
+    val conditionalTemplate = mapping.cases.foldRight(null: ConditionalTemplate)((conditionalMapping, fallback) => {
 
       val templateMapping = conditionalMapping.mapping.asInstanceOf[TemplateMapping]
       val ontologyClass = templateMapping.mapToClass
@@ -137,7 +137,7 @@ object WikiTextTemplateFactory extends TemplateFactory {
 
     val ontologyProperty = mapping.ontologyProperty
     val coordinate = mapping.coordinates
-    val latitude =  mapping.latitude
+    val latitude = mapping.latitude
     val longitude = mapping.longitude
     val latitudeDegrees = mapping.latitudeDegrees
     val latitudeMinutes = mapping.latitudeMinutes
@@ -185,12 +185,12 @@ object WikiTextTemplateFactory extends TemplateFactory {
     }
   }
 
-  private def getTemplates(propertyMappings : List[PropertyMapping]) : List[Template] = {
+  private def getTemplates(propertyMappings: List[PropertyMapping]): List[Template] = {
     val templates = propertyMappings.flatMap {
       case simplePropertyMapping: SimplePropertyMapping => List(createSimplePropertyTemplate(WikiTextBundle(simplePropertyMapping)))
       case constantMapping: ConstantMapping => List(createConstantTemplate(WikiTextBundle(constantMapping)))
       case geocoordinateMapping: GeoCoordinatesMapping => List(createGeocoordinateTemplate(WikiTextBundle(geocoordinateMapping)))
-      case dateIntervalMapping : DateIntervalMapping => List(createStartDateTemplate(WikiTextBundle(dateIntervalMapping)), createEndDateTemplate(WikiTextBundle(dateIntervalMapping)))
+      case dateIntervalMapping: DateIntervalMapping => List(createStartDateTemplate(WikiTextBundle(dateIntervalMapping)), createEndDateTemplate(WikiTextBundle(dateIntervalMapping)))
       case _ => List()
     }
     templates

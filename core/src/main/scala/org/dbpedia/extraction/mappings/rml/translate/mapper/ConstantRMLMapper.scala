@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.mappings.rml.translate.mapper
 
 import org.dbpedia.extraction.mappings.ConstantMapping
-import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
-import org.dbpedia.extraction.mappings.rml.model.{AbstractRMLModel, RMLTranslationModel}
+import org.dbpedia.extraction.mappings.rml.model.RMLTranslationModel
 import org.dbpedia.extraction.mappings.rml.model.resource.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
+import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 import scala.language.reflectiveCalls
@@ -13,19 +13,16 @@ import scala.language.reflectiveCalls
   */
 class ConstantRMLMapper(rmlModel: RMLTranslationModel, mapping: ConstantMapping) {
 
-  def mapToModel() : List[RMLPredicateObjectMap] =
-  {
+  def mapToModel(): List[RMLPredicateObjectMap] = {
     addConstantMapping()
   }
 
-  def addConstantMapping() : List[RMLPredicateObjectMap] =
-  {
+  def addConstantMapping(): List[RMLPredicateObjectMap] = {
     val uniqueUri = rmlModel.wikiTitle.resourceIri
     addConstantMappingToTriplesMap(uniqueUri, rmlModel.triplesMap)
   }
 
-  def addIndependentConstantMapping(uri: String) : List[RMLPredicateObjectMap] =
-  {
+  def addIndependentConstantMapping(uri: String): List[RMLPredicateObjectMap] = {
     val constantMappingUri = RMLUri(uri + "/ConstantMapping/" + TemplateRMLMapper.constantCount)
     TemplateRMLMapper.increaseConstantCount()
 
@@ -34,8 +31,7 @@ class ConstantRMLMapper(rmlModel: RMLTranslationModel, mapping: ConstantMapping)
     List(constantPom)
   }
 
-  def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
-  {
+  def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap): List[RMLPredicateObjectMap] = {
     val constantMappingUri = RMLUri(uri + "/ConstantMapping/" + TemplateRMLMapper.constantCount)
     TemplateRMLMapper.increaseConstantCount()
 
@@ -44,13 +40,12 @@ class ConstantRMLMapper(rmlModel: RMLTranslationModel, mapping: ConstantMapping)
     List(constantPom)
   }
 
-  private def addConstantValuePredicateObjectMap(constantPom: RMLPredicateObjectMap) =
-  {
+  private def addConstantValuePredicateObjectMap(constantPom: RMLPredicateObjectMap) = {
     constantPom.addPredicate(RMLUri(mapping.ontologyProperty.uri))
 
-    if(mapping.datatype == null) {
+    if (mapping.datatype == null) {
 
-      if(mapping.isObjectProperty) {
+      if (mapping.isObjectProperty) {
         constantPom.addObject(RMLUri(mapping.value))
       } else {
         constantPom.addObject(new RMLLiteral(mapping.value))
@@ -62,8 +57,7 @@ class ConstantRMLMapper(rmlModel: RMLTranslationModel, mapping: ConstantMapping)
   }
 
 
-  private def addUnitToPredicateObjectMap(constantPom: RMLPredicateObjectMap) =
-  {
+  private def addUnitToPredicateObjectMap(constantPom: RMLPredicateObjectMap) = {
     val functionTermMapUri = constantPom.uri.extend("/FunctionTermMap")
     val functionTermMap = constantPom.addFunctionTermMap(functionTermMapUri)
     val functionValueUri = functionTermMapUri.extend("/FunctionValue")
@@ -82,8 +76,7 @@ class ConstantRMLMapper(rmlModel: RMLTranslationModel, mapping: ConstantMapping)
 
   }
 
-  private def addParameterFunction(param : String, functionValue: RMLTriplesMap) =
-  {
+  private def addParameterFunction(param: String, functionValue: RMLTriplesMap) = {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
     parameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
@@ -91,8 +84,7 @@ class ConstantRMLMapper(rmlModel: RMLTranslationModel, mapping: ConstantMapping)
     parameterPom.addObjectMap(parameterObjectMapUri).addRMLReference(new RMLLiteral(getParameterValue(param)))
   }
 
-  private def getParameterValue(param: String) : String =
-  {
+  private def getParameterValue(param: String): String = {
     param match {
       case "unitParameter" => mapping.datatype.name
       case "valueParameter" => mapping.value

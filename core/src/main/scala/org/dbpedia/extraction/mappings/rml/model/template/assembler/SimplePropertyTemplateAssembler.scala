@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.mappings.rml.model.template.assembler
 
 import org.dbpedia.extraction.mappings.rml.model.AbstractRMLModel
-import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.model.resource._
 import org.dbpedia.extraction.mappings.rml.model.template.SimplePropertyTemplate
+import org.dbpedia.extraction.mappings.rml.model.template.assembler.TemplateAssembler.Counter
 import org.dbpedia.extraction.mappings.rml.translate.dbf.DbfFunction
 import org.dbpedia.extraction.ontology.RdfNamespace
 
@@ -11,14 +11,14 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   * Created by wmaroy on 24.07.17.
   *
   */
-class SimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: String, language : String, template: SimplePropertyTemplate, counter : Counter) {
+class SimplePropertyTemplateAssembler(rmlModel: AbstractRMLModel, baseUri: String, language: String, template: SimplePropertyTemplate, counter: Counter) {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //  Public methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  def assemble(independent : Boolean = false) : List[RMLPredicateObjectMap] = {
-    if(!independent) {
+  def assemble(independent: Boolean = false): List[RMLPredicateObjectMap] = {
+    if (!independent) {
       val triplesMap = rmlModel.triplesMap
       addSimplePropertyMappingToTriplesMap(baseUri, triplesMap)
     } else {
@@ -30,8 +30,7 @@ class SimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: Stri
   //  Private methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  private def addIndependentSimplePropertyMappingToTriplesMap(uri: String) : List[RMLPredicateObjectMap] =
-  {
+  private def addIndependentSimplePropertyMappingToTriplesMap(uri: String): List[RMLPredicateObjectMap] = {
 
     val simplePropertyMappingUri = RMLUri(uri + "/SimplePropertyMapping/" + counter.simpleProperties)
     val simplePmPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(simplePropertyMappingUri)
@@ -43,8 +42,7 @@ class SimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: Stri
 
   }
 
-  private def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
-  {
+  private def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap): List[RMLPredicateObjectMap] = {
 
     val simplePropertyMappingUri = RMLUri(uri + "/SimplePropertyMapping/" + counter.simpleProperties)
     val simplePmPom = triplesMap.addPredicateObjectMap(simplePropertyMappingUri)
@@ -57,8 +55,7 @@ class SimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: Stri
   }
 
 
-  private def addSimplePropertyToPredicateObjectMap(simplePmPom: RMLPredicateObjectMap) =
-  {
+  private def addSimplePropertyToPredicateObjectMap(simplePmPom: RMLPredicateObjectMap) = {
 
     val functionTermMapUri = simplePmPom.uri.extend("/FunctionTermMap")
     val functionTermMap = simplePmPom.addFunctionTermMap(functionTermMapUri)
@@ -77,12 +74,10 @@ class SimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: Stri
 
     // the next few lines check if the SimplePropertyFunction already exists or not in the mapping file so that
     // there is always a maximum of one ExecutePOMs of this function in a mapping
-    if(!rmlModel.containsResource(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name)))
-    {
+    if (!rmlModel.containsResource(RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))) {
       createSimplePropertyFunction(functionValue)
     }
-    else
-    {
+    else {
       functionValue.addPredicateObjectMap(RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction"))
     }
 
@@ -97,7 +92,7 @@ class SimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: Stri
     * @param functionValue
     * @return
     */
-  private def createSimplePropertyFunction(functionValue : RMLTriplesMap) = {
+  private def createSimplePropertyFunction(functionValue: RMLTriplesMap) = {
     val executePomUri = RMLUri(rmlModel.triplesMap.resource.getURI + "/Function/SimplePropertyFunction") // to make the uri short and simple
     val executePom = functionValue.addPredicateObjectMap(executePomUri)
     executePom.addPredicate(RMLUri(RdfNamespace.FNO.namespace + "executes"))
@@ -118,7 +113,7 @@ class SimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: Stri
     * @param objectMap
     * @return
     */
-  private def addLanguage(objectMap : RMLObjectMap) = {
+  private def addLanguage(objectMap: RMLObjectMap) = {
     if (template.ontologyProperty.range.name.equals("rdf:langString")) objectMap.addLanguage(language)
   }
 
@@ -132,37 +127,36 @@ class SimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: Stri
   private def addParameters(functionValue: RMLTriplesMap) = {
     addReferenceParameterFunction("property", functionValue)
 
-    if(template.factor.toDouble != 1) {
+    if (template.factor.toDouble != 1) {
       addConstantParameterFunction("factor", functionValue)
     }
 
-    if(template.transform != null) {
+    if (template.transform != null) {
       addConstantParameterFunction("transform", functionValue)
     }
 
-    if(template.select != null) {
+    if (template.select != null) {
       addConstantParameterFunction("select", functionValue)
     }
 
-    if(template.prefix != null) {
+    if (template.prefix != null) {
       addConstantParameterFunction("prefix", functionValue)
     }
 
-    if(template.suffix != null) {
+    if (template.suffix != null) {
       addConstantParameterFunction("suffix", functionValue)
     }
 
-    if(template.unit != null) {
+    if (template.unit != null) {
       addConstantParameterFunction("unit", functionValue)
     }
 
-    if(template.ontologyProperty != null) {
+    if (template.ontologyProperty != null) {
       //addConstantParameterFunction("ontologyProperty", functionValue) // will be added by inferencing
     }
   }
 
-  private def addReferenceParameterFunction(param : String, functionValue: RMLTriplesMap) =
-  {
+  private def addReferenceParameterFunction(param: String, functionValue: RMLTriplesMap) = {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
     parameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
@@ -171,16 +165,14 @@ class SimplePropertyTemplateAssembler(rmlModel : AbstractRMLModel, baseUri: Stri
     objectMap.addRMLReference(new RMLLiteral(getParameterValue(param)))
   }
 
-  private def addConstantParameterFunction(param : String, functionValue: RMLTriplesMap) =
-  {
+  private def addConstantParameterFunction(param: String, functionValue: RMLTriplesMap) = {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
     parameterPom.addPredicate(RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
     parameterPom.addObject(new RMLLiteral(getParameterValue(param)))
   }
 
-  private def getParameterValue(param: String) : String =
-  {
+  private def getParameterValue(param: String): String = {
 
     param match {
       case "factor" => template.factor.toString

@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.mappings.rml.model.template.json.std
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
-import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, SimplePropertyTemplate, Template}
 import org.dbpedia.extraction.mappings.rml.model.template.json.{JsonTemplate, TemplateJsonConverter}
+import org.dbpedia.extraction.mappings.rml.model.template.{ConstantTemplate, Template}
 
 /**
   * Created by wmaroy on 12.08.17.
@@ -21,12 +21,12 @@ class StdConstantJsonConverter extends TemplateJsonConverter {
 
     parameters.put("value", constantTemplate.value)
 
-    val ontologyProperty = if(constantTemplate.ontologyProperty != null) {
+    val ontologyProperty = if (constantTemplate.ontologyProperty != null) {
       constantTemplate.ontologyProperty.uri
     } else null
     parameters.put("ontologyProperty", ontologyProperty)
 
-    val unit = if(constantTemplate.unit != null) {
+    val unit = if (constantTemplate.unit != null) {
       constantTemplate.unit.uri
     } else null
     parameters.put("unit", unit)
