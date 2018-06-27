@@ -88,6 +88,11 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
         parse("fr", "xsd:date", "[[3 juin]] [[1996]] au [[31 mai]] [[2008]]") should be (Seq("1996-06-03", "2008-05-31"))
     }
 
+    "DateIntervalMapping" should "return Seq 1939-09-01 1945-09-02 @en" in
+    {
+        parse("en", "xsd:date", "{{start and end dates|1939|9|1|1945|9|2|df=yes}}") should be (Seq("1939-09-01", "1945-09-02"))
+    }
+
     //Date negative tests - Input is not a genuine interval 
     /**
      // FIXME: this would parse for now
@@ -105,15 +110,15 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
   
   
     private val wikiParser = WikiParser.getInstance()
-    private val ontology = {
+    private val onto = {
             val ontoFile = new File("../ontology.xml")
             val ontologySource = XMLSource.fromFile(ontoFile, Language.Mappings)
             new OntologyReader().read(ontologySource)
     }
-    private val startYear = ontology.properties.get("activeYearsStartYear")
-    private val endYear = ontology.properties.get("activeYearsEndYear")
-    private val startDate = ontology.properties.get("activeYearsStartDate")
-    private val endDate = ontology.properties.get("activeYearsEndDate")
+    private val startYear = onto.properties.get("activeYearsStartYear")
+    private val endYear = onto.properties.get("activeYearsEndYear")
+    private val startDate = onto.properties.get("activeYearsStartDate")
+    private val endDate = onto.properties.get("activeYearsEndDate")
 
     private def parse(language : String, datatypeName : String, input : String) : Seq[String] =
     {
@@ -123,7 +128,7 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
         val context = new
         {
             def language : Language = lang
-            def ontology: Ontology = ontology
+            def ontology: Ontology = onto
             def redirects : Redirects = red
         }
         

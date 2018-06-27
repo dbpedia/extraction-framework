@@ -134,7 +134,9 @@ object DateTimeParserConfig
             "nfl_year"            -> Map ("year" -> "1", "year2" -> "2"),
             "nfly"                -> Map ("year" -> "1", "year2" -> "2"),
             "afl year"            -> Map ("year" -> "1", "year2" -> "2"),
-            "afly"                -> Map ("year" -> "1", "year2" -> "2")
+            "afly"                -> Map ("year" -> "1", "year2" -> "2"),
+            "afly"                -> Map ("year" -> "1", "year2" -> "2"),
+            "start and end dates" -> Map ("year" -> "1", "month" -> "2", "day" -> "3", "year2" -> "4","month2" -> "5", "day2" -> "6")
         ),
 
         // alphabetically for other languages
