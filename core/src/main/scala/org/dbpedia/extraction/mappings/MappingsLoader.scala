@@ -1,18 +1,15 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.datatypes.Datatype
-
-import scala.collection.mutable.HashMap
-import scala.collection.mutable.ArrayBuffer
 import java.util.logging.{Level, LogRecord, Logger}
 
-import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
-import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
 
+import scala.collection.mutable.{ArrayBuffer, HashMap}
 import scala.language.reflectiveCalls
-import scala.reflect.ClassTag
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
@@ -21,7 +18,7 @@ import scala.reflect.ClassTag
 object MappingsLoader extends java.io.Serializable
 {
     // Note: we pass the encoded page title as log parameter so we can render a link on the server
-//    private val logger = Logger.getLogger(MappingsLoader.getClass.getName)
+    @transient private val logger = Logger.getLogger(MappingsLoader.getClass.getName)
     
     def load( context : {
                  def ontology : Ontology
@@ -30,7 +27,7 @@ object MappingsLoader extends java.io.Serializable
                  def mappingPageSource : Traversable[WikiPage]
     } ) : Mappings =
     {
-//        logger.info("Loading mappings ("+context.language.wikiCode+")")
+        logger.info("Loading mappings ("+context.language.wikiCode+")")
 
         val classMappings = new HashMap[String, Extractor[TemplateNode]]()
         val tableMappings = new ArrayBuffer[TableMapping]()
@@ -54,7 +51,7 @@ object MappingsLoader extends java.io.Serializable
                         }
                         else
                         {
-//                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
+                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
                         }
                     }
                     case "TableMapping" =>
@@ -75,7 +72,7 @@ object MappingsLoader extends java.io.Serializable
                         }
                         else
                         {
-//                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
+                            logger.log(Level.WARNING, "Duplicate template mapping for '" + name + "' on page " + page.title.decodedWithNamespace + ".", page.title.encodedWithNamespace)
                         }
                     }
                     case _ => throw new IllegalArgumentException("Unknown mapping element "+tnode.title.decoded)
@@ -87,7 +84,7 @@ object MappingsLoader extends java.io.Serializable
             }
         }
 
-//        logger.info("Mappings loaded ("+context.language.wikiCode+")")
+        logger.info("Mappings loaded ("+context.language.wikiCode+")")
 
         new Mappings(classMappings.toMap, tableMappings.toList)
     }
@@ -316,11 +313,11 @@ object MappingsLoader extends java.io.Serializable
      */
     private def log(level: Level, msg: String, params: Array[Object], thrown: Throwable): Unit =
     {
-//      if (! logger.isLoggable(level)) return
-//      val lr = new LogRecord(level, msg)
-//      lr.setLoggerName(logger.getName())
-//      lr.setParameters(params)
-//      lr.setThrown(thrown)
-//      logger.log(lr)
+      if (! logger.isLoggable(level)) return
+      val lr = new LogRecord(level, msg)
+      lr.setLoggerName(logger.getName())
+      lr.setParameters(params)
+      lr.setThrown(thrown)
+      logger.log(lr)
     }
 }
