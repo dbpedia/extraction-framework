@@ -51,6 +51,12 @@ object SparkExtraction {
     sparkContext.setLogLevel("WARN")
 
     // Run extraction jobs
-    configLoader.getSparkExtractionJobs.foreach(_.run(spark, config))
+    configLoader.getSparkExtractionJobs.foreach(job => {
+      try {
+        job.run(spark, config)
+      } catch {
+        case ex: Throwable => ex.printStackTrace()
+      }
+    })
   }
 }
