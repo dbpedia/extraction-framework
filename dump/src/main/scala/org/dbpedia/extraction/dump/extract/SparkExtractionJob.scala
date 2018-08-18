@@ -56,8 +56,6 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
       val broadcastFormats = sparkContext.broadcast(config.formats)
       val broadcastExtractors = sparkContext.broadcast(extractors)
 
-      val mappingsString = scala.io.Source.fromFile(config.mappingsDir + "/" + Namespace.mappings(context.language).name(Language.Mappings).replace(' ','_')+".xml").mkString
-      val broadcastMappingsString = sparkContext.broadcast(mappingsString)
 
       //finding the source files
       val fileFinder = new Finder[File](config.dumpDir, context.language, config.wikiName)
@@ -97,29 +95,13 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
          */
         val extractedDataRDD : RDD[Quad] = wikiPageParsedRDD.mapPartitions(pages => {
           // TODO: ImageExtractor
-          def worker_context = if(broadcastExtractors.value.contains(classOf[MappingExtractor])) {
-            // MappingsExtractor is used → Load Mappings
-            new SparkExtractionContext {
-              def ontology: Ontology = broadcastOntology.value
-              def language: Language = broadcastLanguage.value
-              def redirects: Redirects = broadcastRedirects.value
-              def disambiguations: Disambiguations = broadcastDisambiguations.value
-              def mappingPageSource: Traversable[WikiPage] = {
-                broadcastMappingsString.value.split("<page>")
-                  .map("<page>" + _)
-                  .flatMap(SerializableUtils.parseXMLToWikiPage(_, broadcastLanguage.value))
-              }
-              def mappings: Mappings = MappingsLoader.load(this)
-            }
-          } else {
-            // MappingsExtractor is not used
+          def worker_context =
             new SparkExtractionContext {
               def ontology: Ontology = broadcastOntology.value
               def language: Language = broadcastLanguage.value
               def redirects: Redirects = broadcastRedirects.value
               def disambiguations: Disambiguations = broadcastDisambiguations.value
             }
-          }
           val localExtractor = CompositeParseExtractor.load(broadcastExtractors.value, worker_context)
           pages.map(page =>
             SerializableUtils.extractQuadsFromPage(broadcastNamespaces.value, localExtractor, page)
@@ -160,21 +142,7 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
           */
         val failResults = failedPagesRDD.mapPartitions(pages => {
 
-          def worker_context = if(broadcastExtractors.value.contains(classOf[MappingExtractor])) {
-            // MappingsExtractor is used → Load Mappings
-            new SparkExtractionContext {
-              def ontology: Ontology = broadcastOntology.value
-              def language: Language = broadcastLanguage.value
-              def redirects: Redirects = broadcastRedirects.value
-              def disambiguations: Disambiguations = broadcastDisambiguations.value
-              def mappingPageSource: Traversable[WikiPage] = {
-                broadcastMappingsString.value.split("<page>")
-                  .map("<page>" + _)
-                  .flatMap(SerializableUtils.parseXMLToWikiPage(_, broadcastLanguage.value))
-              }
-              def mappings: Mappings = MappingsLoader.load(this)
-            }
-          } else {
+          def worker_context =
             // MappingsExtractor is not used
             new SparkExtractionContext {
               def ontology: Ontology = broadcastOntology.value
@@ -182,7 +150,6 @@ class SparkExtractionJob(extractors: Seq[Class[_ <: Extractor[_]]],
               def redirects: Redirects = broadcastRedirects.value
               def disambiguations: Disambiguations = broadcastDisambiguations.value
             }
-          }
           val localExtractor = CompositeParseExtractor.load(broadcastExtractors.value, worker_context)
           pages.map(page =>
             SerializableUtils.extractQuadsFromPage(broadcastNamespaces.value, localExtractor, page)
