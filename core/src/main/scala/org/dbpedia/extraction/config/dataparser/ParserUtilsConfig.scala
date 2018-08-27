@@ -28,8 +28,16 @@ object ParserUtilsConfig
           "كوادريليون" -> 15
         ),
         "bg" -> Map(
+            "хиляда" -> 3,
+            "хиляди" -> 3,
+            "милиони" -> 6,
+            "милион" -> 6,
             "млрд" -> 9,
-            "трлн." -> 12
+            "милиард" -> 9,
+            "трлн." -> 12,
+            "трилион" -> 12,
+            "квадрилиона" -> 15,
+            "квадрилиони" -> 15
         ),
         "ca" -> Map(
             "milion" -> 6,
@@ -140,7 +148,8 @@ object ParserUtilsConfig
             "miliardo" -> 9,
             "miliardi" -> 9,
             "miliardi di" -> 9,
-            "bilione" -> 12
+            "bilione" -> 12,
+            "quadrilione" -> 15
         ),
         "nl" -> Map(
             "honderd" -> 2,
@@ -171,7 +180,8 @@ object ParserUtilsConfig
             "bilion" -> 12,
             "biliony" -> 12,
             "bilionów" -> 12,
-            "bln" -> 12
+            "bln" -> 12,
+            "kwadrylion" -> 15
         ),
         "pt" -> Map(
             "mil" -> 3,
@@ -192,6 +202,71 @@ object ParserUtilsConfig
             "quintilhões" -> 18,
             "quinquilhão" -> 18,
             "quinquilhões" -> 18
+        ),
+        "sv" -> Map(
+            "tusen" -> 3,
+            "miljoner" -> 6,
+            "miljarder" -> 9,
+            "biljoner" -> 12,
+            "biljarder" -> 15
+
+        ),
+        "cs" -> Map(
+            "tisíc" -> 3,
+            "tisíce" -> 3,
+            "milión" -> 6,
+            "milióny" -> 6,
+            "miliardy" -> 9,
+            "bilión" -> 12,
+            "bilion" -> 12,
+            "biliarda" -> 15,
+            "kvadrilion" -> 15
+        ),
+        "hu" -> Map(
+            "ezer" -> 3,
+            "több ezer" -> 3,
+            "millió" -> 6,
+            "több millió" -> 6,
+            "milliárd" -> 9,
+            "billió" -> 12,
+            "kvadrillió" -> 15
+        ),
+        "uk" -> Map(
+            "тисяча" -> 3,
+            "тисячі" -> 3,
+            "мільйони" -> 6,
+            "мільйона" -> 6,
+            "млн" -> 6,
+            "мільярд" -> 9,
+            "млрд" -> 9,
+            "мільярди" -> 9,
+            "трильйон" -> 12,
+            "квадрильйон" -> 15
+        ),
+        "lv" -> Map(
+            "tūkstotis" -> 3,
+            "tūkstošiem" -> 3,
+            "miljons" -> 6,
+            "miljoni" -> 6,
+            "miljoniem" -> 6,
+            "miljardiem" -> 9,
+            "miljardi" -> 9,
+            "miljards" -> 9,
+            "triljons" -> 12,
+            "quadrillion" -> 15
+        ),
+        "lt" -> Map(
+            "tūkst" -> 3,
+            "tūkstantis" -> 3,
+            "milijonai" -> 6,
+            "milijonas" -> 6,
+            "milijardus" -> 9,
+            "milijardų" -> 9,
+            "mlrd" -> 9,
+            "milijardai" -> 9,
+            "trilijonas" -> 12,
+            "kvadrilijonas" -> 15,
+            "kvadrilijonai" -> 15
         )
     )
     
