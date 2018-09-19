@@ -8,6 +8,13 @@
       "transformer":"textNode",
       "replace": " - "
     },
+    "US$":{
+      "transformer":"extractChildren",
+      "keys": ["1"],
+      "whileList":true,
+      "replace": "$ $(1||)",
+      "templatesOnly":true
+    },
     "Ndash":{
       "transformer":"textNode",
       "replace": "-"
