@@ -257,8 +257,8 @@ object DBpediaDatasets extends java.io.Serializable
     val WikidataR2R_mappingerrors: Dataset = datasets("wikidata_r2r_mapping_errors")
     val WikidataReifiedR2R: Dataset = datasets("mappingbased_properties_reified") // keep same name with other languages
     val WikidataReifiedR2RQualifier: Dataset = datasets("mappingbased_properties_reified_qualifiers") // keep same name with other languages
-    val WikidataRaw: Dataset = datasets("raw_unredirected")
-    val WikidataRawRedirected: Dataset = datasets("raw")
+    val WikidataRaw: Dataset = datasets("raw")
+    val WikidataRawRedirected: Dataset = datasets("raw_redirected")
     val WikidataRawReified: Dataset = datasets("raw_reified")
     val WikidataRawReifiedQualifiers: Dataset = datasets("raw_reified_qualifiers")
     val WikidataReference: Dataset = datasets("references")
