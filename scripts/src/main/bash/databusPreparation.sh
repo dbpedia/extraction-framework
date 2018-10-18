@@ -5,26 +5,27 @@
 # Usage:
 # RUN IN BASE DIRECTORY OF RELEASE AFTER FINISHED EXTRACTION TO GENERATE THE FOLDERSTRUCTURE FOR THE DATABUS RELEASE TOOL
 # Arguments:
-# 1: Base target directory, where the dataset should be moved. 	Default: ~/databus-maven-tool/dbpedia/generic
-# 2: internal structure for each dataset directory. 		Default: src/main/databus/input
+# 1: Base target directory, where the dataset should be moved.  Default: ~/databus-maven-tool/dbpedia/generic
+# 2: internal structure for each dataset directory.             Default: src/main/databus/input
 
 DESTINATIONBASE=$1
 DATASETSTRUCTURE=$2
+DATE=$(ls *wiki/ | sed 's/[a-Z,/,:]//g' | sed '/^\s*$/d' | sed 's/[0-9]\{4\}/&./1' | sed 's/[0-9]\{2\}/&./3' | sort -u -r | head -1
+)
 for p in ./**/**/*.bz2; do f=$(echo "$p"| cut -d'/' -f 4)
-	echo "preparing: $p"
-	LANG=$(echo "$f"| cut -d'-' -f 1)
-	#echo "Language: $LANG"
-	DATASET=$(echo "$f"| sed "s/.*-[0-9]*-//"|cut -d'.' -f 1)
-	#echo "Dataset: $DATASET"
-	FILENAME=$(echo "$f"| cut -d'.' -f 1)
-	EXTENSION=$(echo "$f"| sed "s/$FILENAME//")
-	#echo "Extensions: $EXTENSION"
-	NEWNAME="${DATASET}_$LANG$EXTENSION"
-	#echo $NEWNAME
-	if [ ! -d "$DESTINATIONBASE/$DATASET/$DATASETSTRUCTURE" ]; then
-  		mkdir -p $DESTINATIONBASE/$DATASET/$DATASETSTRUCTURE
-	fi
-	echo "moving to $DESTINATIONBASE/$DATASET/$DATASETSTRUCTURE/$NEWNAME"
-	mv $p $DESTINATIONBASE/$DATASET/$DATASETSTRUCTURE/$NEWNAME
+        echo "preparing: $p"
+        LANG=$(echo ${f%%wiki-*}wiki| sed 's/wikidatawiki/wikidata/g')
+        #echo "Language: $LANG"
+        DATASET=$(echo "$f"| sed "s/.*-[0-9]*-//"|cut -d'.' -f 1)
+        #echo "Dataset: $DATASET"
+        FILENAME=$(echo "$f"| cut -d'.' -f 1)
+        EXTENSION=$(echo "$f"| sed "s/$FILENAME//")
+        #echo "Extensions: $EXTENSION"
+        NEWNAME="${DATASET}_$LANG$EXTENSION"
+        #echo $NEWNAME
+        if [ ! -d "$DESTINATIONBASE/$DATE/$DATASET/$DATASETSTRUCTURE" ]; then
+                mkdir -p $DESTINATIONBASE/$DATE/$DATASET/$DATASETSTRUCTURE
+        fi
+        echo "copied to $DESTINATIONBASE/$DATE/$DATASET/$DATASETSTRUCTURE/$NEWNAME"
+        cp $p $DESTINATIONBASE/$DATE/$DATASET/$DATASETSTRUCTURE/$NEWNAME
 done
-
