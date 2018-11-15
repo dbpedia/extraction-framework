@@ -5,11 +5,12 @@ import java.util.logging.{Level, LogRecord, Logger}
 import org.dbpedia.extraction.dataparser.StringParser
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.mutable.{ArrayBuffer, HashMap}
 import scala.language.reflectiveCalls
+import scala.reflect.ClassTag
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
@@ -25,6 +26,7 @@ object MappingsLoader extends java.io.Serializable
                  def language : Language
                  def redirects : Redirects
                  def mappingPageSource : Traversable[WikiPage]
+                 def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) : Mappings =
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
@@ -93,7 +95,7 @@ object MappingsLoader extends java.io.Serializable
           def ontology : Ontology
           def redirects : Redirects
           def language : Language
-	  def recorder[T: ClassTag] : ExtractionRecorder[T]
+	        def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) =
     {
         new TemplateMapping( loadOntologyClass(tnode, "mapToClass", true, context.ontology),
