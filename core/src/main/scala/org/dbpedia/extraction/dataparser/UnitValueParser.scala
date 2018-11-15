@@ -92,7 +92,7 @@ class UnitValueParser( extractionContext : {
     override def parse(node : Node) : Option[ParseResult[Double]] =
     {
         val errors =
-//            if(logger.isLoggable(Level.FINE)) Some(new ParsingErrors()) else
+            if(logger.isLoggable(Level.FINE)) Some(new ParsingErrors()) else
                 None
 
         for(result <- catchTemplates(node, errors))
@@ -126,7 +126,7 @@ class UnitValueParser( extractionContext : {
                     }
                     else
                     {
-//                        errors.foreach(_.add("Could not find any unit value in '" + text + "'"))
+                        errors.foreach(_.add("Could not find any unit value in '" + text + "'"))
                     }
                 }
             }
