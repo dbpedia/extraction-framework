@@ -65,7 +65,7 @@ class Config(val configPath: String) extends
   lazy val dumpDir: File = getValue(this, "base-dir", required = true){ x => new File(x)}
 
   /**
-    * Number of worker-nodes created by Spark
+    * Number of parallel processes allowed. Depends on the number of cores, type of disk and IO speed
     */
   lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "4").trim.toInt
 
