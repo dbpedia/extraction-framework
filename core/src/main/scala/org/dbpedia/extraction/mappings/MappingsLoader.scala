@@ -93,7 +93,7 @@ object MappingsLoader extends java.io.Serializable
           def ontology : Ontology
           def redirects : Redirects
           def language : Language
-
+	  def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) =
     {
         new TemplateMapping( loadOntologyClass(tnode, "mapToClass", true, context.ontology),
@@ -107,6 +107,7 @@ object MappingsLoader extends java.io.Serializable
                   def ontology : Ontology
                   def redirects : Redirects
                   def language : Language
+	          def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) : List[PropertyMapping] =
     {
         var mappings = List[PropertyMapping]()
@@ -131,6 +132,7 @@ object MappingsLoader extends java.io.Serializable
                                       def ontology : Ontology
                                       def redirects : Redirects
                                       def language : Language
+	    			      def recorder[T: ClassTag] : ExtractionRecorder[T]
                                       }
                                    ) = tnode.title.decoded match
     {
@@ -213,6 +215,7 @@ object MappingsLoader extends java.io.Serializable
          def ontology : Ontology
          def redirects : Redirects
          def language : Language
+	 def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) =
     {
         val conditionMappings =
@@ -227,6 +230,7 @@ object MappingsLoader extends java.io.Serializable
       def ontology : Ontology
       def redirects : Redirects
       def language : Language
+      def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) =
     {
         //Search for the template mapping in the first template node of the mapping property
