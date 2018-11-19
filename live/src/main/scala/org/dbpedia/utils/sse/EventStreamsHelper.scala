@@ -18,7 +18,23 @@ import org.dbpedia.extraction.live.util.DateUtil
 import scala.concurrent.Future
 import scala.collection.JavaConversions._
 
-//https://stream.wikimedia.org/v2/stream/recentchange
+/**
+  * This Class is used in order to consume the Wikimedia EventStreamsAPI that replaced the RCStream API during spring of 2018.
+  * EventStreams follows the Server Sent Event (SSE) protocol.
+  * Akka SSE offers the implementation of a SSE Client used here.
+  * Akka Streams is used in order to process the stream data.
+  * Processing means filtering by configured language and namespaces, and use the wiki page title and timestamp in order to create LiveQueueItems.
+  *
+  * Documentation on the EventStreams API can be found here: https://wikitech.wikimedia.org/wiki/EventStreams
+  * EventStreams is available here: https://stream.wikimedia.org/v2/stream/recentchange
+  * Documentation on the Akka SSE implementation: https://doc.akka.io/docs/akka-http/current/sse-support.html
+  * The schema of the EventStreams data can be found here: https://github.com/wikimedia/mediawiki-event-schemas/blob/master/jsonschema/mediawiki/recentchange/2.yaml
+  *
+  * @param wikilanguage as configured
+  * @param allowedNamespaces as configured. Sharing between Java and Scala is made possible through scala.collection.JavaConversions._
+  * @author Lena Schindler, November 2018
+  */
+
 
 class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayList[Integer]) {
 

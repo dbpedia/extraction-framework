@@ -8,7 +8,12 @@ import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.utils.sse.EventStreamsHelper;
 
 
-//https://stream.wikimedia.org/v2/stream/recentchange
+/**
+ * This Feeder initializes the consumption of the Wikimedia EventStreams API
+ * See more at the documentation of the org.dbpedia.utils.sse.EventStreamsHelper class.
+ *
+ * @author Lena Schindler, November 2018
+ */
 
 public class EventStreamsFeeder extends Feeder {
 
