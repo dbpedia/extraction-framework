@@ -7,7 +7,7 @@ import scala.collection.mutable.HashMap
 /**
  * @param prefix may be null
  */
-class RdfNamespace(val prefix: String, val namespace: String, val validate: Boolean) {
+class RdfNamespace(val prefix: String, val namespace: String, val validate: Boolean) extends java.io.Serializable {
   
   // TODO: rename to '+'? Or add alias method '+'?
   def append(suffix: String): String =

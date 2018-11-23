@@ -9,30 +9,30 @@ import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
 
 /**
- * Executes a extraction.
- *
- * @param extractor The Extractor
- * @param source The extraction source
- * @param namespaces Only extract pages in these namespaces
- * @param destination The extraction destination. Will be closed after the extraction has been finished.
- * @param language the language of this extraction.
- */
+  * Executes a extraction.
+  *
+  * @param extractor The Extractor
+  * @param source The extraction source
+  * @param namespaces Only extract pages in these namespaces
+  * @param destination The extraction destination. Will be closed after the extraction has been finished.
+  * @param language the language of this extraction.
+  */
 class ExtractionJob(
-   extractor: WikiPageExtractor,
-   source: Source,
-   val namespaces: Set[Namespace],
-   val destination: Destination,
-   val language: Language,
-   val retryFailedPages: Boolean,
-   val extractionRecorder: ExtractionRecorder[WikiPage])
+                     extractor: WikiPageExtractor,
+                     source: Source,
+                     val namespaces: Set[Namespace],
+                     val destination: Destination,
+                     val language: Language,
+                     val retryFailedPages: Boolean,
+                     val extractionRecorder: ExtractionRecorder[WikiPage])
 {
-/*  val myAnnotatedClass: ClassSymbol = runtimeMirror(Thread.currentThread().getContextClassLoader).classSymbol(ExtractorAnnotation.getClass)
-  val annotation: Option[Annotation] = myAnnotatedClass.annotations.find(_.tree.tpe =:= typeOf[ExtractorAnnotation])
-  val result = annotation.flatMap { a =>
-    a.tree.children.tail.collect({ case Literal(Constant(name: String)) => name }).headOption
-  }
+  /*  val myAnnotatedClass: ClassSymbol = runtimeMirror(Thread.currentThread().getContextClassLoader).classSymbol(ExtractorAnnotation.getClass)
+    val annotation: Option[Annotation] = myAnnotatedClass.annotations.find(_.tree.tpe =:= typeOf[ExtractorAnnotation])
+    val result = annotation.flatMap { a =>
+      a.tree.children.tail.collect({ case Literal(Constant(name: String)) => name }).headOption
+    }
 
-  result.foreach( x => println(x.toString))*/
+    result.foreach( x => println(x.toString))*/
 
   def datasets: Set[Dataset] = extractor.datasets
 
@@ -58,7 +58,7 @@ class ExtractionJob(
           extractionRecorder.monitor.reportError(extractionRecorder, ex)
     }
   }
-  
+
   def run(): Unit =
   {
     extractionRecorder.initialize(language, "Main Extraction", extractor.datasets.toSeq)

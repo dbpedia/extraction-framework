@@ -215,8 +215,8 @@ extends PageNodeExtractor
 
     private def extractNumber(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        intParser.parse(node).foreach(value => return Some(ParseResult(value.toString, None, Some(new Datatype("xsd:integer")))))
-        doubleParser.parse(node).foreach(value => return Some(ParseResult(value.toString, None, Some(new Datatype("xsd:double")))))
+        intParser.parse(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:integer")))))
+        doubleParser.parse(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:double")))))
         None
     }
 
@@ -257,7 +257,7 @@ extends PageNodeExtractor
         for (dateTimeParser <- dateTimeParsers;
              date <- dateTimeParser.parse(node))
         {
-            return Some(ParseResult(date.toString, None, Some(date.value.datatype)))
+            return Some(ParseResult(date.value.toString, None, Some(date.value.datatype)))
         }
         None
     }

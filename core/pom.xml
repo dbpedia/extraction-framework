@@ -33,12 +33,12 @@
 
                 <configuration>
                     <launchers>
-                    
+
                         <launcher>
                             <id>download-ontology</id>
                             <mainClass>org.dbpedia.extraction.util.OntologyDownloader</mainClass>
                             <args>
-                                <arg>../ontology.xml</arg> 
+                                <arg>../ontology.xml</arg>
                                 <arg>../ontology.owl</arg>
                                 <arg>${project.version}</arg>
                             </args>
@@ -48,7 +48,7 @@
                             <id>download-mappings</id>
                             <mainClass>org.dbpedia.extraction.util.MappingsDownloader</mainClass>
                             <args>
-                                <arg>../mappings</arg> 
+                                <arg>../mappings</arg>
                             </args>
                         </launcher>
 
@@ -77,6 +77,25 @@
     </repositories>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.4</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
@@ -101,10 +120,10 @@
         </dependency>
 
         <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.8.2</version>
-          <scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -153,27 +172,27 @@
             <version>2.5.0</version>
         </dependency>
 
-		<dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-scala_2.11</artifactId>
             <version>2.5.0</version>
         </dependency>
-            <!--snuggletex dependencies: used to convert latex formula into infix notation maybe replace these-->
-            <dependency>
-                <groupId>uk.ac.ed.ph.snuggletex</groupId>
-                <artifactId>snuggletex-core</artifactId>
-                <version>1.2.2</version>
-            </dependency>
-            <dependency>
-                <groupId>uk.ac.ed.ph.snuggletex</groupId>
-                <artifactId>snuggletex-upconversion</artifactId>
-                <version>1.2.2</version>
-            </dependency>
-            <dependency>
-                <groupId>uk.ac.ed.ph.snuggletex</groupId>
-                <artifactId>snuggletex-jeuclid</artifactId>
-                <version>1.2.2</version>
-            </dependency>
+        <!--snuggletex dependencies: used to convert latex formula into infix notation maybe replace these-->
+        <dependency>
+            <groupId>uk.ac.ed.ph.snuggletex</groupId>
+            <artifactId>snuggletex-core</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.ac.ed.ph.snuggletex</groupId>
+            <artifactId>snuggletex-upconversion</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.ac.ed.ph.snuggletex</groupId>
+            <artifactId>snuggletex-jeuclid</artifactId>
+            <version>1.2.2</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.jena/jena-arq -->
         <dependency>
@@ -191,6 +210,18 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.8.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.databricks</groupId>
+            <artifactId>spark-xml_2.11</artifactId>
+            <version>0.4.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>14.0</version>
         </dependency>
     </dependencies>
 

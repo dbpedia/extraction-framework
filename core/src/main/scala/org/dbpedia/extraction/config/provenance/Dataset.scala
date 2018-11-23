@@ -32,7 +32,7 @@ class Dataset private[provenance](
    //       'dataset'   -> the language namespace is appended with the name of the current dataset (forming an alternate graph iri -> indicating that the dataset has a singular purpose, but should not appear in the general knowledge graph)
    //       'any other value (no whitespaces!)' -> is appended to the namespace of this language (see above -> this can be used to crete alternative namespaces stretching over multiple datasets)
    var keywords: Seq[String] = Seq.empty[String] //also for documentation
-   )
+   ) extends java.io.Serializable
 {
 
   val description = Option(descr)

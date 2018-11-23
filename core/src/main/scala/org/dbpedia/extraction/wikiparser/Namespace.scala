@@ -19,7 +19,7 @@ import scala.collection.mutable
  * FIXME: separate Wikipedia and DBpedia namespaces. We cannot even be sure that there
  * are no name clashes. "Mapping ko" may mean "Template talk" in some language...
  */
-class Namespace private[wikiparser](val code: Int, val name: String, dbpedia: Boolean) {
+class Namespace private[wikiparser](val code: Int, val name: String, dbpedia: Boolean) extends java.io.Serializable {
   
   def name(lang : Language): String = 
     if (dbpedia) name

@@ -79,6 +79,19 @@
 						</launcher>
 
 						<launcher>
+							<id>sparkextraction</id>
+							<mainClass>org.dbpedia.extraction.dump.extract.SparkExtraction</mainClass>
+
+							<jvmArgs>
+								<jvmArg>-server</jvmArg>
+								<jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+								<jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+								<jvmArg>-Xmx16G</jvmArg>
+								<jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+							</jvmArgs>
+						</launcher>
+
+						<launcher>
 							<id>stats-extraction</id>
 							<mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
 							<jvmArgs>
@@ -156,6 +169,13 @@
 
 	<dependencies>
 
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>15.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.dbpedia.extraction</groupId>
 			<artifactId>core</artifactId>
@@ -176,6 +196,12 @@
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.8.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_2.11</artifactId>
+			<version>2.2.1</version>
 		</dependency>
 
 	</dependencies>

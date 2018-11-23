@@ -11,10 +11,10 @@ import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
- * Dump extraction script.
- */
+  * Dump extraction script.
+  */
 object Extraction {
-  
+
   val Started = "extraction-started"
 
   val Complete = "extraction-complete"

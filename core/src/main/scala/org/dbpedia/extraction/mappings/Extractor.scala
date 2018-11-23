@@ -6,11 +6,10 @@ import org.dbpedia.extraction.transform.Quad
 /**
  * TODO: generic type may not be optimal.
  */
-trait Extractor[-N] {
+trait Extractor[-N] extends java.io.Serializable {
 
     var state = ExtractorState.Instantiated
     /**
-     * @param page The source node
      * @param subjectUri The subject URI of the generated triples
      * @return A graph holding the extracted data
      */

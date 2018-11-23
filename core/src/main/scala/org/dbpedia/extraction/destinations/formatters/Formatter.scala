@@ -5,7 +5,7 @@ import org.dbpedia.extraction.transform.Quad
 /**
  * Serializes statements.
  */
-trait Formatter
+trait Formatter extends java.io.Serializable
 {
   def header: String
   

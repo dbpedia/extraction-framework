@@ -5,6 +5,8 @@ import java.net.URL
 import java.util.Properties
 import java.util.logging.{Level, Logger}
 
+import org.dbpedia.extraction.config.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
+import org.dbpedia.extraction.config.ConfigUtils._
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
@@ -17,18 +19,16 @@ import scala.collection.Map
 import scala.collection.mutable.ListBuffer
 import scala.io.Codec
 import scala.util.{Failure, Success, Try}
-import ConfigUtils._
-import org.dbpedia.extraction.config.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 
 
 class Config(val configPath: String) extends
-  Properties(Config.universalProperties)
+  Properties(Config.universalProperties) with java.io.Serializable
 {
 
   if(configPath != null)
     this.putAll(ConfigUtils.loadConfig(configPath))
 
-  private val logger = Logger.getLogger(getClass.getName)
+  @transient private val logger = Logger.getLogger(getClass.getName)
   /**
     * load two config files:
     * 1. the universal config containing properties universal for a release
@@ -68,6 +68,10 @@ class Config(val configPath: String) extends
     * Number of parallel processes allowed. Depends on the number of cores, type of disk and IO speed
     */
   lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "4").trim.toInt
+
+  lazy val sparkMaster: String = Option(getString(this, "spark-master")).getOrElse("local[*]")
+
+  lazy val sparkLocalDir: String = Option(getString(this, "spark-local-dir")).getOrElse("")
 
   /**
     * Normally extraction jobs are run sequentially (one language after the other), but for some jobs it makes sense to run these in parallel.

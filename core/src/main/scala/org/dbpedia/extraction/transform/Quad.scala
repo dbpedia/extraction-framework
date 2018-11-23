@@ -38,7 +38,7 @@ class Quad(
   val datatype: String
 )
 extends Ordered[Quad]
-with Equals
+with Equals with Serializable
 {
   //updated for allowing addition of Wikidata String properties with unknown language
   //try to use this constructor: when using DatasetDestination we need the exact name of the DBpedia dataset!

@@ -199,10 +199,12 @@ extends PageNodeExtractor
             }
             else {
               ex match {
-                case e : java.net.SocketTimeoutException => logger.log(Level.INFO,
+                case e : java.net.SocketTimeoutException =>
+                  logger.log(Level.INFO,
                   "Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
                     loadFactor, ex)
-                case _ => logger.log(Level.INFO,
+                case _ =>
+                  logger.log(Level.INFO,
                   "Error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
                     loadFactor, ex)
               }
@@ -388,7 +390,8 @@ object MissingAbstractsExtractor {
       new BufferedReader(new FileReader("existing-abstracts.tsv"))
     }
     catch {
-      case e: FileNotFoundException => logger.severe(s"Unable to find file '${file.getAbsolutePath}'." +
+      case e: FileNotFoundException =>
+        logger.severe(s"Unable to find file '${file.getAbsolutePath}'." +
         s"Please generate it and put it in the given location.")
         throw e
       case e : Throwable => throw e

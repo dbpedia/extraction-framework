@@ -12,7 +12,7 @@ import scala.util.Try
   *
   * IMPORTANT: when introducing new datasets: make sure you included a new entry in main/resources/datasetdefinitions.json!!!!
  */
-object DBpediaDatasets
+object DBpediaDatasets extends java.io.Serializable
 {
     private val datasets = new mutable.HashMap[String, Dataset]()
     private val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("datasetdefinitions.json"))

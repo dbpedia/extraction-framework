@@ -18,7 +18,7 @@ class FileTypeExtractor(context: {
 }) extends WikiPageExtractor
 {
     // For writing warnings.
-    private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
+    @transient private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
 
     // To store the Commons language.
     private val commonsLang = Language.Commons

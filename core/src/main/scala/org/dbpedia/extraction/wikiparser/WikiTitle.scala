@@ -24,7 +24,7 @@ class WikiTitle (
   val fragment: String = null,
   val capitalizeLink : Boolean = true,
   var id: Option[Long] = None
-)
+) extends Serializable
 {
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 

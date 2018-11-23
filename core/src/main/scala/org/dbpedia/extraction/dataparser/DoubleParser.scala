@@ -17,7 +17,7 @@ class DoubleParser( context : { def language : Language },
 {
     private val parserUtils = new ParserUtils(context)
 
-    private val logger = Logger.getLogger(getClass.getName)
+    @transient private val logger = Logger.getLogger(getClass.getName)
 
     private val language = context.language.wikiCode
 

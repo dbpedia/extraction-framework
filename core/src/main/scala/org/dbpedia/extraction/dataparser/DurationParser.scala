@@ -8,13 +8,13 @@ import java.util.logging.{Logger, Level}
 import util.matching.Regex
 import scala.language.reflectiveCalls
 
-class DurationParser( context : { def language : Language } )
+class DurationParser( context : { def language : Language } ) extends java.io.Serializable
 {
     private val language = context.language.wikiCode
 
     private val parserUtils = new ParserUtils(context)
 
-    private val logger = Logger.getLogger(getClass.getName)
+    @transient private val logger = Logger.getLogger(getClass.getName)
 
     private val timeUnits = DurationParserConfig.timesMap.getOrElse(language, DurationParserConfig.timesMap("en"))
 

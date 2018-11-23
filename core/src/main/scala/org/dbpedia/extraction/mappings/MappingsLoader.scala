@@ -1,16 +1,14 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.datatypes.Datatype
-
-import scala.collection.mutable.HashMap
-import scala.collection.mutable.ArrayBuffer
 import java.util.logging.{Level, LogRecord, Logger}
 
-import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.StringParser
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
+import org.dbpedia.extraction.wikiparser._
 
+import scala.collection.mutable.{ArrayBuffer, HashMap}
 import scala.language.reflectiveCalls
 import scala.reflect.ClassTag
 
@@ -18,17 +16,17 @@ import scala.reflect.ClassTag
  * Loads the mappings from the configuration and builds a MappingExtractor instance.
  * This should be replaced by a general loader later on, which loads the mapping objects based on the grammar (which can be defined using annotations)
  */
-object MappingsLoader
+object MappingsLoader extends java.io.Serializable
 {
     // Note: we pass the encoded page title as log parameter so we can render a link on the server
-    private val logger = Logger.getLogger(MappingsLoader.getClass.getName)
+    @transient private val logger = Logger.getLogger(MappingsLoader.getClass.getName)
     
     def load( context : {
                  def ontology : Ontology
                  def language : Language
                  def redirects : Redirects
                  def mappingPageSource : Traversable[WikiPage]
-                  def recorder[T: ClassTag] : ExtractionRecorder[T]
+                 def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) : Mappings =
     {
         logger.info("Loading mappings ("+context.language.wikiCode+")")
@@ -97,7 +95,7 @@ object MappingsLoader
           def ontology : Ontology
           def redirects : Redirects
           def language : Language
-          def recorder[T: ClassTag] : ExtractionRecorder[T]
+	        def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) =
     {
         new TemplateMapping( loadOntologyClass(tnode, "mapToClass", true, context.ontology),
@@ -111,7 +109,7 @@ object MappingsLoader
                   def ontology : Ontology
                   def redirects : Redirects
                   def language : Language
-                  def recorder[T: ClassTag] : ExtractionRecorder[T]
+	          def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) : List[PropertyMapping] =
     {
         var mappings = List[PropertyMapping]()
@@ -136,7 +134,8 @@ object MappingsLoader
                                       def ontology : Ontology
                                       def redirects : Redirects
                                       def language : Language
-                                      def recorder[T: ClassTag] : ExtractionRecorder[T]}
+	    			      def recorder[T: ClassTag] : ExtractionRecorder[T]
+                                      }
                                    ) = tnode.title.decoded match
     {
         case "PropertyMapping" =>
@@ -218,7 +217,7 @@ object MappingsLoader
          def ontology : Ontology
          def redirects : Redirects
          def language : Language
-          def recorder[T: ClassTag] : ExtractionRecorder[T]
+	 def recorder[T: ClassTag] : ExtractionRecorder[T]
     } ) =
     {
         val conditionMappings =

@@ -12,7 +12,7 @@ import org.dbpedia.extraction.util.Language
  * @param labels The labels of this entity. Map: LanguageCode -> Label
  * @param comments Comments describing this entity. Map: LanguageCode -> Comment
  */
-abstract class OntologyEntity(val name : String, val labels : Map[Language, String], val comments : Map[Language, String])
+abstract class OntologyEntity(val name : String, val labels : Map[Language, String], val comments : Map[Language, String]) extends java.io.Serializable
 {
     require(name != null, "name of ontology entity is null")
     require(labels != null, "missing labels for ontology entity "+name)

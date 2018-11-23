@@ -1,3 +1,15 @@
+## DBpedia Extraction-Framework now powered by Apache Spark™
+The Dump-Extraction of the DBpedia Extraction-Framework has now an Apache Spark Implementation.
+1. `$ git clone git://github.com/Termilion/extraction-framework.git`
+2. `$ cd extraction-framework/`
+3. `$ git checkout SparkExtraction` 
+4. `$ cd dump/`
+5. `$ ../install-run sparkextraction extraction.spark.properties` or `$ ../run sparkextraction extraction.spark.properties`
+
+  * spark-master, alternate computation dir, languages and extractors can be configured in `/dump/extraction.spark.properties`
+
+_____
+
 # DBpedia Information Extraction Framework
 
 [![Build Status](https://travis-ci.org/dbpedia/extraction-framework.svg?branch=master)](https://travis-ci.org/dbpedia/extraction-framework)

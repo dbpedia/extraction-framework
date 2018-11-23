@@ -25,7 +25,7 @@ class ImageAnnotationExtractor (
 )
 extends PageNodeExtractor
 {
-  private val logger = Logger.getLogger(classOf[ImageAnnotationExtractor].getName)
+  @transient private val logger = Logger.getLogger(classOf[ImageAnnotationExtractor].getName)
   override val datasets = Set(DBpediaDatasets.ImageAnnotations)
 
   /* Properties */

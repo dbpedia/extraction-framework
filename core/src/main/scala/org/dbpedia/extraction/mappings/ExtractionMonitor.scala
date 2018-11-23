@@ -34,17 +34,17 @@ class ExtractionMonitor {
   def loadConf(configPath : String = null): Unit ={
     val config = if(configPath == null) Config.universalConfig
     else ConfigUtils.loadConfig(configPath)
-    compareVersions = Try[Boolean]{ config.getProperty("compareDatasetIDs").toBoolean }.getOrElse(false)
+    compareVersions = Try[Boolean]{ config.getProperty("compare-dataset-ids").toBoolean }.getOrElse(false)
     if (compareVersions){
-      require(config.getProperty("previousBaseDir") != null, "Old build directory needs to be defined under 'previousBaseDir' for the dataID comparison!")
-      old_version_URL = config.getProperty("previousBaseDir")
-      val changes = config.getProperty("expectedChanges")
+      require(config.getProperty("previous-base-dir") != null, "Old build directory needs to be defined under 'previousBaseDir' for the dataID comparison!")
+      old_version_URL = config.getProperty("previous-base-dir")
+      val changes = config.getProperty("expected-changes")
       if(changes != null) {
         if(changes.split(",").length == 2) {
           expectedChanges = Array(changes.split(",")(0).toFloat, changes.split(",")(1).toFloat)
         }
       }
-      summarizeExceptions = Try[Boolean]{ config.getProperty("summarizeExceptions").toBoolean }.getOrElse(false)
+      summarizeExceptions = Try[Boolean]{ config.getProperty("summarize-exceptions").toBoolean }.getOrElse(false)
     }
   }
 

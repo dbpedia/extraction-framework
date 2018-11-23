@@ -28,7 +28,7 @@ class CommonsKMLExtractor (
 extends WikiPageExtractor
 {
     // Logger.
-    private val logger = Logger.getLogger(classOf[GalleryExtractor].getName)
+    @transient private val logger = Logger.getLogger(classOf[GalleryExtractor].getName)
 
     /** Property that links a gallery page with each image on it */
     private val hasKMLDataProperty = context.ontology.properties("hasKMLData")

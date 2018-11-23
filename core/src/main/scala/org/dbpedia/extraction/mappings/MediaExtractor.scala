@@ -5,11 +5,10 @@ import java.util.logging.Logger
 import org.dbpedia.extraction.config.mappings.MediaExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.{ExtractorUtils, Language, WikiApi, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.util.RichString.wrapString
 
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.language.reflectiveCalls
@@ -24,8 +23,6 @@ class MediaExtractor(
   context: {
     def ontology: Ontology
     def language: Language
-    def articlesSource: Source
-    def commonsSource: Source
   }
 )
 extends PageNodeExtractor
@@ -37,9 +34,9 @@ extends PageNodeExtractor
 
   private val fileNamespaceIdentifier = Namespace.File.name(language)
 
-  private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
-
   private val encodedLinkRegex = """%[0-9a-fA-F][0-9a-fA-F]""".r
+
+  @transient private val logger = Logger.getLogger(classOf[MappingExtractor].getName)
 
   private val imageClass = context.ontology.classes("Image")
   private val soundClass = context.ontology.classes("Sound")
