@@ -1,15 +1,3 @@
-## DBpedia Extraction-Framework now powered by Apache Spark™
-The Dump-Extraction of the DBpedia Extraction-Framework has now an Apache Spark Implementation.
-1. `$ git clone git://github.com/Termilion/extraction-framework.git`
-2. `$ cd extraction-framework/`
-3. `$ git checkout SparkExtraction` 
-4. `$ cd dump/`
-5. `$ ../install-run sparkextraction extraction.spark.properties` or `$ ../run sparkextraction extraction.spark.properties`
-
-  * spark-master, alternate computation dir, languages and extractors can be configured in `/dump/extraction.spark.properties`
-
-_____
-
 # DBpedia Information Extraction Framework
 
 [![Build Status](https://travis-ci.org/dbpedia/extraction-framework.svg?branch=master)](https://travis-ci.org/dbpedia/extraction-framework)
@@ -81,6 +69,14 @@ Before you can start developing you need to take care of some prerequisites:
 * **Maven** is used for project management and build automation. Get it from: [http://maven.apache.org/](http://maven.apache.org/). Please download Maven 3.
 
 This is enough to compile and run the DBpedia extraction framework. The required input files, the wikimedia dumps, will be downloaded by extractor code if configured to do so (see [here](https://github.com/dbpedia/extraction-framework/wiki/Extraction-Instructions)). Check [this](https://github.com/dbpedia/extraction-framework/wiki/Development-Environment-Setup) out to know more about Development Environment Setup. 
+
+## DBpedia Extraction-Framework now powered by Apache Spark
+The Dump-Extraction of the DBpedia Extraction-Framework has now an Apache Spark Implementation.
+1. `$ cd extraction-framework/dump/`
+2. `$ ../install-run sparkextraction extraction.spark.properties` or `$ ../run sparkextraction extraction.spark.properties`
+  
+  * the spark-extraction currently supports every extractor except MappingsExtractor, ImageExtractor and the NIF-Extraction
+  * spark-master, alternate spark-temporary dir, languages and extractors can be configured in `/dump/extraction.spark.properties`
 
 ## Contribution Guidelines
 
