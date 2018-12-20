@@ -10,7 +10,7 @@
 
 ## 1. Setting everything up:
 In this section the extraction-framework gets downloaded from the official repository, configured to work on your own system and installed with maven.
-1. `git clone https://github.com/dbpedia/databus-maven-plugin.git`
+1. `git clone https://github.com/dbpedia/extraction-framework`
 3. Configure `core/main/resources/universal.properties`:
     - `base-dir`: Path to `DATADIR`
     - `log-dir`: Path to `LOGDIR`
