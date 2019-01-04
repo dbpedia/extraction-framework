@@ -11,15 +11,17 @@ import scala.language.reflectiveCalls
 /**
  * Parses a data time.
  */
-class DateTimeParser ( context : {
+class DateTimeParser ( context :
+                       {
                             def language : Language
-                            def redirects : Redirects },
+                            def redirects : Redirects
+                       },
                        datatype : Datatype,
                        val strict : Boolean = false) extends DataParser
 {
     require(datatype != null, "datatype != null")
 
-    private val logger = Logger.getLogger(getClass.getName)
+    @transient private val logger = Logger.getLogger(getClass.getName)
 
     // language-specific configurations
 
@@ -32,9 +34,10 @@ class DateTimeParser ( context : {
 
     // parse logic configurations
 
-    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexDateTime.contains(language))
-                                            DataParserConfig.splitPropertyNodeRegexDateTime.get(language).get
-                                          else DataParserConfig.splitPropertyNodeRegexDateTime.get("en").get
+    override val splitPropertyNodeRegex: String = if (DataParserConfig.splitPropertyNodeRegexDateTime.contains(language))
+                                                    DataParserConfig.splitPropertyNodeRegexDateTime(language)
+                                                  else
+                                                    DataParserConfig.splitPropertyNodeRegexDateTime("en")
 
     private val monthRegex = months.keySet.mkString("|")
     private val eraRegex = eraStr.keySet.mkString("|")
@@ -74,26 +77,29 @@ class DateTimeParser ( context : {
 
     private val YearRegex = ("""(?iu)""" + prefix + """(?<![\d\pL\w])(-?\d{1,4})(?!\d)\s*(""" + eraRegex + """)?""" + postfix).r
 
+    private val YearRegex2 = ("""(?iu)""" + prefix + """(""" + eraRegex + """)(?<![\d])(\d{1,4})(?!\d)\s*""" + postfix).r
 
-    override def parse(node : Node) : Option[Date] =
+    override def parse(node : Node) : Option[ParseResult[Date]] =
     {
         try
         {
             for( child @ TemplateNode(_, _, _, _) <- node.children;
                  date <- catchTemplate(child))
             {
-                return Some(date)
+                return Some(ParseResult(date))
             }
 
             for(date <- findDate(nodeToString(node).trim))
             {
-                return Some(date)
+                return Some(ParseResult(date))
             }
         }
         catch
         {
-            case ex : IllegalArgumentException  => logger.log(Level.FINE, "Error while parsing date", ex)
-            case ex : NumberFormatException => logger.log(Level.FINE, "Error while parsing date", ex)
+            case ex : IllegalArgumentException  =>
+                logger.log(Level.FINE, "Error while parsing date", ex)
+            case ex : NumberFormatException =>
+                logger.log(Level.FINE, "Error while parsing date", ex)
         }
 
         None
@@ -109,7 +115,7 @@ class DateTimeParser ( context : {
             if (currentTemplate.keySet.contains("text")) {
                 // find date in "text" value property
                 for (property <- node.property(currentTemplate.getOrElse("text", ""));
-                     TextNode(text, _) <- property.children)
+                     TextNode(text, _, _) <- property.children)
                 {
                     return findDate(text)
                 }
@@ -128,7 +134,7 @@ class DateTimeParser ( context : {
                     val propVal = currentTemplate.getOrElse("ifPropertyNumHasValue", "")
 
                     for (property <- node.property(propNum);
-                         TextNode(text, _) <- property.children)
+                         TextNode(text, _, _) <- property.children)
                     {
                         if (text !=  propVal)
                         {
@@ -144,9 +150,9 @@ class DateTimeParser ( context : {
                 for (yearProperty <- node.property(yearNum);
                      monthProperty <- node.property(monthNum);
                      dayProperty <- node.property(dayNum);
-                     year <- yearProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                     month <- monthProperty.children.collect{case TextNode(text, _) => text}.headOption;
-                     day <- dayProperty.children.collect{case TextNode(text, _) => text}.headOption)
+                     year <- yearProperty.children.collect{case TextNode(text, _, _) => text}.headOption;
+                     month <- monthProperty.children.collect{case TextNode(text, _, _) => text}.headOption;
+                     day <- dayProperty.children.collect{case TextNode(text, _, _) => text}.headOption)
                 {
                     try
                     {
@@ -160,9 +166,13 @@ class DateTimeParser ( context : {
                     	  case YearRegex(year, era) => {
                     	    val eraIdentifier = getEraSign(era)
                     	    (eraIdentifier+year).toInt
-                    	  } 
-                    	  case YearRegex(year) => year.toInt
-                    	}
+                    	  }
+                          case YearRegex(year) => year.toInt
+                          case YearRegex2(era, year) => {
+                              val eraIdentifier = getEraSign(era)
+                              (eraIdentifier+year).toInt
+                          }
+                        }
                         return Some(new Date(Some(yearNum), Some(monthNum), Some(day.toInt), datatype))
                     }
                     catch
@@ -174,7 +184,7 @@ class DateTimeParser ( context : {
             }
         }
 
-        logger.log(Level.FINE, "Template unknown: " + node.title);
+        logger.log(Level.FINE, "Template unknown: " + node.title)
         None
     }
 
@@ -188,31 +198,21 @@ class DateTimeParser ( context : {
         datatype.name match
         {
             case "xsd:gDay" =>
-            {
                 logger.fine("Method for day Extraction not yet implemented.")
                 None
-            }
             case "xsd:gMonth" =>
-            {
                 logger.fine("Method for month Extraction not yet implemented.")
                 None
-            }
             case "xsd:gYear" =>
-            {
                 for(date <- catchMonthYear(input))
                 {
                     return Some(date)
                 }
                 catchYear(input)
-            }
             case "xsd:gMonthDay" =>
-            {
                 catchDayMonth(input)
-            }
             case "xsd:gYearMonth" =>
-            {
                 catchMonthYear(input)
-            }
             case _ => None
         }
     }
@@ -240,8 +240,9 @@ class DateTimeParser ( context : {
             }
             months.get(month.toLowerCase) match
             {
-                case Some(monthNumber) => return new Some(new Date(Some((century+year).toInt), Some(monthNumber.toInt), Some(day.toInt), datatype))
-                case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                case Some(monthNumber) => return Some(new Date(Some((century+year).toInt), Some(monthNumber.toInt), Some(day.toInt), datatype))
+                case None =>
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
 
@@ -250,8 +251,9 @@ class DateTimeParser ( context : {
             val eraIdentifier = getEraSign(era)
             months.get(month.toLowerCase) match
             {
-                case Some(monthNumber) => return new Some(new Date(Some((eraIdentifier+year).toInt), Some(monthNumber), Some(day.toInt), datatype))
-                case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                case Some(monthNumber) => return Some(new Date(Some((eraIdentifier+year).toInt), Some(monthNumber), Some(day.toInt), datatype))
+                case None =>
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
 
@@ -260,14 +262,15 @@ class DateTimeParser ( context : {
             val eraIdentifier = getEraSign(era)
             months.get(month.toLowerCase) match
             {
-                case Some(monthNumber) => return new Some(new Date(Some((eraIdentifier+year).toInt), Some(monthNumber), Some(day.toInt), datatype))
-                case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                case Some(monthNumber) => return Some(new Date(Some((eraIdentifier+year).toInt), Some(monthNumber), Some(day.toInt), datatype))
+                case None =>
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
 
         for(DateRegex4(day, month, year) <- List(input))
         {
-            return new Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
+            return Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
         }
 
         for(DateRegex5(day, month, year) <- List(input))
@@ -275,30 +278,32 @@ class DateTimeParser ( context : {
             try
             {
                 val monthNumber = months(month.toLowerCase)
-                return new Some(new Date(Some(year.toInt), Some(monthNumber), Some(day.toInt), datatype))
+                return Some(new Date(Some(year.toInt), Some(monthNumber), Some(day.toInt), datatype))
             }
             catch
             {
-                case ex: NoSuchElementException => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                case ex: NoSuchElementException =>
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
 
         for(DateRegex6(year, month, day) <- List(input))
         {
-            return new Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
+            return Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
         }
 
         for(DateRegex7(day, month, year) <- List(input))
         {
-            return new Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
+            return Some(new Date(Some(year.toInt), Some(month.toInt), Some(day.toInt), datatype))
         }
 
         for(DateRegex8(year, month, day) <- List(input))
         {
             months.get(month.toLowerCase) match
             {
-              case Some(monthNumber) => return new Some(new Date(Some((year).toInt), Some(monthNumber), Some(day.toInt), datatype))
-              case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+              case Some(monthNumber) => return Some(new Date(Some(year.toInt), Some(monthNumber), Some(day.toInt), datatype))
+              case None =>
+                  logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
 
@@ -313,8 +318,9 @@ class DateTimeParser ( context : {
             val day = result.group(2)
             months.get(month.toLowerCase) match
             {
-                case Some(monthNumber) => return new Some(new Date(month = Some(monthNumber), day = Some(day.toInt), datatype = datatype))
-                case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                case Some(monthNumber) => return Some(new Date(month = Some(monthNumber), day = Some(day.toInt), datatype = datatype))
+                case None =>
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
         for(result <- DayMonthRegex2.findFirstMatchIn(input))
@@ -323,8 +329,9 @@ class DateTimeParser ( context : {
             val month = result.group(4)
             months.get(month.toLowerCase) match
             {
-                case Some(monthNumber) => return new Some(new Date(month = Some(monthNumber), day = Some(day.toInt), datatype = datatype))
-                case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                case Some(monthNumber) => return Some(new Date(month = Some(monthNumber), day = Some(day.toInt), datatype = datatype))
+                case None =>
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
         None
@@ -340,8 +347,9 @@ class DateTimeParser ( context : {
             val eraIdentifier = getEraSign(era)
             months.get(month.toLowerCase) match
             {
-                case Some(monthNumber) => return new Some(new Date(year = Some((eraIdentifier+year).toInt), month = Some(monthNumber), datatype = datatype))
-                case None => logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
+                case Some(monthNumber) => return Some(new Date(year = Some((eraIdentifier+year).toInt), month = Some(monthNumber), datatype = datatype))
+                case None =>
+                    logger.log(Level.FINE, "Month with name '"+month+"' (language: "+language+") is unknown")
             }
         }
         None
@@ -353,14 +361,20 @@ class DateTimeParser ( context : {
         {
             val year = result.group(1)
             val eraIdentifier = getEraSign(result.group(2))
-            return new Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = datatype))
+            return Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = datatype))
+        }
+        for(result <- YearRegex2.findFirstMatchIn(input))
+        {
+            val year = result.group(2)
+            val eraIdentifier = getEraSign(result.group(1))
+            return Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = datatype))
         }
         None
     }
 
     private def nodeToString(node : Node) : String = node match
     {
-        case TextNode(text, _) => text
+        case TextNode(text, _, _) => text
         case _ => node.children.map(nodeToString).mkString
     }
 
@@ -373,7 +387,7 @@ class DateTimeParser ( context : {
 
         for ( (key, value) <- eraStr if value == (-1) )
         {
-            if (key.toLowerCase == tmpInp.substring(0, math.min(key.size,tmpInp.size)) )
+            if (key.toLowerCase == tmpInp.substring(0, math.min(key.length,tmpInp.length)) )
             {
                 return "-"
             }

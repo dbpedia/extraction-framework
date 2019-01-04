@@ -1,0 +1,142 @@
+<!-- This is just for the purpose of explaining how to integrate the statistic tables in the DBpedia statistics page
+prerequisite would be the statistics generation, see: $extraction-framework/scripts/src/main/bash/collectStats.sh-->
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- all script and link tags (see below) have to be imported into drupal via php tags. The following tag inserts all necessary script and link tags.-->
+    <?php
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/jquery.min.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/d3.min.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/jquery.dataTables.min.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/commonScripts.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/statisticsTables.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/wikipediaLanguageMap.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/chosen/chosen.jquery.js', 'external');
+            drupal_add_js('http://vmdbpedia.informatik.uni-leipzig.de/temporary/d3.tip.v0.6.3.js', 'external');
+            drupal_add_css('http://vmdbpedia.informatik.uni-leipzig.de/temporary/jquery.dataTables.css', 'external');
+            drupal_add_css('http://vmdbpedia.informatik.uni-leipzig.de/temporary/chosen/chosen.min.css', 'external');
+            drupal_add_css('table.dataTable tbody td {padding: 5px 3px;} div.tooltip { position: absolute; text-align: center; padding: 2px; font: 12px sans-serif; background: wheat; color: black; border: 0px; border-radius: 5px; max-width: 300px;}', 'inline');
+        ?>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/content/jScript/commonScripts.js"></script>
+    <script type="text/javascript" src="/content/jScript/statisticsTables.js"></script>
+    <script type="text/javascript" src="/content/jScript/wikipediaLanguageMap.js"></script>
+    <script type="text/javascript" src="http://vmdbpedia.informatik.uni-leipzig.de/temporary/chosen/chosen.jquery.js"></script>
+    <script type="text/javascript" src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.7/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="http://vmdbpedia.informatik.uni-leipzig.de/temporary/chosen/chosen.min.css"/>
+    <style type="text/css">
+        table.dataTable tbody td {padding: 5px 3px;}
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 2px;
+            font: 12px sans-serif;
+            background: wheat;
+            color: black;
+            border: 0px;
+            border-radius: 5px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+<!--place these tags at the position you want to display respective table-->
+<div id="instPropStatDiv"></div>    <!--the general overview table-->
+<div id="compTableDiv"></div>       <!--the comparison table with the last release-->
+<div id="typeTableDiv"></div>       <!--the type statistics table-->
+<div id="propTableDiv"></div>       <!--the property statistic table-->
+
+<!--place this tag after the last of the table tags above-->
+<script>
+    //params: 1. general statistics file of current release, 2. view name of the current release, 3. list of languages to show at the outset, 4. table-type map (just copy that),
+    // 5. (optional) compare current release to this statistics file, 6. (optional) view-name of second release
+    init("http://vmdbpedia.informatik.uni-leipzig.de/2015-10/statistics/stats-general-stats.json",
+            "2015-10",
+            ["all", "en","de", "es", "fr", "ja", "nl", "ru"],
+            {"instPropStat": "general", "compTable": "compare" },
+            "http://vmdbpedia.informatik.uni-leipzig.de/2015-04/statistics/stats-general-stats.json",
+            "2015-04");
+
+    //params: 1. properties (or type-) statistics file, 2. link to the id used in the div above (just copy that), 3. Type of the table (Properties | Types),
+    // 4. list of languages to show at the outset, 5. List of properties (types) to show at the outset
+    initList("http://vmdbpedia.informatik.uni-leipzig.de/2015-10/statistics/stats-properties-stats.json",
+            "propTable",
+            "Properties",
+            ["all", "en","de", "es", "fr", "ja", "nl", "ru"],
+            ["http://dbpedia.org/ontology/birthPlace",
+                "http://dbpedia.org/ontology/team",
+                "http://dbpedia.org/ontology/country",
+                "http://dbpedia.org/ontology/birthDate",
+                "http://dbpedia.org/ontology/populationTotal",
+                "http://dbpedia.org/ontology/birthYear",
+                "http://dbpedia.org/ontology/postalCode",
+                "http://dbpedia.org/ontology/genre",
+                "http://dbpedia.org/ontology/years",
+                "http://dbpedia.org/ontology/starring",
+                "http://dbpedia.org/ontology/isPartOf",
+                "http://dbpedia.org/ontology/careerStation",
+                "http://dbpedia.org/ontology/family",
+                "http://dbpedia.org/ontology/deathPlace",
+                "http://dbpedia.org/ontology/order",
+                "http://dbpedia.org/ontology/elevation",
+                "http://dbpedia.org/ontology/areaCode",
+                "http://dbpedia.org/ontology/class",
+                "http://dbpedia.org/ontology/deathYear",
+                "http://dbpedia.org/ontology/deathDate",
+                "http://dbpedia.org/ontology/numberOfGoals",
+                "http://dbpedia.org/ontology/numberOfMatches",
+                "http://dbpedia.org/ontology/location",
+                "http://dbpedia.org/ontology/runtime",
+                "http://dbpedia.org/ontology/kingdom"]);
+    initList("http://vmdbpedia.informatik.uni-leipzig.de/2015-10/statistics/stats-types-stats.json",
+            "typeTable",
+            "Types",
+            ["all", "en","de", "es", "fr", "ja", "nl", "ru"],
+            ["dbpedia.org/ontology/Agent",
+                "dbpedia.org/ontology/Person",
+                "dbpedia.org/ontology/Location",
+                "dbpedia.org/ontology/Place",
+                "dbpedia.org/ontology/PopulatedPlace",
+                "dbpedia.org/ontology/Settlement",
+                "dbpedia.org/ontology/Work",
+                "dbpedia.org/ontology/Species",
+                "dbpedia.org/ontology/Athlete",
+                "dbpedia.org/ontology/Eukaryote",
+                "dbpedia.org/ontology/Animal",
+                "dbpedia.org/ontology/Organisation",
+                "dbpedia.org/ontology/Region",
+                "dbpedia.org/ontology/AdministrativeRegion",
+                "dbpedia.org/ontology/MusicalWork",
+                "dbpedia.org/ontology/SoccerPlayer",
+                "dbpedia.org/ontology/Artist",
+                "dbpedia.org/ontology/ArchitecturalStructure",
+                "dbpedia.org/ontology/Film",
+                "dbpedia.org/ontology/City",
+                "dbpedia.org/ontology/Album",
+                "dbpedia.org/ontology/Insect",
+                "dbpedia.org/ontology/Municipality",
+                "dbpedia.org/ontology/Event",
+                "dbpedia.org/ontology/MusicalArtist",
+                "dbpedia.org/ontology/Infrastructure",
+                "dbpedia.org/ontology/WrittenWork",
+                "dbpedia.org/ontology/SocietalEvent",
+                "dbpedia.org/ontology/NaturalPlace",
+                "dbpedia.org/ontology/CelestialBody",
+                "dbpedia.org/ontology/Company",
+                "dbpedia.org/ontology/Plant",
+                "dbpedia.org/ontology/Actor",
+                "dbpedia.org/ontology/Building",
+                "dbpedia.org/ontology/Politician",
+                "dbpedia.org/ontology/MeanOfTransportation",
+                "dbpedia.org/ontology/Book",
+                "dbpedia.org/ontology/SportsTeam"]);
+</script>
+</body>
+</html>

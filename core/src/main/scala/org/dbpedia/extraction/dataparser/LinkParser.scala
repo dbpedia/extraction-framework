@@ -1,17 +1,17 @@
 package org.dbpedia.extraction.dataparser
 
-import java.net.URI
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import org.dbpedia.iri.IRI
 
 /**
  * Parses external links.
  */
 class LinkParser(val strict : Boolean = false) extends DataParser
 {
-    override val splitPropertyNodeRegex = DataParserConfig.splitPropertyNodeRegexLink.get("en").get
+    override val splitPropertyNodeRegex: String = DataParserConfig.splitPropertyNodeRegexLink("en")
 
-    override def parse(node : Node) : Option[URI] =
+    override def parse(node : Node) : Option[ParseResult[IRI]] =
     {
         if (!strict)
         {
@@ -19,7 +19,7 @@ class LinkParser(val strict : Boolean = false) extends DataParser
             list.foreach(link => {
                 try
                 {
-                    return Some(link.destination)
+                    return Some(ParseResult(link.destination))
                 }
                 catch
                 {
@@ -31,15 +31,15 @@ class LinkParser(val strict : Boolean = false) extends DataParser
         {
             node match
             {
-                case ExternalLinkNode(destination, _, _, _) => return Some(destination)
+                case ExternalLinkNode(destination, _, _, _) => return Some(ParseResult(destination))
                 case _ =>
                 {
                     node.children match
                     {
-                        case ExternalLinkNode(destination, _, _, _) :: Nil => return Some(destination)
-                        case ExternalLinkNode(destination, _, _, _) :: TextNode(text, _) :: Nil if text.trim.isEmpty => return Some(destination)
-                        case TextNode(text, _) :: ExternalLinkNode(destination, _, _, _) :: Nil if text.trim.isEmpty => return Some(destination)
-                        case TextNode(text1, _) :: ExternalLinkNode(destination, _, _, _) :: TextNode(text2, _) :: Nil if (text1.trim.isEmpty && text2.trim.isEmpty) => return Some(destination)
+                        case ExternalLinkNode(destination, _, _, _) :: Nil => return Some(ParseResult(destination))
+                        case ExternalLinkNode(destination, _, _, _) :: TextNode(text, _, _) :: Nil if text.trim.isEmpty => return Some(ParseResult(destination))
+                        case TextNode(text, _, _) :: ExternalLinkNode(destination, _, _, _) :: Nil if text.trim.isEmpty => return Some(ParseResult(destination))
+                        case TextNode(text1, _, _) :: ExternalLinkNode(destination, _, _, _) :: TextNode(text2, _, _) :: Nil if text1.trim.isEmpty && text2.trim.isEmpty => return Some(ParseResult(destination))
                         case _ => return None
                     }
                 }

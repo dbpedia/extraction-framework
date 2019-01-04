@@ -8,8 +8,15 @@
 # extraction_framework/core> mvn scala:run "-Dlauncher=LAUNCHER" "-DaddArgs=ARG1|ARG2|ARG3"
 
 LAUNCHER="$1"
+SLACK=false
 
 ADD_ARGS="$2"
+if [[ $ADD_ARGS == log-slack* ]] ;
+then
+  ADD_ARGS=""
+  SLACK=${ADD_ARGS#*log-slack=}
+fi
+
 for ARG in ${@:3}
 do
   ADD_ARGS="$ADD_ARGS|$ARG"
@@ -20,4 +27,5 @@ done
 
 # if we're not on a terminal, use batch mode to avoid ugly log files
 [ ! -t 1 ] && BATCH="-B"
-mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS" 
+
+mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS"

@@ -1,12 +1,12 @@
 package org.dbpedia.extraction.mappings.wikitemplate
 
+import org.dbpedia.extraction.transform.Quad
 import org.openrdf.model.impl.ValueFactoryImpl
 import org.openrdf.model.Statement
 import org.dbpedia.extraction.mappings.{WiktionaryPageExtractor, Cache}
 import collection.mutable.Stack
 import org.dbpedia.extraction.wikiparser.{TemplateNode, TextNode, Node}
 import collection.mutable.{ListBuffer}
-import org.dbpedia.extraction.destinations.Quad
 import xml.{XML, Node => XMLNode, NodeSeq}
 import org.dbpedia.extraction.mappings.wikitemplate.MyNodeList._
 import collection.mutable

@@ -6,7 +6,7 @@ import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.{WikiPage, Source}
+import org.dbpedia.extraction.sources.Source
 
 /**
  * Loads an ontology from configuration files using the DBpedia mapping language.
@@ -239,7 +239,7 @@ class OntologyReader
     {
         node.property(propertyName) match
         {
-            case Some(PropertyNode(_, TextNode(text, _) :: Nil, _)) if !text.trim.isEmpty => Some(text.trim)
+            case Some(PropertyNode(_, TextNode(text, _, _) :: Nil, _)) if !text.trim.isEmpty => Some(text.trim)
             case _ => None
         }
     }
@@ -292,7 +292,7 @@ class OntologyReader
           case template @ TemplateNode(title, _, _, _) if title.decoded equalsIgnoreCase templateName => {
             readPropertyTemplate(template)
           }
-          case TextNode(text, _) if text.trim.isEmpty => {
+          case TextNode(text, _, _) if text.trim.isEmpty => {
             None // ignore space between templates
           }
           case _ => {
@@ -370,50 +370,44 @@ class OntologyReader
             if(!buildCalled)
             {
                  //TODO check for cycles to avoid infinite recursion
-                val baseClasses = baseClassNames.map{ baseClassName => classMap.get(baseClassName) match
-                {
-                    case Some(baseClassBuilder) => baseClassBuilder.build(classMap)
-                    case None if ! RdfNamespace.validate(baseClassName) =>
-                    {
-                        logger.config("base class '"+baseClassName+"' of class '"+name+"' was not found, but for its namespace this was expected")
-                        Some(new OntologyClass(baseClassName, Map(), Map(), List(), Set(), Set()))
-                    }
-                    case None =>
-                    {
-                        logger.warning("base class '"+baseClassName+"' of class '"+name+"' not found")
-                        None
-                    }
-                }}.flatten
+                val baseClasses = baseClassNames.flatMap { baseClassName => classMap.get(baseClassName) match {
+                   case Some(baseClassBuilder) => baseClassBuilder.build(classMap)
+                   case None if !RdfNamespace.validate(baseClassName) => {
+                     logger.config("base class '" + baseClassName + "' of class '" + name + "' was not found, but for its namespace this was expected")
+                     Some(new OntologyClass(baseClassName, Map(), Map(), List(), Set(), Set()))
+                   }
+                   case None => {
+                     logger.warning("base class '" + baseClassName + "' of class '" + name + "' not found")
+                     None
+                   }
+                 }
+                 }
 
-                val equivClasses = equivClassNames.map{ equivClassName => classMap.get(equivClassName) match
-                {
-                    case Some(equivClassBuilder) => equivClassBuilder.build(classMap)
-                    case None if ! RdfNamespace.validate(equivClassName) =>
-                    {
-                        logger.config("equivalent class '"+equivClassName+"' of class '"+name+"' was not found, but for its namespace this was expected")
-                        Some(new OntologyClass(equivClassName, Map(), Map(), List(), Set(), Set()))
-                    }
-                    case None =>
-                    {
-                        logger.warning("equivalent class '"+equivClassName+"' of class '"+name+"' not found")
-                        None
-                    }
-                }}.flatten
-
-                val disjointClasses = disjClassNames.map{ disjClassNames => classMap.get(disjClassNames) match
-                {
+                val equivClasses = equivClassNames.flatMap { equivClassName => classMap.get(equivClassName) match {
                   case Some(equivClassBuilder) => equivClassBuilder.build(classMap)
-                  case None if ! RdfNamespace.validate(disjClassNames) =>
-                  {
-                    logger.config("equivalent class '"+disjClassNames+"' of class '"+name+"' was not found, but for its namespace this was expected")
-                    Some(new OntologyClass(disjClassNames, Map(), Map(), List(), Set(), Set()))
+                  case None if !RdfNamespace.validate(equivClassName) => {
+                    logger.config("equivalent class '" + equivClassName + "' of class '" + name + "' was not found, but for its namespace this was expected")
+                    Some(new OntologyClass(equivClassName, Map(), Map(), List(), Set(), Set()))
                   }
-                  case None =>
-                  {
-                    logger.warning("equivalent class '"+disjClassNames+"' of class '"+name+"' not found")
+                  case None => {
+                    logger.warning("equivalent class '" + equivClassName + "' of class '" + name + "' not found")
                     None
                   }
-                }}.flatten
+                }
+                }
+
+                val disjointClasses = disjClassNames.flatMap { disjClassNames => classMap.get(disjClassNames) match {
+                  case Some(equivClassBuilder) => equivClassBuilder.build(classMap)
+                  case None if !RdfNamespace.validate(disjClassNames) => {
+                    logger.config("equivalent class '" + disjClassNames + "' of class '" + name + "' was not found, but for its namespace this was expected")
+                    Some(new OntologyClass(disjClassNames, Map(), Map(), List(), Set(), Set()))
+                  }
+                  case None => {
+                    logger.warning("equivalent class '" + disjClassNames + "' of class '" + name + "' not found")
+                    None
+                  }
+                }
+                }
 
                 name match
                 {

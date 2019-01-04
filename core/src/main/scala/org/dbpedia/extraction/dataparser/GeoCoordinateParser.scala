@@ -20,7 +20,7 @@ class GeoCoordinateParser(
 {
     private val templateNames = GeoCoordinateParserConfig.coordTemplateNames
 
-    private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
+    @transient private val logger = Logger.getLogger(classOf[GeoCoordinateParser].getName)
     
     private val singleCoordParser = new SingleGeoCoordinateParser(extractionContext)
     
@@ -35,25 +35,26 @@ class GeoCoordinateParser(
     private val LatDir = ("""("""+latHemRegex+""")""").r
     
 
-    override def parse(node : Node) : Option[GeoCoordinate] =
+    override def parse(node : Node) : Option[ParseResult[GeoCoordinate]] =
     {
         try
         {
             for(coordinate <- catchTemplate(node))
             {
-                return Some(coordinate)        
+                return Some(ParseResult(coordinate) )
             }
 
             for( text <- StringParser.parse(node);
-                 coordinate <- parseGeoCoordinate(text) )
+                 coordinate <- parseGeoCoordinate(text.value) )
             {
-                return Some(coordinate)
+                return Some(ParseResult(coordinate))
             }
         }
         catch
         {
             case ex : ControlThrowable => throw ex
-            case ex : Exception => logger.log(Level.FINE, "Could not extract coordinates", ex)
+            case ex : Exception =>
+              logger.log(Level.FINE, "Could not extract coordinates", ex)
         }
 
         None
@@ -70,7 +71,7 @@ class GeoCoordinateParser(
             }
             case _ =>
             {
-                node.children.flatMap(catchTemplate(_)).headOption
+                node.children.flatMap(catchTemplate).headOption
             }
         }
     }

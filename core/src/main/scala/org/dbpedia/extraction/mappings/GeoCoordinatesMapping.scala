@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.{PropertyNode, TemplateNode}
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.Language
@@ -13,7 +14,7 @@ import scala.language.reflectiveCalls
  * Extracts geo-coodinates.
  */
 class GeoCoordinatesMapping( 
-  ontologyProperty : OntologyProperty,
+  val ontologyProperty : OntologyProperty,
   //TODO CreateMappingStats requires this properties to be public. Is there a better way?
   val coordinates : String,
   val latitude : String,
@@ -49,13 +50,13 @@ extends PropertyMapping
   private val pointOntProperty = context.ontology.properties("georss:point")
   private val featureOntClass =  context.ontology.classes("geo:SpatialThing")
 
-  override val datasets = Set(DBpediaDatasets.OntologyProperties)
+  override val datasets = Set(DBpediaDatasets.OntologyPropertiesGeo)
 
-  override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
     extractGeoCoordinate(node) match
     {
-      case Some(coord) => writeGeoCoordinate(node, coord, subjectUri, node.sourceUri, pageContext)
+      case Some(coord) => writeGeoCoordinate(node, coord, subjectUri, node.sourceIri)
       case None => Seq.empty
     }
   }
@@ -70,7 +71,7 @@ extends PropertyMapping
         geoCoordinate <- geoCoordinateParser.parse(coordProperty) 
       )
       {
-        return Some(geoCoordinate)
+        return Some(geoCoordinate.value)
       }
     }
 
@@ -105,17 +106,17 @@ extends PropertyMapping
         lonDeg <- doubleParser.parse(lonDegProperty) 
       )
       {
-        val latMin = node.property(latitudeMinutes).flatMap(doubleParser.parse).getOrElse(0.0)
-        val latSec = node.property(latitudeSeconds).flatMap(doubleParser.parse).getOrElse(0.0)
-        val latDir = node.property(latitudeDirection).flatMap(stringParser.parse).getOrElse("N")
+        val latMin = node.property(latitudeMinutes).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
+        val latSec = node.property(latitudeSeconds).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
+        val latDir = node.property(latitudeDirection).flatMap(stringParser.parse).getOrElse(ParseResult("N")).value
 
-        val lonMin = node.property(longitudeMinutes).flatMap(doubleParser.parse).getOrElse(0.0)
-        val lonSec = node.property(longitudeSeconds).flatMap(doubleParser.parse).getOrElse(0.0)
-        val lonDir = node.property(longitudeDirection).flatMap(stringParser.parse).getOrElse("E")
+        val lonMin = node.property(longitudeMinutes).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
+        val lonSec = node.property(longitudeSeconds).flatMap(doubleParser.parse).getOrElse(ParseResult(0.0)).value
+        val lonDir = node.property(longitudeDirection).flatMap(stringParser.parse).getOrElse(ParseResult("E")).value
 
         try
         {
-          return Some(new GeoCoordinate(latDeg, latMin, latSec, latDir, lonDeg, lonMin, lonSec, lonDir, false))
+          return Some(new GeoCoordinate(latDeg.value, latMin, latSec, latDir, lonDeg.value, lonMin, lonSec, lonDir, false))
         }
         catch
         {
@@ -127,7 +128,7 @@ extends PropertyMapping
     None
   }
 
-  private def writeGeoCoordinate(node : TemplateNode, coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Seq[Quad] =
+  private def writeGeoCoordinate(node : TemplateNode, coord : GeoCoordinate, subjectUri : String, sourceUri : String) : Seq[Quad] =
   {
     var quads = new ArrayBuffer[Quad]()
     
@@ -135,21 +136,21 @@ extends PropertyMapping
 
     if(ontologyProperty != null)
     {
-      instanceUri = pageContext.generateUri(subjectUri, ontologyProperty.name)
+      instanceUri = node.generateUri(subjectUri, ontologyProperty.name)
 
-      quads += new Quad(context.language,  DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, instanceUri, sourceUri)
+      quads += new Quad(context.language,  DBpediaDatasets.OntologyPropertiesGeo, subjectUri, ontologyProperty, instanceUri, sourceUri)
     }
 
-    quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
-    quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
-    quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
-    quads += new Quad(context.language, DBpediaDatasets.OntologyProperties, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
+    quads += new Quad(context.language, DBpediaDatasets.OntologyPropertiesGeo, instanceUri, typeOntProperty, featureOntClass.uri, sourceUri)
+    quads += new Quad(context.language, DBpediaDatasets.OntologyPropertiesGeo, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
+    quads += new Quad(context.language, DBpediaDatasets.OntologyPropertiesGeo, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
+    quads += new Quad(context.language, DBpediaDatasets.OntologyPropertiesGeo, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
 
     quads
   }
 
   private def getSingleCoordinate(coordinateProperty: PropertyNode, rangeMin: Double, rangeMax: Double, wikiCode: String ): Option[Double] = {
-    singleGeoCoordinateParser.parse(coordinateProperty).map(_.toDouble) orElse doubleParser.parse(coordinateProperty) match {
+    singleGeoCoordinateParser.parse(coordinateProperty).map(_.value.toDouble) orElse doubleParser.parse(coordinateProperty).map(_.value) match {
       case Some(coordinateValue) =>
         //Check if the coordinate is in the correct range
         if (rangeMin <= coordinateValue && coordinateValue <= rangeMax) {
@@ -158,9 +159,9 @@ extends PropertyMapping
           // Sometimes coordinates are written with the English locale (. instead of ,)
           doubleParserEn.parse(coordinateProperty) match {
             case Some(enCoordinateValue) =>
-              if (rangeMin <= enCoordinateValue && enCoordinateValue <= rangeMax) {
+              if (rangeMin <= enCoordinateValue.value && enCoordinateValue.value <= rangeMax) {
                 // do not return invalid coordinates either way
-                Some(enCoordinateValue)
+                Some(enCoordinateValue.value)
               } else None
             case None => None
           }

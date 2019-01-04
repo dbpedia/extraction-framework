@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.DBpediaDatasets
-import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, UriUtils, ExtractorUtils}
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+import org.dbpedia.iri.UriUtils
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
@@ -23,7 +25,7 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.ExternalLinks)
 
-  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
         return Seq.empty
@@ -32,7 +34,7 @@ extends PageNodeExtractor
     for(link <- collectExternalLinks(node);
         uri <- UriUtils.cleanLink(link.destination))
     {
-      quads += new Quad(context.language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty, uri, link.sourceUri, null)
+      quads += new Quad(context.language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty, uri, link.sourceIri, null)
     }
     
     quads

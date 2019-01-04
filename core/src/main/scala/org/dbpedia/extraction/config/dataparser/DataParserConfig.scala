@@ -42,4 +42,8 @@ object DataParserConfig {
     "fr" -> List("""[C-c]lr""")
   )
 
+  // see https://www.cs.tut.fi/~jkorpela/dashes.html
+  val dashVariations = List('-', '־', '‐', '‑', '‒','–', '—', '―', '⁻', '₋', '−', '﹣', '－' ,'—')
+  val dashVariationsRegex = dashVariations.mkString("|")
+
 }

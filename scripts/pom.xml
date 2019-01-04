@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.dbpedia</groupId>
         <artifactId>extraction</artifactId>
-        <version>4.0-SNAPSHOT</version>
+        <version>4.2-SNAPSHOT</version>
     </parent>
 
     <groupId>org.dbpedia.extraction</groupId>
@@ -19,6 +19,15 @@
 
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-docs-sources</id>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>doc-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
 
                 <configuration>
                     <launchers>
@@ -66,6 +75,18 @@
                                 <jvmArg>-XX:+PrintGC</jvmArg>
                                 <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
                                 -->
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>SdTypeCreator</id>
+                            <mainClass>org.dbpedia.extraction.scripts.SdTypeCreation</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx16G</jvmArg>
+                                <jvmArg>-Xms4G</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:-UseGCOverheadLimit</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
@@ -128,11 +149,23 @@
                             <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
-                                <jvmArg>-Xmx8G</jvmArg><!-- processing languages in parallel takes a lot of space -->
+                                <jvmArg>-Xmx20G</jvmArg><!-- processing languages in parallel takes a lot of space -->
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                                 <jvmArg>-XX:+PrintGC</jvmArg>
                                 <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>CanonicalizeIris</id>
+                            <mainClass>org.dbpedia.extraction.scripts.CanonicalizeIris</mainClass>
+                            <jvmArgs><jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx20G</jvmArg><!-- processing languages in parallel takes a lot of space -->
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
                         </launcher>
                         <launcher>
@@ -148,7 +181,31 @@
                             <mainClass>org.dbpedia.extraction.scripts.MapObjectUris</mainClass>
                             <jvmArgs>
                                 <jvmArg>-server</jvmArg>
-                                <jvmArg>-Xmx8G</jvmArg><!-- processing languages in parallel takes a lot of space -->
+                                <jvmArg>-Xmx10G</jvmArg><!-- processing languages in parallel takes a lot of space -->
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>MapSubjectUris</id>
+                            <mainClass>org.dbpedia.extraction.scripts.MapSubjectUris</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx10G</jvmArg><!-- processing languages in parallel takes a lot of space -->
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>CleanExternalDataset</id>
+                            <mainClass>org.dbpedia.extraction.scripts.CleanExternalDataset</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx10G</jvmArg><!-- processing languages in parallel takes a lot of space -->
                                 <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                                 <jvmArg>-XX:+PrintGC</jvmArg>
@@ -243,9 +300,92 @@
                                 <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
                             </jvmArgs>
                         </launcher>
+                        <launcher>
+                            <id>TypeStatistics</id>
+                            <mainClass>org.dbpedia.extraction.statistics.TypeStatistics</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms8G</jvmArg>
+                                <jvmArg>-Xmx16G</jvmArg>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>RepairAbstracts</id>
+                            <mainClass>org.dbpedia.extraction.scripts.AbstractRepair</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms8G</jvmArg>
+                                <jvmArg>-Xmx16G</jvmArg>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>PostProcessingStats</id>
+                            <mainClass>org.dbpedia.extraction.statistics.StatsPostProcessing</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms4G</jvmArg>
+                                <jvmArg>-Xmx8G</jvmArg>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>GenerateDataIds</id>
+                            <mainClass>org.dbpedia.extraction.scripts.DataIdGenerator</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>WikidataSubClassOf</id>
+                            <mainClass>org.dbpedia.extraction.scripts.WikidataSubClassOf</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>SlackForwarder</id>
+                            <mainClass>org.dbpedia.extraction.scripts.SlackForwarder</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>WikidataPersonExtractor</id>
+                            <mainClass>org.dbpedia.extraction.scripts.PersonDataExtractorNew</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms4G</jvmArg>
+                                <jvmArg>-Xmx8G</jvmArg>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>MapWikidataToLanguageUri</id>
+                            <mainClass>org.dbpedia.extraction.scripts.MapWikidataToLanguageUri</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms8G</jvmArg>
+                                <jvmArg>-Xmx32G</jvmArg>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>CreateLinesBytesPacked</id>
+                            <mainClass>org.dbpedia.extraction.scripts.CreateLinesBytesPacked</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms2G</jvmArg>
+                                <jvmArg>-Xmx4G</jvmArg>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
                     </launchers>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>
@@ -256,7 +396,51 @@
             <groupId>org.dbpedia.extraction</groupId>
             <artifactId>core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.11</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-reflect</artifactId>
+            <version>2.11.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-rio-rdfxml</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-rio-turtle</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-rio-nquads</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-rio-jsonld</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalaj</groupId>
+            <artifactId>scalaj-http_2.11</artifactId>
+            <version>2.2.1</version>
+        </dependency>
 
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.5.1</version>
+        </dependency>
     </dependencies>
 
 </project>

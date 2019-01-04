@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype, UnitDatatype}
-
 import org.dbpedia.extraction.wikiparser._
 import java.text.ParseException
 import java.util.logging.{Level, Logger}
@@ -20,7 +19,7 @@ class UnitValueParser( extractionContext : {
                         strict : Boolean = false,
                         multiplicationFactor : Double = 1.0) extends DataParser
 {
-    private val logger = Logger.getLogger(getClass.getName)
+    @transient private val logger = Logger.getLogger(getClass.getName)
 
     private val parserUtils = new ParserUtils(extractionContext)
 
@@ -28,10 +27,10 @@ class UnitValueParser( extractionContext : {
 
     private val language = extractionContext.language.wikiCode
 
-    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexUnitValue.contains(language))
-                                            DataParserConfig.splitPropertyNodeRegexUnitValue.get(language).get
-                                          else DataParserConfig.splitPropertyNodeRegexUnitValue.get("en").get
-    
+    override val splitPropertyNodeRegex: String = if (DataParserConfig.splitPropertyNodeRegexUnitValue.contains(language))
+                                            DataParserConfig.splitPropertyNodeRegexUnitValue(language)
+                                          else DataParserConfig.splitPropertyNodeRegexUnitValue("en")
+
     private val prefix = if(strict) """\s*""" else """[\D]*?"""
 
     private val postfix = if(strict) """\s*""" else ".*"
@@ -86,29 +85,34 @@ class UnitValueParser( extractionContext : {
 
     private val PrefixUnitValueRegex2 = ("""(?iu)""" + prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
 
-    override def parse(node : Node) : Option[(Double, UnitDatatype)] =
+    private lazy val MeterUnitDataType = extractionContext.ontology.datatypes("metre").asInstanceOf[UnitDatatype]
+    private lazy val FeetUnitDataType = extractionContext.ontology.datatypes("foot").asInstanceOf[UnitDatatype]
+    private lazy val InchUnitDataType = extractionContext.ontology.datatypes("inch").asInstanceOf[UnitDatatype]
+
+    override def parse(node : Node) : Option[ParseResult[Double]] =
     {
-        val errors = if(logger.isLoggable(Level.FINE)) Some(new ParsingErrors()) else None
+        val errors =
+            if(logger.isLoggable(Level.FINE)) Some(new ParsingErrors()) else
+                None
 
         for(result <- catchTemplates(node, errors))
-        {
-            return Some(result)
-        }
+            return Some(ParseResult(result._1, None, Some(result._2)))
 
         for(parseResult <- StringParser.parse(node))
         {
-            val text = parserUtils.convertLargeNumbers(parseResult)
+            val correctDashes = parseResult.value.replaceAll("["+DataParserConfig.dashVariationsRegex+"]", "-" )
+            val text = parserUtils.convertLargeNumbers(correctDashes)
 
             inputDatatype match
             {
-                case dt : DimensionDatatype if (dt.name == "Time") => for(duration <- catchDuration(text)) return Some(duration)
-                case dt : UnitDatatype if (dt.dimension.name == "Time") => for(duration <- catchDuration(text)) return Some(duration)
+                case dt : DimensionDatatype if dt.name == "Time" => for(duration <- catchDuration(text)) return Some(ParseResult(duration._1, None, Some(duration._2)))
+                case dt : UnitDatatype if dt.dimension.name == "Time" => for(duration <- catchDuration(text)) return Some(ParseResult(duration._1, None, Some(duration._2)))
                 case _ =>
             }
 
             catchUnitValue(text, errors) match
             {
-                case Some(result) => return Some(result)
+                case Some(result) => return Some(ParseResult(result._1, None, Some(result._2)))
                 case None =>
                 {
                     //No unit value found
@@ -117,7 +121,7 @@ class UnitValueParser( extractionContext : {
                         for( value <- catchValue(text);
                              result <- generateOutput(value, None, errors) )
                         {
-                            return Some(result)
+                            return Some(ParseResult(result._1, None, Some(result._2)))
                         }
                     }
                     else
@@ -146,13 +150,12 @@ class UnitValueParser( extractionContext : {
         {
             if(!strict)
             {
-                for (child <- node.children;
-                     result <- catchTemplates(child, errors) )
-                {
-                    return Some(result)
+                for (child <- node.children){
+                  val zw = catchTemplates(child, errors)
+                  if(zw.nonEmpty)
+                    return zw
                 }
-
-                return None;
+                return None
             }
             else
             {
@@ -169,7 +172,7 @@ class UnitValueParser( extractionContext : {
 
 
         val childrenChilds = for(child <- node.children) yield
-            { for(childrenChild @ TextNode(_, _)<- child.children) yield childrenChild }
+            { for(childrenChild @ TextNode(_, _, _)<- child.children) yield childrenChild }
         
         ///////////////////////////////////////////////////////////////////////////////////////
         // Start of template parsing
@@ -207,8 +210,8 @@ class UnitValueParser( extractionContext : {
         {
             for (valueProperty <- templateNode.property("1"); unitProperty <- templateNode.property("2"))
             {
-                value = valueProperty.children.collect{case TextNode(text, _) => text}.headOption
-                unit = unitProperty.children.collect{case TextNode(text, _) => text}.headOption
+                value = valueProperty.children.collect{case TextNode(text, _, _) => text}.headOption
+                unit = unitProperty.children.collect{case TextNode(text, _, _) => text}.headOption
             }
         }
         // http://en.wikipedia.org/wiki/Template:Height
@@ -221,7 +224,7 @@ class UnitValueParser( extractionContext : {
             // TODO: Should not be needed anymore, remove?
             for (property <- templateNode.property("1"))
             {
-                value = property.children.collect{case TextNode(text, _) => text}.headOption
+                value = property.children.collect { case TextNode(text, _, _) => text }.headOption
                 unit = Some(property.key)
             }
             // If the TemplateNode has a second PropertyNode ...
@@ -245,38 +248,39 @@ class UnitValueParser( extractionContext : {
                 }
             } */
 
-            val defaultValue : PropertyNode = PropertyNode("", List(TextNode("0", 0)), 0)
+            val defaultValue: PropertyNode = PropertyNode("", List(TextNode("0", 0)), 0)
 
             // Metre and foot/inch parameters cannot co-exist
-            if (templateNode.property("m").isDefined) {
-                for (metres <- templateNode.property("m"))
-                {
+            findUnitValueProperty(MeterUnitDataType, templateNode) match
+            {
+                case Some(metres) =>
                     try
                     {
-                        val mVal = metres.children.collect {case TextNode(text, _) => text}.headOption
+                        val mVal = metres.children.collect { case TextNode(text, _, _) => text }.headOption
                         val mToCm = mVal.get.toDouble * 100.0
-                        value = Some(mToCm.toString)
                         unit = Some("centimetre")
+                        value = Some(mToCm.toString)
                     }
-                    catch { case _ : Throwable => }
-                }
-            }
-            else {
-                for (feet <- templateNode.property("ft").orElse(Some(defaultValue));
-                     inch <- templateNode.property("in").orElse(Some(defaultValue)))
-                {
+                    catch
+                    {
+                        case _: Throwable =>
+                    }
+                case None =>
+                    val feet = findUnitValueProperty(FeetUnitDataType, templateNode).getOrElse(defaultValue)
+                    val inch = findUnitValueProperty(InchUnitDataType, templateNode).getOrElse(defaultValue)
                     try
                     {
-                        val ftVal =  feet.children.collect{case TextNode(text, _) => text}.headOption
+                        val ftVal = feet.children.collect { case TextNode(text, _, _) => text }.headOption
                         val ftToCm = ftVal.get.toDouble * 30.48
-                        val inVal =  inch.children.collect{case TextNode(text, _) => text}.headOption
+                        val inVal = inch.children.collect { case TextNode(text, _, _) => text }.headOption
                         val inToCm = inVal.get.toDouble * 2.54
-
-                        value = Some((ftToCm + inToCm).toString)
                         unit = Some("centimetre")
+                        value = Some((ftToCm + inToCm).toString)
                     }
-                catch { case _ : Throwable => }
-                }
+                    catch
+                    {
+                        case _: Throwable =>
+                    }
             }
         }
         // http://en.wikipedia.org/wiki/Template:Auto_in
@@ -285,7 +289,7 @@ class UnitValueParser( extractionContext : {
         {
             for (valueProperty <- templateNode.property("1"))
             {
-                value = valueProperty.children.collect{case TextNode(text, _) => text}.headOption
+                value = valueProperty.children.collect{case TextNode(text, _, _) => text}.headOption
             }
             unit = Some("inch")
         }
@@ -295,7 +299,7 @@ class UnitValueParser( extractionContext : {
         {
             for (valueProperty <- templateNode.property("1"))
             {
-                value = valueProperty.children.collect{case TextNode(text, _) => text}.headOption
+                value = valueProperty.children.collect{case TextNode(text, _, _) => text}.headOption
             }
             unit = Some("kilometre")
         }
@@ -305,7 +309,7 @@ class UnitValueParser( extractionContext : {
         {
             for (valueProperty <- templateNode.property("1"))
             {
-                value = valueProperty.children.collect{case TextNode(text, _) => text}.headOption
+                value = valueProperty.children.collect{case TextNode(text, _, _) => text}.headOption
             }
             unit = Some("square kilometre")
         }
@@ -316,7 +320,7 @@ class UnitValueParser( extractionContext : {
         {
             for (valueProperty <- templateNode.property("1"))
             {
-                value = valueProperty.children.collect{case TextNode(text, _) => text}.headOption
+                value = valueProperty.children.collect{case TextNode(text, _, _) => text}.headOption
             }
             unit = Some("inhabitants per square kilometre")
         }
@@ -326,7 +330,7 @@ class UnitValueParser( extractionContext : {
         {
             for (valueProperty <- templateNode.property("1"))
             {
-                value = valueProperty.children.collect{case TextNode(text, _) => text}.headOption
+                value = valueProperty.children.collect{case TextNode(text, _, _) => text}.headOption
             }
             unit = Some("foot")
         }
@@ -336,7 +340,7 @@ class UnitValueParser( extractionContext : {
         {
             for (valueProperty <- templateNode.property("1"))
             {
-                value = valueProperty.children.collect{case TextNode(text, _) => text}.headOption
+                value = valueProperty.children.collect{case TextNode(text, _, _) => text}.headOption
             }
             unit = Some("metre")
         }
@@ -355,9 +359,9 @@ class UnitValueParser( extractionContext : {
             val minutes = templateNode.property("m").getOrElse(templateNode.property("2").getOrElse(defaultValue))
             val seconds = templateNode.property("s").getOrElse(templateNode.property("3").getOrElse(defaultValue))
 
-            val h = hours.children.collect { case TextNode(t, _) => t }.headOption.getOrElse("0").toDouble
-            val m = minutes.children.collect { case TextNode(t, _ ) => t }.headOption.getOrElse("0").toDouble
-            val s = seconds.children.collect { case TextNode(t, _) => t}.headOption.getOrElse("0").toDouble
+            val h = hours.children.collect { case TextNode(t, _, _) => t }.headOption.getOrElse("0").toDouble
+            val m = minutes.children.collect { case TextNode(t, _ , _) => t }.headOption.getOrElse("0").toDouble
+            val s = seconds.children.collect { case TextNode(t, _, _) => t}.headOption.getOrElse("0").toDouble
 
             value = Some((h * 3600.0 + m * 60.0 + s).toString)
             unit = Some("second")
@@ -387,7 +391,11 @@ class UnitValueParser( extractionContext : {
         {
             input match
             {
-                case ValueRegex1(value) => Some(value)
+                case ValueRegex1(value) => //TODO check regular expressions to capture '-'
+                {
+                    val prefix = if (input.startsWith("-") && !value.startsWith("-")) "-" else ""
+                    Some(prefix + value)
+                }
                 case _ => None
             }
         }
@@ -395,7 +403,11 @@ class UnitValueParser( extractionContext : {
         {
             input match
             {
-                case ValueRegex2(value) => Some(value)
+                case ValueRegex2(value)=>  //TODO check regular expressions to capture '-'
+                    {
+                        val prefix = if (input.startsWith("-") && !value.startsWith("-")) "-" else ""
+                        Some(prefix + value)
+                    }
                 case _ => None
             }
         }
@@ -475,6 +487,11 @@ class UnitValueParser( extractionContext : {
                 case _ => None
             }
         }
+    }
+
+    private def findUnitValueProperty(dataType: UnitDatatype, templateNode: TemplateNode): Option[PropertyNode] =
+    {
+        templateNode.keySet.find(dataType.unitLabels.contains).flatMap(templateNode.property)
     }
     
     /**

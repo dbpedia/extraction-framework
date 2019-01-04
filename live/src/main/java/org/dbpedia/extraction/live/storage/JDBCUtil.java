@@ -181,11 +181,11 @@ public class JDBCUtil {
     /*
     * Custom function that returns a list with unmodifies pages from cache
     * */
-    public static List<LiveQueueItem> getCacheUnmodified(int daysAgo, long limit) {
+    public static Set<LiveQueueItem> getCacheUnmodified(int daysAgo, long limit) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet result = null;
-        List<LiveQueueItem> items = null;
+        Set<LiveQueueItem> items = null;
         try {
             conn = JDBCPoolConnection.getCachePoolConnection();
             stmt = conn.prepareStatement(DBpediaSQLQueries.getJSONCacheUnmodified());
@@ -195,13 +195,14 @@ public class JDBCUtil {
 
             result = stmt.executeQuery();
 
-            items = new ArrayList<LiveQueueItem>((int)limit);
+            items = new HashSet<>((int)limit);
 
             while (result.next()) {
                 long pageID = result.getLong("pageID");
+                String title = result.getString("title");
                 Timestamp t = result.getTimestamp("updated");
                 String timestamp = DateUtil.transformToUTC(t.getTime());
-                items.add(new LiveQueueItem(pageID, timestamp));
+                items.add(new LiveQueueItem(pageID, title, timestamp, false, ""));
             }
             return items;
         } catch (Exception e) {

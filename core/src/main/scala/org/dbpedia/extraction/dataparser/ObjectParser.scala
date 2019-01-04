@@ -21,11 +21,11 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
 
     private val language = context.language.wikiCode
 
-    override val splitPropertyNodeRegex = if (DataParserConfig.splitPropertyNodeRegexObject.contains(language)) DataParserConfig.splitPropertyNodeRegexObject.get(language).get
-                                          else DataParserConfig.splitPropertyNodeRegexObject.get("en").get
+    override val splitPropertyNodeRegex: String = if (DataParserConfig.splitPropertyNodeRegexObject.contains(language)) DataParserConfig.splitPropertyNodeRegexObject(language)
+                                          else DataParserConfig.splitPropertyNodeRegexObject("en")
     // the Template {{·}} would also be nice, but is not that easy as the regex splits
 
-    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean, transformCmd : String = null, transformFunc : String => String = identity ) =
+    override def parsePropertyNode( propertyNode : PropertyNode, split : Boolean, transformCmd : String = null, transformFunc : String => String = identity ): List[ParseResult[String]] =
     {
         if(split)
         {
@@ -37,7 +37,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
         }
     }
 
-    override def parse(node : Node) : Option[String] =
+    override def parse(node : Node) : Option[ParseResult[String]] =
     {
         val pageNode = node.root
 
@@ -48,30 +48,30 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
                 //ordinary links
                 case InternalLinkNode(destination, _, _, _) if destination.namespace == Namespace.Main =>
                 {
-                    return Some(getUri(destination, pageNode))
+                    return Some(ParseResult(getUri(destination, pageNode)))
                 }
 
                 case ExternalLinkNode(destination, _, _, _) =>
                 {
-                    return Some(destination.toString)
+                    return Some(ParseResult(destination.toString))
                 }
 
                 //creating links if the same string is a link on this page
-                case TextNode(text, _) => getAdditionalWikiTitle(text, pageNode) match
+                case TextNode(text, _, _) => getAdditionalWikiTitle(text, pageNode) match
                 {
                     case Some(destination) if destination.namespace == Namespace.Main =>
                     {
-                        return Some(getUri(destination, pageNode))
+                        return Some(ParseResult(getUri(destination, pageNode)))
                     }
                     case _ =>
                 }
 
                 //resolve templates to create links
-                case templateNode : TemplateNode if(node.children.length == 1) => resolveTemplate(templateNode) match
+                case templateNode : TemplateNode if node.children.length == 1 => resolveTemplate(templateNode) match
                 {
                     case Some(destination) =>  // should always be Main namespace
                     {
-                        return Some(context.language.resourceUri.append(destination.decodedWithNamespace))
+                        return Some(ParseResult(context.language.resourceUri.append(destination.value.decodedWithNamespace)))
                     }
                     case None =>
                 }
@@ -83,15 +83,15 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
         {
             node match
             {
-                case InternalLinkNode(destination, _, _, _) => return Some(getUri(destination, pageNode))
+                case InternalLinkNode(destination, _, _, _) => return Some(ParseResult(getUri(destination, pageNode)))
                 case _ =>
                 {
                     node.children match
                     {
-                        case InternalLinkNode(destination, _, _, _) :: Nil => return Some(getUri(destination, pageNode))
-                        case InternalLinkNode(destination, _, _, _) :: TextNode(text, _) :: Nil if text.trim.isEmpty => return Some(getUri(destination, pageNode))
-                        case TextNode(text, _) :: InternalLinkNode(destination, _, _, _) :: Nil if text.trim.isEmpty => return Some(getUri(destination, pageNode))
-                        case TextNode(text1, _) ::InternalLinkNode(destination, _, _, _) :: TextNode(text2, _) :: Nil if (text1.trim.isEmpty && text2.trim.isEmpty) => return Some(getUri(destination, pageNode))
+                        case InternalLinkNode(destination, _, _, _) :: Nil => return Some(ParseResult(getUri(destination, pageNode)))
+                        case InternalLinkNode(destination, _, _, _) :: TextNode(text, _, _) :: Nil if text.trim.isEmpty => return Some(ParseResult(getUri(destination, pageNode)))
+                        case TextNode(text, _, _) :: InternalLinkNode(destination, _, _, _) :: Nil if text.trim.isEmpty => return Some(ParseResult(getUri(destination, pageNode)))
+                        case TextNode(text1, _, _) ::InternalLinkNode(destination, _, _, _) :: TextNode(text2, _, _) :: Nil if text1.trim.isEmpty && text2.trim.isEmpty => return Some(ParseResult(getUri(destination, pageNode)))
                         case _ => return None
                     }
                 }
@@ -119,7 +119,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
             case linkNode : InternalLinkNode =>
             {
                 // TODO: Here we match the link label. Should we also match the link target?
-                val linkText = linkNode.children.collect{case TextNode(text, _) => text}.mkString("")
+                val linkText = linkNode.children.collect{case TextNode(text, _, _) => text}.mkString("")
                 if(linkText.toLowerCase(context.language.locale) == surfaceForm)
                 {
                     return Some(linkNode.destination)
@@ -140,7 +140,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
         None
     }
 
-    private def resolveTemplate(templateNode : TemplateNode) : Option[WikiTitle] =
+    private def resolveTemplate(templateNode : TemplateNode) : Option[ParseResult[WikiTitle]] =
     {
         flagTemplateParser.parse(templateNode).foreach(destination => return Some(destination))
         None
@@ -150,7 +150,7 @@ class ObjectParser( context : { def language : Language }, val strict : Boolean 
     {
         // prepend page title to the URI if the destination links to a subsection on this page, e.g. starring = #Cast
         // FIXME: how do we want to treat fragment URIs? Currently, "#" is percent-encoded as "%23"
-        val uriSuffix = if(destination.decoded startsWith "#") (pageNode.title.decodedWithNamespace + destination.decoded)
+        val uriSuffix = if(destination.decoded startsWith "#") pageNode.title.decodedWithNamespace + destination.decoded
                          else destination.decodedWithNamespace
         // TODO this is not the final solution:
         // parsing the list of items in the subsection would be better, but the signature of parse would have to change to return a List

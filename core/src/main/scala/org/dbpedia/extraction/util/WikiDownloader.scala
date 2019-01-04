@@ -6,8 +6,7 @@ import java.nio.charset.Charset
 
 import org.dbpedia.extraction.wikiparser.Namespace
 
-import javax.xml.namespace.QName
-import javax.xml.stream.{XMLEventFactory,XMLEventReader,XMLInputFactory,XMLOutputFactory}
+import javax.xml.stream.{XMLEventFactory,XMLInputFactory,XMLOutputFactory}
 
 import org.dbpedia.extraction.util.RichStartElement.richStartElement
 
@@ -20,20 +19,20 @@ import org.dbpedia.extraction.util.RichStartElement.richStartElement
 class WikiDownloader(val apiUrl : String) {
   
   // TODO: get the charset from the URL? Difficult - writing starts before reading.
-  val charset = Charset.forName("UTF-8")
+  val charset: Charset = Charset.forName("UTF-8")
   
   // newInstance() is deprecated, but the newer methods don't exist in many JDK 6 versions
-  val inFactory = XMLInputFactory.newInstance
-  val outFactory = XMLOutputFactory.newInstance
-  val events = XMLEventFactory.newInstance
+  val inFactory: XMLInputFactory = XMLInputFactory.newInstance
+  val outFactory: XMLOutputFactory = XMLOutputFactory.newInstance
+  val events: XMLEventFactory = XMLEventFactory.newInstance
   
-  def buildURL(namespace : Namespace, gapfrom : String) : URL = 
+  def buildURL(namespace : Namespace, gapcontinue : String) : URL = 
   {
-    var sb = new StringBuilder
+    val sb = new StringBuilder
     sb append apiUrl
     sb append "?action=query&generator=allpages&prop=revisions&rvprop=ids|content|timestamp&format=xml"
     sb append "&gapnamespace=" append namespace.code append "&gaplimit=50"
-    if (gapfrom != null) sb append "&gapfrom=" append gapfrom.replace(' ', '_')
+    if (gapcontinue != null) sb append "&gapcontinue=" append gapcontinue.replace(' ', '_')
     // I'm not sure what kind of escaping URL is doing. Seems ok if we just replace spaces.
     new URL(sb.toString)
   }
@@ -52,18 +51,18 @@ class WikiDownloader(val apiUrl : String) {
           for (namespace <- namespaces) addPages(namespace, out)
         }
       }
-      xmlOut.close
+      xmlOut.close()
     }
-    finally stream.close
+    finally stream.close()
   }
     
   def addPages(namespace : Namespace, out : XMLEventBuilder) : Unit =
   {
-    var gapfrom = ""
+    var gapcontinue = ""
     do
     {
-      val url = buildURL(namespace, gapfrom)
-      gapfrom = null
+      val url = buildURL(namespace, gapcontinue)
+      gapcontinue = null
       
       val stream = url.openStream
       try
@@ -75,7 +74,7 @@ class WikiDownloader(val apiUrl : String) {
           in.element("api") { _ =>
             in.ifElement("error") { error => throw new IOException(error attr "info") }
             in.ifElement("query-continue") { _ =>
-              in.element("allpages") { allpages => gapfrom = allpages attr "gapfrom" } 
+              in.element("allpages") { allpages => gapcontinue = allpages attr "gapcontinue" } 
             }
             in.ifElement("query") { _ => // note: there's no <query> element if the namespace contains no pages
               in.element("pages") { _ =>
@@ -101,10 +100,10 @@ class WikiDownloader(val apiUrl : String) {
             }
           }
         }
-        xmlIn.close
+        xmlIn.close()
       }
-      finally stream.close
-    } while (gapfrom != null)
+      finally stream.close()
+    } while (gapcontinue != null)
   }
   
 }

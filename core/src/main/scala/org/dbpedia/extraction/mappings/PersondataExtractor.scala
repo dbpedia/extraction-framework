@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser.{ObjectParser, DateTimeParser, StringParser}
 import org.dbpedia.extraction.config.mappings.PersondataExtractorConfig
@@ -55,7 +56,7 @@ extends PageNodeExtractor
 
     override val datasets = Set(DBpediaDatasets.Persondata)
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+    override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Main) return Seq.empty
 
@@ -75,21 +76,21 @@ extends PageNodeExtractor
                 {
                     case key if key == name =>
                     {
-                        for(nameValue <- StringParser.parse(property))
+                        for(nameValue <- StringParser.parse(property).map(_.value))
                         {
                             val nameParts = nameValue.split(",")
                             if (nameParts.size == 2)
                             {
                                 val reversedName = nameParts(1).trim + " " + nameParts(0).trim
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, reversedName, property.sourceUri, new Datatype("rdf:langString"))
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafSurNameProperty, nameParts(0).trim, property.sourceUri, new Datatype("rdf:langString"))
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafGivenNameProperty, nameParts(1).trim, property.sourceUri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, reversedName, property.sourceIri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafSurNameProperty, nameParts(0).trim, property.sourceIri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafGivenNameProperty, nameParts(1).trim, property.sourceIri, new Datatype("rdf:langString"))
                             }
                             else
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceUri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, foafNameProperty, nameValue.trim, property.sourceIri, new Datatype("rdf:langString"))
                             }
-                            quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, rdfTypeProperty, foafPersonClass.uri, template.sourceUri)
+                            quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, rdfTypeProperty, foafPersonClass.uri, template.sourceIri)
                             nameFound = true
                         }
                     }
@@ -110,37 +111,37 @@ extends PageNodeExtractor
                         }
                         case key if key == description =>
                         {
-                            for(value <- StringParser.parse(property))
+                            for(value <- StringParser.parse(property).map(_.value))
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceUri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, dcDescriptionProperty, value, property.sourceIri, new Datatype("rdf:langString"))
                             }
                         }
                         case key if key == birthDate =>
                         {
                             for ((date, datatype) <- getDate(property))
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, birthDateProperty, date, property.sourceUri, datatype)
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, birthDateProperty, date, property.sourceIri, datatype)
                             }
                         }
                         case key if key == deathDate =>
                         {
                             for ((date, datatype) <- getDate(property))
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, deathDateProperty, date, property.sourceUri, datatype)
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, deathDateProperty, date, property.sourceIri, datatype)
                             }
                         }
                         case key if key == birthPlace =>
                         {
                             for(objUri <- objectParser.parsePropertyNode(property, split=true))
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, birthPlaceProperty, objUri.toString, property.sourceUri)
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, birthPlaceProperty, objUri.toString, property.sourceIri)
                             }
                         }
                         case key if key == deathPlace =>
                         {
                             for(objUri <- objectParser.parsePropertyNode(property, split=true))
                             {
-                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, deathPlaceProperty, objUri.toString, property.sourceUri)
+                                quads += new Quad(language, DBpediaDatasets.Persondata, subjectUri, deathPlaceProperty, objUri.toString, property.sourceIri)
                             }
                         }
                         case _ =>
@@ -156,19 +157,19 @@ extends PageNodeExtractor
     {
         for (date <- dateParser.parse(node))
         {
-            return Some((date.toString, date.datatype))
+            return Some((date.toString, date.value.datatype))
         }
         for (date <- monthYearParser.parse(node))
         {
-            return Some((date.toString, date.datatype))
+            return Some((date.toString, date.value.datatype))
         }
         for (date <- monthDayParser.parse(node))
         {
-            return Some((date.toString, date.datatype))
+            return Some((date.toString, date.value.datatype))
         }
         for (date <- yearParser.parse(node))
         {
-            return Some((date.toString, date.datatype))
+            return Some((date.toString, date.value.datatype))
         }
         None
     }

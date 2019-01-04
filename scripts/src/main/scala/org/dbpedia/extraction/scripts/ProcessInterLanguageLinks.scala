@@ -1,14 +1,14 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.{File,Writer,BufferedReader}
-import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Finder,Language}
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.config.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.NumberUtils.{intToHex,longToHex,hexToInt,hexToLong}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichReader.wrapReader
 import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
-import org.dbpedia.extraction.destinations.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{RdfNamespace,DBpediaNamespace}
 import scala.Console.err
 import org.dbpedia.extraction.util.IOUtils
@@ -100,7 +100,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   val sameAsUri = RdfNamespace.OWL.append("sameAs")
   val seeAlsoUri = RdfNamespace.RDFS.append("seeAlso")
 
-  val interLinkExtension = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-')
+  val interLinkExtension = DBpediaDatasets.InterLanguageLinks.encoded.replace('_', '-')
   val sameAsExtension = interLinkExtension+"-same-as"+extension
   val seeAlsoExtension = interLinkExtension+"-see-also"+extension
     
@@ -191,7 +191,8 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   /**
    * Find file in dump directories. Side effect: store date for given language in dates array,
    * if not already set and auto is true.
-   * @param part file name part, e.g. interlanguage-links-see-also-chapters
+    *
+    * @param part file name part, e.g. interlanguage-links-see-also-chapters
    */
   private def find(langKey: Int, part: String, auto: Boolean = false): File = {
     val finder = new Finder[File](baseDir, languages(langKey), "wiki")
@@ -202,7 +203,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       date = finder.dates(name).last
       dates(langKey) = date
     }
-    finder.file(date, name)
+    finder.file(date, name).get
   }
   
   /**
@@ -325,7 +326,8 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   /**
    * Open writer for next language.
-   * @param langKey
+    *
+    * @param langKey
    * @param name file name part, e.g. interlanguage-links-see-also-chapters
    * @return writer for given language
    */
@@ -338,7 +340,8 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   
   /**
    * Close writer for current language
-   * @param writer 
+    *
+    * @param writer
    * @param langKey may be -1, in which case this method will return null
    * @param name file name part, e.g. interlanguage-links-see-also-chapters
    * @return writer for given language, or null if no language was given

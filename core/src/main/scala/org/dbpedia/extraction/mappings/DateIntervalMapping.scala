@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
+import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.dataparser.{DateTimeParser,StringParser}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.OntologyProperty
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.mappings.DateIntervalMappingConfig._
 import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, TemplateNode}
@@ -13,8 +15,8 @@ import scala.language.reflectiveCalls
 
 class DateIntervalMapping ( 
   val templateProperty : String, //TODO CreateMappingStats requires this to be public. Is there a better way?
-  startDateOntologyProperty : OntologyProperty,
-  endDateOntologyProperty : OntologyProperty,
+  val startDateOntologyProperty : OntologyProperty, //TODO: rml mappings need this to be public (e.g. ModelMapper)
+  val endDateOntologyProperty : OntologyProperty,   //TODO: same as above
   context : {
     def redirects : Redirects  // redirects required by DateTimeParser
     def language : Language 
@@ -34,11 +36,11 @@ extends PropertyMapping
   private val splitString = splitMap.getOrElse(context.language.wikiCode, splitMap("en"))
 
   // TODO: the parser should resolve HTML entities
-  private val intervalSplitRegex = "(?iu)(—|–|-|&mdash;|&ndash;" + ( if (splitString.isEmpty) "" else "|" + splitString ) + ")"
+  private val intervalSplitRegex = "(?iu)(" + DataParserConfig.dashVariationsRegex + "|&mdash;|&ndash;" + ( if (splitString.isEmpty) "" else "|" + splitString ) + ")"
   
-  override val datasets = Set(DBpediaDatasets.OntologyProperties)
+  override val datasets = Set(DBpediaDatasets.OntologyPropertiesLiterals)
 
-  override def extract(node : TemplateNode, subjectUri: String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri: String) : Seq[Quad] =
   {
     // replicate standard mechanism implemented by dataparsers
     for(propertyNode <- node.property(templateProperty))
@@ -68,11 +70,10 @@ extends PropertyMapping
       }
 
       //Parse start; return if no start year has been found
-      val startDate = startDateParser.parse(splitNodes(0)).getOrElse(return Seq.empty)
+      val startDate = startDateParser.parse(splitNodes.head).getOrElse(return Seq.empty)
 
       //Parse end
-      val endDateOpt = splitNodes match
-      {
+      val endDateOpt = splitNodes match {
         //if there were two elements found
         case List(start, end) => end.retrieveText match
         {
@@ -87,8 +88,8 @@ extends PropertyMapping
         case List(start) => StringParser.parse(start) match
         {
           //if in a "since xxx" construct, don't write end triple
-          case Some(text : String) if (text.trim.toLowerCase.startsWith(sinceString) 
-                                    || text.trim.toLowerCase.endsWith(onwardString)) => None
+          case Some(pr) if (pr.value.trim.toLowerCase.startsWith(sinceString)
+                                    || pr.value.trim.toLowerCase.endsWith(onwardString)) => None
 
           //make start and end the same if there is no end specified
           case _ => Some(startDate)
@@ -98,25 +99,25 @@ extends PropertyMapping
       }
 
       //Write start date quad
-      val quad1 = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceUri)
+      val quad1 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, startDateOntologyProperty, startDate.value.toString, propertyNode.sourceIri)
 
       //Writing the end date is optional if "until present" is specified
       for(endDate <- endDateOpt)
       {
         //Validate interval
-        if(startDate > endDate)
+        if(startDate.value > endDate.value)
         {
           logger.fine("startDate > endDate")
           return Seq(quad1)
         }
 
         //Write end year quad
-        val quad2 = new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceUri)
+        val quad2 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, endDateOntologyProperty, endDate.value.toString, propertyNode.sourceIri)
 
         return Seq(quad1, quad2)
       }
 
-      return Seq(quad1)
+      Seq(quad1)
   }
 
   private def splitIntervalNode(propertyNode : PropertyNode) : List[PropertyNode] =

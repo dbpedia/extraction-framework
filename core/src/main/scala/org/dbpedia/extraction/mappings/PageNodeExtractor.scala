@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.wikiparser._
 
 /**

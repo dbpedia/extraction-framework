@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.live.core.LiveOptions
+import org.dbpedia.extraction.transform.Quad
 
 import scala.collection.mutable
 import org.dbpedia.extraction.live.main.Main

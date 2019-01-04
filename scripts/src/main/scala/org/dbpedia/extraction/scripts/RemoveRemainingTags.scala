@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.ConfigUtils._
+import org.dbpedia.extraction.config.ConfigUtils._
+import org.dbpedia.extraction.util.DateFinder
 
 import scala.Console._
 import scala.util.matching.Regex
@@ -60,7 +61,7 @@ object RemoveRemainingTags {
       // use first input file to find date. TODO: breaks if first file doesn't exist. is there a better way?
       var first = true
       for (input <- inputs; suffix <- suffixes) {
-        QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, auto = first, required = false) { quad =>
+        new QuadMapper().mapQuads(finder, input + suffix, input + extension + suffix, auto = first, required = false) { quad =>
           if (quad.datatype == null) throw new IllegalArgumentException("expected object literal, found object uri: "+quad)
           val cleaned = clean(quad.value)
 

@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.dataparser
 
-import _root_.org.dbpedia.extraction.sources.WikiPage
 import _root_.org.scalatest.Matchers
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser._
@@ -50,7 +49,7 @@ class BooleanParserTest extends FlatSpec with Matchers
         val page = new WikiPage(WikiTitle.parse("TestPage", Language.English), input)
 
         parser(page) match {
-          case Some(n) => BooleanParser.parse(n)
+          case Some(n) => BooleanParser.parse(n).map(_.value)
           case None => None
         }
 

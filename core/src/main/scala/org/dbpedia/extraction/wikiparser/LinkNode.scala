@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
-import java.net.URI
+import org.dbpedia.iri.IRI
 
 /**
  * Represents a Link.
@@ -29,7 +29,7 @@ extends LinkNode(children, line)
  * @param children The nodes of the label of this link
  * @param line The source line number of this link
  */
-case class ExternalLinkNode(destination : URI, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]())
+case class ExternalLinkNode(destination : IRI, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]())
 extends LinkNode(children, line)
 {
     def toWikiText = "[" + destination.toString + " " + children.map(_.toWikiText).mkString + "]"
@@ -45,7 +45,12 @@ extends LinkNode(children, line)
  * @param line The source line number of this link
  */
 case class InternalLinkNode(destination : WikiTitle, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]())
-extends WikiLinkNode(destination, children, line, destinationNodes)
+extends WikiLinkNode(destination, children, line, destinationNodes) {
+    override def equals(obj: scala.Any) = obj match {
+        case otherLink : InternalLinkNode => (otherLink.destination == destination && NodeUtil.filterEmptyTextNodes(otherLink.children) == NodeUtil.filterEmptyTextNodes(children))
+        case _ => false
+    }
+}
 
 /**
  * Represents an InterWiki Link.

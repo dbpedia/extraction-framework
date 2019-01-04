@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.dataparser.{GeoCoordinate, GeoCoordinateParser}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, ExtractorUtils}
@@ -30,25 +31,25 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.GeoCoordinates)
 
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(page : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if (page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) 
       return Seq.empty
     
     // Iterate through all root templates.
     // Not recursing into templates as these are presumed to be handled by template-based mechanisms (GeoCoordinatesMapping).
-    for( 
+    for(
       templateNode @ TemplateNode(_, _, _, _) <- page.children;
-      coordinate <- geoCoordinateParser.parse(templateNode) 
+      coordinate <- geoCoordinateParser.parse(templateNode)
     )
     {
-      return writeGeoCoordinate(coordinate, subjectUri, page.sourceUri, pageContext)
+      return writeGeoCoordinate(coordinate.value, subjectUri, page.sourceIri)
     }
 
     Seq.empty
   }
 
-  private def writeGeoCoordinate(coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Seq[Quad] =
+  private def writeGeoCoordinate(coord : GeoCoordinate, subjectUri : String, sourceUri : String) : Seq[Quad] =
   {
     val quads = new ArrayBuffer[Quad]()
     quads += new Quad(context.language, DBpediaDatasets.GeoCoordinates, subjectUri, typeOntProperty, featureOntClass.uri, sourceUri)

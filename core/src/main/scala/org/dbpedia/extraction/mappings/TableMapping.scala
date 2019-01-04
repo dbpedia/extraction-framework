@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
@@ -25,9 +26,9 @@ extends Extractor[TableNode]
 
     val headerDef = header.split(';').map { _.split(',').map { _.split('&').map(_.trim) } }
 
-    override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyProperties,DBpediaDatasets.OntologyTypes)
+    override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyPropertiesObjects,DBpediaDatasets.OntologyTypes)
 
-    override def extract(tableNode : TableNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+    override def extract(tableNode : TableNode, subjectUri : String): Seq[Quad] =
     {
         val tableHeader = extractTableHeader(tableNode)
 
@@ -49,21 +50,21 @@ extends Extractor[TableNode]
             val correspondingInstance = findCorrespondingInstance(tableNode)
 
             //Generate instance URI
-            val instanceUri = pageContext.generateUri(correspondingInstance.getOrElse(subjectUri), rowNode.children.head);
+            val instanceUri = tableNode.generateUri(correspondingInstance.getOrElse(subjectUri), rowNode.children.head)
 
             //Add new ontology instance
             for (cls <- mapToClass.relatedClasses)
-              graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, rowNode.sourceUri)
+              graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, instanceUri, context.ontology.properties("rdf:type"), cls.uri, rowNode.sourceIri)
 
             //Link new instance to the corresponding Instance
             for(corUri <- correspondingInstance)
             {
                 //TODO write generic and specific properties
-                graph += new Quad(context.language, DBpediaDatasets.OntologyProperties, corUri, correspondingProperty, instanceUri, rowNode.sourceUri)
+                graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, corUri, correspondingProperty, instanceUri, rowNode.sourceIri)
             }
 
             //Extract properties
-            graph ++= mappings.flatMap(_.extract(templateNode, instanceUri, pageContext))
+            graph ++= mappings.flatMap(_.extract(templateNode, instanceUri))
         }
 
         graph
@@ -236,7 +237,6 @@ extends Extractor[TableNode]
         }
 
         //Check if found template has been mapped to corresponding Class
-        var correspondingInstance : Option[String] = None
         for( correspondingTemplate <- lastPageTemplate;
              templateClass <- correspondingTemplate.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
              currentClass <- templateClass.relatedClasses;
@@ -278,7 +278,7 @@ extends Extractor[TableNode]
             }
 
             //Give up and consider this two matchings as equal
-            0;
+            0
         }
     }
 }

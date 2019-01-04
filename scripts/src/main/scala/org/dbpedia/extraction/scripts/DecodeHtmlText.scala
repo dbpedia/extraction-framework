@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.config.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.util.DateFinder
 import org.dbpedia.extraction.util.TurtleUtils.escapeTurtle
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import java.io.File
@@ -65,12 +66,12 @@ object DecodeHtmlText {
       // use first input file to find date. TODO: breaks if first file doesn't exist. is there a better way?
       var first = true
       for (input <- inputs; suffix <- suffixes) {
-        QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, auto = first, required = false) { quad =>
+        new QuadMapper().mapQuads(finder, input + suffix, input + extension + suffix, auto = first, required = false) { quad =>
           if (quad.datatype == null) throw new IllegalArgumentException("expected object literal, found object uri: "+quad)
           val decoded = coder.code(quad.value)
           List(quad.copy(value = decoded))
         }
-        err.println(language.wikiCode+": "+finder.find(input + suffix)+" : found "+counter.errors()+" HTML character reference errors")
+        err.println(language.wikiCode+": "+finder.byName(input + suffix).get+" : found "+counter.errors()+" HTML character reference errors")
         counter.reset()
         first = false
       }

@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.DisambiguationExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
@@ -27,7 +28,7 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.DisambiguationLinks)
 
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(page : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if (page.title.namespace == Namespace.Main && (page.isDisambiguation || context.disambiguations.isDisambiguation(page.id)))
     {
@@ -49,7 +50,7 @@ extends PageNodeExtractor
           subjectUri,
           wikiPageDisambiguatesProperty,
           language.resourceUri.append(link.destination.decodedWithNamespace),
-          link.sourceUri,
+          link.sourceIri,
           null
         )
       }

@@ -2,18 +2,13 @@ package org.dbpedia.extraction.live.main;
 
 
 import org.dbpedia.extraction.live.core.LiveOptions;
-import org.dbpedia.extraction.live.feeder.Feeder;
-import org.dbpedia.extraction.live.feeder.OAIFeeder;
-import org.dbpedia.extraction.live.feeder.OAIFeederMappings;
-import org.dbpedia.extraction.live.feeder.UnmodifiedFeeder;
+import org.dbpedia.extraction.live.feeder.*;
+import org.dbpedia.extraction.live.processor.PageProcessor;
 import org.dbpedia.extraction.live.publisher.DiffData;
+import org.dbpedia.extraction.live.publisher.Publisher;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
-import org.dbpedia.extraction.live.processor.PageProcessor;
-import org.dbpedia.extraction.live.publisher.Publisher;
-import org.dbpedia.extraction.live.statistics.Statistics;
 import org.dbpedia.extraction.live.storage.JDBCUtil;
-import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.Files;
 import org.slf4j.Logger;
@@ -22,8 +17,8 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -38,7 +33,7 @@ public class Main {
 
     //private volatile static Statistics statistics = null;
 
-    private volatile static List<Feeder> feeders = new ArrayList<Feeder>(5);
+    private volatile static List<Feeder>  feeders = new ArrayList<Feeder>(5);
     private volatile static List<PageProcessor> processors = new ArrayList<PageProcessor>(10);
     private volatile static Publisher publisher ;
 
@@ -54,7 +49,18 @@ public class Main {
 
     public static void initLive() {
 
-        JDBCUtil.execSQL("SET names utf8");
+        JDBCUtil.execSQL("SET names utf8mb4");
+
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.rcstream.enabled")) == true) {
+            feeders .add(new RCStreamFeeder("RCStreamFeeder", LiveQueuePriority.LivePriority,
+                LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory"),
+                LiveOptions.options.get("feeder.rcstream.room")));
+        }
+
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.allpages.enabled")) == true) {
+            feeders .add(new AllPagesFeeder("AllPagesFeeder", LiveQueuePriority.LivePriority,
+                    LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
+        }
 
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {
             long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.pollInterval"));

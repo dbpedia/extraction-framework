@@ -11,12 +11,12 @@ import scala.language.reflectiveCalls
  * Utility functions used by the data parsers.
  */
 //TODO test after re-factor
-class ParserUtils( val context : { def language : Language } )
+class ParserUtils( val context : { def language : Language } ) extends java.io.Serializable
 {
     private val scales = ParserUtilsConfig.scalesMap.getOrElse(context.language.wikiCode, ParserUtilsConfig.scalesMap("en"))
 
     // NumberFormat is not thread-safe
-    private val numberFormat = new ThreadLocal[NumberFormat] {
+    private val numberFormat = new ThreadLocalSerializable[NumberFormat] {
       override def initialValue = NumberFormat.getNumberInstance(context.language.locale)
     } 
     
@@ -57,3 +57,5 @@ class ParserUtils( val context : { def language : Language } )
         }
     }
 }
+
+class ThreadLocalSerializable[T]() extends ThreadLocal[T] with java.io.Serializable {}

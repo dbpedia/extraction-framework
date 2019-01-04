@@ -2,12 +2,16 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URI
 
-import org.dbpedia.extraction.wikiparser.TemplateNode
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyObjectProperty}
-import org.dbpedia.extraction.util.{UriUtils, Language}
+import org.dbpedia.extraction.ontology.{OntologyObjectProperty, OntologyProperty}
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.TemplateNode
+import org.dbpedia.iri.UriUtils
+
 import scala.language.reflectiveCalls
+import scala.util.{Failure, Success}
 
 /**
  * Used to map information that is only contained in the infobox template name, for example
@@ -21,35 +25,36 @@ import scala.language.reflectiveCalls
  * }}
  */
 class ConstantMapping (
-  ontologyProperty: OntologyProperty,
-  private var value : String,
-  datatype : Datatype,
+  val ontologyProperty: OntologyProperty,
+  var value : String,
+  val datatype : Datatype,
   context : {
     def language : Language
   } 
 )
 extends PropertyMapping
 {
-  if (ontologyProperty.isInstanceOf[OntologyObjectProperty])
+  val isObjectProperty = ontologyProperty.isInstanceOf[OntologyObjectProperty]
+
+  //split to literal / object dataset
+  val dataset = if (isObjectProperty) DBpediaDatasets.OntologyPropertiesObjects else DBpediaDatasets.OntologyPropertiesLiterals
+
+  if (isObjectProperty)
   {
     require(datatype == null, "expected no datatype for object property '"+ontologyProperty+"', but found datatype '"+datatype+"'")
-    value = try {
-      // if it is a URI return it directly
-      val uri = new URI(value)
-      // if the URI is absolute, we can use it directly. otherwise we make a DBpedia resource URI
-      if (!uri.isAbsolute) context.language.resourceUri.append(value)
-      else uri.toString
-    } catch {
-      // otherwise create a DBpedia resource URI
-      case _ : Exception => context.language.resourceUri.append(value)
+    value = UriUtils.createURI(value) match{
+      case Success(u) => if(u.isAbsolute)
+          context.language.resourceUri.append(value)
+        else u.toString
+      case Failure(f) => context.language.resourceUri.append(value)
     }
   }
 
-  override val datasets = Set(DBpediaDatasets.OntologyProperties)
+  override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals)
 
-  override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
-    Seq(new Quad(context.language, DBpediaDatasets.OntologyProperties, subjectUri, ontologyProperty, value, node.sourceUri, datatype))
+    Seq(new Quad(context.language, dataset, subjectUri, ontologyProperty, value, node.sourceIri, datatype))
   }
 
 

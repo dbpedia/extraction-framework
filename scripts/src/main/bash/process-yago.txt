@@ -141,7 +141,7 @@ cp yagoTaxonomy.ttl.17 yago_taxonomy.ttl
 
 === yagoTransitiveType ===
 
-awk '{print $2" "$1}' yagoTransitiveType.ttl.9b > yagoTransitiveType.ttl.10
+awk '{print $2" "$1}' yagoTransitiveType.ttl.9 > yagoTransitiveType.ttl.10
 env LC_ALL=C sort yagoTransitiveType.ttl.10 > yagoTransitiveType.ttl.11
 env LC_ALL=C join yagoDBpediaClasses.ttl.11 yagoTransitiveType.ttl.11 > yagoTransitiveType.ttl.12
 # retain only resources starting with "<" (excludes "rdfs:label" etc.), exclude lower case names (e.g. "diedIn")
@@ -157,12 +157,17 @@ env LC_ALL=C sort -u yagoDBpediaInstances.ttl.1 >yagoDBpediaInstances.ttl.2
 awk '{print "<http://dbpedia.org/resource/"$1" <http://www.w3.org/2002/07/owl#sameAs> <http://yago-knowledge.org/resource/"$1" ."}' yagoDBpediaInstances.ttl.2 > yagoDBpediaInstances.ttl.3
 cp yagoDBpediaInstances.ttl.3 yago_links.ttl
 
-== convert from IRIs to URIs ==
-
-cd git/extraction-framework/scripts
-../run RecodeUris .ttl .nt  /data2/dbpedia-release/yago/39/yago_*.ttl
-
 == pack as GZip and BZip2 ==
 
 cd /data2/dbpedia-release/yago/39
 for i in * ; do echo $i.gz ; pigz -c <$i >$i.gz ; echo $i.bz2 ; pbzip2 -c <$i >$i.bz2 ; done
+only bz2:
+for i in * ; do echo $i.bz2 ; pbzip2 -c <yago_links.ttl >yago_links.ttl.bz2 ; done
+
+
+== clean/convert from URIs to IRIs & resolve redirects==
+
+cd git/extraction-framework/scripts
+ ../run CleanExternalDataset /data/extraction-data/2016-04/__links .ttl.bz2 -cleaned.ttl.bz2 yago_links,yago_types,yago_taxonomy,yago_type_links
+# use the @external option to use the following script outside of normal language dirs
+ ../run MapSubjectUris /data/extraction-data/2016-04 transitive-redirects .ttl.bz2 yago_links,yago_types,yago_taxonomy,yago_type_links -redirected .ttl.bz2 @external /data/extraction-data/2016-04/__links

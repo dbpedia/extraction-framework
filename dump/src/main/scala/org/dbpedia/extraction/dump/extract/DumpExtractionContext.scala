@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.{WikiPage, Source}
 import org.dbpedia.extraction.mappings.{Disambiguations, Mappings, Redirects}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.sources.Source
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.WikiPage
 
 /**
  * TODO: remove this class. Different extractors need different resources. We should use some kind
@@ -37,4 +38,3 @@ trait DumpExtractionContext
 
     def disambiguations : Disambiguations
 }
-

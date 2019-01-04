@@ -18,4 +18,37 @@ class Ontology (
   val specializations : Map[(OntologyClass, OntologyProperty), UnitDatatype],
   val wikidataPropertiesMap : Map[String,Set[OntologyProperty]],
   val wikidataClassesMap : Map[String,Set[OntologyClass]]
-)
+) extends java.io.Serializable {
+  def getOntologyClass(id: String): Option[OntologyClass] ={
+    val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
+    classes.get(iid)
+  }
+
+  def getOntologyProperty(id: String): Option[OntologyProperty] ={
+    val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
+    properties.get(iid)
+  }
+
+  def getOntologyDatatype(id: String): Option[Datatype] ={
+    val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
+    datatypes.get(iid)
+  }
+
+  def getWikidataClass(id: String): Option[Set[OntologyClass]] ={
+    val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
+    wikidataClassesMap.get(iid)
+  }
+
+  def getWikidataProperty(id: String): Option[Set[OntologyProperty]] ={
+    val iid = if(id.contains("/")) id.substring(id.lastIndexOf("/")+1) else id
+    wikidataPropertiesMap.get(iid)
+  }
+
+  def isSubclassOf(sub: OntologyClass, sup: OntologyClass): Boolean ={
+    if (sup eq sub)
+      return true
+    sub.baseClasses.map(isSubclassOf(_, sup)).foldLeft(false)(_||_)
+  }
+
+  def isSuperclassOf(sup: OntologyClass, sub: OntologyClass): Boolean = isSubclassOf(sub, sup)
+}

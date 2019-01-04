@@ -1,13 +1,10 @@
 package org.dbpedia.extraction.scripts
 
-import java.io.{FileWriter, BufferedWriter, File}
+import java.io.{BufferedWriter, File, FileWriter}
 
-import org.dbpedia.extraction.util.ConfigUtils._
-import org.dbpedia.extraction.util.{SimpleWorkers, Language}
+import org.dbpedia.extraction.config.ConfigUtils._
+import org.dbpedia.extraction.util.DateFinder
 import org.dbpedia.extraction.util.RichFile.wrapFile
-
-import scala.Console._
-import scala.collection.mutable.HashMap
 
 /**
  * Generates list of existing abstracts as a TSV file.
@@ -40,7 +37,7 @@ object GenerateListOfExistingAbstracts {
 
     for (language <- languages) {
       val finder = new DateFinder[File](baseDir, language)
-      QuadReader.readQuads(finder, "long-abstracts" + suffix, auto=true) { quad =>
+      new QuadMapper().readQuads(finder, "long-abstracts" + suffix, auto=true) { quad =>
         val languageUri =
         if (quad.subject.startsWith("http://dbpedia.org")) {
           quad.subject.replace("http://dbpedia.org", s"http://$genericDomain.dbpedia.org")

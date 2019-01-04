@@ -61,7 +61,7 @@ object DecodeHtmlEntities {
       var lineCount = 0
       var changeCount = 0
       val start = System.nanoTime
-      val writer = IOUtils.writer(outFile, charset)
+      val writer = IOUtils.writer(outFile, append = false, charset)
       try {
         IOUtils.readLines(inFile) { line =>
           if (line != null) {

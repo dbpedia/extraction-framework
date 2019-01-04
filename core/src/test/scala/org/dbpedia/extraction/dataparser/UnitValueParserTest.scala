@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.mappings.Redirects
+import org.dbpedia.extraction.ontology.datatypes.UnitDatatype
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
+import org.dbpedia.extraction.sources.MemorySource
 import org.dbpedia.extraction.util.Language
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers
-import org.scalatest.matchers.{MatchResult, BeMatcher}
+import org.scalatest.matchers.{BeMatcher, MatchResult}
+
 import scala.math._
 import org.dbpedia.extraction.ontology.{Ontology, OntologyDatatypes}
 import org.junit.runner.RunWith
@@ -154,7 +156,40 @@ class UnitValueParserTest extends FlatSpec with Matchers
       parse("en", "Length", "{{height|m=1.77|frac=16}}") should equal (Some(1.77))
     }
 
-    // {{height|ft=6}}
+    // https://en.wikipedia.org/wiki/Template:Height#Template_data
+    /**
+     * {{height|meter=1.77}}
+     * {{height|meters=1.77}}
+     * {{height|metre=1.77}}
+     * {{height|metres=1.77}}
+     * {{height|foot=6|inch=1}}
+     * {{height|feet=6|inches=1}}
+     */
+    it should "return 1.77 m with {{height|meter=1.77}}" in {
+      parse("en", "Length", "{{height|meter=1.77}}") should equal (Some(1.77))
+    }
+
+    it should "return 1.77 m with {{height|meters=1.77}}" in {
+      parse("en", "Length", "{{height|meters=1.77}}") should equal (Some(1.77))
+    }
+
+    it should "return 1.77 m with {{height|metre=1.77}}" in {
+      parse("en", "Length", "{{height|metre=1.77}}") should equal (Some(1.77))
+    }
+
+    it should "return 1.77 m with {{height|metres=1.77}}" in {
+      parse("en", "Length", "{{height|metres=1.77}}") should equal (Some(1.77))
+    }
+
+    it should "return 1.85 m with {{height|foot=6|inch=1}}" in {
+      parse("en", "Length", "{{height|foot=6|inch=1}}") should be (Some(1.8542))
+    }
+
+    it should "return 1.85 m with {{height|feet=6|inches=1}}" in {
+      parse("en", "Length", "{{height|foot=6|inch=1}}") should be (Some(1.8542))
+    }
+
+  // {{height|ft=6}}
     it should "return 1.8288 m with {{height|ft=6}}" in {
       parse("en", "Length", "{{height|ft=6}}") should equal (Some(1.8288))
     }
@@ -622,7 +657,8 @@ class UnitValueParserTest extends FlatSpec with Matchers
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)
 
         wikiParser(page) match {
-          case Some(n) =>  unitValueParser.parse(n).map{case (value, dt) => dt.toStandardUnit(value)}
+          case Some(n) =>  unitValueParser.parse(n).map{case dt: ParseResult[_] if dt.unit.isDefined && dt.unit.get.isInstanceOf[UnitDatatype] =>
+            dt.unit.get.asInstanceOf[UnitDatatype].toStandardUnit(dt.value)}
           case None => None
         }
     }

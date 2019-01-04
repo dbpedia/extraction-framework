@@ -1,18 +1,16 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import java.io.File
-import org.dbpedia.extraction.ontology.RdfNamespace.fullUri
-import org.dbpedia.extraction.ontology.DBpediaNamespace.ONTOLOGY
+
 import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.extraction.config.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.util.{Finder, IOUtils}
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import scala.collection.immutable.SortedMap
-import scala.collection.mutable
-import scala.collection.mutable.HashMap
-import scala.collection.Map
-import org.dbpedia.extraction.util.IOUtils
-import org.dbpedia.extraction.util.Finder
+
 import scala.Console.err
+import scala.collection.immutable.SortedMap
+import scala.collection.{Map, mutable}
+import scala.collection.mutable.HashMap
 
 class Counter(var num: Long = 0L)
 
@@ -68,14 +66,14 @@ object CountTypes {
       }
       else {
         val date = dates.last
-        val file = finder.file(date, input + suffix)
-        QuadReader.readQuads(language.wikiCode, file) { quad =>
+        val file = finder.file(date, input + suffix).get
+        new QuadMapper().readQuads(language, file) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           if (quad.predicate != rdfType) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           countType(quad.value, languageTypes)
           if (total) countType(quad.value, totalTypes)
         }
-        printTypes(finder.file(date, output), language.wikiCode+" "+input, languageTypes)
+        printTypes(finder.file(date, output).get, language.wikiCode+" "+input, languageTypes)
       }
     }
     if (total) printTypes(new File(baseDir, output), "total", totalTypes)

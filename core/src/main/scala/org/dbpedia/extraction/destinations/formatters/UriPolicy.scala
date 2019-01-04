@@ -1,31 +1,33 @@
 package org.dbpedia.extraction.destinations.formatters
 
 import java.util.Properties
-import java.net.{IDN, URISyntaxException, URI}
+import java.net.{IDN, URISyntaxException}
+
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.util.ConfigUtils.getStrings
+import org.dbpedia.extraction.config.ConfigUtils.getStrings
 import org.dbpedia.extraction.util.RichString.wrapString
-import scala.xml.Utility.{isNameChar,isNameStart}
+import org.dbpedia.iri.IRI
+
+import scala.xml.Utility.{isNameChar, isNameStart}
 import scala.collection.Map
-import scala.collection.mutable.{ArrayBuffer,HashMap}
+import scala.collection.mutable.{ArrayBuffer, HashMap}
 import scala.collection.JavaConversions.asScalaSet
 
 /**
  * TODO: use scala.collection.Map[String, String] instead of java.util.Properties?
  */
 object UriPolicy {
-
   /**
    * A policy is a function takes a URI and may return the given URI or a transformed version of it.
    * Human-readable type alias.
    */
-  type Policy = URI => URI
+  type Policy = IRI => IRI
 
   /**
    * PolicyApplicable is a function that decides if a policy should be applied for the given DBpedia URI.
    * Human-readable type alias.
    */
-  type PolicyApplicable = URI => Boolean
+  type PolicyApplicable = IRI => Boolean
 
   // codes for URI positions
   val SUBJECT = 0
@@ -106,17 +108,6 @@ object UriPolicy {
   )
 
   /**
-   * Parse all URI policy and format lines.
-   * @param uriPolicyPrefix property key prefix, e.g. "uri-policy"
-   * @param formatPrefix format key prefix, e.g. "format"
-   * @return map from file suffix (without '.' dot) to formatter
-   */
-  def parseFormats(config: Properties, uriPolicyPrefix: String, formatPrefix: String): Map[String, Formatter] = {
-    val policies = parsePolicies(config, uriPolicyPrefix)
-    parseFormats(config, formatPrefix, policies)
-  }
-
-  /**
    * Parse all format lines.
    * @param prefix format key prefix, e.g. "format"
    * @return map from file suffix (without '.' dot) to formatter
@@ -132,7 +123,7 @@ object UriPolicy {
 
         val suffix = key.substring(dottedPrefix.length)
 
-        val settings = getStrings(config, key, ';', true)
+        val settings = getStrings(config, key, ";", true)
         require(settings.length == 1 || settings.length == 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy name")
 
         val formatter =
@@ -176,9 +167,9 @@ object UriPolicy {
     val entries = Array.fill(POSITIONS)(new ArrayBuffer[(Int, Policy)])
 
     // parse a value like "uri:en,fr; xml-safe-predicates:*"
-    for (policy <- list.trimSplit(';')) {
+    for (policy <- list.trimSplit(";")) {
       // parse a part like "uri:en,fr" or "xml-safe-predicates:*"
-      policy.trimSplit(':') match {
+      policy.trimSplit(":") match {
         case Array(name, languages) =>
           // get factory for a name like "xml-safe-predicates"
           policies.get(name) match {
@@ -210,7 +201,7 @@ object UriPolicy {
    */
   private def parsePolicyApplicable(languages: String): PolicyApplicable = {
 
-    val codes = languages.trimSplit(',').toSet
+    val codes = languages.trimSplit(",").toSet
 
     // "*" matches all dbpedia domains
     if (codes("*")) {
@@ -248,7 +239,11 @@ object UriPolicy {
       }
   }
 
-  def toUri(iri: URI) : URI = {
+  def toUri(iri: String) : IRI = {
+    toUri(IRI.create(iri).getOrElse(throw new Exception("Iri validation failed for:" + iri)))
+  }
+
+  def toUri(iri: IRI) : IRI = {
     // In IDN URI parses the host as Authoriry
     // see https://github.com/dbpedia/extraction-framework/pull/300#issuecomment-67777966
     if (iri.getHost() == null && iri.getAuthority != null ) {
@@ -270,13 +265,13 @@ object UriPolicy {
         }
         host = IDN.toASCII(host)
 
-        new URI(uri(iri.getScheme, user, host, port, iri.getPath, iri.getQuery, iri.getFragment).toASCIIString)
+        IRI.create(uri(iri.getScheme, user, host, port, iri.getPath, iri.getQuery, iri.getFragment).toASCIIString).get
       } catch {
-        case _: NumberFormatException | _: IllegalArgumentException => new URI(iri.toASCIIString)
+        case _: NumberFormatException | _: IllegalArgumentException => IRI.create(iri.toASCIIString).get
       }
 
     } else {
-      new URI(iri.toASCIIString)
+      IRI.create(iri.toASCIIString).get
     }
   }
 
@@ -286,7 +281,7 @@ object UriPolicy {
       if (applicableTo(iri)) {
 
         val scheme = iri.getScheme
-        val user = iri.getRawUserInfo
+        val user = iri.getRawUserinfo
         val host = "dbpedia.org"
         val port = iri.getPort
         val path = iri.getRawPath
@@ -308,7 +303,8 @@ object UriPolicy {
     iri =>
       if (applicableTo(iri)) {
         val str = iri.toString
-        if (str.length > MAX_LENGTH) throw new URISyntaxException(str, "length "+str.length+" exceeds maximum "+MAX_LENGTH)
+        if (str.length > MAX_LENGTH)
+          throw new URISyntaxException(str, "length "+str.length+" exceeds maximum "+MAX_LENGTH)
       }
       iri
   }
@@ -349,7 +345,7 @@ object UriPolicy {
       if (applicableTo(iri)) {
 
         val scheme = iri.getScheme
-        val user = iri.getRawUserInfo
+        val user = iri.getRawUserinfo
 
         // When the URI is IDN the URI parser puts the domain name in Authority
         val host = if (iri.getHost == null && iri.getAuthority != null) iri.getAuthority else iri.getHost
@@ -397,27 +393,27 @@ object UriPolicy {
     }
 
     // We can't use the string as an XML name.
-    return tail+'_'
+    tail+'_'
   }
 
-  private def uri(scheme: String, user: String, host: String, port: Int, path: String, query: String, frag: String): URI = {
+  private def uri(scheme: String, user: String, host: String, port: Int, path: String, query: String, frag: String): IRI = {
 
     val sb = new StringBuilder
 
     if (scheme != null) sb append scheme append ':'
 
     if (host != null) {
-      sb.append("//");
-      if (user != null) sb.append(user).append('@');
-      sb.append(host);
-      if (port != -1) sb.append(':').append(port);
+      sb.append("//")
+      if (user != null) sb.append(user).append('@')
+      sb.append(host)
+      if (port != -1) sb.append(':').append(port)
     }
 
-    if (path != null) sb.append(path);
-    if (query != null) sb.append('?').append(query);
-    if (frag != null) sb.append('#').append(frag);
+    if (path != null) sb.append(path)
+    if (query != null) sb.append('?').append(query)
+    if (frag != null) sb.append('#').append(frag)
 
-    new URI(sb.toString)
+    IRI.create(sb.toString).get
   }
 
 }

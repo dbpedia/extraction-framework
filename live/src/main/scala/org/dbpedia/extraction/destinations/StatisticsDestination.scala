@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.destinations
 
+import org.dbpedia.extraction.transform.Quad
+
 /**
  * Writes extraction results to statistics
  */

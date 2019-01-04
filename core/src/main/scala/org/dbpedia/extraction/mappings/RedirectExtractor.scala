@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, ExtractorUtils}
@@ -29,10 +29,9 @@ class RedirectExtractor (
 
   private val quad = QuadBuilder(language, DBpediaDatasets.Redirects, wikiPageRedirectsProperty, null) _
 
-  override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext): Seq[Quad] =
-  {
-    if (page.redirect != null && page.title.namespace == page.redirect.namespace) {
-      return Seq(quad(subjectUri, language.resourceUri.append(page.redirect.decodedWithNamespace), page.sourceUri))
+  override def extract(page : WikiPage, subjectUri : String): Seq[Quad] = {
+    if (page.isRedirect && page.title.namespace == page.redirect.namespace) {
+      return Seq(quad(subjectUri, language.resourceUri.append(page.redirect.decodedWithNamespace), page.sourceIri))
     }
 
     Seq.empty

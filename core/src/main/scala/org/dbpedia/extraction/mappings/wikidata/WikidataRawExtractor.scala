@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
-import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
+import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 import org.wikidata.wdtk.datamodel.interfaces._
 
 import scala.collection.JavaConversions._
@@ -44,35 +45,37 @@ class WikidataRawExtractor(
 
   override val datasets = Set(DBpediaDatasets.WikidataRaw, DBpediaDatasets.WikidataRawReified, DBpediaDatasets.WikidataRawReifiedQualifiers)
 
-  override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
         statementGroup.getStatements.foreach {
           statement => {
-            val claim = statement.getClaim()
+            val claim = statement.getClaim
             val propertyId = claim.getMainSnak.getPropertyId.getId
-            val propertyIri = claim.getMainSnak().getPropertyId().getIri
+            val propertyIri = claim.getMainSnak.getPropertyId.getIri
             val property = WikidataUtil.getWikidataNamespace(propertyIri)
 
-            claim.getMainSnak() match {
+            claim.getMainSnak match {
               case mainSnak: ValueSnak => {
                 val value = mainSnak.getValue
 
-                val datatype = if (WikidataUtil.getDatatype(value) != null) context.ontology.datatypes(WikidataUtil.getDatatype(value)) else null
+                val datatypeiri = WikidataUtil.getDatatype(value)
+                val datatype = if (datatypeiri != null) context.ontology.datatypes(datatypeiri) else null
 
                 //Wikidata raw extractor without reification
-                quads += new Quad(context.language, DBpediaDatasets.WikidataRaw, subjectUri, property, WikidataUtil.getValue(value), page.wikiPage.sourceUri, datatype)
+                val valuei = WikidataUtil.getValue(value)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataRaw, subjectUri, property, valuei, page.wikiPage.sourceIri, datatype)
 
                 //unique statementUri created for reification. Same statementUri is used for reification mapping
                 val statementUri = WikidataUtil.getStatementUri(subjectUri, propertyId, value)
 
                 //Wikidata raw extractor with reification
-                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfType, rdfStatement, page.wikiPage.sourceUri)
-                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfSubject, subjectUri, page.wikiPage.sourceUri, null)
-                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfPredicate, property, page.wikiPage.sourceUri, null)
-                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfObject, WikidataUtil.getValue(value), page.wikiPage.sourceUri, datatype)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfType, rdfStatement, page.wikiPage.sourceIri)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfSubject, subjectUri, page.wikiPage.sourceIri, null)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfPredicate, property, page.wikiPage.sourceIri, null)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataRawReified, statementUri, rdfObject, valuei, page.wikiPage.sourceIri, datatype)
                 quads ++= getQualifiersQuad(page, statementUri, claim)
               }
               case _ =>
@@ -101,7 +104,7 @@ class WikidataRawExtractor(
 
               //Wikidata raw qualifiers without r2r mapping
               quads += new Quad(context.language, DBpediaDatasets.WikidataRawReifiedQualifiers,
-                statementUri, qualifierProperty, WikidataUtil.getValue(qualifierValue), page.wikiPage.sourceUri, qDatatype)
+                statementUri, qualifierProperty, WikidataUtil.getValue(qualifierValue), page.wikiPage.sourceIri, qDatatype)
             }
             case _ =>
           }

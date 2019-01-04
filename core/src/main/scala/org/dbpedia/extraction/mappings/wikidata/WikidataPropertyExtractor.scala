@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
 import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
 import org.wikidata.wdtk.datamodel.interfaces._
@@ -44,7 +45,7 @@ class WikidataPropertyExtractor(
   override val datasets = Set(DBpediaDatasets.WikidataProperty)
 
 
-  override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
     val subject = WikidataUtil.getWikidataNamespace(subjectUri).replace("Property:", "")
@@ -67,7 +68,7 @@ class WikidataPropertyExtractor(
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
             quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataProperty, subjectUri, aliasProperty, alias,
-              page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+              page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }
@@ -85,7 +86,7 @@ class WikidataPropertyExtractor(
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
             quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataProperty, subjectUri,
-              descriptionProperty, description, page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+              descriptionProperty, description, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }
@@ -102,7 +103,7 @@ class WikidataPropertyExtractor(
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
             quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataProperty,
-              subjectUri, labelProperty, literalWithoutLang, page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+              subjectUri, labelProperty, literalWithoutLang, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }
@@ -127,7 +128,7 @@ class WikidataPropertyExtractor(
                 val v = mainSnak.getValue
                 val value = WikidataUtil.getValue(v)
                 val datatype = if (WikidataUtil.getDatatype(v) != null) context.ontology.datatypes(WikidataUtil.getDatatype(v)) else null
-                quads += new Quad(context.language, DBpediaDatasets.WikidataProperty, subjectUri, property, value, page.wikiPage.sourceUri, datatype)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataProperty, subjectUri, property, value, page.wikiPage.sourceIri, datatype)
               }
               case _ =>
             }

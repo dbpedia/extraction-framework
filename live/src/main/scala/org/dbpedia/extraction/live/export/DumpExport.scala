@@ -59,7 +59,7 @@ class DumpExport(val filename: String, val threads: Integer) {
 
         val jsonBlob: Blob = rs.getBlob("json")
         val jsonData = jsonBlob.getBytes(1, jsonBlob.length.asInstanceOf[Int])
-        val jsonString = new String(jsonData).trim
+        val jsonString = new String(jsonData, "UTF-8").trim
         if (!jsonString.isEmpty) {
           // Submit job to thread pool
           executorService.execute(new QuadProcessWorker(destination,jsonString))
@@ -127,7 +127,7 @@ class DumpExport(val filename: String, val threads: Integer) {
 class QuadProcessWorker(val destination: Destination, val jsonString: String) extends Runnable {
 
   override def run(): Unit = {
-    val quads = JSONCache.getTriplesFromJson(new String(jsonString))
+    val quads = JSONCache.getTriplesFromJson(org.apache.commons.lang.StringEscapeUtils.unescapeJava(new String(jsonString)))
     destination.write(quads)
   }
 }

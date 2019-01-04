@@ -3,12 +3,13 @@ package org.dbpedia.extraction.server.stats
 import java.io.File
 import java.util.logging.Logger
 
-import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.util.Finder
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import org.dbpedia.extraction.util.{Finder,Language}
-import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.wikiparser.Namespace
+
+import org.dbpedia.extraction.config.ConfigUtils._
 
 /**
  * Script to gather statistics about templates and properties:
@@ -40,7 +41,7 @@ import org.dbpedia.extraction.wikiparser.Namespace
  */
 object CreateMappingStats
 {
-    val logger = Logger.getLogger(getClass.getName)
+    val logger: Logger = Logger.getLogger(getClass.getName)
     
     def main(args: Array[String])
     {
@@ -55,12 +56,12 @@ object CreateMappingStats
         val pretty = args(3).toBoolean
         
         // Use all remaining args as language codes or comma or whitespace separated lists of codes
-        var languages: Seq[Language] = for(arg <- args.drop(4); lang <- arg.split("[,\\s]"); if (lang.nonEmpty)) yield Language(lang)
+        var languages = parseLanguages(inputDir, args.drop(4))
           
         // if no languages are given, use all languages for which a mapping namespace is defined
-        if (languages.isEmpty) languages = Namespace.mappings.keySet.toSeq
+        if (languages.isEmpty) languages = Namespace.mappings.keySet.toArray
         
-        for (language <- languages.sorted) {
+        languages.sorted.par.foreach(language =>  {
           
             val millis = System.currentTimeMillis()
             
@@ -73,7 +74,7 @@ object CreateMappingStats
             val date = finder.dates("extraction-complete").last
             
             def inputFile(dataset: Dataset): File = {
-              finder.file(date, dataset.name.replace('_', '-')+".ttl"+suffix)
+              finder.file(date, dataset.encoded.replace('_', '-')+".ttl"+suffix).get
             }
             
             // extracted by org.dbpedia.extraction.mappings.RedirectExtractor
@@ -94,6 +95,6 @@ object CreateMappingStats
             new MappingStatsManager(statsDir, language)
             
             logger.info("created statistics for "+language.wikiCode+" in "+prettyMillis(System.currentTimeMillis - millis))
-        }
+        })
     }
 }

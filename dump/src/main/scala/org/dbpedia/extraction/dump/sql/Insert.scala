@@ -1,27 +1,21 @@
 package org.dbpedia.extraction.dump.sql
 
-import java.io.File
-import org.dbpedia.extraction.sources.{Source,XMLSource}
-import org.dbpedia.extraction.util.{Language,StringUtils}
-import org.dbpedia.extraction.wikiparser.{Namespace,WikiTitle}
-import scala.collection.mutable.HashMap
-import java.lang.StringBuilder
-import java.sql.Connection
+import org.dbpedia.extraction.wikiparser.WikiTitle
 
 /**
  * These classes are basically the object arrays used by mwdumper's SqlWriter15
  * ported to Scala.
  */
-class Insert(val table: String, val columns: Array[String], val values: Array[Any])
+class Insert(val table: String, val columns: Array[String], val id: Long, val values: Array[Any])
 
 class Page(pageId: Long, revId: Long, title: WikiTitle, redirect: WikiTitle, length: Int)
-extends Insert(Page.table, Page.columns, Page.values(pageId, revId, title, redirect, length))
+extends Insert(Page.table, Page.columns, pageId, Page.values(pageId, revId, title, redirect, length))
     
 class Revision(pageId: Long, revId: Long, length: Int)
-extends Insert(Revision.table, Revision.columns, Revision.values(pageId, revId, length))
+extends Insert(Revision.table, Revision.columns, pageId, Revision.values(pageId, revId, length))
 
-class Text(revId: Long, text: String)
-extends Insert(Text.table, Text.columns, Text.values(revId, text))
+class Text(pageId: Long, revId: Long, text: String)
+extends Insert(Text.table, Text.columns, pageId, Text.values(revId, text))
 
 object Page {
   

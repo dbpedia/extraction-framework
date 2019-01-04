@@ -6,17 +6,47 @@
 	<groupId>org.dbpedia</groupId>
 	<artifactId>extraction</artifactId>
 	<packaging>pom</packaging>
-	<version>4.0-SNAPSHOT</version>
+	<version>4.2-SNAPSHOT</version>
 	<name>Parent POM of the DBpedia framework</name>
+
+	<description>
+		DBpedia Extraction Framework is a flexible and extensible framework to extract different kinds of structured information from Wikipedia
+	</description>
+
+	<url>http://www.dbpedia.org</url>
+
+	<licenses>
+		<license>
+			<name>GNU GENERAL PUBLIC LICENSE</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.en.html</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>DBpedia Team</name>
+			<email>dbpedia-developers@lists.sourceforge.net</email>
+			<organization>DBpedia</organization>
+			<organizationUrl>http://www.dbpedia.org</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git@github.com:dbpedia/extraction-framework.git</connection>
+		<developerConnection>scm:git:git@github.com:dbpedia/extraction-framework.git</developerConnection>
+		<url>git@github.com:dbpedia/extraction-framework.git</url>
+	</scm>
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<scala.version>2.11.4</scala.version>
 		<scalatest.scala.version>2.11</scalatest.scala.version>
 		<scalatest.version>2.2.1</scalatest.version>
 		<scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
 		<skipTests>true</skipTests>
+		<gpg.keyname>AKSW.GPG</gpg.keyname>
 	</properties>
 
 	<modules>
@@ -89,6 +119,14 @@
 						</goals>
 						<phase>process-resources</phase>
 					</execution>
+
+					<execution>
+						<id>doc</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
 				</executions>
 
 			</plugin>
@@ -100,6 +138,30 @@
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
@@ -120,7 +182,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
 
@@ -165,19 +226,19 @@
 				<artifactId>scala-xml</artifactId>
 				<version>2.11.0-M4</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.jsoup</groupId>
+				<artifactId>jsoup</artifactId>
+				<version>1.8.3</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<distributionManagement>
-		<repository>
-			<id>maven.aksw.internal</id>
-			<name>AKSW Internal Release Repository</name>
-			<url>http://maven.aksw.org/upload/repository/internal</url>
-		</repository>
 		<snapshotRepository>
-			<id>maven.aksw.snapshots</id>
-			<name>AKSW Snapshot Repository</name>
-			<url>http://maven.aksw.org/upload/repository/snapshots</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 

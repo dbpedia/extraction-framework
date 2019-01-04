@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.config.mappings.TopicalConceptsExtractorConfig
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
+
 import scala.language.reflectiveCalls
 
 /**
@@ -26,7 +28,7 @@ class TopicalConceptsExtractor(
 )
 extends PageNodeExtractor
 {
-    private val skosSubjectProperty = context.ontology.properties("skos:subject")
+    private val skosSubjectProperty = context.ontology.properties("dct:subject")
 
     private val rdfTypeProperty = context.ontology.properties("rdf:type")
 
@@ -36,7 +38,7 @@ extends PageNodeExtractor
 
     override val datasets = Set(DBpediaDatasets.TopicalConcepts)
 
-    override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+    override def extract(page : PageNode, subjectUri : String): Seq[Quad] =
     {
         if (page.title.namespace == Namespace.Category)
         {
@@ -53,13 +55,13 @@ extends PageNodeExtractor
                         subjectUri,
                         skosSubjectProperty,
                         mainResource,
-                        template.sourceUri) ::
+                        template.sourceIri) ::
                     new Quad(context.language,
                         DBpediaDatasets.TopicalConcepts,
                         mainResource,
                         rdfTypeProperty,
                         skosSubjectClass.uri,
-                        template.sourceUri)
+                        template.sourceIri)
                     :: Nil)
                 }
 

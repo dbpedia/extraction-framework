@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, ExtractorUtils}
@@ -24,7 +25,7 @@ class AnchorTextExtractor(
 
   override val datasets = Set(DBpediaDatasets.AnchorText)
 
-  override def extract(node: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(node: PageNode, subjectUri: String): Seq[Quad] = {
     if (node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) {
       return Seq.empty
     }
@@ -36,7 +37,7 @@ class AnchorTextExtractor(
         val concated = nodes.children.map(_.toPlainText).mkString("")
         buffer += new
             Quad(context.language, DBpediaDatasets.AnchorText, getUri(nodes.destination), wikiPageWikiLinkProperty,
-              concated, nodes.sourceUri, context.ontology.datatypes("rdf:langString"))
+              concated, nodes.sourceIri, context.ontology.datatypes("rdf:langString"))
       }
       for (child <- nodes.children) {
         child match {
@@ -44,7 +45,7 @@ class AnchorTextExtractor(
             buffer += new
                 Quad(context.language, DBpediaDatasets.AnchorText, getUri(intlink.destination),
                   wikiPageWikiLinkProperty,
-                  intlink.children(0).toPlainText, nodes.sourceUri, context.ontology.datatypes("rdf:langString"))
+                  intlink.children(0).toPlainText, nodes.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }

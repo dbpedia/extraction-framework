@@ -3,12 +3,11 @@ package org.dbpedia.extraction.scripts
 import java.io._
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.IOUtils._
-import scala.collection.mutable.{ArrayBuffer}
+import scala.collection.mutable.ArrayBuffer
 import scala.Console._
 import org.dbpedia.extraction.util.StringUtils._
 import scala.collection.SortedSet
 import java.lang.Boolean
-import java.nio.ByteBuffer
 import java.util.zip.GZIPOutputStream
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream
 
@@ -34,16 +33,16 @@ object WikipediaDumpSplitter {
 
     // Collect arguments
     val dump = new File(args(0))
-    require(dump.isFile() && dump.canRead(), "Please specify a valid dump file!")
+    require(dump.isFile && dump.canRead, "Please specify a valid dump file!")
 
     /**
      * The streams index contains the boundaries of each bz2 stream
      */
     val index = new File(args(1))
-    require(index.isFile() && index.canRead(), "Please specify a valid streams index!")
+    require(index.isFile && index.canRead, "Please specify a valid streams index!")
 
     val output = new File(args(2))
-    require(output.isDirectory() && output.canWrite(), "Please specify a valid output directory")
+    require(output.isDirectory && output.canWrite, "Please specify a valid output directory")
 
     val chunkSize = args(3).toInt * 1024 * 1024 // Let the exception flow
     require(chunkSize > 0, "Please specify a positive integer")
@@ -125,7 +124,7 @@ object WikipediaDumpSplitter {
 
     // Save the Mediawiki XML header
     val header = startChunk(output, chunkNamePrefix, "header", chunkNameExtension)
-    copyToChunk(dump, header, 0, offsetsSeq(0))
+    copyToChunk(dump, header, 0, offsetsSeq.head)
 
     // Generate a dummy Mediawiki XML footer
     var footerStream : OutputStream = null
@@ -139,7 +138,7 @@ object WikipediaDumpSplitter {
     }
 
     // Process chunks
-    var low = offsetsSeq(0)
+    var low = offsetsSeq.head
     val boundaries = new ArrayBuffer[(Long,Long)]()
 
     offsetsSeq.drop(1).foreach { offset =>

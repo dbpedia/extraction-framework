@@ -1,83 +1,89 @@
 package org.dbpedia.extraction.dump.sql
 
 import java.io._
+
 import org.dbpedia.extraction.sources.XMLSource
-import org.dbpedia.extraction.util.{Finder,Language,WikiInfo}
-import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
+
 import scala.io.Codec
-import scala.collection.mutable.{Set,HashSet,Map,HashMap}
-import scala.collection.immutable.SortedSet
-import org.dbpedia.extraction.dump.download.Download
 import java.util.Properties
+
+import org.dbpedia.extraction.config.Config
+
+import scala.collection.mutable
 import scala.io.Source
-import scala.io.Codec.UTF8
-import org.dbpedia.extraction.util.IOUtils
 
 object Import {
   
   def main(args: Array[String]) : Unit = {
-    
-    val baseDir = new File(args(0))
-    val tablesFile = new File(args(1))
-    val url = args(2)
-    val requireComplete = args(3).toBoolean
-    val fileName = args(4)
-    
-    // Use all remaining args as keys or comma or whitespace separated lists of keys
-    var languages = parseLanguages(baseDir, args.drop(5))
+
+    assert(args.length == 1,"Importer needs a single parameter: the path to the pertaining properties file (see: mysql.import.properties).")
+    val config = new Config(args.head)
+
+    val baseDir = config.dumpDir
+    val tablesFile = config.getArbitraryStringProperty("tables-file").getOrElse(throw new IllegalArgumentException("tables-file entry is missing in the properties file"))
+    val url = config.getArbitraryStringProperty("jdbc-url").getOrElse(throw new IllegalArgumentException("jdbc-url entry is missing in the properties file"))
+    val fileName = config.source.head
+    val importThreads = config.parallelProcesses
+    val languages = config.languages
     
     val source = Source.fromFile(tablesFile)(Codec.UTF8)
     val tables =
-    try source.getLines.mkString("\n")
-    finally source.close()
-    
-    //With the new change in Abstract extractor we need all articles TODO FIX this sometime soon and use only categories
-    val namespaces = Set(Namespace.Template, Namespace.Category, Namespace.Main, Namespace.Module)
+      try source.getLines.mkString("\n")
+      finally source.close()
+
+    val namespaces = mutable.Set(Namespace.Template, Namespace.Category, Namespace.Main, Namespace.Module)
     val namespaceList = namespaces.map(_.name).mkString("[",",","]")
-    
-    val info = new Properties()
-    info.setProperty("allowMultiQueries", "true")
-    val conn = new com.mysql.jdbc.Driver().connect(url, info)
-    try {
-      for (language <- languages) {
-        
-        val finder = new Finder[File](baseDir, language, "wiki")
-        val tagFile = if (requireComplete) Download.Complete else fileName
-        val date = finder.dates(tagFile).last
-        val file = finder.file(date, fileName)
-        
-        val database = finder.wikiName
-        
-        println("importing pages in namespaces "+namespaceList+" from "+file+" to database "+database+" on server URL "+url)
-        
-        /*
-        Ignore the page if a different namespace is also given for the title.
-        http://gd.wikipedia.org/?curid=4184 and http://gd.wikipedia.org/?curid=4185&redirect=no
-        have the same title "Teamplaid:Gàidhlig", but they are in different namespaces: 4184 is
-        in the template namespace (good), 4185 is in the main namespace (bad). It looks like
-        MediaWiki can handle this somehow, but when we try to import both pages from the XML dump
-        into the database, MySQL rightly complains about the duplicate title. As a workaround,
-        we simply reject pages for which the <ns> namespace doesn't fit the <title> namespace. 
-        */
-        val source = XMLSource.fromReader(() => IOUtils.reader(file), language, title => title.otherNamespace == null && namespaces.contains(title.namespace))
-        
-        val stmt = conn.createStatement()
+
+      org.dbpedia.extraction.util.Workers.work(SimpleWorkers(importThreads, importThreads){ language : Language =>      //loadfactor: think about disk read speed and mysql processes
+
+        val info = new Properties()
+        info.setProperty("allowMultiQueries", "true")
+        val conn = new com.mysql.jdbc.Driver().connect(url, info)
         try {
-          stmt.execute("DROP DATABASE IF EXISTS "+database+"; CREATE DATABASE "+database+" CHARACTER SET binary; USE "+database+";")
-          stmt.execute(tables)
+          val finder = new Finder[File](baseDir, language, "wiki")
+          val date = finder.dates(fileName).last
+
+          if (config.isDownloadComplete(language)) {
+            finder.file(date, fileName) match {
+              case None =>
+              case Some(file) =>
+                val database = finder.wikiName
+
+                println(language.wikiCode + ": importing pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
+
+                /*
+            Ignore the page if a different namespace is also given for the title.
+            http://gd.wikipedia.org/?curid=4184 and http://gd.wikipedia.org/?curid=4185&redirect=no
+            have the same title "Teamplaid:Gàidhlig", but they are in different namespaces: 4184 is
+            in the template namespace (good), 4185 is in the main namespace (bad). It looks like
+            MediaWiki can handle this somehow, but when we try to import both pages from the XML dump
+            into the database, MySQL rightly complains about the duplicate title. As a workaround,
+            we simply reject pages for which the <ns> namespace doesn't fit the <title> namespace.
+            */
+                val source = XMLSource.fromReader(() => IOUtils.reader(file), language, title => title.otherNamespace == null && namespaces.contains(title.namespace))
+
+                val stmt = conn.createStatement()
+                try {
+                  stmt.execute("DROP DATABASE IF EXISTS " + database + "; CREATE DATABASE " + database + " CHARACTER SET binary; USE " + database + ";")
+                  stmt.execute(tables)
+                }
+                finally stmt.close()
+
+                val recorder = config.getDefaultExtractionRecorder[WikiPage](language, 2000)
+                recorder.initialize(language, "import")
+                val pages = new Importer(conn, language, recorder).process(source)
+
+                println(language.wikiCode + ": imported " + pages + " pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
+            }
+          }
+          else
+            println(language.name + " could not be imported! Download was not complete.")
         }
-        finally stmt.close()
-        
-        new Importer(conn).process(source)
-        
-        println("imported  pages in namespaces "+namespaceList+" from "+file+" to database "+database+" on server URL "+url)
-      }
-    }
-    finally conn.close()
-    
+          finally conn.close()
+      }, languages.toList)
   }
-  
 }
 

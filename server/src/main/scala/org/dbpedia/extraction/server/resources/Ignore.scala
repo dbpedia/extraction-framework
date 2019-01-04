@@ -50,7 +50,7 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
             else ignoreList.removeTemplate(wikiDecode(template))
         }
         
-        Response.temporaryRedirect(new URI("/statistics/"+langCode+"/"+cookieQuery('?', show)+"#"+urlEncode(template))).build
+        Response.temporaryRedirect(URI.create("/statistics/"+langCode+"/"+cookieQuery('?', show)+"#"+urlEncode(template))).build
     }
 
     @GET
@@ -65,7 +65,7 @@ class Ignore (@PathParam("lang") langCode: String, @QueryParam("p") password: St
             else ignoreList.removeProperty(wikiDecode(template), property)
         }
         
-        Response.temporaryRedirect(new URI("/templatestatistics/"+language.wikiCode+"/?template="+template.replace(' ', '_')+cookieQuery('&')+"#"+urlEncode(property))).build
+        Response.temporaryRedirect(URI.create("/templatestatistics/"+language.wikiCode+"/?template="+template.replace(' ', '_')+cookieQuery('&')+"#"+urlEncode(property))).build
     }
 
 }

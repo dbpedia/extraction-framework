@@ -1,18 +1,13 @@
 package org.dbpedia.extraction.util
 
-import org.dbpedia.extraction.mappings.Extractor
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
 import java.util.Properties
-import scala.collection.JavaConversions.asScalaSet
-import scala.collection.immutable.Map
-import scala.collection.immutable.SortedMap
-import org.dbpedia.extraction.util.Language.wikiCodeOrdering
-import org.dbpedia.extraction.util.ConfigUtils.{getStrings}
-import org.dbpedia.extraction.util.RichString.wrapString
 
-import java.net.URLDecoder
-import java.math.BigInteger
-import java.security.MessageDigest
+import org.dbpedia.extraction.mappings.Extractor
+import org.dbpedia.extraction.config.ConfigUtils.getStrings
+import org.dbpedia.extraction.util.Language.wikiCodeOrdering
+import org.dbpedia.extraction.wikiparser._
+
+import scala.collection.immutable.{Map, SortedMap}
 
 /**
  * User: Dimitris Kontokostas
@@ -52,14 +47,14 @@ object ExtractorUtils {
     * */
   def loadExtractorsMapFromConfig(languages: Seq[Language], config: Properties): Map[Language, Seq[Class[_ <: Extractor[_]]]] = {
 
-    val stdExtractors = loadExtractorClassSeq(getStrings(config, "extractors", ',', false))
+    val stdExtractors = loadExtractorClassSeq(getStrings(config, "extractors", ",", false))
 
     val classes =
       (for(language <- languages)
         yield(
           language,
           // Standard extractors from "extractors" plus custom defined extractors from "extractors.xx"
-          (stdExtractors ++ getStrings(config, "extractors."+language.wikiCode, ',', false).map(loadExtractorClass)).distinct)
+          (stdExtractors ++ getStrings(config, "extractors."+language.wikiCode, ",", false).map(loadExtractorClass)).distinct)
       ).toMap
 
     // Sort keys
@@ -112,5 +107,54 @@ object ExtractorUtils {
    */
   def getThumbnailURL(filename: String, language: Language):String =
       language.baseUri + "/wiki/Special:FilePath/" + filename + "?width=300"
+
+  /**
+    * Determine the file URL on DBpedia for a filename.
+    *
+    * @param filename the name of the file.
+    * @param language the wiki on which the file exists.
+    * @return the file URL
+    */
+  def getDbpediaFileURL(filename: String, language: Language): String = {
+    val fileNamespaceIdentifier = Namespace.File.name(language)
+    WikiTitle.parse(fileNamespaceIdentifier + ":" + filename, language).resourceIri;
+  }
+
+  /**
+    * Collects all internal links from a Node
+    */
+  def collectInternalLinksFromNode(node : Node) : List[InternalLinkNode] =
+  {
+    node match
+    {
+      case linkNode : InternalLinkNode => List(linkNode)
+      case _ => node.children.flatMap(collectInternalLinksFromNode)
+    }
+  }
+
+  def collectParserFunctionsFromNode(node : Node) : List[ParserFunctionNode] =
+  {
+    node match
+    {
+      case parserFunctionNode : ParserFunctionNode => List(parserFunctionNode) ++ node.children.flatMap(collectParserFunctionsFromNode)
+      case _ => node.children.flatMap(collectParserFunctionsFromNode)
+    }
+  }
+
+  def collectTemplateParametersFromNode(node : Node) : List[TemplateParameterNode] =
+  {
+    node match
+    {
+      case templateParameterNode : TemplateParameterNode => List(templateParameterNode) ++ node.children.flatMap(collectTemplateParametersFromNode)
+      case _ => node.children.flatMap(collectTemplateParametersFromNode)
+    }
+  }
+
+  def collectTemplatesFromNodeTransitive(node: Node): List[TemplateNode] = {
+    node match {
+      case templateNode: TemplateNode => List(templateNode) ++ node.children.flatMap(collectTemplatesFromNodeTransitive)
+      case _ => node.children.flatMap(collectTemplatesFromNodeTransitive)
+    }
+  }
     
 }

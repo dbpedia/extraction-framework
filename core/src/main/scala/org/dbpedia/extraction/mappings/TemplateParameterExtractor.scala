@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
@@ -24,7 +25,7 @@ extends PageNodeExtractor
   
   override val datasets = Set(DBpediaDatasets.TemplateParameters)
 
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+  override def extract(page : PageNode, subjectUri : String): Seq[Quad] =
   {
     if (page.title.namespace != Namespace.Template || page.isRedirect) return Seq.empty
 
@@ -50,10 +51,10 @@ extends PageNodeExtractor
 
     for (parameter <- parameters.distinct if parameter.nonEmpty) {
       // TODO: page.sourceUri does not include the line number
-      quads += new Quad(context.language, DBpediaDatasets.TemplateParameters, subjectUri, templateParameterProperty, 
-          parameter, page.sourceUri, context.ontology.datatypes("xsd:string"))
+      quads += new Quad(context.language, DBpediaDatasets.TemplateParameters, subjectUri, templateParameterProperty,
+          parameter, page.sourceIri, context.ontology.datatypes("xsd:string"))
     }
-    
+
     quads
   }
 

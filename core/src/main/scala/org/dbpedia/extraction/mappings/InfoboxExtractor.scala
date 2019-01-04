@@ -1,16 +1,21 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
+
 import collection.mutable.HashSet
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
+
 import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import org.dbpedia.iri.UriUtils
+
 import scala.language.reflectiveCalls
 
 /**
@@ -55,6 +60,7 @@ extends PageNodeExtractor
     private val labelProperty = ontology.properties("rdfs:label")
     private val typeProperty = ontology.properties("rdf:type")
     private val propertyClass = ontology.classes("rdf:Property")
+    private val rdfLangStrDt = ontology.datatypes("rdf:langString")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Regexes
@@ -99,14 +105,14 @@ extends PageNodeExtractor
     
     override val datasets = Set(DBpediaDatasets.InfoboxProperties, DBpediaDatasets.InfoboxTest, DBpediaDatasets.InfoboxPropertyDefinitions)
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+    override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) return Seq.empty
         
         val quads = new ArrayBuffer[Quad]()
 
         /** Retrieve all templates on the page which are not ignored */
-        for { template <- collectTemplates(node)
+        for { template <- InfoboxExtractor.collectTemplates(node)
           resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
           if !ignoreTemplates.contains(resolvedTitle)
           if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) 
@@ -126,19 +132,19 @@ extends PageNodeExtractor
                     val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
                     val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
-                    for(splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode))
+                    for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.unit.nonEmpty)
                     {
                         val propertyUri = getPropertyUri(property.key)
                         try
                         {
-                            quads += new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+                            quads += new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.get)
 
                             if (InfoboxExtractorConfig.extractTemplateStatistics) 
                             {
                             	val stat_template = language.resourceUri.append(template.title.decodedWithNamespace)
                             	val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
                             	quads += new Quad(language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
-                                               stat_property, node.sourceUri, ontology.datatypes("xsd:string"))
+                                               stat_property, node.sourceIri, ontology.datatypes("xsd:string"))
                             }
                         }
                         catch
@@ -152,8 +158,8 @@ extends PageNodeExtractor
                             {
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, new Datatype("rdf:langString"))
+                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceIri)
+                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceIri, rdfLangStrDt)
                             }
                         }
                     }
@@ -165,13 +171,13 @@ extends PageNodeExtractor
         quads
     }
 
-    private def extractValue(node : PropertyNode) : List[(String, Datatype)] =
+    private def extractValue(node : PropertyNode) : List[ParseResult[String]] =
     {
         // TODO don't convert to SI units (what happens to {{convert|25|kg}} ?)
         extractUnitValue(node).foreach(result => return List(result))
         extractDates(node) match
         {
-            case dates if !dates.isEmpty => return dates
+            case dates if dates.nonEmpty => return dates
             case _ => 
         }
         extractSingleCoordinate(node).foreach(result =>  return List(result))
@@ -179,27 +185,27 @@ extends PageNodeExtractor
         extractRankNumber(node).foreach(result => return List(result))
         extractLinks(node) match
         {
-            case links if !links.isEmpty => return links
+            case links if links.nonEmpty => return links
             case _ =>
         }
-        StringParser.parse(node).map(value => (value, new Datatype("rdf:langString"))).toList
+        StringParser.parse(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt))).toList
     }
 
-    private def extractUnitValue(node : PropertyNode) : Option[(String, Datatype)] =
+    private def extractUnitValue(node : PropertyNode) : Option[ParseResult[String]] =
     {
         val unitValues =
         for (unitValueParser <- unitValueParsers;
-             (value, unit) <- unitValueParser.parse(node) )
-             yield (value, unit)
+             pr <- unitValueParser.parse(node) )
+             yield pr
 
         if (unitValues.size > 1)
         {
-            StringParser.parse(node).map(value => (value, new Datatype("rdf:langString")))
+            StringParser.parse(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt)))
         }
         else if (unitValues.size == 1)
         {
-            val (value, unit) = unitValues.head
-            Some((value.toString, unit))
+            val pr = unitValues.head
+            Some(ParseResult(pr.value.toString, None, pr.unit))
         }
         else
         {
@@ -207,29 +213,29 @@ extends PageNodeExtractor
         }
     }
 
-    private def extractNumber(node : PropertyNode) : Option[(String, Datatype)] =
+    private def extractNumber(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        intParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:integer"))))
-        doubleParser.parse(node).foreach(value => return Some((value.toString, new Datatype("xsd:double"))))
+        intParser.parse(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:integer")))))
+        doubleParser.parse(node).foreach(value => return Some(ParseResult(value.value.toString, None, Some(new Datatype("xsd:double")))))
         None
     }
 
-    private def extractRankNumber(node : PropertyNode) : Option[(String, Datatype)] =
+    private def extractRankNumber(node : PropertyNode) : Option[ParseResult[String]] =
     {
         StringParser.parse(node) match
         {
-            case Some(RankRegex(number)) => Some((number, new Datatype("xsd:integer")))
+            case Some(RankRegex(number)) => Some(ParseResult(number, None, Some(new Datatype("xsd:integer"))))
             case _ => None
         }
     }
     
-    private def extractSingleCoordinate(node : PropertyNode) : Option[(String, Datatype)] =
+    private def extractSingleCoordinate(node : PropertyNode) : Option[ParseResult[String]] =
     {
-        singleGeoCoordinateParser.parse(node).foreach(value => return Some((value.toDouble.toString, new Datatype("xsd:double"))))
+        singleGeoCoordinateParser.parse(node).foreach(value => return Some(ParseResult(value.value.toDouble.toString, None, Some(new Datatype("xsd:double")))))
         None
     }
 
-    private def extractDates(node : PropertyNode) : List[(String, Datatype)] =
+    private def extractDates(node : PropertyNode) : List[ParseResult[String]] =
     {
         for(date <- extractDate(node))
         {
@@ -246,31 +252,31 @@ extends PageNodeExtractor
         }
     }
     
-    private def extractDate(node : PropertyNode) : Option[(String, Datatype)] =
+    private def extractDate(node : PropertyNode) : Option[ParseResult[String]] =
     {
         for (dateTimeParser <- dateTimeParsers;
              date <- dateTimeParser.parse(node))
         {
-            return Some((date.toString, date.datatype))
+            return Some(ParseResult(date.value.toString, None, Some(date.value.datatype)))
         }
         None
     }
 
-    private def extractLinks(node : PropertyNode) : List[(String, Datatype)] =
+    private def extractLinks(node : PropertyNode) : List[ParseResult[String]] =
     {
         val splitNodes = NodeUtil.splitPropertyNode(node, """\s*\W+\s*""")
 
         splitNodes.flatMap(splitNode => objectParser.parse(splitNode)) match
         {
             // TODO: explain why we check links.size == splitNodes.size
-            case links if links.size == splitNodes.size => return links.map(link => (link, null))
+            case links if links.size == splitNodes.size => return links
             case _ => List.empty
         }
         
         splitNodes.flatMap(splitNode => linkParser.parse(splitNode)) match
         {
             // TODO: explain why we check links.size == splitNodes.size
-            case links if links.size == splitNodes.size => links.map(UriUtils.cleanLink).collect{case Some(link) => (link, null)}
+            case links if links.size == splitNodes.size => links.map(x => UriUtils.cleanLink(x.value)).collect{case Some(link) => ParseResult(link)}
             case _ => List.empty
         }
     }
@@ -302,7 +308,12 @@ extends PageNodeExtractor
         result
     }
 
-    private def collectTemplates(node : Node) : List[TemplateNode] =
+
+}
+
+object InfoboxExtractor {
+
+    def collectTemplates(node : Node) : List[TemplateNode] =
     {
         node match
         {
@@ -311,7 +322,7 @@ extends PageNodeExtractor
         }
     }
 
-    private def collectProperties(node : Node) : List[PropertyNode] =
+    def collectProperties(node : Node) : List[PropertyNode] =
     {
         node match
         {

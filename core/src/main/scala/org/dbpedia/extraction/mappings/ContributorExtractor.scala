@@ -1,19 +1,21 @@
 package org.dbpedia.extraction.mappings
 
+import java.net.URLEncoder
+
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import java.net.{URLEncoder, URI}
+
 import scala.language.reflectiveCalls
-import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Created by IntelliJ IDEA.
  * User: Mohamed Morsey
  * Date: 11/29/11
  * Time: 5:49 PM
- * Extracts the information the describes the contributor (editor) of a Wikipedia page, such as his username, and his ID.
+ * Extracts the information that describes the contributor (editor) of a Wikipedia page, such as his username, and his ID.
  */
 
 class ContributorExtractor( context : {
@@ -21,16 +23,18 @@ class ContributorExtractor( context : {
   def language : Language } ) extends WikiPageExtractor
 {
 
+  private val language = context.language
+
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  override def extract(node : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : WikiPage, subjectUri : String) : Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
         return Seq.empty
 
     if(node.contributorID <= 0) return Seq.empty
 
-    val pageURL = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.title.encoded;
+    val pageURL = language.baseUri + "/wiki/" + node.title.encoded;
 
     //Required predicates
     val contributorPredicate = "http://dbpedia.org/meta/contributor";
@@ -50,15 +54,15 @@ class ContributorExtractor( context : {
     //    val quadPageWithContributor = new Quad(context.language, DBpediaDatasets.Revisions, pageURL, contributorPredicate,
     //      contributorName, node.sourceUri, context.ontology.getDatatype("xsd:string").get );
     //Required Quads
-    val quadPageWithContributor = new Quad(context.language, DBpediaDatasets.RevisionMeta, pageURL, contributorPredicate,
-      contributorURL, node.sourceUri, null );
+    val quadPageWithContributor = new Quad(language, DBpediaDatasets.RevisionMeta, pageURL, contributorPredicate,
+      contributorURL, node.sourceIri, null );
 
-    val quadContributorName = new Quad(context.language, DBpediaDatasets.RevisionMeta, contributorURL,
+    val quadContributorName = new Quad(language, DBpediaDatasets.RevisionMeta, contributorURL,
       context.ontology.properties.get("rdfs:label").get,
-      contributorName, node.sourceUri, context.ontology.datatypes.get("xsd:string").get );
+      contributorName, node.sourceIri, context.ontology.datatypes.get("xsd:string").get );
 
-    val quadContributorID = new Quad(context.language, DBpediaDatasets.RevisionMeta, contributorURL, contributorIDPredicate,
-      contributorID.toString, node.sourceUri, context.ontology.datatypes.get("xsd:integer").get );
+    val quadContributorID = new Quad(language, DBpediaDatasets.RevisionMeta, contributorURL, contributorIDPredicate,
+      contributorID.toString, node.sourceIri, context.ontology.datatypes.get("xsd:integer").get );
 
     Seq(quadPageWithContributor, quadContributorName, quadContributorID);
 

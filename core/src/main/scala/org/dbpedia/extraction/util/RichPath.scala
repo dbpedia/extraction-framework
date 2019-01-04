@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.util
 
-import java.io.{IOException,InputStream,OutputStream}
+import java.io.{File, IOException, InputStream, OutputStream}
 import java.nio.file.{Path,Paths,Files,SimpleFileVisitor,FileVisitResult}
 import java.nio.file.StandardOpenOption.{CREATE,APPEND}
 import java.nio.file.attribute.BasicFileAttributes
 import scala.collection.JavaConversions.iterableAsScalaIterable
 import scala.language.implicitConversions
 import RichPath._
+
+import scala.util.{Failure, Success, Try}
 
 
 /**
@@ -53,7 +55,6 @@ class RichPath(path: Path) extends FileLike[Path] {
   }
   
   /**
-   * @throws NotDirectoryException if the path is not a directory
    */
   override def hasFiles: Boolean = {
     val stream = Files.newDirectoryStream(path)
@@ -65,7 +66,7 @@ class RichPath(path: Path) extends FileLike[Path] {
     else Files.delete(path)
   }
   
-  override def resolve(name: String): Path = path.resolve(name)
+  override def resolve(name: String): Try[Path] = Try(path.resolve(name))
   
   override def exists: Boolean = Files.exists(path)
   
@@ -96,5 +97,6 @@ class RichPath(path: Path) extends FileLike[Path] {
     if (append) Files.newOutputStream(path, APPEND, CREATE) // mimic behavior of new FileOutputStream(file, true)
     else Files.newOutputStream(path)
   }
-  
+
+  override def getFile: File = path.toFile
 }

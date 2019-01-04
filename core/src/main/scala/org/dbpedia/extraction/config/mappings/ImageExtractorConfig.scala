@@ -19,13 +19,21 @@ object ImageExtractorConfig
            "es" -> """(?iu)\{\{\s?(CopyrightByWikimedia|Copyvio|Logo|Screenshot|PD-CAGov|Fairuse|Noncommercial|Nonderivative|NZCrownCopyright|PolandGov|PD-IndiaGov|ADRM2)\s?\}\}""".r,
            "eu" -> """(?i)\{\{\s?(Cc-by-nc-sa-2.5|Wikimedia_logoa|Copyrightdun_logoa|Lizentzia_gabea|Album_azala|Aldizkari_azala|Fair_use|Bideo-zinta_azala|Dirua|DVD_azala|Egunkari_azala|Film_pantaila_irudia|Film_posterra|HQFL_logotipoa|Ikonoa|Ikurra|Irrati_logotipoa|Jatetxe_logotipoa|Joku_azala|Joku_pantaila_irudia|Kirol_logotipoa|Komiki_azala|Liburu_azala|Logotipoa|Mahai-joku_azala|Olinpiada_logotipoa|Politika_posterra|Propaganda|Software_azala|Software_pantaila_irudia|Zigilua|TB_pantaila_irudia|Web_pantaila_irudia)\s?\}\}""".r,
            "fr" -> """(?iu)\{\{\s?(Copyright by Wikimedia|Copyvio|Logo|Screenshot|Ordnance Survey Copyright|Fairuse|Noncommercial|PolandGov|nonderivative|NZCrownCopyright|PD-IndiaGov|ADRM2|Marque déposée)\s?\}\}""".r,
+           "gl" -> """(?iu)\{\{\s?(non-free|Copyright by Wikimedia|Copyvio|Logo|Screenshot|PD-CAGov|Fairuse|Noncommercial|Nonderivative|NZCrownCopyright|PolandGov|PD-IndiaGov|ADRM2)\s?\}\}""".r,
            "id" -> """(?i)\{\{\s?(non-free|Fairuse|Logo|LogoOlahraga|LogoTV|FotoHistoris|GambarKarakter|Promophoto|Smithsonian|TampilanFilm|TampilanVideo|TampilanSitus|TampilanPermainan|GambarUang|GambarPerangko|SampulVideo|SampulPermainan|SampulAlbum|SampulBuku|Poster|GambarBerhakTayangBersyarat)\s?\}\}""".r,
            "it" -> """(?iu)\{\{\s?(Sconosciuto|Riservato|NonCommerciale|Unknown|Noncommercial|Nonderivative|Copyrighted|Screenshot|Ordinance Survey Copyright|Fairuse|Cc-nc|cc-by-nc|cc-by-nc-2.0|cc-nc-sa|cc-by-nc-sa|Cc-by-nc-sa-1.0|cc-by-nc-sa-2.0|cc-nd-nc|cc-by-nd-nc|cc-by-nd-nc-2.0|cc-nd|cc-by-nd|cc-by-nd-2.0|TW-cc-by-nc-nd-2.0|TW-cc-by-nc-sa-2.0|Copyright by Wikimedia|CopyrightbyWikimedia)\s?\}\}""".r,
+           "ja" -> """(?iu)\{\{\s?(Copyright by Wikimedia|Copyvio|Logo|Screenshot|PD-CAGov|Fair use|Noncommercial|PolandGov|Nonderivative|NZCrownCopyright|PD-IndiaGov|ADRM2|RomanianGovernmentCopyright|FrenchMinistryOfForeignAffairs|IRFCA|Members of the Riksdag|Attribution-Ubisoft)\s?\}\}""".r,
            "nl" -> """(?i)\{\{\s?(Copyright by Wikimedia)\s?\}\}""".r,
            "pl" -> """(?iu)\{\{\s?(Copyright by Wikimedia|brak licencji|brak źródła|brak autora|brak pozwolenia|SWMPL|Zgoda PWM)\s?\}\}""".r,
            "pt" -> """(?iu)\{\{\s?(Unknown|Noncommercial|Nonderivative|Copyrighted|Screenshot|Ordnance Survey Copyright|Fairuse|Cc-nc|cc-by-nc|cc-by-nc-2.0|cc-nc-sa|cc-by-nc-sa|Cc-by-nc-sa-1.0|cc-by-nc-sa-2.0|cc-nd-nc|cc-by-nd-nc|cc-by-nd-nc-2.0|cc-nd|cc-by-nd|cc-by-nd-2.0|TW-cc-by-nc-nd-2.0|TW-cc-by-nc-sa-2.0|Copyright by Wikimedia|CopyrightbyWikimedia)\s?\}\}""".r,
            "ru" -> """(?iu)\{\{\s?(CopyrightByWikimedia|Fairuse|несвободный файл|несвободная лицензия|запрещенная лицензия)\s?\}\}""".r
     )
+
+    val flagRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(flag|banner|pavillon|drapeau|bandera|pabellón|bandiera|флаг)([^\w]*|[_\s]+)""".r
+    val mapRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(map|karte|location|position|carte|carta|lage)([^\w]*|[_\s]+)""".r
+    val signatureRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(signature|unterschrift)""".r
+    val cOARegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(coat_of_arms|emblem|crest|wappen|grandes_armes|blason|armoiries)([^\w]*|[_\s]+)""".r
+
 
     val supportedLanguages = NonFreeRegex.keySet
 

@@ -1,0 +1,502 @@
+@prefix rr:     <http://www.w3.org/ns/r2rml#>.
+@prefix rml:    <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql:     <http://semweb.mmlab.be/ns/ql#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix dbo:    <http://dbpedia.org/ontology/>.
+@prefix foaf:   <http://xmlns.com/foaf/0.1/>.
+@prefix hydra : <http://www.w3.org/ns/hydra/core#> .
+
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> a rr:TriplesMap ;
+    rml:logicalSource <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/Source/Person> ;
+    rr:subjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/Class/Person> .
+
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/Source/Person> a rml:LogicalSource ;
+    rml:source [
+                 a hydra:IriTemplate ;
+                 hydra:template <http://en.wikipedia.org/wiki/Mapping_en:Infobox_person?oldid=26071>; ];
+    rml:iterator "Infobox";
+    rml:referenceFormulation ql:wikitext.
+
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/Class/Person> a rr:SubjectMap ;
+    rr:constant "http://dbpedia.org/resource/Infobox_person";
+    rr:class <http://dbpedia.org/ontology/Person> ;
+    rr:termType rr:IRI .
+
+
+## template mapping name -> http://xmlns.com/foaf/0.1/name
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/name/dboProp/http://xmlns.com/foaf/0.1/name> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/name/dboProp/http://xmlns.com/foaf/0.1/name> a rr:PredicateObjectMap ;
+    rr:predicate <http://xmlns.com/foaf/0.1/name>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/name/dboProp/http://xmlns.com/foaf/0.1/name/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/name/dboProp/http://xmlns.com/foaf/0.1/name/objectMap> a rr:ObjectMap ;
+    rml:reference "name".
+
+
+## template mapping birthdate -> http://dbpedia.org/ontology/birthDate
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthdate/dboProp/http://dbpedia.org/ontology/birthDate> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthdate/dboProp/http://dbpedia.org/ontology/birthDate> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/birthDate>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthdate/dboProp/http://dbpedia.org/ontology/birthDate/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthdate/dboProp/http://dbpedia.org/ontology/birthDate/objectMap> a rr:ObjectMap ;
+    rml:reference "birthdate".
+
+
+## template mapping birth_date -> http://dbpedia.org/ontology/birthDate
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_date/dboProp/http://dbpedia.org/ontology/birthDate> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_date/dboProp/http://dbpedia.org/ontology/birthDate> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/birthDate>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_date/dboProp/http://dbpedia.org/ontology/birthDate/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_date/dboProp/http://dbpedia.org/ontology/birthDate/objectMap> a rr:ObjectMap ;
+    rml:reference "birth_date".
+
+
+## template mapping birth_date -> http://dbpedia.org/ontology/birthYear
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_date/dboProp/http://dbpedia.org/ontology/birthYear> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_date/dboProp/http://dbpedia.org/ontology/birthYear> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/birthYear>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_date/dboProp/http://dbpedia.org/ontology/birthYear/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_date/dboProp/http://dbpedia.org/ontology/birthYear/objectMap> a rr:ObjectMap ;
+    rml:reference "birth_date".
+
+
+## template mapping birthplace -> http://dbpedia.org/ontology/birthPlace
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthplace/dboProp/http://dbpedia.org/ontology/birthPlace> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthplace/dboProp/http://dbpedia.org/ontology/birthPlace> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/birthPlace>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthplace/dboProp/http://dbpedia.org/ontology/birthPlace/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthplace/dboProp/http://dbpedia.org/ontology/birthPlace/objectMap> a rr:ObjectMap ;
+    rml:reference "birthplace".
+
+
+## template mapping birth_place -> http://dbpedia.org/ontology/birthPlace
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_place/dboProp/http://dbpedia.org/ontology/birthPlace> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_place/dboProp/http://dbpedia.org/ontology/birthPlace> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/birthPlace>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_place/dboProp/http://dbpedia.org/ontology/birthPlace/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_place/dboProp/http://dbpedia.org/ontology/birthPlace/objectMap> a rr:ObjectMap ;
+    rml:reference "birth_place".
+
+
+## template mapping deathdate -> http://dbpedia.org/ontology/deathDate
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/deathdate/dboProp/http://dbpedia.org/ontology/deathDate> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/deathdate/dboProp/http://dbpedia.org/ontology/deathDate> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/deathDate>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/deathdate/dboProp/http://dbpedia.org/ontology/deathDate/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/deathdate/dboProp/http://dbpedia.org/ontology/deathDate/objectMap> a rr:ObjectMap ;
+    rml:reference "deathdate".
+
+
+## template mapping death_date -> http://dbpedia.org/ontology/deathDate
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_date/dboProp/http://dbpedia.org/ontology/deathDate> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_date/dboProp/http://dbpedia.org/ontology/deathDate> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/deathDate>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_date/dboProp/http://dbpedia.org/ontology/deathDate/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_date/dboProp/http://dbpedia.org/ontology/deathDate/objectMap> a rr:ObjectMap ;
+    rml:reference "death_date".
+
+
+## template mapping death_date -> http://dbpedia.org/ontology/deathYear
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_date/dboProp/http://dbpedia.org/ontology/deathYear> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_date/dboProp/http://dbpedia.org/ontology/deathYear> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/deathYear>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_date/dboProp/http://dbpedia.org/ontology/deathYear/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_date/dboProp/http://dbpedia.org/ontology/deathYear/objectMap> a rr:ObjectMap ;
+    rml:reference "death_date".
+
+
+## template mapping deathplace -> http://dbpedia.org/ontology/deathPlace
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/deathplace/dboProp/http://dbpedia.org/ontology/deathPlace> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/deathplace/dboProp/http://dbpedia.org/ontology/deathPlace> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/deathPlace>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/deathplace/dboProp/http://dbpedia.org/ontology/deathPlace/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/deathplace/dboProp/http://dbpedia.org/ontology/deathPlace/objectMap> a rr:ObjectMap ;
+    rml:reference "deathplace".
+
+
+## template mapping death_place -> http://dbpedia.org/ontology/deathPlace
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_place/dboProp/http://dbpedia.org/ontology/deathPlace> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_place/dboProp/http://dbpedia.org/ontology/deathPlace> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/deathPlace>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_place/dboProp/http://dbpedia.org/ontology/deathPlace/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_place/dboProp/http://dbpedia.org/ontology/deathPlace/objectMap> a rr:ObjectMap ;
+    rml:reference "death_place".
+
+
+## template mapping nationality -> http://dbpedia.org/ontology/nationality
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/nationality/dboProp/http://dbpedia.org/ontology/nationality> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/nationality/dboProp/http://dbpedia.org/ontology/nationality> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/nationality>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/nationality/dboProp/http://dbpedia.org/ontology/nationality/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/nationality/dboProp/http://dbpedia.org/ontology/nationality/objectMap> a rr:ObjectMap ;
+    rml:reference "nationality".
+
+
+## template mapping nationality -> http://dbpedia.org/ontology/stateOfOrigin
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/nationality/dboProp/http://dbpedia.org/ontology/stateOfOrigin> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/nationality/dboProp/http://dbpedia.org/ontology/stateOfOrigin> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/stateOfOrigin>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/nationality/dboProp/http://dbpedia.org/ontology/stateOfOrigin/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/nationality/dboProp/http://dbpedia.org/ontology/stateOfOrigin/objectMap> a rr:ObjectMap ;
+    rml:reference "nationality".
+
+
+## template mapping other_names -> http://dbpedia.org/ontology/alias
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/other_names/dboProp/http://dbpedia.org/ontology/alias> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/other_names/dboProp/http://dbpedia.org/ontology/alias> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/alias>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/other_names/dboProp/http://dbpedia.org/ontology/alias/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/other_names/dboProp/http://dbpedia.org/ontology/alias/objectMap> a rr:ObjectMap ;
+    rml:reference "other_names".
+
+
+## template mapping othername -> http://dbpedia.org/ontology/alias
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/othername/dboProp/http://dbpedia.org/ontology/alias> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/othername/dboProp/http://dbpedia.org/ontology/alias> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/alias>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/othername/dboProp/http://dbpedia.org/ontology/alias/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/othername/dboProp/http://dbpedia.org/ontology/alias/objectMap> a rr:ObjectMap ;
+    rml:reference "othername".
+
+
+## template mapping known_for -> http://dbpedia.org/ontology/knownFor
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/known_for/dboProp/http://dbpedia.org/ontology/knownFor> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/known_for/dboProp/http://dbpedia.org/ontology/knownFor> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/knownFor>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/known_for/dboProp/http://dbpedia.org/ontology/knownFor/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/known_for/dboProp/http://dbpedia.org/ontology/knownFor/objectMap> a rr:ObjectMap ;
+    rml:reference "known_for".
+
+
+## template mapping occupation -> http://dbpedia.org/ontology/occupation
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/occupation/dboProp/http://dbpedia.org/ontology/occupation> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/occupation/dboProp/http://dbpedia.org/ontology/occupation> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/occupation>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/occupation/dboProp/http://dbpedia.org/ontology/occupation/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/occupation/dboProp/http://dbpedia.org/ontology/occupation/objectMap> a rr:ObjectMap ;
+    rml:reference "occupation".
+
+
+## template mapping birth_name -> http://dbpedia.org/ontology/birthName
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_name/dboProp/http://dbpedia.org/ontology/birthName> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_name/dboProp/http://dbpedia.org/ontology/birthName> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/birthName>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_name/dboProp/http://dbpedia.org/ontology/birthName/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birth_name/dboProp/http://dbpedia.org/ontology/birthName/objectMap> a rr:ObjectMap ;
+    rml:reference "birth_name".
+
+
+## template mapping birthname -> http://dbpedia.org/ontology/birthName
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthname/dboProp/http://dbpedia.org/ontology/birthName> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthname/dboProp/http://dbpedia.org/ontology/birthName> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/birthName>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthname/dboProp/http://dbpedia.org/ontology/birthName/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/birthname/dboProp/http://dbpedia.org/ontology/birthName/objectMap> a rr:ObjectMap ;
+    rml:reference "birthname".
+
+
+## template mapping body_discovered -> http://dbpedia.org/ontology/bodyDiscovered
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/body_discovered/dboProp/http://dbpedia.org/ontology/bodyDiscovered> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/body_discovered/dboProp/http://dbpedia.org/ontology/bodyDiscovered> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/bodyDiscovered>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/body_discovered/dboProp/http://dbpedia.org/ontology/bodyDiscovered/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/body_discovered/dboProp/http://dbpedia.org/ontology/bodyDiscovered/objectMap> a rr:ObjectMap ;
+    rml:reference "body_discovered".
+
+
+## template mapping death_cause -> http://dbpedia.org/ontology/deathCause
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_cause/dboProp/http://dbpedia.org/ontology/deathCause> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_cause/dboProp/http://dbpedia.org/ontology/deathCause> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/deathCause>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_cause/dboProp/http://dbpedia.org/ontology/deathCause/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/death_cause/dboProp/http://dbpedia.org/ontology/deathCause/objectMap> a rr:ObjectMap ;
+    rml:reference "death_cause".
+
+
+## template mapping resting_place -> http://dbpedia.org/ontology/restingPlace
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/resting_place/dboProp/http://dbpedia.org/ontology/restingPlace> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/resting_place/dboProp/http://dbpedia.org/ontology/restingPlace> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/restingPlace>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/resting_place/dboProp/http://dbpedia.org/ontology/restingPlace/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/resting_place/dboProp/http://dbpedia.org/ontology/restingPlace/objectMap> a rr:ObjectMap ;
+    rml:reference "resting_place".
+
+
+## template mapping residence -> http://dbpedia.org/ontology/residence
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/residence/dboProp/http://dbpedia.org/ontology/residence> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/residence/dboProp/http://dbpedia.org/ontology/residence> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/residence>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/residence/dboProp/http://dbpedia.org/ontology/residence/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/residence/dboProp/http://dbpedia.org/ontology/residence/objectMap> a rr:ObjectMap ;
+    rml:reference "residence".
+
+
+## template mapping ethnicity -> http://dbpedia.org/ontology/ethnicity
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/ethnicity/dboProp/http://dbpedia.org/ontology/ethnicity> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/ethnicity/dboProp/http://dbpedia.org/ontology/ethnicity> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/ethnicity>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/ethnicity/dboProp/http://dbpedia.org/ontology/ethnicity/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/ethnicity/dboProp/http://dbpedia.org/ontology/ethnicity/objectMap> a rr:ObjectMap ;
+    rml:reference "ethnicity".
+
+
+## template mapping citizenship -> http://dbpedia.org/ontology/citizenship
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/citizenship/dboProp/http://dbpedia.org/ontology/citizenship> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/citizenship/dboProp/http://dbpedia.org/ontology/citizenship> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/citizenship>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/citizenship/dboProp/http://dbpedia.org/ontology/citizenship/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/citizenship/dboProp/http://dbpedia.org/ontology/citizenship/objectMap> a rr:ObjectMap ;
+    rml:reference "citizenship".
+
+
+## template mapping education -> http://dbpedia.org/ontology/education
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/education/dboProp/http://dbpedia.org/ontology/education> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/education/dboProp/http://dbpedia.org/ontology/education> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/education>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/education/dboProp/http://dbpedia.org/ontology/education/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/education/dboProp/http://dbpedia.org/ontology/education/objectMap> a rr:ObjectMap ;
+    rml:reference "education".
+
+
+## template mapping alma_mater -> http://dbpedia.org/ontology/almaMater
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/alma_mater/dboProp/http://dbpedia.org/ontology/almaMater> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/alma_mater/dboProp/http://dbpedia.org/ontology/almaMater> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/almaMater>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/alma_mater/dboProp/http://dbpedia.org/ontology/almaMater/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/alma_mater/dboProp/http://dbpedia.org/ontology/almaMater/objectMap> a rr:ObjectMap ;
+    rml:reference "alma_mater".
+
+
+## template mapping employer -> http://dbpedia.org/ontology/employer
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/employer/dboProp/http://dbpedia.org/ontology/employer> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/employer/dboProp/http://dbpedia.org/ontology/employer> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/employer>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/employer/dboProp/http://dbpedia.org/ontology/employer/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/employer/dboProp/http://dbpedia.org/ontology/employer/objectMap> a rr:ObjectMap ;
+    rml:reference "employer".
+
+
+## template mapping home_town -> http://dbpedia.org/ontology/hometown
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/home_town/dboProp/http://dbpedia.org/ontology/hometown> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/home_town/dboProp/http://dbpedia.org/ontology/hometown> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/hometown>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/home_town/dboProp/http://dbpedia.org/ontology/hometown/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/home_town/dboProp/http://dbpedia.org/ontology/hometown/objectMap> a rr:ObjectMap ;
+    rml:reference "home_town".
+
+
+## template mapping salary -> http://dbpedia.org/ontology/salary
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/salary/dboProp/http://dbpedia.org/ontology/salary> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/salary/dboProp/http://dbpedia.org/ontology/salary> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/salary>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/salary/dboProp/http://dbpedia.org/ontology/salary/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/salary/dboProp/http://dbpedia.org/ontology/salary/objectMap> a rr:ObjectMap ;
+    rml:reference "salary".
+
+
+## template mapping networth -> http://dbpedia.org/ontology/networth
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/networth/dboProp/http://dbpedia.org/ontology/networth> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/networth/dboProp/http://dbpedia.org/ontology/networth> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/networth>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/networth/dboProp/http://dbpedia.org/ontology/networth/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/networth/dboProp/http://dbpedia.org/ontology/networth/objectMap> a rr:ObjectMap ;
+    rml:reference "networth".
+
+
+## template mapping net_worth -> http://dbpedia.org/ontology/networth
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/net_worth/dboProp/http://dbpedia.org/ontology/networth> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/net_worth/dboProp/http://dbpedia.org/ontology/networth> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/networth>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/net_worth/dboProp/http://dbpedia.org/ontology/networth/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/net_worth/dboProp/http://dbpedia.org/ontology/networth/objectMap> a rr:ObjectMap ;
+    rml:reference "net_worth".
+
+
+## template mapping net%20worth -> http://dbpedia.org/ontology/networth
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/net%20worth/dboProp/http://dbpedia.org/ontology/networth> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/net%20worth/dboProp/http://dbpedia.org/ontology/networth> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/networth>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/net%20worth/dboProp/http://dbpedia.org/ontology/networth/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/net%20worth/dboProp/http://dbpedia.org/ontology/networth/objectMap> a rr:ObjectMap ;
+    rml:reference "net worth".
+
+
+## template mapping height -> http://dbpedia.org/ontology/height
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/height/dboProp/http://dbpedia.org/ontology/height> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/height/dboProp/http://dbpedia.org/ontology/height> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/height>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/height/dboProp/http://dbpedia.org/ontology/height/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/height/dboProp/http://dbpedia.org/ontology/height/objectMap> a rr:ObjectMap ;
+    rml:reference "height".
+
+
+## template mapping weight -> http://dbpedia.org/ontology/weight
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/weight/dboProp/http://dbpedia.org/ontology/weight> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/weight/dboProp/http://dbpedia.org/ontology/weight> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/weight>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/weight/dboProp/http://dbpedia.org/ontology/weight/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/weight/dboProp/http://dbpedia.org/ontology/weight/objectMap> a rr:ObjectMap ;
+    rml:reference "weight".
+
+
+## template mapping title -> http://dbpedia.org/ontology/title
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/title/dboProp/http://dbpedia.org/ontology/title> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/title/dboProp/http://dbpedia.org/ontology/title> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/title>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/title/dboProp/http://dbpedia.org/ontology/title/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/title/dboProp/http://dbpedia.org/ontology/title/objectMap> a rr:ObjectMap ;
+    rml:reference "title".
+
+
+## template mapping predecessor -> http://dbpedia.org/ontology/predecessor
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/predecessor/dboProp/http://dbpedia.org/ontology/predecessor> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/predecessor/dboProp/http://dbpedia.org/ontology/predecessor> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/predecessor>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/predecessor/dboProp/http://dbpedia.org/ontology/predecessor/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/predecessor/dboProp/http://dbpedia.org/ontology/predecessor/objectMap> a rr:ObjectMap ;
+    rml:reference "predecessor".
+
+
+## template mapping successor -> http://dbpedia.org/ontology/successor
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/successor/dboProp/http://dbpedia.org/ontology/successor> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/successor/dboProp/http://dbpedia.org/ontology/successor> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/successor>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/successor/dboProp/http://dbpedia.org/ontology/successor/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/successor/dboProp/http://dbpedia.org/ontology/successor/objectMap> a rr:ObjectMap ;
+    rml:reference "successor".
+
+
+## template mapping party -> http://dbpedia.org/ontology/party
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/party/dboProp/http://dbpedia.org/ontology/party> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/party/dboProp/http://dbpedia.org/ontology/party> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/party>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/party/dboProp/http://dbpedia.org/ontology/party/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/party/dboProp/http://dbpedia.org/ontology/party/objectMap> a rr:ObjectMap ;
+    rml:reference "party".
+
+
+## template mapping opponents -> http://dbpedia.org/ontology/opponent
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/opponents/dboProp/http://dbpedia.org/ontology/opponent> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/opponents/dboProp/http://dbpedia.org/ontology/opponent> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/opponent>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/opponents/dboProp/http://dbpedia.org/ontology/opponent/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/opponents/dboProp/http://dbpedia.org/ontology/opponent/objectMap> a rr:ObjectMap ;
+    rml:reference "opponents".
+
+
+## template mapping boards -> http://dbpedia.org/ontology/board
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/boards/dboProp/http://dbpedia.org/ontology/board> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/boards/dboProp/http://dbpedia.org/ontology/board> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/board>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/boards/dboProp/http://dbpedia.org/ontology/board/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/boards/dboProp/http://dbpedia.org/ontology/board/objectMap> a rr:ObjectMap ;
+    rml:reference "boards".
+
+
+## template mapping religion -> http://dbpedia.org/ontology/religion
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/religion/dboProp/http://dbpedia.org/ontology/religion> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/religion/dboProp/http://dbpedia.org/ontology/religion> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/religion>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/religion/dboProp/http://dbpedia.org/ontology/religion/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/religion/dboProp/http://dbpedia.org/ontology/religion/objectMap> a rr:ObjectMap ;
+    rml:reference "religion".
+
+
+## template mapping spouse -> http://dbpedia.org/ontology/spouse
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/spouse/dboProp/http://dbpedia.org/ontology/spouse> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/spouse/dboProp/http://dbpedia.org/ontology/spouse> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/spouse>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/spouse/dboProp/http://dbpedia.org/ontology/spouse/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/spouse/dboProp/http://dbpedia.org/ontology/spouse/objectMap> a rr:ObjectMap ;
+    rml:reference "spouse".
+
+
+## template mapping partner -> http://dbpedia.org/ontology/partner
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/partner/dboProp/http://dbpedia.org/ontology/partner> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/partner/dboProp/http://dbpedia.org/ontology/partner> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/partner>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/partner/dboProp/http://dbpedia.org/ontology/partner/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/partner/dboProp/http://dbpedia.org/ontology/partner/objectMap> a rr:ObjectMap ;
+    rml:reference "partner".
+
+
+## template mapping children -> http://dbpedia.org/ontology/child
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/children/dboProp/http://dbpedia.org/ontology/child> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/children/dboProp/http://dbpedia.org/ontology/child> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/child>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/children/dboProp/http://dbpedia.org/ontology/child/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/children/dboProp/http://dbpedia.org/ontology/child/objectMap> a rr:ObjectMap ;
+    rml:reference "children".
+
+
+## template mapping relations -> http://dbpedia.org/ontology/relation
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/relations/dboProp/http://dbpedia.org/ontology/relation> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/relations/dboProp/http://dbpedia.org/ontology/relation> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/relation>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/relations/dboProp/http://dbpedia.org/ontology/relation/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/relations/dboProp/http://dbpedia.org/ontology/relation/objectMap> a rr:ObjectMap ;
+    rml:reference "relations".
+
+
+## template mapping callsign -> http://dbpedia.org/ontology/callSign
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/callsign/dboProp/http://dbpedia.org/ontology/callSign> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/callsign/dboProp/http://dbpedia.org/ontology/callSign> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/callSign>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/callsign/dboProp/http://dbpedia.org/ontology/callSign/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/callsign/dboProp/http://dbpedia.org/ontology/callSign/objectMap> a rr:ObjectMap ;
+    rml:reference "callsign".
+
+
+## template mapping relatives -> http://dbpedia.org/ontology/relative
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/relatives/dboProp/http://dbpedia.org/ontology/relative> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/relatives/dboProp/http://dbpedia.org/ontology/relative> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/relative>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/relatives/dboProp/http://dbpedia.org/ontology/relative/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/relatives/dboProp/http://dbpedia.org/ontology/relative/objectMap> a rr:ObjectMap ;
+    rml:reference "relatives".
+
+
+## template mapping awards -> http://dbpedia.org/ontology/award
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/awards/dboProp/http://dbpedia.org/ontology/award> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/awards/dboProp/http://dbpedia.org/ontology/award> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/award>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/awards/dboProp/http://dbpedia.org/ontology/award/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/awards/dboProp/http://dbpedia.org/ontology/award/objectMap> a rr:ObjectMap ;
+    rml:reference "awards".
+
+
+## template mapping pseudonym -> http://dbpedia.org/ontology/pseudonym
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/pseudonym/dboProp/http://dbpedia.org/ontology/pseudonym> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/pseudonym/dboProp/http://dbpedia.org/ontology/pseudonym> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/pseudonym>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/pseudonym/dboProp/http://dbpedia.org/ontology/pseudonym/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/pseudonym/dboProp/http://dbpedia.org/ontology/pseudonym/objectMap> a rr:ObjectMap ;
+    rml:reference "pseudonym".
+
+
+## template mapping parents -> http://dbpedia.org/ontology/parent
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/parents/dboProp/http://dbpedia.org/ontology/parent> .
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/parents/dboProp/http://dbpedia.org/ontology/parent> a rr:PredicateObjectMap ;
+    rr:predicate <http://dbpedia.org/ontology/parent>;
+    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/parents/dboProp/http://dbpedia.org/ontology/parent/objectMap>.
+<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/parents/dboProp/http://dbpedia.org/ontology/parent/objectMap> a rr:ObjectMap ;
+    rml:reference "parents".
+
+
+## template mapping website -> http://xmlns.com/foaf/0.1/homepage
+##<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/website/dboProp/http://xmlns.com/foaf/0.1/homepage> .
+##<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/website/dboProp/http://xmlns.com/foaf/0.1/homepage> a rr:PredicateObjectMap ;
+##    rr:predicate <http://xmlns.com/foaf/0.1/homepage>;
+##    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/website/dboProp/http://xmlns.com/foaf/0.1/homepage/objectMap>.
+##<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/website/dboProp/http://xmlns.com/foaf/0.1/homepage/objectMap> a rr:ObjectMap ;
+##    rml:reference "website".
+
+
+## template mapping homepage -> http://xmlns.com/foaf/0.1/homepage
+##<http://mappings.dbpedia.org/server/mappings/en/Infobox_person> rr:predicateObjectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/homepage/dboProp/http://xmlns.com/foaf/0.1/homepage> .
+##<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/homepage/dboProp/http://xmlns.com/foaf/0.1/homepage> a rr:PredicateObjectMap ;
+##    rr:predicate <http://xmlns.com/foaf/0.1/homepage>;
+##    rr:objectMap <http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/homepage/dboProp/http://xmlns.com/foaf/0.1/homepage/objectMap>.
+##<http://mappings.dbpedia.org/server/mappings/en/Infobox_person/tempProp/homepage/dboProp/http://xmlns.com/foaf/0.1/homepage/objectMap> a rr:ObjectMap ;
+##    rml:reference "homepage".
+

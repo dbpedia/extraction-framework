@@ -4,8 +4,8 @@ import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.scalatest.Matchers
 import org.scalatest.FlatSpec
-import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
-import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
+import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitle, WikiParser}
+import org.dbpedia.extraction.sources.MemorySource
 import org.dbpedia.extraction.util.Language
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
@@ -46,7 +46,7 @@ class SingleGeoCoordinateParserTest extends FlatSpec with Matchers
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)
 
       wikiParser(page) match {
-        case Some(n) => singleGeoCoordinateParser.parse(n).map(_.toDouble)
+        case Some(n) => singleGeoCoordinateParser.parse(n).map(_.value.toDouble)
         case None => None
       }
 

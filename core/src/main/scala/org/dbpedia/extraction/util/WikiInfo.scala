@@ -1,23 +1,29 @@
 package org.dbpedia.extraction.util
 
-import java.net.URL
-import scala.io.{Source, Codec}
 import java.io.File
+import java.net.URL
+import java.util.logging.Logger
+
+import org.dbpedia.extraction.config.ConfigUtils
+
 import scala.collection.mutable.ArrayBuffer
+import scala.io.{Codec, Source}
 
 /**
  * Information about a Wikipedia.
  */
-class WikiInfo(val language: Language, val pages: Int)
+class WikiInfo(val wikicode: String, val pages: Int)
 
 /**
  * Helper methods to create WikiInfo objects.
  */
 object WikiInfo
 {
+  val logger = Logger.getLogger(WikiInfo.getClass.getName)
   // hard-coded - there probably is no mirror, and the format is very specific.
   // TODO: user might want to use a local file...
-  val URL = new URL("http://s23.org/wikistats/wikipedias_csv.php")
+  // TODO: mayby change this to XML serialization
+  val URL = new URL("http://wikistats.wmflabs.org/api.php?action=dump&table=wikipedias&format=csv")
   
   // Most browsers would save the file with this name, because s23.org returns it in a http header.
   val FileName = "wikipedias.csv"
@@ -46,7 +52,12 @@ object WikiInfo
     if (! lines.hasNext) throw new Exception("empty file")
     lines.next // skip first line (headers)
     
-    for (line <- lines) if (line.nonEmpty) info += fromLine(line)
+    for (line <- lines)
+      if (line.nonEmpty)
+        fromLine(line) match{
+          case Some(x) => info += x
+          case None =>
+        }
     
     info
   }
@@ -54,17 +65,23 @@ object WikiInfo
   /**
    * Reads a WikiInfo object from a single CSV line.
    */
-  def fromLine(line: String): WikiInfo = {
+  def fromLine(line: String): Option[WikiInfo] = {
       val fields = line.split(",", -1)
       
-      if (fields.length != 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
+      if (fields.length < 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
       
-      val pages = try fields(5).toInt
-      catch { case nfe: NumberFormatException => throw new Exception("expected page count in field with index [5], found line ["+line+"]") }
+      val pages = try fields(4).toInt
+      catch { case nfe: NumberFormatException => 0 }
       
       val wikiCode = fields(2)
       if (! ConfigUtils.LanguageRegex.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
-      
-      new WikiInfo(Language(wikiCode), pages)
+
+      //if(Language.map.keySet.contains(wikiCode))
+        Option(new WikiInfo(wikiCode, pages))
+      //else
+      //{
+      //  logger.log(Level.WARNING, "Language: " + wikiCode + " will be ignored. Add this language to the addonlangs.json file to extract it.")
+      //  None
+      //}
   }
 }

@@ -1,35 +1,37 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.File
+
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
-import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
+
 import scala.collection.mutable.ArrayBuffer
-import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
+import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
-import org.dbpedia.extraction.util.Finder
+import org.dbpedia.extraction.util.{Finder, Language, SimpleWorkers}
 import java.net.URI
+
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.util.SimpleWorkers
-import org.dbpedia.extraction.util.Language
 
 object CreateIriSameAsUriLinks {
   
   def main(args: Array[String]): Unit = {
     require(args != null && args.length == 1 && args(0).nonEmpty, "missing required argument: config file name")
 
-    val config = loadConfig(args(0), "UTF-8")
+    val config = new Config(args(0))
     
-    val baseDir = getValue(config, "base-dir", true)(new File(_))
+    val baseDir = config.dumpDir
     if (! baseDir.exists) throw error("dir "+baseDir+" does not exist")
     
-    val input = getString(config, "input", true)
+    val input = config.inputDatasets.head
     
-    val output = getString(config, "output", true)
+    val output = config.outputDataset.head
     
-    val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
-    
-    val formats = parseFormats(config, "uri-policy", "format")
+    val languages = config.languages
+
+    val policies = config.policies
+    val formats = config.formats
 
     val sameAs = RdfNamespace.OWL.append("sameAs")
     
@@ -39,18 +41,18 @@ object CreateIriSameAsUriLinks {
       val finder = new Finder[File](baseDir, language, "wiki")
       val date = finder.dates().last
       
-      val inputFile = finder.file(date, input)
+      val inputFile = finder.file(date, input).get
       
       val formatDestinations = new ArrayBuffer[Destination]()
       for ((suffix, format) <- formats) {
-        val file = finder.file(date, output+'.'+suffix)
+        val file = finder.file(date, output+'.'+suffix).get
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
-      val destination = new CompositeDestination(formatDestinations.toSeq: _*)
-      
-      QuadMapper.mapQuads(language.wikiCode, inputFile, destination, true) { quad =>
+      val destination = new CompositeDestination(formatDestinations: _*)
+
+      new QuadMapper().mapQuads(language, inputFile, destination, required = true) { quad =>
         val iri = quad.subject
-        val uri = new URI(iri).toASCIIString
+        val uri = URI.create(iri).toASCIIString //in this case we actually want to use an URI not an IRI
         if (uri == iri) List.empty
         else List(new Quad(null, null, iri, sameAs, uri, null, null: String))
       }

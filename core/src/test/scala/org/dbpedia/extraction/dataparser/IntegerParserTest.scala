@@ -116,7 +116,7 @@ class IntegerParserTest extends FlatSpec with Matchers
         }
 
         val parser = new IntegerParser(context, strict, validRange = validRange)
-        parser.parse(textNode)
+        parser.parse(textNode).map(_.value)
     }
 
 }

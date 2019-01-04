@@ -2,6 +2,16 @@
 <configuration>
     <language name ="en">
         <extractors>
+            <extractor name ="org.dbpedia.extraction.mappings.CommonsResourceExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p>OWL_SAMEAS</p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
             <extractor name ="org.dbpedia.extraction.mappings.LabelExtractor" status="ACTIVE">
                 <produces>
                     <matchPattern type="EXACT">
@@ -282,10 +292,9 @@
                         <o></o>
                     </matchPattern>
                 </produces>
-
             </extractor>
 
-            <extractor name="org.dbpedia.extraction.mappings.AbstractExtractor" status="ACTIVE">
+            <extractor name="org.dbpedia.extraction.mappings.AbstractExtractorWikipedia" status="ACTIVE">
                 <produces>
                     <matchPattern type="EXACT">
                         <s></s>
@@ -342,7 +351,7 @@
                 </produces>
             </extractor>
 
-            <extractor name ="org.dbpedia.extraction.mappings.ImageExtractor" status="ACTIVE">
+            <extractor name ="org.dbpedia.extraction.mappings.MediaExtractor" status="ACTIVE">
                 <produces>
                     <matchPattern type="EXACT">
                         <s></s>
@@ -362,6 +371,11 @@
                     <matchPattern type="EXACT">
                         <s></s>
                         <p>DBO_THUMBNAIL</p>
+                        <o></o>
+                    </matchPattern>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p>DBO_MEDIA_ITEM</p>
                         <o></o>
                     </matchPattern>
                 </produces>

@@ -34,12 +34,12 @@ class WikidataCommandReceiver() {
   var MapResult = mutable.Map.empty[String, String]
   private var property: String = ""
   private var value: Value = _
-  private var map = mutable.Map.empty[String, String]
+  private var map = Map.empty[String, String]
   private var equivClassSet = Set[OntologyClass]()
-  private var equivPropertySet = Set[OntologyProperty]()
+  private var equivPropertySet = Set[String]()
 
 
-  def setParameters(property: String, value: Value, equivClassSet: Set[OntologyClass], equivPropSet: Set[OntologyProperty], map: mutable.Map[String, String]): Unit = {
+  def setParameters(property: String, value: Value, equivClassSet: Set[OntologyClass], equivPropSet: Set[String], map: Map[String, String]): Unit = {
     this.property = property
     this.value = value
     this.equivClassSet = equivClassSet
@@ -105,14 +105,12 @@ class WikidataCommandReceiver() {
   }
 
   def getDBpediaProperties(key: String, value: Value): Unit = {
-    if (!equivPropertySet.isEmpty) {
       equivPropertySet.foreach {
         mappedProperty => {
           val propKey = mappedProperty.toString.replace("http://dbpedia.org/ontology/", "")
             MapResult += (propKey -> WikidataUtil.getValue(value))
         }
       }
-    }
   }
 
   def getLatitude(value: Value) = value match {

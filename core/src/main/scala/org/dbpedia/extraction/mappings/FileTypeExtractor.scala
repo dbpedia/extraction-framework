@@ -2,9 +2,9 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 import org.dbpedia.extraction.config.mappings.FileTypeExtractorConfig
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, ExtractorUtils}
 import org.dbpedia.extraction.wikiparser._
 import scala.language.reflectiveCalls
@@ -18,7 +18,7 @@ class FileTypeExtractor(context: {
 }) extends WikiPageExtractor
 {
     // For writing warnings.
-    private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
+    @transient private val logger = Logger.getLogger(classOf[FileTypeExtractor].getName)
 
     // To store the Commons language.
     private val commonsLang = Language.Commons
@@ -32,8 +32,8 @@ class FileTypeExtractor(context: {
     // RDF properties we use.
     private val fileExtensionProperty = context.ontology.properties("fileExtension")
     private val rdfTypeProperty = context.ontology.properties("rdf:type")
-    private val dcTypeProperty = context.ontology.properties("dct:type")
-    private val dcFormatProperty = context.ontology.properties("dct:format")
+    private val dctTypeProperty = context.ontology.properties("dct:type")
+    private val dctFormatProperty = context.ontology.properties("dct:format")
     private val dboFileURLProperty = context.ontology.properties("fileURL")
     private val dboThumbnailProperty = context.ontology.properties("thumbnail")
     private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
@@ -50,10 +50,10 @@ class FileTypeExtractor(context: {
      * Extract a single WikiPage. We guess the file type from the file extension
      * used by the page.
      */
-    override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext) : Seq[Quad] =
+    override def extract(page: WikiPage, subjectUri: String) : Seq[Quad] =
     {
         // This extraction only works on File:s.
-        if(page.title.namespace != Namespace.File || page.redirect != null)
+        if(page.title.namespace != Namespace.File || page.isRedirect)
             return Seq.empty
 
         // Generate the fileURL.
@@ -65,7 +65,7 @@ class FileTypeExtractor(context: {
                 subjectUri,
                 dboFileURLProperty,
                 fileURL,
-                page.sourceUri,
+                page.sourceIri,
                 null
             )
         )
@@ -99,7 +99,7 @@ class FileTypeExtractor(context: {
                 subjectUri,
                 foafDepictionProperty,
                 fileURL,
-                page.sourceUri,
+                page.sourceIri,
                 null
             ), 
             // 2. <resource> thumbnail <image>
@@ -108,7 +108,7 @@ class FileTypeExtractor(context: {
                 subjectUri,
                 dboThumbnailProperty,
                 thumbnailURL,
-                page.sourceUri,
+                page.sourceIri,
                 null
             ),
             // 3. <image> foaf:thumbnail <image>
@@ -117,7 +117,7 @@ class FileTypeExtractor(context: {
                 fileURL,
                 foafThumbnailProperty,
                 thumbnailURL,
-                page.sourceUri,
+                page.sourceIri,
                 null
             )
         )
@@ -125,7 +125,8 @@ class FileTypeExtractor(context: {
 
     /**
      * Determine the extension of a WikiPage.
-     * @returns None if no extension exists, Some[String] if an extension was found.
+ *
+     * @return None if no extension exists, Some[String] if an extension was found.
      */
     def extractExtension(page: WikiPage): Option[String] =
     {
@@ -149,7 +150,7 @@ class FileTypeExtractor(context: {
      * Generate quads that describe the file types for an extension.
      *  <resource> dbo:fileExtension "extension"^^xsd:string
      *  <resource> 
-     *  <resource> dc:type dct:StillImage
+     *  <resource> dct:type dct:StillImage
      *  <resource> rdf:type dbo:File
      *  <resource> rdf:type dbo:Document
      *  <resource> rdf:type dbo:Image
@@ -162,7 +163,7 @@ class FileTypeExtractor(context: {
             subjectUri,
             fileExtensionProperty,
             extension,
-            page.sourceUri,
+            page.sourceIri,
             xsdString
         )
 
@@ -173,23 +174,23 @@ class FileTypeExtractor(context: {
         val depiction_and_thumbnail_quads = if(fileTypeClass != dboStillImage) Seq.empty
             else generateImageURLQuads(page, subjectUri)
 
-        // 4. <resource> dc:type fileTypeClass
+        // 4. <resource> dct:type fileTypeClass
         val file_type_quad = new Quad(
             Language.English, DBpediaDatasets.FileInformation,
             subjectUri,
-            dcTypeProperty,
+            dctTypeProperty,
             fileTypeClass.uri,
-            page.sourceUri,
+            page.sourceIri,
             null
         )
             
-        // 5. <resource> dc:format "mimeType"^^xsd:string
+        // 5. <resource> dct:format "mimeType"^^xsd:string
         val mime_type_quad = new Quad(
             Language.English, DBpediaDatasets.FileInformation,
             subjectUri,
-            dcFormatProperty,
+            dctFormatProperty,
             mimeType,
-            page.sourceUri,
+            page.sourceIri,
             xsdString
         )
 
@@ -200,7 +201,7 @@ class FileTypeExtractor(context: {
           subjectUri,
           rdfTypeProperty,
           dboFile.uri,
-          page.sourceUri,
+          page.sourceIri,
           null
         )
 
@@ -212,7 +213,7 @@ class FileTypeExtractor(context: {
                 subjectUri,
                 rdfTypeProperty,
                 rdfClass.uri,
-                page.sourceUri,
+                page.sourceIri,
                 null
             )
         )

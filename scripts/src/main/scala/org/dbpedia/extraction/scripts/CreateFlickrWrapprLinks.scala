@@ -1,24 +1,25 @@
 package org.dbpedia.extraction.scripts
 
+import org.dbpedia.extraction.transform.Quad
+
 import scala.Console.err
 import java.io.File
+
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
-import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
-import scala.collection.Set
-import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer,HashSet}
-import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
+import org.dbpedia.extraction.config.ConfigUtils.{getString, getStrings, getValue, loadConfig, parseLanguages}
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
+
+import scala.collection.mutable.{ArrayBuffer, HashSet}
+import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
 import org.dbpedia.extraction.util.Finder
-import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.TurtleUtils
-import org.dbpedia.util.text.uri.UriDecoder
 import org.dbpedia.extraction.util.StringUtils
 import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.iri.UriDecoder
 
 object CreateFlickrWrapprLinks {
   
@@ -30,10 +31,10 @@ object CreateFlickrWrapprLinks {
     val baseDir = getValue(config, "base-dir", true)(new File(_))
     if (! baseDir.exists) throw error("dir "+baseDir+" does not exist")
     
-    val include = getStrings(config, "include-subjects", ',', true)
-    val exclude = getStrings(config, "exclude-subjects", ',', true)
+    val include = getStrings(config, "include-subjects", ",", true)
+    val exclude = getStrings(config, "exclude-subjects", ",", true)
     
-    val names = getStrings(config, "namespaces", ',', false)
+    val names = getStrings(config, "namespaces", ",", false)
     val namespaces =
       if (names.isEmpty) null
       // Special case for namespace "Main" - its Wikipedia name is the empty string ""
@@ -41,16 +42,16 @@ object CreateFlickrWrapprLinks {
 
     val output = getString(config, "output", true)
     
-    val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
+    val languages = parseLanguages(baseDir, getStrings(config, "languages", ",", true))
     
     val predSuffix = getString(config, "property-suffix", true)
     
     val objPrefix = getString(config, "object-prefix", true)
     
     val generic = getValue(config, "generic", false)(Language(_))
-    
-    val formats = parseFormats(config, "uri-policy", "format")
-    
+
+    val policies = parsePolicies(config, "uri-policy")
+    val formats = parseFormats(config, "format", policies)
     // store our own private copy of the mutable array
     val replacements = WikiUtil.iriReplacements
     
@@ -67,8 +68,8 @@ object CreateFlickrWrapprLinks {
       val titles = new HashSet[String]
       
       def processTitles(name: String, include: Boolean): Unit = {
-        
-        QuadReader.readQuads(language.wikiCode+": "+(if (include) "add" else "sub")+" uris in "+name, finder.file(date, name)) { quad =>
+
+        new QuadMapper().readQuads(language, finder.file(date, name).get) { quad =>
           val subject = quad.subject
           if (! subject.startsWith(inPrefix)) error("bad subject: "+subject)
           
@@ -101,7 +102,7 @@ object CreateFlickrWrapprLinks {
       
       val formatDestinations = new ArrayBuffer[Destination]()
       for ((suffix, format) <- formats) {
-        val file = finder.file(date, output+'.'+suffix)
+        val file = finder.file(date, output+'.'+suffix).get
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
       val destination = new CompositeDestination(formatDestinations.toSeq: _*)

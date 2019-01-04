@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
+import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.dataparser.DateTimeParser
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.{Language, Date}
 import scala.collection.mutable.ArrayBuffer
@@ -28,13 +29,13 @@ extends PropertyMapping
 
   private val datatype = ontologyProperty.range.asInstanceOf[Datatype]
   
-  private val quad = QuadBuilder(context.language, DBpediaDatasets.OntologyProperties, ontologyProperty, datatype) _
+  private val quad = QuadBuilder(context.language, DBpediaDatasets.OntologyPropertiesLiterals, ontologyProperty, datatype) _
   
   private def parserOption(unit: Datatype) = Option(unit).map(new DateTimeParser(context, _))
 
-  override val datasets = Set(DBpediaDatasets.OntologyProperties)
+  override val datasets = Set(DBpediaDatasets.OntologyPropertiesLiterals)
 
-  override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri : String): Seq[Quad] =
   {
     var dates = ArrayBuffer[Date]()
     
@@ -44,11 +45,11 @@ extends PropertyMapping
       property <- node.property(templateProperty);
       parseResult <- parser.parse(property)
     )
-      dates += parseResult
+      dates += parseResult.value
     
     try {
       val mergedDate = Date.merge(dates, datatype)
-      Seq(quad(subjectUri, mergedDate.toString, node.sourceUri))
+      Seq(quad(subjectUri, mergedDate.toString, node.sourceIri))
     } catch {
       case ex : Exception => Seq.empty // TODO: logging
     }

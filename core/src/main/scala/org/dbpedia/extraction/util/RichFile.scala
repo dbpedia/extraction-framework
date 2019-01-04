@@ -1,9 +1,13 @@
 package org.dbpedia.extraction.util
 
-import java.io.{IOException,File,FilenameFilter,InputStream,FileInputStream,OutputStream,FileOutputStream}
+import java.io._
 import java.util.regex.Pattern
-import RichFile._
+
+import org.dbpedia.extraction.util.RichFile._
+import org.dbpedia.iri.{URI, UriUtils}
+
 import scala.language.implicitConversions
+import scala.util.Try
 
 object RichFile {
 
@@ -33,7 +37,7 @@ class RichFile(file: File) extends FileLike[File] {
     if (name.nonEmpty) name else if (file.isAbsolute) null else name
   }
   
-  override def exists: Boolean = file.exists
+  override def exists: Boolean = file.getAbsoluteFile.exists
   
   // TODO: more efficient type than List?
   override def names: List[String] = names(null) 
@@ -57,10 +61,11 @@ class RichFile(file: File) extends FileLike[File] {
     list.toList
   }
   
-  override def resolve(name: String): File = new File(file, name)
+  override def resolve(name: String): Try[File] = Try(new File(file, name))
   
   /**
    * Retrieves the relative path in respect to a given base directory.
+ *
    * @param child
    * @return path from parent to child. uses forward slashes as separators. may be empty.
    * does not end with a slash.
@@ -68,14 +73,16 @@ class RichFile(file: File) extends FileLike[File] {
    */
   def relativize(child: File): String = {
     // Note: toURI encodes file paths, getPath decodes them
-    var path = UriUtils.relativize(file.toURI, child.toURI).getPath
-    if (path endsWith "/") path = path.substring(0, path.length() - 1)
-    return path
+    var path = UriUtils.relativize(URI.create(file.toURI).get, URI.create(child.toURI).get).getPath
+    if (path endsWith "/")
+      path = path.substring(0, path.length() - 1)
+    path
   }
 
   /**
    * Deletes this file or directory and, if this is a directory and recursive is true,
    * all contained file and sub directories.
+ *
    * @throws IOException if the directory or any of its sub directories could not be deleted
    */
   override def delete(recursive: Boolean = false): Unit = {
@@ -92,5 +99,6 @@ class RichFile(file: File) extends FileLike[File] {
   override def inputStream(): InputStream = new FileInputStream(file)
   
   override def outputStream(append: Boolean = false): OutputStream = new FileOutputStream(file, append)
-  
+
+  override def getFile: File = file
 }

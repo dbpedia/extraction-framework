@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.sources
 
+import org.dbpedia.extraction.wikiparser.WikiPage
+
 import scala.collection.immutable.Traversable
 
 /**

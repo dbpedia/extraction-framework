@@ -5,6 +5,7 @@ import org.apache.log4j.Logger
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.live.core.LiveOptions
+import org.dbpedia.extraction.transform.Quad
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.{ArrayBuffer, HashMap, ListBuffer}
@@ -56,15 +57,15 @@ class JSONCache(pageID: Long, pageTitle: String) {
           val objLsit = vp.asInstanceOf[List[Map[String,String]]]
           for (obj <- objLsit) {
             val objType: String = obj.getOrElse("type","")
-            val objDatatype: String = obj.getOrElse("datatype", "http://www.w3.org/2001/XMLSchema#string")
-            val finalDatatype = if (objType.equals("uri")) null else objDatatype // null datatype if uri
             val objLang: String = obj.getOrElse("lang", JSONCache.defaultLanguage)
+            val objDatatype: String = if (objType.equals("uri"))  null
+                                      else obj.getOrElse("datatype", "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")
 
             val objValue: String = obj.getOrElse("value","")
             // unescape if URI
-            val finalValue = if (finalDatatype == null) org.apache.commons.lang.StringEscapeUtils.unescapeJava(objValue) else objValue
+            val finalValue = if (objDatatype == null) org.apache.commons.lang.StringEscapeUtils.unescapeJava(objValue) else objValue
 
-            quads += new Quad(if (objLang.isEmpty) JSONCache.defaultLanguage else objLang ,"",subject, predicate, objValue, "", finalDatatype)
+            quads += new Quad(objLang ,"",subject, predicate, objValue, "", objDatatype)
 
           }
         }
@@ -107,12 +108,13 @@ class JSONCache(pageID: Long, pageTitle: String) {
     if (subjectsSet.size()>0)
       subjects.deleteCharAt(subjects.length-1); //delete last comma
 
+    val escaped_json = org.apache.commons.lang.StringEscapeUtils.escapeJava(json)
     // Check wheather to update oΑr insert
     if (cacheExists) {
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](this.pageTitle, updatedTimes,  json, subjects.toString, diff,  "" + this.pageID))
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](this.pageTitle, updatedTimes,  escaped_json, subjects.toString, diff,  "" + this.pageID))
     }
     else
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String]("" + this.pageID, this.pageTitle, updatedTimes,  json, subjects.toString, diff))
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String]("" + this.pageID, this.pageTitle, updatedTimes,  escaped_json, subjects.toString, diff))
   }
 
   private def initCache {
@@ -120,9 +122,9 @@ class JSONCache(pageID: Long, pageTitle: String) {
       cacheObj = JDBCUtil.getCacheContent(DBpediaSQLQueries.getJSONCacheSelect, this.pageID)
       if (cacheObj == null) return
       cacheExists = true
-      if (cacheObj.json.equals("")) return
-
-      val map = JSONCache.mapper.readValue[Map[String, Any]](cacheObj.json)
+      if (cacheObj.escaped_json.trim.isEmpty) return
+      val unescaped_json = org.apache.commons.lang.StringEscapeUtils.unescapeJava(cacheObj.escaped_json)
+      val map = JSONCache.mapper.readValue[Map[String, Any]](unescaped_json)
 
       map.foreach {
         case (key, value) => {
@@ -208,10 +210,10 @@ object JSONCache {
                       val objType: String = obj.getOrElse("type", "")
                       val objLang: String = obj.getOrElse("lang", defaultLanguage)
                       val objDatatype: String = if (objType.equals("uri"))  null
-                                                else obj.getOrElse("datatype", "http://www.w3.org/2001/XMLSchema#string")
+                                                else obj.getOrElse("datatype", "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")
 
 
-                      quads += new Quad(if (objLang.isEmpty) defaultLanguage else objLang , "", subject, predicate, objValue, "", objDatatype)
+                      quads += new Quad(objLang , "", subject, predicate, objValue, "", objDatatype)
 
                     }
                 }
@@ -224,6 +226,6 @@ object JSONCache {
   }
 }
 
-class JSONCacheItem(val pageID: Long, val updatedTimes: Int, val json: String, val subjects: java.util.Set[String]) {
+class JSONCacheItem(val pageID: Long, val updatedTimes: Int, val escaped_json: String, val subjects: java.util.Set[String]) {
 
 }

@@ -1,0 +1,145 @@
+{
+  "en":{
+    "Dash":{
+      "transformer":"textNode",
+      "replace": " - "
+    },
+    "paced ndash":{
+      "transformer":"textNode",
+      "replace": " - "
+    },
+    "Ndash":{
+      "transformer":"textNode",
+      "replace": "-"
+    },
+    "Mdash":{
+      "transformer":"textNode",
+      "replace": " - "
+    },
+    "Emdash":{
+      "transformer":"textNode",
+      "replace": " - "
+    },
+    "-":{
+      "transformer":"textNode",
+      "replace": "<br />"
+    },
+    "Clr":{
+      "transformer":"textNode",
+      "replace": "<br />"
+    },
+    "Lang":{
+      "transformer":"textNode",
+      "replace": "<br />$(3||)<br />"
+    },
+    "Marriage":{
+      "transformer":"extractChildren",
+      "keys": ["end", "()"],
+      "whileList":false
+    },
+    "Nowrap":{
+      "transformer":"extractChildren",
+      "keys": [],
+      "whileList":false
+    },
+    "Nobr":{
+      "transformer":"extractChildren",
+      "keys": [],
+      "whileList":false
+    },
+    "Flatlist":{
+      "transformer":"extractChildren",
+      "keys": ["class", "style", "indent"],
+      "whileList":false
+    },
+    "Plainlist":{
+      "transformer":"extractChildren",
+      "keys": ["class", "style", "indent"],
+      "whileList":false
+    },
+    "Plain list":{
+      "transformer":"extractChildren",
+      "keys": ["class", "style", "indent"],
+      "whileList":false
+    },
+    "Hlist":{
+      "transformer":"extractChildren",
+      "keys": ["class", "style", "list_style", "item_style", "indent", "item1_style", "item2_style", "item3_style", "item4_style", "item5_style", "item6_style", "item7_style", "item8_style", "item9_style", "item10_style", "item11_style", "item12_style", "item13_style", "item14_style", "item15_style", "item16_style", "item17_style", "item18_style", "item19_style", "item20_style", "item21_style", "item22_style", "item23_style", "item24_style", "item25_style"],
+      "whileList":false
+    },
+    "Unbulleted list":{
+      "transformer":"extractChildren",
+      "keys": ["class", "style", "list_style", "item_style", "item1_style", "item2_style", "item3_style", "item4_style", "item5_style", "item6_style", "item7_style", "item8_style", "item9_style", "item10_style", "item11_style", "item12_style", "item13_style", "item14_style", "item15_style", "item16_style", "item17_style", "item18_style", "item19_style", "item20_style", "item21_style", "item22_style", "item23_style", "item24_style", "item25_style"],
+      "whileList":false
+    },
+    "Collapsible list":{
+      "transformer":"extractChildren",
+      "keys": ["expand", "frame_style", "title_style", "framestyle", "titlestyle", "list_style", "title", "liststyle", "hlist", "bullets"],
+      "whileList":false
+    },
+    "ICD9":{
+      "transformer":"extractChildren",
+      "keys": ["1"],
+      "whileList":true
+    },
+    "ICD10":{
+      "transformer":"extractChildren",
+      "keys": ["1", "2", "3"],
+      "whileList":true,
+      "replace": "$(1||)$(2||)$(3|.|)"
+    },
+    "Lang-$(lang)":{
+      "transformer":"getLangText",
+      "keys": ["1"],
+      "whileList":true
+    },
+    "Official website":{
+      "transformer":"externalLinkNode"
+    },
+    "URL":{
+      "transformer":"externalLinkNode"
+    }
+  },
+  "commons":{
+    "Self":{
+      "transformer":"unwrapTemplates",
+      "keys": ["author", "attribution", "migration"],
+      "whileList":false
+    },
+    "PD-Art":{
+      "transformer":"unwrapTemplates",
+      "keys": ["1"],
+      "whileList":true
+    },
+    "PD-Art-two":{
+      "transformer":"unwrapTemplates",
+      "keys": ["deathyear"],
+      "whileList":false
+    },
+    "Licensed-PD-Art":{
+      "transformer":"unwrapTemplates",
+      "keys": ["1", "2"],
+      "whileList":true
+    },
+    "Licensed-PD-Art-two":{
+      "transformer":"unwrapTemplates",
+      "keys": ["1", "2", "3"],
+      "whileList":true
+    },
+    "Licensed-FOP":{
+      "transformer":"unwrapTemplates",
+      "keys": ["1", "2"],
+      "whileList":true
+    },
+    "Copyright information":{
+      "transformer":"unwrapTemplates",
+      "keys": ["13"],
+      "whileList":false
+    },
+    "PD-scan":{
+      "transformer":"unwrapTemplates",
+      "keys": ["1"],
+      "whileList":true
+    }
+  }
+}

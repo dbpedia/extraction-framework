@@ -1,24 +1,22 @@
 package org.dbpedia.extraction.scripts
 
-import java.util.Arrays.{copyOf,sort}
-import java.io.{File,Writer}
+import java.io.{File, Writer}
+import java.util.Arrays.{copyOf, sort}
+
+import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
+import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
+import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.extraction.scripts.ProcessWikidataLinks._
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.config.ConfigUtils.{getString, getStrings, getValue, loadConfig, parseLanguages}
+import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util.{Finder, IOUtils, Language, SimpleWorkers}
+import org.dbpedia.extraction.util.StringUtils.prettyMillis
+
 import scala.Console.err
 import scala.collection.Map
-import scala.collection.mutable.{HashMap,ArrayBuffer}
-import org.dbpedia.extraction.util.{Finder,Language}
-import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
-import org.dbpedia.extraction.util.IOUtils
-import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.RichReader.wrapReader
-import org.dbpedia.extraction.util.StringUtils.prettyMillis
-import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.destinations.{Destination,Quad,WriterDestination}
-import org.dbpedia.extraction.util.Finder
-import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
-import org.dbpedia.extraction.destinations.formatters.Formatter
-import org.dbpedia.extraction.destinations.CompositeDestination
-import org.dbpedia.extraction.util.SimpleWorkers
-import ProcessWikidataLinks._
+import scala.collection.mutable.{ArrayBuffer, HashMap}
 
 /**
  * Generate separate triple files for each language from Wikidata link file.
@@ -63,9 +61,10 @@ object ProcessWikidataLinks {
     
     val output = getString(config, "output", true)
     
-    val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
-    
-    val formats = parseFormats(config, "uri-policy", "format")
+    val languages = parseLanguages(baseDir, getStrings(config, "languages", ",", true))
+
+    val policies = parsePolicies(config, "uri-policy")
+    val formats = parseFormats(config, "format", policies)
     
     val processor = new ProcessWikidataLinks(baseDir)
     processor.setLanguages(languages)
@@ -179,7 +178,7 @@ class ProcessWikidataLinks(baseDir: File) {
     
     val finder = new Finder[File](baseDir, Language.Wikidata, "wiki")
     val date = finder.dates().last
-    val file = finder.file(date, fileName)
+    val file = finder.file(date, fileName).get
     
     var lineCount = -1
     IOUtils.readLines(file) { line =>
@@ -254,7 +253,7 @@ class ProcessWikidataLinks(baseDir: File) {
       
       val formatDestinations = new ArrayBuffer[Destination]()
       for ((suffix, format) <- formats) {
-        val file = finder.file(date, fileName+'.'+suffix)
+        val file = finder.file(date, fileName+'.'+suffix).get
         formatDestinations += new WriterDestination(writer(file), format)
       }
       destinations(lang) = new CompositeDestination(formatDestinations.toSeq: _*)

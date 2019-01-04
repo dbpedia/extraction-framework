@@ -54,7 +54,7 @@ class UriPolicyTest extends FlatSpec with Matchers {
   private def policyApplicableMock(uri: String ): Boolean = {true}
 
   private def prepareToUri(uri: String) : String = {
-    UriPolicy.toUri(new URI(uri)).toString
+    UriPolicy.toUri(uri).toString
   }
 
 }

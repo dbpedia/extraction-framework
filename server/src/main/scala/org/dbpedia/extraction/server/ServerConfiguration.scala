@@ -1,30 +1,26 @@
 package org.dbpedia.extraction.server
 
-import java.util.Properties
-import org.dbpedia.extraction.util.ConfigUtils._
+import org.dbpedia.extraction.config.ConfigUtils._
 import java.io.File
-import org.dbpedia.extraction.util.ExtractorUtils
+
+import org.dbpedia.extraction.config.Config
+import org.dbpedia.extraction.mappings.Extractor
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 
 /**
  * User: Dimitris Kontokostas
- * confi
+ * server config
  */
-private class ServerConfiguration(config: Properties) {
+class ServerConfiguration(configPath: String) extends Config(configPath) {
 
-  /** Dump directory */
-  val mappingsUrl = getString(config, "mappingsUrl", true)
+  val mappingsUrl: String = getString(this, "mappingsUrl", required = true)
 
-  val localServerUrl = getString(config, "localServerUrl", true)
+  val localServerUrl: String = getString(this, "localServerUrl", required = true)
 
-  val serverPassword = getString(config, "serverPassword", true)
-  val statisticsDir = getValue(config, "statisticsDir", true)(new File(_))
-  val ontologyFile = getValue(config, "ontologyFile", false)(new File(_))
-  val mappingsDir = getValue(config, "mappingsDir", false)(new File(_))
+  val serverPassword: String = getString(this, "serverPassword", required = true)
+  val statisticsDir: File = getValue(this, "statisticsDir", required = true)(new File(_))
 
-  val _languages = getString(config, "languages",true)
-  val languages = parseLanguages(null,Seq(_languages))
-
-  val mappingTestExtractorClasses = ExtractorUtils.loadExtractorClassSeq(getStrings(config, "mappingsTestExtractors", ',', false))
-  val customTestExtractorClasses = ExtractorUtils.loadExtractorsMapFromConfig(languages, config);
+  val mappingTestExtractorClasses: Seq[Class[_ <: Extractor[_]]] = ExtractorUtils.loadExtractorClassSeq(getStrings(this, "mappingsTestExtractors", ","))
+  val customTestExtractorClasses: Map[Language, Seq[Class[_ <: Extractor[_]]]] = ExtractorUtils.loadExtractorsMapFromConfig(languages, this)
 
 }
