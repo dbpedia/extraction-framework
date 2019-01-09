@@ -2,7 +2,7 @@
 
 ## Requirements:
 1. Maven **3.2+**
-2. Java **1.8+**
+2. Java **1.8+** ( Did not compile with OpenJdk-10 & 11, just use OpenJdk-8 )
 3. rapper version **2.14**
 4. Git
 5. A Text Editor
