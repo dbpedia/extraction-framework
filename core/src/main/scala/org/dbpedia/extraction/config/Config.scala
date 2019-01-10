@@ -100,7 +100,7 @@ class Config(val configPath: String) extends
     case None => None
   }
 
-  def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null, datasets : ListBuffer[Dataset] = null, monitor : ExtractionMonitor = null): ExtractionRecorder[T] ={
+  def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null, datasets : ListBuffer[Dataset] =  ListBuffer[Dataset](), monitor : ExtractionMonitor = null): ExtractionRecorder[T] ={
     val w = if(writer != null) writer
       else openLogFile(lang.wikiCode) match{
         case Some(s) => new OutputStreamWriter(s)
