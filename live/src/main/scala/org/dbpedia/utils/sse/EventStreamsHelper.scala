@@ -1,25 +1,33 @@
 package org.dbpedia.utils.sse
 
 import java.util
+
 import akka.{Done, NotUsed}
 import akka.actor.ActorSystem
+import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.client.RequestBuilding.Get
 import akka.http.scaladsl.model.sse.ServerSentEvent
 import akka.http.scaladsl.unmarshalling.Unmarshal
-import akka.stream.ActorMaterializer
+import akka.http.scaladsl.unmarshalling.sse.EventStreamUnmarshalling
+import akka.stream.{ActorMaterializer, Attributes, scaladsl}
 import akka.stream.scaladsl.{Flow, Keep, RunnableGraph, Sink, Source}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
+import com.typesafe.config.{Config, ConfigFactory}
+import org.apache.log4j.Logger
+import org.dbpedia.extraction.live.core.LiveOptions
 import org.dbpedia.extraction.live.feeder.{EventStreamsFeeder, Feeder}
 import org.dbpedia.extraction.live.queue.LiveQueueItem
 import org.dbpedia.extraction.live.util.DateUtil
+import org.slf4j.LoggerFactory
+
 import scala.concurrent.Future
 import scala.collection.JavaConversions._
 
 /**
-  * This Class is used in order to consume the Wikimedia EventStreamsAPI that replaced the RCStream API during spring of 2018.
+  * This class is used in order to consume the Wikimedia EventStreamsAPI that replaced the RCStream API during spring of 2018.
   * EventStreams follows the Server Sent Event (SSE) protocol.
   * Akka SSE offers the implementation of a SSE Client used here.
   * Akka Streams is used in order to process the stream data.
@@ -36,14 +44,25 @@ import scala.collection.JavaConversions._
   */
 
 
-class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayList[Integer]) {
+class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayList[Integer]) extends  EventStreamUnmarshalling {
+
+  private val logger = Logger.getLogger("EventstreamsHelper")
+
+
+  override protected def maxLineSize: Int = LiveOptions.options.get("feeder.eventstreams.maxLineSize").toInt
+  override protected def maxEventSize: Int = LiveOptions.options.get("feeder.eventstreams.maxEventSize").toInt
+
+
 
   def eventStreamsClient {
 
     implicit val system = ActorSystem()
     implicit val mat = ActorMaterializer()
 
-    import akka.http.scaladsl.unmarshalling.sse.EventStreamUnmarshalling._
+
+
+
+
     import system.dispatcher
 
     val flowData: Flow[ServerSentEvent, String, NotUsed] = Flow.fromFunction(_.getData())
@@ -63,9 +82,9 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
       .singleRequest(Get("https://stream.wikimedia.org/v2/stream/recentchange"))
       .flatMap(Unmarshal(_).to[Source[ServerSentEvent, NotUsed]])
       .map(source => source
-        .via(flowData)
-        .filter(data => filterNamespaceAndLanguage(data))
-        .via(flowLiveQueueItem)
+        .via(flowData).log("EventstreamsHelper")
+        .filter(data => filterNamespaceAndLanguage(data)).log("EventstreamsHelper")
+        .via(flowLiveQueueItem).log("EventstreamsHelper")
         .toMat(addToQueueSink)(Keep.right)
         .run())
      }
@@ -77,7 +96,6 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
     val parsedJson = mapper.readValue(data, classOf[Map[String, String]])
     val value = parsedJson.get(key)
     value.getOrElse("")
-    //TODO decide on default value, consider title and language
   }
 
   def parseIntFromJson(data: String, key: String): Int = {
@@ -85,7 +103,6 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
     mapper.registerModule(DefaultScalaModule)
     val parsedJson = mapper.readValue(data, classOf[Map[String, Int]])
     parsedJson.get(key).getOrElse(-1)
-    //TODO decide on default value, namespace and timestamp use this at the moment
   }
 
   //TODO refactor duplication
@@ -99,6 +116,9 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
       if (nspc == namespace ){
         keep = true
       }
+    }
+    if (parseIntFromJson(data, "timestamp") == -1){
+      keep = false
     }
     keep && language == wikilanguage + "wiki"
   }

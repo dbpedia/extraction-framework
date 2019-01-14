@@ -51,6 +51,8 @@ public class EventStreamsFeeder extends Feeder {
     }
 
     public static synchronized void addQueueItemCollection(LiveQueueItem item){
-        queueItemCollection.add(item);
+        if (item.getItemName()!= ""){
+            queueItemCollection.add(item);
+        }
     }
 }

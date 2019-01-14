@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.live.queue;
 
+
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,7 +21,7 @@ import java.util.concurrent.PriorityBlockingQueue;
  * TODO: If we syncronize add() and take() we will get in a deadlock so we should re-implement the PriorityBlockingQueue
  */
 public class LiveQueue {
-    private static Logger logger;
+    private static Logger logger = LoggerFactory.getLogger("LiveQueue");
 
     private static final PriorityBlockingQueue<LiveQueueItem> queue = new PriorityBlockingQueue<LiveQueueItem>(1000);
     // this is a Map<long,int>, long is the pageID and int the number of same items in the queue (see add())
@@ -44,12 +46,12 @@ public class LiveQueue {
     }
 
     public static LiveQueueItem take() throws InterruptedException {
+        logger.info("QueueSize at take " + queue.size() );
         LiveQueueItem item = queue.take();
         uniqueSet.remove(item.getItemName());
         // update counts
         counts.put(item.getPriority(), getPrioritySize(item.getPriority()) - 1);
         modificationDate.put(item.getPriority(), item.getModificationDate());
-
         return item;
     }
 
