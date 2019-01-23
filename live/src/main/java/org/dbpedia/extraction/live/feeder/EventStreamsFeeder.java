@@ -6,6 +6,7 @@ import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.utils.sse.EventStreamsHelper;
+import org.slf4j.Logger;
 
 
 /**
@@ -17,9 +18,12 @@ import org.dbpedia.utils.sse.EventStreamsHelper;
 
 public class EventStreamsFeeder extends Feeder {
 
+    protected static Logger logger;
     private static Collection<LiveQueueItem> queueItemCollection;
     private ArrayList<Integer> allowedNamespaces;
     private String language;
+    private ArrayList<String> streams;
+    private String baseURL;
 
     public EventStreamsFeeder(String feederName,
                               LiveQueuePriority queuePriority,

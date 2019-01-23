@@ -7,11 +7,12 @@ import akka.actor.ActorSystem
 import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.client.RequestBuilding.Get
+import akka.http.scaladsl.model.HttpRequest
 import akka.http.scaladsl.model.sse.ServerSentEvent
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.http.scaladsl.unmarshalling.sse.EventStreamUnmarshalling
 import akka.stream.{ActorMaterializer, Attributes, scaladsl}
-import akka.stream.scaladsl.{Flow, Keep, RunnableGraph, Sink, Source}
+import akka.stream.scaladsl._
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
@@ -25,6 +26,7 @@ import org.slf4j.LoggerFactory
 
 import scala.concurrent.Future
 import scala.collection.JavaConversions._
+import scala.concurrent.duration._
 
 /**
   * This class is used in order to consume the Wikimedia EventStreamsAPI that replaced the RCStream API during spring of 2018.
@@ -50,18 +52,14 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
 
 
   override protected def maxLineSize: Int = LiveOptions.options.get("feeder.eventstreams.maxLineSize").toInt
-  override protected def maxEventSize: Int = LiveOptions.options.get("feeder.eventstreams.maxEventSize").toInt
 
+  override protected def maxEventSize: Int = LiveOptions.options.get("feeder.eventstreams.maxEventSize").toInt
 
 
   def eventStreamsClient {
 
     implicit val system = ActorSystem()
     implicit val mat = ActorMaterializer()
-
-
-
-
 
     import system.dispatcher
 
@@ -75,19 +73,31 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
         ""
       ))
 
-    val addToQueueSink : Sink[LiveQueueItem, Future[Done]] =
+    val addToQueueSink: Sink[LiveQueueItem, Future[Done]] =
       Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemCollection(_))
 
-    Http()
-      .singleRequest(Get("https://stream.wikimedia.org/v2/stream/recentchange"))
-      .flatMap(Unmarshal(_).to[Source[ServerSentEvent, NotUsed]])
-      .map(source => source
-        .via(flowData).log("EventstreamsHelper")
-        .filter(data => filterNamespaceAndLanguage(data)).log("EventstreamsHelper")
-        .via(flowLiveQueueItem).log("EventstreamsHelper")
-        .toMat(addToQueueSink)(Keep.right)
-        .run())
-     }
+
+    val sseSource = RestartSource.onFailuresWithBackoff(
+      minBackoff = 1.second,
+      maxBackoff = 5.second,
+      randomFactor = 0.2
+    ) { () =>
+      Source.fromFutureSource {
+        Http()
+          .singleRequest(
+            HttpRequest(uri = "https://stream.wikimedia.org/v2/stream/recentchange")
+          )
+          .flatMap(Unmarshal(_).to[Source[ServerSentEvent, NotUsed]])
+      }
+    }
+
+    sseSource.via(flowData).log("dataFlow")
+      .filter(data => filterNamespaceAndLanguage(data)).log("filter")
+      .via(flowLiveQueueItem).log("livequeueItemFlow")
+      .toMat(addToQueueSink)(Keep.right)
+      .run()
+  }
+
 
 
   def parseStringFromJson(data: String, key: String): String = {
