@@ -31,9 +31,15 @@ public class EventStreamsFeeder extends Feeder {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
         queueItemCollection = new ArrayList<>();
         allowedNamespaces = new ArrayList<>();
+        streams = new ArrayList<>();
         for (String namespace : LiveOptions.options.get("feeder.eventstreams.allowedNamespaces").split("\\s*,\\s*")) {
             allowedNamespaces.add(Integer.parseInt(namespace));
         }
+        baseURL = LiveOptions.options.get("eventstreams.baseURL");
+        for (String stream: LiveOptions.options.get("eventstreams.streams").split("\\s*,\\s*")){
+            streams.add(stream);
+        }
+
         language = LiveOptions.options.get("language");
     }
 
