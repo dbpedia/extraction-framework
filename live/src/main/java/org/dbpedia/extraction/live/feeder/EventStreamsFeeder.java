@@ -51,8 +51,14 @@ public class EventStreamsFeeder extends Feeder {
     }
 
     @Override
-    protected Collection<LiveQueueItem> getNextItems() {
+    protected Collection<LiveQueueItem> getNextItems(){
         Collection <LiveQueueItem> returnQueueItemCollection;
+        try {
+            Thread.sleep(300000);
+            System.out.println("now");
+        } catch (InterruptedException e){
+            logger.error("Error when handing over items to liveQueue" + e.getMessage());
+        }
         synchronized (this){
             returnQueueItemCollection = queueItemCollection;
             queueItemCollection = new ArrayList<>();
