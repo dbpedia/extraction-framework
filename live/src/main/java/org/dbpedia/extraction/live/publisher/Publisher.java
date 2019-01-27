@@ -66,15 +66,6 @@ public class Publisher extends Thread{
                         deletedTriples.size() > MAX_QUEUE_SIZE ||
                         reInsertedTriples.size() > MAX_QUEUE_SIZE ||
                         subjectsClear.size() > MAX_QUEUE_SIZE) {
-                    
-                    logger.info(
-                            "Same page: " + pageCache.contains((pubData.pageID))
-                                    + ", addedTriples: " + addedTriples.size()
-                                    + ", deletedTriples: " + deletedTriples.size()
-                                    + ", reInsertedTriples: " + reInsertedTriples.size()
-                                    + ", subjectsClear: " + subjectsClear.size()
-
-                    );
 
                     pageCache.clear();
                     flush();
