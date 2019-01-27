@@ -46,7 +46,7 @@ public class EventStreamsFeeder extends Feeder {
 
     @Override
     protected void initFeeder() {
-        EventStreamsHelper helper = new EventStreamsHelper(language, allowedNamespaces);
+        EventStreamsHelper helper = new EventStreamsHelper(language, allowedNamespaces, streams);
         helper.eventStreamsClient();
     }
 

@@ -6,8 +6,7 @@ import akka.{Done, NotUsed}
 import akka.actor.ActorSystem
 import akka.event.Logging
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.client.RequestBuilding.Get
-import akka.http.scaladsl.model.HttpRequest
+import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.sse.ServerSentEvent
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.http.scaladsl.unmarshalling.sse.EventStreamUnmarshalling
@@ -46,7 +45,7 @@ import scala.concurrent.duration._
   */
 
 
-class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayList[Integer]) extends  EventStreamUnmarshalling {
+class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayList[Integer], streams : util.ArrayList[String]) extends  EventStreamUnmarshalling {
 
   private val logger = Logger.getLogger("EventstreamsHelper")
 
@@ -76,26 +75,29 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
     val addToQueueSink: Sink[LiveQueueItem, Future[Done]] =
       Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemCollection(_))
 
+    val contentType = ContentType(MediaTypes.`text/event-stream`)
 
-    val sseSource = RestartSource.onFailuresWithBackoff(
-      minBackoff = 1.second,
-      maxBackoff = 5.second,
-      randomFactor = 0.2
-    ) { () =>
-      Source.fromFutureSource {
-        Http()
-          .singleRequest(
-            HttpRequest(uri = "https://stream.wikimedia.org/v2/stream/recentchange")
-          )
-          .flatMap(Unmarshal(_).to[Source[ServerSentEvent, NotUsed]])
+    for (stream <- streams) {
+      val sseSource = RestartSource.onFailuresWithBackoff(
+        minBackoff = 1.second,
+        maxBackoff = 5.second,
+        randomFactor = 0.2
+      ) { () =>
+        Source.fromFutureSource {
+          Http().singleRequest(
+              HttpRequest(uri = "https://stream.wikimedia.org/v2/stream/" + stream).withEntity(contentType,"")
+            )
+            .flatMap(Unmarshal(_).to[Source[ServerSentEvent, NotUsed]])
+        }
       }
-    }
 
-    sseSource.via(flowData).log("dataFlow")
-      .filter(data => filterNamespaceAndLanguage(data)).log("filter")
-      .via(flowLiveQueueItem).log("livequeueItemFlow")
-      .toMat(addToQueueSink)(Keep.right)
-      .run()
+      sseSource
+        .via(flowData).log("dataFlow")
+        .filter(data => filterNamespaceAndLanguage(data)).log("filter")
+        .via(flowLiveQueueItem).log("livequeueItemFlow")
+        .toMat(addToQueueSink)(Keep.right)
+        .run()
+    }
   }
 
 
