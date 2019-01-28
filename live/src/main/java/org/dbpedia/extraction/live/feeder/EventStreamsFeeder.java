@@ -24,6 +24,7 @@ public class EventStreamsFeeder extends Feeder {
     private String language;
     private ArrayList<String> streams;
     private String baseURL;
+    private Long sleepTime;
 
     public EventStreamsFeeder(String feederName,
                               LiveQueuePriority queuePriority,
@@ -41,6 +42,7 @@ public class EventStreamsFeeder extends Feeder {
         }
 
         language = LiveOptions.options.get("language");
+        sleepTime = Long.parseLong(LiveOptions.options.get("eventstreams.sleepTime"));
     }
 
 
@@ -54,7 +56,7 @@ public class EventStreamsFeeder extends Feeder {
     protected Collection<LiveQueueItem> getNextItems(){
         Collection <LiveQueueItem> returnQueueItemCollection;
         try {
-            Thread.sleep(300000);
+            Thread.sleep(sleepTime);
             System.out.println("now");
         } catch (InterruptedException e){
             logger.error("Error when handing over items to liveQueue" + e.getMessage());

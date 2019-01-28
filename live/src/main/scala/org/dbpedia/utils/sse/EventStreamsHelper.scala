@@ -5,7 +5,9 @@ import java.util
 import akka.{Done, NotUsed}
 import akka.actor.ActorSystem
 import akka.event.Logging
+import akka.http.javadsl.model.RequestEntity
 import akka.http.scaladsl.Http
+import akka.http.scaladsl.model.HttpEntity.Chunked
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.sse.ServerSentEvent
 import akka.http.scaladsl.unmarshalling.Unmarshal
@@ -75,17 +77,16 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
     val addToQueueSink: Sink[LiveQueueItem, Future[Done]] =
       Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemCollection(_))
 
-    val contentType = ContentType(MediaTypes.`text/event-stream`)
 
     for (stream <- streams) {
       val sseSource = RestartSource.onFailuresWithBackoff(
-        minBackoff = 1.second,
-        maxBackoff = 5.second,
+        minBackoff = 5.second,
+        maxBackoff = 60.second,
         randomFactor = 0.2
       ) { () =>
         Source.fromFutureSource {
           Http().singleRequest(
-              HttpRequest(uri = "https://stream.wikimedia.org/v2/stream/" + stream).withEntity(contentType,"")
+              HttpRequest(uri = "https://stream.wikimedia.org/v2/stream/" + stream)
             )
             .flatMap(Unmarshal(_).to[Source[ServerSentEvent, NotUsed]])
         }
@@ -97,7 +98,7 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
         .via(flowLiveQueueItem).log("livequeueItemFlow")
         .toMat(addToQueueSink)(Keep.right)
         .run()
-    }
+      }
   }
 
 
