@@ -50,6 +50,9 @@ import scala.concurrent.duration._
 class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayList[Integer], streams : util.ArrayList[String]) extends  EventStreamUnmarshalling {
 
   private val logger = Logger.getLogger("EventstreamsHelper")
+  private val minBackoffFactor = LiveOptions.options.get("eventstreams.minBackoffFactor").toInt.second
+  private val maxBackoffFactor = LiveOptions.options.get("eventstreams.maxBackoffFactor").toInt.second
+
 
 
   override protected def maxLineSize: Int = LiveOptions.options.get("feeder.eventstreams.maxLineSize").toInt
@@ -80,9 +83,10 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
 
     for (stream <- streams) {
       val sseSource = RestartSource.onFailuresWithBackoff(
-        minBackoff = 5.second,
-        maxBackoff = 60.second,
-        randomFactor = 0.2
+        minBackoff = minBackoffFactor,
+        maxBackoff = maxBackoffFactor,
+        randomFactor = 0.2,
+        maxRestarts = 5
       ) { () =>
         Source.fromFutureSource {
           Http().singleRequest(
