@@ -49,7 +49,7 @@ import scala.concurrent.duration._
 
 class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayList[Integer], streams : util.ArrayList[String]) extends  EventStreamUnmarshalling {
 
-  private val logger = Logger.getLogger("EventstreamsHelper")
+  private val logger = LoggerFactory.getLogger("EventStreamsHelper")
   private val minBackoffFactor = LiveOptions.options.get("eventstreams.minBackoffFactor").toInt.second
   private val maxBackoffFactor = LiveOptions.options.get("eventstreams.maxBackoffFactor").toInt.second
 
@@ -62,10 +62,11 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
 
   def eventStreamsClient {
 
-    implicit val system = ActorSystem()
+    implicit val system = ActorSystem("EventStreamsActorSystem")
     implicit val mat = ActorMaterializer()
 
     import system.dispatcher
+
 
     val flowData: Flow[ServerSentEvent, String, NotUsed] = Flow.fromFunction(_.getData())
     val flowLiveQueueItem: Flow[String, LiveQueueItem, NotUsed] = Flow.fromFunction(
@@ -76,6 +77,7 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
         false,
         ""
       ))
+
 
     val addToQueueSink: Sink[LiveQueueItem, Future[Done]] =
       Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemCollection(_))
