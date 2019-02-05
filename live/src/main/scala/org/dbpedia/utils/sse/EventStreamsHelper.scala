@@ -1,32 +1,24 @@
 package org.dbpedia.utils.sse
 
-import java.util
 
 import akka.{Done, NotUsed}
 import akka.actor.ActorSystem
-import akka.event.Logging
-import akka.http.javadsl.model.RequestEntity
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.model.HttpEntity.Chunked
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.sse.ServerSentEvent
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.http.scaladsl.unmarshalling.sse.EventStreamUnmarshalling
-import akka.stream.{ActorMaterializer, Attributes, scaladsl}
+import akka.stream.ActorMaterializer
 import akka.stream.scaladsl._
-import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
-import com.typesafe.config.{Config, ConfigFactory}
-import org.apache.log4j.Logger
 import org.dbpedia.extraction.live.core.LiveOptions
-import org.dbpedia.extraction.live.feeder.{EventStreamsFeeder, Feeder}
+import org.dbpedia.extraction.live.feeder.EventStreamsFeeder
 import org.dbpedia.extraction.live.queue.LiveQueueItem
 import org.dbpedia.extraction.live.util.DateUtil
 import org.slf4j.LoggerFactory
-
 import scala.concurrent.Future
-import scala.collection.JavaConversions._
 import scala.concurrent.duration._
 
 /**
@@ -41,22 +33,25 @@ import scala.concurrent.duration._
   * Documentation on the Akka SSE implementation: https://doc.akka.io/docs/akka-http/current/sse-support.html
   * The schema of the EventStreams data can be found here: https://github.com/wikimedia/mediawiki-event-schemas/blob/master/jsonschema/mediawiki/recentchange/2.yaml
   *
-  * @param wikilanguage as configured
-  * @param allowedNamespaces as configured. Sharing between Java and Scala is made possible through scala.collection.JavaConversions._
   * @author Lena Schindler, November 2018
   */
 
 
-class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayList[Integer], streams : util.ArrayList[String]) extends  EventStreamUnmarshalling {
+class EventStreamsHelper () extends  EventStreamUnmarshalling {
 
   private val logger = LoggerFactory.getLogger("EventStreamsHelper")
+
+  private val baseURL = LiveOptions.options.get("eventstreams.baseURL")
+  private val streams = LiveOptions.options.get("eventstreams.streams").split("\\s*,\\s*").toList
+  private val allowedNamespaces  = LiveOptions.options.get("feeder.eventstreams.allowedNamespaces").split("\\s*,\\s*").toList.map((s:String )=> s.toInt)
+  private val wikilanguage = LiveOptions.options.get("language")
   private val minBackoffFactor = LiveOptions.options.get("eventstreams.minBackoffFactor").toInt.second
   private val maxBackoffFactor = LiveOptions.options.get("eventstreams.maxBackoffFactor").toInt.second
 
-
+  private val mapper = new ObjectMapper() with ScalaObjectMapper
+  mapper.registerModule(DefaultScalaModule)
 
   override protected def maxLineSize: Int = LiveOptions.options.get("feeder.eventstreams.maxLineSize").toInt
-
   override protected def maxEventSize: Int = LiveOptions.options.get("feeder.eventstreams.maxEventSize").toInt
 
 
@@ -67,19 +62,15 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
 
     import system.dispatcher
 
-
     val flowData: Flow[ServerSentEvent, String, NotUsed] = Flow.fromFunction(_.getData())
-    val flowLiveQueueItem: Flow[String, LiveQueueItem, NotUsed] = Flow.fromFunction(
-      eventData => new LiveQueueItem(
+    val flowLiveQueueItem: Flow[String, LiveQueueItem, NotUsed] = Flow.fromFunction(eventData =>
+      new LiveQueueItem(
         -1,
         parseStringFromJson(eventData, "title"),
         DateUtil.transformToUTC(parseIntFromJson(eventData, "timestamp")),
         false,
-        ""
-      ))
-
-
-    val addToQueueSink: Sink[LiveQueueItem, Future[Done]] =
+        ""))
+    val sinkAddToQueue: Sink[LiveQueueItem, Future[Done]] =
       Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemCollection(_))
 
 
@@ -91,7 +82,7 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
       ) { () =>
         Source.fromFutureSource {
           Http().singleRequest(
-            HttpRequest(uri = "https://stream.wikimedia.org/v2/stream/" + stream))
+            HttpRequest(uri = baseURL + stream))
             .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
         }
       }
@@ -100,35 +91,18 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
         .via(flowData).log("dataFlow")
         .filter(data => filterNamespaceAndLanguage(data)).log("filter")
         .via(flowLiveQueueItem).log("livequeueItemFlow")
-        .toMat(addToQueueSink)(Keep.right)
+        .toMat(sinkAddToQueue)(Keep.right)
         .run()
       }
   }
 
-
-
-  def parseStringFromJson(data: String, key: String): String = {
-    val mapper = new ObjectMapper() with ScalaObjectMapper
-    mapper.registerModule(DefaultScalaModule)
-    val parsedJson = mapper.readValue(data, classOf[Map[String, String]])
-    val value = parsedJson.get(key)
-    value.getOrElse("")
-  }
-
-  def parseIntFromJson(data: String, key: String): Int = {
-    val mapper = new ObjectMapper() with ScalaObjectMapper
-    mapper.registerModule(DefaultScalaModule)
-    val parsedJson = mapper.readValue(data, classOf[Map[String, Int]])
-    parsedJson.get(key).getOrElse(-1)
-  }
-
-  //TODO refactor duplication
-
-
   def filterNamespaceAndLanguage(data: String): Boolean = {
     var keep = false
+
+    //the EventStreams API uses the postfix "wiki" for the language, e.g. "enwiki" for languag "en"
     val namespace = parseIntFromJson(data, "namespace")
-    val language = parseStringFromJson(data, "wiki")   //the EventStreams API uses this postfix for the language, e.g. "enwiki" for languag "en"
+    val language = parseStringFromJson(data, "wiki")
+
     for(nspc <- allowedNamespaces){
       if (nspc == namespace ){
         keep = true
@@ -140,8 +114,15 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
     keep && language == wikilanguage + "wiki"
   }
 
+  
+  def parseStringFromJson(data: String, key: String): String = {
+    mapper.readValue(data, classOf[Map[String, String]]).getOrElse(key, "")
+  }
 
-
+  def parseIntFromJson(data: String, key: String): Int = {
+    mapper.readValue(data, classOf[Map[String, Int]]).getOrElse(key, -1)
+  }
+  
 }
 
 

@@ -7,6 +7,7 @@ import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.utils.sse.EventStreamsHelper;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -18,37 +19,22 @@ import org.slf4j.Logger;
 
 public class EventStreamsFeeder extends Feeder {
 
-    protected static Logger logger;
+    protected static Logger logger = LoggerFactory.getLogger("EventStreamsFeeder");
+    private Long sleepTime = Long.parseLong(LiveOptions.options.get("eventstreams.sleepTime"));
     private static Collection<LiveQueueItem> queueItemCollection;
-    private ArrayList<Integer> allowedNamespaces;
-    private String language;
-    private ArrayList<String> streams;
-    private String baseURL;
-    private Long sleepTime;
 
     public EventStreamsFeeder(String feederName,
                               LiveQueuePriority queuePriority,
-                              String defaultStartTime, String folderBasePath) {
+                              String defaultStartTime,
+                              String folderBasePath) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
         queueItemCollection = new ArrayList<>();
-        allowedNamespaces = new ArrayList<>();
-        streams = new ArrayList<>();
-        for (String namespace : LiveOptions.options.get("feeder.eventstreams.allowedNamespaces").split("\\s*,\\s*")) {
-            allowedNamespaces.add(Integer.parseInt(namespace));
-        }
-        baseURL = LiveOptions.options.get("eventstreams.baseURL");
-        for (String stream: LiveOptions.options.get("eventstreams.streams").split("\\s*,\\s*")){
-            streams.add(stream);
-        }
-
-        language = LiveOptions.options.get("language");
-        sleepTime = Long.parseLong(LiveOptions.options.get("eventstreams.sleepTime"));
     }
 
 
     @Override
     protected void initFeeder() {
-        EventStreamsHelper helper = new EventStreamsHelper(language, allowedNamespaces, streams);
+        EventStreamsHelper helper = new EventStreamsHelper();
         helper.eventStreamsClient();
     }
 
@@ -57,7 +43,6 @@ public class EventStreamsFeeder extends Feeder {
         Collection <LiveQueueItem> returnQueueItemCollection;
         try {
             Thread.sleep(sleepTime);
-            System.out.println("now");
         } catch (InterruptedException e){
             logger.error("Error when handing over items to liveQueue" + e.getMessage());
         }
