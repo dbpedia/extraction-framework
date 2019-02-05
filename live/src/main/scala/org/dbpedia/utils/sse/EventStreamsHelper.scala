@@ -85,14 +85,12 @@ class EventStreamsHelper (wikilanguage: String, allowedNamespaces: util.ArrayLis
       val sseSource = RestartSource.onFailuresWithBackoff(
         minBackoff = minBackoffFactor,
         maxBackoff = maxBackoffFactor,
-        randomFactor = 0.2,
-        maxRestarts = 5
+        randomFactor = 0.2
       ) { () =>
         Source.fromFutureSource {
           Http().singleRequest(
-              HttpRequest(uri = "https://stream.wikimedia.org/v2/stream/" + stream)
-            )
-            .flatMap(Unmarshal(_).to[Source[ServerSentEvent, NotUsed]])
+            HttpRequest(uri = "https://stream.wikimedia.org/v2/stream/" + stream))
+            .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
         }
       }
 
