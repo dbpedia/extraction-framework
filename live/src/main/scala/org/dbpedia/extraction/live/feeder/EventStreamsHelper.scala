@@ -1,5 +1,4 @@
-package org.dbpedia.utils.sse
-
+package org.dbpedia.extraction.live.feeder
 
 import akka.{Done, NotUsed}
 import akka.actor.ActorSystem
@@ -14,7 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.dbpedia.extraction.live.core.LiveOptions
-import org.dbpedia.extraction.live.feeder.EventStreamsFeeder
 import org.dbpedia.extraction.live.queue.LiveQueueItem
 import org.dbpedia.extraction.live.util.DateUtil
 import org.slf4j.LoggerFactory
@@ -55,7 +53,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   override protected def maxEventSize: Int = LiveOptions.options.get("feeder.eventstreams.maxEventSize").toInt
 
   /**
-    * Starts an akka graph that consumes the Wikimedia EventStream
+    * Defines and starts an akka graph that consumes the Wikimedia EventStream
     *
     */
 

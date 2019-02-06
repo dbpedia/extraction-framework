@@ -5,14 +5,13 @@ import java.util.Collection;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
-import org.dbpedia.utils.sse.EventStreamsHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 /**
  * This Feeder initializes the consumption of the Wikimedia EventStreams API
- * See more at the documentation of the org.dbpedia.utils.sse.EventStreamsHelper class.
+ * See more at the documentation of the EventStreamsHelper class.
  *
  * @author Lena Schindler, November 2018
  */
