@@ -49,6 +49,8 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   private val mapper = new ObjectMapper() with ScalaObjectMapper
   mapper.registerModule(DefaultScalaModule)
 
+  // maxLineSize and maxEventSize belong to the trait EventStreamUnmarshalling
+  // and the defaults of  4096 and  8192 respectively are to small for us
   override protected def maxLineSize: Int = LiveOptions.options.get("feeder.eventstreams.maxLineSize").toInt
   override protected def maxEventSize: Int = LiveOptions.options.get("feeder.eventstreams.maxEventSize").toInt
 
