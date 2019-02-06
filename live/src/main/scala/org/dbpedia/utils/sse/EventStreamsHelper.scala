@@ -54,6 +54,10 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   override protected def maxLineSize: Int = LiveOptions.options.get("feeder.eventstreams.maxLineSize").toInt
   override protected def maxEventSize: Int = LiveOptions.options.get("feeder.eventstreams.maxEventSize").toInt
 
+  /**
+    * Starts an akka graph that consumes the Wikimedia EventStream
+    *
+    */
 
   def eventStreamsClient {
 
@@ -96,6 +100,12 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
       }
   }
 
+  /**
+    * Takes a JSON String and returns true, if namespace and language matches, false otherwise
+    * See the schema of the JSON at https://github.com/wikimedia/mediawiki-event-schemas/blob/master/jsonschema/mediawiki/recentchange/2.yaml
+    * @param data a JSON String
+    * @return boolean: match the configured namespace and language
+    */
   def filterNamespaceAndLanguage(data: String): Boolean = {
     var keep = false
 
