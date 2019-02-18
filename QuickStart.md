@@ -73,7 +73,7 @@ This section describes the gathering of the different input-files for the extrac
 ## 4. Postprocessing
 1. **Wikidata Postprocessing:**
 
-    The wikidata files have their own dedicated postprocessing skripts, that should be executed before publishing the data.
+    The wikidata files have their own dedicated postprocessing scripts, that should be executed before publishing the data.
     - `cd scripts`
     - `../run ResolveTransitiveLinks DATADIR redirects transitive-redirects .ttl.bz2 wikidata`
     - `../run MapObjectUris DATADIR transitive-redirects .ttl.bz2 mappingbased-objects-uncleaned,raw -redirected .ttl.bz2 wikidata`
