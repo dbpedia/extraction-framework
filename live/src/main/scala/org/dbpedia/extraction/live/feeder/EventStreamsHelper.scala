@@ -39,12 +39,12 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
 
   private val logger = LoggerFactory.getLogger("EventStreamsHelper")
 
-  private val baseURL = LiveOptions.options.get("eventstreams.baseURL")
-  private val streams = LiveOptions.options.get("eventstreams.streams").split("\\s*,\\s*").toList
+  private val baseURL = LiveOptions.options.get("feeder.eventstreams.baseURL")
+  private val streams = LiveOptions.options.get("feeder.eventstreams.streams").split("\\s*,\\s*").toList
   private val allowedNamespaces  = LiveOptions.options.get("feeder.eventstreams.allowedNamespaces").split("\\s*,\\s*").toList.map((s:String )=> s.toInt)
   private val wikilanguage = LiveOptions.options.get("language")
-  private val minBackoffFactor = LiveOptions.options.get("eventstreams.minBackoffFactor").toInt.second
-  private val maxBackoffFactor = LiveOptions.options.get("eventstreams.maxBackoffFactor").toInt.second
+  private val minBackoffFactor = LiveOptions.options.get("feeder.eventstreams.minBackoffFactor").toInt.second
+  private val maxBackoffFactor = LiveOptions.options.get("feeder.eventstreams.maxBackoffFactor").toInt.second
 
   private val mapper = new ObjectMapper() with ScalaObjectMapper
   mapper.registerModule(DefaultScalaModule)

@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 public class EventStreamsFeeder extends Feeder {
 
     protected static Logger logger = LoggerFactory.getLogger("EventStreamsFeeder");
-    private Long sleepTime = Long.parseLong(LiveOptions.options.get("eventstreams.sleepTime"));
+    private Long sleepTime = Long.parseLong(LiveOptions.options.get("feeder.eventstreams.sleepTime"));
     private static Collection<LiveQueueItem> queueItemCollection;
 
     public EventStreamsFeeder(String feederName,
