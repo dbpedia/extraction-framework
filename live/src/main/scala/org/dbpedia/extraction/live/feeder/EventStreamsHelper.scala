@@ -40,7 +40,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   private val logger = LoggerFactory.getLogger("EventStreamsHelper")
 
   private val baseURL = LiveOptions.options.get("feeder.eventstreams.baseURL")
-  private val streams = LiveOptions.options.get("feeder.eventstreams.streams").split("\\s*,\\s*").toList
+  private val stream = LiveOptions.options.get("feeder.eventstreams.streams").split("\\s*,\\s*").toList
   private val allowedNamespaces  = LiveOptions.options.get("feeder.eventstreams.allowedNamespaces").split("\\s*,\\s*").toList.map((s:String )=> s.toInt)
   private val wikilanguage = LiveOptions.options.get("language")
   private val minBackoffFactor = LiveOptions.options.get("feeder.eventstreams.minBackoffFactor").toInt.second
@@ -78,26 +78,24 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
       Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemCollection(_))
 
 
-    for (stream <- streams) {
-      val sseSource = RestartSource.onFailuresWithBackoff(
-        minBackoff = minBackoffFactor,
-        maxBackoff = maxBackoffFactor,
-        randomFactor = 0.2
-      ) { () =>
-        Source.fromFutureSource {
-          Http().singleRequest(
-            HttpRequest(uri = baseURL + stream))
-            .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
-        }
+    val sseSource = RestartSource.onFailuresWithBackoff(
+      minBackoff = minBackoffFactor,
+      maxBackoff = maxBackoffFactor,
+      randomFactor = 0.2
+    ) { () =>
+      Source.fromFutureSource {
+        Http().singleRequest(
+          HttpRequest(uri = baseURL + stream))
+          .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
       }
+    }
 
-      sseSource
-        .via(flowData).log("dataFlow")
-        .filter(data => filterNamespaceAndLanguage(data)).log("filter")
-        .via(flowLiveQueueItem).log("livequeueItemFlow")
-        .toMat(sinkAddToQueue)(Keep.right)
-        .run()
-      }
+    sseSource
+      .via(flowData).log("dataFlow")
+      .filter(data => filterNamespaceAndLanguage(data)).log("filter")
+      .via(flowLiveQueueItem).log("livequeueItemFlow")
+      .toMat(sinkAddToQueue)(Keep.right)
+      .run()
   }
 
   /**
