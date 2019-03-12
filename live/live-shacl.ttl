@@ -1,0 +1,58 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix cert: <http://www.w3.org/ns/auth/cert#> .
+@prefix my: <http://www.whatever.org/> .
+@prefix dbo:	<http://dbpedia-live.openlinksw.com/ontology/> .
+
+
+my:DuplicateShape 
+	a sh:NodeShape ;
+	sh:targetClass owl:Thing ;
+	sh:property [                 
+		sh:path rdfs:label ; 
+		sh:uniqueLang true ;
+	]  ; 
+	sh:property [                 
+		sh:path rdfs:comment ; 
+		sh:uniqueLang true ;
+	]  ; 
+	sh:property [                 
+		sh:path dbo:abstract ; 
+		sh:uniqueLang true ;
+	]  ;  
+	sh:property [                 
+		sh:path dbo:wikiPageModified ; 
+		sh:minCount 1 ;
+		sh:maxCount 1 ;
+	]  ;
+	sh:property [                 
+		sh:path dbo:wikiPageRevisionID ; 
+		sh:minCount 1 ;
+		sh:maxCount 1 ;
+	]  ;
+	sh:property [                 
+		sh:path dbo:wikiPageExtracted ; 
+		sh:minCount 1 ;
+		sh:maxCount 1 ;
+	]  ;
+	sh:property [                 
+		sh:path dbo:wikiPageLength ; 
+		sh:minCount 1 ;
+		sh:maxCount 1 ;
+	]  ;
+	sh:property [                 
+		sh:path dbo:wikiPageRevisionLink ; 
+		sh:minCount 1 ;
+		sh:maxCount 1 ;
+	]  ;
+	sh:property [                 
+		sh:path dbo:wikiPageOutDegree ; 
+		sh:minCount 1 ;
+		sh:maxCount 1 ;
+
+	]  .
+
