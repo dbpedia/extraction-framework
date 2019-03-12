@@ -85,7 +85,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
     ) { () =>
       Source.fromFutureSource {
         Http().singleRequest(
-          HttpRequest(uri = baseURL + stream))
+          HttpRequest(uri = baseURL + stream.head))
           .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
       }
     }
