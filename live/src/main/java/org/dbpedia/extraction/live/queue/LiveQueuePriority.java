@@ -5,7 +5,7 @@ package org.dbpedia.extraction.live.queue;
  * 5:24:57 AM Different priority values allowed for a page.
  */
 public enum LiveQueuePriority {
-    LivePriority, ManualPriority, MappingPriority, OntologyPriority, UnmodifiedPagePriority;
+    LivePriority, ManualPriority, MappingPriority, OntologyPriority, UnmodifiedPagePriority, EventStreamsPriority;
 
     @Override
     public String toString() {
@@ -20,6 +20,8 @@ public enum LiveQueuePriority {
                 return "Ontology LiveQueuePriority";
             case UnmodifiedPagePriority:
                 return "Unmodified LiveQueuePriority";
+          case EventStreamsPriority:
+                return  "EventStreams LiveQueuePriority";
             default:
                 return "";
         }
