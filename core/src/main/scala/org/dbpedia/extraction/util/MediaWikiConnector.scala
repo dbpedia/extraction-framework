@@ -19,7 +19,7 @@ import org.dbpedia.extraction.config.Config.MediaWikiConnection
 class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[String]) {
 
 
-  protected def apiUrl: URL = new URL(connectionConfig.apiUrl)
+  //protected def apiUrl: URL = new URL(connectionConfig.apiUrl)
   //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
 
   protected val maxRetries: Int = connectionConfig.maxRetries
@@ -60,6 +60,7 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
       case (search, replacement) =>  titleParam = titleParam.replace(search, replacement);
     }
 
+    val apiUrl: URL = new URL(connectionConfig.apiUrl.replace("{{LANG}}",pageTitle.language.wikiCode))
     // Fill parameters
     val parameters = "uselang=" + pageTitle.language.wikiCode + (pageTitle.id match{
       case Some(id) if apiParameterString.contains("%d") =>
