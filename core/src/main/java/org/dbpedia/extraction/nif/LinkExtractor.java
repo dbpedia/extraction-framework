@@ -77,11 +77,11 @@ public class LinkExtractor implements NodeVisitor {
 		} else if(node.nodeName().equals("a")) {
             String link = node.attr("href");
             //remove internal links linking to mediawiki meta pages. Also removes links that contain ":".
-            if (link.contains("mediawiki") && !link.contains(":")) {
+            if (link.contains("wiki") && !link.contains(":")) {
                 tempLink = new Link();
                 String uri = cleanLink(node.attr("href"), false);
                 setUri(uri);
-            } else if (link.contains("mediawiki") && link.contains(":")) {
+            } else if (link.contains("wiki") && link.contains(":")) {
 
                 if (!node.childNodes().isEmpty()) {
                     if (node.childNode(0).nodeName().equals("#text") &&
