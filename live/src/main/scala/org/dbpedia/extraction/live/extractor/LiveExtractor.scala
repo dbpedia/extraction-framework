@@ -1,13 +1,12 @@
 package org.dbpedia.extraction.live.extractor
 
+import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.util.{ExtractionRecorder, Language}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.mappings._
-
-import collection.mutable.ListBuffer
 import scala.reflect.ClassTag
 
 /**
@@ -75,6 +74,10 @@ object LiveExtractor
         def commonsSource : Source = _commonsSource
 
         def recorder[T: ClassTag]: ExtractionRecorder[T] = null.asInstanceOf[ ExtractionRecorder[T]]
+
+        def configFile: Config = {
+          new Config("../dump/extraction.nif.abstracts.properties")
+        }
       }
   }
 
