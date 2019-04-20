@@ -1,13 +1,12 @@
 package org.dbpedia.extraction.live.processor;
 
-import org.dbpedia.extraction.util.Language;
-import org.slf4j.Logger;
-import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.storage.JSONCache;
+import org.dbpedia.extraction.util.Language;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
@@ -57,27 +56,27 @@ public class PageProcessor extends Thread{
             if (isTitle) {
                 extracted = LiveExtractionConfigLoader.extractPageFromTitle(
                         item,
-                        Language.apply(LiveOptions.language).apiUri(),
-                        LiveOptions.language);
+                        Language.apply(item.getWikiLanguage()).apiUri(),
+                        item.getWikiLanguage());
             } else {
                 extracted = LiveExtractionConfigLoader.extractPage(
                         item,
-                        Language.apply(LiveOptions.language).apiUri(),
-                        LiveOptions.language);
+                        Language.apply(item.getWikiLanguage()).apiUri(),
+                        item.getWikiLanguage()); //TODO pass only item
             }
 
             if (!extracted)
-                JSONCache.setErrorOnCache(item.getItemID(), -1);
+                JSONCache.setErrorOnCache(item, -1);
         }
         catch(Exception exp){
             logger.error("Error in processing page number " + item.getItemID() + ", and the reason is " + exp.getMessage(), exp);
-            JSONCache.setErrorOnCache(item.getItemID(), -2);
+            JSONCache.setErrorOnCache(item, -2);
         }
     }
 
 
     public void run(){
-        LiveQueueItem currentPage = new LiveQueueItem(0,"");
+        LiveQueueItem currentPage = new LiveQueueItem("", 0,"");
         LiveQueueItem lastPage = null;
         while(keepRunning){
             try{
@@ -93,7 +92,7 @@ public class PageProcessor extends Thread{
                     LiveExtractionConfigLoader.reload(page.getStatQueueAdd());
                 }
                 if (page.isDeleted() == true) {
-                    JSONCache.deleteCacheItem(page.getItemID(),LiveExtractionConfigLoader.policies());
+                    JSONCache.deleteCacheItem(page,LiveExtractionConfigLoader.policies());
                     logger.info("Deleted page with ID: " + page.getItemID() + " (" + page.getItemName() + ")");
                 }
                 else {

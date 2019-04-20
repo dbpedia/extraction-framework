@@ -22,6 +22,7 @@ class PublisherDiffDestination(val pageID: Long, val cleanUpdate: Boolean, val s
   var added = new ArrayBuffer[Quad]()
   var deleted = new ArrayBuffer[Quad]()
   var unmodified = new ArrayBuffer[Quad]()
+  val languages = LiveOptions.languages
 
 
   def open() { }
@@ -47,17 +48,20 @@ class PublisherDiffDestination(val pageID: Long, val cleanUpdate: Boolean, val s
     if (cleanUpdate) {
 
       // We also create a list of resources to delete completely with "<...> ?p ?o"
-      var subjectURIs = new mutable.HashSet[String]()
+      var subjectURIs = new mutable.HashMap[String, String]()
       for (quad <- added)
-        subjectURIs.add(quad.subject);
+        subjectURIs.add(quad.subject, quad.language)
       for (quad <- deleted)
-        subjectURIs.add(quad.subject);
+        subjectURIs.add(quad.subject, quad.language)
       for (quad <- unmodified)
-        subjectURIs.add(quad.subject);
+        subjectURIs.add(quad.subject, quad.language)
 
-      for (uri: String <- subjectURIs) {
-        if (!uri.contains("dbpedia.org/property") && uri.startsWith("http")) { // skip global property definitions or non-http uris
-          resourceToClear.add(new Quad(LiveOptions.language, "", uri, "http://dbpedia.org/delete", " ?p ?o ", "", "http://www.w3.org/2001/XMLSchema#string"))
+      for (uri: (String,String) <- subjectURIs) {
+        if (!uri._1.contains("dbpedia.org/property") && uri._1.startsWith("http")) { // skip global property definitions or non-http uris
+
+            resourceToClear.add(new Quad(uri._2, "", uri._1, "http://dbpedia.org/delete", " ?p ?o ", "", "http://www.w3.org/2001/XMLSchema#string"))
+
+
         }
       }
     }

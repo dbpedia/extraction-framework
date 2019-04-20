@@ -42,7 +42,7 @@ object LiveExtractionConfigLoader
   private var extractors : List[Extractor[_]] = _
   private var reloadOntologyAndMapping = true
   private var ontologyAndMappingsUpdateTime : Long = 0
-  private val language = Language.apply(LiveOptions.language)
+  private val language = Language.apply("some kind of language") //TODO implement multilanguage
   private val namespaces = if (language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
     else Set(Namespace.Main, Namespace.Template, Namespace.Category)
   val logger: Logger = LoggerFactory.getLogger("LiveExtractionConfigLoader")
@@ -146,7 +146,7 @@ object LiveExtractionConfigLoader
       if(namespaces.contains(wikiPage.title.namespace))
       {
 
-        val liveCache = new JSONCache(wikiPage.id, wikiPage.title.decoded)
+        val liveCache = new JSONCache(language.wikiCode, wikiPage.id, wikiPage.title.decoded) //
 
         var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
         destList += new JSONCacheUpdateDestination(liveCache)
@@ -210,7 +210,7 @@ object LiveExtractionConfigLoader
       else
       {
         // If not in the allowed namespace, delete cache (if exists)
-        JSONCache.deleteCacheOnlyItem(wikiPage.id)
+        JSONCache.deleteCacheOnlyItem(wikiPage.title.language.wikiCode, wikiPage.id) //TODO make sure the wikicode is whats needed here
       }
 
     }

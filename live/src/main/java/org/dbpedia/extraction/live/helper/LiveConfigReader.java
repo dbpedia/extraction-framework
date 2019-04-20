@@ -41,9 +41,9 @@ public class LiveConfigReader {
 
 
 
-    //Tag names that are use in live.config file
+    //Tag names that are use in live.xml file
     private static final String EXTRACTOR_TAGNAME = "extractor";
-    private static final String LANUAGE_TAGNAME = "language";
+    private static final String LANUAGE_TAGNAME = "languages";
     private static final String UPDATE_ONTOLGY_AND_MAPPINGS_PERIOD_TAGNAME = "updateOntologyAndMappingsPeriod";
 
     private static final String NAME_ATTRIBUTENAME = "name";
@@ -87,7 +87,7 @@ public class LiveConfigReader {
     }
 
     /**
-     * Reads each language along with its set of extractors
+     * Reads each languages along with its set of extractors
      */
     private static void readExtractors(){
         NodeList languageNodes = doc.getElementsByTagName(LANUAGE_TAGNAME);
@@ -107,8 +107,8 @@ public class LiveConfigReader {
 
     /**
      * Gets the list of extractors specified in the config file along with the status of each extractor
-     * @param   elemLanguageExtractors  The XML element containing the extractors of a language
-     * @param   lang    The language code 
+     * @param   elemLanguageExtractors  The XML element containing the extractors of a languages
+     * @param   lang    The languages code
      * */
     private static void readLanguageExtractors(Element elemLanguageExtractors, Language lang){
         try{
@@ -156,8 +156,8 @@ public class LiveConfigReader {
 
     /**
      * Loads the generic match patterns for some extractors e.g. SkosCategoriesExtractor, because those extractors
-     * need a specific pattern for language specific category 
-     * @param lang  The required language
+     * need a specific pattern for languages specific category
+     * @param lang  The required languages
      * @param extractorID   The ID of the required extractor
      * @return  The match pattern suitable for the passed extractor
      */
@@ -249,7 +249,7 @@ public class LiveConfigReader {
 
     /**
      * Returns the extractors with the passed status
-     * @param lang  The required language for which the extractors should be returned
+     * @param lang  The required languages for which the extractors should be returned
      * @param   requiredStatus  The status of the extractors
      * @return  A list containing the extractors of the passed status 
      */

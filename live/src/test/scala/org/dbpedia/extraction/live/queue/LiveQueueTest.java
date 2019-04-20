@@ -13,19 +13,19 @@ public class LiveQueueTest {
     @Test
     public void queueTest() throws InterruptedException {
 
-        LiveQueueItem item1 = new LiveQueueItem(-1, "title1", DateUtil.transformToUTC(System.currentTimeMillis()), false, "");
+        LiveQueueItem item1 = new LiveQueueItem("", -1, "title1", DateUtil.transformToUTC(System.currentTimeMillis()), false, "");
         item1.setPriority(LiveQueuePriority.LivePriority);
-        LiveQueueItem item2 = new LiveQueueItem(-1, "title1", DateUtil.transformToUTC(System.currentTimeMillis()), false, "");
+        LiveQueueItem item2 = new LiveQueueItem("", -1, "title1", DateUtil.transformToUTC(System.currentTimeMillis()), false, "");
         item2.setPriority(LiveQueuePriority.LivePriority);
 
-        LiveQueueItem qL1 = new LiveQueueItem(1, "item L1", "2016-07-13T10:29:43Z", false, "");
+        LiveQueueItem qL1 = new LiveQueueItem("", 1, "item L1", "2016-07-13T10:29:43Z", false, "");
         qL1.setPriority(LiveQueuePriority.LivePriority);
-        LiveQueueItem qL2 = new LiveQueueItem(2, "item L2", "2016-07-13T10:29:50Z", false, "");
+        LiveQueueItem qL2 = new LiveQueueItem("", 2, "item L2", "2016-07-13T10:29:50Z", false, "");
         qL2.setPriority(LiveQueuePriority.LivePriority);
 
-        LiveQueueItem qU1 = new LiveQueueItem(3, "item U1", "2016-07-13T10:29:55Z", false, "");
+        LiveQueueItem qU1 = new LiveQueueItem("", 3, "item U1", "2016-07-13T10:29:55Z", false, "");
         qU1.setPriority(LiveQueuePriority.UnmodifiedPagePriority);
-        LiveQueueItem qU2 = new LiveQueueItem(4, "item U2", "2016-07-13T10:29:56Z", false, "");
+        LiveQueueItem qU2 = new LiveQueueItem("", 4, "item U2", "2016-07-13T10:29:56Z", false, "");
         qU2.setPriority(LiveQueuePriority.UnmodifiedPagePriority);
 
         LiveQueue.add(qU1);

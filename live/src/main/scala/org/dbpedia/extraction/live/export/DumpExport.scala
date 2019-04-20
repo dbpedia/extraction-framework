@@ -27,6 +27,8 @@ class DumpExport(val filename: String, val threads: Integer) {
     UriPolicy.parsePolicy(LiveOptions.options.get("uri-policy.main"))
   }
 
+  val wikiLanguages = LiveOptions.options.get("languages").split("\\s*,\\s*").toList
+
   val destination: Destination = new WriterDestination(writer(new File(filename)), new TerseFormatter(false, true, policies))
 
   // Max threads in thread pool queu 4 x running threads

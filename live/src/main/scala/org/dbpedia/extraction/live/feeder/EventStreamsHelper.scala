@@ -69,6 +69,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
     val flowData: Flow[ServerSentEvent, String, NotUsed] = Flow.fromFunction(_.getData())
     val flowLiveQueueItem: Flow[String, LiveQueueItem, NotUsed] = Flow.fromFunction(eventData =>
       new LiveQueueItem(
+        "the appropriate language", //TODO implement multilanguage
         -1,
         parseStringFromJson(eventData, "title"),
         DateUtil.transformToUTC(parseIntFromJson(eventData, "timestamp")),

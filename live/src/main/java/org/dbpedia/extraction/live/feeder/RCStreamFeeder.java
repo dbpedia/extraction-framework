@@ -133,7 +133,7 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
             Long timestamp = jsonObject.get("timestamp").getAsLong();
             String eventTimestamp = DateUtil.transformToUTC(timestamp * 1000L);
             synchronized (this) {
-                events.add(new LiveQueueItem(-1, title, eventTimestamp, false, ""));
+                events.add(new LiveQueueItem("", -1, title, eventTimestamp, false, "")); //TODO implement multilanguage
                 logger.debug("Registered event for page " + title + " at " + eventTimestamp);
             }
         }

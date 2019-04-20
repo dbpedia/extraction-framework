@@ -1,11 +1,13 @@
 package org.dbpedia.extraction.live.core;
 
-import org.ini4j.*;
+import org.ini4j.Options;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,5 +37,5 @@ public class LiveOptions {
 
     }
 
-    public static String language = LiveOptions.options.get("language");
+    public static List<String> languages = Arrays.asList(LiveOptions.options.get("languages").split(","));
 }

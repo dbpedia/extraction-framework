@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class AllPagesFeeder extends Feeder {
 
-    private final Language language = Language.apply(LiveOptions.options.get("language"));
+    private final Language language = Language.apply(LiveOptions.options.get("languages"));
     private WikiApi api;
     private boolean isFinished = false;
     private String continueString = "-||";
@@ -59,7 +59,7 @@ public class AllPagesFeeder extends Feeder {
         if (!isFinished) {
             List<Node> pageList = queryAllPagesAPI();
             for (Node page : pageList) {
-                queue.add(new LiveQueueItem(Long.parseLong(page.$bslash$at("pageid")), page.$bslash$at("title"), DateUtil.transformToUTC(new Date()), false, ""));
+                queue.add(new LiveQueueItem("some language", Long.parseLong(page.$bslash$at("pageid")), page.$bslash$at("title"), DateUtil.transformToUTC(new Date()), false, "")); //TODO implement multilanguage
             }
             if (continueTitle.isEmpty()) {
                 goToNextNamespace();

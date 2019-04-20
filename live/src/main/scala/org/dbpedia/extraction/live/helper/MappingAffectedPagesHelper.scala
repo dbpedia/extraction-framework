@@ -19,8 +19,8 @@ import org.dbpedia.extraction.live.core.LiveOptions
 object MappingAffectedPagesHelper {
   def GetMappingPages(title: String): List[Long] = {
 
-    val langCode = LiveOptions.language
-    val language = Language.apply(langCode)
+    val langCode = LiveOptions.languages
+    val language = Language.apply(langCode.get(0)) // TODO this definitely needs fixing (make multilingual, but in this case that means most probably deleting ALL OAI related code)
     val templateTitle = new WikiTitle(title, Namespace.Template, language)
     val wikiApiUrl = new URL(LiveOptions.options.get("localApiURL"))
     val api = new WikiApi(wikiApiUrl, language)

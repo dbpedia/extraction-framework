@@ -10,6 +10,7 @@ import java.util.Objects;
  * Item for update.
  */
 public class LiveQueueItem implements Comparable<LiveQueueItem>{
+    private String wikiLanguage;
     private long itemID = 0;
     private LiveQueuePriority itemPriority;
     private String itemName = "";
@@ -18,17 +19,23 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
     private long statQueueAdd = 0;
     private String xml = "";
 
-    public LiveQueueItem(long itemID, String modificationDate){
+    public LiveQueueItem(String wikiLanguage, long itemID, String modificationDate){
+        this.wikiLanguage = wikiLanguage;
         this.itemID = itemID;
         this.modificationDate = modificationDate;
     }
 
-    public LiveQueueItem(long itemID, String itemName, String modificationDate, boolean deleted, String xml){
+    public LiveQueueItem(String wikiLanguage, long itemID, String itemName, String modificationDate, boolean deleted, String xml){
+        this.wikiLanguage = wikiLanguage;
         this.itemID = itemID;
         this.itemName = itemName;
         this.modificationDate = modificationDate;
         this.deleted = deleted;
         this.xml = xml;
+    }
+
+    public  String getWikiLanguage(){
+        return wikiLanguage;
     }
 
     public long getItemID() {
@@ -86,7 +93,7 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
 
     @Override
     public int hashCode() {
-        return Objects.hash(itemID, itemPriority, itemName, modificationDate, deleted, statQueueAdd, xml);
+        return Objects.hash(wikiLanguage, itemID, itemPriority, itemName, modificationDate, deleted, statQueueAdd, xml);
     }
 
     @Override
@@ -98,7 +105,8 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
             return false;
         }
         final LiveQueueItem other = (LiveQueueItem) obj;
-        return Objects.equals(this.itemID, other.itemID)
+        return Objects.equals(this.wikiLanguage, other.wikiLanguage)
+                && Objects.equals(this.itemID, other.itemID)
                 && Objects.equals(this.itemPriority, other.itemPriority)
                 && Objects.equals(this.itemName, other.itemName)
                 && Objects.equals(this.modificationDate, other.modificationDate)

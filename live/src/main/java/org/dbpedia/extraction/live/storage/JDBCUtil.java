@@ -1,15 +1,13 @@
 package org.dbpedia.extraction.live.storage;
 
 
-import org.slf4j.Logger;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.util.DateUtil;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -120,7 +118,7 @@ public class JDBCUtil {
     /*
     * Custon function for retrieving Cache contents (this is application specific)
     * */
-    public static JSONCacheItem getCacheContent(String query, long pageID) {
+    public static JSONCacheItem getCacheContent(String query, String wikiLanguage, long pageID) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -128,7 +126,9 @@ public class JDBCUtil {
             conn = JDBCPoolConnection.getCachePoolConnection();
             stmt = conn.prepareStatement(query);
 
-            stmt.setLong(1, pageID);
+            stmt.setString(1, wikiLanguage);
+            stmt.setLong(2, pageID);
+
 
             result = stmt.executeQuery();
 
@@ -148,7 +148,7 @@ public class JDBCUtil {
                         subjectSet.add(org.apache.commons.lang.StringEscapeUtils.unescapeJava(subject));
                 }
 
-                return new JSONCacheItem(pageID, timesUpdated, jsonString, subjectSet);
+                return new JSONCacheItem(wikiLanguage, pageID, timesUpdated, jsonString, subjectSet);
             } else {
                 return null;
             }
@@ -198,11 +198,12 @@ public class JDBCUtil {
             items = new HashSet<>((int)limit);
 
             while (result.next()) {
+                String wikiLang = result.getString("wikiLanguage");
                 long pageID = result.getLong("pageID");
                 String title = result.getString("title");
                 Timestamp t = result.getTimestamp("updated");
                 String timestamp = DateUtil.transformToUTC(t.getTime());
-                items.add(new LiveQueueItem(pageID, title, timestamp, false, ""));
+                items.add(new LiveQueueItem(wikiLang, pageID, title, timestamp, false, ""));
             }
             return items;
         } catch (Exception e) {
