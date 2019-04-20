@@ -62,23 +62,6 @@ public class Main {
                     LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
         }
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {
-            long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.pollInterval"));
-            long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.sleepInterval"));
-            feeders .add( new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
-                LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),
-                pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
-                LiveOptions.options.get("working_directory")));
-        }
-
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled")) == true) {
-            long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.live.pollInterval"));
-            long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.live.sleepInterval"));
-            feeders .add( new OAIFeeder("FeederLive", LiveQueuePriority.LivePriority,
-                LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
-                pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
-                LiveOptions.options.get("working_directory")));
-        }
 
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.unmodified.enabled")) == true) {
             int minDaysAgo = Integer.parseInt(LiveOptions.options.get("feeder.unmodified.minDaysAgo"));
