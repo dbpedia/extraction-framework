@@ -56,13 +56,13 @@ public class PageProcessor extends Thread{
             if (isTitle) {
                 extracted = LiveExtractionController.extractPageFromTitle(
                         item,
-                        Language.apply(item.getWikiLanguage()).apiUri(),
-                        item.getWikiLanguage());
+                        Language.apply(item.getWikiLanguage().wikiCode()).apiUri(),
+                        item.getWikiLanguage().wikiCode());
             } else {
                 extracted = LiveExtractionController.extractPage(
                         item,
-                        Language.apply(item.getWikiLanguage()).apiUri(),
-                        item.getWikiLanguage()); //TODO pass only item
+                        Language.apply(item.getWikiLanguage().wikiCode()).apiUri(),
+                        item.getWikiLanguage().wikiCode()); //TODO pass only item
             }
 
             if (!extracted)

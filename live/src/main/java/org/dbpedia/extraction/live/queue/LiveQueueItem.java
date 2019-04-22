@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.live.queue;
 
+import org.dbpedia.extraction.util.Language;
+
 import java.util.Objects;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Objects;
  * Item for update.
  */
 public class LiveQueueItem implements Comparable<LiveQueueItem>{
-    private String wikiLanguage;
+    private Language wikiLanguage;
     private long itemID = 0;
     private LiveQueuePriority itemPriority;
     private String itemName = "";
@@ -20,13 +22,13 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
     private String xml = "";
 
     public LiveQueueItem(String wikiLanguage, long itemID, String modificationDate){
-        this.wikiLanguage = wikiLanguage;
+        this.wikiLanguage = Language.apply(wikiLanguage);
         this.itemID = itemID;
         this.modificationDate = modificationDate;
     }
 
     public LiveQueueItem(String wikiLanguage, long itemID, String itemName, String modificationDate, boolean deleted, String xml){
-        this.wikiLanguage = wikiLanguage;
+        this.wikiLanguage = Language.apply(wikiLanguage);
         this.itemID = itemID;
         this.itemName = itemName;
         this.modificationDate = modificationDate;
@@ -34,7 +36,7 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
         this.xml = xml;
     }
 
-    public  String getWikiLanguage(){
+    public  Language getWikiLanguage(){
         return wikiLanguage;
     }
 

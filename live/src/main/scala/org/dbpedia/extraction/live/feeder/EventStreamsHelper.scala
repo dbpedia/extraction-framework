@@ -15,6 +15,7 @@ import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.dbpedia.extraction.live.config.LiveOptions
 import org.dbpedia.extraction.live.queue.LiveQueueItem
 import org.dbpedia.extraction.live.util.DateUtil
+import org.dbpedia.extraction.util.Language
 import org.slf4j.LoggerFactory
 
 import scala.concurrent.Future
@@ -44,6 +45,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   private val stream = LiveOptions.options.get("feeder.eventstreams.streams").split("\\s*,\\s*").toList
   private val allowedNamespaces  = LiveOptions.options.get("feeder.eventstreams.allowedNamespaces").split("\\s*,\\s*").toList.map((s:String )=> s.toInt)
   private val wikilanguage = LiveOptions.options.get("language")
+  private val wikilanguages = LiveOptions.options.get("languages").split("\\s*,\\s*").toList
   private val minBackoffFactor = LiveOptions.options.get("feeder.eventstreams.minBackoffFactor").toInt.second
   private val maxBackoffFactor = LiveOptions.options.get("feeder.eventstreams.maxBackoffFactor").toInt.second
 
@@ -70,7 +72,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
     val flowData: Flow[ServerSentEvent, String, NotUsed] = Flow.fromFunction(_.getData())
     val flowLiveQueueItem: Flow[String, LiveQueueItem, NotUsed] = Flow.fromFunction(eventData =>
       new LiveQueueItem(
-        "the appropriate language", //TODO implement multilanguage
+        parseStringFromJson(eventData, "wiki").replace("wiki", ""), //TODO implement multilanguage
         -1,
         parseStringFromJson(eventData, "title"),
         DateUtil.transformToUTC(parseIntFromJson(eventData, "timestamp")),
@@ -78,6 +80,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
         ""))
     val sinkAddToQueue: Sink[LiveQueueItem, Future[Done]] =
       Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemCollection(_))
+
 
 
     val sseSource = RestartSource.onFailuresWithBackoff(
@@ -121,7 +124,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
     if (parseIntFromJson(data, "timestamp") == -1){
       keep = false
     }
-    keep && language == wikilanguage + "wiki"
+    keep && wikilanguages.contains(language.replace("wiki", ""))
   }
 
   

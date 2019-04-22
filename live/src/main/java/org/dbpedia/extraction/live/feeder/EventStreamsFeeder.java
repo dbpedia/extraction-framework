@@ -1,12 +1,13 @@
 package org.dbpedia.extraction.live.feeder;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import org.dbpedia.extraction.live.config.LiveOptions;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 /**
@@ -54,6 +55,7 @@ public class EventStreamsFeeder extends Feeder {
 
     public static synchronized void addQueueItemCollection(LiveQueueItem item){
         if (item.getItemName()!= ""){
+            System.out.println(item.getWikiLanguage());
             queueItemCollection.add(item);
         }
     }

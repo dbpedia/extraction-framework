@@ -155,11 +155,11 @@ object JSONCache {
   JSONCache.mapper.registerModule(DefaultScalaModule)
 
   def setErrorOnCache(item: LiveQueueItem, error: Int) {
-    JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateError, Array[String]("" + error, "" + item.getWikiLanguage, "" + item.getItemID))
+    JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateError, Array[String]("" + error, "" + item.getWikiLanguage.wikiCode, "" + item.getItemID))
   }
 
   def deleteCacheItem(item: LiveQueueItem, policies: Array[Policy] = null) {
-    val cache = new JSONCache(item.getWikiLanguage, item.getItemID, "")
+    val cache = new JSONCache(item.getWikiLanguage.wikiCode, item.getItemID, "")
     val triples = cache.getAllHashedTriples()
 
     var destList = new ArrayBuffer[LiveDestination]()
@@ -171,7 +171,7 @@ object JSONCache {
     compositeDest.write("dummy extractor","dummy hash", Seq(), triples, Seq())
     compositeDest.close
 
-    deleteCacheOnlyItem(item.getWikiLanguage, item.getItemID)
+    deleteCacheOnlyItem(item.getWikiLanguage.wikiCode, item.getItemID)
   }
 
   def deleteCacheOnlyItem(wikiLanguage: String, pageID: Long) {
