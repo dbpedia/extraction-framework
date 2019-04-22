@@ -15,8 +15,8 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.UriPolicy
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.Policy
-import org.dbpedia.extraction.live.helper.{ExtractorStatus, LiveConfigReader}
-import org.dbpedia.extraction.live.core.LiveOptions
+import org.dbpedia.extraction.live.config.LiveOptions
+import org.dbpedia.extraction.live.config.extractors.{ExtractorStatus, LiveExtractorConfigReader}
 
 import collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.live.storage.JSONCache
@@ -36,7 +36,7 @@ import org.dbpedia.extraction.live.extractor.LiveExtractor
  * the required triples from the wikipage.
  */
 
-object LiveExtractionConfigLoader
+object LiveExtractionController
 {
   //    private var config : Config = null;
   private var extractors : List[Extractor[_]] = _
@@ -157,7 +157,7 @@ object LiveExtractionConfigLoader
 
         val extractorDiffDest = new JSONCacheExtractorDestination(liveCache, compositeDest) // filters triples to add/remove/leave
         // TODO get liveconfigReader permanently
-        val extractorRestrictDest = new ExtractorRestrictDestination ( LiveConfigReader.extractors.get(language), extractorDiffDest)
+        val extractorRestrictDest = new ExtractorRestrictDestination ( LiveExtractorConfigReader.extractors.get(language), extractorDiffDest)
 
         // We don't know in advance what parsers we will need so we initialize them as lazy and will be computed onfirst run
         lazy val pageNode = {
@@ -217,14 +217,15 @@ object LiveExtractionConfigLoader
     complete
   }
 
-  //This method loads the ontology and mappings
-  //@param  articlesSource  The source of the wikipage article
-  //@param  language  The required language
+  /** This method loads the ontology and mappings
+    * @param  articlesSource  The source of the wikipage article
+    * @param  language  The required language
+    */
   //    private def LoadOntologyAndMappings(articlesSource: Source, language: Language): Extractor = {
   private def LoadOntologyAndMappings(articlesSource: Source, language: Language): List[Extractor[_]] = {
 
     ontologyAndMappingsUpdateTime = System.currentTimeMillis
-    val extractorClasses = convertExtractorListToScalaList(LiveConfigReader.getExtractors(language, ExtractorStatus.ACTIVE))
+    val extractorClasses = convertExtractorListToScalaList(LiveExtractorConfigReader.getExtractors(language, ExtractorStatus.ACTIVE))
     LiveExtractor.load(ontologySource, mappingsSource, articlesSource, commonsSource,
             extractorClasses, language)
   }
@@ -250,10 +251,4 @@ object LiveExtractionConfigLoader
     extractorList
   }
 
-
-  private class LiveConfig(){
-    val xmlConfigTree: Elem = XML.loadFile("./live.config")
-    var currentNode: NodeSeq = xmlConfigTree \\ "extractor"
-    println(currentNode.toString)
-  }
 }

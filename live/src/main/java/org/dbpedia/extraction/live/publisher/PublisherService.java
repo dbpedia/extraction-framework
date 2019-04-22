@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.live.publisher;
 
-import org.dbpedia.extraction.live.core.LiveOptions;
+import org.dbpedia.extraction.live.config.LiveOptions;
 import org.dbpedia.extraction.live.util.Files;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

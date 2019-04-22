@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.live.helper
 
 import java.net.URL
+
+import org.dbpedia.extraction.live.config.LiveOptions
 import org.dbpedia.extraction.util.{Language, WikiApi}
 import org.dbpedia.extraction.wikiparser._
-
-import org.dbpedia.extraction.live.core.LiveOptions
 
 
 /**

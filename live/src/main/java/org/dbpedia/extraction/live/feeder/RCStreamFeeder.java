@@ -5,7 +5,7 @@ import io.socket.IOAcknowledge;
 import io.socket.IOCallback;
 import io.socket.SocketIO;
 import io.socket.SocketIOException;
-import org.dbpedia.extraction.live.core.LiveOptions;
+import org.dbpedia.extraction.live.config.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;

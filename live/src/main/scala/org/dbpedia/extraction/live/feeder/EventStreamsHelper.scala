@@ -12,10 +12,11 @@ import akka.stream.scaladsl._
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
-import org.dbpedia.extraction.live.core.LiveOptions
+import org.dbpedia.extraction.live.config.LiveOptions
 import org.dbpedia.extraction.live.queue.LiveQueueItem
 import org.dbpedia.extraction.live.util.DateUtil
 import org.slf4j.LoggerFactory
+
 import scala.concurrent.Future
 import scala.concurrent.duration._
 

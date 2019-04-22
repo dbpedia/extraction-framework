@@ -7,8 +7,8 @@ import java.util.concurrent._
 
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.{TerseFormatter, UriPolicy}
-import org.dbpedia.extraction.live.core.LiveOptions
-import org.dbpedia.extraction.live.storage.{JDBCUtil, JSONCache, DBpediaSQLQueries, JDBCPoolConnection}
+import org.dbpedia.extraction.live.config.LiveOptions
+import org.dbpedia.extraction.live.storage.{DBpediaSQLQueries, JDBCPoolConnection, JDBCUtil, JSONCache}
 import org.dbpedia.extraction.util.RichFile._
 import org.dbpedia.extraction.util.{IOUtils, ProxyAuthenticator}
 import org.slf4j.{Logger, LoggerFactory}

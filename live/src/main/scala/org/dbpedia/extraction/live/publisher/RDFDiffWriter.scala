@@ -5,7 +5,7 @@ import java.io._
 import org.apache.log4j.Logger
 import org.dbpedia.extraction.destinations.formatters.{TerseFormatter, UriPolicy}
 import org.dbpedia.extraction.destinations.{Destination, WriterDestination}
-import org.dbpedia.extraction.live.core.LiveOptions
+import org.dbpedia.extraction.live.config.LiveOptions
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.RichFile._

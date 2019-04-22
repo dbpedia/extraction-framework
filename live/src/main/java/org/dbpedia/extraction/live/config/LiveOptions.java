@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.live.core;
+package org.dbpedia.extraction.live.config;
 
 import org.ini4j.Options;
 import org.slf4j.Logger;

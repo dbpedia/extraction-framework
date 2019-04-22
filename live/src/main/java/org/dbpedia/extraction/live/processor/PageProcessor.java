@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.live.processor;
 
-import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
+import org.dbpedia.extraction.live.extraction.LiveExtractionController;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
@@ -54,12 +54,12 @@ public class PageProcessor extends Thread{
         try{
             Boolean extracted = false;
             if (isTitle) {
-                extracted = LiveExtractionConfigLoader.extractPageFromTitle(
+                extracted = LiveExtractionController.extractPageFromTitle(
                         item,
                         Language.apply(item.getWikiLanguage()).apiUri(),
                         item.getWikiLanguage());
             } else {
-                extracted = LiveExtractionConfigLoader.extractPage(
+                extracted = LiveExtractionController.extractPage(
                         item,
                         Language.apply(item.getWikiLanguage()).apiUri(),
                         item.getWikiLanguage()); //TODO pass only item
@@ -89,10 +89,10 @@ public class PageProcessor extends Thread{
                 currentPage = page;
                 // If a mapping page set extractor to reload mappings and ontology
                 if (page.getPriority() == LiveQueuePriority.MappingPriority) {
-                    LiveExtractionConfigLoader.reload(page.getStatQueueAdd());
+                    LiveExtractionController.reload(page.getStatQueueAdd());
                 }
                 if (page.isDeleted() == true) {
-                    JSONCache.deleteCacheItem(page,LiveExtractionConfigLoader.policies());
+                    JSONCache.deleteCacheItem(page, LiveExtractionController.policies());
                     logger.info("Deleted page with ID: " + page.getItemID() + " (" + page.getItemName() + ")");
                 }
                 else {

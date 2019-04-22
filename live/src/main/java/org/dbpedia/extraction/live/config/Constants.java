@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.live.core;
+package org.dbpedia.extraction.live.config;
 
 /**
  * Created by IntelliJ IDEA.

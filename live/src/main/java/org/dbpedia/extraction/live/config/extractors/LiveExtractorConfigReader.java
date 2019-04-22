@@ -1,8 +1,8 @@
-package org.dbpedia.extraction.live.helper;
+package org.dbpedia.extraction.live.config.extractors;
 
 import org.slf4j.Logger;
 // import org.apache.xerces.parsers.DOMParser;
-import org.dbpedia.extraction.live.core.Constants;
+import org.dbpedia.extraction.live.config.Constants;
 import org.dbpedia.extraction.mappings.ArticleCategoriesExtractor;
 import org.dbpedia.extraction.mappings.SkosCategoriesExtractor;
 import org.dbpedia.extraction.util.Language;
@@ -29,9 +29,9 @@ import java.util.Map;
  * Time: 3:56:55 PM
  * This class reads the configuration file of the live extraction.
  */
-public class LiveConfigReader {
+public class LiveExtractorConfigReader {
 
-    private static Logger logger = LoggerFactory.getLogger(LiveConfigReader.class);
+    private static Logger logger = LoggerFactory.getLogger(LiveExtractorConfigReader.class);
     // private static DOMParser parser = new DOMParser();
     private static final String liveConfigFile = "./live.xml";
 
@@ -41,7 +41,7 @@ public class LiveConfigReader {
 
 
 
-    //Tag names that are use in live.xml file
+    //Tag names that are used in live.xml file
     private static final String EXTRACTOR_TAGNAME = "extractor";
     private static final String LANUAGE_TAGNAME = "languages";
     private static final String UPDATE_ONTOLGY_AND_MAPPINGS_PERIOD_TAGNAME = "updateOntologyAndMappingsPeriod";

@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.live.helper;
+package org.dbpedia.extraction.live.config.extractors;
 
 import org.dbpedia.extraction.transform.Quad;
 

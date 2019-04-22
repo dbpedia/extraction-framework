@@ -2,7 +2,7 @@ package org.dbpedia.extraction.live.feeder;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import org.dbpedia.extraction.live.core.LiveOptions;
+import org.dbpedia.extraction.live.config.LiveOptions;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.slf4j.Logger;

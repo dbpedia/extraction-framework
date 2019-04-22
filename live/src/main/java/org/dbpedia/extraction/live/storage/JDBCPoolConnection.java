@@ -3,7 +3,7 @@ package org.dbpedia.extraction.live.storage;
 import com.jolbox.bonecp.BoneCP;
 import com.jolbox.bonecp.BoneCPConfig;
 import org.slf4j.Logger;
-import org.dbpedia.extraction.live.core.LiveOptions;
+import org.dbpedia.extraction.live.config.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
 import org.slf4j.LoggerFactory;
 

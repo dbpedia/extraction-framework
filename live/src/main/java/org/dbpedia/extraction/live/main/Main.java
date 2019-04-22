@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.live.main;
 
 
-import org.dbpedia.extraction.live.core.LiveOptions;
+import org.dbpedia.extraction.live.config.LiveOptions;
 import org.dbpedia.extraction.live.feeder.*;
 import org.dbpedia.extraction.live.processor.PageProcessor;
 import org.dbpedia.extraction.live.publisher.DiffData;
