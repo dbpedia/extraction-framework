@@ -38,13 +38,12 @@ import org.dbpedia.extraction.live.extractor.LiveExtractor
 
 object LiveExtractionController
 {
-  //    private var config : Config = null;
-  private var extractors : List[Extractor[_]] = _
+  private var multilanguageExtractors: Map[Language, List[Extractor[_]]] = _
   private var reloadOntologyAndMapping = true
   private var ontologyAndMappingsUpdateTime : Long = 0
-  private val language = Language.apply("some kind of language") //TODO implement multilanguage
+  private val languages = LiveOptions.options.get("languages").split("\\s*,\\s*").toList.map(s => Language.apply(s))
   private val namespaces = if (language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
-    else Set(Namespace.Main, Namespace.Template, Namespace.Category)
+    else Set(Namespace.Main, Namespace.Template, Namespace.Category) //TODO implement multilanguage
   val logger: Logger = LoggerFactory.getLogger("LiveExtractionConfigLoader")
 
   /** Ontology source */
@@ -54,10 +53,10 @@ object LiveExtractionController
     language = Language.Mappings )
 
   /** Mappings source */
-  val mappingsSource: Source =  WikiSource.fromNamespaces(
+  val mappingsSource: Map[Language, Source] =  languages.map(language => language -> WikiSource.fromNamespaces(
     namespaces = Set(Namespace.mappings(language)),
     url = new URL(Language.Mappings.apiUri),
-    language = Language.Mappings )
+    language = Language.Mappings )).toMap
 
   println ("COMMONS SOURCE = " + LiveOptions.options.get("commonsDumpsPath"))
 
@@ -127,10 +126,10 @@ object LiveExtractionController
   {
     // In case of single threading
     //Extractor
-    if(extractors==null || reloadOntologyAndMapping) {
+    if(multilanguageExtractors.get(language) == null || reloadOntologyAndMapping) {
       this.synchronized {
-        if(extractors==null || reloadOntologyAndMapping) {
-          extractors = LoadOntologyAndMappings(articlesSource, language)
+        if(multilanguageExtractors.get(language) ==null || reloadOntologyAndMapping) {
+          multilanguageExtractors  += (language -> LoadOntologyAndMappings(articlesSource, language))
           logger.info("Ontology and mappings reloaded")
           reloadOntologyAndMapping = false
         }
@@ -173,7 +172,7 @@ object LiveExtractionController
         extractorRestrictDest.open
 
         //Get triples from each extractor separately
-        extractors.foreach(extractor => {
+        multilanguageExtractors.get(language).foreach(extractor => {
           //Try to get extractor contents, onError just return empty triples
           val RequiredGraph =
             try{
@@ -226,7 +225,7 @@ object LiveExtractionController
 
     ontologyAndMappingsUpdateTime = System.currentTimeMillis
     val extractorClasses = convertExtractorListToScalaList(LiveExtractorConfigReader.getExtractors(language, ExtractorStatus.ACTIVE))
-    LiveExtractor.load(ontologySource, mappingsSource, articlesSource, commonsSource,
+    LiveExtractor.load(ontologySource, mappingsSource.getOrElse(language, null), articlesSource, commonsSource,
             extractorClasses, language)
   }
 
