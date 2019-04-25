@@ -56,12 +56,12 @@ public class PageProcessor extends Thread{
             if (isTitle) {
                 extracted = LiveExtractionController.extractPageFromTitle(
                         item,
-                        Language.apply(item.getWikiLanguage().wikiCode()).apiUri(),
+                        item.getWikiLanguage().apiUri(),
                         item.getWikiLanguage().wikiCode());
             } else {
                 extracted = LiveExtractionController.extractPage(
                         item,
-                        Language.apply(item.getWikiLanguage().wikiCode()).apiUri(),
+                        item.getWikiLanguage().apiUri(),
                         item.getWikiLanguage().wikiCode()); //TODO pass only item
             }
 
@@ -76,13 +76,13 @@ public class PageProcessor extends Thread{
 
 
     public void run(){
-        LiveQueueItem currentPage = new LiveQueueItem("", 0,"");
+        LiveQueueItem currentPage = new LiveQueueItem("en", 0,"");
         LiveQueueItem lastPage = null;
         while(keepRunning){
             try{
                 LiveQueueItem page = LiveQueue.take();
                 if (page.equals(lastPage)) {
-                    logger.info("Ignoring duplicatre page {} ({}) with priority {}", page.getItemName(), page.getItemID(), page.getPriority());
+                    logger.info("Ignoring duplicate page {} ({}) with priority {}", page.getItemName(), page.getItemID(), page.getPriority());
                     continue;
                 }
                 lastPage = page;

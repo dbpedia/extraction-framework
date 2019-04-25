@@ -55,7 +55,6 @@ public class EventStreamsFeeder extends Feeder {
 
     public static synchronized void addQueueItemCollection(LiveQueueItem item){
         if (item.getItemName()!= ""){
-            System.out.println(item.getWikiLanguage());
             queueItemCollection.add(item);
         }
     }

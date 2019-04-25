@@ -26,6 +26,8 @@ import scala.xml._
 import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
 import org.dbpedia.extraction.live.extractor.LiveExtractor
 
+import scala.collection.mutable
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,7 +40,7 @@ import org.dbpedia.extraction.live.extractor.LiveExtractor
 
 object LiveExtractionController
 {
-  private var multilanguageExtractors: Map[Language, List[Extractor[_]]] = _
+  private var multilanguageExtractors: mutable.HashMap[Language, List[Extractor[_]]] = new mutable.HashMap[Language, List[Extractor[_]]]()
   private var reloadOntologyAndMapping = true
   private var ontologyAndMappingsUpdateTime : Long = 0
   private val languages = LiveOptions.options.get("languages").split("\\s*,\\s*").toList.map(s => Language.apply(s))
@@ -126,9 +128,10 @@ object LiveExtractionController
   {
     // In case of single threading
     //Extractor
-    if(multilanguageExtractors.get(language) == null || reloadOntologyAndMapping) {
+
+    if(! multilanguageExtractors.contains(language) || reloadOntologyAndMapping) {
       this.synchronized {
-        if(multilanguageExtractors.get(language) ==null || reloadOntologyAndMapping) {
+        if(! multilanguageExtractors.contains(language) || reloadOntologyAndMapping) {
           multilanguageExtractors  += (language -> LoadOntologyAndMappings(articlesSource, language))
           logger.info("Ontology and mappings reloaded")
           reloadOntologyAndMapping = false
@@ -172,7 +175,8 @@ object LiveExtractionController
         extractorRestrictDest.open
 
         //Get triples from each extractor separately
-        multilanguageExtractors.get(language).foreach(extractor => {
+        multilanguageExtractors.get(language).foreach(extractors => {
+          extractors.foreach(extractor => {
           //Try to get extractor contents, onError just return empty triples
           val RequiredGraph =
             try{
@@ -193,14 +197,17 @@ object LiveExtractionController
                 case _ => Seq.empty
               }
 
-            }
+              }
+
+
             catch {
               case ex: Exception =>
                 logger.error("Error in " + extractor.getClass.getName + "\nError Message: " + ex.getMessage, ex)
                 Seq()
             }
           extractorRestrictDest.write(extractor.getClass.getName, "", RequiredGraph, Seq(), Seq())
-        })
+        })})
+
 
         extractorRestrictDest.close
         complete = true
