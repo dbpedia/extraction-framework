@@ -219,6 +219,7 @@ object LiveExtractionController
         JSONCache.deleteCacheOnlyItem(wikiPage.title.language.wikiCode, wikiPage.id) //TODO make sure the wikicode is whats needed here
       }
 
+
     }
     complete
   }
@@ -233,7 +234,7 @@ object LiveExtractionController
     ontologyAndMappingsUpdateTime = System.currentTimeMillis
     val extractorClasses = convertExtractorListToScalaList(LiveExtractorConfigReader.getExtractors(language, ExtractorStatus.ACTIVE))
     LiveExtractor.load(ontologySource, mappingsSource.getOrElse(language, null), articlesSource, commonsSource,
-            extractorClasses, language)
+            extractorClasses, language) //TODO make sure this doesn't have to be a class instance instead of an object
   }
 
   /**

@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.live.config.extractors;
 
-import org.slf4j.Logger;
-// import org.apache.xerces.parsers.DOMParser;
 import org.dbpedia.extraction.live.config.Constants;
+import org.dbpedia.extraction.live.config.LiveOptions;
 import org.dbpedia.extraction.mappings.ArticleCategoriesExtractor;
 import org.dbpedia.extraction.mappings.SkosCategoriesExtractor;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.wikiparser.Namespace;
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -16,10 +16,10 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.FileNotFoundException;
+import java.util.*;
+
+// import org.apache.xerces.parsers.DOMParser;
 
 
 /**
@@ -33,7 +33,7 @@ public class LiveExtractorConfigReader {
 
     private static Logger logger = LoggerFactory.getLogger(LiveExtractorConfigReader.class);
     // private static DOMParser parser = new DOMParser();
-    private static final String liveConfigFile = "./live.xml";
+    private static final String liveConfigFile = "./" + LiveOptions.options.get("languageExtractorConfig");
 
     private static DocumentBuilderFactory dbFactory;
     private static DocumentBuilder dBuilder;
@@ -58,32 +58,68 @@ public class LiveExtractorConfigReader {
     private static final String OBJECT_TAGNAME = "o";
     private static final String NOTICE_TAGNAME = "notice";
 
-
+    public static List<Language> languages = null;
     public static Map<Language,Map<String, ExtractorSpecification>>  extractors = null;
-
     public static Map<Language, List<Class>> extractorClasses = null;
+
 
     //Initialize the static members
     static{
         try{
-
             dbFactory = DocumentBuilderFactory.newInstance();
             dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(new File(liveConfigFile));
-            readExtractors();
 
-            /** Ontology source */
-//            JavaConversions.asEnumeration(WikiTitle.Namespace());
-//    Source ontologySource = WikiSource.fromNamespaces(Set(WikiTitle.Namespace().OntologyClass, WikiTitle.Namespace.OntologyProperty),
-//                                                   new URL("http://mappings.dbpedia.org/api.php"), Language.Default() );
-//
-//    /** Mappings source */
-//    Source mappingsSource =  WikiSource.fromNamespaces(Set(WikiTitle.Namespace.Mapping),
-//                                                    new URL("http://mappings.dbpedia.org/api.php"), Language.Default() );
+            readExtractorsForMultilanguage();
+            //readExtractors();
+        }
+        catch (FileNotFoundException e){
+            logger.error("Required xml file must be configured in live.ini file like this:\n" +
+                    "languageExtractorConfig = <yourfilename>.xml\n" + e.getMessage());
         }
         catch(Exception exp){
             logger.error(exp.getMessage(), exp);
         }
+    }
+
+
+    private static  void readExtractorsForMultilanguage(){
+        //iterate and build the required list of extractors
+        languages = new ArrayList<>();
+        extractors = new HashMap<Language,Map<String,ExtractorSpecification>>();
+        extractorClasses = new HashMap<Language,List<Class>>();
+
+        NodeList extractorNodes = doc.getElementsByTagName("extractor");
+        for(int i=0;i<extractorNodes.getLength(); i++){
+            Element element = (Element) extractorNodes.item(i);
+            String extractorName = element.getAttribute("name");
+            String status = element.getAttribute("status");
+            Arrays.asList(element.getAttribute("languages").split("\\s*,\\s*"))
+                    .forEach(elem -> multilangExtractors(Language.apply(elem), extractorName, ExtractorStatus.valueOf(status)));
+        }
+        System.out.println(extractors);
+    }
+
+    private static void multilangExtractors(Language lang , String extractor, ExtractorStatus status){
+        System.out.println("Language: " + lang + ", extractor: " + extractor  + ", status: " + status);
+        languages.add(lang);
+        List<Class> classes = extractorClasses.getOrDefault(lang, new ArrayList<>());
+        Map<String, ExtractorSpecification> langExtractors = new HashMap<String, ExtractorSpecification>(20);
+        try{
+            classes.add(ClassLoader.getSystemClassLoader().loadClass(extractor));
+            langExtractors.put(extractor, new ExtractorSpecification(extractor, status)); //TODO implement parsing of match patterns / notices if it is still important
+            //TODO: is the specific configuration for SkosCategoriesExtractor and ArticleCategoriesExtractor still needed here?
+            extractors.put(lang, langExtractors);
+            extractorClasses.put(lang, classes);
+        }
+        catch (ClassNotFoundException e){
+            logger.error("Error when trying to load class " + extractor + "\nBecause of: \n" + e.getMessage());
+        }
+        catch(Exception exp){
+            logger.error(exp.getMessage());
+        }
+
+
     }
 
     /**

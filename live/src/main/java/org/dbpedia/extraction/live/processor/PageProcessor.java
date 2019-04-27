@@ -5,7 +5,6 @@ import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.storage.JSONCache;
-import org.dbpedia.extraction.util.Language;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

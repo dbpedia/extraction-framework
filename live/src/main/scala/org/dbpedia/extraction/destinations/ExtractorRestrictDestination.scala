@@ -30,7 +30,7 @@ class ExtractorRestrictDestination(extractorSpecs: Map[String, ExtractorSpecific
 
     for (quad <- graphAdd) {
       if (spec != null && !spec.accept(quad)) deleted += quad.copy()
-      else if (spec.status == ExtractorStatus.KEEP) unmodified += quad.copy()
+      else if (spec != null && spec.status == ExtractorStatus.KEEP) unmodified += quad.copy()
       else added += quad.copy()
     }
 
