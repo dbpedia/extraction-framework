@@ -19,6 +19,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
  * Date: 11/19/12
  * Time: 8:38 PM
  * An iterator which takes an iterator of nodes and creates converts them to a LiveQueueItem.
+ * This class is currently not in use and stays checked in for documentation purposes
+ * Specifically, it has not yet been adapted to support multiple languages (May 2019)
  */
 public class NodeToLiveQueueItemTransformer implements Transformer<Node, LiveQueueItem>
 {
@@ -44,7 +46,7 @@ public class NodeToLiveQueueItemTransformer implements Transformer<Node, LiveQue
             // TODO add this for debugging, remove it later
             String xml = XMLUtil.toString(document);
 
-            return new LiveQueueItem(nodeItemID, nodeItemName, nodeModificationDate, nodeDeleted, xml);
+            return new LiveQueueItem("", nodeItemID, nodeItemName, nodeModificationDate, nodeDeleted, xml); //TODO support multiple languages4
 		}
 		catch (Exception e) {
 			logger.warn(ExceptionUtil.toString(e));

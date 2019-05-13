@@ -1,12 +1,8 @@
 package org.dbpedia.extraction.live.feeder;
 
-import org.dbpedia.extraction.live.core.LiveOptions;
-import org.dbpedia.extraction.live.helper.MappingAffectedPagesHelper;
+
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
-import scala.collection.JavaConversions;
-
-import java.util.HashSet;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,6 +10,8 @@ import java.util.HashSet;
  * Date: 9/10/12
  * Time: 10:08 AM
  * An OAI Feeder for the mappings wiki
+ * This class is currently not used and stays checked in only for documentation purposes
+ * Specifically, it has not been adapted to support multiple languages (May 2019)
  */
 public class OAIFeederMappings extends OAIFeeder {
 
@@ -29,8 +27,8 @@ public class OAIFeederMappings extends OAIFeeder {
                 pollInterval, sleepInterval, defaultStartTime,
                 folderBasePath);
 
-        String langCode = LiveOptions.language;
-        mappingNamespace = "Mapping " + langCode + ":";
+        //String langCode = LiveOptions.languages;
+        //mappingNamespace = "Mapping " + langCode + ":";
 
     }
 
@@ -44,9 +42,9 @@ public class OAIFeederMappings extends OAIFeeder {
         String title = item.getItemName().substring(item.getItemName().indexOf(":")+1);
 
         //if (!item.isDeleted()) {
-            for (Object newItem: new HashSet<>(JavaConversions.asJavaCollection(MappingAffectedPagesHelper.GetMappingPages(title)))) {
-                addPageIDtoQueue(new LiveQueueItem((Long) newItem, title, item.getModificationDate(), false, ""));
-            }
+            //for (Object newItem: new HashSet<>(JavaConversions.asJavaCollection(MappingAffectedPagesHelper.GetMappingPages(title)))) {
+                //addPageIDtoQueue(new LiveQueueItem((Long) newItem, title, item.getModificationDate(), false, ""));
+            //}
         //} else {
             // TODO find which template the deleted infobox was referring to
         //}
