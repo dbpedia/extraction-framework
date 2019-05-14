@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -106,6 +105,7 @@ public abstract class Feeder extends Thread {
         while (keepRunning) {
             try {
                 for (LiveQueueItem item : getNextItems()) {
+                    System.out.println("before handling: " + item);
                     handleFeedItem(item);
                 }
             } catch (java.lang.OutOfMemoryError exp) {

@@ -184,6 +184,7 @@ public class JDBCUtil {
     public static Set<LiveQueueItem> getCacheUnmodified(int daysAgo, long limit) {
         Connection conn = null;
         PreparedStatement stmt = null;
+        PreparedStatement updatedstmt = null;
         ResultSet result = null;
         Set<LiveQueueItem> items = null;
         try {
@@ -202,8 +203,11 @@ public class JDBCUtil {
                 long pageID = result.getLong("pageID");
                 String title = result.getString("title");
                 Timestamp t = result.getTimestamp("updated");
+                int timesUpdate = Integer.parseInt(result.getString("timesUpdated"))+1;
                 String timestamp = DateUtil.transformToUTC(t.getTime());
                 items.add(new LiveQueueItem(wikiLang, pageID, title, timestamp, false, ""));
+                JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateUnmodified(), new String[]{String.valueOf(timesUpdate), wikiLang, ""+pageID});
+
             }
             return items;
         } catch (Exception e) {
@@ -222,6 +226,14 @@ public class JDBCUtil {
             } catch (Exception e) {
                 logger.warn(e.getMessage());
             }
+            try {
+                if (updatedstmt != null){
+                    updatedstmt.close();
+                }
+            } catch (Exception e){
+                logger.warn(e.getMessage());
+            }
+
             try {
                 if (conn != null)
                     conn.close();

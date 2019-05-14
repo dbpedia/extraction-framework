@@ -34,7 +34,7 @@ object DBpediaSQLQueries {
   }
 
   def getJSONCacheUnmodified: String = {
-    "SELECT wikiLanguage, pageID, title, updated FROM DBPEDIALIVE_CACHE WHERE updated <= now() - INTERVAL ? DAY ORDER BY updated ASC LIMIT ? "
+    "SELECT wikiLanguage, pageID, title, updated, timesUpdated FROM DBPEDIALIVE_CACHE WHERE updated <= now() - INTERVAL ? DAY ORDER BY updated ASC LIMIT ? "
   }
 
   def getJSONCacheUpdateError: String = {
