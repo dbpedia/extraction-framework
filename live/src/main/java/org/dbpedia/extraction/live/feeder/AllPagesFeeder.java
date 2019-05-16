@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
@@ -26,7 +27,7 @@ import java.util.List;
  */
 public class AllPagesFeeder extends Feeder {
 
-    private final Language language = Language.apply(LiveOptions.options.get("languages"));
+    private final List<Language> language = LiveOptions.languages.stream().map(Language::apply).collect(Collectors.toList());
     private WikiApi api;
     private boolean isFinished = false;
     private String continueString = "-||";
@@ -38,7 +39,7 @@ public class AllPagesFeeder extends Feeder {
                           String folderBasePath) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
         try {
-            api = new WikiApi(new URL(language.apiUri()), language);
+            api = new WikiApi(new URL(language.get(0).apiUri()), language.get(0)); //TODO multilanguage
         } catch (MalformedURLException exp) {
             logger.error(ExceptionUtil.toString(exp), exp);
         }

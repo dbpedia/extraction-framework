@@ -19,6 +19,7 @@ import org.slf4j.{Logger, LoggerFactory}
  *
  * @author Dimitris Kontokostas
  * @since 9/18/14 4:33 PM
+  *        TODO: support multilanguage
  */
 class DumpExport(val filename: String, val threads: Integer) {
   val logger: Logger = LoggerFactory.getLogger(classOf[DumpExport])
@@ -27,7 +28,7 @@ class DumpExport(val filename: String, val threads: Integer) {
     UriPolicy.parsePolicy(LiveOptions.options.get("uri-policy.main"))
   }
 
-  val wikiLanguages = LiveOptions.options.get("languages").split("\\s*,\\s*").toList
+  val wikiLanguages = LiveOptions.languages
 
   val destination: Destination = new WriterDestination(writer(new File(filename)), new TerseFormatter(false, true, policies))
 

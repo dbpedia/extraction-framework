@@ -1,12 +1,12 @@
 package org.dbpedia.extraction.live.config;
 
+import org.dbpedia.extraction.live.config.extractors.LiveExtractorConfigReader;
 import org.ini4j.Options;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,5 +37,6 @@ public class LiveOptions {
 
     }
 
-    public static List<String> languages = Arrays.asList(LiveOptions.options.get("languages").split(","));
+    public static List<String> languages = LiveExtractorConfigReader.readLanguages();
+
 }

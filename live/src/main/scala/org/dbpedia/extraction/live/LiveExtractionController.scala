@@ -25,6 +25,7 @@ import org.dbpedia.extraction.live.queue.LiveQueueItem
 import scala.xml._
 import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
 import org.dbpedia.extraction.live.extractor.LiveExtractor
+import scala.collection.JavaConversions._
 
 import scala.collection.mutable
 
@@ -43,7 +44,7 @@ object LiveExtractionController
   private var multilanguageExtractors: mutable.HashMap[Language, List[Extractor[_]]] = new mutable.HashMap[Language, List[Extractor[_]]]()
   private var reloadOntologyAndMapping = true
   private var ontologyAndMappingsUpdateTime : Long = 0
-  private val languages = LiveOptions.options.get("languages").split("\\s*,\\s*").toList.map(s => Language.apply(s))
+  private var languages = LiveOptions.languages.map(Language.apply(_))
   private val namespaces = if (language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
     else Set(Namespace.Main, Namespace.Template, Namespace.Category) //TODO implement multilanguage
   val logger: Logger = LoggerFactory.getLogger("LiveExtractionConfigLoader")
@@ -55,7 +56,8 @@ object LiveExtractionController
     language = Language.Mappings )
 
   /** Mappings source */
-  val mappingsSource: Map[Language, Source] =  languages.map(language => language -> WikiSource.fromNamespaces(
+  val mappingsSource: Map[Language, Source] =  languages
+    .map(language => language -> WikiSource.fromNamespaces(
     namespaces = Set(Namespace.mappings(language)),
     url = new URL(Language.Mappings.apiUri),
     language = Language.Mappings )).toMap
