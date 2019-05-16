@@ -18,6 +18,7 @@ import org.dbpedia.extraction.live.util.DateUtil
 import org.dbpedia.extraction.util.Language
 import org.slf4j.LoggerFactory
 
+import scala.collection.JavaConverters
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
@@ -44,8 +45,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   private val baseURL = LiveOptions.options.get("feeder.eventstreams.baseURL")
   private val stream = LiveOptions.options.get("feeder.eventstreams.streams").split("\\s*,\\s*").toList
   private val allowedNamespaces  = LiveOptions.options.get("feeder.eventstreams.allowedNamespaces").split("\\s*,\\s*").toList.map((s:String )=> s.toInt)
-  private val wikilanguage = LiveOptions.options.get("language")
-  private val wikilanguages = LiveOptions.options.get("languages").split("\\s*,\\s*").toList
+  private val wikilanguages = LiveOptions.languages
   private val minBackoffFactor = LiveOptions.options.get("feeder.eventstreams.minBackoffFactor").toInt.second
   private val maxBackoffFactor = LiveOptions.options.get("feeder.eventstreams.maxBackoffFactor").toInt.second
 
@@ -138,5 +138,5 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   
 }
 
-
+//println("eventstreamshelper: wikilanguages:  " + wikilanguages.toString + ", language: " + language)
 

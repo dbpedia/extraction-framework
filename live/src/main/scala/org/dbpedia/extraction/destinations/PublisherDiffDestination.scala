@@ -22,7 +22,6 @@ class PublisherDiffDestination(val pageID: Long, val cleanUpdate: Boolean, val s
   var added = new ArrayBuffer[Quad]()
   var deleted = new ArrayBuffer[Quad]()
   var unmodified = new ArrayBuffer[Quad]()
-  val languages = LiveOptions.languages
 
 
   def open() { }

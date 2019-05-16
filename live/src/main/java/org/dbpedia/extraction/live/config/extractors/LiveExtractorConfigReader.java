@@ -107,8 +107,10 @@ public class LiveExtractorConfigReader {
         Map<String, ExtractorSpecification> langExtractors = new HashMap<String, ExtractorSpecification>(20);
         try{
             classes.add(ClassLoader.getSystemClassLoader().loadClass(extractor));
-            langExtractors.put(extractor, new ExtractorSpecification(extractor, status)); //TODO implement parsing of match patterns / notices if it is still important
+            langExtractors.put(extractor, new ExtractorSpecification(extractor, status));
+            //TODO implement parsing of match patterns / notices if it is still important
             //TODO: is the specific configuration for SkosCategoriesExtractor and ArticleCategoriesExtractor still needed here?
+            // see readExtractors() and readLanguageExtractors for reference
             extractors.put(lang, langExtractors);
             extractorClasses.put(lang, classes);
         }
@@ -122,6 +124,19 @@ public class LiveExtractorConfigReader {
 
     }
 
+    public static List<String> readLanguages(){
+        List<String> languageList = new ArrayList<>();
+
+        NodeList extractorNodes = doc.getElementsByTagName("extractor");
+        for(int i=0;i<extractorNodes.getLength(); i++){
+            Element element = (Element) extractorNodes.item(i);
+            languageList.addAll(Arrays.asList(
+                    element
+                    .getAttribute("languages")
+                    .split("\\s*,\\s*")));
+        }
+        return languageList;
+    }
     /**
      * Reads each languages along with its set of extractors
      */
