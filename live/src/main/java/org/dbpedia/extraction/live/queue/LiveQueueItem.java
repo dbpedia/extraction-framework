@@ -22,13 +22,13 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
     private String xml = "";
 
     public LiveQueueItem(String wikiLanguage, long itemID, String modificationDate){
-        this.wikiLanguage = Language.apply(wikiLanguage);
+        this.wikiLanguage = theLanguage(wikiLanguage);
         this.itemID = itemID;
         this.modificationDate = modificationDate;
     }
 
     public LiveQueueItem(String wikiLanguage, long itemID, String itemName, String modificationDate, boolean deleted, String xml){
-        this.wikiLanguage = Language.apply(wikiLanguage);
+        this.wikiLanguage = theLanguage(wikiLanguage);
         this.itemID = itemID;
         this.itemName = itemName;
         this.modificationDate = modificationDate;
@@ -75,6 +75,17 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
     public String getXML(){
         return xml;
     }
+
+    private Language theLanguage(String lang){
+        Language theLanguage;
+        if(lang.equals("")){
+            theLanguage =  Language.apply("en"); //TODO this is working in our specific situation but should be generalized in the long term
+        }else{
+            theLanguage =  Language.apply(lang);
+        }
+        return theLanguage;
+    }
+
 
     @Override
     public int compareTo(LiveQueueItem item) {

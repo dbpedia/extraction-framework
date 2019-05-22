@@ -62,9 +62,8 @@ public class UnmodifiedFeeder extends Feeder {
             }
         }
         Set<LiveQueueItem> items = JDBCUtil.getCacheUnmodified(minDaysAgo, chunk);
-        if (items.size() == 0) {
+        if (items != null && items.size() == 0) {
             try {
-
                 Thread.sleep(5 * sleepTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();

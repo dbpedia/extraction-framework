@@ -59,7 +59,8 @@ object UnmodifiedFeederCacheGenerator {
               }
             }
             if (pageID > 0) {
-              writer.write("INSERT INTO DBPEDIALIVE_CACHE(pageID, title, updated) VALUES(" + pageID + ", '" + pageTitle + "', '" + timestamp + "') ; \n")
+              writer.write("INSERT INTO DBPEDIALIVE_CACHE(wikiLanguage, pageID, title, updated) VALUES(" +
+                "'" + language.wikiCode + "', " + pageID + ", '" + pageTitle + "', '" + timestamp + "') ; \n")
             }
 
         }

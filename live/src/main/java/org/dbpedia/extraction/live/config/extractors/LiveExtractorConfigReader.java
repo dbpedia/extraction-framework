@@ -62,6 +62,9 @@ public class LiveExtractorConfigReader {
     public static Map<Language,Map<String, ExtractorSpecification>>  extractors = null;
     public static Map<Language, List<Class>> extractorClasses = null;
 
+    public LiveExtractorConfigReader() {
+     readExtractorsForMultilanguage();
+    }
 
     //Initialize the static members
     static{

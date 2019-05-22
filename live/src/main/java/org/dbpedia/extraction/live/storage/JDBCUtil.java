@@ -206,8 +206,8 @@ public class JDBCUtil {
                 int timesUpdate = Integer.parseInt(result.getString("timesUpdated"))+1;
                 String timestamp = DateUtil.transformToUTC(t.getTime());
                 items.add(new LiveQueueItem(wikiLang, pageID, title, timestamp, false, ""));
-                JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateUnmodified(), new String[]{String.valueOf(timesUpdate), wikiLang, ""+pageID});
-
+                JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateUnmodified(), new String[]{String.valueOf(timesUpdate), ""+wikiLang, ""+pageID});
+                //TODO separate retrieving the cache and updating the updated field (preferably in the UnmodifiedFeeder itself)
             }
             return items;
         } catch (Exception e) {
