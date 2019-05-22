@@ -2,8 +2,8 @@
 -- Table structure for table `DBPEDIALIVE_CACHE`
 --
 
-SET SESSION innodb_file_per_table=1;
-SET SESSION innodb_file_format=Barracuda;
+SET GLOBAL innodb_file_per_table=1;
+SET GLOBAL innodb_file_format=Barracuda;
 
 DROP TABLE IF EXISTS `DBPEDIALIVE_CACHE`;
 CREATE TABLE IF NOT EXISTS `DBPEDIALIVE_CACHE` (
