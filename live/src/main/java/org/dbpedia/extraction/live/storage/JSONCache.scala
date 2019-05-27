@@ -112,10 +112,12 @@ class JSONCache(wikiLanguage: String, pageID: Long, pageTitle: String) {
     val escaped_json = org.apache.commons.lang.StringEscapeUtils.escapeJava(json)
     // Check wheather to update oΑr insert
     if (cacheExists) {
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](this.pageTitle, updatedTimes,  escaped_json, subjects.toString, diff, this.wikiLanguage, "" + this.pageID))
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](
+        this.pageTitle, updatedTimes,  escaped_json, subjects.toString, diff, this.wikiLanguage, "" + this.pageID))
     }
     else
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String](this.wikiLanguage, "" + this.pageID, this.pageTitle, updatedTimes,  escaped_json, subjects.toString, diff))
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String](
+        this.wikiLanguage, "" + this.pageID, this.pageTitle, updatedTimes,  escaped_json, subjects.toString, diff))
   }
 
   private def initCache {

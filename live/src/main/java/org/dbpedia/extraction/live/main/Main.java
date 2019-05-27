@@ -10,11 +10,9 @@ import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.storage.JDBCUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
-import org.dbpedia.extraction.live.util.Files;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.util.ArrayList;
@@ -167,7 +165,7 @@ public class Main {
             }
         });
 
-        authenticate("dbpedia", Files.readFile(new File("pw.txt")).trim());
+        //authenticate("dbpedia", Files.readFile(new File("pw.txt")).trim());
 
         initLive();
         startLive();
