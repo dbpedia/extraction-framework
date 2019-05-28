@@ -49,11 +49,11 @@ class PublisherDiffDestination(val pageID: Long, val cleanUpdate: Boolean, val s
       // We also create a list of resources to delete completely with "<...> ?p ?o"
       var subjectURIs = new mutable.HashMap[String, String]()
       for (quad <- added)
-        subjectURIs.add(quad.subject, quad.language)
+        subjectURIs += (quad.subject ->  quad.language)
       for (quad <- deleted)
-        subjectURIs.add(quad.subject, quad.language)
+        subjectURIs += (quad.subject ->  quad.language)
       for (quad <- unmodified)
-        subjectURIs.add(quad.subject, quad.language)
+        subjectURIs += (quad.subject ->  quad.language)
 
       for (uri: (String,String) <- subjectURIs) {
         if (!uri._1.contains("dbpedia.org/property") && uri._1.startsWith("http")) { // skip global property definitions or non-http uris
