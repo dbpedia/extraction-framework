@@ -58,7 +58,7 @@ class JSONCache(wikiLanguage: String, pageID: Long, pageTitle: String) {
           val objLsit = vp.asInstanceOf[List[Map[String,String]]]
           for (obj <- objLsit) {
             val objType: String = obj.getOrElse("type","")
-            //val objLang: String = obj.getOrElse("lang", JSONCache.defaultLanguage)
+            val objLang: String = obj.getOrElse("lang", "en")
             val objDatatype: String = if (objType.equals("uri"))  null
                                       else obj.getOrElse("datatype", "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")
 
@@ -66,7 +66,7 @@ class JSONCache(wikiLanguage: String, pageID: Long, pageTitle: String) {
             // unescape if URI
             val finalValue = if (objDatatype == null) org.apache.commons.lang.StringEscapeUtils.unescapeJava(objValue) else objValue
 
-            quads += new Quad("" ,"",subject, predicate, objValue, "", objDatatype) //TODO make sure this works without passing the language
+            quads += new Quad(objLang ,"",subject, predicate, objValue, "", objDatatype) //TODO make sure this makes sense
 
           }
         }
@@ -210,12 +210,12 @@ object JSONCache {
                     for (obj <- objLsit) {
                       val objValue: String = obj.getOrElse("value", "")
                       val objType: String = obj.getOrElse("type", "")
-                      //val objLang: String = obj.getOrElse("lang", defaultLanguage) //TODO make sure this works without passing a language
+                      val objLang: String = obj.getOrElse("lang", "en") //TODO make sure this makes sense
                       val objDatatype: String = if (objType.equals("uri"))  null
                                                 else obj.getOrElse("datatype", "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")
 
 
-                      quads += new Quad( "" , "", subject, predicate, objValue, "", objDatatype)
+                      quads += new Quad( objLang , "", subject, predicate, objValue, "", objDatatype)
 
                     }
                 }

@@ -68,7 +68,7 @@ public class PageProcessor extends Thread{
                 JSONCache.setErrorOnCache(item, -1);
         }
         catch(Exception exp){
-            logger.error("Error in processing page number " + item.getItemID() + ", and the reason is " + exp.getMessage(), exp);
+            logger.error("Error in processing page number " + item.getItemID() + " with title '" + item.getItemName() +  "' and language '"+item.getWikiLanguage() + "', and the reason is " + exp.getMessage(), exp);
             JSONCache.setErrorOnCache(item, -2);
         }
     }
