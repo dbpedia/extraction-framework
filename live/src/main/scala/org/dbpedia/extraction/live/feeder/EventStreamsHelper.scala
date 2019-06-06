@@ -43,6 +43,8 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   private val logger = LoggerFactory.getLogger("EventStreamsHelper")
 
   private val baseURL = LiveOptions.options.get("feeder.eventstreams.baseURL")
+  private val since = if (LiveOptions.options.get("feeder.eventstreams.since")=="now"){""}
+  else {"?since=" + LiveOptions.options.get("feeder.eventstreams.since")}
   private val stream = LiveOptions.options.get("feeder.eventstreams.streams").split("\\s*,\\s*").toList
   private val allowedNamespaces  = LiveOptions.options.get("feeder.eventstreams.allowedNamespaces").split("\\s*,\\s*").toList.map((s:String )=> s.toInt)
   private val wikilanguages = LiveOptions.languages
@@ -90,8 +92,8 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
     ) { () =>
       Source.fromFutureSource {
         Http().singleRequest(
-          HttpRequest(uri = baseURL + stream.head))
-          .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
+          HttpRequest(uri = baseURL + stream.head + since))
+        .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
       }
     }
 

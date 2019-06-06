@@ -105,7 +105,6 @@ public abstract class Feeder extends Thread {
         while (keepRunning) {
             try {
                 for (LiveQueueItem item : getNextItems()) {
-                    System.out.println("before handling: " + item);
                     handleFeedItem(item);
                 }
             } catch (java.lang.OutOfMemoryError exp) {
