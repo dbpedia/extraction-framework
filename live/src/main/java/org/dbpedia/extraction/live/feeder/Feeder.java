@@ -32,7 +32,7 @@ public abstract class Feeder extends Thread {
 
     public Feeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime, String folderBasePath) {
         this.feederName = feederName;
-        this.setName("Feeder_"+feederName);
+        this.setName("Feeder_" + feederName);
         logger = LoggerFactory.getLogger(feederName);
         this.queuePriority = queuePriority;
 
@@ -41,15 +41,15 @@ public abstract class Feeder extends Thread {
         getLatestProcessedDate();
     }
 
-    public LiveQueuePriority getQueuePriority(){
+    public LiveQueuePriority getQueuePriority() {
         return queuePriority;
     }
 
     protected abstract void initFeeder();
 
     /*
-    * Starts the feeder (it can only start once
-    * */
+     * Starts the feeder (it can only start once
+     * */
     public void startFeeder() {
         if (keepRunning) {
             initFeeder();
@@ -58,16 +58,16 @@ public abstract class Feeder extends Thread {
     }
 
     /*
-    * Stops the feeder from running gracefully
-    * */
+     * Stops the feeder from running gracefully
+     * */
     public void stopFeeder(String date) {
         keepRunning = false;
         setLatestProcessedDate(date);
     }
 
     /*
-    * Reads the latest process date from the file location. Reverts to default on error
-    * */
+     * Reads the latest process date from the file location. Reverts to default on error
+     * */
     public String getLatestProcessedDate() {
         latestProcessDate = defaultStartTime;
         try {
@@ -89,13 +89,15 @@ public abstract class Feeder extends Thread {
     }
 
     /*
-    * Updates the latest process date to file
-    * */
+     * Updates the latest process date to file
+     * */
     public synchronized void setLatestProcessedDate(String date) {
-        if (date == null || date.equals(""))
+        if (date == null || date.equals("")) {
             date = latestProcessDate;
+        }
 
         Files.createFile(latestProcessDateFile, date);
+        logger.info("Date: "+latestProcessDate + " written into "+latestProcessDateFile);
     }
 
     protected abstract Collection<LiveQueueItem> getNextItems();
@@ -119,7 +121,7 @@ public abstract class Feeder extends Thread {
                 setLatestProcessedDate(null);
                 counter = 0;
             }
-            counter ++;
+            counter++;
         }
     }
 
