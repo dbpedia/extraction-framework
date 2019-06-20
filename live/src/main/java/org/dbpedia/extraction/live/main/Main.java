@@ -90,6 +90,7 @@ public class Main {
         }
 
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.eventstreams.enabled"))== true){
+            logger.info(LiveOptions.options.get("eventstreams.offset")+"aaaa");
             feeders.add(new EventStreamsFeeder("EventStreamsFeeder", LiveQueuePriority.EventStreamsPriority,
                 LiveOptions.options.get("eventstreams.offset"), LiveOptions.options.get("working_directory")));
         }
