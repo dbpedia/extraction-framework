@@ -57,8 +57,9 @@ public class EventStreamsFeeder extends Feeder {
                 readItemsCount += queueItemBuffer.size();
                 returnQueueItems.addAll(queueItemBuffer);
                 queueItemBuffer.clear();
+                float perhour = (readItemsCount) / ((float)secondsRunning / 3600);
                 logger.info("Writing " + queueItemBuffer.size() + " to queue, feed stats: "
-                        + (readItemsCount / secondsRunning) + " per second, " + (readItemsCount) / (secondsRunning / 3600) + " per hour");
+                        + (readItemsCount / secondsRunning) + " per second, " + perhour + " per hour");
 
                 // set last processed date
                 setLatestProcessDate(firstItemTime);
@@ -71,7 +72,6 @@ public class EventStreamsFeeder extends Feeder {
     public static void addQueueItemToBuffer(LiveQueueItem item) {
         if (item.getItemName() != "") {
             synchronized (queueItemBuffer) {
-                logger.info(item.getModificationDate());
                 queueItemBuffer.add(item);
             }
         }
