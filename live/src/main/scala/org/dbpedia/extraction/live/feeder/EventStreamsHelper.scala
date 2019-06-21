@@ -80,7 +80,7 @@ class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
         parseStringFromJson(eventData, "wiki").replace("wiki", ""), //TODO implement multilanguage
         -1,
         parseStringFromJson(eventData, "title"),
-        DateUtil.transformToUTC(parseIntFromJson(eventData, "timestamp")),
+        DateUtil.transformUnixTimestampToUTC(parseIntFromJson(eventData, "timestamp")),
         false,
         ""))
 
@@ -143,16 +143,11 @@ class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
   }
 
   def parseIntFromJson(data: String, key: String): Int = {
-
     val res = mapper.readValue(data, classOf[Map[String, Int]]).getOrElse(key, -1)
-
     if (key == "timestamp"){
       logger.info(DateUtil.transformUnixTimestampToUTC(res))
     }
-
-    mapper.readValue(data, classOf[Map[String, Int]]).getOrElse(key, -1)
-
-
+    res
   }
 
 }
