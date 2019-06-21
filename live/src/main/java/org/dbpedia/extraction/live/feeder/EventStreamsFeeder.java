@@ -52,7 +52,8 @@ public class EventStreamsFeeder extends Feeder {
             // get first element if any and use as last processeddates
             if (!queueItemBuffer.isEmpty()) {
                 String firstItemTime = queueItemBuffer.get(0).getModificationDate();
-                long secondsRunning = (System.currentTimeMillis() - invocationTime) / 1000;
+                //start with one second, because of division by zero
+                long secondsRunning = ((System.currentTimeMillis() - invocationTime) / 1000)+1;
                 readItemsCount += queueItemBuffer.size();
                 returnQueueItems.addAll(queueItemBuffer);
                 queueItemBuffer.clear();

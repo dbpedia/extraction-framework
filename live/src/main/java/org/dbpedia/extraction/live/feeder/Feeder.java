@@ -202,7 +202,7 @@ public abstract class Feeder extends Thread {
             ZonedDateTime.parse(latestProcessDate);
             return true;
         } catch (Exception e) {
-            logger.warn("Failed to parse latestProcessDate: " + latestProcessDate);
+            logger.warn("Failed to parse latestProcessDate: |" + latestProcessDate+"|");
             return false;
         }
 

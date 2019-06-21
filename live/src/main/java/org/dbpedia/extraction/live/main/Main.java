@@ -51,7 +51,7 @@ public class Main {
         JDBCUtil.execSQL("SET names utf8mb4");
 
         String uploaded_dump_date = "";
-        if (LiveOptions.options.get("uploaded_dump_date").equals("now")) {
+        if (LiveOptions.options.get("uploaded_dump_date").equalsIgnoreCase("now")) {
             uploaded_dump_date = DateUtil.transformToUTC(System.currentTimeMillis());
         } else {
             uploaded_dump_date = LiveOptions.options.get("uploaded_dump_date");
