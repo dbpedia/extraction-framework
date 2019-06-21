@@ -3,12 +3,15 @@ package org.dbpedia.extraction.live.feeder;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
+import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.Files;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 
 /**
@@ -24,7 +27,6 @@ public abstract class Feeder extends Thread {
     protected final String feederName;
     protected final LiveQueuePriority queuePriority;
 
-    protected final String defaultStartTime;    //"2011-04-01T15:00:00Z";
     protected final File latestProcessDateFile;
     protected String latestProcessDate;
 
@@ -35,15 +37,32 @@ public abstract class Feeder extends Thread {
         this.setName("Feeder_" + feederName);
         logger = LoggerFactory.getLogger(feederName);
         this.queuePriority = queuePriority;
+        latestProcessDateFile = new File(folderBasePath + this.feederName + ".dat");
 
-        this.defaultStartTime = defaultStartTime;   //"2011-04-01T15:00:00Z";
-        latestProcessDateFile = new File(folderBasePath + feederName + ".dat");
-        getLatestProcessedDate();
+
+        /**
+         * HANDLING OF STARTING TIME
+         */
+
+        // always prioritize file
+        String dateFromFile = readLatestProcessDateFile();
+        if (validateLatestProcessDate(dateFromFile)) {
+            latestProcessDate = dateFromFile;
+            logger.info("Prioritizing file: " + latestProcessDateFile.getName());
+            // then try alternatives from config file
+        } else if (validateLatestProcessDate(defaultStartTime)) {
+            latestProcessDate = defaultStartTime;
+            writeLatestProcessDateFileOrFail(defaultStartTime);
+            logger.info(".dat file not found or incorrect value, created file: " + latestProcessDateFile + " with parameter uploaded_dump_date");
+        } else {
+            logger.error("Neither found " + latestProcessDateFile + "nor correct option uploaded_dump_date (" + defaultStartTime + ")\n" +
+                    "Good Bye");
+            System.exit(-1);
+        }
+
+        logger.info("Resuming from date: " + latestProcessDate);
     }
 
-    public LiveQueuePriority getQueuePriority() {
-        return queuePriority;
-    }
 
     protected abstract void initFeeder();
 
@@ -62,12 +81,78 @@ public abstract class Feeder extends Thread {
      * */
     public void stopFeeder(String date) {
         keepRunning = false;
-        setLatestProcessedDate(date);
+        //TODO date might be wrong
+        writeLatestProcessDateFileOrFail(date);
+        //TODO write file
+        //setLatestProcessedDate(date);
+    }
+
+
+    public void run() {
+        while (keepRunning) {
+            try {
+                for (LiveQueueItem item : getNextItems()) {
+                    handleFeedItem(item);
+                }
+            } catch (java.lang.OutOfMemoryError exp) {
+                logger.error(ExceptionUtil.toString(exp), exp);
+                throw new RuntimeException("OutOfMemory Error", exp);
+            } catch (Exception exp) {
+                logger.error(ExceptionUtil.toString(exp), exp);
+                // On error re-initiate feeder
+                initFeeder();
+            }
+
+        }
+    }
+
+    protected abstract Collection<LiveQueueItem> getNextItems();
+
+
+    /* This function should be overwritten by sub classes */
+    protected void handleFeedItem(LiveQueueItem item) {
+        item.setStatQueueAdd(-1);
+        item.setPriority(this.queuePriority);
+        LiveQueue.add(item);
+        //setLatestProcessDate(item.getModificationDate());
+    }
+
+    // throws runtime exception
+    public synchronized void writeLatestProcessDateFileOrFail(String latestProcessDate) {
+        try (FileOutputStream fos = new FileOutputStream(latestProcessDateFile)) {
+            fos.write(latestProcessDate.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            logger.error("Could not write file " + latestProcessDateFile + " on Feeder construction", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    //just logs the error, but continues
+    public synchronized void writeLatestProcessDateFileAndLog(String latestProcessDate) {
+        try (FileOutputStream fos = new FileOutputStream(latestProcessDateFile)) {
+            fos.write(latestProcessDate.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            logger.error("Could not write file " + latestProcessDateFile + " on Feeder construction", e);
+        }
+    }
+
+    public String readLatestProcessDateFile() {
+        try {
+            return Files.readFile(latestProcessDateFile).trim();
+        } catch (Exception exp) {
+            logger.error(ExceptionUtil.toString(exp), exp);
+        }
+        return "";
     }
 
     /*
      * Reads the latest process date from the file location. Reverts to default on error
      * */
+   /* @Deprecated
     public String getLatestProcessedDate() {
         latestProcessDate = defaultStartTime;
         try {
@@ -86,55 +171,54 @@ public abstract class Feeder extends Thread {
         }
         logger.warn("Resuming from date: " + latestProcessDate);
         return latestProcessDate;
-    }
+    }*/
+
 
     /*
      * Updates the latest process date to file
      * */
+    /*
     public synchronized void setLatestProcessedDate(String date) {
         if (date == null || date.equals("")) {
             date = latestProcessDate;
         }
 
         Files.createFile(latestProcessDateFile, date);
-        logger.info("Date: "+latestProcessDate + " written into "+latestProcessDateFile);
+        logger.info("Date: " + latestProcessDate + " written into " + latestProcessDateFile);
+    }
+*/
+
+    /**
+     * GETTER
+     * SETTER
+     */
+
+    public synchronized String getLatestProcessDate() {
+        return latestProcessDate;
     }
 
-    protected abstract Collection<LiveQueueItem> getNextItems();
+    public static boolean validateLatestProcessDate(String latestProcessDate) {
+        try {
+            ZonedDateTime.parse(latestProcessDate);
+            return true;
+        } catch (Exception e) {
+            logger.warn("Failed to parse latestProcessDate: " + latestProcessDate);
+            return false;
+        }
 
-    public void run() {
-        int counter = 0;
-        while (keepRunning) {
-            try {
-                for (LiveQueueItem item : getNextItems()) {
-                    handleFeedItem(item);
-                }
-            } catch (java.lang.OutOfMemoryError exp) {
-                logger.error(ExceptionUtil.toString(exp), exp);
-                throw new RuntimeException("OutOfMemory Error", exp);
-            } catch (Exception exp) {
-                logger.error(ExceptionUtil.toString(exp), exp);
-                // On error re-initiate feeder
-                initFeeder();
-            }
-            if (counter % 500 == 0) {
-                setLatestProcessedDate(null);
-                counter = 0;
-            }
-            counter++;
+    }
+
+    public void setLatestProcessDate(String latestProcessDate) {
+//TODO
+        if (latestProcessDate == null || latestProcessDate.equals("")) {
+            return;
+        }
+        if (this.latestProcessDate.compareTo(latestProcessDate) > 0) {
+            this.latestProcessDate = latestProcessDate;
         }
     }
 
-    /* This function should be overwritten by sub classes */
-    protected void handleFeedItem(LiveQueueItem item) {
-        addPageIDtoQueue(item);
-    }
-
-    protected void addPageIDtoQueue(LiveQueueItem item) {
-        item.setStatQueueAdd(-1);
-        item.setPriority(this.queuePriority);
-        LiveQueue.add(item);
-        logger.info("Size of LiveQueue: " + LiveQueue.getQueueSize());
-        latestProcessDate = item.getModificationDate();
+    public LiveQueuePriority getQueuePriority() {
+        return queuePriority;
     }
 }

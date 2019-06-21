@@ -18,7 +18,7 @@ import org.dbpedia.extraction.live.util.DateUtil
 import org.dbpedia.extraction.util.Language
 import org.slf4j.LoggerFactory
 
-import scala.collection.JavaConverters
+import scala.collection.{JavaConverters, immutable}
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
@@ -38,15 +38,13 @@ import scala.concurrent.duration._
   */
 
 
-class EventStreamsHelper () extends  EventStreamUnmarshalling {
+class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
 
   private val logger = LoggerFactory.getLogger("EventStreamsHelper")
 
   private val baseURL = LiveOptions.options.get("feeder.eventstreams.baseURL")
-  private val since = if (LiveOptions.options.get("feeder.eventstreams.since")=="now"){""}
-  else {"?since=" + LiveOptions.options.get("feeder.eventstreams.since")}
   private val stream = LiveOptions.options.get("feeder.eventstreams.streams").split("\\s*,\\s*").toList
-  private val allowedNamespaces  = LiveOptions.options.get("feeder.eventstreams.allowedNamespaces").split("\\s*,\\s*").toList.map((s:String )=> s.toInt)
+  private val allowedNamespaces: List[Int] = LiveOptions.options.get("feeder.eventstreams.allowedNamespaces").split("\\s*,\\s*").toList.map((s: String) => s.toInt)
   private val wikilanguages = LiveOptions.languages
   private val minBackoffFactor = LiveOptions.options.get("feeder.eventstreams.minBackoffFactor").toInt.second
   private val maxBackoffFactor = LiveOptions.options.get("feeder.eventstreams.maxBackoffFactor").toInt.second
@@ -57,6 +55,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   // maxLineSize and maxEventSize belong to the trait EventStreamUnmarshalling
   // and the defaults of  4096 and  8192 respectively are to small for us
   override protected def maxLineSize: Int = LiveOptions.options.get("feeder.eventstreams.maxLineSize").toInt
+
   override protected def maxEventSize: Int = LiveOptions.options.get("feeder.eventstreams.maxEventSize").toInt
 
   /**
@@ -72,6 +71,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
     import system.dispatcher
 
     val flowData: Flow[ServerSentEvent, String, NotUsed] = Flow.fromFunction(_.getData())
+
     val flowLiveQueueItem: Flow[String, LiveQueueItem, NotUsed] = Flow.fromFunction(eventData =>
       new LiveQueueItem(
         parseStringFromJson(eventData, "wiki").replace("wiki", ""), //TODO implement multilanguage
@@ -80,9 +80,9 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
         DateUtil.transformToUTC(parseIntFromJson(eventData, "timestamp")),
         false,
         ""))
-    val sinkAddToQueue: Sink[LiveQueueItem, Future[Done]] =
-      Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemCollection(_))
 
+    val sinkAddToQueue: Sink[LiveQueueItem, Future[Done]] =
+      Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemToBuffer(_))
 
 
     val sseSource = RestartSource.onFailuresWithBackoff(
@@ -92,8 +92,8 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
     ) { () =>
       Source.fromFutureSource {
         Http().singleRequest(
-          HttpRequest(uri = baseURL + stream.head + since))
-        .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
+          HttpRequest(uri = baseURL + stream.head + "?since="+ since))
+          .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
       }
     }
 
@@ -108,6 +108,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   /**
     * Takes a JSON String and returns true, if namespace and language matches, false otherwise
     * See the schema of the JSON at https://github.com/wikimedia/mediawiki-event-schemas/blob/master/jsonschema/mediawiki/recentchange/2.yaml
+    *
     * @param data a JSON String
     * @return boolean: match the configured namespace and language
     */
@@ -116,9 +117,13 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
 
     //the EventStreams API uses the postfix "wiki" for the language, e.g. "enwiki" for languag "en"
     val namespace = parseIntFromJson(data, "namespace")
-    val language = parseStringFromJson(data, "wiki")
+    val language = parseStringFromJson(data, "wiki").replace("wiki", "")
+    val timestamp: Int = parseIntFromJson(data, "timestamp")
 
-    for(nspc <- allowedNamespaces){
+    //TODO test if correct, otherwise use below
+    allowedNamespaces.contains(namespace) && (timestamp != -1) && wikilanguages.contains(language)
+
+    /*for(nspc <- allowedNamespaces){
       if (nspc == namespace ){
         keep = true
       }
@@ -126,10 +131,10 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
     if (parseIntFromJson(data, "timestamp") == -1){
       keep = false
     }
-    keep && wikilanguages.contains(language.replace("wiki", ""))
+    keep && wikilanguages.contains(language)*/
   }
 
-  
+
   def parseStringFromJson(data: String, key: String): String = {
     mapper.readValue(data, classOf[Map[String, String]]).getOrElse(key, "")
   }
@@ -137,7 +142,7 @@ class EventStreamsHelper () extends  EventStreamUnmarshalling {
   def parseIntFromJson(data: String, key: String): Int = {
     mapper.readValue(data, classOf[Map[String, Int]]).getOrElse(key, -1)
   }
-  
+
 }
 
 //println("eventstreamshelper: wikilanguages:  " + wikilanguages.toString + ", language: " + language)

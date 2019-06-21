@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.util;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
@@ -43,5 +44,10 @@ public class DateUtil {
     {
         return DateFormatUtils.formatUTC(
                 millis, DateFormatUtils.ISO_DATETIME_FORMAT.getPattern())+"Z";
+    }
+
+    public static long transformUTCtoLong(String UTC)
+    {
+        return ZonedDateTime.parse(UTC).toInstant().toEpochMilli();
     }
 }

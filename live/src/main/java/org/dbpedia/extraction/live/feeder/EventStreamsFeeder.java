@@ -21,41 +21,59 @@ public class EventStreamsFeeder extends Feeder {
 
     protected static Logger logger = LoggerFactory.getLogger("EventStreamsFeeder");
     private Long sleepTime = Long.parseLong(LiveOptions.options.get("feeder.eventstreams.sleepTime"));
-    private static Collection<LiveQueueItem> queueItemCollection;
+    private static ArrayList<LiveQueueItem> queueItemBuffer = new ArrayList<>();
+    private static final long invocationTime = System.currentTimeMillis();
+    private static long readItemsCount = 0;
+
 
     public EventStreamsFeeder(String feederName,
                               LiveQueuePriority queuePriority,
                               String defaultStartTime,
                               String folderBasePath) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
-        queueItemCollection = new ArrayList<>();
     }
 
 
     @Override
     protected void initFeeder() {
-        EventStreamsHelper helper = new EventStreamsHelper();
+        EventStreamsHelper helper = new EventStreamsHelper(latestProcessDate);
         helper.eventStreamsClient();
     }
 
     @Override
-    protected Collection<LiveQueueItem> getNextItems(){
-        Collection <LiveQueueItem> returnQueueItemCollection;
+    protected Collection<LiveQueueItem> getNextItems() {
+        Collection<LiveQueueItem> returnQueueItems = new ArrayList();
         try {
             Thread.sleep(sleepTime);
-        } catch (InterruptedException e){
-            logger.error("Error when handing over items to liveQueue" + e.getMessage());
+        } catch (InterruptedException e) {
+            logger.error("Error when handing over items to liveQueue", e);
         }
-        synchronized (this){
-            returnQueueItemCollection = queueItemCollection;
-            queueItemCollection = new ArrayList<>();
+        synchronized (queueItemBuffer) {
+            // get first element if any and use as last processeddates
+            if (!queueItemBuffer.isEmpty()) {
+                String firstItemTime = queueItemBuffer.get(0).getModificationDate();
+                long secondsRunning = (System.currentTimeMillis() - invocationTime) / 1000;
+                readItemsCount += queueItemBuffer.size();
+                returnQueueItems.addAll(queueItemBuffer);
+                queueItemBuffer.clear();
+                logger.info("Writing " + queueItemBuffer.size() + " to queue, feed stats: "
+                        + (readItemsCount / secondsRunning) + " per second, " + (readItemsCount) / (secondsRunning / 3600) + " per hour");
+
+                // set last processed date
+                setLatestProcessDate(firstItemTime);
+                writeLatestProcessDateFileAndLog(firstItemTime);
+            }
         }
-        return returnQueueItemCollection;
+        return returnQueueItems;
     }
 
-    public static synchronized void addQueueItemCollection(LiveQueueItem item){
-        if (item.getItemName()!= ""){
-            queueItemCollection.add(item);
+    public static void addQueueItemToBuffer(LiveQueueItem item) {
+        if (item.getItemName() != "") {
+            synchronized (queueItemBuffer) {
+                queueItemBuffer.add(item);
+            }
         }
     }
+
+
 }
