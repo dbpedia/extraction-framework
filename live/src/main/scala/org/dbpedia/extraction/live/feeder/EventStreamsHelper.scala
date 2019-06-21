@@ -119,8 +119,10 @@ class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
     val timestamp: Int = parseIntFromJson(data, "timestamp")
 
     //TODO test if correct, otherwise use below
-    allowedNamespaces.contains(namespace) && (timestamp != -1) && wikilanguages.contains(language)
+    val filter = allowedNamespaces.contains(namespace) && (timestamp != -1) && wikilanguages.contains(language)
 
+    logger.info(filter+" "+data)
+    filter
     /*for(nspc <- allowedNamespaces){
       if (nspc == namespace ){
         keep = true
