@@ -95,7 +95,7 @@ class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
     ) { () =>
       Source.fromFutureSource {
         Http().singleRequest(
-          HttpRequest(uri = baseURL + stream.head + "?since="+ since))
+          HttpRequest(uri = baseURL + stream.head + "?since=" + since))
           .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
       }
     }
@@ -143,11 +143,7 @@ class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
   }
 
   def parseIntFromJson(data: String, key: String): Int = {
-    val res = mapper.readValue(data, classOf[Map[String, Int]]).getOrElse(key, -1)
-    if (key == "timestamp"){
-      logger.info(DateUtil.transformUnixTimestampToUTC(res))
-    }
-    res
+    mapper.readValue(data, classOf[Map[String, Int]]).getOrElse(key, -1)
   }
 
 }
