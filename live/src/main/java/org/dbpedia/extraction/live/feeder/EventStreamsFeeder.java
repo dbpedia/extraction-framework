@@ -55,11 +55,12 @@ public class EventStreamsFeeder extends Feeder {
                 //start with one second, because of division by zero
                 long secondsRunning = ((System.currentTimeMillis() - invocationTime) / 1000)+1;
                 readItemsCount += queueItemBuffer.size();
+                logger.info("Writing " + queueItemBuffer.size() + " to queue, feed stats: "
+                        + (readItemsCount / secondsRunning) + " per second, " + (readItemsCount) / ((float)secondsRunning / 3600) + " per hour");
+
+                // shoving to queue
                 returnQueueItems.addAll(queueItemBuffer);
                 queueItemBuffer.clear();
-                float perhour = (readItemsCount) / ((float)secondsRunning / 3600);
-                logger.info("Writing " + queueItemBuffer.size() + " to queue, feed stats: "
-                        + (readItemsCount / secondsRunning) + " per second, " + perhour + " per hour");
 
                 // set last processed date
                 setLatestProcessDate(firstItemTime);

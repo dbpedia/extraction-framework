@@ -1,8 +1,5 @@
 package org.dbpedia.extraction.live.feeder
 
-import java.time.format.DateTimeFormatterBuilder
-import java.time.{Instant, ZoneId, ZonedDateTime}
-
 import akka.{Done, NotUsed}
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -18,10 +15,8 @@ import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.dbpedia.extraction.live.config.LiveOptions
 import org.dbpedia.extraction.live.queue.LiveQueueItem
 import org.dbpedia.extraction.live.util.DateUtil
-import org.dbpedia.extraction.util.Language
 import org.slf4j.LoggerFactory
 
-import scala.collection.{JavaConverters, immutable}
 import scala.concurrent.Future
 import scala.concurrent.duration._
 

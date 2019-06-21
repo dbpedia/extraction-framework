@@ -49,7 +49,7 @@ public abstract class Feeder extends Thread {
         String dateFromFile = readLatestProcessDateFile();
         if (validateLatestProcessDate(dateFromFile)) {
             latestProcessDate = dateFromFile;
-            logger.info("Prioritizing file: " + latestProcessDateFile.getName());
+            logger.info("Prioritizing .dat file " + latestProcessDateFile.getName() + " using " + dateFromFile);
             // then try alternatives from config file
         } else if (validateLatestProcessDate(defaultStartTime)) {
             latestProcessDate = defaultStartTime;
@@ -119,7 +119,7 @@ public abstract class Feeder extends Thread {
     }
 
     // throws runtime exception
-    public  void writeLatestProcessDateFileOrFail(String latestProcessDate) {
+    public void writeLatestProcessDateFileOrFail(String latestProcessDate) {
         try {
             FileWriter fw = new FileWriter(latestProcessDateFile);
             fw.write(latestProcessDate);
