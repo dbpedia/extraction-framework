@@ -53,7 +53,7 @@ public abstract class Feeder extends Thread {
         } else if (validateLatestProcessDate(defaultStartTime)) {
             latestProcessDate = defaultStartTime;
             writeLatestProcessDateFileOrFail(defaultStartTime);
-            logger.info(".dat file not found or incorrect value, created file: " + latestProcessDateFile + " with parameter uploaded_dump_date");
+            logger.info(".dat file not found or incorrect value, created file: " + latestProcessDateFile + " with parameter uploaded_dump_date "+latestProcessDate);
         } else {
             logger.error("Neither found " + latestProcessDateFile + "nor correct option uploaded_dump_date (" + defaultStartTime + ")\n" +
                     "Good Bye");
@@ -193,29 +193,24 @@ public abstract class Feeder extends Thread {
      * SETTER
      */
 
-    public synchronized String getLatestProcessDate() {
-        return latestProcessDate;
-    }
 
     public static boolean validateLatestProcessDate(String latestProcessDate) {
         try {
             ZonedDateTime.parse(latestProcessDate);
             return true;
         } catch (Exception e) {
-            logger.warn("Failed to parse latestProcessDate: |" + latestProcessDate+"|");
+            logger.warn("Failed to parse latestProcessDate: |" + latestProcessDate + "|");
             return false;
         }
 
     }
 
+    public synchronized String getLatestProcessDate() {
+        return latestProcessDate;
+    }
+
     public void setLatestProcessDate(String latestProcessDate) {
-//TODO
-        if (latestProcessDate == null || latestProcessDate.equals("")) {
-            return;
-        }
-        if (this.latestProcessDate.compareTo(latestProcessDate) > 0) {
-            this.latestProcessDate = latestProcessDate;
-        }
+        this.latestProcessDate = latestProcessDate;
     }
 
     public LiveQueuePriority getQueuePriority() {
