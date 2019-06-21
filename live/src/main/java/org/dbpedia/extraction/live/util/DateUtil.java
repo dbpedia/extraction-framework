@@ -1,7 +1,12 @@
 package org.dbpedia.extraction.live.util;
 
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
+
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 /**
@@ -12,6 +17,8 @@ import org.apache.commons.lang3.time.DateFormatUtils;
  * Util / Abstraction class for Date functions
  */
 public class DateUtil {
+
+    public static DateTimeFormatter ISO_INSTANT_NO_NANO = new DateTimeFormatterBuilder().parseCaseInsensitive().appendInstant(0).toFormatter();
 
     public static long getDuration1MonthMillis() {
         return 30 * getDuration1DayMillis();
@@ -34,20 +41,22 @@ public class DateUtil {
     }
 
     // imported from UTCHelper
-    public static String transformToUTC(Date date)
-    {
+    public static String transformToUTC(Date date) {
         return DateFormatUtils.formatUTC(
-                date, DateFormatUtils.ISO_DATETIME_FORMAT.getPattern())+"Z";
+                date, DateFormatUtils.ISO_DATETIME_FORMAT.getPattern()) + "Z";
     }
 
-    public static String transformToUTC(long millis)
-    {
+    public static String transformToUTC(long millis) {
         return DateFormatUtils.formatUTC(
-                millis, DateFormatUtils.ISO_DATETIME_FORMAT.getPattern())+"Z";
+                millis, DateFormatUtils.ISO_DATETIME_FORMAT.getPattern()) + "Z";
     }
 
-    public static long transformUTCtoLong(String UTC)
-    {
+    public static String transformUnixTimestampToUTC(long seconds) {
+        return ISO_INSTANT_NO_NANO.format(ZonedDateTime.ofInstant(Instant.ofEpochSecond(seconds), ZoneId.systemDefault()));
+    }
+
+
+    public static long transformUTCtoLong(String UTC) {
         return ZonedDateTime.parse(UTC).toInstant().toEpochMilli();
     }
 }
