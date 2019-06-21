@@ -1,5 +1,8 @@
 package org.dbpedia.extraction.live.feeder
 
+import java.time.format.DateTimeFormatterBuilder
+import java.time.{Instant, ZoneId, ZonedDateTime}
+
 import akka.{Done, NotUsed}
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -144,8 +147,12 @@ class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
     val res = mapper.readValue(data, classOf[Map[String, Int]]).getOrElse(key, -1)
 
     if (key == "timestamp"){
-      
+      val iv: ZonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochSecond(res), ZoneId.systemDefault())
       logger.info(res+"")
+      logger.info(iv+"")
+      val ISO_INSTANT_NO_NANO = new DateTimeFormatterBuilder().parseCaseInsensitive().appendInstant(0).toFormatter
+
+      logger.info(ISO_INSTANT_NO_NANO.format(iv)+"")
       logger.info(DateUtil.transformToUTC(res))
     }
 
