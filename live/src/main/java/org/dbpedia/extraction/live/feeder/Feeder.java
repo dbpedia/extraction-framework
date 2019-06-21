@@ -54,7 +54,7 @@ public abstract class Feeder extends Thread {
         } else if (validateLatestProcessDate(defaultStartTime)) {
             latestProcessDate = defaultStartTime;
             writeLatestProcessDateFileOrFail(defaultStartTime);
-            logger.info(".dat file not found or incorrect value, created file: " + latestProcessDateFile + " with parameter uploaded_dump_date "+defaultStartTime);
+            logger.info(".dat file not found or incorrect value, created file: " + latestProcessDateFile + " with parameter uploaded_dump_date " + defaultStartTime);
         } else {
             logger.error("Neither found " + latestProcessDateFile + "nor correct option uploaded_dump_date (" + defaultStartTime + ")\n" +
                     "Good Bye");
@@ -120,9 +120,10 @@ public abstract class Feeder extends Thread {
 
     // throws runtime exception
     public synchronized void writeLatestProcessDateFileOrFail(String latestProcessDate) {
-        try (FileWriter fw = new FileWriter(latestProcessDateFile)) {
+        try {
+            FileWriter fw = new FileWriter(latestProcessDateFile);
             fw.write(latestProcessDate);
-            logger.info(latestProcessDateFile+" "+latestProcessDate);
+            logger.info(latestProcessDateFile + " " + latestProcessDate);
             fw.flush();
             fw.close();
         } catch (Exception e) {
