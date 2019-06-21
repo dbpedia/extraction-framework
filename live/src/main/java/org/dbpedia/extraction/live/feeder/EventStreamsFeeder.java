@@ -54,14 +54,17 @@ public class EventStreamsFeeder extends Feeder {
                 String firstItemTime = queueItemBuffer.get(0).getModificationDate();
                 int size = queueItemBuffer.size();
                 //start with one second, because of division by zero
-                long secondsRunning = ((System.currentTimeMillis() - invocationTime) / 1000)+1;
+                long secondsRunning = ((System.currentTimeMillis() - invocationTime) / 1000) + 1;
                 readItemsCount += size;
                 logger.info("Writing " + size + " to queue, feed stats: "
-                        + (readItemsCount / secondsRunning) + " per second, " + (readItemsCount) / ((float)secondsRunning / 3600) + " per hour");
+                        + (readItemsCount / secondsRunning) + " per second, " + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour");
 
                 // shoving to queue
-                returnQueueItems.addAll(queueItemBuffer);
-                queueItemBuffer.clear();
+                //returnQueueItems.addAll(queueItemBuffer);
+                //queueItemBuffer.clear();
+                returnQueueItems = queueItemBuffer;
+                queueItemBuffer = new ArrayList<>();
+
 
                 // set last processed date
                 setLatestProcessDate(firstItemTime);

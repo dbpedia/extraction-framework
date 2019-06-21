@@ -72,11 +72,17 @@ class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
 
     val flowLiveQueueItem: Flow[String, LiveQueueItem, NotUsed] = Flow.fromFunction(eventData =>
       new LiveQueueItem(
+        //language
         parseStringFromJson(eventData, "wiki").replace("wiki", ""), //TODO implement multilanguage
+        //itemID
         -1,
+        //Title
         parseStringFromJson(eventData, "title"),
+        //timestamp
         DateUtil.transformUnixTimestampToUTC(parseIntFromJson(eventData, "timestamp")),
+        //deleted
         false,
+        //xml
         ""))
 
     val sinkAddToQueue: Sink[LiveQueueItem, Future[Done]] =
@@ -118,11 +124,8 @@ class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
     val language = parseStringFromJson(data, "wiki").replace("wiki", "")
     val timestamp: Int = parseIntFromJson(data, "timestamp")
 
-    //TODO test if correct, otherwise use below
-    val filter = allowedNamespaces.contains(namespace) && (timestamp != -1) && wikilanguages.contains(language)
+    allowedNamespaces.contains(namespace) && (timestamp != -1) && wikilanguages.contains(language)
 
-    logger.info(filter+" "+data)
-    filter
     /*for(nspc <- allowedNamespaces){
       if (nspc == namespace ){
         keep = true

@@ -84,8 +84,6 @@ public abstract class Feeder extends Thread {
         keepRunning = false;
         //TODO date might be wrong
         writeLatestProcessDateFileOrFail(date);
-        //TODO write file
-        //setLatestProcessedDate(date);
     }
 
 
