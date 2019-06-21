@@ -119,7 +119,7 @@ public abstract class Feeder extends Thread {
     }
 
     // throws runtime exception
-    public synchronized void writeLatestProcessDateFileOrFail(String latestProcessDate) {
+    public  void writeLatestProcessDateFileOrFail(String latestProcessDate) {
         try {
             FileWriter fw = new FileWriter(latestProcessDateFile);
             fw.write(latestProcessDate);
