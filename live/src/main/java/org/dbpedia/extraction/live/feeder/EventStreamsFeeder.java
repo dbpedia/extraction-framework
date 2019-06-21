@@ -71,6 +71,7 @@ public class EventStreamsFeeder extends Feeder {
     public static void addQueueItemToBuffer(LiveQueueItem item) {
         if (item.getItemName() != "") {
             synchronized (queueItemBuffer) {
+                logger.info(item.getModificationDate());
                 queueItemBuffer.add(item);
             }
         }

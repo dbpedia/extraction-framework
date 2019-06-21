@@ -123,10 +123,8 @@ public abstract class Feeder extends Thread {
         try {
             FileWriter fw = new FileWriter(latestProcessDateFile);
             fw.write(latestProcessDate);
-            logger.info(latestProcessDateFile + " " + latestProcessDate);
             fw.flush();
             fw.close();
-            System.exit(0);
         } catch (Exception e) {
             logger.error("Could not write file " + latestProcessDateFile + " on Feeder construction", e);
             throw new RuntimeException(e);
