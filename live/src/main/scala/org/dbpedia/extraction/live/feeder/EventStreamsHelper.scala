@@ -140,7 +140,13 @@ class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
   }
 
   def parseIntFromJson(data: String, key: String): Int = {
+    if (key == "timestamp"){
+      logger.info(data)
+    }
+
     mapper.readValue(data, classOf[Map[String, Int]]).getOrElse(key, -1)
+
+
   }
 
 }
