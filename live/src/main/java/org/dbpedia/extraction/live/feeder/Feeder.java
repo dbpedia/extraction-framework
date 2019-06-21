@@ -122,6 +122,7 @@ public abstract class Feeder extends Thread {
     public synchronized void writeLatestProcessDateFileOrFail(String latestProcessDate) {
         try (FileWriter fw = new FileWriter(latestProcessDateFile)) {
             fw.write(latestProcessDate);
+            logger.info(latestProcessDateFile+" "+latestProcessDate);
             fw.flush();
             fw.close();
         } catch (Exception e) {
