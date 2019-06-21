@@ -53,6 +53,7 @@ public class Main {
         String uploaded_dump_date = "";
         if (LiveOptions.options.get("uploaded_dump_date").equalsIgnoreCase("now")) {
             uploaded_dump_date = DateUtil.transformToUTC(System.currentTimeMillis());
+            logger.info("uploaded_dump_date was 'now', changed to " + uploaded_dump_date);
         } else {
             uploaded_dump_date = LiveOptions.options.get("uploaded_dump_date");
         }
