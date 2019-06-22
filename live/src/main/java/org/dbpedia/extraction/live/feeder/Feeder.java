@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.feeder;
 
+import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
@@ -56,9 +57,10 @@ public abstract class Feeder extends Thread {
             writeLatestProcessDateFileOrFail(defaultStartTime);
             logger.info(".dat file not found or incorrect value, created file: " + latestProcessDateFile + " with parameter uploaded_dump_date " + defaultStartTime);
         } else {
-            logger.error("Neither found " + latestProcessDateFile + "nor correct option uploaded_dump_date (" + defaultStartTime + ")\n" +
+            logger.error("Neither found " + latestProcessDateFile + "nor correct option 'uploaded_dump_date' (" + defaultStartTime + ")\n" +
                     "Good Bye");
-            System.exit(-1);
+            Main.stopLive();
+            System.exit(-1);//checked
         }
 
         logger.info("Resuming from date: " + latestProcessDate);

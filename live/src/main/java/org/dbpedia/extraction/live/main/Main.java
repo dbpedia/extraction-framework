@@ -18,6 +18,7 @@ import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -118,7 +119,7 @@ public class Main {
         //DEBUGOPTIONS
 
         if (Boolean.parseBoolean(LiveOptions.options.get("debugExitBeforeInit"))) {
-            System.exit(0);
+            System.exit(0);//checked
         }
         debugSkipProcessors = Boolean.parseBoolean(LiveOptions.options.get("debugSkipProcessors"));
 
@@ -158,8 +159,8 @@ public class Main {
             }
 
             for (Feeder f : feeders) {
-                logger.info(feeders.toString()+" "+feeders.size());
-                logger.info("Stopping feeder: "+f.getName());
+                logger.info(feeders.toString() + " " + feeders.size());
+                logger.info("Stopping feeder: " + f.getName());
                 // Stop the feeders, taking the most recent date form the queue
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
             }
@@ -178,29 +179,42 @@ public class Main {
     public static void main(String[] args)
             throws Exception {
 
-        Runtime.getRuntime().addShutdownHook(new Thread() {
+      /*  Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
                 try {
-                    logger.info("received shutdown signal, stopping...");
-                    long inc = 0;
-                    while(inc<(15*1000)) {
 
-                        logger.info("waiting for vm shutdown");
-
-                    }
-                    stopLive();
                 } catch (Exception exp) {
                     exp.printStackTrace();
-                    logger.error("???",exp);
+                    logger.error("???", exp);
 
                 }
             }
-        });
+        });*/
 
         //authenticate("dbpedia", Files.readFile(new File("pw.txt")).trim());
 
         initLive();
         startLive();
+
+        System.out.println("Listening to user input on command line, type q to quit");
+        Scanner s = new Scanner(System.in);
+        String next = "";
+        boolean more = true;
+        while (more) {
+            next = s.next();
+            if (next.equalsIgnoreCase("q")) {
+                System.out.println("received shutdown command");
+                more = false;
+                stopLive();
+            } else if (next.equalsIgnoreCase("s")) {
+                System.out.println("view status, not implemented yet");
+            } else {
+                System.out.println("received nothing meaningful: '" + next + "'\n" +
+                        "Commands:\n" +
+                        "  [q] to quit and shutdown\n" +
+                        "  [s] to show status (not implemented yet)");
+            }
+        }
     }
 }

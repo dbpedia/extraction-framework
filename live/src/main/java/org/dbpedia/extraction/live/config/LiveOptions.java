@@ -29,7 +29,7 @@ public class LiveOptions {
         }
         catch (IOException exp){
             logger.error("live.ini file not found", exp);
-            System.exit(1);
+            System.exit(-1);//checked
         }
         catch (Exception exp){
             logger.error(exp.getMessage(), exp);
