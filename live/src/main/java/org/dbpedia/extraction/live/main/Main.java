@@ -183,6 +183,13 @@ public class Main {
             public void run() {
                 try {
                     logger.info("received shutdown signal, stopping...");
+                    int s = 100;
+                    int inc = 0;
+                    while(inc<(15*1000)) {
+                        sleep(s);
+                        inc+=s;
+                        logger.info("waiting for vm shutdown: "+inc+" ms");
+                    }
                     stopLive();
                 } catch (Exception exp) {
                     exp.printStackTrace();
