@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.live.feeder;
 
 import org.dbpedia.extraction.live.config.LiveOptions;
+import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.util.DateUtil;
@@ -39,10 +40,10 @@ public class EventStreamsFeeder extends Feeder {
         //latestProcessDate is set in super
         invocationTime = ZonedDateTime.parse(latestProcessDate).toInstant().toEpochMilli();
         logger.info("Comparing\n" +
-                "current:    " + System.currentTimeMillis() + "\n" +
-                "current:    " + DateUtil.transformToUTC(System.currentTimeMillis()) + "\n" +
-                "feed in ms: " + invocationTime + "\n" +
-                "feed:       " + latestProcessDate);
+                "current time:   " + System.currentTimeMillis() + "\n" +
+                "current time:   " + DateUtil.transformToUTC(System.currentTimeMillis()) + "\n" +
+                "feed time (ms): " + invocationTime + "\n" +
+                "feed time:      " + latestProcessDate);
     }
 
 
@@ -67,36 +68,38 @@ public class EventStreamsFeeder extends Feeder {
             LiveQueueItem lastItem = queueItemBuffer.get(size - 1);
             String firstItemTime = queueItemBuffer.get(0).getModificationDate();
 
+            long queuesizebefore = LiveQueue.getQueueSize();
+            // doing it
+            returnQueueItems = exportQueueItemBuffer();
+            long queuesizeafter = LiveQueue.getQueueSize();
+            long duplicates = (queuesizebefore + size) - queuesizeafter;
+
 
             //start with one second, because of division by zero
             long secondsRunning = ((System.currentTimeMillis() - invocationTime) / 1000) + 1;
             readItemsCount += size;
-            logger.info("Stream at " + firstItemTime  +
-                    " writing " + size + " to queue, feed stats: "
+            logger.info("Stream at " + firstItemTime +
+                    " writing " + size + " to queue (" + LiveQueue.getQueueSize() + " items with " + duplicates + " estimated duplicates), feed avg.: "
                     + (readItemsCount / secondsRunning) + " per second, "
-                    + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour");
+                    + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour"
+                    + (readItemsCount) / ((float) secondsRunning / 86400) + " per day");
 
             //tracing
-            logger.trace("\n"+firstItem + "\n" + lastItem + "\n");
+            logger.trace("\n" + firstItem + "\n" + lastItem + "\n");
 
-
-            // doing it
-            returnQueueItems = exportQueueItemBuffer();
-
-            // set last processed date
+            // set last processed date, in case there is a hard fail
+            // this is just effective, if the queue is empty
             setLatestProcessDate(firstItemTime);
-            writeLatestProcessDateFileAndLog(firstItemTime);
+            writeLatestProcessDateFileAndLogOnFail(firstItemTime);
         }
         return returnQueueItems;
     }
 
     public synchronized static Collection<LiveQueueItem> exportQueueItemBuffer() {
-        Collection<LiveQueueItem> returnQueueItems = new ArrayList();
-
-        // shoving to queue
+        //shoving to queue
         //returnQueueItems.addAll(queueItemBuffer);
         //queueItemBuffer.clear();
-        returnQueueItems = queueItemBuffer;
+        Collection<LiveQueueItem> returnQueueItems = queueItemBuffer;
         queueItemBuffer = new ArrayList<>();
         return returnQueueItems;
     }
@@ -104,6 +107,8 @@ public class EventStreamsFeeder extends Feeder {
     public synchronized static void addQueueItemToBuffer(LiveQueueItem item) {
         if (item.getItemName() != "") {
             queueItemBuffer.add(item);
+        } else {
+            logger.warn("skipping item, itemName not set:" + item);
         }
     }
 

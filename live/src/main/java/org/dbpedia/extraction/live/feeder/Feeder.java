@@ -82,8 +82,9 @@ public abstract class Feeder extends Thread {
      * */
     public void stopFeeder(String date) {
         keepRunning = false;
-        //TODO date might be wrong
-        writeLatestProcessDateFileOrFail(date);
+        writeLatestProcessDateFileAndLogOnFail(date);
+        logger.info("Stopped "+feederName+" and wrote "+date+" to "+latestProcessDateFile);
+
     }
 
 
@@ -130,7 +131,7 @@ public abstract class Feeder extends Thread {
     }
 
     //just logs the error, but continues
-    public synchronized void writeLatestProcessDateFileAndLog(String latestProcessDate) {
+    public synchronized void writeLatestProcessDateFileAndLogOnFail(String latestProcessDate) {
         try (FileOutputStream fos = new FileOutputStream(latestProcessDateFile)) {
             fos.write(latestProcessDate.getBytes());
             fos.flush();

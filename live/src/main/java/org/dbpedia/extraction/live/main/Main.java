@@ -149,22 +149,20 @@ public class Main {
 
     public static void stopLive() {
         try {
-            logger.warn("Stopping DBpedia Live components");
 
-            for (PageProcessor p : processors)
+            for (PageProcessor p : processors) {
                 p.stopProcessor();
+            }
 
-            for (Feeder f : feeders)
+            for (Feeder f : feeders) {
                 // Stop the feeders, taking the most recent date form the queue
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
-
+            }
             // Statistics
             //if (statistics != null) statistics.stopStatistics();
 
             // Publisher
             publisher.flush();
-            // Page Processor
-            // TODO
 
         } catch (Exception exp) {
             logger.error(ExceptionUtil.toString(exp));
@@ -178,6 +176,7 @@ public class Main {
             @Override
             public void run() {
                 try {
+                    logger.info("received shutdown signal, stopping...");
                     stopLive();
                 } catch (Exception exp) {
 
