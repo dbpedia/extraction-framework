@@ -184,6 +184,7 @@ public class Main {
                     logger.info("received shutdown signal, stopping...");
                     stopLive();
                 } catch (Exception exp) {
+                    logger.error("???",exp);
 
                 }
             }
