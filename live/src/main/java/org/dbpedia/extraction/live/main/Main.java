@@ -37,7 +37,7 @@ public class Main {
     private volatile static Publisher publisher;
 
     // DEBUGGING
-    private static Boolean debugFeeders = false;
+    private static Boolean debugSkipProcessors = false;
 
     public static void authenticate(final String username, final String password) {
         Authenticator.setDefault(new Authenticator() {
@@ -62,18 +62,18 @@ public class Main {
         }
 
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.rcstream.enabled")) == true) {
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.rcstream.enabled"))) {
             feeders.add(new RCStreamFeeder("RCStreamFeeder", LiveQueuePriority.LivePriority,
                     uploaded_dump_date, LiveOptions.options.get("working_directory"),
                     LiveOptions.options.get("feeder.rcstream.room")));
         }
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.allpages.enabled")) == true) {
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.allpages.enabled"))) {
             feeders.add(new AllPagesFeeder("AllPagesFeeder", LiveQueuePriority.LivePriority,
                     uploaded_dump_date, LiveOptions.options.get("working_directory")));
         }
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled"))) {
             long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.pollInterval"));
             long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.sleepInterval"));
             feeders.add(new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
@@ -82,7 +82,7 @@ public class Main {
                     LiveOptions.options.get("working_directory")));
         }
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled")) == true) {
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled"))) {
             long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.live.pollInterval"));
             long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.live.sleepInterval"));
             feeders.add(new OAIFeeder("FeederLive", LiveQueuePriority.LivePriority,
@@ -91,17 +91,17 @@ public class Main {
                     LiveOptions.options.get("working_directory")));
         }
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.unmodified.enabled")) == true) {
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.unmodified.enabled"))) {
             int minDaysAgo = Integer.parseInt(LiveOptions.options.get("feeder.unmodified.minDaysAgo"));
             int chunk = Integer.parseInt(LiveOptions.options.get("feeder.unmodified.chunk"));
             int threshold = Integer.parseInt(LiveOptions.options.get("feeder.unmodified.threshold"));
             long sleepTime = Long.parseLong(LiveOptions.options.get("feeder.unmodified.sleepTime"));
-            feeders.add(new UnmodifiedFeeder("FeederUnmodified", LiveQueuePriority.UnmodifiedPagePriority,
+            feeders.add(new UnmodifiedFeeder("UnmodifiedFeeder", LiveQueuePriority.UnmodifiedPagePriority,
                     minDaysAgo, chunk, threshold, sleepTime,
                     uploaded_dump_date, LiveOptions.options.get("working_directory")));
         }
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.eventstreams.enabled")) == true) {
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.eventstreams.enabled"))) {
             feeders.add(new EventStreamsFeeder("EventStreamsFeeder", LiveQueuePriority.EventStreamsPriority,
                     uploaded_dump_date, LiveOptions.options.get("working_directory")));
         }
@@ -115,10 +115,12 @@ public class Main {
         //statistics = new Statistics(LiveOptions.options.get("statisticsFilePath"), 20,
         //        DateUtil.getDuration1MinMillis(), 2 * DateUtil.getDuration1MinMillis());
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("debugSettingsBeforeInit")) == true) {
+        //DEBUGOPTIONS
+
+        if (Boolean.parseBoolean(LiveOptions.options.get("debugExitBeforeInit"))) {
             System.exit(0);
         }
-        debugFeeders = Boolean.parseBoolean(LiveOptions.options.get("debugFeeders"));
+        debugSkipProcessors = Boolean.parseBoolean(LiveOptions.options.get("debugSkipProcessors"));
 
 
     }
@@ -126,11 +128,12 @@ public class Main {
     public static void startLive() {
         try {
 
-            for (Feeder f : feeders)
+            for (Feeder f : feeders) {
                 f.startFeeder();
 
+            }
             for (PageProcessor p : processors) {
-                if (!debugFeeders) {
+                if (!debugSkipProcessors) {
                     p.startProcessor();
                 }
             }
@@ -155,6 +158,7 @@ public class Main {
             }
 
             for (Feeder f : feeders) {
+                logger.info(feeders.toString()+" "+feeders.size());
                 logger.info("Stopping feeder: "+f.getName());
                 // Stop the feeders, taking the most recent date form the queue
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));

@@ -74,6 +74,7 @@ public abstract class Feeder extends Thread {
         if (keepRunning) {
             initFeeder();
             start();
+            logger.info(feederName + " started");
         }
     }
 
@@ -81,7 +82,7 @@ public abstract class Feeder extends Thread {
      * Stops the feeder from running gracefully
      * */
     public void stopFeeder(String date) {
-        logger.info("Stopped "+feederName+" and wrote "+date+" to "+latestProcessDateFile);
+        logger.info("Stopped " + feederName + " and wrote " + date + " to " + latestProcessDateFile);
         keepRunning = false;
         writeLatestProcessDateFileAndLogOnFail(date);
     }
