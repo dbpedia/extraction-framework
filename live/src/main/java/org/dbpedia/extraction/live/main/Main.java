@@ -118,7 +118,7 @@ public class Main {
         if (Boolean.parseBoolean(LiveOptions.options.get("debugSettingsBeforeInit")) == true) {
             System.exit(0);
         }
-        debugFeeders = Boolean.parseBoolean(LiveOptions.options.get("debugFeeders")) ;
+        debugFeeders = Boolean.parseBoolean(LiveOptions.options.get("debugFeeders"));
 
 
     }
@@ -129,8 +129,10 @@ public class Main {
             for (Feeder f : feeders)
                 f.startFeeder();
 
-            for (PageProcessor p : processors){
-                if(!debugFeeders){p.startProcessor()};
+            for (PageProcessor p : processors) {
+                if (!debugFeeders) {
+                    p.startProcessor();
+                }
             }
 
             publisher = new Publisher("Publisher", 4);
