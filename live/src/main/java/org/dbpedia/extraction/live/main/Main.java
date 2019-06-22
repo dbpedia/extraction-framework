@@ -170,6 +170,7 @@ public class Main {
             publisher.flush();
 
         } catch (Exception exp) {
+            exp.printStackTrace();
             logger.error(ExceptionUtil.toString(exp));
         }
     }
@@ -184,6 +185,7 @@ public class Main {
                     logger.info("received shutdown signal, stopping...");
                     stopLive();
                 } catch (Exception exp) {
+                    exp.printStackTrace();
                     logger.error("???",exp);
 
                 }
