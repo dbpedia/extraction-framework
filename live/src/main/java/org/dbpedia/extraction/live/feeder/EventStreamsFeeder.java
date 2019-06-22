@@ -63,25 +63,26 @@ public class EventStreamsFeeder extends Feeder {
         }
         // get first element if any and use as last processeddates
         if (!queueItemBuffer.isEmpty()) {
-            int size = queueItemBuffer.size();
-            LiveQueueItem firstItem = queueItemBuffer.get(0);
-            LiveQueueItem lastItem = queueItemBuffer.get(size - 1);
-            String firstItemTime = queueItemBuffer.get(0).getModificationDate();
+            int bufferSize = queueItemBuffer.size();
+            long queueSize = LiveQueue.getQueueSize();
 
-            long queuesizebefore = LiveQueue.getQueueSize();
+            LiveQueueItem firstItem = queueItemBuffer.get(0);
+            LiveQueueItem lastItem = queueItemBuffer.get(bufferSize - 1);
+            String firstItemTime = firstItem.getModificationDate();
+            String lastItemTime = lastItem.getModificationDate();
+
             // doing it
             returnQueueItems = exportQueueItemBuffer();
-            long queuesizeafter = LiveQueue.getQueueSize();
-            long duplicates = (queuesizebefore + size) - queuesizeafter;
 
 
             //start with one second, because of division by zero
-            long secondsRunning = ((System.currentTimeMillis() - invocationTime) / 1000) + 1;
-            readItemsCount += size;
-            logger.info("Stream at " + firstItemTime +
-                    " writing " + size + " to queue (" + LiveQueue.getQueueSize() + " items with " + duplicates + " estimated duplicates), feed avg.: "
+            long secondsRunning = ((ZonedDateTime.parse(lastItemTime).toInstant().toEpochMilli() - invocationTime) / 1000) + 1;
+
+            readItemsCount += bufferSize;
+            logger.info("Stream at " + lastItemTime +
+                    " writing " + bufferSize + " to queue (" + queueSize + " items), feed avg.: "
                     + (readItemsCount / secondsRunning) + " per second, "
-                    + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour"
+                    + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour, "
                     + (readItemsCount) / ((float) secondsRunning / 86400) + " per day");
 
             //tracing
