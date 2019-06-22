@@ -35,6 +35,8 @@ public class EventStreamsFeeder extends Feeder {
                               String defaultStartTime,
                               String folderBasePath) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
+
+        //latestProcessDate is set in super
         invocationTime = ZonedDateTime.parse(latestProcessDate).toInstant().toEpochMilli();
         logger.info("Comparing\n" +
                 "current:    " + System.currentTimeMillis() + "\n" +
@@ -72,7 +74,7 @@ public class EventStreamsFeeder extends Feeder {
             logger.info("Stream at " + firstItemTime  +
                     " writing " + size + " to queue, feed stats: "
                     + (readItemsCount / secondsRunning) + " per second, "
-                    + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour")
+                    + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour");
 
             //tracing
             logger.trace("\n"+firstItem + "\n" + lastItem + "\n");
