@@ -3,6 +3,7 @@ package org.dbpedia.extraction.live.feeder;
 import org.dbpedia.extraction.live.config.LiveOptions;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
+import org.dbpedia.extraction.live.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.reflect.generics.tree.Tree;
@@ -34,11 +35,12 @@ public class EventStreamsFeeder extends Feeder {
                               String defaultStartTime,
                               String folderBasePath) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
-        invocationTime = ZonedDateTime.parse(defaultStartTime).toInstant().toEpochMilli();
+        invocationTime = ZonedDateTime.parse(latestProcessDate).toInstant().toEpochMilli();
         logger.info("Comparing\n" +
-                "current:    "+System.currentTimeMillis()+"\n" +
-                "feed in ms: "+invocationTime+"\n" +
-                "feed:       "+defaultStartTime);
+                "current:    " + System.currentTimeMillis() + "\n" +
+                "current:    " + DateUtil.transformToUTC(System.currentTimeMillis()) + "\n" +
+                "feed in ms: " + invocationTime + "\n" +
+                "feed:       " + latestProcessDate);
     }
 
 
@@ -60,23 +62,29 @@ public class EventStreamsFeeder extends Feeder {
         if (!queueItemBuffer.isEmpty()) {
             int size = queueItemBuffer.size();
             LiveQueueItem firstItem = queueItemBuffer.get(0);
-            LiveQueueItem lastItem = queueItemBuffer.get(size-1);
+            LiveQueueItem lastItem = queueItemBuffer.get(size - 1);
             String firstItemTime = queueItemBuffer.get(0).getModificationDate();
 
 
             //start with one second, because of division by zero
             long secondsRunning = ((System.currentTimeMillis() - invocationTime) / 1000) + 1;
             readItemsCount += size;
-            logger.info("Stream at " + firstItemTime + "\n" +
-                    "writing " + size + " to queue, feed stats: "
-                    + (readItemsCount / secondsRunning) + " per second, " + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour\n" +
-                            firstItem+"\n"+lastItem+"\n");
+            logger.info("Stream at " + firstItemTime  +
+                    " writing " + size + " to queue, feed stats: "
+                    + (readItemsCount / secondsRunning) + " per second, "
+                    + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour")
+
+            //tracing
+            logger.trace("\n"+firstItem + "\n" + lastItem + "\n");
 
             StringBuilder sb = new StringBuilder();
-            for (LiveQueueItem item : queueItemBuffer){
+            for (LiveQueueItem item : queueItemBuffer) {
                 sb.append(item.getItemName()).append(", ");
             }
-            logger.info("titles: "+sb.toString());
+            logger.trace("titles: " + sb.toString());
+
+
+            // doing it
             returnQueueItems = exportQueueItemBuffer();
 
             // set last processed date
