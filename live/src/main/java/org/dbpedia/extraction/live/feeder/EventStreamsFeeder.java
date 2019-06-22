@@ -5,10 +5,12 @@ import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.reflect.generics.tree.Tree;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.TreeSet;
 
 
 /**
@@ -61,14 +63,20 @@ public class EventStreamsFeeder extends Feeder {
             LiveQueueItem lastItem = queueItemBuffer.get(size-1);
             String firstItemTime = queueItemBuffer.get(0).getModificationDate();
 
+
             //start with one second, because of division by zero
             long secondsRunning = ((System.currentTimeMillis() - invocationTime) / 1000) + 1;
             readItemsCount += size;
-            logger.info(
-                    "\n" + firstItemTime + ", writing " + size + " to queue, feed stats: "
+            logger.info("Stream at " + firstItemTime + "\n" +
+                    "writing " + size + " to queue, feed stats: "
                     + (readItemsCount / secondsRunning) + " per second, " + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour\n" +
-                            firstItemTime+"\n"+lastItem+"\n");
+                            firstItem+"\n"+lastItem+"\n");
 
+            StringBuilder sb = new StringBuilder();
+            for (LiveQueueItem item : queueItemBuffer){
+                sb.append(item.getItemName()).append(", ");
+            }
+            logger.info("titles: "+sb.toString());
             returnQueueItems = exportQueueItemBuffer();
 
             // set last processed date
