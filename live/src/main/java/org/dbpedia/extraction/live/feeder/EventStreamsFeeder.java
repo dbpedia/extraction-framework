@@ -79,12 +79,6 @@ public class EventStreamsFeeder extends Feeder {
             //tracing
             logger.trace("\n"+firstItem + "\n" + lastItem + "\n");
 
-            StringBuilder sb = new StringBuilder();
-            for (LiveQueueItem item : queueItemBuffer) {
-                sb.append(item.getItemName()).append(", ");
-            }
-            logger.trace("titles: " + sb.toString());
-
 
             // doing it
             returnQueueItems = exportQueueItemBuffer();
