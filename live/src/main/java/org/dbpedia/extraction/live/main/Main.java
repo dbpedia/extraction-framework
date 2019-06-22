@@ -155,6 +155,7 @@ public class Main {
             }
 
             for (Feeder f : feeders) {
+                logger.info("Stopping feeder: "+f.getName());
                 // Stop the feeders, taking the most recent date form the queue
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
             }
