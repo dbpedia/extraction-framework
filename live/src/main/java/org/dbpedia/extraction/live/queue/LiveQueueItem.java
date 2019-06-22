@@ -127,4 +127,18 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
                 && Objects.equals(this.statQueueAdd, other.statQueueAdd)
                 && Objects.equals(this.xml, other.xml);
     }
+
+    @Override
+    public String toString() {
+        return "LiveQueueItem{\n" +
+                "wikiLanguage=" + wikiLanguage +
+                "\nitemID=" + itemID +
+                "\nitemPriority=" + itemPriority +
+                "\nitemName='" + itemName + '\'' +
+                "\nmodificationDate='" + modificationDate + '\'' +
+                "\ndeleted=" + deleted +
+                "\nstatQueueAdd=" + statQueueAdd +
+                "\nxml='" + xml + '\'' +
+                '}';
+    }
 }

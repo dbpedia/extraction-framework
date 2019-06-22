@@ -112,6 +112,9 @@ public class Main {
         //statistics = new Statistics(LiveOptions.options.get("statisticsFilePath"), 20,
         //        DateUtil.getDuration1MinMillis(), 2 * DateUtil.getDuration1MinMillis());
 
+        if (Boolean.parseBoolean(LiveOptions.options.get("debugSettingsBeforeInit")) == true) {
+            System.exit(0);
+        }
 
     }
 

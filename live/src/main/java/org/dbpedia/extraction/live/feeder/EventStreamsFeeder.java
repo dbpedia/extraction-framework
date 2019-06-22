@@ -6,6 +6,7 @@ import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -22,7 +23,7 @@ public class EventStreamsFeeder extends Feeder {
     protected static Logger logger = LoggerFactory.getLogger("EventStreamsFeeder");
     private Long sleepTime = Long.parseLong(LiveOptions.options.get("feeder.eventstreams.sleepTime"));
     private static ArrayList<LiveQueueItem> queueItemBuffer = new ArrayList<>();
-    private static final long invocationTime = System.currentTimeMillis();
+    private final long invocationTime;
     private static long readItemsCount = 0;
 
 
@@ -31,6 +32,11 @@ public class EventStreamsFeeder extends Feeder {
                               String defaultStartTime,
                               String folderBasePath) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
+        invocationTime = ZonedDateTime.parse(defaultStartTime).toInstant().toEpochMilli();
+        logger.info("Comparing\n" +
+                "current:    "+System.currentTimeMillis()+"\n" +
+                "feed in ms: "+invocationTime+"\n" +
+                "feed:       "+defaultStartTime);
     }
 
 
@@ -48,37 +54,44 @@ public class EventStreamsFeeder extends Feeder {
         } catch (InterruptedException e) {
             logger.error("Error when handing over items to liveQueue", e);
         }
-        synchronized (queueItemBuffer) {
-            // get first element if any and use as last processeddates
-            if (!queueItemBuffer.isEmpty()) {
-                String firstItemTime = queueItemBuffer.get(0).getModificationDate();
-                int size = queueItemBuffer.size();
-                //start with one second, because of division by zero
-                long secondsRunning = ((System.currentTimeMillis() - invocationTime) / 1000) + 1;
-                readItemsCount += size;
-                logger.info("Writing " + size + " to queue, feed stats: "
-                        + (readItemsCount / secondsRunning) + " per second, " + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour");
+        // get first element if any and use as last processeddates
+        if (!queueItemBuffer.isEmpty()) {
+            int size = queueItemBuffer.size();
+            LiveQueueItem firstItem = queueItemBuffer.get(0);
+            LiveQueueItem lastItem = queueItemBuffer.get(size-1);
+            String firstItemTime = queueItemBuffer.get(0).getModificationDate();
 
-                // shoving to queue
-                //returnQueueItems.addAll(queueItemBuffer);
-                //queueItemBuffer.clear();
-                returnQueueItems = queueItemBuffer;
-                queueItemBuffer = new ArrayList<>();
+            //start with one second, because of division by zero
+            long secondsRunning = ((System.currentTimeMillis() - invocationTime) / 1000) + 1;
+            readItemsCount += size;
+            logger.info(
+                    "\n" + firstItemTime + ", writing " + size + " to queue, feed stats: "
+                    + (readItemsCount / secondsRunning) + " per second, " + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour\n" +
+                            firstItemTime+"\n"+lastItem+"\n");
 
+            returnQueueItems = exportQueueItemBuffer();
 
-                // set last processed date
-                setLatestProcessDate(firstItemTime);
-                writeLatestProcessDateFileAndLog(firstItemTime);
-            }
+            // set last processed date
+            setLatestProcessDate(firstItemTime);
+            writeLatestProcessDateFileAndLog(firstItemTime);
         }
         return returnQueueItems;
     }
 
-    public static void addQueueItemToBuffer(LiveQueueItem item) {
+    public synchronized static Collection<LiveQueueItem> exportQueueItemBuffer() {
+        Collection<LiveQueueItem> returnQueueItems = new ArrayList();
+
+        // shoving to queue
+        //returnQueueItems.addAll(queueItemBuffer);
+        //queueItemBuffer.clear();
+        returnQueueItems = queueItemBuffer;
+        queueItemBuffer = new ArrayList<>();
+        return returnQueueItems;
+    }
+
+    public synchronized static void addQueueItemToBuffer(LiveQueueItem item) {
         if (item.getItemName() != "") {
-            synchronized (queueItemBuffer) {
-                queueItemBuffer.add(item);
-            }
+            queueItemBuffer.add(item);
         }
     }
 
