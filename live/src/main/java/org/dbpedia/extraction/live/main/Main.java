@@ -36,6 +36,9 @@ public class Main {
     private volatile static List<PageProcessor> processors = new ArrayList<PageProcessor>(10);
     private volatile static Publisher publisher;
 
+    // DEBUGGING
+    private static Boolean debugFeeders = false;
+
     public static void authenticate(final String username, final String password) {
         Authenticator.setDefault(new Authenticator() {
             @Override
@@ -115,6 +118,8 @@ public class Main {
         if (Boolean.parseBoolean(LiveOptions.options.get("debugSettingsBeforeInit")) == true) {
             System.exit(0);
         }
+        debugFeeders = Boolean.parseBoolean(LiveOptions.options.get("debugFeeders")) ;
+
 
     }
 
@@ -124,8 +129,9 @@ public class Main {
             for (Feeder f : feeders)
                 f.startFeeder();
 
-            for (PageProcessor p : processors)
-                p.startProcessor();
+            for (PageProcessor p : processors){
+                if(!debugFeeders){p.startProcessor()};
+            }
 
             publisher = new Publisher("Publisher", 4);
 
