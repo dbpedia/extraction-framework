@@ -83,7 +83,7 @@ class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
         //deleted
         false,
         //xml
-        eventData))
+        ""))
 
     val sinkAddToQueue: Sink[LiveQueueItem, Future[Done]] =
       Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemToBuffer(_))

@@ -46,7 +46,7 @@ public class LiveQueue {
     }
 
     public static LiveQueueItem take() throws InterruptedException {
-        logger.info("QueueSize at take " + queue.size() );
+        //logger.info("QueueSize at take " + queue.size() );
         LiveQueueItem item = queue.take();
         uniqueSet.remove(item.getItemName());
         // update counts

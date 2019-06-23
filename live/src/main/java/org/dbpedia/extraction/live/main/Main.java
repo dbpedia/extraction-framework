@@ -211,7 +211,10 @@ public class Main {
                 more = false;
                 stopLive();
             } else if (next.equalsIgnoreCase("s")) {
-                System.out.println("view status, not implemented yet");
+                String msg = "\n"
+                        + "Current queue: "+LiveQueue.getQueueSize() + "" +
+                        "\n ";
+                System.out.println("view status, not properly implemented yet");
             } else {
                 System.out.println("received nothing meaningful: '" + next + "'\n" +
                         "Commands:\n" +

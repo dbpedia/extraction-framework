@@ -96,7 +96,7 @@ public class EventStreamsFeeder extends Feeder {
                 lastItemsCount = readItemsCount;
                 setLatestProcessDate(LiveQueue.getPriorityDate(this.getQueuePriority()));
                 writeLatestProcessDateFileAndLogOnFail(getLatestProcessDate());
-                logger.info("~ 10 minutes passed, saving " + getLatestProcessDate() + " in " + latestProcessDateFile);
+                logger.info("~10 min stream time passed, " + getLatestProcessDate() + " > " + latestProcessDateFile);
 
             }
         }

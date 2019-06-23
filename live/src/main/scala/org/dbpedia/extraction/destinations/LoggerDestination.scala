@@ -6,9 +6,10 @@ import org.slf4j.LoggerFactory
 import scala.collection.Seq
 
 /**
- * Just logs the extraction output to the screen
- */
+  * Just logs the extraction output to the screen
+  */
 class LoggerDestination(pageID: Long, pageTitle: String) extends LiveDestination {
+
 
   private val logger = LoggerFactory.getLogger(classOf[LoggerDestination].getName)
 
@@ -19,9 +20,9 @@ class LoggerDestination(pageID: Long, pageTitle: String) extends LiveDestination
   private var now = System.currentTimeMillis
 
   /**
-   * Opens this destination. This method should only be called once during the lifetime
-   * of a destination, and it should not be called concurrently with other methods of this class.
-   */
+    * Opens this destination. This method should only be called once during the lifetime
+    * of a destination, and it should not be called concurrently with other methods of this class.
+    */
   def open() {}
 
   override def write(extractor: String, hash: String, graphAdd: Seq[Quad], graphRemove: Seq[Quad], graphUnmodified: Seq[Quad]) {
@@ -33,9 +34,21 @@ class LoggerDestination(pageID: Long, pageTitle: String) extends LiveDestination
   }
 
   override def close = {
+    val ms = (System.currentTimeMillis - now)
+    LDStats.count+=1
+    LDStats.totalTimeInMillis+=ms
     val total = addedTriples + unmodifiedTriples
     logger.info("Page with ID:" + pageID + " produced " + total +
       " Triples (A:" + addedTriples + "/D:" + deletedTriples + "/U:" + unmodifiedTriples +
-      ") in " + (System.currentTimeMillis - now) + "ms. (Title: " + pageTitle + ")")
+      ") in " + ms + "ms. ("+LDStats.avg+") (Title: " + pageTitle + ")")
   }
+}
+
+object LDStats {
+  var count = 0
+  var totalTimeInMillis = 0
+  def avg()={
+    totalTimeInMillis/count
+  }
+
 }
