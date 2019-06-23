@@ -161,7 +161,7 @@ object LiveExtractionController
         var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
         destList += new JSONCacheUpdateDestination(liveCache)
         destList += new PublisherDiffDestination(wikiPage.id, liveCache.performCleanUpdate(), if (liveCache.cacheObj != null) liveCache.cacheObj.subjects else new java.util.HashSet[String]())
-        destList += new LoggerDestination(wikiPage.id, wikiPage.title.decoded) // Just to log extraction results
+        destList += new LoggerDestination(wikiPage.id, wikiPage.title.decoded,language.wikiCode) // Just to log extraction results
 
         val compositeDest: LiveDestination = new CompositeLiveDestination(destList: _*) // holds all main destinations
 

@@ -105,11 +105,25 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
         }
     }
 
+    /**
+     * TODO it really seems that this is used nowhere,
+     * Priority Queue uses compare to
+     * Hashset uses ItemName, which is a string
+     * @return
+     */
+    @Deprecated
     @Override
     public int hashCode() {
         return Objects.hash(wikiLanguage, itemID, itemPriority, itemName, modificationDate, deleted, statQueueAdd, xml);
     }
 
+    /**
+     * TODO it really seems that this is used nowhere,
+     * Priority Queue uses compare to
+     * Hashset uses ItemName, which is a string
+     * @return
+     */
+    @Deprecated
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

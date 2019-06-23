@@ -8,7 +8,7 @@ import scala.collection.Seq
 /**
   * Just logs the extraction output to the screen
   */
-class LoggerDestination(pageID: Long, pageTitle: String) extends LiveDestination {
+class LoggerDestination(pageID: Long, pageTitle: String, wikiLanguage:String) extends LiveDestination {
 
 
   private val logger = LoggerFactory.getLogger(classOf[LoggerDestination].getName)
@@ -40,7 +40,7 @@ class LoggerDestination(pageID: Long, pageTitle: String) extends LiveDestination
     val total = addedTriples + unmodifiedTriples
     logger.info("Page with ID:" + pageID + " produced " + total +
       " Triples (A:" + addedTriples + "/D:" + deletedTriples + "/U:" + unmodifiedTriples +
-      ") in " + ms + "ms. ("+LDStats.avg+"AVG) (Title: " + pageTitle + ")")
+      ") in " + ms + "ms. ("+LDStats.avg+"AVG) (Lang: "+wikiLanguage+", Title: " + pageTitle + ")")
   }
 }
 

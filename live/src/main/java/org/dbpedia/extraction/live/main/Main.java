@@ -10,6 +10,7 @@ import org.dbpedia.extraction.live.publisher.DiffData;
 import org.dbpedia.extraction.live.publisher.Publisher;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
+import org.dbpedia.extraction.live.storage.JDBCPoolConnection;
 import org.dbpedia.extraction.live.storage.JDBCUtil;
 import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
@@ -213,18 +214,22 @@ public class Main {
                 more = false;
                 stopLive();
             } else if (next.equalsIgnoreCase("s")) {
-                float articlespeed = LDStats.avg()/(float)nrOfProcesses;
+                float articlespeed = LDStats.avg() / (float) nrOfProcesses;
 
-                String msg = "\n"
-                        + "Current queue: "+LiveQueue.getQueueSize() + "" +
-                        "\nAVG time needed to extract one page: "+articlespeed+ " ms or "+(1000/articlespeed)+ " per second" +
-                        "\n" ;
+                String msg = "\nEXTRACTION: " +
+                        "\nCurrent queue: " + LiveQueue.getQueueSize() + "" +
+                        "\nAVG time needed to extract one page: " + articlespeed + " ms or " + (1000 / articlespeed) + " per second" +
+                        "\n " +
+                        "\nDATABASE: " +
+                        "\ntime to prepare avg: " + JDBCPoolConnection.getStats().getStatementPrepareTimeAvg() +
+                        "\nprep statements avg: " + JDBCPoolConnection.getStats().getStatementExecuteTimeAvg() +
+                        "\nTotal connections: " + JDBCPoolConnection.getStats().getTotalCreatedConnections();
                 System.out.println(msg);
             } else {
                 System.out.println("received nothing meaningful: '" + next + "'\n" +
                         "Commands:\n" +
                         "  [q] to quit and shutdown\n" +
-                        "  [s] to show status (not implemented yet)");
+                        "  [s] to show status");
             }
         }
 

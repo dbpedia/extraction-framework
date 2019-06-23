@@ -2,6 +2,7 @@ package org.dbpedia.extraction.live.storage;
 
 import com.jolbox.bonecp.BoneCP;
 import com.jolbox.bonecp.BoneCPConfig;
+import com.jolbox.bonecp.Statistics;
 import org.slf4j.Logger;
 import org.dbpedia.extraction.live.config.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
@@ -65,6 +66,10 @@ public class JDBCPoolConnection {
             }
         }
 
+    }
+
+    public static Statistics getStats(){
+        return connectionCachePool.getStatistics();
     }
 
 
