@@ -27,7 +27,11 @@ public class JDBCPoolConnection {
             config.setJdbcUrl(LiveOptions.options.get("cache.dsn"));
             config.setUsername(LiveOptions.options.get("cache.user"));
             config.setPassword(LiveOptions.options.get("cache.pw"));
+            logger.info(config.toString());
             connectionCachePool = new BoneCP(config); // setup the connection pool
+            logger.info(connectionCachePool.getTotalFree()+"");
+            logger.info(connectionCachePool.getStatistics()+"");
+
         } catch (Exception e) {
             logger.error(e.getMessage());
             logger.error("Could not initialize DB connection! Exiting...");

@@ -40,7 +40,7 @@ class LoggerDestination(pageID: Long, pageTitle: String) extends LiveDestination
     val total = addedTriples + unmodifiedTriples
     logger.info("Page with ID:" + pageID + " produced " + total +
       " Triples (A:" + addedTriples + "/D:" + deletedTriples + "/U:" + unmodifiedTriples +
-      ") in " + ms + "ms. ("+LDStats.avg+") (Title: " + pageTitle + ")")
+      ") in " + ms + "ms. ("+LDStats.avg+"AVG) (Title: " + pageTitle + ")")
   }
 }
 
