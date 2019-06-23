@@ -34,8 +34,8 @@ class LoggerDestination(pageID: Long, pageTitle: String) extends LiveDestination
   }
 
   override def close = {
-    val ms = (System.currentTimeMillis - now)
-    LDStats.count+=1
+    val ms: Long = (System.currentTimeMillis - now)
+    LDStats.count+=1L
     LDStats.totalTimeInMillis+=ms
     val total = addedTriples + unmodifiedTriples
     logger.info("Page with ID:" + pageID + " produced " + total +
@@ -45,8 +45,8 @@ class LoggerDestination(pageID: Long, pageTitle: String) extends LiveDestination
 }
 
 object LDStats {
-  var count = 0
-  var totalTimeInMillis = 0
+  var count = 0L
+  var totalTimeInMillis: Long = 0L
   def avg()={
     totalTimeInMillis/count
   }
