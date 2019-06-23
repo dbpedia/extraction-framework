@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.live.main;
 
 
+import org.dbpedia.extraction.destinations.LDStats;
+import org.dbpedia.extraction.destinations.LoggerDestination;
 import org.dbpedia.extraction.live.config.LiveOptions;
 import org.dbpedia.extraction.live.feeder.*;
 import org.dbpedia.extraction.live.processor.PageProcessor;
@@ -40,8 +42,9 @@ public class Main {
     private volatile static List<PageProcessor> processors = new ArrayList<PageProcessor>(10);
     private volatile static Publisher publisher;
 
-    // DEBUGGING
+    // DEBUGGING  STATS
     private static Boolean debugSkipProcessors = false;
+    private static int nrOfProcesses = 0;
 
     public static void authenticate(final String username, final String password) {
         Authenticator.setDefault(new Authenticator() {
@@ -112,6 +115,7 @@ public class Main {
 
 
         int threads = Integer.parseInt(LiveOptions.options.get("ProcessingThreads"));
+        nrOfProcesses = threads;
         for (int i = 0; i < threads; i++) {
             processors.add(new PageProcessor("N" + (i + 1)));
         }
@@ -186,11 +190,9 @@ public class Main {
             @Override
             public void run() {
                 try {
-
                 } catch (Exception exp) {
                     exp.printStackTrace();
                     logger.error("???", exp);
-
                 }
             }
         });*/
@@ -211,10 +213,13 @@ public class Main {
                 more = false;
                 stopLive();
             } else if (next.equalsIgnoreCase("s")) {
+                float articlespeed = LDStats.avg()/(float)nrOfProcesses;
+
                 String msg = "\n"
                         + "Current queue: "+LiveQueue.getQueueSize() + "" +
-                        "\n ";
-                System.out.println("view status, not properly implemented yet");
+                        "\nAVG time needed to extract one page: "+articlespeed+ " ms or "+(1000/articlespeed)+ " per second" +
+                        "\n" ;
+                System.out.println(msg);
             } else {
                 System.out.println("received nothing meaningful: '" + next + "'\n" +
                         "Commands:\n" +
