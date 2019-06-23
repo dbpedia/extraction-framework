@@ -221,6 +221,7 @@ public class Main {
                         "\nAVG time needed to extract one page: " + articlespeed + " ms or " + (1000 / articlespeed) + " per second" +
                         "\n " +
                         "\nDATABASE: " +
+                        "\ntotal statements executed: " + JDBCPoolConnection.getStats().getStatementsExecuted() +
                         "\ntime to prepare avg: " + JDBCPoolConnection.getStats().getStatementPrepareTimeAvg() +
                         "\nprep statements avg: " + JDBCPoolConnection.getStats().getStatementExecuteTimeAvg() +
                         "\nTotal connections: " + JDBCPoolConnection.getStats().getTotalCreatedConnections();
