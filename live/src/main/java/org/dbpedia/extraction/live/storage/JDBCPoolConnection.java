@@ -34,8 +34,6 @@ public class JDBCPoolConnection {
 
             logger.info("JDBCPoolConfig: "+config.toString());
             connectionCachePool = new BoneCP(config); // setup the connection pool
-            logger.info(connectionCachePool.getStatistics().toString()+"");
-            logger.info(connectionCachePool.getStatistics());
 
         } catch (Exception e) {
             logger.error(e.getMessage());
