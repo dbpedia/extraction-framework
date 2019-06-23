@@ -80,7 +80,7 @@ public class EventStreamsFeeder extends Feeder {
             long catchupseconds = (System.currentTimeMillis() - ZonedDateTime.parse(lastItemTime).toInstant().toEpochMilli()) / 1000;
 
             readItemsCount += bufferSize;
-            logger.info("Stream at " + lastItemTime + " (T-" + ((float)catchupseconds / 3600) + "h)"
+            logger.info("Stream at " + lastItemTime + " (T-" + (catchupseconds / 3600) + "h)"
                     + " writing " + bufferSize + " to queue (" + queueSize + " items), feed avg.: "
                     + (readItemsCount / secondsRunning) + " per second, "
                     + (readItemsCount) / ((float) secondsRunning / 3600) + " per hour, "

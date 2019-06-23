@@ -22,6 +22,8 @@ import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
+import static java.lang.Thread.sleep;
+
 
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
@@ -159,7 +161,6 @@ public class Main {
             }
 
             for (Feeder f : feeders) {
-                logger.info(feeders.toString() + " " + feeders.size());
                 logger.info("Stopping feeder: " + f.getName());
                 // Stop the feeders, taking the most recent date form the queue
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
@@ -216,5 +217,9 @@ public class Main {
                         "  [s] to show status (not implemented yet)");
             }
         }
+
+        //System exit is called here to interrupt all remaining threads.
+        sleep(2000);
+        System.exit(0);
     }
 }
