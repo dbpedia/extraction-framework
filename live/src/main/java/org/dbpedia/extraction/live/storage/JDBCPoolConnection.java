@@ -27,10 +27,15 @@ public class JDBCPoolConnection {
             config.setJdbcUrl(LiveOptions.options.get("cache.dsn"));
             config.setUsername(LiveOptions.options.get("cache.user"));
             config.setPassword(LiveOptions.options.get("cache.pw"));
-            logger.info(config.toString());
+
+            // Some magic numbers
+            config.setMinConnectionsPerPartition(4);
+            config.setMaxConnectionsPerPartition(32);
+
+            logger.info("JDBCPoolConfig: "+config.toString());
             connectionCachePool = new BoneCP(config); // setup the connection pool
-            logger.info(connectionCachePool.getTotalFree()+"");
-            logger.info(connectionCachePool.getStatistics()+"");
+            logger.info(connectionCachePool.getStatistics().toString()+"");
+            logger.info(connectionCachePool.getStatistics());
 
         } catch (Exception e) {
             logger.error(e.getMessage());
