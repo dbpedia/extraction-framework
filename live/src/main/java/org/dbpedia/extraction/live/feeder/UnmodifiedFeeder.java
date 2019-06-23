@@ -15,13 +15,20 @@ import java.util.Set;
  * and then adds chunk items. To keep the system running at all times, chunk, threshold and
  * sleepTime should be related in the following type:
  *           sleepTime = threshold * (avg item extract time), and
- *           chunk a lot bigger than threshold (to minimize duplicate adding)
+ *           chunk a lot bigger than threshold (to minimize duplicate adding, e.g. 5000)
+ *
+ *           As a magic number, we estimate 10 million records with uniform partition
+ *           If no entities to update are found, the feeder will sleep:
+ *           1h * (Chunksize / Modified estimate per hour)
+ *           (10,000,000/(minDaysAgo * 24h))
+ *
  */
 public class UnmodifiedFeeder extends Feeder {
     private int minDaysAgo = 0;
     private long chunk = 0;
     private long threshold = 0;
     private long sleepTime = 0;
+    private long estimatedRecords = 10*1000*1000L;
 
     public UnmodifiedFeeder(String feederName, LiveQueuePriority queuePriority,
                             int minDaysAgo, int chunk, int threshold, long sleepTime,
@@ -52,6 +59,7 @@ public class UnmodifiedFeeder extends Feeder {
 
     @Override
     protected Collection<LiveQueueItem> getNextItems() {
+
         while (LiveQueue.getQueueSize() > threshold) {
             try {
                 int m = (int) (LiveQueue.getQueueSize() / threshold);
@@ -64,12 +72,15 @@ public class UnmodifiedFeeder extends Feeder {
         Set<LiveQueueItem> items = JDBCUtil.getCacheUnmodified(minDaysAgo, chunk);
         if (items != null && items.size() == 0) {
             try {
-                Thread.sleep(5 * sleepTime);
+                long s =  60*60*1000 /  (chunk/  (estimatedRecords / (minDaysAgo*24)));
+                logger.info("No unmodified found, sleeping "+(s/1000)+" seconds.");
+                Thread.sleep(s);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 return Collections.emptyList();
             }
         }
+        logger.info( "Writing " + items.size() + " to queue (" + LiveQueue.getQueueSize() + " items) ");
         return items;
     }
 }

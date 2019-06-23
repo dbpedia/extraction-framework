@@ -95,6 +95,7 @@ class JSONCache(wikiLanguage: String, pageID: Long, pageTitle: String) {
   }
 
   def updateCache(json: String, subjectsSet: java.util.Set[String], diff: String, isModified: Boolean): Boolean = {
+
     val updatedTimes = if ( cacheObj == null || performCleanUpdate()) "0" else (cacheObj.updatedTimes + 1).toString
 
     if ( ! isModified) {
