@@ -28,10 +28,12 @@ class JSONCache(wikiLanguage: String, pageID: Long, pageTitle: String) {
   var cacheObj : JSONCacheItem = null
   var cacheExists = false
 
+  var jsonCacheUpdateNthEdit = 5
+
   initCache
 
   def performCleanUpdate() : Boolean = {
-    return cacheObj != null && cacheObj.updatedTimes >=5
+    return cacheObj != null && cacheObj.updatedTimes >= jsonCacheUpdateNthEdit
   }
 
   def getHashForExtractor(extractor: String): String = {

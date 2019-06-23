@@ -119,6 +119,8 @@ public abstract class Feeder extends Thread {
         //setLatestProcessDate(item.getModificationDate());
     }
 
+
+
     // throws runtime exception
     public void writeLatestProcessDateFileOrFail(String latestProcessDate) {
         try {

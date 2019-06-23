@@ -45,8 +45,11 @@ object LiveExtractionController
   private var reloadOntologyAndMapping = true
   private var ontologyAndMappingsUpdateTime : Long = 0
   private var languages = LiveOptions.languages.map(Language.apply(_))
-  private val namespaces = if (language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
-    else Set(Namespace.Main, Namespace.Template, Namespace.Category) //TODO implement multilanguage
+
+  //TODO Namespaces are buggy for commons, below is the previous code, but (language == Language.Commons) will always be false
+  //private val namespaces = if (language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
+  //  else Set(Namespace.Main, Namespace.Template, Namespace.Category) //TODO implement multilanguage
+  private val namespaces = Set(Namespace.Main, Namespace.Template, Namespace.Category)
   val logger: Logger = LoggerFactory.getLogger("LiveExtractionConfigLoader")
 
   /** Ontology source */
@@ -150,7 +153,10 @@ object LiveExtractionController
       if(namespaces.contains(wikiPage.title.namespace))
       {
 
+
         val liveCache = new JSONCache(language.wikiCode, wikiPage.id, wikiPage.title.decoded) //
+        //TODO option included here, but should be nicer
+        liveCache.jsonCacheUpdateNthEdit =  Integer.parseInt(LiveOptions.options.get("cache.jsonCacheUpdateNthEdit"))
 
         var destList = new ArrayBuffer[LiveDestination]()  // List of all final destinations
         destList += new JSONCacheUpdateDestination(liveCache)

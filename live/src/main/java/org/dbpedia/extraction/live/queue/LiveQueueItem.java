@@ -89,6 +89,7 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
 
     @Override
     public int compareTo(LiveQueueItem item) {
+        // different priority
         if (this.itemPriority != item.itemPriority)
         	return this.itemPriority.compareTo(item.itemPriority);
 

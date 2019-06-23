@@ -29,6 +29,7 @@ public class EventStreamsFeeder extends Feeder {
     private static ArrayList<LiveQueueItem> queueItemBuffer = new ArrayList<>();
     private final long invocationTime;
     private static long readItemsCount = 0;
+    private static long lastItemsCount = 0;
 
 
     public EventStreamsFeeder(String feederName,
@@ -89,10 +90,15 @@ public class EventStreamsFeeder extends Feeder {
             //tracing
             logger.trace("\n" + firstItem + "\n" + lastItem + "\n");
 
-            // set last processed date, in case there is a hard fail
-            // this is just effective, if the queue is empty
-            setLatestProcessDate(firstItemTime);
-            writeLatestProcessDateFileAndLogOnFail(firstItemTime);
+            // set last processed date every 10 minutes
+            long itemsPer10Minutes = ((readItemsCount / secondsRunning) * 600);
+            if ((readItemsCount - lastItemsCount) > itemsPer10Minutes) {
+                lastItemsCount = readItemsCount;
+                setLatestProcessDate(LiveQueue.getPriorityDate(this.getQueuePriority()));
+                writeLatestProcessDateFileAndLogOnFail(getLatestProcessDate());
+                logger.info("~ 10 minutes passed, saving " + getLatestProcessDate() + " in " + latestProcessDateFile);
+
+            }
         }
         return returnQueueItems;
     }
