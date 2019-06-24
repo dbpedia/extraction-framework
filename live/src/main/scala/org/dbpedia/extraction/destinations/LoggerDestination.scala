@@ -46,7 +46,7 @@ class LoggerDestination(pageID: Long, pageTitle: String, wikiLanguage:String) ex
 
 object LDStats {
   var count = 0L
-  var totalTimeInMillis: Long = 0L
+  var totalTimeInMillis: Long = 1L
   def avg()={
     totalTimeInMillis/count
   }
