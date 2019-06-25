@@ -180,6 +180,7 @@ object LiveExtractionController
         }
         val uri = wikiPage.title.language.resourceUri.append(wikiPage.title.decodedWithNamespace)
         logger.info(uri)
+        logger.info(wikiPage.title.language.resourceUri.append(wikiPage.title.encodedWithNamespace))
 
         extractorRestrictDest.open
 

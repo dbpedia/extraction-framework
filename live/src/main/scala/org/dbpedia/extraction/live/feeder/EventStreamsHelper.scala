@@ -21,11 +21,13 @@ import scala.concurrent.Future
 import scala.concurrent.duration._
 
 /**
-  * This class is used in order to consume the Wikimedia EventStreamsAPI that replaced the RCStream API during spring of 2018.
+  * This class is used in order to consume the Wikimedia EventStreamsAPI
+  * that replaced the RCStream API during spring of 2018.
   * EventStreams follows the Server Sent Event (SSE) protocol.
   * Akka SSE offers the implementation of a SSE Client used here.
   * Akka Streams is used in order to process the stream data.
-  * Processing means filtering by configured language and namespaces, and use the wiki page title and timestamp in order to create LiveQueueItems.
+  * Processing means filtering by configured language and namespaces, and use
+  * the wiki page title and timestamp in order to create LiveQueueItems.
   *
   * Documentation on the EventStreams API can be found here: https://wikitech.wikimedia.org/wiki/EventStreams
   * EventStreams is available here: https://stream.wikimedia.org/v2/stream/recentchange
