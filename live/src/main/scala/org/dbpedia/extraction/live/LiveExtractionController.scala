@@ -179,6 +179,7 @@ object LiveExtractionController
           jsonNodeParser(wikiPage)
         }
         val uri = wikiPage.title.language.resourceUri.append(wikiPage.title.decodedWithNamespace)
+        logger.info(uri)
 
         extractorRestrictDest.open
 
