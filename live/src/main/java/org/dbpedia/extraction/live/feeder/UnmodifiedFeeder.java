@@ -50,7 +50,8 @@ public class UnmodifiedFeeder extends Feeder {
     public void startFeeder() {
         // Sleep to allow other feeders fill the queue
         try {
-            Thread.sleep(sleepTime);
+            //set to 3 minutes
+            Thread.sleep(3*60*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
