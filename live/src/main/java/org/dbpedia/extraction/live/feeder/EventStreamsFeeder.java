@@ -91,12 +91,12 @@ public class EventStreamsFeeder extends Feeder {
             logger.trace("\n" + firstItem + "\n" + lastItem + "\n");
 
             // set last processed date every 10 minutes
-            long itemsPer10Minutes = ((readItemsCount / secondsRunning) * 600);
-            if ((readItemsCount - lastItemsCount) > itemsPer10Minutes) {
+            long itemsPer3Minutes = ((readItemsCount / secondsRunning) * 180);
+            if ((readItemsCount - lastItemsCount) > itemsPer3Minutes) {
                 lastItemsCount = readItemsCount;
                 setLatestProcessDate(LiveQueue.getPriorityDate(this.getQueuePriority()));
                 writeLatestProcessDateFileAndLogOnFail(getLatestProcessDate());
-                logger.info("~10 min stream time passed, " + getLatestProcessDate() + " > " + latestProcessDateFile);
+                logger.info("~3 min stream time passed, " + getLatestProcessDate() + " > " + latestProcessDateFile);
 
             }
         }

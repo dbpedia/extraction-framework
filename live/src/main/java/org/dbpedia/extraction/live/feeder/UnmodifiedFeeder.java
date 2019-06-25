@@ -29,6 +29,7 @@ public class UnmodifiedFeeder extends Feeder {
     private long threshold = 0;
     private long sleepTime = 0;
     private long estimatedRecords = 10*1000*1000L;
+    private long firstTimeSleep =3*60*1000L;
 
     public UnmodifiedFeeder(String feederName, LiveQueuePriority queuePriority,
                             int minDaysAgo, int chunk, int threshold, long sleepTime,
@@ -49,17 +50,20 @@ public class UnmodifiedFeeder extends Feeder {
     @Override
     public void startFeeder() {
         // Sleep to allow other feeders fill the queue
-        try {
-            //set to 3 minutes
-            Thread.sleep(3*60*1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         super.startFeeder();
     }
 
     @Override
     protected Collection<LiveQueueItem> getNextItems() {
+
+        try {
+            //set to 3 minutes
+            Thread.sleep(firstTimeSleep);
+            firstTimeSleep=0;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         while (LiveQueue.getQueueSize() > threshold) {
             try {
