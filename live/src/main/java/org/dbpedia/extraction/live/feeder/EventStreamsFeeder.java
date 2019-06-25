@@ -50,7 +50,7 @@ public class EventStreamsFeeder extends Feeder {
 
     @Override
     protected void initFeeder() {
-        EventStreamsHelper helper = new EventStreamsHelper(latestProcessDate);
+        EventStreamsHelper helper = new EventStreamsHelper(this);
         helper.eventStreamsClient();
     }
 
