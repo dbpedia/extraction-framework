@@ -115,8 +115,10 @@ object LiveExtractionController
   {
     val lang = Language.apply(landCode)
     val articlesSource : Source =
-      if (item.getXML.isEmpty)
-        WikiSource.fromTitles(List(WikiTitle.parse(item.getItemName,lang)), new URL(apiURL), lang)
+      if (item.getXML.isEmpty) {
+        logger.info{"WikiTitle.parse(item.getItemName, lang)"+WikiTitle.parse(item.getItemName, lang)+""}
+        WikiSource.fromTitles(List(WikiTitle.parse(item.getItemName, lang)), new URL(apiURL), lang)
+      }
       else {
         XMLSource.fromOAIXML(XML.loadString(item.getXML))
       }
@@ -131,6 +133,7 @@ object LiveExtractionController
    */
   def startExtraction(articlesSource : Source, language : Language):Boolean =
   {
+    logger.info("articlesSource: "+articlesSource)
     // In case of single threading
     //Extractor
 
@@ -179,8 +182,8 @@ object LiveExtractionController
           jsonNodeParser(wikiPage)
         }
         val uri = wikiPage.title.language.resourceUri.append(wikiPage.title.decodedWithNamespace)
-        logger.info(uri)
-        logger.info(wikiPage.title.language.resourceUri.append(wikiPage.title.encodedWithNamespace))
+        logger.info("uri: "+uri)
+        logger.info("wikiPage.title.language.resourceUri.append(wikiPage.title.encodedWithNamespace)"+wikiPage.title.encodedWithNamespace)
 
         extractorRestrictDest.open
 
