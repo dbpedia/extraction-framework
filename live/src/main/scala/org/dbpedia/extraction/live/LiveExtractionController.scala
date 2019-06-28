@@ -133,7 +133,6 @@ object LiveExtractionController
    */
   def startExtraction(articlesSource : Source, language : Language):Boolean =
   {
-    logger.info("articlesSource: "+articlesSource)
     // In case of single threading
     //Extractor
 
