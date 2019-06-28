@@ -38,7 +38,7 @@ import scala.concurrent.duration._
   */
 
 
-class EventStreamsHelper(val since: EventStreamsFeeder) extends EventStreamUnmarshalling {
+class EventStreamsHelper(val since: String) extends EventStreamUnmarshalling {
 
   private val logger = LoggerFactory.getLogger("EventStreamsHelper")
 
@@ -91,14 +91,15 @@ class EventStreamsHelper(val since: EventStreamsFeeder) extends EventStreamUnmar
       Sink.foreach[LiveQueueItem](EventStreamsFeeder.addQueueItemToBuffer(_))
 
 
-    val sseSource = RestartSource.onFailuresWithBackoff(
+    val sseSource: Source[ServerSentEvent, NotUsed] = RestartSource.onFailuresWithBackoff(
       minBackoff = minBackoffFactor,
       maxBackoff = maxBackoffFactor,
       randomFactor = 0.2
     ) { () =>
       Source.fromFutureSource {
         Http().singleRequest(
-          HttpRequest(uri = baseURL + stream.head + "?since=" + since.getLatestProcessDate))
+          HttpRequest(uri = baseURL + stream.head + "?since=" + since))
+          //HttpRequest(uri = baseURL + stream.head))
           .flatMap(event => Unmarshal(event).to[Source[ServerSentEvent, NotUsed]])
       }
     }
