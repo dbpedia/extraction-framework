@@ -90,6 +90,12 @@ public class Main {
                 LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
         }
 
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.eventstreams.enabled"))== true){
+            feeders.add(new EventStreamsFeeder("EventStreamsFeeder", LiveQueuePriority.EventStreamsPriority,
+                LiveOptions.options.get("eventstreams.offset"), LiveOptions.options.get("working_directory")));
+        }
+
+
         int threads = Integer.parseInt(LiveOptions.options.get("ProcessingThreads"));
         for (int i=0; i < threads ; i++){
             processors.add( new PageProcessor("N" + (i+1)));

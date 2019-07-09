@@ -133,6 +133,7 @@ public abstract class Feeder extends Thread {
         item.setStatQueueAdd(-1);
         item.setPriority(this.queuePriority);
         LiveQueue.add(item);
+        logger.info("Size of LiveQueue: " + LiveQueue.getQueueSize());
         latestProcessDate = item.getModificationDate();
     }
 }

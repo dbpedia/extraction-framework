@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.queue;
 
+import org.dbpedia.extraction.live.util.DateUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,6 +12,12 @@ public class LiveQueueTest {
 
     @Test
     public void queueTest() throws InterruptedException {
+
+        LiveQueueItem item1 = new LiveQueueItem(-1, "title1", DateUtil.transformToUTC(System.currentTimeMillis()), false, "");
+        item1.setPriority(LiveQueuePriority.LivePriority);
+        LiveQueueItem item2 = new LiveQueueItem(-1, "title1", DateUtil.transformToUTC(System.currentTimeMillis()), false, "");
+        item2.setPriority(LiveQueuePriority.LivePriority);
+
         LiveQueueItem qL1 = new LiveQueueItem(1, "item L1", "2016-07-13T10:29:43Z", false, "");
         qL1.setPriority(LiveQueuePriority.LivePriority);
         LiveQueueItem qL2 = new LiveQueueItem(2, "item L2", "2016-07-13T10:29:50Z", false, "");
@@ -27,8 +34,15 @@ public class LiveQueueTest {
         LiveQueue.add(qL2);
 
 
+        LiveQueue.add(item1);
+        LiveQueue.add(item2);
+
+
+
         Assert.assertTrue(LiveQueue.take() == qL1) ;
         Assert.assertTrue(LiveQueue.take() == qL2) ;
+
+        Assert.assertTrue(LiveQueue.take() == item1) ;
 
         Assert.assertTrue(LiveQueue.take() == qU2) ;
         Assert.assertTrue(LiveQueue.take() == qU1) ;
