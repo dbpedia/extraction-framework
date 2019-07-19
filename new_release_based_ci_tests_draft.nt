@@ -1,0 +1,55 @@
+<http://dev.vocab.org/RDF_IRI_Trigger> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://dev.vocab.org/RDF_IRI_Trigger> <http://www.w3.org/2000/01/rdf-schema#label> "RDF IRI Trigger" .
+<http://dev.vocab.org/RDF_IRI_Trigger> <http://www.w3.org/2000/01/rdf-schema#comment> "triggers on IRIs in RDF" .
+<http://dev.vocab.org/RDF_IRI_Trigger> <http://dev.vocab.org/applicableMediaType> <http://dataid.dbpedia.org/ns/mt#ApplicationNTriples> .
+<http://dev.vocab.org/trigger/generic_wikipedia_dbpedia_extraction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/RDF_IRI_Trigger> .
+<http://dev.vocab.org/trigger/generic_wikipedia_dbpedia_extraction> <http://dev.vocab.org/pattern> "^http://(ga.|af.|als.|am.|an.|ar.|arz.|ast.|az.|azb.|ba.|bar.|batsmg.|be.|bg.|bn.|bpy.|br.|bs.|bug.|ca.|cdo.|ce.|ceb.|ckb.|cs.|cv.|cy.|da.|de.|el.|eml.|en.|eo.|es.|et.|eu.|fa.|fi.|fo.|fr.|fy.|gd.|gl.|gu.|he.|hi.|hr.|hsb.|ht.|hu.|hy.|ia.|id.|ilo.|io.|is.|it.|ja.|jv.|ka.|kk.|kn.|ko.|ku.|ky.|la.|lb.|li.|lmo.|lt.|lv.|mai.|mg.|mhr.|min.|mk.|ml.|mn.|mr.|mrj.|ms.|my.|mzn.|nan.|nap.|nds.|ne.|new.|nl.|nn.|no.|oc.|or.|os.|pa.|pl.|pms.|pnb.|pt.|qu.|ro.|ru.|sa.|sah.|scn.|sco.|sd.|sh.|si.|simple.|sk.|sl.|sq.|sr.|su.|sv.|sw.|ta.|te.|tg.|th.|tl.|tr.|tt.|uk.|ur.|uz.|vec.|vi.|vo.|wa.|war.|wuu.|xmf.|yi.|yo.|yue.|zh.)?dbpedia.org/resource/" .
+<http://dev.vocab.org/trigger/generic_wikipedia_dbpedia_extraction> <http://www.w3.org/2000/01/rdf-schema#label> "DBpedia IRIs from Wikipedia used in Generic Extraction" .
+<http://dev.vocab.org/trigger/generic_wikipedia_dbpedia_extraction> <http://www.w3.org/2000/01/rdf-schema#comment> "Starting with http://dbpedia.org or for 140 languages with http://xx.dbpedia.org" .
+<http://dev.vocab.org/trigger/mappings_wikipedia_dbpedia_extraction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/RDF_IRI_Trigger> .
+<http://dev.vocab.org/trigger/mappings_wikipedia_dbpedia_extraction> <http://dev.vocab.org/pattern> "^http://(ar.|az.|be.|bg.|bn.|ca.|cs.|cy.|da.|de.|el.|en.|eo.|es.|et.|eu.|fa.|fi.|fr.|ga.|gl.|hi.|hr.|hu.|hy.|id.|it.|ja.|ko.|lt.|lv.|mk.|nl.|pl.|pt.|ro.|ru.|sk.|sl.|sr.|sv.|tr.|uk.|ur.|vi.|war.|zh.|commons.)?dbpedia.org/resource/" .
+<http://dev.vocab.org/trigger/mappings_wikipedia_dbpedia_extraction> <http://www.w3.org/2000/01/rdf-schema#label> "DBpedia IRIs from Wikipedia used in Generic Extraction" .
+<http://dev.vocab.org/trigger/mappings_wikipedia_dbpedia_extraction> <http://www.w3.org/2000/01/rdf-schema#comment> "Starting with http://dbpedia.org or for 40 mapped languages with http://xx.dbpedia.org" .
+<http://dev.vocab.org/trigger/wikidata_dbpedia_extraction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/RDF_IRI_Trigger> .
+<http://dev.vocab.org/trigger/wikidata_dbpedia_extraction> <http://dev.vocab.org/startsWith> "http://wikidata.dbpedia.org/resource/Q" .
+<http://dev.vocab.org/trigger/wikidata_dbpedia_extraction> <http://www.w3.org/2000/01/rdf-schema#label> "DBpedia IRIs from Wikidata extraction" .
+<http://dev.vocab.org/trigger/wikidata_dbpedia_extraction> <http://www.w3.org/2000/01/rdf-schema#comment> "Starting with http://wikidata.dbpedia.org/resource/Q" .
+<http://dev.vocab.org/trigger/wikidata> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/RDF_IRI_Trigger> .
+<http://dev.vocab.org/trigger/wikidata> <http://dev.vocab.org/startsWith> "http://www.wikidata.org/entity/Q" .
+<http://dev.vocab.org/trigger/wikidata> <http://www.w3.org/2000/01/rdf-schema#label> "Wikidata IRIs" .
+<http://dev.vocab.org/trigger/wikidata> <http://www.w3.org/2000/01/rdf-schema#comment> "Starting with http://www.wikidata.org/entity/Q" .
+<http://dev.vocab.org/trigger/dbpedia_ontology> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/RDF_IRI_Trigger> .
+<http://dev.vocab.org/trigger/dbpedia_ontology> <http://dev.vocab.org/startsWith> "http://dbpedia.org/ontology/" .
+<http://dev.vocab.org/trigger/dbpedia_ontology> <http://www.w3.org/2000/01/rdf-schema#label> "DBpedia Ontology IRIs" .
+<http://dev.vocab.org/trigger/dbpedia_ontology> <http://www.w3.org/2000/01/rdf-schema#comment> "http://dbpedia.org/ontology/" .
+<http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/IRI_Validator> .
+<http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> <http://dev.vocab.org/hasScheme> "http" .
+<http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> <http://dev.vocab.org/hasQuery> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> <http://dev.vocab.org/hasFragment> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> <http://dev.vocab.org/doesNotContainCharacters> "&" .
+<http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> <http://dev.vocab.org/doesNotContainCharacters> " " .
+<http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> <http://dev.vocab.org/doesNotContainCharacters> "?" .
+<http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> <http://dev.vocab.org/doesNotContainCharacters> "\"" .
+<http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> <http://dev.vocab.org/doesNotContainCharacters> "'" .
+<http://dev.vocab.org/validator/dbpedia_ontology_IRI_Validator> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/IRI_Validator> .
+<http://dev.vocab.org/validator/dbpedia_ontology_IRI_Validator> <http://dev.vocab.org/hasScheme> "http" .
+<http://dev.vocab.org/validator/dbpedia_ontology_IRI_Validator> <http://dev.vocab.org/hasQuery> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dev.vocab.org/validator/dbpedia_ontology_IRI_Validator> <http://dev.vocab.org/hasFragment> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dev.vocab.org/validator/dbpedia_ontology_IRI_Validator> <http://dev.vocab.org/oneOfVocab> <https://raw.githubusercontent.com/dbpedia/ontology-tracker/master/databus/dbpedia/ontology/dbo-snapshots/2019.02.21T08.00.00Z/dbo-snapshots.nt> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#genericDBpediaWikipediaIRIs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/IRITestCase> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#genericDBpediaWikipediaIRIs> <http://dev.vocab.org/trigger> <http://dev.vocab.org/trigger/generic_wikipedia_dbpedia_extraction> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#genericDBpediaWikipediaIRIs> <http://dev.vocab.org/validator> <http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#mappingsDBpediaWikipediaIRIs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/IRITestCase> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#mappingsDBpediaWikipediaIRIs> <http://dev.vocab.org/trigger> <http://dev.vocab.org/trigger/mappings_wikipedia_dbpedia_extraction> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#mappingsDBpediaWikipediaIRIs> <http://dev.vocab.org/validator> <http://dev.vocab.org/validator/dbpedia_resource_IRI_Validator> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#dbpediaOntology> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/IRITestCase> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#dbpediaOntology> <http://dev.vocab.org/trigger> <http://dev.vocab.org/trigger/dbpedia_ontology> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#dbpediaOntology> <http://dev.vocab.org/validator> <http://dev.vocab.org/validator/dbpedia_ontology_IRI_Validator> .
+_:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/IRI_Validator> .
+_:genid1 <http://dev.vocab.org/hasScheme> "http" .
+_:genid1 <http://dev.vocab.org/hasQuery> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+_:genid1 <http://dev.vocab.org/hasFragment> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+_:genid1 <http://dev.vocab.org/patternRegex> "^http://www.wikidata.org/entity/Q[0-9]+$" .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#wikidata_IRIs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dev.vocab.org/IRITestCase> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#wikidata_IRIs> <http://dev.vocab.org/trigger> <http://dev.vocab.org/trigger/wikidata> .
+<file:///mnt/c/Users/Marvin/IdeaProjects/extraction-framework/new_release_based_ci_tests_draft.ttl#wikidata_IRIs> <http://dev.vocab.org/validator> _:genid1 .
