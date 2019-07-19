@@ -1,0 +1,97 @@
+
+@prefix v: <http://dev.vocab.org/> .
+@prefix trigger: <http://dev.vocab.org/trigger/> .
+@prefix validator: <http://dev.vocab.org/validator/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dataid-mt: <http://dataid.dbpedia.org/ns/mt#> .
+
+
+v:RDF_IRI_Trigger a rdfs:Class;
+	rdfs:label "RDF IRI Trigger" ;
+	rdfs:comment "triggers on IRIs in RDF" ;
+	v:applicableMediaType dataid-mt:ApplicationNTriples .
+
+#########################
+# Reusable Triggers, several triggers per TestCase 
+#########################
+
+	
+trigger:generic_wikipedia_dbpedia_extraction a v:RDF_IRI_Trigger ;
+   v:pattern "^http://(ga\.|af\.|als\.|am\.|an\.|ar\.|arz\.|ast\.|az\.|azb\.|ba\.|bar\.|batsmg\.|be\.|bg\.|bn\.|bpy\.|br\.|bs\.|bug\.|ca\.|cdo\.|ce\.|ceb\.|ckb\.|cs\.|cv\.|cy\.|da\.|de\.|el\.|eml\.|en\.|eo\.|es\.|et\.|eu\.|fa\.|fi\.|fo\.|fr\.|fy\.|gd\.|gl\.|gu\.|he\.|hi\.|hr\.|hsb\.|ht\.|hu\.|hy\.|ia\.|id\.|ilo\.|io\.|is\.|it\.|ja\.|jv\.|ka\.|kk\.|kn\.|ko\.|ku\.|ky\.|la\.|lb\.|li\.|lmo\.|lt\.|lv\.|mai\.|mg\.|mhr\.|min\.|mk\.|ml\.|mn\.|mr\.|mrj\.|ms\.|my\.|mzn\.|nan\.|nap\.|nds\.|ne\.|new\.|nl\.|nn\.|no\.|oc\.|or\.|os\.|pa\.|pl\.|pms\.|pnb\.|pt\.|qu\.|ro\.|ru\.|sa\.|sah\.|scn\.|sco\.|sd\.|sh\.|si\.|simple\.|sk\.|sl\.|sq\.|sr\.|su\.|sv\.|sw\.|ta\.|te\.|tg\.|th\.|tl\.|tr\.|tt\.|uk\.|ur\.|uz\.|vec\.|vi\.|vo\.|wa\.|war\.|wuu\.|xmf\.|yi\.|yo\.|yue\.|zh\.)?dbpedia.org/resource/" ;
+	rdfs:label "DBpedia IRIs from Wikipedia used in Generic Extraction" ;
+	rdfs:comment "Starting with http://dbpedia.org or for 140 languages with http://xx.dbpedia.org" .
+	
+trigger:mappings_wikipedia_dbpedia_extraction a v:RDF_IRI_Trigger ;
+   v:pattern "^http://(ar\.|az\.|be\.|bg\.|bn\.|ca\.|cs\.|cy\.|da\.|de\.|el\.|en\.|eo\.|es\.|et\.|eu\.|fa\.|fi\.|fr\.|ga\.|gl\.|hi\.|hr\.|hu\.|hy\.|id\.|it\.|ja\.|ko\.|lt\.|lv\.|mk\.|nl\.|pl\.|pt\.|ro\.|ru\.|sk\.|sl\.|sr\.|sv\.|tr\.|uk\.|ur\.|vi\.|war\.|zh\.|commons\.)?dbpedia.org/resource/" ;
+	rdfs:label "DBpedia IRIs from Wikipedia used in Generic Extraction" ;
+	rdfs:comment "Starting with http://dbpedia.org or for 40 mapped languages with http://xx.dbpedia.org" .
+
+trigger:wikidata_dbpedia_extraction a v:RDF_IRI_Trigger ;
+   v:startsWith  "http://wikidata.dbpedia.org/resource/Q" ;
+	rdfs:label   "DBpedia IRIs from Wikidata extraction" ;
+	rdfs:comment "Starting with http://wikidata.dbpedia.org/resource/Q" .
+	
+trigger:wikidata a v:RDF_IRI_Trigger ;
+   v:startsWith "http://www.wikidata.org/entity/Q" ;
+	rdfs:label "Wikidata IRIs" ;
+	rdfs:comment "Starting with http://www.wikidata.org/entity/Q" .
+
+trigger:dbpedia_ontology a v:RDF_IRI_Trigger ;
+   v:startsWith "http://dbpedia.org/ontology/" ; 
+   rdfs:label "DBpedia Ontology IRIs" ;
+   rdfs:comment "http://dbpedia.org/ontology/" .
+
+#########################
+# Reusable Validators, several Validators per TestCase 
+#########################
+
+validator:dbpedia_resource_IRI_Validator 
+	a v:IRI_Validator ;
+	v:hasScheme "http" ; 
+	v:hasQuery false ;
+	v:hasFragment false ;
+	v:doesNotContainCharacters "&" , " ", "?", "\"", "'" .
+	
+validator:dbpedia_ontology_IRI_Validator 
+	a v:IRI_Validator ;
+	v:hasScheme "http" ;
+	v:hasQuery false ;
+	v:hasFragment false ;
+	# todo get download URL of the ontology from the bus
+	# v:oneOfVocab <https://databus.dbpedia.org/dbpedia/ontology/dbo-snapshots/latest/.nt> 
+	# todo use this for now
+	v:oneOfVocab <https://raw.githubusercontent.com/dbpedia/ontology-tracker/master/databus/dbpedia/ontology/dbo-snapshots/2019.02.21T08.00.00Z/dbo-snapshots.nt> .
+    
+
+
+#########################
+# Specific instantiations below
+#########################
+
+<#genericDBpediaWikipediaIRIs> 
+	a v:IRITestCase ;
+	v:trigger trigger:generic_wikipedia_dbpedia_extraction ;
+	v:validator validator:dbpedia_resource_IRI_Validator .
+	
+<#mappingsDBpediaWikipediaIRIs> 
+	a v:IRITestCase ;
+	v:trigger trigger:mappings_wikipedia_dbpedia_extraction ;
+	v:validator validator:dbpedia_resource_IRI_Validator .
+	
+<#dbpediaOntology> 
+   a v:IRITestCase ;
+   v:trigger trigger:dbpedia_ontology ;
+   v:validator validator:dbpedia_ontology_IRI_Validator .
+   
+<#wikidata_IRIs> 
+  a v:IRITestCase ;
+  v:trigger trigger:wikidata ;
+  v:validator [
+		a v:IRI_Validator ;
+		v:hasScheme "http" ;
+		v:hasQuery false ;
+		v:hasFragment false ;
+		v:patternRegex "^http://www\.wikidata\.org/entity/Q[0-9]+$" 
+		] .
+  
+
