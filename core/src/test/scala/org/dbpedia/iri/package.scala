@@ -8,7 +8,7 @@ import scala.collection.mutable.ListBuffer
 package object iri {
 
   case class IRI_Trigger(iri: String, label: String, comment: String, patterns: List[String] /*TODO: or REGEX*/ )
-  case class IRI_Validator(iri: String, has_scheme: String, has_query: Boolean, has_fragment: Boolean, not_contains: List[Char] /*TODO: or REGEX*/)
+  case class IRI_Validator(iri: String, has_scheme: String, has_query: Boolean, has_fragment: Boolean, not_contains: List[String] /*TODO: or REGEX*/)
 
   def prefix_v = "<http://dev.vocab.org/>"
 
@@ -42,7 +42,7 @@ package object iri {
          |PREFIX v: $prefix_v
          |PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
          |
-         |SELECT ?trigger ?label ?comment (group_concat(?pattern) as ?patterns) {
+         |SELECT ?trigger ?label ?comment (GROUP_CONCAT(DISTINCT ?pattern; SEPARATOR="\t") AS ?patterns) {
          |  ?trigger
          |     a            v:RDF_IRI_Trigger ;
          |     v:pattern    ?pattern ;
@@ -66,7 +66,7 @@ package object iri {
           solution.getResource("trigger").getURI,
           solution.getLiteral("label").getLexicalForm,
           solution.getLiteral("comment").getLexicalForm,
-          List(solution.getLiteral("patterns").getLexicalForm)
+          solution.getLiteral("patterns").getLexicalForm.split("\t").toList
         )
       )
 
@@ -75,7 +75,7 @@ package object iri {
            |FOUND TRIGGER: ${solution.getResource("trigger").getURI}
            |> LABEL: ${solution.getLiteral("label").getLexicalForm}
            |> COMMENT: ${solution.getLiteral("comment").getLexicalForm}
-           |> PATTERN: ${solution.getLiteral("patterns").getLexicalForm}
+           |> PATTERN: ${solution.getLiteral("patterns").getLexicalForm.split("\t").toList}
         """.stripMargin
       )
     }
@@ -90,7 +90,7 @@ package object iri {
          |PREFIX v: $prefix_v
          |PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
          |
-         |SELECT ?validator ?hasScheme ?hasQuery ?hasFragment (group_concat(?notContain) as ?notContains) {
+         |SELECT ?validator ?hasScheme ?hasQuery ?hasFragment (GROUP_CONCAT(DISTINCT ?notContain; SEPARATOR="\t") AS ?notContainChars) {
          |  ?validator
          |     a                          v:IRI_Validator ;
          |     v:hasScheme                ?hasScheme ;
@@ -116,7 +116,8 @@ package object iri {
           solution.getLiteral("hasScheme").getLexicalForm,
           solution.getLiteral("hasQuery").getLexicalForm.toBoolean,
           solution.getLiteral("hasFragment").getLexicalForm.toBoolean,
-          List(solution.getLiteral("notContains").getLexicalForm.charAt(0))
+          solution.getLiteral("notContainChars").getLexicalForm.split("\t").toList
+//          solution.getLiteral("notContainChars").getLexicalForm.split("\t").map(_.charAt(0)).toList)
         )
       )
 
@@ -126,7 +127,7 @@ package object iri {
            |> SCHEME: ${solution.getLiteral("hasScheme").getLexicalForm}
            |> QUERY: ${solution.getLiteral("hasQuery").getLexicalForm}
            |> FRAGMENT: ${solution.getLiteral("hasFragment").getLexicalForm}
-           |> NOT CONTAIN: ${List(solution.getLiteral("notContains").getLexicalForm)}
+           |> NOT CONTAIN CHARS: ${solution.getLiteral("notContainChars").getLexicalForm.split("\t").toList}
         """.stripMargin
       )
     }

@@ -140,5 +140,4 @@ class IRITests extends FunSuite {
     val res = UriUtils.uriToIri(URI.create(testUri).get)
     assert(res.equals(IRI.create(resultIri)), "Decoded: " + UriUtils.uriToIri(URI.create(testUri).get) + " does not equal Expected: " + resultIri)
   }
-
 }
