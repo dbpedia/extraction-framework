@@ -42,6 +42,17 @@ package object validation {
        |
      """.stripMargin
 
+  def testQuery(): String =
+    s"""$prefixDefinition
+       |
+       |SELECT ?tigger ?validator {
+       |  ?case
+       |  	a v:IRITestCase ;
+       |	  v:trigger ?trigger ;
+       |	  v:validator ?validator .
+       |}
+     """.stripMargin
+
   trait RdfTrigger {
 
     object RdfTriggerType extends Enumeration {

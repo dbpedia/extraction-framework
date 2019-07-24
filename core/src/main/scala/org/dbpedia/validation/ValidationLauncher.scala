@@ -1,23 +1,55 @@
 package org.dbpedia.validation
 
+import java.io.File
+
 import org.apache.spark.sql.SparkSession
 
 object ValidationLauncher {
 
   def main(args: Array[String]): Unit = {
+    val hadoopHomeDir = new File("./haoop/")
+    hadoopHomeDir.mkdirs()
+    System.setProperty("hadoop.home.dir", hadoopHomeDir.getAbsolutePath)
+//    System.setProperty("log4j.logger.org.apache.spark.SparkContext", "WARN")
 
-    val pathToTestCaseFile: String = args(0)
-    val pathToFlatTurtleFile: String = args(1)
+    val extractionOutputTtl =
+      s"""
+         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.georss.org/georss/point> "1.0 17.0" .
+         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> .
+         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "1.0"^^<http://www.w3.org/2001/XMLSchema#float> .
+         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "17.0"^^<http://www.w3.org/2001/XMLSchema#float> .
+         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.georss.org/georss/point> "53.0 -1.0" .
+         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> .
+         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "53.0"^^<http://www.w3.org/2001/XMLSchema#float> .
+         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-1.0"^^<http://www.w3.org/2001/XMLSchema#float> .
+         |<http://wikidata.dbpedia.org/resource/Q18> <http://www.georss.org/georss/point> "-21.0 -59.0" .
+       """.stripMargin.trim
 
-    val sparkSession = SparkSession.builder().master("local[*]").appName("Rdf Validation").getOrCreate()
-    sparkSession.sparkContext.setLogLevel("WARN")
+    val sparkSession = SparkSession.builder().config("hadoop.home.dir","./hadoop")
+      .appName("Dev 3").master("local[*]").getOrCreate()
 
-    val untestedFlatTurtle = sparkSession.sqlContext.read.textFile(pathToFlatTurtleFile)
+    val rdd = sparkSession.sparkContext.parallelize(extractionOutputTtl.lines.toSeq)
 
-    //TODO skip \s and check then
-    untestedFlatTurtle.filter(! _.startsWith("#"))
-
+    rdd.fold("")( (a,b) => a + b ).foreach(print)
   }
+
+//  def main(args: Array[String]): Unit = {
+//
+//    val pathToTestCaseFile: String = args(0)
+//    val pathToFlatTurtleFile: String = args(1)
+//
+//    val sparkSession = SparkSession.builder().master("local[*]").appName("Rdf Validation").getOrCreate()
+//    sparkSession.sparkContext.setLogLevel("WARN")
+//
+//    val untestedFlatTurtle = sparkSession.sqlContext.read.textFile(pathToFlatTurtleFile)
+//
+//    //TODO skip \s and check then
+//    untestedFlatTurtle.filter(! _.startsWith("#"))
+//
+//
+//
+//
+//  }
 
 //  //    load_iri_list("")
 //  load_test_cases("../new_release_based_ci_tests_draft.nt")
