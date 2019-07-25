@@ -4,104 +4,77 @@ import java.io.File
 
 import org.apache.spark.sql.SparkSession
 
+case class ReduceScore(cntAll: Long, cntTrigger: Long, cntValid: Long)
+case class SPO(s: String, p: String, o: String)
+
 object ValidationLauncher {
 
   def main(args: Array[String]): Unit = {
+
+
+  }
+
+  def testIris(pathToFlatTurtleFile: String, pathToTestCases: String): Unit = {
+
     val hadoopHomeDir = new File("./haoop/")
     hadoopHomeDir.mkdirs()
     System.setProperty("hadoop.home.dir", hadoopHomeDir.getAbsolutePath)
-//    System.setProperty("log4j.logger.org.apache.spark.SparkContext", "WARN")
-
-    val extractionOutputTtl =
-      s"""
-         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.georss.org/georss/point> "1.0 17.0" .
-         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> .
-         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "1.0"^^<http://www.w3.org/2001/XMLSchema#float> .
-         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "17.0"^^<http://www.w3.org/2001/XMLSchema#float> .
-         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.georss.org/georss/point> "53.0 -1.0" .
-         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> .
-         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "53.0"^^<http://www.w3.org/2001/XMLSchema#float> .
-         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-1.0"^^<http://www.w3.org/2001/XMLSchema#float> .
-         |<http://wikidata.dbpedia.org/resource/Q18> <http://www.georss.org/georss/point> "-21.0 -59.0" .
-       """.stripMargin.trim
 
     val sparkSession = SparkSession.builder().config("hadoop.home.dir","./hadoop")
-      .appName("Dev 3").master("local[*]").getOrCreate()
+      .appName("Test Iris").master("local[*]").getOrCreate()
 
-    val rdd = sparkSession.sparkContext.parallelize(extractionOutputTtl.lines.toSeq)
+    val sqlContext = sparkSession.sqlContext
 
-    rdd.fold("")( (a,b) => a + b ).foreach(print)
+    import sqlContext.implicits._
+
+    var s: String = null
+
+    val spoBasedDataset =
+      sqlContext.read.textFile(pathToFlatTurtleFile)
+        .filter(! _.startsWith("#")).map(prepareFaltTurtleLine)
+
+    val counts: IndexedSeq[ReduceScore] = (0 until 2).map( i =>
+      spoBasedDataset.map(_(i)).distinct().filter(_ != null).map(testIri)
+        .reduce( (a,b) => ReduceScore(a.cntAll+b.cntAll,a.cntTrigger+b.cntTrigger,a.cntValid+b.cntValid))
+    )
+
+    val coverageTripleParts = counts.map( score => score.cntTrigger / score.cntAll)
+
+    val coverageOverall = coverageTripleParts.sum / 3
+
+    /*
+    Iris in s p o could be overlapping
+     */
+    println(
+      s"""
+         |C_s: ${coverageTripleParts(0)} all: ${counts(0).cntAll} trg: ${counts(0).cntTrigger} vld: ${counts(0).cntValid}
+         |C_p: ${coverageTripleParts(1)} all: ${counts(1).cntAll} trg: ${counts(1).cntTrigger} vld: ${counts(1).cntValid}
+         |C_o: ${coverageTripleParts(2)} all: ${counts(2).cntAll} trg: ${counts(2).cntTrigger} vld: ${counts(2).cntValid}
+         |C_total: $coverageOverall \t\t\t vld=doesNotContainChars
+       """.stripMargin)
   }
 
-//  def main(args: Array[String]): Unit = {
-//
-//    val pathToTestCaseFile: String = args(0)
-//    val pathToFlatTurtleFile: String = args(1)
-//
-//    val sparkSession = SparkSession.builder().master("local[*]").appName("Rdf Validation").getOrCreate()
-//    sparkSession.sparkContext.setLogLevel("WARN")
-//
-//    val untestedFlatTurtle = sparkSession.sqlContext.read.textFile(pathToFlatTurtleFile)
-//
-//    //TODO skip \s and check then
-//    untestedFlatTurtle.filter(! _.startsWith("#"))
-//
-//
-//
-//
-//  }
+  /**
+    * Assumption: The whitespace following subject, predicate, and object must be a single space, (U+0020).
+    * All other locations that allow whitespace must be empty. (https://www.w3.org/TR/n-triples/#canonical-ntriples)
+    */
+  def prepareFaltTurtleLine(line: String): Array[String] = {
+    val spo = line.split(" ", 3)
 
-//  //    load_iri_list("")
-//  load_test_cases("../new_release_based_ci_tests_draft.nt")
-//
-//  //    val spark_session = SparkSession.builder().appName("IRI Tests").master("local[*]").getOrCreate()
-//  //    val spark_context = spark_session.sparkContext
-//  //    spark_context.setLogLevel("WARN")
-//
-//  //    TODO
-//
-//}
+    var s: String = null
+    if (spo(0).startsWith("<")) s = spo(0).substring(1, spo(0).length - 1)
 
-//test("Another Test") {
-//
-//
-//  val m_tests = ModelFactory.createDefaultModel()
-//  m_tests.read("../new_release_based_ci_tests_draft.nt")
-//
-//  val q_validator = QueryFactory.create(
-//
-//  s"""
-//         |PREFIX v: $prefix_v
-//         |PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-//         |
-//         |SELECT ?validator ?hasScheme ?hasQuery ?hasFragment (group_concat(?notContain; SEPARATOR="\t") as ?notContains) {
-//         |  ?validator
-//         |     a                          v:IRI_Validator ;
-//         |     v:hasScheme                ?hasScheme ;
-//         |     v:hasQuery                 ?hasQuery ;
-//         |     v:hasFragment              ?hasFragment ;
-//         |     v:doesNotContainCharacters ?notContain .
-//         |
-//         |} GROUP BY ?validator ?hasScheme ?hasQuery ?hasFragment
-//      """.stripMargin)
-//
-//  val query_exec = QueryExecutionFactory.create(q_validator, m_tests)
-//  val result_set = query_exec.execSelect()
-//
-//  val l_iri_validator = ListBuffer[IRI_Validator]()
-//
-//  while (result_set.hasNext) {
-//
-//  val solution = result_set.next()
-//
-//  print(
-//  s"""
-//           |FOUND VALIDATOR: ${solution.getResource("validator").getURI}
-//           |> SCHEME: ${solution.getLiteral("hasScheme").getLexicalForm}
-//           |> QUERY: ${solution.getLiteral("hasQuery").getLexicalForm}
-//           |> FRAGMENT: ${solution.getLiteral("hasFragment").getLexicalForm}
-//           |> NOT CONTAIN: ${List(solution.getLiteral("notContains").getLexicalForm)}
-//        """.stripMargin
-//  )
-//}
+    var p: String = null
+    if (spo(1).startsWith("<")) p = spo(1).substring(1, spo(1).length - 1)
+
+    var o: String = null
+    if (spo(2).startsWith("<")) o = spo(2).substring(1, spo(2).length - 3)
+
+    Array(s,p,o)
+  }
+
+  def testIri(iriStr: String): ReduceScore = {
+
+    ReduceScore(1,1,0)
+  }
 }

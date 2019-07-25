@@ -7,6 +7,9 @@ import scala.collection.mutable.ListBuffer
 
 package object validation {
 
+  type ValidatorReference = String
+  type TriggerReference = String
+
   private val prefixVocab: String = "http://dev.vocab.org/"
 
   private def prefixDefinition: String =
@@ -73,6 +76,10 @@ package object validation {
 
 
   /*------------------------------------------------------------------------------------------------------------------*/
+
+  /*
+  TODO: clean!
+   */
 
   case class IRI_Trigger(iri: String, label: String, comment: String, patterns: List[String] /*TODO: or REGEX*/ )
   case class IRI_Validator(iri: String, has_scheme: String, has_query: Boolean, has_fragment: Boolean, not_contains: List[String] /*TODO: or REGEX*/)
