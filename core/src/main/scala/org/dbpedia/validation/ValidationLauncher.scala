@@ -27,7 +27,7 @@ object ValidationLauncher {
       head("iriTest", "0.1")
 
       arg[String]("<flat-turtle-files>").required().maxOccurs(1).action((s, p) => p.copy(pathToFlatTurtleFile = s))
-        .text("Any un/compressed flatTurtle/NT-Triples file. Wild card possible (e.g dir/\*.ttl.bz2)")
+        .text("Any un/compressed flatTurtle/NT-Triples file. Wild card possible (e.g dir/*.ttl.bz2)")
 
       opt[String]('t', "testCase").required().maxOccurs(1).action((s, p) =>  p.copy(pathToTestCaseFile = s))
         .text("Path to rdf test case file")
