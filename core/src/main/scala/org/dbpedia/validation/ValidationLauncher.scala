@@ -11,6 +11,13 @@ case class SPO(s: String, p: String, o: String)
 
 case class ValidationConfig(pathToFlatTurtleFile: String= null,pathToTestCaseFile: String= null)
 
+/**
+  * Basic Usage: 
+  *   cd core/ && mvn scala:run -Dlauncher=iriTest -DaddArgs="-t|pathToTestFile|pathToFlatTurtleFile"
+  *     pathToTestFile         Path to rdf test case file
+  *     pathToFlatTurtleFile   Any un/compressed flatTurtle/NT-Triples file. Wildcard possible (e.g dir/\*.ttl.bz2)
+  * Adjust memory (launcher Xmx arg) accordingly inside pom. Higher is better.
+  */
 object ValidationLauncher {
 
   def main(args: Array[String]): Unit = {
@@ -20,10 +27,10 @@ object ValidationLauncher {
       head("iriTest", "0.1")
 
       arg[String]("<flat-turtle-files>").required().maxOccurs(1).action((s, p) => p.copy(pathToFlatTurtleFile = s))
-        .text("Line based rdf FILE ( spark syntax)")
+        .text("Any un/compressed flatTurtle/NT-Triples file. Wild card possible (e.g dir/\*.ttl.bz2)")
 
       opt[String]('t', "testCase").required().maxOccurs(1).action((s, p) =>  p.copy(pathToTestCaseFile = s))
-        .text("Iri test case file")
+        .text("Path to rdf test case file")
 
     }
 
