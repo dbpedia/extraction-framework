@@ -10,6 +10,7 @@ import org.apache.spark.sql.SparkSession
 import org.scalatest.FunSuite
 
 import scala.collection.JavaConversions._
+import scala.util.matching.Regex
 
 
 case class ReduceScore(cntAll: Long, cntTrigger: Long, cntValid: Long)
@@ -24,25 +25,6 @@ class IRI_Test_Suite  extends FunSuite{
      */
   }
 
-  test("Test Case Query") {
-
-    val pathToTestCases = "../new_release_based_ci_tests_draft.nt"
-
-    val model = ModelFactory.createDefaultModel()
-    model.read(pathToTestCases)
-
-    val query = QueryFactory.create(org.dbpedia.validation.testQuery())
-    val queryExecutionFactory = QueryExecutionFactory.create(query,model)
-
-    val resultSet = queryExecutionFactory.execSelect()
-
-    val vars = resultSet.getResultVars
-
-    while( resultSet.hasNext ) {
-      val solution = resultSet.next()
-      vars.foreach(v => println(solution.get(v)))
-    }
-  }
 
   test("Spark Approach") {
 
@@ -124,7 +106,40 @@ class IRI_Test_Suite  extends FunSuite{
     catch {
       case iriex: IRIException => println("Invalid IRI definition")
     }
+  }
 
+  test("Iri Trigger Pattern Test") {
+
+    val rawPattern = "^http://(ar\\.|az\\.|be\\.|bg\\.|bn\\.|ca\\.|cs\\.|cy\\.|da\\.|de\\.|el\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fr\\.|ga\\.|gl\\.|hi\\.|hr\\.|hu\\.|hy\\.|id\\.|it\\.|ja\\.|ko\\.|lt\\.|lv\\.|mk\\.|nl\\.|pl\\.|pt\\.|ro\\.|ru\\.|sk\\.|sl\\.|sr\\.|sv\\.|tr\\.|uk\\.|ur\\.|vi\\.|war\\.|zh\\.|commons\\.)?dbpedia.org/resource/"
+    val pattern = rawPattern.r
+
+    val iri = "http://ar.dbpedia.org/resource/"
+    val iri1 = "https://ar.dbpedia.org/resource/"
+    val iri2 = "http://ra.dbpedia.org/resource/"
+
+    println(pattern.pattern.matcher(iri).matches())
+    println(pattern.pattern.matcher(iri1).matches())
+    println(pattern.pattern.matcher(iri2).matches())
+  }
+
+  test(" Iri Validator Pattern Test") {
+
+    import org.dbpedia.validation.IriValidator
+
+    val validator = IriValidator("","",true,true,Array('#','&'))
+
+    val validIri = "http://a.b/c%26d%23e"
+    val nonValidIri = "http://a.b/c&d#e"
+
+    val validatorPatternStr =  s"[${validator.notContainsChars.mkString("")}]"
+    println(validatorPatternStr)
+    val validatorRegex = validatorPatternStr.r
+
+    if ( validatorRegex.findAllIn(validIri).length < 1 ) println(validIri+" is valid")
+    else println(validIri+" is not valid")
+
+    if ( validatorRegex.findAllIn(nonValidIri).length < 1 ) println(nonValidIri+" is valid")
+    else println(nonValidIri+" is not valid")
   }
 
   //test("Another Test") {

@@ -2,79 +2,54 @@ package org.dbpedia.validation
 
 import java.io.File
 
-import org.apache.spark.sql.SparkSession
+import org.apache.commons.cli.CommandLineParser
+import org.apache.spark.sql.{SQLContext, SparkSession}
+import scopt.OptionParser
 
 case class ReduceScore(cntAll: Long, cntTrigger: Long, cntValid: Long)
 case class SPO(s: String, p: String, o: String)
+
+case class ValidationConfig(pathToFlatTurtleFile: String= null,pathToTestCaseFile: String= null)
 
 object ValidationLauncher {
 
   def main(args: Array[String]): Unit = {
 
+    val optionParser: OptionParser[ValidationConfig] = new OptionParser[ValidationConfig]("iriTest") {
 
-  }
+      head("iriTest", "0.1")
 
-  def testIris(pathToFlatTurtleFile: String, pathToTestCases: String): Unit = {
+      arg[String]("<flat-turtle-files>").required().maxOccurs(1).action((s, p) => p.copy(pathToFlatTurtleFile = s))
+        .text("Line based rdf FILE ( spark syntax)")
 
-    val hadoopHomeDir = new File("./haoop/")
-    hadoopHomeDir.mkdirs()
-    System.setProperty("hadoop.home.dir", hadoopHomeDir.getAbsolutePath)
+      opt[String]('t', "testCase").required().maxOccurs(1).action((s, p) =>  p.copy(pathToTestCaseFile = s))
+        .text("Iri test case file")
 
-    val sparkSession = SparkSession.builder().config("hadoop.home.dir","./hadoop")
-      .appName("Test Iris").master("local[*]").getOrCreate()
+    }
 
-    val sqlContext = sparkSession.sqlContext
+    optionParser.parse(args,ValidationConfig()) match {
 
-    import sqlContext.implicits._
+      case Some(config) =>
 
-    var s: String = null
+        println("---------------------------")
+        println(" Spark based IRI form test ")
+        println("---------------------------")
 
-    val spoBasedDataset =
-      sqlContext.read.textFile(pathToFlatTurtleFile)
-        .filter(! _.startsWith("#")).map(prepareFaltTurtleLine)
+        val hadoopHomeDir = new File("./.haoop/")
+        hadoopHomeDir.mkdirs()
+        System.setProperty("hadoop.home.dir", hadoopHomeDir.getAbsolutePath)
 
-    val counts: IndexedSeq[ReduceScore] = (0 until 2).map( i =>
-      spoBasedDataset.map(_(i)).distinct().filter(_ != null).map(testIri)
-        .reduce( (a,b) => ReduceScore(a.cntAll+b.cntAll,a.cntTrigger+b.cntTrigger,a.cntValid+b.cntValid))
-    )
+        val sparkSession = SparkSession.builder()
+          .config("hadoop.home.dir", "./.hadoop")
+          .config("spark.local.dir", "./.spark")
+          .appName("Test Iris").master("local[*]").getOrCreate()
+        sparkSession.sparkContext.setLogLevel("WARN")
 
-    val coverageTripleParts = counts.map( score => score.cntTrigger / score.cntAll)
+        val sqlContext: SQLContext = sparkSession.sqlContext
 
-    val coverageOverall = coverageTripleParts.sum / 3
+        ValidationExecutor.testIris(config.pathToFlatTurtleFile, config.pathToTestCaseFile)(sqlContext)
 
-    /*
-    Iris in s p o could be overlapping
-     */
-    println(
-      s"""
-         |C_s: ${coverageTripleParts(0)} all: ${counts(0).cntAll} trg: ${counts(0).cntTrigger} vld: ${counts(0).cntValid}
-         |C_p: ${coverageTripleParts(1)} all: ${counts(1).cntAll} trg: ${counts(1).cntTrigger} vld: ${counts(1).cntValid}
-         |C_o: ${coverageTripleParts(2)} all: ${counts(2).cntAll} trg: ${counts(2).cntTrigger} vld: ${counts(2).cntValid}
-         |C_total: $coverageOverall \t\t\t vld=doesNotContainChars
-       """.stripMargin)
-  }
-
-  /**
-    * Assumption: The whitespace following subject, predicate, and object must be a single space, (U+0020).
-    * All other locations that allow whitespace must be empty. (https://www.w3.org/TR/n-triples/#canonical-ntriples)
-    */
-  def prepareFaltTurtleLine(line: String): Array[String] = {
-    val spo = line.split(" ", 3)
-
-    var s: String = null
-    if (spo(0).startsWith("<")) s = spo(0).substring(1, spo(0).length - 1)
-
-    var p: String = null
-    if (spo(1).startsWith("<")) p = spo(1).substring(1, spo(1).length - 1)
-
-    var o: String = null
-    if (spo(2).startsWith("<")) o = spo(2).substring(1, spo(2).length - 3)
-
-    Array(s,p,o)
-  }
-
-  def testIri(iriStr: String): ReduceScore = {
-
-    ReduceScore(1,1,0)
+      case _ => optionParser.showUsage()
+    }
   }
 }
