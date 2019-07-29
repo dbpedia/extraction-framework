@@ -61,7 +61,7 @@ object TestSuiteFactory {
     iriTriggers.toArray
   }
 
-  private def loadIriValidators(m_tests: Model): Array[IriValidator] = {
+  def loadIriValidators(m_tests: Model): Array[IriValidator] = {
 
     val validatorsQuery = QueryFactory.create(iriValidatorQueryStr())
     val validatorsResultSet = QueryExecutionFactory.create(validatorsQuery, m_tests).execSelect()
@@ -75,13 +75,28 @@ object TestSuiteFactory {
       val validatorIri = validatorSolution.getResource("validator").getURI
       validatorReferencesToIndexMap.put(validatorIri,arrayIndexCnt)
 
+      val patterns = ArrayBuffer[String]()
+
+      if( validatorSolution.contains("doesNotContainCharacters") ) {
+        val chars = validatorSolution.getLiteral("doesNotContainCharacters").getLexicalForm.split("\t")
+        patterns.append(s"^[^${chars.mkString("")}]*$$")
+      }
+
+      val oneOfVocab = ""
+      //TODO
+
+      if ( validatorSolution.contains("patternRegex") ) {
+        val patternRegex = validatorSolution.getLiteral("patternRegex").getLexicalForm
+        patterns.append(patternRegex)
+      }
+
       iriValidators.append(
         IriValidator(
           validatorIri,
           validatorSolution.getLiteral("hasScheme").getLexicalForm,
           validatorSolution.getLiteral("hasQuery").getLexicalForm.toBoolean,
           validatorSolution.getLiteral("hasFragment").getLexicalForm.toBoolean,
-          validatorSolution.getLiteral("doesNotContainCharacters").getLexicalForm.split("\t").map(_.charAt(0))
+          patterns.toArray
         )
       )
       arrayIndexCnt += 1

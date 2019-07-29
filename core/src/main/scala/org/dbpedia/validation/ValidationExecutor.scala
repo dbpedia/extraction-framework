@@ -19,11 +19,15 @@ object ValidationExecutor {
         .filter(! _.startsWith("#")).map(prepareFaltTurtleLine)
 
     val counts: IndexedSeq[ReduceScore] = (0 until 3).map( i =>
-      spoBasedDataset.map(_(i)).distinct().filter(_ != null).map(resource => testIri(resource, brdcstTestSuit))
-        .reduce( (a,b) => ReduceScore(a.cntAll+b.cntAll,a.cntTrigger+b.cntTrigger,a.cntValid+b.cntValid))
+      spoBasedDataset.map(_(i)).distinct().filter(_ != null).map(resource => testIri(resource, brdcstTestSuit)).rdd.
+        fold(ReduceScore(0,0,0))( (a,b) => ReduceScore(a.cntAll+b.cntAll,a.cntTrigger+b.cntTrigger,a.cntValid+b.cntValid))
     )
 
-    val coverageTripleParts = counts.map( score => score.cntTrigger / score.cntAll.toFloat)
+    val coverageTripleParts = counts.map( score => {
+
+      if (score.cntAll > 0 ) score.cntTrigger / score.cntAll.toFloat
+      else 0.toFloat
+    })
 
     val coverageOverall = coverageTripleParts.sum / 3.toFloat
 
@@ -69,9 +73,8 @@ object ValidationExecutor {
 
         val triggerPattern = s"$triggerPatternStr.*".r.pattern
 
-        if ( triggerPattern.matcher(iriStr).matches() ) {
+        if ( triggerPattern.matcher(iriStr).matches ) {
 
-//          println("trigger matches")
           triggered = true
 
           trigger.validatorReferences.foreach( validatorReference => {
@@ -80,9 +83,13 @@ object ValidationExecutor {
             val validatorIndex = testSuite.validatorReferencesToIndexMap.getOrElse(validatorReference,0)
             val validator: IriValidator = testSuite.validators(validatorIndex)
 
-            val validatorRegex = s"[${validator.notContainsChars.mkString("")}]".r
+            validator.patterns.foreach( validatorPatternStr => {
 
-            if ( validatorRegex.findAllIn(iriStr).length < 1 ) valid = true
+              val validatorPattern = validatorPatternStr.r.pattern
+
+              if (  validatorPattern.matcher(iriStr).matches ) valid = true
+              // else valid = false
+            })
           })
         }
       })

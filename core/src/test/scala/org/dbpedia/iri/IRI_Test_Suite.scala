@@ -35,15 +35,7 @@ class IRI_Test_Suite  extends FunSuite{
 
     val extractionOutputTtl =
       s"""
-         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.georss.org/georss/point> "1.0 17.0" .
-         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> .
-         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "1.0"^^<http://www.w3.org/2001/XMLSchema#float> .
-         |<http://wikidata.dbpedia.org/resource/Q15> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "17.0"^^<http://www.w3.org/2001/XMLSchema#float> .
-         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.georss.org/georss/point> "53.0 -1.0" .
-         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> .
-         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.w3.org/2003/01/geo/wgs84_pos#lat> "53.0"^^<http://www.w3.org/2001/XMLSchema#float> .
-         |<http://wikidata.dbpedia.org/resource/Q21> <http://www.w3.org/2003/01/geo/wgs84_pos#long> "-1.0"^^<http://www.w3.org/2001/XMLSchema#float> .
-         |<http://wikidata.dbpedia.org/resource/Q18> <http://www.georss.org/georss/point> "-21.0 -59.0" .
+         |<http://commons.dbpedia.org/resource/File:Rainbow_Sopot_Poland_2004_08_11_ubt.jpeg> <http://dbpedia.org/ontology/license> <http://commons.dbpedia.org/resource/http://creativecommons.org/licenses/by/2.5/> .
        """.stripMargin.trim
 
     val sparkSession = SparkSession.builder().config("hadoop.home.dir", "./hadoop")
@@ -124,22 +116,22 @@ class IRI_Test_Suite  extends FunSuite{
 
   test(" Iri Validator Pattern Test") {
 
-    import org.dbpedia.validation.IriValidator
-
-    val validator = IriValidator("","",true,true,Array('#','&'))
-
-    val validIri = "http://a.b/c%26d%23e"
-    val nonValidIri = "http://a.b/c&d#e"
-
-    val validatorPatternStr =  s"[${validator.notContainsChars.mkString("")}]"
-    println(validatorPatternStr)
-    val validatorRegex = validatorPatternStr.r
-
-    if ( validatorRegex.findAllIn(validIri).length < 1 ) println(validIri+" is valid")
-    else println(validIri+" is not valid")
-
-    if ( validatorRegex.findAllIn(nonValidIri).length < 1 ) println(nonValidIri+" is valid")
-    else println(nonValidIri+" is not valid")
+//    import org.dbpedia.validation.IriValidator
+//
+//    val validator = IriValidator("","",true,true,Array('#','&'))
+//
+//    val validIri = "http://a.b/c%26d%23e"
+//    val nonValidIri = "http://a.b/c&d#e"
+//
+//    val validatorPatternStr =  s"[${validator.notContainsChars.mkString("")}]"
+//    println(validatorPatternStr)
+//    val validatorRegex = validatorPatternStr.r
+//
+//    if ( validatorRegex.findAllIn(validIri).length < 1 ) println(validIri+" is valid")
+//    else println(validIri+" is not valid")
+//
+//    if ( validatorRegex.findAllIn(nonValidIri).length < 1 ) println(nonValidIri+" is valid")
+//    else println(nonValidIri+" is not valid")
   }
 
   //test("Another Test") {

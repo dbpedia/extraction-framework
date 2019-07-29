@@ -9,7 +9,7 @@ package object validation {
                         patterns: Array[String] /*TODO: or REGEX*/, validatorReferences: Array[ValidatorReference])
 
   case class IriValidator(id: ValidatorReference, hasScheme: String, hasQuery: Boolean,
-                          hasFragment: Boolean, notContainsChars: Array[Char] /*TODO: or REGEX*/)
+                          hasFragment: Boolean, patterns: Array[String]  /*TODO: or REGEX*/)
 
   type ValidatorReference = String
   type TriggerReference = String
@@ -47,17 +47,19 @@ package object validation {
   def iriValidatorQueryStr(): String =
     s"""$prefixDefinition
        |
-       |SELECT ?validator ?hasScheme ?hasQuery ?hasFragment
-       |  (GROUP_CONCAT(DISTINCT ?doesNotContainCharacter; SEPARATOR="\t") AS ?doesNotContainCharacters) {
-       |
+       |SELECT ?validator ?hasScheme ?hasQuery ?hasFragment ?patternRegex ?oneOfVocab
+       |  (GROUP_CONCAT(DISTINCT ?doesNotContainCharacter; SEPARATOR="\t") AS ?doesNotContainCharacters)
+       |{
        |  ?validator
        |     a                          v:IRI_Validator ;
        |     v:hasScheme                ?hasScheme ;
        |     v:hasQuery                 ?hasQuery ;
-       |     v:hasFragment              ?hasFragment ;
-       |     v:doesNotContainCharacters ?doesNotContainCharacter .
+       |     v:hasFragment              ?hasFragment .
+       |     Optional{ ?validator v:doesNotContainCharacters ?doesNotContainCharacter . }
+       |     Optional{ ?validator v:patternRegex ?patternRegex . }
+       |     Optional{ ?validator v:oneOfVocab ?oneOfVocab . }
        |
-       |} GROUP BY ?validator ?hasScheme ?hasQuery ?hasFragment
+       |} GROUP BY ?validator ?hasScheme ?hasQuery ?hasFragment ?patternRegex ?oneOfVocab
      """.stripMargin
 
   def triggeredValidatorsQueryStr(triggerIri: String): String =
