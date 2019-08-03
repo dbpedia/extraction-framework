@@ -117,6 +117,9 @@ object UriUtils
     val scheme = uri.getScheme + "://"
     val authority = uri.getAuthority
     val path = WikiUtil.wikiEncode(iriDecode(uri.getPath)).replaceAll("%25", "%")    // we only want to wiki-encode the path!
+    //System.out.println(uri.getPath)
+    //System.out.println(iriDecode(uri.getPath))
+    //System.out.println(path)
     val query = if (uri.getQuery != null) "?" + iriDecode(uri.getRawQuery).replaceAll("%25", "%") else ""
     val fragment = if(uri.getFragment != null) "#" + iriDecode(uri.getRawFragment).replaceAll("%25", "%") else ""
     IRI.create(
