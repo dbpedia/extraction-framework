@@ -103,7 +103,7 @@ public class UriToIriDecoder {
                     // what does the line below even do?
                     //int code = IriCharacters.decode("%" + c1 + c2).charAt(0);
 
-                    System.out.println("char %"+c1+c2);
+                    //System.out.println("char %"+c1+c2);
 
                     if("%20".equals("%"+c1+c2)){
                         bb.put((byte)'_');
