@@ -3,6 +3,7 @@ package org.dbpedia.validation
 import java.io.File
 
 import org.apache.commons.cli.CommandLineParser
+import org.apache.jena.riot.RDFDataMgr
 import org.apache.spark.sql.{SQLContext, SparkSession}
 import scopt.OptionParser
 
@@ -17,6 +18,7 @@ case class ValidationConfig(pathToFlatTurtleFile: String= null,pathToTestCaseFil
   *     pathToTestFile         Path to rdf test case file
   *     pathToFlatTurtleFile   Any un/compressed flatTurtle/NT-Triples file. Wildcard possible (e.g dir/\*.ttl.bz2)
   * Adjust memory (launcher Xmx arg) accordingly inside pom. Higher is better.
+  * Handling LogLevel by using core/src/main/resources/template.log4j.properties
   */
 object ValidationLauncher {
 

@@ -51,13 +51,17 @@ object ValidationExecutor {
     val spo = line.split(" ", 3)
 
     var s: String = null
-    if (spo(0).startsWith("<")) s = spo(0).substring(1, spo(0).length - 1)
-
     var p: String = null
-    if (spo(1).startsWith("<")) p = spo(1).substring(1, spo(1).length - 1)
-
     var o: String = null
-    if (spo(2).startsWith("<")) o = spo(2).substring(1, spo(2).length - 3)
+
+    try {
+      if (spo(0).startsWith("<")) s = spo(0).substring(1, spo(0).length - 1)
+      if (spo(1).startsWith("<")) p = spo(1).substring(1, spo(1).length - 1)
+      if (spo(2).startsWith("<")) o = spo(2).substring(1, spo(2).length - 3)
+    }
+    catch {
+      case ae: ArrayIndexOutOfBoundsException => println(line)
+    }
 
     Array(s,p,o)
   }

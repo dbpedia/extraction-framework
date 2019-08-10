@@ -45,7 +45,8 @@
 		<scalatest.scala.version>2.11</scalatest.scala.version>
 		<scalatest.version>2.2.1</scalatest.version>
 		<scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
-		<skipTests>true</skipTests>
+		<!--moved to surefire plugin configuration-->
+		<!--<skipTests>false</skipTests>-->
 		<gpg.keyname>AKSW.GPG</gpg.keyname>
 	</properties>
 
@@ -76,6 +77,14 @@
 		</pluginManagement>
 
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
 
 			<!-- Note: we could drop this plugin config and just use scala:compile, 
 				but then the Scala plugin doesn't understand sub-modules. -->
