@@ -1,38 +1,6 @@
 package org.dbpedia
 
-import scala.collection.immutable.HashSet
-import scala.collection.mutable
-
 package object validation {
-
-  case class EvalCounter(all: Long, trg: Long, vld: Long) {
-
-    def coverage: Float = if ( all > 0 ) trg.toFloat / all.toFloat else 0
-
-    override def toString: String = s"all: $all trg: $trg vld: $vld"
-  }
-
-  case class CoverageResult(subjects: EvalCounter, predicates: EvalCounter, objects: EvalCounter) {
-
-    def coverage: Float = {
-
-      if ( 0 < (subjects.coverage + predicates.coverage + objects.coverage ) ) {
-        (subjects.coverage + predicates.coverage + objects.coverage ) / 3f
-      } else {
-        0
-      }
-    }
-
-    override def toString: String = {
-
-      s"""
-         |C_s ${subjects.coverage} ${subjects.toString}
-         |C_p ${predicates.coverage} ${predicates.toString}
-         |C_o ${objects.coverage} ${objects.toString}
-         |C   $coverage
-         """.stripMargin
-    }
-  }
 
   case class TestSuite(triggers: Array[IriTrigger],
                        validators: Array[IriValidator], validatorReferencesToIndexMap: Map[ValidatorReference,Int])
@@ -41,8 +9,7 @@ package object validation {
                         patterns: Array[String] /*TODO: or REGEX*/, validatorReferences: Array[ValidatorReference])
 
   case class IriValidator(id: ValidatorReference, hasScheme: String, hasQuery: Boolean,
-                          hasFragment: Boolean, patterns: Array[String]  /*TODO: or REGEX*/,
-                          oneOf: HashSet[String])
+                          hasFragment: Boolean, patterns: Array[String]  /*TODO: or REGEX*/)
 
   type ValidatorReference = String
   type TriggerReference = String
@@ -105,16 +72,6 @@ package object validation {
        |
        |}
      """.stripMargin
-
-  def oneOfVocabQueryStr: String =
-    """PREFIX owl: <http://www.w3.org/2002/07/owl#>
-      |
-      |SELECT DISTINCT ?property {
-      |
-      |  ?property a  <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
-      |  #FILTER ( ?type IN ( owl:DatatypeProperty, owl:ObjectProperty ) )
-      |}"""
-     .stripMargin
 
   /*------------------------------------------------------------------------------------------------------- TODO clean*/
 

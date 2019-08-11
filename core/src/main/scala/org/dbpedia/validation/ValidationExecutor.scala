@@ -5,8 +5,7 @@ import org.apache.spark.sql.SQLContext
 
 object ValidationExecutor {
 
-  def testIris(pathToFlatTurtleFile: String, pathToTestCases: String)
-              (implicit sqlContext: SQLContext): CoverageResult = {
+  def testIris(pathToFlatTurtleFile: String, pathToTestCases: String)(implicit sqlContext: SQLContext): Unit = {
 
     import sqlContext.implicits._
 
@@ -24,14 +23,24 @@ object ValidationExecutor {
         fold(ReduceScore(0,0,0))( (a,b) => ReduceScore(a.cntAll+b.cntAll,a.cntTrigger+b.cntTrigger,a.cntValid+b.cntValid))
     )
 
+    val coverageTripleParts = counts.map( score => {
+
+      if (score.cntAll > 0 ) score.cntTrigger / score.cntAll.toFloat
+      else 0.toFloat
+    })
+
+    val coverageOverall = coverageTripleParts.sum / 3.toFloat
+
     /*
     Iris in s p o could be overlapping
      */
-    CoverageResult(
-      EvalCounter(counts(0).cntAll, counts(0).cntTrigger, counts(0).cntValid),
-      EvalCounter(counts(1).cntAll, counts(1).cntTrigger, counts(1).cntValid),
-      EvalCounter(counts(2).cntAll, counts(2).cntTrigger, counts(2).cntValid)
-    )
+    println(
+      s"""
+         |C_s: ${coverageTripleParts(0)} all: ${counts(0).cntAll} trg: ${counts(0).cntTrigger} vld: ${counts(0).cntValid}
+         |C_p: ${coverageTripleParts(1)} all: ${counts(1).cntAll} trg: ${counts(1).cntTrigger} vld: ${counts(1).cntValid}
+         |C_o: ${coverageTripleParts(2)} all: ${counts(2).cntAll} trg: ${counts(2).cntTrigger} vld: ${counts(2).cntValid}
+         |C_T: $coverageOverall
+       """.stripMargin)
   }
 
   /**
@@ -85,8 +94,6 @@ object ValidationExecutor {
               if (  validatorPattern.matcher(iriStr).matches ) valid = true
               // else valid = false
             })
-
-            if( validator.oneOf.contains(iriStr) ) valid = true
           })
         }
       })
