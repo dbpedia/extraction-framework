@@ -1,10 +1,15 @@
 package org.dbpedia.validation
 
+import java.io.InputStreamReader
+import java.net.URL
+
 import org.apache.jena.query.{QueryExecutionFactory, QueryFactory}
 import org.apache.jena.rdf.model.{Model, ModelFactory}
+import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 
+import scala.collection.immutable.HashSet
 import scala.collection.mutable
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 object TestSuiteFactory {
 
@@ -82,8 +87,10 @@ object TestSuiteFactory {
         patterns.append(s"^[^${chars.mkString("")}]*$$")
       }
 
-      val oneOfVocab = ""
-      //TODO
+      val oneOfVocab = ArrayBuffer[String]()
+      if( validatorSolution.contains("oneOfVocab") ) {
+        oneOfVocab.appendAll(getVocab(validatorSolution.getResource("oneOfVocab").getURI))
+      }
 
       if ( validatorSolution.contains("patternRegex") ) {
         val patternRegex = validatorSolution.getLiteral("patternRegex").getLexicalForm
@@ -96,11 +103,32 @@ object TestSuiteFactory {
           validatorSolution.getLiteral("hasScheme").getLexicalForm,
           validatorSolution.getLiteral("hasQuery").getLexicalForm.toBoolean,
           validatorSolution.getLiteral("hasFragment").getLexicalForm.toBoolean,
-          patterns.toArray
+          patterns.toArray,
+          HashSet(oneOfVocab.toArray: _*)
         )
       )
       arrayIndexCnt += 1
     }
     iriValidators.toArray
+  }
+
+  def getVocab(urlStr: String): Array[String] = {
+
+    val url = new URL(urlStr)
+    val reader = new InputStreamReader(url.openStream, "UTF-8")
+    val model =  ModelFactory.createDefaultModel()
+
+    RDFDataMgr.read(model,reader,"urn:base",RDFLanguages.NTRIPLES)
+
+    val query = QueryFactory.create(oneOfVocabQueryStr)
+    val resultSet = QueryExecutionFactory.create(query,model).execSelect
+
+    val properties = ArrayBuffer[String]()
+
+    while( resultSet.hasNext ) {
+      properties.append(resultSet.next().getResource("property").getURI)
+    }
+
+    properties.toArray
   }
 }

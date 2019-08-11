@@ -56,7 +56,9 @@ object ValidationLauncher {
 
         val sqlContext: SQLContext = sparkSession.sqlContext
 
-        ValidationExecutor.testIris(config.pathToFlatTurtleFile, config.pathToTestCaseFile)(sqlContext)
+        val coverageResults = ValidationExecutor.testIris(config.pathToFlatTurtleFile, config.pathToTestCaseFile)(sqlContext)
+
+        println(coverageResults.toString)
 
       case _ => optionParser.showUsage()
     }
