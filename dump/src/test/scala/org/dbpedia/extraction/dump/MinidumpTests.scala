@@ -21,12 +21,14 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   /**
     * in src/test/resources/
     */
-  val pageArticlesMinidump = "extraction.minidump.properties"
+  val extractionConfig = "extraction.minidump.properties"
+  val pageArticlesMinidump = "minibenchmark.xml.bz2"
   val wikiMasque= "enwiki"
 
   var dumpPath = ""
 
   override def beforeAll() {
+
     println("Extracting Minidump")
 
     val date = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime)
@@ -34,14 +36,14 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     //Workaround to get resource files in Scala 2.11
     val classLoader = getClass.getClassLoader
 
-    val configURL = classLoader.getResource(pageArticlesMinidump)
+    val configURL = classLoader.getResource(extractionConfig)
     val config = new Config(configURL.getFile)
 
     val minidumpwikiDirectory = new File(config.dumpDir, s"$wikiMasque/$date/")
     dumpPath = minidumpwikiDirectory.getAbsolutePath
     minidumpwikiDirectory.mkdirs()
 
-    val minidumpURL = classLoader.getResource("minibenchmark.xml.bz2")
+    val minidumpURL = classLoader.getResource(pageArticlesMinidump)
 
     FileUtils.copyFile(
       new File(minidumpURL.getFile),
@@ -70,6 +72,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   }
 
   test("IRI Coverage Tests") {
+
     val hadoopHomeDir = new File("./.haoop/")
     hadoopHomeDir.mkdirs()
     System.setProperty("hadoop.home.dir", hadoopHomeDir.getAbsolutePath)
@@ -82,10 +85,16 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     val sqlContext: SQLContext = sparkSession.sqlContext
 
-    ValidationExecutor.testIris(
+    val eval = ValidationExecutor.testIris(
       pathToFlatTurtleFile =  s"$dumpPath/*.ttl.bz2",
       pathToTestCases = "../new_release_based_ci_tests_draft.nt"
     )(sqlContext)
+
+    println(eval.toString)
+
+    assert(eval.subjects.coverage == 1, "subjects not covered")
+    assert(eval.predicates.coverage == 1, "predicates not covered")
+    assert(eval.objects.coverage == 1, "objects not covered")
   }
 
   override def afterAll() {

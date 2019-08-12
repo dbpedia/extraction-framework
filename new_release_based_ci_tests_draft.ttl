@@ -26,19 +26,24 @@ trigger:mappings_wikipedia_dbpedia_extraction a v:RDF_IRI_Trigger ;
 	rdfs:comment "Starting with http://dbpedia.org or for 40 mapped languages with http://xx.dbpedia.org" .
 
 trigger:wikidata_dbpedia_extraction a v:RDF_IRI_Trigger ;
-   v:startsWith  "http://wikidata.dbpedia.org/resource/Q" ;
+   v:pattern  "^http://wikidata.dbpedia.org/resource/Q" ;
 	rdfs:label   "DBpedia IRIs from Wikidata extraction" ;
 	rdfs:comment "Starting with http://wikidata.dbpedia.org/resource/Q" .
 	
 trigger:wikidata a v:RDF_IRI_Trigger ;
-   v:startsWith "http://www.wikidata.org/entity/Q" ;
+   v:pattern "^http://www.wikidata.org/entity/Q" ;
 	rdfs:label "Wikidata IRIs" ;
 	rdfs:comment "Starting with http://www.wikidata.org/entity/Q" .
 
 trigger:dbpedia_ontology a v:RDF_IRI_Trigger ;
-   v:startsWith "http://dbpedia.org/ontology/" ; 
+   v:pattern "^http://dbpedia.org/ontology/" ;
    rdfs:label "DBpedia Ontology IRIs" ;
    rdfs:comment "http://dbpedia.org/ontology/" .
+
+trigger:w3_rdfs a v:RDF_IRI_Trigger ;
+   v:pattern "^http://www.w3.org/2000/01/rdf-schema#" ;
+   rdfs:label "DBpedia Ontology IRIs" ;
+   rdfs:comment "http://www.w3.org/2000/01/rdf-schema#" .
 
 #########################
 # Reusable Validators, several Validators per TestCase 
@@ -90,7 +95,7 @@ validator:dbpedia_ontology_IRI_Validator
 		v:hasScheme "http" ;
 		v:hasQuery false ;
 		v:hasFragment false ;
-		v:patternRegex "^http://www\.wikidata\.org/entity/Q[0-9]+$" 
+		v:patternRegex "^http://www.wikidata.org/entity/Q[0-9]+$"
 		] .
   
 
