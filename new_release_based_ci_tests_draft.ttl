@@ -73,13 +73,14 @@ validator:reserved_sub_delims
 validator:dbpedia_resource_delims 
 	a v:IRI_Validator ;
 	rdfs:comment """ 
-	1. gen-delims are not allowed, except ":"
+	1. gen-delims are not allowed, except ":" and "@" per rfc3987
+	"ipchar = iunreserved / pct-encoded / sub-delims / ":" / "@" "
 	2. sub-delims are allowed:
 	These are allowed in DBpedia Uris, so we check that they are not encoded
 	sub-delims  =  "%21", "%24", "%26", "%27", "%28", "%29", "%2A", "%2B", "%2C", "%3B", "%3D"
     sub-delims = "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
 	reserved gen-delims from above """ ;
-	v:doesNotContain  "?", "#", "[", "]", "/", "@" ;
+	v:doesNotContain  "?", "#", "[", "]", "/" ;
 	v:doesNotContain  "%21", "%24", "%26", "%27", "%28", "%29", "%2A", "%2B", "%2C", "%3B", "%3D" .
 	
 	
