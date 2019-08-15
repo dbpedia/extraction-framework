@@ -50,6 +50,18 @@ trigger:w3_rdfs
    trigger:pattern "^http://www.w3.org/2000/01/rdf-schema#" ;
    rdfs:label "rdfs trigger" ;
    rdfs:comment "http://www.w3.org/2000/01/rdf-schema#" .
+   
+trigger:w3_rdf
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
+   rdfs:label "rdf trigger" ;
+   rdfs:comment "http://www.w3.org/1999/02/22-rdf-syntax-ns#" .
+   
+trigger:foaf_name
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://xmlns.com/foaf/0.1/" ;
+   rdfs:label "foaf trigger" ;
+   rdfs:comment "http://xmlns.com/foaf/0.1/" .
 
 #########################
 # Reusable Validators, several Validators per TestCase 
@@ -90,7 +102,16 @@ validator:dbpedia_ontology
 	# v:oneOfVocab <https://databus.dbpedia.org/dbpedia/ontology/dbo-snapshots/latest/.nt> 
 	# todo use this for now
 	v:oneOfVocab <https://raw.githubusercontent.com/dbpedia/ontology-tracker/master/databus/dbpedia/ontology/dbo-snapshots/2019.02.21T08.00.00Z/dbo-snapshots.nt> .
-    
+
+# no priority to implement this   
+validator:dbpedia_external_properties
+   a v:IRI_Validator ; 
+   v:oneOf "http://www.w3.org/2000/01/rdf-schema#seeAlso" ;
+   v:oneOf "http://xmlns.com/foaf/0.1/name" ;
+   v:oneOf "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" .
+   
+   
+ 
 
 
 #########################
@@ -114,6 +135,14 @@ validator:dbpedia_ontology
    v:trigger trigger:dbpedia_ontology ;
    v:validator validator:dissallowed_chars ;
    v:validator validator:dbpedia_ontology .
+   
+# no priority to implement this   
+<#dbpediaExternalProperties> 
+   a v:TestGenerator ;
+   v:trigger trigger:foaf ;
+   v:trigger trigger:w3_rdf ;
+   v:trigger trigger:w3_rdfs ;
+   v:validator validator:dbpedia_external_properties .
    
 <#wikidata_IRIs> 
   a v:TestGenerator ;
