@@ -22,7 +22,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     * in src/test/resources/
     */
   val extractionConfig = "extraction.minidump.properties"
-  val pageArticlesMinidump = "minibenchmark.xml.bz2"
+  val pageArticlesMinidump = "mini-enwiki.xml.bz2"
   val wikiMasque= "enwiki"
 
   var dumpPath = ""
@@ -73,6 +73,9 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
   test("IRI Coverage Tests") {
 
+    val classLoader = getClass.getClassLoader
+    val pathToTestModelFilePath = classLoader.getResource("new_release_based_ci_tests_draft.ttl")
+
     val hadoopHomeDir = new File("./.haoop/")
     hadoopHomeDir.mkdirs()
     System.setProperty("hadoop.home.dir", hadoopHomeDir.getAbsolutePath)
@@ -87,14 +90,15 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     val eval = ValidationExecutor.testIris(
       pathToFlatTurtleFile =  s"$dumpPath/*.ttl.bz2",
-      pathToTestCases = "../new_release_based_ci_tests_draft.nt"
+      pathToTestCases = pathToTestModelFilePath.getFile
+
     )(sqlContext)
 
     println(eval.toString)
 
-    assert(eval.subjects.coverage == 1, "subjects not covered")
-    assert(eval.predicates.coverage == 1, "predicates not covered")
-    assert(eval.objects.coverage == 1, "objects not covered")
+    assert(eval.subjects.proof == 1, "subjects not valid")
+    assert(eval.predicates.proof == 1, "predicates not valid")
+    assert(eval.objects.proof == 1, "objects not valid")
   }
 
   override def afterAll() {

@@ -3,17 +3,18 @@ package org.dbpedia.validation
 import java.io.InputStreamReader
 import java.net.URL
 
-import org.apache.jena.query.{QueryExecutionFactory, QueryFactory}
+import org.apache.jena.query.{QueryExecutionFactory, QueryFactory, ResultSet}
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 
-import scala.collection.immutable.HashSet
+import scala.collection.immutable.{HashMap, HashSet}
 import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
+import scala.collection.JavaConversions._
 
 object TestSuiteFactory {
 
-  val validatorReferencesToIndexMap: mutable.Map[ValidatorReference,Int] = mutable.Map()
+  val validatorReferenceToIndexMap: mutable.Map[ValidatorReference,Int] = mutable.Map()
 
   // TODO use InputStream
   def loadTestSuite(pathToTestCaseFile: String): TestSuite = {
@@ -29,8 +30,8 @@ object TestSuiteFactory {
     //       ( testcase has idx. of trggr & val array )
     TestSuite(
       loadIriTriggers(testsRdfModel),
-      loadIriValidators(testsRdfModel),
-      validatorReferencesToIndexMap.toMap /*ensure immutability*/)
+      loadIriValidatorsDev(testsRdfModel),
+      validatorReferenceToIndexMap.toMap /*ensure immutability*/)
   }
 
   private def loadIriTriggers(m_tests: Model): Array[IriTrigger] = {
@@ -51,7 +52,15 @@ object TestSuiteFactory {
 
       val validatorReferences = ArrayBuffer[ValidatorReference]()
       while (triggeredValidatorsResultSet.hasNext)
-        validatorReferences.append(triggeredValidatorsResultSet.next().getResource("validator").getURI)
+        validatorReferences.append({
+
+          val validatorNode = triggeredValidatorsResultSet.next().getResource("validator").asNode()
+
+          if( validatorNode.isBlank )
+            validatorNode.getBlankNodeLabel
+          else
+            validatorNode.getURI
+        })
 
       iriTriggers.append(
         IriTrigger(
@@ -78,7 +87,7 @@ object TestSuiteFactory {
 
       val validatorSolution = validatorsResultSet.next()
       val validatorIri = validatorSolution.getResource("validator").getURI
-      validatorReferencesToIndexMap.put(validatorIri,arrayIndexCnt)
+      validatorReferenceToIndexMap.put(validatorIri,arrayIndexCnt)
 
       val patterns = ArrayBuffer[String]()
 
@@ -112,7 +121,112 @@ object TestSuiteFactory {
     iriValidators.toArray
   }
 
-  def getVocab(urlStr: String): Array[String] = {
+  def loadIriValidatorsDev(testsModel: Model): Array[IriValidatorDev]  = {
+
+    val validatorQuery = QueryFactory.create(iriValidatorDevQueryStr())
+    val validatorResultSet = QueryExecutionFactory.create(validatorQuery, testsModel).execSelect()
+
+    val iriValidators = ArrayBuffer[IriValidatorDev]()
+
+    var arrayIndexCnt = 0
+    val delim = "\t"
+
+//    printValidators(validatorResultSet)
+
+    for( validatorQuerySolution <- validatorResultSet) {
+
+      val id = {
+        val validatorNode = validatorQuerySolution.get("validator").asNode()
+
+        if( validatorNode.isBlank )
+        validatorNode.getBlankNodeLabel
+        else
+          validatorNode.getURI
+      }
+
+      validatorReferenceToIndexMap.put(id,arrayIndexCnt)
+
+      /*
+      rdfs:comment
+       */
+      val comment = StringBuilder.newBuilder
+      if( validatorQuerySolution.contains("comment") ) {
+        comment.append(validatorQuerySolution.getLiteral("comment").getLexicalForm)
+      }
+
+      val patterns = ArrayBuffer[String]()
+      if( validatorQuerySolution.contains("patterns") ) {
+
+        patterns.appendAll(validatorQuerySolution.getLiteral("patterns").getLexicalForm.split(delim))
+      }
+
+      val oneOfVocabs = ArrayBuffer[HashSet[String]]()
+      if( validatorQuerySolution.contains("oneOfVocab") ) {
+
+        validatorQuerySolution.getLiteral("oneOfVocab").getLexicalForm.split(delim)
+          .foreach( vocabUrl => oneOfVocabs.append(getVocab(vocabUrl) )
+        )
+      }
+
+//      val doesNotContains = {
+//        if (validatorQuerySolution.contains("doesNotContains")) {
+//
+//          HashMap(
+//            validatorQuerySolution.getLiteral("doesNotContains").getLexicalForm.split(delim)
+//              .zipWithIndex.toSeq: _*
+//          )
+//        } else {
+//
+//          HashMap[String,Int]()
+//        }
+//      }
+
+      val doesNotContains = ArrayBuffer[String]()
+      if (validatorQuerySolution.contains("doesNotContains")) {
+
+        doesNotContains.appendAll(validatorQuerySolution.getLiteral("doesNotContains").getLexicalForm.split(delim))
+      }
+
+      iriValidators.append(
+        IriValidatorDev(
+          id,
+          comment.mkString,
+          patterns.toArray,
+          oneOfVocabs.toArray,
+          doesNotContains.toArray,
+          patterns.size,oneOfVocabs.size,doesNotContains.size
+        )
+      )
+
+      arrayIndexCnt += 1
+    }
+
+    iriValidators.toArray
+  }
+
+  def printValidators(rs: ResultSet): Unit = {
+    import scala.collection.JavaConversions._
+
+    val vars =  rs.getResultVars
+
+    val seqOfSeq = ArrayBuffer[Seq[String]]()
+//    seqOfSeq.append(vars.toSeq)
+    for ( validatorQs <- rs ) {
+      seqOfSeq.append(
+        Seq(
+          {if( validatorQs.getResource("validator").asNode().isBlank) validatorQs.getResource("validator").asNode().getBlankNodeLabel else validatorQs.getResource("validator").getURI},
+          {if( validatorQs.contains("comment") ) validatorQs.getLiteral("comment").getLexicalForm else ""},
+          {if( validatorQs.contains("patterns") ) validatorQs.getLiteral("patterns").getLexicalForm else ""},
+          {if( validatorQs.contains("oneOfVocabs") ) validatorQs.getLiteral("oneOfVocabs").getLexicalForm else ""},
+          {if( validatorQs.contains("doesNotContains") ) validatorQs.getLiteral("doesNotContains").getLexicalForm.replace("\t"," ") else ""}
+        )
+      )
+    }
+
+    println(Tabulator.format(seqOfSeq))
+  }
+
+  def getVocab(urlStr: String): HashSet[String] = {
 
     val url = new URL(urlStr)
     val reader = new InputStreamReader(url.openStream, "UTF-8")
@@ -129,6 +243,6 @@ object TestSuiteFactory {
       properties.append(resultSet.next().getResource("property").getURI)
     }
 
-    properties.toArray
+    HashSet(properties.toArray: _*)
   }
 }

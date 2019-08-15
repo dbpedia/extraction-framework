@@ -1,5 +1,8 @@
 package org.dbpedia.validation
 
+import java.text.SimpleDateFormat
+import java.util.Calendar
+
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.sql.SQLContext
 
@@ -71,22 +74,41 @@ object ValidationExecutor {
         if ( triggerPattern.matcher(iriStr).matches ) {
 
           triggered = true
+          valid = true
 
           trigger.validatorReferences.foreach( validatorReference => {
 
             // TODO: fix getOrElse workaround ! Implement TestCase
-            val validatorIndex = testSuite.validatorReferencesToIndexMap.getOrElse(validatorReference,0)
-            val validator: IriValidator = testSuite.validators(validatorIndex)
+
+            val validatorIndex = testSuite.validatorReferencesToIndexMap.getOrElse(validatorReference,-1)
+            if ( validatorIndex == -1 ) println(s"Error $validatorReference")
+            val validator: IriValidatorDev = testSuite.validators(validatorIndex)
 
             validator.patterns.foreach( validatorPatternStr => {
 
               val validatorPattern = validatorPatternStr.r.pattern
 
-              if (  validatorPattern.matcher(iriStr).matches ) valid = true
-              // else valid = false
+              if ( ! validatorPattern.matcher(iriStr).matches ) valid = false
             })
 
-            if( validator.oneOf.contains(iriStr) ) valid = true
+            validator.oneOfVocabs.foreach( oneOfVocab => {
+
+              if( ! oneOfVocab.contains(iriStr) ) valid = false
+            })
+
+            // TODO optimize doesNotContains
+            // ^.*((XX)|(YY)|(ZZ)).*$
+            // val inner = validator.doesNotContains.map( x => s"(${x.replace("|","\\|")})").mkString("|")
+            // val pattern = s"^($inner)*$$"
+
+            Array.tabulate(validator.sizeDoesNotContains){ i =>
+
+              if ( iriStr.contains(validator.doesNotContains(i)) ) {
+
+                System.err.println(s"${new SimpleDateFormat("hh:mm:ss").format(Calendar.getInstance().getTime)} | ERROR | ${this.getClass.getSimpleName}testIri | $iriStr contains bad sequence ${validator.doesNotContains(i)}")
+                valid = false
+              }
+            }
           })
         }
       })
