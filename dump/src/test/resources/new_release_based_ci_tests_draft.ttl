@@ -63,6 +63,20 @@ trigger:foaf_name
    rdfs:label "foaf trigger" ;
    rdfs:comment "http://xmlns.com/foaf/0.1/" .
 
+# testing objects
+trigger:xsd_date
+  a v:RDF_IRI_Trigger ; 
+  trigger:pattern "http://www.w3.org/2001/XMLSchema#date" .
+
+validator:xsd_date 
+  a v:IRI_Validator ;
+  v:pattern "\"[0-9]+-[0-9]+-[0-9]+\".*" .
+  
+<#datetest> 
+   a v:TestGenerator ;
+   v:trigger trigger:xsd_date ;
+   v:validator validator:xsd_date .
+
 #########################
 # Reusable Validators, several Validators per TestCase 
 #########################
