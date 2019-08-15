@@ -17,13 +17,13 @@ v:RDF_IRI_Trigger a rdfs:Class;
 	
 trigger:generic_wikipedia_dbpedia_extraction 
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://(ga\.|af\.|als\.|am\.|an\.|ar\.|arz\.|ast\.|az\.|azb\.|ba\.|bar\.|batsmg\.|be\.|bg\.|bn\.|bpy\.|br\.|bs\.|bug\.|ca\.|cdo\.|ce\.|ceb\.|ckb\.|cs\.|cv\.|cy\.|da\.|de\.|el\.|eml\.|en\.|eo\.|es\.|et\.|eu\.|fa\.|fi\.|fo\.|fr\.|fy\.|gd\.|gl\.|gu\.|he\.|hi\.|hr\.|hsb\.|ht\.|hu\.|hy\.|ia\.|id\.|ilo\.|io\.|is\.|it\.|ja\.|jv\.|ka\.|kk\.|kn\.|ko\.|ku\.|ky\.|la\.|lb\.|li\.|lmo\.|lt\.|lv\.|mai\.|mg\.|mhr\.|min\.|mk\.|ml\.|mn\.|mr\.|mrj\.|ms\.|my\.|mzn\.|nan\.|nap\.|nds\.|ne\.|new\.|nl\.|nn\.|no\.|oc\.|or\.|os\.|pa\.|pl\.|pms\.|pnb\.|pt\.|qu\.|ro\.|ru\.|sa\.|sah\.|scn\.|sco\.|sd\.|sh\.|si\.|simple\.|sk\.|sl\.|sq\.|sr\.|su\.|sv\.|sw\.|ta\.|te\.|tg\.|th\.|tl\.|tr\.|tt\.|uk\.|ur\.|uz\.|vec\.|vi\.|vo\.|wa\.|war\.|wuu\.|xmf\.|yi\.|yo\.|yue\.|zh\.)?dbpedia.org/resource/" ;
+   trigger:pattern "^http://(ga\\.|af\\.|als\\.|am\\.|an\\.|ar\\.|arz\\.|ast\\.|az\\.|azb\\.|ba\\.|bar\\.|batsmg\\.|be\\.|bg\\.|bn\\.|bpy\\.|br\\.|bs\\.|bug\\.|ca\\.|cdo\\.|ce\\.|ceb\\.|ckb\\.|cs\\.|cv\\.|cy\\.|da\\.|de\\.|el\\.|eml\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fo\\.|fr\\.|fy\\.|gd\\.|gl\\.|gu\\.|he\\.|hi\\.|hr\\.|hsb\\.|ht\\.|hu\\.|hy\\.|ia\\.|id\\.|ilo\\.|io\\.|is\\.|it\\.|ja\\.|jv\\.|ka\\.|kk\\.|kn\\.|ko\\.|ku\\.|ky\\.|la\\.|lb\\.|li\\.|lmo\\.|lt\\.|lv\\.|mai\\.|mg\\.|mhr\\.|min\\.|mk\\.|ml\\.|mn\\.|mr\\.|mrj\\.|ms\\.|my\\.|mzn\\.|nan\\.|nap\\.|nds\\.|ne\\.|new\\.|nl\\.|nn\\.|no\\.|oc\\.|or\\.|os\\.|pa\\.|pl\\.|pms\\.|pnb\\.|pt\\.|qu\\.|ro\\.|ru\\.|sa\\.|sah\\.|scn\\.|sco\\.|sd\\.|sh\\.|si\\.|simple\\.|sk\\.|sl\\.|sq\\.|sr\\.|su\\.|sv\\.|sw\\.|ta\\.|te\\.|tg\\.|th\\.|tl\\.|tr\\.|tt\\.|uk\\.|ur\\.|uz\\.|vec\\.|vi\\.|vo\\.|wa\\.|war\\.|wuu\\.|xmf\\.|yi\\.|yo\\.|yue\\.|zh\\.)?dbpedia.org/resource/" ;
 	rdfs:label "DBpedia IRIs from Wikipedia used in Generic Extraction" ;
 	rdfs:comment "Starting with http://dbpedia.org or for 140 languages with http://xx.dbpedia.org" .
 	
 trigger:mappings_wikipedia_dbpedia_extraction 
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://(ar\.|az\.|be\.|bg\.|bn\.|ca\.|cs\.|cy\.|da\.|de\.|el\.|en\.|eo\.|es\.|et\.|eu\.|fa\.|fi\.|fr\.|ga\.|gl\.|hi\.|hr\.|hu\.|hy\.|id\.|it\.|ja\.|ko\.|lt\.|lv\.|mk\.|nl\.|pl\.|pt\.|ro\.|ru\.|sk\.|sl\.|sr\.|sv\.|tr\.|uk\.|ur\.|vi\.|war\.|zh\.|commons\.)?dbpedia.org/resource/" ;
+   trigger:pattern "^http://(ar\\.|az\\.|be\\.|bg\\.|bn\\.|ca\\.|cs\\.|cy\\.|da\\.|de\\.|el\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fr\\.|ga\\.|gl\\.|hi\\.|hr\\.|hu\\.|hy\\.|id\\.|it\\.|ja\\.|ko\\.|lt\\.|lv\\.|mk\\.|nl\\.|pl\\.|pt\\.|ro\\.|ru\\.|sk\\.|sl\\.|sr\\.|sv\\.|tr\\.|uk\\.|ur\\.|vi\\.|war\\.|zh\\.|commons\\.)?dbpedia.org/resource/" ;
 	rdfs:label "DBpedia IRIs from Wikipedia used in Generic Extraction" ;
 	rdfs:comment "Starting with http://dbpedia.org or for 40 mapped languages with http://xx.dbpedia.org" .
 
@@ -63,7 +63,7 @@ validator:dissallowed_chars
 validator:reserved_gen_delims 
     a v:IRI_Validator ; 
     rdfs:comment """reserved gen-delims from https://www.ietf.org/rfc/rfc3987.txt ":", "?", "#", "[", "]", "/", "@" """ ;
-    v:doesNotContain ":", "?", "#", "[", "]", "/", "@" .
+    v:doesNotContain ":", "?", "#", "[", "]", "@" .
     
 validator:reserved_sub_delims
     a v:IRI_Validator ; 
@@ -80,7 +80,7 @@ validator:dbpedia_resource_delims
 	sub-delims  =  "%21", "%24", "%26", "%27", "%28", "%29", "%2A", "%2B", "%2C", "%3B", "%3D"
     sub-delims = "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
 	reserved gen-delims from above """ ;
-	v:doesNotContain  "?", "#", "[", "]", "/" ;
+	v:doesNotContain  "?", "#", "[", "]" ;
 	v:doesNotContain  "%21", "%24", "%26", "%27", "%28", "%29", "%2A", "%2B", "%2C", "%3B", "%3D" .
 	
 	
