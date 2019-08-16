@@ -2,7 +2,7 @@
 
 LIST=uris.lst
 URIS=`cat $LIST`
-TARGET="../resources/minibenchmark.xml"
+TARGET="../resources/mini-enwiki.xml"
 
 # copy header
 cp head.xml "$TARGET"

@@ -74,7 +74,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   test("IRI Coverage Tests") {
 
     val classLoader = getClass.getClassLoader
-    val pathToTestModelFilePath = classLoader.getResource("new_release_based_ci_tests_draft.ttl")
+    val pathToTestModelFilePath = classLoader.getResource("dbpedia-specific-ci-tests.ttl")
 
     val hadoopHomeDir = new File("./.haoop/")
     hadoopHomeDir.mkdirs()

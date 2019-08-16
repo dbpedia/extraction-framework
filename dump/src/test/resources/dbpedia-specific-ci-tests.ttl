@@ -14,6 +14,9 @@ v:RDF_IRI_Trigger a rdfs:Class;
 # Reusable Triggers, several triggers per TestCase 
 #########################
 
+trigger:wikipedia
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://en.wikipedia.org/wiki/" .
 	
 trigger:generic_wikipedia_dbpedia_extraction 
    a v:RDF_IRI_Trigger ;
@@ -154,4 +157,9 @@ validator:dbpedia_external_properties
 		v:pattern "^http://www.wikidata.org/entity/Q[0-9]+$"
 		] .
   
-
+<#wikipedia_IRIs> 
+  a v:TestGenerator ;
+  v:trigger trigger:wikipedia ;
+  # same as dbpedia
+  v:validator validator:dissallowed_chars ;
+  v:validator validator:dbpedia_resource_delims .
