@@ -78,13 +78,16 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     /**
       * mappings extraction
        */
-    extract(mappingsConfig)
-    extract(genericConfig)
+    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
 
-    def extract (config: Config) = {
+    extract(mappingsConfig,jobsRunning)
+    extract(genericConfig,jobsRunning)
+
+
+    def extract (config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]]) = {
       val configLoader = new ConfigLoader(config)
       val parallelProcesses = if(config.runJobsInParallel) config.parallelProcesses else 1
-      val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
+
       //Execute the extraction jobs one by one
       for (job <- configLoader.getExtractionJobs) {
         while(jobsRunning.size() >= parallelProcesses){
@@ -99,9 +102,10 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
         }
       }
 
-      while(jobsRunning.size() > 0) {
-        Thread.sleep(1000)
-      }
+
+    }
+    while(jobsRunning.size() > 0) {
+      Thread.sleep(1000)
     }
 
 
