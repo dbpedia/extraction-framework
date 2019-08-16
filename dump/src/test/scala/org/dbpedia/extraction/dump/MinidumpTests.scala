@@ -79,7 +79,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
       * mappings extraction
        */
     extract(mappingsConfig)
-    //extract(genericConfig)
+    extract(genericConfig)
 
     def extract (config: Config) = {
       val configLoader = new ConfigLoader(config)
