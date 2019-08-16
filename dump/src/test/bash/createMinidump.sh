@@ -3,7 +3,7 @@
 LANG="en fr"
 
 for l in ${LANG} ; do
-	TARGET="../resources/mini-"$l"wiki.xml"
+	TARGET="../resources/minidumps/"$l"/wiki.xml"
 	# copy header
 	cp head.xml "$TARGET"
     for u in `cat "uris-$l.lst"` ; do
