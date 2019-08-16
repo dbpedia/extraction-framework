@@ -17,8 +17,9 @@ v:RDF_IRI_Trigger a rdfs:Class;
 # TODO trigger does not seem to work
 trigger:wikipedia
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://en.wikipedia.org/wiki/" .
-
+   trigger:pattern "^http://en.wikipedia.org/wiki/" ;
+   rdfs:label "wikipedia"  .
+   
 <#wikipedia_IRIs> 
   a v:TestGenerator ;
   v:trigger trigger:wikipedia ;
@@ -62,6 +63,20 @@ trigger:dbpedia_ontology
    trigger:pattern "^http://dbpedia.org/ontology/" ;
    rdfs:label "DBpedia Ontology IRIs" ;
    rdfs:comment "http://dbpedia.org/ontology/" .
+   
+############### TODO Vocab triggers, can be automated
+trigger:wgs84
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://www.w3.org/2003/01/geo/wgs84_pos#" ;
+   rdfs:label "whs84 trigger" ;
+   rdfs:comment "http://www.w3.org/2003/01/geo/wgs84_pos#" .
+
+trigger:georss
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://www.georss.org/georss/" ;
+   rdfs:label "georss trigger" ;
+   rdfs:comment "http://www.georss.org/georss/" .
+
 
 trigger:w3_rdfs
    a v:RDF_IRI_Trigger ;
@@ -130,9 +145,10 @@ validator:dbpedia_external_properties
    a v:IRI_Validator ; 
    v:oneOf "http://www.w3.org/2000/01/rdf-schema#seeAlso" ;
    v:oneOf "http://xmlns.com/foaf/0.1/name" ;
-   v:oneOf "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" .
-   
-   
+   v:oneOf "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" ; 
+   v:oneOf "http://www.w3.org/2003/01/geo/wgs84_pos#long" ; 
+   v:oneOf "http://www.georss.org/georss/point" ; 
+   v:oneOf "hhttp://www.w3.org/2003/01/geo/wgs84_pos#lat" . 
  
 
 
@@ -158,12 +174,17 @@ validator:dbpedia_external_properties
    v:validator validator:dissallowed_chars ;
    v:validator validator:dbpedia_ontology .
    
+ 
+  
+   
 # no priority to implement this   
 <#dbpediaExternalProperties> 
    a v:TestGenerator ;
    v:trigger trigger:foaf ;
    v:trigger trigger:w3_rdf ;
    v:trigger trigger:w3_rdfs ;
+   v:trigger trigger:wgs84 ;
+   v:trigger trigger:georss ;
    v:validator validator:dbpedia_external_properties .
    
 <#wikidata_IRIs> 
