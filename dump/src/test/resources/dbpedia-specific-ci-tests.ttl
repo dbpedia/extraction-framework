@@ -14,9 +14,24 @@ v:RDF_IRI_Trigger a rdfs:Class;
 # Reusable Triggers, several triggers per TestCase 
 #########################
 
+# TODO trigger does not seem to work
 trigger:wikipedia
    a v:RDF_IRI_Trigger ;
    trigger:pattern "^http://en.wikipedia.org/wiki/" .
+
+<#wikipedia_IRIs> 
+  a v:TestGenerator ;
+  v:trigger trigger:wikipedia ;
+  # same as dbpedia
+  v:validator validator:dissallowed_chars ;
+  v:validator validator:dbpedia_resource_delims .
+  v:validator [
+		a v:IRI_Validator ;
+		v:doesNotContain "<" , ">", "\"" , " ", "{", "}", "|", "\\", "^" , "`" 
+		] .
+  
+   
+
 	
 trigger:generic_wikipedia_dbpedia_extraction 
    a v:RDF_IRI_Trigger ;
@@ -157,9 +172,4 @@ validator:dbpedia_external_properties
 		v:pattern "^http://www.wikidata.org/entity/Q[0-9]+$"
 		] .
   
-<#wikipedia_IRIs> 
-  a v:TestGenerator ;
-  v:trigger trigger:wikipedia ;
-  # same as dbpedia
-  v:validator validator:dissallowed_chars ;
-  v:validator validator:dbpedia_resource_delims .
+
