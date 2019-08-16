@@ -2,8 +2,6 @@ package org.dbpedia.validation
 
 import java.io.File
 
-import org.apache.commons.cli.CommandLineParser
-import org.apache.jena.riot.RDFDataMgr
 import org.apache.spark.sql.{SQLContext, SparkSession}
 import scopt.OptionParser
 
@@ -56,9 +54,7 @@ object ValidationLauncher {
 
         val sqlContext: SQLContext = sparkSession.sqlContext
 
-        val coverageResults = ValidationExecutor.testIris(config.pathToFlatTurtleFile, config.pathToTestCaseFile)(sqlContext)
-
-        println(coverageResults.toString)
+        val testReports = ValidationExecutor.testIris(config.pathToFlatTurtleFile, config.pathToTestCaseFile)(sqlContext)
 
       case _ => optionParser.showUsage()
     }

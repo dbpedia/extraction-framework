@@ -1,41 +1,57 @@
 package org.dbpedia.validation
 
-import java.text.SimpleDateFormat
-import java.util.Calendar
-
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.sql.SQLContext
-import org.slf4j.Logger
+import org.dbpedia.validation.TestSuiteImpl.TestSuite
+import org.dbpedia.validation.TriggerImpl.TriggerType
 
 object ValidationExecutor {
 
   def testIris(pathToFlatTurtleFile: String, pathToTestCases: String)
-              (implicit sqlContext: SQLContext): CoverageResult = {
+              (implicit sqlContext: SQLContext): Array[TestReport] = {
 
     import sqlContext.implicits._
 
-    val brdcstTestSuit: Broadcast[TestSuite] = sqlContext.sparkSession.sparkContext.broadcast(
-      TestSuiteFactory.loadTestSuite(pathToTestCases)
-    )
+    val testSuite = TestSuiteFactory.loadTestSuite(pathToTestCases)
+
+    val brdcstTestSuit: Broadcast[TestSuite] = sqlContext.sparkSession.sparkContext.broadcast(testSuite)
 
     val spoBasedDataset =
       sqlContext.read.textFile(pathToFlatTurtleFile)
         .repartition(Runtime.getRuntime.availableProcessors()*3)
         .filter(! _.startsWith("#")).map(prepareFaltTurtleLine)
 
-    val counts: IndexedSeq[ReduceScore] = (0 until 3).map( i =>
-      spoBasedDataset.map(_(i)).distinct().filter(_ != null).map(resource => testIri(resource, brdcstTestSuit,i)).rdd.
-        fold(ReduceScore(0,0,0))( (a,b) => ReduceScore(a.cntAll+b.cntAll,a.cntTrigger+b.cntTrigger,a.cntValid+b.cntValid))
-    )
+    val zero = {
+      TestReport(
+        0,
+        0,
+        Array.fill[Long](brdcstTestSuit.value.maxTriggerID + 1)(0),
+        Array.fill[Long](brdcstTestSuit.value.maxTestCaseID + 1)(0)
+      )
+    }
 
-    /*
-    Iris in s p o could be overlapping
-     */
-    CoverageResult(
-      EvalCounter(counts(0).cntAll, counts(0).cntTrigger, counts(0).cntValid),
-      EvalCounter(counts(1).cntAll, counts(1).cntTrigger, counts(1).cntValid),
-      EvalCounter(counts(2).cntAll, counts(2).cntTrigger, counts(2).cntValid)
-    )
+    val counts: IndexedSeq[TestReport] = {
+
+      (0 until 3).map(
+
+        column => {
+          spoBasedDataset.map(_ (column)).distinct().filter(_ != null).map(
+
+            nTriplePart => { validateNTriplePart(nTriplePart, brdcstTestSuit) }
+
+          ).rdd.fold(zero)( _+_ )
+        }
+      )
+    }
+
+    val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
+
+    Array.tabulate(counts.length){
+
+      i => formatTestReport(partLabels(i),counts(i),testSuite.triggerCollection,testSuite.testApproachCollection)
+    }
+
+    counts.toArray
   }
 
   /**
@@ -61,66 +77,48 @@ object ValidationExecutor {
     Array(s,p,o)
   }
 
-  def testIri(iriStr: String, brdTestSuite: Broadcast[TestSuite], part: Int): ReduceScore = {
+  def validateNTriplePart(nTriplePart: String, brdTestSuite: Broadcast[TestSuite]): TestReport = {
 
-    val testSuite =  brdTestSuite.value
-    var triggered, valid = false
+    var covered = false
 
-    testSuite.triggers.foreach( trigger => {
+    val testSuite = brdTestSuite.value
 
-      trigger.patterns.foreach( triggerPatternStr => {
+    val prevalence = Array.fill[Long](testSuite.maxTriggerID + 1)(0)
+    val succeded = Array.fill[Long](testSuite.maxTestCaseID + 1)(0)
 
-        val triggerPattern = s"$triggerPatternStr.*".r.pattern
+    //TODO get from part when filter is removed
+    val nTriplePartType = TriggerType.IRI
 
-        if ( triggerPattern.matcher(iriStr).matches ) {
+    testSuite.triggerCollection.filter(_.TYPE == nTriplePartType).foreach(
 
-          triggered = true
-          valid = true
+      trigger => {
 
-          trigger.validatorReferences.foreach( validatorReference => {
+        if( trigger.isTriggered(nTriplePart) ) {
 
-            // TODO: fix getOrElse workaround ! Implement TestCase
+          covered = true
 
-            val validatorIndex = testSuite.validatorReferencesToIndexMap.getOrElse(validatorReference,-1)
-            if ( validatorIndex == -1 ) println(s"Error $validatorReference")
-            val validator: IriValidatorDev = testSuite.validators(validatorIndex)
+          prevalence(trigger.ID) = 1
 
-            validator.patterns.foreach( validatorPatternStr => {
+          trigger.testCases.foreach(
 
-              val validatorPattern = validatorPatternStr.r.pattern
+            testCase => {
 
-              if ( ! validatorPattern.matcher(iriStr).matches ) valid = false
-            })
+              val success = testSuite.testApproachCollection(testCase.testAproachID).run(nTriplePart)
 
-            validator.oneOfVocabs.foreach( oneOfVocab => {
-
-              if( ! oneOfVocab.contains(iriStr) ) valid = false
-            })
-
-            // TODO optimize doesNotContains
-            // ^.*((XX)|(YY)|(ZZ)).*$
-            // val inner = validator.doesNotContains.map( x => s"(${x.replace("|","\\|")})").mkString("|")
-            // val pattern = s"^($inner)*$$"
-
-            Array.tabulate(validator.sizeDoesNotContains){ i =>
-
-              if ( iriStr.contains(validator.doesNotContains(i)) ) {
-
-                System.err.println(s"${new SimpleDateFormat("hh:mm:ss").format(Calendar.getInstance().getTime)} | ERROR | ${this.getClass.getSimpleName}testIri | $iriStr contains bad sequence ${validator.doesNotContains(i)}")
-                valid = false
-              }
+              if (success) succeded(testCase.ID) = 1
             }
-          })
+          )
         }
-      })
-    })
+      }
+    )
 
+    if( ! covered ) System.err.println(s"UNCOVERED $nTriplePart")
 
-    if ( ! triggered ) {
-      val parts = Array[String]("subjects","predicates","objects")
-      System.err.println(s"${new SimpleDateFormat("hh:mm:ss").format(Calendar.getInstance().getTime)} | WARNING | ${this.getClass.getSimpleName}testIri | $iriStr is uncovered in ${parts(part)}")
-    }
-
-    ReduceScore(1,if(triggered) 1 else 0,if(valid) 1 else 0)
+    TestReport(
+      1,
+      {if (covered) 1 else 0},
+      prevalence,
+      succeded
+    )
   }
 }

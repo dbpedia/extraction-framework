@@ -13,21 +13,11 @@ class TestSuiteTests extends FunSuite with BeforeAndAfterAll {
 
   val testModel: Model = ModelFactory.createDefaultModel()
 
-  override def beforeAll(configMap: ConfigMap): Unit = {
-
-
-    RDFDataMgr.read(testModel, new FileInputStream(testModelFile),RDFLanguages.TURTLE)
-  }
-
-  test("Load_Validator_Test") {
-
-    TestSuiteFactory.loadIriValidatorsDev(testModel).foreach( validator => {
-      println(validator.id)
-      println(validator.doesNotContains)
-    })
-
-    //testModel.write(System.out,"Turtle")
-  }
+//  override def beforeAll(configMap: ConfigMap): Unit = {
+//
+//
+//    RDFDataMgr.read(testModel, new FileInputStream(testModelFile),RDFLanguages.TURTLE)
+//  }
 
   test("ValidationExecutor") {
 
@@ -45,5 +35,14 @@ class TestSuiteTests extends FunSuite with BeforeAndAfterAll {
 
 
 //    ValidationExecutor.testIris(testModel,)(sqlContext)
+  }
+
+  test("Array") {
+
+    val array = Array.fill[Long](10)(0)
+
+    array(0) = 1
+
+    array.foreach(println(_))
   }
 }

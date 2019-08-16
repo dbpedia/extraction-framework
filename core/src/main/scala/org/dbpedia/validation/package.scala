@@ -1,72 +1,14 @@
 package org.dbpedia
 
-import scala.collection.immutable.{HashMap, HashSet}
-import scala.collection.mutable
+import org.dbpedia.validation.TestCaseImpl.TestApproach
+import org.dbpedia.validation.TriggerImpl.Trigger
+
+import scala.collection.mutable.ArrayBuffer
 
 package object validation {
 
-  case class IriValidatorDev( id: ValidatorReference,
-                              comment: ValidatorComment,
-                              patterns: Array[String],
-                              oneOfVocabs: Array[HashSet[String]],
-                              doesNotContains: Array[String],
-                              sizePatterns: Int, sizeOneOfVocabs: Int, sizeDoesNotContains: Int
-                            )
-
-  /*-----------------------------*/
-
-  case class EvalCounter(all: Long, trg: Long, vld: Long) {
-
-    def testCoverage: Float = if ( all > 0 ) trg.toFloat / all.toFloat else 0
-
-    def proof: Float = if ( trg > 0 ) vld.toFloat / trg.toFloat else 0
-
-    override def toString: String = s"all: $all trg: $trg vld: $vld"
-  }
-
-  case class CoverageResult(subjects: EvalCounter, predicates: EvalCounter, objects: EvalCounter) {
-
-    def proof(): Float = {
-      if ( 0 < (subjects.proof + predicates.proof + objects.proof ) ) {
-        (subjects.proof + predicates.proof + objects.proof ) / 3f
-      } else {
-        0
-      }
-    }
-
-    def testCoverage: Float = {
-
-      if ( 0 < (subjects.testCoverage + predicates.testCoverage + objects.testCoverage ) ) {
-        (subjects.testCoverage + predicates.testCoverage + objects.testCoverage ) / 3f
-      } else {
-        0
-      }
-    }
-
-    override def toString: String = {
-
-      s"""
-         |Cov_s: ${subjects.testCoverage} ( ${subjects.trg} triggered of ${subjects.all} total ), Success_rate_s: ${subjects.proof} ( ${subjects.vld} )
-         |Cov_p: ${predicates.testCoverage} ( ${predicates.trg} triggered of ${predicates.all} total ), Success_rate_p: ${predicates.proof} ( ${predicates.vld} )
-         |Cov_o: ${objects.testCoverage} ( ${objects.trg} triggered of ${objects.all} total ), Success_rate_o: ${objects.proof} ( ${objects.vld} )
-         |Cov:   $testCoverage
-         """.stripMargin
-    }
-  }
-
-  case class TestSuite(triggers: Array[IriTrigger],
-                       validators: Array[IriValidatorDev], validatorReferencesToIndexMap: Map[ValidatorReference,Int])
-
-  case class IriTrigger(id: TriggerReference, label: String, comment: String,
-                        patterns: Array[String] /*TODO: or REGEX*/, validatorReferences: Array[ValidatorReference])
-
-  case class IriValidator(id: ValidatorReference, hasScheme: String, hasQuery: Boolean,
-                          hasFragment: Boolean, patterns: Array[String]  /*TODO: or REGEX*/,
-                          oneOf: HashSet[String])
-
-  type ValidatorReference = String
-  type ValidatorComment = String
-  type TriggerReference = String
+  type TriggerIRI = String
+  type ValidatorIRI = String
 
   private val prefixVocab: String = "http://dev.vocab.org/"
 
@@ -76,16 +18,6 @@ package object validation {
        |PREFIX validator: <http://dev.vocab.org/validator/>
        |PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
        |PREFIX dataid-mt: <http://dataid.dbpedia.org/ns/mt#>
-     """.stripMargin
-
-  def iriTestCaseQueryStr(): String =
-    s"""$prefixDefinition
-       |
-       |SELECT ?testCase
-       |       (GROUP_CONCAT(DISTINCT ?validator; SEPARATOR="\t")
-       |       (GROUP_CONCAT(DISTINCT ?validator; SEPARATOR="\t") {
-       |  ?testCase
-       |}
      """.stripMargin
 
   def iriTriggerQueryStr(): String =
@@ -102,24 +34,6 @@ package object validation {
      """.stripMargin
 
   def iriValidatorQueryStr(): String =
-    s"""$prefixDefinition
-       |
-       |SELECT ?validator ?hasScheme ?hasQuery ?hasFragment ?patternRegex ?oneOfVocab
-       |  (GROUP_CONCAT(DISTINCT ?doesNotContainCharacter; SEPARATOR="\t") AS ?doesNotContainCharacters)
-       |{
-       |  ?validator
-       |     a                          v:IRI_Validator ;
-       |     v:hasScheme                ?hasScheme ;
-       |     v:hasQuery                 ?hasQuery ;
-       |     v:hasFragment              ?hasFragment .
-       |     Optional{ ?validator v:doesNotContainCharacters ?doesNotContainCharacter . }
-       |     Optional{ ?validator v:patternRegex ?patternRegex . }
-       |     Optional{ ?validator v:oneOfVocab ?oneOfVocab . }
-       |
-       |} GROUP BY ?validator ?hasScheme ?hasQuery ?hasFragment ?patternRegex ?oneOfVocab
-     """.stripMargin
-
-  def iriValidatorDevQueryStr(): String =
     s"""$prefixDefinition
        |
        |SELECT Distinct ?validator ?comment
@@ -157,25 +71,64 @@ package object validation {
       |}"""
      .stripMargin
 
-  /*------------------------------------------------------------------------------------------------------- TODO clean*/
+  case class TestReport(cnt: Long, coverage: Long, prevalence: Array[Long], succeded: Array[Long] ) {
 
-  trait RdfTrigger {
+    def +(testReport: TestReport): TestReport = {
 
-    object RdfTriggerType extends Enumeration {
-      def RdfTriggerType: Value = Value
-      val RdfIriTrigger, RdfLiteralTrigger, RdfBlankNodeTrigger = Value
+      TestReport(
+        cnt + testReport.cnt,
+        coverage + testReport.coverage,
+        prevalence.zip(testReport.prevalence).map { case (x, y) => x + y },
+        succeded.zip(testReport.succeded).map { case (x, y) => x + y }
+      )
     }
-
-    def Type : RdfTriggerType.Value
   }
 
-  case class RdfIriTrigger(iri: String, label: String, comment: String,
-                           patterns: List[String] /*TODO: or REGEX*/) extends RdfTrigger {
-    override def Type: RdfTriggerType.Value = RdfTriggerType.RdfIriTrigger
-  }
+  def formatTestReport( label : String,
+                        testReport: TestReport,
+                        triggerCollection: Array[Trigger],
+                        testApproachCollection: Array[TestApproach] ) : Unit = {
 
-  case class RdfIriValidator(iri: String, hasScheme: String, hasQuery: Boolean,
-                             hasFragment: Boolean, notContainsChars: List[Char] /*TODO: or REGEX*/)
+    println()
+    print(s"$label")
+    print(s" -- Coverage: ${testReport.coverage.toFloat/testReport.cnt.toFloat} " +
+      s"(${testReport.coverage} triggered of ${testReport.cnt} total)")
+
+    val errorRatesBuffer = ArrayBuffer[Float]()
+    val testCaseSerializationBuffer = ArrayBuffer[Seq[String]]()
+
+    testCaseSerializationBuffer.append(
+      Seq("Trigger","Test Approach","Prevalence", "Errors", "Error Rate")
+    )
+
+    triggerCollection.foreach( trigger => {
+
+      trigger.testCases.foreach( testCase => {
+
+        val prevalence = testReport.prevalence(trigger.ID)
+        val success = testReport.succeded(testCase.ID)
+
+        val errorRate = if ( prevalence == 0 ) 0 else 1-success.toFloat/prevalence.toFloat
+        errorRatesBuffer.append(errorRate)
+
+        testCaseSerializationBuffer.append(
+          Seq(
+            " "+trigger.iri+" ",
+            " "+testApproachCollection(testCase.testAproachID).toString+" ",
+            prevalence.toString,
+            (prevalence-success).toString,
+            errorRate.toString
+          )
+        )
+      })
+    })
+
+    val errorRates = errorRatesBuffer.toArray
+
+    println(s" -- Avg. Error Rate ${errorRates.sum/errorRates.length}")
+
+    println(Tabulator.format(testCaseSerializationBuffer))
+  }
 
   object Tabulator {
 
