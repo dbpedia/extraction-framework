@@ -5,6 +5,7 @@ import java.util.Calendar
 
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.sql.SQLContext
+import org.slf4j.Logger
 
 object ValidationExecutor {
 
@@ -23,7 +24,7 @@ object ValidationExecutor {
         .filter(! _.startsWith("#")).map(prepareFaltTurtleLine)
 
     val counts: IndexedSeq[ReduceScore] = (0 until 3).map( i =>
-      spoBasedDataset.map(_(i)).distinct().filter(_ != null).map(resource => testIri(resource, brdcstTestSuit)).rdd.
+      spoBasedDataset.map(_(i)).distinct().filter(_ != null).map(resource => testIri(resource, brdcstTestSuit,i)).rdd.
         fold(ReduceScore(0,0,0))( (a,b) => ReduceScore(a.cntAll+b.cntAll,a.cntTrigger+b.cntTrigger,a.cntValid+b.cntValid))
     )
 
@@ -60,7 +61,7 @@ object ValidationExecutor {
     Array(s,p,o)
   }
 
-  def testIri(iriStr: String, brdTestSuite: Broadcast[TestSuite]): ReduceScore = {
+  def testIri(iriStr: String, brdTestSuite: Broadcast[TestSuite], part: Int): ReduceScore = {
 
     val testSuite =  brdTestSuite.value
     var triggered, valid = false
@@ -114,7 +115,12 @@ object ValidationExecutor {
       })
     })
 
+
+    if ( ! triggered ) {
+      val parts = Array[String]("subjects","predicates","objects")
+      System.err.println(s"${new SimpleDateFormat("hh:mm:ss").format(Calendar.getInstance().getTime)} | WARNING | ${this.getClass.getSimpleName}testIri | $iriStr is uncovered in ${parts(part)}")
+    }
+
     ReduceScore(1,if(triggered) 1 else 0,if(valid) 1 else 0)
   }
-
 }
