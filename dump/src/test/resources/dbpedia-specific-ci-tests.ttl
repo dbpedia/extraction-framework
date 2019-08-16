@@ -24,7 +24,7 @@ trigger:wikipedia
   v:trigger trigger:wikipedia ;
   # same as dbpedia
   v:validator validator:dissallowed_chars ;
-  v:validator validator:dbpedia_resource_delims .
+  v:validator validator:dbpedia_resource_delims ;
   v:validator [
 		a v:IRI_Validator ;
 		v:doesNotContain "<" , ">", "\"" , " ", "{", "}", "|", "\\", "^" , "`" 
@@ -87,6 +87,8 @@ trigger:foaf_name
 # Reusable Validators, several Validators per TestCase 
 #########################
 
+# todo check https://sourceforge.net/p/dbpedia/mailman/message/28982391/
+# http://en.wikipedia.org/wiki/Wikipedia:Naming_conventions_(technical_restrictions)#Forbidden_characters
 validator:dissallowed_chars
 	a v:IRI_Validator ;
    rdfs:comment """Dissallowed in URIs, cf. https://www.ietf.org/rfc/rfc3987.txt: 	Systems accepting IRIs MAY also deal with the printable characters in    US-ASCII that are not allowed in URIs, namely "<", ">", '"', space, "{", "}", "|", "\", "^", and "`", in step 2 above.  If these characters are found but are not converted, then the conversion SHOULD fail.  Please note that the number sign ("#"), the percent sign ("%"), and the square bracket characters ("[", "]") are not part of the above list and MUST NOT be converted.  """ ;

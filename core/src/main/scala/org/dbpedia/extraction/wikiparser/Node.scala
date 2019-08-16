@@ -187,10 +187,13 @@ private class UriGenerator
         if(name != "")
         {
             var text = name
-
+            
+            
+			//TODO CENTRALIZE STRING CLEANING
             //Normalize text
             text = WikiUtil.removeWikiEmphasis(text)
             text = text.replace("&nbsp;", " ")//TODO decode all html entities here
+            text = text.replace('"', ' ')
             text = text.replace('(', ' ')
             text = text.replace(')', ' ')
             text = text.replace('\n', ' ')
@@ -203,6 +206,8 @@ private class UriGenerator
             if(text.length > 50) text = text.substring(0, 50)
             text = WikiUtil.wikiEncode(text)
 
+			
+			
             //Test if the base URI ends with a prefix of text
             var i = Math.max(baseUri.lastIndexOf('_'), baseUri.lastIndexOf('/')) + 1
             var done = false
