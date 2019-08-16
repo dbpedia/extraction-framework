@@ -28,7 +28,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   //Workaround to get resource files in Scala 2.11
   val classLoader =   getClass.getClassLoader
   val mappingsConfig = new Config(classLoader.getResource("mappings.extraction.minidump.properties").getFile)
-//  val genericConfig = new Config(classLoader.getResource("generic.extraction.minidump.properties").getFile)
+  val genericConfig = new Config(classLoader.getResource("generic-spark.extraction.minidump.properties").getFile)
   val minidumpDir = new File(classLoader.getResource("minidumps").getFile)
 
 
@@ -78,25 +78,34 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     /**
       * mappings extraction
        */
+    extract(mappingsConfig)
+    //extract(genericConfig)
 
-    val configLoader = new ConfigLoader(mappingsConfig)
-    val parallelProcesses = if(mappingsConfig.runJobsInParallel) mappingsConfig.parallelProcesses else 1
-    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
-    //Execute the extraction jobs one by one
-    for (job <- configLoader.getExtractionJobs) {
-      while(jobsRunning.size() >= parallelProcesses)
+    def extract (config: Config) = {
+      val configLoader = new ConfigLoader(config)
+      val parallelProcesses = if(config.runJobsInParallel) config.parallelProcesses else 1
+      val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
+      //Execute the extraction jobs one by one
+      for (job <- configLoader.getExtractionJobs) {
+        while(jobsRunning.size() >= parallelProcesses){
+          Thread.sleep(1000)
+        }
+
+        val future = Future{job.run()}
+        jobsRunning.add(future)
+        future.onComplete {
+          case Failure(f) => throw f
+          case Success(_) => jobsRunning.remove(future)
+        }
+      }
+
+      while(jobsRunning.size() > 0) {
         Thread.sleep(1000)
-
-      val future = Future{job.run()}
-      jobsRunning.add(future)
-      future.onComplete {
-        case Failure(f) => throw f
-        case Success(_) => jobsRunning.remove(future)
       }
     }
 
-    while(jobsRunning.size() > 0)
-      Thread.sleep(1000)
+
+
   }
 
 
