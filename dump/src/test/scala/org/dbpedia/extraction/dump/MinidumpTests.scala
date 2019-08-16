@@ -90,21 +90,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   }
 
 
-  test("RDFUnit SHACL"){
-    val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
-    println(filesToBeValidated)
 
-    val dbpedia_ont: Model = ModelFactory.createDefaultModel()
-    RDFDataMgr.read(dbpedia_ont, new FileInputStream(dbpedia_ontologyFile),RDFLanguages.RDFXML)
-
-    val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
-    RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(custom_SHACL_testFile),RDFLanguages.TURTLE)
-
-    assert(dbpedia_ont.size()>0)
-    assert(custom_SHACL_tests.size()>0)
-
-
-  }
 
   test("IRI Coverage Tests") {
 
@@ -132,6 +118,22 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     assert(eval.subjects.proof == 1, "subjects not valid")
     assert(eval.predicates.proof == 1, "predicates not valid")
     assert(eval.objects.proof == 1, "objects not valid")
+  }
+
+  test("RDFUnit SHACL"){
+    val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
+    println("FILES, FILES, FILES\n"+filesToBeValidated)
+
+    val dbpedia_ont: Model = ModelFactory.createDefaultModel()
+    RDFDataMgr.read(dbpedia_ont, new FileInputStream(dbpedia_ontologyFile),RDFLanguages.RDFXML)
+
+    val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
+    RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(custom_SHACL_testFile),RDFLanguages.TURTLE)
+
+    assert(dbpedia_ont.size()>0,"size not 0")
+    assert(custom_SHACL_tests.size()>0, "size not 0")
+
+
   }
 
   override def afterAll() {
