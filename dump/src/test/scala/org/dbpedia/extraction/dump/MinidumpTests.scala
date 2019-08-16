@@ -135,7 +135,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
       pathToTestCases = ciTestFile
 
     )(sqlContext)
-    
+
     //TODO asserts
 
   }
