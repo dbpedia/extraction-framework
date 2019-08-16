@@ -27,22 +27,24 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
   //Workaround to get resource files in Scala 2.11
   val classLoader =   getClass.getClassLoader
-  val config = new Config(classLoader.getResource("extraction.minidump.properties").getFile)
+  val mappingsConfig = new Config(classLoader.getResource("mappings.extraction.minidump.properties").getFile)
+//  val genericConfig = new Config(classLoader.getResource("generic.extraction.minidump.properties").getFile)
+  val minidumpDir = new File(classLoader.getResource("minidumps").getFile)
+
+
+
   val minidumpURL = classLoader.getResource("mini-enwiki.xml.bz2")
   val ciTestFile = classLoader.getResource("dbpedia-specific-ci-tests.ttl").getFile
-  val custom_SHACL_testFile = classLoader.getResource("custom-shacl-tests.ttl").getFile
   val ciTestModel: Model = ModelFactory.createDefaultModel()
 
+
+  /**
+    * NEEDED for SHACL
+    */
+  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
   val dbpedia_ontologyFile = classLoader.getResource("dbpedia.owl").getFile
+  val custom_SHACL_testFile = classLoader.getResource("custom-shacl-tests.ttl").getFile
 
-  val wikiMasque= "enwiki"
-  val minidumpwikiDirectory = new File(config.dumpDir, s"$wikiMasque/$date/")
-  val dumpDirectory = new File(config.dumpDir, s"$wikiMasque/$date/")
-  //val testModelFile: File = new File("../dump/src/test/resources/new_release_based_ci_tests_draft.ttl")
-
-
-  //val extractionConfig = "extraction.minidump.properties"
-  //val pageArticlesMinidump = "mini-enwiki.xml.bz2"
 
   override def beforeAll() {
 
@@ -56,21 +58,29 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
 
 
-
     println("Extracting Minidump")
-    // create directories
-    minidumpwikiDirectory.mkdirs()
+
     // copy dumps
-    FileUtils.copyFile(
-      new File(minidumpURL.getFile),
-      new File(minidumpwikiDirectory, s"$wikiMasque-$date-pages-articles-multistream.xml.bz2")
-    )
+
+    minidumpDir.listFiles().foreach(f=>{
+      val wikiMasque =  f.getName+"wiki"
+      val targetDir =     new File(mappingsConfig.dumpDir, s"${wikiMasque}/$date/")
+      // create directories
+      targetDir.mkdirs()
+      FileUtils.copyFile(
+        new File(f+"/wiki.xml.bz2"),
+        new File(targetDir, s"${wikiMasque}-$date-pages-articles-multistream.xml.bz2")
+      )
+  })
+
+
+
     /**
-      * extraction
+      * mappings extraction
        */
 
-    val configLoader = new ConfigLoader(config)
-    val parallelProcesses = if(config.runJobsInParallel) config.parallelProcesses else 1
+    val configLoader = new ConfigLoader(mappingsConfig)
+    val parallelProcesses = if(mappingsConfig.runJobsInParallel) mappingsConfig.parallelProcesses else 1
     val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
     //Execute the extraction jobs one by one
     for (job <- configLoader.getExtractionJobs) {
@@ -108,7 +118,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     val sqlContext: SQLContext = sparkSession.sqlContext
 
     val eval = ValidationExecutor.testIris(
-      pathToFlatTurtleFile =  s"${dumpDirectory.getAbsolutePath}/*.ttl.bz2",
+      pathToFlatTurtleFile =  s"${mappingsConfig.dumpDir.getAbsolutePath}/*/$date/*.ttl.bz2",
       pathToTestCases = ciTestFile
 
     )(sqlContext)
