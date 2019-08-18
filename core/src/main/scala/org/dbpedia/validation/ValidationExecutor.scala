@@ -10,6 +10,8 @@ object ValidationExecutor {
   def testIris(pathToFlatTurtleFile: String, pathToTestCases: String)
               (implicit sqlContext: SQLContext): Array[TestReport] = {
 
+    val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
+
     import sqlContext.implicits._
 
     val testSuite = TestSuiteFactory.loadTestSuite(pathToTestCases)
@@ -37,14 +39,12 @@ object ValidationExecutor {
         column => {
           spoBasedDataset.map(_ (column)).distinct().filter(_ != null).map(
 
-            nTriplePart => { validateNTriplePart(nTriplePart, brdcstTestSuit) }
+            nTriplePart => { validateNTriplePart(nTriplePart, brdcstTestSuit, partLabels(column)) }
 
           ).rdd.fold(zero)( _+_ )
         }
       )
     }
-
-    val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
 
     Array.tabulate(counts.length){
 
@@ -77,7 +77,7 @@ object ValidationExecutor {
     Array(s,p,o)
   }
 
-  def validateNTriplePart(nTriplePart: String, brdTestSuite: Broadcast[TestSuite]): TestReport = {
+  def validateNTriplePart(nTriplePart: String, brdTestSuite: Broadcast[TestSuite], part: String): TestReport = {
 
     var covered = false
 
@@ -112,7 +112,7 @@ object ValidationExecutor {
       }
     )
 
-    if( ! covered ) System.err.println(s"UNCOVERED $nTriplePart")
+    if( ! covered ) System.err.println(part+" "+s"UNCOVERED $nTriplePart")
 
     TestReport(
       1,

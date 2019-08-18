@@ -103,6 +103,19 @@ package object validation {
 
     triggerCollection.foreach( trigger => {
 
+      if ( trigger.testCases.length == 0 ) {
+
+        testCaseSerializationBuffer.append(
+          Seq(
+            " "+trigger.iri+" ",
+            " missing validator ",
+            testReport.prevalence(trigger.ID).toString,
+            testReport.prevalence(trigger.ID).toString,
+            "0.0"
+          )
+        )
+      }
+
       trigger.testCases.foreach( testCase => {
 
         val prevalence = testReport.prevalence(trigger.ID)
