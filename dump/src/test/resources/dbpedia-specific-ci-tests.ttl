@@ -30,10 +30,7 @@ trigger:wikipedia
 		a v:IRI_Validator ;
 		v:doesNotContain "<" , ">", "\"" , " ", "{", "}", "|", "\\", "^" , "`" 
 		] .
-  
-   
 
-	
 trigger:generic_wikipedia_dbpedia_extraction 
    a v:RDF_IRI_Trigger ;
    trigger:pattern "^http://(ga\\.|af\\.|als\\.|am\\.|an\\.|ar\\.|arz\\.|ast\\.|az\\.|azb\\.|ba\\.|bar\\.|batsmg\\.|be\\.|bg\\.|bn\\.|bpy\\.|br\\.|bs\\.|bug\\.|ca\\.|cdo\\.|ce\\.|ceb\\.|ckb\\.|cs\\.|cv\\.|cy\\.|da\\.|de\\.|el\\.|eml\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fo\\.|fr\\.|fy\\.|gd\\.|gl\\.|gu\\.|he\\.|hi\\.|hr\\.|hsb\\.|ht\\.|hu\\.|hy\\.|ia\\.|id\\.|ilo\\.|io\\.|is\\.|it\\.|ja\\.|jv\\.|ka\\.|kk\\.|kn\\.|ko\\.|ku\\.|ky\\.|la\\.|lb\\.|li\\.|lmo\\.|lt\\.|lv\\.|mai\\.|mg\\.|mhr\\.|min\\.|mk\\.|ml\\.|mn\\.|mr\\.|mrj\\.|ms\\.|my\\.|mzn\\.|nan\\.|nap\\.|nds\\.|ne\\.|new\\.|nl\\.|nn\\.|no\\.|oc\\.|or\\.|os\\.|pa\\.|pl\\.|pms\\.|pnb\\.|pt\\.|qu\\.|ro\\.|ru\\.|sa\\.|sah\\.|scn\\.|sco\\.|sd\\.|sh\\.|si\\.|simple\\.|sk\\.|sl\\.|sq\\.|sr\\.|su\\.|sv\\.|sw\\.|ta\\.|te\\.|tg\\.|th\\.|tl\\.|tr\\.|tt\\.|uk\\.|ur\\.|uz\\.|vec\\.|vi\\.|vo\\.|wa\\.|war\\.|wuu\\.|xmf\\.|yi\\.|yo\\.|yue\\.|zh\\.)?dbpedia.org/resource/" ;
@@ -173,10 +170,16 @@ validator:dbpedia_external_properties
    v:trigger trigger:dbpedia_ontology ;
    v:validator validator:dissallowed_chars ;
    v:validator validator:dbpedia_ontology .
-   
- 
-  
-   
+
+   <#dbpediaGenericProperty>
+     a v:TestGenerator ;
+     v:trigger [
+       a v:RDF_IRI_Trigger ;
+       rdfs:label "DBpedia Generic IRIs" ;
+       trigger:pattern "^http://dbpedia.org/property/"
+     ] .
+     # TODO validator
+
 # no priority to implement this   
 <#dbpediaExternalProperties> 
    a v:TestGenerator ;
@@ -194,5 +197,3 @@ validator:dbpedia_external_properties
 		a v:IRI_Validator ;
 		v:pattern "^http://www.wikidata.org/entity/Q[0-9]+$"
 		] .
-  
-

@@ -7,28 +7,28 @@ import org.dbpedia.validation.TriggerImpl.TriggerType
 
 object ValidationExecutor {
 
-  def testIris(pathToFlatTurtleFile: String, pathToTestCases: String)
+  def testIris(pathToFlatTurtleFile: String, testModelPaths: Array[String])
               (implicit sqlContext: SQLContext): Array[TestReport] = {
 
     val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
 
     import sqlContext.implicits._
 
-    val testSuite = TestSuiteFactory.loadTestSuite(pathToTestCases)
+    val testSuite = TestSuiteFactory.loadTestSuite(testModelPaths)
 
     val brdcstTestSuit: Broadcast[TestSuite] = sqlContext.sparkSession.sparkContext.broadcast(testSuite)
 
     val spoBasedDataset =
       sqlContext.read.textFile(pathToFlatTurtleFile)
         .repartition(Runtime.getRuntime.availableProcessors()*3)
-        .filter(! _.startsWith("#")).map(prepareFaltTurtleLine)
+        .filter(! _.startsWith("#")).filter( ! _.trim.equals("") ).map(prepareFaltTurtleLine)
 
     val zero = {
       TestReport(
-        0,
-        0,
-        Array.fill[Long](brdcstTestSuit.value.maxTriggerID + 1)(0),
-        Array.fill[Long](brdcstTestSuit.value.maxTestCaseID + 1)(0)
+        cnt = 0,
+        coverage = 0,
+        prevalence = Array.fill[Long](brdcstTestSuit.value.maxTriggerID + 1)(0),
+        succeded = Array.fill[Long](brdcstTestSuit.value.maxTestCaseID + 1)(0)
       )
     }
 
@@ -69,6 +69,7 @@ object ValidationExecutor {
       if (spo(0).startsWith("<")) s = spo(0).substring(1, spo(0).length - 1)
       if (spo(1).startsWith("<")) p = spo(1).substring(1, spo(1).length - 1)
       if (spo(2).startsWith("<")) o = spo(2).substring(1, spo(2).length - 3)
+      else if (spo(2).startsWith("\"") ) o = spo(2).substring(0,spo(2).length -2)
     }
     catch {
       case ae: ArrayIndexOutOfBoundsException => println(line)
@@ -86,9 +87,13 @@ object ValidationExecutor {
     val prevalence = Array.fill[Long](testSuite.maxTriggerID + 1)(0)
     val succeded = Array.fill[Long](testSuite.maxTestCaseID + 1)(0)
 
-    // TODO get from part when filter is removed
-    val nTriplePartType = TriggerType.IRI
-    // TODO and then case switch
+
+    val nTriplePartType = {
+
+      if ( nTriplePart.startsWith("\"") ) TriggerType.LITERAL
+      else TriggerType.IRI
+    }
+
 
     testSuite.triggerCollection.filter(_.TYPE == nTriplePartType).foreach(
 
@@ -96,7 +101,7 @@ object ValidationExecutor {
 
         if( trigger.isTriggered(nTriplePart) ) {
 
-          if ( trigger.label == "__GENERIC_IRI__" ) covered = true
+          if ( trigger.iri != "__GENERIC_IRI__" ) covered = true
 
           prevalence(trigger.ID) = 1
 
@@ -113,13 +118,11 @@ object ValidationExecutor {
       }
     )
 
-    if( ! covered ) System.err.println(part+" "+s"UNCOVERED $nTriplePart")
+    if( ! covered && nTriplePartType.equals(TriggerType.IRI) ) System.err.println(part+" "+s"UNCOVERED $nTriplePart")
 
     TestReport(
-      1,
-      {if (covered) 1 else 0},
-      prevalence,
-      succeded
+      cnt = 1, coverage = {if (covered) 1 else 0},
+      prevalence, succeded
     )
   }
 }

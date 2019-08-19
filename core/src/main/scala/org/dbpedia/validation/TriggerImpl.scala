@@ -1,6 +1,7 @@
 package org.dbpedia.validation
 
 import org.dbpedia.validation.TestCaseImpl._
+import org.dbpedia.validation.TriggerImpl.TriggerType
 
 object TriggerImpl {
 
@@ -45,12 +46,32 @@ object TriggerImpl {
     }
   }
 
-  case class LiteralTrigger(ID: TriggerID, testCases: Array[TestCase],
+  case class LiteralTrigger(ID: TriggerID, datatype: String, testCases: Array[TestCase],
                             iri: String, label: String, comment: String) extends Trigger {
+
+//    private val patter = s"\^\^<${datatype.replaceAll("/","\\/").replaceAll(".","\\.")}>$$".r.pattern
+
+    private val matchPart = s"^^<$datatype>"
 
     override val TYPE: TriggerType.Value = TriggerType.LITERAL
 
-    override def isTriggered(nTriplePart: String): Boolean = {false}
+    override def isTriggered(nTriplePart: String): Boolean = {
+
+      nTriplePart.endsWith(matchPart)
+    }
+  }
+
+  case class DefaultLiteralTrigger(ID: TriggerID, testCases: Array[TestCase],
+                                   iri: String, label: String, comment: String) extends Trigger {
+
+    val pattern = "^\".*((\"@[a-zA-Z]*)|(\"))$".r.pattern
+
+    override val TYPE: TriggerType.Value = TriggerType.LITERAL
+
+    override def isTriggered(nTriplePart: String): Boolean = {
+
+      pattern.matcher(nTriplePart).matches()
+    }
   }
 
   case class BlankNodeTrigger(ID: TriggerID, testCases: Array[TestCase],

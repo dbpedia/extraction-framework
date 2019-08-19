@@ -8,7 +8,7 @@ import scopt.OptionParser
 case class ReduceScore(cntAll: Long, cntTrigger: Long, cntValid: Long)
 case class SPO(s: String, p: String, o: String)
 
-case class ValidationConfig(pathToFlatTurtleFile: String= null,pathToTestCaseFile: String= null)
+case class ValidationConfig(pathToFlatTurtleFile: String = null,pathToTestCaseFile: Seq[String] = null)
 
 /**
   * Basic Usage: 
@@ -29,7 +29,7 @@ object ValidationLauncher {
       arg[String]("<flat-turtle-files>").required().maxOccurs(1).action((s, p) => p.copy(pathToFlatTurtleFile = s))
         .text("Any un/compressed flatTurtle/NT-Triples file. Wild card possible (e.g dir/*.ttl.bz2)")
 
-      opt[String]('t', "testCase").required().maxOccurs(1).action((s, p) =>  p.copy(pathToTestCaseFile = s))
+      opt[Seq[String]]('t', "testModel").required().maxOccurs(1).action((s, p) =>  p.copy(pathToTestCaseFile = s))
         .text("Path to rdf test case file")
 
     }
@@ -54,7 +54,7 @@ object ValidationLauncher {
 
         val sqlContext: SQLContext = sparkSession.sqlContext
 
-        val testReports = ValidationExecutor.testIris(config.pathToFlatTurtleFile, config.pathToTestCaseFile)(sqlContext)
+        val testReports = ValidationExecutor.testIris(config.pathToFlatTurtleFile, config.pathToTestCaseFile.toArray)(sqlContext)
 
       case _ => optionParser.showUsage()
     }

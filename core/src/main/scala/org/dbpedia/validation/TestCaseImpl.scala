@@ -2,6 +2,7 @@ package org.dbpedia.validation
 import java.util.regex.Pattern
 
 import org.apache.jena.riot.system.IRIResolver
+import org.dbpedia.validation.TestCaseImpl.TestApproachType
 import org.dbpedia.validation.TriggerImpl.TriggerID
 
 import scala.collection.immutable.HashSet
@@ -12,9 +13,10 @@ object TestCaseImpl {
 
   case class TestCase(ID: TestCaseID, triggerID: TriggerID, testAproachID: TestApproachID)
 
+  // TODO not necessary
   object TestApproachType extends Enumeration {
 
-    val PATTERN_BASED, VOCAB_BASED, PART_BASED, GENERIC = Value
+    val PATTERN_BASED, VOCAB_BASED, PART_BASED, GENERIC, DATATYPE_LITERAL = Value
   }
 
   type TestApproachID = Int
@@ -84,6 +86,28 @@ object TestCaseImpl {
       ! IRIResolver.checkIRI(nTriplePart)
     }
 
-    override def info(): String = "parsed successfully"
+    override def info(): String = "parsed successfully ( excluded from avg. error rate )"
+  }
+
+  case class DatatypeLiteralTestApproach(ID: TestApproachID, patternString: String) extends TestApproach {
+
+    private val pattern = patternString.r.pattern
+
+    override val METHOD_TYPE: TestApproachType.Value = TestApproachType.DATATYPE_LITERAL
+
+    /**
+      * Run TestCase against a NTriplePart ( one of {s,p,o} )
+      *
+      * @param nTriplePart part of an NTripleRow { row.trim.split(" ",3) }
+      * @return true if test successful
+      */
+    override def run(nTriplePart: String): Boolean = {
+
+      val lexicalForm = nTriplePart.trim.split("\"").dropRight(1).drop(1).mkString("")
+
+      pattern.matcher(lexicalForm).matches()
+    }
+
+    override def info(): String = s"matching $patternString"
   }
 }

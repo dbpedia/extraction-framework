@@ -132,7 +132,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     ValidationExecutor.testIris(
       pathToFlatTurtleFile =  s"${mappingsConfig.dumpDir.getAbsolutePath}/*/$date/*.ttl.bz2",
-      pathToTestCases = ciTestFile
+      testModelPaths = Array[String](ciTestFile)
 
     )(sqlContext)
 

@@ -23,14 +23,31 @@ package object validation {
   def iriTriggerQueryStr(): String =
     s"""$prefixDefinition
        |
-       |SELECT ?trigger ?label ?comment (GROUP_CONCAT(DISTINCT ?pattern; SEPARATOR="\t") AS ?patterns) {
+       |SELECT ?trigger ?label ?comment
+       |  (GROUP_CONCAT(DISTINCT ?pattern; SEPARATOR="\t") AS ?patterns)
+       |{
        |  ?trigger
        |     a            v:RDF_IRI_Trigger ;
        |     trigger:pattern    ?pattern ;
-       |     rdfs:label   ?label ;
-       |     rdfs:comment ?comment .
+       |     Optional{ ?trigger rdfs:label ?label . }
+       |     Optional{ ?trigger rdfs:comment ?comment . }
+       |
        |
        |} GROUP BY ?trigger ?label ?comment
+     """.stripMargin
+
+  def literalTriggerQueryStr(): String =
+    s"""$prefixDefinition
+       |
+       |SELECT DISTINCT ?trigger ?datatype ?label ?comment
+       |{
+       |  ?trigger
+       |     a            v:RDF_Literal_Trigger ;
+       |     trigger:datatype    ?datatype ;
+       |     Optional{ ?trigger rdfs:label ?label . }
+       |     Optional{ ?trigger rdfs:comment ?comment . }
+       |
+       |}
      """.stripMargin
 
   def iriValidatorQueryStr(): String =
@@ -50,13 +67,38 @@ package object validation {
        |} GROUP BY ?validator ?comment
      """.stripMargin
 
-  def triggeredValidatorsQueryStr(triggerIri: String): String =
+  def literalValidatorQueryStr(): String =
+    s"""$prefixDefinition
+       |
+       |SELECT Distinct ?validator ?comment ?pattern
+       |{
+       |  ?validator
+       |     a v:Datatype_Literal_Validator .
+       |     Optional{ ?validator rdfs:comment ?comment }
+       |     Optional{ ?validator v:pattern ?pattern }
+       |}
+     """.stripMargin
+
+  def triggeredValidatorsQueryStr(triggerIri: String, isBlank: Boolean): String = {
+
     s"""$prefixDefinition
        |
        |SELECT ?validator {
        |
-       |	?s v:trigger <$triggerIri> ;
-       |     v:validator ?validator
+       |  ?s a v:TestGenerator ;
+       |     v:trigger ${if (isBlank) s"_:$triggerIri" else s"<$triggerIri>" } ;
+       |     v:validator ?validator .
+       |}
+     """.stripMargin
+  }
+
+  def testGeneratorQueryStr: String =
+    s"""$prefixDefinition
+       |
+       |SELECT ?generator ?trigger ?validator
+       |{
+       |  ?generator v:trigger ?trigger ;
+       |             v:validator ?validator .
        |
        |}
      """.stripMargin
@@ -105,9 +147,10 @@ package object validation {
 
       if ( trigger.testCases.length == 0 ) {
 
+        // Does not increase the error rate
         testCaseSerializationBuffer.append(
           Seq(
-            " "+trigger.iri+" ",
+            " "+trigger.label+" { id: "+trigger.iri+" } ",
             " missing validator ",
             testReport.prevalence(trigger.ID).toString,
             testReport.prevalence(trigger.ID).toString,
@@ -126,7 +169,7 @@ package object validation {
 
         testCaseSerializationBuffer.append(
           Seq(
-            " "+trigger.iri+" ",
+            " "+trigger.label+" { id: "+trigger.iri+" } ",
             " "+testApproachCollection(testCase.testAproachID).toString+" ",
             prevalence.toString,
             (prevalence-success).toString,
