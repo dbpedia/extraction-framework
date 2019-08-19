@@ -86,8 +86,9 @@ object ValidationExecutor {
     val prevalence = Array.fill[Long](testSuite.maxTriggerID + 1)(0)
     val succeded = Array.fill[Long](testSuite.maxTestCaseID + 1)(0)
 
-    //TODO get from part when filter is removed
+    // TODO get from part when filter is removed
     val nTriplePartType = TriggerType.IRI
+    // TODO and then case switch
 
     testSuite.triggerCollection.filter(_.TYPE == nTriplePartType).foreach(
 
@@ -95,7 +96,7 @@ object ValidationExecutor {
 
         if( trigger.isTriggered(nTriplePart) ) {
 
-          covered = true
+          if ( trigger.label == "__GENERIC_IRI__" ) covered = true
 
           prevalence(trigger.ID) = 1
 

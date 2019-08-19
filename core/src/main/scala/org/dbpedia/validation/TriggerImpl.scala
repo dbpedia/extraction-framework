@@ -6,7 +6,7 @@ object TriggerImpl {
 
   object TriggerType extends Enumeration {
 
-    val BLANK, IRI, LITERAL = Value
+    val BLANK, IRI, LITERAL, GENERIC_IRI, GENERIC_LITERAL, GENERIC_BLANK = Value
   }
 
   type TriggerID = Int

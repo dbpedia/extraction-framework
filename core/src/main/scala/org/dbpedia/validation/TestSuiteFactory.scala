@@ -64,17 +64,17 @@ object TestSuiteFactory {
       }
     )
 
-    //    triggerCollection.append(
-    //      IRITrigger(
-    //        currentTriggerID,
-    //        Array[String](".*"),
-    //        genericTestCases.toArray,
-    //        "__GENERIC_IRI__",
-    //        "generic iri trigger",
-    //        "parse every"
-    //      )
-    //    )
-    //    currentTriggerID+=1
+        triggerCollection.append(
+          IRITrigger(
+            currentTriggerID,
+            Array[String](".*"),
+            genericTestCases.toArray,
+            "__GENERIC_IRI__",
+            "generic iri trigger",
+            "parse every"
+          )
+        )
+        currentTriggerID+=1
 
     /*
     testModel based IRITrigger
