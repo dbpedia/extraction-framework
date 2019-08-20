@@ -95,11 +95,11 @@ class TestSuiteTests extends FunSuite with BeforeAndAfterAll {
 
     triggerCollection.foreach(
 
-      model.add(ResourceFactory.createStatement(
-//        ResourceFactory.createResource()
-      ))
-
       trigger => {
+
+//        model.add(ResourceFactory.createStatement(
+//          //        ResourceFactory.createResource()
+//        ))
 
         trigger.testCases
 

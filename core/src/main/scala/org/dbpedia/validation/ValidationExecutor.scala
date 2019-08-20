@@ -21,7 +21,7 @@ object ValidationExecutor {
     val spoBasedDataset =
       sqlContext.read.textFile(pathToFlatTurtleFile)
         .repartition(Runtime.getRuntime.availableProcessors()*3)
-        .map(_.trim).map(prepareFaltTurtleLine)
+        .map(_.trim).filter( ! _.startsWith("#") ).filter( ! _.equals("") ).map(prepareFaltTurtleLine)
 
     val zero = {
       TestReport(
@@ -48,7 +48,7 @@ object ValidationExecutor {
 
     Array.tabulate(counts.length){
 
-      i => formatTestReport(partLabels(i),counts(i),testSuite.triggerCollection,testSuite.testApproachCollection)
+      i => formatTestReport2(partLabels(i),counts(i),testSuite.triggerCollection,testSuite.testApproachCollection)
     }
 
     counts.toArray
@@ -71,13 +71,18 @@ object ValidationExecutor {
       p = spo(1).trim.drop(1)
       o = {
 
-        val tmp = spo(2).trim
+        val aa = {
 
-        if ( tmp.endsWith(".") ) tmp.dropRight(1).trim else tmp
+          val a = spo(2).trim
+
+          if ( a.endsWith(".") ) a.dropRight(1).trim else a
+        }
+
+        if ( aa.startsWith("<") ) aa.drop(1).dropRight(1) else aa
       }
     }
     catch {
-      case ae: ArrayIndexOutOfBoundsException => ae.printStackTrace()
+      case ae: ArrayIndexOutOfBoundsException => println(line); ae.printStackTrace()
     }
 
     Array(s,p,o)
