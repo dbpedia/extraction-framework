@@ -54,7 +54,19 @@ object ValidationLauncher {
 
         val sqlContext: SQLContext = sparkSession.sqlContext
 
-        val testReports = ValidationExecutor.testIris(config.pathToFlatTurtleFile, config.pathToTestCaseFile.toArray)(sqlContext)
+        val testSuite = TestSuiteFactory.loadTestSuite(config.pathToTestCaseFile.toArray)
+
+        val testReports = ValidationExecutor.testIris(config.pathToFlatTurtleFile, testSuite)(sqlContext)
+
+
+        val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
+
+        Array.tabulate(testReports.length){
+
+          //      i => formatTestReport2(partLabels(i),counts(i),testSuite.triggerCollection,testSuite.testApproachCollection)
+          i => buildRDFReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
+        }
+
 
       case _ => optionParser.showUsage()
     }

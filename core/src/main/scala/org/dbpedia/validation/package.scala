@@ -1,5 +1,7 @@
 package org.dbpedia
 
+import org.apache.jena.rdf.model.{Model, ModelFactory, ResourceFactory}
+import org.apache.jena.vocabulary.RDFS
 import org.dbpedia.validation.TestCaseImpl.TestApproach
 import org.dbpedia.validation.TriggerImpl.Trigger
 
@@ -126,7 +128,7 @@ package object validation {
     }
   }
 
-  def formatTestReport( label : String,
+  def buildTableReport( label : String,
                         testReport: TestReport,
                         triggerCollection: Array[Trigger],
                         testApproachCollection: Array[TestApproach] ) : Unit = {
@@ -211,5 +213,98 @@ package object validation {
     }
 
     def rowSeparator(colSizes: Seq[Int]): String = colSizes map { "-" * _ } mkString("+", "+", "+")
+  }
+
+  type IRI = String
+
+  class AdvancedJenaModel(m: Model) {
+
+    def simpleStatement(s: IRI, p: IRI, o: IRI): Unit = {
+      m.add(
+        ResourceFactory.createStatement(
+          ResourceFactory.createResource(s),
+          ResourceFactory.createProperty(p),
+          ResourceFactory.createResource(o)
+        )
+      )
+    }
+
+    def simpleLiteralStatement(s: IRI, p: IRI, o: Any): Unit = {
+
+      m.add(
+        ResourceFactory.createStatement(
+          ResourceFactory.createResource(s),
+          ResourceFactory.createProperty(p),
+          ResourceFactory.createTypedLiteral(o)
+        )
+      )
+    }
+  }
+
+  def buildRDFReport( label : String,
+                      testReport: TestReport,
+                      triggerCollection: Array[Trigger],
+                      testApproachCollection: Array[TestApproach] ) : Unit = {
+
+
+    implicit def toAdvancedJenaModel(m: Model): AdvancedJenaModel = new AdvancedJenaModel(m)
+
+    val model = ModelFactory.createDefaultModel()
+
+    triggerCollection.foreach(
+
+      trigger => {
+
+        val triggerPrevalence = testReport.prevalence(trigger.ID)
+
+        model.simpleLiteralStatement(trigger.iri, RDFS.label.getURI, trigger.label)
+        model.simpleLiteralStatement(trigger.iri, RDFS.comment.getURI, trigger.comment)
+        model.simpleLiteralStatement(trigger.iri, ReportVocab.trigger+"prevalence", triggerPrevalence)
+
+        trigger.testCases.foreach(
+
+          testCase => {
+
+            val testCaseIRI = ReportVocab.TestCase+testCase.ID
+            model.simpleStatement(trigger.iri, ReportVocab.trigger+"hasTestCase", testCaseIRI)
+
+            model.simpleLiteralStatement(testCaseIRI,
+              ReportVocab.testCase+"id", testCase.ID)
+            model.simpleStatement(testCaseIRI,
+              ReportVocab.testCase+"hasTrigger", trigger.iri)
+            model.simpleStatement(testCaseIRI,
+              ReportVocab.testCase+"hasApproach", ReportVocab.TestApproach+testCase.testAproachID )
+            model.simpleLiteralStatement(testCaseIRI,
+              ReportVocab.testCase+"errors", triggerPrevalence-testReport.succeded(testCase.ID) )
+          }
+        )
+      }
+    )
+
+    testApproachCollection.foreach(
+
+      testApproach => {
+
+        val testApproachIRI = ReportVocab.TestApproach+testApproach.ID
+        model.simpleLiteralStatement(testApproachIRI,
+          ReportVocab.testApproach+"id", testApproach.ID)
+        model.simpleLiteralStatement(testApproachIRI,
+          ReportVocab.testApproach+"info", testApproach.info() )
+      }
+    )
+
+    model.write(System.out, "Turtle")
+  }
+
+  object ReportVocab {
+
+    val base: String = "http://eval.dbpedia.org/"
+
+    val Trigger: String =  base+"Trigger#"
+    val trigger: String =  base+"trigger/"
+    val TestCase: String =  base+"TestCase#"
+    val testCase: String =  base+"testCase/"
+    val TestApproach: String =  base+"testapproach#"
+    val testApproach: String =  base+"testapproach/"
   }
 }

@@ -10,13 +10,13 @@ import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.apache.spark.sql.{SQLContext, SparkSession}
 import org.dbpedia.extraction.config.Config
-import org.dbpedia.extraction.dump.extract.{ConfigLoader, Extraction}
-import org.dbpedia.validation.ValidationExecutor
+import org.dbpedia.extraction.dump.extract.ConfigLoader
+import org.dbpedia.validation.{TestSuiteFactory, ValidationExecutor}
 import org.scalatest.{BeforeAndAfterAll, FunSuite}
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.{Failure, Success}
-import scala.concurrent.ExecutionContext.Implicits.global
 
 class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
@@ -130,14 +130,21 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     val sqlContext: SQLContext = sparkSession.sqlContext
 
-    ValidationExecutor.testIris(
-      pathToFlatTurtleFile =  s"${mappingsConfig.dumpDir.getAbsolutePath}/*/$date/*.ttl.bz2",
-      testModelPaths = Array[String](ciTestFile)
+    val testSuite = TestSuiteFactory.loadTestSuite(Array[String](ciTestFile))
 
+    val testReports = ValidationExecutor.testIris(
+      pathToFlatTurtleFile =  s"${mappingsConfig.dumpDir.getAbsolutePath}/*/$date/*.ttl.bz2",
+      testSuite = testSuite
     )(sqlContext)
 
-    //TODO asserts
+    import org.dbpedia.validation.buildTableReport
 
+    val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
+
+    Array.tabulate(testReports.length){
+
+      i => buildTableReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
+    }
   }
 
   test("RDFUnit SHACL"){

@@ -10,11 +10,19 @@ object ValidationExecutor {
   def testIris(pathToFlatTurtleFile: String, testModelPaths: Array[String])
               (implicit sqlContext: SQLContext): Array[TestReport] = {
 
+    val testSuite = TestSuiteFactory.loadTestSuite(testModelPaths)
+
+    testIris(pathToFlatTurtleFile, testSuite)
+
+  }
+
+  def testIris(pathToFlatTurtleFile: String, testSuite: TestSuite)
+              (implicit sqlContext: SQLContext): Array[TestReport] = {
+
     val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
 
     import sqlContext.implicits._
 
-    val testSuite = TestSuiteFactory.loadTestSuite(testModelPaths)
 
     val brdcstTestSuit: Broadcast[TestSuite] = sqlContext.sparkSession.sparkContext.broadcast(testSuite)
 
@@ -32,7 +40,7 @@ object ValidationExecutor {
       )
     }
 
-    val counts: IndexedSeq[TestReport] = {
+    val testReports: IndexedSeq[TestReport] = {
 
       (0 until 3).map(
 
@@ -46,12 +54,7 @@ object ValidationExecutor {
       )
     }
 
-    Array.tabulate(counts.length){
-
-      i => formatTestReport2(partLabels(i),counts(i),testSuite.triggerCollection,testSuite.testApproachCollection)
-    }
-
-    counts.toArray
+    testReports.toArray
   }
 
   /**
