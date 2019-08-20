@@ -212,6 +212,4 @@ package object validation {
 
     def rowSeparator(colSizes: Seq[Int]): String = colSizes map { "-" * _ } mkString("+", "+", "+")
   }
-
 }
-

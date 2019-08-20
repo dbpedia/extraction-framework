@@ -1,11 +1,12 @@
 package org.dbpedia.validation
 
 import org.dbpedia.validation.TestCaseImpl._
-import org.dbpedia.validation.TriggerImpl.TriggerType
 
 object TriggerImpl {
 
   object TriggerType extends Enumeration {
+
+    //MOVE Generic
 
     val BLANK, IRI, LITERAL, GENERIC_IRI, GENERIC_LITERAL, GENERIC_BLANK = Value
   }
@@ -49,11 +50,11 @@ object TriggerImpl {
   case class LiteralTrigger(ID: TriggerID, datatype: String, testCases: Array[TestCase],
                             iri: String, label: String, comment: String) extends Trigger {
 
-//    private val patter = s"\^\^<${datatype.replaceAll("/","\\/").replaceAll(".","\\.")}>$$".r.pattern
+    override val TYPE: TriggerType.Value = TriggerType.LITERAL
+
+    //    private val patter = s"\^\^<${datatype.replaceAll("/","\\/").replaceAll(".","\\.")}>$$".r.pattern
 
     private val matchPart = s"^^<$datatype>"
-
-    override val TYPE: TriggerType.Value = TriggerType.LITERAL
 
     override def isTriggered(nTriplePart: String): Boolean = {
 
@@ -61,12 +62,20 @@ object TriggerImpl {
     }
   }
 
+  /**
+    * Triggers pretty xsd:String & rdf:langString
+    * @param ID
+    * @param testCases
+    * @param iri
+    * @param label
+    * @param comment
+    */
   case class DefaultLiteralTrigger(ID: TriggerID, testCases: Array[TestCase],
                                    iri: String, label: String, comment: String) extends Trigger {
 
-    val pattern = "^\".*((\"@[a-zA-Z]*)|(\"))$".r.pattern
-
     override val TYPE: TriggerType.Value = TriggerType.LITERAL
+
+    private val pattern = "^\".*((\"@[a-zA-Z]*)|(\"))$".r.pattern
 
     override def isTriggered(nTriplePart: String): Boolean = {
 

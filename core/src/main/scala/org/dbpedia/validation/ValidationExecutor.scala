@@ -21,7 +21,7 @@ object ValidationExecutor {
     val spoBasedDataset =
       sqlContext.read.textFile(pathToFlatTurtleFile)
         .repartition(Runtime.getRuntime.availableProcessors()*3)
-        .filter(! _.startsWith("#")).filter( ! _.trim.equals("") ).map(prepareFaltTurtleLine)
+        .map(_.trim).map(prepareFaltTurtleLine)
 
     val zero = {
       TestReport(
@@ -59,20 +59,25 @@ object ValidationExecutor {
     * All other locations that allow whitespace must be empty. (https://www.w3.org/TR/n-triples/#canonical-ntriples)
     */
   def prepareFaltTurtleLine(line: String): Array[String] = {
-    val spo = line.split(" ", 3)
+
+    val spo = line.split(">", 3)
 
     var s: String = null
     var p: String = null
     var o: String = null
 
     try {
-      if (spo(0).startsWith("<")) s = spo(0).substring(1, spo(0).length - 1)
-      if (spo(1).startsWith("<")) p = spo(1).substring(1, spo(1).length - 1)
-      if (spo(2).startsWith("<")) o = spo(2).substring(1, spo(2).length - 3)
-      else if (spo(2).startsWith("\"") ) o = spo(2).substring(0,spo(2).length -2)
+      s = spo(0).drop(1)
+      p = spo(1).trim.drop(1)
+      o = {
+
+        val tmp = spo(2).trim
+
+        if ( tmp.endsWith(".") ) tmp.dropRight(1).trim else tmp
+      }
     }
     catch {
-      case ae: ArrayIndexOutOfBoundsException => println(line)
+      case ae: ArrayIndexOutOfBoundsException => ae.printStackTrace()
     }
 
     Array(s,p,o)
