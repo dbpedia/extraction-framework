@@ -5,6 +5,13 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.concurrent.ConcurrentLinkedQueue
 
+import org.aksw.rdfunit.RDFUnit
+import org.aksw.rdfunit.enums.TestCaseExecutionType
+import org.aksw.rdfunit.io.reader.RdfModelReader
+import org.aksw.rdfunit.model.interfaces.{TestCase, TestSuite}
+import org.aksw.rdfunit.sources.{SchemaSourceFactory, TestSource, TestSourceBuilder}
+import org.aksw.rdfunit.tests.generators.{ShaclTestGenerator, TestGeneratorFactory}
+import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator
 import org.apache.commons.io.FileUtils
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
@@ -159,6 +166,24 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     assert(dbpedia_ont.size()>0,"size not 0")
     assert(custom_SHACL_tests.size()>0, "size not 0")
+
+    val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
+
+    val rdfUnit = RDFUnit.createWithOwlAndShacl
+    rdfUnit.init
+
+    val testGenerator = new ShaclTestGenerator()
+
+    val tests: java.util.Collection[TestCase] = testGenerator.generate(schema)
+    val testSuite = new TestSuite(tests)
+
+    val testSource = new TestSourceBuilder()
+      .setPrefixUri("minidump", "http://dbpedia.org/minidump")
+      .setInMemReader(new RdfModelReader((ModelFactory.createDefaultModel())))
+        .build()
+    val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.shaclTestCaseResult, testSource, testSuite)
+
+    assert(results.getTestCaseResults.isEmpty)
 
 
   }

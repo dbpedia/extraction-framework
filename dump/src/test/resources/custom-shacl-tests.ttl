@@ -1,5 +1,7 @@
 @prefix sh: <http://www.w3.org/ns/shacl#>.
 @prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
 
 <#geowgs84>
 	a sh:NodeShape ;
@@ -7,12 +9,12 @@
 
 	sh:property [
 		sh:path wgs84:long ;
-		sh:minExclusive "-180" ;
-		sh:maxExclusive "180"
+		sh:minInclusive "-180"^^xsd:float ;
+		sh:maxInclusive "180"^^xsd:float
 	] ;
 	sh:property [
 		sh:path wgs84:lat ;
-		sh:minExclusive "-90" ;
-		sh:maxExclusive "90"
+		sh:minInclusive "-90"^^xsd:float ;
+		sh:maxInclusive "90"^^xsd:float
 	] .
 
