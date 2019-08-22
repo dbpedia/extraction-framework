@@ -249,15 +249,33 @@ package object validation {
 
     stringBuilder.append(s"""<h3>$label</h3>""".stripMargin)
     stringBuilder.append(
-      s"""
-        |<ul>
-        |  <li>Timestap: ${new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(Calendar.getInstance().getTime )}
-        |  <li>Coverage: $coverage ( ${testReport.coverage} triggered of ${testReport.cnt} total )"
-        |  <li>Avg. Error Rate: $errorRate
-        |</ul>
-      """.stripMargin)
+      s"""|<!DOCTYPE html>
+          |<html>
+          |<head>
+          |<style>
+          |table {
+          |  border-collapse: collapse;
+          |  width: 100%;
+          |}
+          |
+          |th, td {
+          |  text-align: left;
+          |  padding: 8px;
+          |  border: 1px solid black;
+          |}
+          |
+          |tr:nth-child(even) {background-color: #f2f2f2;}
+          |</style>
+          |</head>
+          |<body>
+          |<ul>
+          |  <li>Timestap: ${new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(Calendar.getInstance().getTime )}
+          |  <li>Coverage: $coverage ( ${testReport.coverage} triggered of ${testReport.cnt} total )"
+          |  <li>Avg. Error Rate: $errorRate
+          |</ul>
+        """.stripMargin)
 
-    stringBuilder.append("<table border=\"1|0\">" )
+    stringBuilder.append("<table>" )
 
     stringBuilder.append(
       """<tr>
@@ -271,7 +289,10 @@ package object validation {
 
     testCaseSerializationBuffer.toArray.foreach(row => stringBuilder.append(s"<tr><td>${row.mkString("</td><td>")}</td></tr>"))
 
-    stringBuilder.append("""</table>""")
+    stringBuilder.append(
+      """</table>
+        |<body>
+        |""".stripMargin)
 
     (stringBuilder.mkString,errorRate)
   }
