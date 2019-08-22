@@ -199,7 +199,7 @@ package object validation {
                     ) : (String,Float) = {
 
     val errorRatesBuffer = ArrayBuffer[Float]()
-    val testCaseSerializationBuffer = ArrayBuffer[Seq[String]]()
+    val testCaseSerializationBuffer = ArrayBuffer[TableRow]()
 
     triggerCollection.foreach( trigger => {
 
@@ -207,12 +207,12 @@ package object validation {
 
         // Does not increase the error rate
         testCaseSerializationBuffer.append(
-          Seq(
-            "0.0",
-            testReport.prevalence(trigger.ID).toString,
-            testReport.prevalence(trigger.ID).toString,
-            " missing validator ",
-            " "+trigger.label+" { id: "+trigger.iri+" } "
+          TableRow(
+            0.0f,
+            testReport.prevalence(trigger.ID),
+            testReport.prevalence(trigger.ID),
+            "missing validator",
+            trigger.label+" { id: "+trigger.iri+" }"
           )
         )
       }
@@ -226,12 +226,12 @@ package object validation {
         errorRatesBuffer.append(errorRate)
 
         testCaseSerializationBuffer.append(
-          Seq(
-            errorRate.toString,
-            prevalence.toString,
-            (prevalence-success).toString,
-            " "+testApproachCollection(testCase.testAproachID).toString+" ",
-            " "+trigger.label+" { id: "+trigger.iri+" } "
+          TableRow(
+            errorRate,
+            prevalence,
+            prevalence-success,
+            testApproachCollection(testCase.testAproachID).toString,
+            trigger.label+" { id: "+trigger.iri+" }"
           )
         )
       })
@@ -247,7 +247,6 @@ package object validation {
     val coverage = testReport.coverage.toFloat / testReport.cnt.toFloat
     val stringBuilder = new StringBuilder
 
-    stringBuilder.append(s"""<h3>$label</h3>""".stripMargin)
     stringBuilder.append(
       s"""|<!DOCTYPE html>
           |<html>
@@ -268,9 +267,10 @@ package object validation {
           |</style>
           |</head>
           |<body>
+          |<h3>$label</h3>
           |<ul>
-          |  <li>Timestap: ${new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(Calendar.getInstance().getTime )}
-          |  <li>Coverage: $coverage ( ${testReport.coverage} triggered of ${testReport.cnt} total )"
+          |  <li>Timestamp: ${new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(Calendar.getInstance().getTime )}
+          |  <li>Coverage: $coverage ( ${testReport.coverage} triggered of ${testReport.cnt} total )
           |  <li>Avg. Error Rate: $errorRate
           |</ul>
         """.stripMargin)
@@ -287,7 +287,12 @@ package object validation {
         |</tr>
       """.stripMargin)
 
-    testCaseSerializationBuffer.toArray.foreach(row => stringBuilder.append(s"<tr><td>${row.mkString("</td><td>")}</td></tr>"))
+//    testCaseSerializationBuffer.toArray
+    testCaseSerializationBuffer.toArray
+      .sortWith(_.prevalence > _.prevalence)
+      .sortWith(_.errors > _.errors)
+      .sortWith(_.errorRate > _.errorRate)
+      .foreach(row => stringBuilder.append(row.toString) )
 
     stringBuilder.append(
       """</table>
@@ -295,6 +300,19 @@ package object validation {
         |""".stripMargin)
 
     (stringBuilder.mkString,errorRate)
+  }
+
+  case class TableRow(errorRate: Float, prevalence: Long, errors: Long, approach: String, trigger: String) {
+
+    override def toString: IRI =
+      s"""<tr>
+         | <td>$errorRate</td>
+         | <td>$prevalence</td>
+         | <td>$errors</td>
+         | <td>$approach</td>
+         | <td>$trigger</td>
+         |</tr>
+       """.stripMargin
   }
 
 
