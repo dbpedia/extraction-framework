@@ -11,9 +11,11 @@ import org.apache.spark.sql.{SQLContext, SparkSession}
 import org.dbpedia.validation.{TestSuiteFactory, ValidationExecutor}
 import scopt.OptionParser
 
+import scala.language.postfixOps
+
 object EvalMod {
 
-  val modVocab =
+  val modVocab : String =
     s"""
        |# no base
        |@prefix mod: <http://dataid.dbpedia.org/ns/mod.ttl#> .
@@ -122,7 +124,7 @@ object EvalMod {
 
             new File(s"$repo/$path/").mkdirs()
 
-            if( ! new File(s"$repo/$path/$sha.svg" ).exists() || true ) {
+            if( ! new File(s"$repo/$path/$sha.svg" ).exists() ) {
 
               downloadFile(downloadURL,new File(s"$repo/tmp/${sha}_${downloadURL.split("/").last}"))
 
