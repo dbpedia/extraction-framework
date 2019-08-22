@@ -2,8 +2,11 @@ package org.dbpedia.databus.mod
 
 import java.io.{File, FileWriter}
 import java.net.URL
+import java.text.SimpleDateFormat
 import java.time.{Instant, ZoneId, ZonedDateTime}
+import java.util.Calendar
 
+import org.apache.commons.io.FileUtils
 import org.apache.spark.sql.{SQLContext, SparkSession}
 import org.dbpedia.validation.{TestSuiteFactory, ValidationExecutor}
 import scopt.OptionParser
@@ -20,7 +23,7 @@ object EvalMod {
        |
          |<#EvalMod> a owl:Class ;
        |  rdfs:subClassOf mod:DatabusMod ;
-       |  rdfs:label "Online Stats of dcat:downloadURL" ;
+       |  rdfs:label "Evaluation of dcat:downloadURL" ;
        |  rdfs:comment "Sends daily HEAD requests and logs them in a .tsv file (time, success/failure, url) and calculates a rating." .
        |
          |
@@ -146,6 +149,8 @@ object EvalMod {
               writeSVG(s"$repo/$path/$sha.svg", errorRate)
 
               writeActivityTTL(s"$repo/$path/$sha.ttl", file, errorRate, 0.0f, serviceURL, path, sha, repo)
+
+              FileUtils.deleteQuietly(new File(s"$repo/tmp/${sha}_${downloadURL.split("/").last}"))
             }
           }
         )
@@ -166,7 +171,12 @@ object EvalMod {
     val fw = new FileWriter(file, append)
     try {
       fw.write(contents)
-      println(s"written (append: $append) " + file)
+      System.err.println(
+        s"${new SimpleDateFormat("yyyy-dd-MM hh:mm:ss").format(Calendar.getInstance().getTime)} " +
+        s"| INFO " +
+        s"| writeFile " +
+        s"| written (append: $append) " + file
+      )
     }
     finally fw.close()
   }
