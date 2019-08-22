@@ -21,13 +21,13 @@ object EvalMod {
        |@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
        |@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
        |
-         |<#EvalMod> a owl:Class ;
+       |<#NtriplesEvalMod> a owl:Class ;
        |  rdfs:subClassOf mod:DatabusMod ;
-       |  rdfs:label "Evaluation of dcat:downloadURL" ;
-       |  rdfs:comment "Sends daily HEAD requests and logs them in a .tsv file (time, success/failure, url) and calculates a rating." .
+       |  rdfs:label "Evaluation of Ntrple Datasets" ;
+       |  rdfs:comment "Downloads the files and analyses IRI correctness and xsd:datatypes" .
        |
-         |
-         |<errorRate> a owl:DatatypeProperty ;
+       |
+       |<errorRate> a owl:DatatypeProperty ;
        |  rdfs:subPropertyOf mod:statSummary ;
        |  rdfs:label "error rate" ;
        |  rdfs:comment "Average error rate of failed test cases (prevalence of test case divided by its fails)" ;
