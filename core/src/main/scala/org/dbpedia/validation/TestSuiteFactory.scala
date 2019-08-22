@@ -29,6 +29,10 @@ object TestSuiteFactory {
 
   def loadTestSuite(testModelFilePaths: Array[String]): TestSuite = {
 
+    currentTestApproachID = 0
+    currentTriggerID = 0
+    currentTestCaseID = 0
+
     testModelFilePaths.foreach(
 
       testModelFilePath => {
@@ -43,12 +47,20 @@ object TestSuiteFactory {
 
   def loadTestSuite(testModelFilePath: String): TestSuite = {
 
+    currentTestApproachID = 0
+    currentTriggerID = 0
+    currentTestCaseID = 0
+
     testModel.read(testModelFilePath)
 
     loadTestSuite(testModel)
   }
 
   def loadTestSuite(testModel: Model): TestSuite = {
+
+    currentTestApproachID = 0
+    currentTriggerID = 0
+    currentTestCaseID = 0
 
     val testApproachCollection = loadTestApproachCollection(testModel)
 

@@ -94,7 +94,7 @@ object EvalMod {
     val testModels = evalModConf.testModels
 
     //reset aggregate
-    writeFile(s"$repo/aggregate.nt", "")
+    //writeFile(s"$repo/aggregate.nt", "")
 
     //write vocab
     writeFile(s"$repo/modvocab.ttl", modVocab)
@@ -194,9 +194,10 @@ object EvalMod {
   val ntriples =
     s"""
        |<$serviceRepoURL/$path/$sha.svg> <http://dataid.dbpedia.org/ns/mod.ttl#svgDerivedFrom> <$databusFile> .
-       |<$serviceRepoURL/$path/$sha.tsv> <http://dataid.dbpedia.org/ns/mod.ttl#statisticsDerivedFrom> <$databusFile> .
+       |<$serviceRepoURL/$path/$sha.html> <http://dataid.dbpedia.org/ns/mod.ttl#htmlDerivedFrom> <$databusFile> .
        |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#generated> <$serviceRepoURL/$path/$sha.svg> .
        |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#generated> <$serviceRepoURL/$path/$sha.html> .
+       |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#used> <$databusFile> .
        |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#endedAtTime> "$invocationTime"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
        |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <$serviceRepoURL/modvocab.ttl#EvalMod> .
        |<$serviceRepoURL/$path/$sha.ttl#this> <$serviceRepoURL/modvocab.ttl#errorRate> "$errorRate"^^<http://www.w3.org/2001/XMLSchema#float> .
@@ -205,7 +206,7 @@ object EvalMod {
 //<$serviceRepoURL/$path/$sha.ttl#this> <$serviceRepoURL/modvocab.ttl#coverage> "$coverage"^^<http://www.w3.org/2001/XMLSchema#float> .
 
     writeFile(activityFile, ntriples)
-    writeFile(s"$repo/aggregate.nt", ntriples, true)
+    //writeFile(s"$repo/aggregate.nt", ntriples, true)
   }
 
   def writeSVG(svgFile: String, errorRate: Float): Unit = {
