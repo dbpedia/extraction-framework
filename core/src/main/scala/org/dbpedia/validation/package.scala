@@ -7,6 +7,7 @@ import org.dbpedia.validation.TriggerImpl.Trigger
 
 import scala.collection.mutable.ArrayBuffer
 
+//TODO cleanup
 package object validation {
 
   type TriggerIRI = String
@@ -187,6 +188,60 @@ package object validation {
 
     println(Tabulator.format(testCaseSerializationBuffer))
   }
+
+  def buildModReport( testReport: TestReport,
+                      triggerCollection: Array[Trigger],
+                      testApproachCollection: Array[TestApproach]
+                    ) : (String,Float) = {
+
+    val errorRatesBuffer = ArrayBuffer[Float]()
+    val testCaseSerializationBuffer = ArrayBuffer[Seq[String]]()
+
+    testCaseSerializationBuffer.append(
+      Seq("Trigger","Test Approach","Prevalence", "Errors", "Error Rate")
+    )
+
+    triggerCollection.foreach( trigger => {
+
+      if ( trigger.testCases.length == 0 ) {
+
+        // Does not increase the error rate
+        testCaseSerializationBuffer.append(
+          Seq(
+            " "+trigger.label+" { id: "+trigger.iri+" } ",
+            " missing validator ",
+            testReport.prevalence(trigger.ID).toString,
+            testReport.prevalence(trigger.ID).toString,
+            "0.0"
+          )
+        )
+      }
+
+      trigger.testCases.foreach( testCase => {
+
+        val prevalence = testReport.prevalence(trigger.ID)
+        val success = testReport.succeded(testCase.ID)
+
+        val errorRate = if ( prevalence == 0 ) 0 else 1-success.toFloat/prevalence.toFloat
+        errorRatesBuffer.append(errorRate)
+
+        testCaseSerializationBuffer.append(
+          Seq(
+            " "+trigger.label+" { id: "+trigger.iri+" } ",
+            " "+testApproachCollection(testCase.testAproachID).toString+" ",
+            prevalence.toString,
+            (prevalence-success).toString,
+            errorRate.toString
+          )
+        )
+      })
+    })
+
+    val errorRates = errorRatesBuffer.toArray
+
+    (Tabulator.format(testCaseSerializationBuffer),errorRates.sum/errorRates.length)
+  }
+
 
   object Tabulator {
 
