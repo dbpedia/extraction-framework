@@ -172,16 +172,17 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     val rdfUnit = RDFUnit.createWithOwlAndShacl
     rdfUnit.init
 
-    val testGenerator = new ShaclTestGenerator()
-
-    val tests: java.util.Collection[TestCase] = testGenerator.generate(schema)
-    val testSuite = new TestSuite(tests)
+    val shaclTestGenerator = new ShaclTestGenerator()
+    val shaclTests: java.util.Collection[TestCase] = shaclTestGenerator.generate(schema)
+    val shaclTestSuite = new TestSuite(shaclTests)
 
     val testSource = new TestSourceBuilder()
       .setPrefixUri("minidump", "http://dbpedia.org/minidump")
-      .setInMemReader(new RdfModelReader((ModelFactory.createDefaultModel())))
-        .build()
-    val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.shaclTestCaseResult, testSource, testSuite)
+      .setInMemReader(new RdfModelReader((ModelFactory.createDefaultModel()))) // here pass a model
+      //.setInMemFromCustomText(fileContentAsString, "TURTLE") // or pass the file content as String
+      .setReferenceSchemata(schema)
+      .build()
+    val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.shaclTestCaseResult, testSource, shaclTestSuite)
 
     assert(results.getTestCaseResults.isEmpty)
 
