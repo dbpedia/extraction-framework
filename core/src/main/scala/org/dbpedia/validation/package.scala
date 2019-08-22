@@ -1,5 +1,8 @@
 package org.dbpedia
 
+import java.text.SimpleDateFormat
+import java.util.Calendar
+
 import org.apache.jena.rdf.model.{Model, ModelFactory, ResourceFactory}
 import org.apache.jena.vocabulary.RDFS
 import org.dbpedia.validation.TestCaseImpl.TestApproach
@@ -189,17 +192,14 @@ package object validation {
     println(Tabulator.format(testCaseSerializationBuffer))
   }
 
-  def buildModReport( testReport: TestReport,
+  def buildModReport( label: String,
+                      testReport: TestReport,
                       triggerCollection: Array[Trigger],
                       testApproachCollection: Array[TestApproach]
                     ) : (String,Float) = {
 
     val errorRatesBuffer = ArrayBuffer[Float]()
     val testCaseSerializationBuffer = ArrayBuffer[Seq[String]]()
-
-    testCaseSerializationBuffer.append(
-      Seq("Trigger","Test Approach","Prevalence", "Errors", "Error Rate")
-    )
 
     triggerCollection.foreach( trigger => {
 
@@ -208,11 +208,11 @@ package object validation {
         // Does not increase the error rate
         testCaseSerializationBuffer.append(
           Seq(
-            " "+trigger.label+" { id: "+trigger.iri+" } ",
+            "0.0",
+            testReport.prevalence(trigger.ID).toString,
+            testReport.prevalence(trigger.ID).toString,
             " missing validator ",
-            testReport.prevalence(trigger.ID).toString,
-            testReport.prevalence(trigger.ID).toString,
-            "0.0"
+            " "+trigger.label+" { id: "+trigger.iri+" } "
           )
         )
       }
@@ -227,19 +227,53 @@ package object validation {
 
         testCaseSerializationBuffer.append(
           Seq(
-            " "+trigger.label+" { id: "+trigger.iri+" } ",
-            " "+testApproachCollection(testCase.testAproachID).toString+" ",
+            errorRate.toString,
             prevalence.toString,
             (prevalence-success).toString,
-            errorRate.toString
+            " "+testApproachCollection(testCase.testAproachID).toString+" ",
+            " "+trigger.label+" { id: "+trigger.iri+" } "
           )
         )
       })
     })
 
-    val errorRates = errorRatesBuffer.toArray
+//    testCaseSerializationBuffer.append(
+//      Seq("Trigger","Test Approach","Prevalence", "Errors", "Error Rate")
+//    )
 
-    (Tabulator.format(testCaseSerializationBuffer),errorRates.sum/errorRates.length)
+    val errorRates = errorRatesBuffer.toArray
+    val errorRate = errorRates.sum/errorRates.length
+
+    val coverage = testReport.coverage.toFloat / testReport.cnt.toFloat
+    val stringBuilder = new StringBuilder
+
+    stringBuilder.append(s"""<h3>$label</h3>""".stripMargin)
+    stringBuilder.append(
+      s"""
+        |<ul>
+        |  <li>Timestap: ${new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(Calendar.getInstance().getTime )}
+        |  <li>Coverage: $coverage ( ${testReport.coverage} triggered of ${testReport.cnt} total )"
+        |  <li>Avg. Error Rate: $errorRate
+        |</ul>
+      """.stripMargin)
+
+    stringBuilder.append("<table border=\"1|0\">" )
+
+    stringBuilder.append(
+      """<tr>
+        | <th>Error Rate</th>
+        | <th>Prevalence</th>
+        | <th>Errors</th>
+        | <th>Test Approach</th>
+        | <th>Triggered From</th>
+        |</tr>
+      """.stripMargin)
+
+    testCaseSerializationBuffer.toArray.foreach(row => stringBuilder.append(s"<tr><td>${row.mkString("</td><td>")}</td></tr>"))
+
+    stringBuilder.append("""</table>""")
+
+    (stringBuilder.mkString,errorRate)
   }
 
 

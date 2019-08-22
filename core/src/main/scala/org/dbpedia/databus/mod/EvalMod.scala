@@ -23,7 +23,7 @@ object EvalMod {
        |
        |<#NtriplesEvalMod> a owl:Class ;
        |  rdfs:subClassOf mod:DatabusMod ;
-       |  rdfs:label "Evaluation of Ntrple Datasets" ;
+       |  rdfs:label "Evaluation of Ntirple Datasets" ;
        |  rdfs:comment "Downloads the files and analyses IRI correctness and xsd:datatypes" .
        |
        |
@@ -122,7 +122,7 @@ object EvalMod {
 
             new File(s"$repo/$path/").mkdirs()
 
-            if( ! new File(s"$repo/$path/$sha.svg" ).exists() ) {
+            if( ! new File(s"$repo/$path/$sha.svg" ).exists() || true ) {
 
               downloadFile(downloadURL,new File(s"$repo/tmp/${sha}_${downloadURL.split("/").last}"))
 
@@ -136,12 +136,13 @@ object EvalMod {
 
               val modReport = {
                 org.dbpedia.validation.buildModReport(
+                  s"Aggregated Test Case Report of: $sha ( $filename )",
                   encodedReport.reduce(_ + _),
                   testSuite.triggerCollection,
                   testSuite.testApproachCollection
                 )
               }
-              val html = s"<pre>${modReport._1}</pre>"
+              val html = modReport._1
               val errorRate = modReport._2
 
               writeFile(s"$repo/$path/$sha.html",html)
