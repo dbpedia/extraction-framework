@@ -216,10 +216,11 @@ object EvalMod {
   def writeSVG(svgFile: String, errorRate: Float): Unit = {
 
     var color = errorRate match {
-      case x if (1-x) >= 0.95f => "#4c1"
-      case x if (1-x) < 0.95f => "#fc0"
-      case _ => "#fc0"
+      case x if (1-x) >= 1.0f => "#4c1"
+      case x if (1-x) > 0.80f => "#fc0"
+      case _ => "#cc0000"
     }
+    
     val percentage = BigDecimal((errorRate * 100).toDouble).setScale(2, BigDecimal.RoundingMode.HALF_UP) + "%"
 
     val svg =
@@ -299,7 +300,7 @@ object EvalMod {
          |     fill="${color}"
          |     id="rect11" />
          |  <path
-         |     fill="#4c1"
+         |     fill="${color}"
          |     d="M58 0h4v20h-4z"
          |     id="path13" />
          |  <rect
