@@ -103,6 +103,8 @@ object EvalMod {
 
     new File(s"$repo/tmp/").mkdirs()
 
+    val testSuite = TestSuiteFactory.loadTestSuite(testModels.toArray)
+
     updateTSVs.foreach(
 
       update => {
@@ -128,7 +130,6 @@ object EvalMod {
 
               downloadFile(downloadURL,new File(s"$repo/tmp/${sha}_${downloadURL.split("/").last}"))
 
-              val testSuite = TestSuiteFactory.loadTestSuite(testModels.toArray)
               val encodedReport = {
                 ValidationExecutor.testIris(
                   s"$repo/tmp/${sha}_${downloadURL.split("/").last}",
