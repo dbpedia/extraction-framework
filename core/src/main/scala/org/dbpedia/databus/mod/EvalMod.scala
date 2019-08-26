@@ -232,7 +232,7 @@ object EvalMod {
          |   xmlns="http://www.w3.org/2000/svg"
          |   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
          |   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-         |   width="90"
+         |   width="105.5"
          |   height="20"
          |   id="svg2"
          |   version="1.1"
@@ -287,24 +287,24 @@ object EvalMod {
          |  </linearGradient>
          |  <rect
          |     rx="3"
-         |     width="90"
+         |     width="88"
          |     height="20"
          |     fill="#555"
          |     id="rect9" />
          |  <rect
          |     rx="3"
-         |     x="37"
-         |     width="53"
+         |     x="58"
+         |     width="47.5"
          |     height="20"
-         |     fill="$color"
+         |     fill="${color}"
          |     id="rect11" />
          |  <path
          |     fill="#4c1"
-         |     d="M37 0h4v20h-4z"
+         |     d="M58 0h4v20h-4z"
          |     id="path13" />
          |  <rect
          |     rx="3"
-         |     width="90"
+         |     width="105.5"
          |     height="20"
          |     fill="url(#a)"
          |     id="rect15" />
@@ -315,18 +315,18 @@ object EvalMod {
          |     font-size="11"
          |     id="g17">
          |    <text
-         |       x="19.5"
-         |       y="15"
+         |       x="28.5"
+         |       y="14"
          |       id="text19">errorRate</text>
          |    <text
-         |       x="62.5"
+         |       x="60.5"
          |       y="15"
          |       id="text23"
          |       style="fill:#010101;fill-opacity:0.3" />
          |    <text
-         |       x="62.5"
+         |       x="81.0"
          |       y="14"
-         |       id="text25">$percentage</text>
+         |       id="text25">${percentage}</text>
          |  </g>
          |</svg>
        """.stripMargin
