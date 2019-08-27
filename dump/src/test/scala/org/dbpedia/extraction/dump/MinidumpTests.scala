@@ -36,6 +36,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   val classLoader =   getClass.getClassLoader
   val mappingsConfig = new Config(classLoader.getResource("mappings.extraction.minidump.properties").getFile)
   val genericConfig = new Config(classLoader.getResource("generic-spark.extraction.minidump.properties").getFile)
+  val nifAbstractConfig = new Config(classLoader.getResource("extraction.nif.abstracts.properties").getFile)
   val minidumpDir = new File(classLoader.getResource("minidumps").getFile)
 
 
@@ -89,7 +90,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     extract(mappingsConfig,jobsRunning)
     //extract(genericConfig,jobsRunning)
-
+//extract (nifAbstractConfig, jobsRunning)
 
     def extract (config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]]) = {
       val configLoader = new ConfigLoader(config)
@@ -125,7 +126,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   test("IRI Coverage Tests") {
 
 
-    val hadoopHomeDir = new File("./.haoop/")
+    val hadoopHomeDir = new File("./.hadoop/")
     hadoopHomeDir.mkdirs()
     System.setProperty("hadoop.home.dir", hadoopHomeDir.getAbsolutePath)
 
