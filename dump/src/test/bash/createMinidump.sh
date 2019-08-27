@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LANG="en fr"
+LANG="en fr de nl"
 
 for l in ${LANG} ; do
 	TARGET="../resources/minidumps/"$l"/wiki.xml"

@@ -2,7 +2,8 @@ package org.dbpedia.extraction.config
 
 import java.io.{File, FileOutputStream, OutputStreamWriter, Writer}
 import java.net.URL
-import java.util.Properties
+import java.text.SimpleDateFormat
+import java.util.{Calendar, Properties}
 import java.util.logging.{Level, Logger}
 
 import org.dbpedia.extraction.config.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
@@ -84,7 +85,12 @@ class Config(val configPath: String) extends
     */
   lazy val dbPediaVersion: String = parseVersionString(getString(this, "dbpedia-version").trim) match{
     case Success(s) => s
-    case Failure(e) => throw new IllegalArgumentException("dbpedia-version option in universal.properties was not defined or in a wrong format", e)
+    case Failure(e) =>  {
+      val version = new SimpleDateFormat("yyyy-MM").format(Calendar.getInstance().getTime)
+      logger.info(s"dbpedia-version option in universal.properties was not defined using $version")
+      version
+    }
+     // throw new IllegalArgumentException("dbpedia-version option in universal.properties was not defined or in a wrong format", e)
   }
 
   lazy val wikidataMappingsFile: File = {
