@@ -76,13 +76,28 @@ public class LinkExtractor implements NodeVisitor {
 
 		} else if(node.nodeName().equals("a")) {
             String link = node.attr("href");
-            //remove internal links linking to mediawiki meta pages. Also removes links that contain ":".
-            if (link.contains("mediawiki") && !link.contains(":")) {
+            //TODO central string management
+			/**
+			 * remove internal links linking to mediawiki meta pages. Also removes links that contain ":".
+			 * Wikipedia api standard link looks like (allowed):
+			 * <a href="/wiki/Philosopher" title="Philosopher">philosopher</a>
+			 * see Schopenhauer: https://en.wikipedia.org/w/api.php?uselang=en&format=xml&action=parse&prop=text&pageid=17340400
+			 */
+            String linkPrefix = "/wiki/";
+            // standard wikilinks
+            if (link.contains(linkPrefix) && !link.contains(":")) {
                 tempLink = new Link();
                 String uri = cleanLink(node.attr("href"), false);
                 setUri(uri);
-            } else if (link.contains("mediawiki") && link.contains(":")) {
 
+            //simple example of Help:IPA
+			// <a href="/wiki/Help:IPA/Standard_German" title="Help:IPA/Standard German">[ˈaɐ̯tʊɐ̯ ˈʃoːpn̩haʊ̯ɐ]</a>
+            } else if (link.contains(linkPrefix) && link.contains(":")) {
+				/**
+				 * TODO buggy
+				 * Cleans up child nodes: difficult example
+				 * <a href="/wiki/Help:IPA/English" title="Help:IPA/English">/<span style="border-bottom:1px dotted"><span title="/ˈ/: primary stress follows">ˈ</span><span title="/ʃ/: 'sh' in 'shy'">ʃ</span><span title="/oʊ/: 'o' in 'code'">oʊ</span><span title="'p' in 'pie'">p</span><span title="/ən/: 'on' in 'button'">ən</span><span title="'h' in 'hi'">h</span><span title="/aʊ/: 'ou' in 'mouth'">aʊ</span><span title="/./: syllable break">.</span><span title="/ər/: 'er' in 'letter'">ər</span></span>/</a>
+				 */
                 if (!node.childNodes().isEmpty()) {
                     if (node.childNode(0).nodeName().equals("#text") &&
                             node.childNode(0).toString().contains(":") &&
@@ -94,7 +109,7 @@ public class LinkExtractor implements NodeVisitor {
                 } else {
                     skipLevel = depth;
                 }
-
+            //TODO add example
             } else if (node.attr("class").equals("external text")) {
                 //don't skip external links
                 tempLink = new Link();
@@ -144,6 +159,7 @@ public class LinkExtractor implements NodeVisitor {
 	
 	private String cleanLink(String uri, boolean external) {
 		if(!external) {
+			//TODO central string management
 			if(!this.context.language.equals("en")) {
 
 				uri="http://"+this.context.language+".dbpedia.org/resource/"+uri.substring(uri.indexOf("?title=")+7);

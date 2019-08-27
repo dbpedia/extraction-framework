@@ -19,7 +19,7 @@ import org.dbpedia.extraction.config.Config.MediaWikiConnection
 class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[String]) {
 
 
-  protected def apiUrl: URL = new URL(connectionConfig.apiUrl)
+  //protected def apiUrl: URL = new URL(connectionConfig.apiUrl)
   //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
 
   protected val maxRetries: Int = connectionConfig.maxRetries
@@ -55,17 +55,20 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
     // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
     // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
     // TODO: test this in detail!!! there may be other characters that need to be escaped.
+    // TODO central string management
     var titleParam = pageTitle.encodedWithNamespace
     MediaWikiConnector.CHARACTERS_TO_ESCAPE foreach {
       case (search, replacement) =>  titleParam = titleParam.replace(search, replacement);
     }
 
+    val apiUrl: URL = new URL(connectionConfig.apiUrl.replace("{{LANG}}",pageTitle.language.wikiCode))
     // Fill parameters
     val parameters = "uselang=" + pageTitle.language.wikiCode + (pageTitle.id match{
       case Some(id) if apiParameterString.contains("%d") =>
         apiParameterString.replace("&page=%s", "").format(id)
       case _ => apiParameterString.replaceAll("&pageid=[^&]+", "").format(titleParam)
     })
+    println(s"mediawikiurl: $apiUrl?$parameters")
 
     for(counter <- 1 to maxRetries)
     {
