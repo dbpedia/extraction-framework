@@ -1,17 +1,19 @@
 package org.dbpedia.extraction.dump
 
-import java.io.{File, FileInputStream}
+import java.io.{File, FileInputStream, FileOutputStream}
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.concurrent.ConcurrentLinkedQueue
 
 import org.aksw.rdfunit.RDFUnit
 import org.aksw.rdfunit.enums.TestCaseExecutionType
-import org.aksw.rdfunit.io.reader.RdfModelReader
+import org.aksw.rdfunit.io.reader.{RdfModelReader, RdfStreamReader}
+import org.aksw.rdfunit.io.writer.RdfFileWriter
 import org.aksw.rdfunit.model.interfaces.{TestCase, TestSuite}
 import org.aksw.rdfunit.sources.{SchemaSourceFactory, TestSource, TestSourceBuilder}
 import org.aksw.rdfunit.tests.generators.{ShaclTestGenerator, TestGeneratorFactory}
 import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator
+import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream, BZip2CompressorOutputStream}
 import org.apache.commons.io.FileUtils
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
@@ -177,15 +179,17 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     val shaclTests: java.util.Collection[TestCase] = shaclTestGenerator.generate(schema)
     val shaclTestSuite = new TestSuite(shaclTests)
 
-    val testSource = new TestSourceBuilder()
-      .setPrefixUri("minidump", "http://dbpedia.org/minidump")
-      .setInMemReader(new RdfModelReader((ModelFactory.createDefaultModel()))) // here pass a model
-      //.setInMemFromCustomText(fileContentAsString, "TURTLE") // or pass the file content as String
-      .setReferenceSchemata(schema)
-      .build()
-    val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.shaclTestCaseResult, testSource, shaclTestSuite)
+    for (file <- filesToBeValidated ) {
+      val testSource = new TestSourceBuilder()
+        .setPrefixUri("minidump", "http://dbpedia.org/minidump")
+        .setInMemReader(new RdfStreamReader(new BZip2CompressorInputStream(new FileInputStream(file.getAbsolutePath)), "TURTLE"))
+        .setReferenceSchemata(schema)
+        .build()
+      val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.shaclTestCaseResult, testSource, shaclTestSuite)
 
-    assert(results.getTestCaseResults.isEmpty)
+      assert(results.getTestCaseResults.isEmpty)
+
+    }
 
 
   }
