@@ -102,7 +102,7 @@ object TypeConsistencyCheck {
       val destination = createDestination(finder, date, formats)
 
       val typeDatasetFile: File = finder.file(date, typesDataset).get
-      val mappedTripleDatasetFile: File = finder.file(date, typesDataset).get
+      val mappedTripleDatasetFile: File = finder.file(date, mappedTripleDataset).get
       checkTypeConsistency(ontology, typeDatasetFile, mappedTripleDatasetFile, destination, lang)
     }
   }
