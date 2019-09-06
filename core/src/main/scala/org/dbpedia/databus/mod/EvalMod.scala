@@ -12,10 +12,11 @@ import org.dbpedia.validation.{TestSuiteFactory, ValidationExecutor}
 import scopt.OptionParser
 
 import scala.language.postfixOps
+import scala.sys.process.Process
 
 object EvalMod {
 
-  val modVocab : String =
+  val modVocab: String =
     s"""
        |# no base
        |@prefix mod: <http://dataid.dbpedia.org/ns/mod.ttl#> .
@@ -66,7 +67,7 @@ object EvalMod {
         .text("TODO")
     }
 
-    optionParser.parse(args,EvalModConf()) match {
+    optionParser.parse(args, EvalModConf()) match {
 
       case Some(evalModConf) =>
 
@@ -126,9 +127,10 @@ object EvalMod {
 
             new File(s"$repo/$path/").mkdirs()
 
-            if( ! new File(s"$repo/$path/$sha.svg" ).exists() ) {
 
-              downloadFile(downloadURL,new File(s"$repo/tmp/${sha}_${downloadURL.split("/").last}"))
+            if (!new File(s"$repo/$path/$sha.ttl").exists()) {
+
+              downloadFile(downloadURL, new File(s"$repo/tmp/${sha}_${downloadURL.split("/").last}"))
 
               val encodedReport = {
                 ValidationExecutor.testIris(
@@ -148,7 +150,7 @@ object EvalMod {
               val html = modReport._1
               val errorRate = modReport._2
 
-              writeFile(s"$repo/$path/$sha.html",html)
+              writeFile(s"$repo/$path/$sha.html", html)
 
               writeSVG(s"$repo/$path/$sha.svg", errorRate)
 
@@ -156,13 +158,24 @@ object EvalMod {
 
               FileUtils.deleteQuietly(new File(s"$repo/tmp/${sha}_${downloadURL.split("/").last}"))
             }
+            else if (sha == "d3dda84eb03b9738d118eb2be78e246106900493c0ae07819ad60815134a8058") {
+
+              val cmd = Seq("bash", "-c", s"grep $file $repo/$path/$sha.ttl >/dev/null")
+
+              val exitCode = Process(cmd).!
+
+              if (exitCode != 0) {
+                writeActivityTTL(s"$repo/$path/$sha.ttl", file,
+                  0, 0.0f, serviceURL, path, sha, repo, true)
+              }
+            }
           }
         )
       }
     )
   }
 
-  def downloadFile(downloadURL: String, sinkFile: File) : Unit = {
+  def downloadFile(downloadURL: String, sinkFile: File): Unit = {
 
     //TODO change method of downloading
 
@@ -177,9 +190,9 @@ object EvalMod {
       fw.write(contents)
       System.err.println(
         s"${new SimpleDateFormat("yyyy-dd-MM hh:mm:ss").format(Calendar.getInstance().getTime)} " +
-        s"| INFO " +
-        s"| writeFile " +
-        s"| written (append: $append) " + file
+          s"| INFO " +
+          s"| writeFile " +
+          s"| written (append: $append) " + file
       )
     }
     finally fw.close()
@@ -192,35 +205,47 @@ object EvalMod {
 
   def writeActivityTTL(activityFile: String, databusFile: String,
                        errorRate: Float, coverage: Float, serviceRepoURL: String,
-                       path: String, sha: String, repo: String) {
+                       path: String, sha: String, repo: String, append: Boolean = false) {
 
-  val invocationTime: ZonedDateTime = ZonedDateTime.ofInstant(Instant.now(), ZoneId.systemDefault())
-  val ntriples =
-    s"""
-       |<$serviceRepoURL/$path/$sha.svg> <http://dataid.dbpedia.org/ns/mod.ttl#svgDerivedFrom> <$databusFile> .
-       |<$serviceRepoURL/$path/$sha.html> <http://dataid.dbpedia.org/ns/mod.ttl#htmlDerivedFrom> <$databusFile> .
-       |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#generated> <$serviceRepoURL/$path/$sha.svg> .
-       |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#generated> <$serviceRepoURL/$path/$sha.html> .
-       |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#used> <$databusFile> .
-       |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#endedAtTime> "$invocationTime"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-       |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <$serviceRepoURL/modvocab.ttl#EvalMod> .
-       |<$serviceRepoURL/$path/$sha.ttl#this> <$serviceRepoURL/modvocab.ttl#errorRate> "$errorRate"^^<http://www.w3.org/2001/XMLSchema#float> .
-       |""".stripMargin
+    val invocationTime: ZonedDateTime = ZonedDateTime.ofInstant(Instant.now(), ZoneId.systemDefault())
 
-//<$serviceRepoURL/$path/$sha.ttl#this> <$serviceRepoURL/modvocab.ttl#coverage> "$coverage"^^<http://www.w3.org/2001/XMLSchema#float> .
+    val ntriples = {
 
-    writeFile(activityFile, ntriples)
+      if (append) {
+        s"""
+           |<$serviceRepoURL/$path/$sha.svg> <http://dataid.dbpedia.org/ns/mod.ttl#svgDerivedFrom> <$databusFile> .
+           |<$serviceRepoURL/$path/$sha.html> <http://dataid.dbpedia.org/ns/mod.ttl#htmlDerivedFrom> <$databusFile> .
+           |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#used> <$databusFile> .
+           |""".stripMargin
+      }
+      else {
+        s"""
+           |<$serviceRepoURL/$path/$sha.svg> <http://dataid.dbpedia.org/ns/mod.ttl#svgDerivedFrom> <$databusFile> .
+           |<$serviceRepoURL/$path/$sha.html> <http://dataid.dbpedia.org/ns/mod.ttl#htmlDerivedFrom> <$databusFile> .
+           |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#generated> <$serviceRepoURL/$path/$sha.svg> .
+           |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#generated> <$serviceRepoURL/$path/$sha.html> .
+           |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#used> <$databusFile> .
+           |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/ns/prov#endedAtTime> "$invocationTime"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+           |<$serviceRepoURL/$path/$sha.ttl#this> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <$serviceRepoURL/modvocab.ttl#EvalMod> .
+           |<$serviceRepoURL/$path/$sha.ttl#this> <$serviceRepoURL/modvocab.ttl#errorRate> "$errorRate"^^<http://www.w3.org/2001/XMLSchema#float> .
+           |""".stripMargin
+      }
+    }
+
+    //<$serviceRepoURL/$path/$sha.ttl#this> <$serviceRepoURL/modvocab.ttl#coverage> "$coverage"^^<http://www.w3.org/2001/XMLSchema#float> .
+
+    writeFile(activityFile, ntriples, append)
     //writeFile(s"$repo/aggregate.nt", ntriples, true)
   }
 
   def writeSVG(svgFile: String, errorRate: Float): Unit = {
 
     var color = errorRate match {
-      case x if (1-x) >= 1.0f => "#4c1"
-      case x if (1-x) > 0.80f => "#fc0"
+      case x if (1 - x) >= 1.0f => "#4c1"
+      case x if (1 - x) > 0.80f => "#fc0"
       case _ => "#cc0000"
     }
-    
+
     val percentage = BigDecimal((errorRate * 100).toDouble).setScale(2, BigDecimal.RoundingMode.HALF_UP) + "%"
 
     val svg =
