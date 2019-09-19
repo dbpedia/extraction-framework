@@ -13,6 +13,7 @@ for l in ${LANG} ; do
 	echo "LANGUAGE $l"
 	PAGES=`grep "$l.wikipedia.org" uris.lst | sed 's|wikipedia.org/wiki/|wikipedia.org/wiki/Special:Export/|' `
 	# copy header
+	mkdir -p "../resources/minidumps/"$l
 	TARGET="../resources/minidumps/"$l"/wiki.xml"
 	echo "TARGET: $TARGET"
 	cp head.xml "$TARGET"
