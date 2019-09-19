@@ -232,7 +232,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
       triples += rawTables(tableUri, RdfNamespace.NIF.append("beginIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
       triples += rawTables(tableUri, RdfNamespace.NIF.append("endIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
       triples += rawTables(tableUri, RdfNamespace.HTML.append("class"), table.getOuterClass, sourceUrl, RdfNamespace.XSD.append("string"))
-      triples += rawTables(tableUri, RdfNamespace.DC.append("source"), table.getHtml, sourceUrl, RdfNamespace.RDF.append("XMLLiteral"))
+      triples += rawTables(tableUri, RdfNamespace.DC.append("source"), table.getHtml, sourceUrl, RdfNamespace.RDF.append("HTML"))
     }
     triples
   }
@@ -248,7 +248,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
       triples += equations(equUri, RdfNamespace.NIF.append("referenceContext"), contextUri, sourceUrl, null)
       triples += equations(equUri, RdfNamespace.NIF.append("beginIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
       triples += equations(equUri, RdfNamespace.NIF.append("endIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
-      triples += equations(equUri, RdfNamespace.DC.append("source"), equ.getHtml, sourceUrl, RdfNamespace.RDF.append("XMLLiteral"))
+      triples += equations(equUri, RdfNamespace.DC.append("source"), equ.getHtml, sourceUrl, RdfNamespace.RDF.append("HTML"))
     }
     triples
   }

@@ -159,7 +159,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
   test("RDFUnit SHACL"){
     val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
-    println("FILES, FILES, FILES\n"+filesToBeValidated)
+    //println("FILES, FILES, FILES\n"+filesToBeValidated)
 
     val dbpedia_ont: Model = ModelFactory.createDefaultModel()
     RDFDataMgr.read(dbpedia_ont, new FileInputStream(dbpedia_ontologyFile),RDFLanguages.RDFXML)
@@ -180,6 +180,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     val shaclTestSuite = new TestSuite(shaclTests)
 
     for (file <- filesToBeValidated ) {
+      println("Validating: "+file)
       val testSource = new TestSourceBuilder()
         .setPrefixUri("minidump", "http://dbpedia.org/minidump")
         .setInMemReader(new RdfStreamReader(new BZip2CompressorInputStream(new FileInputStream(file.getAbsolutePath)), "TURTLE"))

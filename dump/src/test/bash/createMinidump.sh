@@ -2,7 +2,7 @@
 
 
 # sort the file
-sort -u -o uris.lst uris.lst 
+LC_ALL=C sort -u -o uris.lst uris.lst 
 
 # detect languages
 LANG=`sed 's|^https://||;s|\.wikipedia.org.*||' uris.lst | sort -u` 
