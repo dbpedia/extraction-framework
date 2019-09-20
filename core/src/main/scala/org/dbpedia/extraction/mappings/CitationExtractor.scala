@@ -134,7 +134,8 @@ extends WikiPageExtractor
         } {
 
             val citationIri = getCitationIRI(template).toString
-
+            
+            if(!citationIri.contains(" ")){
             quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceIri, null)
 
             for (property <- template.children; if !property.key.forall(_.isDigit)) {
@@ -153,6 +154,7 @@ extends WikiPageExtractor
                         case ex: IllegalArgumentException => println(ex)
                     }
                 }
+            }
             }
         }
         quads
