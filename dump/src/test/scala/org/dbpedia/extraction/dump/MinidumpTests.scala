@@ -92,7 +92,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     extract(mappingsConfig,jobsRunning)
     extract(genericConfig,jobsRunning)
-    //extract (nifAbstractConfig, jobsRunning)
+    extract (nifAbstractConfig, jobsRunning)
 
     def extract (config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]]) = {
       val configLoader = new ConfigLoader(config)

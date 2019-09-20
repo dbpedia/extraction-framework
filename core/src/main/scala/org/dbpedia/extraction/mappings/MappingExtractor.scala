@@ -21,7 +21,7 @@ extends PageNodeExtractor
   private val templateMappings = context.mappings.templateMappings
   private val tableMappings = context.mappings.tableMappings
 
-  private val resolvedMappings = context.redirects.resolveMap(templateMappings)
+  private val resolvedMappings: Map[String, Extractor[TemplateNode]] = context.redirects.resolveMap(templateMappings)
 
   override val datasets = templateMappings.values.flatMap(_.datasets).toSet ++ tableMappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyPropertiesLiterals)
 
@@ -48,7 +48,9 @@ extends PageNodeExtractor
       {
         resolvedMappings.get(templateNode.title.decoded) match
         {
-          case Some(mapping) => mapping.extract(templateNode, subjectUri)
+          case Some(mapping) => {
+            mapping.extract(templateNode, subjectUri)
+          }
           case None => Seq.empty
         }
       }
