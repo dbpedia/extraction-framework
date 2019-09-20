@@ -10,6 +10,8 @@ import scala.collection.mutable.ArrayBuffer
 import scala.util.{Failure, Success}
 
 import scala.collection.convert.decorateAsScala._
+import scala.language.postfixOps
+
 
 /**
  * Template transformations.
