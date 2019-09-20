@@ -2,7 +2,7 @@ package org.dbpedia.extraction.wikiparser
 
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.{Language, WikiUtil}
-import org.dbpedia.iri.UriDecoder
+import org.dbpedia.iri.{UriDecoder, UriToIriDecoder}
 import org.dbpedia.util.text.ParseExceptionIgnorer
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 
@@ -41,16 +41,22 @@ class WikiTitle (
     val encodedWithNamespace = withNamespace(true)
 
     /** page IRI for this page title */
-    val pageIri = language.baseUri+"/wiki/"+encodedWithNamespace
+    val pageIri = language.baseUri+"/wiki/"+ encodedWithNamespace
 
     /** resource IRI for this page title */
     val resourceIri = language.resourceUri.append(encodedWithNamespace)
 
-    private def withNamespace(encode : Boolean) : String =
-    {
+    private def withNamespace(encode : Boolean) : String = {
+      // get namespace
       var ns = namespace.name(language)
-      if (encode) ns = WikiUtil.wikiEncode(ns).capitalize(language.locale)
-      (if (ns.isEmpty) ns else ns+':') + (if (encode) encoded else decoded)
+      // encode namespace, not sure when this is necessary
+      if (encode) {
+          ns = WikiUtil.wikiEncode(ns).capitalize(language.locale)
+      }
+      if(ns.nonEmpty) {
+          ns = ns+':'
+      }
+      return ns + (if (encode) encoded else decoded)
     }
 
     /**

@@ -134,27 +134,28 @@ extends WikiPageExtractor
         } {
 
             val citationIri = getCitationIRI(template).toString
-            
+            // see https://github.com/dbpedia/extraction-framework/issues/594
             if(!citationIri.contains(" ")){
-            quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceIri, null)
+                quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceIri, null)
 
-            for (property <- template.children; if !property.key.forall(_.isDigit)) {
-                // exclude numbered properties
-                // TODO clean HTML
+                for (property <- template.children; if !property.key.forall(_.isDigit)) {
+                    // exclude numbered properties
+                    // TODO clean HTML
 
-                val cleanedPropertyNode = NodeUtil.removeParentheses(property)
+                    val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
-                val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
-                for (splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.unit.nonEmpty) {
-                    val propertyUri = getPropertyUri(property.key)
-                    try {
-                        quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.get)
-                    }
-                    catch {
-                        case ex: IllegalArgumentException => println(ex)
+                    val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
+                    for (splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.unit.nonEmpty) {
+                        val propertyUri = getPropertyUri(property.key)
+                        try {
+
+                            quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.get)
+                        }
+                        catch {
+                            case ex: IllegalArgumentException => println(ex)
+                        }
                     }
                 }
-            }
             }
         }
         quads

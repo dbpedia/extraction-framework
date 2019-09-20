@@ -92,7 +92,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     extract(mappingsConfig,jobsRunning)
     extract(genericConfig,jobsRunning)
-    extract (nifAbstractConfig, jobsRunning)
+    //extract (nifAbstractConfig, jobsRunning)
 
     def extract (config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]]) = {
       val configLoader = new ConfigLoader(config)
@@ -178,6 +178,8 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     val shaclTestGenerator = new ShaclTestGenerator()
     val shaclTests: java.util.Collection[TestCase] = shaclTestGenerator.generate(schema)
     val shaclTestSuite = new TestSuite(shaclTests)
+
+    //org.apache.jena.riot.system.IRIResolver.
 
     for (file <- filesToBeValidated ) {
       println("Validating: "+file)

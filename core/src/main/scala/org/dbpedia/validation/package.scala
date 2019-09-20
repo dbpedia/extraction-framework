@@ -9,6 +9,7 @@ import org.dbpedia.validation.TestCaseImpl.TestApproach
 import org.dbpedia.validation.TriggerImpl.Trigger
 
 import scala.collection.mutable.ArrayBuffer
+import scala.language.implicitConversions
 
 //TODO cleanup
 package object validation {

@@ -67,8 +67,9 @@ object WikiUtil
     
     /**
      * Replacement string array for StringUtils.escape
+      * SH: I added ^`?" not sure why they were removed in the first place
      */
-    def iriReplacements: Array[String] = StringUtils.replacements('%', "#<>[]{}|\\")
+    def iriReplacements: Array[String] = StringUtils.replacements('%', "#<>[]{}|\\^`?\"")
     
     // store our own private copy of the mutable array
     private val replacements = iriReplacements
@@ -76,7 +77,8 @@ object WikiUtil
     /**
      * Replaces multiple spaces (U+0020) by one, removes spaces from start and end, 
      * replaces spaces by underscores, and percent-encodes the following characters:
-     * 
+     *
+      * TODO CENTRAL STRING MANAGEMENT
      * "#%<>?[\]^`{|}
      *
      * The result is usable in most parts of a IRI. The ampersand '&' is not escaped though.

@@ -99,7 +99,7 @@ object Server
     }
 
     /**
-     * Builds template redirects from Wiki statistics as collected by {@link CreateMappingStats}
+     * Builds template redirects from Wiki statistics as collected by {todo link CreateMappingStats}
      * Main purpose is to clean template names from the template namespace so that redirects can be used in Extractors
      * (Extractors use decoded wiki titles)
      * @param redirects
