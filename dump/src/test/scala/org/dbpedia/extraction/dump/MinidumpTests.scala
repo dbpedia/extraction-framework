@@ -20,6 +20,10 @@ import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.apache.spark.sql.{SQLContext, SparkSession}
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.dump.extract.ConfigLoader
+import org.dbpedia.extraction.util.MappingsDownloader.apiUrl
+import org.dbpedia.extraction.util.{Language, WikiDownloader}
+import org.dbpedia.extraction.util.OntologyDownloader.{download, load, save}
+import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.validation.{TestSuiteFactory, ValidationExecutor}
 import org.scalatest.{BeforeAndAfterAll, FunSuite}
 
@@ -68,7 +72,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
 
 
-    println("Extracting Minidump")
+
 
     // copy dumps
 
@@ -81,13 +85,38 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
         new File(f+"/wiki.xml.bz2"),
         new File(targetDir, s"${wikiMasque}-$date-pages-articles-multistream.xml.bz2")
       )
-  })
+    })
 
+    /**
+      * download ontology
+      */
+    println("Download ontology")
+    val dumpFile = new File("../ontology.xml")
+    val owlFile = new File("../ontology.owl")
+    val version = "1.0"
+    org.dbpedia.extraction.util.OntologyDownloader.download(dumpFile)
+    val ontology = load(dumpFile)
+    org.dbpedia.extraction.util.OntologyDownloader.save(ontology, version, owlFile)
 
+    /**
+      * download mappings
+      */
+    println("Download mappings")
+    val dir = new File("../mappings")
+    // don't use mkdirs, that often masks mistakes.
+    require(dir.isDirectory || dir.mkdir, "directory ["+dir+"] does not exist and cannot be created")
+    Namespace.mappings.values.par.foreach { namespace =>
+      val file = new File(dir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
+      val nanos = System.nanoTime
+      println("downloading mappings from "+apiUrl+" to "+file)
+      new WikiDownloader(apiUrl).download(file, namespace)
+      println("downloaded mappings from "+apiUrl+" to "+file+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
+    }
 
     /**
       * mappings extraction
        */
+    println("Extracting Minidump")
     val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
 
     extract(genericConfig,jobsRunning)
