@@ -852,7 +852,7 @@
 	&lt;!-- {{ PropertyMapping | templateProperty = malt | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = map2 | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = remarks | ontologyProperty = }} --&gt;
-}}</text></revision></page><page><title>Mapping sr:Infobox protein</title><ns>256</ns><id>9015</id><revision><id>31050</id><timestamp>2014-01-28T08:34:24Z</timestamp><text>{{TemplateMapping | mapToClass = Protein
+}}</text></revision></page><page><title>Mapping sr:Infobox protein</title><ns>256</ns><id>9015</id><revision><id>52419</id><timestamp>2017-10-15T14:48:52Z</timestamp><text>{{TemplateMapping | mapToClass = Protein
 | mappings = 
 	{{ PropertyMapping | templateProperty = Chromosome | ontologyProperty = chromosome }}
 	{{ PropertyMapping | templateProperty = EntrezGene | ontologyProperty = entrezgene}}
@@ -864,14 +864,17 @@
 	{{ PropertyMapping | templateProperty = UniProt | ontologyProperty = uniprot }}
 	{{ PropertyMapping | templateProperty = PDB | ontologyProperty = pdb }}
 	{{ PropertyMapping | templateProperty = ECnumber | ontologyProperty = ecNumber }}
-	{{ PropertyMapping | templateProperty = ATC prefix | ontologyProperty = atcPrefix }}
-	{{ PropertyMapping | templateProperty = ATC_suffix | ontologyProperty = atcSuffix  }}
-	{{ PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcSupplemental }}
+	{{CombineSimpleMapping
+	| templateProperty1 = ATC_prefix
+	| templateProperty2 = ATC_suffix
+	| ontologyProperty = atcCode
+	}}
+	{{ PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcCode }}
 	{{ PropertyMapping | templateProperty = CAS_number | ontologyProperty = casNumber }}
 	{{ PropertyMapping | templateProperty = CAS_supplemental | ontologyProperty = casSupplemental }}
 	{{ PropertyMapping | templateProperty = DrugBank | ontologyProperty = drugbank }}
 
-}}</text></revision></page><page><title>Mapping sr:Infobox protein-lat</title><ns>256</ns><id>8913</id><revision><id>30714</id><timestamp>2014-01-22T10:54:47Z</timestamp><text>{{TemplateMapping | mapToClass = Protein
+}}</text></revision></page><page><title>Mapping sr:Infobox protein-lat</title><ns>256</ns><id>8913</id><revision><id>52422</id><timestamp>2017-10-15T14:53:51Z</timestamp><text>{{TemplateMapping | mapToClass = Protein
 | mappings = 
 	{{ PropertyMapping | templateProperty = Symbol | ontologyProperty = symbol }}
         {{ PropertyMapping | templateProperty = EntrezGene| ontologyProperty = entrezgene}}
@@ -883,11 +886,13 @@
 	{{ PropertyMapping | templateProperty = OMIM | ontologyProperty = omim }}
 	{{ PropertyMapping | templateProperty = ECnumber | ontologyProperty = ecNumber}}
 	{{ PropertyMapping | templateProperty = PDB | ontologyProperty =pdb }}
-	{{ PropertyMapping | templateProperty = width | ontologyProperty =width }}
-	{{ PropertyMapping | templateProperty = ATC prefix | ontologyProperty = atcPrefix}} 
-	{{ PropertyMapping | templateProperty = ATC_prefix | ontologyProperty =atcPrefix }}
-	{{ PropertyMapping | templateProperty = ATC_suffix | ontologyProperty = atcSuffix}} 
-	{{ PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty =atcSupplemental }} 
+	{{ PropertyMapping | templateProperty = width | ontologyProperty =width }}	
+        {{CombineSimpleMapping
+	| templateProperty1 = ATC_prefix
+	| templateProperty2 = ATC_suffix
+	| ontologyProperty = atcCode
+	}}
+	{{ PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty =atcCode }} 
 	{{ PropertyMapping | templateProperty = CAS_number | ontologyProperty = casNumber}} --&gt;
 	{{ PropertyMapping | templateProperty = CAS_supplemental | ontologyProperty =casSupplemental }}
 	{{ PropertyMapping | templateProperty = DrugBank | ontologyProperty = drugbank}} 
@@ -1099,16 +1104,14 @@
 	{{PropertyMapping | templateProperty =  licenca  | ontologyProperty = license }}
 	{{PropertyMapping | templateProperty =  vebsajt  | ontologyProperty = foaf:homepage }}
 
-}}</text></revision></page><page><title>Mapping sr:Lek info-okvir</title><ns>256</ns><id>8978</id><revision><id>30957</id><timestamp>2014-01-24T12:59:27Z</timestamp><text>{{TemplateMapping | mapToClass = Drug
+}}</text></revision></page><page><title>Mapping sr:Lek info-okvir</title><ns>256</ns><id>8978</id><revision><id>52418</id><timestamp>2017-10-15T14:48:33Z</timestamp><text>{{TemplateMapping | mapToClass = Drug
 | mappings = 
-	 {{ PropertyMapping | templateProperty = ATC_prefix | ontologyProperty = atcPrefix }}
 	 {{ PropertyMapping | templateProperty = CAS_number | ontologyProperty = casNumber }} 
 	&lt;!-- {{ PropertyMapping | templateProperty = C | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = molecular_weight | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = H | ontologyProperty = }} --&gt;
 	 {{ PropertyMapping | templateProperty = IUPAC_name | ontologyProperty = iupacName }} 
 	 {{ PropertyMapping | templateProperty = PubChem | ontologyProperty = pubchem }} 
-	 {{ PropertyMapping | templateProperty = ATC_suffix | ontologyProperty = atcSuffix }}
 	&lt;!-- {{ PropertyMapping | templateProperty = routes_of_administration | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = ChemSpiderID | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = elimination_half-life | ontologyProperty = }} --&gt;
@@ -1142,7 +1145,7 @@
 	&lt;!-- {{ PropertyMapping | templateProperty = width2 | ontologyProperty = }} --&gt;
 	 {{ PropertyMapping | templateProperty = boiling_point | ontologyProperty = boilingPoint | unit = Temperature }} 
 	&lt;!-- {{ PropertyMapping | templateProperty = dependency_liability | ontologyProperty = }} --&gt;
-	 {{ PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcSupplemental }} 
+	 {{ PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcCode }} 
 	&lt;!-- {{ PropertyMapping | templateProperty = ChEBI | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = density | ontologyProperty = }} --&gt;
 	 {{ PropertyMapping | templateProperty = melting_high | ontologyProperty = meltingPoint | unit = Temperature }}
@@ -1167,7 +1170,11 @@
 	&lt;!-- {{ PropertyMapping | templateProperty = melting_notes | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = sec_combustion | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = type | ontologyProperty = }} --&gt;
-	 {{ PropertyMapping | templateProperty = ATC prefix | ontologyProperty = atcPrefix  }} 
+	{{CombineSimpleMapping
+	| templateProperty1 = ATC_prefix
+	| templateProperty2 = ATC_suffix
+	| ontologyProperty = atcCode
+	}}
 	&lt;!-- {{ PropertyMapping | templateProperty = ATCvet | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = Ag | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = As | ontologyProperty = }} --&gt;
@@ -1209,14 +1216,17 @@
 	&lt;!-- {{ PropertyMapping | templateProperty = source | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = target | ontologyProperty = }} --&gt;
 	&lt;!-- {{ PropertyMapping | templateProperty = vaccine_type | ontologyProperty = }} --&gt;
-}}</text></revision></page><page><title>Mapping sr:Lek info-okvir-lat</title><ns>256</ns><id>8892</id><revision><id>31275</id><timestamp>2014-01-31T10:54:20Z</timestamp><text>{{TemplateMapping | mapToClass = Drug
+}}</text></revision></page><page><title>Mapping sr:Lek info-okvir-lat</title><ns>256</ns><id>8892</id><revision><id>52416</id><timestamp>2017-10-15T14:47:19Z</timestamp><text>{{TemplateMapping | mapToClass = Drug
 | mappings = smiles
 
-	{{ PropertyMapping | templateProperty = ATC_prefix | ontologyProperty = atcPrefix }} 
 {{ PropertyMapping | templateProperty = smiles| ontologyProperty = smiles}} 
 	{{ PropertyMapping | templateProperty = PubChem | ontologyProperty = pubchem }}
 	{{ PropertyMapping | templateProperty = CAS_number | ontologyProperty = casNumber }}
-	{{ PropertyMapping | templateProperty = ATC_suffix | ontologyProperty = atcSuffix }}
+	{{CombineSimpleMapping
+	| templateProperty1 = ATC_prefix
+	| templateProperty2 = ATC_suffix
+	| ontologyProperty = atcCode
+	}}
 	{{ PropertyMapping | templateProperty = UNII | ontologyProperty = fdaUniiCode }}
 	{{ PropertyMapping | templateProperty = DrugBank | ontologyProperty = drugbank }}
 	{{ PropertyMapping | templateProperty = IUPAC_name | ontologyProperty = iupacName }}
@@ -1224,7 +1234,7 @@
 	{{ PropertyMapping | templateProperty = melting_point | ontologyProperty = meltingPoint | unit = Temperature }}
 	{{ PropertyMapping | templateProperty = synonyms | ontologyProperty = synonym }}
 	{{ PropertyMapping | templateProperty = bioavailability | ontologyProperty = bioavailability }}
-	{{ PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcSupplemental }}
+	{{ PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcCode }}
 	{{ PropertyMapping | templateProperty = MedlinePlus | ontologyProperty = medlineplus }}
 	{{ PropertyMapping | templateProperty = boiling_point | ontologyProperty = boilingPoint | unit = Temperature }}
 	{{ PropertyMapping | templateProperty = CAS_supplemental | ontologyProperty = casSupplemental }}
