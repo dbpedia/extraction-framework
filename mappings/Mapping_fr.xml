@@ -3545,70 +3545,6 @@
         {{PropertyMapping | templateProperty = création | ontologyProperty = creator }}
         {{PropertyMapping | templateProperty = type | ontologyProperty = type }}
         {{PropertyMapping | templateProperty = statut | ontologyProperty = status }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Département d'outre-mer</title><ns>210</ns><id>7019</id><revision><id>45236</id><timestamp>2015-02-12T20:05:36Z</timestamp><text>{{TemplateMapping 
-| mapToClass = OverseasDepartment 
-| mappings = 
-        {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
-        {{PropertyMapping | templateProperty = blason | ontologyProperty = blazon }} 
-        {{PropertyMapping | templateProperty = drapeau | ontologyProperty = flag }} 
-        {{PropertyMapping | templateProperty = imageloc | ontologyProperty = localizationThumbnail }} 
-        {{PropertyMapping | templateProperty = insee | ontologyProperty = inseeCode }}
-        {{PropertyMapping | templateProperty = préfecture | ontologyProperty = prefecture }}
-        {{PropertyMapping | templateProperty = sous-préfectures | ontologyProperty = subprefecture }}
-        {{PropertyMapping | templateProperty = arrondissements | ontologyProperty = numberOfArrondissement }} 
-        {{PropertyMapping | templateProperty = cantons | ontologyProperty = numberOfCanton }}
-        {{PropertyMapping | templateProperty = communes | ontologyProperty = numberOfSettlement }}
-        {{IntermediateNodeMapping
-        | nodeClass = TermOfOffice
-        | correspondingProperty = council
-        | mappings =
-           {{PropertyMapping | templateProperty = conseil régional | ontologyProperty = regionalCouncil }}
-           {{PropertyMapping | templateProperty = présidentR | ontologyProperty = presidentRegionalCouncil }}
-           {{DateIntervalMapping
-            | templateProperty          = mandatR
-            | startDateOntologyProperty = activeYearsStartYear
-            | endDateOntologyProperty   = activeYearsEndYear
-           }}
-        }} 
-        {{IntermediateNodeMapping
-        | nodeClass = TermOfOffice
-        | correspondingProperty = council
-        | mappings =
-           {{PropertyMapping | templateProperty = conseil général | ontologyProperty = generalCouncil }}
-        {{PropertyMapping | templateProperty = présidentG | ontologyProperty = presidentGeneralCouncil }}
-           {{DateIntervalMapping
-            | templateProperty          = mandatG
-            | startDateOntologyProperty = activeYearsStartYear
-            | endDateOntologyProperty   = activeYearsEndYear
-           }}
-        }} 
-        {{IntermediateNodeMapping
-        | nodeClass = PoliticalFunction
-        | correspondingProperty = politicalLeader
-        | mappings =
-           {{PropertyMapping | templateProperty = préfet | ontologyProperty = prefect }}
-        }} 
-        {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
-        {{PropertyMapping | templateProperty = langues régionales | ontologyProperty = regionalLanguage }}
-        {{IntermediateNodeMapping
-        | nodeClass = Demographics
-        | correspondingProperty = demographics
-        | mappings =
-           {{PropertyMapping | templateProperty = population | ontologyProperty = populationTotal }} 
-           {{PropertyMapping | templateProperty = année_pop | ontologyProperty = year }} 
-        }}
-        {{IntermediateNodeMapping
-        | nodeClass = Area
-        | correspondingProperty = wholeArea
-        | mappings =
-           {{PropertyMapping | templateProperty = superficie | ontologyProperty = value }} 
-        }}
-        {{PropertyMapping | templateProperty = tu | ontologyProperty = tu }}
-        {{PropertyMapping | templateProperty = domaine | ontologyProperty = domain }}
-        {{PropertyMapping | templateProperty = indicatif | ontologyProperty = areaCode }}
-        {{PropertyMapping | templateProperty = gentilé | ontologyProperty = peopleName }} 
-        {{GeocoordinatesMapping | latitude = latitude  | longitude = longitude }}
-        {{PropertyMapping | templateProperty = site web | ontologyProperty = foaf:homepage }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Département de France</title><ns>210</ns><id>7013</id><revision><id>47863</id><timestamp>2015-05-09T08:01:04Z</timestamp><text>{{TemplateMapping 
 | mapToClass = Department 
 | mappings = 
@@ -4739,6 +4675,35 @@
      {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
      {{PropertyMapping | templateProperty = langues | ontologyProperty = language }}
      {{PropertyMapping | templateProperty = langage de programmation | ontologyProperty = programmingLanguage }}
+}}</text></revision></page><page><title>Mapping fr:Infobox Maladie</title><ns>210</ns><id>12075</id><revision><id>52953</id><timestamp>2018-03-06T13:51:07Z</timestamp><text>{{TemplateMapping
+| mapToClass = Disease
+| mappings =
+	{{PropertyMapping | templateProperty = ICD10 | ontologyProperty = icd10	}}
+	{{PropertyMapping | templateProperty = Nom | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = ICD9 | ontologyProperty = icd9	}}
+	{{PropertyMapping | templateProperty = MeshID | ontologyProperty = meshId}}
+	{{PropertyMapping | templateProperty = DiseasesDB | ontologyProperty = diseasesDB }}
+	{{PropertyMapping | templateProperty = eMedicineSubj | ontologyProperty = eMedicineSubject}}
+	{{PropertyMapping | templateProperty = Légende | ontologyProperty = description}}
+	{{PropertyMapping | templateProperty = MedlinePlus | ontologyProperty = medlinePlus }}
+	{{PropertyMapping | templateProperty = OMIM | ontologyProperty = omim }}
+	{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = Caption | ontologyProperty = description}}
+	{{PropertyMapping | templateProperty = MeshNumber | ontologyProperty = meshNumber}}
+	{{PropertyMapping | templateProperty = ICDO | ontologyProperty = icdo }}
+	{{PropertyMapping | templateProperty = GeneReviewsName | ontologyProperty = geneReviewsName }}
+	{{PropertyMapping | templateProperty = GeneReviewsID | ontologyProperty = geneReviewsId }}
+	{{PropertyMapping | templateProperty = eMedicine_mult | ontologyProperty = geneReviewsId }}
+	{{PropertyMapping | templateProperty = Upright | ontologyProperty = imageSize }}
+	{{PropertyMapping | templateProperty = OMIM_mult | ontologyProperty = omim }}
+	{{PropertyMapping | templateProperty = DiseasesDB_mult | ontologyProperty = diseasesDB }}
+	{{PropertyMapping | templateProperty = MedlinePlus_mult | ontologyProperty = medlinePlus }}
+	{{PropertyMapping | templateProperty = eMedicine | ontologyProperty = eMedicineSubject }}
+&lt;!--	{{PropertyMapping | templateProperty = IHS | ontologyProperty = impossible }} --&gt;
+	{{PropertyMapping | templateProperty = Background | ontologyProperty = background }}
+	{{PropertyMapping | templateProperty = Image | ontologyProperty = logo }}
+	{{PropertyMapping | templateProperty = Medline | ontologyProperty = medlinePlus }}
+	{{PropertyMapping | templateProperty = handicap| ontologyProperty = diseasesDB}}
 }}</text></revision></page><page><title>Mapping fr:Infobox Mannequin</title><ns>210</ns><id>7747</id><revision><id>27950</id><timestamp>2013-07-31T09:45:36Z</timestamp><text>{{TemplateMapping
 | mapToClass = Model
 | mappings =
@@ -9953,7 +9918,7 @@ Temperature }}
         {{PropertyMapping | templateProperty = distinctions | ontologyProperty = award }}
         {{PropertyMapping | templateProperty = œuvres principales | ontologyProperty = notableWork }}
         {{PropertyMapping | templateProperty = adjectifs dérivés | ontologyProperty = derivedWord }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Édifice religieux</title><ns>210</ns><id>5880</id><revision><id>35405</id><timestamp>2014-06-22T20:33:58Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Édifice religieux</title><ns>210</ns><id>5880</id><revision><id>52636</id><timestamp>2017-11-03T15:30:32Z</timestamp><text>{{ConditionalMapping
 | cases =
  {{Condition
     | templateProperty = type
@@ -9971,7 +9936,7 @@ Temperature }}
     | templateProperty = type
     | operator = equals
     | value = Abbaye
-    | mapping = {{TemplateMapping | mapToClass = Abbey | header=0 }}
+    | mapping = {{TemplateMapping | mapToClass = Monastery | header=0 }}
  }}
  {{Condition
     | templateProperty = type

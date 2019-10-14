@@ -4,7 +4,7 @@
 {{PropertyMapping | templateProperty = id | ontologyProperty = id }}
 {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
 
-}}</text></revision></page><page><title>Mapping de:Coordinate</title><ns>208</ns><id>5232</id><revision><id>31694</id><timestamp>2014-02-10T17:45:39Z</timestamp><text>{{ConditionalMapping
+}}</text></revision></page><page><title>Mapping de:Coordinate</title><ns>208</ns><id>5232</id><revision><id>52804</id><timestamp>2018-02-08T08:46:29Z</timestamp><text>{{ConditionalMapping
 | cases =
 
 {{Condition
@@ -46,8 +46,6 @@
 {{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
 {{PropertyMapping | templateProperty = type | ontologyProperty = type }}
 {{PropertyMapping | templateProperty = region | ontologyProperty = region }}
-{{PropertyMapping | templateProperty = text | ontologyProperty = rdfs:label }}
-{{PropertyMapping | templateProperty = article | ontologyProperty = rdfs:label }}
 }}</text></revision></page><page><title>Mapping de:Eliteprospects</title><ns>208</ns><id>9183</id><revision><id>31904</id><timestamp>2014-02-14T17:31:01Z</timestamp><text>{{TemplateMapping
 | mapToClass = owl:Thing
 | mappings =
@@ -2017,6 +2015,16 @@ broken --&gt;
        {{ PropertyMapping | templateProperty = shorts2| ontologyProperty = awayColourHexCode }}
        {{ PropertyMapping | templateProperty = socks2| ontologyProperty = awayColourHexCode }}
        {{ PropertyMapping | templateProperty = body2| ontologyProperty = awayColourHexCode }}
+}}</text></revision></page><page><title>Mapping de:Infobox Fußballliga</title><ns>208</ns><id>12070</id><revision><id>52948</id><timestamp>2018-03-06T12:44:37Z</timestamp><text>{{TemplateMapping
+| mapToClass = SoccerLeague
+| mappings =
+{{PropertyMapping | templateProperty = Liganame | ontologyProperty = foaf:name }}
+{{PropertyMapping | templateProperty = Gegründet | ontologyProperty = foundingYear }}
+{{PropertyMapping | templateProperty = Gegründet | ontologyProperty = formationDate }}
+{{PropertyMapping | templateProperty = Mannschaften | ontologyProperty = numberOfTeams }}
+{{PropertyMapping | templateProperty = Region | ontologyProperty = country }}
+{{PropertyMapping | templateProperty = Mannschaften | ontologyProperty = participant }}
+{{PropertyMapping | templateProperty = Webseite | ontologyProperty = foaf:homepage }}
 }}</text></revision></page><page><title>Mapping de:Infobox Fußballsaison</title><ns>208</ns><id>9220</id><revision><id>32125</id><timestamp>2014-02-24T19:38:47Z</timestamp><text>{{TemplateMapping
 | mapToClass = FootballLeagueSeason
 | mappings =
@@ -3296,7 +3304,13 @@ broken
 	{{PropertyMapping | templateProperty = STAND | ontologyProperty = status }}
 	{{GeocoordinatesMapping | latitude = BREITENGRAD | longitude = LÄNGENGRAD  }}
 
-}}</text></revision></page><page><title>Mapping de:Infobox Kommune in Norwegen</title><ns>208</ns><id>3197</id><revision><id>11964</id><timestamp>2011-04-06T09:55:14Z</timestamp><text>{{ TemplateMapping
+}}</text></revision></page><page><title>Mapping de:Infobox Kirche</title><ns>208</ns><id>12071</id><revision><id>52949</id><timestamp>2018-03-06T13:14:49Z</timestamp><text>{{ TemplateMapping | mapToClass = HistoricBuilding | mappings = 
+    {{ PropertyMapping | ontologyProperty = foaf:name | templateProperty = Name }}
+    {{ PropertyMapping | ontologyProperty = district | templateProperty = Region }}
+    {{ PropertyMapping | ontologyProperty = foaf:name | templateProperty = Bezeichnung }}
+    {{ PropertyMapping | ontologyProperty = location | templateProperty = Anschrift }}
+    {{ PropertyMapping | ontologyProperty = pastor | templateProperty = Priester }}
+ }}</text></revision></page><page><title>Mapping de:Infobox Kommune in Norwegen</title><ns>208</ns><id>3197</id><revision><id>11964</id><timestamp>2011-04-06T09:55:14Z</timestamp><text>{{ TemplateMapping
    | mapToClass = Settlement
    | mappings =
        {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
@@ -3702,7 +3716,36 @@ Maybe useful properties but without a counterpart so far:
 {{ PropertyMapping | templateProperty = Typ | ontologyProperty = }}
 {{ PropertyMapping | templateProperty = Dim | ontologyProperty =  }}
 {{ PropertyMapping | templateProperty = TiefeRef | ontologyProperty =  }}
-—&gt;</text></revision></page><page><title>Mapping de:Infobox Municipio in Bolivien</title><ns>208</ns><id>3367</id><revision><id>12279</id><timestamp>2011-04-20T10:39:11Z</timestamp><text>{{ TemplateMapping
+—&gt;</text></revision></page><page><title>Mapping de:Infobox Motorrad</title><ns>208</ns><id>12069</id><revision><id>52947</id><timestamp>2018-03-06T12:42:20Z</timestamp><text>{{TemplateMapping 
+| mapToClass = Motorcycle
+| mappings =
+{{ PropertyMapping | templateProperty = Bezeichnung | ontologyProperty = foaf:name }}
+{{ PropertyMapping | templateProperty = Motor | ontologyProperty = motor}}
+{{ PropertyMapping | templateProperty = Hersteller | ontologyProperty = manufacturer}}
+{{ PropertyMapping | templateProperty = Gänge | ontologyProperty = transmission }}
+{{ PropertyMapping | templateProperty = Produktion | ontologyProperty = production }}
+{{ PropertyMapping | templateProperty = Bremsen | ontologyProperty = breaks }}
+{{ PropertyMapping | templateProperty = Klasse | ontologyProperty = class }}
+{{ PropertyMapping | templateProperty = Fahrwerk | ontologyProperty = suspension }}
+{{ PropertyMapping | templateProperty = Leistung | ontologyProperty = power }}
+{{ PropertyMapping | templateProperty = related | ontologyProperty = related }}
+{{ PropertyMapping | templateProperty = Vorgängermodell | ontologyProperty = predecessor }}
+{{ PropertyMapping | templateProperty = Drehmoment | ontologyProperty = torqueOutput}}
+{{ PropertyMapping | templateProperty = Tankvolumen | ontologyProperty = fuelcapacity }} 
+{{ PropertyMapping | templateProperty = Nachfolgemodell | ontologyProperty = successor }}
+{{ PropertyMapping | templateProperty = Leergewicht | ontologyProperty = dryweight}}
+{{ PropertyMapping | templateProperty = Radstand | ontologyProperty = wheelbase }}
+{{ PropertyMapping | templateProperty = Sitzhöhe | ontologyProperty = seatheight }}
+{{ PropertyMapping | templateProperty = Verdichtung | ontologyProperty = compression}}
+{{ PropertyMapping | templateProperty = wet_weight | ontologyProperty = wetwheight}} 
+{{ PropertyMapping | templateProperty = Bildtext | ontologyProperty = caption }} 
+{{ PropertyMapping | templateProperty = rake_trail | ontologyProperty = raketrail }} 
+{{ PropertyMapping | templateProperty = Hersteller | ontologyProperty =parent_company }}
+{{ PropertyMapping | templateProperty = Geschwindigkeit | ontologyProperty = topspeed }}
+{{ PropertyMapping | templateProperty = Kraftstoffverbrauch | ontologyProperty = fuelConsumption}} 
+{{ PropertyMapping | templateProperty = Bild zeigt | ontologyProperty = picture}} 
+
+}}</text></revision></page><page><title>Mapping de:Infobox Municipio in Bolivien</title><ns>208</ns><id>3367</id><revision><id>12279</id><timestamp>2011-04-20T10:39:11Z</timestamp><text>{{ TemplateMapping
    | mapToClass = AdministrativeRegion
    | mappings =
        {{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
@@ -6899,6 +6942,12 @@ Im Englischen nicht bekannt/verwendet:
 {{PropertyMapping | templateProperty = Breite | ontologyProperty = width | unit = millimetre }}
 {{PropertyMapping | templateProperty = Höhe | ontologyProperty = height | unit = millimetre }}
 {{PropertyMapping | templateProperty = Gewicht | ontologyProperty = weight | unit = Mass }}
+}}</text></revision></page><page><title>Mapping de:Infobox Park</title><ns>208</ns><id>12073</id><revision><id>52951</id><timestamp>2018-03-06T13:17:42Z</timestamp><text>{{TemplateMapping
+| mapToClass = Park
+| mappings =
+	{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = Kategorie | ontologyProperty = type }}
+	{{PropertyMapping | templateProperty = Ort | ontologyProperty = location }}
 }}</text></revision></page><page><title>Mapping de:Infobox Parlament</title><ns>208</ns><id>9213</id><revision><id>32006</id><timestamp>2014-02-20T00:59:50Z</timestamp><text>{{ TemplateMapping
 | mapToClass = Legislature
 | mappings = 
@@ -7008,8 +7057,8 @@ Im Englischen nicht bekannt/verwendet:
 &lt;!--   {{ PropertyMapping | templateProperty = DSTEIGUNG1 | ontologyProperty = }} --&gt;
 &lt;!--   {{ PropertyMapping | templateProperty = DSTEIGUNG2 | ontologyProperty = }} --&gt;
 &lt;!--   {{ PropertyMapping | templateProperty = HD1 | ontologyProperty = }} --&gt;
-&lt;!--   {{ PropertyMapping | templateProperty = HD2 | ontologyProperty = }} --&gt;</text></revision></page><page><title>Mapping de:Infobox Pferd</title><ns>208</ns><id>9199</id><revision><id>31938</id><timestamp>2014-02-18T14:05:41Z</timestamp><text>{{TemplateMapping
-| mapToClass = RaceHorse
+&lt;!--   {{ PropertyMapping | templateProperty = HD2 | ontologyProperty = }} --&gt;</text></revision></page><page><title>Mapping de:Infobox Pferd</title><ns>208</ns><id>9199</id><revision><id>52650</id><timestamp>2017-11-03T16:24:17Z</timestamp><text>{{TemplateMapping
+| mapToClass = Horse
 | mappings =
     {{PropertyMapping | templateProperty = Rasse | ontologyProperty = race }}
     {{PropertyMapping | templateProperty = Besitzer | ontologyProperty = owner }}
@@ -7265,7 +7314,7 @@ Im Englischen nicht bekannt/verwendet:
     {{ PropertyMapping | ontologyProperty = influenced | templateProperty = Beeinflusste }} 
     {{ PropertyMapping | ontologyProperty = foaf:page | templateProperty = Website }} 
     {{ PropertyMapping | ontologyProperty = license | templateProperty = Lizenz }} 
-}}</text></revision></page><page><title>Mapping de:Infobox Protein</title><ns>208</ns><id>9204</id><revision><id>31943</id><timestamp>2014-02-18T15:07:47Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping de:Infobox Protein</title><ns>208</ns><id>9204</id><revision><id>52420</id><timestamp>2017-10-15T14:50:44Z</timestamp><text>{{TemplateMapping
 | mapToClass = Protein
 | mappings =
 	{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
@@ -7273,10 +7322,8 @@ Im Englischen nicht bekannt/verwendet:
         {{PropertyMapping | templateProperty = Bild | ontologyProperty = foaf:depiction }}
 	{{PropertyMapping | templateProperty = AltSymbols | ontologyProperty = symbol }}
 	{{PropertyMapping | templateProperty = CAS | ontologyProperty = casNumber }}
-	{{PropertyMapping | templateProperty = CASergänzend | ontologyProperty = casSupplemental }}
-	{{PropertyMapping | templateProperty = ATC-Code | ontologyProperty = atcPrefix }}
-	{{PropertyMapping | templateProperty = ATC-Code | ontologyProperty = atcSuffix }}
-	{{PropertyMapping | templateProperty = ATC-Code | ontologyProperty = atcSupplemental }}
+	{{PropertyMapping | templateProperty = CASergänzend | ontologyProperty = casNumber }}
+	{{PropertyMapping | templateProperty = ATC-Code | ontologyProperty = atcCode }}
 
 }}</text></revision></page><page><title>Mapping de:Infobox Provinz (Italien)</title><ns>208</ns><id>3378</id><revision><id>12320</id><timestamp>2011-04-20T13:48:41Z</timestamp><text>{{ TemplateMapping
    | mapToClass = AdministrativeRegion
@@ -8361,6 +8408,21 @@ Im Englischen nicht bekannt/verwendet:
 	{{PropertyMapping | templateProperty = ISO2 | ontologyProperty = iso6392Code }}
 	{{PropertyMapping | templateProperty = ISO3 | ontologyProperty = iso6393Code }}
 	{{PropertyMapping | templateProperty = Klassifikation | ontologyProperty = languageFamily }}
+}}</text></revision></page><page><title>Mapping de:Infobox Squashspieler</title><ns>208</ns><id>12072</id><revision><id>52950</id><timestamp>2018-03-06T13:16:27Z</timestamp><text>{{TemplateMapping
+| mapToClass = SquashPlayer
+| mappings =
+    {{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
+    {{PropertyMapping | templateProperty = fullname | ontologyProperty = foaf:name }}
+    {{PropertyMapping | templateProperty = Geburtstag | ontologyProperty = birthDate }}
+    {{PropertyMapping | templateProperty = birth_place | ontologyProperty = birthPlace }}
+    {{PropertyMapping | templateProperty = death_date | ontologyProperty = deathDate }}
+    {{PropertyMapping | templateProperty = death_place | ontologyProperty = deathPlace }}
+    {{PropertyMapping | templateProperty = Größe | ontologyProperty = height }}
+    {{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
+    {{PropertyMapping | templateProperty = nickname | ontologyProperty = foaf:nick }}
+    {{PropertyMapping | templateProperty = country | ontologyProperty = country }}
+    {{PropertyMapping | templateProperty = residence | ontologyProperty = residence }}
+    {{PropertyMapping | templateProperty = Trainer | ontologyProperty = coach }}
 }}</text></revision></page><page><title>Mapping de:Infobox Staat</title><ns>208</ns><id>2397</id><revision><id>47246</id><timestamp>2015-03-28T16:29:45Z</timestamp><text>{{ TemplateMapping
    | mapToClass = Country
    | mappings =
@@ -8725,6 +8787,18 @@ Im Englischen nicht bekannt/verwendet:
  {{PropertyMapping | templateProperty = Eröffnet | ontologyProperty = openingDate }}
  {{PropertyMapping | templateProperty = Eröffnet | ontologyProperty = openingYear }}
  {{PropertyMapping | templateProperty = Homepage | ontologyProperty = foaf:homepage }}
+}}</text></revision></page><page><title>Mapping de:Infobox Tischtennisspieler</title><ns>208</ns><id>12097</id><revision><id>53066</id><timestamp>2018-03-27T09:39:24Z</timestamp><text>{{TemplateMapping
+| mapToClass = TableTennisPlayer
+| mappings =
+{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
+{{PropertyMapping | templateProperty = Spitzname | ontologyProperty = foaf:nick }}
+{{PropertyMapping | templateProperty = Geburtsdatum | ontologyProperty = birthDate }}
+{{PropertyMapping | templateProperty = Geburtsort | ontologyProperty = birthPlace }}
+{{PropertyMapping | templateProperty = Sterbedatum | ontologyProperty = deathDate }}
+{{PropertyMapping | templateProperty = Sterbeort | ontologyProperty = deathPlace }}
+{{PropertyMapping | templateProperty = Größe | ontologyProperty = height }}
+{{PropertyMapping | templateProperty = Gewicht | ontologyProperty = weight }}
+{{PropertyMapping | templateProperty = Nationalität | ontologyProperty = nationality }}
 }}</text></revision></page><page><title>Mapping de:Infobox Unternehmen</title><ns>208</ns><id>3616</id><revision><id>51882</id><timestamp>2017-02-12T11:10:00Z</timestamp><text>{{ TemplateMapping
    | mapToClass = Company
    | mappings =

@@ -1231,6 +1231,41 @@ equiposamateur
     {{ PropertyMapping | templateProperty = nacionalidad | ontologyProperty = nationality }}
     {{ PropertyMapping | templateProperty = premios | ontologyProperty = award }}
     {{ PropertyMapping | templateProperty = campos | ontologyProperty = field }}
+}}</text></revision></page><page><title>Mapping es:Ficha de club deportivo</title><ns>214</ns><id>12103</id><revision><id>53076</id><timestamp>2018-04-03T12:09:45Z</timestamp><text>{{TemplateMapping
+| mapToClass = SportsTeam
+| mappings =
+{{PropertyMapping | templateProperty = nombre | ontologyProperty = foaf:name }}
+{{PropertyMapping | templateProperty = color | ontologyProperty = colour }}
+{{PropertyMapping | templateProperty = colores | ontologyProperty = colour }}
+{{PropertyMapping | templateProperty = imagen | ontologyProperty = logo }}
+{{PropertyMapping | templateProperty = nombre complete | ontologyProperty = foaf:name }}
+{{PropertyMapping | templateProperty = apodo | ontologyProperty = foaf:nick }}
+{{PropertyMapping | templateProperty = Deporte | ontologyProperty = sport }}
+{{PropertyMapping | templateProperty = founded | ontologyProperty = foundingYear }}
+
+{{PropertyMapping | templateProperty = Liga | ontologyProperty = league }}
+
+{{PropertyMapping | templateProperty = Liga | ontologyProperty = division }}
+
+{{PropertyMapping | templateProperty = campo | ontologyProperty = stadium }}
+{{PropertyMapping | templateProperty = ballpark | ontologyProperty = stadium }}
+{{PropertyMapping | templateProperty = Estadio | ontologyProperty = stadium }}
+{{PropertyMapping | templateProperty = city | ontologyProperty = city }}
+{{PropertyMapping | templateProperty = colores | ontologyProperty = colour }}
+
+{{PropertyMapping | templateProperty = colores | ontologyProperty = colour }}
+{{PropertyMapping | templateProperty = owner | ontologyProperty = owner }}
+{{PropertyMapping | templateProperty = Presidente | ontologyProperty = president }}
+{{PropertyMapping | templateProperty = Entrenador | ontologyProperty = coach }}
+{{PropertyMapping | templateProperty = manager general | ontologyProperty = manager }}
+{{PropertyMapping | templateProperty = gm | ontologyProperty = manager }}
+
+{{PropertyMapping | templateProperty = anthem | ontologyProperty = anthem }}
+
+{{PropertyMapping | templateProperty = Mascota | ontologyProperty = mascot }}
+
+{{PropertyMapping | templateProperty = sitio web | ontologyProperty = foaf:homepage }}
+
 }}</text></revision></page><page><title>Mapping es:Ficha de cocinero</title><ns>214</ns><id>6346</id><revision><id>22394</id><timestamp>2013-01-11T21:25:10Z</timestamp><text>{{TemplateMapping
 | mapToClass = Chef
 | mappings =
@@ -4126,18 +4161,18 @@ Estos terminos sobre capital y los mapeados arriba habría que revisarlos:
 | mappings =
 	{{PropertyMapping | templateProperty = país | ontologyProperty = country }}
 	{{PropertyMapping | templateProperty = nombre | ontologyProperty = foaf:name }}
-}}</text></revision></page><page><title>Mapping es:Ficha de proteína</title><ns>214</ns><id>4797</id><revision><id>16113</id><timestamp>2011-11-04T12:53:00Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping es:Ficha de proteína</title><ns>214</ns><id>4797</id><revision><id>52423</id><timestamp>2017-10-15T14:55:27Z</timestamp><text>{{TemplateMapping
 | mapToClass = Protein
 | mappings =
 	{{PropertyMapping | templateProperty = Símbolo | ontologyProperty = symbol }}
 	{{PropertyMapping | templateProperty = símbolos_alt | ontologyProperty = symbol }}
         {{PropertyMapping | templateProperty = AltSymbols | ontologyProperty = symbol }}
-	{{PropertyMapping | templateProperty = ATC_prefix | ontologyProperty = atcPrefix }}
-        {{PropertyMapping | templateProperty = ATC prefix | ontologyProperty = atcPrefix }}
-	{{PropertyMapping | templateProperty = ATC_suffix | ontologyProperty = atcSuffix }}
-	{{PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcSupplemental }}
-{{PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcSupplemental }}
-
+	{{CombineSimpleMapping
+	| templateProperty1 = ATC_prefix
+	| templateProperty2 = ATC_suffix
+	| ontologyProperty = atcCode
+	}}
+	{{PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcCode }}
 	{{PropertyMapping | templateProperty = CAS_number | ontologyProperty = casNumber }}
 	{{PropertyMapping | templateProperty = CAS_supplemental | ontologyProperty = casSupplemental }}
 	{{PropertyMapping | templateProperty = DrugBank | ontologyProperty = drugbank }}
@@ -5445,6 +5480,21 @@ partidosinternacionales
 	{{PropertyMapping | templateProperty = id | ontologyProperty = routeNumber}}
 	{{PropertyMapping | templateProperty = link | ontologyProperty = wikiPageWikiLink }}
 	
+}}</text></revision></page><page><title>Mapping es:Infobox animanga principal</title><ns>214</ns><id>12102</id><revision><id>53075</id><timestamp>2018-04-03T12:07:23Z</timestamp><text>{{TemplateMapping
+| mapToClass = Anime
+| mappings =
+{{PropertyMapping | templateProperty = director | ontologyProperty = director }}
+{{PropertyMapping | templateProperty = distribuidor | ontologyProperty = producer }}
+{{PropertyMapping | templateProperty = tipo | ontologyProperty = type }}
+{{PropertyMapping | templateProperty = título | ontologyProperty = foaf:name }}
+{{PropertyMapping | templateProperty = escritor | ontologyProperty = writer }}
+{{PropertyMapping | templateProperty = estudio | ontologyProperty = network }}
+{{PropertyMapping | templateProperty = estudio2 | ontologyProperty = network }}
+{{PropertyMapping | templateProperty = network_other | ontologyProperty = network }}
+{{PropertyMapping | templateProperty = licencia | ontologyProperty = licensee }}
+{{PropertyMapping | templateProperty = licensor | ontologyProperty = licensee }}
+{{PropertyMapping | templateProperty = licensor_other | ontologyProperty = licensee }}
+{{PropertyMapping | templateProperty = musica | ontologyProperty = musicComposer }}
 }}</text></revision></page><page><title>Mapping es:Infobox liga de rugby</title><ns>214</ns><id>6397</id><revision><id>22993</id><timestamp>2013-01-15T19:01:23Z</timestamp><text></text></revision></page><page><title>Mapping es:Jugador de fútbol</title><ns>214</ns><id>10427</id><revision><id>39552</id><timestamp>2015-01-20T14:27:56Z</timestamp><text>{{TemplateMapping
 | mapToClass = SoccerPlayer
 

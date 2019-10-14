@@ -4485,14 +4485,17 @@ Dodano:
 	{{PropertyMapping | templateProperty = language | ontologyProperty = language }}
 	{{PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping sl:Infopolje Protein</title><ns>268</ns><id>4052</id><revision><id>13863</id><timestamp>2011-06-24T08:57:10Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping sl:Infopolje Protein</title><ns>268</ns><id>4052</id><revision><id>52408</id><timestamp>2017-10-15T14:44:08Z</timestamp><text>{{TemplateMapping
 | mapToClass = Protein
 | mappings =
 	{{PropertyMapping | templateProperty = Symbol | ontologyProperty = symbol }}
 	{{PropertyMapping | templateProperty = AltSymbols | ontologyProperty = symbol }}
-	{{PropertyMapping | templateProperty = ATC_prefix | ontologyProperty = atcPrefix }}
-	{{PropertyMapping | templateProperty = ATC_suffix | ontologyProperty = atcSuffix }}
-	{{PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcSupplemental }}
+	{{CombineSimpleMapping
+	| templateProperty1 = ATC_prefix
+	| templateProperty2 = ATC_suffix
+	| ontologyProperty = atcCode
+	}}
+	{{PropertyMapping | templateProperty = ATC_supplemental | ontologyProperty = atcCode }}
 	{{PropertyMapping | templateProperty = CAS_number | ontologyProperty = casNumber }}
 	{{PropertyMapping | templateProperty = CAS_supplemental | ontologyProperty = casSupplemental }}
 	{{PropertyMapping | templateProperty = DrugBank | ontologyProperty = drugbank }}
