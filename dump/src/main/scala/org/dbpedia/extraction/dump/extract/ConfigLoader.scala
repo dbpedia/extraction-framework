@@ -49,8 +49,8 @@ class ConfigLoader(config: Config)
     extractionRecorder.get(classTag[T]) match{
       case Some(s) => s.get(lang) match {
         case None =>
-          val datasetsParam = if (dataset == null) ListBuffer[Dataset]() else ListBuffer(dataset)
-          s(lang) = config.getDefaultExtractionRecorder[T](lang, 2000, null, null, datasetsParam, extractionMonitor)
+          //val datasetsParam = if (dataset == null) ListBuffer[Dataset]() else ListBuffer(dataset)
+          s(lang) = config.getDefaultExtractionRecorder[T](lang, 2000, null, null,  ListBuffer(dataset), extractionMonitor)
           s(lang).asInstanceOf[ExtractionRecorder[T]]
         case Some(er) =>
           if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
