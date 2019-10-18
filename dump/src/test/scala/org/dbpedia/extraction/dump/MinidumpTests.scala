@@ -209,19 +209,20 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     val shaclTestSuite = new TestSuite(shaclTests)
 
     //org.apache.jena.riot.system.IRIResolver.
-
+    val singleModel: Model = ModelFactory.createDefaultModel()
     for (file <- filesToBeValidated ) {
+      singleModel.add(new RdfStreamReader(new BZip2CompressorInputStream(new FileInputStream(file.getAbsolutePath)), "TURTLE").read())
       println("Validating: "+file)
-      val testSource = new TestSourceBuilder()
-        .setPrefixUri("minidump", "http://dbpedia.org/minidump")
-        .setInMemReader(new RdfStreamReader(new BZip2CompressorInputStream(new FileInputStream(file.getAbsolutePath)), "TURTLE"))
-        .setReferenceSchemata(schema)
-        .build()
-      val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.shaclTestCaseResult, testSource, shaclTestSuite)
-
-      assert(results.getTestCaseResults.isEmpty)
-
     }
+
+    val testSource = new TestSourceBuilder()
+      .setPrefixUri("minidump", "http://dbpedia.org/minidump")
+      .setInMemReader(new RdfModelReader(singleModel))
+      .setReferenceSchemata(schema)
+      .build()
+    val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.shaclTestCaseResult, testSource, shaclTestSuite)
+
+    assert(results.getTestCaseResults.isEmpty)
 
 
   }
