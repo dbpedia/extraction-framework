@@ -5,33 +5,36 @@ One of the common methodologies is to write Unit tests (e.g. by using JUnit in J
 Therefore we started to cover the DIEF code with Unit tests as well. 
 This will lead to a better debugging experience and enables the evaluation of quality improvement between older and newer code. 
 
-In the case of our implementation, we chose to use mainly [scala-test](http://www.scalatest.org/) plugin for [Apache Maven](https://maven.apache.org/), but if you want to use JAVA it is also possible to write tests using JUnit-4](https://junit.org/junit4/).
-.
+In the case of our implementation, we chose to use mainly [scala-test](http://www.scalatest.org/) plugin for [Apache Maven](https://maven.apache.org/), but if you want to use JAVA it is also possible to write tests using [JUnit-4](https://junit.org/junit4/).
 Mavens default behavior is to execute any found test during the `mvn install` goal.
 
 Thus, to install the DIEF you just simply clone the repository, enter the directory and execute `mvn install`
+
 ```bash
 git clone https://github.com/dbpedia/extraction-framework.git && cd extraction-framework
 mvn clean install # add "-Dmaven.test.skip -DskipTests" to skip all tests during the install goal
 ```
+
+For troubleshooting, check if you fulfill the needed [requirements](#requirements).
+
 ## Contribution
 
-If you want to contribute to this debugging process feel free to, add a Unit test for a given part of the DIEF (e.g. a used parser) and create a pull request.
+If you want to contribute to this debugging process feel free to, add a Unit test for a given part of the DIEF (e.g. one of the implemented [data parsers](https://github.com/dbpedia/extraction-framework/tree/master/core/src/main/scala/org/dbpedia/extraction/dataparser)) and create a pull request.
 
 ## Minidump Tests
 
 For evaluating the quality of the DIEF development process, we introduce the minidump tests.
 The main goal of this test collection is to retrieve a global overview of the extraction quality. This is needed because sometimes the code improvement of one part in the code can lead to a decress or failure of other parts.
 
-#### Workflow 
+#### Workflow
 
 The minidump test uses subsets of single official Wikipedia dumps as extraction import.
 For now, its implementation will run the following test
 
-* Download the newest mappings and ontology files
-* Extract [minidumps](`https://github.com/dbpedia/extraction-framework/tree/master/dump/src/test/resources/minidumps`) (generic and mapping-based approach)
-* Runs the [DIEF syntax evaluation](#dief-syntax-evaluation) on the extracted dumps
-* Validates extracted RDF with [RDFUnit](https://github.com/AKSW/RDFUnit)
+* Download the newest DBpedia [mappings](http://mappings.dbpedia.org/index.php/Main_Page) and [ontology](https://github.com/dbpedia/ontology-tracker/tree/master/databus/dbpedia/ontology/dbo-snapshots) files
+* Extract RDF from the [minidumps](`https://github.com/dbpedia/extraction-framework/tree/master/dump/src/test/resources/minidumps`) (generic and mapping-based approach)
+* Evaluate the RDF [syntax quality](#dief-syntax-evaluation) of the extracted dumps
+* Validate the extracted RDF dumps with [RDFUnit](https://github.com/AKSW/RDFUnit)
 
 #### Testing
 
@@ -43,6 +46,7 @@ mvn test
 ```
 
 #### Code
+
 The latest test code can be found inside [MiniDumpTests.scala](https://github.com/dbpedia/extraction-framework/blob/master/dump/src/test/scala/org/dbpedia/extraction/dump/MinidumpTests.scala)
 
 ## DIEF Syntax Evaluation
@@ -59,11 +63,15 @@ In short, the evaluation is using a various number of defined IRI namespace and 
 
 > **TODO** move to README.md
 
+* A compatible shell (e.g. bash) to follow the instructions
+* The version control system Git
 * Java JDK 1.8 ( does not compile with JDK 1.11 )
-* Apache  Maven 
+* Apache  Maven 3.3 or higher
 
 ## FYI
 
 * [How run a single scala-test by name](https://stackoverflow.com/questions/24852484/how-to-run-a-single-test-in-scalatest-from-maven)
+
+
 
 
