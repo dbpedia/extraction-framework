@@ -78,6 +78,10 @@ The Dump-Extraction of the DBpedia Extraction-Framework has now an Apache Spark 
   * the spark-extraction currently supports every extractor except MappingsExtractor, ImageExtractor and the NIF-Extraction
   * spark-master, alternate spark-temporary dir, languages and extractors can be configured in `/dump/extraction.spark.properties`
 
+## Debugging
+
+See [DEBUG.md](DEBUG.md)
+
 ## Contribution Guidelines
 
 If you want to work on one of the [issues](https://github.com/dbpedia/extraction-framework/issues), assign yourself to it or at least leave a comment that you are working on it and how.  
