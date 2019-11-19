@@ -1,6 +1,6 @@
 # DIEF Debugging
 
-Debugging large codebases, for example the DIEF repository, is quite hard.
+Debugging a large codebase, for example the DIEF repository, is quite hard.
 One of the common methodologies is to write Unit tests (e.g. by using JUnit in JAVA).
 Therefore, we started to cover the DIEF code with Unit tests as well. 
 This will lead to a better debugging experience and enables the evaluation of quality improvement between older and newer code. 
