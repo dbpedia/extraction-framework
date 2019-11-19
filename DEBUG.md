@@ -32,7 +32,7 @@ The minidump test uses subsets of single official Wikipedia dumps as extraction 
 For now, its implementation will run the following test
 
 * Download the newest DBpedia [mappings](http://mappings.dbpedia.org/index.php/Main_Page) and [ontology](https://github.com/dbpedia/ontology-tracker/tree/master/databus/dbpedia/ontology/dbo-snapshots) files
-* Extract RDF from the [minidumps](`https://github.com/dbpedia/extraction-framework/tree/master/dump/src/test/resources/minidumps`) (generic and mapping-based approach)
+* Extract RDF from the [minidumps](https://github.com/dbpedia/extraction-framework/tree/master/dump/src/test/resources/minidumps) (generic and mapping-based approach)
 * Evaluate the RDF [syntax quality](#dief-syntax-evaluation) of the extracted dumps
 * Validate the extracted RDF dumps with [RDFUnit](https://github.com/AKSW/RDFUnit)
 
