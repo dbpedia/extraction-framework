@@ -67,6 +67,7 @@ In short, the evaluation is using a various number of defined IRI namespace and 
 * The version control system Git
 * Java JDK 1.8 ( does not compile with JDK 1.11 )
 * Apache  Maven 3.3 or higher
+* Scala 2.11.4 (should only matter in an IDEA e.g. Intellij)
 
 ## FYI
 
