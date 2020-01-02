@@ -430,11 +430,13 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
     doc
   }
 
-  protected def getNifIri(nifClass: String, beginIndex: Int, endIndex: Int): String ={
-    UriUtils.createURI(nifContextIri) match{
+  protected def getNifIri(nifClass: String, beginIndex: Int, endIndex: Int): String = {
+    val split = nifContextIri.split("\\?")
+    val query = split(1)
+    UriUtils.createURI(split(0)) match {
       case Success(uri) =>
         var iri = uri.getScheme + "://" + uri.getHost + (if(uri.getPort > 0) ":" + uri.getPort else "") + uri.getPath + "?"
-          val m = uri.getQuery.split("&").map(_.trim).collect{ case x if !x.startsWith("nif=") => x}
+        val m = query.split("&").map(_.trim).collect{ case x if !x.startsWith("nif=") => x}
         iri += m.foldRight("")(_+"&"+_) + "nif=" + nifClass + "&char=" + beginIndex + "," + endIndex
         iri.replace("?&", "?")
       case Failure(f) => throw f
