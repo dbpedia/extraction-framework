@@ -131,7 +131,7 @@ object ValidationExecutor {
       }
     )
 
-    if( ! covered && nTriplePartType.equals(TriggerType.IRI) ) System.err.println(part+" "+s"UNCOVERED $nTriplePart")
+//    if( ! covered && nTriplePartType.equals(TriggerType.IRI) ) System.err.println(part+" "+s"UNCOVERED $nTriplePart")
 
     TestReport(
       cnt = 1, coverage = {if (covered) 1 else 0},

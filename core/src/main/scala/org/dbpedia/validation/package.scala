@@ -252,20 +252,8 @@ package object validation {
       s"""|<!DOCTYPE html>
           |<html>
           |<head>
-          |<style>
-          |table {
-          |  border-collapse: collapse;
-          |  width: 100%;
-          |}
-          |
-          |th, td {
-          |  text-align: left;
-          |  padding: 8px;
-          |  border: 1px solid black;
-          |}
-          |
-          |tr:nth-child(even) {background-color: #f2f2f2;}
-          |</style>
+          |<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+          |<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
           |</head>
           |<body>
           |<h3>$label</h3>
@@ -274,19 +262,23 @@ package object validation {
           |  <li>Coverage: $coverage ( ${testReport.coverage} triggered of ${testReport.cnt} total )
           |  <li>Avg. Error Rate: $errorRate
           |</ul>
-        """.stripMargin)
-
-    stringBuilder.append("<table>" )
+          |""".stripMargin)
 
     stringBuilder.append(
-      """<tr>
-        | <th>Error Rate</th>
-        | <th>Prevalence</th>
-        | <th>Errors</th>
-        | <th>Test Approach</th>
-        | <th>Triggered From</th>
+      """<table
+        | data-toggle="table"
+        | data-search="true">
+        |<thead>
+        |<tr>
+        | <th data-sortable="true" data-field="errorrate">Error Rate</th>
+        | <th data-sortable="true" data-field="prevalence">Prevalence</th>
+        | <th <th data-sortable="true" data-field="errors">Errors</th>
+        | <th <th data-sortable="true" data-field="approach">Test Approach</th>
+        | <th <th data-sortable="true" data-field="trigger">Triggered From</th>
         |</tr>
-      """.stripMargin)
+        |</thead>
+        |<tbody>
+        |""".stripMargin)
 
 //    testCaseSerializationBuffer.toArray
     testCaseSerializationBuffer.toArray
@@ -296,7 +288,10 @@ package object validation {
       .foreach(row => stringBuilder.append(row.toString) )
 
     stringBuilder.append(
-      """</table>
+      """</tbody>
+        |</table>
+        |<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        |<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
         |<body>
         |""".stripMargin)
 
@@ -313,7 +308,7 @@ package object validation {
          | <td>$approach</td>
          | <td>$trigger</td>
          |</tr>
-       """.stripMargin
+         |""".stripMargin
   }
 
 

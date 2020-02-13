@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.dump
 
 import java.io.{File, FileInputStream, FileOutputStream}
+import java.nio.file.FileSystem
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.concurrent.ConcurrentLinkedQueue
@@ -14,10 +15,11 @@ import org.aksw.rdfunit.sources.{SchemaSourceFactory, TestSource, TestSourceBuil
 import org.aksw.rdfunit.tests.generators.{ShaclTestGenerator, TestGeneratorFactory}
 import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator
 import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream, BZip2CompressorOutputStream}
-import org.apache.commons.io.FileUtils
+import org.apache.commons.io.{FileSystemUtils, FileUtils}
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.apache.spark.sql.{SQLContext, SparkSession}
+import org.dbpedia.databus.mod.EvalMod.writeFile
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.dump.extract.ConfigLoader
 import org.dbpedia.extraction.util.MappingsDownloader.apiUrl
@@ -89,29 +91,35 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     /**
       * download ontology
+      *
+      * cd core;
+      * mvn scala:run -Dlauncher="download-mappings "
       */
-    println("Download ontology")
-    val dumpFile = new File("../ontology.xml")
-    val owlFile = new File("../ontology.owl")
-    val version = "1.0"
-    org.dbpedia.extraction.util.OntologyDownloader.download(dumpFile)
-    val ontology = load(dumpFile)
-    org.dbpedia.extraction.util.OntologyDownloader.save(ontology, version, owlFile)
+//    println("Download ontology")
+//    val dumpFile = new File("../ontology.xml")
+//    val owlFile = new File("../ontology.owl")
+//    val version = "1.0"
+//    org.dbpedia.extraction.util.OntologyDownloader.download(dumpFile)
+//    val ontology = load(dumpFile)
+//    org.dbpedia.extraction.util.OntologyDownloader.save(ontology, version, owlFile)
 
     /**
       * download mappings
+      *
+      * cd core;
+      * mvn scala:run -Dlauncher="download-ontology";
       */
-    println("Download mappings")
-    val dir = new File("../mappings")
-    // don't use mkdirs, that often masks mistakes.
-    require(dir.isDirectory || dir.mkdir, "directory ["+dir+"] does not exist and cannot be created")
-    Namespace.mappings.values.par.foreach { namespace =>
-      val file = new File(dir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-      val nanos = System.nanoTime
-      println("downloading mappings from "+apiUrl+" to "+file)
-      new WikiDownloader(apiUrl).download(file, namespace)
-      println("downloaded mappings from "+apiUrl+" to "+file+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
-    }
+//    println("Download mappings")
+//    val dir = new File("../mappings")
+//    // don't use mkdirs, that often masks mistakes.
+//    require(dir.isDirectory || dir.mkdir, "directory ["+dir+"] does not exist and cannot be created")
+//    Namespace.mappings.values.par.foreach { namespace =>
+//      val file = new File(dir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
+//      val nanos = System.nanoTime
+//      println("downloading mappings from "+apiUrl+" to "+file)
+//      new WikiDownloader(apiUrl).download(file, namespace)
+//      println("downloaded mappings from "+apiUrl+" to "+file+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
+//    }
 
     /**
       * mappings extraction
@@ -169,6 +177,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     val sqlContext: SQLContext = sparkSession.sqlContext
 
+    import sqlContext.implicits._
     val testSuite = TestSuiteFactory.loadTestSuite(Array[String](ciTestFile))
 
     val testReports = ValidationExecutor.testIris(
@@ -176,13 +185,18 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
       testSuite = testSuite
     )(sqlContext)
 
-    import org.dbpedia.validation.buildTableReport
+    import org.dbpedia.validation.buildModReport
 
     val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
 
     Array.tabulate(testReports.length){
 
-      i => buildTableReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
+      i => {
+        val modReport = buildModReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
+        val html = modReport._1
+        FileUtils.forceMkdir(new File("target/testreports"))
+        writeFile(s"target/testreports/testreport_$i.html", html)
+      }
     }
   }
 
