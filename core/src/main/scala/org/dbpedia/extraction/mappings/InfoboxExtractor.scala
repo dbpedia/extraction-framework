@@ -185,7 +185,7 @@ extends PageNodeExtractor
         extractRankNumber(node).foreach(result => return List(result))
         extractLinks(node) match
         {
-            case links if links.nonEmpty => return links
+            case links if links.nonEmpty => { return links}
             case _ =>
         }
         StringParser.parse(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt))).toList
