@@ -132,12 +132,17 @@ extends PageNodeExtractor
                     val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
                     val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
-                    for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.unit.nonEmpty)
+
+                    //for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.unit.nonEmpty)
+                    //sh: removed pr.unit.nonEmpty as it kicked out all objectproperty triples from wikilinks,
+                    // didn't test for further side-effects seems to work
+                    for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode))
                     {
                         val propertyUri = getPropertyUri(property.key)
                         try
                         {
-                            quads += new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.get)
+                            //sh: pr.unit should be empty (null) for objects
+                            quads += new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, pr.value, splitNode.sourceIri, pr.unit.getOrElse(null))
 
                             if (InfoboxExtractorConfig.extractTemplateStatistics) 
                             {
