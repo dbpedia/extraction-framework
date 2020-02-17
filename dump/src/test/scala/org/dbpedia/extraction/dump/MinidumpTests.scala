@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.dump
 
-import java.io.{File, FileInputStream, FileOutputStream}
-import java.nio.file.FileSystem
+import java.io.{File, FileInputStream}
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.concurrent.ConcurrentLinkedQueue
@@ -9,23 +8,18 @@ import java.util.concurrent.ConcurrentLinkedQueue
 import org.aksw.rdfunit.RDFUnit
 import org.aksw.rdfunit.enums.TestCaseExecutionType
 import org.aksw.rdfunit.io.reader.{RdfModelReader, RdfStreamReader}
-import org.aksw.rdfunit.io.writer.RdfFileWriter
 import org.aksw.rdfunit.model.interfaces.{TestCase, TestSuite}
-import org.aksw.rdfunit.sources.{SchemaSourceFactory, TestSource, TestSourceBuilder}
-import org.aksw.rdfunit.tests.generators.{ShaclTestGenerator, TestGeneratorFactory}
+import org.aksw.rdfunit.sources.{SchemaSourceFactory, TestSourceBuilder}
+import org.aksw.rdfunit.tests.generators.ShaclTestGenerator
 import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator
-import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream, BZip2CompressorOutputStream}
-import org.apache.commons.io.{FileSystemUtils, FileUtils}
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
+import org.apache.commons.io.FileUtils
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.apache.spark.sql.{SQLContext, SparkSession}
 import org.dbpedia.databus.mod.EvalMod.writeFile
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.dump.extract.ConfigLoader
-import org.dbpedia.extraction.util.MappingsDownloader.apiUrl
-import org.dbpedia.extraction.util.{Language, WikiDownloader}
-import org.dbpedia.extraction.util.OntologyDownloader.{download, load, save}
-import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.validation.{TestSuiteFactory, ValidationExecutor}
 import org.scalatest.{BeforeAndAfterAll, FunSuite}
 
@@ -176,8 +170,6 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     sparkSession.sparkContext.setLogLevel("WARN")
 
     val sqlContext: SQLContext = sparkSession.sqlContext
-
-    import sqlContext.implicits._
     val testSuite = TestSuiteFactory.loadTestSuite(Array[String](ciTestFile))
 
     val testReports = ValidationExecutor.testIris(
