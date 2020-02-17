@@ -44,9 +44,9 @@
         <java.version>1.8</java.version>
         <scala.version>2.11.4</scala.version>
         <scala.compat.version>2.11</scala.compat.version>
-        <scalatest.scala.version>2.11</scalatest.scala.version>
+        <!--scalatest.scala.version>2.11</scalatest.scala.version-->
         <scalatest.version>2.2.1</scalatest.version>
-        <scala.compiler.Xmx>-Xmx1024m</scala.compiler.Xmx>
+        <scala.compiler.Xmx>-Xmx10240m</scala.compiler.Xmx>
         <rdfunit.version>0.8.21</rdfunit.version>
         <!--moved to surefire plugin configuration-->
         <!--<skipTests>false</skipTests>-->
@@ -268,7 +268,7 @@
             <!-- core, live -->
             <dependency>
                 <groupId>org.scalatest</groupId>
-                <artifactId>scalatest_${scalatest.scala.version}</artifactId>
+                <artifactId>scalatest_${scala.compat.version}</artifactId>
                 <version>${scalatest.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -282,7 +282,8 @@
 
 
 
-            <!--TODO-->
+
+            <!--TODO CHECK IF NEEDED-->
 
             <dependency>
                 <groupId>org.jsoup</groupId>
@@ -310,6 +311,7 @@ for the test compilation and execution phases. This scope is not transitive.
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
+                <!--version>4.8.2</version-->
                 <version>4.12</version>
                 <scope>test</scope>
             </dependency>
