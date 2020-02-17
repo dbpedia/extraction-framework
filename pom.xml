@@ -44,9 +44,12 @@
         <java.version>1.8</java.version>
         <scala.version>2.11.4</scala.version>
         <scala.compat.version>2.11</scala.compat.version>
-        <!--scalatest.scala.version>2.11</scalatest.scala.version-->
         <scalatest.version>2.2.1</scalatest.version>
-        <scala.compiler.Xmx>-Xmx10240m</scala.compiler.Xmx>
+
+        <spark.compat.version>2.11</spark.compat.version>
+        <spark.version>2.2.1</spark.version>
+
+        <scala.compiler.Xmx>-Xmx5120m</scala.compiler.Xmx>
         <rdfunit.version>0.8.21</rdfunit.version>
         <!--moved to surefire plugin configuration-->
         <!--<skipTests>false</skipTests>-->
@@ -265,13 +268,8 @@
                 <version>${scala.version}</version>
             </dependency>
 
-            <!-- core, live -->
-            <dependency>
-                <groupId>org.scalatest</groupId>
-                <artifactId>scalatest_${scala.compat.version}</artifactId>
-                <version>${scalatest.version}</version>
-                <scope>test</scope>
-            </dependency>
+
+
             <dependency>
                 <groupId>org.scala-lang</groupId>
                 <artifactId>scala-xml</artifactId>
@@ -289,6 +287,40 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>1.8.3</version>
+            </dependency>
+
+
+            <!--
+ #####  ######     #    ######  #    #
+#     # #     #   # #   #     # #   #
+#       #     #  #   #  #     # #  #
+ #####  ######  #     # ######  ###
+      # #       ####### #   #   #  #
+#     # #       #     # #    #  #   #
+ #####  #       #     # #     # #    #
+            -->
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-core_${spark.compat.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-sql_${spark.compat.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.databricks</groupId>
+                <artifactId>spark-xml_${spark.compat.version}</artifactId>
+                <version>0.4.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>26.0-jre</version>
             </dependency>
 
             <!--
@@ -313,6 +345,14 @@ for the test compilation and execution phases. This scope is not transitive.
                 <artifactId>junit</artifactId>
                 <!--version>4.8.2</version-->
                 <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- core, live -->
+            <dependency>
+                <groupId>org.scalatest</groupId>
+                <artifactId>scalatest_${scala.compat.version}</artifactId>
+                <version>${scalatest.version}</version>
                 <scope>test</scope>
             </dependency>
 

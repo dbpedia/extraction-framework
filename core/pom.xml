@@ -94,10 +94,14 @@
 
     <dependencies>
 
-        <!-- TODO REMOVE IN FUTURE, see main pom -->
         <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>jena-arq</artifactId>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-xml</artifactId>
         </dependency>
 
         <dependency>
@@ -110,6 +114,32 @@
             <artifactId>junit</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_${spark.compat.version}</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${spark.compat.version}</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.databricks</groupId>
+            <artifactId>spark-xml_${spark.compat.version}</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <!-- TODO REMOVE IN FUTURE, see main pom -->
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-arq</artifactId>
+        </dependency>
+
         <!-- TODO CHECK if needed-->
         <dependency>
             <groupId>org.jsoup</groupId>
@@ -118,17 +148,7 @@
 
         <!--TODO-->
 
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.11</artifactId>
-            <version>2.2.1</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.11</artifactId>
-            <version>2.2.1</version>
-        </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -177,15 +197,7 @@
             <version>0.8.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-xml</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -220,19 +232,6 @@
             <groupId>org.scalaj</groupId>
             <artifactId>scalaj-http_2.11</artifactId>
             <version>2.2.1</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.databricks</groupId>
-            <artifactId>spark-xml_2.11</artifactId>
-            <version>0.4.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>26.0-jre</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.github.scopt/scopt -->
