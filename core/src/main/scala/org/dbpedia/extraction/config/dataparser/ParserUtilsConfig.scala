@@ -6,7 +6,6 @@ object ParserUtilsConfig
 {
     val scalesMap = Map(
         "en" -> Map(
-            "hundred" ->2,
             "thousand" -> 3,
             "million" -> 6,
             "mio" -> 6,
@@ -14,22 +13,7 @@ object ParserUtilsConfig
             "billion" -> 9,
             "bln" -> 9,
             "trillion" -> 12,
-            "quadrillion" -> 15,
-            "quintillion" -> 18,
-            "sextillion" -> 21,
-            "septillion" -> 24,
-            "octillion" -> 27,
-            "nonillion" -> 30,
-            "decillion" -> 33,
-            "undecillion" -> 36,
-            "duodecillion" -> 39,
-            "tredecillion" -> 42,
-            "quindecillion" -> 48,
-            "sexdecillion" -> 51,
-            "octodecillion" -> 57,
-            "novemdecillion" -> 60,
-            "vigintillion" -> 63,
-            "centillion" -> 303
+            "quadrillion" -> 15
         ),
         // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
         // Don't change this else if you know how it is done.
