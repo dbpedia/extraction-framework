@@ -6,7 +6,6 @@ import org.apache.jena.iri.IRIException
 import org.apache.jena.query.{QueryExecutionFactory, QueryFactory}
 import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.riot.system.IRIResolver
-import org.apache.spark.sql.SparkSession
 import org.scalatest.FunSuite
 
 import scala.collection.JavaConversions._
@@ -28,58 +27,58 @@ class IRI_Test_Suite  extends FunSuite{
 
   test("Spark Approach") {
 
-    val hadoopHomeDir = new File("./haoop/")
-    hadoopHomeDir.mkdirs()
-    System.setProperty("hadoop.home.dir", hadoopHomeDir.getAbsolutePath)
-    System.setProperty("log4j.logger.org.apache.spark.SparkContext", "WARN")
-
-    val extractionOutputTtl =
-      s"""
-         |<http://commons.dbpedia.org/resource/File:Rainbow_Sopot_Poland_2004_08_11_ubt.jpeg> <http://dbpedia.org/ontology/license> <http://commons.dbpedia.org/resource/http://creativecommons.org/licenses/by/2.5/> .
-       """.stripMargin.trim
-
-    val sparkSession = SparkSession.builder().config("hadoop.home.dir", "./hadoop")
-      .appName("Dev 3").master("local[*]").getOrCreate()
-
-    //    sparkSession.sparkContext.setLogLevel("WARN")
-
-    val sqlContext = sparkSession.sqlContext
-    import sqlContext.implicits._
-
-    val rdd = sqlContext.createDataset(extractionOutputTtl.lines.toSeq)
-
-    val counts = rdd.map(line => {
-
-      val spo = line.split(" ", 3)
-
-      //      implicit def betterStringConversion(str: String) = new BetterString(str)
-
-      var s: String = null
-      if (spo(0).startsWith("<")) {
-        s = spo(0).substring(1, spo(0).length - 1)
-      }
-
-      //  var tS, vS, tP, vP, tO, vO: Long = 0L
-      //
-      var p: String = null
-      if (spo(1).startsWith("<")) {
-        p = spo(1).substring(1, spo(1).length - 1)
-      }
-
-      var o: String = null
-      if (spo(2).startsWith("<")) {
-        o = spo(2).substring(1, spo(2).length - 3)
-      }
-
-      println(s)
-      SPO(s,p,o)
-    }).map(_.s).distinct().filter(_ != null).map( x => ReduceScore(1,1,0) )
-      .reduce( (a,b) => ReduceScore(a.cntAll+b.cntAll,a.cntTrigger+b.cntTrigger,a.cntValid+b.cntValid))
-
-    println(counts.cntAll)
-    println(counts.cntTrigger)
-    println(counts.cntValid)
-
+//    TODO rework
+//    val hadoopHomeDir = new File("./haoop/")
+//    hadoopHomeDir.mkdirs()
+//    System.setProperty("hadoop.home.dir", hadoopHomeDir.getAbsolutePath)
+//    System.setProperty("log4j.logger.org.apache.spark.SparkContext", "WARN")
+//
+//    val extractionOutputTtl =
+//      s"""
+//         |<http://commons.dbpedia.org/resource/File:Rainbow_Sopot_Poland_2004_08_11_ubt.jpeg> <http://dbpedia.org/ontology/license> <http://commons.dbpedia.org/resource/http://creativecommons.org/licenses/by/2.5/> .
+//       """.stripMargin.trim
+//
+//    val sparkSession = SparkSession.builder().config("hadoop.home.dir", "./hadoop")
+//      .appName("Dev 3").master("local[*]").getOrCreate()
+//
+//    //    sparkSession.sparkContext.setLogLevel("WARN")
+//
+//    val sqlContext = sparkSession.sqlContext
+//    import sqlContext.implicits._
+//
+//    val rdd = sqlContext.createDataset(extractionOutputTtl.lines.toSeq)
+//
+//    val counts = rdd.map(line => {
+//
+//      val spo = line.split(" ", 3)
+//
+//      //      implicit def betterStringConversion(str: String) = new BetterString(str)
+//
+//      var s: String = null
+//      if (spo(0).startsWith("<")) {
+//        s = spo(0).substring(1, spo(0).length - 1)
+//      }
+//
+//      //  var tS, vS, tP, vP, tO, vO: Long = 0L
+//      //
+//      var p: String = null
+//      if (spo(1).startsWith("<")) {
+//        p = spo(1).substring(1, spo(1).length - 1)
+//      }
+//
+//      var o: String = null
+//      if (spo(2).startsWith("<")) {
+//        o = spo(2).substring(1, spo(2).length - 3)
+//      }
+//
+//      println(s)
+//      SPO(s,p,o)
+//    }).map(_.s).distinct().filter(_ != null).map( x => ReduceScore(1,1,0) )
+//      .reduce( (a,b) => ReduceScore(a.cntAll+b.cntAll,a.cntTrigger+b.cntTrigger,a.cntValid+b.cntValid))
+//
+//    println(counts.cntAll)
+//    println(counts.cntTrigger)
+//    println(counts.cntValid)
 
   }
   case class RawRdfTripleParts()

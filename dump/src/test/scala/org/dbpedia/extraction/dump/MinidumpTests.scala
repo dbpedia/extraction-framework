@@ -93,7 +93,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
       * download ontology
       *
       * cd core;
-      * mvn scala:run -Dlauncher="download-mappings "
+      * mvn scala:run -Dlauncher="download-mappings";
       */
 //    println("Download ontology")
 //    val dumpFile = new File("../ontology.xml")

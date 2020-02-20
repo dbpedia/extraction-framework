@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.mappings
 
-import org.apache.spark.SparkContext
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
