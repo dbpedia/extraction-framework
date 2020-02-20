@@ -52,6 +52,9 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
   {
     val retryFactor = if(isRetry) 2 else 1
 
+    //replaces {{lang}} with the language
+    val apiUrl: URL = new URL(connectionConfig.apiUrl.replace("{{LANG}}",pageTitle.language.wikiCode))
+
     // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
     // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
     // TODO: test this in detail!!! there may be other characters that need to be escaped.
@@ -61,14 +64,16 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
       case (search, replacement) =>  titleParam = titleParam.replace(search, replacement);
     }
 
-    val apiUrl: URL = new URL(connectionConfig.apiUrl.replace("{{LANG}}",pageTitle.language.wikiCode))
+
     // Fill parameters
-    val parameters = "uselang=" + pageTitle.language.wikiCode + (pageTitle.id match{
+    var parameters = "uselang=" + pageTitle.language.wikiCode
+
+    parameters += (pageTitle.id match{
       case Some(id) if apiParameterString.contains("%d") =>
         apiParameterString.replace("&page=%s", "").format(id)
       case _ => apiParameterString.replaceAll("&pageid=[^&]+", "").format(titleParam)
     })
-    //println(s"mediawikiurl: $apiUrl?$parameters")
+    println(s"mediawikiurl: $apiUrl?$parameters")
 
     for(counter <- 1 to maxRetries)
     {

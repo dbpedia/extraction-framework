@@ -22,6 +22,9 @@ var table = null;
 
 function init(catalogUrl, callback, params, canon)
 {
+    // show the spinning circle
+    createProgressBar();
+
     sendRequest(catalogUrl, "GET", null, true, catalogLoaded, function () {});
     initCallback = callback;
     callbackParam = params;
@@ -390,9 +393,40 @@ function insertOntologyTable()
         nt = owl;
         owl = owl.replace(".nt", ".owl")
     }
+
+
     ontoTable.html("<table><tbody><tr><td><strong>File</strong></td><td><strong>Serialization</strong></td></tr>" +
         "<tr><td><a href=\"" + document.URL + "#dbpedia-ontology\" name=\"odbpedia-ontology\">DBpedia Ontology</a></td>" +
         "<td><a href=\"" + owl + "\">owl</a><br><a href=\"" + nt + "\">nt</a></td></tr></tbody></table>");
+}
+
+function createProgressBar()
+{
+    // get the canvas
+     var loader = d3.select("#canvas")
+        .append("div")
+        .attr("id", "downloads-loader")
+        .style("width", "100%")
+        .style("text-align", "center");
+
+    loader.append("style")
+        .text(`.loader { margin: auto; border: 8px solid #F0F0F0; border-radius: 50%; border-top: 8px solid #2B4253;
+            width: 80px; height: 80px; -webkit-animation: spin 2s linear infinite; animation: spin 2s linear infinite; } 
+            @-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(720deg); } } 
+            @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(720deg); } }`);
+
+    loader.append("div")
+        .attr("class", "loader");
+
+    loader.append("div")
+        .style("margin", "20px")
+        .text("Loading Downloads Table");
+}
+
+function hideProgressBar()
+{
+    var progressBar = $('#downloads-loader');
+    progressBar.css("display", "none")
 }
 
 function reDrawTable(s)
@@ -414,6 +448,9 @@ function reDrawTable(s)
     }
 
     tabulate(s);
+
+
+    hideProgressBar();
 
     $('#table').on('draw.dt', function(){
         var langs = getLanguages();

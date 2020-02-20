@@ -21,31 +21,47 @@ import scala.collection.mutable.ListBuffer
 import scala.io.Codec
 import scala.util.{Failure, Success, Try}
 
-
+/**
+  * Documentation of config values
+  *
+  * TODO universal.properties is loaded and then overwritten by the job specific config, however,
+  * we are working on removing universal properties by setting (and documenting) sensible default values
+  * here, that CAN be overwritten in job sepcific config
+  *
+  * Guideline:
+  * 1. Use Java/Scaladoc always
+  * 2. Parameters (lazy val) MUST be documented in the following manner:
+  *   1. provide info about how the parameter works
+  *   2. describe all checks done, i.e. fail on null or >300
+  *   3. state the default value
+  * 3. Parameters MUST follow this pattern:
+  *   1. if the config param is called "base-dir" then the param MUST be "baseDir"
+  *   2. i.e. replace - by CamelCase, since "-" can not be used in scala
+  *
+  *
+  * TODO @Fabian please:
+  * * go through universal properties and other configs and move all comments here
+  * * after removing place a comment in the property file refering to http://temporary.dbpedia.org/scaladocs/#org.dbpedia.extraction.config.Config
+  * * set default values according to universal.properties
+  * * try to FOLLOW THE GUIDELINES above, add TODO if unclear
+  * * if possible, move all def functions to ConfigUtils
+  * * check the classes using the params for validation checks and move them here
+  * */
 class Config(val configPath: String) extends
   Properties(Config.universalProperties) with java.io.Serializable
 {
 
+  /**
+    * Merge and overrides all universal property values
+    * TODO can configPath ever be null?
+    */
   if(configPath != null)
     this.putAll(ConfigUtils.loadConfig(configPath))
 
   @transient private val logger = Logger.getLogger(getClass.getName)
-  /**
-    * load two config files:
-    * 1. the universal config containing properties universal for a release
-    * 2. the extraction job specific config provided by the user
-    */
 
-  def getArbitraryStringProperty(key: String): Option[String] = {
-    Option(getString(this, key))
-  }
 
-  def throwMissingPropertyException(property: String, required: Boolean): Unit ={
-    if(required)
-      throw new IllegalArgumentException("The following required property is missing from the provided .properties file (or has an invalid format): '" + property + "'")
-    else
-      logger.log(Level.WARNING, "The following property is missing from the provided .properties file (or has an invalid format): '" + property + "'. It will not factor in.")
-  }
+
 
   /**
     * get all universal properties, check if there is an override in the provided config file
@@ -58,15 +74,27 @@ class Config(val configPath: String) extends
   lazy val copyrightCheck: Boolean = Try(this.getProperty("copyrightCheck", "false").toBoolean).getOrElse(false)
 
   /**
-   * Dump directory
-   * Note: This is lazy to defer initialization until actually called (eg. this class is not used
-   * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
-   * and overrides this val to null because it is not needed)
+    * base-dir gives either an absolute path or a relative path to where all data is stored, normally wikidumps are downloaded here and extracted data is saved next to it, created folder structure is {{lang}}wiki/$date
+    *
+    * DEV NOTE:
+    * 1. this must stay lazy as it might not be used or creatable in the SPARK extraction
+    * 2. Download.scala in core does the creation
+    *
+    * DEFAULT ./wikidumps
+    *
+    * TODO rename dumpDir to baseDir
    */
-  lazy val dumpDir: File = getValue(this, "base-dir", required = true){ x => new File(x)}
+  lazy val dumpDir: File = {
+    var x:File = getValue[File](this, "base-dir", required = true){ x => new File(x)}
+    if (x==null.asInstanceOf[File]){
+       x = new File ("./wikidumps")
+    }
+    x
+  }
 
   /**
     * Number of parallel processes allowed. Depends on the number of cores, type of disk and IO speed
+    *
     */
   lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "4").trim.toInt
 
@@ -92,6 +120,8 @@ class Config(val configPath: String) extends
     }
      // throw new IllegalArgumentException("dbpedia-version option in universal.properties was not defined or in a wrong format", e)
   }
+
+
 
   lazy val wikidataMappingsFile: File = {
     val name = this.getProperty("wikidata-property-mappings-file", "wikidata-property-mappings.json").trim
@@ -203,23 +233,7 @@ class Config(val configPath: String) extends
     */
   lazy val requireComplete: Boolean = this.getProperty("require-download-complete", "false").trim.toBoolean
 
-  /**
-    * determines if 1. the download has to be completed and if so 2. looks for the download-complete file
-    * @param lang - the language for which to check
-    * @return
-    */
-  def isDownloadComplete(lang:Language): Boolean ={
-    if(requireComplete){
-      val finder = new Finder[File](dumpDir, lang, wikiName)
-      val date = finder.dates(source.head).last
-      finder.file(date, Config.Complete) match {
-        case None => false
-        case Some(x) => x.exists()
-      }
-    }
-    else
-      true
-  }
+
 
   /**
     * TODO experimental, ignore for now
@@ -284,6 +298,41 @@ class Config(val configPath: String) extends
     case Success(s) => s
     case Failure(f) => throw new IllegalArgumentException("Not all necessary parameters for the 'NifParameters' class were provided or could not be parsed to the expected type.", f)
   }
+
+  /* HELPER FUNCTIONS */
+
+
+  def getArbitraryStringProperty(key: String): Option[String] = {
+    Option(getString(this, key))
+  }
+
+  def throwMissingPropertyException(property: String, required: Boolean): Unit ={
+    if(required)
+      throw new IllegalArgumentException("The following required property is missing from the provided .properties file (or has an invalid format): '" + property + "'")
+    else
+      logger.log(Level.WARNING, "The following property is missing from the provided .properties file (or has an invalid format): '" + property + "'. It will not factor in.")
+  }
+
+
+  /**
+    * determines if 1. the download has to be completed and if so 2. looks for the download-complete file
+    * @param lang - the language for which to check
+    * @return
+    */
+  def isDownloadComplete(lang:Language): Boolean ={
+    if(requireComplete){
+      val finder = new Finder[File](dumpDir, lang, wikiName)
+      val date = finder.dates(source.head).last
+      finder.file(date, Config.Complete) match {
+        case None => false
+        case Some(x) => x.exists()
+      }
+    }
+    else
+      true
+  }
+
+
 }
 
 object Config{
@@ -301,6 +350,15 @@ object Config{
     cssSelectorMap: URL
   )
 
+  /**
+    * test
+    * @constructor test
+    * @param apiUrl test
+    * @param maxRetries
+    * @param connectMs
+    * @param readMs
+    * @param sleepFactor
+    */
   case class MediaWikiConnection(
     apiUrl: String,
     maxRetries: Int,
