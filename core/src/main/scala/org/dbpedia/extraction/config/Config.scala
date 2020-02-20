@@ -42,6 +42,7 @@ import scala.util.{Failure, Success, Try}
   * TODO @Fabian please:
   * * go through universal properties and other configs and move all comments here
   * * after removing place a comment in the property file refering to http://temporary.dbpedia.org/scaladocs/#org.dbpedia.extraction.config.Config
+  * * local extraction-framework/core/target/site/scaladocs after mvn install in core
   * * set default values according to universal.properties
   * * try to FOLLOW THE GUIDELINES above, add TODO if unclear
   * * if possible, move all def functions to ConfigUtils
