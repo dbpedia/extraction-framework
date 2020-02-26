@@ -68,15 +68,47 @@ class Config(val configPath: String) extends
     * get all universal properties, check if there is an override in the provided config file
     */
 
+  /**
+   * ###### Extract from part files ######
+   * Please make sure that the regex actually matches the format used by ALL the wikis you are going to extract from!!!!
+   * One that should work in all cases is
+   * source=@pages-articles\\d*\\.xml(-p\\d+p\\d+)?\\.bz2
+   *
+   * NOTE: when using the above regex you should make sure you do not have part files AND regular dump files together
+   * for the same wiki, e.g. frwiki-20131120-pages-articles1.xml.bz2 and frwiki-20131120-pages-articles.xml.bz2, as they
+   * BOTH will match and that will result in duplicate output data
+   *
+   * Example:
+   * enwiki => enwiki-latest-pages-articles1.xml-p000000010p000010000.bz2 hence @pages-articles\\d+\\.xml-p\\d+p\\d+\\.bz2 matches
+   * frwiki => frwiki-latest-pages-articles1.xml.bz2 hence @pages-articles\\d+\\.xml\\.bz2 matches (the previous regex does not!)
+   * commonswiki => it does not have part files! This is true for other wikis as well.
+   *
+   * source=@pages-articles\\d+\\.xml-p\\d+p\\d+\\.bz2
+   *
+   * In case of multistream chunks
+   * source=@pages-articles-multistream\\.xml\\.\\d+\\.bz2
+   *
+   * Source file. If source file name ends with .gz or .bz2, it is unzipped on the fly.
+   * Must exist in the directory xxwiki/yyyymmdd and have the prefix xxwiki-yyyymmdd-
+   * where xx is the wiki code and yyyymmdd is the dump date.
+   * (default: pages-articles.xml.bz2):
+   */
   lazy val source: Seq[String] = getStrings(this, "source", ",", required = true)
 
+  /**
+   * wiki suffix: should be 'wiki'
+   */
   lazy val wikiName: String = getString(this, "wiki-name", required = true).trim
 
+  /**
+   * If we need to Exclude Non-Free Images in this Extraction, set this to true
+   */
   lazy val copyrightCheck: Boolean = Try(this.getProperty("copyrightCheck", "false").toBoolean).getOrElse(false)
 
   /**
     * base-dir gives either an absolute path or a relative path to where all data is stored, normally wikidumps are downloaded here and extracted data is saved next to it, created folder structure is {{lang}}wiki/$date
-    *
+    * Replace with your Wikipedia dump download directory (should not change over the course of a release)
+   *
     * DEV NOTE:
     * 1. this must stay lazy as it might not be used or creatable in the SPARK extraction
     * 2. Download.scala in core does the creation
@@ -94,13 +126,19 @@ class Config(val configPath: String) extends
   }
 
   /**
-    * Number of parallel processes allowed. Depends on the number of cores, type of disk and IO speed
-    *
+    * Parallel Disc Processes: indicates how many parallel extraction processes can be executed
+    * Depends on the number of cores, type of disk and IO speed
     */
   lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "4").trim.toInt
 
+  /**
+   * # Options for the SparkExtraction
+   */
   lazy val sparkMaster: String = Option(getString(this, "spark-master")).getOrElse("local[*]")
 
+  /**
+   * # Options for the SparkExtraction
+   */
   lazy val sparkLocalDir: String = Option(getString(this, "spark-local-dir")).getOrElse("")
 
   /**
@@ -110,8 +148,9 @@ class Config(val configPath: String) extends
   val runJobsInParallel: Boolean = this.getProperty("run-jobs-in-parallel", "false").trim.toBoolean
 
   /**
-    * The version string of the DBpedia version being extracted
-    */
+    * The version string of the DBpedia version being extracted (in this format: YYYY-MM)
+   *  NOTE will use current YYYY-MM if not set
+   */
   lazy val dbPediaVersion: String = parseVersionString(getString(this, "dbpedia-version").trim) match{
     case Success(s) => s
     case Failure(e) =>  {
@@ -123,14 +162,16 @@ class Config(val configPath: String) extends
   }
 
 
-
+  /**
+   * Wikidata mapping file created by the WikidataSubClassOf script
+   */
   lazy val wikidataMappingsFile: File = {
     val name = this.getProperty("wikidata-property-mappings-file", "wikidata-property-mappings.json").trim
     new File(dumpDir, name)
   }
 
   /**
-    * The directory where all log files will be stored
+    * The log file directory - used to store all log files created in the course of all extractions
     */
   lazy val logDir: Option[File] = Option(getString(this, "log-dir")) match {
     case Some(x) => Some(new File(x))
@@ -179,6 +220,10 @@ class Config(val configPath: String) extends
     * Note: This is lazy to defer initialization until actually called (eg. this class is not used
     * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
     * and overrides this val to null because it is not needed)
+   *
+   * # if ontology and mapping files are not given or do not exist,
+   * # download info from mappings.dbpedia.org
+   * # by default both should be in the root folder ../
     */
   lazy val ontologyFile: File = getValue(this, "ontology")(new File(_))
 
@@ -190,11 +235,29 @@ class Config(val configPath: String) extends
     */
   lazy val mappingsDir: File = getValue(this, "mappings")(new File(_))
 
+  /**
+   * # Serialization URI policies and file formats. Quick guide:
+   * # uri-policy keys: uri, generic, xml-safe, reject-long
+   * # uri-policy position modifiers: -subjects, -predicates, -objects, -datatypes, -contexts
+   * # uri-policy values: comma-separated languages or '*' for all languages
+   * # format values: n-triples, n-quads, turtle-triples, turtle-quads, trix-triples, trix-quads
+   * # See http://git.io/DBpedia-serialization-format-properties for details.
+   *
+   * # For backwards compatibility, en uses generic URIs. All others use local IRIs.
+   * # uri-policy.uri=uri:en; generic:en; xml-safe-predicates:*; reject-long:*
+   */
   lazy val policies: Map[String, Array[Policy]] = parsePolicies(this, "uri-policy")
 
+  /**
+   * # format values: n-triples, n-quads, turtle-triples, turtle-quads, trix-triples, trix-quads
+   */
   lazy val formats: Map[String, Formatter] = parseFormats(this, "format", policies).toMap
 
+  /**
+   * # disambiguations file (default: "page_props.sql.gz")
+   */
   lazy val disambiguations: String = this.getProperty("disambiguations", "page_props.sql.gz")
+
 
   /**
     * all non universal properties...
@@ -271,6 +334,18 @@ class Config(val configPath: String) extends
     case Failure(f) => throw new IllegalArgumentException("Not all necessary parameters for the 'MediaWikiConnection' class were provided or could not be parsed to the expected type.", f)
   }
 
+  /**
+   * parameters specific for the abstract extraction
+   *
+   * abstract-query=&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s
+   * # the tag path of the XML tags under which the result is expected
+   * abstract-tags=api,query,pages,page,extract
+   * # the properties used to specify long- and short abstracts (should not change)
+   * short-abstracts-property=rdfs:comment
+   * long-abstracts-property=abstract
+   * # the short abstract is at least this long
+   * short-abstract-min-length=200
+   */
   lazy val abstractParameters: AbstractParameters = Try {
     AbstractParameters(
       abstractQuery = this.getProperty("abstract-query", "").trim,
@@ -285,6 +360,22 @@ class Config(val configPath: String) extends
   }
 
 
+  /**
+   * #parameters specific to the nif extraction
+   *
+   * #only extract abstract (not the whole page)
+   * nif-extract-abstract-only=false
+   * #the request query string
+   * nif-query=&format=xml&action=parse&prop=text&page=%s&pageid=%d
+   * #the xml path of the response
+   * nif-tags=api,parse,text
+   * # will leave out the long and short abstract datasets
+   * nif-isTestRun=false
+   * # will write all anchor texts for each nif instance
+   * nif-write-anchor=false
+   * # write only the anchor text for link instances
+   * nif-write-link-anchor=true
+   */
   lazy val nifParameters: NifParameters = Try {
     NifParameters(
       nifQuery = this.getProperty("nif-query", "").trim,
