@@ -31,7 +31,8 @@ object DateIntervalMappingConfig
         "ru" -> Set("наши дни", "настоящее время", "наст. время", "н.вр."),
         "sk" -> Set("súčasnosť"),
         "sl" -> Set("danes"),
-        "tr" -> Set("günümüz", "günümüze", "halen")
+        "tr" -> Set("günümüz", "günümüze", "halen"),
+        "uk" -> Set("зараз", "в даний момент часу", "в нинішні дні")
     )
 
     val sinceMap = Map(
@@ -40,7 +41,8 @@ object DateIntervalMappingConfig
         "es" -> "desde",
         "fr" -> "depuis",
         "pl" -> "od",
-        "pt" -> "desde"
+        "pt" -> "desde",
+        "uk" -> "від"
     )
 
     val onwardMap = Map(
