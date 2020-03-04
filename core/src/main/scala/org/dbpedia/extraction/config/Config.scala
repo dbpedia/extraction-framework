@@ -61,15 +61,16 @@ class Config(val configPath: String) extends
 
   @transient private val logger = Logger.getLogger(getClass.getName)
 
-
-
-
   /**
     * get all universal properties, check if there is an override in the provided config file
     */
 
   /**
-   * ###### Extract from part files ######
+   * Source file. If source file name ends with .gz or .bz2, it is unzipped on the fly.
+   * Must exist in the directory xxwiki/yyyymmdd and have the prefix xxwiki-yyyymmdd-
+   * where xx is the wiki code and yyyymmdd is the dump date.
+   *
+   * Extract from part files:
    * Please make sure that the regex actually matches the format used by ALL the wikis you are going to extract from!!!!
    * One that should work in all cases is
    * source=@pages-articles\\d*\\.xml(-p\\d+p\\d+)?\\.bz2
@@ -88,17 +89,16 @@ class Config(val configPath: String) extends
    * In case of multistream chunks
    * source=@pages-articles-multistream\\.xml\\.\\d+\\.bz2
    *
-   * Source file. If source file name ends with .gz or .bz2, it is unzipped on the fly.
-   * Must exist in the directory xxwiki/yyyymmdd and have the prefix xxwiki-yyyymmdd-
-   * where xx is the wiki code and yyyymmdd is the dump date.
-   * (default: pages-articles.xml.bz2):
+   *
+   *@example source=pages-articles-multistream.xml.bz2
    */
   lazy val source: Seq[String] = getStrings(this, "source", ",", required = true)
 
   /**
-   * wiki suffix: should be 'wiki'
+   * wiki suffix
+   * @example wiki-name=wiki
    */
-  lazy val wikiName: String = getString(this, "wiki-name", required = true).trim
+  lazy val wikiName: String = Try(getString(this, "wiki-name", required = true).trim).getOrElse("wiki")
 
   /**
    * If we need to Exclude Non-Free Images in this Extraction, set this to true
@@ -106,7 +106,7 @@ class Config(val configPath: String) extends
   lazy val copyrightCheck: Boolean = Try(this.getProperty("copyrightCheck", "false").toBoolean).getOrElse(false)
 
   /**
-    * base-dir gives either an absolute path or a relative path to where all data is stored, normally wikidumps are downloaded here and extracted data is saved next to it, created folder structure is {{lang}}wiki/$date
+    * baseDir gives either an absolute path or a relative path to where all data is stored, normally wikidumps are downloaded here and extracted data is saved next to it, created folder structure is {{lang}}wiki/$date
     * Replace with your Wikipedia dump download directory (should not change over the course of a release)
    *
     * DEV NOTE:
@@ -126,20 +126,23 @@ class Config(val configPath: String) extends
   }
 
   /**
-    * Parallel Disc Processes: indicates how many parallel extraction processes can be executed
+    * Parallel Disc Processes: indicates how many parallel extraction processes can be executed.
     * Depends on the number of cores, type of disk and IO speed
+   * @example parallel-processes=8
     */
-  lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "4").trim.toInt
+  lazy val parallelProcesses: Int = Option(this.getProperty("parallel-processes", "4").trim.toInt).getOrElse(8)
 
   /**
-   * # Options for the SparkExtraction
+   * spark master for the SparkExtraction
+   * @example spark-master=local[*]
    */
   lazy val sparkMaster: String = Option(getString(this, "spark-master")).getOrElse("local[*]")
 
   /**
-   * # Options for the SparkExtraction
+   * spark local dir for the SparkExtraction
+   * @example spark-local-dir=/home/extractor/data/
    */
-  lazy val sparkLocalDir: String = Option(getString(this, "spark-local-dir")).getOrElse("")
+  lazy val sparkLocalDir: String = Option(getString(this, "spark-local-dir")).getOrElse("/home/extractor/data/")
 
   /**
     * Normally extraction jobs are run sequentially (one language after the other), but for some jobs it makes sense to run these in parallel.
@@ -166,18 +169,29 @@ class Config(val configPath: String) extends
    * Wikidata mapping file created by the WikidataSubClassOf script
    */
   lazy val wikidataMappingsFile: File = {
-    val name = this.getProperty("wikidata-property-mappings-file", "wikidata-property-mappings.json").trim
+    val name = Try(this.getProperty("wikidata-property-mappings-file", "wikidata-property-mappings.json").trim).getOrElse("wikidata-property-mappings.json")
     new File(dumpDir, name)
   }
 
   /**
-    * The log file directory - used to store all log files created in the course of all extractions
+    * log file directory: used to store all log files created in the course of all extractions
     */
-  lazy val logDir: Option[File] = Option(getString(this, "log-dir")) match {
+  lazy val logDir: Option[File] = Try(Option(getString(this, "log-dir"))).getOrElse(Option("/home/marvin/workspace/active/logdir")) match {
     case Some(x) => Some(new File(x))
     case None => None
   }
 
+  /**
+   *
+   * @param lang
+   * @param interval
+   * @param preamble
+   * @param writer
+   * @param datasets
+   * @param monitor
+   * @tparam T
+   * @return
+   */
   def getDefaultExtractionRecorder[T](lang: Language, interval: Int = 100000, preamble: String = null, writer: Writer = null, datasets : ListBuffer[Dataset] =  ListBuffer[Dataset](), monitor : ExtractionMonitor = null): ExtractionRecorder[T] ={
     val w = if(writer != null) writer
       else openLogFile(lang.wikiCode) match{
@@ -187,6 +201,11 @@ class Config(val configPath: String) extends
     new ExtractionRecorder[T](w, interval, preamble, slackCredentials.getOrElse(null), datasets, lang, monitor)
   }
 
+  /**
+   *
+   * @param langWikiCode
+   * @return
+   */
   private def openLogFile(langWikiCode: String): Option[FileOutputStream] ={
     logDir match{
       case Some(p) if p.exists() =>
@@ -236,25 +255,26 @@ class Config(val configPath: String) extends
   lazy val mappingsDir: File = getValue(this, "mappings")(new File(_))
 
   /**
-   * # Serialization URI policies and file formats. Quick guide:
-   * # uri-policy keys: uri, generic, xml-safe, reject-long
-   * # uri-policy position modifiers: -subjects, -predicates, -objects, -datatypes, -contexts
-   * # uri-policy values: comma-separated languages or '*' for all languages
-   * # format values: n-triples, n-quads, turtle-triples, turtle-quads, trix-triples, trix-quads
-   * # See http://git.io/DBpedia-serialization-format-properties for details.
+   * Serialization URI policies and file formats. Quick guide:
+   * uriPolicy keys: uri, generic, xml-safe, reject-long
+   * uriPolicy position modifiers: -subjects, -predicates, -objects, -datatypes, -contexts
+   * uriPolicy values: comma-separated languages or '*' for all languages
+   * format values: n-triples, n-quads, turtle-triples, turtle-quads, trix-triples, trix-quads
+   * See http://git.io/DBpedia-serialization-format-properties for details.
    *
-   * # For backwards compatibility, en uses generic URIs. All others use local IRIs.
-   * # uri-policy.uri=uri:en; generic:en; xml-safe-predicates:*; reject-long:*
+   * For backwards compatibility, en uses generic URIs. All others use local IRIs.
+   * However, in the input files English already uses the generic domain, thus URI encoding gets enabled for the generic domain
+   * uri-policy.uri=uri:en; generic:en; xml-safe-predicates:*; reject-long:*
    */
   lazy val policies: Map[String, Array[Policy]] = parsePolicies(this, "uri-policy")
 
   /**
-   * # format values: n-triples, n-quads, turtle-triples, turtle-quads, trix-triples, trix-quads
+   * format values: n-triples, n-quads, turtle-triples, turtle-quads, trix-triples, trix-quads
    */
   lazy val formats: Map[String, Formatter] = parseFormats(this, "format", policies).toMap
 
   /**
-   * # disambiguations file (default: "page_props.sql.gz")
+   * disambiguations file (default: "page_props.sql.gz")
    */
   lazy val disambiguations: String = this.getProperty("disambiguations", "page_props.sql.gz")
 
@@ -314,6 +334,11 @@ class Config(val configPath: String) extends
     */
   lazy val namespaces: Set[Namespace] = loadNamespaces()
 
+  /**
+   * load namespaces defined by the languages in use
+   *
+   * @return set of namespaces
+   */
   private def loadNamespaces(): Set[Namespace] = {
     val names = getStrings(this, "namespaces", ",")
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template, Namespace.WikidataProperty)
@@ -321,6 +346,9 @@ class Config(val configPath: String) extends
     else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
   }
 
+  /**
+   *
+   */
   lazy val mediawikiConnection: MediaWikiConnection = Try {
     MediaWikiConnection(
       apiUrl = this.getProperty("mwc-apiUrl", "").trim,
@@ -337,14 +365,16 @@ class Config(val configPath: String) extends
   /**
    * parameters specific for the abstract extraction
    *
-   * abstract-query=&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s
-   * # the tag path of the XML tags under which the result is expected
-   * abstract-tags=api,query,pages,page,extract
-   * # the properties used to specify long- and short abstracts (should not change)
-   * short-abstracts-property=rdfs:comment
-   * long-abstracts-property=abstract
-   * # the short abstract is at least this long
-   * short-abstract-min-length=200
+   * abstractQuery query for the abstract extraction
+   * =&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s
+   * abstractTags is the path of the XML tags under which the result is expected
+   * =api,query,pages,page,extract
+   * shortAbstractsProperty is the property used to specify short abstracts (should not change)
+   * =rdfs:comment
+   * longAbstractsProperty is the property used to specify long abstracts (should not change)
+   * =abstract
+   * shortAbstractMinLength specifies the minimal length of the short abstract
+   * =200
    */
   lazy val abstractParameters: AbstractParameters = Try {
     AbstractParameters(
@@ -362,6 +392,19 @@ class Config(val configPath: String) extends
 
   /**
    * Parameters specific to the nif extraction
+   *
+   * nifQuery
+   * =&format=xml&action=parse&prop=text&page=%s&pageid=%d
+   * nifTags the xml path of the response
+   * =api,parse,text
+   * nifIsTestRun will leave out the long and short abstract datasets
+   * =false
+   * nifWriteAnchor will write all anchor texts for each nif instance
+   * =false
+   * nifWriteLinkAnchor write only the anchor text for link instances
+   * =true
+   * nifExtractAbstractOnly only extract abstract (not the whole page)
+   * =false
    */
   lazy val nifParameters: NifParameters = Try {
     NifParameters(
@@ -381,10 +424,22 @@ class Config(val configPath: String) extends
   /* HELPER FUNCTIONS */
 
 
+  /**
+   * getter of an arbitrary string property
+   *
+   * @param key property key
+   * @return property
+   */
   def getArbitraryStringProperty(key: String): Option[String] = {
     Option(getString(this, key))
   }
 
+  /**
+   * checks if a property in the provided .property file is missing or has an invalid format
+   *
+   * @param property property of .properties file
+   * @param required property is required
+   */
   def throwMissingPropertyException(property: String, required: Boolean): Unit ={
     if(required)
       throw new IllegalArgumentException("The following required property is missing from the provided .properties file (or has an invalid format): '" + property + "'")
@@ -420,20 +475,6 @@ object Config{
   val Complete = "download-complete"
 
   /**
-   * *
-   * * only extract abstract (not the whole page)
-   * * nif-extract-abstract-only=false
-   * * #
-   * * nif-query=&format=xml&action=parse&prop=text&page=%s&pageid=%d
-   * * #the xml path of the response
-   * * nif-tags=api,parse,text
-   * * # will leave out the long and short abstract datasets
-   * * nif-isTestRun=false
-   * * # will write all anchor texts for each nif instance
-   * * nif-write-anchor=false
-   * * # write only the anchor text for link instances
-   * * nif-write-link-anchor=true
-   *
    * @param nifQuery the request query string
    * @param nifTags the xml path of the response
    * @param isTestRun will leave out the long and short abstract datasets
@@ -471,20 +512,26 @@ object Config{
 
   /**
    *
-   * @param abstractQuery
-   * @param shortAbstractsProperty  the properties used to specify short abstracts (should not change)
+   * @param abstractQuery query for the abstract extraction
+   * @param shortAbstractsProperty the properties used to specify short abstracts (should not change)
    * @param longAbstractsProperty the properties used to specify long abstracts (should not change)
    * @param shortAbstractMinLength the short abstract is at least this long
    * @param abstractTags the tag path of the XML tags under which the result is expected
    */
   case class AbstractParameters(
-    abstractQuery: String,
+    abstractQuery: String = "foo",
     shortAbstractsProperty: String,
     longAbstractsProperty: String,
     shortAbstractMinLength: Int,
     abstractTags: String
   )
 
+  /**
+   * @param webhook URL of the slack webhook to be used
+   * @param username username under which all messages are posted (has to be registered for this webhook?)
+   * @param summaryThreshold Threshold of extracted pages over which a summary of the current extraction is posted
+   * @param exceptionThreshold Threshold of exceptions over which an exception report is posted
+   */
   case class SlackCredentials(
      webhook: URL,
      username: String,
@@ -492,8 +539,14 @@ object Config{
      exceptionThreshold: Int
    )
 
+  /**
+   * loads universal properties
+   */
   private val universalProperties: Properties = loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
 
+  /**
+   * creates universal config
+   */
   val universalConfig: Config = new Config(null)
 
 
