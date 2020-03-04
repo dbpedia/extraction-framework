@@ -361,20 +361,7 @@ class Config(val configPath: String) extends
 
 
   /**
-   * #parameters specific to the nif extraction
-   *
-   * #only extract abstract (not the whole page)
-   * nif-extract-abstract-only=false
-   * #the request query string
-   * nif-query=&format=xml&action=parse&prop=text&page=%s&pageid=%d
-   * #the xml path of the response
-   * nif-tags=api,parse,text
-   * # will leave out the long and short abstract datasets
-   * nif-isTestRun=false
-   * # will write all anchor texts for each nif instance
-   * nif-write-anchor=false
-   * # write only the anchor text for link instances
-   * nif-write-link-anchor=true
+   * Parameters specific to the nif extraction
    */
   lazy val nifParameters: NifParameters = Try {
     NifParameters(
@@ -432,6 +419,29 @@ object Config{
   /** name of marker file in wiki date directory */
   val Complete = "download-complete"
 
+  /**
+   * *
+   * * only extract abstract (not the whole page)
+   * * nif-extract-abstract-only=false
+   * * #
+   * * nif-query=&format=xml&action=parse&prop=text&page=%s&pageid=%d
+   * * #the xml path of the response
+   * * nif-tags=api,parse,text
+   * * # will leave out the long and short abstract datasets
+   * * nif-isTestRun=false
+   * * # will write all anchor texts for each nif instance
+   * * nif-write-anchor=false
+   * * # write only the anchor text for link instances
+   * * nif-write-link-anchor=true
+   *
+   * @param nifQuery the request query string
+   * @param nifTags the xml path of the response
+   * @param isTestRun will leave out the long and short abstract datasets
+   * @param writeAnchor will write all anchor texts for each nif instance
+   * @param writeLinkAnchor write only the anchor text for link instances
+   * @param abstractsOnly only extract abstract (not the whole page)
+   * @param cssSelectorMap
+   */
   case class NifParameters(
     nifQuery: String,
     nifTags: String,
@@ -459,6 +469,14 @@ object Config{
     sleepFactor: Int
   )
 
+  /**
+   *
+   * @param abstractQuery
+   * @param shortAbstractsProperty  the properties used to specify short abstracts (should not change)
+   * @param longAbstractsProperty the properties used to specify long abstracts (should not change)
+   * @param shortAbstractMinLength the short abstract is at least this long
+   * @param abstractTags the tag path of the XML tags under which the result is expected
+   */
   case class AbstractParameters(
     abstractQuery: String,
     shortAbstractsProperty: String,
