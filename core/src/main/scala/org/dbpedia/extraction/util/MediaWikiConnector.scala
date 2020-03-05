@@ -73,7 +73,7 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
         apiParameterString.replace("&page=%s", "").format(id)
       case _ => apiParameterString.replaceAll("&pageid=[^&]+", "").format(titleParam)
     })
-    println(s"mediawikiurl: $apiUrl?$parameters")
+    //println(s"mediawikiurl: $apiUrl?$parameters")
 
     for(counter <- 1 to maxRetries)
     {
