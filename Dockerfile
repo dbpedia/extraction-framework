@@ -2,9 +2,9 @@ FROM maven:3-jdk-8
 
 WORKDIR /dbpedia
 
-RUN git clone https://github.com/dbpedia/extraction-framework.git
+RUN bash -c 'mkdir -p /dbpedia/extraction-framework-files/{basedir,logdir}'
 
-RUN mkdir -p /dbpedia/extraction-framework-files/basedir && mkdir /dbpedia/extraction-framework-files/logdir 
+ADD . /dbpedia/extraction-framework
 
 VOLUME /dbpedia/extraction-framework-files
 
