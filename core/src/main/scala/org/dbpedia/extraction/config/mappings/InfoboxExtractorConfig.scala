@@ -15,7 +15,8 @@ object InfoboxExtractorConfig
         "ar"-> Set("صورة"),
         "id"-> Set("foto", "gambar"),
         "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης"),
-        "eo"-> Set("dosiero")
+        "eo"-> Set("dosiero"),
+        "pt" -> Set("imagem", "foto","mapa")
     )
     
     // TODO: i18n
