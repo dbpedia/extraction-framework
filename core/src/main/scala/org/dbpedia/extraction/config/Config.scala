@@ -92,7 +92,13 @@ class Config(val configPath: String) extends
    *
    *@example source=pages-articles-multistream.xml.bz2
    */
-  lazy val source: Seq[String] = getStrings(this, "source", ",", required = true)
+  lazy val source: Seq[String] = {
+    val temp = getStrings(this, "source", ",")
+    if (temp.isEmpty) Seq("pages-articles-multistream.xml.bz2")
+    else temp
+  }
+//  lazy val source: Seq[String] = getStrings(this, "source", ",", required = true)
+
 
   /**
    * wiki suffix
@@ -245,6 +251,7 @@ class Config(val configPath: String) extends
    * # by default both should be in the root folder ../
     */
   lazy val ontologyFile: File = getValue(this, "ontology")(new File(_))
+
 
   /**
     * Local mappings files, downloaded for speed and reproducibility
@@ -555,5 +562,6 @@ object Config{
     */
   private val wikisinfoFile = new File(getString(universalProperties , "base-dir", required = true), WikiInfo.FileName)
   private lazy val wikiinfo = if(wikisinfoFile.exists()) WikiInfo.fromFile(wikisinfoFile, Codec.UTF8) else Seq()
+
   def wikiInfos: Seq[WikiInfo] = wikiinfo
 }
