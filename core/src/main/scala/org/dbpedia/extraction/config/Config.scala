@@ -47,6 +47,22 @@ import scala.util.{Failure, Success, Try}
   * * try to FOLLOW THE GUIDELINES above, add TODO if unclear
   * * if possible, move all def functions to ConfigUtils
   * * check the classes using the params for validation checks and move them here
+  *
+  *
+  * TODO:
+  * parallelprocesses was 4 before, changed to 8 now -> ok?
+  *
+  * dumpdir: changed defaultvalue from 'wikidumps' to 'home/marvin/.../basedir' -> ok?
+  *
+  * dbpediaversion: unclear how to solve
+  *
+  * how to treat ontology and mappings?
+  *
+  * all of Extraction Monitor: compare-dataset-ids... ?
+  *
+  * how does it set the policies?
+  * If a uri policy (like uri-policy.iri) is not found in parsePolicies it returns an exception?
+  * In universal.properties many uri-policies are commented out, but it still doesnt throw an exception, why?
   * */
 class Config(val configPath: String) extends
   Properties(Config.universalProperties) with java.io.Serializable
@@ -119,14 +135,14 @@ class Config(val configPath: String) extends
     * 1. this must stay lazy as it might not be used or creatable in the SPARK extraction
     * 2. Download.scala in core does the creation
     *
-    * DEFAULT ./wikidumps
-    *
     * TODO rename dumpDir to baseDir
+    *
+    * @example base-dir=./wikidumps
    */
   lazy val dumpDir: File = {
     var x:File = getValue[File](this, "base-dir", required = true){ x => new File(x)}
     if (x==null.asInstanceOf[File]){
-       x = new File ("./wikidumps")
+       x = new File ("/home/marvin/workspace/active/basedir")
     }
     x
   }
@@ -134,9 +150,10 @@ class Config(val configPath: String) extends
   /**
     * Parallel Disc Processes: indicates how many parallel extraction processes can be executed.
     * Depends on the number of cores, type of disk and IO speed
+    *
    * @example parallel-processes=8
     */
-  lazy val parallelProcesses: Int = Option(this.getProperty("parallel-processes", "4").trim.toInt).getOrElse(8)
+  lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "8").trim.toInt
 
   /**
    * spark master for the SparkExtraction
@@ -175,16 +192,16 @@ class Config(val configPath: String) extends
    * Wikidata mapping file created by the WikidataSubClassOf script
    */
   lazy val wikidataMappingsFile: File = {
-    val name = Try(this.getProperty("wikidata-property-mappings-file", "wikidata-property-mappings.json").trim).getOrElse("wikidata-property-mappings.json")
+    val name = this.getProperty("wikidata-property-mappings-file", "wikidata-property-mappings.json").trim
     new File(dumpDir, name)
   }
 
   /**
     * log file directory: used to store all log files created in the course of all extractions
     */
-  lazy val logDir: Option[File] = Try(Option(getString(this, "log-dir"))).getOrElse(Option("/home/marvin/workspace/active/logdir")) match {
+  lazy val logDir: Option[File] = Option(getString(this, "log-dir")) match {
     case Some(x) => Some(new File(x))
-    case None => None
+    case None => Some(new File("/home/marvin/workspace/active/logdir"))
   }
 
   /**
@@ -231,13 +248,21 @@ class Config(val configPath: String) extends
     * the username under which all messages are posted (has to be registered for this webhook?)
     * Threshold of extracted pages over which a summary of the current extraction is posted
     * Threshold of exceptions over which an exception report is posted
+    *
+    * {{{
+    * Default values:
+    * slack-webhook=https://hooks.slack.com/services/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
+    * slack-username=username
+    * slack-summary-threshold=1000000
+    * slack-exception-threshold=10
+    * }}}
     */
   lazy val slackCredentials = Try{
       SlackCredentials(
-        webhook = new URL(getString(this, "slack-webhook").trim),
-        username = this.getProperty("slack-username").trim,
-        summaryThreshold = this.getProperty("slack-summary-threshold").trim.toInt,
-        exceptionThreshold = this.getProperty("slack-exception-threshold").trim.toInt
+        webhook = new URL(Option(getString(this, "slack-webhook")).getOrElse("https://hooks.slack.com/services/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").trim),
+        username = Option(this.getProperty("slack-username")).getOrElse("username").trim,
+        summaryThreshold = Option(this.getProperty("slack-summary-threshold")).getOrElse("1000000").trim.toInt,
+        exceptionThreshold = Option(this.getProperty("slack-exception-threshold")).getOrElse("10").trim.toInt
       )}
 
   /**
@@ -249,6 +274,8 @@ class Config(val configPath: String) extends
    * # if ontology and mapping files are not given or do not exist,
    * # download info from mappings.dbpedia.org
    * # by default both should be in the root folder ../
+    *
+    * @example ontology=../ontology.xml
     */
   lazy val ontologyFile: File = getValue(this, "ontology")(new File(_))
 
@@ -258,6 +285,8 @@ class Config(val configPath: String) extends
     * Note: This is lazy to defer initialization until actually called (eg. this class is not used
     * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
     * and overrides this val to null because it is not needed)
+    *
+    * @example mappings=../mappings
     */
   lazy val mappingsDir: File = getValue(this, "mappings")(new File(_))
 
@@ -373,19 +402,14 @@ class Config(val configPath: String) extends
    * parameters specific for the abstract extraction
    *
    * abstractQuery query for the abstract extraction
-   * =&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s
    * abstractTags is the path of the XML tags under which the result is expected
-   * =api,query,pages,page,extract
    * shortAbstractsProperty is the property used to specify short abstracts (should not change)
-   * =rdfs:comment
    * longAbstractsProperty is the property used to specify long abstracts (should not change)
-   * =abstract
    * shortAbstractMinLength specifies the minimal length of the short abstract
-   * =200
    */
   lazy val abstractParameters: AbstractParameters = Try {
     AbstractParameters(
-      abstractQuery = this.getProperty("abstract-query", "").trim,
+      abstractQuery = this.getProperty("abstract-query", "&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s").trim,
       shortAbstractsProperty = this.getProperty("short-abstracts-property", "rdfs:comment").trim,
       longAbstractsProperty = this.getProperty("long-abstracts-property", "abstract").trim,
       shortAbstractMinLength = this.getProperty("short-abstract-min-length", "200").trim.toInt,
@@ -401,21 +425,16 @@ class Config(val configPath: String) extends
    * Parameters specific to the nif extraction
    *
    * nifQuery
-   * =&format=xml&action=parse&prop=text&page=%s&pageid=%d
    * nifTags the xml path of the response
-   * =api,parse,text
    * nifIsTestRun will leave out the long and short abstract datasets
-   * =false
    * nifWriteAnchor will write all anchor texts for each nif instance
-   * =false
    * nifWriteLinkAnchor write only the anchor text for link instances
-   * =true
    * nifExtractAbstractOnly only extract abstract (not the whole page)
-   * =false
+    *
    */
   lazy val nifParameters: NifParameters = Try {
     NifParameters(
-      nifQuery = this.getProperty("nif-query", "").trim,
+      nifQuery = this.getProperty("nif-query", "&format=xml&action=parse&prop=text&page=%s&pageid=%d").trim,
       nifTags = this.getProperty("nif-tags", "parse,text").trim,
       isTestRun = this.getProperty("nif-isTestRun", "false").trim.toBoolean,
       writeAnchor = this.getProperty("nif-write-anchor", "false").trim.toBoolean,
@@ -559,8 +578,11 @@ object Config{
 
   /**
     * The content of the wikipedias.csv in the base-dir (needs to be static)
+    *
+    * @example base-dir=/home/marvin/workspace/active/basedir
     */
-  private val wikisinfoFile = new File(getString(universalProperties , "base-dir", required = true), WikiInfo.FileName)
+  private val wikisinfoFile = new File(Option(getString(universalProperties , "base-dir")).getOrElse("/home/marvin/workspace/active/basedir"), WikiInfo.FileName)
+
   private lazy val wikiinfo = if(wikisinfoFile.exists()) WikiInfo.fromFile(wikisinfoFile, Codec.UTF8) else Seq()
 
   def wikiInfos: Seq[WikiInfo] = wikiinfo
