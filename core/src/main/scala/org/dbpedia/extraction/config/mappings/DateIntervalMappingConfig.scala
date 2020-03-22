@@ -27,7 +27,7 @@ object DateIntervalMappingConfig
         "it" -> Set("in attività"),
         "nl" -> Set("heden"),
         "pl" -> Set("nadal", "obecnie"),
-        "pt" -> Set("presente", "atualidade", "atualmente"),
+        "pt" -> Set("presente", "atualidade", "atualmente","agora"),
         "ru" -> Set("наши дни", "настоящее время", "наст. время", "н.вр."),
         "sk" -> Set("súčasnosť"),
         "sl" -> Set("danes"),
@@ -47,7 +47,8 @@ object DateIntervalMappingConfig
 
     val onwardMap = Map(
         "en" -> "onward",
-        "es" -> "en adelante"
+        "es" -> "en adelante",
+        "pt" -> "adiante|avante"
     )
 
     val splitMap = Map(
