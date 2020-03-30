@@ -40,14 +40,13 @@ class SnippetExtractorTest extends FlatSpec with Matchers with PrivateMethodTest
 
   "HomepageExtractor" should """return correct homepage for external links""" in {
 
-    val lang = Language.English
-
     val quads = extractPageNode(
       """
         |== External links ==
         | * [http://www.homepage.com Official website]
         |""".stripMargin,
-      homepageExtractor)
+      homepageExtractor,
+      Language.English)
 
 
 
