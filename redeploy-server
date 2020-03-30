@@ -1,0 +1,15 @@
+#!/bin/bash
+#singleton bash sript: check if it is already running, if so terminate old instance (and its child processes) 
+[[ `pgrep ${0##*/} | wc -l` > 2 ]] && kill -- -`pgrep ${0##*/} | head -n 1`
+git stash push
+git pull
+git stash pop
+cd core
+../run download-mappings
+../run download-ontology
+#TODO
+cd ../server
+#../run stats #4 required params: input dir, output dir, file suffix ('.gz', '.bz2' or ''), pretty-printing flag (true) may be followed by list of language codes
+#../run stats create.mappings.stats.properties # only for template-test
+../run server 
+
