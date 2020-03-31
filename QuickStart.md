@@ -76,7 +76,17 @@ cd core/src/main/resources && curl https://raw.githubusercontent.com/dbpedia/ext
 cd ../../../../ && mvn clean install # again to ensure new wikidatar2r.json is loaded correctly
 ``` 
 
-## 3. Running the Extraction
+## 3A Running per-entity ad hoc extraction / Deploying Ad hoc Extraction Server
+run `redeploy-server` script 
+go to http://localhost:9999/server/extraction/
+you can also use this script as cronjob for one instance per machine / docker container to redeploy the ad hoc extraction daily using latest master source code + ontology + mappings
+
+```
+0 3 * * * /bin/bash -c "cd /home/gfs/extraction-framework && ./redeploy-server"
+```
+
+
+## 3B Running the Dump Extraction
 1. **Default-Extraction:**
 
 This is the default way of starting the extraction. The extractor classes that get used, and with that the datasets that get produced, can be configured in the `.properties` file used.
