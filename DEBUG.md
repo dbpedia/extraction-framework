@@ -21,6 +21,8 @@ For troubleshooting, check if you fulfill the needed [requirements](#requirement
 
 If you want to contribute to this debugging process feel free to, add a Unit test for a given part of the DIEF (e.g. one of the implemented [data parsers](https://github.com/dbpedia/extraction-framework/tree/master/core/src/main/scala/org/dbpedia/extraction/dataparser)) and create a pull request.
 
+## Ad hoc extraction
+You can [deploy](http://dev.dbpedia.org/Extraction_QuickStart#3a-running-per-entity-ad-hoc-extraction--deploying-ad-hoc-extraction-server) your own instance of an ad hoc extraction server on your local machine in order to see the extraction results for a single entity/resource/article (see e.g. http://dbpedia.informatik.uni-leipzig.de:9999/server/extraction/en/) 
 ## Minidump Tests
 
 For evaluating the quality of the DIEF development process, we introduce the minidump tests.
