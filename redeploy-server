@@ -3,9 +3,9 @@
 # TODO use PID file or sth like this later
 set -x
 $SHELL --version
-PID=`pgrep ${0##*/} | head -n 1` #get pid of (first started instance) this script
-PGRP=`ps -p $PID -o pgrp | head -n 2 | tail -n 1` #get process-group for pid
-[[ `pgrep ${0##*/} | wc -l` > 2 ]] && `kill -- -$PGRP` # if more than one instance of this script terminate process group (needed in order to close all forked processes like the extraction framework itself)
+PID=`pgrep --oldest ${0##*/} | head -n 1` #get pid of (first started instance of) this script
+PGRP=`ps -p $PID -o pgrp | head -n 2 | tail -n 1 | xargs` #get process-group for pid and trim whitespaces with xargs
+[[ `pgrep ${0##*/} | wc -l` > 2 ]] && `kill -- -$PGRP` # if more than one instance of this script terminate process group (needed in order to close all forked processes like the extraction framework itself) 
 
 #fetch git and preserve local changes hopefully
 git stash push
