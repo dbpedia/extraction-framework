@@ -226,7 +226,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     val singleModel: Model = ModelFactory.createDefaultModel()
     for (file <- filesToBeValidated ) {
       singleModel.add(new RdfStreamReader(new BZip2CompressorInputStream(new FileInputStream(file.getAbsolutePath)), "TURTLE").read())
-      println("Validating: "+file)
+      println("RDFUnit loaded: "+file)
     }
 
     val testSource = new TestSourceBuilder()
