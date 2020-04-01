@@ -1,15 +1,25 @@
 #!/bin/bash
-#singleton bash sript: check if it is already running, if so terminate old instance (and its child processes) 
-[[ `pgrep ${0##*/} | wc -l` > 2 ]] && kill -- -`pgrep ${0##*/} | head -n 1`
+#singleton bash sript: check if it is already running, if so terminate old instance (and its child processes)
+# TODO use PID file or sth like this later
+set -x
+$SHELL --version
+PID=`pgrep ${0##*/} | head -n 1` #get pid of (first started instance) this script
+PGRP=`ps -p $PID -o pgrp | head -n 2 | tail -n 1` #get process-group for pid
+[[ `pgrep ${0##*/} | wc -l` > 2 ]] && `kill -- -$PGRP` # if more than one instance of this script terminate process group (needed in order to close all forked processes like the extraction framework itself)
+
+#fetch git and preserve local changes hopefully
 git stash push
 git pull
 git stash pop
+
+#fetch data
 cd core
 ../run download-mappings
 ../run download-ontology
-#TODO
 cd ../server
+#TODO create mapping stats, not important for extraction itself
 #../run stats #4 required params: input dir, output dir, file suffix ('.gz', '.bz2' or ''), pretty-printing flag (true) may be followed by list of language codes
 #../run stats create.mappings.stats.properties # only for template-test
+
 ../run server 
 
