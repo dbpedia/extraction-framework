@@ -22,7 +22,10 @@ for l in ${LANG} ; do
 		echo "PAGE: $p"
 		echo "" >> "$TARGET"
 		
-		curl --progress-bar -L $p  | xmlstarlet sel -N x="http://www.mediawiki.org/xml/export-0.10/"  -t -c "//x:page" >> $TARGET
+		echo "<page>" >> $TARGET
+		curl --progress-bar -L $p \
+			| xmlstarlet sel -N x="http://www.mediawiki.org/xml/export-0.10/" -t -c "//x:page" \
+			| tail -n+2 >> $TARGET
 		echo "" >> "$TARGET"
 	done
 	echo "</mediawiki>\n" >> $TARGET

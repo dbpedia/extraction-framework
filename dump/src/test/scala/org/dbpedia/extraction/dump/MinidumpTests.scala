@@ -53,12 +53,25 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   val dbpedia_ontologyFile = classLoader.getResource("dbpedia.owl").getFile
   val custom_SHACL_testFile = classLoader.getResource("custom-shacl-tests.ttl").getFile
 
+  /**
+   * SPARK
+   */
+  val sparkSession : SparkSession = SparkSession.builder()
+    .appName("Minidump Tests")
+    .master("local[*]")
+    .config("hadoop.home.dir", "./target/minidumptest/hadoop-tmp")
+    .config("spark.local.dir", "./target/minidumptest/spark-tmp")
+    .config("spark.locality.wait","0")
+    .getOrCreate()
 
   override def beforeAll() {
+
 
     /**
       * check ttl file for CI here
       */
+
+    sparkSession.sparkContext.setLogLevel("WARN")
 
     println("Loading triggers and validators")
 
@@ -148,60 +161,21 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     /**
      * generic extraction
      */
-    val configLoader = new ConfigLoader(genericConfig)
-    val master = genericConfig.sparkMaster
-    val altLocalDir = genericConfig.sparkLocalDir
-
     println("-- generic")
-    val spark =
-      if(altLocalDir != "") {
-        logger.info(s"Set alternate spark-local-dir to: $altLocalDir")
-        SparkSession.builder()
-          .appName("MainExtraction")
-          .master(master)
-          .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
-          .config("spark.local.dir", altLocalDir)
-          .getOrCreate()
-      } else {
-        SparkSession.builder()
-          .appName("MainExtraction")
-          .master(master)
-          .config("spark.locality.wait","0")
-          .getOrCreate()
-      }
-
-    println(s"Created Spark Session with master: $master")
-
-    // Create SparkContext
-    val sparkContext = spark.sparkContext
-    // change to INFO for debugging
-    sparkContext.setLogLevel("WARN")
+    val configLoader = new ConfigLoader(genericConfig)
 
     // Run extraction jobs
     configLoader.getSparkExtractionJobs.foreach(job => {
       try {
-        job.run(spark, genericConfig)
-        println("done generic")
+        job.run(sparkSession, genericConfig)
       } catch {
         case ex: Throwable =>
-          println("failed generic")
           ex.printStackTrace()
       }
     })
   }
 
   test("IRI Coverage Tests") {
-
-
-    val hadoopHomeDir = new File("./.hadoop/")
-    hadoopHomeDir.mkdirs()
-    System.setProperty("hadoop.home.dir", hadoopHomeDir.getAbsolutePath)
-
-    val sparkSession = SparkSession.builder()
-      .config("hadoop.home.dir", "./.hadoop")
-      .config("spark.local.dir", "./.spark")
-      .appName("Test Iris").master("local[*]").getOrCreate()
-    sparkSession.sparkContext.setLogLevel("WARN")
 
     val sqlContext: SQLContext = sparkSession.sqlContext
     val testSuite = TestSuiteFactory.loadTestSuite(Array[String](ciTestFile))
