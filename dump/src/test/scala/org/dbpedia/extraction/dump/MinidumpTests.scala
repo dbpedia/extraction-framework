@@ -20,6 +20,7 @@ import org.apache.spark.sql.{SQLContext, SparkSession}
 import org.dbpedia.databus.mod.EvalMod.writeFile
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.dump.extract.ConfigLoader
+import org.dbpedia.extraction.dump.extract.SparkExtraction.logger
 import org.dbpedia.validation.{TestSuiteFactory, ValidationExecutor}
 import org.scalatest.{BeforeAndAfterAll, FunSuite}
 
@@ -41,12 +42,9 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   val nifAbstractConfig = new Config(classLoader.getResource("extraction.nif.abstracts.properties").getFile)
   val minidumpDir = new File(classLoader.getResource("minidumps").getFile)
 
-
-
   val minidumpURL = classLoader.getResource("mini-enwiki.xml.bz2")
   val ciTestFile = classLoader.getResource("dbpedia-specific-ci-tests.ttl").getFile
   val ciTestModel: Model = ModelFactory.createDefaultModel()
-
 
   /**
     * NEEDED for SHACL
@@ -65,10 +63,6 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     println("Loading triggers and validators")
 
     RDFDataMgr.read(ciTestModel, new FileInputStream(ciTestFile),RDFLanguages.TURTLE)
-
-
-
-
 
     // copy dumps
 
@@ -115,14 +109,16 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 //      println("downloaded mappings from "+apiUrl+" to "+file+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
 //    }
 
-    /**
-      * mappings extraction
-       */
     println("Extracting Minidump")
+    /**
+     * mappings extraction
+     * nifAbstract extraction
+     */
     val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
 
-    extract(genericConfig,jobsRunning)
+    println("-- mappings")
     extract(mappingsConfig,jobsRunning)
+    println("-- nifAbstract")
     extract (nifAbstractConfig, jobsRunning)
 
     def extract (config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]]) = {
@@ -142,19 +138,57 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
           case Success(_) => jobsRunning.remove(future)
         }
       }
-
-
     }
     while(jobsRunning.size() > 0) {
       Thread.sleep(1000)
     }
 
+    jobsRunning.clear()
 
+    /**
+     * generic extraction
+     */
+    val configLoader = new ConfigLoader(genericConfig)
+    val master = genericConfig.sparkMaster
+    val altLocalDir = genericConfig.sparkLocalDir
 
+    println("-- generic")
+    val spark =
+      if(altLocalDir != "") {
+        logger.info(s"Set alternate spark-local-dir to: $altLocalDir")
+        SparkSession.builder()
+          .appName("MainExtraction")
+          .master(master)
+          .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+          .config("spark.local.dir", altLocalDir)
+          .getOrCreate()
+      } else {
+        SparkSession.builder()
+          .appName("MainExtraction")
+          .master(master)
+          .config("spark.locality.wait","0")
+          .getOrCreate()
+      }
+
+    println(s"Created Spark Session with master: $master")
+
+    // Create SparkContext
+    val sparkContext = spark.sparkContext
+    // change to INFO for debugging
+    sparkContext.setLogLevel("WARN")
+
+    // Run extraction jobs
+    configLoader.getSparkExtractionJobs.foreach(job => {
+      try {
+        job.run(spark, genericConfig)
+        println("done generic")
+      } catch {
+        case ex: Throwable =>
+          println("failed generic")
+          ex.printStackTrace()
+      }
+    })
   }
-
-
-
 
   test("IRI Coverage Tests") {
 
@@ -229,8 +263,6 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.shaclTestCaseResult, testSource, shaclTestSuite)
 
     assert(results.getTestCaseResults.isEmpty)
-
-
   }
 
   override def afterAll() {
