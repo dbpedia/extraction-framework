@@ -145,7 +145,11 @@ object MapObjectUris {
         val inputFile = if(isExternal) new File(secondary, input._1 + input._2) else finder.byName(input._1 + input._2, auto = true).get
         val outputFile = if(isExternal) new File(secondary, input._1 + extension + input._2) else finder.byName(input._1 + extension + input._2, auto = true).get
         new QuadMapper().mapQuads(language, inputFile, outputFile) { quad =>
-          if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
+
+          if (quad.datatype != null) {
+            // just copy quad with literal values. TODO: make this configurable
+            List(quad)
+          }
           else {
             val uris = map.get(quad.value).asScala
             count = count + 1
@@ -153,6 +157,7 @@ object MapObjectUris {
               yield quad.copy(
                 value = uri, // change object URI
                 context = if (quad.context == null) quad.context else quad.context + "&objectMappedFrom=" + quad.value) // add change provenance
+            // none found
             if(ret.isEmpty)
               List(quad)
             else
