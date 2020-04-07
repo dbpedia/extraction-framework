@@ -79,8 +79,9 @@ object MapObjectUris {
         /*3*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), " +
         /*4*/ "output dataset name extension (e.g. '-redirected'), " +
         /*5*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2'), " +
-        /*6*/ "languages or article count ranges (e.g. 'en,fr' or '10000-') or choose '@external' to map external datasets from a secondary directory (see last argument)" +
-        /*7*/ "optional secondary directory (containing the input datasets to map if language option is '@external')")
+        /*6*/ "languages or article count ranges (e.g. @downloaded, or 'en,fr' or '10000-') or " +
+              "choose '@external' to map external datasets from a secondary directory (see last argument)" +
+        /*7*/ "(optional) secondary directory (containing the input datasets to map if language option is '@external')")
 
     val baseDir = new File(args(0))
 
