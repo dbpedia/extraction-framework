@@ -5,7 +5,7 @@ See the current state of integration into the official DBpedia Release at https:
 ## ResolveTransitiveLinks
 [Code](https://github.com/dbpedia/extraction-framework/blob/master/scripts/src/main/scala/org/dbpedia/extraction/scripts/ResolveTransitiveLinks.scala) 
 
-Wikipedia has a redirect mechanism if articles names change, to support stability. However, in wikitext this change is not reflected. The goal of this and the next step is to canoncialize the occurence of these IRIs by picking on representant (the last element in the redirection chain/path). This script computes the redirect chain.
+Wikipedia has a redirect mechanism if articles names change, to support stability. However, in wikitext this change is not reflected. The goal of this and the next step is to canoncialize the occurence of these IRIs by picking on representant (the last element in the redirection chain/path). This step computes the redirect chain (transitive links).
 
 The script itself is more generic and replaces all triples in a dataset by their transitive closure. All triples must use the same property. Cycles are removed.
 
