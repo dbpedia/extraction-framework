@@ -18,6 +18,8 @@ import scala.util.{Failure, Success, Try}
 import scala.collection.convert.decorateAsScala._
 
 /**
+ * More info available at http://dev.dbpedia.org/Post-Processing#resolvetransitivelinks
+ *
  * Replace triples in a dataset by their transitive closure.
  * All triples must use the same property. Cycles are removed.
  *
@@ -33,10 +35,13 @@ object ResolveTransitiveLinks {
       /*0*/ "base dir, " +
       /*1*/ "input file part (e.g. 'redirects'), " +
       /*2*/ "output file part (e.g. 'transitive-redirects'), " +
-      /*3*/ "triples file suffix (e.g. '.nt.gz'), " +
-      /*4*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')" +
-      /*5*/ "wikidata interlanguage links (optional: e.g. interlanguage-links) - if provided, transitive redirect is omitted if a wikidata uri exists for a redirect page" +
-      /*6*/ "log dir (optional) - if provided, log output files are created ther for each language")
+      /*3*/ "triples file suffix of DBpedia files, for example \".nt\", \".ttl.gz\", \".nt.bz2\" and so on. " +
+        "This script works with .nt or .ttl files, using IRIs or URIs. " +
+        "Does NOT work with .nq or .tql files. (Preserving the context wouldn't make sense.)  " +
+      /*4*/ "languages or article count ranges (e.g. @downloaded or 'en,fr' or '10000-')" +
+      /*5*/ "(optional) wikidata interlanguage links (e.g. interlanguage-links) -" +
+        " if provided, transitive redirect is omitted if a wikidata uri exists for a redirect page" +
+      /*6*/ "(optional) log dir - if provided, log output files are created there for each language")
     
     val baseDir = new File(args(0))
     
@@ -47,9 +52,7 @@ object ResolveTransitiveLinks {
     require(output.nonEmpty, "no output dataset name")
     require(output != input, "output dataset name must different from input dataset name ")
     
-    // Suffix of DBpedia files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
-    // This script works with .nt or .ttl files, using IRIs or URIs.
-    // Does NOT work with .nq or .tql files. (Preserving the context wouldn't make sense.)
+
     val suffix = args(3)
     require(suffix.nonEmpty, "no file suffix")
 
