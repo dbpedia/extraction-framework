@@ -14,6 +14,10 @@ import scopt.OptionParser
 import scala.language.postfixOps
 import scala.sys.process.Process
 
+/**
+ * A DBpedia Databus Mod
+ *   Evaluation of dataset construct correctness.
+ */
 object EvalMod {
 
   val modVocab: String =
