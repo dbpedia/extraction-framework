@@ -49,7 +49,8 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   /**
     * NEEDED for SHACL
     */
-  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
+  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"")
+//  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
   val dbpedia_ontologyFile = classLoader.getResource("dbpedia.owl").getFile
   val custom_SHACL_testFile = classLoader.getResource("custom-shacl-tests.ttl").getFile
 
@@ -201,7 +202,9 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   }
 
   test("RDFUnit SHACL"){
-    val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
+    
+    val filesToBeValidated = recursiveListFiles(dumpDirectory).filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
+    // val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
     //println("FILES, FILES, FILES\n"+filesToBeValidated)
 
     val dbpedia_ont: Model = ModelFactory.createDefaultModel()
@@ -239,6 +242,10 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     assert(results.getTestCaseResults.isEmpty)
   }
 
+  def recursiveListFiles(f: File): Array[File] = {
+    val these = f.listFiles
+    these ++ these.filter(_.isDirectory).flatMap(recursiveListFiles)
+  }
   override def afterAll() {
     println("Cleaning Extraction")
   }
