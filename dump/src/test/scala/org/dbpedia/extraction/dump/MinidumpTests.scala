@@ -134,6 +134,27 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     extract(mappingsConfig,jobsRunning)
     println("-- nifAbstract")
     extract (nifAbstractConfig, jobsRunning)
+    println("-- generic")
+    extractSpark(genericConfig, jobsRunning)
+
+    def extractSpark(config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]])={
+      /**
+       * generic extraction
+       */
+      println("-- generic")
+      val configLoader = new ConfigLoader(config)
+
+      // Run extraction jobs
+      configLoader.getSparkExtractionJobs.foreach(job => {
+        try {
+          job.run(sparkSession, config)
+        } catch {
+          case ex: Throwable =>
+            ex.printStackTrace()
+        }
+      })
+      jobsRunning.clear()
+    }
 
     def extract (config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]]) = {
       val configLoader = new ConfigLoader(config)
@@ -159,21 +180,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     jobsRunning.clear()
 
-    /**
-     * generic extraction
-     */
-    println("-- generic")
-    val configLoader = new ConfigLoader(genericConfig)
 
-    // Run extraction jobs
-    configLoader.getSparkExtractionJobs.foreach(job => {
-      try {
-        job.run(sparkSession, genericConfig)
-      } catch {
-        case ex: Throwable =>
-          ex.printStackTrace()
-      }
-    })
   }
 
   test("IRI Coverage Tests") {
