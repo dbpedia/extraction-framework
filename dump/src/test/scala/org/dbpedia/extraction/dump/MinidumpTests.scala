@@ -49,7 +49,8 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   /**
     * NEEDED for SHACL
     */
-  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
+  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"")
+//  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
   val dbpedia_ontologyFile = classLoader.getResource("dbpedia.owl").getFile
   val custom_SHACL_testFile = classLoader.getResource("custom-shacl-tests.ttl").getFile
 
@@ -133,6 +134,27 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     extract(mappingsConfig,jobsRunning)
     println("-- nifAbstract")
     extract (nifAbstractConfig, jobsRunning)
+    println("-- generic")
+    extractSpark(genericConfig, jobsRunning)
+
+    def extractSpark(config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]])={
+      /**
+       * generic extraction
+       */
+      println("-- generic")
+      val configLoader = new ConfigLoader(config)
+
+      // Run extraction jobs
+      configLoader.getSparkExtractionJobs.foreach(job => {
+        try {
+          job.run(sparkSession, config)
+        } catch {
+          case ex: Throwable =>
+            ex.printStackTrace()
+        }
+      })
+      jobsRunning.clear()
+    }
 
     def extract (config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]]) = {
       val configLoader = new ConfigLoader(config)
@@ -158,21 +180,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     jobsRunning.clear()
 
-    /**
-     * generic extraction
-     */
-    println("-- generic")
-    val configLoader = new ConfigLoader(genericConfig)
 
-    // Run extraction jobs
-    configLoader.getSparkExtractionJobs.foreach(job => {
-      try {
-        job.run(sparkSession, genericConfig)
-      } catch {
-        case ex: Throwable =>
-          ex.printStackTrace()
-      }
-    })
   }
 
   test("IRI Coverage Tests") {
@@ -207,7 +215,9 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   }
 
   test("RDFUnit SHACL"){
-    val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
+    
+    val filesToBeValidated = recursiveListFiles(dumpDirectory).filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
+    // val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
     //println("FILES, FILES, FILES\n"+filesToBeValidated)
 
     val dbpedia_ont: Model = ModelFactory.createDefaultModel()
@@ -245,6 +255,10 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     assert(results.getTestCaseResults.isEmpty)
   }
 
+  def recursiveListFiles(f: File): Array[File] = {
+    val these = f.listFiles
+    these ++ these.filter(_.isDirectory).flatMap(recursiveListFiles)
+  }
   override def afterAll() {
     println("Cleaning Extraction")
   }

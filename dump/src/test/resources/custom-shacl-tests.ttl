@@ -21,9 +21,7 @@
 		sh:maxInclusive "90"^^xsd:float ;
 	] .
 
-
-
- <#Angela_Merkel>
+<#Angela_Merkel>
 	a sh:NodeShape ;
 	sh:targetNode dbr:Angela_Merkel ;
 	
@@ -39,8 +37,28 @@
 	sh:property [
 		sh:path dbp:birthPlace ;
 		sh:in ( dbr:Hamburg  dbr:Germany) ;
-	] 
+	] .
+
+<#Food_(disambiguation)_en>
+	a sh:NodeShape ;
+	sh:targetNode <http://dbpedia.org/resource/Food_(disambiguation)> ;
 	
-	.
+	# assuring that the dissambiguation extractor for English is active
+	# noticed that for some languages the dissambiguation extractor is not active (e.g. the case with Czech)
+	sh:property [
+		sh:path dbo:wikiPageDisambiguates ;
+		sh:hasValue <http://dbpedia.org/resource/Food_(film)> ;
+	] .
+
+<#Český_(rozcestník)_cs>
+	a sh:NodeShape ;
+	sh:targetNode <http://cs.dbpedia.org/resource/Český_(rozcestník)> ;
+	
+	# assuring that the dissambiguation extractor for Czech is active
+	# noticed that for some languages the dissambiguation extractor is not active (e.g. the case Czech)
+	sh:property [
+		sh:path dbo:wikiPageDisambiguates ;
+		sh:hasValue <http://cs.dbpedia.org/resource/Český> ;
+	] .
 
 

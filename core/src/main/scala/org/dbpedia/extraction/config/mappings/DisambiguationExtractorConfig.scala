@@ -25,6 +25,7 @@ object DisambiguationExtractorConfig
          "it" -> " (disambigua)",
          "ja" -> " (曖昧さ回避)",
          "ko" -> " (동음이의)",
+         "mk" -> " (појаснување)",
          "nl" -> " (doorverwijspagina)", //TODO make it Set() for multiple “nl” -> " (disambigueren)"
          "pl" -> " (ujednoznacznienie)",
          "pt" -> " (desambiguação)",
