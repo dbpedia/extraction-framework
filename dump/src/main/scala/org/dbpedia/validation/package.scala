@@ -368,7 +368,7 @@ package object validation {
   def buildRDFReport( label : String,
                       testReport: TestReport,
                       triggerCollection: Array[Trigger],
-                      testApproachCollection: Array[TestApproach] ) : Unit = {
+                      testApproachCollection: Array[TestApproach] ) : Model = {
 
 
     implicit def toAdvancedJenaModel(m: Model): AdvancedJenaModel = new AdvancedJenaModel(m)
@@ -417,7 +417,7 @@ package object validation {
       }
     )
 
-    model.write(System.out, "Turtle")
+    model
   }
 
   object ReportVocab {

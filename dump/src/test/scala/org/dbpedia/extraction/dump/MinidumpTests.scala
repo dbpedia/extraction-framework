@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump
 
-import java.io.{File, FileInputStream}
+import java.io.{File, FileInputStream, FileOutputStream}
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.concurrent.ConcurrentLinkedQueue
@@ -186,16 +186,22 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     )(sqlContext)
 
     import org.dbpedia.validation.buildModReport
+    import org.dbpedia.validation.buildRDFReport
 
     val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
 
     Array.tabulate(testReports.length){
 
       i => {
-        val modReport = buildModReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
-        val html = modReport._1
+        val modReportHTML = buildModReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
+        val html = modReportHTML._1
         FileUtils.forceMkdir(new File("target/testreports"))
         writeFile(s"target/testreports/testreport_$i.html", html)
+
+        val modReportRDF = buildRDFReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
+        val ttlOs = new FileOutputStream(s"target/testreports/testreport_$i.ttl",false)
+        modReportRDF.write(ttlOs,"Turtle")
+        ttlOs.close()
       }
     }
   }
