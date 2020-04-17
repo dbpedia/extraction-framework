@@ -154,7 +154,7 @@ object EvalMod {
               val html = modReport._1
               val errorRate = modReport._2
 
-              writeFile(s"$repo/$path/$sha.html", html)
+              writeFile(s"$repo/$path/$sha.html", html.mkString)
 
               writeSVG(s"$repo/$path/$sha.svg", errorRate)
 
