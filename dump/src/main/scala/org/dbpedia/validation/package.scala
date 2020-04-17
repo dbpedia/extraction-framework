@@ -6,7 +6,7 @@ import java.util.Calendar
 import org.apache.jena.rdf.model.{Model, ModelFactory, ResourceFactory}
 import org.apache.jena.vocabulary.RDFS
 import org.dbpedia.validation.TestCaseImpl.TestApproach
-import org.dbpedia.validation.TriggerImpl.Trigger
+import org.dbpedia.validation.TriggerImpl.{Trigger, TriggerType}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.language.implicitConversions
@@ -120,7 +120,8 @@ package object validation {
       |}"""
      .stripMargin
 
-  case class TestReport(cnt: Long, coverage: Long, prevalence: Array[Long], succeded: Array[Long] ) {
+  // TODO prevalence and succeeded access with TestCaseID and TriggerID types (wrapper)
+  case class TestReport(cnt: Long, coverage: Long, prevalence: Array[Long], succeeded: Array[Long] ) {
 
     def +(testReport: TestReport): TestReport = {
 
@@ -128,7 +129,7 @@ package object validation {
         cnt + testReport.cnt,
         coverage + testReport.coverage,
         prevalence.zip(testReport.prevalence).map { case (x, y) => x + y },
-        succeded.zip(testReport.succeded).map { case (x, y) => x + y }
+        succeeded.zip(testReport.succeeded).map { case (x, y) => x + y }
       )
     }
   }
@@ -169,7 +170,7 @@ package object validation {
       trigger.testCases.foreach( testCase => {
 
         val prevalence = testReport.prevalence(trigger.ID)
-        val success = testReport.succeded(testCase.ID)
+        val success = testReport.succeeded(testCase.ID)
 
         val errorRate = if ( prevalence == 0 ) 0 else 1-success.toFloat/prevalence.toFloat
         errorRatesBuffer.append(errorRate)
@@ -197,44 +198,71 @@ package object validation {
                       testReport: TestReport,
                       triggerCollection: Array[Trigger],
                       testApproachCollection: Array[TestApproach]
-                    ) : (String,Float) = {
+                    ) : (StringBuilder,Float) = {
 
-    val errorRatesBuffer = ArrayBuffer[Float]()
+    val errorBuffer = ArrayBuffer[Float]()
     val testCaseSerializationBuffer = ArrayBuffer[TableRow]()
+    val genericTestCaseSerializationBuffer = ArrayBuffer[TableRow]()
 
     triggerCollection.foreach( trigger => {
 
       if ( trigger.testCases.length == 0 ) {
 
         // Does not increase the error rate
-        testCaseSerializationBuffer.append(
-          TableRow(
-            0.0f,
-            testReport.prevalence(trigger.ID),
-            testReport.prevalence(trigger.ID),
-            "missing validator",
-            trigger.label+" { id: "+trigger.iri+" }"
+        if( trigger.iri == "__GENERIC_IRI__" || trigger.iri == "__GENERIC_LITERAL__") {
+          genericTestCaseSerializationBuffer.append(
+            TableRow(
+              0.0f,
+              testReport.prevalence(trigger.ID),
+              0,
+              "missing validator",
+              trigger.label + " { id: " + trigger.iri + " }"
+            )
           )
-        )
+        } else {
+          testCaseSerializationBuffer.append(
+            TableRow(
+              0.0f,
+              testReport.prevalence(trigger.ID),
+              0,
+              "missing validator",
+              trigger.label + " { id: " + trigger.iri + " }"
+            )
+          )
+        }
       }
 
       trigger.testCases.foreach( testCase => {
 
+        //        println("methodType",testApproachCollection(testCase.testAproachID).METHOD_TYPE)
         val prevalence = testReport.prevalence(trigger.ID)
-        val success = testReport.succeded(testCase.ID)
+        val success = testReport.succeeded(testCase.ID)
 
         val errorRate = if ( prevalence == 0 ) 0 else 1-success.toFloat/prevalence.toFloat
-        errorRatesBuffer.append(errorRate)
 
-        testCaseSerializationBuffer.append(
-          TableRow(
-            errorRate,
-            prevalence,
-            prevalence-success,
-            testApproachCollection(testCase.testAproachID).toString,
-            trigger.label+" { id: "+trigger.iri+" }"
+        if( trigger.iri == "__GENERIC_IRI__" || trigger.iri == "__GENERIC_LITERAL__") {
+          genericTestCaseSerializationBuffer.append(
+            TableRow(
+              errorRate,
+              prevalence,
+              prevalence - success,
+              testApproachCollection(testCase.testAproachID).toString,
+              trigger.label + " { id: " + trigger.iri + " }"
+            )
           )
-        )
+        } else {
+          errorBuffer.append(prevalence-success)
+
+          testCaseSerializationBuffer.append(
+            TableRow(
+              errorRate,
+              prevalence,
+              prevalence - success,
+              testApproachCollection(testCase.testAproachID).toString,
+              trigger.label + " { id: " + trigger.iri + " }"
+            )
+          )
+        }
       })
     })
 
@@ -242,9 +270,12 @@ package object validation {
 //      Seq("Trigger","Test Approach","Prevalence", "Errors", "Error Rate")
 //    )
 
-    val errorRates = errorRatesBuffer.toArray
-    val errorRate = errorRates.sum/errorRates.length
+    val errorRate =  errorBuffer.toArray.sum / testReport.cnt.toFloat
 
+    /**
+     * excluded GENERIC_IRI but inculded GENERIC_LITERAL
+     * into coverage
+     */
     val coverage = testReport.coverage.toFloat / testReport.cnt.toFloat
     val stringBuilder = new StringBuilder
 
@@ -272,9 +303,38 @@ package object validation {
         |<tr>
         | <th data-sortable="true" data-field="errorrate">Error Rate</th>
         | <th data-sortable="true" data-field="prevalence">Prevalence</th>
-        | <th <th data-sortable="true" data-field="errors">Errors</th>
-        | <th <th data-sortable="true" data-field="approach">Test Approach</th>
-        | <th <th data-sortable="true" data-field="trigger">Triggered From</th>
+        | <th data-sortable="true" data-field="errors">Errors</th>
+        | <th data-sortable="true" data-field="approach">Test Approach</th>
+        | <th data-sortable="true" data-field="trigger">Triggered From</th>
+        |</tr>
+        |</thead>
+        |<tbody>
+        |""".stripMargin)
+
+    //    testCaseSerializationBuffer.toArray
+    genericTestCaseSerializationBuffer.toArray
+      .sortWith(_.prevalence > _.prevalence)
+      .sortWith(_.errors > _.errors)
+      .sortWith(_.errorRate > _.errorRate)
+      .foreach(row => stringBuilder.append(row.toString) )
+
+    stringBuilder.append(
+      """</tbody>
+        |</table>
+        |<hr>
+        |""".stripMargin)
+
+    stringBuilder.append(
+      """<table
+        | data-toggle="table"
+        | data-search="true">
+        |<thead>
+        |<tr>
+        | <th data-sortable="true" data-field="errorrate">Error Rate</th>
+        | <th data-sortable="true" data-field="prevalence">Prevalence</th>
+        | <th data-sortable="true" data-field="errors">Errors</th>
+        | <th data-sortable="true" data-field="approach">Test Approach</th>
+        | <th data-sortable="true" data-field="trigger">Triggered From</th>
         |</tr>
         |</thead>
         |<tbody>
@@ -295,7 +355,7 @@ package object validation {
         |<body>
         |""".stripMargin)
 
-    (stringBuilder.mkString,errorRate)
+    (stringBuilder,errorRate)
   }
 
   case class TableRow(errorRate: Float, prevalence: Long, errors: Long, approach: String, trigger: String) {
@@ -399,7 +459,7 @@ package object validation {
             model.simpleStatement(testCaseIRI,
               ReportVocab.testCase+"hasApproach", ReportVocab.TestApproach+testCase.testAproachID )
             model.simpleLiteralStatement(testCaseIRI,
-              ReportVocab.testCase+"errors", triggerPrevalence-testReport.succeded(testCase.ID) )
+              ReportVocab.testCase+"errors", triggerPrevalence-testReport.succeeded(testCase.ID) )
           }
         )
       }

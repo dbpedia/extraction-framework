@@ -36,7 +36,7 @@ object ValidationExecutor {
         cnt = 0,
         coverage = 0,
         prevalence = Array.fill[Long](brdcstTestSuit.value.maxTriggerID + 1)(0),
-        succeded = Array.fill[Long](brdcstTestSuit.value.maxTestCaseID + 1)(0)
+        succeeded = Array.fill[Long](brdcstTestSuit.value.maxTestCaseID + 1)(0)
       )
     }
 
@@ -124,6 +124,7 @@ object ValidationExecutor {
 
               val success = testSuite.testApproachCollection(testCase.testAproachID).run(nTriplePart)
 
+              // TODO count overlap store succeeded before and then= add all together
               if (success) succeded(testCase.ID) = 1
             }
           )

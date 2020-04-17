@@ -86,8 +86,20 @@ object TestCaseImpl {
       ! IRIResolver.checkIRI(nTriplePart)
     }
 
-    override def info(): String = "parsed successfully ( excluded from avg. error rate )"
+    override def info(): String = "parsed successfully with APACHE JENA"
   }
+
+//  case class GenericLiteralTestApproach(ID: TestApproachID) extends TestApproach {
+//
+//    override val METHOD_TYPE: TestApproachType.Value = TestApproachType.GENERIC
+//
+//    override def run(nTriplePart: String): Boolean = {
+//
+//      ! IRIResolver.checkIRI(nTriplePart)
+//    }
+//
+//    override def info(): String = "parsed successfully "
+//  }
 
   case class DatatypeLiteralTestApproach(ID: TestApproachID, patternString: String) extends TestApproach {
 
@@ -111,3 +123,11 @@ object TestCaseImpl {
     override def info(): String = s"matching $patternString"
   }
 }
+
+/*
+@startuml
+class Car() {
+
+}
+@enduml
+*/

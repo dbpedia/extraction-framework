@@ -1,6 +1,6 @@
 package org.dbpedia.validation
 
-import java.io.File
+import java.io.{File, FileWriter}
 
 import org.apache.spark.sql.{SQLContext, SparkSession}
 import scopt.OptionParser
@@ -8,13 +8,18 @@ import scopt.OptionParser
 case class ReduceScore(cntAll: Long, cntTrigger: Long, cntValid: Long)
 case class SPO(s: String, p: String, o: String)
 
-case class ValidationConfig(pathToFlatTurtleFile: String = null,pathToTestCaseFile: Seq[String] = null)
+case class ValidationConfig(
+                             pathToFlatTurtleFile: String = null,
+                             pathToTestCaseFile: Seq[String] = null,
+                             pathToResultFolder: Seq[String] = null
+                           )
 
 /**
   * Basic Usage: 
-  *   cd core/ && mvn scala:run -Dlauncher=iriTest -DaddArgs="-t|pathToTestFile|pathToFlatTurtleFile"
+  *
+  * cd core/ && mvn scala:run -Dlauncher=iriTest -DaddArgs="-t|pathToTestFile|pathToFlatTurtleFile"
   *     pathToTestFile         Path to rdf test case file
-  *     pathToFlatTurtleFile   Any un/compressed flatTurtle/NT-Triples file. Wildcard possible (e.g dir/\*.ttl.bz2)
+  *     pathToFlatTurtleFile   Any un/compressed flat Turtle/NTriples file. Globbing possible (e.g dir/\*.ttl.bz2)
   * Adjust memory (launcher Xmx arg) accordingly inside pom. Higher is better.
   * Handling LogLevel by using core/src/main/resources/template.log4j.properties
   */
@@ -27,11 +32,16 @@ object ValidationLauncher {
       head("iriTest", "0.1")
 
       arg[String]("<flat-turtle-files>").required().maxOccurs(1).action((s, p) => p.copy(pathToFlatTurtleFile = s))
-        .text("Any un/compressed flatTurtle/NT-Triples file. Wild card possible (e.g dir/*.ttl.bz2)")
+        .text("Any un/compressed flat Turtle/NTriples file. Globing possible (e.g dir/*.ttl.bz2)")
 
       opt[Seq[String]]('t', "testModel").required().maxOccurs(1).action((s, p) =>  p.copy(pathToTestCaseFile = s))
         .text("Path to rdf test case file")
 
+      opt[Seq[String]]('o', "outFile").maxOccurs(1).action((s, p) =>  p.copy(pathToTestCaseFile = s))
+        .text("output")
+
+      opt[Seq[String]]('f', "format").maxOccurs(1).action((s, p) =>  p.copy(pathToTestCaseFile = s))
+        .text("format: rdf, html")
     }
 
     optionParser.parse(args,ValidationConfig()) match {
@@ -58,15 +68,19 @@ object ValidationLauncher {
 
         val testReports = ValidationExecutor.testIris(config.pathToFlatTurtleFile, testSuite)(sqlContext)
 
-
         val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
 
-        Array.tabulate(testReports.length){
+        Array.tabulate(testReports.length) {
 
           //      i => formatTestReport2(partLabels(i),counts(i),testSuite.triggerCollection,testSuite.testApproachCollection)
-          i => buildRDFReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
-        }
+          i => {
+            val (html,_) = buildModReport(partLabels(i), testReports(i), testSuite.triggerCollection, testSuite.testApproachCollection)
 
+            val fw = new FileWriter(s"./output_$i.html",false)
+            fw.write(html.mkString)
+            fw.close()
+          }
+        }
 
       case _ => optionParser.showUsage()
     }

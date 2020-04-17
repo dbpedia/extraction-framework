@@ -204,7 +204,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
         val modReportHTML = buildModReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
         val html = modReportHTML._1
         FileUtils.forceMkdir(new File("target/testreports"))
-        writeFile(s"target/testreports/testreport_$i.html", html)
+        writeFile(s"target/testreports/testreport_$i.html", html.toString())
 
         val modReportRDF = buildRDFReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
         val ttlOs = new FileOutputStream(s"target/testreports/testreport_$i.ttl",false)

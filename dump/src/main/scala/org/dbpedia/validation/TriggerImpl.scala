@@ -75,6 +75,7 @@ object TriggerImpl {
 
     override val TYPE: TriggerType.Value = TriggerType.LITERAL
 
+    // TODO regex only start and end with "
     private val pattern = "^\".*((\"@[a-zA-Z]*)|(\"))$".r.pattern
 
     override def isTriggered(nTriplePart: String): Boolean = {

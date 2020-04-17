@@ -260,6 +260,7 @@ object TestSuiteFactory {
      */
     testApproachCollection.append(
       GenericIRITestApproach(currentTestApproachID)
+      //TODO GEenericLiteralTestApproach
     )
     validatorRef_TestApproachSet.put("__GENERIC_IRI__",Array[Int](0))
     currentTestApproachID += 1
