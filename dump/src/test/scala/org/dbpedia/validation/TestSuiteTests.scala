@@ -2,12 +2,9 @@ package org.dbpedia.validation
 
 import java.io.{ByteArrayInputStream, File, FileInputStream}
 
-import org.apache.jena.rdf.model.impl.NTripleReader
 import org.apache.jena.rdf.model.{Model, ModelFactory, ResourceFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.apache.spark.sql.{SQLContext, SparkSession}
-import org.dbpedia.validation.TestCaseImpl.TestApproach
-import org.dbpedia.validation.TriggerImpl.Trigger
 import org.scalatest.{BeforeAndAfterAll, ConfigMap, FunSuite}
 
 import scala.collection.immutable.HashMap
@@ -84,28 +81,28 @@ class TestSuiteTests extends FunSuite with BeforeAndAfterAll {
     )
   }
 
-  test( "RDF Evaluation Report" ) {
-
-    val model = ModelFactory.createDefaultModel()
-
-    val label : String = "Subjects"
-    val testReport: TestReport = TestReport(0,0,Array[Long](),Array[Long]())
-    val triggerCollection: Array[Trigger] = Array[Trigger]()
-    val testApproachCollection: Array[TestApproach] = Array[TestApproach]()
-
-    triggerCollection.foreach(
-
-      trigger => {
-
-//        model.add(ResourceFactory.createStatement(
-//          //        ResourceFactory.createResource()
-//        ))
-
-        trigger.testCases
-
-      }
-    )
-
-    model.write(System.out,"Turtle")
-  }
+//  test( "RDF Evaluation Report" ) {
+//
+//    val model = ModelFactory.createDefaultModel()
+//
+//    val label : String = "Subjects"
+//    val testReport: TestReport = TestReport(0,0,Array[Long](),Array[Long]())
+//    val triggerCollection: Array[Trigger] = Array[Trigger]()
+//    val testApproachCollection: Array[TestApproach] = Array[TestApproach]()
+//
+//    triggerCollection.foreach(
+//
+//      trigger => {
+//
+////        model.add(ResourceFactory.createStatement(
+////          //        ResourceFactory.createResource()
+////        ))
+//
+//        trigger.testCases
+//
+//      }
+//    )
+//
+//    model.write(System.out,"Turtle")
+//  }
 }

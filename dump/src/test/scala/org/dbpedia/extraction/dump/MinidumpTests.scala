@@ -17,11 +17,13 @@ import org.apache.commons.io.FileUtils
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.apache.spark.sql.{SQLContext, SparkSession}
-import org.dbpedia.databus.mod.EvalMod.writeFile
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.dump.extract.ConfigLoader
-import org.dbpedia.extraction.dump.extract.SparkExtraction.logger
-import org.dbpedia.validation.{TestSuiteFactory, ValidationExecutor}
+import org.dbpedia.validation.construct.report.ReportWriter
+import org.dbpedia.validation.construct.report.formats.ReportFormat
+import org.dbpedia.validation.construct.tests.TestSuiteFactory
+//import org.dbpedia.validation.construct.tests.executors.DumpExecutor
+import org.dbpedia.validation.construct.tests.suites.NTripleTestSuite
 import org.scalatest.{BeforeAndAfterAll, FunSuite}
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -31,12 +33,12 @@ import scala.util.{Failure, Success}
 class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
   /**
-    * in src/test/resources/
-    */
+   * in src/test/resources/
+   */
   val date = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime)
 
   //Workaround to get resource files in Scala 2.11
-  val classLoader =   getClass.getClassLoader
+  val classLoader = getClass.getClassLoader
   val mappingsConfig = new Config(classLoader.getResource("mappings.extraction.minidump.properties").getFile)
   val genericConfig = new Config(classLoader.getResource("generic-spark.extraction.minidump.properties").getFile)
   val nifAbstractConfig = new Config(classLoader.getResource("extraction.nif.abstracts.properties").getFile)
@@ -47,81 +49,80 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   val ciTestModel: Model = ModelFactory.createDefaultModel()
 
   /**
-    * NEEDED for SHACL
-    */
-  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"")
-//  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
+   * NEEDED for SHACL
+   */
+  val dumpDirectory = new File(mappingsConfig.dumpDir, s"")
+  //  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
   val dbpedia_ontologyFile = classLoader.getResource("dbpedia.owl").getFile
   val custom_SHACL_testFile = classLoader.getResource("custom-shacl-tests.ttl").getFile
 
   /**
    * SPARK
    */
-  val sparkSession : SparkSession = SparkSession.builder()
+  val sparkSession: SparkSession = SparkSession.builder()
     .appName("Minidump Tests")
     .master("local[*]")
     .config("hadoop.home.dir", "./target/minidumptest/hadoop-tmp")
     .config("spark.local.dir", "./target/minidumptest/spark-tmp")
-    .config("spark.locality.wait","0")
+    .config("spark.locality.wait", "0")
     .getOrCreate()
 
   override def beforeAll() {
 
-
     /**
-      * check ttl file for CI here
-      */
+     * check ttl file for CI here
+     */
 
     sparkSession.sparkContext.setLogLevel("WARN")
 
     println("Loading triggers and validators")
 
-    RDFDataMgr.read(ciTestModel, new FileInputStream(ciTestFile),RDFLanguages.TURTLE)
+    RDFDataMgr.read(ciTestModel, new FileInputStream(ciTestFile), RDFLanguages.TURTLE)
 
     // copy dumps
 
-    minidumpDir.listFiles().foreach(f=>{
-      val wikiMasque =  f.getName+"wiki"
-      val targetDir =     new File(mappingsConfig.dumpDir, s"${wikiMasque}/$date/")
+    minidumpDir.listFiles().foreach(f => {
+      val wikiMasque = f.getName + "wiki"
+      val targetDir = new File(mappingsConfig.dumpDir, s"${wikiMasque}/$date/")
       // create directories
       targetDir.mkdirs()
       FileUtils.copyFile(
-        new File(f+"/wiki.xml.bz2"),
+        new File(f + "/wiki.xml.bz2"),
         new File(targetDir, s"${wikiMasque}-$date-pages-articles-multistream.xml.bz2")
       )
     })
 
     /**
-      * download ontology
-      *
-      * cd core;
-      * mvn scala:run -Dlauncher="download-mappings";
-      */
-//    println("Download ontology")
-//    val dumpFile = new File("../ontology.xml")
-//    val owlFile = new File("../ontology.owl")
-//    val version = "1.0"
-//    org.dbpedia.extraction.util.OntologyDownloader.download(dumpFile)
-//    val ontology = load(dumpFile)
-//    org.dbpedia.extraction.util.OntologyDownloader.save(ontology, version, owlFile)
+     * download ontology
+     *
+     * cd core;
+     * mvn scala:run -Dlauncher="download-mappings";
+     */
+    //    println("Download ontology")
+    //    val dumpFile = new File("../ontology.xml")
+    //    val owlFile = new File("../ontology.owl")
+    //    val version = "1.0"
+    //    org.dbpedia.extraction.util.OntologyDownloader.download(dumpFile)
+    //    val ontology = load(dumpFile)
+    //    org.dbpedia.extraction.util.OntologyDownloader.save(ontology, version, owlFile)
 
     /**
-      * download mappings
-      *
-      * cd core;
-      * mvn scala:run -Dlauncher="download-ontology";
-      */
-//    println("Download mappings")
-//    val dir = new File("../mappings")
-//    // don't use mkdirs, that often masks mistakes.
-//    require(dir.isDirectory || dir.mkdir, "directory ["+dir+"] does not exist and cannot be created")
-//    Namespace.mappings.values.par.foreach { namespace =>
-//      val file = new File(dir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-//      val nanos = System.nanoTime
-//      println("downloading mappings from "+apiUrl+" to "+file)
-//      new WikiDownloader(apiUrl).download(file, namespace)
-//      println("downloaded mappings from "+apiUrl+" to "+file+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
-//    }
+     * download mappings
+     *
+     * cd core;
+     * mvn scala:run -Dlauncher="download-ontology";
+     */
+    //    println("Download mappings")
+    //    val dir = new File("../mappings")
+    //    // don't use mkdirs, that often masks mistakes.
+    //    require(dir.isDirectory || dir.mkdir, "directory ["+dir+"] does not exist and cannot be created")
+    //    Namespace.mappings.values.par.foreach { namespace =>
+    //      val file = new File(dir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
+    //      val nanos = System.nanoTime
+    //      println("downloading mappings from "+apiUrl+" to "+file)
+    //      new WikiDownloader(apiUrl).download(file, namespace)
+    //      println("downloaded mappings from "+apiUrl+" to "+file+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
+    //    }
 
     println("Extracting Minidump")
     /**
@@ -131,13 +132,13 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
 
     println("-- mappings")
-    extract(mappingsConfig,jobsRunning)
+    extract(mappingsConfig, jobsRunning)
     println("-- nifAbstract")
-    extract (nifAbstractConfig, jobsRunning)
+    extract(nifAbstractConfig, jobsRunning)
     println("-- generic")
     extractSpark(genericConfig, jobsRunning)
 
-    def extractSpark(config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]])={
+    def extractSpark(config: Config, jobsRunning: ConcurrentLinkedQueue[Future[Unit]]) = {
       /**
        * generic extraction
        */
@@ -156,17 +157,19 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
       jobsRunning.clear()
     }
 
-    def extract (config: Config, jobsRunning:ConcurrentLinkedQueue[Future[Unit]]) = {
+    def extract(config: Config, jobsRunning: ConcurrentLinkedQueue[Future[Unit]]) = {
       val configLoader = new ConfigLoader(config)
-      val parallelProcesses = if(config.runJobsInParallel) config.parallelProcesses else 1
+      val parallelProcesses = if (config.runJobsInParallel) config.parallelProcesses else 1
 
       //Execute the extraction jobs one by one
       for (job <- configLoader.getExtractionJobs) {
-        while(jobsRunning.size() >= parallelProcesses){
+        while (jobsRunning.size() >= parallelProcesses) {
           Thread.sleep(1000)
         }
 
-        val future = Future{job.run()}
+        val future = Future {
+          job.run()
+        }
         jobsRunning.add(future)
         future.onComplete {
           case Failure(f) => throw f
@@ -174,7 +177,8 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
         }
       }
     }
-    while(jobsRunning.size() > 0) {
+
+    while (jobsRunning.size() > 0) {
       Thread.sleep(1000)
     }
 
@@ -185,49 +189,49 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
   test("IRI Coverage Tests") {
 
-    val sqlContext: SQLContext = sparkSession.sqlContext
-    val testSuite = TestSuiteFactory.loadTestSuite(Array[String](ciTestFile))
+    val SQLContext: SQLContext = sparkSession.sqlContext
 
-    val testReports = ValidationExecutor.testIris(
-      pathToFlatTurtleFile =  s"${mappingsConfig.dumpDir.getAbsolutePath}/*/$date/*.ttl.bz2",
-      testSuite = testSuite
-    )(sqlContext)
+    val testFiles = Array(ciTestFile)
 
-    import org.dbpedia.validation.buildModReport
-    import org.dbpedia.validation.buildRDFReport
+    val testModel = ModelFactory.createDefaultModel()
+    testFiles.foreach(testFile => testModel.read(testFile))
 
-    val partLabels = Array[String]("SUBJECT TEST CASES","PREDICATE TEST CASES","OBJECT TEST CASES")
+    val testSuite = TestSuiteFactory.create(testModel, TestSuiteFactory.TestSuiteType.NTriples).asInstanceOf[NTripleTestSuite]
 
-    Array.tabulate(testReports.length){
+    val testScores = testSuite.test(s"${mappingsConfig.dumpDir.getAbsolutePath}/*/$date/*.ttl.bz2")(SQLContext)
 
-      i => {
-        val modReportHTML = buildModReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
-        val html = modReportHTML._1
-        FileUtils.forceMkdir(new File("target/testreports"))
-        writeFile(s"target/testreports/testreport_$i.html", html.toString())
+    val scoreLabels = Array[String]("SUBJECT TEST CASES", "PREDICATE TEST CASES", "OBJECT TEST CASES")
 
-        val modReportRDF = buildRDFReport(partLabels(i),testReports(i),testSuite.triggerCollection,testSuite.testApproachCollection)
-        val ttlOs = new FileOutputStream(s"target/testreports/testreport_$i.ttl",false)
-        modReportRDF.write(ttlOs,"Turtle")
-        ttlOs.close()
+    Array.tabulate(testScores.length) {
+
+      testScoreIdx => {
+
+        new File("target/testreports/").mkdirs()
+        val htmlOS = new FileOutputStream(s"target/testreports/testreport_$testScoreIdx.html", false)
+        ReportWriter.write(scoreLabels(testScoreIdx), testScores(testScoreIdx), testSuite, ReportFormat.HTML, htmlOS)
+        htmlOS.close()
+        println("Wrote: " + s"target/testreports/testreport_$testScoreIdx.html")
+        //        val ttlOS = new FileOutputStream(s"target/testreports/testreport_$testScoreIdx.ttl", false)
+        //        ReportWriter.write(scoreLabels(testScoreIdx), testScores(testScoreIdx), testSuite, ReportFormat.RDF, ttlOS)
+        //        ttlOS.close()
       }
     }
   }
 
-  test("RDFUnit SHACL"){
-    
+  test("RDFUnit SHACL") {
+
     val filesToBeValidated = recursiveListFiles(dumpDirectory).filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
     // val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
     //println("FILES, FILES, FILES\n"+filesToBeValidated)
 
     val dbpedia_ont: Model = ModelFactory.createDefaultModel()
-    RDFDataMgr.read(dbpedia_ont, new FileInputStream(dbpedia_ontologyFile),RDFLanguages.RDFXML)
+    RDFDataMgr.read(dbpedia_ont, new FileInputStream(dbpedia_ontologyFile), RDFLanguages.RDFXML)
 
     val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
-    RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(custom_SHACL_testFile),RDFLanguages.TURTLE)
+    RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(custom_SHACL_testFile), RDFLanguages.TURTLE)
 
-    assert(dbpedia_ont.size()>0,"size not 0")
-    assert(custom_SHACL_tests.size()>0, "size not 0")
+    assert(dbpedia_ont.size() > 0, "size not 0")
+    assert(custom_SHACL_tests.size() > 0, "size not 0")
 
     val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
 
@@ -240,9 +244,9 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     //org.apache.jena.riot.system.IRIResolver.
     val singleModel: Model = ModelFactory.createDefaultModel()
-    for (file <- filesToBeValidated ) {
+    for (file <- filesToBeValidated) {
       singleModel.add(new RdfStreamReader(new BZip2CompressorInputStream(new FileInputStream(file.getAbsolutePath)), "TURTLE").read())
-      println("RDFUnit loaded: "+file)
+      println("RDFUnit loaded: " + file)
     }
 
     val testSource = new TestSourceBuilder()
@@ -259,6 +263,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     val these = f.listFiles
     these ++ these.filter(_.isDirectory).flatMap(recursiveListFiles)
   }
+
   override def afterAll() {
     println("Cleaning Extraction")
   }
