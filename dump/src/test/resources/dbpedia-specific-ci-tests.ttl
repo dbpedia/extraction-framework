@@ -140,12 +140,11 @@ validator:dbpedia_ontology
 # no priority to implement this   
 validator:dbpedia_external_properties
    a v:IRI_Validator ; 
-   v:oneOf "http://www.w3.org/2000/01/rdf-schema#seeAlso" ;
-   v:oneOf "http://xmlns.com/foaf/0.1/name" ;
-   v:oneOf "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" ; 
-   v:oneOf "http://www.w3.org/2003/01/geo/wgs84_pos#long" ; 
-   v:oneOf "http://www.georss.org/georss/point" ; 
-   v:oneOf "hhttp://www.w3.org/2003/01/geo/wgs84_pos#lat" . 
+   v:oneOfVocab <http://www.w3.org/2000/01/rdf-schema#> ;
+   v:oneOfVocab <http://xmlns.com/foaf/0.1/> ;
+   v:oneOfVocab <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ; 
+   v:oneOfVocab <http://www.georss.org/georss/geo_2007.owl> ; 
+   v:oneOfVocab <http://www.w3.org/2003/01/geo/wgs84_pos#> . 
  
 
 
