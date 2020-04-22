@@ -42,7 +42,7 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
       //      val list = List(0,1,2)
       Array(0,1,2).map(column => {
         spoBasedDataset.map(_ (column))
-          .distinct()
+//          .distinct()
           .filter(_ != null)
           .map(nTriplePart => {
             validateNTriplePart(
