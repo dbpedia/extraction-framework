@@ -282,17 +282,13 @@ object NTripleTestGenerator extends TestGenerator {
     (validatorCollection.toArray, HashMap[ValidatorIRI, Array[ValidatorID]]() ++ validatorMap)
   }
 
-  def getVocab(urlStr: String): HashSet[String] = {
+  def getVocab(uri: String): HashSet[String] = {
 
-    val url = new URL(urlStr)
-    val reader = new InputStreamReader(url.openStream, "UTF-8")
     val model = ModelFactory.createDefaultModel()
-
-    RDFDataMgr.read(model, reader, "urn:base", RDFLanguages.NTRIPLES)
+    RDFDataMgr.read(model, uri)
 
     val query = QueryFactory.create(Queries.oneOfVocabQueryStr)
     val resultSet = QueryExecutionFactory.create(query, model).execSelect
-
     val properties = ArrayBuffer[String]()
 
     while (resultSet.hasNext) {
