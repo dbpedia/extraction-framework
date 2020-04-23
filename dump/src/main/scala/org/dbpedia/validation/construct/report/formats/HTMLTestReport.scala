@@ -63,75 +63,6 @@ object HTMLTestReport {
       }
     })
 
-
-
-    //    testSuite.triggerCollection.foreach(trigger => {
-    //
-    //      if (trigger.testCases.length == 0) {
-    //
-    //        // Does not increase the error rate
-    //        if (trigger.iri == "#GENERIC_IRI_TRIGGER" || trigger.iri == "#GENERIC_LITERAL_TRIGGER") {
-    //          genericTestCaseSerializationBuffer.append(
-    //            TableRow(
-    //              0.0f,
-    //              testReport.prevalenceOfTriggers(trigger.ID),
-    //              0,
-    //              "missing validator",
-    //              trigger.label + " { id: " + trigger.iri + " }"
-    //            )
-    //          )
-    //        } else {
-    //          testCaseSerializationBuffer.append(
-    //            TableRow(
-    //              0.0f,
-    //              testReport.prevalenceOfTriggers(trigger.ID),
-    //              0,
-    //              "requires validators",
-    //              trigger.label + " { id: " + trigger.iri + " }"
-    //            )
-    //          )
-    //        }
-    //      }
-    //
-    //      trigger.testCases.foreach(testCase => {
-    //
-    //        //        println("methodType",testApproachCollection(testCase.testAproachID).METHOD_TYPE)
-    //        val prevalence = testReport.prevalence(trigger.ID)
-    //        val success = testReport.succeeded(testCase.ID)
-    //
-    //        val errorRate = if (prevalence == 0) 0 else 1 - success.toFloat / prevalence.toFloat
-    //
-    //        if (trigger.iri == "__GENERIC_IRI__" || trigger.iri == "__GENERIC_LITERAL__") {
-    //          genericTestCaseSerializationBuffer.append(
-    //            TableRow(
-    //              errorRate,
-    //              prevalence,
-    //              prevalence - success,
-    //              testApproachCollection(testCase.testAproachID).toString,
-    //              trigger.label + " { id: " + trigger.iri + " }"
-    //            )
-    //          )
-    //        } else {
-    //          errorBuffer.append(prevalence - success)
-    //
-    //          testCaseSerializationBuffer.append(
-    //            TableRow(
-    //              errorRate,
-    //              prevalence,
-    //              prevalence - success,
-    //              testApproachCollection(testCase.testAproachID).toString,
-    //              trigger.label + " { id: " + trigger.iri + " }"
-    //            )
-    //          )
-    //        }
-    //      })
-    //    })
-
-    //    testCaseSerializationBuffer.append(
-    //      Seq("Trigger","Test Approach","Prevalence", "Errors", "Error Rate")
-    //    )
-
-
     outputStream.write(
       s"""<!DOCTYPE html>
          |<html>
@@ -143,11 +74,13 @@ object HTMLTestReport {
          |<h3>$label</h3>
          |<ul>
          |  <li>Timestamp: ${new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(Calendar.getInstance().getTime)}
-         |  <li>Coverage: ${testScore.coverage} ( ${testScore.covered} covered of ${testScore.total} total )
-         |  <li>ErroneousConstructs/CoveredConstructs: ${testScore.errorsPerCovered} ( ${testScore.valid} valid )
-         |  <li>TotalErrors/TotalConstructs: ${testScore.errorsPerConstruct} ( ${testScore.errorsOfTestCases.sum} total errors )
+         |  <li>Total Constructs: ${testScore.total}
          |</ul>
          |<h4>Generic Test Cases</h4>
+         |<ul>
+         |  <li>Erroneous_Constructs/Covered_Constructs: TODO
+         |  <li>Total_Errors/Covered_Constructs: TODO
+         |</ul>
          |<table
          | data-toggle="table"
          | data-search="true">
@@ -170,24 +103,41 @@ object HTMLTestReport {
       .foreach(row => outputStream.write(row.toString.getBytes(StandardCharsets.UTF_8)))
 
     outputStream.write(
-      """</tbody>
-        |</table>
-        |<br>
-        |<h4>Custom Test Cases</h4>
-        |<table
-        | data-toggle="table"
-        | data-search="true">
-        |<thead>
-        |<tr>
-        | <th data-sortable="true" data-field="errorrate">Error Rate</th>
-        | <th data-sortable="true" data-field="prevalence">Prevalence</th>
-        | <th data-sortable="true" data-field="errors">Errors</th>
-        | <th data-sortable="true" data-field="approach">Test Approach</th>
-        | <th data-sortable="true" data-field="trigger">Triggered From</th>
-        |</tr>
-        |</thead>
-        |<tbody>
-        |""".stripMargin.getBytes(StandardCharsets.UTF_8))
+      s"""</tbody>
+         |</table>
+         |<br>
+         |<h4>Custom Test Cases</h4>
+         |<strong>Overall</strong>
+         |<ul>
+         |  <li>Coverage: ${testScore.coverage} ( ${testScore.covered} covered of ${testScore.total} total )
+         |  <li>Coverage (IRIs): TODO
+         |  <li>Erroneous_Constructs/Covered_Constructs: TODO
+         |  <li>Total_Errors/Covered_Constructs: TODO
+         |</ul>
+         |<strong>IRI Compliance</strong>
+         |<ul>
+         |  <li>Erroneous_Constructs/Covered_Constructs: TODO
+         |  <li>Total_Errors/Covered_Constructs: TODO
+         |</ul>
+         |<strong>Vocab Usage</strong>
+         |<ul>
+         |  <li>Erroneous_Constructs/Covered_Constructs: TODO
+         |  <li>Total_Errors/Covered_Constructs: TODO
+         |</ul>
+         |<table
+         | data-toggle="table"
+         | data-search="true">
+         |<thead>
+         |<tr>
+         | <th data-sortable="true" data-field="errorrate">Error Rate</th>
+         | <th data-sortable="true" data-field="prevalence">Prevalence</th>
+         | <th data-sortable="true" data-field="errors">Errors</th>
+         | <th data-sortable="true" data-field="approach">Test Approach</th>
+         | <th data-sortable="true" data-field="trigger">Triggered From</th>
+         |</tr>
+         |</thead>
+         |<tbody>
+         |""".stripMargin.getBytes(StandardCharsets.UTF_8))
 
     customTests.toArray
       .sortWith(_.prevalence > _.prevalence)

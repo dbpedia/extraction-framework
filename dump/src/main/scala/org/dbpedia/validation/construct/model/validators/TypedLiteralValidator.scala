@@ -7,7 +7,7 @@ case class TypedLiteralValidator(ID: ValidatorID, iri: ValidatorIRI, patternStri
 
   private val pattern = patternString.r.pattern
 
-  override val METHOD_TYPE: ValidatorType.Value = ValidatorType.DATATYPE_LITERAL
+  override val METHOD_TYPE: ValidatorType.Value = ValidatorType.TYPED_LITERAL
 
   override def run(nTriplePart: String): Boolean = {
 

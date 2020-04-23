@@ -15,7 +15,7 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
 
   def test(path: String)(implicit SQLContext: SQLContext): Array[TestScore] = {
 
-    val partLabels = Array[String]("SUBJECT TEST CASES", "PREDICATE TEST CASES", "OBJECT TEST CASES")
+    //    val partLabels = Array[String]("SUBJECT TEST CASES", "PREDICATE TEST CASES", "OBJECT TEST CASES")
 
     import SQLContext.implicits._
 
@@ -26,7 +26,7 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
     val spoBasedDataset =
       SQLContext.read.textFile(path)
         .repartition(Runtime.getRuntime.availableProcessors() * 3)
-        .map(_.trim).filter(!_.startsWith("#")).filter(!_.equals("")).map(prepareFlatTerseLine)
+        .map(_.trim).filter(!_.startsWith("#")).filter(!_.equals("")).flatMap(prepareFlatTerseLine)
 
     val zero = {
       TestScore(
@@ -39,10 +39,12 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
     }
 
     val testReports: Array[TestScore] = {
-      //      val list = List(0,1,2)
-      Array(0,1,2).map(column => {
-        spoBasedDataset.map(_ (column))
-//          .distinct()
+
+      //      Array(0,1,2).map(column => {
+      Array(
+        spoBasedDataset
+          //          .map(_ (column))
+          //          .distinct()
           .filter(_ != null)
           .map(nTriplePart => {
             validateNTriplePart(
@@ -50,13 +52,14 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
               brdTestCaseCount.value,
               brdTriggerCollection.value,
               brdValidatorCollection.value,
-              partLabels(column)
+              ""
             )
           }).rdd.fold(zero)(_ + _)
-      })
+      )
+      //      })
     }
-
-    testReports.toArray
+    
+    testReports
   }
 
   /**

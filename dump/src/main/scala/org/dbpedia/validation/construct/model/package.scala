@@ -17,7 +17,7 @@ package object model {
 
   object ValidatorType extends Enumeration {
 
-    val PATTERN_BASED, VOCAB_BASED, PART_BASED, GENERIC, DATATYPE_LITERAL: Value = Value
+    val PATTERN_BASED, VOCAB_BASED, PART_BASED, GENERIC, TYPED_LITERAL: Value = Value
   }
 
   object TestCaseType extends Enumeration {

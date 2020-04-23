@@ -7,8 +7,10 @@ import org.apache.jena.query.{QueryExecutionFactory, QueryFactory}
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.dbpedia.validation.construct.model.triggers._
+import org.dbpedia.validation.construct.model.triggers.generic.{GenericIRITrigger, GenericLiteralLangTagTrigger, GenericLiteralTrigger, GenericTypedLiteralTrigger}
 import org.dbpedia.validation.construct.model.{TestCase, TestCaseType, TriggerIRI, ValidatorID, ValidatorIRI}
 import org.dbpedia.validation.construct.model.validators._
+import org.dbpedia.validation.construct.model.validators.generic.{GenericIRIValidator, GenericLiteralLangTagValidator, GenericLiteralValidator, GenericRdfLangStringValidator, GenericValidator}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.JavaConversions._
@@ -51,22 +53,42 @@ object NTripleTestGenerator extends TestGenerator {
     val testCaseCollection = ArrayBuffer[TestCase]()
 
     /*
-    Generic trigger
+    Generic trigger ----------------------------------------------------------------------------------------------------
      */
-    val generic_literal_testcase = TestCase(currentTestCaseID, currentTriggerID, validatorMap("#GENERIC_VALIDATOR").head, TestCaseType.GENERIC)
-    triggerCollection.append(GenericLiteralTrigger(currentTriggerID, Array[TestCase](generic_literal_testcase)))
-    testCaseCollection.append(generic_literal_testcase)
-    currentTestCaseID += 1
-    currentTriggerID += 1
+
+    /** IRI APACHE JENA */
 
     val generic_iri_testcase = TestCase(currentTestCaseID, currentTriggerID, validatorMap("#GENERIC_IRI_VALIDATOR").head, TestCaseType.GENERIC)
-    triggerCollection.append(GenericIRITrigger(currentTriggerID, Array[TestCase](generic_iri_testcase)))
-    testCaseCollection.append(generic_iri_testcase)
     currentTestCaseID += 1
+    testCaseCollection.append(generic_iri_testcase)
+    triggerCollection.append(GenericIRITrigger(currentTriggerID, Array[TestCase](generic_iri_testcase)))
+    currentTriggerID += 1
+
+    /** Typed Literals */
+
+    // generic literal
+    val generic_literal_testcase = TestCase(currentTestCaseID, currentTriggerID, validatorMap("#GENERIC_LITERAL_VALIDATOR").head, TestCaseType.GENERIC)
+    currentTestCaseID += 1
+    testCaseCollection.append(generic_literal_testcase)
+    triggerCollection.append(GenericLiteralTrigger(currentTriggerID, Array[TestCase](generic_literal_testcase)))
+    currentTriggerID += 1
+
+    // rdf lang string
+    val generic_rdf_lang_string_testcase = TestCase(currentTestCaseID, currentTriggerID, validatorMap("#GENERIC_RDF_LANG_STRING_VALIDATOR").head, TestCaseType.GENERIC)
+    currentTestCaseID += 1
+    testCaseCollection.append(generic_rdf_lang_string_testcase)
+    triggerCollection.append(GenericTypedLiteralTrigger(currentTriggerID, Array[TestCase](generic_rdf_lang_string_testcase)))
+    currentTriggerID += 1
+
+    // literal language tag
+    val generic_literal_lang_tag_testcase = TestCase(currentTestCaseID, currentTriggerID, validatorMap("#GENERIC_LTIERAL_LANG_TAG_VALIDATOR").head, TestCaseType.GENERIC)
+    currentTestCaseID += 1
+    testCaseCollection.append(generic_literal_lang_tag_testcase)
+    triggerCollection.append(GenericLiteralLangTagTrigger(currentTriggerID, Array[TestCase](generic_literal_lang_tag_testcase)))
     currentTriggerID += 1
 
     /*
-    Custom IRI trigger
+    Custom IRI trigger -------------------------------------------------------------------------------------------------
      */
     val iriTriggersQuery = QueryFactory.create(Queries.iriTriggerQueryStr())
 
@@ -152,16 +174,32 @@ object NTripleTestGenerator extends TestGenerator {
     /*
     generic validators
      */
+
+    // generic IRI
     val genericIRIValidator = GenericIRIValidator(currentValidatorID)
     validatorCollection.append(genericIRIValidator)
     validatorMap.put(genericIRIValidator.iri, Array[Int](genericIRIValidator.ID))
     currentValidatorID += 1
 
+    // generic literal lang tag
+    val genericLiteralLangTagValidator = GenericLiteralLangTagValidator(currentValidatorID)
+    validatorCollection.append(genericLiteralLangTagValidator)
+    validatorMap.put(genericLiteralLangTagValidator.iri, Array[Int](genericLiteralLangTagValidator.ID))
+    currentValidatorID += 1
+
+    // generic literal
     val genericLiteralValidator = GenericLiteralValidator(currentValidatorID)
     validatorCollection.append(genericLiteralValidator)
     validatorMap.put(genericLiteralValidator.iri, Array[Int](genericLiteralValidator.ID))
     currentValidatorID += 1
 
+    // generic rdf lang string
+    val genericRdfLangStringValidator =GenericRdfLangStringValidator(currentValidatorID)
+    validatorCollection.append(genericRdfLangStringValidator)
+    validatorMap.put(genericRdfLangStringValidator.iri, Array[Int](genericRdfLangStringValidator.ID))
+    currentValidatorID += 1
+
+    // placeholder validator
     val genericValidator = GenericValidator(currentValidatorID)
     validatorCollection.append(genericValidator)
     validatorMap.put(genericValidator.iri, Array[Int](genericValidator.ID))
@@ -290,7 +328,7 @@ object NTripleTestGenerator extends TestGenerator {
     val query = QueryFactory.create(Queries.oneOfVocabQueryStr)
     val resultSet = QueryExecutionFactory.create(query, model).execSelect
     val properties = ArrayBuffer[String]()
-
+    12
     while (resultSet.hasNext) {
       properties.append(resultSet.next().getResource("property").getURI)
     }

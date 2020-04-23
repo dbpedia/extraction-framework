@@ -19,7 +19,9 @@ case class VocabValidator(ID: ValidatorID, iri: ValidatorIRI, vocabUrl: String, 
 
   override def run(nTriplePart: String): Boolean = {
 
-    vocab.contains(nTriplePart)
+    val bool = vocab.contains(nTriplePart)
+//    if (! bool ) println(vocabUrl,nTriplePart)
+    bool
   }
 
   override def info(): String = s"one of vocab $vocabUrl"

@@ -2,6 +2,7 @@ package org.dbpedia.validation.construct.model.triggers
 
 import org.dbpedia.validation.construct.model.{TestCase, TriggerID, TriggerIRI, TriggerType}
 
+// TODO create only a literal trigger
 case class TypedLiteralTrigger(ID: TriggerID, datatype: String, testCases: Array[TestCase],
                                iri: TriggerIRI, label: String, comment: String) extends Trigger {
 

@@ -57,43 +57,41 @@ trigger:wikidata
 
 trigger:dbpedia_ontology 
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://dbpedia.org/ontology/" ;
+   trigger:pattern "^http://dbpedia.org/ontology/[a-z].*" ;
    rdfs:label "DBpedia Ontology IRIs" ;
-   rdfs:comment "http://dbpedia.org/ontology/" .
+   rdfs:comment "http://dbpedia.org/ontology/*" .
    
 ############### TODO Vocab triggers, can be automated
+
 trigger:wgs84
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://www.w3.org/2003/01/geo/wgs84_pos#" ;
+   trigger:pattern "^http://www.w3.org/2003/01/geo/wgs84_pos#[a-z].*" ;
    rdfs:label "whs84 trigger" ;
    rdfs:comment "http://www.w3.org/2003/01/geo/wgs84_pos#" .
 
 trigger:georss
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://www.georss.org/georss/" ;
+   trigger:pattern "^http://www.georss.org/georss/[a-z].*" ;
    rdfs:label "georss trigger" ;
    rdfs:comment "http://www.georss.org/georss/" .
 
-
 trigger:w3_rdfs
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://www.w3.org/2000/01/rdf-schema#" ;
+   trigger:pattern "^http://www.w3.org/2000/01/rdf-schema#[a-z].*" ;
    rdfs:label "rdfs trigger" ;
    rdfs:comment "http://www.w3.org/2000/01/rdf-schema#" .
    
 trigger:w3_rdf
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
+   trigger:pattern "^http://www.w3.org/1999/02/22-rdf-syntax-ns#[a-z].*" ;
    rdfs:label "rdf trigger" ;
    rdfs:comment "http://www.w3.org/1999/02/22-rdf-syntax-ns#" .
    
-trigger:foaf_name
+trigger:foaf
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://xmlns.com/foaf/0.1/" ;
+   trigger:pattern "^http://xmlns.com/foaf/0.1/[a-z]*" ;
    rdfs:label "foaf trigger" ;
    rdfs:comment "http://xmlns.com/foaf/0.1/" .
-
-
 
 #########################
 # Reusable Validators, several Validators per TestCase 
@@ -138,15 +136,25 @@ validator:dbpedia_ontology
 	v:oneOfVocab <https://raw.githubusercontent.com/dbpedia/ontology-tracker/master/databus/dbpedia/ontology/dbo-snapshots/dbo-snapshots.nt> .
 
 # no priority to implement this   
-validator:dbpedia_external_properties
-   a v:IRI_Validator ; 
-   v:oneOfVocab <http://www.w3.org/2000/01/rdf-schema#> ;
-   v:oneOfVocab <http://xmlns.com/foaf/0.1/> ;
-   v:oneOfVocab <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ; 
-   v:oneOfVocab <http://www.georss.org/georss/geo_2007.owl> ; 
+validator:foaf
+   a v:IRI_Validator ;
+   v:oneOfVocab <http://xmlns.com/foaf/0.1/> .
+
+validator:w3_rdf
+   a v:IRI_Validator ;
+   v:oneOfVocab <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+validator:w3_rdfs
+   a v:IRI_Validator ;
+   v:oneOfVocab <http://www.w3.org/2000/01/rdf-schema#> .
+
+validator:wgs84
+   a v:IRI_Validator ;
    v:oneOfVocab <http://www.w3.org/2003/01/geo/wgs84_pos#> . 
  
-
+validator:georss
+   a v:IRI_Validator ;
+   v:oneOfVocab <http://www.georss.org/georss/geo_2007.owl> .
 
 #########################
 # Specific instantiations below
@@ -180,14 +188,30 @@ validator:dbpedia_external_properties
      # TODO validator
 
 # no priority to implement this   
-<#dbpediaExternalProperties> 
+<#foaf>
    a v:TestGenerator ;
    v:trigger trigger:foaf ;
+   v:validator validator:foaf .
+
+<#w3_rdf>
+   a v:TestGenerator ;
    v:trigger trigger:w3_rdf ;
+   v:validator validator:w3_rdf .
+
+<#w3_rdfs>
+   a v:TestGenerator ;
    v:trigger trigger:w3_rdfs ;
+   v:validator validator:w3_rdfs .
+
+<#wgs84>
+   a v:TestGenerator ;
    v:trigger trigger:wgs84 ;
+   v:validator validator:wgs84 .
+
+<#georss>
+   a v:TestGenerator ;
    v:trigger trigger:georss ;
-   v:validator validator:dbpedia_external_properties .
+   v:validator validator:georss .
    
 <#wikidata_IRIs> 
   a v:TestGenerator ;

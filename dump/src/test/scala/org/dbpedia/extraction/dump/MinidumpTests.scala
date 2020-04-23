@@ -46,6 +46,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
   val minidumpURL = classLoader.getResource("mini-enwiki.xml.bz2")
   val ciTestFile = classLoader.getResource("dbpedia-specific-ci-tests.ttl").getFile
+  val XSDCITestFile = classLoader.getResource("xsd_ci-tests.ttl").getFile
   val ciTestModel: Model = ModelFactory.createDefaultModel()
 
   /**
@@ -68,6 +69,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     .getOrCreate()
 
   override def beforeAll() {
+//  def excludeBeforeAll() {
 
     /**
      * check ttl file for CI here
@@ -191,7 +193,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     val SQLContext: SQLContext = sparkSession.sqlContext
 
-    val testFiles = Array(ciTestFile)
+    val testFiles = Array(ciTestFile,XSDCITestFile)
 
     val testModel = ModelFactory.createDefaultModel()
     testFiles.foreach(testFile => testModel.read(testFile))
@@ -202,23 +204,24 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     val scoreLabels = Array[String]("SUBJECT TEST CASES", "PREDICATE TEST CASES", "OBJECT TEST CASES")
 
-    Array.tabulate(testScores.length) {
-
-      testScoreIdx => {
+//    Array.tabulate(testScores.length) {
+//
+//      testScoreIdx => {
 
         new File("target/testreports/").mkdirs()
-        val htmlOS = new FileOutputStream(s"target/testreports/testreport_$testScoreIdx.html", false)
-        ReportWriter.write(scoreLabels(testScoreIdx), testScores(testScoreIdx), testSuite, ReportFormat.HTML, htmlOS)
+        val htmlOS = new FileOutputStream(s"target/testreports/testreport_combined.html", false)
+        ReportWriter.write("DIEF Minidump NTriple Test Cases", testScores(0), testSuite, ReportFormat.HTML, htmlOS)
         htmlOS.close()
-        println("Wrote: " + s"target/testreports/testreport_$testScoreIdx.html")
+        println("Wrote: " + s"target/testreports/testreport_combined.html")
         //        val ttlOS = new FileOutputStream(s"target/testreports/testreport_$testScoreIdx.ttl", false)
         //        ReportWriter.write(scoreLabels(testScoreIdx), testScores(testScoreIdx), testSuite, ReportFormat.RDF, ttlOS)
         //        ttlOS.close()
-      }
-    }
+//      }
+//    }
   }
 
   test("RDFUnit SHACL") {
+//  def excludeRDFUnitSHACL() {
 
     val filesToBeValidated = recursiveListFiles(dumpDirectory).filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
     // val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
