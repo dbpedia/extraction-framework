@@ -5,7 +5,8 @@ import org.dbpedia.validation.construct.model.{TestCase, TriggerID, TriggerIRI, 
 case class IRITrigger(ID: TriggerID, patternStrings: Array[String], testCases: Array[TestCase],
                       iri: TriggerIRI, label: String, comment: String) extends Trigger {
 
-  private val patterns = patternStrings.map( patternString => s"$patternString.*".r.pattern)
+//  private val patterns = patternStrings.map( patternString => s"$patternString.*".r.pattern)
+  private val patterns = patternStrings.map( patternString => patternString.r.pattern)
 
   override val TYPE: TriggerType.Value = TriggerType.IRI
 

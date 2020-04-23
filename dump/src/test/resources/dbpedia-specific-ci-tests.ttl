@@ -17,7 +17,7 @@ v:RDF_IRI_Trigger a rdfs:Class;
 # TODO trigger does not seem to work
 trigger:wikipedia
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://en.wikipedia.org/wiki/" ;
+   trigger:pattern "^http://en.wikipedia.org/wiki/.*" ;
    rdfs:label "wikipedia"  .
    
 <#wikipedia_IRIs> 
@@ -33,25 +33,25 @@ trigger:wikipedia
 
 trigger:generic_wikipedia_dbpedia_extraction 
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://(ga\\.|af\\.|als\\.|am\\.|an\\.|ar\\.|arz\\.|ast\\.|az\\.|azb\\.|ba\\.|bar\\.|batsmg\\.|be\\.|bg\\.|bn\\.|bpy\\.|br\\.|bs\\.|bug\\.|ca\\.|cdo\\.|ce\\.|ceb\\.|ckb\\.|cs\\.|cv\\.|cy\\.|da\\.|de\\.|el\\.|eml\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fo\\.|fr\\.|fy\\.|gd\\.|gl\\.|gu\\.|he\\.|hi\\.|hr\\.|hsb\\.|ht\\.|hu\\.|hy\\.|ia\\.|id\\.|ilo\\.|io\\.|is\\.|it\\.|ja\\.|jv\\.|ka\\.|kk\\.|kn\\.|ko\\.|ku\\.|ky\\.|la\\.|lb\\.|li\\.|lmo\\.|lt\\.|lv\\.|mai\\.|mg\\.|mhr\\.|min\\.|mk\\.|ml\\.|mn\\.|mr\\.|mrj\\.|ms\\.|my\\.|mzn\\.|nan\\.|nap\\.|nds\\.|ne\\.|new\\.|nl\\.|nn\\.|no\\.|oc\\.|or\\.|os\\.|pa\\.|pl\\.|pms\\.|pnb\\.|pt\\.|qu\\.|ro\\.|ru\\.|sa\\.|sah\\.|scn\\.|sco\\.|sd\\.|sh\\.|si\\.|simple\\.|sk\\.|sl\\.|sq\\.|sr\\.|su\\.|sv\\.|sw\\.|ta\\.|te\\.|tg\\.|th\\.|tl\\.|tr\\.|tt\\.|uk\\.|ur\\.|uz\\.|vec\\.|vi\\.|vo\\.|wa\\.|war\\.|wuu\\.|xmf\\.|yi\\.|yo\\.|yue\\.|zh\\.)?dbpedia.org/resource/" ;
+   trigger:pattern "^http://(ga\\.|af\\.|als\\.|am\\.|an\\.|ar\\.|arz\\.|ast\\.|az\\.|azb\\.|ba\\.|bar\\.|batsmg\\.|be\\.|bg\\.|bn\\.|bpy\\.|br\\.|bs\\.|bug\\.|ca\\.|cdo\\.|ce\\.|ceb\\.|ckb\\.|cs\\.|cv\\.|cy\\.|da\\.|de\\.|el\\.|eml\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fo\\.|fr\\.|fy\\.|gd\\.|gl\\.|gu\\.|he\\.|hi\\.|hr\\.|hsb\\.|ht\\.|hu\\.|hy\\.|ia\\.|id\\.|ilo\\.|io\\.|is\\.|it\\.|ja\\.|jv\\.|ka\\.|kk\\.|kn\\.|ko\\.|ku\\.|ky\\.|la\\.|lb\\.|li\\.|lmo\\.|lt\\.|lv\\.|mai\\.|mg\\.|mhr\\.|min\\.|mk\\.|ml\\.|mn\\.|mr\\.|mrj\\.|ms\\.|my\\.|mzn\\.|nan\\.|nap\\.|nds\\.|ne\\.|new\\.|nl\\.|nn\\.|no\\.|oc\\.|or\\.|os\\.|pa\\.|pl\\.|pms\\.|pnb\\.|pt\\.|qu\\.|ro\\.|ru\\.|sa\\.|sah\\.|scn\\.|sco\\.|sd\\.|sh\\.|si\\.|simple\\.|sk\\.|sl\\.|sq\\.|sr\\.|su\\.|sv\\.|sw\\.|ta\\.|te\\.|tg\\.|th\\.|tl\\.|tr\\.|tt\\.|uk\\.|ur\\.|uz\\.|vec\\.|vi\\.|vo\\.|wa\\.|war\\.|wuu\\.|xmf\\.|yi\\.|yo\\.|yue\\.|zh\\.)?dbpedia.org/resource/((?!(\\?.*(nif=|dbpv=).*(dbpv=|nif=))).)*" ;
 	rdfs:label "DBpedia IRIs from Wikipedia used in Generic Extraction" ;
 	rdfs:comment "Starting with http://dbpedia.org or for 140 languages with http://xx.dbpedia.org" .
 	
 trigger:mappings_wikipedia_dbpedia_extraction 
    a v:RDF_IRI_Trigger ;
-   trigger:pattern "^http://(ar\\.|az\\.|be\\.|bg\\.|bn\\.|ca\\.|cs\\.|cy\\.|da\\.|de\\.|el\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fr\\.|ga\\.|gl\\.|hi\\.|hr\\.|hu\\.|hy\\.|id\\.|it\\.|ja\\.|ko\\.|lt\\.|lv\\.|mk\\.|nl\\.|pl\\.|pt\\.|ro\\.|ru\\.|sk\\.|sl\\.|sr\\.|sv\\.|tr\\.|uk\\.|ur\\.|vi\\.|war\\.|zh\\.|commons\\.)?dbpedia.org/resource/" ;
+   trigger:pattern "^http://(ar\\.|az\\.|be\\.|bg\\.|bn\\.|ca\\.|cs\\.|cy\\.|da\\.|de\\.|el\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fr\\.|ga\\.|gl\\.|hi\\.|hr\\.|hu\\.|hy\\.|id\\.|it\\.|ja\\.|ko\\.|lt\\.|lv\\.|mk\\.|nl\\.|pl\\.|pt\\.|ro\\.|ru\\.|sk\\.|sl\\.|sr\\.|sv\\.|tr\\.|uk\\.|ur\\.|vi\\.|war\\.|zh\\.|commons\\.)?dbpedia.org/resource/((?!(\\?.*(nif=|dbpv=).*(dbpv=|nif=))).)*" ;
 	rdfs:label "DBpedia IRIs from Wikipedia used in Generic Extraction" ;
 	rdfs:comment "Starting with http://dbpedia.org or for 40 mapped languages with http://xx.dbpedia.org" .
 
 trigger:wikidata_dbpedia_extraction 
     a v:RDF_IRI_Trigger ;
-    trigger:pattern  "^http://wikidata.dbpedia.org/resource/Q" ;
+    trigger:pattern  "^http://wikidata.dbpedia.org/resource/Q((?!(\\?.*(nif=|dbpv=).*(dbpv=|nif=))).)*" ;
 	rdfs:label   "DBpedia IRIs from Wikidata extraction" ;
 	rdfs:comment "Starting with http://wikidata.dbpedia.org/resource/Q" .
 	
 trigger:wikidata 
     a v:RDF_IRI_Trigger ;
-    trigger:pattern "^http://www.wikidata.org/entity/Q" ;
+    trigger:pattern "^http://www.wikidata.org/entity/Q.*" ;
 	rdfs:label "Wikidata IRIs" ;
 	rdfs:comment "Starting with http://www.wikidata.org/entity/Q" .
 
