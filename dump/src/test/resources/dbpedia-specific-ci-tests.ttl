@@ -55,6 +55,12 @@ trigger:wikidata
 	rdfs:label "Wikidata IRIs" ;
 	rdfs:comment "Starting with http://www.wikidata.org/entity/Q" .
 
+trigger:dbpedia_nif
+    a v:RDF_IRI_Trigger ;
+    trigger:pattern "^http://\\w*\\.dbpedia.org/resource/.*\\?.*(nif=|dbpv=).*(dbpv=|nif=).*" ;
+    rdfs:label "DBpedia NIF IRIs" ;
+    rdfs:comment "Containing NIF query part" .
+
 trigger:dbpedia_ontology 
    a v:RDF_IRI_Trigger ;
    trigger:pattern "^http://dbpedia.org/ontology/[a-z].*" ;
