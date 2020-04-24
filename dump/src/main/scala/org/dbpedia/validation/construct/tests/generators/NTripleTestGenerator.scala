@@ -7,7 +7,7 @@ import org.apache.jena.query.{QueryExecutionFactory, QueryFactory}
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.dbpedia.validation.construct.model.triggers._
-import org.dbpedia.validation.construct.model.triggers.generic.{GenericIRITrigger, GenericLiteralLangTagTrigger, GenericLiteralTrigger, GenericTypedLiteralTrigger}
+import org.dbpedia.validation.construct.model.triggers.generic.{GenericIRITrigger, GenericLangLiteralTrigger, GenericLiteralTrigger, GenericPlainLiteralTrigger, GenericTypedLiteralTrigger}
 import org.dbpedia.validation.construct.model.{TestCase, TestCaseType, TriggerIRI, ValidatorID, ValidatorIRI}
 import org.dbpedia.validation.construct.model.validators._
 import org.dbpedia.validation.construct.model.validators.generic.{GenericIRIValidator, GenericLiteralLangTagValidator, GenericLiteralValidator, GenericRdfLangStringValidator, GenericValidator}
@@ -64,27 +64,44 @@ object NTripleTestGenerator extends TestGenerator {
     triggerCollection.append(GenericIRITrigger(currentTriggerID, Array[TestCase](generic_iri_testcase)))
     currentTriggerID += 1
 
-    /** Typed Literals */
 
-    // generic literal
-    val generic_literal_testcase = TestCase(currentTestCaseID, currentTriggerID, validatorMap("#GENERIC_LITERAL_VALIDATOR").head, TestCaseType.GENERIC)
+    /** Literals */
+//    val generic_literal_testcase = TestCase(currentTestCaseID, currentTriggerID, validatorMap("#GENERIC_LITERAL_VALIDATOR").head, TestCaseType.GENERIC)
+//    currentTestCaseID += 1
+//    testCaseCollection.append(generic_literal_testcase)
+//    triggerCollection.append(GenericLiteralTrigger(currentTriggerID, Array[TestCase](generic_literal_testcase)))
+//    currentTriggerID += 1
+
+    // plain
+    val generic_jena_plain_literal_testcase = TestCase(currentTestCaseID, currentTriggerID,  validatorMap("#GENERIC_LITERAL_VALIDATOR").head, TestCaseType.GENERIC)
     currentTestCaseID += 1
-    testCaseCollection.append(generic_literal_testcase)
-    triggerCollection.append(GenericLiteralTrigger(currentTriggerID, Array[TestCase](generic_literal_testcase)))
+    testCaseCollection.append(generic_jena_plain_literal_testcase)
+    triggerCollection.append(GenericPlainLiteralTrigger(currentTriggerID, Array[TestCase]()))
     currentTriggerID += 1
 
-    // rdf lang string
+    // typed
+    val generic_jena_typed_literal_testcase = TestCase(currentTestCaseID, currentTriggerID,  validatorMap("#GENERIC_LITERAL_VALIDATOR").head, TestCaseType.GENERIC)
+    currentTestCaseID += 1
+    testCaseCollection.append(generic_jena_typed_literal_testcase)
+
+    // not having rdfLangString type
     val generic_rdf_lang_string_testcase = TestCase(currentTestCaseID, currentTriggerID, validatorMap("#GENERIC_RDF_LANG_STRING_VALIDATOR").head, TestCaseType.GENERIC)
     currentTestCaseID += 1
     testCaseCollection.append(generic_rdf_lang_string_testcase)
-    triggerCollection.append(GenericTypedLiteralTrigger(currentTriggerID, Array[TestCase](generic_rdf_lang_string_testcase)))
+
+    triggerCollection.append(GenericTypedLiteralTrigger(currentTriggerID, Array[TestCase](generic_rdf_lang_string_testcase, generic_jena_typed_literal_testcase)))
     currentTriggerID += 1
 
-    // literal language tag
+    // language based
+    val generic_jena_lang_literal_testcase = TestCase(currentTestCaseID, currentTriggerID, validatorMap("#GENERIC_LITERAL_VALIDATOR").head, TestCaseType.GENERIC)
+    currentTestCaseID += 1
+    testCaseCollection.append(generic_jena_lang_literal_testcase)
+
+    // correct lang tag
     val generic_literal_lang_tag_testcase = TestCase(currentTestCaseID, currentTriggerID, validatorMap("#GENERIC_LTIERAL_LANG_TAG_VALIDATOR").head, TestCaseType.GENERIC)
     currentTestCaseID += 1
     testCaseCollection.append(generic_literal_lang_tag_testcase)
-    triggerCollection.append(GenericLiteralLangTagTrigger(currentTriggerID, Array[TestCase](generic_literal_lang_tag_testcase)))
+    triggerCollection.append(GenericLangLiteralTrigger(currentTriggerID, Array[TestCase](generic_literal_lang_tag_testcase)))
     currentTriggerID += 1
 
     /*
@@ -152,7 +169,7 @@ object NTripleTestGenerator extends TestGenerator {
 
       generator.getOrElse(triggerIRI, Array[ValidatorIRI]()).foreach(validatorIri => {
         validatorMap(validatorIri).foreach(testApproachID => {
-          val testCase = TestCase(currentTestCaseID, currentTriggerID, testApproachID, TestCaseType.CUSTOM)
+          val testCase = TestCase(currentTestCaseID, currentTriggerID, testApproachID, TestCaseType.GENERIC)
           testCases.append(testCase)
           testCaseCollection.append(testCase)
           currentTestCaseID += 1

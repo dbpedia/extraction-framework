@@ -1,10 +1,11 @@
 package org.dbpedia.validation.construct.report.formats
 
-import java.nio.charset.{StandardCharsets}
+import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
-import org.dbpedia.validation.construct.model.{TestCaseType, TestScore}
+import org.dbpedia.validation.construct.model.triggers.generic.{GenericIRITrigger, GenericLiteralTrigger}
+import org.dbpedia.validation.construct.model.{TestCaseType, TestScore, TriggerType}
 import org.dbpedia.validation.construct.tests.suites.TestSuite
 
 import scala.collection.mutable.ArrayBuffer
@@ -36,6 +37,14 @@ object HTMLTestReport {
     val customTests = ArrayBuffer[TableRow]()
     val genericTests = ArrayBuffer[TableRow]()
 
+    var generic_total_errors: Long = 0
+
+    var iriCount: Long = 0
+    var litCount: Long = 0
+
+    var custom_total_errors: Long = 0 // =
+
+
     testSuite.testCaseCollection.foreach(testCase => {
 
       val tableRow: TableRow = {
@@ -56,10 +65,20 @@ object HTMLTestReport {
         )
       }
 
+      val trigger = testSuite.triggerCollection(testCase.triggerID)
+
       if (testCase.TYPE == TestCaseType.GENERIC) {
         genericTests.append(tableRow)
+        generic_total_errors += testScore.errorsOfTestCases(testCase.ID)
+
+        trigger match {
+          case iriT: GenericIRITrigger => iriCount = testScore.prevalenceOfTriggers(testCase.triggerID)
+          case litT: GenericLiteralTrigger => litCount = testScore.prevalenceOfTriggers(testCase.triggerID)
+          case _ =>
+        }
       } else {
         customTests.append(tableRow)
+        custom_total_errors += testScore.errorsOfTestCases(testCase.ID)
       }
     })
 
@@ -74,12 +93,12 @@ object HTMLTestReport {
          |<h3>$label</h3>
          |<ul>
          |  <li>Timestamp: ${new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(Calendar.getInstance().getTime)}
-         |  <li>Total Constructs: ${testScore.total}
          |</ul>
          |<h4>Generic Test Cases</h4>
          |<ul>
-         |  <li>Erroneous_Constructs/Covered_Constructs: TODO
-         |  <li>Total_Errors/Covered_Constructs: TODO
+         |  <li>Generic Construct Coverage Proof: ${testScore.coveredGeneric / testScore.total.toFloat}  ( ${testScore.coveredGeneric} covered of ${testScore.total} total constructs )
+         |  <li>Erroneous_Constructs/Total_Constructs: ${(testScore.total - testScore.validGeneric) / testScore.total.toFloat} ( ${(testScore.total - testScore.validGeneric)} erroneous constructs )
+         |  <li>Total_Errors/Total_Constructs: ${generic_total_errors / testScore.total.toFloat} ( $generic_total_errors total errors )
          |</ul>
          |<table
          | data-toggle="table"
@@ -102,27 +121,16 @@ object HTMLTestReport {
       .sortWith(_.errorRate > _.errorRate)
       .foreach(row => outputStream.write(row.toString.getBytes(StandardCharsets.UTF_8)))
 
+    //   <li>Coverage: ${testScore.coverage} ( ${testScore.covered} covered of ${testScore.total} total )
     outputStream.write(
       s"""</tbody>
          |</table>
          |<br>
          |<h4>Custom Test Cases</h4>
-         |<strong>Overall</strong>
          |<ul>
-         |  <li>Coverage: ${testScore.coverage} ( ${testScore.covered} covered of ${testScore.total} total )
-         |  <li>Coverage (IRIs): TODO
-         |  <li>Erroneous_Constructs/Covered_Constructs: TODO
-         |  <li>Total_Errors/Covered_Constructs: TODO
-         |</ul>
-         |<strong>IRI Compliance</strong>
-         |<ul>
-         |  <li>Erroneous_Constructs/Covered_Constructs: TODO
-         |  <li>Total_Errors/Covered_Constructs: TODO
-         |</ul>
-         |<strong>Vocab Usage</strong>
-         |<ul>
-         |  <li>Erroneous_Constructs/Covered_Constructs: TODO
-         |  <li>Total_Errors/Covered_Constructs: TODO
+         |  <li>Coverage (IRIs): ${testScore.coveredCustom / iriCount.toFloat} ( ${testScore.coveredCustom} covered of $iriCount total IRI constructs )
+         |  <li>Erroneous_Constructs/Covered_Constructs: ${(testScore.coveredCustom - testScore.validCustom) / testScore.coveredCustom.toFloat} ( ${testScore.coveredCustom - testScore.validCustom} erroneous constructs )
+         |  <li>Total_Errors/Covered_Constructs: ${custom_total_errors / testScore.coveredCustom.toFloat} ( $custom_total_errors total errors )
          |</ul>
          |<table
          | data-toggle="table"

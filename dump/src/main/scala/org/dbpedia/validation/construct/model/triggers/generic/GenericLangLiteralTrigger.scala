@@ -9,10 +9,10 @@ import org.dbpedia.validation.construct.model.{TestCase, TriggerID, TriggerIRI, 
  * @param ID id of the trigger
  * @param testCases set of test cases
  */
-case class GenericLiteralLangTagTrigger(ID: TriggerID, testCases: Array[TestCase]) extends Trigger {
+case class GenericLangLiteralTrigger(ID: TriggerID, testCases: Array[TestCase]) extends Trigger {
 
   override val TYPE: TriggerType.Value = TriggerType.LITERAL
-  override val iri: TriggerIRI = "#GENERIC_LITERAL_LANG_TAG_TRIGGER"
+  override val iri: TriggerIRI = "#GENERIC_LANG_LITERAL_TRIGGER"
   override val label: String = "GENERIC rdf:langString trigger"
   override val comment: String = "rdf language literals e.g. \"string\"@lang"
 

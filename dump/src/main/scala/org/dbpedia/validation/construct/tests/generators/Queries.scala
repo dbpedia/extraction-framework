@@ -102,11 +102,11 @@ object Queries {
     """PREFIX owl: <http://www.w3.org/2002/07/owl#>
       |
       |SELECT DISTINCT ?property {
-      |  VALUES ?type {
-      |     <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>
-      |     owl:DatatypeProperty
-      |     owl:ObjectProperty
-      |  }
+      |  #VALUES ?type {
+      |  #   <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>
+      |  #   owl:DatatypeProperty
+      |  #   owl:ObjectProperty
+      |  #}
       |  ?property a ?type .
       |  #FILTER ( ?type IN ( owl:DatatypeProperty, owl:ObjectProperty ) )
       |}"""

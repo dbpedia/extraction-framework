@@ -9,9 +9,9 @@ import org.dbpedia.validation.construct.model.triggers.Trigger
 case class GenericTypedLiteralTrigger(ID: TriggerID, testCases: Array[TestCase]) extends Trigger {
 
   override val TYPE: model.TriggerType.Value = model.TriggerType.LITERAL
-  override val iri: TriggerIRI = "#GENERIC_LITERAL_DATATYPE_TRIGGER"
-  override val label: String = "GENERIC literal datatype trigger"
-  override val comment: String = "typed literals"
+  override val iri: TriggerIRI = "#GENERIC_TYPED_LITERAL_TRIGGER"
+  override val label: String = "GENERIC typed literal trigger"
+  override val comment: String = "typed literals (except plain and language tagged literals)"
 
   val pattern: Pattern = "\".*\"\\^\\^<.*>".r.pattern
 

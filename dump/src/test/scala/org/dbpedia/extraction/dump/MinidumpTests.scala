@@ -202,22 +202,11 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     val testScores = testSuite.test(s"${mappingsConfig.dumpDir.getAbsolutePath}/*/$date/*.ttl.bz2")(SQLContext)
 
-    val scoreLabels = Array[String]("SUBJECT TEST CASES", "PREDICATE TEST CASES", "OBJECT TEST CASES")
-
-//    Array.tabulate(testScores.length) {
-//
-//      testScoreIdx => {
-
-        new File("target/testreports/").mkdirs()
-        val htmlOS = new FileOutputStream(s"target/testreports/testreport_combined.html", false)
-        ReportWriter.write("DIEF Minidump NTriple Test Cases", testScores(0), testSuite, ReportFormat.HTML, htmlOS)
-        htmlOS.close()
-        println("Wrote: " + s"target/testreports/testreport_combined.html")
-        //        val ttlOS = new FileOutputStream(s"target/testreports/testreport_$testScoreIdx.ttl", false)
-        //        ReportWriter.write(scoreLabels(testScoreIdx), testScores(testScoreIdx), testSuite, ReportFormat.RDF, ttlOS)
-        //        ttlOS.close()
-//      }
-//    }
+    new File("target/testreports/").mkdirs()
+    val htmlOS = new FileOutputStream(s"./target/testreports/minidump.html", false)
+    ReportWriter.write("DIEF Minidump NTriple Test Cases", testScores(0), testSuite, ReportFormat.HTML, htmlOS)
+    htmlOS.close()
+    println("Wrote: " + s"./target/testreports/minidump.html")
   }
 
   test("RDFUnit SHACL") {

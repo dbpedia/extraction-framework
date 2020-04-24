@@ -3,8 +3,8 @@ package org.dbpedia.validation.construct.tests.suites
 import org.apache.jena.rdf.model.Model
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.sql.SQLContext
-import org.dbpedia.validation.construct.model.{TestCase, TestScore, TriggerType}
-import org.dbpedia.validation.construct.model.triggers.Trigger
+import org.dbpedia.validation.construct.model.{TestCase, TestCaseType, TestScore, TriggerType}
+import org.dbpedia.validation.construct.model.triggers.{IRITrigger, Trigger}
 import org.dbpedia.validation.construct.model.validators.Validator
 import org.dbpedia.validation.construct.tests.generators.NTripleTestGenerator
 
@@ -31,8 +31,10 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
     val zero = {
       TestScore(
         total = 0,
-        covered = 0,
-        valid = 0,
+        coveredGeneric = 0,
+        coveredCustom = 0,
+        validGeneric = 0,
+        validCustom = 0,
         prevalenceOfTriggers = Array.fill[Long](brdTriggerCollection.value.length)(0),
         errorsOfTestCases = Array.fill[Long](brdTestCaseCount.value)(0)
       )
@@ -58,7 +60,7 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
       )
       //      })
     }
-    
+
     testReports
   }
 
@@ -103,8 +105,10 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
                            validatorCollection: Array[Validator],
                            constructLabel: String): TestScore = {
 
-    var covered = false
-    var valid = true
+    var coveredGeneric = false
+    var coveredCustom = false
+    var validGeneric = true
+    var validCustom = true
 
     val prevalenceOfTrigger = Array.fill[Long](triggerCollection.length)(0)
     val errorsOfTestCase = Array.fill[Long](testCaseCount)(0)
@@ -120,7 +124,11 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
 
         if (trigger.isTriggered(nTriplePart)) {
 
-          if (trigger.iri != "#GENERIC_IRI_TRIGGER") covered = true
+//          if (trigger.iri != "#GENERIC_IRI_TRIGGER") covered = true
+
+          // TODO: hard coded coverage only for custom iris
+          if( trigger.isInstanceOf[IRITrigger] ) coveredCustom = true
+          else coveredGeneric = true
 
           prevalenceOfTrigger(trigger.ID) = 1
 
@@ -131,8 +139,12 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
               val success = validatorCollection(testCase.validatorID).run(nTriplePart)
 
               // TODO count overlap store succeeded before and then=2 add all together
+
               if (!success) {
-                valid = false
+                testCase.TYPE match {
+                  case TestCaseType.GENERIC => validGeneric = false
+                  case TestCaseType.CUSTOM => validCustom = false
+                }
                 errorsOfTestCase(testCase.ID) = 1
               }
             }
@@ -141,10 +153,17 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
       }
     )
 
+    // TODO log uncovered properly
+//    if( ! covered && nTriplePartType == TriggerType.IRI) {
+//        println(nTriplePart)
+//    }
+
     TestScore(
       total = 1,
-      covered = if (covered) 1 else 0,
-      valid = if (valid && covered) 1 else 0,
+      coveredGeneric = if (coveredGeneric) 1 else 0,
+      coveredCustom = if (coveredCustom) 1 else 0,
+      validGeneric = if (validGeneric) 1 else 0,
+      validCustom = if (validCustom && coveredCustom) 1 else 0,
       prevalenceOfTriggers = prevalenceOfTrigger,
       errorsOfTestCases = errorsOfTestCase)
   }
