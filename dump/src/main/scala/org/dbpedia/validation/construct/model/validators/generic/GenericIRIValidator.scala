@@ -15,5 +15,5 @@ case class GenericIRIValidator(ID: ValidatorID) extends Validator {
     ! IRIResolver.checkIRI(nTriplePart)
   }
 
-  override def info(): String = "IRI parsed successfully with APACHE JENA"
+  override def info(): String = "IRI Validation with Apache Jena IRI parser (prevalence:= all IRIs)"
 }

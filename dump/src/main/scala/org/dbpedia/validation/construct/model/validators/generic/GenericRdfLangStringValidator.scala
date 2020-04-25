@@ -13,5 +13,5 @@ case class GenericRdfLangStringValidator(ID: ValidatorID) extends Validator {
     ! nTriplePart.endsWith("<http://www.w3.org/1999/02/22-rdf-syntax-ns#langString>")
   }
 
-  override def info(): String = "Literal with rdf:langString serialized properly. ( prevalence = typed_literals )"
+  override def info(): String = "rdf:langString is an implicit type and must never be serialized. (prevalence := all typed literals)"
 }

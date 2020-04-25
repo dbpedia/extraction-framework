@@ -15,5 +15,5 @@ case class GenericLiteralLangTagValidator(ID: ValidatorID) extends Validator {
     true
   }
 
-  override def info(): String = "Use of correct literal language tag"
+  override def info(): String = "Literal language tag conformity to BCP47 (prevalence:= literals with lang tags)"
 }

@@ -37,5 +37,5 @@ case class GenericLiteralValidator(ID: ValidatorID) extends Validator {
     catch { case _: RiotException => false }
   }
 
-  override def info(): String = "Literal parsed successfully with APACHE JENA"
+  override def info(): String = "Literal validation with Apache Jena literal parser (prevalence:= all literals)"
 }

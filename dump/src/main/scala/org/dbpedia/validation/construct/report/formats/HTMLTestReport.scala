@@ -96,9 +96,13 @@ object HTMLTestReport {
          |</ul>
          |<h4>Generic Test Cases</h4>
          |<ul>
-         |  <li>Generic Construct Coverage Proof: ${testScore.coveredGeneric / testScore.total.toFloat}  ( ${testScore.coveredGeneric} covered of ${testScore.total} total constructs )
-         |  <li>Erroneous_Constructs/Total_Constructs: ${(testScore.total - testScore.validGeneric) / testScore.total.toFloat} ( ${(testScore.total - testScore.validGeneric)} erroneous constructs )
-         |  <li>Total_Errors/Total_Constructs: ${generic_total_errors / testScore.total.toFloat} ( $generic_total_errors total errors )
+         |  <li>Total constructs: ${testScore.total}</li>
+         |  <li>Covered constructs: ${testScore.coveredGeneric}</li>
+         |  <li>Coverage: ${testScore.coveredGeneric / testScore.total.toFloat} covered / total</li>
+         |  <li>Constructs with >=1 errors: ${(testScore.total - testScore.validGeneric)} </li>
+         |  <li>Error rate I: ${(testScore.total - testScore.validGeneric) / testScore.total.toFloat} erroneous constructs / total</li>
+         |  <li>Total errors: $generic_total_errors </li>
+         |  <li>Error rate II:  ${generic_total_errors / testScore.total.toFloat}  total errors / total constructs </li>
          |</ul>
          |<table
          | data-toggle="table"
@@ -128,9 +132,13 @@ object HTMLTestReport {
          |<br>
          |<h4>Custom Test Cases</h4>
          |<ul>
-         |  <li>Coverage (IRIs): ${testScore.coveredCustom / iriCount.toFloat} ( ${testScore.coveredCustom} covered of $iriCount total IRI constructs )
-         |  <li>Erroneous_Constructs/Covered_Constructs: ${(testScore.coveredCustom - testScore.validCustom) / testScore.coveredCustom.toFloat} ( ${testScore.coveredCustom - testScore.validCustom} erroneous constructs )
-         |  <li>Total_Errors/Covered_Constructs: ${custom_total_errors / testScore.coveredCustom.toFloat} ( $custom_total_errors total errors )
+         |  <li>Total IRI count: $iriCount</li>
+         |  <li>Covered IRIs: ${testScore.coveredCustom} </li>
+         |  <li>Coverage: ${testScore.coveredCustom / iriCount.toFloat}  covered / total </li>
+         |  <li>Constructs with >=1 errors: ${(testScore.coveredCustom - testScore.validCustom)} </li>
+         |  <li>Error rate I: ${(testScore.coveredCustom - testScore.validCustom) / testScore.coveredCustom.toFloat} erroneous constructs / total </li>
+         |  <li>Total errors: $custom_total_errors </li>
+         |  <li>Error rate II:  ${custom_total_errors / testScore.coveredCustom.toFloat}  total errors / total constructs </li>
          |</ul>
          |<table
          | data-toggle="table"
