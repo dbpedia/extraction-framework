@@ -9,6 +9,8 @@ import java.util.concurrent.ConcurrentLinkedQueue
 import org.aksw.rdfunit.RDFUnit
 import org.aksw.rdfunit.enums.TestCaseExecutionType
 import org.aksw.rdfunit.io.reader.{RdfModelReader, RdfStreamReader}
+import org.aksw.rdfunit.io.writer.RdfResultsWriterFactory
+import org.aksw.rdfunit.model.interfaces.results.TestExecution
 import org.aksw.rdfunit.model.interfaces.{TestCase, TestSuite}
 import org.aksw.rdfunit.sources.{SchemaSource, SchemaSourceFactory, TestSourceBuilder}
 import org.aksw.rdfunit.tests.generators.{ShaclTestGenerator, TestGeneratorFactory}
@@ -211,17 +213,22 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   }
 
   test("Minidumps with RDFUnit/SHACL") {
-//  def excludeRDFUnitSHACL() {
+    //  def excludeRDFUnitSHACL() {
+
     val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuite()
-    validateMinidumpWithTestSuite(schema, testSuite)
+    val results = validateMinidumpWithTestSuite(schema, testSuite, "./target/testreports/shacl-tests.html")
+
+    assert(results.getTestCaseResults.isEmpty)
   }
 
 
   test("Minidumps with RDFUnit/Ontology") {
-    //  def excludeRDFUnitSHACL() {
+    //  def excludeRDFUnitOnto() {
 
     val (schema: SchemaSource, testSuite: TestSuite) = generateOntologyTestSuite
-    validateMinidumpWithTestSuite(schema, testSuite)
+    validateMinidumpWithTestSuite(schema, testSuite, "./target/testreports/onto-tests.html")
+
+    // TODO assert
   }
 
 
@@ -259,11 +266,16 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     (schema, testSuite)
   }
 
-  private def validateMinidumpWithTestSuite(schema: SchemaSource, testSuite: TestSuite) = {
-    val filesToBeValidated = recursiveListFiles(dumpDirectory).filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
+  private def validateMinidumpWithTestSuite(schema: SchemaSource,
+                                            testSuite: TestSuite,
+                                            sinkFileName: String): TestExecution = {
+
+    val filesToBeValidated = recursiveListFiles(dumpDirectory).filter(_.isFile)
+      .filter(_.toString.endsWith(".ttl.bz2"))
+      .toList
+
     // val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
     //println("FILES, FILES, FILES\n"+filesToBeValidated)
-
 
     //org.apache.jena.riot.system.IRIResolver.
     val singleModel: Model = ModelFactory.createDefaultModel()
@@ -277,9 +289,14 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
       .setInMemReader(new RdfModelReader(singleModel))
       .setReferenceSchemata(schema)
       .build()
-    val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.shaclTestCaseResult, testSource, testSuite)
 
-    assert(results.getTestCaseResults.isEmpty)
+    val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.aggregatedTestCaseResult, testSource, testSuite)
+
+    RdfResultsWriterFactory.createHtmlWriter(
+      results, new FileOutputStream(sinkFileName,false)
+    ).write(ModelFactory.createDefaultModel())
+
+    results
   }
 
   def recursiveListFiles(f: File): Array[File] = {
