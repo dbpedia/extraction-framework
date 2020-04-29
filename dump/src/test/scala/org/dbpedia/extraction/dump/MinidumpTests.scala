@@ -72,7 +72,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     .getOrCreate()
 
   override def beforeAll() {
-//  def excludeBeforeAll() {
+    //  def excludeBeforeAll() {
 
     /**
      * check ttl file for CI here
@@ -196,7 +196,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     val SQLContext: SQLContext = sparkSession.sqlContext
 
-    val testFiles = Array(ciTestFile,XSDCITestFile)
+    val testFiles = Array(ciTestFile, XSDCITestFile)
 
     val testModel = ModelFactory.createDefaultModel()
     testFiles.foreach(testFile => testModel.read(testFile))
@@ -213,20 +213,22 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   }
 
   test("Minidumps with RDFUnit/SHACL") {
-    //  def excludeRDFUnitSHACL() {
+    //      def excludeRDFUnitSHACL() {
 
     val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuite()
-    val results = validateMinidumpWithTestSuite(schema, testSuite, "./target/testreports/shacl-tests.html")
+    val results =
+      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.shaclTestCaseResult, "./target/testreports/shacl-tests.html")
 
     assert(results.getTestCaseResults.isEmpty)
   }
 
 
   test("Minidumps with RDFUnit/Ontology") {
-    //  def excludeRDFUnitOnto() {
+    //      def excludeRDFUnitOnto() {
 
     val (schema: SchemaSource, testSuite: TestSuite) = generateOntologyTestSuite
-    validateMinidumpWithTestSuite(schema, testSuite, "./target/testreports/onto-tests.html")
+    val results =
+      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/onto-tests.html")
 
     // TODO assert
   }
@@ -249,7 +251,6 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   }
 
 
-
   private def generateOntologyTestSuite: (SchemaSource, TestSuite) = {
     val dbpedia_ont: Model = ModelFactory.createDefaultModel()
     RDFDataMgr.read(dbpedia_ont, new FileInputStream(dbpedia_ontologyFile), RDFLanguages.RDFXML)
@@ -268,6 +269,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
   private def validateMinidumpWithTestSuite(schema: SchemaSource,
                                             testSuite: TestSuite,
+                                            executionType: TestCaseExecutionType,
                                             sinkFileName: String): TestExecution = {
 
     val filesToBeValidated = recursiveListFiles(dumpDirectory).filter(_.isFile)
@@ -290,10 +292,10 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
       .setReferenceSchemata(schema)
       .build()
 
-    val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.aggregatedTestCaseResult, testSource, testSuite)
+    val results = RDFUnitStaticValidator.validate(executionType, testSource, testSuite)
 
     RdfResultsWriterFactory.createHtmlWriter(
-      results, new FileOutputStream(sinkFileName,false)
+      results, new FileOutputStream(sinkFileName, false)
     ).write(ModelFactory.createDefaultModel())
 
     results
