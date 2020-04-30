@@ -70,30 +70,29 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
    */
   def prepareFlatTerseLine(line: String): Array[String] = {
 
-    val spo = line.split(">", 3)
+    val spo = line.split(" ", 3)
 
     var s: String = null
     var p: String = null
     var o: String = null
 
     try {
-      s = spo(0).drop(1)
-      p = spo(1).trim.drop(1)
-      o = {
+      if(spo(0).startsWith("<")) s = spo(0).drop(1).dropRight(1)
+      if(spo(1).startsWith("<")) p = spo(1).drop(1).dropRight(1)
 
-        val aa = {
-
-          val a = spo(2).trim
-
-          if (a.endsWith(".")) a.dropRight(1).trim else a
-        }
-
-        if (aa.startsWith("<")) aa.drop(1).dropRight(1) else aa
+      val tail = {
+        val trim = spo(2).trim
+        if (trim.endsWith(".")) trim.dropRight(1).trim else trim
       }
+
+      if (tail.startsWith("<")) o = tail.drop(1).dropRight(1)
+      else if (tail.startsWith("\"")) o = tail
     }
     catch {
       case ae: ArrayIndexOutOfBoundsException => println(line); ae.printStackTrace()
     }
+
+
 
     Array(s, p, o)
   }

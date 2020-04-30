@@ -6,16 +6,6 @@ import java.util
 import java.util.Calendar
 import java.util.concurrent.ConcurrentLinkedQueue
 
-import org.aksw.rdfunit.RDFUnit
-import org.aksw.rdfunit.enums.TestCaseExecutionType
-import org.aksw.rdfunit.io.reader.{RdfModelReader, RdfStreamReader}
-import org.aksw.rdfunit.io.writer.RdfResultsWriterFactory
-import org.aksw.rdfunit.model.interfaces.results.TestExecution
-import org.aksw.rdfunit.model.interfaces.{TestCase, TestSuite}
-import org.aksw.rdfunit.sources.{SchemaSource, SchemaSourceFactory, TestSourceBuilder}
-import org.aksw.rdfunit.tests.generators.{ShaclTestGenerator, TestGeneratorFactory}
-import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator
-import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import org.apache.commons.io.FileUtils
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
@@ -72,7 +62,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     .getOrCreate()
 
   override def beforeAll() {
-//  def excludeBeforeAll() {
+//      def excludeBeforeAll() {
 
     /**
      * check ttl file for CI here
@@ -188,15 +178,13 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     }
 
     jobsRunning.clear()
-
-
   }
 
   test("IRI Coverage Tests") {
 
     val SQLContext: SQLContext = sparkSession.sqlContext
 
-    val testFiles = Array(ciTestFile,XSDCITestFile)
+    val testFiles = Array(ciTestFile, XSDCITestFile)
 
     val testModel = ModelFactory.createDefaultModel()
     testFiles.foreach(testFile => testModel.read(testFile))
@@ -212,92 +200,94 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     println("Wrote: " + s"./target/testreports/minidump.html")
   }
 
-  test("Minidumps with RDFUnit/SHACL") {
-    //  def excludeRDFUnitSHACL() {
-
-    val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuite()
-    val results = validateMinidumpWithTestSuite(schema, testSuite, "./target/testreports/shacl-tests.html")
-
-    assert(results.getTestCaseResults.isEmpty)
-  }
-
-
-  test("Minidumps with RDFUnit/Ontology") {
-    //  def excludeRDFUnitOnto() {
-
-    val (schema: SchemaSource, testSuite: TestSuite) = generateOntologyTestSuite
-    validateMinidumpWithTestSuite(schema, testSuite, "./target/testreports/onto-tests.html")
-
-    // TODO assert
-  }
-
-
-  private def generateShaclTestSuite() = {
-    val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
-    RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(custom_SHACL_testFile), RDFLanguages.TURTLE)
-
-    assert(custom_SHACL_tests.size() > 0, "size not 0")
-    val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
-
-    val rdfUnit = RDFUnit.createWithOwlAndShacl
-    rdfUnit.init
-
-    val shaclTestGenerator = new ShaclTestGenerator()
-    val shaclTests: util.Collection[TestCase] = shaclTestGenerator.generate(schema)
-    val testSuite = new TestSuite(shaclTests)
-    (schema, testSuite)
-  }
-
-
-
-  private def generateOntologyTestSuite: (SchemaSource, TestSuite) = {
-    val dbpedia_ont: Model = ModelFactory.createDefaultModel()
-    RDFDataMgr.read(dbpedia_ont, new FileInputStream(dbpedia_ontologyFile), RDFLanguages.RDFXML)
-    assert(dbpedia_ont.size() > 0, "size not 0")
-
-    val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/ontology", new RdfModelReader(dbpedia_ont))
-
-    val rdfUnit = RDFUnit.createWithOwlAndShacl
-    rdfUnit.init
-
-    val testGenerator = TestGeneratorFactory.createAllNoCache(rdfUnit.getAutoGenerators, "./")
-    val tests: java.util.Collection[TestCase] = testGenerator.generate(schema)
-    val testSuite = new TestSuite(tests)
-    (schema, testSuite)
-  }
-
-  private def validateMinidumpWithTestSuite(schema: SchemaSource,
-                                            testSuite: TestSuite,
-                                            sinkFileName: String): TestExecution = {
-
-    val filesToBeValidated = recursiveListFiles(dumpDirectory).filter(_.isFile)
-      .filter(_.toString.endsWith(".ttl.bz2"))
-      .toList
-
-    // val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
-    //println("FILES, FILES, FILES\n"+filesToBeValidated)
-
-    //org.apache.jena.riot.system.IRIResolver.
-    val singleModel: Model = ModelFactory.createDefaultModel()
-    for (file <- filesToBeValidated) {
-      singleModel.add(new RdfStreamReader(new BZip2CompressorInputStream(new FileInputStream(file.getAbsolutePath)), "TURTLE").read())
-      println("RDFUnit loaded: " + file)
-    }
-
-    val testSource = new TestSourceBuilder()
-      .setPrefixUri("minidump", "http://dbpedia.org/minidump")
-      .setInMemReader(new RdfModelReader(singleModel))
-      .setReferenceSchemata(schema)
-      .build()
-
-    val results = RDFUnitStaticValidator.validate(TestCaseExecutionType.aggregatedTestCaseResult, testSource, testSuite)
-
-    RdfResultsWriterFactory.createHtmlWriter(
-      results, new FileOutputStream(sinkFileName,false)
-    ).write(ModelFactory.createDefaultModel())
-
-    results
-  }
+//  test("Minidumps with RDFUnit/SHACL") {
+//    //      def excludeRDFUnitSHACL() {
+//
+//    val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuite()
+//    val results =
+//      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.shaclTestCaseResult, "./target/testreports/shacl-tests.html")
+//
+//    assert(results.getTestCaseResults.isEmpty)
+//  }
+//
+//
+//  test("Minidumps with RDFUnit/Ontology") {
+//    //      def excludeRDFUnitOnto() {
+//
+//    val (schema: SchemaSource, testSuite: TestSuite) = generateOntologyTestSuite
+//    val results =
+//      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/onto-tests.html")
+//
+//    // TODO assert
+//  }
+//
+//
+//  private def generateShaclTestSuite() = {
+//    val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
+//    RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(custom_SHACL_testFile), RDFLanguages.TURTLE)
+//
+//    assert(custom_SHACL_tests.size() > 0, "size not 0")
+//    val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
+//
+//    val rdfUnit = RDFUnit.createWithOwlAndShacl
+//    rdfUnit.init
+//
+//    val shaclTestGenerator = new ShaclTestGenerator()
+//    val shaclTests: util.Collection[TestCase] = shaclTestGenerator.generate(schema)
+//    val testSuite = new TestSuite(shaclTests)
+//    (schema, testSuite)
+//  }
+//
+//
+//  private def generateOntologyTestSuite: (SchemaSource, TestSuite) = {
+//    val dbpedia_ont: Model = ModelFactory.createDefaultModel()
+//    RDFDataMgr.read(dbpedia_ont, new FileInputStream(dbpedia_ontologyFile), RDFLanguages.RDFXML)
+//    assert(dbpedia_ont.size() > 0, "size not 0")
+//
+//    val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/ontology", new RdfModelReader(dbpedia_ont))
+//
+//    val rdfUnit = RDFUnit.createWithOwlAndShacl
+//    rdfUnit.init
+//
+//    val testGenerator = TestGeneratorFactory.createAllNoCache(rdfUnit.getAutoGenerators, "./")
+//    val tests: java.util.Collection[TestCase] = testGenerator.generate(schema)
+//    val testSuite = new TestSuite(tests)
+//    (schema, testSuite)
+//  }
+//
+//  private def validateMinidumpWithTestSuite(schema: SchemaSource,
+//                                            testSuite: TestSuite,
+//                                            executionType: TestCaseExecutionType,
+//                                            sinkFileName: String): TestExecution = {
+//
+//    val filesToBeValidated = recursiveListFiles(dumpDirectory).filter(_.isFile)
+//      .filter(_.toString.endsWith(".ttl.bz2"))
+//      .toList
+//
+//    // val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
+//    //println("FILES, FILES, FILES\n"+filesToBeValidated)
+//
+//    //org.apache.jena.riot.system.IRIResolver.
+//    val singleModel: Model = ModelFactory.createDefaultModel()
+//    for (file <- filesToBeValidated) {
+//      singleModel.add(new RdfStreamReader(new BZip2CompressorInputStream(new FileInputStream(file.getAbsolutePath)), "TURTLE").read())
+//      println("RDFUnit loaded: " + file)
+//    }
+//
+//    val testSource = new TestSourceBuilder()
+//      .setPrefixUri("minidump", "http://dbpedia.org/minidump")
+//      .setInMemReader(new RdfModelReader(singleModel))
+//      .setReferenceSchemata(schema)
+//      .build()
+//
+//    val results = RDFUnitStaticValidator.validate(executionType, testSource, testSuite)
+//
+//    RdfResultsWriterFactory.createHtmlWriter(
+//      results, new FileOutputStream(sinkFileName, false)
+//    ).write(ModelFactory.createDefaultModel())
+//
+//    results
+//  }
 
   def recursiveListFiles(f: File): Array[File] = {
     val these = f.listFiles

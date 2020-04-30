@@ -1,5 +1,6 @@
 package org.dbpedia.validation.construct.report.formats
 
+import java.math.RoundingMode
 import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -15,7 +16,7 @@ object HTMLTestReport {
 
   type IRI = String
 
-  case class TableRow(errorRate: Float, prevalence: Long, errors: Long, approach: String, trigger: String) {
+  case class TableRow(errorRate: String, prevalence: Long, errors: Long, approach: String, trigger: String) {
 
     override def toString: IRI =
       s"""<tr>
@@ -27,6 +28,17 @@ object HTMLTestReport {
          |</tr>
          |""".stripMargin
 
+  }
+
+  def pct(float: Float): String = {
+    new java.math.BigDecimal(float * 100)
+      .round(new java.math.MathContext(4, RoundingMode.UP))
+//      .setScale(4, RoundingMode.UP)
+      .toPlainString + "%"
+//    match {
+//      case subOne if subOne.startsWith("0.") => subOne.substring(1)
+//      case greOne => greOne
+//    }
   }
 
   def build(label: String,
@@ -57,7 +69,7 @@ object HTMLTestReport {
           " { id: " + testSuite.triggerCollection(testCase.triggerID).iri + " }"
 
         TableRow(
-          errorRate,
+          pct(errorRate),
           prevalence,
           errors,
           validatorNote,
@@ -91,19 +103,43 @@ object HTMLTestReport {
          |</head>
          |<body>
          |<h3>$label</h3>
-         |<ul>
-         |  <li>Timestamp: ${new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(Calendar.getInstance().getTime)}
-         |</ul>
+         |<table border="0">
+         |  <tr>
+         |    <td class="font-weight-bold text-right">Timestamp:</td>
+         |    <td class="pl-4">${new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(Calendar.getInstance().getTime)}</td>
+         |  </tr>
+         |</table>
          |<h4>Generic Test Cases</h4>
-         |<ul>
-         |  <li>Total constructs: ${testScore.total}</li>
-         |  <li>Covered constructs: ${testScore.coveredGeneric}</li>
-         |  <li>Coverage: ${testScore.coveredGeneric / testScore.total.toFloat} covered / total</li>
-         |  <li>Constructs with >=1 errors: ${(testScore.total - testScore.validGeneric)} </li>
-         |  <li>Error rate I: ${(testScore.total - testScore.validGeneric) / testScore.total.toFloat} erroneous constructs / total</li>
-         |  <li>Total errors: $generic_total_errors </li>
-         |  <li>Error rate II:  ${generic_total_errors / testScore.total.toFloat}  total errors / total constructs </li>
-         |</ul>
+         |<table border="0">
+         |  <tr>
+         |    <td class="font-weight-bold text-right">Total constructs:</td>
+         |    <td class="pl-4">${testScore.total}</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Covered constructs:</td>
+         |  <td class="pl-4">${testScore.coveredGeneric}</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Coverage:</td>
+         |  <td class="pl-4">${pct(testScore.coveredGeneric / testScore.total.toFloat)} ( covered / total )</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Constructs with >=1 errors:</td>
+         |  <td class="pl-4">${testScore.total - testScore.validGeneric}</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Error rate I:</td>
+         |  <td class="pl-4">${pct((testScore.total - testScore.validGeneric) / testScore.total.toFloat)} ( erroneous constructs / total )</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Total errors:</td>
+         |  <td class="pl-4">$generic_total_errors</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Error rate II:</td>
+         |  <td class="pl-4">${pct(generic_total_errors / testScore.total.toFloat)} ( total errors / total constructs )</td>
+         |  </tr>
+         |</table>
          |<table
          | data-toggle="table"
          | data-search="true">
@@ -131,15 +167,36 @@ object HTMLTestReport {
          |</table>
          |<br>
          |<h4>Custom Test Cases</h4>
-         |<ul>
-         |  <li>Total IRI count: $iriCount</li>
-         |  <li>Covered IRIs: ${testScore.coveredCustom} </li>
-         |  <li>Coverage: ${testScore.coveredCustom / iriCount.toFloat}  covered / total </li>
-         |  <li>Constructs with >=1 errors: ${(testScore.coveredCustom - testScore.validCustom)} </li>
-         |  <li>Error rate I: ${(testScore.coveredCustom - testScore.validCustom) / testScore.coveredCustom.toFloat} erroneous constructs / total </li>
-         |  <li>Total errors: $custom_total_errors </li>
-         |  <li>Error rate II:  ${custom_total_errors / testScore.coveredCustom.toFloat}  total errors / total constructs </li>
-         |</ul>
+         |<table border="0">
+         |  <tr>
+         |    <td class="font-weight-bold text-right">Total IRI count:</td>
+         |    <td class="pl-4">$iriCount</td>
+         |  </tr>
+         |  <tr>
+         |    <td class="font-weight-bold text-right">Covered IRIs:</td>
+         |    <td class="pl-4">${testScore.coveredCustom}</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Coverage:</td>
+         |  <td class="pl-4">${pct(testScore.coveredCustom / iriCount.toFloat)} ( covered / total )</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Constructs with >=1 errors:</td>
+         |  <td class="pl-4">${testScore.coveredCustom - testScore.validCustom}</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Error rate I:</td>
+         |  <td class="pl-4">${pct((testScore.coveredCustom - testScore.validCustom) / testScore.coveredCustom.toFloat)} ( erroneous constructs / total )</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Total errors:</td>
+         |  <td class="pl-4">$custom_total_errors</td>
+         |  </tr>
+         |  <tr>
+         |  <td class="font-weight-bold text-right">Error rate II:</td>
+         |  <td class="pl-4">${pct(custom_total_errors / testScore.coveredCustom.toFloat)} ( total errors / total constructs )</td>
+         |  </tr>
+         |</table>
          |<table
          | data-toggle="table"
          | data-search="true">
