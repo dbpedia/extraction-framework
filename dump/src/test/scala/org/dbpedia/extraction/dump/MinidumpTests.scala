@@ -36,8 +36,8 @@ import scala.util.{Failure, Success}
 class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
   /**
-   * in src/test/resources/
-   */
+    * in src/test/resources/
+    */
   val date = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime)
 
   //Workaround to get resource files in Scala 2.11
@@ -45,6 +45,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   val mappingsConfig = new Config(classLoader.getResource("mappings.extraction.minidump.properties").getFile)
   val genericConfig = new Config(classLoader.getResource("generic-spark.extraction.minidump.properties").getFile)
   val nifAbstractConfig = new Config(classLoader.getResource("extraction.nif.abstracts.properties").getFile)
+  val wikidataConfig = new Config(classLoader.getResource("wikidata.extraction.properties").getFile)
   val minidumpDir = new File(classLoader.getResource("minidumps").getFile)
 
   val minidumpURL = classLoader.getResource("mini-enwiki.xml.bz2")
@@ -53,16 +54,16 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   val ciTestModel: Model = ModelFactory.createDefaultModel()
 
   /**
-   * NEEDED for SHACL
-   */
+    * NEEDED for SHACL
+    */
   val dumpDirectory = new File(mappingsConfig.dumpDir, s"")
   //  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
   val dbpedia_ontologyFile = classLoader.getResource("dbpedia.owl").getFile
   val custom_SHACL_testFile = classLoader.getResource("custom-shacl-tests.ttl").getFile
 
   /**
-   * SPARK
-   */
+    * SPARK
+    */
   val sparkSession: SparkSession = SparkSession.builder()
     .appName("Minidump Tests")
     .master("local[*]")
@@ -75,8 +76,8 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     //  def excludeBeforeAll() {
 
     /**
-     * check ttl file for CI here
-     */
+      * check ttl file for CI here
+      */
 
     sparkSession.sparkContext.setLogLevel("WARN")
 
@@ -98,11 +99,11 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     })
 
     /**
-     * download ontology
-     *
-     * cd core;
-     * mvn scala:run -Dlauncher="download-mappings";
-     */
+      * download ontology
+      *
+      * cd core;
+      * mvn scala:run -Dlauncher="download-mappings";
+      */
     //    println("Download ontology")
     //    val dumpFile = new File("../ontology.xml")
     //    val owlFile = new File("../ontology.owl")
@@ -112,11 +113,11 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
     //    org.dbpedia.extraction.util.OntologyDownloader.save(ontology, version, owlFile)
 
     /**
-     * download mappings
-     *
-     * cd core;
-     * mvn scala:run -Dlauncher="download-ontology";
-     */
+      * download mappings
+      *
+      * cd core;
+      * mvn scala:run -Dlauncher="download-ontology";
+      */
     //    println("Download mappings")
     //    val dir = new File("../mappings")
     //    // don't use mkdirs, that often masks mistakes.
@@ -131,11 +132,12 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     println("Extracting Minidump")
     /**
-     * mappings extraction
-     * nifAbstract extraction
-     */
+      * mappings extraction
+      * nifAbstract extraction
+      */
     val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
-
+    println("-- wikidata")
+    extract(wikidataConfig, jobsRunning)
     println("-- mappings")
     extract(mappingsConfig, jobsRunning)
     println("-- nifAbstract")
@@ -145,8 +147,8 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     def extractSpark(config: Config, jobsRunning: ConcurrentLinkedQueue[Future[Unit]]) = {
       /**
-       * generic extraction
-       */
+        * generic extraction
+        */
       println("-- generic")
       val configLoader = new ConfigLoader(config)
 
