@@ -121,6 +121,8 @@ object Namespace {
   val Category: Namespace = _values(14)
   val Module: Namespace = _values(828)
   val WikidataProperty: Namespace = _values(120)
+  val WikidataLexeme: Namespace = _values(146)
+
 
   val OntologyClass: Namespace = _values(200)
   val OntologyProperty: Namespace = _values(202)

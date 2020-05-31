@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.util
 
+import org.wikidata.wdtk.datamodel.implementation.MonolingualTextValueImpl
 import org.wikidata.wdtk.datamodel.interfaces._
-import org.wikidata.wdtk.datamodel.json.jackson.datavalues.JacksonValueMonolingualText
 
 /**
  * Created by ali on 2/1/15.
@@ -61,7 +61,7 @@ object WikidataUtil {
     case value: QuantityValue => {
       "xsd:float"
     }
-    case value : JacksonValueMonolingualText => {
+    case value : MonolingualTextValue => {
       "xsd:string"
     }
     case _=> null
@@ -86,7 +86,7 @@ object WikidataUtil {
     case value: QuantityValue => {
       value.getNumericValue.toString
     }
-    case value:JacksonValueMonolingualText => {
+    case value: MonolingualTextValue => {
       // Do we need value.getLanguageCode?
       value.getText
     }

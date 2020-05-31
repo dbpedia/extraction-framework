@@ -34,9 +34,11 @@ class WikidataLabelExtractor(
 
   override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     // This array will hold all the triples we will extract
+
     val quads = new ArrayBuffer[Quad]()
-    if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
-      for ((lang, value) <- page.wikiDataDocument.getLabels) {
+    if (page.wikiPage.title.namespace != Namespace.WikidataProperty && page.wikiPage.title.namespace != Namespace.WikidataLexeme) {
+      val document = page.wikiDataDocument.deserializeItemDocument(page.wikiPage.source)
+      for ((lang, value) <- document.getLabels) {
         val literalWithoutLang = WikidataUtil.replacePunctuation(value.toString, lang)
         Language.get(lang) match {
           case Some(dbpedia_lang) => {

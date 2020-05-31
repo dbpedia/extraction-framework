@@ -55,20 +55,22 @@ class WikidataPropertyExtractor(
     quads ++= getLabels(page, subject)
     quads ++= getStatements(page, subject)
 
+
     quads
   }
 
 
-  private def getAliases(page: JsonNode, subjectUri: String): Seq[Quad] = {
+  private def getAliases(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
-    if (page.wikiPage.title.namespace == Namespace.WikidataProperty) {
-      for ((lang, value) <- page.wikiDataDocument.getAliases) {
+    if (document.wikiPage.title.namespace == Namespace.WikidataProperty) {
+      val page = document.wikiDataDocument.deserializePropertyDocument(document.wikiPage.source)
+      for ((lang, value) <- page.getAliases) {
         val alias = WikidataUtil.replacePunctuation(value.toString, lang)
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
             quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataProperty, subjectUri, aliasProperty, alias,
-              page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
+              document.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }
@@ -77,16 +79,16 @@ class WikidataPropertyExtractor(
     quads
   }
 
-  private def getDescriptions(page: JsonNode, subjectUri: String): Seq[Quad] = {
+  private def getDescriptions(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
-
-    if (page.wikiPage.title.namespace == Namespace.WikidataProperty) {
-      for ((lang, value) <- page.wikiDataDocument.getDescriptions()) {
-        val description = WikidataUtil.replacePunctuation(value.toString(), lang)
+    if (document.wikiPage.title.namespace == Namespace.WikidataProperty) {
+      val page = document.wikiDataDocument.deserializePropertyDocument(document.wikiPage.source)
+      for ((lang, value) <- page.getDescriptions) {
+        val description = WikidataUtil.replacePunctuation(value.toString, lang)
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
             quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataProperty, subjectUri,
-              descriptionProperty, description, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
+              descriptionProperty, description, document.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }
@@ -95,15 +97,16 @@ class WikidataPropertyExtractor(
     quads
   }
 
-  private def getLabels(page: JsonNode, subjectUri: String): Seq[Quad] = {
+  private def getLabels(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
-    if (page.wikiPage.title.namespace == Namespace.WikidataProperty) {
-      for ((lang, value) <- page.wikiDataDocument.getLabels) {
+    if (document.wikiPage.title.namespace == Namespace.WikidataProperty) {
+      val page = document.wikiDataDocument.deserializePropertyDocument(document.wikiPage.source)
+      for ((lang, value) <- page.getLabels) {
         val literalWithoutLang = WikidataUtil.replacePunctuation(value.toString, lang)
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
             quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataProperty,
-              subjectUri, labelProperty, literalWithoutLang, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
+              subjectUri, labelProperty, literalWithoutLang, document.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }
@@ -113,11 +116,12 @@ class WikidataPropertyExtractor(
   }
 
 
-  private def getStatements(page: JsonNode, subjectUri: String): Seq[Quad] = {
+  private def getStatements(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
-    if (page.wikiPage.title.namespace == Namespace.WikidataProperty) {
-      for (statementGroup <- page.wikiDataDocument.getStatementGroups) {
+    if (document.wikiPage.title.namespace == Namespace.WikidataProperty) {
+      val page = document.wikiDataDocument.deserializePropertyDocument(document.wikiPage.source)
+      for (statementGroup <- page.getStatementGroups) {
         statementGroup.foreach {
           statement => {
             val claim = statement.getClaim
@@ -128,7 +132,7 @@ class WikidataPropertyExtractor(
                 val v = mainSnak.getValue
                 val value = WikidataUtil.getValue(v)
                 val datatype = if (WikidataUtil.getDatatype(v) != null) context.ontology.datatypes(WikidataUtil.getDatatype(v)) else null
-                quads += new Quad(context.language, DBpediaDatasets.WikidataProperty, subjectUri, property, value, page.wikiPage.sourceIri, datatype)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataProperty, subjectUri, property, value, document.wikiPage.sourceIri, datatype)
               }
               case _ =>
             }

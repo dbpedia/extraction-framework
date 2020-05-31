@@ -48,8 +48,9 @@ class WikidataRawExtractor(
   override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
-    if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
-      for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
+    if (page.wikiPage.title.namespace != Namespace.WikidataProperty && page.wikiPage.title.namespace != Namespace.WikidataLexeme) {
+      val document = page.wikiDataDocument.deserializeItemDocument(page.wikiPage.source)
+      for (statementGroup <- document.getStatementGroups) {
         statementGroup.getStatements.foreach {
           statement => {
             val claim = statement.getClaim

@@ -251,6 +251,7 @@ object DBpediaDatasets extends java.io.Serializable
     val WikidataDescriptionMappingsWiki: Dataset = datasets("description")
     val WikidataDescriptionRest: Dataset = datasets("description_nmw")
     val WikidataProperty: Dataset = datasets("properties")
+    val WikidataLexeme: Dataset = datasets("lexemes")
     val WikidataR2R_literals = OntologyPropertiesLiterals
     val WikidataR2R_objects = OntologyPropertiesObjects
     val WikidataR2R_ontology: Dataset = datasets("ontology_subclassof")

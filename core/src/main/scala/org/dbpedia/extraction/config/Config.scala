@@ -253,7 +253,7 @@ class Config(val configPath: String) extends
 
   private def loadNamespaces(): Set[Namespace] = {
     val names = getStrings(this, "namespaces", ",")
-    if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template, Namespace.WikidataProperty)
+    if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template, Namespace.WikidataProperty, Namespace.WikidataLexeme)
     // Special case for namespace "Main" - its Wikipedia name is the empty string ""
     else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
   }
