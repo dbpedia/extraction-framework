@@ -5,7 +5,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
 import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
-import org.wikidata.wdtk.datamodel.interfaces.ValueSnak
+import org.wikidata.wdtk.datamodel.interfaces.{StatementGroup, ValueSnak}
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ArrayBuffer
@@ -29,27 +29,40 @@ class WikidataReferenceExtractor(
 
   override val datasets = Set(DBpediaDatasets.WikidataReference)
 
+
   override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
-    if (page.wikiPage.title.namespace != Namespace.WikidataProperty && page.wikiPage.title.namespace != Namespace.WikidataLexeme) {
+    //extracting references from item's statements
+    if (page.wikiPage.title.namespace == Namespace.Main) {
       val document = page.wikiDataDocument.deserializeItemDocument(page.wikiPage.source)
-      for (statementGroup <- document.getStatementGroups) {
-        statementGroup.getStatements.foreach {
-          statement => {
-            val references = statement.getReferences
-            val property = statement.getClaim.getMainSnak.getPropertyId.getIri
-            if (!references.isEmpty) {
-              for (i <- references.indices) {
-                for (reference <- references.get(i).getAllSnaks) {
-                  reference match {
-                    case snak: ValueSnak => {
-                      val value = snak.getValue
-                      val statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
-                      val datatype = if (WikidataUtil.getDatatype(value) != null) context.ontology.datatypes(WikidataUtil.getDatatype(value)) else null
-                      quads += new Quad(context.language, DBpediaDatasets.WikidataReference, statementUri, referenceProperty, WikidataUtil.getValue(value), page.wikiPage.sourceIri, datatype)
-                    }
-                    case _ =>
+      quads ++= extractStatements(document.getStatementGroups.toList,subjectUri, page.wikiPage.sourceIri)
+    }
+    //extracting references from properties' statements
+    else if (page.wikiPage.title.namespace == Namespace.WikidataProperty){
+      val document = page.wikiDataDocument.deserializePropertyDocument(page.wikiPage.source)
+      quads ++= extractStatements(document.getStatementGroups.toList, subjectUri, page.wikiPage.sourceIri)
+    }
+
+    quads
+  }
+  private def extractStatements(statementGroups: List[StatementGroup], subjectUri: String, sourceIri: String): Seq[Quad] = {
+    val quads = new ArrayBuffer[Quad]()
+    for (statementGroup <- statementGroups) {
+      statementGroup.getStatements.foreach {
+        statement => {
+          val references = statement.getReferences
+          val property = statement.getClaim().getMainSnak().getPropertyId().getIri
+          if (!references.isEmpty) {
+            for (i <- references.indices) {
+              for (reference <- references.get(i).getAllSnaks) {
+                reference match {
+                  case snak: ValueSnak => {
+                    val value = snak.getValue
+                    val statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
+                    val datatype = if (WikidataUtil.getDatatype(value) != null) context.ontology.datatypes(WikidataUtil.getDatatype(value)) else null
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataReference, statementUri, referenceProperty, WikidataUtil.getValue(value), sourceIri, datatype)
                   }
+                  case _ =>
                 }
               }
             }
@@ -58,7 +71,6 @@ class WikidataReferenceExtractor(
         }
       }
     }
-
     quads
   }
 }
