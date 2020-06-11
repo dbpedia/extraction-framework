@@ -238,18 +238,23 @@ extends PropertyMapping
 
     private def writeUnitValue(node : TemplateNode, pr: ParseResult[Double], subjectUri : String, sourceUri : String): Seq[Quad] =
     {
-        //TODO better handling of inconvertible units
-        if(unit.isInstanceOf[InconvertibleUnitDatatype])
-        {
-            val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, unit)
-            return Seq(quad)
-        }
 
+        // fix for https://github.com/dbpedia/extraction-framework/issues/630
         //Write generic property
-        val stdValue = pr.unit match{
-          case Some(u) if u.isInstanceOf[UnitDatatype] => u.asInstanceOf[UnitDatatype].toStandardUnit(pr.value)
+        val stdValue = pr.unit match {
+
+          case Some(u) if u.isInstanceOf[InconvertibleUnitDatatype] => {
+
+            val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, unit)
+            return Seq(quad)          
+          }
+
+          case Some(u) if u.isInstanceOf[UnitDatatype] =>
+            u.asInstanceOf[UnitDatatype].toStandardUnit(pr.value)
+            
           case None => pr.value  //should not happen
         }
+        // end of fix
         
         val graph = new ArrayBuffer[Quad]
 
