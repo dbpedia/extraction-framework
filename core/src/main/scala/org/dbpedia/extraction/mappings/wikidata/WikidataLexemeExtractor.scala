@@ -28,7 +28,7 @@ class WikidataLexemeExtractor(
   // private val descriptionProperty = context.ontology.properties("description")
   //  private val languageProperty = context.ontology.properties("rdf:language")
 
-
+  private val sameAsProperty = context.ontology.properties("owl:sameAs")
   override val datasets = Set(DBpediaDatasets.WikidataLexeme)
 
 
@@ -39,11 +39,8 @@ class WikidataLexemeExtractor(
 
     //checks if extractor is used for correct entity
 
-    quads ++= getLexicalCategory(page, subject)
+
     quads ++= getLemmas(page, subject)
-    quads ++= getLanguage(page, subject)
-    quads ++= getStatements(page, subject)
-    quads ++= getSenses(page, subject)
     quads ++= getForms(page, subject)
 
 
@@ -51,172 +48,35 @@ class WikidataLexemeExtractor(
   }
 
 
-  private def getLexicalCategory(document: JsonNode, subjectUri: String): Seq[Quad] = {
-    val quads = new ArrayBuffer[Quad]()
-
-    if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
-      val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
-      page.getLexicalCategory match {
-        case value: Value =>{
-          val objectValue = WikidataUtil.getValue(value)
-
-          //  val datatype = if (WikidataUtil.getDatatype(v) != null) context.ontology.datatypes(WikidataUtil.getDatatype(v)) else null
-          quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectUri, lexicalCategoryProperty, objectValue,
-            document.wikiPage.sourceIri, null)
-
-        }
-        case _ =>
-      }
-    }
-    quads
-  }
 
   private def getLemmas(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
-
+    val subjectString: String = "http://lex.dbpedia.org/resource/"
     if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
       val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
       for ((lang, value) <- page.getLemmas) {
-        val lemmas = WikidataUtil.replacePunctuation(value.toString, lang)
+        val lemmas = subjectString+value.getText
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
-            quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, subjectUri, lemmaProperty, lemmas,
-              document.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
+            quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, lemmas, sameAsProperty, subjectUri,
+              document.wikiPage.sourceIri, null)
           }
           case _ =>
         }
       }
     }
     quads
-  }
+ }
 
-  private def getLanguage(document: JsonNode, subjectUri: String): Seq[Quad] = {
-    val quads = new ArrayBuffer[Quad]()
-
-
-
-    if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
-      val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
-      page.getLanguage match {
-        case value: Value =>{
-          val objectValue = WikidataUtil.getValue(value)
-
-          //  val datatype = if (WikidataUtil.getDatatype(v) != null) context.ontology.datatypes(WikidataUtil.getDatatype(v)) else null
-          quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectUri, language, objectValue,
-            document.wikiPage.sourceIri, null)
-
-        }
-        case _ =>
-      }
-    }
-    quads
-  }
-  private def getStatements(document: JsonNode, subjectUri: String): Seq[Quad] = {
-    val quads = new ArrayBuffer[Quad]()
-
-    if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
-      val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
-      for (statementGroup <- page.getStatementGroups) {
-        statementGroup.foreach {
-          statement => {
-            val claim = statement.getClaim
-            val lexeme = WikidataUtil.getWikidataNamespace(claim.getMainSnak.getPropertyId.getIri)
-
-            claim.getMainSnak match {
-              case mainSnak: ValueSnak => {
-                val v = mainSnak.getValue
-                val value = WikidataUtil.getValue(v).split(" ")(0)
-                val datatype = if (WikidataUtil.getDatatype(v) != null) context.ontology.datatypes(WikidataUtil.getDatatype(v)) else null
-                quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectUri, lexeme, value, document.wikiPage.sourceIri, datatype)
-              }
-              case _ =>
-            }
-          }
-        }
-      }
-    }
-
-    quads
-  }
-  //write senses
-  private def getSenses(document: JsonNode, subjectUri: String): Seq[Quad] = {
-    val quads = new ArrayBuffer[Quad]()
-
-    if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
-      val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
-      for (sense <- page.getSenses){
-        val senseId = sense.getEntityId.toString.split(" ",2)(0)
-        for (statementGroup <- sense.getStatementGroups) {
-          statementGroup.foreach {
-            statement => {
-              val claim = statement.getClaim
-              val lexeme = WikidataUtil.getWikidataNamespace(claim.getMainSnak.getPropertyId.getIri)
-
-              claim.getMainSnak match {
-                case mainSnak: ValueSnak => {
-                  val v = mainSnak.getValue
-                  val value = WikidataUtil.getValue(v).split(" ")(0)
-                  val datatype = if (WikidataUtil.getDatatype(v) != null) context.ontology.datatypes(WikidataUtil.getDatatype(v)) else null
-                  quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, senseId, lexeme, value, document.wikiPage.sourceIri, datatype)
-                }
-                case _ =>
-              }
-            }
-          }
-        }
-        for((lang, value) <- sense.getGlosses){
-          val lemmas = WikidataUtil.replacePunctuation(value.toString, lang)
-          Language.get(lang) match {
-            case Some(dbpedia_lang) => {
-              quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, senseId, labelProperty, lemmas,
-                document.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
-            }
-            case _ =>
-          }
-        }
-
-      }
-
-    }
-
-    quads
-  }
   private def getForms(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
     if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
       val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
       for (form <- page.getForms){
-        val formId = form.getEntityId.toString.split(" ",2)(0)
-        for (statementGroup <- form.getStatementGroups) {
-          statementGroup.foreach {
-            statement => {
-              val claim = statement.getClaim
-              val lexeme = WikidataUtil.getWikidataNamespace(claim.getMainSnak.getPropertyId.getIri)
+        val formId = form.getEntityId.getId
 
-              claim.getMainSnak match {
-                case mainSnak: ValueSnak => {
-                  val v = mainSnak.getValue
-                  val value = WikidataUtil.getValue(v).split(" ")(0)
 
-                  val datatype = if (WikidataUtil.getDatatype(v) != null) context.ontology.datatypes(WikidataUtil.getDatatype(v)) else null
-                  quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, formId, lexeme, value, document.wikiPage.sourceIri, datatype)
-                }
-                case _ =>
-              }
-            }
-          }
-        }
-        for((lang, value) <- form.getRepresentations){
-          val lemmas = WikidataUtil.replacePunctuation(value.toString, lang)
-          Language.get(lang) match {
-            case Some(dbpedia_lang) => {
-              quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, formId, labelProperty, lemmas,
-                document.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
-            }
-            case _ =>
-          }
-        }
         for (grammaticalFeature <- form.getGrammaticalFeatures){
           grammaticalFeature match{
             case value: Value =>{
