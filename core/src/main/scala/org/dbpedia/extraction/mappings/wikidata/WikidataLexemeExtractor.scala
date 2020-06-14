@@ -12,6 +12,13 @@ import scala.collection.JavaConversions._
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
+/**
+  * Lexeme extractor extracts data on the form of
+  * <http://lex.dbpedia.org/resource/cèdre> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222070> .
+  * <http://lex.dbpedia.org/resource/cèdre> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222070-F1> .
+  * <http://lex.dbpedia.org/resource/cèdres> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222070-F2> .
+  *
+  */
 class WikidataLexemeExtractor(
                                  context: {
                                    def ontology: Ontology
