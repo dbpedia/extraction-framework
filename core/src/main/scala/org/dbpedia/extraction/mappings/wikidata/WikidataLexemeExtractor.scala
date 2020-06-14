@@ -20,13 +20,8 @@ class WikidataLexemeExtractor(
                                )
   extends JsonNodeExtractor {
 
-  private val lexicalCategoryProperty = "http://dbpedia.org/ontology/lexicalcategory"
-  private val lemmaProperty = "http://dbpedia.org/ontology/lemma"
-  private val language = "http://dbpedia.org/ontology/language"
-  private val grammaticalFeatureProperty = "http://dbpedia.org/ontology/grammaticalfeature"
-  private val labelProperty = context.ontology.properties("rdfs:label")
-  // private val descriptionProperty = context.ontology.properties("description")
-  //  private val languageProperty = context.ontology.properties("rdf:language")
+  private val subjectString: String = "http://lex.dbpedia.org/resource/"
+
 
   private val sameAsProperty = context.ontology.properties("owl:sameAs")
   override val datasets = Set(DBpediaDatasets.WikidataLexeme)
@@ -36,9 +31,6 @@ class WikidataLexemeExtractor(
     val quads = new ArrayBuffer[Quad]()
 
     val subject = WikidataUtil.getWikidataNamespace(subjectUri).replace("Lexeme:", "")
-
-    //checks if extractor is used for correct entity
-
 
     quads ++= getLemmas(page, subject)
     quads ++= getForms(page, subject)
@@ -51,14 +43,14 @@ class WikidataLexemeExtractor(
 
   private def getLemmas(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
-    val subjectString: String = "http://lex.dbpedia.org/resource/"
+
     if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
       val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
       for ((lang, value) <- page.getLemmas) {
-        val lemmas = subjectString+value.getText
+        val lemmaIri = subjectString+value.getText
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
-            quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, lemmas, sameAsProperty, subjectUri,
+            quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, lemmaIri, sameAsProperty, subjectUri,
               document.wikiPage.sourceIri, null)
           }
           case _ =>
@@ -74,14 +66,12 @@ class WikidataLexemeExtractor(
     if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
       val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
       for (form <- page.getForms){
-        val formId = form.getEntityId.getId
-
-
-        for (grammaticalFeature <- form.getGrammaticalFeatures){
-          grammaticalFeature match{
-            case value: Value =>{
-              val objectValue = WikidataUtil.getValue(value)
-              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, formId, grammaticalFeatureProperty, objectValue,
+        for ((lang, representation) <- form.getRepresentations){
+          Language.get(lang) match {
+            case Some(dbpedia_lang) => {
+              val formIri = WikidataUtil.getValue(form.getEntityId)
+              val subjectIri = subjectString+representation.getText
+              quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, subjectIri, sameAsProperty, formIri,
                 document.wikiPage.sourceIri, null)
             }
             case _ =>

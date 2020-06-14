@@ -93,6 +93,9 @@ object WikidataUtil {
     case value: PropertyIdValue => {
       getWikidataNamespace(value.getIri)
     }
+    case value: FormIdValue =>{
+      getWikidataNamespace(value.getIri)
+    }
     case _=> value.toString
   }
 
