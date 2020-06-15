@@ -14,9 +14,9 @@ import scala.language.reflectiveCalls
 
 /**
   * Lexeme extractor extracts data on the form of
-  * <http://lex.dbpedia.org/resource/cèdre> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222070> .
-  * <http://lex.dbpedia.org/resource/cèdre> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222070-F1> .
-  * <http://lex.dbpedia.org/resource/cèdres> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222070-F2> .
+  * <http://lex.dbpedia.org/wikidata/L221524> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L221524> .
+  * <http://lex.dbpedia.org/resource/fukssvans> <http://lex.dbpedia.org/property/lexeme> <http://lex.dbpedia.org/wikidata/L221524> .
+  * <http://lex.dbpedia.org/resource/fukssvans> <http://lex.dbpedia.org/property/form> <http://www.wikidata.org/entity/L221524-F1> .
   *
   */
 class WikidataLexemeExtractor(
@@ -27,7 +27,10 @@ class WikidataLexemeExtractor(
                                )
   extends JsonNodeExtractor {
 
-  private val subjectString: String = "http://lex.dbpedia.org/resource/"
+  private val subjectResource: String = "http://lex.dbpedia.org/resource/"
+  private val subjectWikidata: String = "http://lex.dbpedia.org/wikidata/"
+  private val lexemeProperty: String = "http://lex.dbpedia.org/property/lexeme"
+  private val formProperty: String = "http://lex.dbpedia.org/property/form"
 
 
   private val sameAsProperty = context.ontology.properties("owl:sameAs")
@@ -38,7 +41,7 @@ class WikidataLexemeExtractor(
     val quads = new ArrayBuffer[Quad]()
 
     val subject = WikidataUtil.getWikidataNamespace(subjectUri).replace("Lexeme:", "")
-
+    quads ++= getLexeme(page, subject)
     quads ++= getLemmas(page, subject)
     quads ++= getForms(page, subject)
 
@@ -46,7 +49,20 @@ class WikidataLexemeExtractor(
     quads
   }
 
-
+  private def getLexeme(document: JsonNode, subjectUri: String): Seq[Quad]= {
+    val quads = new ArrayBuffer[Quad]()
+    if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
+      val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
+      page.getEntityId match {
+        case value: Value => {
+          val lexeme = subjectWikidata+value.getId
+          quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexeme, sameAsProperty, subjectUri, document.wikiPage.sourceIri, null)
+        }
+        case _ =>
+      }
+    }
+    quads
+  }
 
   private def getLemmas(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
@@ -54,10 +70,12 @@ class WikidataLexemeExtractor(
     if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
       val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
       for ((lang, value) <- page.getLemmas) {
-        val lemmaIri = subjectString+value.getText
+
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
-            quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, lemmaIri, sameAsProperty, subjectUri,
+            val lemmaIri = subjectResource+value.getText
+            val subject = subjectWikidata+page.getEntityId.getId
+            quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, lemmaIri, lexemeProperty, subject,
               document.wikiPage.sourceIri, null)
           }
           case _ =>
@@ -77,8 +95,8 @@ class WikidataLexemeExtractor(
           Language.get(lang) match {
             case Some(dbpedia_lang) => {
               val formIri = WikidataUtil.getValue(form.getEntityId)
-              val subjectIri = subjectString+representation.getText
-              quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, subjectIri, sameAsProperty, formIri,
+              val subjectIri = subjectResource+representation.getText
+              quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLexeme, subjectIri, formProperty, formIri,
                 document.wikiPage.sourceIri, null)
             }
             case _ =>
