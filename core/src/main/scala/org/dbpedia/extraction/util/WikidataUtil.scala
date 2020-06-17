@@ -24,6 +24,13 @@ object WikidataUtil {
     case _ => "V"+getHash(value)
   }
 
+  def getUrl(value: Value): String = {
+    value.toString.split(" ")(0)
+  }
+  def getId(value:Value): String = {
+    value.toString.split(" ")(0).replace(WikidataUtil.wikidataDBpNamespace, "")
+  }
+
   def getStatementUri(subject:String, property:String,value:Value):String = {
     subject+"_"+ property.replace(WikidataUtil.wikidataDBpNamespace, "").trim+"_" + getItemId(value)
   }
@@ -97,6 +104,9 @@ object WikidataUtil {
       getWikidataNamespace(value.getIri)
     }
     case value: LexemeIdValue => {
+      getWikidataNamespace(value.getIri)
+    }
+    case value: SenseIdValue => {
       getWikidataNamespace(value.getIri)
     }
     case _=> value.toString
