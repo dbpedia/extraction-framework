@@ -20,11 +20,11 @@ import scala.language.reflectiveCalls
   *
   */
 class WikidataLexemeExtractor(
-                                 context: {
-                                   def ontology: Ontology
-                                   def language: Language
-                                 }
-                               )
+                               context: {
+                                 def ontology: Ontology
+                                 def language: Language
+                               }
+                             )
   extends JsonNodeExtractor {
 
   private val subjectResource: String = "http://lex.dbpedia.org/resource/"
@@ -33,7 +33,7 @@ class WikidataLexemeExtractor(
   private val formProperty: String = "http://lex.dbpedia.org/property/form"
   private val senseProperty: String = "http://lex.dbpedia.org/property/lexicalSense"
   private val property: String = "http://lex.dbpedia.org/property/"
-
+  private val ontolexProperty: String = "http://www.w3.org/ns/lemon/ontolex#lexicalForm"
   private val sameAsProperty = context.ontology.properties("owl:sameAs")
   override val datasets = Set(DBpediaDatasets.WikidataLexeme)
 
@@ -50,14 +50,18 @@ class WikidataLexemeExtractor(
     quads
   }
 
-  private def getLexeme(document: JsonNode, subjectUri: String): Seq[Quad]= {
+  private def getLexeme(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
     if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
       val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
       page.getEntityId match {
         case value: Value => {
-          val lexeme = subjectWikidata+value.getId
+          val lexeme = subjectWikidata + value.getId
           quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexeme, sameAsProperty, subjectUri, document.wikiPage.sourceIri, null)
+          for (form <- page.getForms) {
+            val lexemeForm = subjectWikidata + form.getEntityId.getId
+            quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexeme, ontolexProperty, lexemeForm, document.wikiPage.sourceIri, null)
+          }
         }
         case _ =>
       }
@@ -73,8 +77,8 @@ class WikidataLexemeExtractor(
       for ((_, value) <- page.getLemmas) {
         value match {
           case lemma: Value => {
-            val lemmaIri = subjectResource+lemma.getText
-            val subject = subjectWikidata+page.getEntityId.getId
+            val lemmaIri = (subjectResource + lemma.getText).replace(" ", "_")
+            val subject = subjectWikidata + page.getEntityId.getId
             quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lemmaIri, lexemeProperty, subject,
               document.wikiPage.sourceIri, null)
           }
@@ -83,19 +87,19 @@ class WikidataLexemeExtractor(
       }
     }
     quads
- }
+  }
 
   private def getForms(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
     if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
       val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
-      for (form <- page.getForms){
-        for ((_, representation) <- form.getRepresentations){
+      for (form <- page.getForms) {
+        for ((_, representation) <- form.getRepresentations) {
           representation match {
             case value: Value => {
               val formIri = WikidataUtil.getValue(form.getEntityId)
-              val subjectIri = subjectResource+value.getText
+              val subjectIri = (subjectResource + value.getText).replace(" ", "_")
               quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, formProperty, formIri,
                 document.wikiPage.sourceIri, null)
             }
@@ -115,14 +119,14 @@ class WikidataLexemeExtractor(
 
     if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
       val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
-      for (sense <- page.getSenses){
-        for ((_, lexicalSense) <- sense.getGlosses){
+      for (sense <- page.getSenses) {
+        for ((_, lexicalSense) <- sense.getGlosses) {
 
-           lexicalSense match {
+          lexicalSense match {
             case value: Value => {
 
               val senseIri = WikidataUtil.getValue(sense.getEntityId)
-              val subjectIri = subjectResource + value.getText
+              val subjectIri = (subjectResource + value.getText).replace(" ", "_")
               quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, senseProperty, senseIri,
                 document.wikiPage.sourceIri, null)
 
@@ -130,14 +134,21 @@ class WikidataLexemeExtractor(
                 statementGroup.foreach {
                   statement => {
                     val claim = statement.getClaim
-                    val lexeme = property+WikidataUtil.getId(claim.getMainSnak.getPropertyId)
+                    val lexeme = property + WikidataUtil.getId(claim.getMainSnak.getPropertyId)
 
                     claim.getMainSnak match {
                       case mainSnak: ValueSnak => {
                         val v = mainSnak.getValue
-                        val objectValue = WikidataUtil.getWikidataNamespace(WikidataUtil.getUrl(v))
+                        v match {
+                          case entity: EntityIdValue => {
+                            val objectValue = WikidataUtil.getWikidataNamespace(WikidataUtil.getUrl(entity))
 
-                        quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, lexeme, objectValue, document.wikiPage.sourceIri, null)
+                            quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, lexeme, objectValue, document.wikiPage.sourceIri, null)
+
+                          }
+                          case _ =>
+                        }
+
                       }
                       case _ =>
                     }
