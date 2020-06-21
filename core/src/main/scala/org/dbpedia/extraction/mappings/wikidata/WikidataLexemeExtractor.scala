@@ -14,9 +14,14 @@ import scala.language.reflectiveCalls
 
 /**
   * Lexeme extractor extracts data on the form of
-  * <http://lex.dbpedia.org/wikidata/L221524> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L221524> .
-  * <http://lex.dbpedia.org/resource/fukssvans> <http://lex.dbpedia.org/property/lexeme> <http://lex.dbpedia.org/wikidata/L221524> .
-  * <http://lex.dbpedia.org/resource/fukssvans> <http://lex.dbpedia.org/property/form> <http://www.wikidata.org/entity/L221524-F1> .
+  * http://lex.dbpedia.org/wikidata/L222072> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222072> .
+  * <http://lex.dbpedia.org/wikidata/L222072> <http://www.w3.org/ns/lemon/ontolex#lexicalForm> <http://lex.dbpedia.org/wikidata/L222072-F1> .
+  * <http://lex.dbpedia.org/resource/cykelsadel> <http://lex.dbpedia.org/property/lexeme> <http://lex.dbpedia.org/wikidata/L222072> .
+  * <http://lex.dbpedia.org/resource/cykelsadel> <http://lex.dbpedia.org/property/form> <http://lex.dbpedia.org/wikidata/L222072-F1> .
+  * <http://lex.dbpedia.org/wikidata/L222072-F1> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222072-F1> .
+  * <http://lex.dbpedia.org/resource/sæde_på_en_cykel> <http://lex.dbpedia.org/property/lexicalSense> <http://www.wikidata.org/entity/L222072-S1> .
+  * <http://lex.dbpedia.org/resource/sæde_på_en_cykel> <http://lex.dbpedia.org/property/P5137> <http://www.wikidata.org/entity/Q1076532> .
+  * <http://lex.dbpedia.org/resource/sæde_på_en_cykel> <http://lex.dbpedia.org/property/P18> <https://commons.wikimedia.org/wiki/File:Bicycle_saddle.jpg> .
   *
   */
 class WikidataLexemeExtractor(
@@ -77,7 +82,7 @@ class WikidataLexemeExtractor(
       for ((_, value) <- page.getLemmas) {
         value match {
           case lemma: Value => {
-            val lemmaIri = (subjectResource + lemma.getText).replace(" ", "_")
+            val lemmaIri = WikidataUtil.replaceSpace(subjectResource + lemma.getText)
             val subject = subjectWikidata + page.getEntityId.getId
             quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lemmaIri, lexemeProperty, subject,
               document.wikiPage.sourceIri, null)
@@ -98,19 +103,17 @@ class WikidataLexemeExtractor(
         for ((_, representation) <- form.getRepresentations) {
           representation match {
             case value: Value => {
-              val formIri = WikidataUtil.getValue(form.getEntityId)
-              val subjectIri = (subjectResource + value.getText).replace(" ", "_")
-              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, formProperty, formIri,
-                document.wikiPage.sourceIri, null)
+              val lexemeForm = subjectWikidata + form.getEntityId.getId
+              val formWikidata = WikidataUtil.getValue(form.getEntityId)
+              val subjectIri = WikidataUtil.replaceSpace(subjectResource + value.getText)
+              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, formProperty, lexemeForm, document.wikiPage.sourceIri, null)
+              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexemeForm, sameAsProperty, formWikidata, document.wikiPage.sourceIri,null)
             }
             case _ =>
           }
         }
-
       }
-
     }
-
     quads
   }
 
@@ -142,9 +145,11 @@ class WikidataLexemeExtractor(
                         v match {
                           case entity: EntityIdValue => {
                             val objectValue = WikidataUtil.getWikidataNamespace(WikidataUtil.getUrl(entity))
-
                             quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, lexeme, objectValue, document.wikiPage.sourceIri, null)
-
+                          }
+                          case text: Value => {
+                            val objectValue = WikidataUtil.getWikiCommmonsUrl(WikidataUtil.getValue(text))
+                            quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, lexeme, objectValue, document.wikiPage.sourceIri, null)
                           }
                           case _ =>
                         }
