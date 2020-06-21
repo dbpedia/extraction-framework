@@ -18,10 +18,19 @@ object WikidataUtil {
   def replaceString(str:String):String = {
     str.replace("(String)","").trim()
   }
-
+  def replaceSpace(str: String): String = {
+    str.replace(" ", "_")
+  }
   def getItemId(value:Value) = value match {
     case v:ItemIdValue => replaceItemId(v.toString).replace(wikidataDBpNamespace,"")
     case _ => "V"+getHash(value)
+  }
+
+  def getUrl(value: Value): String = {
+    value.toString.split(" ")(0)
+  }
+  def getId(value:Value): String = {
+    value.toString.split(" ")(0).replace(WikidataUtil.wikidataDBpNamespace, "")
   }
 
   def getStatementUri(subject:String, property:String,value:Value):String = {
@@ -93,12 +102,21 @@ object WikidataUtil {
     case value: PropertyIdValue => {
       getWikidataNamespace(value.getIri)
     }
-    case value: FormIdValue =>{
+    case value: FormIdValue => {
+      getWikidataNamespace(value.getIri)
+    }
+    case value: LexemeIdValue => {
+      getWikidataNamespace(value.getIri)
+    }
+    case value: SenseIdValue => {
       getWikidataNamespace(value.getIri)
     }
     case _=> value.toString
   }
-
+  def getWikiCommmonsUrl(file: String): String = {
+    val url = "https://commons.wikimedia.org/wiki/File:"+WikidataUtil.replaceSpace(file)
+    url
+  }
   def getWikidataNamespace(namespace: String): String = {
     namespace.replace(WikidataUtil.wikidataDBpNamespace, "http://www.wikidata.org/entity/")
   }
