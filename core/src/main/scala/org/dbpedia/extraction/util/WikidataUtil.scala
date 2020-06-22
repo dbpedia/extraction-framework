@@ -113,8 +113,8 @@ object WikidataUtil {
     }
     case _=> value.toString
   }
-  def getWikiCommmonsUrl(file: String): String = {
-    val url = "https://commons.wikimedia.org/wiki/File:"+WikidataUtil.replaceSpace(file)
+  def getWikiCommonsUrl(file: String): String = {
+    val url = "http://commons.wikimedia.org/wiki/File:"+WikidataUtil.replaceSpace(file)
     url
   }
   def getWikidataNamespace(namespace: String): String = {

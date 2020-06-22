@@ -14,7 +14,7 @@ import scala.language.reflectiveCalls
 
 /**
   * Lexeme extractor extracts data on the form of
-  * http://lex.dbpedia.org/wikidata/L222072> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222072> .
+  * <http://lex.dbpedia.org/wikidata/L222072> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222072> .
   * <http://lex.dbpedia.org/wikidata/L222072> <http://www.w3.org/ns/lemon/ontolex#lexicalForm> <http://lex.dbpedia.org/wikidata/L222072-F1> .
   * <http://lex.dbpedia.org/resource/cykelsadel> <http://lex.dbpedia.org/property/lexeme> <http://lex.dbpedia.org/wikidata/L222072> .
   * <http://lex.dbpedia.org/resource/cykelsadel> <http://lex.dbpedia.org/property/form> <http://lex.dbpedia.org/wikidata/L222072-F1> .
@@ -148,7 +148,7 @@ class WikidataLexemeExtractor(
                             quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, lexeme, objectValue, document.wikiPage.sourceIri, null)
                           }
                           case text: Value => {
-                            val objectValue = WikidataUtil.getWikiCommmonsUrl(WikidataUtil.getValue(text))
+                            val objectValue = WikidataUtil.getWikiCommonsUrl(WikidataUtil.getValue(text))
                             quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, lexeme, objectValue, document.wikiPage.sourceIri, null)
                           }
                           case _ =>
