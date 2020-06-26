@@ -37,8 +37,11 @@ class WikidataLexemeExtractor(
   private val propertyLanguage: String = "http://dbpedia.org/ontology/language"
   private val sameAsProperty = context.ontology.properties("owl:sameAs")
 
-  //add some more formats if exists
-  private val listOfWikiCommonsFilesFormats = Set(".jpg".r,".svg".r,".png".r, ".gif".r,".webp".r,".tiff".r, ".xcf".r, ".oga".r, ".wav".r, ".ogg".r,".ogx".r,".ogv".r, ".mp3".r,".opus".r, ".flac".r, ".webm".r, ".pdf".r,".mid".r,".djvu".r, ".map".r, ".tab".r, ".stl".r)
+  //TODO: add some more formats if exists
+  private val listOfWikiCommonsFileTypes = Set(".*\\.jpg\\b".r, ".*\\.svg\\b".r,".png\\b".r, ".*\\.gif\\b".r,
+    ".*\\.webp\\b".r,".*\\.tiff\\b".r, ".xcf\\b".r, ".*\\.oga\\b".r, ".*\\.wav\\b".r, ".*\\.ogg\\b".r,".*\\.ogx\\b".r,
+    ".*\\.ogv\\b".r, ".*\\.mp3\\b".r,".*\\.opus\\b".r, ".flac\\b".r, ".webm\\b".r, ".*\\.pdf\\b".r,
+    ".*\\.mid\\b".r,".*\\.djvu\\b".r, ".*\\.map\\b".r, ".*\\.tab\\b".r, ".*\\.stl\\b".r)
 
   override val datasets = Set(DBpediaDatasets.WikidataLexeme)
 
@@ -90,7 +93,7 @@ class WikidataLexemeExtractor(
       for ((_, value) <- page.getLemmas) {
         value match {
           case lemma: Value => {
-            val lemmaIri = WikidataUtil.replaceSpace(subjectResource + lemma.getText)
+            val lemmaIri = WikidataUtil.replaceSpaceWithUnderscore(subjectResource + lemma.getText)
             val subject = subjectWikidata + page.getEntityId.getId
             quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lemmaIri, propertyLexeme, subject,
               document.wikiPage.sourceIri, null)
@@ -138,7 +141,7 @@ class WikidataLexemeExtractor(
             case value: Value => {
 
               val formWikidata = WikidataUtil.getValue(form.getEntityId)
-              val subject = WikidataUtil.replaceSpace(subjectResource + value.getText)
+              val subject = WikidataUtil.replaceSpaceWithUnderscore(subjectResource + value.getText)
               quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyForm, lexemeForm, document.wikiPage.sourceIri, null)
               quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexemeForm, sameAsProperty, formWikidata, document.wikiPage.sourceIri,null)
               for (grammaticalFeature <- form.getGrammaticalFeatures) {
@@ -207,14 +210,14 @@ class WikidataLexemeExtractor(
                 quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyStatement, objectValue,document.wikiPage.sourceIri,  null)
               }
               case text: Value => {
-                if (listOfWikiCommonsFilesFormats.exists(regex => regex.findFirstIn(text.toString).isDefined)) {
-                  val objectValue = WikidataUtil.getWikiCommonsUrl(WikidataUtil.getValue(text))
-                  quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyStatement, objectValue, document.wikiPage.sourceIri, null)
+                if (listOfWikiCommonsFileTypes.exists(regex => regex.findFirstIn(text.toString).isDefined)) {
+                  val statementValue = WikidataUtil.getWikiCommonsUrl(WikidataUtil.getValue(text))
+                  quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyStatement, statementValue, document.wikiPage.sourceIri, null)
                 }
                 else {
-                  val objectValue = WikidataUtil.replaceSpace(WikidataUtil.getValue(text))
+                  val statementValue = WikidataUtil.replaceSpaceWithUnderscore(WikidataUtil.getValue(text))
                   val datatype = if (WikidataUtil.getDatatype(v) != null) context.ontology.datatypes(WikidataUtil.getDatatype(v)) else null
-                  quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyStatement, objectValue, document.wikiPage.sourceIri, datatype)
+                  quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyStatement, statementValue, document.wikiPage.sourceIri, datatype)
                 }
               }
               case _ =>
