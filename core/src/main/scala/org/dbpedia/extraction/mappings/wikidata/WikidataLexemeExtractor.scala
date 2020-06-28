@@ -13,7 +13,28 @@ import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**
-  * Lexeme extractor extracts data on the form of
+  * Lexeme extractor extracts data in the form of
+  * getLexeme method:
+<http://lex.dbpedia.org/wikidata/L536> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L536> .
+<http://lex.dbpedia.org/wikidata/L536> <http://www.w3.org/ns/lemon/ontolex#lexicalForm> <http://lex.dbpedia.org/wikidata/L536-F1> .
+<http://lex.dbpedia.org/wikidata/L536> <http://www.w3.org/ns/lemon/ontolex#sense> <http://lex.dbpedia.org/wikidata/L536-S1> .
+  * getLemma method returns data in form of:
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/lexeme> <http://lex.dbpedia.org/wikidata/L536> .
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/lexicalcategory> <http://www.wikidata.org/entity/Q1084> .
+<http://lex.dbpedia.org/resource/book> <http://dbpedia.org/ontology/language> <http://www.wikidata.org/entity/Q1860> .
+  * one statement from lexeme:
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/P5402> <http://www.wikidata.org/entity/L16168> .
+  * getForms method returns data in form of:
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/form> <http://lex.dbpedia.org/wikidata/L536-F1> .
+<http://lex.dbpedia.org/wikidata/L536-F1> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L536-F1> .
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/grammaticalFeature> <http://www.wikidata.org/entity/Q110786> .
+  * one statement from form:
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/P898> "/bʊk/" .
+  * getSenses returns data in form of:
+<http://lex.dbpedia.org/resource/document> <http://lex.dbpedia.org/property/lexicalSense> <http://lex.dbpedia.org/wikidata/L536-S1> .
+<http://lex.dbpedia.org/wikidata/L536-S1> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L536-S1> .
+  * one statement from sense:
+<http://lex.dbpedia.org/resource/document> <http://lex.dbpedia.org/property/P18> <http://commons.wikimedia.org/wiki/File:Books_HD_(8314929977).jpg> .
 
   */
 class WikidataLexemeExtractor(
@@ -141,16 +162,16 @@ class WikidataLexemeExtractor(
             case value: Value => {
 
               val formWikidata = WikidataUtil.getValue(form.getEntityId)
-              val subject = WikidataUtil.replaceSpaceWithUnderscore(subjectResource + value.getText)
-              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyForm, lexemeForm, document.wikiPage.sourceIri, null)
+              val formRepresentation = WikidataUtil.replaceSpaceWithUnderscore(subjectResource + value.getText)
+              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, formRepresentation, propertyForm, lexemeForm, document.wikiPage.sourceIri, null)
               quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexemeForm, sameAsProperty, formWikidata, document.wikiPage.sourceIri,null)
               for (grammaticalFeature <- form.getGrammaticalFeatures) {
                 val grammaticalFeatureObject = WikidataUtil.getWikidataNamespace(grammaticalFeature.getIri)
 
-                quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyGrammaticalFeature, grammaticalFeatureObject, document.wikiPage.sourceIri,null)
+                quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, formRepresentation, propertyGrammaticalFeature, grammaticalFeatureObject, document.wikiPage.sourceIri,null)
               }
               for (statementGroup <- form.getStatementGroups) {
-                quads ++= getStatements(subject,statementGroup,document)
+                quads ++= getStatements(formRepresentation,statementGroup,document)
               }
             }
             case _ =>
