@@ -13,16 +13,29 @@ import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**
-  * Lexeme extractor extracts data on the form of
-  * <http://lex.dbpedia.org/wikidata/L222072> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222072> .
-  * <http://lex.dbpedia.org/wikidata/L222072> <http://www.w3.org/ns/lemon/ontolex#lexicalForm> <http://lex.dbpedia.org/wikidata/L222072-F1> .
-  * <http://lex.dbpedia.org/resource/cykelsadel> <http://lex.dbpedia.org/property/lexeme> <http://lex.dbpedia.org/wikidata/L222072> .
-  * <http://lex.dbpedia.org/resource/cykelsadel> <http://lex.dbpedia.org/property/form> <http://lex.dbpedia.org/wikidata/L222072-F1> .
-  * <http://lex.dbpedia.org/wikidata/L222072-F1> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L222072-F1> .
-  * <http://lex.dbpedia.org/resource/sæde_på_en_cykel> <http://lex.dbpedia.org/property/lexicalSense> <http://www.wikidata.org/entity/L222072-S1> .
-  * <http://lex.dbpedia.org/resource/sæde_på_en_cykel> <http://lex.dbpedia.org/property/P5137> <http://www.wikidata.org/entity/Q1076532> .
-  * <http://lex.dbpedia.org/resource/sæde_på_en_cykel> <http://lex.dbpedia.org/property/P18> <https://commons.wikimedia.org/wiki/File:Bicycle_saddle.jpg> .
-  *
+  * Lexeme extractor extracts data in the form of
+  * getLexeme method:
+<http://lex.dbpedia.org/wikidata/L536> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L536> .
+<http://lex.dbpedia.org/wikidata/L536> <http://www.w3.org/ns/lemon/ontolex#lexicalForm> <http://lex.dbpedia.org/wikidata/L536-F1> .
+<http://lex.dbpedia.org/wikidata/L536> <http://www.w3.org/ns/lemon/ontolex#sense> <http://lex.dbpedia.org/wikidata/L536-S1> .
+  * getLemma method returns data in form of:
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/lexeme> <http://lex.dbpedia.org/wikidata/L536> .
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/lexicalcategory> <http://www.wikidata.org/entity/Q1084> .
+<http://lex.dbpedia.org/resource/book> <http://dbpedia.org/ontology/language> <http://www.wikidata.org/entity/Q1860> .
+  * one statement from lexeme:
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/P5402> <http://www.wikidata.org/entity/L16168> .
+  * getForms method returns data in form of:
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/form> <http://lex.dbpedia.org/wikidata/L536-F1> .
+<http://lex.dbpedia.org/wikidata/L536-F1> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L536-F1> .
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/grammaticalFeature> <http://www.wikidata.org/entity/Q110786> .
+  * one statement from form:
+<http://lex.dbpedia.org/resource/book> <http://lex.dbpedia.org/property/P898> "/bʊk/" .
+  * getSenses returns data in form of:
+<http://lex.dbpedia.org/resource/document> <http://lex.dbpedia.org/property/lexicalSense> <http://lex.dbpedia.org/wikidata/L536-S1> .
+<http://lex.dbpedia.org/wikidata/L536-S1> <http://www.w3.org/2002/07/owl#sameAs> <http://www.wikidata.org/entity/L536-S1> .
+  * one statement from sense:
+<http://lex.dbpedia.org/resource/document> <http://lex.dbpedia.org/property/P18> <http://commons.wikimedia.org/wiki/File:Books_HD_(8314929977).jpg> .
+
   */
 class WikidataLexemeExtractor(
                                context: {
@@ -34,12 +47,23 @@ class WikidataLexemeExtractor(
 
   private val subjectResource: String = "http://lex.dbpedia.org/resource/"
   private val subjectWikidata: String = "http://lex.dbpedia.org/wikidata/"
-  private val lexemeProperty: String = "http://lex.dbpedia.org/property/lexeme"
-  private val formProperty: String = "http://lex.dbpedia.org/property/form"
-  private val senseProperty: String = "http://lex.dbpedia.org/property/lexicalSense"
   private val property: String = "http://lex.dbpedia.org/property/"
-  private val ontolexProperty: String = "http://www.w3.org/ns/lemon/ontolex#lexicalForm"
+  private val propertyLexeme: String = "http://lex.dbpedia.org/property/lexeme"
+  private val propertyForm: String = "http://lex.dbpedia.org/property/form"
+  private val propertySense: String = "http://lex.dbpedia.org/property/lexicalSense"
+  private val propertyGrammaticalFeature: String = "http://lex.dbpedia.org/property/grammaticalFeature"
+  private val propertyLexicalCategory: String = "http://lex.dbpedia.org/property/lexicalcategory"
+  private val propertyOntolexSense: String = "http://www.w3.org/ns/lemon/ontolex#sense"
+  private val propertyOntolexForm: String = "http://www.w3.org/ns/lemon/ontolex#lexicalForm"
+  private val propertyLanguage: String = "http://dbpedia.org/ontology/language"
   private val sameAsProperty = context.ontology.properties("owl:sameAs")
+
+  //TODO: add some more formats if exists
+  private val listOfWikiCommonsFileTypes = Set(".*\\.jpg\\b".r, ".*\\.svg\\b".r,".png\\b".r, ".*\\.gif\\b".r,
+    ".*\\.webp\\b".r,".*\\.tiff\\b".r, ".xcf\\b".r, ".*\\.oga\\b".r, ".*\\.wav\\b".r, ".*\\.ogg\\b".r,".*\\.ogx\\b".r,
+    ".*\\.ogv\\b".r, ".*\\.mp3\\b".r,".*\\.opus\\b".r, ".flac\\b".r, ".webm\\b".r, ".*\\.pdf\\b".r,
+    ".*\\.mid\\b".r,".*\\.djvu\\b".r, ".*\\.map\\b".r, ".*\\.tab\\b".r, ".*\\.stl\\b".r)
+
   override val datasets = Set(DBpediaDatasets.WikidataLexeme)
 
 
@@ -47,7 +71,7 @@ class WikidataLexemeExtractor(
     val quads = new ArrayBuffer[Quad]()
 
     val subject = WikidataUtil.getWikidataNamespace(subjectUri).replace("Lexeme:", "")
-    quads ++= getLexeme(page, subject)
+    quads ++= getLexemes(page, subject)
     quads ++= getLemmas(page, subject)
     quads ++= getForms(page, subject)
     quads ++= getSenses(page, subject)
@@ -55,7 +79,7 @@ class WikidataLexemeExtractor(
     quads
   }
 
-  private def getLexeme(document: JsonNode, subjectUri: String): Seq[Quad] = {
+  private def getLexemes(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
     if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
       val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
@@ -63,10 +87,18 @@ class WikidataLexemeExtractor(
         case value: Value => {
           val lexeme = subjectWikidata + value.getId
           quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexeme, sameAsProperty, subjectUri, document.wikiPage.sourceIri, null)
+          // extracting forms
           for (form <- page.getForms) {
             val lexemeForm = subjectWikidata + form.getEntityId.getId
-            quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexeme, ontolexProperty, lexemeForm, document.wikiPage.sourceIri, null)
+            quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexeme, propertyOntolexForm, lexemeForm, document.wikiPage.sourceIri, null)
           }
+          // extracting senses
+          for (sense <- page.getSenses) {
+            val lexemeSense = subjectWikidata + sense.getEntityId.getId
+            quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexeme, propertyOntolexSense, lexemeSense, document.wikiPage.sourceIri, null)
+          }
+
+
         }
         case _ =>
       }
@@ -82,10 +114,33 @@ class WikidataLexemeExtractor(
       for ((_, value) <- page.getLemmas) {
         value match {
           case lemma: Value => {
-            val lemmaIri = WikidataUtil.replaceSpace(subjectResource + lemma.getText)
+            val lemmaIri = WikidataUtil.replaceSpaceWithUnderscore(subjectResource + lemma.getText)
             val subject = subjectWikidata + page.getEntityId.getId
-            quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lemmaIri, lexemeProperty, subject,
+            quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lemmaIri, propertyLexeme, subject,
               document.wikiPage.sourceIri, null)
+
+            page.getLexicalCategory match {
+              case value: Value => {
+                val objectValue = WikidataUtil.getWikidataNamespace(value.getIri)
+
+                //getting lexical category
+                quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lemmaIri, propertyLexicalCategory, objectValue,
+                  document.wikiPage.sourceIri, null)
+                for (statementGroup <- page.getStatementGroups) {
+                  quads ++= getStatements(lemmaIri, statementGroup, document)
+                }
+
+              }
+              case _ =>
+            }
+            page.getLanguage match {
+              case value: Value => {
+                val language = WikidataUtil.getWikidataNamespace(WikidataUtil.getValue(value))
+                quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lemmaIri, propertyLanguage,language,document.wikiPage.sourceIri, null)
+              }
+              case _ =>
+            }
+
           }
           case _ =>
         }
@@ -94,24 +149,36 @@ class WikidataLexemeExtractor(
     quads
   }
 
+
   private def getForms(document: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
     if (document.wikiPage.title.namespace == Namespace.WikidataLexeme) {
       val page = document.wikiDataDocument.deserializeLexemeDocument(document.wikiPage.source)
       for (form <- page.getForms) {
+        val lexemeForm = subjectWikidata + form.getEntityId.getId
         for ((_, representation) <- form.getRepresentations) {
           representation match {
             case value: Value => {
-              val lexemeForm = subjectWikidata + form.getEntityId.getId
+
               val formWikidata = WikidataUtil.getValue(form.getEntityId)
-              val subjectIri = WikidataUtil.replaceSpace(subjectResource + value.getText)
-              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, formProperty, lexemeForm, document.wikiPage.sourceIri, null)
+              val formRepresentation = WikidataUtil.replaceSpaceWithUnderscore(subjectResource + value.getText)
+              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, formRepresentation, propertyForm, lexemeForm, document.wikiPage.sourceIri, null)
               quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, lexemeForm, sameAsProperty, formWikidata, document.wikiPage.sourceIri,null)
+              for (grammaticalFeature <- form.getGrammaticalFeatures) {
+                val grammaticalFeatureObject = WikidataUtil.getWikidataNamespace(grammaticalFeature.getIri)
+
+                quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, formRepresentation, propertyGrammaticalFeature, grammaticalFeatureObject, document.wikiPage.sourceIri,null)
+              }
+              for (statementGroup <- form.getStatementGroups) {
+                quads ++= getStatements(formRepresentation,statementGroup,document)
+              }
             }
             case _ =>
           }
+
         }
+
       }
     }
     quads
@@ -129,46 +196,58 @@ class WikidataLexemeExtractor(
             case value: Value => {
 
               val senseIri = WikidataUtil.getValue(sense.getEntityId)
+              val senseWikidata = subjectWikidata + sense.getEntityId.getId
               val subjectIri = (subjectResource + value.getText).replace(" ", "_")
-              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, senseProperty, senseIri,
+              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, propertySense, senseWikidata,
+                document.wikiPage.sourceIri, null)
+              quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, senseWikidata, sameAsProperty, senseIri,
                 document.wikiPage.sourceIri, null)
 
               for (statementGroup <- sense.getStatementGroups) {
-                statementGroup.foreach {
-                  statement => {
-                    val claim = statement.getClaim
-                    val lexeme = property + WikidataUtil.getId(claim.getMainSnak.getPropertyId)
-
-                    claim.getMainSnak match {
-                      case mainSnak: ValueSnak => {
-                        val v = mainSnak.getValue
-                        v match {
-                          case entity: EntityIdValue => {
-                            val objectValue = WikidataUtil.getWikidataNamespace(WikidataUtil.getUrl(entity))
-                            quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, lexeme, objectValue, document.wikiPage.sourceIri, null)
-                          }
-                          case text: Value => {
-                            val objectValue = WikidataUtil.getWikiCommonsUrl(WikidataUtil.getValue(text))
-                            quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subjectIri, lexeme, objectValue, document.wikiPage.sourceIri, null)
-                          }
-                          case _ =>
-                        }
-
-                      }
-                      case _ =>
-                    }
-                  }
-                }
+                quads ++= getStatements(subjectIri, statementGroup, document)
               }
             }
             case _ =>
           }
-
         }
-
       }
     }
     quads
   }
 
+  private def getStatements(subject: String, statementGroup: StatementGroup, document: JsonNode ): Seq[Quad] = {
+    val quads = new ArrayBuffer[Quad]()
+    statementGroup.foreach {
+      statement => {
+        val claim = statement.getClaim
+        val propertyStatement = property + WikidataUtil.getId(claim.getMainSnak.getPropertyId)
+
+        claim.getMainSnak match {
+          case mainSnak: ValueSnak => {
+            val v = mainSnak.getValue
+            v match {
+              case entity: EntityIdValue => {
+                val objectValue = WikidataUtil.getWikidataNamespace(WikidataUtil.getUrl(entity))
+                quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyStatement, objectValue,document.wikiPage.sourceIri,  null)
+              }
+              case text: Value => {
+                if (listOfWikiCommonsFileTypes.exists(regex => regex.findFirstIn(text.toString).isDefined)) {
+                  val statementValue = WikidataUtil.getWikiCommonsUrl(WikidataUtil.getValue(text))
+                  quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyStatement, statementValue, document.wikiPage.sourceIri, null)
+                }
+                else {
+                  val statementValue = WikidataUtil.replaceSpaceWithUnderscore(WikidataUtil.getValue(text))
+                  val datatype = if (WikidataUtil.getDatatype(v) != null) context.ontology.datatypes(WikidataUtil.getDatatype(v)) else null
+                  quads += new Quad(context.language, DBpediaDatasets.WikidataLexeme, subject, propertyStatement, statementValue, document.wikiPage.sourceIri, datatype)
+                }
+              }
+              case _ =>
+            }
+          }
+          case _ =>
+        }
+      }
+    }
+    quads
+  }
 }

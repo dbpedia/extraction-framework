@@ -18,7 +18,7 @@ object WikidataUtil {
   def replaceString(str:String):String = {
     str.replace("(String)","").trim()
   }
-  def replaceSpace(str: String): String = {
+  def replaceSpaceWithUnderscore(str: String): String = {
     str.replace(" ", "_")
   }
   def getItemId(value:Value) = value match {
@@ -114,7 +114,7 @@ object WikidataUtil {
     case _=> value.toString
   }
   def getWikiCommonsUrl(file: String): String = {
-    val url = "http://commons.wikimedia.org/wiki/File:"+WikidataUtil.replaceSpace(file)
+    val url = "http://commons.wikimedia.org/wiki/File:"+WikidataUtil.replaceSpaceWithUnderscore(file)
     url
   }
   def getWikidataNamespace(namespace: String): String = {
