@@ -45,6 +45,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
   val mappingsConfig = new Config(classLoader.getResource("mappings.extraction.minidump.properties").getFile)
   val genericConfig = new Config(classLoader.getResource("generic-spark.extraction.minidump.properties").getFile)
   val nifAbstractConfig = new Config(classLoader.getResource("extraction.nif.abstracts.properties").getFile)
+  val wikidataConfig = new Config(classLoader.getResource("wikidata.extraction.properties").getFile)
   val minidumpDir = new File(classLoader.getResource("minidumps").getFile)
 
   val minidumpURL = classLoader.getResource("mini-enwiki.xml.bz2")
@@ -135,7 +136,8 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
      * nifAbstract extraction
      */
     val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
-
+    println("-- wikidata")
+    extract(wikidataConfig, jobsRunning)
     println("-- mappings")
     extract(mappingsConfig, jobsRunning)
     println("-- nifAbstract")
@@ -189,6 +191,8 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     jobsRunning.clear()
 
+    // create test reports directory
+    new File("./target/testreports/").mkdirs()
 
   }
 

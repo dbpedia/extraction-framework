@@ -12,6 +12,7 @@ object GeoCoordinateParserConfig
     
     //map latitude letters used in languages to the ones used in English ("E" for East and "W" for West) 
     val longitudeLetterMap = Map(
+        "de" -> Map("E" -> "E", "O" -> "E", "W" -> "W"),
         "en" -> Map("E" -> "E", "W" -> "W"),
         "cs" -> Map("E" -> "E", "W" -> "W"),
         "de" -> Map("E" -> "E", "O" -> "E", "W" -> "W"),

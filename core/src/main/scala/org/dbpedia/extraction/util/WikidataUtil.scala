@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.util
 
+import org.wikidata.wdtk.datamodel.implementation.MonolingualTextValueImpl
 import org.wikidata.wdtk.datamodel.interfaces._
-import org.wikidata.wdtk.datamodel.json.jackson.datavalues.JacksonValueMonolingualText
 
 /**
  * Created by ali on 2/1/15.
@@ -18,10 +18,19 @@ object WikidataUtil {
   def replaceString(str:String):String = {
     str.replace("(String)","").trim()
   }
-
+  def replaceSpaceWithUnderscore(str: String): String = {
+    str.replace(" ", "_")
+  }
   def getItemId(value:Value) = value match {
     case v:ItemIdValue => replaceItemId(v.toString).replace(wikidataDBpNamespace,"")
     case _ => "V"+getHash(value)
+  }
+
+  def getUrl(value: Value): String = {
+    value.toString.split(" ")(0)
+  }
+  def getId(value:Value): String = {
+    value.toString.split(" ")(0).replace(WikidataUtil.wikidataDBpNamespace, "")
   }
 
   def getStatementUri(subject:String, property:String,value:Value):String = {
@@ -61,7 +70,7 @@ object WikidataUtil {
     case value: QuantityValue => {
       "xsd:float"
     }
-    case value : JacksonValueMonolingualText => {
+    case value : MonolingualTextValue => {
       "xsd:string"
     }
     case _=> null
@@ -86,16 +95,28 @@ object WikidataUtil {
     case value: QuantityValue => {
       value.getNumericValue.toString
     }
-    case value:JacksonValueMonolingualText => {
+    case value: MonolingualTextValue => {
       // Do we need value.getLanguageCode?
       value.getText
     }
     case value: PropertyIdValue => {
       getWikidataNamespace(value.getIri)
     }
+    case value: FormIdValue => {
+      getWikidataNamespace(value.getIri)
+    }
+    case value: LexemeIdValue => {
+      getWikidataNamespace(value.getIri)
+    }
+    case value: SenseIdValue => {
+      getWikidataNamespace(value.getIri)
+    }
     case _=> value.toString
   }
-
+  def getWikiCommonsUrl(file: String): String = {
+    val url = "http://commons.wikimedia.org/wiki/File:"+WikidataUtil.replaceSpaceWithUnderscore(file)
+    url
+  }
   def getWikidataNamespace(namespace: String): String = {
     namespace.replace(WikidataUtil.wikidataDBpNamespace, "http://www.wikidata.org/entity/")
   }

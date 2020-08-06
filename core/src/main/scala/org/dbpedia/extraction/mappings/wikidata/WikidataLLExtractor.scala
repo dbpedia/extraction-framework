@@ -42,8 +42,8 @@ class WikidataLLExtractor(
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
 
-    if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
-      val itemDocument: ItemDocument = page.wikiDataDocument.asInstanceOf[ItemDocument]
+    if (page.wikiPage.title.namespace != Namespace.WikidataProperty && page.wikiPage.title.namespace != Namespace.WikidataLexeme) {
+      val itemDocument = page.wikiDataDocument.deserializeItemDocument(page.wikiPage.source)
 
       for ((wikidataLang, siteLink1) <- itemDocument.getSiteLinks) {
         val lang1 = wikidataLang.toString().replace("wiki", "")

@@ -30,13 +30,15 @@ class WikidataDescriptionExtractor(
   // this is where we will store the output
   override val datasets = Set(DBpediaDatasets.WikidataDescriptionMappingsWiki, DBpediaDatasets.WikidataDescriptionRest)
 
-  override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
+  override def extract(page: JsonNode, subjectUri: String): Seq[Quad] ={
+
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
 
-    if (page.wikiPage.title.namespace != Namespace.WikidataProperty){
-      for ((lang, value) <- page.wikiDataDocument.getDescriptions()) {
-        val description = WikidataUtil.replacePunctuation(value.toString(),lang)
+    if (page.wikiPage.title.namespace != Namespace.WikidataProperty && page.wikiPage.title.namespace != Namespace.WikidataLexeme){
+      val document = page.wikiDataDocument.deserializeItemDocument(page.wikiPage.source)
+      for ((lang, value) <- document.getDescriptions) {
+        val description = WikidataUtil.replacePunctuation(value.toString,lang)
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
             if (mappingLanguages.contains(dbpedia_lang))

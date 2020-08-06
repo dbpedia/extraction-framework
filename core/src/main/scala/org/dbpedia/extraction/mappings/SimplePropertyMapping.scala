@@ -238,6 +238,12 @@ extends PropertyMapping
 
     private def writeUnitValue(node : TemplateNode, pr: ParseResult[Double], subjectUri : String, sourceUri : String): Seq[Quad] =
     {
+        //TODO better handling of inconvertible units
+        if(unit.isInstanceOf[InconvertibleUnitDatatype])
+        {
+            val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, unit)
+            return Seq(quad)
+        }
 
         // fix for https://github.com/dbpedia/extraction-framework/issues/630
         //Write generic property
