@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class TemplateTransformParser extends FlatSpec with Matchers
+class TemplateTransformParserTest extends FlatSpec with Matchers
 {
 
 
