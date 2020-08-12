@@ -85,7 +85,6 @@
 	] .
 
 
-
 <#Citation_type>
 	a sh:NodeShape ;
 	sh:targetNode <http://johnkstuff.blogspot.com/2007/11/bio-in-progress.html> ;
@@ -95,30 +94,6 @@
 		sh:hasValue <http://dbpedia.org/ontology/website> ;
 	] .
 
-<#Citation_polish_language>
-	a sh:NodeShape ;
-	sh:targetNode <http://books.google.com/books%3Fvid=ISBN978-83-04-04985-7>  ;
-
-	sh:property [
-		sh:path <http://pl.dbpedia.org/property/tytuł> ;
-		sh:hasValue "Polska-Niemcy. Stosunki polityczne od zarania po czasy najnowsze" ;
-	] .
-
-
-<#Citation_spanish_language_title_datatype_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://es.dbpedia.org/property/título>  ;
-	sh:property [
-		sh:path <http://es.dbpedia.org/property/título>  ;
-		sh:or (
-            [
-            	sh:datatype xsd:string;
-            ]
-            [
-                sh:datatype xsd:langString;
-            ]
-        )
-	] .
 <#Citation_english_language_title_datatype_validation>
 	a sh:NodeShape  ;
 	sh:targetSubjectsOf <http://dbpedia.org/property/title>  ;
