@@ -61,6 +61,27 @@ object DurationParserConfig
           "أعوام" -> "year",
           "حول" -> "year"
         ),
+        "cs" -> Map(
+            "s" -> "second",
+            "sekunda" -> "second",
+            "sekundy" -> "second",
+            "vteřina" -> "second",
+            "vteřiny" -> "second",
+            "m" -> "minute",
+            "minuta" -> "minute",
+            "minuty" -> "minute",
+            "h" -> "hour",
+            "hodina" -> "hour",
+            "hodiny" -> "hour",
+            "d" -> "day",
+            "den" -> "day",
+            "dny" -> "day",
+            "měsíc" -> "month",
+            "měsíce" -> "month",
+            "rok" -> "year",
+            "roky" -> "year",
+            "y" -> "year"
+        ),
         "de" -> Map(
             "Sekunde" -> "second",
             "Sekunden" -> "second",
@@ -211,6 +232,20 @@ object DurationParserConfig
             "meses" -> "month",
             "ano" -> "year",
             "anos" -> "year"
+        ),
+        "mk" -> Map(
+            "секунда" -> "second",
+            "секунди" -> "second",
+            "минута" -> "minute",
+            "минути" -> "minute",
+            "саат" -> "hour",
+            "саати" -> "hour",
+            "ден" -> "day",
+            "денови" -> "day",
+            "месец" -> "month",
+            "месеци" -> "month",
+            "година" -> "year",
+            "години" -> "year"
         ),
         "nl" -> Map(
             "Seconde" -> "second",

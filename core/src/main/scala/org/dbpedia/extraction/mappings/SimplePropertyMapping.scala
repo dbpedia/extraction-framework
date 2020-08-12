@@ -102,7 +102,7 @@ extends PropertyMapping
       require(ontologyProperty.range.uri == RdfNamespace.fullUri(RdfNamespace.RDF, "langString"),
         "Language can only be specified for rdf:langString datatype properties")
     }
-    
+
     private val parser : DataParser = ontologyProperty.range match
     {
         //TODO
@@ -110,7 +110,7 @@ extends PropertyMapping
           if (ontologyProperty.name == "foaf:homepage") {
             checkMultiplicationFactor("foaf:homepage")
             new LinkParser()
-          } 
+          }
           else {
             new ObjectParser(context)
           }
@@ -167,7 +167,7 @@ extends PropertyMapping
             throw new IllegalArgumentException("multiplication factor cannot be specified for " + datatypeName)
         }
     }
-    
+
     override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals, DBpediaDatasets.SpecificProperties)
 
     override def extract(node : TemplateNode, subjectUri : String): Seq[Quad] =
@@ -232,29 +232,34 @@ extends PropertyMapping
                 graph ++= g
             }
         }
-        
+
         graph
     }
 
     private def writeUnitValue(node : TemplateNode, pr: ParseResult[Double], subjectUri : String, sourceUri : String): Seq[Quad] =
     {
-        //TODO better handling of inconvertible units
-        if(unit.isInstanceOf[InconvertibleUnitDatatype])
-        {
+
+        // fix for https://github.com/dbpedia/extraction-framework/issues/630
+        //Write generic property
+        val stdValue = pr.unit match {
+
+          case Some(u) if u.isInstanceOf[InconvertibleUnitDatatype] => {
+
             val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, unit)
             return Seq(quad)
-        }
+          }
 
-        //Write generic property
-        val stdValue = pr.unit match{
-          case Some(u) if u.isInstanceOf[UnitDatatype] => u.asInstanceOf[UnitDatatype].toStandardUnit(pr.value)
+          case Some(u) if u.isInstanceOf[UnitDatatype] =>
+            u.asInstanceOf[UnitDatatype].toStandardUnit(pr.value)
+
           case None => pr.value  //should not happen
         }
-        
+        // end of fix
+
         val graph = new ArrayBuffer[Quad]
 
         graph += new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, stdValue.toString, sourceUri, new Datatype("xsd:double"))
-        
+
         // Write specific properties
         // FIXME: copy-and-paste in CalculateMapping
         for(templateClass <- node.getAnnotation(TemplateMapping.CLASS_ANNOTATION);

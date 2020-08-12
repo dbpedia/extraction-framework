@@ -27,6 +27,7 @@ object DateTimeParserConfig
         "ja" -> Map("一月"->1,"二月"->2,"三月"->3,"四月"->4,"五月"->5,"六月"->6,"七月"->7,"八月"->8,"九月"->9,"十月"->10,"十一月"->11,"十二月"->12,
                     "1月"->1,"2月"->2,"3月"->3,"4月"->4,"5月"->5,"6月"->6,"7月"->7,"8月"->8,"9月"->9,"10月"->10,"11月"->11,"12月"->12,
                     "１月"->1,"２月"->2,"３月"->3,"４月"->4,"５月"->5,"６月"->6,"７月"->7,"８月"->8,"９月"->9,"１０月"->10,"１１月"->11,"１２月"->12),
+        "mk" -> Map("јануари"->1,"февруари"->2,"март"->3,"април"->4,"мај"->5,"јуни"->6,"јули"->7,"август"->8,"септември"->9,"октомври"->10,"ноември"->11,"декември"->12),
         "nl" -> Map("januari"->1,"februari"->2,"maart"->3,"april"->4,"mei"->5,"juni"->6,"juli"->7,"augustus"->8,"september"->9,"oktober"->10,"november"->11,"december"->12),
         "pl" -> Map("stycznia"->1,"lutego"->2,"marca"->3,"kwietnia"->4,"maja"->5,"czerwca"->6,"lipca"->7,"sierpnia"->8,"września"->9,"października"->10,"listopada"->11,"grudnia"->12,
                     "styczeń"->1,"luty"->2,"marzec"->3,"kwiecień"->4,"maj"->5,"czerwiec"->6,"lipiec"->7,"sierpień"->8,"wrzesień"->9,"październik"->10,"listopad"->11,"grudzień"->12),
@@ -98,7 +99,9 @@ object DateTimeParserConfig
         "en" -> Map(
             "birth date and age"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age"
             "birth date and age2" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age2"
+            "start date and age" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age2"
             "death date and age"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date and age"
+            "end date and age"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date and age"
             "birth date"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date"
             "death date"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date"
             "bda"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Bda"

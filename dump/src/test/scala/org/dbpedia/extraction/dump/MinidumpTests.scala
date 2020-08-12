@@ -191,6 +191,8 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
 
     jobsRunning.clear()
 
+    // create test reports directory
+    new File("./target/testreports/").mkdirs()
 
   }
 

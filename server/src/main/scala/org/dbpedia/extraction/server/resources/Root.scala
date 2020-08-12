@@ -15,9 +15,9 @@ class Root
     def get =
     {
       <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-        {ServerHeader.getHeader("DBpedia Server",true)}
+        {ServerHeader.getHeader("DBpedia Extraction Framework Web Services",true)}
           <body>
-            <h2 align="center">DBpedia Server</h2>
+            <h2 align="center">DBpedia Extraction Framework Web Services</h2>
             <p align="center">
             <a href="ontology/">Ontology</a>
             </p>
