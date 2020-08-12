@@ -62,6 +62,29 @@
 		sh:hasValue <http://cs.dbpedia.org/resource/Český> ;
 	] .
 
+<#IKEA>
+	a sh:NodeShape ;
+	sh:targetNode dbr:IKEA ;
+	
+	# related to issue https://github.com/dbpedia/extraction-framework/issues/630
+	# no types for specific entities (e.g. IKEA, Samsung)
+	sh:property [
+		sh:path rdf:type ;
+		sh:hasValue dbo:Company ;
+	] .
+
+<#Samsung>
+	a sh:NodeShape ;
+	sh:targetNode dbr:Samsung ;
+	
+	# related to issue https://github.com/dbpedia/extraction-framework/issues/630
+	# no types for specific entities (e.g. IKEA, Samsung)
+	sh:property [
+		sh:path rdf:type ;
+		sh:hasValue dbo:Company ;
+	] .
+
+
 
 <#Citation_type>
 	a sh:NodeShape ;

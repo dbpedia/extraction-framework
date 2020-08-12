@@ -604,6 +604,15 @@ class UnitValueParserTest extends FlatSpec with Matchers
       parse("en", "astronomicalUnit", ".7949766633909954") should be (Some(1.1892681609948355E11))
     }
 
+    "UnitValueParser" should "return Currency ($ 500)" in
+    {
+      parse("en", "Currency", "USD 500", inconvertible = true) should equal (Some(500))
+    }
+    "UnitValueParser" should "return Currency ({{US$|500}})" in
+    {
+      parse("en", "Currency", "{{US$|500}}", inconvertible = true) should equal (Some(500))
+    }
+
     /**
      * Matcher to test if 2 values are approximately equal.
      */
@@ -638,7 +647,7 @@ class UnitValueParserTest extends FlatSpec with Matchers
     private val wikiParser = WikiParser.getInstance()
     private val datatypes =  OntologyDatatypes.load().map(dt => (dt.name, dt)).toMap
 
-    private def parse(language : String, datatypeName : String, input : String) : Option[Double] =
+    private def parse(language : String, datatypeName : String, input : String, inconvertible : Boolean = false) : Option[Double] =
     {
         val lang = Language(language)
         val red = new Redirects(Map())
@@ -657,8 +666,13 @@ class UnitValueParserTest extends FlatSpec with Matchers
         val page = new WikiPage(WikiTitle.parse("TestPage", lang), input)
 
         wikiParser(page) match {
-          case Some(n) =>  unitValueParser.parse(n).map{case dt: ParseResult[_] if dt.unit.isDefined && dt.unit.get.isInstanceOf[UnitDatatype] =>
-            dt.unit.get.asInstanceOf[UnitDatatype].toStandardUnit(dt.value)}
+          case Some(n) =>
+            unitValueParser.parse(n).map{case dt: ParseResult[_] if dt.unit.isDefined && dt.unit.get.isInstanceOf[UnitDatatype] => {
+              if (inconvertible)
+                dt.value
+              else
+                dt.unit.get.asInstanceOf[UnitDatatype].toStandardUnit(dt.value)
+            }}
           case None => None
         }
     }

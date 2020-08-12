@@ -32,7 +32,7 @@ extends LinkNode(children, line)
 case class ExternalLinkNode(destination : IRI, override val children : List[Node], override val line : Int, destinationNodes : List[Node] = List[Node]())
 extends LinkNode(children, line)
 {
-    def toWikiText = "[" + destination.toString + " " + children.map(_.toWikiText).mkString + "]"
+    def toWikiText = "[" + (destination.toString + " " + children.map(_.toWikiText).mkString).trim + "]"
 }
 
 /**

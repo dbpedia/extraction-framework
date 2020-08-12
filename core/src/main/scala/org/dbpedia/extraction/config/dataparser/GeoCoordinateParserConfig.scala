@@ -14,12 +14,17 @@ object GeoCoordinateParserConfig
     val longitudeLetterMap = Map(
         "de" -> Map("E" -> "E", "O" -> "E", "W" -> "W"),
         "en" -> Map("E" -> "E", "W" -> "W"),
-        "fr" -> Map("E" -> "E", "O" -> "W", "W" -> "W")
+        "cs" -> Map("E" -> "E", "W" -> "W"),
+        "de" -> Map("E" -> "E", "O" -> "E", "W" -> "W"),
+        "fr" -> Map("E" -> "E", "O" -> "W", "W" -> "W"),
+        "mk" -> Map("E" -> "E", "W" -> "W")
     )
 
     //map longitude letters used in languages to the ones used in English ("N" for North and "S" for South)
     val latitudeLetterMap = Map(
-        "en" -> Map("N" -> "N", "S" -> "S")
+        "en" -> Map("N" -> "N", "S" -> "S"),
+        "cs" -> Map("N" -> "N", "S" -> "S"),
+        "mk" -> Map("N" -> "N", "S" -> "S")
     )
     
 }

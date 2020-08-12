@@ -22,7 +22,7 @@
     },
     "-":{
       "transformer":"textNode",
-      "replace": "<br />"
+      "replace": " - "
     },
     "Clr":{
       "transformer":"textNode",
@@ -50,22 +50,20 @@
     "Flatlist":{
       "transformer":"extractChildren",
       "keys": ["class", "style", "indent"],
-      "whileList":false
+      "whileList":false,
+      "additionalSplitString": "*"
     },
-    "Plainlist":{
+    "Plainlist|Plain list":{
       "transformer":"extractChildren",
       "keys": ["class", "style", "indent"],
-      "whileList":false
-    },
-    "Plain list":{
-      "transformer":"extractChildren",
-      "keys": ["class", "style", "indent"],
-      "whileList":false
+      "whileList":false,
+      "additionalSplitString": "*"
     },
     "Hlist":{
       "transformer":"extractChildren",
       "keys": ["class", "style", "list_style", "item_style", "indent", "item1_style", "item2_style", "item3_style", "item4_style", "item5_style", "item6_style", "item7_style", "item8_style", "item9_style", "item10_style", "item11_style", "item12_style", "item13_style", "item14_style", "item15_style", "item16_style", "item17_style", "item18_style", "item19_style", "item20_style", "item21_style", "item22_style", "item23_style", "item24_style", "item25_style"],
-      "whileList":false
+      "whileList":false,
+      "additionalSplitString": "*"
     },
     "Unbulleted list":{
       "transformer":"extractChildren",
@@ -75,7 +73,8 @@
     "Collapsible list":{
       "transformer":"extractChildren",
       "keys": ["expand", "frame_style", "title_style", "framestyle", "titlestyle", "list_style", "title", "liststyle", "hlist", "bullets"],
-      "whileList":false
+      "whileList":false,
+      "additionalSplitString": "*"
     },
     "ICD9":{
       "transformer":"extractChildren",
@@ -96,8 +95,84 @@
     "Official website":{
       "transformer":"externalLinkNode"
     },
-    "URL":{
+    "URL|url":{
       "transformer":"externalLinkNode"
+    },
+    "Currency":{
+      "transformer":"textNode",
+      "replace": "<br /> $(2||) $(1||)<br />"
+    },
+    "US$":{
+      "transformer":"textNode",
+      "replace": "<br /> USD $(1||)<br />"
+    },
+    "GB£":{
+      "transformer":"textNode",
+      "replace": "<br /> GBP $(1||)<br />"
+    },
+    "AUD":{
+      "transformer":"textNode",
+      "replace": "<br /> AUD $(1||)<br />"
+    },
+    "CAD":{
+      "transformer":"textNode",
+      "replace": "<br /> CAD $(1||)<br />"
+    },
+    "CNY":{
+      "transformer":"textNode",
+      "replace": "<br /> CNY $(1||)<br />"
+    },
+    "BDT":{
+      "transformer":"textNode",
+      "replace": "<br /> BDT $(1||)<br />"
+    },
+    "INR":{
+      "transformer":"textNode",
+      "replace": "<br /> INR $(1||)<br />"
+    },
+    "JPY":{
+      "transformer":"textNode",
+      "replace": "<br /> JPY $(1||)<br />"
+    },
+    "ISIN":{
+      "transformer":"textNode",
+      "replace": "$(1||)"
+    },
+    "New York Stock Exchange|NYSE|nyse|NYSE was|NYSE link":{
+      "transformer":"textNode",
+      "replace": "NYSE:$(1||)"
+    },
+    "NYSE American|AMEX|amex|AMEX link|AMEX was":{
+      "transformer":"textNode",
+      "replace": "AMEX:$(1||)"
+    },
+    "NASDAQ|nasdaq|NASDAQ was|NASDAQ link":{
+      "transformer":"textNode",
+      "replace": "NASDAQ:$(1||)"
+    },
+    "NASDAQ Dubai":{
+      "transformer":"textNode",
+      "replace": "NASDAQ Dubai:$(1||)"
+    },
+    "Frankfurt Stock Exchange|FWB|fwb|FWB link|FWB was":{
+      "transformer":"textNode",
+      "replace": "FWB:$(1||)"
+    },
+    "Euronext|Euronext link|Euronext was":{
+      "transformer":"textNode",
+      "replace": "Euronext:$(1||)"
+    },
+    "Luxembourg Stock Exchange":{
+      "transformer":"textNode",
+      "replace": "LuxSE:$(1||)"
+    },
+    "London Stock Exchange|LSE|lse|LSE link|LSE was":{
+      "transformer":"textNode",
+      "replace": "LSE:$(1||)"
+    },
+    "Hong Kong Stock Exchange|SEHK|SEHK link|SEHK was|Hkse|HKEX":{
+      "transformer":"textNode",
+      "replace": "SEHK:$(1||)"
     }
   },
   "commons":{

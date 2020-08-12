@@ -10,7 +10,7 @@ object DateIntervalMappingConfig
     // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
     // Don't change this else if you know how it is done.
     val presentMap = Map(
-        "en" -> Set("present", "now"),
+        "en" -> Set("present", "now"), // for example see https://en.wikipedia.org/wiki/Donald_Trump -> Political party -> Republican (1987–1999, 2009–2011, 2012–present)
         "ar" -> Set("الحاضر"),
         "be" -> Set("па гэты дзень", "па сучаснасць"),
         "bg" -> Set("до наши дни", "настояще", "досега"),
@@ -25,6 +25,7 @@ object DateIntervalMappingConfig
         "hu" -> Set("napjainkig"),
         "id" -> Set("sekarang"),
         "it" -> Set("in attività"),
+        "mk" -> Set("денес"),
         "nl" -> Set("heden"),
         "pl" -> Set("nadal", "obecnie"),
         "pt" -> Set("presente", "atualidade", "atualmente","agora"),
