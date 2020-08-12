@@ -99,7 +99,9 @@ object DateTimeParserConfig
         "en" -> Map(
             "birth date and age"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age"
             "birth date and age2" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age2"
+            "start date and age" -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date and age2"
             "death date and age"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date and age"
+            "end date and age"  -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date and age"
             "birth date"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Birth date"
             "death date"          -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Death date"
             "bda"                 -> Map ("year" -> "1", "month"-> "2", "day" -> "3"), //"Bda"
