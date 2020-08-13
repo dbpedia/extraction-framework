@@ -1,6 +1,5 @@
 # DBpedia Information Extraction Framework
-
-[![Build Status](https://travis-ci.org/dbpedia/extraction-framework.svg?branch=master)](https://travis-ci.org/dbpedia/extraction-framework)
+![Build Status](https://github.com/dbpedia/extraction-framework/workflows/Java%20CI%20with%20Maven/badge.svg)
 
 ### Contents
 * [About DBpedia](#about-dbpedia)  
