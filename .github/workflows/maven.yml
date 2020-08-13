@@ -13,7 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
@@ -22,3 +23,9 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn clean install
+    - uses: act10ns/slack@v1
+      with:
+        status: ${{ job.status }}
+        steps: ${{ toJson(steps) }}
+        channel: '#dev-team'
+        if: always() #failure()
