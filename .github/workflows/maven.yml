@@ -28,4 +28,4 @@ jobs:
         status: ${{ job.status }}
         steps: ${{ toJson(steps) }}
         channel: '#dev-team'
-        if: always() #failure()
+      if: failure()
