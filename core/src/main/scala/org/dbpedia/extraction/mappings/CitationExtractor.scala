@@ -67,7 +67,7 @@ extends WikiPageExtractor
     )
 
     private val ontology = context.ontology
-    
+
     private val language = context.language
 
     private val wikiCode = language.wikiCode

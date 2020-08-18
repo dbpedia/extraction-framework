@@ -84,5 +84,91 @@
 		sh:hasValue dbo:Company ;
 	] .
 
+<#Citation_english_language_title_datatype_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/property/title>  ;
+	sh:property [
+		sh:path <http://dbpedia.org/property/title>  ;
+		sh:or (
+            [
+            	sh:datatype xsd:string ;
+            ]
+            [
+                sh:datatype xsd:langString ;
+            ]
+        )
+	] .
+
+<#Citation_english_language_date_datatype_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/property/date> ;
+	sh:property [
+		sh:path <http://dbpedia.org/property/date>  ;
+		sh:or (
+		    [
+		    	sh:datatype xsd:string ;
+		    ]
+		    [
+		        sh:datatype xsd:date ;
+		    ]
+		)
+
+	] .
+<#Citation_english_language_last1_datatype_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/property/last1>  ;
+	sh:property [
+		sh:path <http://dbpedia.org/property/last1> ;
+		sh:datatype xsd:string;
+
+	] .
+<#Citation_english_language_last_datatype_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/property/last> ;
+	sh:property [
+		sh:path <http://dbpedia.org/property/last> ;
+		sh:datatype xsd:string;
+
+	] .
+<#Citation_english_language_work_datatype_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/property/work>  ;
+	sh:property [
+		sh:path <http://dbpedia.org/property/work>;
+        sh:datatype xsd:string;
+	] .
+
+
+<#Citation_english_language_isbn_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/property/isbn> ;
+	sh:property [
+		sh:path <http://dbpedia.org/property/isbn>  ;
+		sh:datatype xsd:string ;
+        sh:pattern "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$" ;
+
+	] .
+<#Citation_english_language_page_datatype_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/property/page> ;
+	sh:property [
+		sh:path <http://dbpedia.org/property/page> ;
+		sh:datatype xsd:string ;
+	] .
+
+<#Citation_english_languagа_accessDate_datatype_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/property/accessDate> ;
+	sh:property [
+		sh:path <http://dbpedia.org/property/accessDate> ;
+		sh:datatype xsd:date ;
+	] .
+<#Citation_english_languagа_year_datatype_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/property/year> ;
+	sh:property [
+		sh:path <http://dbpedia.org/property/year> ;
+		sh:datatype xsd:string ;
+	] .
 
 
