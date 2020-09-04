@@ -94,6 +94,9 @@ object RdfNamespace {
   //the following namespaces are required for supporting the entries in the mappings Wiki as of 2014-07-15
   val CIDOCCRM = ns("cidoccrm", "http://purl.org/NET/cidoc-crm/core#", false)
   val BIO = ns("bio", "http://purl.org/vocab/bio/0.1/", false)
+  
+  // doing the new global mappings
+  val CEO = ns("ceo","https://linkeddata.cultureelerfgoed.nl/vocab/def/ceo#",false)
 
   /**
    * @return namespace for prefix and suffix, default namespace and full name if no match found 
