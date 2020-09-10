@@ -31,14 +31,28 @@ trait FileDownloader extends Downloader
    * Download file from URL to given target file.
    */
   def downloadFile(url : URL, file : File) : Unit = {
+
     val conn = url.openConnection
-    try {
-      downloadFile(conn, file)
-    } finally conn match { 
-      // http://dumps.wikimedia.org/ seems to kick us out if we don't disconnect.
-      case conn: HttpURLConnection => conn.disconnect
-      // But only disconnect if it's a http connection. Can't do this with file:// URLs.
-      case _ =>
+
+    // handle 301 Moved Permanently
+    val redirect = conn.getHeaderField("Location") match {
+      case null => conn.getHeaderField("location")
+      case notNull => notNull
+    }
+    System.out.println("# New Code")
+    if (redirect != null){
+      // resolve new location
+      downloadFile(new URL(redirect),file)
+    } else {
+      // resolve current location
+      try {
+        downloadFile(conn, file)
+      } finally conn match {
+        // http://dumps.wikimedia.org/ seems to kick us out if we don't disconnect.
+        case conn: HttpURLConnection => conn.disconnect
+        // But only disconnect if it's a http connection. Can't do this with file:// URLs.
+        case _ =>
+      }
     }
   }
   
@@ -47,6 +61,7 @@ trait FileDownloader extends Downloader
    */
   protected def downloadFile(conn: URLConnection, file : File): Unit = {
     val in = inputStream(conn)
+
     try
     {
       val out = outputStream(file)
@@ -62,7 +77,9 @@ trait FileDownloader extends Downloader
   /**
    * Get input stream. Mixins may decorate the stream or open a different stream.
    */
-  protected def inputStream(conn: URLConnection) : InputStream = conn.getInputStream
+  protected def inputStream(conn: URLConnection) : InputStream = {
+    conn.getInputStream
+  }
   
   /**
    * Get output stream. Mixins may decorate the stream or open a different stream.
