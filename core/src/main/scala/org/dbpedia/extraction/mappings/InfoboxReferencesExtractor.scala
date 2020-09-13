@@ -164,18 +164,20 @@ extends PageNodeExtractor
         }
 
         for { template <- InfoboxReferencesExtractor.collectTemplates(node2)
-          resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
-          if !ignoreTemplates.contains(resolvedTitle)
-          if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) 
+          getTitle = context.redirects.resolve(template.title).decoded.toLowerCase
+          if !ignoreTemplates.contains(getTitle)
+          if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(getTitle).isDefined) 
         }
         {
 
+            var propertiesFound = false
+            
             val propertyList = template.children.filterNot(property => ignoreProperties.get(wikiCode).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
 
-            var propertiesFound = false
+            
 
-            val countExplicitPropertyKeys = propertyList.count(property => !property.key.forall(_.isDigit))
-            if ((countExplicitPropertyKeys >= minPropertyCount) && (countExplicitPropertyKeys.toDouble / propertyList.size) > minRatioOfExplicitPropertyKeys)
+            val countPropertyKeys = propertyList.count(property => !property.key.forall(_.isDigit))
+            if ((countPropertyKeys >= minPropertyCount) && (countPropertyKeys.toDouble / propertyList.size) > minRatioOfExplicitPropertyKeys)
             {
                 for(property <- propertyList) {
                     val propertyUri = getPropertyUri(property.key)
