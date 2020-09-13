@@ -21,16 +21,6 @@ import org.dbpedia.iri.UriUtils
 
 import scala.language.reflectiveCalls
 
-/**
- * This extractor extracts all properties from all infoboxes.
- * Extracted information is represented using properties in the http://xx.dbpedia.org/property/
- * namespace (where xx is the language code).
- * The names of the these properties directly reflect the name of the Wikipedia infobox property.
- * Property names are not cleaned or merged.
- * Property types are not part of a subsumption hierarchy and there is no consistent ontology for the infobox dataset.
- * The infobox extractor performs only a minimal amount of property value clean-up, e.g., by converting a value like “June 2009” to the XML Schema format “2009–06”.
- * You should therefore use the infobox dataset only if your application requires complete coverage of all Wikipeda properties and you are prepared to accept relatively noisy data.
- */
 class InfoboxReferencesExtractor(
   context : {
     def ontology : Ontology
@@ -40,17 +30,13 @@ class InfoboxReferencesExtractor(
 ) 
 extends PageNodeExtractor
 {
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Configuration
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private val minPropertyCount = InfoboxExtractorConfig.minPropertyCount
 
     private val ontology = context.ontology
-    
+
     private val language = context.language
 
     private val wikiCode = language.wikiCode
-
-    private val minPropertyCount = InfoboxExtractorConfig.minPropertyCount
 
     private val minRatioOfExplicitPropertyKeys = InfoboxExtractorConfig.minRatioOfExplicitPropertyKeys
 
@@ -60,52 +46,12 @@ extends PageNodeExtractor
 
     private val ignoreProperties = InfoboxExtractorConfig.ignoreProperties
 
-    private val labelProperty = ontology.properties("rdfs:label")
-    private val typeProperty = ontology.properties("rdf:type")
-    private val propertyClass = ontology.classes("rdf:Property")
     private val rdfLangStrDt = ontology.datatypes("rdf:langString")
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Regexes
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // TODO: i18n
-    private val RankRegex = InfoboxExtractorConfig.RankRegex
 
     private val SplitWordsRegex = InfoboxExtractorConfig.SplitWordsRegex
 
     private val TrailingNumberRegex = InfoboxExtractorConfig.TrailingNumberRegex
 
-    private val splitPropertyNodeRegexInfobox = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(wikiCode))
-                                                  DataParserConfig.splitPropertyNodeRegexInfobox.get(wikiCode).get
-                                                else DataParserConfig.splitPropertyNodeRegexInfobox.get("en").get
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Parsers
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private val unitValueParsers = ontology.datatypes.values
-                                   .filter(_.isInstanceOf[DimensionDatatype])
-                                   .map(dimension => new UnitValueParser(context, dimension, true))
-
-    private val intParser = new IntegerParser(context, true, validRange = (i => i%1==0))
-
-    private val doubleParser = new DoubleParser(context, true)
-
-    private val dateTimeParsers = List("xsd:date", "xsd:gMonthYear", "xsd:gMonthDay", "xsd:gMonth" /*, "xsd:gYear", "xsd:gDay"*/)
-                                  .map(datatype => new DateTimeParser(context, new Datatype(datatype), true))
-
-    private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
-                                  
-    private val objectParser = new ObjectParser(context, true)
-
-    private val linkParser = new LinkParser(true)
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // State
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private val seenProperties = HashSet[String]()
-    
     override val datasets = Set(DBpediaDatasets.InfoboxTest)
 
     override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
@@ -217,7 +163,6 @@ extends PageNodeExtractor
             infoboxesRaw(tempName) = ParametersRaw
         }
 
-        /** Retrieve all templates on the page which are not ignored */
         for { template <- InfoboxReferencesExtractor.collectTemplates(node2)
           resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
           if !ignoreTemplates.contains(resolvedTitle)
@@ -229,7 +174,6 @@ extends PageNodeExtractor
 
             var propertiesFound = false
 
-            // check how many property keys are explicitly defined
             val countExplicitPropertyKeys = propertyList.count(property => !property.key.forall(_.isDigit))
             if ((countExplicitPropertyKeys >= minPropertyCount) && (countExplicitPropertyKeys.toDouble / propertyList.size) > minRatioOfExplicitPropertyKeys)
             {
@@ -238,9 +182,6 @@ extends PageNodeExtractor
                     try {
                         if (infoboxesRaw contains template.title.decoded) {
                             if (infoboxesRaw(template.title.decoded) contains property.key) {
-
-                                val uaU = new Datatype("rdf:langString")
-                                //var property2 = new ParseResult(pr.value,None,Option(uaU))
 
                                 val rawParameter = infoboxesRaw(template.title.decoded)(property.key)
 
