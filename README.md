@@ -1,21 +1,24 @@
 # DBpedia Information Extraction Framework
 ![Build Status](https://github.com/dbpedia/extraction-framework/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-### Contents
-* [About DBpedia](#about-dbpedia)  
-* [The DBpedia Extraction Framework](#the-dbpedia-extraction-framework) <br>
-     1. [Core Module](#core-module)
-     2. [Dump Extraction Module](#dump-extraction-module)
-* [Quickstart](#quickstart)
-* [Contribution Guidelines](#contribution-guidelines)
-* [Wiki](#wiki)
-* [License](#license)<br><br>
+**Homepage**: http://dbpedia.org <br/>
+**Documentation**: http://dev.dbpedia.org/Extraction  <br/>
+**Get in touch with DBpedia**: https://wiki.dbpedia.org/join/get-in-touch <br/>
+**Slack**: https://dbpedia-slack.herokuapp.com/ <br/>
+-> channel **#dev-team**: slack channel where [updates are posted](https://github.com/dbpedia/extraction-framework/blob/master/.github/workflows/maven.yml) and discussion is happening 
+
+## More documentation + better browsing 
+Go to http://dev.dbpedia.org/Extraction
 
 
 ## About DBpedia
 DBpedia is a crowd-sourced community effort to extract structured information from Wikipedia and make this information available on the Web. DBpedia allows you to ask sophisticated queries against Wikipedia, and to link the different data sets on the Web to Wikipedia data. We hope that this work will make it easier for the huge amount of information in Wikipedia to be used in some new interesting ways. Furthermore, it might inspire new mechanisms for navigating, linking, and improving the encyclopedia itself. <br>
 To check out the projects of DBpedia, visit the [official DBpedia website](http://dbpedia.org).
 
+## A note on SPARK
+
+- explain that half the extractors can do spark and need different starting [quickstart]
+- explain that new code should try to use SPARK as explained in [new extractors]
 
 
 ## Quickstart 
@@ -23,8 +26,8 @@ To check out the projects of DBpedia, visit the [official DBpedia website](http:
 TODO write a short description and link to:
 
 * Quickstart.md
-* Run the extraction like we do each Marvin config -> note on postprocessing - release dashboard, target architecture
-* new extrator
+* Run the extraction like we do each Marvin config -> note on spark note on postprocessing - release dashboard, target architecture
+* new extractor -> TODO move to documentation and extend https://github.com/dbpedia/extraction-framework/wiki/New-Extractor
 * debug See [DEBUG.md](DEBUG.md)
 
 
@@ -84,12 +87,15 @@ To know more about the extraction framework, click [here](https://github.com/dbp
 
 
 ## DBpedia Extraction-Framework now powered by Apache Spark
+
+TODO scrap and merge into quickstart
 The Dump-Extraction of the DBpedia Extraction-Framework has now an Apache Spark Implementation.
 1. `$ cd extraction-framework/dump/`
 2. `$ ../install-run sparkextraction extraction.spark.properties` or `$ ../run sparkextraction extraction.spark.properties`
   
   * the spark-extraction currently supports every extractor except MappingsExtractor, ImageExtractor and the NIF-Extraction
   * spark-master, alternate spark-temporary dir, languages and extractors can be configured in `/dump/extraction.spark.properties`
+
 ## Contribution Guidelines
 
 If you want to work on one of the [issues](https://github.com/dbpedia/extraction-framework/issues), assign yourself to it or at least leave a comment that you are working on it and how.  
@@ -111,10 +117,9 @@ Please make sure you have read the Developer's Certificate of Origin, further do
   * If there are further changes you need to make, because Travis said the build fails or because somebody caught something you overlooked, go back to item 4. Stay on the same branch (if it is still related to the same issue). GitHub will add the new commits to the same pull request.
   * Finally, when everything is fine, your changes will be merged into `extraction-framework/master`.
   
+TODO scrap & merge
 Read the complete contribution guidelines [here](https://github.com/dbpedia/extraction-framework/wiki/Contributing) 
 
-## Wiki 
-For more information about DBpedia, check out the [wiki](https://github.com/dbpedia/extraction-framework/wiki) page.   
 
 ## License
 The source code is under the terms of the [GNU General Public License, version 2](http://www.gnu.org/licenses/gpl-2.0.html).
