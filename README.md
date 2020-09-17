@@ -16,9 +16,7 @@ To check out the projects of DBpedia, visit the [official DBpedia website](http:
 
 ## QuickStart
 
-* Running the extraction framework is a relatively complex task which is in details documented in the [advanced QuickStart guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/quickstart.md). The extraction can be also executed using Apache Spark. Check the [QuickStart](https://github.com/dbpedia/extraction-framework/blob/master/documentation/extraction-process.md#2-generic-spark-extraction) guide on how to run the extraction using Apache Spark.
-
-* To run the extraction process same as the DBpedia core team does, you can do using the [MARVIN release bot](https://git.informatik.uni-leipzig.de/dbpedia-assoc/marvin-config). The MARVIN bot automates the overall extraction process, from downloading the ontology, mappings and Wikipedia dumps, to extraction and post-processing the data.
+Running the extraction framework is a relatively complex task which is in details documented in the [advanced QuickStart guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/quickstart.md). To run the extraction process same as the DBpedia core team does, you can do using the [MARVIN release bot](https://git.informatik.uni-leipzig.de/dbpedia-assoc/marvin-config). The MARVIN bot automates the overall extraction process, from downloading the ontology, mappings and Wikipedia dumps, to extraction and post-processing the data.
 ```
 git clone https://git.informatik.uni-leipzig.de/dbpedia-assoc/marvin-config
 cd marvin-config
