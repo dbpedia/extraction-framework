@@ -16,6 +16,36 @@
 DBpedia is a crowd-sourced community effort to extract structured information from Wikipedia and make this information available on the Web. DBpedia allows you to ask sophisticated queries against Wikipedia, and to link the different data sets on the Web to Wikipedia data. We hope that this work will make it easier for the huge amount of information in Wikipedia to be used in some new interesting ways. Furthermore, it might inspire new mechanisms for navigating, linking, and improving the encyclopedia itself. <br>
 To check out the projects of DBpedia, visit the [official DBpedia website](http://dbpedia.org).
 
+
+
+## Quickstart 
+
+TODO write a short description and link to:
+
+* Quickstart.md
+* Run the extraction like we do each Marvin config -> note on postprocessing - release dashboard, target architecture
+* new extrator
+* debug See [DEBUG.md](DEBUG.md)
+
+
+
+TODO scrap and delete:
+Before you can start developing you need to take care of some prerequisites:
+
+* **DBpedia Extraction Framework** Get the most recent revision from the [Github repository](https://github.com/dbpedia/extraction-framework).
+
+     `$ git clone git://github.com/dbpedia/extraction-framework.git`
+* **Java Development Kit** The DBpedia extraction framework uses Java. Get the most recent JDK from [http://java.sun.com/](http://java.sun.com/). DBpedia requires at least Java 7 (v1.7.0). To compile and run it with an earlier version, delete or blank the following two files.(The launchers purge-download and purge-extract in the dump module won't work, but they are not vitally necessary.)  
+
+    `core/src/main/scala/org/dbpedia/extraction/util/RichPath.scala`
+
+    `dump/src/main/scala/org/dbpedia/extraction/dump/clean/Clean.scala`
+
+* **Maven** is used for project management and build automation. Get it from: [http://maven.apache.org/](http://maven.apache.org/). Please download Maven 3.
+
+This is enough to compile and run the DBpedia extraction framework. The required input files, the wikimedia dumps, will be downloaded by extractor code if configured to do so (see [here](https://github.com/dbpedia/extraction-framework/wiki/Extraction-Instructions)). Check [this](https://github.com/dbpedia/extraction-framework/wiki/Development-Environment-Setup) out to know more about Development Environment Setup. 
+
+
 ## The DBpedia Extraction Framework
 
 The DBpedia community uses a flexible and extensible framework to extract different kinds of structured information from Wikipedia. The DBpedia extraction framework is written using Scala 2.8. The framework is available from the DBpedia Github repository (GNU GPL License). The change log may reveal more recent developments. More recent configuration options can be found here: https://github.com/dbpedia/extraction-framework/wiki
@@ -52,22 +82,6 @@ More recent configuration options can be found here: [https://github.com/dbpedia
 
 To know more about the extraction framework, click [here](https://github.com/dbpedia/extraction-framework/wiki/Documentation#h25-3)
 
-## Quickstart 
-
-Before you can start developing you need to take care of some prerequisites:
-
-* **DBpedia Extraction Framework** Get the most recent revision from the [Github repository](https://github.com/dbpedia/extraction-framework).
-
-     `$ git clone git://github.com/dbpedia/extraction-framework.git`
-* **Java Development Kit** The DBpedia extraction framework uses Java. Get the most recent JDK from [http://java.sun.com/](http://java.sun.com/). DBpedia requires at least Java 7 (v1.7.0). To compile and run it with an earlier version, delete or blank the following two files.(The launchers purge-download and purge-extract in the dump module won't work, but they are not vitally necessary.)  
-
-    `core/src/main/scala/org/dbpedia/extraction/util/RichPath.scala`
-
-    `dump/src/main/scala/org/dbpedia/extraction/dump/clean/Clean.scala`
-
-* **Maven** is used for project management and build automation. Get it from: [http://maven.apache.org/](http://maven.apache.org/). Please download Maven 3.
-
-This is enough to compile and run the DBpedia extraction framework. The required input files, the wikimedia dumps, will be downloaded by extractor code if configured to do so (see [here](https://github.com/dbpedia/extraction-framework/wiki/Extraction-Instructions)). Check [this](https://github.com/dbpedia/extraction-framework/wiki/Development-Environment-Setup) out to know more about Development Environment Setup. 
 
 ## DBpedia Extraction-Framework now powered by Apache Spark
 The Dump-Extraction of the DBpedia Extraction-Framework has now an Apache Spark Implementation.
@@ -76,11 +90,6 @@ The Dump-Extraction of the DBpedia Extraction-Framework has now an Apache Spark 
   
   * the spark-extraction currently supports every extractor except MappingsExtractor, ImageExtractor and the NIF-Extraction
   * spark-master, alternate spark-temporary dir, languages and extractors can be configured in `/dump/extraction.spark.properties`
-
-## Debugging
-
-See [DEBUG.md](DEBUG.md)
-
 ## Contribution Guidelines
 
 If you want to work on one of the [issues](https://github.com/dbpedia/extraction-framework/issues), assign yourself to it or at least leave a comment that you are working on it and how.  
@@ -108,6 +117,6 @@ Read the complete contribution guidelines [here](https://github.com/dbpedia/extr
 For more information about DBpedia, check out the [wiki](https://github.com/dbpedia/extraction-framework/wiki) page.   
 
 ## License
-
 The source code is under the terms of the [GNU General Public License, version 2](http://www.gnu.org/licenses/gpl-2.0.html).
+
 
