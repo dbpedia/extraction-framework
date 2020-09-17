@@ -1,6 +1,6 @@
 # Developer Certificate Of Origin
 
-(copied from https://elinux.org/Developer_Certificate_Of_Origin
+Copied from https://elinux.org/Developer_Certificate_Of_Origin
 
 ```
         Developer's Certificate of Origin 1.1
