@@ -22,6 +22,9 @@ import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.apache.spark.sql.{SQLContext, SparkSession}
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.dump.extract.ConfigLoader
+import org.dbpedia.extraction.util.MappingsDownloader.apiUrl
+import org.dbpedia.extraction.util.{Language, OntologyDownloader, WikiDownloader}
+import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.validation.construct.report.ReportWriter
 import org.dbpedia.validation.construct.report.formats.ReportFormat
 import org.dbpedia.validation.construct.tests.TestSuiteFactory
@@ -109,7 +112,7 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
        val owlFile = new File("../ontology.owl")
        val version = "1.0"
        org.dbpedia.extraction.util.OntologyDownloader.download(dumpFile)
-       val ontology = load(dumpFile)
+       val ontology = OntologyDownloader.load(dumpFile)
        org.dbpedia.extraction.util.OntologyDownloader.save(ontology, version, owlFile)
 
     /**
