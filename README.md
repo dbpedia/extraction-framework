@@ -4,8 +4,7 @@
 **Homepage**: http://dbpedia.org <br/>
 **Documentation**: http://dev.dbpedia.org/Extraction  <br/>
 **Get in touch with DBpedia**: https://wiki.dbpedia.org/join/get-in-touch <br/>
-**Slack**: https://dbpedia-slack.herokuapp.com/ <br/>
-  * join the **#dev-team** slack channel where [updates are posted](https://github.com/dbpedia/extraction-framework/blob/master/.github/workflows/maven.yml) and discussion is happening 
+**Slack**: https://dbpedia-slack.herokuapp.com/ - join the **#dev-team** slack channel where [updates are posted](https://github.com/dbpedia/extraction-framework/blob/master/.github/workflows/maven.yml) and discussion is happening <br/>
 
 ## More documentation + better browsing
 Need more documentation about the extraction? Check the DBpedia development bible at http://dev.dbpedia.org/Extraction
