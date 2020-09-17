@@ -104,13 +104,13 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
       * cd core;
       * mvn scala:run -Dlauncher="download-mappings";
       */
-    //    println("Download ontology")
-    //    val dumpFile = new File("../ontology.xml")
-    //    val owlFile = new File("../ontology.owl")
-    //    val version = "1.0"
-    //    org.dbpedia.extraction.util.OntologyDownloader.download(dumpFile)
-    //    val ontology = load(dumpFile)
-    //    org.dbpedia.extraction.util.OntologyDownloader.save(ontology, version, owlFile)
+       println("Download ontology")
+       val dumpFile = new File("../ontology.xml")
+       val owlFile = new File("../ontology.owl")
+       val version = "1.0"
+       org.dbpedia.extraction.util.OntologyDownloader.download(dumpFile)
+       val ontology = load(dumpFile)
+       org.dbpedia.extraction.util.OntologyDownloader.save(ontology, version, owlFile)
 
     /**
       * download mappings
@@ -118,17 +118,17 @@ class MinidumpTests extends FunSuite with BeforeAndAfterAll {
       * cd core;
       * mvn scala:run -Dlauncher="download-ontology";
       */
-    //    println("Download mappings")
-    //    val dir = new File("../mappings")
-    //    // don't use mkdirs, that often masks mistakes.
-    //    require(dir.isDirectory || dir.mkdir, "directory ["+dir+"] does not exist and cannot be created")
-    //    Namespace.mappings.values.par.foreach { namespace =>
-    //      val file = new File(dir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-    //      val nanos = System.nanoTime
-    //      println("downloading mappings from "+apiUrl+" to "+file)
-    //      new WikiDownloader(apiUrl).download(file, namespace)
-    //      println("downloaded mappings from "+apiUrl+" to "+file+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
-    //    }
+        println("Download mappings")
+        val dir = new File("../mappings")
+        // don't use mkdirs, that often masks mistakes.
+        require(dir.isDirectory || dir.mkdir, "directory ["+dir+"] does not exist and cannot be created")
+        Namespace.mappings.values.par.foreach { namespace =>
+          val file = new File(dir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
+          val nanos = System.nanoTime
+          println("downloading mappings from "+apiUrl+" to "+file)
+          new WikiDownloader(apiUrl).download(file, namespace)
+          println("downloaded mappings from "+apiUrl+" to "+file+" in "+((System.nanoTime - nanos) / 1000000000F)+" seconds")
+        }
 
     println("Extracting Minidump")
     /**
