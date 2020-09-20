@@ -141,7 +141,7 @@ extends PageNodeExtractor {
       //handle the bindings from pro- and epilog
       proAndEpilogBindings.foreach({case (tpl : Tpl, tplBindings : VarBindingsHierarchical) => {
         try {
-          quads appendAll handleFlatBindings(tplBindings.getFlat(), pageConfig, tpl, cache, cache.blockURIs("page").getURI)
+          quads appendAll handleFlatBindings(tplBindings.getFlat(), pageConfig, tpl, cache, cache.blockURIs("page").toString)
         } catch { case _ : Throwable => } //returned bindings are wrong
       }})
       Logging.printMsg("pro- and epilog bindings handled", 2)
@@ -185,7 +185,7 @@ extends PageNodeExtractor {
 
               //generate triples
               //println(tpl.name +": "+ blockBindings.dump())
-              quads appendAll handleFlatBindings(blockBindings.getFlat(), curBlock, tpl, cache, cache.blockURIs(curBlock.name).getURI)
+              quads appendAll handleFlatBindings(blockBindings.getFlat(), curBlock, tpl, cache, cache.blockURIs(curBlock.name).toString)
 
               //no exception -> success -> stuff below here will be executed on success
               consumed = true
@@ -227,9 +227,9 @@ extends PageNodeExtractor {
                   val blockIndBindings = VarBinder.parseNodesWithTemplate(blockIndTpl.wiki.clone, pageStack)
 
                   val parentBlockUri = if(!curOpenBlocks.contains(block)){
-                    cache.blockURIs(curBlock.name).getURI
+                    cache.blockURIs(curBlock.name).toString
                   } else {
-                    cache.blockURIs(block.parent.name).getURI
+                    cache.blockURIs(block.parent.name).toString
                   }
                   cache.savedVars("block") = parentBlockUri
 
@@ -281,7 +281,7 @@ extends PageNodeExtractor {
         if(!consumed){
           var anyMatched = false
           afterNodeHandlers.foreach((nh : NodeHandler) => {
-            var result = nh.process(pageStack, cache.blockURIs("page").getURI, cache, Map(), pageConfig)
+            var result = nh.process(pageStack, cache.blockURIs("page").toString, cache, Map(), pageConfig)
             if(result.isInstanceOf[NodeHandlerTriplesResult]){
               anyMatched = true
               quads appendAll result.asInstanceOf[NodeHandlerTriplesResult].triples
@@ -321,7 +321,7 @@ extends PageNodeExtractor {
 
     //postprocessing (schema transformation)
     val quadsPostProcessed = if(postprocessor.isDefined && quadsDistinct.size > 0){
-      postprocessor.get.process(quadsDistinct, cache.blockURIs("page").getURI).groupBy(_.toString).map(_._2.head).toList
+      postprocessor.get.process(quadsDistinct, cache.blockURIs("page").toString).groupBy(_.toString).map(_._2.head).toList
     } else quadsDistinct
 
     val quadsFiltered = quadsPostProcessed.filter((q : Statement) =>

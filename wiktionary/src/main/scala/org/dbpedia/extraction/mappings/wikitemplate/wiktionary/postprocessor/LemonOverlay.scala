@@ -156,17 +156,17 @@ object MemoryModel {
     for(q <- g){
       if(d.contains(q.getSubject.toString())){
         val s = d(q.getSubject.toString())
-        if(s.contains(q.getPredicate.getURI())){
-          s(q.getPredicate.getURI()).append(q.getObject)
+        if(s.contains(q.getPredicate.toString())){
+          s(q.getPredicate.toString()).append(q.getObject)
         } else {
           val values = new ListBuffer[Value]()
           values.append(q.getObject)
-          s(q.getPredicate.getURI()) = values
+          s(q.getPredicate.toString) = values
         }
       } else {
         val values = new ListBuffer[Value]()
         values.append(q.getObject)
-        d(q.getSubject.toString()) = MMap(q.getPredicate.getURI() -> values)
+        d(q.getSubject.toString()) = MMap(q.getPredicate.toString -> values)
       }
     }
     new MemoryModel( d)
