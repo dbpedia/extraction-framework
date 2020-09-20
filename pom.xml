@@ -58,9 +58,9 @@
 
     <modules>
         <module>core</module>
-        <module>server</module>
-        <module>dump</module>
         <module>scripts</module>
+        <module>dump</module>
+        <module>server</module>
         <module>live</module>
         <module>wiktionary</module>
     </modules>
@@ -229,8 +229,11 @@
                 <version>${project.version}</version>
             </dependency>
 
-
-
+            <dependency>
+                <groupId>org.dbpedia.extraction</groupId>
+                <artifactId>scripts</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!--TODO-->
 
@@ -342,6 +345,12 @@
                 <groupId>org.wikidata.wdtk</groupId>
                 <artifactId>wdtk-datamodel</artifactId>
                 <version>0.11.1</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.6.0</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
