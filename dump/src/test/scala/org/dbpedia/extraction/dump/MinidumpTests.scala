@@ -2,6 +2,13 @@ package org.dbpedia.extraction.dump
 
 import org.scalatest.Suites
 
+
+/**
+ * DBpedia Minidump testing suite
+ *
+ * TODO add baseDir to config
+ * TODO post process mostly only for en and fr because of mappings-extraction.properties
+ */
 class MinidumpTests extends Suites(
   new DownloadTest,
   new ExtractionTest,
