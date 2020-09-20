@@ -30,15 +30,16 @@
 	sh:property [
 		sh:path rdf:type ;
 		sh:hasValue dbo:Politician ;
-	] ;
+	] .
 
 	# related to issue: https://github.com/dbpedia/extraction-framework/issues/619 
         # more info at: https://forum.dbpedia.org/t/dbpedia-dataset-2019-08-30-pre-release/219/7
 	# InfoboxExtractor discarded all triples with wikilinks/objects
-	sh:property [
-		sh:path dbp:birthPlace ;
-		sh:in ( dbr:Hamburg  dbr:Germany) ;
-	] .
+# TODO hackathon
+#	sh:property [
+#		sh:path dbp:birthPlace ;
+#		sh:in ( dbr:Hamburg  dbr:Germany) ;
+#	] .
 
 <#Food_(disambiguation)_en>
 	a sh:NodeShape ;
@@ -122,14 +123,15 @@
 		sh:datatype xsd:string;
 
 	] .
-<#Citation_english_language_last_datatype_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://dbpedia.org/property/last> ;
-	sh:property [
-		sh:path <http://dbpedia.org/property/last> ;
-		sh:datatype xsd:string;
-
-	] .
+# TODO hackathon
+#<#Citation_english_language_last_datatype_validation>
+#	a sh:NodeShape  ;
+#	sh:targetSubjectsOf <http://dbpedia.org/property/last> ;
+#	sh:property [
+#		sh:path <http://dbpedia.org/property/last> ;
+#		sh:datatype xsd:string;
+#
+#	] .
 <#Citation_english_language_work_datatype_validation>
 	a sh:NodeShape  ;
 	sh:targetSubjectsOf <http://dbpedia.org/property/work>  ;
