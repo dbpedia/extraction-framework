@@ -4,17 +4,28 @@
 **Homepage**: http://dbpedia.org <br/>
 **Documentation**: http://dev.dbpedia.org/Extraction  <br/>
 **Get in touch with DBpedia**: https://wiki.dbpedia.org/join/get-in-touch <br/>
-**Slack**: https://dbpedia-slack.herokuapp.com/ - join the **#dev-team** slack channel where [updates are posted](https://github.com/dbpedia/extraction-framework/blob/master/.github/workflows/maven.yml) and discussion is happening <br/>
+**Slack**: join the [**#dev-team**](https://dbpedia.slack.com/archives/C0L9MJFU7) slack channel within the the [DBpedia Slack workspace](https://dbpedia-slack.herokuapp.com/) - the main point for [developement updates](https://github.com/dbpedia/extraction-framework/blob/master/.github/workflows/maven.yml) and discussions <br/>
 
-## More documentation + better browsing
-Need more documentation about the extraction? Check the DBpedia development bible at http://dev.dbpedia.org/Extraction
+## Contents
+
+* [About DBpedia](#about-dbpedia)
+* [Getting Started](#getting-started)
+  - [The Easy Way](#the-easy-way---execution-using-the-marvin-release-bot)
+  - [Standalone Execution](#standalone-execution)
+  - [Execution using Apache Spark](#execution-using-apache-spark)
+* [The DBpedia Extraction Framework](#the-dbpedia-extraction-framework)
+* [Contribution Guidelines](#contribution-guidelines)
+  - [Developer's Certificate of Origin](#important-developers-certificate-of-origin)
+* [License](#license)
 
 ## About DBpedia
 DBpedia is a crowd-sourced community effort to extract structured information from Wikipedia and make this information available on the Web. DBpedia allows you to ask sophisticated queries against Wikipedia, and to link the different data sets on the Web to Wikipedia data. We hope that this work will make it easier for the huge amount of information in Wikipedia to be used in some new interesting ways. Furthermore, it might inspire new mechanisms for navigating, linking, and improving the encyclopedia itself. <br>
 To check out the projects of DBpedia, visit the [official DBpedia website](http://dbpedia.org).
 
-## QuickStart
+<a name="getting-started"></a>
+## Getting Started
 
+<a name="the-easy-way"></a>
 ### The Easy Way - Execution using the MARVIN release bot
 Running the extraction framework is a relatively complex task which is in details documented in the [advanced QuickStart guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/quickstart.md). To run the extraction process same as the DBpedia core team does, you can do using the [MARVIN release bot](https://git.informatik.uni-leipzig.de/dbpedia-assoc/marvin-config). The MARVIN bot automates the overall extraction process, from downloading the ontology, mappings and Wikipedia dumps, to extraction and post-processing the data.
 ```
@@ -35,15 +46,12 @@ If you plan to work on improving the codebase of the framework you would need to
 * Check the [Debugging Guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/debug.md) and learn how to debug the extraction framework.
 
 ### Execution using Apache Spark
-
 In order to speed up the extraction process, the extraction framework has been adopted to run on Apache Spark.
 Currently, more than half of the extractors can be executed using Spark. The extraction process using Spark is a slightly different process and requires different Execution. Check the [QuickStart](https://github.com/dbpedia/extraction-framework/blob/master/documentation/extraction-process.md#2-generic-spark-extraction) guide on how to run the extraction using Apache Spark.
 
 Note: if possible, new extractors should be implemented using Apache Spark. To learn more, check the [New Extractors](https://github.com/dbpedia/extraction-framework/blob/master/documentation/new-extractor.md) guide, which explains the process of writing new extractor.
 
-
 ## The DBpedia Extraction Framework
-
 The DBpedia community uses a flexible and extensible framework to extract different kinds of structured information from Wikipedia. The DBpedia extraction framework is written using Scala 2.8. The framework is available from the DBpedia Github repository (GNU GPL License). The change log may reveal more recent developments. More recent configuration options can be found here: https://github.com/dbpedia/extraction-framework/wiki
 
 The DBpedia extraction framework is structured into different modules
@@ -72,11 +80,11 @@ In addition to the core components, a number of utility packages offers essentia
 * **DataParser** Parsers to extract data from nodes in the abstract syntax tree. All classes are located in the namespace [org.dbpedia.extraction.dataparser](tree/master/core/src/main/scala/org/dbpedia/extraction/dataparser)
 * **Util** Various utility classes. All classes are located in the namespace [org.dbpedia.extraction.util](tree/master/core/src/main/scala/org/dbpedia/extraction/util)
 
+<a name="dump-extraction-module"></a>
 ### Dump extraction Module
 More recent configuration options can be found here: [https://github.com/dbpedia/extraction-framework/wiki/Extraction-Instructions](https://github.com/dbpedia/extraction-framework/wiki/Extraction-Instructions "Outgoing link (in new window)").
 
 To know more about the extraction framework, click [here](https://github.com/dbpedia/extraction-framework/wiki/Documentation#h25-3)
-
 
 ## Contribution Guidelines
 
