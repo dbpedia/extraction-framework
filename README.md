@@ -15,6 +15,7 @@ To check out the projects of DBpedia, visit the [official DBpedia website](http:
 
 ## QuickStart
 
+### The Easy Way - Execution using the MARVIN release bot
 Running the extraction framework is a relatively complex task which is in details documented in the [advanced QuickStart guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/quickstart.md). To run the extraction process same as the DBpedia core team does, you can do using the [MARVIN release bot](https://git.informatik.uni-leipzig.de/dbpedia-assoc/marvin-config). The MARVIN bot automates the overall extraction process, from downloading the ontology, mappings and Wikipedia dumps, to extraction and post-processing the data.
 ```
 git clone https://git.informatik.uni-leipzig.de/dbpedia-assoc/marvin-config
@@ -25,7 +26,9 @@ cd marvin-config
 # around 4-7 days
 ./marvin_extraction_run.sh generic
 ```
-... if you plan to work on improving the codebase of the framework you would need to run the extraction framework alone as described in the [QuickStart guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/quickstart.md). This is highly recommended, since during this process you will learn a lot about the extraction framework.
+
+### Standalone Execution
+If you plan to work on improving the codebase of the framework you would need to run the extraction framework alone as described in the [QuickStart guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/quickstart.md). This is highly recommended, since during this process you will learn a lot about the extraction framework.
 
 * Extractors represent the core of the extraction framework. So far, many extractors have been developed for extraction of particular information from different Wikimedia projects. To learn more, check the [New Extractors](https://github.com/dbpedia/extraction-framework/blob/master/documentation/new-extractor.md) guide, which explains the process of writing new extractor.
 
@@ -33,7 +36,7 @@ cd marvin-config
 
 ### Extraction using Apache Spark
 
-In order to speed up the extration process, the extraction framework has been adopted to run on Apache Spark.
+In order to speed up the extraction process, the extraction framework has been adopted to run on Apache Spark.
 Currently, more than half of the extractors can be executed using Spark. The extraction process using Spark is a slightly different process and requires different Execution. Check the [QuickStart](https://github.com/dbpedia/extraction-framework/blob/master/documentation/extraction-process.md#2-generic-spark-extraction) guide on how to run the extraction using Apache Spark.
 
 Note: if possible, new extractors should be implemented using Apache Spark. To learn more, check the [New Extractors](https://github.com/dbpedia/extraction-framework/blob/master/documentation/new-extractor.md) guide, which explains the process of writing new extractor.
