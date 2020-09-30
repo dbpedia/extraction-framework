@@ -97,6 +97,9 @@ object RdfNamespace {
   
   // doing the new global mappings
   val CEO = ns("ceo","https://linkeddata.cultureelerfgoed.nl/vocab/def/ceo#",false)
+  val BAG = ns("bag","http://bag.basisregistraties.overheid.nl/def/bag#",false)
+  val DBLP2 = ns("dblp2","https://dblp.org/rdf/schema-2020-07-01#",false)
+  val bibschema = ns("bibschema","https://bib.schema.org/",false)
 
   /**
    * @return namespace for prefix and suffix, default namespace and full name if no match found 
