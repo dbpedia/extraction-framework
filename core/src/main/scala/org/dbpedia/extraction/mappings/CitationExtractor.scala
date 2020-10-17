@@ -74,7 +74,9 @@ extends WikiPageExtractor
 
     //FIXME put this in a config!
     private val citationTemplatesRegex = List("cite.*".r, "citation.*".r, "literatur.*".r, "internetquelle.*".r, "bib.*".r,
-     "статья.*".r, "книга.*".r, "публикация.*".r, "cita.*".r, "cytuj.*".r, "citare.*".r, "citat.*".r, "kilde.*".r)
+        "статья.*".r, "книга.*".r, "публикация.*".r, "cita.*".r, "cytuj.*".r, "citare.*".r, "citat.*".r, "kilde.*".r,
+        "lien web.*".r, "ouvrage.*".r, "article.*".r, "citar.*".r, "стаття.*".r, "webbref.*".r, "tidskriftsref.*".r,
+        "bokref.*".r, "tidningsref.*".r, "citeer.*".r, "chemref.*".r)
 
     private val typeProperty = ontology.properties("rdf:type")
     //private val rdfLangStrDt = ontology.datatypes("rdf:langString")
