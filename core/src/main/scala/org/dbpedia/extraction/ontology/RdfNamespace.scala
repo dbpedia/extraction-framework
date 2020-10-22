@@ -100,6 +100,10 @@ object RdfNamespace {
   val BAG = ns("bag","http://bag.basisregistraties.overheid.nl/def/bag#",false)
   val DBLP2 = ns("dblp2","https://dblp.org/rdf/schema-2020-07-01#",false)
   val bibschema = ns("bibschema","https://bib.schema.org/",false)
+  val GN = ns("gn","http://www.geonames.org/ontology#",false)
+  val MO = ns("mo","http://purl.org/ontology/mo/",false)
+  val GND = ns("gnd","https://d-nb.info/standards/elementset/gnd#",false)
+  val RKD = ns("rkd","http://data.rkd.nl/def#",false)
 
   /**
    * @return namespace for prefix and suffix, default namespace and full name if no match found 
