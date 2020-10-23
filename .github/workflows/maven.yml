@@ -24,7 +24,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn clean install
+      run: mvn clean install -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.count=3
     - uses: act10ns/slack@v1
       with:
         status: ${{ job.status }}
