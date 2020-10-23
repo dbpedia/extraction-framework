@@ -13,14 +13,14 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
     
     def write(ontology : Ontology) : scala.xml.Elem =
     {
-
+        /* No dcterms:modified required anymore
         val currentTimeStamp = {
           val tz : TimeZone = TimeZone.getTimeZone("UTC")
           val df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
           df.setTimeZone(tz)
           df.format(new Date())
         }
-
+        */
         <rdf:RDF
           xml:base="http://dbpedia.org/ontology/"
           xmlns="http://dbpedia.org/ontology/"
@@ -53,7 +53,6 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
             <dcterms:publisher>DBpedia Maintainers</dcterms:publisher>
             <dcterms:creator>DBpedia Maintainers and Contributors</dcterms:creator>
             <dcterms:issued>2008-11-17T12:00Z</dcterms:issued>
-            <dcterms:modified>{currentTimeStamp}</dcterms:modified>
             <owl:versionInfo xml:lang="en">{version}</owl:versionInfo>
             <rdfs:comment xml:lang="en">
               This ontology is generated from the manually created specifications in the DBpedia Mappings
@@ -61,7 +60,6 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
               contains instance data extracted from the different language versions of Wikipedia. For
               information regarding changes in this ontology, please refer to the DBpedia Mappings Wiki.
             </rdfs:comment>
-            <cc:license rdf:resource="http://www.gnu.org/copyleft/fdl.html" />
             <cc:license rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
           </owl:Ontology>
         {
