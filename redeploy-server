@@ -12,7 +12,7 @@ git stash push
 git pull
 git stash pop
 
-mvn install -DskipTests
+mvn install -Dskip=true -DskipTests -Dmaven.source.skip=true
 
 #fetch data
 cd core
