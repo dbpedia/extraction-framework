@@ -61,6 +61,7 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
               information regarding changes in this ontology, please refer to the DBpedia Mappings Wiki.
             </rdfs:comment>
             <cc:license rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+            <dcterms:license rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
           </owl:Ontology>
         {
             //Write classes from the default namespace (Don't write owl, rdf and rdfs built-in classes etc.)
