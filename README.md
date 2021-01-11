@@ -1,5 +1,5 @@
 # DBpedia Information Extraction Framework
-[![Build Status](https://github.com/dbpedia/extraction-framework/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/dbpedia/extraction-framework/actions?query=workflow%3A%22Java+CI+with+Maven%22)
+![Extraction Framework Build and MiniDump Test](https://github.com/dbpedia/extraction-framework/workflows/Extraction%20Framework%20Build%20and%20MiniDump%20Test/badge.svg)
 
 **Homepage**: http://dbpedia.org <br/>
 **Documentation**: http://dev.dbpedia.org/Extraction  <br/>
