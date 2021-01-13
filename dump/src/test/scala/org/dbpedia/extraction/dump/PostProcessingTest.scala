@@ -32,7 +32,7 @@ class PostProcessingTest extends FunSuite {
   }
 
   test("type consistency check", PostProcessingTestTag) {
-    val propertyPath = classLoader.getResource("type.consistency.check.properties").getFile
+    val propertyPath = classLoader.getResource("post-processing/type.consistency.check.properties").getFile
     TypeConsistencyCheck.main(Array(propertyPath))
   }
 }
