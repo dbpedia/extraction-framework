@@ -14,15 +14,15 @@ object TestConfig {
 
   //Workaround to get resource files in Scala 2.11
   val classLoader: ClassLoader = getClass.getClassLoader
-  val mappingsConfig = new Config(classLoader.getResource("mappings.extraction.minidump.properties").getFile)
-  val genericConfig = new Config(classLoader.getResource("generic-spark.extraction.minidump.properties").getFile)
-  val nifAbstractConfig = new Config(classLoader.getResource("extraction.nif.abstracts.properties").getFile)
-  val wikidataConfig = new Config(classLoader.getResource("wikidata.extraction.properties").getFile)
+  val mappingsConfig = new Config(classLoader.getResource("extraction-configs/mappings.extraction.minidump.properties").getFile)
+  val genericConfig = new Config(classLoader.getResource("extraction-configs/generic-spark.extraction.minidump.properties").getFile)
+  val nifAbstractConfig = new Config(classLoader.getResource("extraction-configs/extraction.nif.abstracts.properties").getFile)
+  val wikidataConfig = new Config(classLoader.getResource("extraction-configs/wikidata.extraction.properties").getFile)
   val minidumpDir = new File(classLoader.getResource("minidumps").getFile)
 
   val minidumpURL: URL = classLoader.getResource("mini-enwiki.xml.bz2")
-  val ciTestFile: String = classLoader.getResource("dbpedia-specific-ci-tests.ttl").getFile
-  val XSDCITestFile: String = classLoader.getResource("xsd_ci-tests.ttl").getFile
+  val ciTestFile: String = classLoader.getResource("ci-tests/dbpedia-specific-ci-tests.ttl").getFile
+  val XSDCITestFile: String = classLoader.getResource("ci-tests/xsd_ci-tests.ttl").getFile
   val ciTestModel: Model = ModelFactory.createDefaultModel()
 
   /**
@@ -31,7 +31,7 @@ object TestConfig {
   val dumpDirectory = new File(mappingsConfig.dumpDir, s"")
   //  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
   val dbpedia_ontologyFile: String = classLoader.getResource("dbpedia.owl").getFile
-  val custom_SHACL_testFile: String = classLoader.getResource("custom-shacl-tests.ttl").getFile
+  val custom_SHACL_testFile: String = classLoader.getResource("shacl-tests/custom-shacl-tests.ttl").getFile
 
   /**
    * SPARK
