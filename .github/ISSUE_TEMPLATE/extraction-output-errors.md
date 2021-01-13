@@ -13,7 +13,7 @@ A clear name and brief description of what the erroneous output is.
 
 **Error specification**
 
-- Affected extraction artifacts (Databus identifiers): 
+- Affected extraction artifacts (Databus artifact version or file identifiers):
 	- a
 	- b
 - Example DBpedia resource URL(s) having the error (one full IRI per line): 
