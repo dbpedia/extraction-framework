@@ -5,7 +5,7 @@ TODO: requires further extension with info from: https://github.com/dbpedia/extr
 ## Requirements:
 
 * **Maven 3.2+** - used for project management and build automation. Get it from: http://maven.apache.org/.
-* **Java 1.8+ JDK** - user Java version 1.8. The framework does not compile with OpenJDK 10 & 1
+* **Java 1.8.x JDK** - use JDK version 1.8 ( Java 8)  The framework does not compile with Java 10 & 11
 * **rapper** version 2.14+ - get it from http://librdf.org/raptor/rapper.html
 * **Git** 
 * Your favourite IDE for coding. There are a number of options:
