@@ -1,11 +1,25 @@
 ---
-name: Extraction Output Errors
-about: Report erroneous or missing triples / invalid RDF of DBpedia Extraction
+name: Data Issue
+about: Problem with the data
 title: ''
-labels: ''
+labels: 'data'
 assignees: ''
 
 ---
+
+## Source
+Where did you find the data issue? Pick one, remove the others.
+
+### SPARQL
+
+
+### Monthly release dumps
+
+
+### Running the DBpedia Extraction (DIEF) software 
+
+
+
 
 **Error Description**
 

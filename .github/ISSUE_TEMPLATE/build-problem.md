@@ -1,6 +1,6 @@
 ---
-name: Software Build Problem 
-about: When trying to `mvn install` the software an error occured
+name: Build Problem 
+about: when trying to `mvn install` the software an error occured
 title: ''
 labels: 'build'
 assignees: ''

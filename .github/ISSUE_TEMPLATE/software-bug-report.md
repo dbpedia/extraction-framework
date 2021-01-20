@@ -1,7 +1,7 @@
 ---
-name: Software Bug report
+name: Software Bug Report
 about: Report a bug in the software itself (crash, exception) while running the Extraction
-  Framework software yourself
+  Framework software
 title: ''
 labels: ''
 assignees: ''
