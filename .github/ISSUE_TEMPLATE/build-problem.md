@@ -15,7 +15,6 @@ Please help us improve the docu. Which part was unclear or made you stuck?
 
 Please fill out or post:
  - Extraction Framework commit hash: 
- - Extraction Framework branch: 
  - OS: 
  - Java SDK Version (java --version):
  - Maven version (mvn --version):
