@@ -24,7 +24,6 @@ for i in `cat uris.lst` ; do
 	echo "* $i">> minidump-overview.md
 done 
 
-exit
 
 # detect languages
 LANG=`sed 's|^https://||;s|\.wikipedia.org.*||' uris.lst | sort -u` 
