@@ -1,8 +1,30 @@
 #!/bin/sh
 
-
 # sort the file
 LC_ALL=C sort -u -o uris.lst uris.lst 
+
+SHACL=`rapper -i turtle ../resources/shacl-tests/*  | cut -d ' ' -f1 | grep '^<' | sed 's/.*#//;s/^<//;s/>//' | sort -u | wc -l`
+
+echo "# Minidump Overview
+
+This readme is generated upon creation of the minidump by running \`./createMinidump.sh\` [code](https://github.com/dbpedia/extraction-framework/blob/master/dump/src/test/bash/createMinidump.sh).
+
+## SHACL Tests 
+Total: $SHACL
+
+TODO match shacl to URIs with a SPARQL query
+
+" >  minidump-overview.md
+
+echo "
+## Included Articles
+
+" > minidump-overview.md
+for i in `cat uris.lst` ; do
+	echo "* $i">> minidump-overview.md
+done 
+
+exit
 
 # detect languages
 LANG=`sed 's|^https://||;s|\.wikipedia.org.*||' uris.lst | sort -u` 

@@ -1,6 +1,5 @@
-# Minidump
 
-The following articles are included in the Minidump testing:
+## Included Articles
 
 
 * https://af.wikipedia.org/wiki/Berlyn
