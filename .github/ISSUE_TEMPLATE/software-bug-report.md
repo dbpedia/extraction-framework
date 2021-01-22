@@ -8,24 +8,24 @@ assignees: ''
 
 ---
 
-**Describe the bug**
+# Describe the bug
 
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+# To Reproduce
 
 Steps to reproduce the behavior:
 
-**Expected behavior**
+# Expected behavior
 
 A clear and concise description of what you expected to happen.
 
-**Environment:**
+Environment:
  - Extraction Framework commit hash: 
  - OS: 
  - Java SDK Version:
  - Maven version:
 
-**Additional context**
+# Additional context
 
 Add any other context about the problem here.
