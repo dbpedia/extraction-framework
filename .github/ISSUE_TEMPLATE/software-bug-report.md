@@ -1,5 +1,5 @@
 ---
-name: Software Bug Report
+name: Software Bug Report (DIEF)
 about: Report a bug in the software itself (crash, exception) while running the Extraction
   Framework software
 title: ''

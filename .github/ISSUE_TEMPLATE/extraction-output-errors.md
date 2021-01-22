@@ -7,17 +7,28 @@ assignees: ''
 
 ---
 
-## Source
+# Source
 Where did you find the data issue? Pick one, remove the others.
 
-### SPARQL
+## Web / SPARQL 
+- State the service (e.g. http://dbpedia.org/sparql) and the SPARQL query  
+- give a link to the web / linked data pages (e.g. http://dbpedia.org/resource/Berlin)
+
+## Release Dumps
+DBpedia provides monthly release dumps.
+- artifact & version 
 
 
-### Monthly release dumps
+## Running the DBpedia Extraction (DIEF) software 
+
+# Debugging URL
+
+http://dief.tools.dbpedia.org/server/extraction/en/extract?title=United+States
 
 
-### Running the DBpedia Extraction (DIEF) software 
-
+# Classification
+If you have some familiarity with DBpedia, please use the classification tags at (link) to correctly file this issue. 
+Otherwise skip this step. 
 
 
 

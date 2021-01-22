@@ -1,6 +1,6 @@
 ---
-name: Build Problem 
-about: when trying to `mvn install` the software an error occured
+name: Software Build Problem (DIEF)
+about: when trying to `mvn install` the extraction software, an error occured
 title: ''
 labels: 'build'
 assignees: ''
