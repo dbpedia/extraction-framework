@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"><page><title>Mapping fr:Album</title><ns>210</ns><id>9580</id><revision><id>35485</id><timestamp>2014-06-27T21:57:21Z</timestamp><text>{{TemplateMapping
+<?xml version='1.0' encoding='UTF-8'?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"><page><title>Mapping fr:Album</title><ns>210</ns><id>9580</id><revision><id>35485</id><timestamp>2014-06-27T21:57:21Z</timestamp><text>{{TemplateMapping
    | mapToClass = Album
    | correspondingClass = Band
    | correspondingProperty = artist
@@ -10,14 +10,14 @@
 	{{PropertyMapping | templateProperty = label | ontologyProperty = recordLabel }}
 	{{PropertyMapping | templateProperty = Label | ontologyProperty = recordLabel }}
 }}</text></revision></page><page><title>Mapping fr:Allociné titre</title><ns>210</ns><id>11068</id><revision><id>46162</id><timestamp>2015-03-17T23:32:03Z</timestamp><text>{{TemplateMapping
-| mapToClass = Work  &lt;!-- may also be a TV series, avoids creating an additional node --&gt;
+| mapToClass = Work  &lt;!-- may also be a TV series, avoids creating an additional node -->
 | mappings =
         {{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name}}
         {{PropertyMapping | templateProperty = titre | ontologyProperty = dc:title}}
         {{PropertyMapping | templateProperty = id | ontologyProperty = idAllocine}}
 	{{PropertyMapping | templateProperty = id | ontologyProperty = dct:references | prefix = http://www.allocine.fr/film/fichefilm_gen_cfilm= | suffix = .html | transform = external }}
 }}</text></revision></page><page><title>Mapping fr:Autorité</title><ns>210</ns><id>11190</id><revision><id>47393</id><timestamp>2015-03-31T21:55:22Z</timestamp><text>{{TemplateMapping
-| mapToClass = owl:Thing &lt;!-- GND/VIAF has other than Agents --&gt;
+| mapToClass = owl:Thing &lt;!-- GND/VIAF has other than Agents -->
 | mappings =
   {{PropertyMapping | templateProperty = VIAF | ontologyProperty = viafId }}
   {{PropertyMapping | templateProperty = VIAF | ontologyProperty = owl:sameAs | prefix = http://www.viaf.org/viaf/ | transform = external }}
@@ -749,7 +749,7 @@
       {{TemplateMapping | mapToClass = Sculpture}}
 }}
 
-&lt;!-- more risky conditions --&gt;
+&lt;!-- more risky conditions -->
 {{Condition
     | templateProperty = type
     | operator = contains
@@ -777,7 +777,7 @@
         {{PropertyMapping | templateProperty = musée | ontologyProperty = museum }}
         {{PropertyMapping | templateProperty = année | ontologyProperty = creationYear }}
         {{PropertyMapping | templateProperty = ville | ontologyProperty = location }}
-        {{PropertyMapping | templateProperty = ville | ontologyProperty = city }} &lt;!-- don't know which property is more suited --&gt;
+        {{PropertyMapping | templateProperty = ville | ontologyProperty = city }} &lt;!-- don't know which property is more suited -->
         {{PropertyMapping | templateProperty = pays | ontologyProperty = locationCountry }}
         {{PropertyMapping | templateProperty = localisation | ontologyProperty = location }}
         {{PropertyMapping | templateProperty = propriétaire | ontologyProperty = owner }}
@@ -791,7 +791,7 @@
         {{PropertyMapping | templateProperty = légende | ontologyProperty = depictionDescription }}
         {{PropertyMapping | templateProperty = taille | ontologyProperty = imageSize }}
 
-&lt;!-- not very clear from the template description what is the difference between these properties --&gt;
+&lt;!-- not very clear from the template description what is the difference between these properties -->
         {{PropertyMapping | templateProperty = technique | ontologyProperty = technique }}
         {{PropertyMapping | templateProperty = type | ontologyProperty = technique }}
 
@@ -1089,7 +1089,7 @@
    {{PropertyMapping | templateProperty = cours_eau | ontologyProperty = river }}
    {{IntermediateNodeMapping 
      | nodeClass = Lake
-     | correspondingProperty = lake &lt;!-- could be reservoir to be more specific --&gt; 
+     | correspondingProperty = lake &lt;!-- could be reservoir to be more specific --> 
      | mappings = 
         {{PropertyMapping | templateProperty = surface_réservoir | ontologyProperty = area | unit = Area }}
         {{PropertyMapping | templateProperty = volume_réservoir | ontologyProperty = volume | unit = Volume }}
@@ -1196,7 +1196,7 @@
 	{{PropertyMapping | templateProperty = rég | ontologyProperty = region }}
 	{{PropertyMapping | templateProperty = dépt | ontologyProperty = department}}
 	{{PropertyMapping | templateProperty = arrt | ontologyProperty = arrondissement }}
-	{{PropertyMapping | templateProperty = circonscription | ontologyProperty = part }} &lt;!-- nothing better --&gt;
+	{{PropertyMapping | templateProperty = circonscription | ontologyProperty = part }} &lt;!-- nothing better -->
 	{{PropertyMapping | templateProperty = ville | ontologyProperty = administrativeHeadCity }}
 	{{PropertyMapping | templateProperty = insee | ontologyProperty = inseeCode }}
 	{{PropertyMapping | templateProperty = nbcomm | ontologyProperty = numberOfMunicipalities }}
@@ -1503,9 +1503,9 @@
         {{PropertyMapping | templateProperty = couleurs | ontologyProperty = colourName }}
 
 	{{PropertyMapping | templateProperty = président | ontologyProperty = chairman }}
-        &lt;!--{{PropertyMapping | templateProperty = chrtitle | ontologyProperty = chairmanTitle }}--&gt;
+        &lt;!--{{PropertyMapping | templateProperty = chrtitle | ontologyProperty = chairmanTitle }}-->
 	{{PropertyMapping | templateProperty = entraîneur | ontologyProperty = manager }}
-	&lt;!--{{PropertyMapping | templateProperty = mgrtitle | ontologyProperty = managerTitle }}--&gt;
+	&lt;!--{{PropertyMapping | templateProperty = mgrtitle | ontologyProperty = managerTitle }}-->
         {{PropertyMapping | templateProperty = championnat actuel  | ontologyProperty = league }}   
 	{{PropertyMapping | templateProperty = meilleur buteur | ontologyProperty = clubsRecordGoalscorer }}
 	{{PropertyMapping | templateProperty = propriétaire | ontologyProperty = owner }}
@@ -1561,9 +1561,9 @@
         {{PropertyMapping | templateProperty = Couleurs | ontologyProperty = colourName }}
 
 	{{PropertyMapping | templateProperty = Président | ontologyProperty = chairman }}
-        &lt;!--{{PropertyMapping | templateProperty = chrtitle | ontologyProperty = chairmanTitle }}--&gt;
+        &lt;!--{{PropertyMapping | templateProperty = chrtitle | ontologyProperty = chairmanTitle }}-->
 	{{PropertyMapping | templateProperty = Entraîneur | ontologyProperty = manager }}
-	&lt;!--{{PropertyMapping | templateProperty = mgrtitle | ontologyProperty = managerTitle }}--&gt;
+	&lt;!--{{PropertyMapping | templateProperty = mgrtitle | ontologyProperty = managerTitle }}-->
 
         {{PropertyMapping | templateProperty = Championnat actuel  | ontologyProperty = league }}   
 	{{PropertyMapping | templateProperty = Meilleur buteur | ontologyProperty = clubsRecordGoalscorer }}
@@ -1581,7 +1581,7 @@
 	{{PropertyMapping | templateProperty = worstdefeat | ontologyProperty = worstDefeat }}
 	{{PropertyMapping | templateProperty = fansgroup | ontologyProperty = fansgroup }}
 	{{PropertyMapping | templateProperty = honours | ontologyProperty = honours }}
---&gt;
+-->
 }}</text></revision></page><page><title>Mapping fr:Infobox Commune d'Algérie</title><ns>210</ns><id>6836</id><revision><id>45350</id><timestamp>2015-02-15T14:56:32Z</timestamp><text>{{TemplateMapping
 | mapToClass = Settlement
 | mappings =
@@ -3217,9 +3217,9 @@
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
 
 
-	&lt;!--{{PropertyMapping | templateProperty = destinations | ontologyProperty = destination }} should be the number of destinations --&gt;
-	&lt;!--{{PropertyMapping | templateProperty = frequent flyer | ontologyProperty = targetAirport }} --&gt;
-	&lt;!--{{PropertyMapping | templateProperty = sleutelpersonen | ontologyProperty = ceo }}--&gt;
+	&lt;!--{{PropertyMapping | templateProperty = destinations | ontologyProperty = destination }} should be the number of destinations -->
+	&lt;!--{{PropertyMapping | templateProperty = frequent flyer | ontologyProperty = targetAirport }} -->
+	&lt;!--{{PropertyMapping | templateProperty = sleutelpersonen | ontologyProperty = ceo }}-->
 }}</text></revision></page><page><title>Mapping fr:Infobox Compétition sportive</title><ns>210</ns><id>4389</id><revision><id>45475</id><timestamp>2015-02-27T00:21:03Z</timestamp><text>{{ConditionalMapping
 | cases =
  {{Condition
@@ -4065,11 +4065,11 @@
         {{PropertyMapping | templateProperty = développeur | ontologyProperty = developer }}
 	{{PropertyMapping | templateProperty = distributeur | ontologyProperty = distributor }}
 
-&lt;!--    {{PropertyMapping | templateProperty = director | ontologyProperty = director }}   --&gt;     
+&lt;!--    {{PropertyMapping | templateProperty = director | ontologyProperty = director }}   -->     
 &lt;!--	{{PropertyMapping | templateProperty = producer | ontologyProperty = producer }}        
 	{{PropertyMapping | templateProperty = designer | ontologyProperty = designer }}       
 	{{PropertyMapping | templateProperty = artist | ontologyProperty = gameArtist}}
-	{{PropertyMapping | templateProperty = writer | ontologyProperty = writer }}    --&gt;
+	{{PropertyMapping | templateProperty = writer | ontologyProperty = writer }}    -->
 
 	{{PropertyMapping | templateProperty = musique | ontologyProperty = composer }}
 	{{PropertyMapping | templateProperty = date | ontologyProperty = releaseDate }}
@@ -4699,7 +4699,7 @@
 	{{PropertyMapping | templateProperty = DiseasesDB_mult | ontologyProperty = diseasesDB }}
 	{{PropertyMapping | templateProperty = MedlinePlus_mult | ontologyProperty = medlinePlus }}
 	{{PropertyMapping | templateProperty = eMedicine | ontologyProperty = eMedicineSubject }}
-&lt;!--	{{PropertyMapping | templateProperty = IHS | ontologyProperty = impossible }} --&gt;
+&lt;!--	{{PropertyMapping | templateProperty = IHS | ontologyProperty = impossible }} -->
 	{{PropertyMapping | templateProperty = Background | ontologyProperty = background }}
 	{{PropertyMapping | templateProperty = Image | ontologyProperty = logo }}
 	{{PropertyMapping | templateProperty = Medline | ontologyProperty = medlinePlus }}
@@ -5132,7 +5132,7 @@
 	{{PropertyMapping | templateProperty = auteur-compositeur | ontologyProperty = composer }}
 	{{PropertyMapping | templateProperty = édition | ontologyProperty = publisher }}
 	{{PropertyMapping | templateProperty = classement | ontologyProperty = rank }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Musique classique (personnalité)</title><ns>210</ns><id>5925</id><revision><id>28132</id><timestamp>2013-08-31T18:27:08Z</timestamp><text>&lt;!-- For an overview over all known types see: http://fr.wikipedia.org/wiki/Mod%C3%A8le:Infobox_Musique_classique_(personnalit%C3%A9)#Charte_graphique --&gt;
+}}</text></revision></page><page><title>Mapping fr:Infobox Musique classique (personnalité)</title><ns>210</ns><id>5925</id><revision><id>28132</id><timestamp>2013-08-31T18:27:08Z</timestamp><text>&lt;!-- For an overview over all known types see: http://fr.wikipedia.org/wiki/Mod%C3%A8le:Infobox_Musique_classique_(personnalit%C3%A9)#Charte_graphique -->
 {{ConditionalMapping
 
 | cases =
@@ -5197,7 +5197,7 @@
 	{{PropertyMapping | templateProperty = titre autre | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = musique | ontologyProperty = musicComposer }}
 	{{PropertyMapping | templateProperty = musique | ontologyProperty = author }}
-	&lt;!--{{PropertyMapping | templateProperty = texte | ontologyProperty = lyrics }}--&gt;
+	&lt;!--{{PropertyMapping | templateProperty = texte | ontologyProperty = lyrics }}-->
         {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
         {{PropertyMapping | templateProperty = première monde date | ontologyProperty = releaseDate }}
 	{{PropertyMapping | templateProperty = durée | ontologyProperty = runtime | unit = minute }}
@@ -5236,7 +5236,7 @@
 
 	{{PropertyMapping | templateProperty = type | ontologyProperty = type }}
 	{{PropertyMapping | templateProperty = network | ontologyProperty = network }}
-	--&gt;
+	-->
 }}</text></revision></page><page><title>Mapping fr:Infobox Nageur</title><ns>210</ns><id>5864</id><revision><id>27366</id><timestamp>2013-07-10T14:15:24Z</timestamp><text>{{
  TemplateMapping | mapToClass = Swimmer 
  | mappings = 
@@ -5336,7 +5336,7 @@
 	{{PropertyMapping | templateProperty = titre | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = titre autre | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = musique | ontologyProperty = musicComposer }}
-	&lt;!--{{PropertyMapping | templateProperty = musique | ontologyProperty = author }}--&gt;
+	&lt;!--{{PropertyMapping | templateProperty = musique | ontologyProperty = author }}-->
 	{{PropertyMapping | templateProperty = livret | ontologyProperty = lyrics }}
         {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
         {{PropertyMapping | templateProperty = première monde date | ontologyProperty = releaseDate }}
@@ -5463,11 +5463,11 @@
 	{{PropertyMapping | templateProperty = nom_local | ontologyProperty = foaf:name }}
         {{PropertyMapping | templateProperty = langue | ontologyProperty = language }}
         {{PropertyMapping | templateProperty = prononciation | ontologyProperty = pronunciation }}
-        {{PropertyMapping | templateProperty = nom_local_1 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_1 --&gt;
-        {{PropertyMapping | templateProperty = nom_local_2 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_2 --&gt;
-        {{PropertyMapping | templateProperty = nom_local_3 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_3 --&gt;
-        {{PropertyMapping | templateProperty = nom_local_4 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_4 --&gt;
-        {{PropertyMapping | templateProperty = nom_local_5 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_5 --&gt;
+        {{PropertyMapping | templateProperty = nom_local_1 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_1 -->
+        {{PropertyMapping | templateProperty = nom_local_2 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_2 -->
+        {{PropertyMapping | templateProperty = nom_local_3 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_3 -->
+        {{PropertyMapping | templateProperty = nom_local_4 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_4 -->
+        {{PropertyMapping | templateProperty = nom_local_5 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_5 -->
         {{PropertyMapping | templateProperty = image_drapeau | ontologyProperty = flag }}
         {{PropertyMapping | templateProperty = image_blason | ontologyProperty = blazon }}
         {{PropertyMapping | templateProperty = image_map | ontologyProperty = map }}
@@ -5555,7 +5555,7 @@
            {{PropertyMapping | templateProperty = IDH_rang | ontologyProperty = rank }}
            {{PropertyMapping | templateProperty = IDH_catégorie | ontologyProperty = category }}
         }}
---&gt;
+-->
 	{{PropertyMapping | templateProperty = monnaie | ontologyProperty = currency }} 
         {{PropertyMapping | templateProperty = code_monnaie | ontologyProperty = currencyCode }}
         {{PropertyMapping | templateProperty = fuseau_horaire | ontologyProperty = timeZone }}
@@ -7062,7 +7062,7 @@ Temperature }}
 | defaultMappings =
  {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
  {{PropertyMapping | templateProperty = lieu | ontologyProperty = locationCity | select = first }}
-&lt;!-- {{PropertyMapping | templateProperty = lieu | ontologyProperty = locationCountry | select = last }} --&gt;
+&lt;!-- {{PropertyMapping | templateProperty = lieu | ontologyProperty = locationCountry | select = last }} -->
  {{PropertyMapping | templateProperty = type | ontologyProperty = type }}
  {{PropertyMapping | templateProperty = gestion | ontologyProperty = operator }}
  {{PropertyMapping | templateProperty = structure-mère | ontologyProperty = organisation }}
@@ -7565,16 +7565,16 @@ Temperature }}
 	{{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
 	{{PropertyMapping | templateProperty = site_web | ontologyProperty = foaf:homepage }}
 	{{PropertyMapping | templateProperty = site web | ontologyProperty = foaf:homepage }}
-}}</text></revision></page><page><title>Mapping fr:Infobox Territoire</title><ns>210</ns><id>7159</id><revision><id>45830</id><timestamp>2015-03-14T13:23:49Z</timestamp><text>&lt;!-- language = langue_1  awaits resolution of https://github.com/dbpedia/extraction-framework/issues/350 --&gt;
+}}</text></revision></page><page><title>Mapping fr:Infobox Territoire</title><ns>210</ns><id>7159</id><revision><id>45830</id><timestamp>2015-03-14T13:23:49Z</timestamp><text>&lt;!-- language = langue_1  awaits resolution of https://github.com/dbpedia/extraction-framework/issues/350 -->
 
 {{TemplateMapping
 | mapToClass = Territory
 | mappings =
         {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
-        {{PropertyMapping | templateProperty = nom_local_1 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_1 --&gt;
-        {{PropertyMapping | templateProperty = nom_local_2 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_2 --&gt;
-        {{PropertyMapping | templateProperty = nom_local_3 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_3 --&gt;
-        {{PropertyMapping | templateProperty = nom_local_4 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_4 --&gt;
+        {{PropertyMapping | templateProperty = nom_local_1 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_1 -->
+        {{PropertyMapping | templateProperty = nom_local_2 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_2 -->
+        {{PropertyMapping | templateProperty = nom_local_3 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_3 -->
+        {{PropertyMapping | templateProperty = nom_local_4 | ontologyProperty = foaf:name }} &lt;!-- | language = langue_4 -->
         {{PropertyMapping | templateProperty = drapeau | ontologyProperty = flag }}
         {{PropertyMapping | templateProperty = légende drapeau | ontologyProperty = flagCaption }}
         {{PropertyMapping | templateProperty = blason | ontologyProperty = blazon }} 
@@ -7624,7 +7624,7 @@ Temperature }}
         | mappings =
            {{PropertyMapping | templateProperty = pib_hab | ontologyProperty = value }}
         }}
---&gt;
+-->
         {{PropertyMapping | templateProperty = monnaie | ontologyProperty = currency }} 
         {{PropertyMapping | templateProperty = fuseau_horaire | ontologyProperty = timeZone }}
         {{PropertyMapping | templateProperty = domaine_internet | ontologyProperty = topLevelDomain }}
@@ -7688,7 +7688,7 @@ Temperature }}
 	}}
 
 
-&lt;!-- Entries seems to be in lower case, but not counted by statistics otherwise --&gt;
+&lt;!-- Entries seems to be in lower case, but not counted by statistics otherwise -->
 	{{PropertyMapping | templateProperty = Nom | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = Nom de l'édition | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = Lieu | ontologyProperty = location }}
@@ -8325,7 +8325,7 @@ Temperature }}
         {{PropertyMapping | templateProperty = année_pop | ontologyProperty = populationAsOf }}
         {{PropertyMapping | templateProperty = maire | ontologyProperty = mayor }}
 
-        {{PropertyMapping | templateProperty = division | ontologyProperty = locatedInArea }} &lt;!-- Can "nom de division" be taken into account to specify the property ? --&gt;
+        {{PropertyMapping | templateProperty = division | ontologyProperty = locatedInArea }} &lt;!-- Can "nom de division" be taken into account to specify the property ? -->
         {{PropertyMapping | templateProperty = division2 | ontologyProperty = locatedInArea }}
         {{PropertyMapping | templateProperty = division3 | ontologyProperty = locatedInArea }}
         {{PropertyMapping | templateProperty = division4 | ontologyProperty = locatedInArea }}
@@ -8353,7 +8353,7 @@ Temperature }}
         {{PropertyMapping | templateProperty = canton | ontologyProperty = canton }}      
 
 
---&gt;
+-->
 }}</text></revision></page><page><title>Mapping fr:Infobox Ville de Chine</title><ns>210</ns><id>7224</id><revision><id>27831</id><timestamp>2013-07-16T14:37:18Z</timestamp><text>{{TemplateMapping 
 | mapToClass = City 
 | mappings = 
@@ -10467,7 +10467,7 @@ Temperature }}
     | mapToClass            = PersonFunction
     | correspondingClass    = Person
     | correspondingProperty = occupation
---&gt;
+-->
 | mappings =
     {{IntermediateNodeMapping
       | nodeClass = PersonFunction
@@ -10493,14 +10493,14 @@ Temperature }}
 | mappings =
         {{PropertyMapping | templateProperty = phylum | ontologyProperty = phylum }}
         {{PropertyMapping | templateProperty = embranchement | ontologyProperty = division }}
-        &lt;!-- {{PropertyMapping | templateProperty = sous-embranchement | ontologyProperty = }} --&gt;
+        &lt;!-- {{PropertyMapping | templateProperty = sous-embranchement | ontologyProperty = }} -->
         {{PropertyMapping | templateProperty = classe | ontologyProperty = class }}
-        &lt;!-- {{PropertyMapping | templateProperty = sous-classe | ontologyProperty = }} --&gt;
-        &lt;!-- {{PropertyMapping | templateProperty = infra-classe | ontologyProperty = }} --&gt;
+        &lt;!-- {{PropertyMapping | templateProperty = sous-classe | ontologyProperty = }} -->
+        &lt;!-- {{PropertyMapping | templateProperty = infra-classe | ontologyProperty = }} -->
         {{PropertyMapping | templateProperty = ordre | ontologyProperty = order }}
-        &lt;!-- {{PropertyMapping | templateProperty = sous-ordre | ontologyProperty = }} --&gt;
+        &lt;!-- {{PropertyMapping | templateProperty = sous-ordre | ontologyProperty = }} -->
         {{PropertyMapping | templateProperty = famille | ontologyProperty = family }}
-        &lt;!-- {{PropertyMapping | templateProperty = sous-famille | ontologyProperty =  }} --&gt;
+        &lt;!-- {{PropertyMapping | templateProperty = sous-famille | ontologyProperty =  }} -->
         {{PropertyMapping | templateProperty = genre | ontologyProperty = genus }}
 }}</text></revision></page><page><title>Mapping fr:Taxobox taxon</title><ns>210</ns><id>11835</id><revision><id>52026</id><timestamp>2017-04-11T08:38:03Z</timestamp><text>{{ ConditionalMapping | cases =
   {{ Condition
