@@ -10,6 +10,22 @@ import scala.collection.mutable.ListBuffer
 
 object MinidumpDoc extends App {
 
+  val shapesSHACLFile = new File(args(0))
+  val miniExtractionBaseDir = new File(args(1))
+  val urisFile = new File(args(2))
+
+  if (!(shapesSHACLFile.exists() && miniExtractionBaseDir.exists() && urisFile.exists())) {
+    println(
+      s"""Make sure
+         |${shapesSHACLFile.getAbsolutePath}
+         |${miniExtractionBaseDir.getAbsolutePath} (run: mvn test in dump module)
+         |${urisFile.getAbsolutePath}
+         |exists
+         |""".stripMargin
+    )
+    System.exit(1)
+  }
+
   sealed trait Target
 
   case class TargetNode(s: String) extends Target
@@ -27,7 +43,7 @@ object MinidumpDoc extends App {
   ontologySHACL.read("http://www.w3.org/ns/shacl#")
 
   val shapesSHACL = ModelFactory.createDefaultModel()
-  shapesSHACL.read(args(0))
+  shapesSHACL.read(shapesSHACLFile.getAbsolutePath)
 
   val testModel = ModelFactory.createRDFSModel(ontologySHACL, shapesSHACL)
 
@@ -48,7 +64,7 @@ object MinidumpDoc extends App {
     val qs = rs.next()
     val targetNode = {
       if (qs.contains("targetNode")) {
-        println(s"tests ${Some(TargetNode(qs.get("targetNode").asResource().getURI))} on ${TargetNode(qs.get("targetNode").asResource().getURI)}")
+        println(s"tests ${Some(TargetNode(qs.get("targetNode").asResource().getURI))} on target ${qs.get("targetNode").asResource().getURI}")
         None
         //TODO
         //Some(TarNode(qs.get("targetNode").asResource().getURI))
@@ -67,9 +83,8 @@ object MinidumpDoc extends App {
   }
 
   // Select From MiniExtraction
-  val miniExtractionBaseDir = new File(args(1))
-  if (!testsBuffer.isEmpty) {
-    val urisFile = new File(args(2))
+  if (testsBuffer.nonEmpty) {
+
     val minidumpURIs = convertWikiPageToDBpediaURI(urisFile)
     val miniExtraction = loadMiniExtraction(miniExtractionBaseDir)
     testsBuffer.foreach({
@@ -100,9 +115,9 @@ object MinidumpDoc extends App {
   def convertWikiPageToDBpediaURI(urisF: File): Set[String] = {
     val source = scala.io.Source.fromFile(urisF)
     source.getLines().map({ wikiPage =>
-      wikiPage.replace("https://","http://")
-        .replace("wikipedia.org/wiki/","dbpedia.org/resource/")
-        .replace("wikidata.org/wiki/","wikidata.dbpedia.org/resource/")
+      wikiPage.replace("https://", "http://")
+        .replace("wikipedia.org/wiki/", "dbpedia.org/resource/")
+        .replace("wikidata.org/wiki/", "wikidata.dbpedia.org/resource/")
     }).toSet
   }
 
