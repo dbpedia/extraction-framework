@@ -7,3 +7,4 @@ assignees: ''
 
 ---
 
+> Note that forum.dbpedia.org is also an excellent venue to discuss features and other topics. We mostly use the issue tracker for tracking problems. 
