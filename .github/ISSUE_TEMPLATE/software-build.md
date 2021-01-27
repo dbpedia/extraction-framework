@@ -12,7 +12,6 @@ Please help us improve the docu. Which part was unclear or made you stuck?
 * Make sure maven is using java 1.8 (mvn --version)
 
 # Environment:
-
 > *Please fill out or post:*
  - **Extraction:** (commit hash): 
  - **OS:** 
@@ -20,10 +19,11 @@ Please help us improve the docu. Which part was unclear or made you stuck?
  - **Maven version** (mvn --version):
 
 # Error description
-> Please describe the problem. 
+> Please state the nature of your technical emergency. 
 
 # Log
-> Which command did you use (e.g., mvn install)? 
+> Which command did you use (e.g., mvn install)?
+> In which folder? 
 ```
 
 ```

@@ -3,14 +3,14 @@ name: Software Bug Report (DIEF)
 about: Report a bug in the software itself (crash, exception, unexpected behaviour) while running the Extraction
   Framework software
 title: ''
-labels: ''
+labels: 'bug'
 assignees: ''
 ---
 
-# Describe the Bug
+# Describe the bug
 > A clear and concise description of what the bug is.
 
-# Expected Behaviour
+# Expected behaviour
 > A clear and concise description of what you expected to happen.
 
 # Environment
@@ -21,10 +21,10 @@ assignees: ''
  - **Java SDK Version** (java --version):
  - **Maven version** (mvn --version):
  
-# To Reproduce
+# To reproduce
 > Steps to reproduce the behavior.
 
-# Additional Context & Logs
+# Additional context & logs
 > Add any other context or logs about the problem here.
 ```
 
