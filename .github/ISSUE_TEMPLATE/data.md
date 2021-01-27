@@ -7,23 +7,24 @@ assignees: ''
 
 ---
 
+# Issue Uptodateness
+> Is the issue still valid? If you found the issue in a release dump or on a hosted service it could be that it already has been fixed.
+> verify with http://dief.tools.dbpedia.org/server/extraction/ by picking the appropriate language and the example resource where you found the issue http://dief.tools.dbpedia.org/server/extraction/en/extract?title=United+States
+[ ] validated with 
+
 # Source
-Where did you find the data issue? Pick one, remove the others.
+> Where did you find the data issue? Pick one, remove the others.
 
-## Web / SPARQL 
-- State the service (e.g. http://dbpedia.org/sparql) and the SPARQL query  
-- give a link to the web / linked data pages (e.g. http://dbpedia.org/resource/Berlin)
+### Web / SPARQL 
+> - State the service (e.g. http://dbpedia.org/sparql) and the SPARQL query  
+> - give a link to the web / linked data pages (e.g. http://dbpedia.org/resource/Berlin)
 
-## Release Dumps
-DBpedia provides monthly release dumps.
-- artifact & version 
+### Release Dumps
+> DBpedia provides monthly release dumps.
+> - artifact & version 
 
+### Running the DBpedia Extraction (DIEF) software 
 
-## Running the DBpedia Extraction (DIEF) software 
-
-# Debugging URL
-
-http://dief.tools.dbpedia.org/server/extraction/en/extract?title=United+States
 
 
 # Classification
@@ -32,11 +33,11 @@ Otherwise skip this step.
 
 
 
-## Error Description
+### Error Description
 
 A clear name and brief description of what the erroneous output is.
 
-## Error specification
+### Error specification
 
 - Affected extraction artifacts (Databus artifact version or file identifiers):
 	- https://databus.dbpedia.org/dbpedia/mappings/mappingbased-objects/mappingbased-objects_lang=en_disjointDomain.ttl.bz2
@@ -53,6 +54,6 @@ A clear name and brief description of what the erroneous output is.
   
   ```
 
-## Additional context
+### Additional context
 
 Add any other context about the problem here.
