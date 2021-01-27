@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump.util
 
-import java.io.{BufferedInputStream, File, FileInputStream}
+import java.io.{BufferedInputStream, File, FileInputStream, FileReader}
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import org.apache.jena.query.QueryExecutionFactory
@@ -11,9 +11,12 @@ import scala.collection.mutable.ListBuffer
 object MinidumpDoc extends App {
 
   sealed trait Target
-  case class TarNode(s: String) extends Target
-  case class TarSubject(p: String) extends Target
-  case class TarObject(p: String) extends Target
+
+  case class TargetNode(s: String) extends Target
+
+  case class TargetSubjectOf(p: String) extends Target
+
+  case class TargetObjectOf(p: String) extends Target
 
   case class TestDefinition(id: String, target: Target)
 
@@ -45,27 +48,29 @@ object MinidumpDoc extends App {
     val qs = rs.next()
     val targetNode = {
       if (qs.contains("targetNode")) {
-        println(s"tests ${Some(TarNode(qs.get("targetNode").asResource().getURI))} on ${Some(TarNode(qs.get("targetNode").asResource().getURI))}")
+        println(s"tests ${Some(TargetNode(qs.get("targetNode").asResource().getURI))} on ${TargetNode(qs.get("targetNode").asResource().getURI)}")
         None
         //TODO
         //Some(TarNode(qs.get("targetNode").asResource().getURI))
       } else if (qs.contains("subjectOf")) {
-        Some(TarSubject(qs.get("subjectOf").asResource().getURI))
+        Some(TargetSubjectOf(qs.get("subjectOf").asResource().getURI))
       } else if (qs.contains("objectOf")) {
-        Some(TarObject(qs.get("objectOf").asResource().getURI))
+        Some(TargetObjectOf(qs.get("objectOf").asResource().getURI))
       } else {
         None
       }
     }
     val shape = qs.get("shape").asResource()
     if (shape.isURIResource && targetNode.isDefined) {
-      testsBuffer.append(TestDefinition(shape.getURI,targetNode.get))
+      testsBuffer.append(TestDefinition(shape.getURI, targetNode.get))
     }
   }
 
   // Select From MiniExtraction
   val miniExtractionBaseDir = new File(args(1))
-  if(! testsBuffer.isEmpty) {
+  if (!testsBuffer.isEmpty) {
+    val urisFile = new File(args(2))
+    val minidumpURIs = convertWikiPageToDBpediaURI(urisFile)
     val miniExtraction = loadMiniExtraction(miniExtractionBaseDir)
     testsBuffer.foreach({
       testDef =>
@@ -73,22 +78,32 @@ object MinidumpDoc extends App {
         val queryString = new StringBuilder
         queryString.append("SELECT DISTINCT ?t { ")
         testDef.target match {
-          case TarNode(s) => queryString.append(s"VALUES ?t { <$s> } ?t ?p ?o . }")
-          case TarSubject(p) => queryString.append(s"?t <$p> ?o . }")
-          case TarObject(p) => queryString.append(s"?s <$p> ?t . }")
+          case TargetNode(s) => queryString.append(s"VALUES ?t { <$s> } ?t ?p ?o . }")
+          case TargetSubjectOf(p) => queryString.append(s"?t <$p> ?o . }")
+          case TargetObjectOf(p) => queryString.append(s"?s <$p> ?t . }")
         }
 
-        val exec = QueryExecutionFactory.create(queryString.toString(),miniExtraction)
+        val exec = QueryExecutionFactory.create(queryString.toString(), miniExtraction)
 
         val rs = exec.execSelect()
 
         while (rs.hasNext) {
           val qs = rs.next
           val t = qs.get("t").asResource().getURI
-          if(t.contains("dbpedia.org/"))
-          println(s"tests ${testDef.target} on $t")
+          if (t.contains("dbpedia.org/") && minidumpURIs.contains(t)) {
+            println(s"tests ${testDef.target} on target $t")
+          }
         }
     })
+  }
+
+  def convertWikiPageToDBpediaURI(urisF: File): Set[String] = {
+    val source = scala.io.Source.fromFile(urisF)
+    source.getLines().map({ wikiPage =>
+      wikiPage.replace("https://","http://")
+        .replace("wikipedia.org/wiki/","dbpedia.org/resource/")
+        .replace("wikidata.org/wiki/","wikidata.dbpedia.org/resource/")
+    }).toSet
   }
 
   def loadMiniExtraction(d: File) = {
@@ -98,7 +113,7 @@ object MinidumpDoc extends App {
 
     val model: Model = ModelFactory.createDefaultModel()
     for (file <- filesToBeValidated) {
-      model.read(new BZip2CompressorInputStream(new FileInputStream(file)),null, "TTL")
+      model.read(new BZip2CompressorInputStream(new FileInputStream(file)), null, "TTL")
     }
     model
   }
