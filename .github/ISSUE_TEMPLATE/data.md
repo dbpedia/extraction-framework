@@ -7,11 +7,19 @@ assignees: ''
 
 ---
 
+<<<<<<< HEAD
 # Issue still valid?
 > DBpedia updates frequently in this order: 1. DIEF software, 2. monthly dumps, 3. online services loaded from dumps.
 > We update http://dief.tools.dbpedia.org/server/extraction/ on a daily basis from the git and it reflects the current state. 
 > Please verify your issue with this service, e.g. http://dief.tools.dbpedia.org/server/extraction/en/extract?title=United+States
 > Please add the link you used for verification: 
+=======
+# Issue Uptodateness
+> Is the issue still valid? If you found the issue in a release dump or on a hosted service it could be that it already has been fixed.
+> verify with http://dief.tools.dbpedia.org/server/extraction/ by picking the appropriate language and the example resource where you found the issue http://dief.tools.dbpedia.org/server/extraction/en/extract?title=United+States
+
+- [ ] validated with 
+>>>>>>> 8b7e2504c4a3b0f0134eb5a7bbd056c553e293dd
 
 # Source
 > Where did you find the data issue? Pick one, remove the others.

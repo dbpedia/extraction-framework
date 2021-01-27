@@ -1,12 +1,13 @@
 package org.dbpedia.extraction.dump
 
 import java.io.{File, FileInputStream, FileOutputStream}
-import java.util
 
 import org.aksw.rdfunit.RDFUnit
 import org.aksw.rdfunit.enums.TestCaseExecutionType
+import org.aksw.rdfunit.io.format.SerialiazationFormatFactory
 import org.aksw.rdfunit.io.reader.{RdfModelReader, RdfStreamReader}
 import org.aksw.rdfunit.io.writer.RdfResultsWriterFactory
+import org.aksw.rdfunit.model.impl.results.DatasetOverviewResults
 import org.aksw.rdfunit.model.interfaces.results.TestExecution
 import org.aksw.rdfunit.model.interfaces.{TestCase, TestSuite}
 import org.aksw.rdfunit.sources.{SchemaSource, SchemaSourceFactory, TestSourceBuilder}
@@ -30,19 +31,19 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
   test("RDFUnit with SHACL", ShaclTestTag) {
     val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuite()
     val results =
-      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.shaclTestCaseResult, "./target/testreports/shacl-tests.html")
+      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/shacl-tests.html")
 
-    assert(results.getTestCaseResults.isEmpty)
+    assert(results.getDatasetOverviewResults.getErrorTests == 0)
   }
 
 
-  test("RDFUnit with ontology", ShaclTestTag) {
-    val (schema: SchemaSource, testSuite: TestSuite) = generateOntologyTestSuite
-    val results =
-      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/onto-tests.html")
-
-    // TODO assert
-  }
+//  test("RDFUnit with ontology", ShaclTestTag) {
+//    val (schema: SchemaSource, testSuite: TestSuite) = generateOntologyTestSuite
+//    val results =
+//      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/onto-tests.html")
+//
+//    // TODO assert
+//  }
 
 
   def generateShaclTestSuite(): (SchemaSource, TestSuite) = {
@@ -56,7 +57,7 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     rdfUnit.init
 
     val shaclTestGenerator = new ShaclTestGenerator()
-    val shaclTests: util.Collection[TestCase] = shaclTestGenerator.generate(schema)
+    val shaclTests: java.util.Collection[TestCase] = shaclTestGenerator.generate(schema)
     val testSuite = new TestSuite(shaclTests)
     (schema, testSuite)
   }
@@ -105,9 +106,13 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
 
     val results = RDFUnitStaticValidator.validate(executionType, testSource, testSuite)
 
+    val mod = ModelFactory.createDefaultModel()
+//    RdfResultsWriterFactory.createWriterFromFormat(new FileOutputStream(sinkFileName.replace("html","ttl"), false),SerialiazationFormatFactory.createTriG(),results).write(ModelFactory.createDefaultModel())
     RdfResultsWriterFactory.createHtmlWriter(
       results, new FileOutputStream(sinkFileName, false)
-    ).write(ModelFactory.createDefaultModel())
+    ).write(mod)
+
+    mod.write(System.out,"TURTLE")
 
     results
   }
