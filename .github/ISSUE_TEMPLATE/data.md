@@ -1,6 +1,6 @@
 ---
 name: Data Issue
-about: Problem with the data
+about: Problem with the DBpedia extracted data
 title: ''
 labels: 'data'
 assignees: ''
@@ -32,18 +32,18 @@ Otherwise skip this step.
 
 
 
-**Error Description**
+## Error Description
 
 A clear name and brief description of what the erroneous output is.
 
-**Error specification**
+## Error specification
 
 - Affected extraction artifacts (Databus artifact version or file identifiers):
-	- a
-	- b
+	- https://databus.dbpedia.org/dbpedia/mappings/mappingbased-objects/mappingbased-objects_lang=en_disjointDomain.ttl.bz2
+	- 
 - Example DBpedia resource URL(s) having the error (one full IRI per line): 
-	- a 
-	- b
+	- https://dbpedia.org/resource/Leipzig 
+	- 
 - Erroneous triples RDF snippet (NTRIPLES): 
   ``` 
   
@@ -53,6 +53,6 @@ A clear name and brief description of what the erroneous output is.
   
   ```
 
-**Additional context**
+## Additional context
 
 Add any other context about the problem here.
