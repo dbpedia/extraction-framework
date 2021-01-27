@@ -1,31 +1,31 @@
 ---
 name: Software Bug Report (DIEF)
-about: Report a bug in the software itself (crash, exception) while running the Extraction
+about: Report a bug in the software itself (crash, exception, unexpected behaviour) while running the Extraction
   Framework software
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
-# Describe the bug
+# Describe the Bug
+> A clear and concise description of what the bug is.
 
-A clear and concise description of what the bug is.
+# Expected Behaviour
+> A clear and concise description of what you expected to happen.
 
+# Environment
+
+> *Please fill out or post:*
+ - **Extraction:** (commit hash): 
+ - **OS:** 
+ - **Java SDK Version** (java --version):
+ - **Maven version** (mvn --version):
+ 
 # To Reproduce
+> Steps to reproduce the behavior.
 
-Steps to reproduce the behavior:
+# Additional Context & Logs
+> Add any other context or logs about the problem here.
+```
 
-# Expected behavior
-
-A clear and concise description of what you expected to happen.
-
-Environment:
- - Extraction Framework commit hash: 
- - OS: 
- - Java SDK Version:
- - Maven version:
-
-# Additional context
-
-Add any other context about the problem here.
+```
