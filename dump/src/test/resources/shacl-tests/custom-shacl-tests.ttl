@@ -8,21 +8,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix prov: <http://www.w3.org/ns/prov#>.
 
-<#geowgs84>
-	a sh:NodeShape ;
-	rdfs:comment "generic test for range of wgs84 lat/long" ;
-	sh:targetSubjectsOf wgs84:long ;
-
-	sh:property [
-		sh:path wgs84:long ;
-		sh:minInclusive "-180"^^xsd:float ;
-		sh:maxInclusive "180"^^xsd:float ;
-	] ;
-	sh:property [
-		sh:path wgs84:lat ;
-		sh:minInclusive "-90"^^xsd:float ;
-		sh:maxInclusive "90"^^xsd:float ;
-	] .
 
 <#Angela_Merkel>
 	a sh:NodeShape ;
@@ -143,16 +128,6 @@
         sh:datatype xsd:string;
 	] .
 
-
-<#Citation_english_language_isbn_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://dbpedia.org/property/isbn> ;
-	sh:property [
-		sh:path <http://dbpedia.org/property/isbn>  ;
-		sh:datatype xsd:string ;
-        sh:pattern "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$" ;
-
-	] .
 <#Citation_english_language_page_datatype_validation>
 	a sh:NodeShape  ;
 	sh:targetSubjectsOf <http://dbpedia.org/property/page> ;
