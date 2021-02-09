@@ -29,7 +29,7 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
   }
 
   test("RDFUnit with SHACL", ShaclTestTag) {
-    val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuite()
+    val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuiteFromFolders()
     val results =
       validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/shacl-tests.html")
 
@@ -47,12 +47,14 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
 
 
   def generateShaclTestSuite(): (SchemaSource, TestSuite) = {
+    generateShaclTestSuiteFromFolders()
+
     val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
     RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(custom_SHACL_testFile), RDFLanguages.TURTLE)
 
     assert(custom_SHACL_tests.size() > 0, "size not 0")
     val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
-
+    //generateShaclTestSuiteFromFolders()
     val rdfUnit = RDFUnit.createWithOwlAndShacl
     rdfUnit.init
 
@@ -78,7 +80,27 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     val testSuite = new TestSuite(tests)
     (schema, testSuite)
   }
+  def generateShaclTestSuiteFromFolders(): (SchemaSource, TestSuite) = {
+    val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
+    val filesToBeValidated = recursiveListFiles(new File(TestConfig.custom_SHACL_testFolder)).filter(_.isFile)
+      .filter(_.toString.endsWith(".ttl"))
+      .toList
 
+    for (file <- filesToBeValidated) {
+      RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(file), RDFLanguages.TURTLE)
+    }
+    assert(custom_SHACL_tests.size() > 0, "size not 0")
+    val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
+    //generateShaclTestSuiteFromFolders()
+    val rdfUnit = RDFUnit.createWithOwlAndShacl
+    rdfUnit.init
+
+    val shaclTestGenerator = new ShaclTestGenerator()
+    val shaclTests: java.util.Collection[TestCase] = shaclTestGenerator.generate(schema)
+    val testSuite = new TestSuite(shaclTests)
+    (schema, testSuite)
+
+  }
   def validateMinidumpWithTestSuite(schema: SchemaSource,
                                     testSuite: TestSuite,
                                     executionType: TestCaseExecutionType,
