@@ -47,14 +47,14 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
 
 
   def generateShaclTestSuite(): (SchemaSource, TestSuite) = {
-    generateShaclTestSuiteFromFolders()
+
 
     val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
     RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(custom_SHACL_testFile), RDFLanguages.TURTLE)
 
     assert(custom_SHACL_tests.size() > 0, "size not 0")
     val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
-    //generateShaclTestSuiteFromFolders()
+
     val rdfUnit = RDFUnit.createWithOwlAndShacl
     rdfUnit.init
 
@@ -91,7 +91,7 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     }
     assert(custom_SHACL_tests.size() > 0, "size not 0")
     val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
-    //generateShaclTestSuiteFromFolders()
+
     val rdfUnit = RDFUnit.createWithOwlAndShacl
     rdfUnit.init
 
