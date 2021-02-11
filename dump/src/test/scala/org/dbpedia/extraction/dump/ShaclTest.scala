@@ -136,8 +136,7 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
       .toList
 
     for (file <- filesToBeValidated) {
-      custom_SHACL_tests.read(file.getAbsolutePath)
-      //RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(file), RDFLanguages.TURTLE)
+      RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(file), RDFLanguages.TURTLE)
     }
     assert(custom_SHACL_tests.size() > 0, "size not 0")
 
