@@ -1,32 +1,40 @@
 package org.dbpedia.extraction.dump
 
 import org.dbpedia.extraction.dump.TestConfig.classLoader
+import org.scalatest.FunSuite
 
-import scala.collection.mutable
-import scala.collection.mutable.ArrayBuffer
+class Upload extends FunSuite {
 
-object Upload extends App {
-  def loadTestGroupKeys(group: String, path: String)  = {
-    val mapGroups: mutable.HashMap[Integer, String] = scala.collection.mutable.HashMap[Integer, String]()
-    val file = scala.io.Source.fromFile(classLoader.getResource(path).getFile)
+  def loadTestGroupsKeys(group: String, path: String): Array[String] = {
+    val flag = "yes"
+    val filePath = classLoader.getResource(path).getFile
+    val file = scala.io.Source.fromFile(filePath)
 
-    val firstRow = file.getLines().take(1).mkString.split(",")
-    for (i <- 0 until firstRow.length) {
-      mapGroups.put(i, firstRow(i))
+    val table: Array[Array[String]] = file.getLines().map(_.split(",")).toArray
+    val columnsNames: Array[String] = table.head
+
+    if (!columnsNames.contains(group)) {
+      Array[String]()
     }
-    val otherRows = file.getLines()
-    val result: ArrayBuffer[String] = new ArrayBuffer[String]()
-    for (line <- otherRows) {
-      val words = line.mkString.split(",")
-      for (i <- 0 until words.length) {
-        if (mapGroups(i).equals(group) ) {
-          if (words(i) == "yes") {
-            result += words(0)
-          }
-        }
-      }
+    else {
+      val indexOfGroup = columnsNames.indexOf(group)
+      val groupsKeys: Array[String] = table.tail.flatMap(row =>
+        if (row(indexOfGroup) == flag) Array[String](row(0))
+        else Array[String]())
+
+      groupsKeys
     }
-    result
   }
-  loadTestGroupKeys("GROUP_ALL", "testGroups.csv").foreach(println)
+  val keysGroupAll = loadTestGroupsKeys("GROUP_ALL","testGroups.csv")
+  assert(keysGroupAll.nonEmpty)
+  assert(keysGroupAll.length == 2)
+  assert(keysGroupAll.contains("#Angela_Merkel"))
+  assert(keysGroupAll.contains("#IKEA"))
+
+  val keysGroupDev = loadTestGroupsKeys("GROUP_DEV", "testGroups.csv")
+  assert(keysGroupDev.nonEmpty)
+  assert(keysGroupDev.length == 2)
+  assert(keysGroupDev.contains("#Samsung"))
+  assert(keysGroupDev.contains("#Food_(disambiguation)_en"))
+
 }
