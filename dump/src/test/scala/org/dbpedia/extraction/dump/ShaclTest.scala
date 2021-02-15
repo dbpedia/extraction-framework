@@ -16,7 +16,7 @@ import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
-import org.dbpedia.extraction.dump.TestConfig.{custom_SHACL_testFile, dbpedia_ontologyFile, dumpDirectory}
+import org.dbpedia.extraction.dump.TestConfig.{classLoader, custom_SHACL_testFile, dbpedia_ontologyFile, dumpDirectory}
 import org.dbpedia.extraction.dump.tags.ShaclTestTag
 import org.scalatest.{BeforeAndAfterAll, DoNotDiscover, FunSuite}
 
@@ -47,6 +47,8 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
 
 
   def generateShaclTestSuite(): (SchemaSource, TestSuite) = {
+
+
     val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
     RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(custom_SHACL_testFile), RDFLanguages.TURTLE)
 
@@ -78,6 +80,8 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     val testSuite = new TestSuite(tests)
     (schema, testSuite)
   }
+
+
 
   def validateMinidumpWithTestSuite(schema: SchemaSource,
                                     testSuite: TestSuite,
@@ -115,6 +119,71 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     mod.write(System.out,"TURTLE")
 
     results
+  }
+
+  test("RDFUnit with SHACL. Generating shacl test suite from multiple files") {
+    val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuiteFromMultipleFiles()
+    val results =
+      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/shacl-tests.html")
+
+    assert(results.getDatasetOverviewResults.getErrorTests == 0)
+  }
+
+  def generateShaclTestSuiteFromMultipleFiles(): (SchemaSource, TestSuite) = {
+    val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
+    val filesToBeValidated = recursiveListFiles(new File(TestConfig.custom_SHACL_testFolder)).filter(_.isFile)
+      .filter(_.toString.endsWith(".ttl"))
+      .toList
+
+    for (file <- filesToBeValidated) {
+      RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(file), RDFLanguages.TURTLE)
+    }
+    assert(custom_SHACL_tests.size() > 0, "size not 0")
+
+    val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
+
+    val rdfUnit = RDFUnit.createWithOwlAndShacl
+    rdfUnit.init
+
+    val shaclTestGenerator = new ShaclTestGenerator()
+    val shaclTests: java.util.Collection[TestCase] = shaclTestGenerator.generate(schema)
+    val testSuite = new TestSuite(shaclTests)
+    (schema, testSuite)
+  }
+
+  test("Loading test names from csv file", ShaclTestTag) {
+    val keysGroupAll = loadTestGroupsKeys("GROUP_ALL","testGroups.csv")
+    assert(keysGroupAll.nonEmpty)
+    assert(keysGroupAll.length == 2)
+    assert(keysGroupAll.contains("#Angela_Merkel"))
+    assert(keysGroupAll.contains("#IKEA"))
+
+    val keysGroupDev = loadTestGroupsKeys("GROUP_DEV", "testGroups.csv")
+    assert(keysGroupDev.nonEmpty)
+    assert(keysGroupDev.length == 2)
+    assert(keysGroupDev.contains("#Samsung"))
+    assert(keysGroupDev.contains("#Food_(disambiguation)_en"))
+  }
+
+  def loadTestGroupsKeys(group: String, path: String): Array[String] = {
+    val flag = "yes"
+    val filePath = classLoader.getResource(path).getFile
+    val file = scala.io.Source.fromFile(filePath)
+
+    val table: Array[Array[String]] = file.getLines().map(_.split(",")).toArray
+    val columnsNames: Array[String] = table.head
+
+    if (!columnsNames.contains(group)) {
+      Array[String]()
+    }
+    else {
+      val indexOfGroup = columnsNames.indexOf(group)
+      val groupsKeys: Array[String] = table.tail.flatMap(row =>
+        if (row(indexOfGroup) == flag) Array[String](row(0))
+        else Array[String]())
+
+      groupsKeys
+    }
   }
 
   def recursiveListFiles(f: File): Array[File] = {
