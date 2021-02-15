@@ -15,11 +15,6 @@ assignees: ''
 >
 > Therefore, you can use this tool to extract an example page and check if the error persists in the latest software version, and add the link you used for verification, e.g., http://dief.tools.dbpedia.org/server/extraction/en/extract?title=United+States
 
-
-Not sure what you want me to validate here. You can validate the issue using the "execute query" link below.
-
-
-
 # Source
 > Where did you find the data issue? Pick one, remove the others.
 
