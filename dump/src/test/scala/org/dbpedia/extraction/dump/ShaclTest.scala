@@ -14,6 +14,7 @@ import org.aksw.rdfunit.sources.{SchemaSource, SchemaSourceFactory, TestSourceBu
 import org.aksw.rdfunit.tests.generators.{ShaclTestGenerator, TestGeneratorFactory}
 import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
+import org.apache.jena.query.QueryExecutionFactory
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.dbpedia.extraction.dump.TestConfig.{classLoader, custom_SHACL_testFile, dbpedia_ontologyFile, dumpDirectory}
@@ -140,7 +141,30 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     }
     assert(custom_SHACL_tests.size() > 0, "size not 0")
 
-    val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
+    val selectValues = loadTestGroupsKeys("GROUP_ALL","testGroups.csv")
+      .map(x => s"<https://github.com/dbpedia/extraction-framework$x> ")
+      .mkString("\n")
+
+    val queryString =
+      s"""PREFIX sh: <http://www.w3.org/ns/shacl#>
+         |CONSTRUCT {
+         | ?s ?p ?o .
+         | ?s2 ?p2 ?o2 .
+         |}
+         |WHERE {
+         | VALUES ?s {
+         |   ${selectValues}
+         | }
+         | ?s ?p ?o .
+         | ?s (!<>)* ?s2 . ?s2 ?p2 ?o2 .
+         |}
+         |""".stripMargin
+
+    val selected_SHACL_tests = QueryExecutionFactory.create(queryString,custom_SHACL_tests).execConstruct()
+
+    selected_SHACL_tests.write(System.out,"TURTLE")
+
+    val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(selected_SHACL_tests))
 
     val rdfUnit = RDFUnit.createWithOwlAndShacl
     rdfUnit.init
