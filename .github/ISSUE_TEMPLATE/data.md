@@ -8,10 +8,17 @@ assignees: ''
 ---
 
 # Issue still valid?
-> DBpedia updates frequently in this order: 1. DIEF software, 2. monthly dumps, 3. online services loaded from dumps.
+> DBpedia updates frequently in this order: 1. DIEF software (extracts data from wikidata), 2. monthly dumps, 3. online services loaded from dumps.
 > We update http://dief.tools.dbpedia.org/server/extraction/ on a daily basis from the git and it reflects the current state. 
-> Please verify your issue with this service, e.g. http://dief.tools.dbpedia.org/server/extraction/en/extract?title=United+States
-> Please add the link you used for verification: 
+> 
+> **Disclaimer:** The public SPARQL endpoints (e.g., http://dbpedia.org/sparql) and other applications build based on DBpedia's data are not in sync yet with the latest monthly extracted data. 
+>
+> Therefore, you can use this tool to extract an example page and check if the error persists in the latest software version, and add the link you used for verification, e.g., http://dief.tools.dbpedia.org/server/extraction/en/extract?title=United+States
+
+
+Not sure what you want me to validate here. You can validate the issue using the "execute query" link below.
+
+
 
 # Source
 > Where did you find the data issue? Pick one, remove the others.
