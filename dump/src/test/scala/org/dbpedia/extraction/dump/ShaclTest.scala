@@ -29,8 +29,13 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     new File("./target/testreports/").mkdirs()
   }
 
+  def getGroup: String = {
+    // TODO read group name from 1. best way: pom.xml or 2. from command line -D.testGroup=ALL
+    TestConfig.defaultTestGroup
+  }
+
   test("RDFUnit with SHACL", ShaclTestTag) {
-    val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuite()
+    val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuiteFromMultipleFiles(getGroup)
     val results =
       validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/shacl-tests.html")
 
@@ -122,15 +127,7 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     results
   }
 
-  test("RDFUnit with SHACL. Generating shacl test suite from multiple files") {
-    val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuiteFromMultipleFiles()
-    val results =
-      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/shacl-tests.html")
-
-    assert(results.getDatasetOverviewResults.getErrorTests == 0)
-  }
-
-  def generateShaclTestSuiteFromMultipleFiles(): (SchemaSource, TestSuite) = {
+  def generateShaclTestSuiteFromMultipleFiles(testGroup: String = TestConfig.defaultTestGroup): (SchemaSource, TestSuite) = {
     val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
     val filesToBeValidated = recursiveListFiles(new File(TestConfig.custom_SHACL_testFolder)).filter(_.isFile)
       .filter(_.toString.endsWith(".ttl"))
@@ -141,8 +138,9 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     }
     assert(custom_SHACL_tests.size() > 0, "size not 0")
 
-    val selectValues = loadTestGroupsKeys("GROUP_ALL","testGroups.csv")
-      .map(x => s"<https://github.com/dbpedia/extraction-framework$x> ")
+    val groupKeys = loadTestGroupsKeys(testGroup,"testGroups.csv")
+    assert(groupKeys.nonEmpty)
+    val selectValues = groupKeys.map(x => s"<https://github.com/dbpedia/extraction-framework$x> ")
       .mkString("\n")
 
     val queryString =
@@ -173,20 +171,6 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     val shaclTests: java.util.Collection[TestCase] = shaclTestGenerator.generate(schema)
     val testSuite = new TestSuite(shaclTests)
     (schema, testSuite)
-  }
-
-  test("Loading test names from csv file", ShaclTestTag) {
-    val keysGroupAll = loadTestGroupsKeys("GROUP_ALL","testGroups.csv")
-    assert(keysGroupAll.nonEmpty)
-    assert(keysGroupAll.length == 2)
-    assert(keysGroupAll.contains("#Angela_Merkel"))
-    assert(keysGroupAll.contains("#IKEA"))
-
-    val keysGroupDev = loadTestGroupsKeys("GROUP_DEV", "testGroups.csv")
-    assert(keysGroupDev.nonEmpty)
-    assert(keysGroupDev.length == 2)
-    assert(keysGroupDev.contains("#Samsung"))
-    assert(keysGroupDev.contains("#Food_(disambiguation)_en"))
   }
 
   def loadTestGroupsKeys(group: String, path: String): Array[String] = {

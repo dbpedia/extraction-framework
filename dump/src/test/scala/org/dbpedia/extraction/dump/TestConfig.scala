@@ -28,6 +28,7 @@ object TestConfig {
   /**
    * NEEDED for SHACL
    */
+  val defaultTestGroup = "PRODUCTIVE"
   val dumpDirectory = new File(mappingsConfig.dumpDir, s"")
   //  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
   val dbpedia_ontologyFile: String = classLoader.getResource("dbpedia.owl").getFile
