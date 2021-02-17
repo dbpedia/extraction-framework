@@ -39,7 +39,6 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     if (properties.getProperty("testGroup") != null) {
      // assert(properties.getProperty("testGroup") == "PRODUCTIVE")
       properties.getProperty("testGroup")
-
     }
     else {
       TestConfig.defaultTestGroup
@@ -50,7 +49,7 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuiteFromMultipleFiles(getGroup)
     val results =
       validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/shacl-tests.html")
-    getGroup
+
     assert(results.getDatasetOverviewResults.getErrorTests == 0)
   }
 
