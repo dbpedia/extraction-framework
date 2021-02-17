@@ -30,69 +30,7 @@
 		sh:path dbo:wikiPageDisambiguates ;
 		sh:hasValue <http://cs.dbpedia.org/resource/Český> ;
 	] .
-# TODO move to instances/ikea.ttl
-<#IKEA>
-	a sh:NodeShape ;
-	# TODO check whether this can be merged with samsung:
-	# sh:targetNode dbr:IKEA, dbr:Samsung ;
-	sh:targetNode dbr:IKEA ;
-	prov:wasDerivedFrom <https://github.com/dbpedia/extraction-framework/issues/630> ;
-	rdfs:comment "no  company type for some specific entities (e.g. IKEA, Samsung)" ;
-	sh:property [
-		sh:path rdf:type ;
-		sh:hasValue dbo:Company ;
-	] .
 
-# TODO move to instances/samsung.ttl
-<#Samsung>
-	a sh:NodeShape ;
-	sh:targetNode dbr:Samsung ;
-	prov:wasDerivedFrom <https://github.com/dbpedia/extraction-framework/issues/630> ;
-	rdfs:comment "no  company type for some specific entities (e.g. IKEA, Samsung)" ;
-	sh:property [
-		sh:path rdf:type ;
-		sh:hasValue dbo:Company ;
-	] .
-
-# TODO move to properties/dbp_title.ttl
-<#Citation_english_language_title_datatype_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://dbpedia.org/property/title>  ;
-	sh:property [
-		sh:path <http://dbpedia.org/property/title>  ;
-		sh:or (
-            [
-            	sh:datatype xsd:string ;
-            ]
-            [
-                sh:datatype xsd:langString ;
-            ]
-        )
-	] .
-
-<#Citation_english_language_date_datatype_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://dbpedia.org/property/date> ;
-	sh:property [
-		sh:path <http://dbpedia.org/property/date>  ;
-		sh:or (
-		    [
-		    	sh:datatype xsd:string ;
-		    ]
-		    [
-		        sh:datatype xsd:date ;
-		    ]
-		)
-
-	] .
-<#Citation_english_language_last1_datatype_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://dbpedia.org/property/last1>  ;
-	sh:property [
-		sh:path <http://dbpedia.org/property/last1> ;
-		sh:datatype xsd:string;
-
-	] .
 # TODO hackathon
 #<#Citation_english_language_last_datatype_validation>
 #	a sh:NodeShape  ;
@@ -102,35 +40,3 @@
 #		sh:datatype xsd:string;
 #
 #	] .
-<#Citation_english_language_work_datatype_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://dbpedia.org/property/work>  ;
-	sh:property [
-		sh:path <http://dbpedia.org/property/work>;
-        sh:datatype xsd:string;
-	] .
-
-<#Citation_english_language_page_datatype_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://dbpedia.org/property/page> ;
-	sh:property [
-		sh:path <http://dbpedia.org/property/page> ;
-		sh:datatype xsd:string ;
-	] .
-
-<#Citation_english_languagа_accessDate_datatype_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://dbpedia.org/property/accessDate> ;
-	sh:property [
-		sh:path <http://dbpedia.org/property/accessDate> ;
-		sh:datatype xsd:date ;
-	] .
-<#Citation_english_languagа_year_datatype_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://dbpedia.org/property/year> ;
-	sh:property [
-		sh:path <http://dbpedia.org/property/year> ;
-		sh:datatype xsd:string ;
-	] .
-
-
