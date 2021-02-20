@@ -33,16 +33,18 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
   def getGroup: String = {
 
     // TODO read group name from 1. best way: pom.xml or 2. from command line -D.testGroup=ALL
-    val resourceInputStream = getClass.getClassLoader.getResourceAsStream("properties-from-pom.properties")
+    val resourceInputStream = Option(getClass.getClassLoader.getResourceAsStream("properties-from-pom.properties"))
     val properties = new Properties()
-    properties.load(resourceInputStream)
-    if (properties.getProperty("testGroup") != null) {
-     // assert(properties.getProperty("testGroup") == "PRODUCTIVE")
-      properties.getProperty("testGroup")
+    resourceInputStream match {
+      case Some(inputStream) => properties.load(inputStream)
+      case None => return TestConfig.defaultTestGroup
     }
-    else {
-      TestConfig.defaultTestGroup
+    val groupOption = Option(properties.getProperty("testGroup"))
+    groupOption match {
+      case Some(group) => group
+      case None => TestConfig.defaultTestGroup
     }
+
   }
 
   test("RDFUnit with SHACL", ShaclTestTag) {
