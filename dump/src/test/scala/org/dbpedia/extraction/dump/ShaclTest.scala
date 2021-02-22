@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.dump
 
 import java.io.{File, FileInputStream, FileOutputStream}
+import java.util.Properties
 
 import org.aksw.rdfunit.RDFUnit
 import org.aksw.rdfunit.enums.TestCaseExecutionType
@@ -30,8 +31,20 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
   }
 
   def getGroup: String = {
+
     // TODO read group name from 1. best way: pom.xml or 2. from command line -D.testGroup=ALL
-    TestConfig.defaultTestGroup
+    val resourceInputStream = Option(getClass.getClassLoader.getResourceAsStream("properties-from-pom.properties"))
+    val properties = new Properties()
+    resourceInputStream match {
+      case Some(inputStream) => properties.load(inputStream)
+      case None => return TestConfig.defaultTestGroup
+    }
+    val groupOption = Option(properties.getProperty("testGroup"))
+    groupOption match {
+      case Some(group) => group
+      case None => TestConfig.defaultTestGroup
+    }
+
   }
 
   test("RDFUnit with SHACL", ShaclTestTag) {
