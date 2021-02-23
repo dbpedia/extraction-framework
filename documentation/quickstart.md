@@ -14,6 +14,37 @@ TODO: requires further extension with info from: https://github.com/dbpedia/extr
   * **Eclipse** - please follow the [DBpedia & Eclipse Quick Start Guide](Setting up Eclipse).
   * **Netbeans** - also offers a Scala plugin.
 
+## How to install Java 1.8 
+You can install Java 1.8 with sdkman. In command line write next commands:
+
+`curl -s "https://get.sdkman.io" | bash`
+
+open a new shell and check for available versions
+
+`sdk list java | grep open | grep 8.`
+
+pick one release and install with
+
+`sdk install java 8.y.z-open`
+
+For example
+
+`sdk install java 8.0.282-open`
+
+check whether correct java version is set to default
+with
+
+`mvn -v`
+
+It should look similar to this
+```
+mvn -v
+Apache Maven 3.6.0
+Maven home: /usr/share/maven
+Java version: 1.8.0_282, vendor: Oracle Corporation, runtime: /home/dbpedia/.sdkman/candidates/java/8.0.282-open/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "4.19.0-14-amd64", arch: "amd64", family: "unix"
+```
 ## 1. Setting Up
 
 * Clone the latest version of the framework from the `master` branch.
