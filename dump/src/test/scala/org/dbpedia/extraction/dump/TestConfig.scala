@@ -32,7 +32,6 @@ object TestConfig {
   val dumpDirectory = new File(mappingsConfig.dumpDir, s"")
   //  val dumpDirectory =     new File(mappingsConfig.dumpDir, s"enwiki/$date/")
   val dbpedia_ontologyFile: String = classLoader.getResource("dbpedia.owl").getFile
-  val custom_SHACL_testFile: String = classLoader.getResource("shacl-tests/custom-shacl-tests.ttl").getFile
   val custom_SHACL_testFolder: String = classLoader.getResource("shacl-tests").getFile
   /**
    * SPARK
