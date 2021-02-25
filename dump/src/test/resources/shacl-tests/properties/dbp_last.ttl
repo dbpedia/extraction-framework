@@ -1,3 +1,4 @@
+@base <https://github.com/dbpedia/extraction-framework> .
 @prefix sh: <http://www.w3.org/ns/shacl#>.
 @prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -9,11 +10,10 @@
 @prefix prov: <http://www.w3.org/ns/prov#>.
 
 # TODO hackathon
-#<#Citation_english_language_last_datatype_validation>
-#	a sh:NodeShape  ;
-#	sh:targetSubjectsOf <http://dbpedia.org/property/last> ;
-#	sh:property [
-#		sh:path <http://dbpedia.org/property/last> ;
-#		sh:datatype xsd:string;
-#
-#	] .
+<#Citation_english_language_last_datatype_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/property/last> ;
+	sh:property [
+		sh:path <http://dbpedia.org/property/last> ;
+		sh:datatype xsd:string;
+	] .
