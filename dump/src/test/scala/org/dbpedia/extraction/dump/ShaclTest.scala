@@ -18,7 +18,7 @@ import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import org.apache.jena.query.QueryExecutionFactory
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
-import org.dbpedia.extraction.dump.TestConfig.{classLoader, custom_SHACL_testFile, dbpedia_ontologyFile, dumpDirectory}
+import org.dbpedia.extraction.dump.TestConfig.{classLoader, dbpedia_ontologyFile, dumpDirectory}
 import org.dbpedia.extraction.dump.tags.ShaclTestTag
 import org.scalatest.{BeforeAndAfterAll, DoNotDiscover, FunSuite}
 
@@ -63,26 +63,6 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
 //
 //    // TODO assert
 //  }
-
-
-  def generateShaclTestSuite(): (SchemaSource, TestSuite) = {
-
-
-    val custom_SHACL_tests: Model = ModelFactory.createDefaultModel()
-    RDFDataMgr.read(custom_SHACL_tests, new FileInputStream(custom_SHACL_testFile), RDFLanguages.TURTLE)
-
-    assert(custom_SHACL_tests.size() > 0, "size not 0")
-    val schema = SchemaSourceFactory.createSchemaSourceSimple("http://dbpedia.org/shacl", new RdfModelReader(custom_SHACL_tests))
-
-    val rdfUnit = RDFUnit.createWithOwlAndShacl
-    rdfUnit.init
-
-    val shaclTestGenerator = new ShaclTestGenerator()
-    val shaclTests: java.util.Collection[TestCase] = shaclTestGenerator.generate(schema)
-    val testSuite = new TestSuite(shaclTests)
-    (schema, testSuite)
-  }
-
 
   def generateOntologyTestSuite: (SchemaSource, TestSuite) = {
     val dbpedia_ont: Model = ModelFactory.createDefaultModel()

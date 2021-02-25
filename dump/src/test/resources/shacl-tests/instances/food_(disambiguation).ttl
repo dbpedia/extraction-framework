@@ -9,10 +9,13 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix prov: <http://www.w3.org/ns/prov#>.
 
-<#Citation_english_language_page_datatype_validation>
-	a sh:NodeShape  ;
-	sh:targetSubjectsOf <http://dbpedia.org/property/page> ;
+<#Food_(disambiguation)_en>
+	a sh:NodeShape ;
+	sh:targetNode <http://dbpedia.org/resource/Food_(disambiguation)> ;
+
+	# assuring that the dissambiguation extractor for English is active
+	# noticed that for some languages the dissambiguation extractor is not active (e.g. the case with Czech)
 	sh:property [
-		sh:path <http://dbpedia.org/property/page> ;
-		sh:datatype xsd:string ;
+		sh:path dbo:wikiPageDisambiguates ;
+		sh:hasValue <http://dbpedia.org/resource/Food_(film)> ;
 	] .
