@@ -180,43 +180,27 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.3.1</version>
+                <version>3.0.0-M3</version>
                 <executions>
                     <execution>
+                        <id>enforce-versions</id>
                         <goals>
                             <goal>enforce</goal>
                         </goals>
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>${java.version}</version>
+                                    <version>[1.8,1.9)</version>
+                                    <message>ERROR! USE JAVA 8 TO RUN THE FRAMEWORK. You can check your current java version with "mvn -version" command</message>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <!--plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <configuration>
-                            <rules>
-                                <dependencyConvergence/>
-                            </rules>
-                        </configuration>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin-->
         </plugins>
     </build>
 
