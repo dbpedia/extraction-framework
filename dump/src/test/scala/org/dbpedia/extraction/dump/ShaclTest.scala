@@ -45,15 +45,13 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
 
   test("RDFUnit with SHACL", ShaclTestTag) {
     val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuiteFromMultipleFiles(getGroup)
-    val results = validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.shaclTestCaseResult, "./target/testreports/shacl-tests.html")
 
-    results.getTestCaseResults.forEach(new Consumer[TestCaseResult] {
-      override def accept(t: TestCaseResult): Unit = {
-        println(t)
+    val shaclTestCaseResults =
+      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.shaclTestCaseResult, "./target/testreports/shacl-tests.html")
 
-      }
-    })
-    assert(results.getDatasetOverviewResults.getFailedTests == 0, "Number of failed tests should be zero")
+    validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/aggregated-tests.html")
+
+    assert(shaclTestCaseResults.getDatasetOverviewResults.getFailedTests == 0, "Number of failed tests should be zero")
   }
 
 
