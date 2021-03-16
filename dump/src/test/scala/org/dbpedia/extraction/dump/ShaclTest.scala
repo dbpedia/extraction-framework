@@ -6,10 +6,8 @@ import java.util.function.Consumer
 
 import org.aksw.rdfunit.RDFUnit
 import org.aksw.rdfunit.enums.TestCaseExecutionType
-import org.aksw.rdfunit.io.format.SerialiazationFormatFactory
 import org.aksw.rdfunit.io.reader.{RdfModelReader, RdfStreamReader}
 import org.aksw.rdfunit.io.writer.RdfResultsWriterFactory
-import org.aksw.rdfunit.model.impl.results.DatasetOverviewResults
 import org.aksw.rdfunit.model.interfaces.results.{TestCaseResult, TestExecution}
 import org.aksw.rdfunit.model.interfaces.{TestCase, TestSuite}
 import org.aksw.rdfunit.sources.{SchemaSource, SchemaSourceFactory, TestSourceBuilder}
@@ -32,8 +30,6 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
   }
 
   def getGroup: String = {
-
-    // TODO read group name from 1. best way: pom.xml or 2. from command line -D.testGroup=ALL
     val resourceInputStream = Option(getClass.getClassLoader.getResourceAsStream("properties-from-pom.properties"))
     val properties = new Properties()
     resourceInputStream match {
@@ -45,22 +41,17 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
       case Some(group) => group
       case None => TestConfig.defaultTestGroup
     }
-
   }
 
   test("RDFUnit with SHACL", ShaclTestTag) {
     val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuiteFromMultipleFiles(getGroup)
-    val results =
-      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/shacl-tests.html")
 
-    println(results.getDatasetOverviewResults)
-    results.getTestCaseResults.forEach(new Consumer[TestCaseResult] {
-      override def accept(t: TestCaseResult): Unit = {
-        println(t)
-      }
-    })
-// TODO
-//    assert(results.getDatasetOverviewResults.getFailedTests == 0, "Number of failed tests should be zero")
+    val shaclTestCaseResults =
+      validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.shaclTestCaseResult, "./target/testreports/shacl-tests.html")
+
+    validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.aggregatedTestCaseResult, "./target/testreports/aggregated-tests.html")
+
+    assert(shaclTestCaseResults.getDatasetOverviewResults.getFailedTests == 0, "Number of failed tests should be zero")
   }
 
 
@@ -99,9 +90,9 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
       .toList
 
     // val filesToBeValidated = dumpDirectory.listFiles.filter(_.isFile).filter(_.toString.endsWith(".ttl.bz2")).toList
-    //println("FILES, FILES, FILES\n"+filesToBeValidated)
+    // println("FILES, FILES, FILES\n"+filesToBeValidated)
 
-    //org.apache.jena.riot.system.IRIResolver.
+    // org.apache.jena.riot.system.IRIResolver.
     val singleModel: Model = ModelFactory.createDefaultModel()
     for (file <- filesToBeValidated) {
       singleModel.add(new RdfStreamReader(new BZip2CompressorInputStream(new FileInputStream(file.getAbsolutePath)), "TURTLE").read())
@@ -117,7 +108,6 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     val results = RDFUnitStaticValidator.validate(executionType, testSource, testSuite)
 
     val mod = ModelFactory.createDefaultModel()
-    //    RdfResultsWriterFactory.createWriterFromFormat(new FileOutputStream(sinkFileName.replace("html","ttl"), false),SerialiazationFormatFactory.createTriG(),results).write(ModelFactory.createDefaultModel())
     RdfResultsWriterFactory.createHtmlWriter(
       results, new FileOutputStream(sinkFileName, false)
     ).write(mod)
