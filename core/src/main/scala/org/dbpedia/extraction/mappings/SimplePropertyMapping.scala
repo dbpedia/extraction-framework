@@ -243,9 +243,9 @@ extends PropertyMapping
         //Write generic property
         val stdValue = pr.unit match {
 
-          case Some(u) if u.isInstanceOf[InconvertibleUnitDatatype] => {
+          case Some(currentUnit) if currentUnit.isInstanceOf[InconvertibleUnitDatatype] => {
 
-            val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, unit)
+            val quad = new Quad(language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, ontologyProperty, pr.value.toString, sourceUri, currentUnit)
             return Seq(quad)
           }
 
