@@ -1,12 +1,23 @@
 package org.dbpedia.extraction.dump.util
 
-import java.io.{BufferedInputStream, File, FileInputStream, FileReader}
+import java.io.{BufferedInputStream, File, FileInputStream, FileReader, PrintWriter}
+import java.util.Properties
 
+import org.aksw.rdfunit.RDFUnit
+import org.aksw.rdfunit.model.interfaces.TestSuite
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import org.apache.jena.query.QueryExecutionFactory
 import org.apache.jena.rdf.model.{Model, ModelFactory}
+import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
+import org.aksw.rdfunit.sources.{SchemaSource, SchemaSourceFactory, TestSourceBuilder}
+import org.aksw.rdfunit.enums.TestCaseExecutionType
+import org.aksw.rdfunit.io.reader.{RdfModelReader, RdfStreamReader}
+import org.aksw.rdfunit.io.writer.RdfResultsWriterFactory
+import org.aksw.rdfunit.model.interfaces.results.{TestCaseResult, TestExecution}
+import org.aksw.rdfunit.model.interfaces.{TestCase, TestSuite}
+import org.aksw.rdfunit.tests.generators.ShaclTestGenerator
 
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 object MinidumpDoc extends App {
 
@@ -43,10 +54,16 @@ object MinidumpDoc extends App {
   ontologySHACL.read("http://www.w3.org/ns/shacl#")
 
   val shapesSHACL = ModelFactory.createDefaultModel()
-  shapesSHACL.read(shapesSHACLFile.getAbsolutePath)
+  val filesToBeValidated = recursiveListFiles(new File("/Users/mykolamedynsky/Desktop/4semester/GoogleSummerOfCode/extraction-framework/dump/src/test/resources/shacl-tests")).filter(_.isFile)
+    .filter(_.toString.endsWith(".ttl"))
+    .toList
+  for (file <- filesToBeValidated) {
+    shapesSHACL.read(file.getAbsolutePath)
+  }
 
+
+  val map = new scala.collection.mutable.HashMap[String, ArrayBuffer[TestDefinition]]
   val testModel = ModelFactory.createRDFSModel(ontologySHACL, shapesSHACL)
-
   val exec = QueryExecutionFactory.create(
     prefixSHACL +
       """SELECT * {
@@ -54,6 +71,7 @@ object MinidumpDoc extends App {
         |  OPTIONAL { ?shape sh:targetNode ?targetNode . }
         |  OPTIONAL { ?shape sh:targetSubjectsOf ?subjectOf . }
         |  OPTIONAL { ?shape sh:targetObjectsOf ?objectOf . }
+        |
         |}
         |""".stripMargin, testModel)
 
@@ -62,13 +80,18 @@ object MinidumpDoc extends App {
   val testsBuffer = new ListBuffer[TestDefinition]
   while (rs.hasNext) {
     val qs = rs.next()
+
+
     val targetNode = {
       if (qs.contains("targetNode")) {
         println(s"tests ${Some(TargetNode(qs.get("targetNode").asResource().getURI))} on target ${qs.get("targetNode").asResource().getURI}")
-        None
+
+        //None
         //TODO
-        //Some(TarNode(qs.get("targetNode").asResource().getURI))
+        Some(TargetNode(qs.get("targetNode").asResource().getURI))
       } else if (qs.contains("subjectOf")) {
+        println(s"tests ${Some(TargetSubjectOf(qs.get("subjectOf").asResource().getURI))} on target ${qs.get("subjectOf").asResource().getURI}")
+       //None
         Some(TargetSubjectOf(qs.get("subjectOf").asResource().getURI))
       } else if (qs.contains("objectOf")) {
         Some(TargetObjectOf(qs.get("objectOf").asResource().getURI))
@@ -104,12 +127,60 @@ object MinidumpDoc extends App {
 
         while (rs.hasNext) {
           val qs = rs.next
+
           val t = qs.get("t").asResource().getURI
-          if (t.contains("dbpedia.org/") && minidumpURIs.contains(t)) {
-            println(s"tests ${testDef.target} on target $t")
+          if(t.contains("Angela")) {
+            println("RESULT: " +  minidumpURIs.contains(t.replace("dbpedia.org/", "en.dbpedia.org/")))
+          }
+          if (t.contains("dbpedia.org/") && (minidumpURIs.contains(t) ||
+            minidumpURIs.contains(t.replace("dbpedia.org/", "en.dbpedia.org/")))) {
+
+            if (!minidumpURIs.contains(t) &&
+              minidumpURIs.contains(t.replace("dbpedia.org/", "en.dbpedia.org/"))) {
+              val replacedTarget = t.replace("dbpedia.org/", "en.dbpedia.org/")
+              saveToMap(replacedTarget, testDef)
+            }
+            else {
+              println(s"tests ${testDef.target} on target $t")
+              saveToMap(t, testDef)
+            }
           }
         }
     })
+    getListOfUris()
+
+    def saveToMap(t: String, testDef: TestDefinition) = {
+      val buffer = map.get(t)
+      buffer match {
+        case Some(currentBuffer) => currentBuffer.append(testDef)
+          map.put(t, currentBuffer)
+        case None => map.put(t, ArrayBuffer(testDef))
+      }
+    }
+
+    def getListOfUris(): Unit = {
+      val file = new PrintWriter(new File("/Users/mykolamedynsky/Desktop/4semester/GoogleSummerOfCode/extraction-framework/dump/src/test/resources/shaclTestsTable.csv" ))
+      file.write("wikipage-uri,shacl-test\n")
+      for (line <- minidumpURIs){
+
+        if (map.contains(line)) {
+          val buffer = map(line)
+          for (item <- buffer) {
+            println(item)
+            val uri = item.target match {
+              case TargetNode(value) => value
+              case TargetObjectOf(value) => value
+              case TargetSubjectOf(value) => value
+            }
+            file.write(line + "," + "true " + uri + "\n")
+          }
+        }
+        else {
+          file.write(line + ",false\n")
+        }
+      }
+      file.close
+    }
   }
 
   def convertWikiPageToDBpediaURI(urisF: File): Set[String] = {
@@ -132,7 +203,6 @@ object MinidumpDoc extends App {
     }
     model
   }
-
 
   def recursiveListFiles(d: File): Array[File] = {
     val these = d.listFiles
