@@ -1,22 +1,13 @@
 package org.dbpedia.extraction.dump.util
 
 import java.io.{BufferedInputStream, File, FileInputStream, FileReader, PrintWriter}
-import java.util.Properties
 
-import org.aksw.rdfunit.RDFUnit
-import org.aksw.rdfunit.model.interfaces.TestSuite
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import org.apache.jena.query.QueryExecutionFactory
 import org.apache.jena.rdf.model.{Model, ModelFactory}
-import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
-import org.aksw.rdfunit.sources.{SchemaSource, SchemaSourceFactory, TestSourceBuilder}
-import org.aksw.rdfunit.enums.TestCaseExecutionType
-import org.aksw.rdfunit.io.reader.{RdfModelReader, RdfStreamReader}
-import org.aksw.rdfunit.io.writer.RdfResultsWriterFactory
-import org.aksw.rdfunit.model.interfaces.results.{TestCaseResult, TestExecution}
-import org.aksw.rdfunit.model.interfaces.{TestCase, TestSuite}
-import org.aksw.rdfunit.tests.generators.ShaclTestGenerator
 
+import scala.collection.mutable
+import scala.collection.mutable.HashMap
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 object MinidumpDoc extends App {
@@ -45,10 +36,10 @@ object MinidumpDoc extends App {
 
   case class TargetObjectOf(p: String) extends Target
 
-  case class TestDefinition(id: String, target: Target)
+  case class TestDefinition(id: String, target: Target, additionalInformation: HashMap[String,String])
 
   // Get SHACL tests
-  val prefixSHACL = "PREFIX sh: <http://www.w3.org/ns/shacl#> "
+  val prefixSHACL = "PREFIX sh: <http://www.w3.org/ns/shacl#> PREFIX prov: <http://www.w3.org/ns/prov#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
 
   val ontologySHACL = ModelFactory.createDefaultModel()
   ontologySHACL.read("http://www.w3.org/ns/shacl#")
@@ -61,8 +52,12 @@ object MinidumpDoc extends App {
     shapesSHACL.read(file.getAbsolutePath)
   }
 
+  val file = new PrintWriter(new File("/Users/mykolamedynsky/Desktop/4semester/GoogleSummerOfCode/extraction-framework/dump/src/test/resources/shaclTestsTable.csv" ))
 
-  val map = new scala.collection.mutable.HashMap[String, ArrayBuffer[TestDefinition]]
+  val columnsNamesList: List[String] = List("wikipage-uri","shacl-test","issue","comment")
+  val additionalInformationTypes: List[String] = List("issue","comment")
+
+  val urisAndShaclTestsMap = new mutable.HashMap[String, ArrayBuffer[TestDefinition]]
   val testModel = ModelFactory.createRDFSModel(ontologySHACL, shapesSHACL)
   val exec = QueryExecutionFactory.create(
     prefixSHACL +
@@ -71,7 +66,8 @@ object MinidumpDoc extends App {
         |  OPTIONAL { ?shape sh:targetNode ?targetNode . }
         |  OPTIONAL { ?shape sh:targetSubjectsOf ?subjectOf . }
         |  OPTIONAL { ?shape sh:targetObjectsOf ?objectOf . }
-        |
+        |  OPTIONAL { ?shape prov:wasDerivedFrom ?issue . }
+        |  OPTIONAL { ?shape rdfs:comment ?comment . }
         |}
         |""".stripMargin, testModel)
 
@@ -81,7 +77,10 @@ object MinidumpDoc extends App {
   while (rs.hasNext) {
     val qs = rs.next()
 
-
+    if (qs.contains("issue")) {
+      println("ISSUE: " + qs.get("issue").asResource().getURI)
+      println("Target: " + qs.get("targetNode").asResource().getURI)
+    }
     val targetNode = {
       if (qs.contains("targetNode")) {
         println(s"tests ${Some(TargetNode(qs.get("targetNode").asResource().getURI))} on target ${qs.get("targetNode").asResource().getURI}")
@@ -99,9 +98,18 @@ object MinidumpDoc extends App {
         None
       }
     }
+    val listOfAdditionalInformation = new HashMap[String, String]()
+
+    for(typeOfInformation <- additionalInformationTypes) {
+      if (qs.contains(typeOfInformation)) {
+        val information = qs.get(typeOfInformation).toString
+        listOfAdditionalInformation.put(typeOfInformation, information)
+      }
+    }
+
     val shape = qs.get("shape").asResource()
     if (shape.isURIResource && targetNode.isDefined) {
-      testsBuffer.append(TestDefinition(shape.getURI, targetNode.get))
+      testsBuffer.append(TestDefinition(shape.getURI, targetNode.get,listOfAdditionalInformation))
     }
   }
 
@@ -127,56 +135,83 @@ object MinidumpDoc extends App {
 
         while (rs.hasNext) {
           val qs = rs.next
-
           val t = qs.get("t").asResource().getURI
-          if(t.contains("Angela")) {
-            println("RESULT: " +  minidumpURIs.contains(t.replace("dbpedia.org/", "en.dbpedia.org/")))
-          }
-          if (t.contains("dbpedia.org/") && (minidumpURIs.contains(t) ||
-            minidumpURIs.contains(t.replace("dbpedia.org/", "en.dbpedia.org/")))) {
 
-            if (!minidumpURIs.contains(t) &&
-              minidumpURIs.contains(t.replace("dbpedia.org/", "en.dbpedia.org/"))) {
-              val replacedTarget = t.replace("dbpedia.org/", "en.dbpedia.org/")
-              saveToMap(replacedTarget, testDef)
-            }
-            else {
-              println(s"tests ${testDef.target} on target $t")
-              saveToMap(t, testDef)
+          if (t.contains(MinidumpDocConfig.dbpediaUriPrefix) ) {
+            val englishDbpediaUri = t.replace(MinidumpDocConfig.dbpediaUriPrefix, MinidumpDocConfig.englishDbpediaUriPrefix)
+            if (minidumpURIs.contains(t) || minidumpURIs.contains(englishDbpediaUri)) {
+              if (!minidumpURIs.contains(t) && minidumpURIs.contains(englishDbpediaUri)) {
+                saveToMap(englishDbpediaUri, testDef)
+              }
+              else {
+                println(s"tests ${testDef.target} on target $t")
+                saveToMap(t, testDef)
+              }
             }
           }
         }
     })
-    getListOfUris()
+
+    writeShaclTestsTableToFile()
 
     def saveToMap(t: String, testDef: TestDefinition) = {
-      val buffer = map.get(t)
+      val buffer = urisAndShaclTestsMap.get(t)
       buffer match {
         case Some(currentBuffer) => currentBuffer.append(testDef)
-          map.put(t, currentBuffer)
-        case None => map.put(t, ArrayBuffer(testDef))
+          urisAndShaclTestsMap.put(t, currentBuffer)
+        case None => urisAndShaclTestsMap.put(t, ArrayBuffer(testDef))
       }
     }
 
-    def getListOfUris(): Unit = {
-      val file = new PrintWriter(new File("/Users/mykolamedynsky/Desktop/4semester/GoogleSummerOfCode/extraction-framework/dump/src/test/resources/shaclTestsTable.csv" ))
-      file.write("wikipage-uri,shacl-test\n")
-      for (line <- minidumpURIs){
+    def writeColumnsNamesToFile(columnsNamesList: List[String]): Unit = {
+      columnsNamesList match {
+        case Nil =>
+        case head::Nil => file.write(head+"\n")
+        case head::(secondElement::tail) => {
+          file.write(head+",")
+          writeColumnsNamesToFile(secondElement::tail)
+        }
+      }
+    }
 
-        if (map.contains(line)) {
-          val buffer = map(line)
-          for (item <- buffer) {
-            println(item)
-            val uri = item.target match {
+    def writeShaclTestsTableToFile(): Unit = {
+
+      writeColumnsNamesToFile(columnsNamesList)
+
+      for (uriFromList <- minidumpURIs){
+
+        if (urisAndShaclTestsMap.contains(uriFromList)) {
+          val shaclTests = urisAndShaclTestsMap(uriFromList)
+          for (test <- shaclTests) {
+            println(test)
+            val shaclTest = test.target match {
               case TargetNode(value) => value
               case TargetObjectOf(value) => value
               case TargetSubjectOf(value) => value
             }
-            file.write(line + "," + "true " + uri + "\n")
+            file.write(uriFromList + "," + "true " + shaclTest)
+
+
+            val indexArray = new Array[String](columnsNamesList.length)
+            for (typeOfInformation <- additionalInformationTypes) {
+              if (test.additionalInformation.contains(typeOfInformation)) {
+                val index = columnsNamesList.indexOf(typeOfInformation)
+                indexArray(index) = test.additionalInformation(typeOfInformation)
+              }
+            }
+            for (i <- 2 until columnsNamesList.length) {
+              if (indexArray(i) == null ) {
+                file.write(",")
+              }
+              else {
+                file.write("," + indexArray(i).replaceAll(",",";"))
+              }
+            }
+            file.write("\n")
           }
         }
         else {
-          file.write(line + ",false\n")
+          file.write(uriFromList + ",false\n")
         }
       }
       file.close
