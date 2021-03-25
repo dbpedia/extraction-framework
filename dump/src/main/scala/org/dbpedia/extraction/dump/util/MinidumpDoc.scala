@@ -15,7 +15,7 @@ object MinidumpDoc extends App {
   val shapesSHACLFile = new File(args(0))
   val miniExtractionBaseDir = new File(args(1))
   val urisFile = new File(args(2))
-
+  val filePrintWriter = new PrintWriter(MinidumpDocConfig.shaclTestsTableFile)
   if (!(shapesSHACLFile.exists() && miniExtractionBaseDir.exists() && urisFile.exists())) {
     println(
       s"""Make sure
@@ -52,7 +52,6 @@ object MinidumpDoc extends App {
     shapesSHACL.read(file.getAbsolutePath)
   }
 
-  val file = new PrintWriter(new File("/Users/mykolamedynsky/Desktop/4semester/GoogleSummerOfCode/extraction-framework/dump/src/test/resources/shaclTestsTable.csv" ))
 
   val columnsNamesList: List[String] = List("wikipage-uri","shacl-test","issue","comment")
   val additionalInformationTypes: List[String] = List("issue","comment")
@@ -166,9 +165,9 @@ object MinidumpDoc extends App {
     def writeColumnsNamesToFile(columnsNamesList: List[String]): Unit = {
       columnsNamesList match {
         case Nil =>
-        case head::Nil => file.write(head+"\n")
+        case head::Nil => filePrintWriter.write(head+"\n")
         case head::(secondElement::tail) => {
-          file.write(head+",")
+          filePrintWriter.write(head+",")
           writeColumnsNamesToFile(secondElement::tail)
         }
       }
@@ -189,7 +188,7 @@ object MinidumpDoc extends App {
               case TargetObjectOf(value) => value
               case TargetSubjectOf(value) => value
             }
-            file.write(uriFromList + "," + "true " + shaclTest)
+            filePrintWriter.write(uriFromList + "," + "true " + shaclTest)
 
 
             val indexArray = new Array[String](columnsNamesList.length)
@@ -201,20 +200,20 @@ object MinidumpDoc extends App {
             }
             for (i <- 2 until columnsNamesList.length) {
               if (indexArray(i) == null ) {
-                file.write(",")
+                filePrintWriter.write(",")
               }
               else {
-                file.write("," + indexArray(i).replaceAll(",",";"))
+                filePrintWriter.write("," + indexArray(i).replaceAll(",",";"))
               }
             }
-            file.write("\n")
+            filePrintWriter.write("\n")
           }
         }
         else {
-          file.write(uriFromList + ",false\n")
+          filePrintWriter.write(uriFromList + ",false\n")
         }
       }
-      file.close
+      filePrintWriter.close
     }
   }
 
