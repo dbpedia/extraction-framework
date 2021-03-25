@@ -1,6 +1,5 @@
 wikipage-uri|shacl-test|issue|comment
 -|-|-|-
-wikipage-uri|shacl-test|issue|comment
 http://uk.dbpedia.org/resource/Берлін|false
 http://wikidata.dbpedia.org/resource/Q75197619|false
 http://wikidata.dbpedia.org/resource/Lexeme:L222359|false
