@@ -1,13 +1,12 @@
 package org.dbpedia.extraction.dump.util
 
-import java.io.{BufferedInputStream, File, FileInputStream, FileReader, PrintWriter}
+import java.io.{File, FileInputStream, PrintWriter}
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import org.apache.jena.query.QueryExecutionFactory
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 
 import scala.collection.mutable
-import scala.collection.mutable.HashMap
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 object MinidumpDoc extends App {
@@ -36,7 +35,7 @@ object MinidumpDoc extends App {
 
   case class TargetObjectOf(p: String) extends Target
 
-  case class TestDefinition(id: String, target: Target, additionalInformation: HashMap[String,String])
+  case class TestDefinition(id: String, target: Target, additionalInformation: mutable.HashMap[String,String])
 
   // Get SHACL tests
   val prefixSHACL = "PREFIX sh: <http://www.w3.org/ns/shacl#> PREFIX prov: <http://www.w3.org/ns/prov#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
@@ -45,7 +44,7 @@ object MinidumpDoc extends App {
   ontologySHACL.read("http://www.w3.org/ns/shacl#")
 
   val shapesSHACL = ModelFactory.createDefaultModel()
-  val filesToBeValidated = recursiveListFiles(new File("/Users/mykolamedynsky/Desktop/4semester/GoogleSummerOfCode/extraction-framework/dump/src/test/resources/shacl-tests")).filter(_.isFile)
+  val filesToBeValidated = recursiveListFiles(new File("../extraction-framework/dump/src/test/resources/shacl-tests")).filter(_.isFile)
     .filter(_.toString.endsWith(".ttl"))
     .toList
   for (file <- filesToBeValidated) {
@@ -76,28 +75,26 @@ object MinidumpDoc extends App {
   while (rs.hasNext) {
     val qs = rs.next()
 
-    if (qs.contains("issue")) {
-      println("ISSUE: " + qs.get("issue").asResource().getURI)
-      println("Target: " + qs.get("targetNode").asResource().getURI)
-    }
     val targetNode = {
-      if (qs.contains("targetNode")) {
-        println(s"tests ${Some(TargetNode(qs.get("targetNode").asResource().getURI))} on target ${qs.get("targetNode").asResource().getURI}")
+      if (qs.contains(MinidumpDocConfig.targetNode)) {
+        println(s"tests ${Some(TargetNode(qs.get(MinidumpDocConfig.targetNode).asResource().getURI))} " +
+          s"on target ${qs.get(MinidumpDocConfig.targetNode).asResource().getURI}")
 
         //None
         //TODO
-        Some(TargetNode(qs.get("targetNode").asResource().getURI))
-      } else if (qs.contains("subjectOf")) {
-        println(s"tests ${Some(TargetSubjectOf(qs.get("subjectOf").asResource().getURI))} on target ${qs.get("subjectOf").asResource().getURI}")
+        Some(TargetNode(qs.get(MinidumpDocConfig.targetNode).asResource().getURI))
+      } else if (qs.contains(MinidumpDocConfig.subjectOf)) {
+        println(s"tests ${Some(TargetSubjectOf(qs.get(MinidumpDocConfig.subjectOf).asResource().getURI))} " +
+          s"on target ${qs.get(MinidumpDocConfig.subjectOf).asResource().getURI}")
        //None
-        Some(TargetSubjectOf(qs.get("subjectOf").asResource().getURI))
-      } else if (qs.contains("objectOf")) {
-        Some(TargetObjectOf(qs.get("objectOf").asResource().getURI))
+        Some(TargetSubjectOf(qs.get(MinidumpDocConfig.subjectOf).asResource().getURI))
+      } else if (qs.contains(MinidumpDocConfig.objectOf)) {
+        Some(TargetObjectOf(qs.get(MinidumpDocConfig.objectOf).asResource().getURI))
       } else {
         None
       }
     }
-    val listOfAdditionalInformation = new HashMap[String, String]()
+    val listOfAdditionalInformation = new mutable.HashMap[String, String]()
 
     for(typeOfInformation <- additionalInformationTypes) {
       if (qs.contains(typeOfInformation)) {
@@ -137,7 +134,10 @@ object MinidumpDoc extends App {
           val t = qs.get("t").asResource().getURI
 
           if (t.contains(MinidumpDocConfig.dbpediaUriPrefix) ) {
-            val englishDbpediaUri = t.replace(MinidumpDocConfig.dbpediaUriPrefix, MinidumpDocConfig.englishDbpediaUriPrefix)
+
+            val englishDbpediaUri = t.replace(MinidumpDocConfig.dbpediaUriPrefix,
+              MinidumpDocConfig.englishDbpediaUriPrefix)
+
             if (minidumpURIs.contains(t) || minidumpURIs.contains(englishDbpediaUri)) {
               if (!minidumpURIs.contains(t) && minidumpURIs.contains(englishDbpediaUri)) {
                 saveToMap(englishDbpediaUri, testDef)
@@ -188,8 +188,7 @@ object MinidumpDoc extends App {
               case TargetObjectOf(value) => value
               case TargetSubjectOf(value) => value
             }
-            filePrintWriter.write(uriFromList + "," + "true " + shaclTest)
-
+            filePrintWriter.write(uriFromList + "," + shaclTest)
 
             val indexArray = new Array[String](columnsNamesList.length)
             for (typeOfInformation <- additionalInformationTypes) {
@@ -210,7 +209,7 @@ object MinidumpDoc extends App {
           }
         }
         else {
-          filePrintWriter.write(uriFromList + ",false\n")
+          filePrintWriter.write(uriFromList + ",\n")
         }
       }
       filePrintWriter.close

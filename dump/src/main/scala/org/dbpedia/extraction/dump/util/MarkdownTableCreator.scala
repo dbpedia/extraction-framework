@@ -17,15 +17,28 @@ object MarkdownTableCreator extends App{
 
       val markdownPrintWriter = new PrintWriter(markdownFile)
       markdownPrintWriter.write(firstLine.replaceAll(",", "|"))
-      val numberOfColumns = firstLine.count(x => x==',')
+      val numberOfColumns = firstLine.count(x => x == ',')
       markdownPrintWriter.write("\n")
       for (i <- 0 until numberOfColumns) {
-        markdownPrintWriter.write("-|")
+        markdownPrintWriter.write("---|")
       }
-      markdownPrintWriter.write("-\n")
+      markdownPrintWriter.write("---\n")
 
       for (line <- lines.tail) {
-        markdownPrintWriter.write(line.replaceAll(",", "|"))
+        val splitLine = line.split(",")
+        if (splitLine.nonEmpty) {
+          for (statement <- splitLine) {
+            // checking if the statement from split line is link
+            if( (statement.startsWith("http://") || statement.startsWith("https://") )
+              && !statement.contains(" ")) {
+              markdownPrintWriter.write("["+statement+"]("+statement+") | ")
+            }
+            else {
+              markdownPrintWriter.write(statement + " |")
+            }
+          }
+        }
+
         markdownPrintWriter.write("\n")
       }
 
