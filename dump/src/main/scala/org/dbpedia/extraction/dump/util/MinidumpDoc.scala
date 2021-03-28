@@ -10,7 +10,7 @@ import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 object MinidumpDoc extends App {
-
+  // TODO: Make code cleaner
   val shapesSHACLFile = new File(args(0))
   val miniExtractionBaseDir = new File(args(1))
   val urisFile = new File(args(2))
@@ -153,6 +153,7 @@ object MinidumpDoc extends App {
 
     writeShaclTestsTableToFile()
 
+
     def saveToMap(t: String, testDef: TestDefinition) = {
       val buffer = urisAndShaclTestsMap.get(t)
       buffer match {
@@ -162,16 +163,7 @@ object MinidumpDoc extends App {
       }
     }
 
-    def writeColumnsNamesToFile(columnsNamesList: List[String]): Unit = {
-      columnsNamesList match {
-        case Nil =>
-        case head::Nil => filePrintWriter.write(head+"\n")
-        case head::(secondElement::tail) => {
-          filePrintWriter.write(head+",")
-          writeColumnsNamesToFile(secondElement::tail)
-        }
-      }
-    }
+
 
     def writeShaclTestsTableToFile(): Unit = {
 
@@ -214,7 +206,20 @@ object MinidumpDoc extends App {
       }
       filePrintWriter.close
     }
+
+    def writeColumnsNamesToFile(columnsNamesList: List[String]): Unit = {
+      columnsNamesList match {
+        case Nil =>
+        case head::Nil => filePrintWriter.write(head+"\n")
+        case head::(secondElement::tail) => {
+          filePrintWriter.write(head+",")
+          writeColumnsNamesToFile(secondElement::tail)
+        }
+      }
+    }
   }
+
+  createMarkdownFile()
 
   def convertWikiPageToDBpediaURI(urisF: File): Set[String] = {
     val source = scala.io.Source.fromFile(urisF)
@@ -241,5 +246,44 @@ object MinidumpDoc extends App {
     val these = d.listFiles
     these ++
       these.filter(_.isDirectory).flatMap(recursiveListFiles)
+  }
+
+  def createMarkdownFile(): Unit = {
+    val markdownFile = new File("../extraction-framework/dump/src/test/resources/markdown.md")
+
+    if (!markdownFile.exists()) {
+      markdownFile.createNewFile()
+    }
+    val filePath = MinidumpDocConfig.path
+    val file = scala.io.Source.fromFile(filePath)
+    val lines = file.getLines().toArray
+    val firstLine = lines.head
+
+    val markdownPrintWriter = new PrintWriter(markdownFile)
+    markdownPrintWriter.write(firstLine.replaceAll(",", "|"))
+    val numberOfColumns = firstLine.count(x => x == ',')
+    markdownPrintWriter.write("\n")
+    for (i <- 0 until numberOfColumns) {
+      markdownPrintWriter.write("---|")
+    }
+    markdownPrintWriter.write("---\n")
+
+    for (line <- lines.tail) {
+      val splitLine = line.split(",")
+      if (splitLine.nonEmpty) {
+        for (statement <- splitLine) {
+          // checking if the statement from split line is link
+          if( (statement.startsWith("http://") || statement.startsWith("https://") )
+            && !statement.contains(" ")) {
+            markdownPrintWriter.write("["+statement+"]("+statement+") | ")
+          }
+          else {
+            markdownPrintWriter.write(statement + " |")
+          }
+        }
+      }
+      markdownPrintWriter.write("\n")
+    }
+    markdownPrintWriter.close()
   }
 }
