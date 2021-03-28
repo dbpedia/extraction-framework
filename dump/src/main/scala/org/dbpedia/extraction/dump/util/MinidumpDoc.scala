@@ -221,13 +221,13 @@ object MinidumpDoc extends App {
 
   createMarkdownFile()
 
-  def convertWikiPageToDBpediaURI(urisF: File): Set[String] = {
+  def convertWikiPageToDBpediaURI(urisF: File): List[String] = {
     val source = scala.io.Source.fromFile(urisF)
     source.getLines().map({ wikiPage =>
       wikiPage.replace("https://", "http://")
         .replace("wikipedia.org/wiki/", "dbpedia.org/resource/")
         .replace("wikidata.org/wiki/", "wikidata.dbpedia.org/resource/")
-    }).toSet
+    }).toList
   }
 
   def loadMiniExtraction(d: File) = {
