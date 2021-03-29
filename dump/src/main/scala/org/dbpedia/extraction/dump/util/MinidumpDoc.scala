@@ -182,19 +182,26 @@ object MinidumpDoc extends App {
             testTableStringBuilder.append(dbpediaPageLink
               + "," + shaclTest + " " + fixShaclTestShapeUri(test.id))
 
-            val indexArray = new Array[String](columnsNamesList.length)
+            val additionalInformationArray = new Array[String](columnsNamesList.length)
             for (typeOfInformation <- additionalInformationTypes) {
               if (test.additionalInformation.contains(typeOfInformation)) {
                 val index = columnsNamesList.indexOf(typeOfInformation)
-                indexArray(index) = test.additionalInformation(typeOfInformation)
+                additionalInformationArray(index) = test.additionalInformation(typeOfInformation)
               }
             }
             for (i <- 2 until columnsNamesList.length) {
-              if (indexArray(i) == null ) {
+              val information = additionalInformationArray(i)
+              if (information == null ) {
                 testTableStringBuilder.append(",")
               }
               else {
-                testTableStringBuilder.append("," + indexArray(i).replaceAll(",",";"))
+                if (columnsNamesList(i) == MinidumpDocConfig.issue){
+                  testTableStringBuilder.append(", " + "["+information+"]"+"("+information+")" )
+                }
+                else {
+                  testTableStringBuilder.append("," + information.replaceAll(",",";"))
+                }
+
               }
             }
             testTableStringBuilder.append("\n")
@@ -227,7 +234,6 @@ object MinidumpDoc extends App {
       case "dbpedia" => "en"
       case anyLanguage: String => anyLanguage
     }
-
 
     val title = uri.split("/").last
 
@@ -291,7 +297,6 @@ object MinidumpDoc extends App {
       if (splitLine.nonEmpty) {
         for (statement <- splitLine) {
           markdownPrintWriter.write(statement+ " | ")
-
         }
       }
       markdownPrintWriter.write("\n")
