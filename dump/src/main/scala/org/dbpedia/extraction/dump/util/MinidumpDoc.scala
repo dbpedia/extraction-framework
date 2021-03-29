@@ -1,24 +1,26 @@
 package org.dbpedia.extraction.dump.util
 
 import java.io.{File, FileInputStream, PrintWriter}
-
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import org.apache.jena.query.QueryExecutionFactory
 import org.apache.jena.rdf.model.{Model, ModelFactory}
-
+import org.dbpedia.extraction.dump.util.MinidumpDocConfig.path
 import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 object MinidumpDoc extends App {
-  // TODO: Make code cleaner
-  val shapesSHACLFile = new File(args(0))
-  val miniExtractionBaseDir = new File(args(1))
-  val urisFile = new File(args(2))
-  val filePrintWriter = new PrintWriter(MinidumpDocConfig.shaclTestsTableFile)
-  if (!(shapesSHACLFile.exists() && miniExtractionBaseDir.exists() && urisFile.exists())) {
+  // TODO: Make code cleaner, remove program arguments
+  //
+  val miniExtractionBaseDir = new File(MinidumpDocConfig.miniExtractionBaseDirPath)
+  val shaclTestsTableFile = new File(path)
+  val urisFile = new File(MinidumpDocConfig.urisFilePath)
+  val shaclTestFolder = new File(MinidumpDocConfig.shaclTestsFolderPath)
+  val filePrintWriter = new PrintWriter(shaclTestsTableFile)
+
+  if (!(shaclTestFolder.exists() && miniExtractionBaseDir.exists() && urisFile.exists())) {
     println(
       s"""Make sure
-         |${shapesSHACLFile.getAbsolutePath}
+         |${shaclTestFolder.getAbsolutePath}
          |${miniExtractionBaseDir.getAbsolutePath} (run: mvn test in dump module)
          |${urisFile.getAbsolutePath}
          |exists
@@ -44,14 +46,12 @@ object MinidumpDoc extends App {
   ontologySHACL.read("http://www.w3.org/ns/shacl#")
 
   val shapesSHACL = ModelFactory.createDefaultModel()
-  val filesToBeValidated = recursiveListFiles(new File("../extraction-framework/dump/src/test/resources/shacl-tests")).filter(_.isFile)
+  val filesToBeValidated = recursiveListFiles(shaclTestFolder).filter(_.isFile)
     .filter(_.toString.endsWith(".ttl"))
     .toList
   for (file <- filesToBeValidated) {
     shapesSHACL.read(file.getAbsolutePath)
   }
-
-
   val columnsNamesList: List[String] = List("wikipage-uri","shacl-test","issue","comment")
   val additionalInformationTypes: List[String] = List("issue","comment")
 
@@ -70,6 +70,7 @@ object MinidumpDoc extends App {
         |""".stripMargin, testModel)
 
   val rs = exec.execSelect()
+
 
   val testsBuffer = new ListBuffer[TestDefinition]
   while (rs.hasNext) {
@@ -249,7 +250,7 @@ object MinidumpDoc extends App {
   }
 
   def createMarkdownFile(): Unit = {
-    val markdownFile = new File("../extraction-framework/dump/src/test/resources/markdown.md")
+    val markdownFile = new File(MinidumpDocConfig.shaclTestsTableMarkdownPath)
 
     if (!markdownFile.exists()) {
       markdownFile.createNewFile()

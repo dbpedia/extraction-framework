@@ -1,5 +1,5 @@
 package org.dbpedia.extraction.dump.util
-import java.io._
+
 object MinidumpDocConfig {
   val targetNode = "targetNode"
   val subjectOf = "subjectOf"
@@ -8,8 +8,9 @@ object MinidumpDocConfig {
   val dbpediaUriPrefix = "dbpedia.org/"
   val englishDbpediaUriPrefix = "en.dbpedia.org/"
   val classLoader: ClassLoader = getClass.getClassLoader
-  val path = "../extraction-framework/dump/src/test/resources/shaclTestsTable.csv"
-  val shaclTestsTableFile = new File(path)
-
-
+  val path = "src/test/resources/shaclTestsTable.csv"
+  val shaclTestsTableMarkdownPath = "src/test/resources/shaclTestsCoverageTable.md"
+  val shaclTestsFolderPath = "src/test/resources/shacl-tests"
+  val urisFilePath = "src/test/bash/uris.lst"
+  val miniExtractionBaseDirPath = "target/minidumptest/base"
 }
