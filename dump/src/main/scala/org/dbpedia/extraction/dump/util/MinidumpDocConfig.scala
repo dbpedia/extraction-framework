@@ -5,6 +5,7 @@ object MinidumpDocConfig {
   val subjectOf = "subjectOf"
   val objectOf = "objectOf"
   val issue = "issue"
+  val shape = "shape"
   val dbpediaUriPrefix = "dbpedia.org/"
   val englishDbpediaUriPrefix = "en.dbpedia.org/"
   val classLoader: ClassLoader = getClass.getClassLoader

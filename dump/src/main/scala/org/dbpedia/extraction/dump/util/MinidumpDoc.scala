@@ -12,10 +12,8 @@ object MinidumpDoc extends App {
   // TODO: Make code cleaner, remove program arguments
   //
   val miniExtractionBaseDir = new File(MinidumpDocConfig.miniExtractionBaseDirPath)
-
   val urisFile = new File(MinidumpDocConfig.urisFilePath)
   val shaclTestFolder = new File(MinidumpDocConfig.shaclTestsFolderPath)
-
 
   if (!(shaclTestFolder.exists() && miniExtractionBaseDir.exists() && urisFile.exists())) {
     println(
@@ -40,7 +38,8 @@ object MinidumpDoc extends App {
   case class TestDefinition(id: String, target: Target, additionalInformation: mutable.HashMap[String,String])
 
   // Get SHACL tests
-  val prefixSHACL = "PREFIX sh: <http://www.w3.org/ns/shacl#> PREFIX prov: <http://www.w3.org/ns/prov#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+  val prefixSHACL = "PREFIX sh: <http://www.w3.org/ns/shacl#> PREFIX prov: <http://www.w3.org/ns/prov#> " +
+    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
 
   val ontologySHACL = ModelFactory.createDefaultModel()
   ontologySHACL.read("http://www.w3.org/ns/shacl#")
@@ -80,16 +79,16 @@ object MinidumpDoc extends App {
 
     val targetNode = {
       if (qs.contains(MinidumpDocConfig.targetNode)) {
-        println(s"tests ${Some(TargetNode(qs.get(MinidumpDocConfig.targetNode).asResource().getURI))} " +
-          s"on target ${qs.get(MinidumpDocConfig.targetNode).asResource().getURI}")
+//        println(s"tests ${Some(TargetNode(qs.get(MinidumpDocConfig.targetNode).asResource().getURI))} " +
+//          s"on target ${qs.get(MinidumpDocConfig.targetNode).asResource().getURI}")
 
         //None
         //TODO
         Some(TargetNode(qs.get(MinidumpDocConfig.targetNode).asResource().getURI))
       } else if (qs.contains(MinidumpDocConfig.subjectOf)) {
-        println(s"tests ${Some(TargetSubjectOf(qs.get(MinidumpDocConfig.subjectOf).asResource().getURI))} " +
-          s"on target ${qs.get(MinidumpDocConfig.subjectOf).asResource().getURI}")
-       //None
+//        println(s"tests ${Some(TargetSubjectOf(qs.get(MinidumpDocConfig.subjectOf).asResource().getURI))} " +
+//          s"on target ${qs.get(MinidumpDocConfig.subjectOf).asResource().getURI}")
+//       //None
         Some(TargetSubjectOf(qs.get(MinidumpDocConfig.subjectOf).asResource().getURI))
       } else if (qs.contains(MinidumpDocConfig.objectOf)) {
         Some(TargetObjectOf(qs.get(MinidumpDocConfig.objectOf).asResource().getURI))
@@ -106,7 +105,7 @@ object MinidumpDoc extends App {
       }
     }
 
-    val shape = qs.get("shape").asResource()
+    val shape = qs.get(MinidumpDocConfig.shape).asResource()
     if (shape.isURIResource && targetNode.isDefined) {
       testsBuffer.append(TestDefinition(shape.getURI, targetNode.get,listOfAdditionalInformation))
     }
@@ -145,7 +144,7 @@ object MinidumpDoc extends App {
                 saveToMap(englishDbpediaUri, testDef)
               }
               else {
-                println(s"tests ${testDef.target} on target $t")
+              //  println(s"tests ${testDef.target} on target $t")
                 saveToMap(t, testDef)
               }
             }
@@ -167,6 +166,7 @@ object MinidumpDoc extends App {
       writeColumnsNamesToFile(columnsNamesList)
 
       for (uriFromList <- minidumpURIs){
+        val dbpediaPageLink = "["+uriFromList+"]"+"("+composeDbpediaUri(uriFromList)+")"
         if (urisAndShaclTestsMap.contains(uriFromList)) {
           val shaclTests = urisAndShaclTestsMap(uriFromList)
           for (test <- shaclTests) {
@@ -176,7 +176,11 @@ object MinidumpDoc extends App {
               case TargetObjectOf(value) => value
               case TargetSubjectOf(value) => value
             }
-            testTableStringBuilder.append(uriFromList + "," + shaclTest)
+
+            val shaclTestAsLink = "["+shaclTest+"]"+"("+shaclTest+")"
+
+            testTableStringBuilder.append(dbpediaPageLink
+              + "," + shaclTest + " " + fixShaclTestShapeUri(test.id))
 
             val indexArray = new Array[String](columnsNamesList.length)
             for (typeOfInformation <- additionalInformationTypes) {
@@ -197,7 +201,7 @@ object MinidumpDoc extends App {
           }
         }
         else {
-          testTableStringBuilder.append(uriFromList + ",\n")
+          testTableStringBuilder.append(dbpediaPageLink + ",\n")
         }
       }
     }
@@ -215,6 +219,21 @@ object MinidumpDoc extends App {
   }
 
   createMarkdownFile()
+
+  def composeDbpediaUri(uri: String, revid: String = "",
+                        format: String = "trix", extractors: String = "custom"): String = {
+
+    val language = uri.replace("http://","").split("\\.")(0) match {
+      case "dbpedia" => "en"
+      case anyLanguage: String => anyLanguage
+    }
+
+
+    val title = uri.split("/").last
+
+    s"http://dief.tools.dbpedia.org/server/extraction/${language}" +
+      s"/extract?title=${title}&revid=${revid}&format=${format}&extractors=${extractors}"
+  }
 
   def convertWikiPageToDBpediaURI(urisF: File): List[String] = {
     val source = scala.io.Source.fromFile(urisF)
@@ -243,6 +262,11 @@ object MinidumpDoc extends App {
       these.filter(_.isDirectory).flatMap(recursiveListFiles)
   }
 
+  def fixShaclTestShapeUri(uri: String): String = {
+    uri.replace("https://github.com/dbpedia/extraction-framework", "")
+  }
+
+
   def createMarkdownFile(): Unit = {
     val markdownFile = new File(MinidumpDocConfig.shaclTestsTableMarkdownPath)
 
@@ -266,14 +290,8 @@ object MinidumpDoc extends App {
       val splitLine = line.split(",")
       if (splitLine.nonEmpty) {
         for (statement <- splitLine) {
+          markdownPrintWriter.write(statement+ " | ")
 
-          if( (statement.startsWith("http://") || statement.startsWith("https://") )
-            && !statement.contains(" ")) {
-            markdownPrintWriter.write("["+statement+"]("+statement+") | ")
-          }
-          else {
-            markdownPrintWriter.write(statement + " |")
-          }
         }
       }
       markdownPrintWriter.write("\n")
