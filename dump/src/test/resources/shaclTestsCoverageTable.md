@@ -35,22 +35,22 @@ wikipage-uri|shacl-test|issue|comment
 [http://en.dbpedia.org/resource/Angela_Merkel](http://en.dbpedia.org/resource/Angela_Merkel) | [http://dbpedia.org/resource/Angela_Merkel](http://dbpedia.org/resource/Angela_Merkel) | 
 [http://en.dbpedia.org/resource/Arthur_Schopenhauer](http://en.dbpedia.org/resource/Arthur_Schopenhauer) | 
 [http://en.dbpedia.org/resource/Asda](http://en.dbpedia.org/resource/Asda) | [http://www.w3.org/2003/01/geo/wgs84_pos#long](http://www.w3.org/2003/01/geo/wgs84_pos#long) |  |generic test for range of wgs84 lat/long |
-[http://en.dbpedia.org/resource/Atlantic_Ocean](http://en.dbpedia.org/resource/Atlantic_Ocean) | [http://www.w3.org/2003/01/geo/wgs84_pos#long](http://www.w3.org/2003/01/geo/wgs84_pos#long) |  |generic test for range of wgs84 lat/long |
 [http://en.dbpedia.org/resource/Atlantic_Ocean](http://en.dbpedia.org/resource/Atlantic_Ocean) | [http://dbpedia.org/property/date](http://dbpedia.org/property/date) | 
-[http://en.dbpedia.org/resource/Berlin](http://en.dbpedia.org/resource/Berlin) | [http://www.w3.org/2003/01/geo/wgs84_pos#long](http://www.w3.org/2003/01/geo/wgs84_pos#long) |  |generic test for range of wgs84 lat/long |
+[http://en.dbpedia.org/resource/Atlantic_Ocean](http://en.dbpedia.org/resource/Atlantic_Ocean) | [http://www.w3.org/2003/01/geo/wgs84_pos#long](http://www.w3.org/2003/01/geo/wgs84_pos#long) |  |generic test for range of wgs84 lat/long |
 [http://en.dbpedia.org/resource/Berlin](http://en.dbpedia.org/resource/Berlin) | [http://dbpedia.org/property/date](http://dbpedia.org/property/date) | 
+[http://en.dbpedia.org/resource/Berlin](http://en.dbpedia.org/resource/Berlin) | [http://www.w3.org/2003/01/geo/wgs84_pos#long](http://www.w3.org/2003/01/geo/wgs84_pos#long) |  |generic test for range of wgs84 lat/long |
 [http://en.dbpedia.org/resource/Dahlak_SC](http://en.dbpedia.org/resource/Dahlak_SC) | 
 [http://en.dbpedia.org/resource/Ferdinand_Piëch](http://en.dbpedia.org/resource/Ferdinand_Piëch) | 
 [http://en.dbpedia.org/resource/Food_(disambiguation)](http://en.dbpedia.org/resource/Food_(disambiguation)) | [http://dbpedia.org/resource/Food_(disambiguation)](http://dbpedia.org/resource/Food_(disambiguation)) | 
 [http://en.dbpedia.org/resource/IBM](http://en.dbpedia.org/resource/IBM) | 
-[http://en.dbpedia.org/resource/IKEA](http://en.dbpedia.org/resource/IKEA) | [http://www.w3.org/2003/01/geo/wgs84_pos#long](http://www.w3.org/2003/01/geo/wgs84_pos#long) |  |generic test for range of wgs84 lat/long |
 [http://en.dbpedia.org/resource/IKEA](http://en.dbpedia.org/resource/IKEA) | [http://dbpedia.org/resource/IKEA](http://dbpedia.org/resource/IKEA) | [https://github.com/dbpedia/extraction-framework/issues/630](https://github.com/dbpedia/extraction-framework/issues/630) | no  company type for some specific entities (e.g. IKEA; Samsung) |
+[http://en.dbpedia.org/resource/IKEA](http://en.dbpedia.org/resource/IKEA) | [http://www.w3.org/2003/01/geo/wgs84_pos#long](http://www.w3.org/2003/01/geo/wgs84_pos#long) |  |generic test for range of wgs84 lat/long |
 [http://en.dbpedia.org/resource/Jim_Pewter](http://en.dbpedia.org/resource/Jim_Pewter) | 
 [http://en.dbpedia.org/resource/Kerala_Agricultural_University](http://en.dbpedia.org/resource/Kerala_Agricultural_University) | [http://www.w3.org/2003/01/geo/wgs84_pos#long](http://www.w3.org/2003/01/geo/wgs84_pos#long) |  |generic test for range of wgs84 lat/long |
 [http://en.dbpedia.org/resource/Mini_(Mark_I)](http://en.dbpedia.org/resource/Mini_(Mark_I)) | 
 [http://en.dbpedia.org/resource/N.EX.T](http://en.dbpedia.org/resource/N.EX.T) | 
-[http://en.dbpedia.org/resource/Ranma_½](http://en.dbpedia.org/resource/Ranma_½) | [http://dbpedia.org/property/title](http://dbpedia.org/property/title) | 
 [http://en.dbpedia.org/resource/Ranma_½](http://en.dbpedia.org/resource/Ranma_½) | [http://dbpedia.org/property/last](http://dbpedia.org/property/last) | 
+[http://en.dbpedia.org/resource/Ranma_½](http://en.dbpedia.org/resource/Ranma_½) | [http://dbpedia.org/property/title](http://dbpedia.org/property/title) | 
 [http://en.dbpedia.org/resource/Redd_Kross](http://en.dbpedia.org/resource/Redd_Kross) | 
 [http://en.dbpedia.org/resource/Ren_%26_Stimpy_%22Adult_Party_Cartoon%22](http://en.dbpedia.org/resource/Ren_%26_Stimpy_%22Adult_Party_Cartoon%22) | 
 [http://en.dbpedia.org/resource/Samsung](http://en.dbpedia.org/resource/Samsung) | [http://dbpedia.org/resource/Samsung](http://dbpedia.org/resource/Samsung) | [https://github.com/dbpedia/extraction-framework/issues/630](https://github.com/dbpedia/extraction-framework/issues/630) | no  company type for some specific entities (e.g. IKEA; Samsung) |

@@ -4,7 +4,7 @@ import java.io.{File, FileInputStream, PrintWriter}
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
 import org.apache.jena.query.QueryExecutionFactory
 import org.apache.jena.rdf.model.{Model, ModelFactory}
-import org.dbpedia.extraction.dump.util.MinidumpDocConfig.path
+
 import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
@@ -12,10 +12,10 @@ object MinidumpDoc extends App {
   // TODO: Make code cleaner, remove program arguments
   //
   val miniExtractionBaseDir = new File(MinidumpDocConfig.miniExtractionBaseDirPath)
-  val shaclTestsTableFile = new File(path)
+
   val urisFile = new File(MinidumpDocConfig.urisFilePath)
   val shaclTestFolder = new File(MinidumpDocConfig.shaclTestsFolderPath)
-  val filePrintWriter = new PrintWriter(shaclTestsTableFile)
+
 
   if (!(shaclTestFolder.exists() && miniExtractionBaseDir.exists() && urisFile.exists())) {
     println(
@@ -71,8 +71,10 @@ object MinidumpDoc extends App {
 
   val rs = exec.execSelect()
 
+  val testTableStringBuilder = new StringBuilder()
 
   val testsBuffer = new ListBuffer[TestDefinition]
+
   while (rs.hasNext) {
     val qs = rs.next()
 
@@ -133,7 +135,6 @@ object MinidumpDoc extends App {
         while (rs.hasNext) {
           val qs = rs.next
           val t = qs.get("t").asResource().getURI
-
           if (t.contains(MinidumpDocConfig.dbpediaUriPrefix) ) {
 
             val englishDbpediaUri = t.replace(MinidumpDocConfig.dbpediaUriPrefix,
@@ -151,10 +152,7 @@ object MinidumpDoc extends App {
           }
         }
     })
-
     writeShaclTestsTableToFile()
-
-
     def saveToMap(t: String, testDef: TestDefinition) = {
       val buffer = urisAndShaclTestsMap.get(t)
       buffer match {
@@ -164,14 +162,11 @@ object MinidumpDoc extends App {
       }
     }
 
-
-
     def writeShaclTestsTableToFile(): Unit = {
 
       writeColumnsNamesToFile(columnsNamesList)
 
       for (uriFromList <- minidumpURIs){
-
         if (urisAndShaclTestsMap.contains(uriFromList)) {
           val shaclTests = urisAndShaclTestsMap(uriFromList)
           for (test <- shaclTests) {
@@ -181,7 +176,7 @@ object MinidumpDoc extends App {
               case TargetObjectOf(value) => value
               case TargetSubjectOf(value) => value
             }
-            filePrintWriter.write(uriFromList + "," + shaclTest)
+            testTableStringBuilder.append(uriFromList + "," + shaclTest)
 
             val indexArray = new Array[String](columnsNamesList.length)
             for (typeOfInformation <- additionalInformationTypes) {
@@ -192,28 +187,27 @@ object MinidumpDoc extends App {
             }
             for (i <- 2 until columnsNamesList.length) {
               if (indexArray(i) == null ) {
-                filePrintWriter.write(",")
+                testTableStringBuilder.append(",")
               }
               else {
-                filePrintWriter.write("," + indexArray(i).replaceAll(",",";"))
+                testTableStringBuilder.append("," + indexArray(i).replaceAll(",",";"))
               }
             }
-            filePrintWriter.write("\n")
+            testTableStringBuilder.append("\n")
           }
         }
         else {
-          filePrintWriter.write(uriFromList + ",\n")
+          testTableStringBuilder.append(uriFromList + ",\n")
         }
       }
-      filePrintWriter.close
     }
 
     def writeColumnsNamesToFile(columnsNamesList: List[String]): Unit = {
       columnsNamesList match {
         case Nil =>
-        case head::Nil => filePrintWriter.write(head+"\n")
+        case head::Nil => testTableStringBuilder.append(head+"\n")
         case head::(secondElement::tail) => {
-          filePrintWriter.write(head+",")
+          testTableStringBuilder.append(head+",")
           writeColumnsNamesToFile(secondElement::tail)
         }
       }
@@ -255,9 +249,8 @@ object MinidumpDoc extends App {
     if (!markdownFile.exists()) {
       markdownFile.createNewFile()
     }
-    val filePath = MinidumpDocConfig.path
-    val file = scala.io.Source.fromFile(filePath)
-    val lines = file.getLines().toArray
+
+    val lines = testTableStringBuilder.toString().split("\n")
     val firstLine = lines.head
 
     val markdownPrintWriter = new PrintWriter(markdownFile)
@@ -268,12 +261,12 @@ object MinidumpDoc extends App {
       markdownPrintWriter.write("---|")
     }
     markdownPrintWriter.write("---\n")
-
-    for (line <- lines.tail) {
+    val sortedLines = lines.tail.sorted
+    for (line <- sortedLines) {
       val splitLine = line.split(",")
       if (splitLine.nonEmpty) {
         for (statement <- splitLine) {
-          // checking if the statement from split line is link
+
           if( (statement.startsWith("http://") || statement.startsWith("https://") )
             && !statement.contains(" ")) {
             markdownPrintWriter.write("["+statement+"]("+statement+") | ")
