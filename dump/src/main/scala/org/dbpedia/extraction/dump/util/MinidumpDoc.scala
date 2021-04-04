@@ -180,7 +180,7 @@ object MinidumpDoc extends App {
             val shaclTestAsLink = "["+shaclTest+"]"+"("+shaclTest+")"
 
             testTableStringBuilder.append(dbpediaPageLink
-              + "," + shaclTest + " " + fixShaclTestShapeUri(test.id))
+              + "," + shaclTestAsLink + " " + fixShaclTestShapeUri(test.id))
 
             val additionalInformationArray = new Array[String](columnsNamesList.length)
             for (typeOfInformation <- additionalInformationTypes) {
@@ -195,12 +195,23 @@ object MinidumpDoc extends App {
                 testTableStringBuilder.append(",")
               }
               else {
-                if (columnsNamesList(i) == MinidumpDocConfig.issue){
-                  testTableStringBuilder.append(", " + "["+information+"]"+"("+information+")" )
+                val splitInformation = information.replaceAll(",", ";").split(" ")
+                testTableStringBuilder.append(", ")
+
+                for (word <- splitInformation) {
+                  if (word.startsWith("https://") || word.startsWith("http://")) {
+                    testTableStringBuilder.append("["+word+"]"+"("+word+")" + " ")
+                  }
+                  else {
+                    testTableStringBuilder.append(word + " ")
+                  }
                 }
-                else {
-                  testTableStringBuilder.append("," + information.replaceAll(",",";"))
-                }
+//                if (columnsNamesList(i) == MinidumpDocConfig.issue){
+//                  testTableStringBuilder.append(", " + "["+information+"]"+"("+information+")" )
+//                }
+//                else {
+//                  testTableStringBuilder.append("," + information.replaceAll(",",";"))
+//                }
 
               }
             }
