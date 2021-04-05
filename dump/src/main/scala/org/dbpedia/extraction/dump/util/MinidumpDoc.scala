@@ -9,8 +9,6 @@ import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 object MinidumpDoc extends App {
-  // TODO: Make code cleaner, remove program arguments
-  //
   val miniExtractionBaseDir = new File(MinidumpDocConfig.miniExtractionBaseDirPath)
   val urisFile = new File(MinidumpDocConfig.urisFilePath)
   val shaclTestFolder = new File(MinidumpDocConfig.shaclTestsFolderPath)
@@ -206,13 +204,6 @@ object MinidumpDoc extends App {
                     testTableStringBuilder.append(word + " ")
                   }
                 }
-//                if (columnsNamesList(i) == MinidumpDocConfig.issue){
-//                  testTableStringBuilder.append(", " + "["+information+"]"+"("+information+")" )
-//                }
-//                else {
-//                  testTableStringBuilder.append("," + information.replaceAll(",",";"))
-//                }
-
               }
             }
             testTableStringBuilder.append("\n")
