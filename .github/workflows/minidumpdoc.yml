@@ -1,0 +1,31 @@
+name: Update Minidump document
+
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Run Maven install
+        run: mvn install
+
+      - name: Run MinidumpDoc
+        working-directory: ./dump
+        run: mvn package exec:java -Dexec.mainClass=org.dbpedia.extraction.dump.util.MinidumpDoc
+
+      - name: Updating test coverage table
+        uses: EndBug/add-and-commit@v4.4.0
+        with:
+          message: 'Github action minidumpdoc update'
+          add: 'dump/src/test/resources/shaclTestsCoverageTable.md --force'
