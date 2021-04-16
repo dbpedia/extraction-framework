@@ -1,9 +1,14 @@
 package org.dbpedia.extraction.dump.util
 
 import java.io.{File, FileInputStream, PrintWriter}
+import java.util.function.Consumer
+
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream
-import org.apache.jena.query.QueryExecutionFactory
-import org.apache.jena.rdf.model.{Model, ModelFactory}
+import org.apache.jena.query.{QueryExecutionFactory, QuerySolution}
+import org.apache.jena.rdf.model.{Model, ModelFactory, RDFNode, Resource}
+import org.apache.jena.sparql.core.ResultBinding
+import org.apache.jena.sparql.core.Var
+import org.apache.jena.sparql.engine.binding.BindingProject
 
 import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
@@ -126,26 +131,41 @@ object MinidumpDoc extends App {
         }
 
         val exec = QueryExecutionFactory.create(queryString.toString(), miniExtraction)
+        val rs = new mutable.LinkedHashSet[String]()
+        exec.execSelect().forEachRemaining(new Consumer[QuerySolution] {
+          override def accept(t: QuerySolution): Unit = rs.add(t.get("t").asResource().getURI)
+        })
 
-        val rs = exec.execSelect()
+        for(target <- rs) {
+          if (target.contains(MinidumpDocConfig.dbpediaUriPrefix) ) {
 
-        while (rs.hasNext) {
-          val qs = rs.next
-          val t = qs.get("t").asResource().getURI
-          if (t.contains(MinidumpDocConfig.dbpediaUriPrefix) ) {
-
-            val englishDbpediaUri = t.replace(MinidumpDocConfig.dbpediaUriPrefix,
+            val englishDbpediaUri = target.replace(MinidumpDocConfig.dbpediaUriPrefix,
               MinidumpDocConfig.englishDbpediaUriPrefix)
 
-            if (minidumpURIs.contains(t) || minidumpURIs.contains(englishDbpediaUri)) {
-              if (!minidumpURIs.contains(t) && minidumpURIs.contains(englishDbpediaUri)) {
+            if (minidumpURIs.contains(target) || minidumpURIs.contains(englishDbpediaUri)) {
+              if (!minidumpURIs.contains(target) && minidumpURIs.contains(englishDbpediaUri)) {
                 saveToMap(englishDbpediaUri, testDef)
               }
               else {
               //  println(s"tests ${testDef.target} on target $t")
-                saveToMap(t, testDef)
+                saveToMap(target, testDef)
               }
             }
+
+          }
+          else {
+            val citedByURI = "http://dbpedia.org/property/isCitedBy"
+            val newQueryStringGraph = new StringBuilder
+            newQueryStringGraph.append(s"SELECT DISTINCT ?o { <$target> <$citedByURI>  ?o . }")
+            val exec = QueryExecutionFactory.create(newQueryStringGraph.toString(), miniExtraction)
+
+            exec.execSelect().forEachRemaining(new Consumer[QuerySolution] {
+              override def accept(t: QuerySolution): Unit = {
+                //println(t.getResource("o").getURI)
+                rs.add(t.getResource("o").getURI)
+              }
+            })
+
           }
         }
     })
