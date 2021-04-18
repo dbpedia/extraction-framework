@@ -151,21 +151,21 @@ object MinidumpDoc extends App {
                 saveToMap(target, testDef)
               }
             }
-
           }
           else {
-            val citedByURI = "http://dbpedia.org/property/isCitedBy"
+            //val citedByURI = "http://dbpedia.org/property/isCitedBy"
             val newQueryStringGraph = new StringBuilder
-            newQueryStringGraph.append(s"SELECT DISTINCT ?o { <$target> <$citedByURI>  ?o . }")
+            // maybe it is better to use citedBy URI as a property in the query
+            newQueryStringGraph.append(s"SELECT DISTINCT ?o { <$target> ?p  ?o . }")
             val exec = QueryExecutionFactory.create(newQueryStringGraph.toString(), miniExtraction)
-
             exec.execSelect().forEachRemaining(new Consumer[QuerySolution] {
               override def accept(t: QuerySolution): Unit = {
                 //println(t.getResource("o").getURI)
-                rs.add(t.getResource("o").getURI)
+                if (t.get("o").isResource){
+                  rs.add(t.getResource("o").getURI)
+                }
               }
             })
-
           }
         }
     })
