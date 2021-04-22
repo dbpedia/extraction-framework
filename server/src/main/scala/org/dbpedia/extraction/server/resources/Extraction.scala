@@ -116,7 +116,7 @@ class Extraction(@PathParam("lang") langCode : String)
         val acceptContent = selectFormatByContentType(acceptedTypesList(0)) // TODO this can break if multiple RDF formats are requested and the first is not supported
         if (!acceptContent.equalsIgnoreCase("unknownAcceptFormat") && !browserMode)
           finalFormat = acceptContent
-        val contentType = if (browserMode) "text/plain" else selectContentType(format)
+        val contentType = if (browserMode) "text/plain" else selectContentType(finalFormat)
 
         val formatter = finalFormat match
         {
