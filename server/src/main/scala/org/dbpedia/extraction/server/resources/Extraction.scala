@@ -1,17 +1,19 @@
 package org.dbpedia.extraction.server.resources
 
-import java.net.{URL, URI}
+import java.net.{URI, URL}
+
 import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
 import org.dbpedia.extraction.util.Language
 import javax.ws.rs._
-import javax.ws.rs.core.{HttpHeaders, MediaType, Response}
-import java.util.logging.{Logger,Level}
+import javax.ws.rs.core.{Context, HttpHeaders, MediaType, Response}
+import java.util.logging.{Level, Logger}
+
 import scala.xml.Elem
-import scala.io.{Source,Codec}
+import scala.io.{Codec, Source}
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.destinations.{DeduplicatingDestination, WriterDestination}
-import org.dbpedia.extraction.sources.{XMLSource, WikiSource}
+import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import stylesheets.TriX
 import java.io.StringWriter
 
@@ -98,13 +100,25 @@ class Extraction(@PathParam("lang") langCode : String)
      */
     @GET
     @Path("extract")
-    def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String, @QueryParam("extractors") extractors: String) : Response =
+    def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String, @QueryParam("extractors") extractors: String, @Context headers : HttpHeaders) : Response =
     {
+      import scala.collection.JavaConverters._
+      import scala.collection.JavaConversions._
         if (title == null && revid < 0) throw new WebApplicationException(new Exception("title or revid must be given"), Response.Status.NOT_FOUND)
-        
+
+      val acceptedTypes =  headers.getAcceptableMediaTypes
+      val acceptedTypesList = acceptedTypes.map(_.toString)
+      val browserMode = acceptedTypesList.isEmpty || acceptedTypesList.contains("text/html") || acceptedTypesList.contains("application/xhtml+xml") || acceptedTypesList.contains("text/plain")
+
         val writer = new StringWriter
 
-        val formatter = format match
+        var finalFormat = format
+        val acceptContent = selectFormatByContentType(acceptedTypesList(0)) // TODO this can break if multiple RDF formats are requested and the first is not supported
+        if (!acceptContent.equalsIgnoreCase("unknownAcceptFormat") && !browserMode)
+          finalFormat = acceptContent
+        val contentType = if (browserMode) "text/plain" else selectContentType(format)
+
+        val formatter = finalFormat match
         {
             case "turtle-triples" => new TerseFormatter(false, true)
             case "turtle-quads" => new TerseFormatter(true, true)
@@ -131,14 +145,35 @@ class Extraction(@PathParam("lang") langCode : String)
         Server.instance.extractor.extract(source, destination, language, customExtraction)
 
         Response.ok(writer.toString)
-          .header(HttpHeaders.CONTENT_TYPE, selectContentType(format)+"; charset=UTF-8" )
+          .header(HttpHeaders.CONTENT_TYPE, contentType +"; charset=UTF-8" )
           .build()
     }
+
+  private def selectFormatByContentType(format: String): String = {
+
+    format match
+    {
+      case "text/xml" => "trix"
+      case "text/turtle" => "turtle-triples"
+      //case "text/nquads" => "turtle-quads" // this does not exist as mimetype
+      case "application/n-triples" => "n-triples"
+      case "application/n-quads" => "n-quads"
+      case MediaType.APPLICATION_JSON => "rdf-json"
+      //case "application/ld+json" => MediaType.APPLICATION_JSON
+      case _ => "unknownAcceptFormat"
+    }
+  }
 
     private def selectContentType(format: String): String = {
 
       format match
       {
+        case "trix" => MediaType.APPLICATION_XML
+        case "turtle-triples" => "text/turtle"
+        case "turtle-quads" => "text/nquads"
+        case "n-triples" => "application/n-triples"
+        case "n-quads" => "application/n-quads"
+        case "rdf-json" => MediaType.APPLICATION_JSON
         case "trix" => MediaType.APPLICATION_XML
         case _ => MediaType.TEXT_PLAIN
       }
