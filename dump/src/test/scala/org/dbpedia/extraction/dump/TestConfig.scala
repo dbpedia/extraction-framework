@@ -39,6 +39,7 @@ object TestConfig {
   val sparkSession: SparkSession = SparkSession.builder()
     .appName("Minidump Tests")
     .master("local[*]")
+    .config("spark.ui.enabled", "false")
     .config("hadoop.home.dir", "./target/minidumptest/hadoop-tmp")
     .config("spark.local.dir", "./target/minidumptest/spark-tmp")
     .config("spark.locality.wait", "0")
