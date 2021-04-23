@@ -106,17 +106,17 @@ class Extraction(@PathParam("lang") langCode : String)
       import scala.collection.JavaConversions._
         if (title == null && revid < 0) throw new WebApplicationException(new Exception("title or revid must be given"), Response.Status.NOT_FOUND)
 
-      val acceptedTypes =  headers.getAcceptableMediaTypes
-      val acceptedTypesList = acceptedTypes.map(_.toString)
-      val browserMode = acceptedTypesList.isEmpty || acceptedTypesList.contains("text/html") || acceptedTypesList.contains("application/xhtml+xml") || acceptedTypesList.contains("text/plain")
+      val requestedTypesList = headers.getAcceptableMediaTypes.map(_.toString)
+      val browserMode = requestedTypesList.isEmpty || requestedTypesList.contains("text/html") || requestedTypesList.contains("application/xhtml+xml") || requestedTypesList.contains("text/plain")
 
         val writer = new StringWriter
 
         var finalFormat = format
-        val acceptContent = selectFormatByContentType(acceptedTypesList(0)) // TODO this can break if multiple RDF formats are requested and the first is not supported
-        if (!acceptContent.equalsIgnoreCase("unknownAcceptFormat") && !browserMode)
-          finalFormat = acceptContent
-        val contentType = if (browserMode) "text/plain" else selectContentType(finalFormat)
+        val acceptContentBest = requestedTypesList.map(selectFormatByContentType).head
+
+        if (!acceptContentBest.equalsIgnoreCase("unknownAcceptFormat") && !browserMode)
+          finalFormat = acceptContentBest
+        val contentType = if (browserMode) selectInBrowserContentType(finalFormat) else selectContentType(finalFormat)
 
         val formatter = finalFormat match
         {
@@ -149,9 +149,10 @@ class Extraction(@PathParam("lang") langCode : String)
           .build()
     }
 
+  // map
   private def selectFormatByContentType(format: String): String = {
 
-    format match
+    (format match
     {
       case "text/xml" => "trix"
       case "text/turtle" => "turtle-triples"
@@ -161,9 +162,21 @@ class Extraction(@PathParam("lang") langCode : String)
       case MediaType.APPLICATION_JSON => "rdf-json"
       //case "application/ld+json" => MediaType.APPLICATION_JSON
       case _ => "unknownAcceptFormat"
+    })
+  }
+
+  // override content type in browser for some formats to display text instead of downloading a file, or
+  private def selectInBrowserContentType(format: String): String = {
+
+    format match
+    {
+      case "trix" => MediaType.APPLICATION_XML
+      case "rdf-json" => MediaType.APPLICATION_JSON
+      case _ => MediaType.TEXT_PLAIN
     }
   }
 
+  // map format parameters to regular content types
     private def selectContentType(format: String): String = {
 
       format match
