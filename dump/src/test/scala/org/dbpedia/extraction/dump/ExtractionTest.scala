@@ -30,20 +30,20 @@ class ExtractionTest extends FunSuite with BeforeAndAfterAll {
     })
   }
 
-  test("extract generic datasets", ExtractionTestTag) {
-    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
-    extract(genericConfig, jobsRunning)
-  }
+//  test("extract generic datasets", ExtractionTestTag) {
+//    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
+//    extract(genericConfig, jobsRunning)
+//  }
 
-  test("extract mappings datasets", ExtractionTestTag) {
-    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
-    extract(mappingsConfig, jobsRunning)
-  }
-
-  test("extract wikidata datasets", ExtractionTestTag) {
-    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
-    extract(wikidataConfig, jobsRunning)
-  }
+//  test("extract mappings datasets", ExtractionTestTag) {
+//    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
+//    extract(mappingsConfig, jobsRunning)
+//  }
+//
+//  test("extract wikidata datasets", ExtractionTestTag) {
+//    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
+//    extract(wikidataConfig, jobsRunning)
+//  }
 
   test("extract nifAbstract datasets", ExtractionTestTag) {
     val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()

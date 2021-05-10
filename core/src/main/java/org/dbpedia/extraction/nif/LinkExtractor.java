@@ -21,22 +21,22 @@ public class LinkExtractor implements NodeVisitor {
 	private boolean invisible = false;
     private NifExtractorContext context;
 	private ArrayList<String> errors = new ArrayList<>();
-	
+
 	public LinkExtractor(NifExtractorContext context) {
         paragraphs = new ArrayList<Paragraph>();
 		this.context = context;
 	}
-	
+
 	/**
 	 * Gets called when entering an element
 	 * -handle text cleanup and remove Wikipedia specific stuff like reference numbers
 	 * -if we encounter a link, we make a new nif:Word
-	 * -we get the text out of a whitelist of elements. 
-	 *   If we encounter a non-whitelisted element, we set this.skipLevel to the current depth 
+	 * -we get the text out of a whitelist of elements.
+	 *   If we encounter a non-whitelisted element, we set this.skipLevel to the current depth
 	 *   of the dom tree and skip everything until we are back to that depth
 	 * -this thing badly needs refactoring
 	 */
-	
+
 	public void head(Node node, int depth) {
 
 		if(skipLevel>=0)
@@ -75,6 +75,10 @@ public class LinkExtractor implements NodeVisitor {
 		    paragraph.addText(tempText);
 
 		} else if(node.nodeName().equals("a")) {
+			/**
+			 * TODO: Investigate more why the pronunciation data is removed
+			 */
+
             String link = node.attr("href");
             //TODO central string management
 			/**
@@ -156,19 +160,19 @@ public class LinkExtractor implements NodeVisitor {
             tempLink = new Link();
         }
 	}
-	
+
 	private String cleanLink(String uri, boolean external) {
 		if(!external) {
 			//TODO central string management
 			if(!this.context.language.equals("en")) {
 
 				uri="http://"+this.context.language+".dbpedia.org/resource/"+uri.substring(uri.indexOf("?title=")+7);
-				
+
 			} else {
 				uri="http://dbpedia.org/resource/"+uri.substring(uri.indexOf("?title=")+7);
 			}
 			uri = uri.replace("&action=edit&redlink=1", "");
-			
+
 		} else {
 			//there are links that contain illegal hostnames
 			try {
@@ -177,7 +181,7 @@ public class LinkExtractor implements NodeVisitor {
 					uri = "http:"+uri;
 				uri = URLEncoder.encode(uri,"UTF-8");
 				uri = uri.replace("%3A", ":").replace("%2F", "/").replace("%2E", ".");
-					
+
 			} catch(UnsupportedEncodingException e) {
 				//this doesn't happen
 				e.printStackTrace();

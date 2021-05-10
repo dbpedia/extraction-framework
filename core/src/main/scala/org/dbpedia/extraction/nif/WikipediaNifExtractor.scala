@@ -118,6 +118,7 @@ class WikipediaNifExtractor(
 
     def getSection : Option[PageSection] ={
       //look for the next <h> tag
+
       nodes = nodes.dropWhile(node => !node.nodeName().matches("h\\d"))
       val title = nodes.headOption
       nodes = nodes.drop(1)
