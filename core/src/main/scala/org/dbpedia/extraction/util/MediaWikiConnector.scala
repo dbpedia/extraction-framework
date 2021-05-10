@@ -11,7 +11,7 @@ import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
 import org.dbpedia.extraction.config.Config.MediaWikiConnection
-
+import org.slf4j.LoggerFactory
 /**
   * The Mediawiki API connector
   * @param connectionConfig - Collection of parameters necessary for API requests (see Config.scala)
@@ -19,7 +19,7 @@ import org.dbpedia.extraction.config.Config.MediaWikiConnection
   */
 class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[String]) {
 
-
+  protected val log = LoggerFactory.getLogger(classOf[MediaWikiConnector])
   //protected def apiUrl: URL = new URL(connectionConfig.apiUrl)
   //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
 
@@ -98,7 +98,7 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
         val end = java.time.LocalTime.now()
         conn match {
           case connection: HttpURLConnection => {
-            println("Request type: "+ connection.getRequestMethod + "; URL: " + connection.getURL +
+            log.debug("Request type: "+ connection.getRequestMethod + "; URL: " + connection.getURL +
               "; Parameters: " + parameters +"; HTTP code: "+ connection.getHeaderField(null) +
               "; Request time: "+start+"; Response time: " + end + "; Time needed: " +
               start.until(end, ChronoUnit.MILLIS))
