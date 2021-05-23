@@ -63,6 +63,7 @@ extends WikiPageExtractor
 
   private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
 
+  private val parenthesesRegex = "(\\(\\;.*\\)|\\(\\))".r
 
     override def extract(pageNode : WikiPage, subjectUri: String): Seq[Quad] =
     {
@@ -79,16 +80,16 @@ extends WikiPageExtractor
         // if(abstractWikiText == "") return Seq.empty
 
         //Retrieve page text
-        val text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match{
+        val text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
           case Some(t) => AbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
           case None => return Seq.empty
         }
-
+        val modifiedText = parenthesesRegex.replaceAllIn(text, "")
         //Create a short version of the abstract
-        val shortText = short(text)
+        val shortText = short(modifiedText)
 
         //Create statements
-        val quadLong = longQuad(pageNode.uri, text, pageNode.sourceIri)
+        val quadLong = longQuad(pageNode.uri, modifiedText, pageNode.sourceIri)
         val quadShort = shortQuad(pageNode.uri, shortText, pageNode.sourceIri)
 
         if (shortText.isEmpty)
