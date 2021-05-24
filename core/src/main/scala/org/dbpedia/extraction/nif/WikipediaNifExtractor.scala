@@ -67,8 +67,9 @@ class WikipediaNifExtractor(
     */
   override def extendSectionTriples(extractionResults: ExtractedSection, graphIri: String, subjectIri: String): Seq[Quad] = {
     //this is only dbpedia relevant: for singling out long and short abstracts
+
     if (recordAbstracts && extractionResults.section.id == "abstract" && extractionResults.getExtractedLength > 0) {
-      List(longQuad(subjectIri, extractionResults.getExtractedText, graphIri), shortQuad(subjectIri, getShortAbstract(extractionResults), graphIri))
+      List(longQuad(subjectIri, removeBrackets(extractionResults.getExtractedText), graphIri), shortQuad(subjectIri, removeBrackets(getShortAbstract(extractionResults)), graphIri))
     }
     else
       List()
@@ -218,5 +219,43 @@ class WikipediaNifExtractor(
     for( query: String <- queries )
       test.addAll(doc.select(query))
     test.size() > 0
+  }
+
+  /**
+  this method removes broken information with brackets like (; some info) or ()
+  */
+  def removeBrackets(text: String): String = {
+    var closeBrackets = 0
+    var result = ""
+    var bracketsWithSemicolon = 0
+    var skipBrackets = 0
+    for (i <- 0 until text.length) {
+      if (text(i) == '(') {
+        if ((i < text.length-1) && (text(i+1) == ';') && bracketsWithSemicolon == 0) {
+          bracketsWithSemicolon = 1
+        }
+        else if (bracketsWithSemicolon > 0) {
+          bracketsWithSemicolon += 1
+        }
+        else if ((i < text.length-1) && (text(i+1) == ')')) {
+          skipBrackets = 2
+        }
+      }
+      else if (text(i) == ')' ) {
+        closeBrackets += 1
+        if (closeBrackets == bracketsWithSemicolon) {
+          bracketsWithSemicolon = 0
+          closeBrackets = 0
+          skipBrackets += 1
+        }
+      }
+      if (bracketsWithSemicolon == 0 && skipBrackets == 0) {
+        result += text(i)
+      }
+      if (skipBrackets > 0) {
+        skipBrackets -= 1
+      }
+    }
+    result
   }
 }
