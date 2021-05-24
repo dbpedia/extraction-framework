@@ -10,6 +10,7 @@ import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{Language, MediaWikiConnector}
 import org.dbpedia.extraction.wikiparser._
 
+import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**
@@ -63,8 +64,6 @@ extends WikiPageExtractor
 
   private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
 
-  private val parenthesesRegex = "(\\(\\;.*\\)|\\(\\))".r
-
     override def extract(pageNode : WikiPage, subjectUri: String): Seq[Quad] =
     {
         //Only extract abstracts for pages from the Main namespace
@@ -84,12 +83,12 @@ extends WikiPageExtractor
           case Some(t) => AbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
           case None => return Seq.empty
         }
-        val modifiedText = parenthesesRegex.replaceAllIn(text, "")
+        val modifiedText = removeBrackets(text)
         //Create a short version of the abstract
         val shortText = short(modifiedText)
 
         //Create statements
-        val quadLong = longQuad(pageNode.uri, modifiedText, pageNode.sourceIri)
+        val quadLong = longQuad(pageNode.uri,modifiedText, pageNode.sourceIri)
         val quadShort = shortQuad(pageNode.uri, shortText, pageNode.sourceIri)
 
         if (shortText.isEmpty)
@@ -150,6 +149,43 @@ extends WikiPageExtractor
       ret
     }
 
+    /**
+      this method removes broken information with brackets like (; some info) or ()
+     */
+    def removeBrackets(text: String): String = {
+      var closeBrackets = 0
+      var result = ""
+      var bracketsWithSemicolon = 0
+      var skipBrackets = 0
+      for (i <- 0 until text.length) {
+        if (text(i) == '(') {
+          if ((i < text.length-1) && (text(i+1) == ';') && bracketsWithSemicolon == 0) {
+            bracketsWithSemicolon = 1
+          }
+          else if (bracketsWithSemicolon > 0) {
+            bracketsWithSemicolon += 1
+          }
+          else if ((i < text.length-1) && (text(i+1) == ')')) {
+            skipBrackets = 2
+          }
+        }
+        else if (text(i) == ')' ) {
+          closeBrackets += 1
+          if (closeBrackets == bracketsWithSemicolon) {
+            bracketsWithSemicolon = 0
+            closeBrackets = 0
+            skipBrackets += 1
+          }
+        }
+        if (bracketsWithSemicolon == 0 && skipBrackets == 0) {
+          result += text(i)
+        }
+        if (skipBrackets > 0) {
+          skipBrackets -= 1
+        }
+      }
+      result
+    }
 
     //private val destinationNamespacesToRender = List(Namespace.Main, Namespace.Template)
 
