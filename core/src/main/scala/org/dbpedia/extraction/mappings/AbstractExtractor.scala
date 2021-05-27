@@ -7,10 +7,9 @@ import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.{Language, MediaWikiConnector}
+import org.dbpedia.extraction.util.{Language, MediaWikiConnector, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 
-import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**
@@ -83,7 +82,7 @@ extends WikiPageExtractor
           case Some(t) => AbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
           case None => return Seq.empty
         }
-        val modifiedText = removeBrackets(text)
+        val modifiedText = WikiUtil.removeBracketsInAbstracts(text)
         //Create a short version of the abstract
         val shortText = short(modifiedText)
 
@@ -149,43 +148,6 @@ extends WikiPageExtractor
       ret
     }
 
-    /**
-      this method removes broken information with brackets like (; some info) or ()
-     */
-    def removeBrackets(text: String): String = {
-      var closeBrackets = 0
-      var result = ""
-      var bracketsWithSemicolon = 0
-      var skipBrackets = 0
-      for (i <- 0 until text.length) {
-        if (text(i) == '(') {
-          if ((i < text.length-1) && (text(i+1) == ';') && bracketsWithSemicolon == 0) {
-            bracketsWithSemicolon = 1
-          }
-          else if (bracketsWithSemicolon > 0) {
-            bracketsWithSemicolon += 1
-          }
-          else if ((i < text.length-1) && (text(i+1) == ')')) {
-            skipBrackets = 2
-          }
-        }
-        else if (text(i) == ')' ) {
-          closeBrackets += 1
-          if (closeBrackets == bracketsWithSemicolon) {
-            bracketsWithSemicolon = 0
-            closeBrackets = 0
-            skipBrackets += 1
-          }
-        }
-        if (bracketsWithSemicolon == 0 && skipBrackets == 0) {
-          result += text(i)
-        }
-        if (skipBrackets > 0) {
-          skipBrackets -= 1
-        }
-      }
-      result
-    }
 
     //private val destinationNamespacesToRender = List(Namespace.Main, Namespace.Template)
 
