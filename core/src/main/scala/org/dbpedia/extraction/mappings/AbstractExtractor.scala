@@ -50,6 +50,8 @@ extends WikiPageExtractor
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
   protected val apiParametersFormat = context.configFile.abstractParameters.abstractQuery
 
+  protected val removeBrokenBrackets = context.configFile.abstractParameters.removeBrokenBracketsProperty
+
     // lazy so testing does not need ontology
   protected lazy val shortProperty = context.ontology.properties(context.configFile.abstractParameters.shortAbstractsProperty)
 
@@ -82,7 +84,12 @@ extends WikiPageExtractor
           case Some(t) => AbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
           case None => return Seq.empty
         }
-        val modifiedText = WikiUtil.removeBracketsInAbstracts(text)
+
+        val modifiedText = removeBrokenBrackets match {
+          case "true" => WikiUtil.removeBrokenBracketsInAbstracts(text)
+          case _ => text
+        }
+
         //Create a short version of the abstract
         val shortText = short(modifiedText)
 
@@ -204,7 +211,7 @@ extends WikiPageExtractor
                 .filter(renderNode)
                 .map(_.toWikiText)
                 .mkString("").trim
-        
+
         // decode HTML entities - the result is plain text
         decodeHtml(text)
     }

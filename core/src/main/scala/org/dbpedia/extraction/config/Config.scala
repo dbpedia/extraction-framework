@@ -277,7 +277,8 @@ class Config(val configPath: String) extends
       shortAbstractsProperty = this.getProperty("short-abstracts-property", "rdfs:comment").trim,
       longAbstractsProperty = this.getProperty("long-abstracts-property", "abstract").trim,
       shortAbstractMinLength = this.getProperty("short-abstract-min-length", "200").trim.toInt,
-      abstractTags = this.getProperty("abstract-tags", "query,pages,page,extract").trim
+      abstractTags = this.getProperty("abstract-tags", "query,pages,page,extract").trim,
+      removeBrokenBracketsProperty = this.getProperty("remove-broken-brackets", "false").trim
     )
   } match{
     case Success(s) => s
@@ -369,11 +370,12 @@ object Config{
   )
 
   case class AbstractParameters(
-    abstractQuery: String,
-    shortAbstractsProperty: String,
-    longAbstractsProperty: String,
-    shortAbstractMinLength: Int,
-    abstractTags: String
+                                 abstractQuery: String,
+                                 shortAbstractsProperty: String,
+                                 longAbstractsProperty: String,
+                                 shortAbstractMinLength: Int,
+                                 abstractTags: String,
+                                 removeBrokenBracketsProperty: String
   )
 
   case class SlackCredentials(
