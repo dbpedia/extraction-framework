@@ -69,7 +69,7 @@ class WikipediaNifExtractor(
     //this is only dbpedia relevant: for singling out long and short abstracts
 
     if (recordAbstracts && extractionResults.section.id == "abstract" && extractionResults.getExtractedLength > 0) {
-      List(longQuad(subjectIri, WikiUtil.removeBracketsInAbstracts(extractionResults.getExtractedText), graphIri), shortQuad(subjectIri, WikiUtil.removeBracketsInAbstracts(getShortAbstract(extractionResults)), graphIri))
+      List(longQuad(subjectIri, WikiUtil.removeBrokenBracketsInAbstracts(extractionResults.getExtractedText), graphIri), shortQuad(subjectIri, WikiUtil.removeBrokenBracketsInAbstracts(getShortAbstract(extractionResults)), graphIri))
     }
     else
       List()
