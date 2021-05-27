@@ -171,7 +171,7 @@ object WikiUtil
   /**
     this method removes broken information with brackets like (; some info) or ()
     */
-  def removeBracketsInAbstracts(text: String): String = {
+  def removeBrokenBracketsInAbstracts(text: String): String = {
     var closeBrackets = 0
     var result = ""
     var bracketsWithSemicolon = 0
