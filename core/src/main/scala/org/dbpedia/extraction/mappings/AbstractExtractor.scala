@@ -242,6 +242,7 @@ object AbstractExtractor {
 
   val patternsToRemove = List(
     """<div style=[^/]*/>""".r -> " ",
-    """</div>""".r -> " "
+    """</div>""".r -> " ",
+    """<normalized>.*<\/normalized>""".r -> ""
   )
 }
