@@ -7,7 +7,7 @@ import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.{Language, MediaWikiConnector}
+import org.dbpedia.extraction.util.{Language, MediaWikiConnector, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
@@ -50,6 +50,8 @@ extends WikiPageExtractor
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
   protected val apiParametersFormat = context.configFile.abstractParameters.abstractQuery
 
+  protected val removeBrokenBrackets = context.configFile.abstractParameters.removeBrokenBracketsProperty
+
     // lazy so testing does not need ontology
   protected lazy val shortProperty = context.ontology.properties(context.configFile.abstractParameters.shortAbstractsProperty)
 
@@ -62,7 +64,6 @@ extends WikiPageExtractor
   override val datasets = Set(DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
   private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
-
 
     override def extract(pageNode : WikiPage, subjectUri: String): Seq[Quad] =
     {
@@ -79,16 +80,21 @@ extends WikiPageExtractor
         // if(abstractWikiText == "") return Seq.empty
 
         //Retrieve page text
-        val text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match{
+        val text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
           case Some(t) => AbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
           case None => return Seq.empty
         }
 
+        val modifiedText = removeBrokenBrackets match {
+          case "true" => WikiUtil.removeBrokenBracketsInAbstracts(text)
+          case _ => text
+        }
+
         //Create a short version of the abstract
-        val shortText = short(text)
+        val shortText = short(modifiedText)
 
         //Create statements
-        val quadLong = longQuad(pageNode.uri, text, pageNode.sourceIri)
+        val quadLong = longQuad(pageNode.uri,modifiedText, pageNode.sourceIri)
         val quadShort = shortQuad(pageNode.uri, shortText, pageNode.sourceIri)
 
         if (shortText.isEmpty)
@@ -205,7 +211,7 @@ extends WikiPageExtractor
                 .filter(renderNode)
                 .map(_.toWikiText)
                 .mkString("").trim
-        
+
         // decode HTML entities - the result is plain text
         decodeHtml(text)
     }
@@ -243,6 +249,7 @@ object AbstractExtractor {
 
   val patternsToRemove = List(
     """<div style=[^/]*/>""".r -> " ",
-    """</div>""".r -> " "
+    """</div>""".r -> " ",
+    """<normalized>.*<\/normalized>""".r -> ""
   )
 }

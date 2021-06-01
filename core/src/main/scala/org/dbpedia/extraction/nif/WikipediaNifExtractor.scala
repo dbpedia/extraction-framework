@@ -4,7 +4,7 @@ import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty, RdfNamespace}
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.{Language, RecordEntry, RecordSeverity}
+import org.dbpedia.extraction.util.{Language, RecordEntry, RecordSeverity, WikiUtil}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.jsoup.nodes.{Document, Element, Node}
@@ -67,8 +67,9 @@ class WikipediaNifExtractor(
     */
   override def extendSectionTriples(extractionResults: ExtractedSection, graphIri: String, subjectIri: String): Seq[Quad] = {
     //this is only dbpedia relevant: for singling out long and short abstracts
+
     if (recordAbstracts && extractionResults.section.id == "abstract" && extractionResults.getExtractedLength > 0) {
-      List(longQuad(subjectIri, extractionResults.getExtractedText, graphIri), shortQuad(subjectIri, getShortAbstract(extractionResults), graphIri))
+      List(longQuad(subjectIri, WikiUtil.removeBrokenBracketsInAbstracts(extractionResults.getExtractedText), graphIri), shortQuad(subjectIri, WikiUtil.removeBrokenBracketsInAbstracts(getShortAbstract(extractionResults)), graphIri))
     }
     else
       List()
@@ -219,4 +220,5 @@ class WikipediaNifExtractor(
       test.addAll(doc.select(query))
     test.size() > 0
   }
+
 }

@@ -1,16 +1,17 @@
 package org.dbpedia.extraction.util
 
 import java.io.{InputStream, OutputStreamWriter}
-import java.net.URL
-import javax.xml.ws.WebServiceException
+import java.net.{HttpURLConnection, URL}
+import java.time.temporal.ChronoUnit
 
+import javax.xml.ws.WebServiceException
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
 import org.dbpedia.extraction.config.Config.MediaWikiConnection
-
+import org.slf4j.LoggerFactory
 /**
   * The Mediawiki API connector
   * @param connectionConfig - Collection of parameters necessary for API requests (see Config.scala)
@@ -18,7 +19,7 @@ import org.dbpedia.extraction.config.Config.MediaWikiConnection
   */
 class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[String]) {
 
-
+  protected val log = LoggerFactory.getLogger(classOf[MediaWikiConnector])
   //protected def apiUrl: URL = new URL(connectionConfig.apiUrl)
   //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
 
@@ -80,6 +81,7 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
       try
       {
         val conn = apiUrl.openConnection
+        val start = java.time.LocalTime.now()
         conn.setDoOutput(true)
         conn.setConnectTimeout(retryFactor * connectMs)
         conn.setReadTimeout(retryFactor * readMs)
@@ -89,8 +91,22 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
         writer.flush()
         writer.close()
 
+        // log URL, POSTparametersifPOST,  HTTP code, time needed, request-time
+        // log.debug(conn.getHeaderFields)
+
+        val inputStream = conn.getInputStream
+        val end = java.time.LocalTime.now()
+        conn match {
+          case connection: HttpURLConnection => {
+            log.debug("Request type: "+ connection.getRequestMethod + "; URL: " + connection.getURL +
+              "; Parameters: " + parameters +"; HTTP code: "+ connection.getHeaderField(null) +
+              "; Request time: "+start+"; Response time: " + end + "; Time needed: " +
+              start.until(end, ChronoUnit.MILLIS))
+          }
+          case _ =>
+        }
         // Read answer
-        return readInAbstract(conn.getInputStream) match{
+        return readInAbstract(inputStream) match{
           case Success(str) => Option(str)
           case Failure(e) => throw e
         }
