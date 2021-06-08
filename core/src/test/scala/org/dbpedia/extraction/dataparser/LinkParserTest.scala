@@ -1,4 +1,5 @@
 package org.dbpedia.extraction.dataparser
+package org.dbpedia.extraction.dataparser
 
 import _root_.org.scalatest.Matchers
 import org.scalatest.FlatSpec
@@ -92,7 +93,7 @@ class LinkParserTest extends FlatSpec with Matchers
   }
 
   it should "return http://www.example.com/foo/" in {
-    //parse("{{URL|www.example.com/foo/|link}}") should equal (Some(build("http://www.example.com/foo/")))
+    parse("{{URL|www.example.com/foo/|link}}") should equal (Some(build("http://www.example.com/foo/")))
     parse("{{URL|http://www.example.com/foo/|link}}") should equal (Some(build("http://www.example.com/foo/")))
     parse("{{URL|www.example.com/foo/}}") should equal (Some(build("http://www.example.com/foo/")))
   }
