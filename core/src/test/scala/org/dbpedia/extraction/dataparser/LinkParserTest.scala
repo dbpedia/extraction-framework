@@ -1,5 +1,4 @@
 package org.dbpedia.extraction.dataparser
-package org.dbpedia.extraction.dataparser
 
 import _root_.org.scalatest.Matchers
 import org.scalatest.FlatSpec
