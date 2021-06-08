@@ -76,6 +76,13 @@ object TemplateTransformConfig {
   private def extractFirstExternalLinkNode(node: Option[PropertyNode]) : Option[ExternalLinkNode] = {
     node
       .flatMap(_.children
+        .map(c => {
+          if (c.isInstanceOf[TextNode] && c.toPlainText.contains(".") && !c.toPlainText.contains(" ")) {
+            val text = c.toPlainText
+            val triedUri = UriUtils.createURI(if (!text.startsWith("http") && !text.contains(":")) "http://" + text else text)
+            triedUri.map(uri => ExternalLinkNode(uri, c.children, c.line)).getOrElse(c)
+          } else c
+        })
         .filter(c => c.isInstanceOf[ExternalLinkNode])
         .map(_.asInstanceOf[ExternalLinkNode])
         .headOption
@@ -169,7 +176,8 @@ object TemplateTransformConfig {
         PropertyNode("link-title", List(TextNode("", node.line)), node.line)
       }
 
-      // Check if this uri has a scheme. If it does not, add a default http:// scheme
+
+    // Check if this uri has a scheme. If it does not, add a default http:// scheme
       // From https://en.wikipedia.org/wiki/Template:URL:
       // The first parameter is parsed to see if it takes the form of a complete URL.
       // If it doesn't start with a URI scheme (such as "http:", "https:", or "ftp:"),
