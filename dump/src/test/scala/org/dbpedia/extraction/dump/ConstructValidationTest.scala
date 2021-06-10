@@ -54,9 +54,9 @@ class ConstructValidationTest extends FunSuite with BeforeAndAfterAll {
 
     val testScores = testSuite.test(s"${mappingsConfig.dumpDir.getAbsolutePath}/*/$date/*.ttl.bz2")(SQLContext)
     new File("taget/testreports/").mkdirs()
-    val htmlOS = new FileOutputStream(s"./target/testreports/minidump-cv-productive.html", false)
+    val htmlOS = new FileOutputStream(s"./target/testreports/minidump.html", false)
     ReportWriter.write("DIEF Minidump NTriple Test Cases", testScores(0), testSuite, ReportFormat.HTML, htmlOS)
     htmlOS.close()
-    println("Wrote: " + s"./target/testreports/minidump-cv-productive.html")
+    println("Wrote: " + s"./target/testreports/minidump.html")
   }
 }
