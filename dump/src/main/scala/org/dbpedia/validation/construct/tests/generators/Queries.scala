@@ -92,8 +92,10 @@ object Queries {
        |
        |SELECT ?generator ?trigger ?validator
        |{
-       |  ?generator v:trigger ?trigger ;
-       |             v:validator ?validator .
+       |  ?generator
+       |  a     v:TestGenerator ;
+       |  v:trigger ?trigger ;
+       |  v:validator ?validator .
        |
        |}
      """.stripMargin

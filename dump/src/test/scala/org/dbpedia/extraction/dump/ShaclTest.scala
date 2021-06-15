@@ -29,22 +29,8 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     new File("./target/testreports/").mkdirs()
   }
 
-  def getGroup: String = {
-    val resourceInputStream = Option(getClass.getClassLoader.getResourceAsStream("properties-from-pom.properties"))
-    val properties = new Properties()
-    resourceInputStream match {
-      case Some(inputStream) => properties.load(inputStream)
-      case None => return TestConfig.defaultTestGroup
-    }
-    val groupOption = Option(properties.getProperty("testGroup"))
-    groupOption match {
-      case Some(group) => group
-      case None => TestConfig.defaultTestGroup
-    }
-  }
-
   test("RDFUnit with SHACL", ShaclTestTag) {
-    val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuiteFromMultipleFiles(getGroup)
+    val (schema: SchemaSource, testSuite: TestSuite) = generateShaclTestSuiteFromMultipleFiles(Utils.getGroup("shaclTestGroup"))
 
     val shaclTestCaseResults =
       validateMinidumpWithTestSuite(schema, testSuite, TestCaseExecutionType.shaclTestCaseResult, "./target/testreports/shacl-tests.html")
@@ -128,7 +114,7 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     }
     assert(custom_SHACL_tests.size() > 0, "size not 0")
 
-    val groupKeys = loadTestGroupsKeys(testGroup, "testGroups.csv")
+    val groupKeys = Utils.loadTestGroupsKeys(testGroup, "shacl-test-groups.csv", "yes")
     assert(groupKeys.nonEmpty)
     val selectValues = groupKeys.map(x => s"<https://github.com/dbpedia/extraction-framework$x> ")
       .mkString("\n")
@@ -163,30 +149,6 @@ class ShaclTest extends FunSuite with BeforeAndAfterAll {
     (schema, testSuite)
   }
 
-  def loadTestGroupsKeys(group: String, path: String): Array[String] = {
-    println(
-      s"""##############
-         | GROUP $group
-         |##############""".stripMargin)
-    val flag = "yes"
-    val filePath = classLoader.getResource(path).getFile
-    val file = scala.io.Source.fromFile(filePath)
-
-    val table: Array[Array[String]] = file.getLines().map(_.split(",")).toArray
-    val columnsNames: Array[String] = table.head
-
-    if (!columnsNames.contains(group)) {
-      Array[String]()
-    }
-    else {
-      val indexOfGroup = columnsNames.indexOf(group)
-      val groupsKeys: Array[String] = table.tail.flatMap(row =>
-        if (row(indexOfGroup) == flag) Array[String](row(0))
-        else Array[String]())
-
-      groupsKeys
-    }
-  }
 
   def recursiveListFiles(f: File): Array[File] = {
     val these = f.listFiles
