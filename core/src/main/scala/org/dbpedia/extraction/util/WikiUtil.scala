@@ -178,7 +178,7 @@ object WikiUtil
     var skipBrackets = 0
     for (i <- 0 until text.length) {
       if (text(i) == '(') {
-        if ((i < text.length-1) && (text(i+1) == ';') && bracketsWithSemicolon == 0) {
+        if ((i < text.length-1) && (text(i+1) == ';' || text(i+1) ==',') && bracketsWithSemicolon == 0) {
           bracketsWithSemicolon = 1
         }
         else if (bracketsWithSemicolon > 0) {
