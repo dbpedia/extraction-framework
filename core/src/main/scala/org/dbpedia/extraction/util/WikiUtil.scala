@@ -173,7 +173,7 @@ object WikiUtil
     */
   def removeBrokenBracketsInAbstracts(text: String): String = {
     var closeBrackets = 0
-    var result = ""
+    val result = new StringBuilder()
     var bracketsWithSemicolon = 0
     var skipBrackets = 0
     for (i <- 0 until text.length) {
@@ -198,14 +198,14 @@ object WikiUtil
       }
       if (bracketsWithSemicolon == 0 && skipBrackets == 0) {
         // if the previous character was space and the next is also space then we skip it
-        if (!(result.length > 0 && result.last == ' ' && text(i) == ' ' )) {
-          result += text(i)
+        if (!(result.nonEmpty && result.last == ' ' && text(i) == ' ' )) {
+          result.append(text(i))
         }
       }
       if (skipBrackets > 0) {
         skipBrackets -= 1
       }
     }
-    result
+    result.toString().trim
   }
 }
