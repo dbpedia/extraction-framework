@@ -278,7 +278,7 @@ class Config(val configPath: String) extends
       longAbstractsProperty = this.getProperty("long-abstracts-property", "abstract").trim,
       shortAbstractMinLength = this.getProperty("short-abstract-min-length", "200").trim.toInt,
       abstractTags = this.getProperty("abstract-tags", "query,pages,page,extract").trim,
-      removeBrokenBracketsProperty = this.getProperty("remove-broken-brackets", "false").trim
+      removeBrokenBracketsProperty = this.getProperty("remove-broken-brackets-plain-abstracts", "false").trim
     )
   } match{
     case Success(s) => s
@@ -294,7 +294,8 @@ class Config(val configPath: String) extends
       writeAnchor = this.getProperty("nif-write-anchor", "false").trim.toBoolean,
       writeLinkAnchor = this.getProperty("nif-write-link-anchor", "true").trim.toBoolean,
       abstractsOnly = this.getProperty("nif-extract-abstract-only", "true").trim.toBoolean,
-      cssSelectorMap = this.getClass.getClassLoader.getResource("nifextractionconfig.json") //static config file in core/src/main/resources
+      cssSelectorMap = this.getClass.getClassLoader.getResource("nifextractionconfig.json"), //static config file in core/src/main/resources
+      removeBrokenBracketsProperty = this.getProperty("remove-broken-brackets-html-abstracts", "false").trim.toBoolean
     )
   } match{
     case Success(s) => s
@@ -349,7 +350,8 @@ object Config{
     writeAnchor: Boolean,
     writeLinkAnchor: Boolean,
     abstractsOnly: Boolean,
-    cssSelectorMap: URL
+    cssSelectorMap: URL,
+    removeBrokenBracketsProperty: Boolean
   )
 
   /**

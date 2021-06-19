@@ -47,6 +47,8 @@ class WikipediaNifExtractor(
   protected val recordAbstracts: Boolean = !context.configFile.nifParameters.isTestRun  //not! will create dbpedia short and long abstracts
   protected val shortAbstractLength: Int = context.configFile.abstractParameters.shortAbstractMinLength
   protected val abstractsOnly: Boolean = context.configFile.nifParameters.abstractsOnly
+  protected val removeBrokenBrackets: Boolean = context.configFile.nifParameters.removeBrokenBracketsProperty
+
   override protected val templateString: String = Namespaces.names(context.language).get(Namespace.Template.code) match {
     case Some(x) => x
     case None => "Template"
@@ -69,7 +71,12 @@ class WikipediaNifExtractor(
     //this is only dbpedia relevant: for singling out long and short abstracts
 
     if (recordAbstracts && extractionResults.section.id == "abstract" && extractionResults.getExtractedLength > 0) {
-      List(longQuad(subjectIri, WikiUtil.removeBrokenBracketsInAbstracts(extractionResults.getExtractedText), graphIri), shortQuad(subjectIri, WikiUtil.removeBrokenBracketsInAbstracts(getShortAbstract(extractionResults)), graphIri))
+      val modifiedText = if (removeBrokenBrackets) {
+        WikiUtil.removeBrokenBracketsInAbstracts(extractionResults.getExtractedText)
+      } else {
+        extractionResults.getExtractedText
+      }
+      List(longQuad(subjectIri, modifiedText, graphIri), shortQuad(subjectIri, modifiedText, graphIri))
     }
     else
       List()
