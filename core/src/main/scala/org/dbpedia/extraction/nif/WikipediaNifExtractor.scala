@@ -71,12 +71,13 @@ class WikipediaNifExtractor(
     //this is only dbpedia relevant: for singling out long and short abstracts
 
     if (recordAbstracts && extractionResults.section.id == "abstract" && extractionResults.getExtractedLength > 0) {
-      val modifiedText = if (removeBrokenBrackets) {
-        WikiUtil.removeBrokenBracketsInAbstracts(extractionResults.getExtractedText)
+      val (cleanLongAbstract, cleanShortAbstract) = if (removeBrokenBrackets) {
+        (WikiUtil.removeBrokenBracketsInAbstracts(extractionResults.getExtractedText),
+          WikiUtil.removeBrokenBracketsInAbstracts(getShortAbstract(extractionResults)))
       } else {
-        extractionResults.getExtractedText
+        (extractionResults.getExtractedText, getShortAbstract(extractionResults))
       }
-      List(longQuad(subjectIri, modifiedText, graphIri), shortQuad(subjectIri, modifiedText, graphIri))
+      List(longQuad(subjectIri, cleanLongAbstract, graphIri), shortQuad(subjectIri, cleanShortAbstract, graphIri))
     }
     else
       List()
