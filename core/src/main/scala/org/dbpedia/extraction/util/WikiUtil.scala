@@ -206,6 +206,6 @@ object WikiUtil
         skipBrackets -= 1
       }
     }
-    result.toString().trim
+    result.toString().replaceAll("](\\s*);", "];")
   }
 }

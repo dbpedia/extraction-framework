@@ -64,11 +64,13 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
     testReports
   }
 
+  case class Construct(self: String, left: Option[String] = None, right: Option[String] = None)
+
   /**
    * Assumption: The whitespace following subject, predicate, and object must be a single space, (U+0020).
    * All other locations that allow whitespace must be empty. (https://www.w3.org/TR/n-triples/#canonical-ntriples)
    */
-  def prepareFlatTerseLine(line: String): Array[String] = {
+  def prepareFlatTerseLine(line: String): Array[Construct] = {
 
     val spo = line.split(">", 3)
 
@@ -95,7 +97,7 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
       case ae: ArrayIndexOutOfBoundsException => println(line); ae.printStackTrace()
     }
 
-    Array(s, p, o)
+    Array(Construct(s), Construct(p, Some(s), Some(o)), Some(o))
   }
 
   def validateNTriplePart(
