@@ -44,15 +44,14 @@ class ExtractionTest extends FunSuite with BeforeAndAfterAll {
     extract(wikidataConfig, jobsRunning)
   }
 
-  test("extract nifAbstract datasets", ExtractionTestTag) {
-    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
-    extract(nifAbstractConfig, jobsRunning)
+  test("extract abstract datasets", ExtractionTestTag) {
+    val jobsRunning1 = new ConcurrentLinkedQueue[Future[Unit]]()
+    extract(nifAbstractConfig, jobsRunning1)
     Utils.renameAbstractsDatasetFiles("html")
-    extract(plainAbstractConfig, jobsRunning)
+    val jobsRunning2 = new ConcurrentLinkedQueue[Future[Unit]]()
+    extract(plainAbstractConfig, jobsRunning2)
     Utils.renameAbstractsDatasetFiles("plain")
   }
-
-
 
   def extractSpark(config: Config, jobsRunning: ConcurrentLinkedQueue[Future[Unit]]): Unit = {
     /**
