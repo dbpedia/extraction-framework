@@ -17,6 +17,7 @@ object TestConfig {
   val mappingsConfig = new Config(classLoader.getResource("extraction-configs/mappings.extraction.minidump.properties").getFile)
   val genericConfig = new Config(classLoader.getResource("extraction-configs/generic-spark.extraction.minidump.properties").getFile)
   val nifAbstractConfig = new Config(classLoader.getResource("extraction-configs/extraction.nif.abstracts.properties").getFile)
+  val plainAbstractConfig = new Config(classLoader.getResource("extraction-configs/extraction.plain.abstracts.properties").getFile)
   val wikidataConfig = new Config(classLoader.getResource("extraction-configs/wikidata.extraction.properties").getFile)
   val minidumpDir = new File(classLoader.getResource("minidumps").getFile)
 

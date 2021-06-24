@@ -2,10 +2,9 @@ package org.dbpedia.extraction.dump
 
 import java.io.File
 import java.util.concurrent.ConcurrentLinkedQueue
-
 import org.apache.commons.io.FileUtils
 import org.dbpedia.extraction.config.Config
-import org.dbpedia.extraction.dump.TestConfig.{date, genericConfig, mappingsConfig, minidumpDir, nifAbstractConfig, sparkSession, wikidataConfig}
+import org.dbpedia.extraction.dump.TestConfig.{classLoader, date, genericConfig, mappingsConfig, minidumpDir, nifAbstractConfig, plainAbstractConfig, sparkSession, wikidataConfig}
 import org.dbpedia.extraction.dump.extract.ConfigLoader
 import org.dbpedia.extraction.dump.tags.ExtractionTestTag
 import org.scalatest.{BeforeAndAfterAll, DoNotDiscover, FunSuite}
@@ -45,9 +44,13 @@ class ExtractionTest extends FunSuite with BeforeAndAfterAll {
     extract(wikidataConfig, jobsRunning)
   }
 
-  test("extract nifAbstract datasets", ExtractionTestTag) {
-    val jobsRunning = new ConcurrentLinkedQueue[Future[Unit]]()
-    extract(nifAbstractConfig, jobsRunning)
+  test("extract abstract datasets", ExtractionTestTag) {
+    val jobsRunning1 = new ConcurrentLinkedQueue[Future[Unit]]()
+    extract(nifAbstractConfig, jobsRunning1)
+    Utils.renameAbstractsDatasetFiles("html")
+    val jobsRunning2 = new ConcurrentLinkedQueue[Future[Unit]]()
+    extract(plainAbstractConfig, jobsRunning2)
+    Utils.renameAbstractsDatasetFiles("plain")
   }
 
   def extractSpark(config: Config, jobsRunning: ConcurrentLinkedQueue[Future[Unit]]): Unit = {
