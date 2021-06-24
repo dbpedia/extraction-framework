@@ -57,7 +57,7 @@ class NifExtractorTest extends FunSuite {
 
   private def getHtml(title:WikiTitle): String={
     mwConnector.retrievePage(title, context.configFile.nifParameters.nifQuery) match{
-      case Some(pc) => AbstractExtractor.postProcessExtractedHtml(title, pc)
+      case Some(pc) => PlainAbstractExtractor.postProcessExtractedHtml(title, pc)
       case None => ""
     }
   }

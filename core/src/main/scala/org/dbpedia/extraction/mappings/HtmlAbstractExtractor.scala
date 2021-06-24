@@ -13,7 +13,7 @@ import scala.language.reflectiveCalls
  * Created: 5/19/14 9:21 AM
  */
 
-class AbstractExtractorWikipedia(
+class HtmlAbstractExtractor(
   context : {
     def ontology : Ontology
     def language : Language
