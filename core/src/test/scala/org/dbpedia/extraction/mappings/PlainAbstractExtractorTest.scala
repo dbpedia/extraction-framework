@@ -12,7 +12,7 @@ import scala.io.Source
 import scala.language.reflectiveCalls
 
 @Ignore  // unignore to test; MediaWiki server has to be in place
-class AbstractExtractorTest
+class PlainAbstractExtractorTest
 {
     private val testDataRootDir = new File("core/src/test/resources/org/dbpedia/extraction/mappings")
     private val configFilePath = "extraction-framework/dump/extraction.nif.abstracts.properties"
@@ -47,7 +47,7 @@ class AbstractExtractorTest
         def language = Language.English
         def configFile : Config = new Config(configFilePath)
     }
-    private val extractor = new AbstractExtractor(context)
+    private val extractor = new PlainAbstractExtractor(context)
 
     private val parser = WikiParser.getInstance()
 

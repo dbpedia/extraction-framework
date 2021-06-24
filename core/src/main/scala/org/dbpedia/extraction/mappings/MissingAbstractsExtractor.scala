@@ -54,7 +54,7 @@ extends PageNodeExtractor
 
     private val language = context.language.wikiCode
 
-    private val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
+    private val logger = Logger.getLogger(classOf[PlainAbstractExtractor].getName)
 
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
     private val apiParametersFormat = "uselang="+language+"&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s"

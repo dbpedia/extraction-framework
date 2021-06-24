@@ -30,7 +30,7 @@ import scala.language.reflectiveCalls
 
 @deprecated("replaced by NifExtractor.scala: which will extract the whole page content including the abstract", "2016-10")
 @ExtractorAnnotation("abstract extractor")
-class AbstractExtractor(
+class PlainAbstractExtractor(
   context : {
     def ontology : Ontology
     def language : Language
@@ -39,7 +39,7 @@ class AbstractExtractor(
 )
 extends WikiPageExtractor
 {
-  protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
+  protected val logger = Logger.getLogger(classOf[PlainAbstractExtractor].getName)
   this.getClass.getClassLoader.getResource("myproperties.properties")
 
 
@@ -81,7 +81,7 @@ extends WikiPageExtractor
 
         //Retrieve page text
         val text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
-          case Some(t) => AbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
+          case Some(t) => PlainAbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
           case None => return Seq.empty
         }
 
@@ -146,7 +146,7 @@ extends WikiPageExtractor
 
     private def replacePatterns(abst: String): String= {
       var ret = abst
-      for ((regex, replacement) <- AbstractExtractor.patternsToRemove) {
+      for ((regex, replacement) <- PlainAbstractExtractor.patternsToRemove) {
         val matches = regex.pattern.matcher(ret)
         if (matches.find()) {
           ret = matches.replaceAll(replacement)
@@ -219,7 +219,7 @@ extends WikiPageExtractor
 
 }
 
-object AbstractExtractor {
+object PlainAbstractExtractor {
 
   //TODO check if this function is still relevant
   def postProcessExtractedHtml(pageTitle: WikiTitle, text: String): String =
