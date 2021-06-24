@@ -70,7 +70,7 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
    * Assumption: The whitespace following subject, predicate, and object must be a single space, (U+0020).
    * All other locations that allow whitespace must be empty. (https://www.w3.org/TR/n-triples/#canonical-ntriples)
    */
-  def prepareFlatTerseLine(line: String): Array[Construct] = {
+  def prepareFlatTerseLine(line: String): Array[String] = {
 
     val spo = line.split(">", 3)
 
@@ -97,7 +97,8 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
       case ae: ArrayIndexOutOfBoundsException => println(line); ae.printStackTrace()
     }
 
-    Array(Construct(s), Construct(p, Some(s), Some(o)), Some(o))
+    //Array(Construct(s), Construct(p, Some(s), Some(o)), Construct(o))
+    Array(s, p, o)
   }
 
   def validateNTriplePart(
@@ -139,6 +140,7 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
             testCase => {
 
               val success = validatorCollection(testCase.validatorID).run(nTriplePart)
+              println("validator: " + validatorCollection(testCase.validatorID).info())
 
               // TODO count overlap store succeeded before and then=2 add all together
 

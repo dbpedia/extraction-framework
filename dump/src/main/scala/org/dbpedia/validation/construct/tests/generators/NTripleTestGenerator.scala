@@ -230,7 +230,7 @@ object NTripleTestGenerator extends TestGenerator {
     QueryExecutionFactory.create(validatorQuery, testModel).execSelect().foreach(
 
       validatorQuerySolution => {
-
+        println(validatorQuerySolution.toString)
         val groupedValidators = ArrayBuffer[Int]()
 
         /*

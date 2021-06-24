@@ -21,16 +21,6 @@ trigger:wikipedia
    trigger:pattern "^http://en.wikipedia.org/wiki/.*" ;
    rdfs:label "wikipedia"  .
    
-<#wikipedia_IRIs> 
-  a v:TestGenerator ;
-  v:trigger trigger:wikipedia ;
-  # same as dbpedia
-  v:validator validator:dissallowed_chars ;
-  v:validator validator:dbpedia_resource_delims ;
-  v:validator [
-		a v:IRI_Validator ;
-		v:doesNotContain "<" , ">", "\"" , " ", "{", "}", "|", "\\", "^" , "`" 
-		] .
 
 trigger:generic_wikipedia_dbpedia_extraction 
    a v:RDF_IRI_Trigger ;
@@ -199,73 +189,4 @@ validator:itsrdf
 # Specific instantiations below
 #########################
 
-<#genericDBpediaWikipediaIRIs> 
-	a v:TestGenerator ;
-	v:trigger trigger:generic_wikipedia_dbpedia_extraction ;
-	v:validator validator:dissallowed_chars ;
-	v:validator validator:dbpedia_resource_delims .
-	
-<#mappingsDBpediaWikipediaIRIs> 
-	a v:TestGenerator ;
-	v:trigger trigger:mappings_wikipedia_dbpedia_extraction ;
-	v:validator validator:dissallowed_chars ;
-	v:validator validator:dbpedia_resource_delims .
-	
-<#dbpediaOntology> 
-   a v:TestGenerator ;
-   v:trigger trigger:dbpedia_ontology ;
-   v:validator validator:dissallowed_chars ;
-   v:validator validator:dbpedia_ontology .
 
-<#dbpediaGenericProperty>
-     a v:TestGenerator ;
-     v:trigger [
-       a v:RDF_IRI_Trigger ;
-       rdfs:label "DBpedia Generic IRIs" ;
-       trigger:pattern "^http://dbpedia.org/property/"
-     ] .
-     # TODO validator
-
-# no priority to implement this   
-<#foaf>
-   a v:TestGenerator ;
-   v:trigger trigger:foaf ;
-   v:validator validator:foaf .
-
-<#w3_rdf>
-   a v:TestGenerator ;
-   v:trigger trigger:w3_rdf ;
-   v:validator validator:w3_rdf .
-
-<#w3_rdfs>
-   a v:TestGenerator ;
-   v:trigger trigger:w3_rdfs ;
-   v:validator validator:w3_rdfs .
-
-<#wgs84>
-   a v:TestGenerator ;
-   v:trigger trigger:wgs84 ;
-   v:validator validator:wgs84 .
-
-<#georss>
-   a v:TestGenerator ;
-   v:trigger trigger:georss ;
-   v:validator validator:georss .
-
-<#skos>
-   a v:TestGenerator ;
-   v:trigger trigger:skos ;
-   v:validator validator:skos .
-
-<#itsrdf>
-   a v:TestGenerator ;
-   v:trigger trigger:itsrdf ;
-   v:validator validator:itsrdf .
-   
-<#wikidata_IRIs> 
-  a v:TestGenerator ;
-  v:trigger trigger:wikidata ;
-  v:validator [
-		a v:IRI_Validator ;
-		v:pattern "^http://www.wikidata.org/entity/Q[0-9]+$"
-		] .
