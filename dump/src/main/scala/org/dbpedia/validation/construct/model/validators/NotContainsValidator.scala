@@ -1,15 +1,21 @@
 package org.dbpedia.validation.construct.model.validators
 
-import org.dbpedia.validation.construct.model.{ValidatorID, ValidatorIRI, ValidatorType}
+import org.dbpedia.validation.construct.model.{Construct, ValidatorGroup, ValidatorID, ValidatorIRI, ValidatorType}
 
-case class NotContainsValidator(ID: ValidatorID, iri: ValidatorIRI, sequence: String) extends Validator {
+case class NotContainsValidator(ID: ValidatorID, iri: ValidatorIRI, sequence: String, validatorGroup: ValidatorGroup.Value = ValidatorGroup.DEFAULT) extends Validator {
 
   override val METHOD_TYPE: ValidatorType.Value = ValidatorType.PART_BASED
 
-  override def run(nTriplePart: String): Boolean = {
+  override val VALIDATOR_GROUP: ValidatorGroup.Value = validatorGroup
 
-  ! nTriplePart.contains(sequence)
-}
+  override def run(nTriplePart: Construct): Boolean = {
+    val result: Boolean = VALIDATOR_GROUP match {
+      case ValidatorGroup.RIGHT => !nTriplePart.right.get.contains(sequence)
+      case ValidatorGroup.LEFT => !nTriplePart.left.get.contains(sequence)
+      case _ => !nTriplePart.self.contains(sequence)
+    }
+    result
+  }
 
   override def info(): String = s"does not contain $sequence"
 }

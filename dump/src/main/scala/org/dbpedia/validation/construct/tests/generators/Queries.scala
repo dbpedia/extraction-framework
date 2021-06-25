@@ -65,11 +65,13 @@ object Queries {
   def literalValidatorQueryStr(): String =
     s"""$prefixDefinition
        |
-       |SELECT Distinct ?validator ?comment ?pattern
+       |SELECT Distinct ?validator ?comment ?pattern ?validatorGroup ?doesNotContains
        |{
        |  ?validator
        |     a v:Datatype_Literal_Validator .
+       |     Optional{ ?validator v:validatorGroup ?validatorGroup }
        |     Optional{ ?validator rdfs:comment ?comment }
+       |     Optional{ ?validator v:doesNotContain ?doesNotContains . }
        |     Optional{ ?validator v:pattern ?pattern }
        |}
      """.stripMargin

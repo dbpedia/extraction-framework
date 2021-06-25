@@ -2,13 +2,12 @@ package org.dbpedia.validation.construct.tests.generators
 
 import java.io.InputStreamReader
 import java.net.URL
-
 import org.apache.jena.query.{QueryExecutionFactory, QueryFactory}
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.dbpedia.validation.construct.model.triggers._
 import org.dbpedia.validation.construct.model.triggers.generic.{GenericIRITrigger, GenericLangLiteralTrigger, GenericLiteralTrigger, GenericPlainLiteralTrigger, GenericTypedLiteralTrigger}
-import org.dbpedia.validation.construct.model.{TestCase, TestCaseType, TriggerIRI, ValidatorID, ValidatorIRI}
+import org.dbpedia.validation.construct.model.{TestCase, TestCaseType, TriggerIRI, ValidatorGroup, ValidatorID, ValidatorIRI}
 import org.dbpedia.validation.construct.model.validators._
 import org.dbpedia.validation.construct.model.validators.generic.{GenericIRIValidator, GenericLiteralLangTagValidator, GenericLiteralValidator, GenericRdfLangStringValidator, GenericValidator}
 
@@ -20,6 +19,8 @@ import scala.collection.mutable
 object NTripleTestGenerator extends TestGenerator {
 
   private val delim = "\t"
+  private val rightValidator = "rightValidator"
+  private val leftValidator = "leftValidator"
 
   def loadTestGenerator(testModel: Model): HashMap[TriggerIRI, Array[ValidatorIRI]] = {
 
@@ -226,6 +227,7 @@ object NTripleTestGenerator extends TestGenerator {
     iri validators
      */
     val validatorQuery = QueryFactory.create(Queries.iriValidatorQueryStr())
+    val iriQueries = QueryExecutionFactory.create(validatorQuery, testModel).execSelect().toList
 
     QueryExecutionFactory.create(validatorQuery, testModel).execSelect().foreach(
 
@@ -297,7 +299,7 @@ object NTripleTestGenerator extends TestGenerator {
     typedLiteralValidator
      */
     val literalValidatorQuery = QueryFactory.create(Queries.literalValidatorQueryStr())
-
+   // val queries = QueryExecutionFactory.create(literalValidatorQuery, testModel).execSelect().toList
     QueryExecutionFactory.create(literalValidatorQuery, testModel).execSelect().foreach(
 
       validatorQuerySolution => {
@@ -328,6 +330,27 @@ object NTripleTestGenerator extends TestGenerator {
           validatorCollection.append(TypedLiteralValidator(currentValidatorID, validatorIRI, patternString))
           grouepdTestApproachIDs.append(currentValidatorID)
           currentValidatorID += 1
+        }
+        /*
+        v:doesNotContain
+         */
+        if (validatorQuerySolution.contains("doesNotContains")) {
+
+          validatorQuerySolution.getLiteral("doesNotContains").getLexicalForm.split(delim).foreach(charSeq => {
+            val validatorGroup = if (validatorQuerySolution.contains("validatorGroup")) {
+              val v = validatorQuerySolution.getResource("validatorGroup").getLocalName
+              if (v == rightValidator) {
+                ValidatorGroup.RIGHT
+              } else {
+                ValidatorGroup.LEFT
+              }
+            } else {
+              ValidatorGroup.DEFAULT
+            }
+            validatorCollection.append(NotContainsValidator(currentValidatorID, validatorIRI, charSeq, validatorGroup))
+            grouepdTestApproachIDs.append(currentValidatorID)
+            currentValidatorID += 1
+          })
         }
 
         validatorMap.put(validatorIRI, grouepdTestApproachIDs.toArray)
