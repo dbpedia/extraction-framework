@@ -1,7 +1,7 @@
 package org.dbpedia.validation.construct.model.validators
 
 
-import org.dbpedia.validation.construct.model.{ValidatorID, ValidatorIRI, ValidatorType}
+import org.dbpedia.validation.construct.model.{Construct, ValidatorID, ValidatorIRI, ValidatorType}
 
 import scala.collection.immutable.HashSet
 
@@ -17,9 +17,9 @@ case class VocabValidator(ID: ValidatorID, iri: ValidatorIRI, vocabUrl: String, 
 
   override val METHOD_TYPE: ValidatorType.Value = ValidatorType.VOCAB_BASED
 
-  override def run(nTriplePart: String): Boolean = {
+  override def run(nTriplePart: Construct): Boolean = {
 
-    val bool = vocab.contains(nTriplePart)
+    val bool = vocab.contains(nTriplePart.self)
 //    if (! bool ) println(vocabUrl,nTriplePart)
     bool
   }

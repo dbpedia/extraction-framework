@@ -1,6 +1,6 @@
 package org.dbpedia.validation.construct.model.validators
 
-import org.dbpedia.validation.construct.model.{ValidatorID, ValidatorIRI, ValidatorType}
+import org.dbpedia.validation.construct.model.{Construct, ValidatorID, ValidatorIRI, ValidatorType}
 
 
 case class TypedLiteralValidator(ID: ValidatorID, iri: ValidatorIRI, patternString: String) extends Validator {
@@ -9,9 +9,9 @@ case class TypedLiteralValidator(ID: ValidatorID, iri: ValidatorIRI, patternStri
 
   override val METHOD_TYPE: ValidatorType.Value = ValidatorType.TYPED_LITERAL
 
-  override def run(nTriplePart: String): Boolean = {
+  override def run(nTriplePart: Construct): Boolean = {
 
-    val lexicalForm = nTriplePart.trim.split("\"").dropRight(1).drop(1).mkString("")
+    val lexicalForm = nTriplePart.self.trim.split("\"").dropRight(1).drop(1).mkString("")
 
     pattern.matcher(lexicalForm).matches()
   }
