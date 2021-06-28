@@ -2,13 +2,12 @@ package org.dbpedia.validation.construct.tests.generators
 
 import java.io.InputStreamReader
 import java.net.URL
-
-import org.apache.jena.query.{QueryExecutionFactory, QueryFactory}
+import org.apache.jena.query.{QueryExecutionFactory, QueryFactory, QuerySolution}
 import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot.{RDFDataMgr, RDFLanguages}
 import org.dbpedia.validation.construct.model.triggers._
 import org.dbpedia.validation.construct.model.triggers.generic.{GenericIRITrigger, GenericLangLiteralTrigger, GenericLiteralTrigger, GenericPlainLiteralTrigger, GenericTypedLiteralTrigger}
-import org.dbpedia.validation.construct.model.{TestCase, TestCaseType, TriggerIRI, ValidatorID, ValidatorIRI}
+import org.dbpedia.validation.construct.model.{TestCase, TestCaseType, TriggerIRI, ValidatorGroup, ValidatorID, ValidatorIRI}
 import org.dbpedia.validation.construct.model.validators._
 import org.dbpedia.validation.construct.model.validators.generic.{GenericIRIValidator, GenericLiteralLangTagValidator, GenericLiteralValidator, GenericRdfLangStringValidator, GenericValidator}
 
@@ -20,6 +19,8 @@ import scala.collection.mutable
 object NTripleTestGenerator extends TestGenerator {
 
   private val delim = "\t"
+  private val rightValidator = "rightValidator"
+  private val leftValidator = "leftValidator"
 
   def loadTestGenerator(testModel: Model): HashMap[TriggerIRI, Array[ValidatorIRI]] = {
 
@@ -211,7 +212,7 @@ object NTripleTestGenerator extends TestGenerator {
     currentValidatorID += 1
 
     // generic rdf lang string
-    val genericRdfLangStringValidator =GenericRdfLangStringValidator(currentValidatorID)
+    val genericRdfLangStringValidator = GenericRdfLangStringValidator(currentValidatorID)
     validatorCollection.append(genericRdfLangStringValidator)
     validatorMap.put(genericRdfLangStringValidator.iri, Array[Int](genericRdfLangStringValidator.ID))
     currentValidatorID += 1
@@ -230,7 +231,6 @@ object NTripleTestGenerator extends TestGenerator {
     QueryExecutionFactory.create(validatorQuery, testModel).execSelect().foreach(
 
       validatorQuerySolution => {
-
         val groupedValidators = ArrayBuffer[Int]()
 
         /*
@@ -256,8 +256,8 @@ object NTripleTestGenerator extends TestGenerator {
         if (validatorQuerySolution.contains("patterns")) {
 
           validatorQuerySolution.getLiteral("patterns").getLexicalForm.split(delim).foreach(patternString => {
-
-            validatorCollection.append(PatternValidator(currentValidatorID, validatorIRI, patternString))
+            val validatorGroup = getValidatorGroup(validatorQuerySolution)
+            validatorCollection.append(PatternValidator(currentValidatorID, validatorIRI, patternString, validatorGroup))
             groupedValidators.append(currentValidatorID)
             currentValidatorID += 1
           })
@@ -269,8 +269,8 @@ object NTripleTestGenerator extends TestGenerator {
         if (validatorQuerySolution.contains("oneOfVocabs")) {
 
           validatorQuerySolution.getLiteral("oneOfVocabs").getLexicalForm.split(delim).foreach(vocabUrl => {
-
-            validatorCollection.append(VocabValidator(currentValidatorID, validatorIRI, vocabUrl, getVocab(vocabUrl)))
+            val validatorGroup = getValidatorGroup(validatorQuerySolution)
+            validatorCollection.append(VocabValidator(currentValidatorID, validatorIRI, vocabUrl, getVocab(vocabUrl),validatorGroup))
             groupedValidators.append(currentValidatorID)
             currentValidatorID += 1
           })
@@ -324,17 +324,40 @@ object NTripleTestGenerator extends TestGenerator {
         if (validatorQuerySolution.contains("pattern")) {
 
           val patternString = validatorQuerySolution.getLiteral("pattern").getLexicalForm
-
-          validatorCollection.append(TypedLiteralValidator(currentValidatorID, validatorIRI, patternString))
+          val validatorGroup = getValidatorGroup(validatorQuerySolution)
+          validatorCollection.append(TypedLiteralValidator(currentValidatorID, validatorIRI, patternString, validatorGroup))
           grouepdTestApproachIDs.append(currentValidatorID)
           currentValidatorID += 1
         }
-
+        /*
+        v:doesNotContain
+         */
+        if (validatorQuerySolution.contains("doesNotContains")) {
+          validatorQuerySolution.getLiteral("doesNotContains").getLexicalForm.split(delim).foreach(charSeq => {
+            val validatorGroup = getValidatorGroup(validatorQuerySolution)
+            validatorCollection.append(NotContainsValidator(currentValidatorID, validatorIRI, charSeq, validatorGroup))
+            grouepdTestApproachIDs.append(currentValidatorID)
+            currentValidatorID += 1
+          })
+        }
         validatorMap.put(validatorIRI, grouepdTestApproachIDs.toArray)
       }
     )
 
     (validatorCollection.toArray, HashMap[ValidatorIRI, Array[ValidatorID]]() ++ validatorMap)
+  }
+
+  def getValidatorGroup(validatorQuerySolution: QuerySolution): ValidatorGroup.Value = {
+    if (validatorQuerySolution.contains("validatorGroup")) {
+      val v = validatorQuerySolution.getResource("validatorGroup").getLocalName
+      if (v == rightValidator) {
+        ValidatorGroup.RIGHT
+      } else {
+        ValidatorGroup.LEFT
+      }
+    } else {
+      ValidatorGroup.DEFAULT
+    }
   }
 
   def getVocab(uri: String): HashSet[String] = {
@@ -345,7 +368,6 @@ object NTripleTestGenerator extends TestGenerator {
     val query = QueryFactory.create(Queries.oneOfVocabQueryStr)
     val resultSet = QueryExecutionFactory.create(query, model).execSelect
     val properties = ArrayBuffer[String]()
-    12
     while (resultSet.hasNext) {
       properties.append(resultSet.next().getResource("property").getURI)
     }
