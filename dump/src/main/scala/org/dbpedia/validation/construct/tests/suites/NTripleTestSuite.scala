@@ -3,7 +3,7 @@ package org.dbpedia.validation.construct.tests.suites
 import org.apache.jena.rdf.model.Model
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.sql.SQLContext
-import org.dbpedia.validation.construct.model.{TestCase, TestCaseType, TestScore, TriggerType}
+import org.dbpedia.validation.construct.model.{Construct, TestCase, TestCaseType, TestScore, TriggerType}
 import org.dbpedia.validation.construct.model.triggers.{IRITrigger, Trigger}
 import org.dbpedia.validation.construct.model.validators.Validator
 import org.dbpedia.validation.construct.tests.generators.NTripleTestGenerator
@@ -64,11 +64,13 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
     testReports
   }
 
+
+
   /**
    * Assumption: The whitespace following subject, predicate, and object must be a single space, (U+0020).
    * All other locations that allow whitespace must be empty. (https://www.w3.org/TR/n-triples/#canonical-ntriples)
    */
-  def prepareFlatTerseLine(line: String): Array[String] = {
+  def prepareFlatTerseLine(line: String): Array[Construct] = {
 
     val spo = line.split(">", 3)
 
@@ -95,11 +97,12 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
       case ae: ArrayIndexOutOfBoundsException => println(line); ae.printStackTrace()
     }
 
-    Array(s, p, o)
+    Array(Construct(s), Construct(p, Some(s), Some(o)), Construct(o))
+    //Array(s, p, o)
   }
 
   def validateNTriplePart(
-                           nTriplePart: String,
+                           nTriplePart: Construct,
                            testCaseCount: Int,
                            triggerCollection: Array[Trigger],
                            validatorCollection: Array[Validator],
@@ -114,7 +117,7 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
     val errorsOfTestCase = Array.fill[Long](testCaseCount)(0)
 
     val nTriplePartType = {
-      if (nTriplePart.startsWith("\"")) TriggerType.LITERAL
+      if (nTriplePart.self.startsWith("\"")) TriggerType.LITERAL
       else TriggerType.IRI
     }
 
@@ -122,7 +125,7 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
 
       trigger => {
 
-        if (trigger.isTriggered(nTriplePart)) {
+        if (trigger.isTriggered(nTriplePart.self)) {
 
 //          if (trigger.iri != "#GENERIC_IRI_TRIGGER") covered = true
 
