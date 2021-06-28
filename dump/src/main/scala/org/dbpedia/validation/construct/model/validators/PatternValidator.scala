@@ -11,13 +11,18 @@ case class PatternValidator(ID: ValidatorID, iri: ValidatorIRI, patternString: S
   override val VALIDATOR_GROUP: ValidatorGroup.Value = validatorGroup
 
   override def run(nTriplePart: Construct): Boolean = {
-    val result: Boolean = VALIDATOR_GROUP match {
-        //TODO: make pattern matching for nTriplePart.right/left because it is optional
-      case ValidatorGroup.RIGHT => pattern.matcher(nTriplePart.right.get).matches()
-      case ValidatorGroup.LEFT => pattern.matcher(nTriplePart.left.get).matches()
+    VALIDATOR_GROUP match {
+      case ValidatorGroup.RIGHT => nTriplePart.right match {
+      // TODO: maybe we need to rename "value"
+        case Some(value) => pattern.matcher(value).matches()
+        case None => false
+      }
+      case ValidatorGroup.LEFT => nTriplePart.left match {
+        case Some(value) => pattern.matcher(value).matches()
+        case None => false
+      }
       case _ => pattern.matcher(nTriplePart.self).matches()
     }
-    result
   }
 
   override def info(): String = s"matches pattern $patternString"

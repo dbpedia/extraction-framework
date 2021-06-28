@@ -140,7 +140,6 @@ class NTripleTestSuite(override val triggerCollection: Array[Trigger],
             testCase => {
 
               val success = validatorCollection(testCase.validatorID).run(nTriplePart)
-              println("validator: " + validatorCollection(testCase.validatorID).info())
 
               // TODO count overlap store succeeded before and then=2 add all together
 

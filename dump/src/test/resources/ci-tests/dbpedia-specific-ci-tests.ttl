@@ -57,7 +57,7 @@ trigger:wikidata
 	rdfs:label "Wikidata IRIs" ;
 	rdfs:comment "Starting with http://www.wikidata.org/entity/Q" .
 
-trigger:abstract
+trigger:abstract_property
     a v:RDF_IRI_Trigger ;
     trigger:pattern "http://dbpedia.org/ontology/abstract" ;
 	rdfs:label "abstract IRIs" ;
@@ -285,9 +285,9 @@ validator:itsrdf
 		v:pattern "^http://www.wikidata.org/entity/Q[0-9]+$"
 		] .
 
-<#abstract_text>
+<#abstracts>
   a v:TestGenerator ;
-  v:trigger trigger:abstract ;
+  v:trigger trigger:abstract_property ;
   v:validator [
 		a v:Datatype_Literal_Validator ;
 		v:validatorGroup v:rightValidator ;
