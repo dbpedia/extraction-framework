@@ -349,11 +349,13 @@ object NTripleTestGenerator extends TestGenerator {
 
   def getValidatorGroup(validatorQuerySolution: QuerySolution): ValidatorGroup.Value = {
     if (validatorQuerySolution.contains("validatorGroup")) {
-      val v = validatorQuerySolution.getResource("validatorGroup").getLocalName
-      if (v == rightValidator) {
+      val validatorGroup = validatorQuerySolution.getResource("validatorGroup").getLocalName
+      if (validatorGroup == rightValidator) {
         ValidatorGroup.RIGHT
-      } else {
+      } else if (validatorGroup == leftValidator){
         ValidatorGroup.LEFT
+      } else {
+        ValidatorGroup.DEFAULT
       }
     } else {
       ValidatorGroup.DEFAULT
