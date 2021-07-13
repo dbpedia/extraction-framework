@@ -1,13 +1,12 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-
 import org.dbpedia.extraction.annotations.ExtractorAnnotation
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.{Language, MediaWikiConnector, WikiUtil}
+import org.dbpedia.extraction.util.{AbstractUtils, Language, MediaWikiConnector, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
@@ -85,9 +84,10 @@ extends WikiPageExtractor
           case None => return Seq.empty
         }
 
-        val modifiedText = removeBrokenBrackets match {
-          case "true" => WikiUtil.removeBrokenBracketsInAbstracts(text)
-          case _ => text
+        val modifiedText = if (removeBrokenBrackets) {
+          AbstractUtils.removeBrokenBracketsInAbstracts(text)
+        } else {
+          text
         }
 
         //Create a short version of the abstract

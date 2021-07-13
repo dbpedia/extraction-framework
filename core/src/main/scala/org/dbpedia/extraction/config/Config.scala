@@ -278,7 +278,7 @@ class Config(val configPath: String) extends
       longAbstractsProperty = this.getProperty("long-abstracts-property", "abstract").trim,
       shortAbstractMinLength = this.getProperty("short-abstract-min-length", "200").trim.toInt,
       abstractTags = this.getProperty("abstract-tags", "query,pages,page,extract").trim,
-      removeBrokenBracketsProperty = this.getProperty("remove-broken-brackets-plain-abstracts", "false").trim
+      removeBrokenBracketsProperty = this.getProperty("remove-broken-brackets-plain-abstracts", "false").trim.toBoolean
     )
   } match{
     case Success(s) => s
@@ -377,7 +377,7 @@ object Config{
                                  longAbstractsProperty: String,
                                  shortAbstractMinLength: Int,
                                  abstractTags: String,
-                                 removeBrokenBracketsProperty: String
+                                 removeBrokenBracketsProperty: Boolean
   )
 
   case class SlackCredentials(
