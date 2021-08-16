@@ -6,7 +6,8 @@ import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.{AbstractUtils, Language, MediaWikiConnector, WikiUtil}
+import org.dbpedia.extraction.util.abstracts.AbstractUtils
+import org.dbpedia.extraction.util.{Language, MediaWikiConnector, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
