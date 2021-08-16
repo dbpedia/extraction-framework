@@ -1,4 +1,5 @@
 package org.dbpedia.extraction.util
+import org.dbpedia.extraction.util.abstracts.AbstractUtils
 import org.scalatest.FunSuite
 
 class AbstractUtilsTest extends FunSuite {
