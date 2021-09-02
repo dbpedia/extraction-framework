@@ -180,7 +180,7 @@ validator:dbpedia_ontology
 # no priority to implement this
 validator:foaf
    a v:IRI_Validator ;
-   v:oneOfVocab <http://xmlns.com/foaf/0.1/> .
+   v:oneOfVocab <https://akswnc7.informatik.uni-leipzig.de/dstreitmatter/archivo/xmlns.com/foaf--0--1/2020.06.10-215725/foaf--0--1_type=parsed.ttl> .
 
 validator:w3_rdf
    a v:IRI_Validator ;
@@ -302,6 +302,14 @@ validator:itsrdf
   a v:TestGenerator ;
   v:trigger trigger:generic_iri ;
   v:validator [
-          a v:IRI_Validator ;
-          v:doesNotContain "\\n"
-          ] .
+        a v:IRI_Validator ;
+        v:doesNotContain "\\n"
+        ] .
+
+<#multiple_dbpedia_resources_in_IRI>
+  a v:TestGenerator ;
+  v:trigger trigger:generic_wikipedia_dbpedia_extraction ;
+  v:validator [
+         a v:IRI_Validator ;
+         v:pattern "^((?!(http://(.*\\.)?dbpedia.org/resource/http://(.*\\.)?dbpedia.org/resource/.*)).)*$" ;
+         ] .
