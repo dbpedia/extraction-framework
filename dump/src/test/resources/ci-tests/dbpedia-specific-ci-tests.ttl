@@ -302,6 +302,14 @@ validator:itsrdf
   a v:TestGenerator ;
   v:trigger trigger:generic_iri ;
   v:validator [
-          a v:IRI_Validator ;
-          v:doesNotContain "\\n"
-          ] .
+        a v:IRI_Validator ;
+        v:doesNotContain "\\n"
+        ] .
+
+<#multiple_dbpedia_resources_in_IRI>
+  a v:TestGenerator ;
+  v:trigger trigger:generic_wikipedia_dbpedia_extraction ;
+  v:validator [
+         a v:IRI_Validator ;
+         v:pattern "^((?!(http://(.*\\.)?dbpedia.org/resource/http://(.*\\.)?dbpedia.org/resource/.*)).)*$" ;
+         ] .
