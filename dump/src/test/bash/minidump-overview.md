@@ -38,6 +38,7 @@
 * https://en.wikipedia.org/wiki/Asda
 * https://en.wikipedia.org/wiki/Atlantic_Ocean
 * https://en.wikipedia.org/wiki/Berlin
+* https://en.wikipedia.org/wiki/Category:Pininfarina
 * https://en.wikipedia.org/wiki/Dahlak_SC
 * https://en.wikipedia.org/wiki/Ferdinand_Piëch
 * https://en.wikipedia.org/wiki/Food_(disambiguation)
