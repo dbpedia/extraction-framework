@@ -27,9 +27,7 @@ extends Extractor[TemplateNode]
 
   private val classOwlThing = context.ontology.classes("owl:Thing")
   private val propertyRdfType = context.ontology.properties("rdf:type")
-  private val logger = Logger.getLogger(TemplateMapping.getClass.getName)
-
-
+  
   /**
    * when extractor has a pre-phase
    */
