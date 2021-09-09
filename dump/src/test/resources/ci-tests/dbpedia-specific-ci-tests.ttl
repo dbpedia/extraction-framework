@@ -291,3 +291,18 @@ validator:itsrdf
         a v:IRI_Validator ;
 		v:pattern "^((?!(http://(ga\\.|af\\.|als\\.|am\\.|an\\.|ar\\.|arz\\.|ast\\.|az\\.|azb\\.|ba\\.|bar\\.|batsmg\\.|be\\.|bg\\.|bn\\.|bpy\\.|br\\.|bs\\.|bug\\.|ca\\.|cdo\\.|ce\\.|ceb\\.|ckb\\.|cs\\.|cv\\.|cy\\.|da\\.|de\\.|el\\.|eml\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fo\\.|fr\\.|fy\\.|gd\\.|gl\\.|gu\\.|he\\.|hi\\.|hr\\.|hsb\\.|ht\\.|hu\\.|hy\\.|ia\\.|id\\.|ilo\\.|io\\.|is\\.|it\\.|ja\\.|jv\\.|ka\\.|kk\\.|kn\\.|ko\\.|ku\\.|ky\\.|la\\.|lb\\.|li\\.|lmo\\.|lt\\.|lv\\.|mai\\.|mg\\.|mhr\\.|min\\.|mk\\.|ml\\.|mn\\.|mr\\.|mrj\\.|ms\\.|my\\.|mzn\\.|nan\\.|nap\\.|nds\\.|ne\\.|new\\.|nl\\.|nn\\.|no\\.|oc\\.|or\\.|os\\.|pa\\.|pl\\.|pms\\.|pnb\\.|pt\\.|qu\\.|ro\\.|ru\\.|sa\\.|sah\\.|scn\\.|sco\\.|sd\\.|sh\\.|si\\.|simple\\.|sk\\.|sl\\.|sq\\.|sr\\.|su\\.|sv\\.|sw\\.|ta\\.|te\\.|tg\\.|th\\.|tl\\.|tr\\.|tt\\.|uk\\.|ur\\.|uz\\.|vec\\.|vi\\.|vo\\.|wa\\.|war\\.|wuu\\.|xmf\\.|yi\\.|yo\\.|yue\\.|zh\\.)?dbpedia.org/resource/.*/.)).)*$"
 		] .
+		
+<#iri_slash_n>
+  a v:TestGenerator ;
+  v:trigger trigger:generic_iri ;
+  v:validator [
+        a v:IRI_Validator ;
+        v:doesNotContain "\\n"
+        ] .
+<#multiple_dbpedia_resources_in_IRI>
+  a v:TestGenerator ;
+  v:trigger trigger:generic_wikipedia_dbpedia_extraction ;
+  v:validator [
+         a v:IRI_Validator ;
+         v:pattern "^((?!(http://(.*\\.)?dbpedia.org/resource/http://(.*\\.)?dbpedia.org/resource/.*)).)*$" ;
+         ] .

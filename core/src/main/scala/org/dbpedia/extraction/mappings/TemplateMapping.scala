@@ -59,7 +59,7 @@ extends Extractor[TemplateNode]
         // Condition #1
         //  Check if the root template has been mapped to the corresponding Class of this template
         //  If the mapping already defines a corresponding class & propery then we should create a new resource
-        var condition1_createCorrespondingProperty = correspondingClass != null &&
+        var condition1_create_correspondingproperty = correspondingClass != null &&
           correspondingProperty != null && pageClass.relatedClasses.contains(correspondingClass)
 
         // Condition #2
@@ -89,7 +89,7 @@ extends Extractor[TemplateNode]
           false
         }
 
-        var condition4_SameEntityInfoBox = true
+        var condition4_same_entity_infoBox = true
 
         if(isInfobox)
         {
@@ -104,12 +104,12 @@ extends Extractor[TemplateNode]
           var pageTitle = splittedURI(splittedURI.size - 1)
 
           if(!name.contains(pageTitle) && !pageTitle.contains(name))
-            condition4_SameEntityInfoBox = false
+            condition4_same_entity_infoBox = false
 
         }
         // If all above conditions are met then use the main resource, otherwise create a new one
         val instanceUri = {
-          if ( (!condition1_createCorrespondingProperty) && (!condition2_template_exists) && condition3_subclass && condition4_SameEntityInfoBox) subjectUri
+          if ( (!condition1_create_correspondingproperty) && (!condition2_template_exists) && condition3_subclass && condition4_same_entity_infoBox) subjectUri
           else generateUri(subjectUri, node)
         }
 
@@ -121,7 +121,7 @@ extends Extractor[TemplateNode]
           createInstance(graph, instanceUri, node)
         }
 
-        if (condition1_createCorrespondingProperty)
+        if (condition1_create_correspondingproperty)
         {
           //Connect new instance to the instance created from the root template
           graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, instanceUri, correspondingProperty, subjectUri, node.sourceIri)
