@@ -8,6 +8,11 @@ PGRP=`ps -p $PID -o pgrp | head -n 2 | tail -n 1 | xargs` #get process-group for
 [[ `pgrep ${0##*/} | wc -l` > 2 ]] && `kill -- -$PGRP` # if more than one instance of this script terminate process group (needed in order to close all forked processes like the extraction framework itself) 
 
 #fetch git and preserve local changes hopefully
+export GIT_AUTHOR_NAME="DBpedia Server redeploy script"
+export GIT_COMMITTER_NAME="DBpedia Server redeploy script"
+export GIT_COMMITTER_EMAIL="dbpedia-redeploy-script@foo.foo"
+export GIT_AUTHOR_EMAIL="dbpedia-redeploy-script@foo.foo"
+printenv 
 git stash push
 git pull
 git stash pop
