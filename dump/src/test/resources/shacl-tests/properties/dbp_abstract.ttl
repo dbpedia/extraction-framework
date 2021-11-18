@@ -12,7 +12,8 @@
 <#en_abstract_validation>
 	a sh:NodeShape  ;
 	sh:targetSubjectsOf <http://dbpedia.org/ontology/abstract> ;
-        sh:message "Error, found (; in dbo:abstract. "@en ;
+	prov:wasDerivedFrom <https://github.com/dbpedia/extraction-framework/issues/693> ;
+    sh:message "Error, found (; in dbo:abstract. "@en ;
 	sh:property [
 		sh:path <http://dbpedia.org/ontology/abstract>  ;
         sh:pattern "^((?!\\(\\;).)*$" ;
