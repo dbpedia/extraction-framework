@@ -118,7 +118,7 @@ Please keep in mind:
 - In general, we prefer Scala over Java.
 
 More tips:
-- Guides to setup your development environment for [Intellij](https://github.com/dbpedia/extraction-framework/wiki/Setting-up-intellij-idea) or [Eclipse](https://github.com/dbpedia/extraction-framework/wiki/Setting-up-eclipse).
+- Guides to setup your development environment for [IntelliJ IDEA](https://github.com/dbpedia/extraction-framework/wiki/Setting-up-intellij-idea) or [Eclipse](https://github.com/dbpedia/extraction-framework/wiki/Setting-up-eclipse).
 - Get help with the [Maven build](Build-from-Source-with-Maven) or another form of [installation](Installation).
 - [Download](Downloads) some data to work with.
 - How to run [from Scala/Java](Run-from-Java-or-Scala) or [from a JAR](Run-from-a-JAR).
