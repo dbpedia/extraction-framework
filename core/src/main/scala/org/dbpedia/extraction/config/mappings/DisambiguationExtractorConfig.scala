@@ -7,6 +7,7 @@ object DisambiguationExtractorConfig
     // Don't change this unless you know what you're doing.
     val disambiguationTitlePartMap = Map(
          "ar" -> " (توضيح)",
+         "bg" -> " (пояснение)",
          "ca" -> " (desambiguació)",
          "cs" -> " (rozcestník)",
          "de" -> " (Begriffsklärung)",
