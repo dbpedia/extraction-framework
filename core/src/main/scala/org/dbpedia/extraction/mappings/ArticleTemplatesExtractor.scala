@@ -22,9 +22,7 @@ class ArticleTemplatesExtractor(
     }
   ) extends PageNodeExtractor {
 
-  // FIXME: this uses the http://xx.dbpedia.org/property/ namespace, but the
-  // http://dbpedia.org/ontology/ namespace would probably make more sense.
-  private val usesTemplateProperty = context.language.propertyUri.append("wikiPageUsesTemplate")
+  private val usesTemplateProperty = context.ontology.classes("WikiPageUsesTemplate")
 
   override val datasets = Set(DBpediaDatasets.ArticleTemplates, DBpediaDatasets.ArticleTemplatesNested)
 
