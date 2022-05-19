@@ -9,7 +9,7 @@
         <artifactId>extraction</artifactId>
         <version>4.2-SNAPSHOT</version>
     </parent>
-
+    <packaging>jar</packaging>
     <groupId>org.dbpedia.extraction</groupId>
     <artifactId>dump</artifactId>
     <name>DBpedia Dump Extraction</name>
@@ -20,6 +20,35 @@
     </properties>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <compilerArgs>
+                        <arg>--add-exports=java.base/jdk.internal.misc=cn.piumnl.learning.java.interrupt</arg>
+                        <arg>--add-exports=java.base/sun.nio.ch=cn.piumnl.learning.java.interrupt</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>properties-maven-plugin</artifactId>
@@ -221,13 +250,10 @@
         <dependency>
             <groupId>org.dbpedia.extraction</groupId>
             <artifactId>core</artifactId>
+
         </dependency>
 
         <!-- post process dependency -->
-        <dependency>
-            <groupId>org.dbpedia.extraction</groupId>
-            <artifactId>scripts</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.scala-lang</groupId>
