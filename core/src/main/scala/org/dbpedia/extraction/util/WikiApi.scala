@@ -3,13 +3,15 @@ package org.dbpedia.extraction.util
 import java.util.logging.Logger
 import java.io.IOException
 import java.net.{HttpURLConnection, URL, URLEncoder}
+
 import javax.net.ssl.HttpsURLConnection
-import scala.xml.{XML, Elem, Node}
+
+import scala.xml.{Elem, Node, XML}
 import scala.collection.immutable.Seq
 import scala.language.postfixOps
-import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitle, Namespace}
-
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 import WikiApi._
+import org.apache.http.client.HttpClient
 
 object WikiApi
 {
@@ -30,7 +32,7 @@ object WikiApi
     /** Specify a custom user agent for queries to the MediaWiki API */
     private val customUserAgentText =
     try {
-        System.getProperty("extract.wikiapi.customUserAgent.text", "DBpedia Extraction Framework")
+        System.getProperty("extract.wikiapi.customUserAgent.text", "curl/7.54")
     } catch {
         case ex : Exception => "DBpedia Extraction Framework"
     }
@@ -120,7 +122,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(group <- ids.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&continue=&format=xml&prop=revisions|info&"+param+"=" + group.mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
+                val response = query("?action=query&continue=&format=xml&prop=revisions%7Cinfo&"+param+"=" + group.mkString("%7C") + "&rvprop=ids%7Ccontent%7Ctimestamp%7Cuser%7Cuserid")
                 processPages(response, proc)
             }
         }
@@ -137,7 +139,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(titleGroup <- titles.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&continue=&format=xml&prop=revisions|info&titles=" + titleGroup.map(formatWikiTitle).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
+                val response = query("?action=query&continue=&format=xml&prop=revisions%7Cinfo&titles=" + titleGroup.map(formatWikiTitle).mkString("%7C") + "&rvprop=ids%7Ccontent%7Ctimestamp%7Cuser%7Cuserid")
                 processPages(response, proc)
             }
         }
@@ -272,15 +274,22 @@ class WikiApi(url: URL, language: Language)
     {
         for(i <- 0 to maxRetries)
         {
+            import org.apache.http.impl.client.HttpClients
+            import org.apache.http.client.methods.HttpGet
+            val client = HttpClients.createDefault
+
             try
             {
-                val connection = new URL(url + params).openConnection()
-                if (customUserAgentEnabled) {
-                    connection.setRequestProperty("User-Agent", customUserAgentText)
-                }
-                val reader = connection.getInputStream
-                val xml = XML.load(reader)
-                reader.close()
+                val ur = new URL(url + params)
+                val request = new HttpGet(new URL(url + params).toString)
+                val response = client.execute(request)
+//                val connection = new URL(url + params).openConnection()
+//                if (customUserAgentEnabled) {
+//                    connection.setRequestProperty("User-Agent", customUserAgentText)
+//                }
+//                val reader = connection.getInputStream
+                val xml = XML.load(response.getEntity.getContent)
+//                reader.close()
 
                 return xml
             }
@@ -297,7 +306,7 @@ class WikiApi(url: URL, language: Language)
                         throw ex
                     }
                 }
-            }
+            } finally { client.close()}
 
             Thread.sleep(100)
         }
