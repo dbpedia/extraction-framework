@@ -3,35 +3,35 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.annotations.ExtractorAnnotation
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.nif.WikipediaNifExtractor
+import org.dbpedia.extraction.nif.{WikipediaNifExtractor2, WikipediaNifExtractor}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.{Language, MediaWikiConnector}
+import org.dbpedia.extraction.util.{Language, MediaWikiConnector2, MediaWikiConnectorRest}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
 
 /**
-  * Extracts page html.
-  *
-  * Based on PlainAbstractExtractor, major difference is the parameter
-  * apiParametersFormat = "action=parse&prop=text&section=0&format=xml&page=%s"
-  *
-  * This class produces all nif related datasets for the abstract as well as the short-, long-abstracts datasets.
-  * Where the long abstracts is the nif:isString attribute of the nif instance representing the abstract section of a wikipage.
-  *
-  * We are going to to use this method for generating the abstracts from release 2016-10 onwards.
-  * It will be expanded to cover the whole wikipage in the future.
-  */
+ * Extracts page html.
+ *
+ * Based on PlainAbstractExtractor, major difference is the parameter
+ * apiParametersFormat = "action=parse&prop=text&section=0&format=xml&page=%s"
+ *
+ * This class produces all nif related datasets for the abstract as well as the short-, long-abstracts datasets.
+ * Where the long abstracts is the nif:isString attribute of the nif instance representing the abstract section of a wikipage.
+ *
+ * We are going to to use this method for generating the abstracts from release 2016-10 onwards.
+ * It will be expanded to cover the whole wikipage in the future.
+ */
 
 @ExtractorAnnotation("nif extractor")
 class NifExtractor(
-     context : {
-       def ontology : Ontology
-       def language : Language
-       def configFile : Config
-     }
-   )
+                    context : {
+                      def ontology : Ontology
+                      def language : Language
+                      def configFile : Config
+                    }
+                  )
   extends WikiPageExtractor
 {
   //API parameters to geht HTML of first section
@@ -41,12 +41,13 @@ class NifExtractor(
   protected val writeLinkAnchors: Boolean = context.configFile.nifParameters.writeLinkAnchor
   protected val writeStrings: Boolean = context.configFile.nifParameters.writeAnchor
   protected val shortAbstractLength: Int = context.configFile.abstractParameters.shortAbstractMinLength
-
+  protected val abstractsOnly : Boolean =  context.configFile.nifParameters.abstractsOnly
   protected val dbpediaVersion: String = context.configFile.dbPediaVersion
 
   override val datasets = Set(DBpediaDatasets.NifContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts, DBpediaDatasets.RawTables, DBpediaDatasets.Equations)
 
-  private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
+  private val mwConnector = new MediaWikiConnector2(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
+  private val mwRestConnector = new MediaWikiConnectorRest(context.configFile.mediawikiConnectionRest, context.configFile.nifParameters.nifTags.split(","))
 
   override def extract(pageNode : WikiPage, subjectUri : String): Seq[Quad] =
   {
@@ -56,13 +57,31 @@ class NifExtractor(
     //Don't extract abstracts from redirect and disambiguation pages
     if(pageNode.isRedirect || pageNode.isDisambiguation) return Seq.empty
 
-    //Retrieve page text
-    val html = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match{
-      case Some(t) => NifExtractor.postProcessExtractedHtml(pageNode.title, t)
-      case None => return Seq.empty
-    }
+      var html = ""
 
-    new WikipediaNifExtractor(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err))
+        // NEW API  ONLY IF abstractsOnly
+        // html = mwRestConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
+        //   case Some(t) => NifExtractor.postProcessExtractedHtml(pageNode.title, t)
+        //   case None => return Seq.empty
+        // }
+        // new WikipediaNifExtractor2(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err))
+
+
+          html = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
+            case Some(t) => NifExtractor.postProcessExtractedHtml(pageNode.title, t)
+            case None => return Seq.empty
+          }
+
+
+          new WikipediaNifExtractor(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err))
+
+
+
+
+
+
+
+
   }
 
 }

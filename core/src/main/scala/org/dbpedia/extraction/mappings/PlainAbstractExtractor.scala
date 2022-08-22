@@ -7,7 +7,7 @@ import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.abstracts.AbstractUtils
-import org.dbpedia.extraction.util.{Language, MediaWikiConnector, WikiUtil}
+import org.dbpedia.extraction.util.{Language, MediaWikiConnector2, MediaWikiConnectorRest, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
@@ -52,6 +52,7 @@ extends WikiPageExtractor
 
   protected val removeBrokenBrackets = context.configFile.abstractParameters.removeBrokenBracketsProperty
 
+
     // lazy so testing does not need ontology
   protected lazy val shortProperty = context.ontology.properties(context.configFile.abstractParameters.shortAbstractsProperty)
 
@@ -63,9 +64,12 @@ extends WikiPageExtractor
 
   override val datasets = Set(DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
-  private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
+  protected val abstractsOnly: Boolean = context.configFile.nifParameters.abstractsOnly
 
-    override def extract(pageNode : WikiPage, subjectUri: String): Seq[Quad] =
+  private val mwConnector = new MediaWikiConnector2(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
+
+  private val mwRestConnector = new MediaWikiConnectorRest(context.configFile.mediawikiConnectionRest, context.configFile.abstractParameters.abstractTags.split(","))
+   override def extract(pageNode : WikiPage, subjectUri: String): Seq[Quad] =
     {
         //Only extract abstracts for pages from the Main namespace
         if(pageNode.title.namespace != Namespace.Main)
@@ -75,9 +79,20 @@ extends WikiPageExtractor
         if(pageNode.isRedirect || pageNode.isDisambiguation)
           return Seq.empty
 
+
         //Reproduce wiki text for abstract
         //val abstractWikiText = getAbstractWikiText(pageNode)
         // if(abstractWikiText == "") return Seq.empty
+       
+        //Retrieve page text
+
+
+        // NEW REST API > ONLY FOR ABSTRACT
+        //text = mwRestConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
+        //  case Some(t) => PlainAbstractExtractor.postProcessExtractedHtml(pageNode.title, t)
+        //  case None => return Seq.empty
+       //
+     
 
         //Retrieve page text
         val text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
@@ -85,6 +100,7 @@ extends WikiPageExtractor
           case None => return Seq.empty
         }
 
+       
         val modifiedText = if (removeBrokenBrackets) {
           AbstractUtils.removeBrokenBracketsInAbstracts(text)
         } else {
@@ -106,6 +122,7 @@ extends WikiPageExtractor
         {
             Seq(quadLong, quadShort)
         }
+
     }
 
     /**
