@@ -53,14 +53,14 @@ test("extract html abstract datasets", ExtractionTestTag) {
 
 
 
- // test("extract plain abstract datasets", ExtractionTestTag) {
- //    println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Plain abstract begin")
- //    Utils.renameAbstractsDatasetFiles("plain")
- //    val jobsRunning2 = new ConcurrentLinkedQueue[Future[Unit]]()
- //    var extractRes2=extract(plainAbstractConfig, jobsRunning2)
- //    writeTestResult("MWC_final_plainAbstract",extractRes2)
- //    println("> Plain abstract end")
- //  }
+ test("extract plain abstract datasets", ExtractionTestTag) {
+    println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Plain abstract begin")
+    Utils.renameAbstractsDatasetFiles("plain")
+    val jobsRunning2 = new ConcurrentLinkedQueue[Future[Unit]]()
+    var extractRes2=extract(plainAbstractConfig, jobsRunning2)
+    writeTestResult("MWC_final_plainAbstract",extractRes2)
+    println("> Plain abstract end")
+  }
 
   def writeTestResult(file_name : String, content: Array[Map[String,String]]): Unit ={
     var today = java.time.LocalDate.now.toString
@@ -69,6 +69,11 @@ test("extract html abstract datasets", ExtractionTestTag) {
     val mapper = new ObjectMapper()
     mapper.registerModule(DefaultScalaModule)
     val json = mapper.writeValueAsString(content)
+
+     val targetDir = new File("../dump/test_logs/")
+    // create directories
+    targetDir.mkdirs()
+      
     if( Files.exists(Paths.get(list_used_file))){
 
       val fileContents = Source.fromFile(list_used_file).getLines.mkString
