@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html prefix="dc: http://purl.org/dc/terms/ mw: http://mediawiki.org/rdf/" about="https://ro.wikipedia.org/wiki/Special:Redirect/revision/14515629"><head prefix="mwr: https://ro.wikipedia.org/wiki/Special:Redirect/"><meta property="mw:TimeUuid" content="90a42f00-d68b-11ec-8807-2399a03e2bc9"/><meta charset="utf-8"/><meta property="mw:pageId" content="268448"/><meta property="mw:pageNamespace" content="0"/><link rel="dc:replaces" resource="mwr:revision/12998955"/><meta property="mw:revisionSHA1" content="ae5f413bf60f2d92a11bc37c38a914483233f984"/><meta property="dc:modified" content="2021-10-10T10:18:11.000Z"/><meta property="mw:htmlVersion" content="2.4.0"/><meta property="mw:html:version" content="2.4.0"/><link rel="dc:isVersionOf" href="//ro.wikipedia.org/wiki/Rota%C8%9Bie_Givens"/><base href="//ro.wikipedia.org/wiki/"/><title>Rotație Givens</title><meta property="mw:generalModules" content="ext.math.scripts"/><meta property="mw:moduleStyles" content="ext.math.styles"/><link rel="stylesheet" href="/w/load.php?lang=ro&amp;modules=ext.math.styles%7Cmediawiki.skinning.content.parsoid%7Cmediawiki.skinning.interface%7Csite.styles&amp;only=styles&amp;skin=vector"/><meta http-equiv="content-language" content="ro"/><meta http-equiv="vary" content="Accept"/></head><body id="mwAA" lang="ro" class="mw-content-ltr sitedir-ltr ltr mw-body-content parsoid-body mediawiki mw-parser-output" dir="ltr"><section data-mw-section-id="0" id="mwAQ"><p id="mwAg">În <a rel="mw:WikiLink" href="./Algebra_liniară" title="Algebra liniară" class="mw-redirect" id="mwAw">algebra liniară</a> numerică, o <b id="mwBA">rotație Givens</b> este o <a rel="mw:WikiLink" href="./Rotație" title="Rotație" id="mwBQ">rotație</a> în planul generat de două axe de <a rel="mw:WikiLink" href="./Coordonate_carteziene" title="Coordonate carteziene" id="mwBg">coordonate</a>. Rotațiile Givens au fost denumite după <a rel="mw:WikiLink" href="./Wallace_Givens" title="Wallace Givens" class="new" id="mwBw">Wallace Givens</a> care le-a prezentat specialiștilor în <a rel="mw:WikiLink" href="./Analiză_numerică" title="Analiză numerică" id="mwCA">analiza numerică</a> în anii 1950 în timp ce lucra la Laboratorul Național Argonne.</p>
+
+</section><section data-mw-section-id="1" id="mwCQ"><h2 id="Reprezentarea_matriceală"><span id="Reprezentarea_matriceal.C4.83" typeof="mw:FallbackId"></span>Reprezentarea matriceală</h2>
+
+<p id="mwCg">O rotație Givens este reprezentată de o <a rel="mw:WikiLink" href="./Matrice" title="Matrice" id="mwCw">matrice</a> de forma</p>
+
+<dl id="mwDA"><dd id="mwDQ"><span class="mwe-math-element" typeof="mw:Extension/math" about="#mwt2" data-mw='{"name":"math","attrs":{},"body":{"extsrc":"G(i, k, \\theta) = \n       \\begin{bmatrix}   1   &amp; \\cdots &amp;    0   &amp; \\cdots &amp;    0   &amp; \\cdots &amp;    0   \\\\\n                      \\vdots &amp; \\ddots &amp; \\vdots &amp;        &amp; \\vdots &amp;        &amp; \\vdots \\\\\n                         0   &amp; \\cdots &amp;    c   &amp; \\cdots &amp;    s   &amp; \\cdots &amp;    0   \\\\\n                      \\vdots &amp;        &amp; \\vdots &amp; \\ddots &amp; \\vdots &amp;        &amp; \\vdots \\\\\n                         0   &amp; \\cdots &amp;   -s   &amp; \\cdots &amp;    c   &amp; \\cdots &amp;    0   \\\\\n                      \\vdots &amp;        &amp; \\vdots &amp;        &amp; \\vdots &amp; \\ddots &amp; \\vdots \\\\\n                         0   &amp; \\cdots &amp;    0   &amp; \\cdots &amp;    0   &amp; \\cdots &amp;    1\n       \\end{bmatrix}"}}' id="mwDg"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle G(i,k,\theta )={\begin{bmatrix}1&amp;\cdots &amp;0&amp;\cdots &amp;0&amp;\cdots &amp;0\\\vdots &amp;\ddots &amp;\vdots &amp;&amp;\vdots &amp;&amp;\vdots \\0&amp;\cdots &amp;c&amp;\cdots &amp;s&amp;\cdots &amp;0\\\vdots &amp;&amp;\vdots &amp;\ddots &amp;\vdots &amp;&amp;\vdots \\0&amp;\cdots &amp;-s&amp;\cdots &amp;c&amp;\cdots &amp;0\\\vdots &amp;&amp;\vdots &amp;&amp;\vdots &amp;\ddots &amp;\vdots \\0&amp;\cdots &amp;0&amp;\cdots &amp;0&amp;\cdots &amp;1\end{bmatrix}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>G</mi>
+        <mo stretchy="false">(</mo>
+        <mi>i</mi>
+        <mo>,</mo>
+        <mi>k</mi>
+        <mo>,</mo>
+        <mi>θ<!-- θ --></mi>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow>
+            <mo>[</mo>
+            <mtable rowspacing="4pt" columnspacing="1em">
+              <mtr>
+                <mtd>
+                  <mn>1</mn>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+                <mtd>
+                  <mo>⋱<!-- ⋱ --></mo>
+                </mtd>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+                <mtd></mtd>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+                <mtd></mtd>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mi>c</mi>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mi>s</mi>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+                <mtd></mtd>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+                <mtd>
+                  <mo>⋱<!-- ⋱ --></mo>
+                </mtd>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+                <mtd></mtd>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mo>−<!-- − --></mo>
+                  <mi>s</mi>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mi>c</mi>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+                <mtd></mtd>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+                <mtd></mtd>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+                <mtd>
+                  <mo>⋱<!-- ⋱ --></mo>
+                </mtd>
+                <mtd>
+                  <mo>⋮<!-- ⋮ --></mo>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+                <mtd>
+                  <mo>⋯<!-- ⋯ --></mo>
+                </mtd>
+                <mtd>
+                  <mn>1</mn>
+                </mtd>
+              </mtr>
+            </mtable>
+            <mo>]</mo>
+          </mrow>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle G(i,k,\theta )={\begin{bmatrix}1&amp;\cdots &amp;0&amp;\cdots &amp;0&amp;\cdots &amp;0\\\vdots &amp;\ddots &amp;\vdots &amp;&amp;\vdots &amp;&amp;\vdots \\0&amp;\cdots &amp;c&amp;\cdots &amp;s&amp;\cdots &amp;0\\\vdots &amp;&amp;\vdots &amp;\ddots &amp;\vdots &amp;&amp;\vdots \\0&amp;\cdots &amp;-s&amp;\cdots &amp;c&amp;\cdots &amp;0\\\vdots &amp;&amp;\vdots &amp;&amp;\vdots &amp;\ddots &amp;\vdots \\0&amp;\cdots &amp;0&amp;\cdots &amp;0&amp;\cdots &amp;1\end{bmatrix}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/68c2d323e4c539384e159fa4324c150632ee219f" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -13.171ex; width:45.016ex; height:27.509ex;" alt="{\displaystyle G(i,k,\theta )={\begin{bmatrix}1&amp;\cdots &amp;0&amp;\cdots &amp;0&amp;\cdots &amp;0\\\vdots &amp;\ddots &amp;\vdots &amp;&amp;\vdots &amp;&amp;\vdots \\0&amp;\cdots &amp;c&amp;\cdots &amp;s&amp;\cdots &amp;0\\\vdots &amp;&amp;\vdots &amp;\ddots &amp;\vdots &amp;&amp;\vdots \\0&amp;\cdots &amp;-s&amp;\cdots &amp;c&amp;\cdots &amp;0\\\vdots &amp;&amp;\vdots &amp;&amp;\vdots &amp;\ddots &amp;\vdots \\0&amp;\cdots &amp;0&amp;\cdots &amp;0&amp;\cdots &amp;1\end{bmatrix}}}"/></span></dd></dl>
+
+<p id="mwDw">unde <i id="mwEA">c</i> = cos(<i id="mwEQ">θ</i>) și <i id="mwEg">s</i> = sin(<i id="mwEw">θ</i>) apar la intersecțiile rândurilor și coloanelor <i id="mwFA">i</i> și <i id="mwFQ">k</i>. Adică o matrice de rotație Givens este o matrice identitate cu următoarele substituții:</p>
+<dl id="mwFg"><dd id="mwFw"><span class="mwe-math-element" typeof="mw:Extension/math" about="#mwt4" data-mw='{"name":"math","attrs":{},"body":{"extsrc":"\\begin{align}\n g_{i\\, i} &amp;{}= c \\\\\n g_{k\\, k} &amp;{}= c \\\\\n g_{i\\, k} &amp;{}= s \\\\\n g_{k\\, i} &amp;{}= -s\n\\end{align}"}}' id="mwGA"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle {\begin{aligned}g_{i\,i}&amp;{}=c\\g_{k\,k}&amp;{}=c\\g_{i\,k}&amp;{}=s\\g_{k\,i}&amp;{}=-s\end{aligned}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true">
+            <mtr>
+              <mtd>
+                <msub>
+                  <mi>g</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>i</mi>
+                    <mspace width="thinmathspace"></mspace>
+                    <mi>i</mi>
+                  </mrow>
+                </msub>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mrow class="MJX-TeXAtom-ORD">
+
+                </mrow>
+                <mo>=</mo>
+                <mi>c</mi>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <msub>
+                  <mi>g</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>k</mi>
+                    <mspace width="thinmathspace"></mspace>
+                    <mi>k</mi>
+                  </mrow>
+                </msub>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mrow class="MJX-TeXAtom-ORD">
+
+                </mrow>
+                <mo>=</mo>
+                <mi>c</mi>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <msub>
+                  <mi>g</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>i</mi>
+                    <mspace width="thinmathspace"></mspace>
+                    <mi>k</mi>
+                  </mrow>
+                </msub>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mrow class="MJX-TeXAtom-ORD">
+
+                </mrow>
+                <mo>=</mo>
+                <mi>s</mi>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <msub>
+                  <mi>g</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>k</mi>
+                    <mspace width="thinmathspace"></mspace>
+                    <mi>i</mi>
+                  </mrow>
+                </msub>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mrow class="MJX-TeXAtom-ORD">
+
+                </mrow>
+                <mo>=</mo>
+                <mo>−<!-- − --></mo>
+                <mi>s</mi>
+              </mtd>
+            </mtr>
+          </mtable>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{aligned}g_{i\,i}&amp;{}=c\\g_{k\,k}&amp;{}=c\\g_{i\,k}&amp;{}=s\\g_{k\,i}&amp;{}=-s\end{aligned}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/24d6304f7a38ed2af60619b00e1f82f44f2af9f9" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -5.338ex; width:10.19ex; height:11.843ex;" alt="{\displaystyle {\begin{aligned}g_{i\,i}&amp;{}=c\\g_{k\,k}&amp;{}=c\\g_{i\,k}&amp;{}=s\\g_{k\,i}&amp;{}=-s\end{aligned}}}"/></span></dd></dl>
+
+<p id="mwGQ">Produsul <i id="mwGg">G</i>(<i id="mwGw">i</i>,<i id="mwHA">k</i>,θ)<sup id="mwHQ">T</sup><b id="mwHg">x</b> reprezintă o rotație în sens trigonometric a vectorului <b id="mwHw">x</b> din planul (<i id="mwIA">i</i>,<i id="mwIQ">k</i>) cu θ radiani. </p>
+
+<p id="mwIg">Principala utilizare a rotațiilor Givens în <a rel="mw:WikiLink" href="./Algebra_liniară_numerică" title="Algebra liniară numerică" class="new" id="mwIw">algebra liniară numerică</a> este de a introduce zerouri în <a rel="mw:WikiLink" href="./Vector" title="Vector" class="mw-disambig" id="mwJA">vectori</a> sau <a rel="mw:WikiLink" href="./Matrice" title="Matrice" id="mwJQ">matrici</a>.
+Acest efect poate fi, de exemplu, folosit la calcularea <a rel="mw:WikiLink" href="./Descompunere_QR" title="Descompunere QR" class="mw-redirect" id="mwJg">descompunerii QR</a> a unei matrice. Un avantaj față de <a rel="mw:WikiLink" href="./Transformare_Householder" title="Transformare Householder" class="new" id="mwJw">transformările Householder</a> este că pot fi ușor paralelizate, iar altul este că adesea pentru matrice foarte rare implică un număr mai mic de operații.</p>
+
+</section><section data-mw-section-id="2" id="mwKA"><h2 id="Calcul_stabil">Calcul stabil</h2>
+<p id="mwKQ">Când o rotație Givens dată, <i id="mwKg">G</i>(<i id="mwKw">i</i>,<i id="mwLA">k</i>,θ), este înmulțită cu altă matrice, <i id="mwLQ">A</i>, la stânga, <i id="mwLg">GA</i>, doar rândurile <i id="mwLw">i</i> și <i id="mwMA">k</i> din <i id="mwMQ">A</i> sunt afectate. Astfel, atenția se restrânge asupra următoarei probleme: date fiind <i id="mwMg">a</i> și <i id="mwMw">b</i>, să se găsească <i id="mwNA">c</i><span typeof="mw:Entity" id="mwNQ"> </span>= cos<span typeof="mw:Entity" id="mwNg"> </span>θ și <i id="mwNw">s</i><span typeof="mw:Entity" id="mwOA"> </span>= sin<span typeof="mw:Entity" id="mwOQ"> </span>θ astfel încât</p>
+<dl id="mwOg"><dd id="mwOw"><span class="mwe-math-element" typeof="mw:Extension/math" about="#mwt6" data-mw='{"name":"math","attrs":{},"body":{"extsrc":" \\begin{bmatrix} c &amp; s \\\\ -s &amp; c \\end{bmatrix} \\begin{bmatrix} a \\\\ b \\end{bmatrix} = \\begin{bmatrix} r \\\\ 0 \\end{bmatrix} . "}}' id="mwPA"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle {\begin{bmatrix}c&amp;s\\-s&amp;c\end{bmatrix}}{\begin{bmatrix}a\\b\end{bmatrix}}={\begin{bmatrix}r\\0\end{bmatrix}}.}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow>
+            <mo>[</mo>
+            <mtable rowspacing="4pt" columnspacing="1em">
+              <mtr>
+                <mtd>
+                  <mi>c</mi>
+                </mtd>
+                <mtd>
+                  <mi>s</mi>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mo>−<!-- − --></mo>
+                  <mi>s</mi>
+                </mtd>
+                <mtd>
+                  <mi>c</mi>
+                </mtd>
+              </mtr>
+            </mtable>
+            <mo>]</mo>
+          </mrow>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow>
+            <mo>[</mo>
+            <mtable rowspacing="4pt" columnspacing="1em">
+              <mtr>
+                <mtd>
+                  <mi>a</mi>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mi>b</mi>
+                </mtd>
+              </mtr>
+            </mtable>
+            <mo>]</mo>
+          </mrow>
+        </mrow>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow>
+            <mo>[</mo>
+            <mtable rowspacing="4pt" columnspacing="1em">
+              <mtr>
+                <mtd>
+                  <mi>r</mi>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+              </mtr>
+            </mtable>
+            <mo>]</mo>
+          </mrow>
+        </mrow>
+        <mo>.</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{bmatrix}c&amp;s\\-s&amp;c\end{bmatrix}}{\begin{bmatrix}a\\b\end{bmatrix}}={\begin{bmatrix}r\\0\end{bmatrix}}.}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d6b3206684884aa00e2dd213fb91b11371358c3b" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -2.505ex; width:22.069ex; height:6.176ex;" alt="{\displaystyle {\begin{bmatrix}c&amp;s\\-s&amp;c\end{bmatrix}}{\begin{bmatrix}a\\b\end{bmatrix}}={\begin{bmatrix}r\\0\end{bmatrix}}.}"/></span></dd></dl>
+<p id="mwPQ">Calculul explicit al lui θ nu este de regulă nici necesar, nici de dorit. În schimb, se caută direct <i id="mwPg">c</i>, <i id="mwPw">s</i>, și <i id="mwQA">r</i>. O soluție simplă ar fi</p>
+<dl id="mwQQ"><dd id="mwQg"><span class="mwe-math-element" typeof="mw:Extension/math" about="#mwt8" data-mw='{"name":"math","attrs":{},"body":{"extsrc":"\\begin{align}\n r &amp;{}\\larr \\sqrt{a^2 + b^2} \\\\\n c &amp;{}\\larr a / r \\\\\n s &amp;{}\\larr b / r\n\\end{align}"}}' id="mwQw"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle {\begin{aligned}r&amp;{}\leftarrow {\sqrt {a^{2}+b^{2}}}\\c&amp;{}\leftarrow a/r\\s&amp;{}\leftarrow b/r\end{aligned}}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true">
+            <mtr>
+              <mtd>
+                <mi>r</mi>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mrow class="MJX-TeXAtom-ORD">
+
+                </mrow>
+                <mo stretchy="false">←<!-- ← --></mo>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <msqrt>
+                    <msup>
+                      <mi>a</mi>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </msup>
+                    <mo>+</mo>
+                    <msup>
+                      <mi>b</mi>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </msup>
+                  </msqrt>
+                </mrow>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mi>c</mi>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mrow class="MJX-TeXAtom-ORD">
+
+                </mrow>
+                <mo stretchy="false">←<!-- ← --></mo>
+                <mi>a</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mo>/</mo>
+                </mrow>
+                <mi>r</mi>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mi>s</mi>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mrow class="MJX-TeXAtom-ORD">
+
+                </mrow>
+                <mo stretchy="false">←<!-- ← --></mo>
+                <mi>b</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mo>/</mo>
+                </mrow>
+                <mi>r</mi>
+              </mtd>
+            </mtr>
+          </mtable>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{aligned}r&amp;{}\leftarrow {\sqrt {a^{2}+b^{2}}}\\c&amp;{}\leftarrow a/r\\s&amp;{}\leftarrow b/r\end{aligned}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e28063900d7d0b9e44aa7d4db8d4c9b5b16c4309" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -4.338ex; width:14.956ex; height:9.843ex;" alt="{\displaystyle {\begin{aligned}r&amp;{}\leftarrow {\sqrt {a^{2}+b^{2}}}\\c&amp;{}\leftarrow a/r\\s&amp;{}\leftarrow b/r\end{aligned}}}"/></span></dd></dl>
+
+</section><section data-mw-section-id="3" id="mwRA"><h2 id="Bibliografie">Bibliografie</h2>
+
+<ul id="mwRQ"><li id="mwRg"><cite class="citation book" about="#mwt9" typeof="mw:Transclusion" data-mw='{"parts":[{"template":{"target":{"wt":"citat carte\n  ","href":"./Format:Citat_carte"},"params":{"last":{"wt":"Golub"},"first":{"wt":"Gene H."},"authorlink":{"wt":"Gene H. Golub"},"coauthors":{"wt":"[[Charles F. Van Loan]]"},"title":{"wt":"Matrix Computations"},"edition":{"wt":"3/e"},"publisher":{"wt":"Johns Hopkins University Press"},"date":{"wt":"1996"},"location":{"wt":"Baltimore"},"id":{"wt":"ISBN 978-0-8018-5414-9"}},"i":0}}]}' id="mwRw"><a rel="mw:WikiLink" href="./Gene_H._Golub" title="Gene H. Golub" class="new">Golub, Gene H.</a> (<time datetime="1996">1996</time>). <i>Matrix Computations</i> (ed. 3/e). Baltimore: Johns Hopkins University Press. <a href="./Special:BookSources/9780801854149" rel="mw:WikiLink">ISBN 978-0-8018-5414-9</a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Matrix+Computations&amp;rft.place=Baltimore&amp;rft.edition=3%2Fe&amp;rft.pub=Johns+Hopkins+University+Press&amp;rft.date=1996&amp;rft.aulast=Golub&amp;rft.aufirst=Gene+H.&amp;rfr_id=info%3Asid%2Fro.wikipedia.org%3ARota%C8%9Bie+Givens" class="Z3988" about="#mwt9"><span style="display:none;"><span typeof="mw:Entity"> </span></span></span><span about="#mwt9"> </span><span style="font-size:100%" class="error citation-comment" about="#mwt9">Citare cu parametru depășit <code style="color:inherit; border:inherit; padding:inherit;"><span typeof="mw:Entity">|</span>coauthors=</code> (<a rel="mw:WikiLink" href="./Ajutor:Erori_CS1#deprecated_params" title="Ajutor:Erori CS1">ajutor</a>)</span><link rel="mw:PageProp/Category" href="./Categorie:Erori_CS1:_parametri_depășiți" about="#mwt9"/><style data-mw-deduplicate="TemplateStyles:r12706741" typeof="mw:Extension/templatestyles" about="#mwt9" data-mw='{"name":"templatestyles","attrs":{"src":"Module:Citation/CS1/styles.css"},"body":{"extsrc":""}}'>.mw-parser-output cite.citation{font-style:inherit}.mw-parser-output .citation q{quotes:"\"""\"""'""'"}.mw-parser-output .citation .cs1-lock-free a{background:url("//upload.wikimedia.org/wikipedia/commons/thumb/6/65/Lock-green.svg/9px-Lock-green.svg.png")no-repeat;background-position:right .1em center}.mw-parser-output .citation .cs1-lock-limited a,.mw-parser-output .citation .cs1-lock-registration a{background:url("//upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Lock-gray-alt-2.svg/9px-Lock-gray-alt-2.svg.png")no-repeat;background-position:right .1em center}.mw-parser-output .citation .cs1-lock-subscription a{background:url("//upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Lock-red-alt-2.svg/9px-Lock-red-alt-2.svg.png")no-repeat;background-position:right .1em center}.mw-parser-output .cs1-subscription,.mw-parser-output .cs1-registration{color:#555}.mw-parser-output .cs1-subscription span,.mw-parser-output .cs1-registration span{border-bottom:1px dotted;cursor:help}.mw-parser-output .cs1-ws-icon a{background:url("//upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Wikisource-logo.svg/12px-Wikisource-logo.svg.png")no-repeat;background-position:right .1em center}.mw-parser-output code.cs1-code{color:inherit;background:inherit;border:inherit;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;font-size:100%}.mw-parser-output .cs1-visible-error{font-size:100%}.mw-parser-output .cs1-maint{display:none;color:#33aa33;margin-left:0.3em}.mw-parser-output .cs1-subscription,.mw-parser-output .cs1-registration,.mw-parser-output .cs1-format{font-size:95%}.mw-parser-output .cs1-kern-left,.mw-parser-output .cs1-kern-wl-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right,.mw-parser-output .cs1-kern-wl-right{padding-right:0.2em}</style></li>
+<li id="mwSA">Anderson, Edward. (2000) <i id="mwSQ"><a rel="mw:ExtLink" href="http://www.netlib.org/lapack/lawns/downloads/" class="external text" id="mwSg">Discontinuous Plane Rotations and the Symmetric Eigenvalue Problem</a></i>. LAPACK Working Note 150, University of Tennessee, UT-CS-00-454, 4 decembrie 2000.</li>
+<li id="mwSw">D. Bindel, J. Demmel, W. Kahan, O. Marques. (2001) <i id="mwTA"><a rel="mw:ExtLink" href="http://www.netlib.org/lapack/lawns/downloads/" class="external text" id="mwTQ">On Computing Givens rotations reliably and efficiently</a></i>. LAPACK Working Note 148, University of Tennessee, UT-CS-00-449, 31 ianuarie 2001.</li></ul><!-- The paper itself says January 2001, but the LAWN site says October 2000. -->
+
+<link rel="mw:PageProp/Category" href="./Categorie:Algebră_liniară_numerică" id="mwTg"/></section></body></html>

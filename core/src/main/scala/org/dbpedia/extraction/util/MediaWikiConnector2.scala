@@ -12,6 +12,7 @@ import java.net.{HttpURLConnection, URL}
 import java.time.temporal.ChronoUnit
 import java.util.zip._
 import java.util
+import scala.math.pow
 import javax.xml.ws.WebServiceException
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
@@ -79,6 +80,10 @@ class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[St
   {
     val retryFactor = if(isRetry) 2 else 1
     var waiting_time = sleepFactorMs
+    var Success_parsing = false
+    var currentMaxLag= maxLag
+    var gzipok=true
+    var parsed_answer: Try[String] = null
     //replaces {{lang}} with the language
     val apiUrl: URL = new URL(connectionConfig.apiUrl.replace("{{LANG}}",pageTitle.language.wikiCode))
 
@@ -92,23 +97,22 @@ class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[St
     }
 
 
-    // Fill parameters
-    var parameters = "uselang=" + pageTitle.language.wikiCode
 
-    parameters += (pageTitle.id match{
-      case Some(id) if apiParameterString.contains("%d") =>
-        apiParameterString.replace("&page=%s", "").format(id)
-      case _ => apiParameterString.replaceAll("&pageid=[^&]+", "").format(titleParam)
-    })
-    //parameters += apiParameterString.replaceAll("&pageid=[^&]+", "").format(titleParam)
-
-    parameters += "&maxlag="+maxLag
-
-    println(s"mediawikiurl: $apiUrl?$parameters")
     for(counter <- 1 to maxRetries)
     {
-      try
-      {
+        // Fill parameters
+        var parameters = "uselang=" + pageTitle.language.wikiCode
+
+        parameters += (pageTitle.id match {
+          case Some(id) if apiParameterString.contains("%d") =>
+            apiParameterString.replace("&page=%s", "").format(id)
+          case _ => apiParameterString.replaceAll("&pageid=[^&]+", "").format(titleParam)
+        })
+        //parameters += apiParameterString.replaceAll("&pageid=[^&]+", "").format(titleParam)
+
+        parameters += "&maxlag=" + currentMaxLag
+
+
         val conn = apiUrl.openConnection
         val start = java.time.LocalTime.now()
         conn.setDoOutput(true)
@@ -121,14 +125,14 @@ class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[St
         writer.write(parameters)
         writer.flush()
         writer.close()
+        var answer_header = conn.getHeaderFields();
+        var answer_clean = answer_header.asScala.filterKeys(_ != null);
 
        // UNCOMMENT FOR LOG
        /* var mapper = new ObjectMapper()
         mapper.registerModule(DefaultScalaModule)
         mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false)
 
-        var answer_header=conn.getHeaderFields();
-        var answer_clean = answer_header.asScala.filterKeys(_ != null);
 
         answer_clean += ("parameters" -> util.Arrays.asList(parameters) )
         answer_clean += ("url" -> util.Arrays.asList(apiUrl.toString) )
@@ -138,10 +142,18 @@ class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[St
         var jsonString = mapper.writeValueAsString(answer_clean);
 
         log2.info(jsonString)*/
-
+      if(conn.getHeaderField(null).contains("HTTP/1.1 200 OK") ){
         var inputStream = conn.getInputStream
         // IF GZIP
-        if ( gzipCall ) inputStream = new GZIPInputStream(inputStream)
+        if ( gzipCall ){
+          try {
+            inputStream = new GZIPInputStream(inputStream)
+          }catch {
+            case x:ZipException =>{
+              gzipok = false
+            }
+          }
+        }
         val end = java.time.LocalTime.now()
         conn match {
           case connection: HttpURLConnection => {
@@ -153,41 +165,52 @@ class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[St
           case _ =>
         }
         // Read answer
-        return readInAbstract(inputStream) match{
+        parsed_answer = readInAbstract(inputStream)
+        Success_parsing = parsed_answer match {
+          case Success(str) => true
+          case Failure(e) => false
+        }
+
+
+      }
+      if(!Success_parsing || !gzipok){
+
+        println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXFAIL")
+        println(s"mediawikiurl: $apiUrl?$parameters")
+        var sleepMs = sleepFactorMs
+        if (retryAfter && answer_clean.contains("retry-after") ){
+            println("GIVEN RETRY-AFTER > "+ answer_clean("retry-after").get(0))
+            waiting_time = Integer.parseInt(answer_clean("retry-after").get(0)) * 1000
+
+            // exponential backoff test
+            sleepMs = pow(waiting_time, counter).toInt
+            println("WITH EXPONENTIAL BACK OFF" + counter)
+            println("Sleeping time double >>>>>>>>>>>" + pow(waiting_time, counter))
+            println("Sleeping time int >>>>>>>>>>>" + sleepMs)
+
+        }
+        if( currentMaxLag <15 ){
+          currentMaxLag = currentMaxLag + 1
+          println("> INCREASE MAX LAG : " + currentMaxLag)
+        }
+        if (counter < maxRetries)
+          Thread.sleep(sleepMs)
+        else
+          throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries.")
+      }else{
+
+        println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOK")
+
+        println(s"mediawikiurl: $apiUrl?$parameters")
+        return parsed_answer match {
           case Success(str) => Option(str)
           case Failure(e) => throw e
         }
       }
-      catch
-      {
-        case ex: Exception =>
 
-          // The web server may still be trying to render the page. If we send new requests
-          // at once, there will be more and more tasks running in the web server and the
-          // system eventually becomes overloaded. So we wait a moment. The higher the load,
-          // the longer we wait.
-
-          val zw = ex.getMessage
-          var loadFactor = Double.NaN
-          //var sleepMs = sleepFactorMs
-          var sleepMs = waiting_time
-          // if the load average is not available, a negative value is returned
-          val load = osBean.getSystemLoadAverage
-          if (load >= 0) {
-            loadFactor = load / availableProcessors
-            sleepMs = (loadFactor * sleepFactorMs).toInt
-          }
-          ex match {
-            case e : java.net.SocketTimeoutException =>
-              if (counter < maxRetries)
-                Thread.sleep(sleepMs)
-              else
-                throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, e)
-            case _ => throw ex
-          }
-      }
     }
     throw new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded)
+
   }
 
 

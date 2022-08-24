@@ -46,19 +46,20 @@ test("extract html abstract datasets", ExtractionTestTag) {
     println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> html abstract begin")
     val jobsRunning1 = new ConcurrentLinkedQueue[Future[Unit]]()
     var extractRes=extract(nifAbstractConfig, jobsRunning1)
-    writeTestResult("MWCREST_final_htmlbstract",extractRes)
+    writeTestResult("MWC2_test_htmlbstract",extractRes)
     println("> html abstract end")
 
   }
 
 
 
- test("extract plain abstract datasets", ExtractionTestTag) {
+test("extract plain abstract datasets", ExtractionTestTag) {
     println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Plain abstract begin")
     Utils.renameAbstractsDatasetFiles("plain")
     val jobsRunning2 = new ConcurrentLinkedQueue[Future[Unit]]()
     var extractRes2=extract(plainAbstractConfig, jobsRunning2)
-    writeTestResult("MWC_final_plainAbstract",extractRes2)
+    writeTestResult("MWC_REST_plainAbstract",extractRes2)
+
     println("> Plain abstract end")
   }
 
@@ -96,12 +97,16 @@ test("extract html abstract datasets", ExtractionTestTag) {
     println(">>>>>>>>> EXTRACT  - BEGIN")
     var  map_results = Array[Map[String,String]]()
     val configLoader = new ConfigLoader(config)
+
+    val parallelProcesses = 1
+    println(parallelProcesses)
     val jobs=configLoader.getExtractionJobs
     println(">>>>>>>>> EXTRACT - NBJOBS > "+jobs.size)
     println("LAUNCH JOBS")
     for (job <- jobs) {
 
       job.run()
+
       var lang=job.extractionRecorder.language
       var records=job.extractionRecorder
       println(">>>>>>>>> EXTRACT - LANG > "+lang.wikiCode.toString())

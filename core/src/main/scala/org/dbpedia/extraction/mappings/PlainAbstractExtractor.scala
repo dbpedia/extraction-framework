@@ -91,7 +91,7 @@ extends WikiPageExtractor
         //text = mwRestConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
         //  case Some(t) => PlainAbstractExtractor.postProcessExtractedHtml(pageNode.title, t)
         //  case None => return Seq.empty
-       //
+       //}
      
 
         //Retrieve page text

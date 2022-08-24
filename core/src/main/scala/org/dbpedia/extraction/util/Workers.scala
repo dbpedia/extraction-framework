@@ -125,6 +125,7 @@ object Workers {
   /**
    * By default, use one thread per logical processor.
    */
+  //private[util] val defaultThreads = Runtime.getRuntime.availableProcessors()
   private[util] val defaultThreads = Runtime.getRuntime.availableProcessors()
 
 
