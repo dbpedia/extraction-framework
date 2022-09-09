@@ -341,7 +341,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
   }
 
   protected def getJsoupDoc(html: String): Document = {
-    val doc = Jsoup.parse(html.replaceAll("\n", ""))
+    val doc = Jsoup.parse(html.replaceAll("data-mw='(.*?)}'","").replaceAll("\n", ""))
 
     //delete queries
     for(query <- cssSelectorConfigMap.removeElements)

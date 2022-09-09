@@ -66,9 +66,7 @@ extends WikiPageExtractor
 
   protected val abstractsOnly: Boolean = context.configFile.nifParameters.abstractsOnly
 
-  private val mwConnector = new MediaWikiConnector2(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
 
-  private val mwRestConnector = new MediaWikiConnectorRest(context.configFile.mediawikiConnectionRest, context.configFile.abstractParameters.abstractTags.split(","))
    override def extract(pageNode : WikiPage, subjectUri: String): Seq[Quad] =
     {
         //Only extract abstracts for pages from the Main namespace
@@ -80,28 +78,28 @@ extends WikiPageExtractor
           return Seq.empty
 
 
-        //Reproduce wiki text for abstract
-        //val abstractWikiText = getAbstractWikiText(pageNode)
-        // if(abstractWikiText == "") return Seq.empty
-       
-        //Retrieve page text
+      var text = ""
+      val mwcType = context.configFile.mediawikiConnection.apiType
+      if (mwcType.equals("rest")) {
 
-
+        val mwConnector = new MediaWikiConnectorRest(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
         // NEW REST API > ONLY FOR ABSTRACT
-        //text = mwRestConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
-        //  case Some(t) => PlainAbstractExtractor.postProcessExtractedHtml(pageNode.title, t)
-        //  case None => return Seq.empty
-       //}
-     
-
-        //Retrieve page text
-        val text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
-          case Some(t) => PlainAbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
+        text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
+          case Some(t) => PlainAbstractExtractor.postProcessExtractedHtml(pageNode.title, t)
           case None => return Seq.empty
         }
+      }else{
+        val mwConnector = new MediaWikiConnector2(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
+        text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
+                    case Some(t) => PlainAbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
+                    case None => return Seq.empty
+                  }
+      }
+
 
        
         val modifiedText = if (removeBrokenBrackets) {
+          System.out.println("REMOVE BRACKETS")
           AbstractUtils.removeBrokenBracketsInAbstracts(text)
         } else {
           text

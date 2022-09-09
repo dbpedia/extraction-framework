@@ -28,45 +28,13 @@ import scala.collection.JavaConverters._
   * @param connectionConfig - Collection of parameters necessary for API requests (see Config.scala)
   * @param xmlPath - An array of XML tag names leading from the root (usually 'api') to the intended content of the response XML (depending on the request query used)
   */
-class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[String]) {
-
-  protected val log = LoggerFactory.getLogger(classOf[MediaWikiConnector2])
-  // UNCOMMENT FOR LOG
-  //  protected val log2 = LoggerFactory.getLogger("apiCalls")
-
-  protected val maxRetries: Int = connectionConfig.maxRetries
-  require(maxRetries <= 10 && maxRetries > 0, "maxRetries has to be in the interval of [1,10]")
-
-  /** timeout for connection to web server, milliseconds */
-  protected val connectMs: Int = connectionConfig.connectMs
-  require(connectMs > 200, "connectMs shall be more than 200 ms!")
-
-  /** timeout for result from web server, milliseconds */
-  protected val readMs: Int = connectionConfig.readMs
-  require(readMs > 1000, "readMs shall be more than 1000 ms!")
-
-  /** sleep between retries, milliseconds, multiplied by CPU load */
-  protected val sleepFactorMs: Int = connectionConfig.sleepFactor
-  require(sleepFactorMs > 200, "sleepFactorMs shall be more than 200 ms!")
-
+class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[String]) extends MediaWikiConnectorAbstract(connectionConfig, xmlPath ){
 
   protected val userAgent: String = connectionConfig.useragent
   require(userAgent != "" , "userAgent must be declared !")
-
-
   protected val gzipCall: Boolean = connectionConfig.gzip
-  //require(gzipCall != "", "gzipCall must be declared !")
-
-
   protected val retryAfter: Boolean = connectionConfig.retryafter
-  //require(gzipCall != "", "gzipCall must be declared !")
-
-
   protected val maxLag: Int = connectionConfig.maxlag
-  //require(maxLag != "", "maxLag must be declared !")
-
-  //protected val xmlPath = connectionConfig.abstractTags.split(",").map(_.trim)
-
   private val osBean = java.lang.management.ManagementFactory.getOperatingSystemMXBean
   private val availableProcessors = osBean.getAvailableProcessors
 
@@ -76,7 +44,7 @@ class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[St
     * @param pageTitle The encoded title of the page
     * @return The page as an Option
     */
-  def retrievePage(pageTitle : WikiTitle, apiParameterString: String, isRetry: Boolean = false) : Option[String] =
+  override def retrievePage(pageTitle : WikiTitle, apiParameterString: String, isRetry: Boolean = false) : Option[String] =
   {
     val retryFactor = if(isRetry) 2 else 1
     var waiting_time = sleepFactorMs
@@ -92,7 +60,7 @@ class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[St
     // TODO: test this in detail!!! there may be other characters that need to be escaped.
     // TODO central string management
     var titleParam = pageTitle.encodedWithNamespace
-    MediaWikiConnector2.CHARACTERS_TO_ESCAPE foreach {
+    this.CHARACTERS_TO_ESCAPE foreach {
       case (search, replacement) =>  titleParam = titleParam.replace(search, replacement);
     }
 
@@ -214,10 +182,6 @@ class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[St
   }
 
 
-  def decodeHtml(text: String): Try[String] = {
-    val coder = new HtmlCoder(XmlCodes.NONE)
-    Try(coder.code(text))
-  }
 
   /**
     * Get the parsed and cleaned abstract text from the MediaWiki instance input stream.
@@ -225,7 +189,7 @@ class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[St
     * <api> <query> <pages> <page> <extract> ABSTRACT_TEXT <extract> <page> <pages> <query> <api>
     *  ///  <api> <parse> <text> ABSTRACT_TEXT </text> </parse> </api>
     */
-  private def readInAbstract(inputStream : InputStream) : Try[String] =
+  override def readInAbstract(inputStream : InputStream) : Try[String] =
   {
     // for XML format
     var xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
@@ -254,22 +218,4 @@ class MediaWikiConnector2(connectionConfig: MediaWikiConnection, xmlPath: Seq[St
     decodeHtml(xmlAnswer.trim)
   }
 
-  object MediaWikiConnector2 {
-    /**
-      * List of all characters which are reserved in a query component according to RFC 2396
-      * with their escape sequences as determined by the JavaScript function encodeURIComponent.
-      */
-    val CHARACTERS_TO_ESCAPE = List(
-      (";", "%3B"),
-      ("/", "%2F"),
-      ("?", "%3F"),
-      (":", "%3A"),
-      ("@", "%40"),
-      ("&", "%26"),
-      ("=", "%3D"),
-      ("+", "%2B"),
-      (",", "%2C"),
-      ("$", "%24")
-    )
-  }
 }

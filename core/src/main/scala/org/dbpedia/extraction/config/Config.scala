@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat
 import java.util.{Calendar, Properties}
 import java.util.logging.{Level, Logger}
 
-import org.dbpedia.extraction.config.Config.{AbstractParameters, MediaWikiConnection,MediawikiConnectionRest, NifParameters, SlackCredentials}
+import org.dbpedia.extraction.config.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 import org.dbpedia.extraction.config.ConfigUtils._
 import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
@@ -259,42 +259,32 @@ class Config(val configPath: String) extends
   }
 
   lazy val mediawikiConnection: MediaWikiConnection = Try {
+
     MediaWikiConnection(
-      apiUrl = this.getProperty("mwc-apiUrl", "").trim,
+      apiType = this.getProperty("mwc-type", "").trim,
+      apiUrl = this.getProperty("mwc-type").trim match {
+        case "rest" =>  this.getProperty("mwc-apiRestUrl", "").trim
+        case "mwc" => this.getProperty("mwc-apiMWCUrl", "").trim
+        case "local" => this.getProperty("mwc-apiLocalUrl", "").trim
+      },
       maxRetries = this.getProperty("mwc-maxRetries", "4").trim.toInt,
       connectMs = this.getProperty("mwc-connectMs", "2000").trim.toInt,
       readMs = this.getProperty("mwc-readMs", "5000").trim.toInt,
       sleepFactor = this.getProperty("mwc-sleepFactor", "1000").trim.toInt,
-      // New params
       maxlag = this.getProperty("mwc-maxlag", "5").trim.toInt,
       useragent = this.getProperty("mwc-useragent", "anonymous").trim,
       gzip = this.getProperty("mwc-gzip","false").trim.toBoolean,
-      retryafter = this.getProperty("mwc-retryafter", "false").trim.toBoolean
+      retryafter = this.getProperty("mwc-retryafter", "false").trim.toBoolean,
+      accept = this.getProperty("mwc-accept", "text/html").trim,
+      charset = this.getProperty("mwc-charset", "utf-8").trim,
+      profile = this.getProperty("mwc-profile", "https://www.mediawiki.org/wiki/Specs/HTML/2.1.0").trim
     )
   } match{
     case Success(s) => s
     case Failure(f) => throw new IllegalArgumentException("Not all necessary parameters for the 'MediaWikiConnection' class were provided or could not be parsed to the expected type.", f)
   }
 
-  lazy val mediawikiConnectionRest: MediawikiConnectionRest = Try {
-    MediawikiConnectionRest(
 
-      apiUrl = this.getProperty("mwc_rest-apiUrl", "").trim,
-      maxRetries = this.getProperty("mwc_rest-maxRetries", "4").trim.toInt,
-      connectMs = this.getProperty("mwc_rest-connectMs", "2000").trim.toInt,
-      readMs = this.getProperty("mwc_rest-readMs", "5000").trim.toInt,
-      sleepFactor = this.getProperty("mwc_rest-sleepFactor", "1000").trim.toInt,
-      // New params
-      useragent = this.getProperty("mwc_rest-useragent", "anonymous").trim,
-      accept = this.getProperty("mwc_rest-accept", "text/html").trim,
-      charset = this.getProperty("mwc_rest-charset", "utf-8").trim,
-      profile = this.getProperty("mwc_rest-profile", "https://www.mediawiki.org/wiki/Specs/HTML/2.1.0").trim
-
-    )
-  } match {
-    case Success(s) => s
-    case Failure(f) => throw new IllegalArgumentException("Not all necessary parameters for the 'mediawikiConnectionRest' class were provided or could not be parsed to the expected type.", f)
-  }
   lazy val abstractParameters: AbstractParameters = Try {
     AbstractParameters(
       abstractQuery = this.getProperty("abstract-query", "").trim,
@@ -388,28 +378,21 @@ object Config{
     * @param sleepFactor
     */
   case class MediaWikiConnection(
-    apiUrl: String,
-    maxRetries: Int,
-    connectMs: Int,
-    readMs: Int,
-    sleepFactor: Int,
-    useragent: String,
-    maxlag: Int,
-    gzip: Boolean,
-    retryafter: Boolean
-  )
-
-  case class MediawikiConnectionRest(
+                                  apiType: String,
                                   apiUrl: String,
                                   maxRetries: Int,
                                   connectMs: Int,
                                   readMs: Int,
                                   sleepFactor: Int,
+                                  maxlag: Int,
                                   useragent: String,
-                                  accept: String,
+                                  gzip: Boolean,
+                                  retryafter: Boolean,
+                                  accept  : String,
                                   charset: String,
                                   profile: String
                                 )
+
   case class AbstractParameters(
                                  abstractQuery: String,
                                  shortAbstractsProperty: String,
