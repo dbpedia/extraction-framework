@@ -1,25 +1,15 @@
 package org.dbpedia.extraction.util
 
-import com.fasterxml.jackson.databind.{ObjectMapper, SerializationFeature}
-import com.fasterxml.jackson.module.scala.DefaultScalaModule
-import org.dbpedia.extraction.config.Config.{MediaWikiConnection}
+import org.dbpedia.extraction.config.Config.MediaWikiConnection
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
-import org.slf4j.LoggerFactory
-
-import java.io.{InputStream, OutputStreamWriter}
+import java.io.InputStream
 import java.net.{HttpURLConnection, URL}
 import java.time.temporal.ChronoUnit
 import scala.collection.JavaConverters._
-import java.util.zip._
-import java.util
+import scala.math.pow
 import javax.xml.ws.WebServiceException
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
-import org.slf4j.LoggerFactory
-import com.fasterxml.jackson.module.scala.DefaultScalaModule
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
 
 /**
   * The Mediawiki API connector
@@ -27,13 +17,12 @@ import com.fasterxml.jackson.databind.SerializationFeature
   * @param xmlPath - An array of XML tag names leading from the root (usually 'api') to the intended content of the response XML (depending on the request query used)
   */
 class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq[String]) extends MediaWikiConnectorAbstract(connectionConfig, xmlPath ) {
-  //protected val apiUrl : String = connectionConfig.apiUrl
+
   protected val apiAccept: String = connectionConfig.accept
   protected val apiCharset: String = connectionConfig.charset
   protected val apiProfile: String = connectionConfig.profile
   protected val userAgent: String = connectionConfig.useragent
-  private val osBean = java.lang.management.ManagementFactory.getOperatingSystemMXBean
-  private val availableProcessors = osBean.getAvailableProcessors
+
 
   /**
    * Retrieves a Wikipedia page.
@@ -43,6 +32,9 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
    */
   override def retrievePage(pageTitle: WikiTitle, apiParameterString: String, isRetry: Boolean = false): Option[String] = {
     val retryFactor = if (isRetry) 2 else 1
+    var Success_parsing = false
+    var parsed_answer: Try[String] = null
+    var waiting_time = sleepFactorMs
 
 
     //val apiUrl: URL = new URL(connectionConfig.apiUrl.replace("{{LANG}}",pageTitle.language.wikiCode))
@@ -55,19 +47,17 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
       case (search, replacement) => titleParam = titleParam.replace(search, replacement);
     }
     //replaces {{lang}} with the language
-    var url: String = connectionConfig.apiUrl.replace("{{LANG}}", pageTitle.language.wikiCode)
+    val url: String = connectionConfig.apiUrl.replace("{{LANG}}", pageTitle.language.wikiCode)
     val apiUrl: URL = new URL(url.concat(titleParam))
 
 
-    var parameters = "redirect=true"
+    val parameters = "redirect=true"
 
-    // Fill parameters
-    //var parameters = "uselang=" + pageTitle.language.wikiCode
     println(s"mediawikiurl: $apiUrl?$parameters")
 
 
     for (counter <- 1 to maxRetries) {
-      try {
+
         val conn = apiUrl.openConnection
         conn.setDoOutput(true) // POST REQUEST to verify
 
@@ -82,49 +72,55 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
         conn.setRequestProperty("User-Agent", userAgent)
 
         val inputStream = conn.getInputStream
+        val answer_header = conn.getHeaderFields()
+        val answer_clean = answer_header.asScala.filterKeys(_ != null)
 
-        val end = java.time.LocalTime.now()
-        conn match {
-          case connection: HttpURLConnection => {
-            log.debug("Request type: " + connection.getRequestMethod + "; URL: " + connection.getURL +
-              "; Parameters: " + parameters + "; HTTP code: " + connection.getHeaderField(null) +
-              "; Request time: " + start + "; Response time: " + end + "; Time needed: " +
-              start.until(end, ChronoUnit.MILLIS))
+      if(conn.getHeaderField(null).contains("HTTP/1.1 200 OK") ){
+
+
+          val end = java.time.LocalTime.now()
+          conn match {
+            case connection: HttpURLConnection =>
+              log.debug("Request type: " + connection.getRequestMethod + "; URL: " + connection.getURL +
+                "; Parameters: " + parameters + "; HTTP code: " + connection.getHeaderField(null) +
+                "; Request time: " + start + "; Response time: " + end + "; Time needed: " +
+                start.until(end, ChronoUnit.MILLIS))
+            case _ =>
           }
-          case _ =>
-        }
         // Read answer
-        return readInAbstract(inputStream) match {
+          parsed_answer = readInAbstract(inputStream)
+          Success_parsing = parsed_answer match {
+            case Success(str) => true
+            case Failure(_) => false
+          }
+      }
+      if(!Success_parsing){
+        var sleepMs = sleepFactorMs
+        if (retryAfter && answer_clean.contains("retry-after")) {
+          //println("GIVEN RETRY-AFTER > "+ answer_clean("retry-after").get(0))
+          waiting_time = Integer.parseInt(answer_clean("retry-after").get(0)) * 1000
+
+          // exponential backoff test
+          sleepMs = pow(waiting_time, counter).toInt
+          //println("WITH EXPONENTIAL BACK OFF" + counter)
+          //println("Sleeping time double >>>>>>>>>>>" + pow(waiting_time, counter))
+          //println("Sleeping time int >>>>>>>>>>>" + sleepMs)
+
+        }
+        if (counter < maxRetries)
+          Thread.sleep(sleepMs)
+        else
+          throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries.")
+      } else {
+
+
+        //println(s"mediawikiurl: $apiUrl?$parameters")
+        return parsed_answer match {
           case Success(str) => Option(str)
           case Failure(e) => throw e
         }
       }
-      catch {
-        case ex: Exception =>
-          // The web server may still be trying to render the page. If we send new requests
-          // at once, there will be more and more tasks running in the web server and the
-          // system eventually becomes overloaded. So we wait a moment. The higher the load,
-          // the longer we wait.
 
-          val zw = ex.getMessage
-          var loadFactor = Double.NaN
-          var sleepMs = sleepFactorMs
-
-          // if the load average is not available, a negative value is returned
-          val load = osBean.getSystemLoadAverage
-          if (load >= 0) {
-            loadFactor = load / availableProcessors
-            sleepMs = (loadFactor * sleepFactorMs).toInt
-          }
-          ex match {
-            case e: java.net.SocketTimeoutException =>
-              if (counter < maxRetries)
-                Thread.sleep(sleepMs)
-              else
-                throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, e)
-            case _ => throw ex
-          }
-      }
     }
     throw new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded)
   }
@@ -138,7 +134,7 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
    */
   override def readInAbstract(inputStream: InputStream): Try[String] = {
     // for XML format
-    var htmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
+    val htmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
     //var text = XML.loadString(xmlAnswer).asInstanceOf[NodeSeq]
 
     //test for errors

@@ -38,31 +38,25 @@ class ExtractionTestAbstract extends FunSuite with BeforeAndAfterAll {
 
 
 
-
 test("extract html abstract datasets", ExtractionTestTag) {
     Utils.renameAbstractsDatasetFiles("html")
     println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> html abstract begin")
     val jobsRunning1 = new ConcurrentLinkedQueue[Future[Unit]]()
     val extractRes = extract(nifAbstractConfig, jobsRunning1)
-    writeTestResult("MWC_REST_htmlbstract",extractRes)
+    writeTestResult("MWCREST_fr_htmlabstract_only",extractRes)
     println("> html abstract end")
 
   }
 
-
-
-
-
-/*test("extract plain abstract datasets", ExtractionTestTag) {
+/*
+test("extract plain abstract datasets", ExtractionTestTag) {
     println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Plain abstract begin")
     Utils.renameAbstractsDatasetFiles("plain")
     val jobsRunning2 = new ConcurrentLinkedQueue[Future[Unit]]()
-  val extractRes2=extract(plainAbstractConfig, jobsRunning2)
-    writeTestResult("MWC_REST_plainAbstract",extractRes2)
-
+    val extractRes2=extract(plainAbstractConfig, jobsRunning2)
+    writeTestResult("MWCREST_en_plainabstractall2",extractRes2)
     println("> Plain abstract end")
   }*/
-
 
   def writeTestResult(fileName : String, content: Array[Map[String,String]]): Unit ={
     val today = java.time.LocalDate.now.toString
@@ -113,11 +107,11 @@ test("extract html abstract datasets", ExtractionTestTag) {
       println(">>>>>>>>> EXTRACT - LANG > " + lang.wikiCode)
 
       val status = records.getStatusValues(lang);
-      var nbFailed429 = 0
-      var nbFailed503 = 0
-      var nbFailedIOException = 0
-      var nbFailedOutOfMemoryError = 0
-      var nbFailedNullPointerException = 0
+      var numberOfFailedPages429 = 0
+      var numberOfFailedPages503 = 0
+      var numberOfFailedPagesIOException = 0
+      var numberOfFailedPagesOutOfMemoryError = 0
+      var numberOfFailedPagesNullPointerException = 0
       var mapLocal= status
 
       mapLocal += "language" -> lang.wikiCode.toString();
@@ -126,30 +120,30 @@ test("extract html abstract datasets", ExtractionTestTag) {
         val listFailedPages_ = records.listFailedPages(lang)
         for( failed <- listFailedPages_) {
           if(failed.toString().contains("Server returned HTTP response code: 429")){
-            nbFailed429 += 1
+            numberOfFailedPages429 += 1
           }
           if (failed.toString().contains("Server returned HTTP response code: 503")){
-            nbFailed503 += 1
+            numberOfFailedPages503 += 1
           }
           if (failed.toString().contains("java.io.IOException")){
-            nbFailedIOException += 1
+            numberOfFailedPagesIOException += 1
           }
           if (failed.toString().contains("java.io.OutOfMemoryError")){
-            nbFailedOutOfMemoryError += 1
+            numberOfFailedPagesOutOfMemoryError += 1
           }
           if (failed.toString().contains("java.io.NullPointerException")){
-            nbFailedNullPointerException += 1
+            numberOfFailedPagesNullPointerException += 1
           }
         }
       } catch {
         case e: Exception =>  None
       }
 
-      mapLocal += "nbFailed429" -> nbFailed429.toString
-      mapLocal += "nbFailed503" -> nbFailed503.toString
-      mapLocal += "nbFailedIOException" -> nbFailedIOException.toString
-      mapLocal += "nbFailedOutOfMemoryError" -> nbFailedOutOfMemoryError.toString
-      mapLocal += "nbFailedNullPointerException" -> nbFailedNullPointerException.toString
+      mapLocal += "numberOfFailedPages429" -> numberOfFailedPages429.toString
+      mapLocal += "numberOfFailedPages503" -> numberOfFailedPages503.toString
+      mapLocal += "numberOfFailedPagesIOException" -> numberOfFailedPagesIOException.toString
+      mapLocal += "numberOfFailedPagesOutOfMemoryError" ->numberOfFailedPagesOutOfMemoryError.toString
+      mapLocal += "numberOfFailedPagesNullPointerException" -> numberOfFailedPagesNullPointerException.toString
 
 
       mapResults = mapResults :+ mapLocal

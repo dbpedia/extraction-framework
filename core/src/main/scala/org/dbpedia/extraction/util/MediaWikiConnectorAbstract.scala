@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory
 import java.io.{InputStream, OutputStreamWriter}
 import java.net.{HttpURLConnection, URL}
 import java.time.temporal.ChronoUnit
-import javax.xml.ws.WebServiceException
-import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
 /**
@@ -26,6 +24,7 @@ abstract class MediaWikiConnectorAbstract(connectionConfig: MediaWikiConnection,
   protected val maxRetries: Int = connectionConfig.maxRetries
   require(maxRetries <= 10 && maxRetries > 0, "maxRetries has to be in the interval of [1,10]")
 
+  protected val retryAfter: Boolean = connectionConfig.retryafter
   /** timeout for connection to web server, milliseconds */
   protected val connectMs: Int = connectionConfig.connectMs
   require(connectMs > 200, "connectMs shall be more than 200 ms!")

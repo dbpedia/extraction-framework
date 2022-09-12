@@ -7,7 +7,7 @@ import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.abstracts.AbstractUtils
-import org.dbpedia.extraction.util.{Language, MediaWikiConnector2, MediaWikiConnectorRest, WikiUtil}
+import org.dbpedia.extraction.util.{Language, MediawikiConnectorConfigured, MediaWikiConnectorRest, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
@@ -89,7 +89,7 @@ extends WikiPageExtractor
           case None => return Seq.empty
         }
       }else{
-        val mwConnector = new MediaWikiConnector2(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
+        val mwConnector = new MediawikiConnectorConfigured(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
         text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
                     case Some(t) => PlainAbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
                     case None => return Seq.empty

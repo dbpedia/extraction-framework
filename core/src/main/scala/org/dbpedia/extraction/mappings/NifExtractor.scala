@@ -3,10 +3,10 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.annotations.ExtractorAnnotation
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.nif.{WikipediaNifExtractor2, WikipediaNifExtractor}
+import org.dbpedia.extraction.nif.{WikipediaNifExtractorRest, WikipediaNifExtractor}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.{Language, MediaWikiConnector2, MediaWikiConnectorRest}
+import org.dbpedia.extraction.util.{Language, MediawikiConnectorConfigured, MediaWikiConnectorRest}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
@@ -64,9 +64,9 @@ class NifExtractor(
         case Some(t) => NifExtractor.postProcessExtractedHtml(pageNode.title, t)
         case None => return Seq.empty
       }
-      new WikipediaNifExtractor2(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err))
+      new WikipediaNifExtractorRest(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err))
     }else{
-      val mwConnector =new MediaWikiConnector2(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
+      val mwConnector =new MediawikiConnectorConfigured(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
       html = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
         case Some(t) => NifExtractor.postProcessExtractedHtml(pageNode.title, t)
         case None => return Seq.empty

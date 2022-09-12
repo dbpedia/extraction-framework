@@ -23,9 +23,9 @@ echo "========================="
 clickstream_data="clickstream_data_${lang}_${date_archive}"
 if [ -f "$clickstream_data" ]
 then
-  echo "File is found"
+  echo "File found"
 else
-   echo "File is not found"
+   echo "File not found"
    clickstream_url="https://dumps.wikimedia.org/other/clickstream/";
    content=$(curl -L "$clickstream_url$date_archive/")
    links=$( echo $content | grep -Po '(?<=href=")[^"]*');
@@ -57,12 +57,12 @@ while IFS= read -r line; do
    IFS=$'\t'; arrIN=($line); unset IFS;
    key=${arrIN[1]}
    val=${arrIN[3]}
-
-   if [[ ${#dict[${key}]} -eq 0 ]] ;then
-	   dict[${key}]=$(($val));
-   else
-	  dict[${key}]=$((${dict[${key}]}+$val));
-
+   if [[ ${key} != *"List"* ]];then
+     if [[ ${#dict[${key}]} -eq 0 ]] ;then
+       dict[${key}]=$(($val));
+     else
+       dict[${key}]=$((${dict[${key}]}+$val));
+     fi
    fi
 done < $clickstream_data
 

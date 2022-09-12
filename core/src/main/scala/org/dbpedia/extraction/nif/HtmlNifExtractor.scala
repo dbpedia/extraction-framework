@@ -159,12 +159,16 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
         triples += nifStructure(contextUri, RdfNamespace.NIF.append("lastSection"), sectionUri, sourceUrl, null)
     }
     else{
-      triples += nifStructure(sectionUri, RdfNamespace.NIF.append("superString"), section.getTop.get.getSectionIri(), sourceUrl, null)
-      triples += nifStructure(section.getTop.get.getSectionIri(), RdfNamespace.NIF.append("hasSection"), sectionUri, sourceUrl, null)
-      if (section.prev.isEmpty)
-        triples += nifStructure(section.getTop.get.getSectionIri(), RdfNamespace.NIF.append("firstSection"), sectionUri, sourceUrl, null)
-      if (section.next.isEmpty)
-        triples += nifStructure(section.getTop.get.getSectionIri(), RdfNamespace.NIF.append("lastSection"), sectionUri, sourceUrl, null)
+      // ADDED THIS TEST BECAUSE WHEN THIS IS A PAGE END IT CAUSES PROBLEMS (top not empty but no getTop)
+      if(section.getTop != None) {
+        triples += nifStructure(sectionUri, RdfNamespace.NIF.append("superString"), section.getTop.get.getSectionIri(), sourceUrl, null)
+        triples += nifStructure(section.getTop.get.getSectionIri(), RdfNamespace.NIF.append("hasSection"), sectionUri, sourceUrl, null)
+        if (section.prev.isEmpty)
+          triples += nifStructure(section.getTop.get.getSectionIri(), RdfNamespace.NIF.append("firstSection"), sectionUri, sourceUrl, null)
+        if (section.next.isEmpty)
+          triples += nifStructure(section.getTop.get.getSectionIri(), RdfNamespace.NIF.append("lastSection"), sectionUri, sourceUrl, null)
+      }
+
     }
 
     //further specifying paragraphs of every section

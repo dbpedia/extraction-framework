@@ -60,11 +60,10 @@ public class LinkExtractor implements NodeVisitor {
 		  tempText = StringEscapeUtils.unescapeHtml4(tempText);
           tempText = org.dbpedia.extraction.util.StringUtils.escape(tempText, replaceChars());
 		  tempText = tempText.replace("\\n", "\n").replace("\\t", "\t").replace("\\r", "");
-			//stem.out.println("-- after replace");
+
 		  //this text node is the content of an <a> element: make a new nif:Word
 		  if(inLink) {
 
-			  //System.out.println("in link-----------------");
               if(!tempText.trim().startsWith(this.context.wikipediaTemplateString + ":"))  //not!
               {
                   tempLink.setLinkText(tempText);
