@@ -10,7 +10,6 @@ import org.scalatest.{BeforeAndAfterAll, DoNotDiscover}
  * TODO post process mostly only for en and fr because of mappings-extraction.properties
  */
 
-@DoNotDiscover
 class MinidumpTests extends Suites(
   new DownloadTest,
   new ExtractionTest,

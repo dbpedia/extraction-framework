@@ -20,7 +20,6 @@ import org.apache.jena.rdf.model.RDFNode
 
 import java.util.function.Consumer
 
-@DoNotDiscover
 class ConstructValidationTest extends FunSuite with BeforeAndAfterAll {
 
   override def beforeAll() {

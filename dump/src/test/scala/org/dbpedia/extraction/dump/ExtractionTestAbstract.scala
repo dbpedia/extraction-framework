@@ -14,6 +14,7 @@ import java.nio.file.{Files, Paths}
 import scala.concurrent.Future
 
 
+@DoNotDiscover
 class ExtractionTestAbstract extends FunSuite with BeforeAndAfterAll {
   println("""    __  ____       _     __                         ______          __
             |   /  |/  (_)___  (_)___/ /_  ______ ___  ____     /_  __/__  _____/ /______

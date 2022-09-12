@@ -5,7 +5,7 @@ import org.dbpedia.extraction.dump.tags.PostProcessingTestTag
 import org.scalatest.{DoNotDiscover, FunSuite}
 import org.dbpedia.extraction.scripts.{MapObjectUris, ResolveTransitiveLinks, TypeConsistencyCheck}
 
-@DoNotDiscover
+@DoNotDiscove
 class PostProcessingTest extends FunSuite {
 
   test("resolve transitive links", PostProcessingTestTag) {

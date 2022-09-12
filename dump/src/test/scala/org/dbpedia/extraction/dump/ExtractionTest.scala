@@ -7,13 +7,12 @@ import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.dump.TestConfig.{classLoader, date, genericConfig, mappingsConfig, minidumpDir, nifAbstractConfig, plainAbstractConfig, sparkSession, wikidataConfig}
 import org.dbpedia.extraction.dump.extract.ConfigLoader
 import org.dbpedia.extraction.dump.tags.ExtractionTestTag
-import org.scalatest.{BeforeAndAfterAll, DoNotDiscover, FunSuite}
+import org.scalatest.{BeforeAndAfterAll,  FunSuite}
 
 import scala.concurrent.Future
 import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
 
-@DoNotDiscover
 class ExtractionTest extends FunSuite with BeforeAndAfterAll {
 
   override def beforeAll() {

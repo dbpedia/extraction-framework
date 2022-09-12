@@ -8,7 +8,6 @@ import org.dbpedia.extraction.util.{Language, OntologyDownloader, WikiDownloader
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.scalatest.{DoNotDiscover, FunSuite}
 
-@DoNotDiscover
 class DownloadTest extends FunSuite {
 
   test("download ontology", DownloadTestTag) {
