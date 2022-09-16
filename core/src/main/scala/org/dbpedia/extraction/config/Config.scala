@@ -94,7 +94,7 @@ class Config(val configPath: String) extends
   }
 
   /**
-    * Number of parallel processes allowed. Depends on the number of cores, type of disk and IO speed
+    * Number of parallel processes allowed. Depends on the number of cores, type of disk, and IO speed
     *
     */
   lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "1").trim.toInt
