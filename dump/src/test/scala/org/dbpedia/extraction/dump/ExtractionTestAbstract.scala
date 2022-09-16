@@ -143,7 +143,7 @@ test("extract html abstract datasets", ExtractionTestTag) {
       mapLocal += "numberOfFailedPages429" -> numberOfFailedPages429.toString
       mapLocal += "numberOfFailedPages503" -> numberOfFailedPages503.toString
       mapLocal += "numberOfFailedPagesIOException" -> numberOfFailedPagesIOException.toString
-      mapLocal += "numberOfFailedPagesOutOfMemoryError" ->numberOfFailedPagesOutOfMemoryError.toString
+      mapLocal += "numberOfFailedPagesOutOfMemoryError" -> numberOfFailedPagesOutOfMemoryError.toString
       mapLocal += "numberOfFailedPagesNullPointerException" -> numberOfFailedPagesNullPointerException.toString
 
 
