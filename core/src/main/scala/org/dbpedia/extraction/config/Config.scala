@@ -281,7 +281,7 @@ class Config(val configPath: String) extends
     )
   } match{
     case Success(s) => s
-    case Failure(f) => throw new IllegalArgumentException("Not all necessary parameters for the 'MediaWikiConnection' class were provided or could not be parsed to the expected type.", f)
+    case Failure(f) => throw new IllegalArgumentException("Some parameters necessary for the 'MediaWikiConnection' class were not provided or could not be parsed to the expected type.", f)
   }
 
 
