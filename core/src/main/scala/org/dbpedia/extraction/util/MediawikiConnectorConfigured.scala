@@ -198,7 +198,7 @@ class MediawikiConnectorConfigured(connectionConfig: MediaWikiConnection, xmlPat
 
 
     // REDIRECT CASE
-    // Implemented but usefull ?
+    // Implemented but useful?
     //xmlAnswer = xmlAnswer.replaceAll("<redirects />", "")
     /*if (xmlAnswer.contains("<redirects>" ) && xmlAnswer.contains("</redirects>")) {
       val indexBegin = xmlAnswer.indexOf("<redirects>")
