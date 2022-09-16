@@ -120,7 +120,7 @@ test("extract html abstract datasets", ExtractionTestTag) {
       try {
         val listFailedPages_ = records.listFailedPages(lang)
         for( failed <- listFailedPages_) {
-          if(failed.toString().contains("Server returned HTTP response code: 429")){
+          if (failed.toString().contains("Server returned HTTP response code: 429")){
             numberOfFailedPages429 += 1
           }
           if (failed.toString().contains("Server returned HTTP response code: 503")){
