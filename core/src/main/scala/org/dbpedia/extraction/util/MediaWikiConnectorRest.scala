@@ -32,9 +32,9 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
    */
   override def retrievePage(pageTitle: WikiTitle, apiParameterString: String, isRetry: Boolean = false): Option[String] = {
     val retryFactor = if (isRetry) 2 else 1
-    var Success_parsing = false
-    var parsed_answer: Try[String] = null
-    var waiting_time = sleepFactorMs
+    var SuccessParsing = false
+    var parsedAnswer: Try[String] = null
+    var waitingTime = sleepFactorMs
 
 
     //val apiUrl: URL = new URL(connectionConfig.apiUrl.replace("{{LANG}}",pageTitle.language.wikiCode))
@@ -54,7 +54,7 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
 
 
 
-    println(s"mediawikiurl: $apiUrl")
+    //println(s"mediawikiurl: $apiUrl")
 
 
     for (counter <- 1 to maxRetries) {
@@ -73,8 +73,8 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
       conn.setRequestProperty("User-Agent", userAgent)
 
       val inputStream = conn.getInputStream
-      val answer_header = conn.getHeaderFields()
-      val answer_clean = answer_header.asScala.filterKeys(_ != null)
+      val answerHeader = conn.getHeaderFields()
+      val answerClean = answerHeader.asScala.filterKeys(_ != null)
 
       if(conn.getHeaderField(null).contains("HTTP/1.1 200 OK") ){
 
@@ -89,20 +89,20 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
           case _ =>
         }
         // Read answer
-        parsed_answer = readInAbstract(inputStream)
-        Success_parsing = parsed_answer match {
+        parsedAnswer = readInAbstract(inputStream)
+        SuccessParsing = parsedAnswer match {
           case Success(str) => true
           case Failure(_) => false
         }
       }
-      if(!Success_parsing){
+      if(!SuccessParsing){
         var sleepMs = sleepFactorMs
-        if (retryAfter && answer_clean.contains("retry-after")) {
+        if (retryAfter && answerClean.contains("retry-after")) {
           //println("GIVEN RETRY-AFTER > "+ answer_clean("retry-after").get(0))
-          waiting_time = Integer.parseInt(answer_clean("retry-after").get(0)) * 1000
+          waitingTime = Integer.parseInt(answerClean("retry-after").get(0)) * 1000
 
           // exponential backoff test
-          sleepMs = pow(waiting_time, counter).toInt
+          sleepMs = pow(waitingTime, counter).toInt
           //println("WITH EXPONENTIAL BACK OFF" + counter)
           //println("Sleeping time double >>>>>>>>>>>" + pow(waiting_time, counter))
           //println("Sleeping time int >>>>>>>>>>>" + sleepMs)
@@ -116,7 +116,7 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
 
 
         //println(s"mediawikiurl: $apiUrl?$parameters")
-        return parsed_answer match {
+        return parsedAnswer match {
           case Success(str) => Option(str)
           case Failure(e) => throw e
         }

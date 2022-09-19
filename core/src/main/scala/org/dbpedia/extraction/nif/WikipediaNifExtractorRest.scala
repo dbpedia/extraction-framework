@@ -39,20 +39,20 @@ class WikipediaNifExtractorRest(
     val currentSection = new ListBuffer[Int]()                  //keeps track of section number
     currentSection.append(0)                                    //initialize on abstract section
 
-    def getSection(current_nodes : scala.collection.mutable.Buffer[Node]) : Unit = {
+    def getSection(currentNodes : scala.collection.mutable.Buffer[Node]) : Unit = {
       //look for the next <h> tag
 
-      var subnodes = current_nodes.head.childNodes().asScala
-      subnodes = subnodes.dropWhile(current_nodes => !current_nodes.nodeName().matches("h\\d") && !current_nodes.nodeName().matches("section"))
-      var process_end=false
-      while (subnodes.nonEmpty && !process_end) {
+      var subnodes = currentNodes.head.childNodes().asScala
+      subnodes = subnodes.dropWhile(currentNodes => !currentNodes.nodeName().matches("h\\d") && !currentNodes.nodeName().matches("section"))
+      var processEnd=false
+      while (subnodes.nonEmpty && !processEnd) {
         if (subnodes.head.nodeName().matches("h\\d")) {
           val title = subnodes.headOption
-          process_end=super.isWikiPageEnd(subnodes.head)
+          processEnd=super.isWikiPageEnd(subnodes.head)
 
           title match {
 
-            case Some(t) if super.isWikiNextTitle(t) && !process_end=>
+            case Some(t) if super.isWikiNextTitle(t) && !processEnd=>
 
               //calculate the section number by looking at the <h2> to <h4> tags
               val depth = Integer.parseInt(t.asInstanceOf[org.jsoup.nodes.Element].tagName().substring(1)) - 1
@@ -91,8 +91,8 @@ class WikipediaNifExtractorRest(
               )
 
               tocMap.append(section)
-            case None => process_end=true
-            case _ => process_end=true
+            case None => processEnd=true
+            case _ => processEnd=true
           }
         } else if (subnodes.head.nodeName().matches("section")) {
           getSection(subnodes)
@@ -105,8 +105,8 @@ class WikipediaNifExtractorRest(
     }
 
 
-    val abstract_sect=doc.select("body").select("section").first.childNodes.asScala //get first section
-    val ab = abstract_sect.filter(node => node.nodeName() == "p") //move cursor to abstract
+    val abstractSect=doc.select("body").select("section").first.childNodes.asScala //get first section
+    val ab = abstractSect.filter(node => node.nodeName() == "p") //move cursor to abstract
 
     nodes = nodes.drop(1)
 

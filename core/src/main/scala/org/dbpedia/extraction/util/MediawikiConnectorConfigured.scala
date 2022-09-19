@@ -35,11 +35,11 @@ class MediawikiConnectorConfigured(connectionConfig: MediaWikiConnection, xmlPat
   override def retrievePage(pageTitle : WikiTitle, apiParameterString: String, isRetry: Boolean = false) : Option[String] =
   {
     val retryFactor = if(isRetry) 2 else 1
-    var waiting_time = sleepFactorMs
-    var Success_parsing = false
+    var waitingTime = sleepFactorMs
+    var SuccessParsing = false
     var currentMaxLag= maxLag
     var gzipok = true
-    var parsed_answer: Try[String] = null
+    var parsedAnswer: Try[String] = null
     //replaces {{lang}} with the language
     val apiUrl: URL = new URL(connectionConfig.apiUrl.replace("{{LANG}}",pageTitle.language.wikiCode))
 
@@ -78,13 +78,13 @@ class MediawikiConnectorConfigured(connectionConfig: MediaWikiConnection, xmlPat
         conn.setRequestProperty("User-Agent",userAgent)
         if ( gzipCall ) conn.setRequestProperty("Accept-Encoding","gzip")
 
-        println(s"mediawikiurl: $apiUrl?$parameters")
+        //println(s"mediawikiurl: $apiUrl?$parameters")
         val writer = new OutputStreamWriter(conn.getOutputStream)
         writer.write(parameters)
         writer.flush()
         writer.close()
-        var answer_header = conn.getHeaderFields();
-        var answer_clean = answer_header.asScala.filterKeys(_ != null);
+        var answerHeader = conn.getHeaderFields();
+        var answerClean = answerHeader.asScala.filterKeys(_ != null);
 
        // UNCOMMENT FOR LOG
        /* var mapper = new ObjectMapper()
@@ -125,24 +125,24 @@ class MediawikiConnectorConfigured(connectionConfig: MediaWikiConnection, xmlPat
         }
 
         // Read answer
-        parsed_answer = readInAbstract(inputStream)
-        Success_parsing = parsed_answer match {
+        parsedAnswer = readInAbstract(inputStream)
+        SuccessParsing = parsedAnswer match {
           case Success(str) => true
           case Failure(e) => false
         }
 
 
       }
-      if(!Success_parsing){
-        println("ERROR DURING PARSING" )
+      if(!SuccessParsing){
+        //println("ERROR DURING PARSING" )
 
         var sleepMs = sleepFactorMs
-        if (retryAfter && answer_clean.contains("retry-after") ){
-            println("GIVEN RETRY-AFTER > "+ answer_clean("retry-after").get(0))
-            waiting_time = Integer.parseInt(answer_clean("retry-after").get(0)) * 1000
+        if (retryAfter && answerClean.contains("retry-after") ){
+            //println("GIVEN RETRY-AFTER > "+ answer_clean("retry-after").get(0))
+            waitingTime = Integer.parseInt(answerClean("retry-after").get(0)) * 1000
 
             // exponential backoff test
-            sleepMs = pow(waiting_time, counter).toInt
+            sleepMs = pow(waitingTime, counter).toInt
             //println("WITH EXPONENTIAL BACK OFF" + counter)
             //println("Sleeping time double >>>>>>>>>>>" + pow(waiting_time, counter))
             //println("Sleeping time int >>>>>>>>>>>" + sleepMs)
@@ -162,7 +162,7 @@ class MediawikiConnectorConfigured(connectionConfig: MediaWikiConnection, xmlPat
 
 
         //println(s"mediawikiurl: $apiUrl?$parameters")
-        return parsed_answer match {
+        return parsedAnswer match {
           case Success(str) => Option(str)
           case Failure(e) => throw e
         }
