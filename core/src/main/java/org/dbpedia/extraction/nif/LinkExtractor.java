@@ -39,11 +39,14 @@ public class LinkExtractor implements NodeVisitor {
 	
 	public void head(Node node, int depth) {
 
-		if(skipLevel>=0)
+		if(skipLevel>=0){
 			return;
+		}
 
-        if(paragraph == null)
-            paragraph = new Paragraph(0, "", "p");
+
+        if(paragraph == null) {
+			paragraph = new Paragraph(0, "", "p");
+		}
 		//ignore all content inside invisible tags
 		if(invisible || node.attr("style").matches(".*display\\s*:\\s*none.*")) {
 			invisible = true;
@@ -52,6 +55,7 @@ public class LinkExtractor implements NodeVisitor {
 
 		if(node.nodeName().equals("#text")) {
 		  String tempText = node.toString();
+
 		  //replace no-break spaces because unescape doesn't deal with them
 		  tempText = StringEscapeUtils.unescapeHtml4(tempText);
           tempText = org.dbpedia.extraction.util.StringUtils.escape(tempText, replaceChars());
@@ -59,6 +63,7 @@ public class LinkExtractor implements NodeVisitor {
 
 		  //this text node is the content of an <a> element: make a new nif:Word
 		  if(inLink) {
+
               if(!tempText.trim().startsWith(this.context.wikipediaTemplateString + ":"))  //not!
               {
                   tempLink.setLinkText(tempText);
@@ -70,11 +75,15 @@ public class LinkExtractor implements NodeVisitor {
 				  errors.add("found Template in resource: " + this.context.resource + ": " + tempText);
 				  return;
 			  }
+
 		  }
 		  else
 		    paragraph.addText(tempText);
 
-		} else if(node.nodeName().equals("a")) {
+		}
+
+		else if(node.nodeName().equals("a")) {
+
             String link = node.attr("href");
             //TODO central string management
 			/**
@@ -84,41 +93,62 @@ public class LinkExtractor implements NodeVisitor {
 			 * see Schopenhauer: https://en.wikipedia.org/w/api.php?uselang=en&format=xml&action=parse&prop=text&pageid=17340400
 			 */
             String linkPrefix = "/wiki/";
-            // standard wikilinks
-            if (link.contains(linkPrefix) && !link.contains(":")) {
-                tempLink = new Link();
-                String uri = cleanLink(node.attr("href"), false);
-                setUri(uri);
+			// SPECIAL CASE FOR RESTAPI PARSING
 
-            //simple example of Help:IPA
-			// <a href="/wiki/Help:IPA/Standard_German" title="Help:IPA/Standard German">[ˈaɐ̯tʊɐ̯ ˈʃoːpn̩haʊ̯ɐ]</a>
-            } else if (link.contains(linkPrefix) && link.contains(":")) {
-				/**
-				 * TODO buggy
-				 * Cleans up child nodes: difficult example
-				 * <a href="/wiki/Help:IPA/English" title="Help:IPA/English">/<span style="border-bottom:1px dotted"><span title="/ˈ/: primary stress follows">ˈ</span><span title="/ʃ/: 'sh' in 'shy'">ʃ</span><span title="/oʊ/: 'o' in 'code'">oʊ</span><span title="'p' in 'pie'">p</span><span title="/ən/: 'on' in 'button'">ən</span><span title="'h' in 'hi'">h</span><span title="/aʊ/: 'ou' in 'mouth'">aʊ</span><span title="/./: syllable break">.</span><span title="/ər/: 'er' in 'letter'">ər</span></span>/</a>
-				 */
-                if (!node.childNodes().isEmpty()) {
-                    if (node.childNode(0).nodeName().equals("#text") &&
-                            node.childNode(0).toString().contains(":") &&
-                            !node.childNode(0).toString().contains("http")) {
-                        tempLink = new Link();
-                        String uri = cleanLink(node.attr("href"), false);
-                        setUri(uri);
-                    }
-                } else {
-                    skipLevel = depth;
-                }
-            //TODO add example
-            } else if (node.attr("class").equals("external text")) {
-                //don't skip external links
-                tempLink = new Link();
-                String uri = cleanLink(node.attr("href"), true);
-                setUri(uri);
+			if(node.hasAttr("rel")){
 
-            } else {
-                skipLevel = depth;
-            }
+				String relType = node.attr("rel");
+				if(relType.equals("mw:WikiLink")){
+
+						tempLink = new Link();
+						String uri = cleanLink(node.attr("href"), false);
+						setUri(uri);
+
+
+				} else if (relType.equals("mw:ExtLink")) {
+						tempLink = new Link();
+						String uri = cleanLink(node.attr("href"), true);
+						setUri(uri);
+				}
+			}else{
+				// standard wikilinks
+				if (link.contains(linkPrefix) && !link.contains(":")) {
+					tempLink = new Link();
+					String uri = cleanLink(node.attr("href"), false);
+					setUri(uri);
+
+					//simple example of Help:IPA
+					// <a href="/wiki/Help:IPA/Standard_German" title="Help:IPA/Standard German">[ˈaɐ̯tʊɐ̯ ˈʃoːpn̩haʊ̯ɐ]</a>
+				} else if (link.contains(linkPrefix) && link.contains(":")) {
+					/**
+					 * TODO buggy
+					 * Cleans up child nodes: difficult example
+					 * <a href="/wiki/Help:IPA/English" title="Help:IPA/English">/<span style="border-bottom:1px dotted"><span title="/ˈ/: primary stress follows">ˈ</span><span title="/ʃ/: 'sh' in 'shy'">ʃ</span><span title="/oʊ/: 'o' in 'code'">oʊ</span><span title="'p' in 'pie'">p</span><span title="/ən/: 'on' in 'button'">ən</span><span title="'h' in 'hi'">h</span><span title="/aʊ/: 'ou' in 'mouth'">aʊ</span><span title="/./: syllable break">.</span><span title="/ər/: 'er' in 'letter'">ər</span></span>/</a>
+					 */
+					if (!node.childNodes().isEmpty()) {
+						if (node.childNode(0).nodeName().equals("#text") &&
+								node.childNode(0).toString().contains(":") &&
+								!node.childNode(0).toString().contains("http")) {
+							tempLink = new Link();
+							String uri = cleanLink(node.attr("href"), false);
+							setUri(uri);
+						}
+					} else {
+						skipLevel = depth;
+					}
+					//TODO add example
+				} else if (node.attr("class").equals("external text")) {
+					//don't skip external links
+					tempLink = new Link();
+					String uri = cleanLink(node.attr("href"), true);
+					setUri(uri);
+
+				} else {
+					skipLevel = depth;
+				}
+			}
+
+
         } else if(node.nodeName().equals("p")) {
             if(paragraph != null) {
                 addParagraph("p");
@@ -136,6 +166,7 @@ public class LinkExtractor implements NodeVisitor {
             skipLevel = depth;
         } else if(node.nodeName().equals("span")) {
 			//denote notes
+
 		    if(node.attr("class").contains("notebegin"))
                 addParagraph("note");
 
@@ -159,13 +190,21 @@ public class LinkExtractor implements NodeVisitor {
 	
 	private String cleanLink(String uri, boolean external) {
 		if(!external) {
+
+			String linkPrefix = "/wiki/";
+			String linkPrefix2= "./";
+			if(uri.contains(linkPrefix)){
+				uri=uri.substring(uri.indexOf("?title=")+7);
+			} else if (uri.contains(linkPrefix2)) {
+				uri=uri.substring(uri.indexOf("?title=")+3);
+			}
 			//TODO central string management
 			if(!this.context.language.equals("en")) {
-
-				uri="http://"+this.context.language+".dbpedia.org/resource/"+uri.substring(uri.indexOf("?title=")+7);
+				uri="http://"+this.context.language+".dbpedia.org/resource/"+uri;
 				
-			} else {
-				uri="http://dbpedia.org/resource/"+uri.substring(uri.indexOf("?title=")+7);
+			}
+			else {
+				uri="http://dbpedia.org/resource/"+uri;
 			}
 			uri = uri.replace("&action=edit&redlink=1", "");
 			
@@ -183,14 +222,15 @@ public class LinkExtractor implements NodeVisitor {
 				e.printStackTrace();
 			}
 		}
-
 		return UriUtils.uriToDbpediaIri(uri).toString();
 	}
 	
 	public void tail(Node node, int depth) {
-		
+
+
 		if(skipLevel>0) {
 			if(skipLevel==depth) {
+
 				skipLevel = -1;
 				return;
 			} else {
@@ -198,7 +238,7 @@ public class LinkExtractor implements NodeVisitor {
 			}
 		}
 
-		if(node.nodeName().equals("a")&&inLink) {
+		if(node.nodeName().equals("a") && inLink) {
 			inLink = false;
 			paragraph.addLink(tempLink);
 			tempLink = new Link();
@@ -210,6 +250,7 @@ public class LinkExtractor implements NodeVisitor {
             addParagraph("p");
         }
         else if(node.nodeName().equals("sup") && inSup) {
+
 			inSup = false;
 		}
         else if(node.nodeName().matches("h\\d")) {

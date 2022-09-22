@@ -3,10 +3,10 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.annotations.ExtractorAnnotation
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.nif.WikipediaNifExtractor
+import org.dbpedia.extraction.nif.{WikipediaNifExtractorRest, WikipediaNifExtractor}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.{Language, MediaWikiConnector}
+import org.dbpedia.extraction.util.{Language, MediawikiConnectorConfigured, MediaWikiConnectorRest}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
@@ -41,12 +41,11 @@ class NifExtractor(
   protected val writeLinkAnchors: Boolean = context.configFile.nifParameters.writeLinkAnchor
   protected val writeStrings: Boolean = context.configFile.nifParameters.writeAnchor
   protected val shortAbstractLength: Int = context.configFile.abstractParameters.shortAbstractMinLength
-
+  protected val abstractsOnly : Boolean =  context.configFile.nifParameters.abstractsOnly
   protected val dbpediaVersion: String = context.configFile.dbPediaVersion
 
   override val datasets = Set(DBpediaDatasets.NifContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts, DBpediaDatasets.RawTables, DBpediaDatasets.Equations)
 
-  private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
 
   override def extract(pageNode : WikiPage, subjectUri : String): Seq[Quad] =
   {
@@ -56,13 +55,24 @@ class NifExtractor(
     //Don't extract abstracts from redirect and disambiguation pages
     if(pageNode.isRedirect || pageNode.isDisambiguation) return Seq.empty
 
-    //Retrieve page text
-    val html = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match{
-      case Some(t) => NifExtractor.postProcessExtractedHtml(pageNode.title, t)
-      case None => return Seq.empty
-    }
+    var html = ""
+    val mwcType = context.configFile.mediawikiConnection.apiType
 
-    new WikipediaNifExtractor(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err))
+    if (mwcType == "rest") {
+      val mwConnector = new MediaWikiConnectorRest(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
+      html = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
+        case Some(t) => NifExtractor.postProcessExtractedHtml(pageNode.title, t)
+        case None => return Seq.empty
+      }
+      new WikipediaNifExtractorRest(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err))
+    } else {
+      val mwConnector = new MediawikiConnectorConfigured(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
+      html = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
+        case Some(t) => NifExtractor.postProcessExtractedHtml(pageNode.title, t)
+        case None => return Seq.empty
+      }
+      new WikipediaNifExtractor(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err))
+    }
   }
 
 }
