@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.config.{Config, ConfigUtils}
+import org.dbpedia.extraction.config.{Config2, ConfigUtils}
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
@@ -28,35 +28,35 @@ import scala.reflect._
  *
  * TODO: get rid of all config file parsers, use Spring
  */
-class ConfigLoader2(config: Config)
+class ConfigLoader2(config: Config2)
 {
   //private val logger = Logger.getLogger(classOf[ConfigLoader2].getName)
 
-  private val extractionJobs = new ConcurrentHashMap[Language, ExtractionJob]().asScala
+  private val extractionJobs = new ConcurrentHashMap[Language, ExtractionJob2]().asScala
 
-  private val sparkExtractionJobs = new ConcurrentHashMap[Language, SparkExtractionJob]().asScala
+  private val sparkExtractionJobs = new ConcurrentHashMap[Language, SparkExtractionJob2]().asScala
 
-  private val extractionRecorder = new mutable.HashMap[ClassTag[_], mutable.HashMap[Language, ExtractionRecorder[_]]]()
+  private val extractionRecorder = new mutable.HashMap[ClassTag[_], mutable.HashMap[Language, ExtractionRecorder2[_]]]()
 
   //these lists are used when the ImageExtractor is amongst the selected Extractors
   private val nonFreeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
   private val freeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
 
-  private val extractionMonitor = new ExtractionMonitor()
+  private val extractionMonitor = new ExtractionMonitor2()
 
-  def getExtractionRecorder[T: ClassTag](lang: Language, dataset : Dataset = null): org.dbpedia.extraction.util.ExtractionRecorder[T] = {
+  def getExtractionRecorder[T: ClassTag](lang: Language, dataset : Dataset = null): org.dbpedia.extraction.util.ExtractionRecorder2[T] = {
     extractionRecorder.get(classTag[T]) match{
       case Some(s) => s.get(lang) match {
         case None =>
           val datasetsParam = if (dataset == null) ListBuffer[Dataset]() else ListBuffer(dataset)
           s(lang) = config.getDefaultExtractionRecorder[T](lang, 2000, null, null, datasetsParam, extractionMonitor)
-          s(lang).asInstanceOf[ExtractionRecorder[T]]
+          s(lang).asInstanceOf[ExtractionRecorder2[T]]
         case Some(er) =>
           if(dataset != null) if(!er.datasets.contains(dataset)) er.datasets += dataset
-          er.asInstanceOf[ExtractionRecorder[T]]
+          er.asInstanceOf[ExtractionRecorder2[T]]
       }
       case None =>
-        extractionRecorder(classTag[T]) = new mutable.HashMap[Language, ExtractionRecorder[_]]()
+        extractionRecorder(classTag[T]) = new mutable.HashMap[Language, ExtractionRecorder2[_]]()
         getExtractionRecorder[T](lang, dataset)
     }
   }
@@ -71,53 +71,31 @@ class ConfigLoader2(config: Config)
     val date = latestDate(finder)
 
     //Extraction Context
-    val context = new DumpExtractionContext
+    val context = new DumpExtractionContext2
     {
       def ontology: Ontology = _ontology
 
-      def commonsSource: Source = _commonsSource
+      def commonsSource: Source2 = _commonsSource
 
       def language: Language = input._1
 
-      def recorder[T: ClassTag]: ExtractionRecorder[T] = getExtractionRecorder[T](input._1)
+      def recorder[T: ClassTag]: ExtractionRecorder2[T] = getExtractionRecorder[T](input._1)
 
-      private lazy val _mappingPageSource =
-      {
-        val namespace = Namespace.mappings(language)
 
-        if (config.mappingsDir != null && config.mappingsDir.isDirectory)
-        {
-          val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-          XMLSource.fromFile(file, Language.Mappings)
-        }
-        else
-        {
-          val namespaces = Set(namespace)
-          val url = new URL(Language.Mappings.apiUri)
-          WikiSource.fromNamespaces(namespaces,url,Language.Mappings)
-        }
-      }
 
-      def mappingPageSource : Traversable[WikiPage] = _mappingPageSource
 
-      private lazy val _mappings: Mappings =
-      {
-        MappingsLoader.load(this)
-      }
-      def mappings : Mappings = _mappings
-
-      def articlesSource: Source = getArticlesSource(language, finder)
+      def articlesSource: Source2 = getArticlesSource(language, finder)
 
       private val _redirects =
       {
         finder.file(date, "template-redirects.obj") match{
-          case Some(cache) => Redirects.load(articlesSource, cache, language)
-          case None => new Redirects(Map())
+          case Some(cache) => Redirects2.load(articlesSource, cache, language)
+          case None => new Redirects2(Map())
         }
 
       }
 
-      def redirects : Redirects = _redirects
+      def redirects : Redirects2 = _redirects
 
       private val _disambiguations =
       {
@@ -136,7 +114,7 @@ class ConfigLoader2(config: Config)
         else
           new Disambiguations(Set[Long]())
 
-      def configFile: Config = config
+      def configFile: Config2 = config
 
       def freeImages : Seq[String] = ConfigLoader2.this.freeImages.get(language) match{
         case Some(s) => s
@@ -150,7 +128,9 @@ class ConfigLoader2(config: Config)
     }
 
     //Extractors
-    val extractor = CompositeParseExtractor.load(input._2, context)
+    val extractor = CompositeParseExtractor2.load(input._2, context)
+
+    System.out.println(">>  EXTRACTOR : " + extractor);
     val datasets = extractor.datasets
 
     val formatDestinations = new ArrayBuffer[Destination]()
@@ -159,7 +139,7 @@ class ConfigLoader2(config: Config)
       val datasetDestinations = new mutable.HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
-          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format, getExtractionRecorder(context.language, dataset), dataset))
+          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination2(writer(file), format, getExtractionRecorder(context.language, dataset), dataset))
           case None =>
         }
       }
@@ -176,7 +156,7 @@ class ConfigLoader2(config: Config)
       ExtractorUtils.commonsNamespacesContainingMetadata
     else config.namespaces
 
-    val extractionJob = new ExtractionJob(
+    val extractionJob = new ExtractionJob2(
       extractor,
       context.articlesSource,
       extractionJobNS,
@@ -192,31 +172,31 @@ class ConfigLoader2(config: Config)
   /**
    * Creates ab extraction job for a specific language.
    */
-  def buildSparkExtractionJob(lang: Language, extractors : Seq[Class[_ <: Extractor[_]]]) : Option[SparkExtractionJob] = {
+  def buildSparkExtractionJob(lang: Language, extractors : Seq[Class[_ <: Extractor[_]]]) : Option[SparkExtractionJob2] = {
     val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
 
     val date = latestDate(finder)
 
-    def articlesSource: Source = getArticlesSource(lang, finder)
+    def articlesSource: Source2 = getArticlesSource(lang, finder)
 
     //Extraction Context
-    val context = new SparkExtractionContext
-    {
+    val context = new SparkExtractionContext2 {
+
       def ontology: Ontology = _ontology
       def language: Language = lang
 
       private val _redirects =
       {
         finder.file(date, "template-redirects.obj") match{
-          case Some(cache) => Redirects.load(articlesSource, cache, language)
-          case None => new Redirects(Map())
+          case Some(cache) => Redirects2.load(articlesSource, cache, language)
+          case None => new Redirects2(Map())
         }
 
       }
 
-      def redirects : Redirects = _redirects
+      def redirects : Redirects2 = _redirects
 
-      def recorder[T: ClassTag]: ExtractionRecorder[T] = getExtractionRecorder[T](lang)
+      def recorder[T: ClassTag]: ExtractionRecorder2[T] = getExtractionRecorder[T](lang)
 
       private lazy val _mappingPageSource =
       {
@@ -225,7 +205,7 @@ class ConfigLoader2(config: Config)
         if (config.mappingsDir != null && config.mappingsDir.isDirectory)
         {
           val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-          XMLSource.fromFile(file, Language.Mappings)
+          XMLSource2.fromFile(file, Language.Mappings)
         }
         else
         {
@@ -235,13 +215,7 @@ class ConfigLoader2(config: Config)
         }
       }
 
-      def mappingPageSource : Traversable[WikiPage] = _mappingPageSource
 
-      private lazy val _mappings: Mappings =
-      {
-        MappingsLoader.load(this)
-      }
-      def mappings : Mappings = _mappings
 
       private val _disambiguations =
       {
@@ -271,7 +245,7 @@ class ConfigLoader2(config: Config)
       val datasetDestinations = new mutable.HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
-          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format, getExtractionRecorder(lang, dataset), dataset))
+          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination2(writer(file), format, getExtractionRecorder(lang, dataset), dataset))
           case None =>
         }
       }
@@ -288,7 +262,7 @@ class ConfigLoader2(config: Config)
       ExtractorUtils.commonsNamespacesContainingMetadata
     else config.namespaces
 
-    val sparkExtractionJob = new SparkExtractionJob(
+    val sparkExtractionJob = new SparkExtractionJob2(
       extractors,
       context,
       extractionJobNS,
@@ -301,39 +275,15 @@ class ConfigLoader2(config: Config)
     sparkExtractionJobs.put(lang, sparkExtractionJob)
   }
 
-  /**
-   * Creates ab extraction job for a specific language.
-   */
-  val imageCategoryWorker: Workers[Language] = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
-    val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
-    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang, DBpediaDatasets.Images))
-    this.freeImages.put(lang, imageCategories._1)
-    this.nonFreeImages.put(lang, imageCategories._2)
-  }
+
 
   /**
    * Loads the configuration and creates extraction jobs for all configured languages.
    *
    * @return Non-strict Traversable over all configured extraction jobs i.e. an extractions job will not be created until it is explicitly requested.
    */
-  def getExtractionJobs: Traversable[ExtractionJob] =
+  def getExtractionJobs: Traversable[ExtractionJob2] =
   {
-    if(config.copyrightCheck) {
-      // Image Extractor pre-processing: Extract Free & Non-Free Images prior to the main Extraction
-      var zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractorNew"))
-      if (zw.isEmpty) {
-        zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
-      }
-      val imageExtractorLanguages = zw match {
-        case filtered if filtered.nonEmpty => filtered.keySet.toList ++ List(Language.Commons) //else: add Commons (see ImageExtractorScala for why)
-        case _ => List[Language]() //no ImageExtractors selected
-      }
-      Workers.work[Language](imageCategoryWorker, imageExtractorLanguages)
-    } else {
-      val zw = config.extractorClasses.filter(x => x._2.map(y => y.getSimpleName).contains("ImageExtractor"))
-      zw.keys.foreach(lang => this.nonFreeImages.put(lang, Seq[String]()))
-      this.nonFreeImages.put(Language.Commons, Seq[String]())
-    }
 
 
     // Create a non-strict view of the extraction jobs
@@ -342,11 +292,12 @@ class ConfigLoader2(config: Config)
     extractionJobs.values
   }
 
-  def getSparkExtractionJobs: Traversable[SparkExtractionJob] = {
+  def getSparkExtractionJobs: Traversable[SparkExtractionJob2] = {
+
+
     config.extractorClasses.toList.foreach(input => buildSparkExtractionJob(input._1, input._2))
     sparkExtractionJobs.values
   }
-
   private def writer(file: File): () => Writer = {
     () => IOUtils.writer(file)
   }
@@ -392,14 +343,13 @@ class ConfigLoader2(config: Config)
   {
     val finder = new Finder[File](config.dumpDir, Language("commons"), config.wikiName)
     val date = latestDate(finder)
-    XMLSource.fromReaders(config.source.flatMap(x => readers(x, finder, date)), Language.Commons, _.namespace == Namespace.File)
+    XMLSource2.fromReaders(config.source.flatMap(x => readers(x, finder, date)), Language.Commons, _.namespace == Namespace.File)
   }
 
   private def getArticlesSource(language: Language, finder: Finder[File]) =
   {
     val articlesReaders = config.source.flatMap(x => readers(x, finder, latestDate(finder)))
 
-    System.out.println("getArticlesSource ");
     XMLSource2.fromReaders(articlesReaders, language,
       title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
         title.namespace == Namespace.Category || title.namespace == Namespace.Template ||
@@ -409,7 +359,7 @@ class ConfigLoader2(config: Config)
   private def latestDate(finder: Finder[_]): String = {
     val isSourceRegex = config.source.startsWith("@")
     val source = if (isSourceRegex) config.source.head.substring(1) else config.source.head
-    val fileName = if (config.requireComplete) Config.Complete else source
+    val fileName = if (config.requireComplete) Config2.Complete else source
     finder.dates(fileName, isSuffixRegex = isSourceRegex).last
   }
 }

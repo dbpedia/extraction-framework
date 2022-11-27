@@ -29,11 +29,11 @@ object XMLSource2
    * @param filter   Function to filter pages by their title. Pages for which this function returns false, won't be yielded by the source.
    * @param language if given, parser expects file to be in this language and doesn't read language from siteinfo element
    */
-  def fromFile(file: File, language: Language, filter: WikiTitle => Boolean = _ => true): Source = {
+  def fromFile(file: File, language: Language, filter: WikiTitle => Boolean = _ => true): Source2 = {
     fromReader(() => new InputStreamReader(new FileInputStream(file), "UTF-8"), language, filter)
   }
 
-  def fromMultipleFiles(files: List[File], language: Language, filter: WikiTitle => Boolean = _ => true): Source = {
+  def fromMultipleFiles(files: List[File], language: Language, filter: WikiTitle => Boolean = _ => true): Source2 = {
     fromReaders(files.map { f => () => new InputStreamReader(new FileInputStream(f), "UTF-8") }, language, filter)
   }
 
@@ -44,18 +44,18 @@ object XMLSource2
      * @param filter Function to filter pages by their title. Pages for which this function returns false, won't be yielded by the source.
      * @param language if given, parser expects file to be in this language and doesn't read language from siteinfo element
      */
-    def fromReader(source: () => Reader, language: Language, filter: WikiTitle => Boolean = _ => true) : Source = {
+    def fromReader(source: () => Reader, language: Language, filter: WikiTitle => Boolean = _ => true) : Source2 = {
 
       System.out.print("fromReader - XMLReaderSource2 ");
       new XMLReaderSource2(source, language, filter)
     }
 
-    def fromReaders(sources: Seq[() => Reader], language: Language, filter: WikiTitle => Boolean = _ => true) : Source = {
+  def fromReaders(sources: Seq[() => Reader], language: Language, filter: WikiTitle => Boolean = _ => true): Source2 = {
 
-      System.out.print("fromReaders - MultipleXMLReaderSource2 ");
-      if (sources.size == 1) fromReader(sources.head, language, filter) // no need to create an ExecutorService
-      else new MultipleXMLReaderSource2(sources, language, filter)
-    }
+    System.out.print("fromReaders - MultipleXMLReaderSource2 ");
+    if (sources.size == 1) fromReader(sources.head, language, filter) // no need to create an ExecutorService
+    else new MultipleXMLReaderSource2(sources, language, filter)
+  }
 
     /**
      *  Creates an XML Source from a parsed XML tree.
@@ -76,11 +76,11 @@ object XMLSource2
 /**
  * XML source which reads from a file
  */
-private class MultipleXMLReaderSource2(sources: Seq[() => Reader], language: Language, filter: WikiTitle => Boolean) extends Source
+private class MultipleXMLReaderSource2(sources: Seq[() => Reader], language: Language, filter: WikiTitle => Boolean) extends Source2
 {
   var executorService : ExecutorService = _
 
-  override def foreach[U](proc : WikiPage => U) : Unit = {
+  override def foreach[U](proc : WikiPageWithRevisions => U) : Unit = {
 
     System.out.print("MultipleXMLReaderSource2 ");
     if (executorService == null) executorService = Executors.newFixedThreadPool(Runtime.getRuntime.availableProcessors())
@@ -113,13 +113,15 @@ private class MultipleXMLReaderSource2(sources: Seq[() => Reader], language: Lan
 /**
  * XML source which reads from a file
  */
-private class XMLReaderSource2(source: () => Reader, language: Language, filter: WikiTitle => Boolean) extends Source
+private class XMLReaderSource2(source: () => Reader, language: Language, filter: WikiTitle => Boolean) extends Source2
 {
-    override def foreach[U](proc : WikiPage => U) : Unit = {
+    override def foreach[U](proc : WikiPageWithRevisions => U) : Unit = {
       System.out.print("XMLReaderSource2 - readPages")
       val reader = source()
       try new WikipediaDumpParserHistory(reader, language, filter.asInstanceOf[WikiTitle => java.lang.Boolean], proc).run()
       finally reader.close()
+      System.out.print("END XMLReaderSource2 - readPages")
+
     }
 
     override def hasDefiniteSize = true

@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.config.Config
+import org.dbpedia.extraction.config.Config2
 import org.dbpedia.extraction.util.ProxyAuthenticator
 
 import java.net.Authenticator
@@ -23,7 +23,7 @@ object Extraction2 {
    // Authenticator.setDefault(new ProxyAuthenticator())
 
     //Load extraction jobs from configuration
-    val config = new Config(args.head)
+    val config = new Config2(args.head)
     val configLoader = new ConfigLoader2(config)
 
     val parallelProcesses = if(config.runJobsInParallel) config.parallelProcesses else 1

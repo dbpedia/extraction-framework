@@ -21,25 +21,26 @@ import scala.xml.Elem
  */
 class RevisionNode(
                     val id: Long,
-                    val parentId: Long,
-                    val timestamp: Long,
-                    val contributorID: Long,
+                    val pageUri: String,
+                    val parent_Uri: String,
+                    val timestamp: String,
+                    val contributorID: String,
                     val contributorName: String,
                     val contributorIP: String,
                     val contributorDeleted: Boolean,
                     val comment: String,
                     val format: String,
-                    val text_size: Long,
-                    val minor_edit: Boolean
+                    val text_size: Int,
+                    val minor_edit: Boolean,
+                    val text_delta: Int
   )
   extends java.io.Serializable
 {
 
 
+  def this(id: String, pageUri:String, parent_Uri: String, timestamp: String, contributorID: String, contributorName: String, contributorIP: String, contributorDeleted: String, comment: String, format: String, text_size: String, minor_edit:String, text_delta: Int) = {
 
-  def this(id: String, parentId: String, timestamp: String, contributorID: String, contributorName: String, contributorIP: String, contributorDeleted: String, comment: String, format: String, text_size: String, minor_edit:String) = {
-
-    this(RevisionNode.parseLong(id), RevisionNode.parseLong(parentId),parseTimestamp(timestamp), RevisionNode.parseLong(contributorID), contributorName, contributorIP, RevisionNode.parseBoolean(contributorDeleted), comment, format,RevisionNode.parseInt(text_size),RevisionNode.parseBoolean(minor_edit))
+    this(RevisionNode.parseLong(id), pageUri, parent_Uri,timestamp, contributorID, contributorName, contributorIP, RevisionNode.parseBoolean(contributorDeleted), comment, format,RevisionNode.parseInt(text_size),RevisionNode.parseBoolean(minor_edit),text_delta)
   }
 
 }

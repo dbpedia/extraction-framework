@@ -147,10 +147,13 @@ public class WikipediaDumpParserHistory
       if (isStartElement(SITEINFO_ELEM)) skipElement(SITEINFO_ELEM, true);
     }
     // now after </siteinfo>
-    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+    System.out.println("BEFORE READ PAGES");
     readPages();
+    System.out.println("AFTER READ PAGES");
 
     requireEndElement(ROOT_ELEM);
+
+    System.out.println("EN READ PAGES");
   }
 
   private Language readSiteInfo()
@@ -191,19 +194,19 @@ public class WikipediaDumpParserHistory
     System.out.println("readPages");
     while (isStartElement(PAGE_ELEM))
     {
-      System.out.println("XXXXXXXXXXXX FIRST PAGE");
+      System.out.println("XXXXXXXXXXXX NEW PAGE");
       readPage();
       // now at </page>
       System.out.println("XXXXXXXXXXXX NEXT PAGE");
       nextTag();
     }
+
+    System.out.println("readPagesend");
   }
 
   private void readPage()
           throws XMLStreamException, InterruptedException
   {
-
-    System.out.println("XX BEGIN readPage");
     //record any error or warning
     ArrayList<Tuple3<String, Throwable, scala.Enumeration.Value>> records = new ArrayList<>();
 
@@ -226,12 +229,11 @@ public class WikipediaDumpParserHistory
 
     //Read page id
     String pageId = readString(ID_ELEM, false);
-
-    System.out.println("PAGE >"+pageId);
     // now at </id>
 
     //create title now with pageId
 
+    Integer last_size=0;
     WikiTitle title = null;
     try
     {
@@ -274,6 +276,10 @@ public class WikipediaDumpParserHistory
     //Read page
     WikiPageWithRevisions page = null;
     WikiTitle redirect = null;
+
+    System.out.println("> PAGE TITLE : "+title);
+    System.out.println("> PAGE ID : "+pageId);
+    //Read page
     //Long lastRev_id=0;
     ArrayList<RevisionNode> RevisionList = new ArrayList<>();
     while (nextTag() == START_ELEMENT)
@@ -297,108 +303,87 @@ public class WikipediaDumpParserHistory
 
         RevisionNode current_revision= null;
 
-
-        while( isStartElement(REVISION_ELEM) ){
-
-          System.out.println(">> new revision element");
-          current_revision= readRevision(title, redirect, pageId);
-          RevisionList.add(current_revision);
-
-          requireEndElement(REVISION_ELEM);
-
-          nextTag();
-        }
-
-        System.out.println(">>  create page");
-        page = new WikiPageWithRevisions(title, redirect, pageId, "", "", "", "", "", "",RevisionList);
-
-        //nextTag();
-
-        System.out.println(">> nextTag PAGE");
-        // now at </page>
+        current_revision= readRevision(title, redirect, pageId,last_size);
+        RevisionList.add(current_revision);
+        last_size=current_revision.text_size();
+        //page = readRevision(title, redirect, pageId);
+        // now at </revision>
       }
       else
       {
         // skip all other elements, don't care about the name, don't skip end tag
         skipElement(null, false);
       }
-
-      System.out.println("XX END PAGE");
     }
 
-    System.out.println("XX SAVE PAGE");
+    page = new WikiPageWithRevisions(title, redirect, pageId, "", "", "", "", "", "",RevisionList);
+    System.out.println(page);
     if (page != null)
     {
-
-      System.out.println("XX HEY2");
       for(Tuple3<String, Throwable, scala.Enumeration.Value> record : records){
         page.addExtractionRecord(record._1(), record._2(), record._3());
       }
       try
       {
-
-        System.out.println("XX HEY TRY");
         _processor.apply(page);
-        System.out.println("XX HEY TRY END");
       }
       catch (Exception e)
       {
-
-        System.out.println("XX HEY CATCH");
         // emulate Scala exception handling. Ugly...
         if (e instanceof ControlThrowable) throw Exceptions.unchecked(e);
         if (e instanceof InterruptedException) throw (InterruptedException)e;
         else page.addExtractionRecord("Could not process page: " + page.title().encoded(), e, RecordSeverity.Warning());
+        System.out.println("ERRROR");
       }
     }
     requireEndElement(PAGE_ELEM);
-
-    System.out.println("XX end readPage");
   }
+
 
   private void skipTitle() throws XMLStreamException {
     while(! isEndElement(PAGE_ELEM)) _reader.next();
   }
 
-  private RevisionNode readRevision(WikiTitle title, WikiTitle redirect, String pageId)
+  private RevisionNode readRevision(WikiTitle title, WikiTitle redirect, String pageId, Integer last_size)
           throws XMLStreamException
   {
-    String revision_id = null;
-    String parent_id= null;
-    String timestamp= null;
-    String contributorID= null;
-    String contributorName= null;
+    String revision_id = "";
+    String parent_id= "";
+    String timestamp= "";
+    String contributorID= "";
+    String contributorName= "";
     String contributorDeleted="false";
-    String contributorIP= null;
-    String comment= null;
+    String contributorIP= "";
+    String comment= "";
     String text_size= "";
     String format= null;
     String minor_edit= "false";
-
-    System.out.println(">> Begin readRevision ");
+    Integer text_delta= 0;
 
     while (nextTag() == START_ELEMENT)
     {
+     // System.out.println("LOOP BEGIND");
      if (isStartElement(TEXT_ELEM))
       {
-        //String deleted = _reader.getAttributeValue(null, "bytes");
+        String deleted = _reader.getAttributeValue(null, "bytes");
         text_size = _reader.getAttributeValue(null, "bytes");
-        System.out.println(text_size);
-        //text = readString(TEXT_ELEM, false);
+        text_delta = Integer.parseInt(text_size) - last_size;
+        //System.out.println(text_size);
+        skipElement(null, false);
         // now at </text>
+
       }
-      else
-        if (isStartElement(TIMESTAMP_ELEM))
+      else if (isStartElement(TIMESTAMP_ELEM))
       {
         timestamp = readString(TIMESTAMP_ELEM, false);
-        System.out.println(">timestamp : "+timestamp);
+        //System.out.println(">timestamp : "+timestamp);
         // now at </timestamp>
       }
       else if (isStartElement(REVISION_ID))
       {
 
         revision_id = readString(REVISION_ID, false);
-        System.out.println(">revision_id : "+revision_id);
+        //System.out.println(">revision_id : "+revision_id);
 
         // now at </id>
       }
@@ -406,23 +391,24 @@ public class WikipediaDumpParserHistory
       {
 
         parent_id = readString(REVISION_PARENT_ID, false);
-        System.out.println(">parent_id : "+parent_id);
+        //System.out.println(">parent_id : "+parent_id);
 
         // now at </id>
       } else if (isStartElement(REVISION_COMMENT))
       {
 
         comment = readString(REVISION_COMMENT, false);
-        System.out.println(">comment : "+comment);
+        //System.out.println(">comment : "+comment);
 
         // now at </id>
-      }else if (isStartElement(REVISION_MINOR_UPDATE) && isEndElement(REVISION_MINOR_UPDATE))
+      }else if ( isStartElement(REVISION_MINOR_UPDATE))
       {
 
         minor_edit = "true";
-        System.out.println(">minor_edit : "+minor_edit);
+        //System.out.println(">minor_edit : "+minor_edit);
 
-        //nextTag();
+        skipElement(null, false);
+
 
         // now at </id>
       }
@@ -441,32 +427,35 @@ public class WikipediaDumpParserHistory
           // now should have ip / (author & id), when ip is present we don't have author / id
           // TODO Create a getElementName function to make this cleaner
           if (isStartElement(CONTRIBUTOR_IP)) {
+            //  System.out.println(">contributor CASE 0");
             contributorIP = readString(CONTRIBUTOR_IP, false);
-            //System.out.println(">contributorIP : "+contributorIP);
+            //  System.out.println(">contributorIP : "+contributorIP);
           }
           else
           {
             // usually we have contributor name first but we have to check
             if (isStartElement(CONTRIBUTOR_NAME))
             {
+              //  System.out.println(">contributor CASE 1");
               contributorName = readString(CONTRIBUTOR_NAME, false);
-              //System.out.println(">contributorName : "+contributorName);
               nextTag();
+              // System.out.println(">contributorName : "+contributorName);
               if (isStartElement(CONTRIBUTOR_ID))
                 contributorID = readString(CONTRIBUTOR_ID, false);
-              //System.out.println(">contributorID : "+contributorID);
+              // System.out.println(">contributorID : "+contributorID);
             }
             else
             {
               // when contributor ID is first
               if (isStartElement(CONTRIBUTOR_ID))
               {
+                //  System.out.println(">contributor CASE 2");
                 contributorID = readString(CONTRIBUTOR_ID, false);
-                //System.out.println(">contributorID : "+contributorID);
+                // System.out.println(">contributorID : "+contributorID);
                 nextTag();
                 if (isStartElement(CONTRIBUTOR_NAME))
                   contributorName = readString(CONTRIBUTOR_NAME, false);
-                //System.out.println(">contributorName : "+contributorName);
+                // System.out.println(">contributorName : "+contributorName);
               }
             }
           }
@@ -476,21 +465,28 @@ public class WikipediaDumpParserHistory
       }
       else if (isStartElement(FORMAT_ELEM)) {
         format = readString(FORMAT_ELEM, false);
-//          System.out.println(">format : "+format);
+       //  System.out.println(">format : "+format);
         // now at </format>
       }
-      else
-      {
-        // skip all other elements, don't care about the name, don't skip end tag
+      else {
+
+       /// skip all other elements, don't care about the name, don't skip end tag
         skipElement(null, false);
       }
+      //System.out.println("LOOP END");
     }
-
+    //System.out.println("AFTER LOOP ");
     requireEndElement(REVISION_ELEM);
 
-    System.out.println(">> End readRevision ");
+    // System.out.println(">> End readRevision ");
     // now at </revision>
-    return new RevisionNode(revision_id,parent_id,timestamp,contributorID,contributorName,contributorIP,contributorDeleted,comment,format,text_size,minor_edit);
+
+    String pageUri=title.pageIri() + "?" + "oldid=" + revision_id + "&"  + "ns=" + title.namespace().code();
+    String parent_Uri=title.pageIri() + "?" + "oldid=" + parent_id + "&"  + "ns=" + title.namespace().code();
+    System.out.println("=========================");
+    System.out.println(pageUri);
+    System.out.println("=========================");
+    return new RevisionNode(revision_id,pageUri,parent_Uri,timestamp,contributorID,contributorName,contributorIP,contributorDeleted,comment,format,text_size,minor_edit,text_delta);
   }
 
   /* Methods for low-level work. Ideally, only these methods would access _reader while the
