@@ -85,9 +85,35 @@ class WikiPageWithRevisions(
     addExtractionRecord(new RecordEntry2[WikiPageWithRevisions](this, this.uri, severity, this.title.language, errorMsg, error))
   }
 
-  def getExtractionRecords(): mutable.Seq[RecordEntry2[WikiPageWithRevisions]] = this.extractionRecords.seq
+  def getExtractionRecords: mutable.Seq[RecordEntry2[WikiPageWithRevisions]] = this.extractionRecords.seq
   override def toString: String = "WikiPageWithRevision(" + title + "," + id   + ", with " + revisions.size+ "revisions )"
-  lazy val sourceIri = title.pageIri + "?" + (if (revision >= 0) "oldid=" + revision + "&" else "") + "ns=" + title.namespace.code
+  lazy val sourceIri:String = title.pageIri + "?" + (if (revision >= 0) "oldid=" + revision + "&" else "") + "ns=" + title.namespace.code
+
+  def getUniqueContributors: Int = {
+     this.revisions.groupBy(_.getUserIDAlt).size
+  }
+
+  def getRevPerYear: Map[String,Int] = {
+    this.revisions.groupBy(_.getYear).mapValues(_.size)
+  }
+
+  def getRevPerYearAvgSize: Map[String, Int] = {
+     this.revisions.groupBy(_.getYear).map{
+      case (candidate, group) =>
+        candidate -> group.map{ _.text_size}.sum / group.size
+
+    }
+  }
+  def getRevPerYearMonth: Map[String, Int] = {
+     this.revisions.groupBy(_.getYearMonth).mapValues(_.size)
+  }
+
+  def getRevPerYearMonthAvgSize: Map[String, Int] = {
+     this.revisions.groupBy(_.getYearMonth).map {
+      case (candidate, group) =>
+        candidate -> group.map { _.text_size }.sum / group.size
+    }
+  }
 
 }
 
@@ -102,5 +128,7 @@ object WikiPageWithRevisions  {
   def convertToWikiPage(wpr: WikiPageWithRevisions): WikiPage = {
     new WikiPage(wpr.title,wpr.redirect,wpr.id,wpr.revision,wpr.timestamp,wpr.source)
   }
+
+
 
 }

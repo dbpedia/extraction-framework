@@ -1,8 +1,7 @@
 package org.dbpedia.extraction.mappings
 
-import java.net.URL
-import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
@@ -13,90 +12,78 @@ import scala.language.reflectiveCalls
 
 
 class HistoryPageExtractor(
-  context : {
-    def ontology: Ontology
-    def language: Language
-  }
-)
+                            context : {
+                              def ontology: Ontology
+                              def language: Language
+                            }
+                          )
   extends WikiPageWithRevisionsExtractor {
-
-  //PageNodeExtractor? WikiPageExtractor ?
-  private val subjectOntProperty = context.ontology.properties("dc:subject")
+  // PROP FROM ONTOLOGY
   private val typeOntProperty = context.ontology.properties("rdf:type")
-  private val featureOntClass = context.ontology.classes("prov:Revision")
   private val wikiPageRevisionIdProperty = context.ontology.properties("wikiPageRevisionID")
   private val foafNick = context.ontology.properties("foaf:nick")
+  private val minorRevProperty = context.ontology.properties("isMinorRevision")
+  private val wikiPageLengthDeltaProperty = context.ontology.properties("wikiPageLengthDelta")
+  private val wikiPageLengthProperty = context.ontology.properties("wikiPageLength")
+  private val nonNegativeInteger = context.ontology.datatypes("xsd:nonNegativeInteger")
 
-  val wikiPageLengthProperty = context.ontology.properties("wikiPageLength")
-  val nonNegativeInteger = context.ontology.datatypes("xsd:nonNegativeInteger")
-
-  // PROPERTIES TO ADD INTO THE ONTOLOGY
-  private val Entityclass = "http://www.w3.org/ns/prov#Entity"
-  private val derivedFromProperty = "http://www.w3.org/ns/prov#wasDerivedFrom"
-  private val quadpropderivedFromProperty = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, derivedFromProperty, null) _
+  // PROPERTIES NOT IN THE ONTOLOGY
+  private val entityClass = "http://www.w3.org/ns/prov#Entity"
+  private val revisionClass = "http://www.w3.org/ns/prov#Revision"
   private val propQualifRevision = "http://www.w3.org/ns/prov#qualifiedRevision"
-  private val quadpropQualifRevision = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propQualifRevision, null) _
+  private val quadPropQualifRevision = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propQualifRevision, null) _
   private val propCreated = "http://purl.org/dc/terms/created"
-  private val quadpropCreated = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propCreated,  context.ontology.datatypes("xsd:dateTime")) _
-  private val propwasRevisionOf = "http://www.w3.org/ns/prov#wasRevisionOf"
-  private val quadpropwasRevisionOf = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propwasRevisionOf, null) _
+  private val quadPropCreated = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propCreated,  context.ontology.datatypes("xsd:dateTime")) _
+  private val propWasRevisionOf = "http://www.w3.org/ns/prov#wasRevisionOf"
+  private val quadPropWasRevisionOf = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propWasRevisionOf, null) _
   private val propCreator = "http://purl.org/dc/terms/creator"
-  private val quadpropCreator = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propCreator, null) _
-  private val propsciorid= "http://rdfs.org/sioc/ns#id"
-  private val quadpropsciorid = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propsciorid, context.ontology.datatypes("xsd:string")) _
-  private val propsciorip = "http://rdfs.org/sioc/ns#ip_address"
-  private val quadpropsciorip = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propsciorip, context.ontology.datatypes("xsd:string")) _
-  private val propsciornote = "http://rdfs.org/sioc/ns#note"
-  private val quadpropsciocnote = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propsciornote, context.ontology.datatypes("xsd:string")) _
+  private val quadPropCreator = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propCreator, null) _
+  private val propSiocId= "http://rdfs.org/sioc/ns#id"
+  private val quadPropSiocId = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propSiocId, context.ontology.datatypes("xsd:string")) _
+  private val propPropSiocIp = "http://rdfs.org/sioc/ns#ip_address"
+  private val quadPropPropSiocIp = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propPropSiocIp, context.ontology.datatypes("xsd:string")) _
+  private val propSiocNote = "http://rdfs.org/sioc/ns#note"
+  private val quadPropSiocNote = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.HistoryData, propSiocNote, context.ontology.datatypes("xsd:string")) _
 
-
-  override val datasets = Set(DBpediaDatasets.HistoryData) //# ToADD
+  override val datasets = Set(DBpediaDatasets.HistoryData)
 
 
   override def extract(page: WikiPageWithRevisions , subjectUri: String): Seq[Quad] = {
 
-    println("xxxxxxxxxxxxxx HISTORY EXTRACTOR xxxxxxxxxxxxxxxxx")
 
     val quads = new ArrayBuffer[Quad]()
     var rev_index=0;
-    quads += new Quad(context.language, DBpediaDatasets.HistoryData, page.title.pageIri, typeOntProperty, Entityclass, page.sourceIri)
-    // TODO : ADD STATS TO REVISION NODE CLASS FOR
-    // uniqueContributorNb
-    // dbfr:revPerYear
-    // dbfr:revPerMonth
-    // averageSizePerYear
-    // averageSizePerMonth
-
+    quads += new Quad(context.language, DBpediaDatasets.HistoryData, page.title.pageIri, typeOntProperty, entityClass, page.sourceIri)
+    //// CONTENT OF HISTORY
     page.revisions.foreach(revision => {
-      quads += new Quad(context.language, DBpediaDatasets.HistoryData, page.title.pageIri, typeOntProperty, Entityclass, page.sourceIri)
-      quads += quadpropQualifRevision(page.title.pageIri, revision.pageUri, page.sourceIri) // NOT 100% SUR OF IT
+      quads += new Quad(context.language, DBpediaDatasets.HistoryData,revision.pageUri, typeOntProperty, revisionClass, page.sourceIri)
+      quads += quadPropQualifRevision(page.title.pageIri, revision.pageUri, page.sourceIri) // NOT 100% SUR OF IT
       quads += new Quad(context.language, DBpediaDatasets.HistoryData, revision.pageUri, wikiPageRevisionIdProperty,revision.id.toString, page.sourceIri, context.ontology.datatypes("xsd:integer"))
-      quads += quadpropCreated(revision.pageUri,  revision.timestamp, page.sourceIri)
-      quads += quadpropwasRevisionOf(revision.pageUri,  revision.parent_Uri, page.sourceIri)
+      quads += quadPropCreated(revision.pageUri,  revision.timestamp, page.sourceIri)
+      quads += quadPropWasRevisionOf(revision.pageUri,  revision.parent_Uri, page.sourceIri)
 
-      //// CREATOR
-      var bn_propCreator=subjectUri+"__creator__"+rev_index
-      quads += quadpropCreator(revision.pageUri, bn_propCreator, page.sourceIri)
+      //// CREATOR ID based on getUserIdAll function that give unique ID based on what data is available about the user
+      val bn_propCreator=subjectUri+"__creator__"+revision.getUserIDAlt
+      quads += quadPropCreator(revision.pageUri, bn_propCreator, page.sourceIri)
       if(revision.contributorID != ""){
-        quads += quadpropsciorid(bn_propCreator,revision.contributorID , page.sourceIri)
+        quads += quadPropSiocId(bn_propCreator,revision.contributorID , page.sourceIri)
       }
       if (revision.contributorIP != "") {
-        quads += quadpropsciorip(bn_propCreator, revision.contributorIP, page.sourceIri)
+        quads += quadPropPropSiocIp(bn_propCreator, revision.contributorIP, page.sourceIri)
       }
       if (revision.contributorName != "") {
         quads += new Quad(context.language, DBpediaDatasets.HistoryData, bn_propCreator, foafNick, revision.contributorName, page.sourceIri)
       }
       if (revision.comment != "") {
-        quads += quadpropsciocnote(revision.pageUri,revision.comment, page.sourceIri)
+        quads += quadPropSiocNote(revision.pageUri,revision.comment, page.sourceIri)
       }
 
       quads += new Quad(context.language, DBpediaDatasets.HistoryData, revision.pageUri, wikiPageLengthProperty, revision.text_size.toString, page.sourceIri, nonNegativeInteger)
+      quads += new Quad(context.language, DBpediaDatasets.HistoryData, revision.pageUri, wikiPageLengthDeltaProperty, revision.text_delta.toString, page.sourceIri, context.ontology.datatypes("xsd:integer"))
+      quads += new Quad(context.language, DBpediaDatasets.HistoryData, revision.pageUri, minorRevProperty, revision.minor_edit.toString, page.sourceIri, context.ontology.datatypes("xsd:boolean"))
 
       // TODO : CREATE OR FIND PROP FOR  :
-      // revision.contributorDeleted
-      // revision.minor_edit
-      // revision.text_delta
-
+      // revision.contributorDeleted ov:DeletedEntry ?
       rev_index+=1
     })
 

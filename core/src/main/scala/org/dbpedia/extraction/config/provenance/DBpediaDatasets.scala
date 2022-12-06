@@ -283,6 +283,7 @@ object DBpediaDatasets extends java.io.Serializable
      *
      */
     val HistoryData: Dataset = datasets("history_dataset")
+    val HistoryStats: Dataset = datasets("history_stats")
 
     /**
     * misc

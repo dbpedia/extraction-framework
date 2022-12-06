@@ -1,17 +1,18 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Node
 /**
  * Represents a page.
  *
- * @param title The title of this page
  * @param id The page ID
- * @param revision The revision of this page
+ * @param parentId Id the the parent revision
  * @param timestamp The timestamp of the revision, in milliseconds since 1970-01-01 00:00:00 UTC
- * @param contributorID The ID of the latest contributor
- * @param contributorName The name of the latest contributor
- * @param children The contents of this page
+ * @param contributorID The ID of the contributor
+ * @param contributorName The name of the contributor
+ * @param contributorIP IP of the contributor
+ * @param comment The revision comment added by the contributor
+ * @param text_size Size of the revision content
+ * @param minor_edit Flag if revision is minor
  */
 class RevisionNode(
                    val id: Long,
@@ -35,4 +36,5 @@ class RevisionNode(
         && otherRevisionNode.contributorID == contributorID && otherRevisionNode.contributorName == contributorName )
       case _ => false
     }
+
 }

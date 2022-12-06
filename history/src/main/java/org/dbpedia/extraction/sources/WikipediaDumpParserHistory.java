@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.sources;
 
-import org.apache.jena.base.Sys;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.util.RecordSeverity;
 import org.dbpedia.extraction.wikiparser.*;
@@ -274,7 +273,7 @@ public class WikipediaDumpParserHistory
     }
 
     //Read page
-    WikiPageWithRevisions page = null;
+    WikiPageWithRevisions page;
     WikiTitle redirect = null;
 
     System.out.println("> PAGE TITLE : "+title);
@@ -301,7 +300,7 @@ public class WikipediaDumpParserHistory
       else if (isStartElement(REVISION_ELEM))
       {
 
-        RevisionNode current_revision= null;
+        RevisionNode current_revision;
 
         current_revision= readRevision(title, redirect, pageId,last_size);
         RevisionList.add(current_revision);
@@ -317,7 +316,7 @@ public class WikipediaDumpParserHistory
     }
 
     page = new WikiPageWithRevisions(title, redirect, pageId, "", "", "", "", "", "",RevisionList);
-    System.out.println(page);
+
     if (page != null)
     {
       for(Tuple3<String, Throwable, scala.Enumeration.Value> record : records){
@@ -368,7 +367,6 @@ public class WikipediaDumpParserHistory
         String deleted = _reader.getAttributeValue(null, "bytes");
         text_size = _reader.getAttributeValue(null, "bytes");
         text_delta = Integer.parseInt(text_size) - last_size;
-        //System.out.println(text_size);
         skipElement(null, false);
         // now at </text>
 
@@ -376,40 +374,29 @@ public class WikipediaDumpParserHistory
       else if (isStartElement(TIMESTAMP_ELEM))
       {
         timestamp = readString(TIMESTAMP_ELEM, false);
-        //System.out.println(">timestamp : "+timestamp);
         // now at </timestamp>
       }
       else if (isStartElement(REVISION_ID))
       {
 
         revision_id = readString(REVISION_ID, false);
-        //System.out.println(">revision_id : "+revision_id);
-
         // now at </id>
       }
       else if (isStartElement(REVISION_PARENT_ID))
       {
 
         parent_id = readString(REVISION_PARENT_ID, false);
-        //System.out.println(">parent_id : "+parent_id);
-
         // now at </id>
       } else if (isStartElement(REVISION_COMMENT))
       {
 
         comment = readString(REVISION_COMMENT, false);
-        //System.out.println(">comment : "+comment);
-
         // now at </id>
       }else if ( isStartElement(REVISION_MINOR_UPDATE))
       {
 
         minor_edit = "true";
-        //System.out.println(">minor_edit : "+minor_edit);
-
         skipElement(null, false);
-
-
         // now at </id>
       }
       else if (isStartElement(CONTRIBUTOR_ELEM))
@@ -419,7 +406,6 @@ public class WikipediaDumpParserHistory
         String deleted = _reader.getAttributeValue(null, "deleted");
         if (deleted != null && deleted.equals("deleted")) {
           contributorDeleted = "true";
-          //System.out.println(">contributorDeleted : "+contributorDeleted);
           nextTag();
         } else {
           // now at <contributor>, move to next tag
@@ -427,35 +413,27 @@ public class WikipediaDumpParserHistory
           // now should have ip / (author & id), when ip is present we don't have author / id
           // TODO Create a getElementName function to make this cleaner
           if (isStartElement(CONTRIBUTOR_IP)) {
-            //  System.out.println(">contributor CASE 0");
             contributorIP = readString(CONTRIBUTOR_IP, false);
-            //  System.out.println(">contributorIP : "+contributorIP);
           }
           else
           {
             // usually we have contributor name first but we have to check
             if (isStartElement(CONTRIBUTOR_NAME))
             {
-              //  System.out.println(">contributor CASE 1");
               contributorName = readString(CONTRIBUTOR_NAME, false);
               nextTag();
-              // System.out.println(">contributorName : "+contributorName);
               if (isStartElement(CONTRIBUTOR_ID))
                 contributorID = readString(CONTRIBUTOR_ID, false);
-              // System.out.println(">contributorID : "+contributorID);
             }
             else
             {
               // when contributor ID is first
               if (isStartElement(CONTRIBUTOR_ID))
               {
-                //  System.out.println(">contributor CASE 2");
                 contributorID = readString(CONTRIBUTOR_ID, false);
-                // System.out.println(">contributorID : "+contributorID);
                 nextTag();
                 if (isStartElement(CONTRIBUTOR_NAME))
                   contributorName = readString(CONTRIBUTOR_NAME, false);
-                // System.out.println(">contributorName : "+contributorName);
               }
             }
           }
@@ -465,7 +443,6 @@ public class WikipediaDumpParserHistory
       }
       else if (isStartElement(FORMAT_ELEM)) {
         format = readString(FORMAT_ELEM, false);
-       //  System.out.println(">format : "+format);
         // now at </format>
       }
       else {
@@ -473,20 +450,14 @@ public class WikipediaDumpParserHistory
        /// skip all other elements, don't care about the name, don't skip end tag
         skipElement(null, false);
       }
-      //System.out.println("LOOP END");
     }
-    //System.out.println("AFTER LOOP ");
     requireEndElement(REVISION_ELEM);
 
-    // System.out.println(">> End readRevision ");
     // now at </revision>
 
     String pageUri=title.pageIri() + "?" + "oldid=" + revision_id + "&"  + "ns=" + title.namespace().code();
     String parent_Uri=title.pageIri() + "?" + "oldid=" + parent_id + "&"  + "ns=" + title.namespace().code();
-    System.out.println("=========================");
-    System.out.println(pageUri);
-    System.out.println("=========================");
-    return new RevisionNode(revision_id,pageUri,parent_Uri,timestamp,contributorID,contributorName,contributorIP,contributorDeleted,comment,format,text_size,minor_edit,text_delta);
+    return new RevisionNode(revision_id,pageUri,parent_Uri,timestamp,contributorID,contributorName,contributorIP,contributorDeleted,comment,text_size,minor_edit,text_delta);
   }
 
   /* Methods for low-level work. Ideally, only these methods would access _reader while the

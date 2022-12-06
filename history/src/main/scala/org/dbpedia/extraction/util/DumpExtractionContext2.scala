@@ -3,7 +3,6 @@ package org.dbpedia.extraction.util
 import org.dbpedia.extraction.mappings.{Disambiguations, Mappings, Redirects, Redirects2}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.Source2
-import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.WikiPageWithRevisions
 
 /**
