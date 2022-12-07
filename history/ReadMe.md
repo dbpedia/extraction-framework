@@ -1,6 +1,6 @@
 # DBPEDIA HISTORY
 
-DBpedia History allows to extract into a RDF format the history of Wikipedia chapter
+DBpedia History enables the history of a Wikipedia chapter to be extracted into an RDF format 
 
 
 ## Previous work
