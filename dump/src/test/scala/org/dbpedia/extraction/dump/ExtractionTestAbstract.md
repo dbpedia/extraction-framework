@@ -3,8 +3,8 @@
 designed for testing abstracts extractors
 ## Before all
 
-* Delete tag @DoNotDiscover of ExtractionTestAbstract
-* add the tag @DoNotDiscover to other test class
+* Delete tag `@DoNotDiscover` of `ExtractionTestAbstract`
+* add tag `@DoNotDiscover` to other test class
 
 ## Procedure
 1. Clean your target directory with `mvn clean` in the root directory of DIEF
