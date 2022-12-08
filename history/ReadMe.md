@@ -48,4 +48,4 @@ Some other improvements that could be made:
 * configure the [extraction.properties](extraction.properties) file
 * and run  ```../run run extraction.properties```
 
-* Test it with : mvn test (need to have a containing file frwiki-[YYYYMMDD]-download-complete empty flag file into the base-dir defined into the extraction-properties file )
+* Test it with `mvn test` (need to have a containing file, `frwiki-[YYYYMMDD]-download-complete` empty flag file into the `base-dir` defined into the `extraction-properties` file)
