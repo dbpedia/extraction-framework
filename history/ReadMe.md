@@ -27,9 +27,9 @@ Some other improvements that could be made:
 
 ## Main Class
 
-* [WikipediaDumpParserHistory.java](src/main/java/org/dbpedia/extraction/sources/WikipediaDumpParserHistory.java) : for parsing of the history dumps
-* [RevisionNode.scala](src/main/scala/org/dbpedia/extraction/wikiparser/RevisionNode.scala)  : define revision node object
-* [WikiPageWithRevision](src/main/scala/org/dbpedia/extraction/wikiparser/WikiPageWithRevisions.scala) : define wikipage with revision list object 
+* [WikipediaDumpParserHistory.java](src/main/java/org/dbpedia/extraction/sources/WikipediaDumpParserHistory.java) — for parsing the history dumps
+* [RevisionNode.scala](src/main/scala/org/dbpedia/extraction/wikiparser/RevisionNode.scala) — define revision of node object
+* [WikiPageWithRevision](src/main/scala/org/dbpedia/extraction/wikiparser/WikiPageWithRevisions.scala) — define `wikipage` with revision list object 
 
 ## Extractors 
 
