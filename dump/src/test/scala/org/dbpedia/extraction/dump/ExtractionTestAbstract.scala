@@ -13,16 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import java.nio.file.{Files, Paths}
 import scala.concurrent.Future
 
-
 @DoNotDiscover
 class ExtractionTestAbstract extends FunSuite with BeforeAndAfterAll {
-  println("""    __  ____       _     __                         ______          __
-            |   /  |/  (_)___  (_)___/ /_  ______ ___  ____     /_  __/__  _____/ /______
-            |  / /|_/ / / __ \/ / __  / / / / __ `__ \/ __ \     / / / _ \/ ___/ __/ ___/
-            | / /  / / / / / / / /_/ / /_/ / / / / / / /_/ /    / / /  __(__  ) /_(__  )
-            |/_/  /_/_/_/ /_/_/\__,_/\__,_/_/ /_/ /_/ .___/    /_/  \___/____/\__/____/
-            |                                      /_/                                   ABSTRACTS""".replace("\r", "").stripMargin)
-
   override def beforeAll() {
     minidumpDir.listFiles().foreach(f => {
       val wikiMasque = f.getName + "wiki"
@@ -36,19 +28,14 @@ class ExtractionTestAbstract extends FunSuite with BeforeAndAfterAll {
     })
   }
 
-
-
-
-test("extract html abstract datasets", ExtractionTestTag) {
-    Utils.renameAbstractsDatasetFiles("html")
+  ignore("extract html abstract datasets", ExtractionTestTag) {
+   // Utils.renameAbstractsDatasetFiles("html")
     println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> html abstract begin")
     val jobsRunning1 = new ConcurrentLinkedQueue[Future[Unit]]()
     val extractRes = extract(nifAbstractConfig, jobsRunning1)
     writeTestResult("MWC_ro_html_rest_only",extractRes)
     println("> html abstract end")
-
   }
-
 
 /*test("extract plain abstract datasets", ExtractionTestTag) {
     println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Plain abstract begin")
@@ -67,21 +54,17 @@ test("extract html abstract datasets", ExtractionTestTag) {
     mapper.registerModule(DefaultScalaModule)
     val json = mapper.writeValueAsString(content)
 
-     val targetDir = new File("../dump/test_logs/")
+    val targetDir = new File("../dump/test_logs/")
     // create directories
     targetDir.mkdirs()
       
-    if( Files.exists(Paths.get(urisListUsed))){
-
+    if(Files.exists(Paths.get(urisListUsed))){
       val Urifile = Source.fromFile(urisListUsed)
       val fileContents = Urifile.getLines.mkString
       Urifile.close()
-
       fileName2="../dump/test_logs/"+fileName+"_"+fileContents+"_"+today+".log"
-
-    }else{
+    } else {
       fileName2="../dump/test_logs/"+fileName+"_"+"base-list"+today+".log"
-
     }
     val file = new File(fileName2)
     val bw = new BufferedWriter(new FileWriter(file))
@@ -89,24 +72,20 @@ test("extract html abstract datasets", ExtractionTestTag) {
     bw.close()
   }
 
-  def extract(config: Config, jobsRunning: ConcurrentLinkedQueue[Future[Unit]]): Array[Map[String,String]]  ={
+  def extract(config: Config, jobsRunning: ConcurrentLinkedQueue[Future[Unit]]): Array[Map[String,String]] ={
     println(">>>>>>>>> EXTRACT  - BEGIN")
     var  mapResults = Array[Map[String,String]]()
     val configLoader = new ConfigLoader(config)
-
     val parallelProcesses = 1
     println(parallelProcesses)
     val jobs=configLoader.getExtractionJobs
     println(">>>>>>>>> EXTRACT - NBJOBS > "+jobs.size)
     println("LAUNCH JOBS")
     for (job <- jobs) {
-
       job.run()
-
       val lang=job.extractionRecorder.language
       val records=job.extractionRecorder
       println(">>>>>>>>> EXTRACT - LANG > " + lang.wikiCode)
-
       val status = records.getStatusValues(lang);
       var numberOfFailedPages429 = 0
       var numberOfFailedPages503 = 0
@@ -146,17 +125,14 @@ test("extract html abstract datasets", ExtractionTestTag) {
       mapLocal += "numberOfFailedPagesOutOfMemoryError" -> numberOfFailedPagesOutOfMemoryError.toString
       mapLocal += "numberOfFailedPagesNullPointerException" -> numberOfFailedPagesNullPointerException.toString
 
-
       mapResults = mapResults :+ mapLocal
-
     }
-    while (jobsRunning.size() > 0) {
 
+    while (jobsRunning.size() > 0) {
       Thread.sleep(1000)
     }
 
     jobsRunning.clear()
     mapResults
-
   }
 }

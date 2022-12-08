@@ -59,38 +59,30 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
 
     val sections = getRelevantParagraphs(html)
 
-    var  context = ""
+    var context = ""
     var offset = 0
-
     val quads = for(section <- sections) yield {
       extractTextFromHtml(section, new NifExtractorContext(language, subjectIri, templateString)) match {
         case Success(extractionResults) => {
           sectionMap.put(section, extractionResults)
           sectionMap.put(extractionResults, extractionResults)
 
-
           if (context.length != 0) {
             context = context + "\n\n"
             offset += 2
           }
-
           var quads = if(nifParameters.abstractsOnly)
             Seq()
           else
             makeStructureElements(extractionResults, nifContextIri, graphIri, offset)
-
 
           offset += extractionResults.getExtractedLength
           context += extractionResults.getExtractedText
 
           //collect additional triples
           quads ++= extendSectionTriples(extractionResults, graphIri, subjectIri)
-
-
           //forward exceptions
           extractionResults.errors.foreach(exceptionHandle(_, RecordSeverity.Warning, null))
-
-
           quads
         }
         case Failure(e) => {
@@ -151,7 +143,6 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
         triples += nifStructure(p.getSectionIri(), RdfNamespace.NIF.append("nextSection"), sectionUri, sourceUrl, null)
       case None =>
     }
-
     section.getTop match{
       case Some(p) =>
         triples += nifStructure(sectionUri, RdfNamespace.NIF.append("superString"), p.getSectionIri(), sourceUrl, null)
@@ -177,8 +168,6 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
         if (section.next.isEmpty)
           triples += nifStructure(section.getTop.get.getSectionIri(), RdfNamespace.NIF.append("lastSection"), sectionUri, sourceUrl, null)
       }
-
-
     }
 
     //further specifying paragraphs of every section
@@ -355,9 +344,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
   }
 
   protected def getJsoupDoc(html: String): Document = {
-
-    var html_clean=cleanHtml(html)
-     val doc = Jsoup.parse( html_clean)
+    val doc = Jsoup.parse(cleanHtml(html))
 
     //delete queries
     for(query <- cssSelectorConfigMap.removeElements)

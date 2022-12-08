@@ -14,14 +14,13 @@ import scala.language.reflectiveCalls
   * Created by Chile on 1/19/2017.
   */
 class WikipediaNifExtractorRest(
-                               context : {
-                                 def ontology : Ontology
-                                 def language : Language
-                                 def configFile : Config
-                               },
-                               wikiPage: WikiPage
-                             )
-  extends WikipediaNifExtractor ( context ,wikiPage)  {
+    context : {
+      def ontology : Ontology
+      def language : Language
+      def configFile : Config
+    },
+    wikiPage: WikiPage
+  ) extends WikipediaNifExtractor(context ,wikiPage) {
 
 
   /**
@@ -52,7 +51,7 @@ class WikipediaNifExtractorRest(
 
           title match {
 
-            case Some(t) if super.isWikiNextTitle(t) && !processEnd=>
+            case Some(t) if super.isWikiNextTitle(t) && !processEnd =>
 
               //calculate the section number by looking at the <h2> to <h4> tags
               val depth = Integer.parseInt(t.asInstanceOf[org.jsoup.nodes.Element].tagName().substring(1)) - 1
@@ -67,9 +66,7 @@ class WikipediaNifExtractorRest(
                 if (currentSection.size == depth - 1)
                   currentSection.append(zw + 1)
               }
-
               subnodes = subnodes.drop(1)
-
               val section = new PageSection(
                 //previous section (if on same depth level
                 prev = currentSection.last match {
@@ -89,7 +86,6 @@ class WikipediaNifExtractorRest(
                 //take all following tags until you hit another title or end of content
                 content = Seq(t) ++ subnodes.takeWhile(node => !node.nodeName().matches("h\\d") && !node.nodeName().matches("section"))
               )
-
               tocMap.append(section)
             case None => processEnd=true
             case _ => processEnd=true
@@ -98,12 +94,9 @@ class WikipediaNifExtractorRest(
           getSection(subnodes)
           subnodes =  subnodes.drop(1)
         }
-
         subnodes = subnodes.dropWhile(node => !node.nodeName().matches("h\\d") && !node.nodeName().matches("section"))
       }
-
     }
-
 
     val abstractSect=doc.select("body").select("section").first.childNodes.asScala //get first section
     val ab = abstractSect.filter(node => node.nodeName() == "p") //move cursor to abstract
@@ -131,7 +124,4 @@ class WikipediaNifExtractorRest(
     }
     tocMap
   }
-
-
-
 }

@@ -43,7 +43,6 @@ public class LinkExtractor implements NodeVisitor {
 			return;
 		}
 
-
         if(paragraph == null) {
 			paragraph = new Paragraph(0, "", "p");
 		}
@@ -63,7 +62,6 @@ public class LinkExtractor implements NodeVisitor {
 
 		  //this text node is the content of an <a> element: make a new nif:Word
 		  if(inLink) {
-
               if(!tempText.trim().startsWith(this.context.wikipediaTemplateString + ":"))  //not!
               {
                   tempLink.setLinkText(tempText);
@@ -75,11 +73,9 @@ public class LinkExtractor implements NodeVisitor {
 				  errors.add("found Template in resource: " + this.context.resource + ": " + tempText);
 				  return;
 			  }
-
 		  }
 		  else
 		    paragraph.addText(tempText);
-
 		}
 
 		else if(node.nodeName().equals("a")) {
@@ -93,24 +89,20 @@ public class LinkExtractor implements NodeVisitor {
 			 * see Schopenhauer: https://en.wikipedia.org/w/api.php?uselang=en&format=xml&action=parse&prop=text&pageid=17340400
 			 */
             String linkPrefix = "/wiki/";
-			// SPECIAL CASE FOR RESTAPI PARSING
 
-			if(node.hasAttr("rel")){
-
+			// SPECIAL CASE FOR RESTAPI PARSING https://en.wikipedia.org/api/rest_v1/
+			if(node.hasAttr("rel")) {
 				String relType = node.attr("rel");
 				if(relType.equals("mw:WikiLink")){
-
-						tempLink = new Link();
-						String uri = cleanLink(node.attr("href"), false);
-						setUri(uri);
-
-
+					tempLink = new Link();
+					String uri = cleanLink(node.attr("href"), false);
+					setUri(uri);
 				} else if (relType.equals("mw:ExtLink")) {
-						tempLink = new Link();
-						String uri = cleanLink(node.attr("href"), true);
-						setUri(uri);
+					tempLink = new Link();
+					String uri = cleanLink(node.attr("href"), true);
+					setUri(uri);
 				}
-			}else{
+			} else {
 				// standard wikilinks
 				if (link.contains(linkPrefix) && !link.contains(":")) {
 					tempLink = new Link();
@@ -147,8 +139,6 @@ public class LinkExtractor implements NodeVisitor {
 					skipLevel = depth;
 				}
 			}
-
-
         } else if(node.nodeName().equals("p")) {
             if(paragraph != null) {
                 addParagraph("p");
@@ -201,9 +191,7 @@ public class LinkExtractor implements NodeVisitor {
 			//TODO central string management
 			if(!this.context.language.equals("en")) {
 				uri="http://"+this.context.language+".dbpedia.org/resource/"+uri;
-				
-			}
-			else {
+			} else {
 				uri="http://dbpedia.org/resource/"+uri;
 			}
 			uri = uri.replace("&action=edit&redlink=1", "");
@@ -211,7 +199,6 @@ public class LinkExtractor implements NodeVisitor {
 		} else {
 			//there are links that contain illegal hostnames
 			try {
-
 				if(uri.startsWith("//"))
 					uri = "http:"+uri;
 				uri = URLEncoder.encode(uri,"UTF-8");
@@ -226,11 +213,8 @@ public class LinkExtractor implements NodeVisitor {
 	}
 	
 	public void tail(Node node, int depth) {
-
-
 		if(skipLevel>0) {
 			if(skipLevel==depth) {
-
 				skipLevel = -1;
 				return;
 			} else {

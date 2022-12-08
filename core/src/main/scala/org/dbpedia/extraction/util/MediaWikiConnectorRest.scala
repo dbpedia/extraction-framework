@@ -23,7 +23,6 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
   protected val apiProfile: String = connectionConfig.profile
   protected val userAgent: String = connectionConfig.useragent
 
-
   /**
    * Retrieves a Wikipedia page.
    *
@@ -52,10 +51,7 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
     val parameters = "redirect=true"
     val apiUrl: URL = new URL(url.concat(titleParam).concat("?"+parameters))
 
-
-
     //println(s"mediawikiurl: $apiUrl")
-
 
     for (counter <- 1 to maxRetries) {
 
@@ -77,8 +73,6 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
       val answerClean = answerHeader.asScala.filterKeys(_ != null)
 
       if(conn.getHeaderField(null).contains("HTTP/1.1 200 OK") ){
-
-
         val end = java.time.LocalTime.now()
         conn match {
           case connection: HttpURLConnection =>
@@ -106,15 +100,12 @@ class MediaWikiConnectorRest(connectionConfig: MediaWikiConnection, xmlPath: Seq
           //println("WITH EXPONENTIAL BACK OFF" + counter)
           //println("Sleeping time double >>>>>>>>>>>" + pow(waiting_time, counter))
           //println("Sleeping time int >>>>>>>>>>>" + sleepMs)
-
         }
         if (counter < maxRetries)
           Thread.sleep(sleepMs)
         else
           throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries.")
       } else {
-
-
         //println(s"mediawikiurl: $apiUrl?$parameters")
         return parsedAnswer match {
           case Success(str) => Option(str)
