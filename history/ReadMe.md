@@ -33,8 +33,8 @@ Some other improvements that could be made:
 
 ## Extractors 
 
-* [HistoryPageExtractor.scala](src/main/scala/org/dbpedia/extraction/mappings/HistoryPageExtractor.scala): Extract all the revision of every wikipedia pages
-* [HistoryStatsExtractor.scala](src/main/scala/org/dbpedia/extraction/mappings/HistoryStatsExtractor.scala) : Extract statistics about the revision activity for every page of Wikipedia
+* [HistoryPageExtractor.scala](src/main/scala/org/dbpedia/extraction/mappings/HistoryPageExtractor.scala) — Extract all revisions of every Wikipedia page
+* [HistoryStatsExtractor.scala](src/main/scala/org/dbpedia/extraction/mappings/HistoryStatsExtractor.scala) — Extract statistics about revision activity for every page of Wikipedia
 
 ## How to run it ? 
 
