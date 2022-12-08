@@ -22,8 +22,8 @@ But as a first step, we wanted to touch the less possible DBpedia core module.
 
 Some other improvements that could be made:
 * Scala version
-* Being able to use a historic namespace taking into account the DBpedia chapter language
-* Being able to follow if a revision impacts an infobox content
+* Enabling use of a historic namespace, taking into account the DBpedia chapter language
+* Enabling following when a revision impacts content of an `infobox`
 
 ## Main Class
 
