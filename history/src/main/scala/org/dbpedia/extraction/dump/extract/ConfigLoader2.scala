@@ -280,7 +280,7 @@ class ConfigLoader2(config: Config2)
   /**
    * Loads the configuration and creates extraction jobs for all configured languages.
    *
-   * @return Non-strict Traversable over all configured extraction jobs i.e. an extractions job will not be created until it is explicitly requested.
+   * @return Non-strict Traversable over all configured extraction jobs, i.e., an extraction job will not be created until it is explicitly requested.
    */
   def getExtractionJobs: Traversable[ExtractionJob2] =
   {
