@@ -20,7 +20,7 @@ We basically copy/pasted and renamed all the classes and objects we needed for r
 This conception could be easily improved by making `WikiPage` and `WikiPageWithRevision` objects inherit from the same abstract object.
 But as a first step, we wanted to touch the less possible DBpedia core module.
 
-Some other improvements that could be conducted:
+Some other improvements that could be made:
 * Scala version
 * Being able to use a historic namespace taking into account the DBpedia chapter language
 * Being able to follow if a revision impacts an infobox content
