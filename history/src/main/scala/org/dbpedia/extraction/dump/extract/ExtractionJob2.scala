@@ -14,7 +14,7 @@ import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiPageWithRevis
   * @param source The extraction source
   * @param namespaces Only extract pages in these namespaces
   * @param destination The extraction destination. Will be closed after the extraction has been finished.
-  * @param language the language of this extraction.
+  * @param language The language of this extraction.
   */
 class ExtractionJob2(
                       extractor: WikiPageWithRevisionsExtractor,
