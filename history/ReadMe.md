@@ -18,7 +18,7 @@ https://hal.inria.fr/hal-01359583
 This prototype is not optimized. During its development, we were faced with the WikiPage type-checking constraints that are checked in almost every module of the DBpedia pipeline.
 We basically copy/pasted and renamed all the classes and objects we needed for running the extractors.
 This conception could be easily improved by making `WikiPage` and `WikiPageWithRevision` objects inherit from the same abstract object.
-But as a first step, we wanted to touch the less possible DBpedia core module.
+But as a first step, we didn't want to impact the core module.
 
 Some other improvements that could be made:
 * Scala version
