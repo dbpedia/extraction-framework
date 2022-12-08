@@ -5,7 +5,7 @@ DBpedia History enables the history of a Wikipedia chapter to be extracted into 
 
 ## Previous work
 
-This DBpedia App is a scala/java version of the first work conducted by the French Chapter : https://github.com/dbpedia/Historic/ 
+This DBpedia App is a Scala/Java version of the first work conducted by the French Chapter, <https://github.com/dbpedia/Historic/>.
 
 Fabien Gandon, Raphael Boyer, Olivier Corby, Alexandre Monnin. Wikipedia editing history in DBpedia: extracting and publishing the encyclopedia editing activity as linked data. IEEE/WIC/ACM International Joint Conference on Web Intelligence (WI' 16), Oct 2016, Omaha, United States. <hal-01359575>
 https://hal.inria.fr/hal-01359575
