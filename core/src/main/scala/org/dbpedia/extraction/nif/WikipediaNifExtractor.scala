@@ -210,15 +210,15 @@ class WikipediaNifExtractor(
     tocMap
   }
 
-  private def isWikiPageEnd(node: Node): Boolean ={
+  protected def isWikiPageEnd(node: Node): Boolean ={
     cssSelectorTest(node, cssSelectorConfigMap.findPageEnd)
   }
 
-  private def isWikiToc(node: Node): Boolean ={
+  protected def isWikiToc(node: Node): Boolean ={
     cssSelectorTest(node, cssSelectorConfigMap.findToc)
   }
 
-  private def isWikiNextTitle(node: Node): Boolean ={
+  protected def isWikiNextTitle(node: Node): Boolean ={
     cssSelectorTest(node, cssSelectorConfigMap.nextTitle)
   }
 

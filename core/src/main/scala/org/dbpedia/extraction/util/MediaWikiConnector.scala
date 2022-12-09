@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory
   * @param connectionConfig - Collection of parameters necessary for API requests (see Config.scala)
   * @param xmlPath - An array of XML tag names leading from the root (usually 'api') to the intended content of the response XML (depending on the request query used)
   */
+@deprecated("replaced by MediaWikiConnectorAbstract classes", "2022-09")
 class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[String]) {
 
   protected val log = LoggerFactory.getLogger(classOf[MediaWikiConnector])

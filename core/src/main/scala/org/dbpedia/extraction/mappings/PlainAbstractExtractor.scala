@@ -7,7 +7,7 @@ import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.abstracts.AbstractUtils
-import org.dbpedia.extraction.util.{Language, MediaWikiConnector, WikiUtil}
+import org.dbpedia.extraction.util.{Language, MediawikiConnectorConfigured}
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
@@ -63,7 +63,6 @@ extends WikiPageExtractor
 
   override val datasets = Set(DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
-  private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
 
     override def extract(pageNode : WikiPage, subjectUri: String): Seq[Quad] =
     {
@@ -79,7 +78,7 @@ extends WikiPageExtractor
         //val abstractWikiText = getAbstractWikiText(pageNode)
         // if(abstractWikiText == "") return Seq.empty
 
-        //Retrieve page text
+        val mwConnector = new MediawikiConnectorConfigured(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
         val text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
           case Some(t) => PlainAbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
           case None => return Seq.empty

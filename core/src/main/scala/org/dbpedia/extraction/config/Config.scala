@@ -94,7 +94,7 @@ class Config(val configPath: String) extends
   }
 
   /**
-    * Number of parallel processes allowed. Depends on the number of cores, type of disk and IO speed
+    * Number of parallel processes allowed. Depends on the number of cores, type of disk, and IO speed
     *
     */
   lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "4").trim.toInt
@@ -259,17 +259,31 @@ class Config(val configPath: String) extends
   }
 
   lazy val mediawikiConnection: MediaWikiConnection = Try {
+
     MediaWikiConnection(
-      apiUrl = this.getProperty("mwc-apiUrl", "").trim,
+      apiType = this.getProperty("mwc-type", "").trim,
+      apiUrl = this.getProperty("mwc-type").trim match {
+        case "rest" =>  this.getProperty("mwc-apiRestUrl", "").trim
+        case "mwc" => this.getProperty("mwc-apiMWCUrl", "").trim
+        case "local" => this.getProperty("mwc-apiLocalUrl", "").trim
+      },
       maxRetries = this.getProperty("mwc-maxRetries", "4").trim.toInt,
       connectMs = this.getProperty("mwc-connectMs", "2000").trim.toInt,
       readMs = this.getProperty("mwc-readMs", "5000").trim.toInt,
-      sleepFactor = this.getProperty("mwc-sleepFactor", "1000").trim.toInt
+      sleepFactor = this.getProperty("mwc-sleepFactor", "1000").trim.toInt,
+      maxlag = this.getProperty("mwc-maxlag", "5").trim.toInt,
+      useragent = this.getProperty("mwc-useragent", "anonymous").trim,
+      gzip = this.getProperty("mwc-gzip","false").trim.toBoolean,
+      retryafter = this.getProperty("mwc-retryafter", "false").trim.toBoolean,
+      accept = this.getProperty("mwc-accept", "text/html").trim,
+      charset = this.getProperty("mwc-charset", "utf-8").trim,
+      profile = this.getProperty("mwc-profile", "https://www.mediawiki.org/wiki/Specs/HTML/2.1.0").trim
     )
   } match{
     case Success(s) => s
-    case Failure(f) => throw new IllegalArgumentException("Not all necessary parameters for the 'MediaWikiConnection' class were provided or could not be parsed to the expected type.", f)
+    case Failure(f) => throw new IllegalArgumentException("Some parameters necessary for the 'MediaWikiConnection' class were not provided or could not be parsed to the expected type.", f)
   }
+
 
   lazy val abstractParameters: AbstractParameters = Try {
     AbstractParameters(
@@ -364,12 +378,20 @@ object Config{
     * @param sleepFactor
     */
   case class MediaWikiConnection(
-    apiUrl: String,
-    maxRetries: Int,
-    connectMs: Int,
-    readMs: Int,
-    sleepFactor: Int
-  )
+                                  apiType: String,
+                                  apiUrl: String,
+                                  maxRetries: Int,
+                                  connectMs: Int,
+                                  readMs: Int,
+                                  sleepFactor: Int,
+                                  maxlag: Int,
+                                  useragent: String,
+                                  gzip: Boolean,
+                                  retryafter: Boolean,
+                                  accept  : String,
+                                  charset: String,
+                                  profile: String
+                                )
 
   case class AbstractParameters(
                                  abstractQuery: String,
