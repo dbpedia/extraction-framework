@@ -2,8 +2,11 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
+
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
+
+import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
@@ -57,6 +60,12 @@ class SisterProjectExtractor(
   // Regexes
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  // TODO: i18n
+
+  private val SplitWordsRegex = InfoboxExtractorConfig.SplitWordsRegex
+
+  private val TrailingNumberRegex = InfoboxExtractorConfig.TrailingNumberRegex
+
 
   private val splitPropertyNodeRegexInfobox = if (DataParserConfig.splitPropertyNodeRegexInfobox.contains(wikiCode))
     DataParserConfig.splitPropertyNodeRegexInfobox.get(wikiCode).get
@@ -66,6 +75,7 @@ class SisterProjectExtractor(
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   private val sameAsProperty = context.ontology.properties("owl:sameAs")
 
+
   /// NEED TO BE EXTENDED TO OTHERS LANGUAGES
   private val regexMap = Map(
   "fr"->List("autres projet.*".r),
@@ -73,6 +83,8 @@ class SisterProjectExtractor(
   "de"->List("schwesterprojekte.*".r)
 
   )
+
+
   private val currentRegexList = regexMap(wikiCode)
 
   private val objectParser = new ObjectParser(context, true)
@@ -100,6 +112,7 @@ class SisterProjectExtractor(
     "wikibooks" -> "https://wikibooks.org/wiki/",
     "wikiversity" -> "https://wikibooks.org/wiki/",
     "species" -> "https://species.wikimedia.org/wiki/"
+
   )
 
   override val datasets = Set(DBpediaDatasets.SisterProjectLink)
@@ -120,16 +133,19 @@ class SisterProjectExtractor(
     {
       val propertyList = template.children.filterNot(property => ignoreProperties.get(wikiCode).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
 
-        for(property <- propertyList; if !property.key.forall(_.isDigit)) {
+
+        for(property <- propertyList; if (!property.key.forall(_.isDigit))) {
+
           // TODO clean HTML
 
           val cleanedPropertyNode = NodeUtil.removeParentheses(property)
 
           val splitPropertyNodes = NodeUtil.splitPropertyNode(cleanedPropertyNode, splitPropertyNodeRegexInfobox)
 
+
           for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode))
           {
-
+            val propertyUri = getPropertyUri(property.key)
             try
             {
 
@@ -155,12 +171,13 @@ class SisterProjectExtractor(
     quads
   }
 
-  private def extractValue(node : PropertyNode) : List[ParseResult[String]] =
-  {
 
-    extractLinks(node) match
-    {
-      case links if links.nonEmpty =>  return links
+  private def extractValue(node: PropertyNode): List[ParseResult[String]] = {
+
+    extractLinks(node) match {
+      case links if links.nonEmpty => {
+        return links
+      }
       case _ =>
     }
     StringParser.parse(node).map(value => ParseResult(value.value, None, Some(rdfLangStrDt))).toList
@@ -174,6 +191,7 @@ class SisterProjectExtractor(
     {
       // TODO: explain why we check links.size == splitNodes.size
       case links if links.size == splitNodes.size => return links
+
     }
 
     splitNodes.flatMap(splitNode => linkParser.parse(splitNode)) match
@@ -185,6 +203,19 @@ class SisterProjectExtractor(
   }
 
 
+  private def getPropertyUri(key : String) : String =
+  {
+    // convert property key to camelCase
+    var result = key.toLowerCase(language.locale).trim
+    result = result.toCamelCase(SplitWordsRegex, language.locale)
+
+    // Rename Properties like LeaderName1, LeaderName2, ... to LeaderName
+    result = TrailingNumberRegex.replaceFirstIn(result, "")
+
+    result = WikiUtil.cleanSpace(result)
+
+    language.propertyUri.append(result)
+  }
 
 
 }
