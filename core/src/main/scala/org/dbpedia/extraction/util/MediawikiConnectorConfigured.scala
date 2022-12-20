@@ -51,9 +51,6 @@ class MediawikiConnectorConfigured(connectionConfig: MediaWikiConnection, xmlPat
     this.CHARACTERS_TO_ESCAPE foreach {
       case (search, replacement) =>  titleParam = titleParam.replace(search, replacement);
     }
-
-
-
     for(counter <- 1 to maxRetries)
     {
         // Fill parameters
@@ -69,22 +66,21 @@ class MediawikiConnectorConfigured(connectionConfig: MediaWikiConnection, xmlPat
         // NEED TO BE ABLE TO MANAGE <redirects /> parsing
         //parameters += "&redirects=1"
 
-
         val conn = apiUrl.openConnection
         val start = java.time.LocalTime.now()
         conn.setDoOutput(true)
         conn.setConnectTimeout(retryFactor * connectMs)
         conn.setReadTimeout(retryFactor * readMs)
         conn.setRequestProperty("User-Agent",userAgent)
-        if ( gzipCall ) conn.setRequestProperty("Accept-Encoding","gzip")
+        if (gzipCall) conn.setRequestProperty("Accept-Encoding","gzip")
 
         //println(s"mediawikiurl: $apiUrl?$parameters")
         val writer = new OutputStreamWriter(conn.getOutputStream)
         writer.write(parameters)
         writer.flush()
         writer.close()
-        var answerHeader = conn.getHeaderFields();
-        var answerClean = answerHeader.asScala.filterKeys(_ != null);
+        val answerHeader = conn.getHeaderFields();
+        val answerClean = answerHeader.asScala.filterKeys(_ != null);
 
        // UNCOMMENT FOR LOG
        /* var mapper = new ObjectMapper()
@@ -107,7 +103,7 @@ class MediawikiConnectorConfigured(connectionConfig: MediaWikiConnection, xmlPat
         if ( gzipCall ){
           try {
             inputStream = new GZIPInputStream(inputStream)
-          }catch {
+          } catch {
             case x:ZipException =>{
               gzipok = false
             }
@@ -123,57 +119,45 @@ class MediawikiConnectorConfigured(connectionConfig: MediaWikiConnection, xmlPat
           }
           case _ =>
         }
-
         // Read answer
         parsedAnswer = readInAbstract(inputStream)
         SuccessParsing = parsedAnswer match {
           case Success(str) => true
           case Failure(e) => false
         }
-
-
       }
-      if(!SuccessParsing){
+      if(!SuccessParsing) {
         //println("ERROR DURING PARSING" )
-
         var sleepMs = sleepFactorMs
-        if (retryAfter && answerClean.contains("retry-after") ){
-            //println("GIVEN RETRY-AFTER > "+ answer_clean("retry-after").get(0))
-            waitingTime = Integer.parseInt(answerClean("retry-after").get(0)) * 1000
+        if (retryAfter && answerClean.contains("retry-after")) {
+          //println("GIVEN RETRY-AFTER > "+ answer_clean("retry-after").get(0))
+          waitingTime = Integer.parseInt(answerClean("retry-after").get(0)) * 1000
 
-            // exponential backoff test
-            sleepMs = pow(waitingTime, counter).toInt
-            //println("WITH EXPONENTIAL BACK OFF" + counter)
-            //println("Sleeping time double >>>>>>>>>>>" + pow(waiting_time, counter))
-            //println("Sleeping time int >>>>>>>>>>>" + sleepMs)
-            if (currentMaxLag < 15) {
-              // INCREMENT MaxLag
-              currentMaxLag = currentMaxLag + 1
-              //println("> INCREASE MAX LAG : " + currentMaxLag)
-            }
-            if (counter < maxRetries)
-              Thread.sleep(sleepMs)
-            else
-              throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries.")
+          // exponential backoff test
+          sleepMs = pow(waitingTime, counter).toInt
+          //println("WITH EXPONENTIAL BACK OFF" + counter)
+          //println("Sleeping time double >>>>>>>>>>>" + pow(waiting_time, counter))
+          //println("Sleeping time int >>>>>>>>>>>" + sleepMs)
+          if (currentMaxLag < 15) {
+            // INCREMENT MaxLag
+            currentMaxLag = currentMaxLag + 1
+            //println("> INCREASE MAX LAG : " + currentMaxLag)
+          }
+          if (counter < maxRetries)
+            Thread.sleep(sleepMs)
+          else
+            throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries.")
         }
-
-
-      }else{
-
-
+      } else {
         //println(s"mediawikiurl: $apiUrl?$parameters")
         return parsedAnswer match {
           case Success(str) => Option(str)
           case Failure(e) => throw e
         }
       }
-
     }
     throw new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded)
-
   }
-
-
 
   /**
     * Get the parsed and cleaned abstract text from the MediaWiki instance input stream.

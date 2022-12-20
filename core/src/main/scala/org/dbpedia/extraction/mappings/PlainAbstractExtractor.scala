@@ -78,7 +78,6 @@ extends WikiPageExtractor
         //val abstractWikiText = getAbstractWikiText(pageNode)
         // if(abstractWikiText == "") return Seq.empty
 
-
         val mwConnector = new MediawikiConnectorConfigured(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
         val text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match {
           case Some(t) => PlainAbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
