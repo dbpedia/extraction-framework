@@ -41,10 +41,13 @@ Some other improvements that could be made:
   * the id of the user are based depending on what is available : ip / nickname or the wikipedia id
   
 ### [HistoryStatsExtractor.scala](src/main/scala/org/dbpedia/extraction/mappings/HistoryStatsExtractor.scala) 
-  * Extract statistics about revision activity for every page of Wikipedia. 
+  * Extract statistics about revision activity for every page of Wikipedia : 
+    * number of revision per year / months 
+    * avg size of revision per year / month
+    * number of unique contribution
   * This exctraction add some computation and could be not necessary
   * Use dc, rdf, rdfs ontologies
-  * Get number of revision per year / months and avg size of revision per year / month
+
   
 
 ## How to run it ? 
