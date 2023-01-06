@@ -278,8 +278,14 @@ object DBpediaDatasets extends java.io.Serializable
     val CitatedFacts: Dataset = datasets("cited_facts")  //TODO add description @Dimitris
     //val CitationTypes = datasets.get("citation_types").get
 
+    /**
+     * History
+     *
+     */
+    val HistoryData: Dataset = datasets("history_dataset")
+    val HistoryStats: Dataset = datasets("history_stats")
 
-  /**
+    /**
     * misc
     */
   val MainDataset: Dataset = datasets("main_dataset")
