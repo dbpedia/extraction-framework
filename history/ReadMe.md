@@ -66,9 +66,9 @@ Some other improvements that could be made:
 
 ### Triple extracted
 
-Given this little wikipedia page : [Hôtes_de_passage](https://fr.wikipedia.org/wiki/H%C3%B4tes_de_passage)
+Given this little Wikipedia page: [Hôtes_de_passage](https://fr.wikipedia.org/wiki/H%C3%B4tes_de_passage)
 
--> The HistoryPageExtractor.scala extractor will produce : 
+→ The `HistoryPageExtractor.scala` extractor will produce: 
 ```
 <http://fr.wikipedia.org/wiki/Hôtes_de_passage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
 <http://fr.wikipedia.org/wiki/Hôtes_de_passage?oldid=36815850&ns=0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Revision> .
