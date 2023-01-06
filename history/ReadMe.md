@@ -82,10 +82,10 @@ Given this little wikipedia page : [Hôtes_de_passage](https://fr.wikipedia.org/
 <http://fr.wikipedia.org/wiki/Hôtes_de_passage?oldid=36815850&ns=0> <http://dbpedia.org/ontology/wikiPageLength> "214"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
 <http://fr.wikipedia.org/wiki/Hôtes_de_passage?oldid=36815850&ns=0> <http://dbpedia.org/ontology/wikiPageLengthDelta> "214"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <http://fr.wikipedia.org/wiki/Hôtes_de_passage?oldid=36815850&ns=0> <http://dbpedia.org/ontology/isMinorRevision> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
-.....
+...
 ```
 
--> HistoryStatsExtractor.scala extractor will produce : 
+→ `HistoryStatsExtractor.scala` extractor will produce: 
 ```
 <http://fr.wikipedia.org/wiki/Hôtes_de_passage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
 <http://fr.wikipedia.org/wiki/Hôtes_de_passage> <http://dbpedia.org/ontology/nbUniqueContrib> "9"^^<http://www.w3.org/2001/XMLSchema#integer> .
