@@ -148,6 +148,9 @@
 * https://tt.wikipedia.org/wiki/Берлин
 * https://uk.wikipedia.org/wiki/Берлін
 * https://ur.wikipedia.org/wiki/برلن
+* https://ur.wikipedia.org/wiki/جو_بائیڈن
+* https://ur.wikipedia.org/wiki/ولیم_شیکسپیئر
+* https://ur.wikipedia.org/wiki/پاکستان
 * https://uz.wikipedia.org/wiki/Berlin
 * https://vec.wikipedia.org/wiki/Berlin
 * https://vi.wikipedia.org/wiki/Berlin
