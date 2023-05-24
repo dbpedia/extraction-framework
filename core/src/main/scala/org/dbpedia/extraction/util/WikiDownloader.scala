@@ -73,8 +73,13 @@ class WikiDownloader(val apiUrl : String) {
         in.document { _ =>
           in.element("api") { _ =>
             in.ifElement("error") { error => throw new IOException(error attr "info") }
-            in.ifElement("query-continue") { _ =>
-              in.element("allpages") { allpages => gapcontinue = allpages attr "gapcontinue" } 
+            in.ifElement("query-continue") { _ => // deprecated element, MW uses `continue` now
+              in.element("allpages") { allpages => gapcontinue = allpages attr "gapcontinue" }
+            }
+            in.ifElement("continue") { continue => gapcontinue = continue attr "gapcontinue"}
+            in.ifElement("warnings") { _ =>
+              in.ifElement("main") { _ => in.text { mainText => println("warning: (main)" + mainText) } }
+              in.ifElement("revisions") { _ => in.text { mainText => println("warning: (revision)" + mainText) } }
             }
             in.ifElement("query") { _ => // note: there's no <query> element if the namespace contains no pages
               in.element("pages") { _ =>
