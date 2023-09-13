@@ -1,5 +1,5 @@
 # DBpedia Information Extraction Framework
-![Extraction Framework Build and MiniDump Test](https://github.com/dbpedia/extraction-framework/workflows/Extraction%20Framework%20Build%20and%20MiniDump%20Test/badge.svg)
+[![Extraction Framework Build and MiniDump Test](https://github.com/dbpedia/extraction-framework/workflows/Extraction%20Framework%20Build%20and%20MiniDump%20Test/badge.svg)](https://github.com/dbpedia/extraction-framework/actions/workflows/maven.yml)
 
 **Homepage**: http://dbpedia.org <br/>
 **Documentation**: http://dev.dbpedia.org/Extraction  <br/>
