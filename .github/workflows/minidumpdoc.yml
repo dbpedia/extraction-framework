@@ -11,9 +11,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      JAVA_TOOL_OPTIONS: -Djavax.xml.parsers.DocumentBuilderFactory=org.apache.xerces.jaxp.DocumentBuilderFactoryImpl
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 1.8
@@ -25,7 +22,7 @@ jobs:
 
       - name: Run MinidumpDoc
         working-directory: ./dump
-        run: mvn package exec:java -Dexec.mainClass=org.dbpedia.extraction.dump.util.MinidumpDoc
+        run: mvn package exec:java -Dexec.mainClass=org.dbpedia.extraction.dump.util.MinidumpDoc -Djavax.xml.parsers.DocumentBuilderFactory=org.apache.xerces.jaxp.DocumentBuilderFactoryImpl
 
       - name: Updating test coverage table
         uses: EndBug/add-and-commit@v4.4.0
