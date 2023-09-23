@@ -2,16 +2,20 @@ name: Update Minidump document
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ master, dev, workflow-test ]
   pull_request:
-    branches: [ master, dev ]
+    branches: [ master, dev, workflow-test ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
-    steps:
+    env:
+      JAVA_TOOL_OPTIONS: -Djavax.xml.parsers.DocumentBuilderFactory=org.apache.xerces.jaxp.DocumentBuilderFactoryImpl
+
+
+  steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
