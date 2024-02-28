@@ -29,7 +29,6 @@ object DisambiguationExtractorConfig
          "mk" -> " (појаснување)",
          "nl" -> " (doorverwijspagina)", //TODO make it Set() for multiple “nl” -> " (disambigueren)"
          "pl" -> " (ujednoznacznienie)",
-         "ro" -> " (dezambiguizare)", // eg. https://ro.wikipedia.org/wiki/Atena_(dezambiguizare)
          "pt" -> " (desambiguação)",
          "ru" -> " (значения)",
          "sk" -> " (Rozlišovacia stránka)",
