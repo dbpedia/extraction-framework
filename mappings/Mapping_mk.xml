@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"><page><title>Mapping mk:Chembox</title><ns>310</ns><id>11471</id><revision><id>49633</id><timestamp>2015-11-25T00:08:04Z</timestamp><text>{{TemplateMapping | mapToClass = ChemicalCompound
+<?xml version="1.0" encoding="UTF-8"?><mediawiki xmlns="http://www.mediawiki.org/xml/export-0.8/"><page><title>Mapping mk:Chembox</title><ns>310</ns><id>11471</id><revision><id>49633</id><timestamp>2015-11-25T00:08:04Z</timestamp><text>{{TemplateMapping | mapToClass = ChemicalCompound
 | mappings = 
 	{{ PropertyMapping | templateProperty = IUPACName | ontologyProperty = iupacName}}
 	{{ PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
@@ -11,10 +11,10 @@
         {{ PropertyMapping | templateProperty = MeltingPt| ontologyProperty = meltingPoint| unit = Temperature}}
         {{ PropertyMapping | templateProperty = Density| ontologyProperty = density| unit = Density}}
         {{ PropertyMapping | templateProperty = PubChem| ontologyProperty = pubchem}}
-}}</text></revision></page><page><title>Mapping mk:Geobox</title><ns>310</ns><id>11558</id><revision><id>50467</id><timestamp>2016-03-07T23:52:22Z</timestamp><text>&lt;!-- For an overview over all known types see: http://en.wikipedia.org/wiki/Template:Geobox/type -->
+}}</text></revision></page><page><title>Mapping mk:Geobox</title><ns>310</ns><id>11558</id><revision><id>50467</id><timestamp>2016-03-07T23:52:22Z</timestamp><text>&lt;!-- For an overview over all known types see: http://en.wikipedia.org/wiki/Template:Geobox/type --&gt;
 {{ConditionalMapping
 | cases =
-&lt;!-- Buildings, human creations -->
+&lt;!-- Buildings, human creations --&gt;
   {{Condition
     | templateProperty = 1
     | operator = equals
@@ -42,7 +42,7 @@
                 }}
   }}
 
-&lt;!-- Mountains etc. -->
+&lt;!-- Mountains etc. --&gt;
   {{Condition
     | templateProperty = 1
     | operator = equals
@@ -106,7 +106,7 @@
                 }}
   }}
   
-&lt;!-- Nature protected areas -->
+&lt;!-- Nature protected areas --&gt;
 
   {{Condition
     | templateProperty = 1
@@ -135,7 +135,7 @@
                 }}
   }}
 
-&lt;!-- Regions -->
+&lt;!-- Regions --&gt;
 
   {{Condition
     | templateProperty = 1
@@ -146,7 +146,7 @@
                 }}
   }}
 
-&lt;!-- Settlements -->
+&lt;!-- Settlements --&gt;
 
   {{Condition
     | templateProperty = 1
@@ -202,7 +202,7 @@
                 }}
   }}
 
-&lt;!-- Water -->
+&lt;!-- Water --&gt;
 
   {{Condition
     | templateProperty = 1
@@ -258,7 +258,7 @@
                 }}
   }}
 
-&lt;!-- Otherwise -->
+&lt;!-- Otherwise --&gt;
 
 {{Condition
     | operator = otherwise
@@ -268,7 +268,7 @@
  }}
 
  | defaultMappings =
-     &lt;!-- Names -->
+     &lt;!-- Names --&gt;
      {{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
      {{PropertyMapping | templateProperty = official_name | ontologyProperty = foaf:name }}
      {{PropertyMapping | templateProperty = other_name | ontologyProperty = synonym }}
@@ -280,12 +280,12 @@
      
      {{PropertyMapping | templateProperty = nickname | ontologyProperty = foaf:nick }}
      
-     &lt;!-- Location -->
+     &lt;!-- Location --&gt;
      {{PropertyMapping | templateProperty = location | ontologyProperty = location }}
      
      {{GeocoordinatesMapping | latitudeDegrees = lat_d  | latitudeMinutes = lat_m  | latitudeSeconds = lat_s  | latitudeDirection = lat_NS  | longitudeDegrees = long_d  | longitudeMinutes = long_m  | longitudeSeconds = long_s  | longitudeDirection = long_EW }}
 
-     &lt;!-- Dimensions -->
+     &lt;!-- Dimensions --&gt;
      {{PropertyMapping | templateProperty = length | ontologyProperty = length | unit = Length }}
      {{PropertyMapping | templateProperty = length1 | ontologyProperty = length | unit = Length }}
      {{PropertyMapping | templateProperty = length_imperial | ontologyProperty = length | unit = mile }}
@@ -307,7 +307,7 @@
      {{PropertyMapping | templateProperty = weight | ontologyProperty = weight | unit = kilogram }}
      {{PropertyMapping | templateProperty = weight_imperial | ontologyProperty = weight | unit = pound }}
      
-     &lt;!-- Area -->
+     &lt;!-- Area --&gt;
      
      {{PropertyMapping | templateProperty = area_imperial | ontologyProperty = areaTotal | unit = Area}}
      
@@ -321,7 +321,7 @@
      {{PropertyMapping | templateProperty = area_water_imperial | ontologyProperty = areaWater | unit = Area }}
      
      {{PropertyMapping | templateProperty = area_water_percentage | ontologyProperty = percentageOfAreaWater }}
-&lt;!--     {{PropertyMapping | templateProperty = area_water_percentage_round | comment = please do not map this property - it does not contain data, only a formatting hint. See [http://en.wikipedia.org/wiki/Template:Geobox/legend#Units Template:Geobox/legend#Units]}} -->
+&lt;!--     {{PropertyMapping | templateProperty = area_water_percentage_round | comment = please do not map this property - it does not contain data, only a formatting hint. See [http://en.wikipedia.org/wiki/Template:Geobox/legend#Units Template:Geobox/legend#Units]}} --&gt;
                          
      {{PropertyMapping | templateProperty = area_urban | ontologyProperty =  areaUrban | unit = Area }}
      {{PropertyMapping | templateProperty = area_urban_imperial | ontologyProperty =  areaUrban | unit = Area }}
@@ -329,7 +329,7 @@
      {{PropertyMapping | templateProperty = area_metro | ontologyProperty =  areaMetro | unit = Area }}
      {{PropertyMapping | templateProperty = area_metro_imperial | ontologyProperty =  areaMetro | unit = Area }}
      
-     &lt;!-- Elevation (Highest/Lowest/Prominence) -->
+     &lt;!-- Elevation (Highest/Lowest/Prominence) --&gt;
      {{PropertyMapping | templateProperty = elevation | ontologyProperty = elevation | unit = metre }}
      {{PropertyMapping | templateProperty = elevation_imperial | ontologyProperty = elevation | unit = foot }}
      
@@ -355,7 +355,7 @@
      
      {{PropertyMapping | templateProperty = prominence | ontologyProperty = prominence | unit = metre }}
      
-     &lt;!-- Administrative Division -->
+     &lt;!-- Administrative Division --&gt;
      {{PropertyMapping | templateProperty = country | ontologyProperty = country }}
      {{PropertyMapping | templateProperty = country1 | ontologyProperty = country }}
      {{PropertyMapping | templateProperty = country2 | ontologyProperty = country }}
@@ -413,7 +413,7 @@
      {{PropertyMapping | templateProperty = municipality3 | ontologyProperty = municipality }}
      {{PropertyMapping | templateProperty = municipality4 | ontologyProperty = municipality }}
 
-     &lt;!-- Cities -->
+     &lt;!-- Cities --&gt;
      {{PropertyMapping | templateProperty = city | ontologyProperty = city }}
      {{PropertyMapping | templateProperty = city1 | ontologyProperty = city }}
      {{PropertyMapping | templateProperty = city2 | ontologyProperty = city }}
@@ -431,7 +431,7 @@
      {{PropertyMapping | templateProperty = city14 | ontologyProperty = city }}
      {{PropertyMapping | templateProperty = city15 | ontologyProperty = city }}
      
-    &lt;!-- Capital -->
+    &lt;!-- Capital --&gt;
     {{PropertyMapping | templateProperty = capital_location | ontologyProperty = capitalMountain }}
     {{PropertyMapping | templateProperty = capital_location | ontologyProperty = capitalPlace }}
     {{PropertyMapping | templateProperty = capital | ontologyProperty = capital }}
@@ -441,7 +441,7 @@
     
     {{GeocoordinatesMapping | ontologyProperty = capitalPosition | latitudeDegrees = capital_lat_d  | latitudeMinutes = capital_lat_m  | latitudeSeconds = capital_lat_s  | latitudeDirection = capital_lat_NS  | longitudeDegrees = capital_long_d  | longitudeMinutes = capital_long_m  | longitudeSeconds = capital_long_s  | longitudeDirection = capital_long_EW }}
      
-    &lt;!-- Government -->
+    &lt;!-- Government --&gt;
     {{PropertyMapping | templateProperty = government | ontologyProperty = government }}
     {{PropertyMapping | templateProperty = government_region | ontologyProperty = governmentRegion }}
     {{PropertyMapping | templateProperty = government_country | ontologyProperty = governmentCountry }}
@@ -459,7 +459,7 @@
     
     {{PropertyMapping | templateProperty = mayor | ontologyProperty = mayor }}
                     
-    &lt;!-- Geology -->
+    &lt;!-- Geology --&gt;
     {{PropertyMapping | templateProperty = geology | ontologyProperty = geology }}
     {{PropertyMapping | templateProperty = geology1 | ontologyProperty = geology }}
     {{PropertyMapping | templateProperty = geology2 | ontologyProperty = geology }}
@@ -471,7 +471,7 @@
     {{PropertyMapping | templateProperty = biome | ontologyProperty = biome }}
     {{PropertyMapping | templateProperty = biome1 | ontologyProperty = biome }}
 
-    &lt;!-- Plant/Animal -->
+    &lt;!-- Plant/Animal --&gt;
     {{PropertyMapping | templateProperty = plant | ontologyProperty = plant }}
     {{PropertyMapping | templateProperty = animal | ontologyProperty = animal }}
     {{PropertyMapping | templateProperty = plant1 | ontologyProperty = plant }}
@@ -500,7 +500,7 @@
     {{PropertyMapping | templateProperty = animal14 | ontologyProperty = animal }}
     {{PropertyMapping | templateProperty = animal15 | ontologyProperty = animal }}
     
-    &lt;!-- Source -->
+    &lt;!-- Source --&gt;
     {{PropertyMapping | templateProperty = source | ontologyProperty = source }}
     {{PropertyMapping | templateProperty = source1 | ontologyProperty = source }}
     {{PropertyMapping | templateProperty = source_name | ontologyProperty = source }}
@@ -534,7 +534,7 @@
     {{GeocoordinatesMapping | ontologyProperty = sourcePosition | latitudeDegrees = source_lat_d  | latitudeMinutes = source_lat_m  | latitudeSeconds = source_lat_s  | latitudeDirection = source_lat_NS  | longitudeDegrees = source_long_d  | longitudeMinutes = source_long_m  | longitudeSeconds = source_long_s  | longitudeDirection = source_long_EW }}
     {{GeocoordinatesMapping | ontologyProperty = sourcePosition | latitudeDegrees = source1_lat_d  | latitudeMinutes = source1_lat_m  | latitudeSeconds = source1_lat_s  | latitudeDirection = source1_lat_NS  | longitudeDegrees = source1_long_d  | longitudeMinutes = source1_long_m  | longitudeSeconds = source1_long_s  | longitudeDirection = source1_long_EW }}
 
-    &lt;!-- Mouth -->
+    &lt;!-- Mouth --&gt;
     {{PropertyMapping | templateProperty = mouth | ontologyProperty = riverMouth }}
     {{PropertyMapping | templateProperty = mouth_name | ontologyProperty = riverMouth }}
 
@@ -550,7 +550,7 @@
 
     {{GeocoordinatesMapping | ontologyProperty = mouthPosition | latitudeDegrees = mouth_lat_d  | latitudeMinutes = mouth_lat_m  | latitudeSeconds = mouth_lat_s  | latitudeDirection = mouth_lat_NS  | longitudeDegrees = mouth_long_d  | longitudeMinutes = mouth_long_m  | longitudeSeconds = mouth_long_s  | longitudeDirection = mouth_long_EW }}
 
-    &lt;!-- Discharge -->
+    &lt;!-- Discharge --&gt;
     {{PropertyMapping | templateProperty = discharge | ontologyProperty = discharge | unit = cubicMetrePerSecond }}
     {{PropertyMapping | templateProperty = discharge_imperial | ontologyProperty = discharge | unit = cubicFeetPerSecond }}
 
@@ -567,11 +567,11 @@
     {{PropertyMapping | templateProperty = discharge_max | ontologyProperty = maximumDischarge | unit = cubicMetrePerSecond }}
     {{PropertyMapping | templateProperty = discharge_max_imperial | ontologyProperty = maximumDischarge | unit = cubicFeetPerSecond }}
 
-    &lt;!-- Watershed -->
+    &lt;!-- Watershed --&gt;
     {{PropertyMapping | templateProperty = watershed | ontologyProperty = watershed | unit = Area }}
     {{PropertyMapping | templateProperty = watershed_imperial | ontologyProperty = watershed | unit = squareMile }}
 
-    &lt;!-- Tributaries -->
+    &lt;!-- Tributaries --&gt;
     {{PropertyMapping | templateProperty = tributary_left | ontologyProperty = leftTributary}}
     {{PropertyMapping | templateProperty = tributary_left1 | ontologyProperty = leftTributary}}
     {{PropertyMapping | templateProperty = tributary_left2 | ontologyProperty = leftTributary}}
@@ -606,7 +606,7 @@
     {{PropertyMapping | templateProperty = tributary_right14 | ontologyProperty = rightTributary}}
     {{PropertyMapping | templateProperty = tributary_right15 | ontologyProperty = rightTributary}}
     
-    &lt;!-- Population -->
+    &lt;!-- Population --&gt;
     {{PropertyMapping | templateProperty = population | ontologyProperty =  populationTotal }}
     {{PropertyMapping | templateProperty = population_as_of | ontologyProperty =  populationAsOf }}
     {{PropertyMapping | templateProperty = population_metro | ontologyProperty =  populationMetro }}
@@ -616,19 +616,19 @@
     
  
     
-    &lt;!-- Established -->
+    &lt;!-- Established --&gt;
     {{PropertyMapping | templateProperty = established | ontologyProperty =  foundingDate }}
     {{PropertyMapping | templateProperty = established1 | ontologyProperty =  foundingDate }}
     {{PropertyMapping | templateProperty = established2 | ontologyProperty =  foundingDate }}
 
-    &lt;!-- Leader/Owner -->
+    &lt;!-- Leader/Owner --&gt;
     {{PropertyMapping | templateProperty = leader | ontologyProperty =  leader }}
     {{PropertyMapping | templateProperty = leader1 | ontologyProperty =  leader }}
     {{PropertyMapping | templateProperty = owner | ontologyProperty = owner }}
     {{PropertyMapping | templateProperty = owner | ontologyProperty = owningOrganisation }}
     
     
-    &lt;!-- Management -->
+    &lt;!-- Management --&gt;
     {{PropertyMapping | templateProperty = management_body | ontologyProperty = management }}
     {{PropertyMapping | templateProperty = management_location | ontologyProperty = managementMountain }}
     {{PropertyMapping | templateProperty = management_location | ontologyProperty = managementPlace }}
@@ -636,7 +636,7 @@
     {{PropertyMapping | templateProperty = management_elevation | ontologyProperty = managementElevation | unit = metre }}
     {{PropertyMapping | templateProperty = management_elevation_imperial| ontologyProperty = managementElevation | unit = foot }}
 
-    &lt;!-- Others -->
+    &lt;!-- Others --&gt;
     
     {{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
     {{PropertyMapping | templateProperty = range | ontologyProperty = range }}
@@ -688,7 +688,7 @@
     {{PropertyMapping | templateProperty = part14 | ontologyProperty =  part }}
 
 
-&lt;!--    {{PropertyMapping | templateProperty = parent | comment = ontologyProperty = parent is wrong, it is used for persons. }} -->
+&lt;!--    {{PropertyMapping | templateProperty = parent | comment = ontologyProperty = parent is wrong, it is used for persons. }} --&gt;
     
     
 }}</text></revision></page><page><title>Mapping mk:Infobox Language</title><ns>310</ns><id>11476</id><revision><id>49680</id><timestamp>2015-11-25T01:41:25Z</timestamp><text>{{TemplateMapping
@@ -1483,7 +1483,7 @@
     {{PropertyMapping | templateProperty = variations | ontologyProperty = hasVariant }}
     {{PropertyMapping | templateProperty = hex | ontologyProperty = colourHexCode }}
 
-    &lt;!-- Colour coordinates -->
+    &lt;!-- Colour coordinates --&gt;
     {{PropertyMapping | templateProperty = r | ontologyProperty = rgbCoordinateRed}}
     {{PropertyMapping | templateProperty = g | ontologyProperty = rgbCoordinateGreen}}
     {{PropertyMapping | templateProperty = b | ontologyProperty = rgbCoordinateBlue}}
@@ -1598,9 +1598,9 @@
 			| value = gulf
 			| mapping = {{TemplateMapping | header = 0 | mapToClass = Bay }}
 		}}
-		-->
+		--&gt;
 
-		&lt;!-- Lake -->
+		&lt;!-- Lake --&gt;
 		{{Condition
 			| templateProperty = lake_name
 			| operator = isSet
@@ -1627,7 +1627,7 @@
 			| mapping = {{TemplateMapping | header = 0 | mapToClass = Lake }}
 		}}
 
-		&lt;!-- Ocean -->
+		&lt;!-- Ocean --&gt;
 		{{Condition
 			| templateProperty = ocean_name
 			| operator = isSet
@@ -1670,7 +1670,7 @@
 		}}
 
 
-		&lt;!-- Reservoir -->
+		&lt;!-- Reservoir --&gt;
 		{{Condition
 			| templateProperty = type
 			| operator = contains
@@ -1685,7 +1685,7 @@
 		}}
 
 
-		&lt;!-- Sea -->
+		&lt;!-- Sea --&gt;
 		{{Condition
 			| templateProperty = type
 			| operator = contains
@@ -1694,7 +1694,7 @@
 		}}
 
 
-		&lt;!-- Protected Area -->
+		&lt;!-- Protected Area --&gt;
 		{{Condition
 			| templateProperty = designation
 			| operator = isSet
@@ -1702,7 +1702,7 @@
 		}}
 
 
-		&lt;!-- Default -->
+		&lt;!-- Default --&gt;
 		{{Condition
 			| operator = otherwise
 			| mapping = {{TemplateMapping | header = 0 | mapToClass = BodyOfWater }}
@@ -1838,7 +1838,7 @@
 				{{PropertyMapping | templateProperty = pushpin_map_caption | ontologyProperty =  }}
 				{{PropertyMapping | templateProperty = pushpin_mapsize | ontologyProperty =  | comment = style parameter }}
 				{{PropertyMapping | templateProperty = pushpin_relief | ontologyProperty =  }}
-		-->
+		--&gt;
 }}</text></revision></page><page><title>Mapping mk:Инфокутија Воено лице</title><ns>310</ns><id>11589</id><revision><id>50584</id><timestamp>2016-03-10T11:43:31Z</timestamp><text>{{TemplateMapping
 | mapToClass = MilitaryPerson
 | mappings =
@@ -1864,7 +1864,7 @@
 {{ PropertyMapping | templateProperty = date | ontologyProperty = date }}
 {{ PropertyMapping | templateProperty = place| ontologyProperty = place}}
 
-&lt;!--{{ PropertyMapping | templateProperty = units2 | ontologyProperty = isbn }} bad mapping-->
+&lt;!--{{ PropertyMapping | templateProperty = units2 | ontologyProperty = isbn }} bad mapping--&gt;
 {{ PropertyMapping | templateProperty = casualties1 | ontologyProperty = casualties }}}}
 {{ PropertyMapping | templateProperty = casualties2 | ontologyProperty = casualties }}}}
 {{ PropertyMapping | templateProperty = casualties3 | ontologyProperty = casualties }}}}
@@ -2198,7 +2198,7 @@
   }}
 
   | defaultMappings =
-&lt;!-- german properties -->
+&lt;!-- german properties --&gt;
 	{{ConstantMapping | ontologyProperty = country | value = http://dbpedia.org/resource/Germany }}
 	{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}	
         {{PropertyMapping | templateProperty = Name or name | ontologyProperty = foaf:name }}
@@ -2238,7 +2238,7 @@
 
 
 
-&lt;!-- english properties -->
+&lt;!-- english properties --&gt;
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = name_local | ontologyProperty = foaf:name }}
         {{PropertyMapping | templateProperty = region | ontologyProperty = region }}
@@ -2280,7 +2280,7 @@
 	{{PropertyMapping | templateProperty = id | ontologyProperty = unitedStatesNationalBridgeId }}
 	{{PropertyMapping | templateProperty = designer | ontologyProperty = architect }}
 	{{PropertyMapping | templateProperty = architect | ontologyProperty = architect }}
-	&lt;!-- {{PropertyMapping | templateProperty = engineering | ontologyProperty = ??? }} -->
+	&lt;!-- {{PropertyMapping | templateProperty = engineering | ontologyProperty = ??? }} --&gt;
 	{{PropertyMapping | templateProperty = design | ontologyProperty = type }}
 	{{PropertyMapping | templateProperty = material | ontologyProperty = constructionMaterial }}
 	{{PropertyMapping | templateProperty = length | ontologyProperty = length | unit = Length }}
@@ -2290,11 +2290,11 @@
 	{{PropertyMapping | templateProperty = spans | ontologyProperty = numberOfSpans }}
 	{{PropertyMapping | templateProperty = pierswater | ontologyProperty = numberOfPiersInWater }}
 	{{PropertyMapping | templateProperty = load | ontologyProperty = loadLimit }}
-	&lt;!-- {{PropertyMapping | templateProperty = clearance | ontologyProperty = ??? }} -->
-	&lt;!-- {{PropertyMapping | templateProperty = below | ontologyProperty = ??? }} -->
-	&lt;!-- {{PropertyMapping | templateProperty = life | ontologyProperty = ??? }} -->
+	&lt;!-- {{PropertyMapping | templateProperty = clearance | ontologyProperty = ??? }} --&gt;
+	&lt;!-- {{PropertyMapping | templateProperty = below | ontologyProperty = ??? }} --&gt;
+	&lt;!-- {{PropertyMapping | templateProperty = life | ontologyProperty = ??? }} --&gt;
 	{{PropertyMapping | templateProperty = builder | ontologyProperty = builder }}
-	&lt;!-- {{PropertyMapping | templateProperty = fabricator | ontologyProperty = ??? }} -->
+	&lt;!-- {{PropertyMapping | templateProperty = fabricator | ontologyProperty = ??? }} --&gt;
 	{{PropertyMapping | templateProperty = begin | ontologyProperty = buildingStartDate }}
 	{{PropertyMapping | templateProperty = complete | ontologyProperty = buildingEndDate }}
 	{{PropertyMapping | templateProperty = cost | ontologyProperty = cost }}
@@ -2304,13 +2304,13 @@
 	{{PropertyMapping | templateProperty = inaugurated | ontologyProperty = openingYear }}
 	{{PropertyMapping | templateProperty = toll | ontologyProperty = toll | unit = Currency }}
 	{{PropertyMapping | templateProperty = traffic | ontologyProperty = vehiclesPerDay }}
-	&lt;!-- {{PropertyMapping | templateProperty = preceded | ontologyProperty = ??? }} -->
-	&lt;!-- {{PropertyMapping | templateProperty = followed | ontologyProperty = ??? }} -->
-	&lt;!-- {{PropertyMapping | templateProperty = heritage | ontologyProperty = ??? }} -->
+	&lt;!-- {{PropertyMapping | templateProperty = preceded | ontologyProperty = ??? }} --&gt;
+	&lt;!-- {{PropertyMapping | templateProperty = followed | ontologyProperty = ??? }} --&gt;
+	&lt;!-- {{PropertyMapping | templateProperty = heritage | ontologyProperty = ??? }} --&gt;
 	{{PropertyMapping | templateProperty = collapsed | ontologyProperty = demolitionDate }}
 	{{PropertyMapping | templateProperty = closed | ontologyProperty = closingDate }}
 	{{PropertyMapping | templateProperty = closed | ontologyProperty = closingYear }}
-	&lt;!-- {{PropertyMapping | templateProperty = replaces | ontologyProperty = ??? }} -->
+	&lt;!-- {{PropertyMapping | templateProperty = replaces | ontologyProperty = ??? }} --&gt;
 	{{GeocoordinatesMapping | coordinates = coordinates }}
 }}</text></revision></page><page><title>Mapping mk:Инфокутија Музеј</title><ns>310</ns><id>11560</id><revision><id>50476</id><timestamp>2016-03-08T00:43:58Z</timestamp><text>{{TemplateMapping
 | mapToClass = Museum
@@ -2762,7 +2762,7 @@
     {{ PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
     {{ PropertyMapping | templateProperty = predecessor | ontologyProperty = predecessor }}
     {{ PropertyMapping | templateProperty = successor | ontologyProperty = successor }}
-    &lt;!-- mapped foundation into three different ontologyProperties    -->
+    &lt;!-- mapped foundation into three different ontologyProperties    --&gt;
     {{ PropertyMapping | templateProperty = foundation | ontologyProperty = foundingDate }}
     {{ PropertyMapping | templateProperty = foundation | ontologyProperty = foundingYear }}
     {{ PropertyMapping | templateProperty = foundation | ontologyProperty = foundationPlace }}
@@ -2771,7 +2771,7 @@
     {{ PropertyMapping | templateProperty = location | ontologyProperty = location }}
     {{ PropertyMapping | templateProperty = area_served | ontologyProperty = regionServed }}
     {{ PropertyMapping | templateProperty = key_people | ontologyProperty = keyPerson }}
-    &lt;!-- {{ IntermediateNodeMapping | nodeClass = PersonFunction | correspondingProperty = leaderFunction | mappings = {{ PropertyMapping | templateProperty = key_people | ontologyProperty = person }} {{ PropertyMapping | templateProperty = key_people | ontologyProperty = title }} }} -->
+    &lt;!-- {{ IntermediateNodeMapping | nodeClass = PersonFunction | correspondingProperty = leaderFunction | mappings = {{ PropertyMapping | templateProperty = key_people | ontologyProperty = person }} {{ PropertyMapping | templateProperty = key_people | ontologyProperty = title }} }} --&gt;
 
     {{ PropertyMapping | templateProperty = industry | ontologyProperty = industry }}
     {{ PropertyMapping | templateProperty = products | ontologyProperty = product }}
@@ -2951,7 +2951,7 @@
     {{ PropertyMapping | templateProperty = owned | ontologyProperty = owner }}
     {{ PropertyMapping | templateProperty = owned | ontologyProperty = owningOrganisation }}
     {{ PropertyMapping | templateProperty = zone | ontologyProperty = fareZone }}
-    &lt;!-- unessential {{ PropertyMapping | templateProperty = smartcardstatus | ontologyProperty = ??? }} -->
+    &lt;!-- unessential {{ PropertyMapping | templateProperty = smartcardstatus | ontologyProperty = ??? }} --&gt;
 
     {{ PropertyMapping | templateProperty = former | ontologyProperty = formerName }}
     {{ PropertyMapping | templateProperty = passengers | ontologyProperty = passengersPerYear }}
@@ -3817,7 +3817,7 @@
         {{PropertyMapping | templateProperty = first_aired | ontologyProperty = releaseDate }}
         {{PropertyMapping | templateProperty = country | ontologyProperty = country }}
         {{PropertyMapping | templateProperty = last_aired | ontologyProperty = completionDate }}
-       &lt;!-- {{PropertyMapping | templateProperty = caption | ontologyProperty = caption }}-->
+       &lt;!-- {{PropertyMapping | templateProperty = caption | ontologyProperty = caption }}--&gt;
        {{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
        {{PropertyMapping | templateProperty = opentheme | ontologyProperty = openingTheme }}
        {{PropertyMapping | templateProperty = executive_producer | ontologyProperty = executiveProducer }}
@@ -3831,7 +3831,7 @@
 &lt;!--    
         Either Single-camera or Multi-camera.
        {{PropertyMapping | templateProperty = camera | ontologyProperty = ???? }} 
--->
+--&gt;
        {{PropertyMapping | templateProperty = director | ontologyProperty = director }}
        {{PropertyMapping | templateProperty = theme_music_composer | ontologyProperty = composer }}
        {{PropertyMapping | templateProperty = composer | ontologyProperty = composer }}
