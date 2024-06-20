@@ -16,8 +16,8 @@ object ParserUtilsConfig
             "quadrillion" -> 15
         ),
           "am" -> Map(
-            "አስር" -› 1,
-            "መቶ" -› 2,
+            "አስር" -> 1,
+            "መቶ" -> 2,
             "መቶዎች" -> 2,
             "thousand" -> 3,
             "ሺህ" -> 3,
