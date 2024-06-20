@@ -15,6 +15,23 @@ object ParserUtilsConfig
             "trillion" -> 12,
             "quadrillion" -> 15
         ),
+          "am" -> Map(
+            "አስር" -› 1,
+            "መቶ" -› 2,
+            "መቶዎች" -> 2,
+            "thousand" -> 3,
+            "ሺህ" -> 3,
+            "million" -> 6,
+            "mln" -> 6,
+            "ሚሊዮን" -> 6,
+            "billion" -> 9,
+            "ቢሊዮን" -> 9,
+            "bln" -> 9,
+            "trillion" -> 12,
+            "ትሪሊዮን" -> 12,
+            "quadrillion" -> 15,
+            "ኳድሪሊየን" -> 15
+        ),
         // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
         // Don't change this else if you know how it is done.
         "ar" -> Map(

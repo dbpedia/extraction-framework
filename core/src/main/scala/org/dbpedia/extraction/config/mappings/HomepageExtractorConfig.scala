@@ -9,6 +9,23 @@ object HomepageExtractorConfig
     // Don't change this else if you know how it is done.
 
     private val propertyNamesMap = Map(
+        "am" -> Set(
+          "ድህረገፅ",
+          "ድህረ_ገፅ",
+          "ገጽ",
+          "ድህረ ገጽ",
+          "ድህረ_ገጽ",
+          "ድረ_ገፅ",
+          "ድረገፅ",
+          "ድረገጽ",
+          "ድረ ገጽ",
+          "ድረ_ገጽ",
+          "ዋና_ገጽ",
+          "ዌብሳይት",
+          "website",
+          "web",
+          "site"
+        ),
         "ar" -> Set("الموقع", "الصفحة الرسمية", "موقع", "الصفحة الرئيسية", "صفحة ويب", "موقع ويب"),
         "bg" -> Set("сайт", "уебсайт"),
         "ca" -> Set("pàgina", "web", "lloc"),
@@ -38,6 +55,7 @@ object HomepageExtractorConfig
     val supportedLanguages = propertyNamesMap.keySet
 
     private val externalLinkSectionsMap = Map(
+        "am" -> "(?:የውጭ ንባብ|የውጭ ማያያዣ)",
         "ar" -> "وصلات خارجية",
         "bg" -> "Външни препратки",
         "ca" -> "(?:Enllaços externs|Enllaço extern)",
@@ -65,6 +83,7 @@ object HomepageExtractorConfig
     }
 
     private val officialMap = Map(
+        "am" -> "ዋና",
         "ar" -> "رسمي",
         "bg" -> "официален",
         "ca" -> "oficial",

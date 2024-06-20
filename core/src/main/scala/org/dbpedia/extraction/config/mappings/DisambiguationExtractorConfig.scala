@@ -6,6 +6,7 @@ object DisambiguationExtractorConfig
     // For "ar" and "he" configurations, rendering right-to-left may seem like a bug, but it's not.
     // Don't change this unless you know what you're doing.
     val disambiguationTitlePartMap = Map(
+         "am" -> " (መንታ)",
          "ar" -> " (توضيح)",
          "bg" -> " (пояснение)",
          "ca" -> " (desambiguació)",
