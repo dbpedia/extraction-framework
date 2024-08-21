@@ -12,6 +12,7 @@ object ImageExtractorConfig
     // Don't change this else if you know how it is done.
     val NonFreeRegex = Map(
            "ar" -> """(?i)\{\{\s?غير حر""".r,
+           "am" ->"""(?i)\{\{\s?(non-free|Logo|Screenshot|Noncommercial|ነፃ_ያልሆነ)""".r,
            "bg" ->"""(?i)\{\{\s?non-free""".r,
            "de" -> """(?iu)\{\{\s?(Dateiüberprüfung/benachrichtigt_\(Kategorie\)|Geschützt|Geschützt-Ungeklärt|Bild-LogoSH|Bild-PD-alt-100|Bild-PD-alt-1923|Bild-WikimediaCopyright)\s?\}\}""".r ,
            "el" -> """(?iu)\{\{\s?(εύλογη χρήση|σήμα|σήμα αθλητικού σωματείου|αφίσα ταινίας|σκηνή από ταινία|γραφικά υπολογιστή|εξώφυλλο άλμπουμ|εξώφυλλο βιβλίου|μη ελεύθερο έργο τέχνης|σελίδα κόμικς|σελίδα εφημερίδας|εικόνα-βιντεοπαιχνίδι|ιδιοκτησία Wikimedia)\s?\}\}""".r ,
@@ -29,9 +30,9 @@ object ImageExtractorConfig
            "ru" -> """(?iu)\{\{\s?(CopyrightByWikimedia|Fairuse|несвободный файл|несвободная лицензия|запрещенная лицензия)\s?\}\}""".r
     )
 
-    val flagRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(flag|banner|pavillon|drapeau|bandera|pabellón|bandiera|флаг)([^\w]*|[_\s]+)""".r
-    val mapRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(map|karte|location|position|carte|carta|lage)([^\w]*|[_\s]+)""".r
-    val signatureRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(signature|unterschrift)""".r
+    val flagRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(flag|banner|pavillon|drapeau|bandera|pabellón|bandiera|флаг|ባንዲራ|ሰንደቅ_ዓላማ)([^\w]*|[_\s]+)""".r
+    val mapRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(map|karte|location|position|carte|carta|lage|ካርታ)([^\w]*|[_\s]+)""".r
+    val signatureRegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(signature|unterschrift|ፊርማ)""".r
     val cOARegex = """(?iu)s?^([^a-zA-Z0-9]*|[\w\s]*[^a-zA-Z0-9]+)(coat_of_arms|emblem|crest|wappen|grandes_armes|blason|armoiries)([^\w]*|[_\s]+)""".r
 
 
