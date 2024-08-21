@@ -23,6 +23,14 @@ class ParserUtilsTest extends TestCase
     // testConvertLargeNumbers("de", "1.234,5 trillion", "1234500000000000000000")
     testConvertLargeNumbers("nl", "123 milja", "123 milja")
     testConvertLargeNumbers("nl", "123 milj.", "123000000000")
+
+    // Tests for Amharic
+    testConvertLargeNumbers("am", "15 ሚሊዮን", "15000000")
+    testConvertLargeNumbers("am", "3 ሺህ", "3000")
+    testConvertLargeNumbers("am", "6 billion", "6000000000")
+
+
+
   }
 
   def testParse(): Unit = {
