@@ -24,7 +24,6 @@ class DateTimeParser ( context :
     @transient private val logger = Logger.getLogger(getClass.getName)
 
     // language-specific configurations
-
     private val language = if(DateTimeParserConfig.supportedLanguages.contains(context.language.wikiCode)) context.language.wikiCode else "en"
 
     private val months = DateTimeParserConfig.monthsMap.getOrElse(language, DateTimeParserConfig.monthsMap("en"))
@@ -32,6 +31,7 @@ class DateTimeParser ( context :
     private val cardinalityRegex = DateTimeParserConfig.cardinalityRegexMap.getOrElse(language, DateTimeParserConfig.cardinalityRegexMap("en"))
     private val templates = DateTimeParserConfig.templateDateMap.getOrElse(language, Map())
 
+    private val ethiopianDateParser = new EthiopianDateParser(datatype:Datatype, strict:Boolean);
     // parse logic configurations
 
     override val splitPropertyNodeRegex: String = if (DataParserConfig.splitPropertyNodeRegexDateTime.contains(language))
@@ -189,7 +189,17 @@ class DateTimeParser ( context :
     }
 
     private def findDate(input: String) : Option[Date] =
+        
     {
+
+        // scan for Ethiopian (geez) calendar dates
+        if(language == "am"){
+            for(date <- ethiopianDateParser.findGeezDate(input))
+            {
+                return Some(date)
+            }
+        }
+        
         for(date <- catchDate(input))
         {
             return Some(date)
