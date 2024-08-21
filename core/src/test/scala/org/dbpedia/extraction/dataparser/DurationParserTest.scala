@@ -138,6 +138,27 @@ class DurationParserTest extends FlatSpec with Matchers
          parse("en", "Time", "2002-present") should equal (None)
      }
 
+
+    //  Test for Amharic 
+        "DurationParser" should "return 5 seconds for '5 ሴኮንድ'" in
+     {
+         parse("am", "Time", "5 ሴኮንድ").get should equal (5.0)
+     }
+    "DurationParser" should "return 10 minutes for 'context 10 ደቂቃዎች context'" in
+     {
+         parse("am", "Time", "context 10 ደቂቃዎች context").get should equal (600.0)
+     }
+    "DurationParser" should "return 14820 seconds for 'context 4 ሰዓት, 7 ደቂቃ context'" in
+     {
+         parse("am", "Time", "context 4 ሰዓት, 7 ደቂቃ context").get should equal (14820.0)
+     }
+    
+    "DurationParser" should "return 857752817 seconds for '27 ዓመታት, 2 ወራት, 5 ቀናት, 1 ሰዓት 40 ደቂቃ, 17 ሴኮንድ '" in
+     {
+         parse("am", "Time", "27 ዓመታት, 2 ወራት, 5 ቀናት, 1 ሰዓት 40 ደቂቃ, 17 ሴኮንድ  ").get should be (approximatelyEqualTo(857752817.0))
+     }
+   
+
      /**
      * Matcher to test if 2 values are approximately equal.
      */
