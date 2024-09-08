@@ -33,7 +33,7 @@ object ParserUtilsConfig
             "ኳድሪሊየን" -> 15
         ),
         // For "ar" configuration, rendering right-to-left may seems like a bug, but it's not.
-        // Don't change this else if you know how it is done.
+        // Don't change this unless you know how it works.
         "ar" -> Map(
           "عشرة" -> 1,
           "مئة" -> 2,
