@@ -13,7 +13,7 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class DateTimeParserTest extends FlatSpec with Matchers
 {
-    //gYear positive tests - Input is inside equivalence class
+    // gYear positive tests - Input is inside equivalence class
 
     "DateTimeParser" should "return gYear (2008)" in
     {
@@ -677,6 +677,64 @@ class DateTimeParserTest extends FlatSpec with Matchers
         parse("ja", "xsd:gYear", "西暦2012年") should equal (Some("2012"))
     }
 
+// Amharic date Test: If date is already in Gregorian calendar, conversion shouldn't be performed.
+   
+"DateTimeParser" should "parse Gregorian Date 21-ጁላይ-2013 and return date 2013-07-21" in
+    {
+        parse("am", "xsd:date", "21-ጁላይ-2013 እ.ኤ.አ.") should equal (Some("2013-07-21"))
+    } 
+"DateTimeParser" should "parse Gregorian date September 23 2000 እ.ኤ.አ. and return date 2000-09-23" in
+    {
+        parse("am", "xsd:date", "September 23 2000 እ.ኤ.አ.") should equal (Some("2000-09-23"))
+    } 
+"DateTimeParser" should "parse Gregorian date 23 ሴፕተምበር 2013 እ.ኤ.አ. and return date 2013-09-23" in
+    {
+        parse("am", "xsd:date", "23 ሴፕተምበር 2013 እ.ኤ.አ.") should equal (Some("2013-09-23"))
+    } 
+    "DataParser" should "parse Gregorian date 23/07/2013 እ.ኤ.አ. and return date 2013-09-23" in
+    {
+        parse("am", "xsd:date", "23/07/2013 እ.ኤ.አ.") should equal (Some("2013-07-23"))
+    } 
+
+// Amharic date Test: Invalid dates test
+"DateTimeParser" should "not parse invalid Ethiopian Date 31/01/2024 and return None" in
+    {
+        parse("am", "xsd:date", "31 ጥቅምት 2024") should equal (None)
+    } 
+"DateTimeParser" should "not parse invalid Ethiopian Date 06/ጳጉሜ/2000 and return None" in
+    {
+        parse("am", "xsd:date", "06/ጳጉሜ/2000") should equal (None)
+    } 
+"DateTimeParser" should "not parse invalid Ethiopian Date 07/13/2003 and return None" in
+    {
+        parse("am", "xsd:date", "07/13/2003") should equal (None)
+        
+    } 
+// Amharic date Test: Geez calendar dates should be converted to Gregorian
+"DateTimeParser" should "parse Ethiopian Date 21-11-2013 and return date 2020-10-31" in
+    {
+        parse("am", "xsd:date", "21-11-2013") should equal (Some("2021-07-28"))
+    } 
+"DateTimeParser" should "parse Ethiopian Date 21/ሚያዝያ/2013 and return date 2021-04-29" in
+    {
+        parse("am", "xsd:date", "21/ሚያዝያ/2013") should equal (Some("2021-04-29"))
+    } 
+"DateTimeParser" should "parse Ethiopian Date ሚያዝያ ፳፩ ፳፻ and return date 2008-04-29" in
+    {
+        parse("am", "xsd:date", "ሚያዝያ ፳፩ ፳፻") should equal (Some("2008-04-29"))
+    } 
+"DateTimeParser" should "parse Ethiopian Date ግንቦት ፳፩ 2010 and return date 2018-05-29" in
+    {
+        parse("am", "xsd:date", "ግንቦት ፳፩ 2010") should equal (Some("2018-05-29"))
+    } 
+"DateTimeParser" should "parse Ethiopian Date ፳፩ ሚያዝያ ፳፻ and return date 2008-04-29" in
+    {
+        parse("am", "xsd:date", "፳፩ ሚያዝያ ፳፻") should equal (Some("2008-04-29"))
+    } 
+"DateTimeParser" should "parse Ethiopian Date ጳጉሜ 5 ፳፻ and return date 2008-09-10" in
+    {
+        parse("am", "xsd:date", "ጳጉሜ 5 ፳፻") should equal (Some("2008-09-10"))
+    } 
 
     private val wikiParser = WikiParser.getInstance()
 
