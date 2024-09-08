@@ -683,9 +683,9 @@ class DateTimeParserTest extends FlatSpec with Matchers
     {
         parse("am", "xsd:date", "21-ጁላይ-2013 እ.ኤ.አ.") should equal (Some("2013-07-21"))
     } 
-"DateTimeParser" should "parse Gregorian Date september 23 2000 እ.ኤ.አ. and return date 2000-09-23" in
+"DateTimeParser" should "parse Gregorian date September 23 2000 እ.ኤ.አ. and return date 2000-09-23" in
     {
-        parse("am", "xsd:date", "september 23 2000 እ.ኤ.አ.") should equal (Some("2000-09-23"))
+        parse("am", "xsd:date", "September 23 2000 እ.ኤ.አ.") should equal (Some("2000-09-23"))
     } 
 "DateTimeParser" should "parse Gregorian Date 23 ሴፕተምበር 2013 እ.ኤ.አ. and return date 2013-09-23" in
     {
