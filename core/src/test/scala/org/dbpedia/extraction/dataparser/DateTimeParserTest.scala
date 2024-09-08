@@ -710,7 +710,7 @@ class DateTimeParserTest extends FlatSpec with Matchers
         parse("am", "xsd:date", "07/13/2003") should equal (None)
         
     } 
-// Amharic date Test: Geez calender dates should be converted to gregorian
+// Amharic date Test: Geez calendar dates should be converted to Gregorian
 "DateTimeParser" should "parse Ethiopian Date 21-11-2013 and return date 2020-10-31" in
     {
         parse("am", "xsd:date", "21-11-2013") should equal (Some("2021-07-28"))
