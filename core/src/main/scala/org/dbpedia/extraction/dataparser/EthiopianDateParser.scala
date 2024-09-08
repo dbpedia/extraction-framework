@@ -53,7 +53,6 @@ class EthiopianDateParser(datatype: Datatype, val strict: Boolean = false) {
     // Amharic month names (month-day-year)
     for (dateRegex2(month, day, year) <- List(dateString)) {
       return Some((year, month, day))
-
     }
 
     // Amharic month names (day-month-year)
