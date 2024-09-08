@@ -28,7 +28,7 @@ class GeezNumberUtils {
     '፼' -> 10000
   )
 
-  // Preprocesses and converts geez scripts to arabic numeral.
+  // Preprocesses and converts geez scripts to Arabic numerals.
   def preprocess(geezStr: String): List[Int] = {
     val strippedGeezStr = geezStr.trim
     val stack = scala.collection.mutable.ListBuffer[Int]()
