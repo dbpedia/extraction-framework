@@ -65,7 +65,7 @@ class EthiopianDateParser(datatype: Datatype, val strict: Boolean = false) {
       return Some((year, month, day))
     }
 
-    // dates that contain geez/ Amharic numbers (day-month-year)
+    // dates that contain geez/Amharic numbers (day-month-year)
     for (dateRegex5(day, month, year) <- List(dateString)) {
       return Some((year, month, day))
     }
