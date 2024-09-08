@@ -677,7 +677,7 @@ class DateTimeParserTest extends FlatSpec with Matchers
         parse("ja", "xsd:gYear", "西暦2012年") should equal (Some("2012"))
     }
 
-// Amharic date Test: If date is already in gregorian calendar conversion shouldnt be performed.
+// Amharic date Test: If date is already in Gregorian calendar, conversion shouldn't be performed.
    
 "DateTimeParser" should "parse Gregorian Date 21-ጁላይ-2013 and return date 2013-07-21" in
     {
