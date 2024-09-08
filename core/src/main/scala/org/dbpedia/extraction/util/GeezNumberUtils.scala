@@ -44,7 +44,7 @@ class GeezNumberUtils {
     stack.toList
   }
 
-  // Recursively calculates and performs the calcualtion to convert geez number to arabic numerals.
+  // Recursively calculates and performs the calculation to convert geez numbers to Arabic numerals.
   def calculate(start: Int, end: Int, arr: List[Int]): Option[Int] = {
     if (start > end) return None
     if (start == end) {
