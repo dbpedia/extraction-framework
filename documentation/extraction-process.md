@@ -5,7 +5,7 @@ This first section contains the commands used to download all necessary data to 
 The Wikipedia-XML-Dumps are the main source of the DBpedia Extraction. They contain all the wikipedia articles in the XML format and are found here: https://dumps.wikimedia.org/.
 The DBpedia Extraction-Framework has a function that helps downloading all dumps that are needed. It can be configured in the `$extraction-framework/dump/download.10000.properties` file. To run the dump-download run the following commands:
 - `cd $extraction-framework/dump`
-- `../run download download.10000.properties`
+- `..run download download.10000.properties`
 ### 1.2. The Ontology Files
 In addition to the XML-Dumps the extraction-framework needs the ontology files to run. They are downloaded using the following command.
 - `cd $extraction-framework/dump`
