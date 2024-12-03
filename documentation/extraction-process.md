@@ -9,7 +9,7 @@ The DBpedia Extraction-Framework has a function that helps downloading all dumps
 ### 1.2. The Ontology Files
 In addition to the XML-Dumps the extraction-framework needs the ontology files to run. They are downloaded using the following command.
 - `cd $extraction-framework/dump`
-- `..run download-ontology`
+- `../run download-ontology`
 ### 1.3. The wikidata-r2r Mappings
 Used by the wikidata-extraction, this file needs to be up-to-date, which can be achieved using the following commands: 
 - `cd $EXTRACT_DIR/core/src/main/resources && curl https://raw.githubusercontent.com/dbpedia/extraction-framework/master/core/src/main/resources/wikidatar2r.json > wikidatar2r.json`
