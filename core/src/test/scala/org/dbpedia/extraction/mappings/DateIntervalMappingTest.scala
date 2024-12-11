@@ -99,6 +99,15 @@ class DateIntervalMappingTest extends FlatSpec with ShouldMatchers
         parse("en", "xsd:date", "foo") should be (Seq())
     }
   
+    // Tests for Amharic 
+    "DateIntervalMapping" should "return Seq 1988 2024 @am" in
+    {
+        parse("am", "xsd:gYear", "ከ 1988 እስከ 2024") should be (Seq("1988", "2024"))
+    }
+    "DateIntervalMapping" should "return Seq 2014-07-01 2024-07-01 @am" in
+    {
+        parse("am", "xsd:date", "2014-07-01 እስከ 2024-07-01") should be (Seq("2014-07-01", "2024-07-01"))
+    }
   
     private val wikiParser = WikiParser.getInstance()
     private val ontology = {
