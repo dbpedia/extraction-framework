@@ -458,9 +458,9 @@ object OntologyDatatypes
         types :::= builder.build
 
         builder.addDimension("Speed");
-        builder.addUnit(new StandardUnitDatatype("kilometrePerHour", Set("km/h","kmh","kilometre per hour",/*el*/ "χιλιόμετρα ανά ώρα")));
+        builder.addUnit(new StandardUnitDatatype("kilometrePerHour", Set("km/h","kmh","kilometre per hour",/*el*/ "χιλιόμετρα ανά ώρα", /*am*/ "ኪሎሜትር በሰዓት")));
         builder.addUnit(new FactorUnitDatatype("metrePerSecond", Set("m/s","ms","metre per second"), 3.6));
-        builder.addUnit(new FactorUnitDatatype("kilometrePerSecond", Set("km/s","kilometre per second"), 3600.0));
+        builder.addUnit(new FactorUnitDatatype("kilometrePerSecond", Set("km/s","kilometre per second", /*am*/ "ኪሎሜትር በሰከንድ"), 3600.0));
         builder.addUnit(new FactorUnitDatatype("milePerHour", Set("mph","mi/h","mile per hour"), 1.60934));
         builder.addUnit(new FactorUnitDatatype("footPerSecond", Set("ft/s","foot per second"), 0.0003048333333));
         builder.addUnit(new FactorUnitDatatype("footPerMinute", Set("ft/min","foot per minute"), 0.01829));
@@ -469,21 +469,21 @@ object OntologyDatatypes
 
         builder.addDimension("Temperature");
         builder.addUnit(new StandardUnitDatatype("kelvin", Set("K","kelvin",/*el*/ "Κ","κέλβιν")));
-        builder.addUnit(new FactorUnitDatatype("degreeCelsius", Set("°C","degree celsius","C","Celsius",/*el*/ "βαθμοί"), 1.0, 273.15));
+        builder.addUnit(new FactorUnitDatatype("degreeCelsius", Set("°C","degree celsius","C","Celsius",/*el*/ "βαθμοί", /*am*/ "ሴልሲየስ"), 1.0, 273.15));
         builder.addUnit(new FactorUnitDatatype("degreeFahrenheit", Set("°F","F","Fahrenheit","degree fahrenheit"), 5.0 / 9.0, 459.67));
         builder.addUnit(new FactorUnitDatatype("degreeRankine", Set("°R","R","degree rankine"), 5.0 / 9.0, 0));
         types :::= builder.build
 
         builder.addDimension("Time");
-        builder.addUnit(new StandardUnitDatatype("second", Set("s","sec","secs","second","seconds",/*el*/ "δ","δευτερόλεπτα")));
+        builder.addUnit(new StandardUnitDatatype("second", Set("s","sec","secs","second","seconds",/*el*/ "δ","δευτερόλεπτα", /*am*/ "ሴኮንድ")));
         //Add commonly used fractions of second
         builder.addUnit(new FactorUnitDatatype("millisecond", Set("ms","millisecond","milliseconds"), 0.001));
         builder.addUnit(new FactorUnitDatatype("microsecond", Set("µs","microsecond","microseconds"), 1.0E-6));
         builder.addUnit(new FactorUnitDatatype("nanosecond", Set("ns","nanosecond","nanoseconds"), 1.0E-9));
         // end of fractions
-        builder.addUnit(new FactorUnitDatatype("minute", Set("m","min","min.","mins","minute","minutes",/*el*/ "λ","λεπτά"), 60.0));
-        builder.addUnit(new FactorUnitDatatype("hour", Set("h","hr","hr.","hour","hours","std",/*el*/ "ω","ώρες","ώρα"), 3600.0));
-        builder.addUnit(new FactorUnitDatatype("day", Set("d","days","day",/*el*/ "μ","μέρα","μέρες"), 86400.0));
+        builder.addUnit(new FactorUnitDatatype("minute", Set("m","min","min.","mins","minute","minutes",/*el*/ "λ","λεπτά", /*am*/ "ደቂቃ", "ደቂቃዎች"), 60.0));
+        builder.addUnit(new FactorUnitDatatype("hour", Set("h","hr","hr.","hour","hours","std",/*el*/ "ω","ώρες","ώρα", /*am*/ "ሰዓት", "ሰዓታት"), 3600.0));
+        builder.addUnit(new FactorUnitDatatype("day", Set("d","days","day",/*el*/ "μ","μέρα","μέρες", /*am*/ "ቀን", "ቀናት", "ቀኖች", "ቀናቶች"), 86400.0));
         types :::= builder.build
 
         builder.addDimension("Torque");
