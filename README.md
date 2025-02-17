@@ -112,8 +112,8 @@ Please keep in mind:
 - Try *not* to modify the indentation. If you want to re-format, use a separate "formatting" commit in which no functionality changes are made.
 - **Never** rebase the master onto a development branch (i.e. _never_ call `rebase` from `extraction-framework/master`). Only rebase your branch onto the dev branch, *if and only if* nobody already pulled from the development branch!
 - If you already pushed a branch to GitHub, later rebased the master onto this branch and then tried to push again, GitHub won't let you saying _"To prevent you from losing history, non-fast-forward updates were rejected"_. If _(and only if)_ you are sure that nobody already pulled from this branch, add `--force` to the push command.  
-[_"Don’t rebase branches you have shared with another developer."_](http://www.jarrodspillers.com/2009/08/19/git-merge-vs-git-rebase-avoiding-rebase-hell/)  
-[_"Rebase is awesome, I use rebase exclusively for everything local. Never for anything that I've already pushed."_](http://jeffkreeftmeijer.com/2010/the-magical-and-not-harmful-rebase/#comment-87479247)  
+  - _"[Don’t rebase branches you have shared with another developer.](http://www.jarrodspillers.com/2009/08/19/git-merge-vs-git-rebase-avoiding-rebase-hell/)"_
+  - _"[Rebase is awesome, I use rebase exclusively for everything local. Never for anything that I've already pushed.](http://jeffkreeftmeijer.com/2010/the-magical-and-not-harmful-rebase/#comment-87479247)"_
 [_"Never ever rebase a branch that you pushed, or that you pulled from another person_"](https://web.archive.org/web/20150622064245/http://blog.experimentalworks.net/2009/03/merge-vs-rebase-a-deep-dive-into-the-mysteries-of-revision-control/)
 - In general, we prefer Scala over Java.
 
