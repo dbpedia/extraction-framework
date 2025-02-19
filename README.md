@@ -4,7 +4,7 @@
 **Homepage**: http://dbpedia.org <br/>
 **Documentation**: http://dev.dbpedia.org/Extraction  <br/>
 **Get in touch with DBpedia**: https://wiki.dbpedia.org/join/get-in-touch <br/>
-**Slack**: join the [**#dev-team**](https://dbpedia.slack.com/archives/C0L9MJFU7) slack channel within the the [DBpedia Slack workspace](https://dbpedia-slack.herokuapp.com/) - the main point for [developement updates](https://github.com/dbpedia/extraction-framework/blob/master/.github/workflows/maven.yml) and discussions <br/>
+**Slack**: join the [**#dev-team**](https://dbpedia.slack.com/archives/C0L9MJFU7) slack channel within the the [DBpedia Slack workspace]( https://join.slack.com/t/dbpedia/shared_invite/zt-nffbn1ra-dRoi8oeWBlolJb_lKifEqA) - the main point for developement updates and discussions <br/>
 
 ## Contents
 
@@ -61,7 +61,7 @@ The DBpedia extraction framework is structured into different modules
 
 ### Core Module
 
-![http://www4.wiwiss.fu-berlin.de/dbpedia/wiki/DataFlow.png](http://www4.wiwiss.fu-berlin.de/dbpedia/wiki/DataFlow.png "http://www4.wiwiss.fu-berlin.de/dbpedia/wiki/DataFlow.png")
+![Data flow](https://web.archive.org/web/20111109084216/http://www4.wiwiss.fu-berlin.de/dbpedia/wiki/DataFlow.png)
 
 <a name="p27582-10"></a>
 
@@ -76,9 +76,9 @@ The DBpedia extraction framework is structured into different modules
 
 In addition to the core components, a number of utility packages offers essential functionality to be used by the extraction code:
 
-* **Ontology** Classes used to represent an ontology. Methods for both, reading and writing ontologies are provided. All classes are located in the namespace [org.dbpedia.extraction.ontology](tree/master/core/src/main/scala/org/dbpedia/extraction/ontology)
-* **DataParser** Parsers to extract data from nodes in the abstract syntax tree. All classes are located in the namespace [org.dbpedia.extraction.dataparser](tree/master/core/src/main/scala/org/dbpedia/extraction/dataparser)
-* **Util** Various utility classes. All classes are located in the namespace [org.dbpedia.extraction.util](tree/master/core/src/main/scala/org/dbpedia/extraction/util)
+* **Ontology** Classes used to represent an ontology. Methods for both, reading and writing ontologies are provided. All classes are located in the namespace `org.dbpedia.extraction.ontology`.
+* **DataParser** Parsers to extract data from nodes in the abstract syntax tree. All classes are located in the namespace `org.dbpedia.extraction.dataparser`.
+* **Util** Various utility classes. All classes are located in the namespace `org.dbpedia.extraction.util`.
 
 <a name="dump-extraction-module"></a>
 ### Dump extraction Module
@@ -104,7 +104,7 @@ Please make sure you have read the Developer's Certificate of Origin, further do
 8. Send a pull request from your branch into `extraction-framework/dev` via GitHub.
   * In the description, reference the associated commit (for example, _"Fixes #123 by ..."_ for issue number 123).
   * Your changes will be reviewed and discussed on GitHub.
-  * In addition, [Travis-CI](http://about.travis-ci.org/) will test if the merged version passes the build.
+  * In addition, [Travis-CI](https://www.travis-ci.com/about-us/) will test if the merged version passes the build.
   * If there are further changes you need to make, because Travis said the build fails or because somebody caught something you overlooked, go back to item 4. Stay on the same branch (if it is still related to the same issue). GitHub will add the new commits to the same pull request.
   * When everything is fine, your changes will be merged into `extraction-framework/dev`, finally the `dev` together with your improvements will be merged with the `master` branch.
 
@@ -112,17 +112,17 @@ Please keep in mind:
 - Try *not* to modify the indentation. If you want to re-format, use a separate "formatting" commit in which no functionality changes are made.
 - **Never** rebase the master onto a development branch (i.e. _never_ call `rebase` from `extraction-framework/master`). Only rebase your branch onto the dev branch, *if and only if* nobody already pulled from the development branch!
 - If you already pushed a branch to GitHub, later rebased the master onto this branch and then tried to push again, GitHub won't let you saying _"To prevent you from losing history, non-fast-forward updates were rejected"_. If _(and only if)_ you are sure that nobody already pulled from this branch, add `--force` to the push command.  
-[_"Don’t rebase branches you have shared with another developer."_](http://www.jarrodspillers.com/2009/08/19/git-merge-vs-git-rebase-avoiding-rebase-hell/)  
-[_"Rebase is awesome, I use rebase exclusively for everything local. Never for anything that I've already pushed."_](http://jeffkreeftmeijer.com/2010/the-magical-and-not-harmful-rebase/#comment-87479247)  
-[_"Never ever rebase a branch that you pushed, or that you pulled from another person_"](http://blog.experimentalworks.net/2009/03/merge-vs-rebase-a-deep-dive-into-the-mysteries-of-revision-control/)
+  - _"[Don’t rebase branches you have shared with another developer.](http://www.jarrodspillers.com/2009/08/19/git-merge-vs-git-rebase-avoiding-rebase-hell/)"_
+  - _"[Rebase is awesome, I use rebase exclusively for everything local. Never for anything that I've already pushed.](http://jeffkreeftmeijer.com/2010/the-magical-and-not-harmful-rebase/#comment-87479247)"_
+  - _"[Never ever rebase a branch that you pushed, or that you pulled from another person](https://web.archive.org/web/20150622064245/http://blog.experimentalworks.net/2009/03/merge-vs-rebase-a-deep-dive-into-the-mysteries-of-revision-control/)"_
 - In general, we prefer Scala over Java.
 
 More tips:
 - Guides to setup your development environment for [Intellij](Setting up IntelliJ IDEA) or [Eclipse](Setting up eclipse).
-- Get help with the [Maven build](Build-from-Source-with-Maven) or another form of [installation](Installation).
-- [Download](Downloads) some data to work with.
-- How to run [from Scala/Java](Run-from-Java-or-Scala) or [from a JAR](Run-from-a-JAR).
-- Having different troubles? Check the [troubleshooting page](Troubleshooting) or post on https://forum.dbpedia.org.
+- Get help with the [Maven build](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html) or another form of [installation](https://maven.apache.org/install.html).
+- [Download](https://dumps.wikimedia.org/) some data to work with.
+- How to run [from Scala/Java](https://docs.scala-lang.org/tutorials/scala-with-maven.html) or [from a JAR](https://docs.oracle.com/javase/tutorial/deployment/jar/run.html).
+- Having different troubles? Check the [troubleshooting page](https://maven.apache.org/users/getting-help.html) or post on https://forum.dbpedia.org.
 
 ### Important: Developer's Certificate of Origin
 By sending a pull request to the [extraction-framework repository](https://github.com/dbpedia/extraction-framework) on GitHub, you implicitly accept the [Developer's Certificate of Origin 1.1](https://github.com/dbpedia/extraction-framework/blob/master/documentation/DeveloperCertificateOfOrigin.md)
