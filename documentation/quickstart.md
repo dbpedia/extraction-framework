@@ -78,7 +78,7 @@ TODO: missing docu with in-depth description of the configuration options, being
 
 * Compile the framework
 
-## Install core and scripts first
+* Install core and scripts first
 
 ```bash
 cd core
@@ -87,7 +87,7 @@ cd ../scripts
 mvn clean install
 ```
 
-## Then install dump without running tests
+* Then install dump without running tests
 
 ```bash
 cd ../dump
