@@ -117,7 +117,7 @@ Note: check if everything has been downloaded. If not, run the download command 
 Download the latest version of the DBpedia ontology using the script.
 
 ```
-cd core
+cd dump
 ../run download-ontology
 ```
 
@@ -126,7 +126,7 @@ cd core
 Download the latest versions of the mappings from the [mappings wiki](http://mappings.dbpedia.org).
 
 ```
-cd core
+cd dump
 ../run download-mappings
 ```
 
