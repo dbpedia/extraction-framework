@@ -1,0 +1,24 @@
+name: Snapshot Deploy
+
+on:
+  push:
+    branches: [ master ]  # or your development branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 1.8
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Deploy Snapshot
+        run: mvn deploy -DskipTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
