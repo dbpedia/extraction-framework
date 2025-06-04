@@ -18,7 +18,20 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace }}
 
+      - name: Set up settings.xml for deploy
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml <<EOF
+          <settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${{ github.actor }}</username>
+                <password>${{ secrets.GITHUB_TOKEN }}
+              </server>
+            </servers>
+          </settings>
+          EOF
+
       - name: Deploy Snapshot
         run: mvn deploy -DskipTests
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
