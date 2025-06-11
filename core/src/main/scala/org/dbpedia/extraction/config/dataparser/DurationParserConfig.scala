@@ -385,12 +385,12 @@ object DurationParserConfig
             "s" -> "second",
             "\"" -> "second",
             "मिनट" -> "minute",
-            "\’" -> "minute",
+            "\\’" -> "minute",
             "m" -> "minute",
             "घंटा" -> "hour",
             "दिन" -> "day",
             "महीना" -> "month",
-            "वर्ष" -> "year",
+            "वर्ष" -> "year"
         ),
         "it" -> Map(
             "secondo" -> "second",
