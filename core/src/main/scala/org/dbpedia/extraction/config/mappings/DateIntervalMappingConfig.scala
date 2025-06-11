@@ -22,6 +22,7 @@ object DateIntervalMappingConfig
         "eu" -> Set("gaur egun", "gaur egun arte", "egun"),
         "fr" -> Set("aujourd'hui", "en cours"),
         "ga" -> Set("inniu"),
+        "hi" -> Set("अबतक"),
         "hr" -> Set("danas"),
         "hu" -> Set("napjainkig"),
         "id" -> Set("sekarang"),
