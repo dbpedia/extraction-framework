@@ -78,7 +78,21 @@ TODO: missing docu with in-depth description of the configuration options, being
 
 * Compile the framework
 
-`mvn install`
+* Install core and scripts first
+
+```bash
+cd core
+mvn clean install
+cd ../scripts
+mvn clean install
+```
+
+* Then install dump without running tests
+
+```bash
+cd ../dump
+mvn clean install -DskipTests
+```
 
 ## 2. Download Input Data
 
@@ -103,7 +117,7 @@ Note: check if everything has been downloaded. If not, run the download command 
 Download the latest version of the DBpedia ontology using the script.
 
 ```
-cd core
+cd dump
 ../run download-ontology
 ```
 
@@ -112,7 +126,7 @@ cd core
 Download the latest versions of the mappings from the [mappings wiki](http://mappings.dbpedia.org).
 
 ```
-cd core
+cd dump
 ../run download-mappings
 ```
 
