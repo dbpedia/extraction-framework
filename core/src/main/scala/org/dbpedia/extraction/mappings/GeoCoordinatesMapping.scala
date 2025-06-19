@@ -11,36 +11,34 @@ import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
 /**
- * Extracts geo-coordinates.
+ * Extracts geo-coodinates.
  */
 class GeoCoordinatesMapping(
-                             val ontologyProperty: OntologyProperty,
-                             val coordinates: String,
-                             val latitude: String,
-                             val longitude: String,
-                             val longitudeDegrees: String,
-                             val longitudeMinutes: String,
-                             val longitudeSeconds: String,
-                             val longitudeDirection: String,
-                             val latitudeDegrees: String,
-                             val latitudeMinutes: String,
-                             val latitudeSeconds: String,
-                             val latitudeDirection: String,
-                             context: {
-                               def ontology: Ontology
-                               def redirects: Redirects
-                               def language: Language
-                             }
-                           ) extends PropertyMapping {
+  val ontologyProperty : OntologyProperty,
+  val coordinates : String,
+  val latitude : String,
+  val longitude : String,
+  val longitudeDegrees : String,
+  val longitudeMinutes : String,
+  val longitudeSeconds : String,
+  val longitudeDirection : String,
+  val latitudeDegrees : String,
+  val latitudeMinutes : String,
+  val latitudeSeconds : String,
+  val latitudeDirection : String,
+  context : {
+    def ontology : Ontology
+    def redirects : Redirects
+    def language : Language
+  }
+) extends PropertyMapping {
 
   private val logger = Logger.getLogger(classOf[GeoCoordinatesMapping].getName)
 
   private val geoCoordinateParser = new GeoCoordinateParser(context)
   private val singleGeoCoordinateParser = new SingleGeoCoordinateParser(context)
   private val doubleParser = new DoubleParser(context)
-  private val doubleParserEn = new DoubleParser(context = new {
-    def language: Language = Language("en")
-  })
+  private val doubleParserEn = new DoubleParser(context = new { def language : Language = Language("en") })
   private val stringParser = StringParser
   private val wikiCode = context.language.wikiCode
 
@@ -49,6 +47,10 @@ class GeoCoordinatesMapping(
   private val lonOntProperty = context.ontology.properties("geo:long")
   private val pointOntProperty = context.ontology.properties("georss:point")
   private val featureOntClass = context.ontology.classes("geo:SpatialThing")
+
+  // ✅ NEW hemisphere properties
+  private val latnsOntProperty = context.ontology.properties("dbp:latns")
+  private val longewOntProperty = context.ontology.properties("dbp:longew")
 
   override val datasets = Set(DBpediaDatasets.OntologyPropertiesGeo)
 
@@ -80,9 +82,10 @@ class GeoCoordinatesMapping(
       ) {
         try {
           return Some(new GeoCoordinate(lat, lon))
-        }
-        catch {
-          case ex: IllegalArgumentException => logger.log(Level.FINE, "Invalid geo coordinate", ex); return None
+        } catch {
+          case ex: IllegalArgumentException =>
+            logger.log(Level.FINE, "Invalid geo coordinate", ex)
+            return None
         }
       }
     }
@@ -105,9 +108,10 @@ class GeoCoordinatesMapping(
 
         try {
           return Some(new GeoCoordinate(latDeg.value, latMin, latSec, latDir, lonDeg.value, lonMin, lonSec, lonDir, false))
-        }
-        catch {
-          case ex: IllegalArgumentException => logger.log(Level.FINE, "Invalid geo coordinate", ex); return None
+        } catch {
+          case ex: IllegalArgumentException =>
+            logger.log(Level.FINE, "Invalid geo coordinate", ex)
+            return None
         }
       }
     }
@@ -128,6 +132,13 @@ class GeoCoordinatesMapping(
     quads += new Quad(context.language, DBpediaDatasets.OntologyPropertiesGeo, instanceUri, latOntProperty, coord.latitude.toString, sourceUri)
     quads += new Quad(context.language, DBpediaDatasets.OntologyPropertiesGeo, instanceUri, lonOntProperty, coord.longitude.toString, sourceUri)
     quads += new Quad(context.language, DBpediaDatasets.OntologyPropertiesGeo, instanceUri, pointOntProperty, coord.latitude + " " + coord.longitude, sourceUri)
+
+    // ✅ Add hemisphere indicators
+    val latHemisphere = if (coord.latitude < 0) "S" else "N"
+    val lonHemisphere = if (coord.longitude < 0) "W" else "E"
+
+    quads += new Quad(context.language, DBpediaDatasets.OntologyPropertiesGeo, instanceUri, latnsOntProperty, latHemisphere, sourceUri)
+    quads += new Quad(context.language, DBpediaDatasets.OntologyPropertiesGeo, instanceUri, longewOntProperty, lonHemisphere, sourceUri)
 
     quads
   }
