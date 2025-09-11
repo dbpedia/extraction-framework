@@ -1,4 +1,6 @@
 #!/bin/bash
+# helper script to run the DIEF Web Server  
+# used with the following cronjob: 0 2 * * * /bin/bash -cl "source ~/.bashrc; cd /home/dbpedia/extraction-framework/ && ./redeploy-server"
 SDK_MAN_PATH=$HOME/.sdkman # change if running for different user (cron) and you are using sdkman and no standard java binary or export JAVA_HOME manually for this script to Java version 8
 
 
@@ -9,7 +11,7 @@ echo and Java Home: $JAVA_HOME
 
 #in case sdkman is used to have a JAVA 8 running; needed in cron jobs since .bash_rc will not be used
 export SDKMAN_DIR="${SDK_MAN_PATH}"
-[[ -s "${SDK_MAN_PATH}/bin/sdkman-init.sh" ]] && source "${SDK_MAN_PATH}/bin/sdkman-init.sh" && echo "found and intialized sdkman" && sdk list java  # && sdk use #TODO use a Java 8 version here
+[[ -s "${SDK_MAN_PATH}/bin/sdkman-init.sh" ]] && source "${SDK_MAN_PATH}/bin/sdkman-init.sh" && echo "found and intialized sdkman" && sdk current java  # && sdk use #TODO use a Java 8 version here
 
 set -x
 echo $JAVA_HOME
