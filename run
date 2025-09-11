@@ -27,5 +27,5 @@ done
 
 # if we're not on a terminal, use batch mode to avoid ugly log files
 [ ! -t 1 ] && BATCH="-B"
-
+export JAVA_TOOL_OPTIONS='-Dhttp.agent=curl/8.6.0'
 mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS"
