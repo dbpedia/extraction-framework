@@ -10,7 +10,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env:
+          # needed for Wikimedia API calls to not get a 403
+          JAVA_TOOL_OPTIONS: '-Dhttp.agent=curl/8.6.0' 
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 1.8
