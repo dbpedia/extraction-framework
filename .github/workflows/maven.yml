@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # needed for Wikimedia API calls
+      JAVA_TOOL_OPTIONS: '-Dhttp.agent=curl/8.6.0' 
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
