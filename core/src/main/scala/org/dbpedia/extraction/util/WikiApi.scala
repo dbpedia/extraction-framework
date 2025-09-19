@@ -11,7 +11,6 @@ import scala.collection.immutable.Seq
 import scala.language.postfixOps
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 import WikiApi._
-import org.apache.http.client.HttpClient
 
 object WikiApi
 {
@@ -197,37 +196,31 @@ class WikiApi(url: URL, language: Language)
      */
     def retrieveTemplateUsageIDs(title : WikiTitle, maxCount : Int = 500) : List[Long] =
     {
-        var pageList = List[Long]();
-        var  canContinue = false;
-        var eicontinue = "";
-        var appropriateQuery = "";
+        var pageList = List[Long]()
+        var canContinue = false
+        var eicontinue = ""
 
         do{
-            appropriateQuery = "?action=query&continue=&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace +
-                                "&einamespace=0&eifilterredir=nonredirects&eilimit=" + maxCount;
-            //Since the call can return only 500 matches at most we must use the eicontinue parameter to
-            //get the other matches
+            var appropriateQuery = "?action=query&continue=&format=xml&list=embeddedin&eititle=" + title.encodedWithNamespace +
+                                "&einamespace=0&eifilterredir=nonredirects&eilimit=" + maxCount
+
             if(canContinue)
-                appropriateQuery = appropriateQuery + "&eicontinue=" + eicontinue;
+                appropriateQuery = appropriateQuery + "&eicontinue=" + eicontinue
 
-            val response = query(appropriateQuery);
+            val response = query(appropriateQuery)
+            val queryContinue = response \ "query-continue" \ "embeddedin"
+            val continueSeq = queryContinue \\ "@eicontinue"
+            eicontinue = continueSeq.text
 
-                val queryContinue = response \ "query-continue" \ "embeddedin";
-                val continueSeq = queryContinue \\ "@eicontinue";
-                eicontinue = continueSeq.text;
+            canContinue = eicontinue != null && eicontinue.nonEmpty
 
-                canContinue = false;
+            for(page <- response \ "query" \ "embeddedin" \ "ei";
+                title <- page \ "@pageid" ){
+                pageList = pageList ::: List(title.text.toLong)
+            }
+        } while(canContinue)
 
-                if((eicontinue != null) && (eicontinue != ""))
-                    canContinue= true;
-
-                for(page <- response \ "query" \ "embeddedin" \ "ei";
-                    title <- page \ "@pageid" ){
-                        pageList = pageList ::: List(title.text.toLong);
-                }
-        }while(canContinue)
-
-      pageList;
+        pageList
     }
 
     /**
@@ -238,15 +231,19 @@ class WikiApi(url: URL, language: Language)
      * @return true iff the file exists else false
      */
     def fileExistsOnWiki(fileName : String, language: Language): Boolean = {
-        val fileNamespaceIdentifier = Namespace.File.name(language)
-
-        val queryURLString = language.baseUri.replace("http:", "https:") + "/wiki/" + fileNamespaceIdentifier + ":" + fileName
-        val connection = new URL(queryURLString).openConnection().asInstanceOf[HttpsURLConnection]
-        connection.setRequestMethod("HEAD")
-        val responseCode = connection.getResponseCode()
-        connection.disconnect()
-
-        responseCode == HttpURLConnection.HTTP_OK
+        try {
+            val fileNamespaceIdentifier = Namespace.File.name(language)
+            val queryURLString = language.baseUri.replace("http:", "https:") + "/wiki/" + fileNamespaceIdentifier + ":" + URLEncoder.encode(fileName, "UTF-8")
+            val connection = new URL(queryURLString).openConnection().asInstanceOf[HttpsURLConnection]
+            connection.setRequestMethod("HEAD")
+            connection.setConnectTimeout(10000)
+            connection.setReadTimeout(10000)
+            val responseCode = connection.getResponseCode()
+            connection.disconnect()
+            responseCode == HttpURLConnection.HTTP_OK
+        } catch {
+            case _: Exception => false
+        }
     }
 
     /**
@@ -268,50 +265,195 @@ class WikiApi(url: URL, language: Language)
     }
 
     /**
-     * Executes a query to the MediaWiki API.
+     * Executes a query to the MediaWiki API with improved error handling.
+     *
+     * FIXED: HTTP blocking issues with Wikipedia API
+     * PROBLEM: Getting connection timeouts, HTTP 403 responses, and blocked requests
+     * ROOT CAUSE: Apache HttpClient was missing User-Agent header, causing Wikipedia to block bot requests
+     *
+     * SOLUTIONS DISCUSSED:
+     *   1. Johannes's approach: Fix Apache HttpClient by adding proper User-Agent headers (IMPLEMENTED)
+     *   2. URLConnection replacement: Replace HttpClient entirely with URLConnection (available as backup)
+     *
+     * The User-Agent header identifies the bot properly and prevents Wikipedia from treating requests as malicious.
      */
     protected def query(params : String) : Elem =
     {
         for(i <- 0 to maxRetries)
         {
+            // OLD BROKEN CODE (kept for reference - caused Wikipedia blocking):
+            // import org.apache.http.impl.client.HttpClients
+            // import org.apache.http.client.methods.HttpGet
+            // val client = HttpClients.createDefault
+            // val request = new HttpGet(new URL(url + params).toString)
+            // val response = client.execute(request)  // <-- NO User-Agent header = BLOCKED/TIMEOUT
+            // val xml = XML.load(response.getEntity.getContent)
+
+            // NEW WORKING CODE with Johannes's User-Agent fix:
             import org.apache.http.impl.client.HttpClients
             import org.apache.http.client.methods.HttpGet
+            import org.apache.http.client.config.RequestConfig
             val client = HttpClients.createDefault
 
             try
             {
-                val ur = new URL(url + params)
-                val request = new HttpGet(new URL(url + params).toString)
-                val response = client.execute(request)
-//                val connection = new URL(url + params).openConnection()
-//                if (customUserAgentEnabled) {
-//                    connection.setRequestProperty("User-Agent", customUserAgentText)
-//                }
-//                val reader = connection.getInputStream
-                val xml = XML.load(response.getEntity.getContent)
-//                reader.close()
+                val fullUrl = url + params
+                logger.fine(s"Querying MediaWiki API: $fullUrl")
 
-                return xml
+                val request = new HttpGet(fullUrl)
+
+                // JOHANNES'S FIX: Set proper User-Agent header to prevent Wikipedia blocking
+                request.setHeader("User-Agent", "DBpediaBot/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org) DBpedia/4.0")
+                request.setHeader("Accept", "application/xml, text/xml, */*")
+
+                // ADDITIONAL IMPROVEMENT: Set timeouts via RequestConfig
+                val config = RequestConfig.custom()
+                    .setConnectTimeout(15000)      // 15 seconds
+                    .setSocketTimeout(30000)       // 30 seconds
+                    .setConnectionRequestTimeout(10000) // 10 seconds to get connection from pool
+                    .build()
+                request.setConfig(config)
+
+                val response = client.execute(request)
+
+                try {
+                    val xml = XML.load(response.getEntity.getContent)
+                    return xml
+                } finally {
+                    response.close()
+                }
+
             }
             catch
             {
-                case ex : IOException =>
+                case ex: org.apache.http.conn.ConnectTimeoutException =>
                 {
-                    if(i < maxRetries - 1)
+                    logger.warning(s"Connection timeout on attempt ${i+1} for: $params")
+
+                    if(i < maxRetries)
                     {
-                        logger.fine("Query failed: " + params + ". Retrying...")
-                    }
-                    else
-                    {
+                        val sleepTime = Math.min(1000 * (i + 1), 5000) // Progressive backoff, max 5 seconds
+                        logger.fine(s"Retrying in ${sleepTime}ms...")
+                        Thread.sleep(sleepTime)
+                    } else {
+                        logger.severe(s"All $maxRetries attempts timed out for: $params")
                         throw ex
                     }
                 }
-            } finally { client.close()}
+                case ex: java.net.SocketTimeoutException =>
+                {
+                    logger.warning(s"Socket timeout on attempt ${i+1} for: $params")
 
-            Thread.sleep(100)
+                    if(i < maxRetries)
+                    {
+                        val sleepTime = Math.min(1000 * (i + 1), 5000) // Progressive backoff, max 5 seconds
+                        logger.fine(s"Retrying in ${sleepTime}ms...")
+                        Thread.sleep(sleepTime)
+                    } else {
+                        logger.severe(s"All $maxRetries attempts timed out for: $params")
+                        throw ex
+                    }
+                }
+                case ex: Exception =>
+                {
+                    logger.warning(s"Query attempt ${i+1} failed: ${ex.getMessage}")
+
+                    if(i < maxRetries)
+                    {
+                        val sleepTime = Math.min(1000 * (i + 1), 3000) // Progressive backoff, max 3 seconds
+                        logger.fine(s"Query failed: $params. Retrying in ${sleepTime}ms...")
+                        Thread.sleep(sleepTime)
+                    } else {
+                        logger.severe(s"All $maxRetries attempts failed for: $params")
+                        throw ex
+                    }
+                }
+            }
+            finally {
+                client.close()
+            }
         }
 
-        throw new IllegalStateException("Should never get there")
+        throw new IllegalStateException("Should never reach this point")
+    }
+
+    /**
+     * Alternative URLConnection implementation (Haniya's September 2024 solution)
+     *
+     * BACKGROUND: This was the initial fix when HttpClient was completely failing.
+     * Instead of fixing HttpClient, this replaces it entirely with Java's built-in URLConnection.
+     *
+     * PROS: No external Apache dependencies, simpler code, works reliably
+     * CONS: Potentially slower than HttpClient (performance concern from kurzum)
+     *
+     * STATUS: Kept as backup/fallback approach. Can be used if HttpClient approach fails.
+     */
+    protected def queryWithURLConnection(params : String) : Elem =
+    {
+        for(i <- 0 to maxRetries)
+        {
+            try
+            {
+                val fullUrl = url + params
+                logger.fine(s"Querying MediaWiki API: $fullUrl")
+
+                val connection = new URL(fullUrl).openConnection()
+
+                // Set proper headers
+                connection.setRequestProperty("User-Agent", "DBpediaBot/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org) DBpedia/4.0")
+                connection.setRequestProperty("Accept", "application/xml, text/xml, */*")
+                connection.setConnectTimeout(30000) // 30 seconds
+                connection.setReadTimeout(60000)    // 60 seconds
+
+                val inputStream = connection.getInputStream
+
+                // More efficient reading without StringBuilder
+                val reader = new java.io.InputStreamReader(inputStream, "UTF-8")
+                val bufferedReader = new java.io.BufferedReader(reader)
+
+                try {
+                    val xml = XML.load(bufferedReader)
+                    return xml
+                } finally {
+                    bufferedReader.close()
+                    inputStream.close()
+                }
+
+            }
+            catch
+            {
+                case ex: java.net.SocketTimeoutException =>
+                {
+                    logger.warning(s"Timeout on attempt ${i+1} for: $params")
+
+                    if(i < maxRetries)
+                    {
+                        val sleepTime = Math.min(1000 * (i + 1), 5000) // Progressive backoff, max 5 seconds
+                        logger.fine(s"Retrying in ${sleepTime}ms...")
+                        Thread.sleep(sleepTime)
+                    } else {
+                        logger.severe(s"All $maxRetries attempts timed out for: $params")
+                        throw ex
+                    }
+                }
+                case ex: Exception =>
+                {
+                    logger.warning(s"Query attempt ${i+1} failed: ${ex.getMessage}")
+
+                    if(i < maxRetries)
+                    {
+                        val sleepTime = Math.min(1000 * (i + 1), 3000) // Progressive backoff, max 3 seconds
+                        logger.fine(s"Query failed: $params. Retrying in ${sleepTime}ms...")
+                        Thread.sleep(sleepTime)
+                    } else {
+                        logger.severe(s"All $maxRetries attempts failed for: $params")
+                        throw ex
+                    }
+                }
+            }
+        }
+
+        throw new IllegalStateException("Should never reach this point")
     }
 
     /**
