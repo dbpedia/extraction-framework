@@ -230,6 +230,7 @@ object DBpediaDatasets extends java.io.Serializable
     val FreebaseLinks: Dataset = datasets("freebase_links")
     val GeonamesLinks: Dataset = datasets("geonames_links")
     val CommonsLink: Dataset = datasets("commons_page_links")
+    val SisterProjectLink: Dataset = datasets("sisterprojects_page_links")
 
 
     /**
