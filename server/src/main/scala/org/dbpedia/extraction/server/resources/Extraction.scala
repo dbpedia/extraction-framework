@@ -179,15 +179,20 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
       }
     } catch {
       case e: IllegalArgumentException =>
-        throw new WebApplicationException(new Exception(e.getMessage), 400)
+        throw new WebApplicationException(e, 400)
       case e: IllegalStateException =>
-        throw new WebApplicationException(new Exception(e.getMessage), 500)
+        throw new WebApplicationException(e, 500)
       case e: WebApplicationException =>
         throw e
       case e: Exception =>
         val errorMsg = s"Extraction failed for language '${language.wikiCode}' with extractor '$extractorName': ${e.getMessage}"
         Extraction.logger.severe(errorMsg)
-        throw new WebApplicationException(new Exception(errorMsg), 500)
+        // Log the full (unshortened) stack trace
+        val sw = new java.io.StringWriter()
+        val pw = new java.io.PrintWriter(sw)
+        e.printStackTrace(pw)
+        Extraction.logger.severe("Full stack trace:\n" + sw.toString())
+        throw new WebApplicationException(new Exception(errorMsg, e), 500)
     }
 
     val result = writer.toString
