@@ -251,14 +251,32 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
     @Path("extract")
     @Consumes(Array("application/xml"))
     @Produces(Array("application/xml"))
-    def extract(xml : Elem) =
+    def extract(xml : Elem, @QueryParam("extractors") extractors: String) =
     {
         val writer = new StringWriter
         val formatter = TriX.writeHeader(writer, 2)
         val source = XMLSource.fromXML(xml, language)
         val destination = new WriterDestination(() => writer, formatter)
 
-        Server.getInstance().extractor.extract(source, destination, language)
+        val extractorName = Option(extractors).getOrElse("mappings")
+
+        extractorName match {
+          case "mappings" =>
+            Server.getInstance().extractor.extract(source, destination, language, false)
+
+          case "custom" =>
+            Server.getInstance().extractor.extract(source, destination, language, true)
+
+          case specificExtractor if specificExtractor.contains(",") =>
+            // Handle comma-separated list of extractors
+            val extractorNames = specificExtractor.split(",").map(_.trim).filter(_.nonEmpty)
+            extractorNames.foreach { name =>
+              Server.getInstance().extractWithSpecificExtractor(source, destination, language, name)
+            }
+
+          case specificExtractor =>
+            Server.getInstance().extractWithSpecificExtractor(source, destination, language, specificExtractor)
+        }
 
         writer.toString
     }
