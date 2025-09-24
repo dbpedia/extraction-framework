@@ -250,11 +250,27 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
     @POST
     @Path("extract")
     @Consumes(Array("application/xml"))
-    @Produces(Array("application/xml"))
-    def extract(xml : Elem, @QueryParam("extractors") extractors: String) =
-    {
+    def extract(xml : Elem, @QueryParam("extractors") extractors: String, @Context headers: HttpHeaders): Response = {
+        import scala.collection.JavaConverters._
+        val requestedTypesList = headers.getAcceptableMediaTypes.asScala.map(_.toString).toList
+        val browserMode = requestedTypesList.isEmpty || requestedTypesList.contains("text/html") || requestedTypesList.contains("application/xhtml+xml") || requestedTypesList.contains("text/plain")
+
         val writer = new StringWriter
-        val formatter = TriX.writeHeader(writer, 2)
+
+        val acceptContentBest = requestedTypesList.map(selectFormatByContentType).headOption.getOrElse("unknownAcceptFormat")
+        val finalFormat = if (!acceptContentBest.equalsIgnoreCase("unknownAcceptFormat") && !browserMode) acceptContentBest else "trix"
+        val contentType = if (browserMode) selectInBrowserContentType(finalFormat) else selectContentType(finalFormat)
+
+        val formatter = finalFormat match
+        {
+            case "turtle-triples" => new TerseFormatter(false, true)
+            case "turtle-quads" => new TerseFormatter(true, true)
+            case "n-triples" => new TerseFormatter(false, false)
+            case "n-quads" => new TerseFormatter(true, false)
+            case "rdf-json" => new RDFJSONFormatter()
+            case _ => TriX.writeHeader(writer, 2)
+        }
+
         val source = XMLSource.fromXML(xml, language)
         val destination = new WriterDestination(() => writer, formatter)
 
@@ -278,6 +294,10 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
             Server.getInstance().extractWithSpecificExtractor(source, destination, language, specificExtractor)
         }
 
-        writer.toString
+        val result = writer.toString
+
+        Response.ok(result)
+              .header(HttpHeaders.CONTENT_TYPE, contentType +"; charset=UTF-8" )
+              .build()
     }
 }
