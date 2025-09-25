@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.util
 
+import java.net.URL
 import java.util.logging.{Level, Logger}
 import java.util.{Locale, MissingResourceException}
 
@@ -91,7 +92,12 @@ object Language extends (String => Language)
     }
 
     val languages = new HashMap[String,Language]
-    val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
+    //val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
+
+    val conn = new URL("https://noc.wikimedia.org/conf/langlist").openConnection()
+    conn.setRequestProperty("User-Agent", "DBpedia-ExtractionFramework/1.0")
+    val source = scala.io.Source.fromInputStream(conn.getInputStream)
+
     val wikiLanguageCodes = try source.getLines.toList finally source.close
 
     val specialLangs: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("addonlangs.json"))
