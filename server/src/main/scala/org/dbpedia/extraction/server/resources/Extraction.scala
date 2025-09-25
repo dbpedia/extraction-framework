@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.server.resources
 
 import java.net.{URI, URL}
+import java.io.IOException
 
 import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
 import org.dbpedia.extraction.util.Language
@@ -53,6 +54,8 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
                 <input type="text" name="title" value={ getTitle }/><br/>
                 Revision ID (optional, overrides title)<br/>
                 <input type="text" name="revid"/><br/>
+                XML URL (optional, fetch XML from URL instead of title)<br/>
+                <input type="text" name="xmlUrl" placeholder="https://example.com/wiki/Special:Export/PageTitle"/><br/>
                 Output format<br/>
                 <select name="format">
                   <option value="trix">Trix</option>
@@ -131,9 +134,9 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
      */
     @GET
     @Path("extract")
-  def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String, @QueryParam("extractors") extractors: String, @Context headers: HttpHeaders): Response = {
+  def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String, @QueryParam("extractors") extractors: String, @QueryParam("xmlUrl") xmlUrl: String, @Context headers: HttpHeaders): Response = {
     import scala.collection.JavaConverters._
-    if (title == null && revid < 0) throw new WebApplicationException(new Exception("title or revid must be given"), Response.Status.NOT_FOUND)
+    if (title == null && revid < 0 && (xmlUrl == null || xmlUrl.isEmpty)) throw new WebApplicationException(new Exception("title, revid, or xmlUrl must be given"), Response.Status.BAD_REQUEST)
 
     val requestedTypesList = headers.getAcceptableMediaTypes.asScala.map(_.toString).toList
     val browserMode = requestedTypesList.isEmpty || requestedTypesList.contains("text/html") || requestedTypesList.contains("application/xhtml+xml") || requestedTypesList.contains("text/plain")
@@ -158,9 +161,43 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
         }
     val extractorName = Option(extractors).getOrElse("mappings")
 
-        val source =
+        val source = if (xmlUrl != null && !xmlUrl.isEmpty) {
+          // Fetch XML from custom URL with user agent
+          import org.apache.http.impl.client.HttpClients
+          import org.apache.http.client.methods.HttpGet
+          val client = HttpClients.createDefault
+          try {
+            val request = new HttpGet(xmlUrl)
+            // Apply user agent if enabled (same logic as WikiApi)
+            val customUserAgentEnabled = try {
+              System.getProperty("extract.wikiapi.customUserAgent.enabled", "false").toBoolean
+            } catch {
+              case ex: Exception => false
+            }
+            val customUserAgentText = try {
+              System.getProperty("extract.wikiapi.customUserAgent.text", "curl/8.6.0")
+            } catch {
+              case ex: Exception => "DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)"
+            }
+            if (customUserAgentEnabled) {
+              request.setHeader("User-Agent", customUserAgentText)
+            }
+            val response = client.execute(request)
+            val statusCode = response.getStatusLine.getStatusCode
+            if (statusCode != 200) {
+              throw new IOException(s"HTTP error ${statusCode}: ${response.getStatusLine.getReasonPhrase} for URL: $xmlUrl")
+            }
+            val xmlContent = scala.io.Source.fromInputStream(response.getEntity.getContent).mkString
+            val xml = scala.xml.XML.loadString(xmlContent)
+            XMLSource.fromXML(xml, language)
+          } finally {
+            client.close()
+          }
+        } else {
+          // Use WikiSource with default API
           if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
           else WikiSource.fromTitles(List(WikiTitle.parse(title, language)), new URL(language.apiUri), language)
+        }
 
         // See https://github.com/dbpedia/extraction-framework/issues/144
         // We should mimic the extraction framework behavior
