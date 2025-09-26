@@ -5,9 +5,9 @@ name: Extraction Framework Build and MiniDump Test
 
 on:
   push:
-    branches: [ master , testing]
+    branches: [ master , dev, testing]
   pull_request:
-    branches: [ master ]
+    branches: [ master , dev]
   schedule:
     - cron: '0 0 *,12 * *' 
 
@@ -18,7 +18,7 @@ jobs:
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       # needed for Wikimedia API calls
-      JAVA_TOOL_OPTIONS: '-Dhttp.agent=curl/8.6.0' 
+      JAVA_TOOL_OPTIONS: '-Dhttp.agent=curl/8.6.0 -Dextract.wikiapi.customUserAgent.enabled=true -Dextract.wikiapi.customUserAgent.text=curl/8.6.0' 
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
