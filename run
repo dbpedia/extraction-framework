@@ -27,5 +27,7 @@ done
 
 # if we're not on a terminal, use batch mode to avoid ugly log files
 [ ! -t 1 ] && BATCH="-B"
-
+# setting the user agent for WikiAPI for apache and java http clients; PLEASE change this according to https://foundation.wikimedia.org/wiki/Policy%3AWikimedia_Foundation_User-Agent_Policy
+# TODO maybe think about making a better default user agent string here requiring configuration of an email address and service URL
+export JAVA_TOOL_OPTIONS='-Dhttp.agent=curl/8.6.0 -Dextract.wikiapi.customUserAgent.enabled=true -Dextract.wikiapi.customUserAgent.text=curl/8.6.0'
 mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS"
