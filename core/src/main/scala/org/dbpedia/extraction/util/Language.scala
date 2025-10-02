@@ -1,10 +1,14 @@
 package org.dbpedia.extraction.util
 
+import java.net.URL
 import java.util.logging.{Level, Logger}
 import java.util.{Locale, MissingResourceException}
 
 import org.dbpedia.extraction.config.Config
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
+
+import org.apache.http.impl.client.HttpClients
+import org.apache.http.client.methods.HttpGet
 
 import scala.collection.mutable.HashMap
 import scala.io.{Codec, Source}
@@ -91,8 +95,15 @@ object Language extends (String => Language)
     }
 
     val languages = new HashMap[String,Language]
-    val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
-    val wikiLanguageCodes = try source.getLines.toList finally source.close
+    //val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
+    // User Agent behaviour to bypass 403 error
+    val client = HttpClients.createDefault()
+    val request = new HttpGet(langListUrl)
+    request.setHeader("User-Agent", "curl/8.6.0")
+
+    val response = client.execute(request)
+    val stream = response.getEntity.getContent
+    val wikiLanguageCodes = try Source.fromInputStream(stream)(Codec.UTF8).getLines.toList finally{ stream.close(); client.close() }
 
     val specialLangs: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("addonlangs.json"))
 
