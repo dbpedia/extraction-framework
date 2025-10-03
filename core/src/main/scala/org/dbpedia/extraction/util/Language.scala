@@ -9,6 +9,9 @@ import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 import scala.collection.mutable.HashMap
 import scala.io.{Codec, Source}
 
+import org.apache.http.impl.client.HttpClients
+import org.apache.http.client.methods.HttpGet
+
 /**
  * Represents a MediaWiki instance and the language used on it. Initially, this class was
  * only used for xx.wikipedia.org instances, but now we also use it for mappings.dbpedia.org
