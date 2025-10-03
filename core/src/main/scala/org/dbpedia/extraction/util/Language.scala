@@ -91,8 +91,13 @@ object Language extends (String => Language)
     }
 
     val languages = new HashMap[String,Language]
-    val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
-    val wikiLanguageCodes = try source.getLines.toList finally source.close
+    val client = HttpClients.createDefault()
+    val request = new HttpGet(wikipediaLanguageUrl)
+    request.setHeader("User-Agent", "curl/8.6.0") 
+
+    val response = client.execute(request)
+    val stream = response.getEntity.getContent
+    val wikiLanguageCodes = try Source.fromInputStream(stream).getLines().toList finally{ stream.close; client.close() }
 
     val specialLangs: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("addonlangs.json"))
 
