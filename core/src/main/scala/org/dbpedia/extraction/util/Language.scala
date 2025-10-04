@@ -98,9 +98,9 @@ object Language extends (String => Language)
     val request = new HttpGet(wikipediaLanguageUrl)
     //request.setHeader("User-Agent", "curl/8.6.0") 
 
-    val customUserAgentEnabled := Boolean =
+    val customUserAgentEnabled : Boolean =
       try{
-        System.getProperty("extract.wikiapi.customUserAgent.enabled", false)
+        System.getProperty("extract.wikiapi.customUserAgent.enabled", "false")
       }
       catch{
         case _: Exception => false
