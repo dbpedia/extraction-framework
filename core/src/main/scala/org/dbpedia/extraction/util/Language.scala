@@ -96,11 +96,40 @@ object Language extends (String => Language)
     val languages = new HashMap[String,Language]
     val client = HttpClients.createDefault()
     val request = new HttpGet(wikipediaLanguageUrl)
-    request.setHeader("User-Agent", "curl/8.6.0") 
+    //request.setHeader("User-Agent", "curl/8.6.0") 
+
+    val customUserAgentEnabled := Boolean =
+      try{
+        System.getProperty("extract.wikiapi.customUserAgent.enabled", false)
+      }
+      catch{
+        case _: Exception => false
+        logger.log(Level.WARNING, "Could not read system property extract.wikiapi.customUserAgent.enabled, using default value false")
+      }
+    
+    val customUserAgentText: String =
+      try{
+        System.getProperty("extract.wikiapi.customUserAgent.text", "curl/8.6.0")
+      }
+      catch { 
+        case _: Exception =>
+          "DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)"
+          logger.log(Level.WARNING, "Could not read system property extract.wikiapi.customUserAgent.text, using default value DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)")
+      }
+
+    // Apply User-Agent conditionally
+    if (customUserAgentEnabled) {
+      request.setHeader("User-Agent", customUserAgentText)
+    }
 
     val response = client.execute(request)
     val stream = response.getEntity.getContent
-    val wikiLanguageCodes = try Source.fromInputStream(stream).getLines().toList finally{ stream.close; client.close() }
+    val wikiLanguageCodes = 
+      try Source.fromInputStream(stream).getLines().toList 
+      finally{ 
+        stream.close()
+        client.close() 
+      }
 
     val specialLangs: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("addonlangs.json"))
 
