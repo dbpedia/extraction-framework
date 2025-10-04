@@ -103,8 +103,9 @@ object Language extends (String => Language)
         System.getProperty("extract.wikiapi.customUserAgent.enabled", "false").toBoolean
       }
       catch{
-        case _: Exception => false
-        logger.log(Level.WARNING, "Could not read system property extract.wikiapi.customUserAgent.enabled, using default value false")
+        case _: Exception => 
+          logger.log(Level.WARNING, "Could not read system property extract.wikiapi.customUserAgent.enabled, using default value false")
+          false
       }
     
     val customUserAgentText: String =
@@ -113,8 +114,8 @@ object Language extends (String => Language)
       }
       catch { 
         case _: Exception =>
-          "DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)"
           logger.log(Level.WARNING, "Could not read system property extract.wikiapi.customUserAgent.text, using default value DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)")
+          "DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)"
       }
 
     // Apply User-Agent conditionally
