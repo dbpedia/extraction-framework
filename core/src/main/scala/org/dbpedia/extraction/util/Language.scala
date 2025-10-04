@@ -100,7 +100,7 @@ object Language extends (String => Language)
 
     val customUserAgentEnabled : Boolean =
       try{
-        System.getProperty("extract.wikiapi.customUserAgent.enabled", "false")
+        System.getProperty("extract.wikiapi.customUserAgent.enabled", "false").toBoolean
       }
       catch{
         case _: Exception => false
