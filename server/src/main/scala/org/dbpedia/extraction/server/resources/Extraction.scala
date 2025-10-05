@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server.resources
 import java.net.{URI, URL}
 import java.io.IOException
 
-import org.dbpedia.extraction.destinations.formatters.{RDFJSONFormatter, TerseFormatter}
+import org.dbpedia.extraction.destinations.formatters.{Formatter, RDFJSONFormatter, TerseFormatter}
 import org.dbpedia.extraction.util.Language
 import javax.ws.rs._
 import javax.ws.rs.core.{Context, HttpHeaders, MediaType, Response}
@@ -13,10 +13,12 @@ import scala.xml.Elem
 import scala.io.{Codec, Source}
 import org.dbpedia.extraction.server.Server
 import org.dbpedia.extraction.wikiparser.WikiTitle
-import org.dbpedia.extraction.destinations.{DeduplicatingDestination, WriterDestination}
+import org.dbpedia.extraction.destinations.{DeduplicatingDestination, Destination, WriterDestination}
 import org.dbpedia.extraction.sources.{Source, WikiSource, XMLSource}
 import stylesheets.TriX
+import org.dbpedia.extraction.transform.Quad
 import java.io.StringWriter
+import scala.collection.mutable.ArrayBuffer
 
 object Extraction
 {
@@ -65,15 +67,14 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
                   <option value="n-quads">N-Quads</option>
                   <option value="rdf-json">RDF/JSON</option>
                 </select><br/>
-                <select name="extractors">
-                <option value="mappings">Mappings Only</option>
-                <option value="custom">All Enabled Extractors </option>{
-                extractors.map(extractor =>
-                  <option value={extractor}>
-                    {extractor}
-                  </option>
-                )}
-                </select><br/>
+              Select Extractors:<br/>
+              <label for="mappings">Mappings Only <input type="checkbox" name="extractors" value="mappings" id="mappings"/></label><br/>
+              <label for="custom">All Enabled Extractors <input type="checkbox" name="extractors" value="custom" id="custom"/></label><br/>
+              {extractors.map(extractor =>
+                <span>
+                  <label for={extractor}>{extractor} <input type="checkbox" name="extractors" value={extractor} id={extractor}/></label><br/>
+                </span>
+              )}
               <input type="submit" value="Extract" />
             </form>
             </div>
@@ -129,19 +130,36 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
     }
   }
 
+  /**
+   * Custom destination that collects quads in memory
+   */
+  private class QuadCollectorDestination extends Destination {
+    val quads = new ArrayBuffer[Quad]()
+
+    override def open(): Unit = {}
+
+  override def write(graph: Traversable[Quad]): Unit = {
+  quads ++= graph
+}
+
+    override def close(): Unit = {}
+  }
+
     /**
      * Extracts a MediaWiki article
      */
     @GET
     @Path("extract")
-  def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String, @QueryParam("extractors") extractors: String, @QueryParam("xmlUrl") xmlUrl: String, @Context headers: HttpHeaders): Response = {
+  def extract(@QueryParam("title") title: String, @QueryParam("revid") @DefaultValue("-1") revid: Long, @QueryParam("format") format: String, @QueryParam("extractors") extractors: java.util.List[String], @Context headers: HttpHeaders): Response = {
     import scala.collection.JavaConverters._
-    if (title == null && revid < 0 && (xmlUrl == null || xmlUrl.isEmpty)) throw new WebApplicationException(new Exception("title, revid, or xmlUrl must be given"), Response.Status.BAD_REQUEST)
+  import java.io.IOException
+
+  if (title == null && revid < 0)
+    throw new WebApplicationException(new Exception("title or revid must be given"), Response.Status.NOT_FOUND)
 
     val requestedTypesList = headers.getAcceptableMediaTypes.asScala.map(_.toString).toList
     val browserMode = requestedTypesList.isEmpty || requestedTypesList.contains("text/html") || requestedTypesList.contains("application/xhtml+xml") || requestedTypesList.contains("text/plain")
 
-        val writer = new StringWriter
 
         var finalFormat = format
         val acceptContentBest = requestedTypesList.map(selectFormatByContentType).headOption.getOrElse("unknownAcceptFormat")
@@ -150,94 +168,131 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
           finalFormat = acceptContentBest
         val contentType = if (browserMode) selectInBrowserContentType(finalFormat) else selectContentType(finalFormat)
 
-        val formatter = finalFormat match
-        {
-            case "turtle-triples" => new TerseFormatter(false, true)
-            case "turtle-quads" => new TerseFormatter(true, true)
-            case "n-triples" => new TerseFormatter(false, false)
-            case "n-quads" => new TerseFormatter(true, false)
-            case "rdf-json" => new RDFJSONFormatter()
-            case _ => TriX.writeHeader(writer, 2)
-        }
-    val extractorName = Option(extractors).getOrElse("mappings")
-
-        val source = if (xmlUrl != null && !xmlUrl.isEmpty) {
-          // Fetch XML from custom URL with user agent
-          import org.apache.http.impl.client.HttpClients
-          import org.apache.http.client.methods.HttpGet
-          val client = HttpClients.createDefault
-          try {
-            val request = new HttpGet(xmlUrl)
-            // Apply user agent if enabled (same logic as WikiApi)
-            val customUserAgentEnabled = try {
-              System.getProperty("extract.wikiapi.customUserAgent.enabled", "false").toBoolean
-            } catch {
-              case ex: Exception => false
-            }
-            val customUserAgentText = try {
-              System.getProperty("extract.wikiapi.customUserAgent.text", "curl/8.6.0")
-            } catch {
-              case ex: Exception => "DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)"
-            }
-            if (customUserAgentEnabled) {
-              request.setHeader("User-Agent", customUserAgentText)
-            }
-            val response = client.execute(request)
-            val statusCode = response.getStatusLine.getStatusCode
-            if (statusCode != 200) {
-              throw new IOException(s"HTTP error ${statusCode}: ${response.getStatusLine.getReasonPhrase} for URL: $xmlUrl")
-            }
-            val xmlContent = scala.io.Source.fromInputStream(response.getEntity.getContent).mkString
-            val xml = scala.xml.XML.loadString(xmlContent)
-            XMLSource.fromXML(xml, language)
-          } finally {
-            client.close()
-          }
-        } else {
-          // Use WikiSource with default API
-          if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
-          else WikiSource.fromTitles(List(WikiTitle.parse(title, language)), new URL(language.apiUri), language)
-        }
-
-        // See https://github.com/dbpedia/extraction-framework/issues/144
-        // We should mimic the extraction framework behavior
-        val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
+  // Convert Java List to Scala and join with commas
+  val extractorName = if (extractors == null || extractors.isEmpty) {
+    "mappings"
+  } else {
+    extractors.asScala.mkString(",")
+  }
 
     try {
       extractorName match {
         case "mappings" =>
-          Server.getInstance().extractor.extract(source, destination, language, false)
+        val writer = new StringWriter
+        val formatter = createFormatter(finalFormat, writer)
+        val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
+
+        val source =
+          if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
+          else WikiSource.fromTitles(List(WikiTitle.parse(title, language)), new URL(language.apiUri), language)
+
+        Server.getInstance().extractor.extract(source, destination, language, false)
+
+        Response.ok(writer.toString)
+          .header(HttpHeaders.CONTENT_TYPE, contentType + "; charset=UTF-8")
+          .build()
 
         case "custom" =>
-          Server.getInstance().extractor.extract(source, destination, language, true)
+        val writer = new StringWriter
+        val formatter = createFormatter(finalFormat, writer)
+        val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
 
-        case specificExtractor =>
-          Server.getInstance().extractWithSpecificExtractor(source, destination, language, specificExtractor)
-      }
-    } catch {
-      case e: IllegalArgumentException =>
-        throw new WebApplicationException(e, 400)
-      case e: IllegalStateException =>
-        throw new WebApplicationException(e, 500)
-      case e: WebApplicationException =>
-        throw e
-      case e: Exception =>
-        val errorMsg = s"Extraction failed for language '${language.wikiCode}' with extractor '$extractorName': ${e.getMessage}"
-        Extraction.logger.severe(errorMsg)
-        // Log the full (unshortened) stack trace
-        val sw = new java.io.StringWriter()
-        val pw = new java.io.PrintWriter(sw)
-        e.printStackTrace(pw)
-        Extraction.logger.severe("Full stack trace:\n" + sw.toString())
-        throw new WebApplicationException(new Exception(errorMsg, e), 500)
-    }
+        val source =
+          if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
+          else WikiSource.fromTitles(List(WikiTitle.parse(title, language)), new URL(language.apiUri), language)
 
-    val result = writer.toString
+        Server.getInstance().extractor.extract(source, destination, language, true)
 
-    Response.ok(result)
-          .header(HttpHeaders.CONTENT_TYPE, contentType +"; charset=UTF-8" )
+        Response.ok(writer.toString)
+          .header(HttpHeaders.CONTENT_TYPE, contentType + "; charset=UTF-8")
+          .build()
+
+      case specificExtractor if specificExtractor.contains(",") =>
+        // Handle comma-separated list of extractors
+        val extractorNames = specificExtractor.split(",").map(_.trim).filter(_.nonEmpty)
+
+        logger.info(s"Processing ${extractorNames.length} extractors: ${extractorNames.mkString(", ")}")
+
+        val collector = new QuadCollectorDestination()
+
+        for (name <- extractorNames) {
+          try {
+            logger.info(s"Processing extractor: $name")
+
+            val freshSource =
+              if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
+              else WikiSource.fromTitles(List(WikiTitle.parse(title, language)), new URL(language.apiUri), language)
+
+            Server.getInstance().extractWithSpecificExtractor(freshSource, collector, language, name)
+            logger.info(s"Completed extractor: $name")
+          } catch {
+            case e: IllegalArgumentException =>
+              logger.warning(s"Extractor $name not found: ${e.getMessage}")
+            case e: Exception =>
+              logger.severe(s"Failed to extract with $name: ${e.getMessage}")
+              e.printStackTrace()
+          }
+        }
+
+        val writer = new StringWriter
+        val formatter = createFormatter(finalFormat, writer)
+        val finalDestination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
+
+        finalDestination.open()
+        finalDestination.write(collector.quads)
+        finalDestination.close()
+
+        Response.ok(writer.toString)
+          .header(HttpHeaders.CONTENT_TYPE, contentType + "; charset=UTF-8")
+          .build()
+
+      case specificExtractor =>
+        val writer = new StringWriter
+        val formatter = createFormatter(finalFormat, writer)
+        val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
+
+        val source =
+          if (revid >= 0) WikiSource.fromRevisionIDs(List(revid), new URL(language.apiUri), language)
+          else WikiSource.fromTitles(List(WikiTitle.parse(title, language)), new URL(language.apiUri), language)
+
+        Server.getInstance().extractWithSpecificExtractor(source, destination, language, specificExtractor)
+
+        Response.ok(writer.toString)
+          .header(HttpHeaders.CONTENT_TYPE, contentType + "; charset=UTF-8")
           .build()
     }
+  } catch {
+    case e: IllegalArgumentException =>
+      throw new WebApplicationException(e, 400)
+    case e: IllegalStateException =>
+      throw new WebApplicationException(e, 500)
+    case e: WebApplicationException =>
+      throw e
+    case e: Exception =>
+      val errorMsg = s"Extraction failed for language '${language.wikiCode}' with extractor '$extractorName': ${e.getMessage}"
+      Extraction.logger.severe(errorMsg)
+      val sw = new java.io.StringWriter()
+      val pw = new java.io.PrintWriter(sw)
+      e.printStackTrace(pw)
+      Extraction.logger.severe("Full stack trace:\n" + sw.toString())
+      throw new WebApplicationException(new Exception(errorMsg, e), 500)
+  }
+}
+
+/**
+ * Helper method to create formatter based on format type
+ */
+private def createFormatter(finalFormat: String, writer: StringWriter): Formatter = {
+  finalFormat match {
+    case "turtle-triples" => new TerseFormatter(false, true)
+    case "turtle-quads" => new TerseFormatter(true, true)
+    case "n-triples" => new TerseFormatter(false, false)
+    case "n-quads" => new TerseFormatter(true, false)
+    case "rdf-json" => new RDFJSONFormatter()
+    case "trix" => TriX.writeHeader(writer, 2) // Returns TriXFormatter
+    case _ => TriX.writeHeader(writer, 2) // Default to TriX
+  }
+}
 
   // map
   private def selectFormatByContentType(format: String): String = {
@@ -292,49 +347,82 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
         val requestedTypesList = headers.getAcceptableMediaTypes.asScala.map(_.toString).toList
         val browserMode = requestedTypesList.isEmpty || requestedTypesList.contains("text/html") || requestedTypesList.contains("application/xhtml+xml") || requestedTypesList.contains("text/plain")
 
-        val writer = new StringWriter
-
         val acceptContentBest = requestedTypesList.map(selectFormatByContentType).headOption.getOrElse("unknownAcceptFormat")
         val finalFormat = if (!acceptContentBest.equalsIgnoreCase("unknownAcceptFormat") && !browserMode) acceptContentBest else "trix"
         val contentType = if (browserMode) selectInBrowserContentType(finalFormat) else selectContentType(finalFormat)
-
-        val formatter = finalFormat match
-        {
-            case "turtle-triples" => new TerseFormatter(false, true)
-            case "turtle-quads" => new TerseFormatter(true, true)
-            case "n-triples" => new TerseFormatter(false, false)
-            case "n-quads" => new TerseFormatter(true, false)
-            case "rdf-json" => new RDFJSONFormatter()
-            case _ => TriX.writeHeader(writer, 2)
-        }
-
-        val source = XMLSource.fromXML(xml, language)
-        val destination = new WriterDestination(() => writer, formatter)
 
         val extractorName = Option(extractors).getOrElse("mappings")
 
         extractorName match {
           case "mappings" =>
+            val writer = new StringWriter
+            val formatter = createFormatter(finalFormat, writer)
+            val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
+            val source = XMLSource.fromXML(xml, language)
             Server.getInstance().extractor.extract(source, destination, language, false)
 
+            Response.ok(writer.toString)
+              .header(HttpHeaders.CONTENT_TYPE, contentType + "; charset=UTF-8")
+              .build()
+
           case "custom" =>
+            val writer = new StringWriter
+            val formatter = createFormatter(finalFormat, writer)
+            val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
+            val source = XMLSource.fromXML(xml, language)
             Server.getInstance().extractor.extract(source, destination, language, true)
+
+            Response.ok(writer.toString)
+              .header(HttpHeaders.CONTENT_TYPE, contentType + "; charset=UTF-8")
+              .build()
 
           case specificExtractor if specificExtractor.contains(",") =>
             // Handle comma-separated list of extractors
             val extractorNames = specificExtractor.split(",").map(_.trim).filter(_.nonEmpty)
+
+            logger.info(s"POST: Processing ${extractorNames.length} extractors: ${extractorNames.mkString(", ")}")
+
+            // Collect quads from all extractors
+            val collector = new QuadCollectorDestination()
+
             extractorNames.foreach { name =>
-              Server.getInstance().extractWithSpecificExtractor(source, destination, language, name)
+              try {
+                logger.info(s"POST: Processing extractor: $name")
+                val freshSource = XMLSource.fromXML(xml, language)
+                Server.getInstance().extractWithSpecificExtractor(freshSource, collector, language, name)
+                logger.info(s"POST: Completed extractor: $name")
+              } catch {
+                case e: IllegalArgumentException =>
+                  logger.warning(s"POST: Extractor $name not found: ${e.getMessage}")
+                case e: Exception =>
+                  logger.severe(s"POST: Failed to extract with $name: ${e.getMessage}")
+                  e.printStackTrace()
+              }
             }
 
-          case specificExtractor =>
-            Server.getInstance().extractWithSpecificExtractor(source, destination, language, specificExtractor)
-        }
+            // Write all collected quads at once
+            val writer = new StringWriter
+            val formatter = createFormatter(finalFormat, writer)
+            val finalDestination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
 
-        val result = writer.toString
+            finalDestination.open()
+            finalDestination.write(collector.quads)
+            finalDestination.close()
 
-        Response.ok(result)
-              .header(HttpHeaders.CONTENT_TYPE, contentType +"; charset=UTF-8" )
+            Response.ok(writer.toString)
+              .header(HttpHeaders.CONTENT_TYPE, contentType + "; charset=UTF-8")
               .build()
+
+          case specificExtractor =>
+            val writer = new StringWriter
+            val formatter = createFormatter(finalFormat, writer)
+            val destination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
+            val source = XMLSource.fromXML(xml, language)
+            Server.getInstance().extractWithSpecificExtractor(source, destination, language, specificExtractor)
+
+            Response.ok(writer.toString)
+              .header(HttpHeaders.CONTENT_TYPE, contentType + "; charset=UTF-8")
+              .build()
+        }
     }
 }
