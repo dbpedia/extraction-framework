@@ -71,11 +71,12 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
               Select Extractors:<br/>
               <label for="mappings">Mappings Only <input type="checkbox" name="extractors" value="mappings" id="mappings"/></label><br/>
               <label for="custom">All Enabled Extractors <input type="checkbox" name="extractors" value="custom" id="custom"/></label><br/>
-              {extractors.map(extractor =>
-                <span>
-                  <label for={extractor}>{extractor} <input type="checkbox" name="extractors" value={extractor} id={extractor}/></label><br/>
-                </span>
-              )}
+              {extractors.map(extractor => {
+  val sanitizedId = extractor.replaceAll("[^a-zA-Z0-9_-]", "_")
+  <span>
+    <label for={sanitizedId}>{extractor} <input type="checkbox" name="extractors" value={extractor} id={sanitizedId}/></label><br/>
+  </span>
+})}
               <input type="submit" value="Extract" />
             </form>
             </div>
@@ -278,7 +279,7 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
   def extract(@QueryParam("title") title: String,
               @QueryParam("revid") @DefaultValue("-1") revid: Long,
               @QueryParam("format") format: String,
-              @QueryParam("extractors") extractors: String,
+              @QueryParam("extractors") extractors: java.util.List[String],
               @QueryParam("xmlUrl") xmlUrl: String,
               @Context headers: HttpHeaders): Response = {
     import scala.collection.JavaConverters._
@@ -298,8 +299,11 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
       finalFormat = acceptContentBest
     val contentType = if (browserMode) selectInBrowserContentType(finalFormat) else selectContentType(finalFormat)
 
-    val extractorName = Option(extractors).getOrElse("mappings")
-
+val extractorName = if (extractors == null || extractors.isEmpty) {
+  "mappings"
+} else {
+  extractors.asScala.mkString(",")
+}
     try {
       performExtraction(
         extractorName,
@@ -383,8 +387,7 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
     @POST
     @Path("extract")
     @Consumes(Array("application/xml"))
-    def extract(xml : Elem, @QueryParam("extractors") extractors: String, @Context headers: HttpHeaders): Response = {
-        import scala.collection.JavaConverters._
+def extract(xml : Elem, @QueryParam("extractors") extractors: java.util.List[String], @Context headers: HttpHeaders): Response = {        import scala.collection.JavaConverters._
         val requestedTypesList = headers.getAcceptableMediaTypes.asScala.map(_.toString).toList
         val browserMode = requestedTypesList.isEmpty || requestedTypesList.contains("text/html") || requestedTypesList.contains("application/xhtml+xml") || requestedTypesList.contains("text/plain")
 
@@ -394,8 +397,11 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
         val finalFormat = if (!acceptContentBest.equalsIgnoreCase("unknownAcceptFormat") && !browserMode) acceptContentBest else "trix"
         val contentType = if (browserMode) selectInBrowserContentType(finalFormat) else selectContentType(finalFormat)
 
-    val extractorName = Option(extractors).getOrElse("mappings")
-
+val extractorName = if (extractors == null || extractors.isEmpty) {
+  "mappings"
+} else {
+  extractors.asScala.mkString(",")
+}
     performExtraction(
       extractorName,
       () => XMLSource.fromXML(xml, language),
