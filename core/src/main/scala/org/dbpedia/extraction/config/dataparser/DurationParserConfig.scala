@@ -340,7 +340,7 @@ object DurationParserConfig
             "घंटा" -> "hour",
             "दिन" -> "day",
             "महीना" -> "month",
-            "वर्ष" -> "year",
+            "वर्ष" -> "year"
         ),
         "it" -> Map(
             "secondo" -> "second",
