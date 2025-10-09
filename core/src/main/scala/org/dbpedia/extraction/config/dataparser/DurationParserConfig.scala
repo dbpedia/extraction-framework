@@ -379,6 +379,20 @@ object DurationParserConfig
             "año" -> "year",
             "años" -> "year"
         ),
+        "hi" -> Map(
+            "सेकेंड" -> "second",
+            "सेकेण्ड" -> "second",
+            "s" -> "second",
+            "\"" -> "second",
+            "मिनट" -> "minute",
+            "'" -> "minute", // copied from english configuration
+            "′" -> "minute", // prime symbol as minute symbol according to AI
+            "m" -> "minute",
+            "घंटा" -> "hour",
+            "दिन" -> "day",
+            "महीना" -> "month",
+            "वर्ष" -> "year"
+        ),
         "it" -> Map(
             "secondo" -> "second",
             "secondi" -> "second",

@@ -22,6 +22,7 @@ object DisambiguationExtractorConfig
          "ga" -> " (idirdhealáin)",
          "gl" -> " (homónimos)",
          "he" -> " (פירושונים)",
+         "hi" -> " (बहुविकल्पी)", // eg. https://hi.wikipedia.org/wiki/आयरलैण्ड_(बहुविकल्पी)
          "hu" -> " (egyértelműsítő lap)",
          "id" -> " (disambig)",
          "it" -> " (disambigua)",
