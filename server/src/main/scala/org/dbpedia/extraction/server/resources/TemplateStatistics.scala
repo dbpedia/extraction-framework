@@ -87,6 +87,11 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
 
     val language = Language.getOrElse(langCode, throw new WebApplicationException(new Exception("invalid language " + langCode), 404))
 
+    // Wikidata doesn't support template mapping statistics
+if (language.wikiCode == "wikidata") {
+  throw new WebApplicationException(new Exception("Template mapping statistics are not available for Wikidata"), 501)
+}
+
     if (! Server.instance.managers.contains(language)) throw new WebApplicationException(new Exception("language " + langCode + " not defined in server"), 404)
 
     val manager = Server.instance.managers(language)
