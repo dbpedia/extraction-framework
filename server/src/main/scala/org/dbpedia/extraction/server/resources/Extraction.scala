@@ -70,16 +70,54 @@ val extractors = Server.getInstance().getAvailableExtractorNames(language)
                   <option value="rdf-json">RDF/JSON</option>
                 </select><br/>
               Select Extractors:<br/>
-              <label for="mappings">Mappings Only <input type="checkbox" name="extractors" value="mappings" id="mappings"/></label><br/>
-              <label for="custom">All Enabled Extractors <input type="checkbox" name="extractors" value="custom" id="custom"/></label><br/>
-              {extractors.map(extractor => {
-  val sanitizedId = extractor.replaceAll("[^a-zA-Z0-9_-]", "_")
-  <span>
-    <label for={sanitizedId}>{extractor} <input type="checkbox" name="extractors" value={extractor} id={sanitizedId}/></label><br/>
-  </span>
+              <select id="extractorMode" onchange="toggleCustomExtractors()">
+                <option value="mappings">Mappings Only </option>
+                <option value="custom">All Enabled Extractors</option>
+                <option value="custom-selection">Custom</option>
+              </select><br/>
+              <div id="customExtractors" style="display:none; margin-top:10px; padding:10px; border:1px solid #ddd; background-color:#f9f9f9;">
+                <strong>Select extractors to combine:</strong><br/>
+                <label><input type="checkbox" name="extractors" value="mappings" id="cb-mappings"/> Mappings Only</label><br/>
+                <label><input type="checkbox" name="extractors" value="custom" id="cb-custom"/> All Enabled Extractors</label><br/>
+                {extractors.map(extractor => {
+  val sanitizedId = "cb-" + extractor.replaceAll("[^a-zA-Z0-9_-]", "_")
+                  <label><input type="checkbox" name="extractors" value={extractor} id={sanitizedId}/> {extractor}</label><br/>
 })}
+              </div>
               <input type="submit" value="Extract" />
             </form>
+               <script type="text/javascript">
+                {scala.xml.Unparsed("""
+                function toggleCustomExtractors() {
+                  var mode = document.getElementById('extractorMode').value;
+                  var customDiv = document.getElementById('customExtractors');
+
+                  if (mode === 'custom-selection') {
+                    customDiv.style.display = 'block';
+                  } else {
+                    customDiv.style.display = 'none';
+                  }
+                }
+
+                document.querySelector('form').addEventListener('submit', function(e) {
+                  var mode = document.getElementById('extractorMode').value;
+
+                  if (mode === 'mappings') {
+                    var input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'extractors';
+                    input.value = 'mappings';
+                    this.appendChild(input);
+                  } else if (mode === 'custom') {
+                    var input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'extractors';
+                    input.value = 'custom';
+                    this.appendChild(input);
+                  }
+                });
+                """)}
+              </script>
             </div>
            </div>
          </body>
@@ -251,23 +289,34 @@ name match {
         }
 
         if (errors.nonEmpty) {
+          logger.warning(s"Partial extraction completed with errors: ${errors.mkString("; ")}")
+          if (collector.quads.isEmpty) {
           val errorMessage = if (errors.size == 1) errors.head
                             else s"Multiple extractor errors:\n${errors.mkString("\n")}"
           val statusCode = if (errors.exists(_.contains("not found"))) Response.Status.BAD_REQUEST
                           else Response.Status.INTERNAL_SERVER_ERROR
           throw new WebApplicationException(new Exception(errorMessage), statusCode)
+          }
         }
 
         val writer = new StringWriter
         val formatter = createFormatter(finalFormat, writer)
+
+        if (errors.nonEmpty && (finalFormat.contains("turtle") || finalFormat.contains("n-triples") || finalFormat.contains("n-quads"))) {
+          writer.write("# Warning: Partial results - some extractors failed:\n")
+          errors.foreach(err => writer.write(s"# - $err\n"))
+          writer.write("\n")
+        }
+
         val finalDestination = new DeduplicatingDestination(new WriterDestination(() => writer, formatter))
         finalDestination.open()
         finalDestination.write(collector.quads)
         finalDestination.close()
 
-        Response.ok(writer.toString)
+        val responseBuilder = Response.ok(writer.toString)
           .header(HttpHeaders.CONTENT_TYPE, contentType + "; charset=UTF-8")
-          .build()
+        if (errors.nonEmpty) responseBuilder.header("X-Extraction-Warnings", errors.mkString("; "))
+        responseBuilder.build()
 
         case specificExtractor =>
         val writer = new StringWriter
