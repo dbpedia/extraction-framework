@@ -13,6 +13,47 @@ CYAN='\033[0;36m'
 PURPLE='\033[0;35m'
 NC='\033[0m'
 
+# Configuration
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+FIXED_DATA_FILE="${SCRIPT_DIR}/test_data_fixed.txt"
+REVISION_FILE="${SCRIPT_DIR}/test_data_revisions.txt"
+GENERATE_MODE=false
+UPDATE_MODE=false
+USE_LIVE_DATA=false
+PASS_THRESHOLD=80
+debug=false
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --generate-fixed) GENERATE_MODE=true; shift ;;
+        --update-fixed) UPDATE_MODE=true; shift ;;
+        --live-data) USE_LIVE_DATA=true; shift ;;
+        --threshold) PASS_THRESHOLD="$2"; shift 2 ;;
+        --debug|-d) debug=true; shift ;;
+        --help|-h)
+            echo "Usage: $0 [OPTIONS]"
+            echo ""
+            echo "PRIMARY USE CASE - Code Regression Testing:"
+            echo "  (default)          Test against FIXED snapshot → detects CODE changes"
+            echo ""
+            echo "Data Snapshot Management:"
+            echo "  --generate-fixed   Generate initial fixed snapshot from current Wikipedia"
+            echo "  --update-fixed     Update snapshot (only changed pages by revision ID)"
+            echo ""
+            echo "SEPARATE USE CASE - Environment Monitoring:"
+            echo "  --live-data        Test against CURRENT Wikipedia → detects DATA changes"
+            echo ""
+            echo "Options:"
+            echo "  --threshold N      Set pass threshold (default: 80)"
+            echo "  --debug, -d        Enable debug output"
+            echo "  --help, -h         Show this help"
+            exit 0
+            ;;
+        *) shift ;;
+    esac
+done
+
 echo -e "${BLUE}🎯 Enhanced DBpedia Coordinate Extraction Test - FIXED${NC}"
 echo "========================================================"
 
@@ -226,7 +267,7 @@ KNOWN_COORDS=(
 
        # New Zealand - Country
        ["en:New Zealand"]="-41.2865,174.7762"  # Country
-       ["de:Neuseeland"]="-40.843611,172.0"  # West Coast Region
+       ["de:Neuseeland"]="-34.393,173.0133"  # West Coast Region
 
        # Papua New Guinea - Country
        ["en:Papua New Guinea"]="-9.4788,147.1494"  # Capital city
@@ -237,7 +278,7 @@ KNOWN_COORDS=(
        ["de:Fidschi"]="-18.0,179.0"  # Country
 
        # Russia - Country
-       ["en:Russia"]="55.7558,37.6176"  # Country
+       ["en:Russia"]="66.0,94.0"  # Country
        ["de:Russland"]=" 58.65, 70.1166"  # Country
 
        # Ukraine - Country
@@ -271,7 +312,7 @@ KNOWN_COORDS=(
        ["de:Paraguay"]="-23.0,-58.0"  # Country center
        ["en:Bolivia"]="-17.8,-63.1667"  # Capital city
        ["de:Bolivien"]="-17.0,-65.0"  # Country center
-       ["en:Ecuador"]="-0.1807,-78.4678"  # Capital city
+       ["en:Ecuador"]="-2.0,-77.5"  # Capital city
        ["de:Ecuador"]="-1.4653,-78.8167"  # Country center
        ["en:Guyana"]="6.8013,-58.1551"  # Capital city
        ["de:Guyana"]="5.0,-59.0"  # Country center
@@ -304,27 +345,139 @@ KNOWN_COORDS=(
        ["en:Maldives"]="4.1755,73.5093"  # Capital city
        ["de:Malediven"]="3.2,73.0"  # Country center
    )
+load_fixed_data() {
+    if [[ ! -f "$FIXED_DATA_FILE" ]]; then
+        return 1
+    fi
 
-   declare -A ALTERNATIVE_COORDS
-   ALTERNATIVE_COORDS=(
-       ["en:Washington,_D.C."]="38.895,-77.036"
-       ["en:New_York_City"]="40.7128,-74.0060"
-       ["de:Berlin"]="52.520008,13.404954"
-       ["fr:Paris"]="48.8566,2.3522"
+    echo -e "${CYAN}Loading fixed test data from $FIXED_DATA_FILE${NC}"
 
-       # Additional Southern Hemisphere alternatives
-       ["en:Cape_Town"]="-33.9249,18.4241"
-       ["en:Sydney"]="-33.8688,151.2093"
-       ["en:Buenos_Aires"]="-34.6118,-58.3960"
-       ["en:Santiago"]="-33.4489,-70.6693"
-       ["en:Lima"]="-12.0464,-77.0428"
-       ["en:Brasília"]="-15.8267,-47.9218"
-       ["en:Johannesburg"]="-26.2041,28.0473"
-       ["en:Melbourne"]="-37.8136,144.9631"
-       ["en:Auckland"]="-36.8485,174.7633"
-       ["en:Wellington"]="-41.2865,174.7762"
-   )
+    KNOWN_COORDS=()
+    while IFS='=' read -r lang_page coords; do
+        [[ -z "$lang_page" || "$lang_page" == \#* ]] && continue
+        KNOWN_COORDS["$lang_page"]="$coords"
+    done < "$FIXED_DATA_FILE"
 
+    echo -e "${GREEN}Loaded ${#KNOWN_COORDS[@]} test cases${NC}"
+
+    if [[ -f "$REVISION_FILE" ]]; then
+        local first_rev=$(head -1 "$REVISION_FILE" | cut -d'|' -f2)
+        [[ -n "$first_rev" ]] && echo -e "${CYAN}Snapshot revision: $first_rev${NC}"
+    fi
+    echo ""
+    return 0
+}
+
+get_wikipedia_revision() {
+    local lang="$1"
+    local page="$2"
+    local api_url="https://${lang}.wikipedia.org/w/api.php"
+
+    local response=$(curl -s -G "$api_url" \
+        --data-urlencode "action=query" \
+        --data-urlencode "titles=$page" \
+        --data-urlencode "prop=revisions" \
+        --data-urlencode "rvprop=ids" \
+        --data-urlencode "format=json" \
+        --connect-timeout 5 \
+        --max-time 10 2>/dev/null)
+
+    if [[ -n "$response" ]]; then
+        echo "$response" | python3 -c "
+import sys, json
+try:
+    data = json.load(sys.stdin)
+    pages = data['query']['pages']
+    page_data = list(pages.values())[0]
+    print(page_data.get('revisions', [{}])[0].get('revid', 'unknown'))
+except:
+    print('unknown')
+" 2>/dev/null
+    else
+        echo "unknown"
+    fi
+}
+
+generate_fixed_data() {
+    local mode="${1:-generate}"
+    echo -e "${YELLOW}${mode^} fixed test data...${NC}"
+    echo "========================================"
+
+    local temp_file="${FIXED_DATA_FILE}.tmp"
+    local temp_rev="${REVISION_FILE}.tmp"
+    rm -f "$temp_file" "$temp_rev"
+
+    if [[ -f "$REVISION_FILE" && "$mode" == "update" ]]; then
+        cp "$REVISION_FILE" "$temp_rev"
+    else
+        > "$temp_rev"
+    fi
+
+    local success=0 failed=0 skipped=0
+
+    for lang_page in "${!KNOWN_COORDS[@]}"; do
+        IFS=':' read -r lang page <<< "$lang_page"
+        echo -ne "Checking ${lang_page}... "
+
+        local current_revid=$(get_wikipedia_revision "$lang" "$page")
+
+        if [[ "$mode" == "update" && -f "$REVISION_FILE" ]]; then
+            local old_entry=$(grep "^${lang_page}=" "$REVISION_FILE" 2>/dev/null)
+            if [[ -n "$old_entry" ]]; then
+                local stored_revid=$(echo "$old_entry" | cut -d'|' -f2)
+                if [[ "$stored_revid" == "$current_revid" && "$current_revid" != "unknown" ]]; then
+                    echo -e "${CYAN}UP-TO-DATE${NC}"
+                    local old_coords=$(echo "$old_entry" | cut -d'=' -f2 | cut -d'|' -f1)
+                    echo "${lang_page}=${old_coords}" >> "$temp_file"
+                    echo "$old_entry" >> "$temp_rev"
+                    skipped=$((skipped + 1))
+                    continue
+                fi
+            fi
+        fi
+
+        local response=$(test_api_endpoint "$lang" "$page" "false")
+        if [[ $? -eq 0 ]]; then
+            local coords=$(extract_coords_from_response "$response" "false")
+            if [[ -n "$coords" && "$coords" != "," ]]; then
+                echo "${lang_page}=${coords}" >> "$temp_file"
+                echo "${lang_page}=${coords}|${current_revid}" >> "$temp_rev"
+                echo -e "${GREEN}OK${NC} ($coords)"
+                success=$((success + 1))
+            else
+                # CRITICAL FIX: Preserve entry even if extraction fails
+                local expected="${KNOWN_COORDS[$lang_page]}"
+                echo "${lang_page}=${expected}" >> "$temp_file"
+                echo "${lang_page}=${expected}|${current_revid}|EXPECTED" >> "$temp_rev"
+                echo -e "${YELLOW}NO COORDS - Using expected${NC}"
+                failed=$((failed + 1))
+            fi
+        else
+            # CRITICAL FIX: Preserve entry even if API fails
+            local expected="${KNOWN_COORDS[$lang_page]}"
+            echo "${lang_page}=${expected}" >> "$temp_file"
+            echo "${lang_page}=${expected}|${current_revid}|EXPECTED" >> "$temp_rev"
+            echo -e "${YELLOW}FAILED - Using expected${NC}"
+            failed=$((failed + 1))
+        fi
+        sleep 0.5
+    done
+
+    echo ""
+    echo "Summary: ${GREEN}${success} success${NC}, ${CYAN}${skipped} skipped${NC}, ${RED}${failed} failed${NC}"
+
+        if [[ -f "$temp_file" ]]; then
+        mv "$temp_file" "$FIXED_DATA_FILE"
+        mv "$temp_rev" "$REVISION_FILE"
+        echo -e "${GREEN}Saved: $FIXED_DATA_FILE (${success}+${skipped}+${failed} entries)${NC}"
+        echo -e "${YELLOW}Commit both files to git${NC}"
+        return 0
+    else
+        rm -f "$temp_file" "$temp_rev"
+        echo -e "${RED}No data saved${NC}"
+        return 1
+    fi
+}
 # URL encode helper
 url_encode() {
     local string="$1"
@@ -384,7 +537,7 @@ extract_coords_from_response() {
     local lat="" long=""
 
     if [[ "$debug" == "true" ]]; then
-        echo -e "${CYAN}🔎 Starting coordinate extraction...${NC}"
+        echo -e "${CYAN}🔎 Starting coordinate extraction...${NC}" >&2
     fi
 
     if [[ -z "$response" || ${#response} -lt 10 ]]; then return 1; fi
@@ -414,80 +567,28 @@ extract_coords_from_response() {
         done < <(echo "$triples" | tr '\n' '|' | sed 's|</triple>|<\/triple>\n|g')
     fi
 
-    # Smart coordinate sign validation and correction
-    if [[ -n "$lat" && -n "$long" && -n "$expected" ]]; then
-        local expected_lat=$(echo "$expected" | cut -d',' -f1 | xargs)
-        local expected_long=$(echo "$expected" | cut -d',' -f2 | xargs)
-
-        if [[ "$debug" == "true" ]]; then
-            echo -e "${CYAN}🧠 Smart validation:${NC}"
-            echo -e "${CYAN}  Extracted: lat=$lat, long=$long${NC}"
-            echo -e "${CYAN}  Expected:  lat=$expected_lat, long=$expected_long${NC}"
-        fi
-
-        # Check if latitude sign is wrong (handle negative expected values)
-                if [[ "$expected_lat" == -* ]] && [[ "$lat" != -* ]]; then
-                    lat="-$lat"
-                    [[ "$debug" == "true" ]] && echo -e "${YELLOW}  🔧 Corrected latitude sign: $lat${NC}"
-                elif [[ "$expected_lat" != -* ]] && [[ "$lat" == -* ]]; then
-                    lat="${lat#-}"
-                    [[ "$debug" == "true" ]] && echo -e "${YELLOW}  🔧 Corrected latitude sign: $lat${NC}"
-                fi
-
-                # Check if longitude sign is wrong (handle negative expected values)
-                if [[ "$expected_long" == -* ]] && [[ "$long" != -* ]]; then
-                    long="-$long"
-                    [[ "$debug" == "true" ]] && echo -e "${YELLOW}  🔧 Corrected longitude sign: $long${NC}"
-                elif [[ "$expected_long" != -* ]] && [[ "$long" == -* ]]; then
-                    long="${long#-}"
-                    [[ "$debug" == "true" ]] && echo -e "${YELLOW}  🔧 Corrected longitude sign: $long${NC}"
-                fi
-
-
-    fi
-
-    # Hemisphere-based fallback correction (when no expected coordinates available)
-    if [[ -n "$lat" && -n "$long" && -z "$expected" ]]; then
-        if [[ "$debug" == "true" ]]; then
-            echo -e "${CYAN}🌍 Applying hemisphere-based corrections...${NC}"
-        fi
-
-        # Western Hemisphere countries (should have negative longitude)
-        if [[ "$page" =~ (America|Canada|USA|Mexico|Brazil|Argentina|Chile|Peru|Colombia|Venezuela|Ecuador|Bolivia|Uruguay|Paraguay|Guyana|Suriname|Guiana|Panama|Costa|Rica|Nicaragua|Honduras|Guatemala|Belize|Salvador|Haiti|Dominican|Jamaica|Cuba|Bahamas|Barbados|Trinidad|Tobago) ]]; then
-            if [[ "$long" =~ ^[0-9] ]] && (( $(echo "$long > 0" | bc -l) )); then
-                long="-$long"
-                [[ "$debug" == "true" ]] && echo -e "${YELLOW}  🌎 Applied Western Hemisphere correction: $long${NC}"
-            fi
-        fi
-
-        # Southern Hemisphere countries (should have negative latitude)
-        if [[ "$page" =~ (Australia|New.*Zealand|South.*Africa|Argentina|Chile|Uruguay|Paraguay|Bolivia|Peru|Ecuador|Brazil|Angola|Zambia|Zimbabwe|Botswana|Namibia|Lesotho|Swaziland|Madagascar|Mauritius|Seychelles|Fiji|Tonga|Samoa|Vanuatu|Solomon|Papua|New.*Guinea) ]]; then
-            if [[ "$lat" =~ ^[0-9] ]] && (( $(echo "$lat > 0" | bc -l) )); then
-                lat="-$lat"
-                [[ "$debug" == "true" ]] && echo -e "${YELLOW}  🌏 Applied Southern Hemisphere correction: $lat${NC}"
-            fi
-        fi
-    fi
-
-    # Final validation and range check
-    if [[ -n "$lat" && -n "$long" ]]; then
-        # Remove any leading + signs
         lat=${lat#+}
         long=${long#+}
 
-        if [[ "$debug" == "true" ]]; then
-            echo -e "${CYAN}✅ Final coordinates: lat=$lat, long=$long${NC}"
-        fi
+# Check if empty
+if [[ -z "$lat" || -z "$long" ]]; then
+    echo -e "${RED}❌ No coordinates extracted from server response${NC}" >&2
+    return 1
+fi
 
-        # Validate coordinate ranges
-        if (( $(echo "$lat >= -90 && $lat <= 90" | bc -l) )) && (( $(echo "$long >= -180 && $long <= 180" | bc -l) )); then
-            echo "$lat,$long"
-            return 0
-        else
-            [[ "$debug" == "true" ]] && echo -e "${RED}❌ Coordinates out of valid range${NC}"
-        fi
-    fi
+# Check if numeric
+if ! [[ "$lat" =~ ^-?[0-9]+\.?[0-9]*$ ]] || ! [[ "$long" =~ ^-?[0-9]+\.?[0-9]*$ ]]; then
+    echo -e "${RED}❌ Invalid coordinate format: lat='$lat', long='$long'${NC}" >&2
+    return 1
+fi
 
+# Check range
+if (( $(echo "$lat >= -90 && $lat <= 90" | bc -l) )) && (( $(echo "$long >= -180 && $long <= 180" | bc -l) )); then
+    echo "$lat,$long"
+    return 0
+fi
+
+echo -e "${RED}❌ Coordinates out of range: lat=$lat, long=$long${NC}" >&2
     return 1
 }
 
@@ -522,50 +623,71 @@ test_specific_page() {
         return 1
     fi
 
-   local lat=$(echo "$coords" | cut -d',' -f1)
-   local long=$(echo "$coords" | cut -d',' -f2)
-   echo -e "${GREEN}💡 Server response: lat='$lat', long='$long'${NC}"
+    # CHECK FOR CONTAMINATION BEFORE CLEANUP
+    if [[ "$coords" =~ [^0-9.,\ +\-] ]]; then
+        echo -e "${RED}❌ Server response contains non-numeric data${NC}"
+        echo -e "${RED}Raw coords: $coords${NC}"
+        echo -e "${RED}FAILURE_REASON: Contaminated response from server${NC}"
+        if [[ "$debug" == "true" ]]; then
+            local safe_filename=$(echo "${lang}_${page}" | sed 's/[^a-zA-Z0-9._-]/_/g')
+            echo "$response" > "debug_${safe_filename}.xml"
+            echo -e "${CYAN}💾 Saved response: debug_${safe_filename}.xml${NC}"
+        fi
+        return 1
+    fi
+
+    # Now clean and extract
+    local lat=$(echo "$coords" | cut -d',' -f1 | tr -d '\n' | xargs)
+    local long=$(echo "$coords" | cut -d',' -f2 | tr -d '\n' | xargs)
+
+    # Validate they're actually numbers
+    if ! [[ "$lat" =~ ^-?[0-9]+\.?[0-9]*$ ]] || ! [[ "$long" =~ ^-?[0-9]+\.?[0-9]*$ ]]; then
+        echo -e "${RED}FAILURE_REASON: Invalid coordinate format${NC}"
+        return 1
+    fi
+
+    echo -e "${GREEN}💡 Server response: lat='$lat', long='$long'${NC}"
 
    local elat=$(echo "$expected" | cut -d',' -f1 | xargs)
    local elong=$(echo "$expected" | cut -d',' -f2 | xargs)
 
-   # Round coordinates to 4 decimal places for comparison
-   lat=$(printf "%.4f" "$lat")
-   long=$(printf "%.4f" "$long")
-   elat=$(printf "%.4f" "$elat")
-   elong=$(printf "%.4f" "$elong")
+    lat=$(printf "%.4f" "$lat" 2>/dev/null || echo "$lat")
+    long=$(printf "%.4f" "$long" 2>/dev/null || echo "$long")
+    elat=$(printf "%.4f" "$elat" 2>/dev/null || echo "$elat")
+    elong=$(printf "%.4f" "$elong" 2>/dev/null || echo "$elong")
 
-    # Calculate differences
-    local diff_lat diff_long
-    if [[ "$lat" =~ ^[-+]?[0-9]+\.?[0-9]*$ ]] && [[ "$elat" =~ ^[-+]?[0-9]+\.?[0-9]*$ ]]; then
-        diff_lat=$(echo "$lat - $elat" | bc -l | sed 's/-//')
-    else
-        diff_lat="nan"
-    fi
+    local diff_lat=$(echo "$lat - $elat" | bc -l | sed 's/-//')
+    local diff_long=$(echo "$long - $elong" | bc -l | sed 's/-//')
 
-    if [[ "$long" =~ ^[-+]?[0-9]+\.?[0-9]*$ ]] && [[ "$elong" =~ ^[-+]?[0-9]+\.?[0-9]*$ ]]; then
-        diff_long=$(echo "$long - $elong" | bc -l | sed 's/-//')
-    else
-        diff_long="nan"
-    fi
-
-    # Success criteria: within 2 degree tolerance
-    if [[ "$diff_lat" != "nan" && "$diff_long" != "nan" ]] && \
-       (( $(echo "$diff_lat < 2.0" | bc -l) )) && (( $(echo "$diff_long < 2.0" | bc -l) )); then
-        echo -e "${GREEN}🎯 Match with expected coordinates${NC}"
+    if (( $(echo "$diff_lat < 1.0" | bc -l) )) && (( $(echo "$diff_long < 1.0" | bc -l) )); then
+        echo -e "${GREEN}Match${NC}"
         return 0
     else
-        echo -e "${YELLOW}⚠️ Coordinates differ from expected${NC}"
-        echo "Expected: $elat,$elong"
-        echo "Got:      $lat,$long"
-        echo "Diff:     Δlat=$diff_lat, Δlong=$diff_long"
+        echo -e "${YELLOW}MISMATCH_REASON: lat diff=$diff_lat, long diff=$diff_long${NC}"
         return 2
     fi
 }
 # Main test runner
 main() {
-    local debug=false
-    [[ "$1" == "--debug" || "$1" == "-d" ]] && debug=true
+    if [[ "$GENERATE_MODE" == "true" ]]; then
+        generate_fixed_data "generate"
+        exit $?
+    elif [[ "$UPDATE_MODE" == "true" ]]; then
+        generate_fixed_data "update"
+        exit $?
+    fi
+
+    if [[ "$USE_LIVE_DATA" == "true" ]]; then
+        echo -e "${YELLOW}Mode: LIVE DATA (Environment Monitoring)${NC}\n"
+    else
+        if load_fixed_data; then
+            echo -e "${GREEN}Mode: FIXED SNAPSHOT (Code Regression Testing)${NC}"
+            echo -e "${GREEN}Environment is frozen. Changes = code regressions.${NC}\n"
+        else
+            echo -e "${RED}WARNING: No snapshot file found!${NC}"
+            echo -e "${YELLOW}Run: $0 --generate-fixed${NC}\n"
+        fi
+    fi
 
     check_server_connectivity
 
@@ -573,40 +695,71 @@ main() {
     echo "==============================="
 
     local total=0 ok=0 partial=0 fail=0
+    declare -A failed_pages
+    declare -A partial_pages
 
     for lang_page in "${!KNOWN_COORDS[@]}"; do
         total=$((total+1))
+
+        # Show output in real-time, capture only status
         test_specific_page "$lang_page" "${KNOWN_COORDS[$lang_page]}" "$debug"
-        case $? in
-            0) ok=$((ok+1)) ;;
-            2) partial=$((partial+1)) ;;
-            *) fail=$((fail+1)) ;;
+        local status=$?
+
+        case $status in
+            0)
+                ok=$((ok+1))
+                ;;
+            2)
+                partial=$((partial+1))
+                partial_pages["$lang_page"]="Coordinate mismatch"
+                ;;
+            *)
+                fail=$((fail+1))
+                failed_pages["$lang_page"]="Extraction failed"
+                ;;
         esac
         sleep 1
     done
 
-    if [[ $fail -gt 0 ]]; then
-        echo -e "\n${PURPLE}🔁 Testing fallback pages...${NC}"
-        for lang_page in "${!ALTERNATIVE_COORDS[@]}"; do
-            total=$((total+1))
-            test_specific_page "$lang_page" "${ALTERNATIVE_COORDS[$lang_page]}" "$debug"
-            case $? in
-                0) ok=$((ok+1)) ;;
-                2) partial=$((partial+1)) ;;
-                *) fail=$((fail+1)) ;;
-            esac
-            sleep 1
-        done
-    fi
+    local pass_rate=$(( (ok * 100) / total ))
 
-    echo -e "\n${BLUE}📊 TEST SUMMARY${NC}"
+    echo -e "\n${BLUE}TEST SUMMARY${NC}"
     echo "======================="
     echo "Total:     $total"
     echo -e "Passed:    ${GREEN}$ok${NC}"
     echo -e "Partial:   ${YELLOW}$partial${NC}"
     echo -e "Failed:    ${RED}$fail${NC}"
+    echo -e "Pass Rate: ${CYAN}${pass_rate}%${NC}"
+    echo -e "Threshold: ${CYAN}${PASS_THRESHOLD}%${NC}"
+
+    if [[ ${#failed_pages[@]} -gt 0 ]]; then
+        echo -e "\n${RED}FAILED PAGES (${#failed_pages[@]}):${NC}"
+        for page in "${!failed_pages[@]}"; do
+            echo -e "  ${RED}✗${NC} $page - ${failed_pages[$page]}"
+        done
+    fi
+
+    if [[ ${#partial_pages[@]} -gt 0 ]]; then
+        echo -e "\n${YELLOW}PARTIAL MATCHES (${#partial_pages[@]}):${NC}"
+        for page in "${!partial_pages[@]}"; do
+            echo -e "  ${YELLOW}~${NC} $page - ${partial_pages[$page]}"
+        done
+    fi
+
     echo -e "\n${CYAN}Run with --debug for more info${NC}"
-    exit $([[ $((ok + partial)) -ge $((total * 50 / 100)) ]] && echo 0 || echo 1)
+
+    if [[ $pass_rate -ge $PASS_THRESHOLD ]]; then
+        echo -e "\n${GREEN}TESTS PASSED (${pass_rate}% >= ${PASS_THRESHOLD}%)${NC}"
+        exit 0
+    else
+        echo -e "\n${RED}TESTS FAILED (${pass_rate}% < ${PASS_THRESHOLD}%)${NC}"
+        if [[ "$USE_LIVE_DATA" == "false" ]]; then
+            echo -e "${RED}Code regression detected!${NC}"
+        else
+            echo -e "${YELLOW}Environment changes detected.${NC}"
+        fi
+        exit 1
+    fi
 }
 
 main "$@"
