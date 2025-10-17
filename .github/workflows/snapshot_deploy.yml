@@ -2,7 +2,9 @@ name: Snapshot Deploy
 
 on:
   push:
-    branches: [ master ]  # or your development branch
+    branches: [ master ] 
+  pull_request:
+    branches: [ master ]
 
 jobs:
   deploy:
@@ -39,6 +41,8 @@ jobs:
 
       - name: Deploy Snapshot
         env:
-            GH_REPO_OWNER: ${{ github.repository_owner }}
-            GH_REPO_NAME: ${{ github.event.repository.name }}
-        run: mvn deploy -DskipTests -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${GH_REPO_OWNER}/${GH_REPO_NAME}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            REPO: ${{ github.repository }}    # expands to "owner/repo"
+        run: |
+           echo "Attempt to overwrite new deploy URL: https://maven.pkg.github.com/$REPO"
+           mvn deploy -DskipTests -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/$REPO
