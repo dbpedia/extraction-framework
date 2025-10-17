@@ -51,8 +51,19 @@ object MappingStatsHolder {
         }
       }
       
-      val redirects = wikiStats.redirects.filterKeys(title => templateMappings.contains(title.substring(templateNamespace.length))).map(_.swap)
-      
+       // Simple fix (commented out): just filter out invalid redirects silently
+      // val redirects = wikiStats.redirects.filterKeys(title => title.startsWith(templateNamespace) && templateMappings.contains(title.substring(templateNamespace.length))).map(_.swap)
+
+      // Better fix: filter out invalid redirects with warning logging
+      val redirects = wikiStats.redirects.filter { case (title, _) =>
+        if (title.startsWith(templateNamespace)) {
+          true
+        } else {
+          logger.warning(language.wikiCode + " redirect '" + title + "' does not start with '" + templateNamespace + "'")
+          false
+        }
+      }.filterKeys(title => templateMappings.contains(title.substring(templateNamespace.length))).map(_.swap)
+    
       val holder = new MappingStatsHolder(mappings, statistics.toList, redirects, ignoreList)
       
       logger.info("Updated "+language.wikiCode+" mapped statistics in "+prettyMillis(System.currentTimeMillis - millis))
