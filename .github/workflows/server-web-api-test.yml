@@ -28,6 +28,11 @@ jobs:
 
     - name: Debug List Maven repo and parent POM
       run: |
+        sed -n '1,120p' ~/.m2/repository/org/dbpedia/extraction/core/4.2-SNAPSHOT/core-4.2-SNAPSHOT.pom | grep -n '<parent>\|<version>'
+        echo "=== Check installed POMs for unresolved \${revision} in <parent><version> ==="
+        grep -n "<parent>" ~/.m2/repository/org/dbpedia/extraction/*/4.2-SNAPSHOT/*.pom || true
+        grep -n "<version>\${revision}</version>" ~/.m2/repository/org/dbpedia/extraction/*/4.2-SNAPSHOT/*.pom || true
+
         echo "Listing parent POM and Maven repo contents:"
         ls -l ../pom.xml || ls -l ../../pom.xml || true
         ls -lR ~/.m2/repository/org/dbpedia/extraction || true
