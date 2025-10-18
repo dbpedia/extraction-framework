@@ -25,6 +25,19 @@ jobs:
         java-version: 1.8
     - name: Build DIEF with Maven
       run: mvn clean install -Dskip=true -DskipTests -Dmaven.source.skip=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.count=3
+
+    - name: Debug: List Maven repo and parent POM
+      run: |
+        echo "Listing parent POM and Maven repo contents:"
+        ls -l ../pom.xml || ls -l ../../pom.xml || true
+        ls -lR ~/.m2/repository/org/dbpedia/extraction || true
+
+    - name: Debug: Print effective POM for server module
+      run: |
+        cd server
+        mvn help:effective-pom -Doutput=effective-pom.xml
+        cat effective-pom.xml
+        cd ..
     - name: Start DBpedia Server
       run: |
         cd server
