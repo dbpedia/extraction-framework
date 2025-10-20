@@ -39,19 +39,42 @@ jobs:
           </settings>
           EOF
 
+      - name: Compute Maven-safe REVISION
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sanitize() {
+            # lowercase; allow only [a-z0-9.-]; collapse dashes; trim edges
+            echo "$1" \
+              | tr '[:upper:]' '[:lower:]' \
+              | sed -E 's/[^a-z0-9.-]+/-/g; s/-+/-/g; s/^-+//; s/-+$//'
+          }
+
+          if [[ "${GITHUB_REF}" == refs/pull/* ]]; then
+            # e.g. refs/pull/42/merge -> pr-42-SNAPSHOT
+            pr_num="$(echo "${GITHUB_REF}" | sed -E 's#refs/pull/([0-9]+).*#\1#')"
+            base="pr-${pr_num}"
+          else
+            # e.g. refs/heads/feature/foo -> feature-foo-SNAPSHOT
+            base="${GITHUB_REF##*/}"
+          fi
+
+          safe_base="$(sanitize "${base}")"
+          [[ -z "${safe_base}" ]] && safe_base="build"
+
+          REVISION="${safe_base}-SNAPSHOT"
+          echo "Using Maven revision: ${REVISION}"
+          echo "REVISION=${REVISION}" >> "$GITHUB_ENV"
+
+      - name: Set Maven Version
+        run: mvn versions:set -DnewVersion="${REVISION}"
+
       - name: Deploy Snapshot
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            REPO: ${{ github.repository }}    # expands to "owner/repo"
+            REPO: ${{ github.repository }}
         run: |
-           # Example version names:
-           # For branch 'master': master-SNAPSHOT
-           # For branch 'feature/foo': feature/foo-SNAPSHOT
-           # For PR #42: pr-42-SNAPSHOT
-           if [[ "${GITHUB_REF}" == refs/pull/* ]]; then
-             REVISION="pr-${GITHUB_REF#refs/pull/}-SNAPSHOT"
-           else
-             REVISION="${GITHUB_REF##*/}-SNAPSHOT"
-           fi
-           echo "Deploying to: https://maven.pkg.github.com/${REPO} with revision: $REVISION"
-           mvn deploy -DskipTests -Dgithub.repo.url="https://maven.pkg.github.com/${REPO}" -Drevision="$REVISION"
+          echo "Deploying to https://maven.pkg.github.com/${REPO} with revision ${REVISION}"
+          mvn deploy -DskipTests \
+            -Dgithub.repo.url="https://maven.pkg.github.com/${REPO}"
