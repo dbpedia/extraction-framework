@@ -6,7 +6,7 @@
     <groupId>org.dbpedia</groupId>
     <artifactId>extraction</artifactId>
     <packaging>pom</packaging>
-    <version>4.2-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>Parent POM of the DBpedia framework</name>
 
     <description>
@@ -40,6 +40,7 @@
 
 
     <properties>
+        <revision>4.2-SNAPSHOT</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <scala.version>2.11.4</scala.version>
@@ -54,6 +55,7 @@
         <!--moved to surefire plugin configuration-->
         <!--<skipTests>false</skipTests>-->
         <gpg.keyname>AKSW.GPG</gpg.keyname>
+        <github.repo.url>https://maven.pkg.github.com/DBpedia-Enterprise/extraction-framework</github.repo.url>
     </properties>
 
     <modules>
@@ -518,8 +520,8 @@ for the test compilation and execution phases. This scope is not transitive.
     <distributionManagement>
         <snapshotRepository>
             <id>github</id>
-            <name>GitHub DBpedia-Enterprise Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/DBpedia-Enterprise/extraction-framework</url>
+            <name>GitHub Maven Packages</name>
+            <url>${github.repo.url}</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>

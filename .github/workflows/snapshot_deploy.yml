@@ -2,7 +2,9 @@ name: Snapshot Deploy
 
 on:
   push:
-    branches: [ master ]  # or your development branch
+    branches: [ master , dev] 
+  pull_request:
+    branches: [ master , dev ]
 
 jobs:
   deploy:
@@ -39,6 +41,17 @@ jobs:
 
       - name: Deploy Snapshot
         env:
-            GH_REPO_OWNER: ${{ github.repository_owner }}
-            GH_REPO_NAME: ${{ github.event.repository.name }}
-        run: mvn deploy -DskipTests -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${GH_REPO_OWNER}/${GH_REPO_NAME}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            REPO: ${{ github.repository }}    # expands to "owner/repo"
+        run: |
+           # Example version names:
+           # For branch 'master': master-SNAPSHOT
+           # For branch 'feature/foo': feature/foo-SNAPSHOT
+           # For PR #42: pr-42-SNAPSHOT
+           if [[ "${GITHUB_REF}" == refs/pull/* ]]; then
+             REVISION="pr-${GITHUB_REF#refs/pull/}-SNAPSHOT"
+           else
+             REVISION="${GITHUB_REF##*/}-SNAPSHOT"
+           fi
+           echo "Deploying to: https://maven.pkg.github.com/${REPO} with revision: $REVISION"
+           mvn deploy -DskipTests -Dgithub.repo.url="https://maven.pkg.github.com/${REPO}" -Drevision="$REVISION"
