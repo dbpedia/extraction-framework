@@ -1,7 +1,10 @@
 package org.dbpedia.extraction.util
 
+import com.github.tototoshi.csv.CSVReader
+
 import java.io.File
 import java.net.URL
+import java.io.StringReader
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.config.ConfigUtils
@@ -47,17 +50,31 @@ object WikiInfo
   * 
   */
   def fromLines(lines: Iterator[String]): Seq[WikiInfo] = {    
-    val info = new ArrayBuffer[WikiInfo]
-    
-    if (! lines.hasNext) throw new Exception("empty file")
-    lines.next // skip first line (headers)
-    
-    for (line <- lines)
-      if (line.nonEmpty)
-        fromLine(line) match{
-          case Some(x) => info += x
-          case None =>
-        }
+    val info = new ArrayBuffer[WikiInfo]  
+      
+    // Join all lines back into a single string for proper CSV parsing  
+    val content = lines.mkString("\n")  
+    val reader = CSVReader.open(new StringReader(content))  
+      
+    try {  
+      val allRows = reader.iterator.toSeq  
+        
+      if (allRows.isEmpty) throw new Exception("empty file")  
+        
+      // Skip header row  
+      for (row <- allRows.tail) {  
+        if (row.nonEmpty && row.length >= 15) {  
+          val pages = try row(4).toInt catch { case _: NumberFormatException => 0 }  
+          val wikiCode = row(2)  
+            
+          if (ConfigUtils.LanguageRegex.pattern.matcher(wikiCode).matches) {  
+            info += new WikiInfo(wikiCode, pages)  
+          }  
+        }  
+      }  
+    } finally {  
+      reader.close()  
+    }
     
     info
   }
@@ -66,22 +83,27 @@ object WikiInfo
    * Reads a WikiInfo object from a single CSV line.
    */
   def fromLine(line: String): Option[WikiInfo] = {
-      val fields = line.split(",", -1)
-      
-      if (fields.length < 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
-      
-      val pages = try fields(4).toInt
-      catch { case nfe: NumberFormatException => 0 }
-      
-      val wikiCode = fields(2)
-      if (! ConfigUtils.LanguageRegex.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
-
-      //if(Language.map.keySet.contains(wikiCode))
-        Option(new WikiInfo(wikiCode, pages))
-      //else
-      //{
-      //  logger.log(Level.WARNING, "Language: " + wikiCode + " will be ignored. Add this language to the addonlangs.json file to extract it.")
-      //  None
-      //}
+      val reader = CSVReader.open(new StringReader(line))  
+    try {  
+      val fields = reader.iterator.toSeq.headOption.getOrElse(Seq.empty)  
+        
+      if (fields.length < 15) {  
+        logger.warning(s"expected [15] fields, found [${fields.length}] in line [${line.take(100)}...]")  
+        return None  
+      }  
+        
+      val pages = try fields(4).toInt  
+      catch { case nfe: NumberFormatException => 0 }  
+        
+      val wikiCode = fields(2)  
+      if (!ConfigUtils.LanguageRegex.pattern.matcher(wikiCode).matches) {  
+        logger.warning(s"expected language code in field with index [2], found line [${line.take(100)}...]")  
+        return None  
+      }  
+  
+      Option(new WikiInfo(wikiCode, pages))  
+    } finally {  
+      reader.close()  
+    } 
   }
 }
