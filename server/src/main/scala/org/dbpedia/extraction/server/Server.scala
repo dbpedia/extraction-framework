@@ -39,6 +39,10 @@ class Server(
     managers.map(manager => (manager._1, Server.buildTemplateRedirects(manager._2.wikiStats.redirects, manager._1)))
     }
 
+  val extractor: ExtractionManager = new DynamicExtractionManager(managers(_).updateStats(_), languages, paths, redirects, mappingTestExtractors, customTestExtractors)
+
+  extractor.updateAll
+
   // Cache key for single extractor managers
   private case class ExtractorCacheKey(language: Language, extractorClass: Class[_ <: Extractor[_]])
 
@@ -74,10 +78,6 @@ class Server(
       })
   }
 
-  // Main extraction manager with ALL extractors
-  val extractor: ExtractionManager = {
-    new DynamicExtractionManager(managers(_).updateStats(_), languages, paths, redirects, mappingTestExtractors, customTestExtractors)
-  }
 
   def adminRights(pass: String): Boolean = password == pass
 
