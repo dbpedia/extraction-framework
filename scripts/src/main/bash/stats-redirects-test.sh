@@ -15,6 +15,9 @@ MAPPINGS_PAGE=$(curl -s "${BASE_URL}/mappings/")
 LANGUAGES=($(echo "$MAPPINGS_PAGE" | grep -oP 'href="\K[^/"]+(?=/">)' | sort -u))
 [ ${#LANGUAGES[@]} -eq 0 ] && { echo "❌ ERROR: No languages found"; exit 1; }
 
+# Exclude wikidata as it doesn't support template mapping statistics
+LANGUAGES=($(printf '%s\n' "${LANGUAGES[@]}" | grep -v '^wikidata$'))
+
 echo "Found ${#LANGUAGES[@]} languages: ${LANGUAGES[@]}"
 echo ""
 
