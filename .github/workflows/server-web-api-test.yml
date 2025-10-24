@@ -16,7 +16,7 @@ jobs:
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       # needed for Wikimedia API calls
-      JAVA_TOOL_OPTIONS: '-Dhttp.agent=curl/8.6.0 -Dextract.wikiapi.customUserAgent.enabled=true -Dextract.wikiapi.customUserAgent.text=curl/8.6.0' 
+      JAVA_TOOL_OPTIONS: '-Dhttp.agent=curl/8.6.0 -Dextract.wikiapi.customUserAgent.enabled=true -Dextract.wikiapi.customUserAgent.text=curl/8.6.0'
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 1.8
@@ -28,7 +28,7 @@ jobs:
     - name: Start DBpedia Server
       run: |
         cd server
-        ../run server &
+        MAVEN_OPTS="-Daa.languages=@mappings" ../run server &
         SERVER_PID=$!
         echo "Server started with PID $SERVER_PID"
         echo $SERVER_PID > server.pid
@@ -51,6 +51,10 @@ jobs:
       run: |
         cd scripts/src/main/bash
         ./coords-integration-test.sh
+    - name: Run Stats and Redirects Tests
+      run: |
+        cd scripts/src/main/bash
+        ./stats-redirects-test.sh
     - name: Stop DBpedia Server
       run: |
         if [ -f server.pid ]; then
