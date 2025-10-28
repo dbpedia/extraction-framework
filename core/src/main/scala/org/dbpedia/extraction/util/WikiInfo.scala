@@ -2,8 +2,11 @@ package org.dbpedia.extraction.util
 
 import com.github.tototoshi.csv.CSVReader
 
+import com.github.tototoshi.csv.CSVReader
+
 import java.io.File
 import java.net.URL
+import java.io.StringReader
 import java.io.StringReader
 import java.util.logging.Logger
 
