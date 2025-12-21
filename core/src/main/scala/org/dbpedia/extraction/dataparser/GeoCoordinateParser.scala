@@ -245,8 +245,8 @@ class GeoCoordinateParser(
 
         properties match
         {
-            // FIXED: Reject templates with too many coordinate parameters (> 8)
-            case params if params.length > 8 => None
+            // REMOVED: Length check that was rejecting templates with extra parameters
+            // Templates often have additional parameters like "type:landmark" that should be ignored
 
             // {{coord|dd|N/S|dd|E/W|coordinate parameters|template parameters}}
             case latDeg :: latHem :: lonDeg :: lonHem :: _ if isValidDirection(latHem) && isValidDirection(lonHem) =>
