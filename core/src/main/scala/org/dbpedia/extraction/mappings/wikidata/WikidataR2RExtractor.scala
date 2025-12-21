@@ -127,6 +127,24 @@ class WikidataR2RExtractor(
 
     splitDatasets(quads, subjectUri, page)
   }
+  
+  private def getDatatypeForQualifier(wikidataDatatype: String, ontologyProperty: OntologyProperty): Datatype = {
+  if (wikidataDatatype != null && wikidataDatatype.nonEmpty) {
+    context.ontology.datatypes.get(wikidataDatatype) match {
+      case Some(dt) => dt
+      case None => 
+        if (ontologyProperty.range.isInstanceOf[Datatype]) 
+          ontologyProperty.range.asInstanceOf[Datatype] 
+        else 
+          null
+    }
+  } else {
+    if (ontologyProperty.range.isInstanceOf[Datatype]) 
+      ontologyProperty.range.asInstanceOf[Datatype] 
+    else 
+      null
+  }
+}
 
   def checkRank(statementGroup: StatementGroup): Seq[Statement] ={
     var statements = Seq[Statement]();
@@ -140,28 +158,39 @@ class WikidataR2RExtractor(
     }
     statements
   }
-  def getQuad(page: JsonNode, subjectUri: String,statementUri:String,map: mutable.Map[String, String]): ArrayBuffer[Quad] = {
+  def getQuad(page: JsonNode, subjectUri: String, statementUri: String, map: mutable.Map[String, (String, String)]): ArrayBuffer[Quad] = {
     val quads = new ArrayBuffer[Quad]()
     map.foreach {
       propertyValue => {
         try {
           val ontologyProperty = context.ontology.properties(propertyValue._1)
-          val datatype = findType(null, ontologyProperty.range)
-          if (propertyValue._2.startsWith("http:") && datatype != null && datatype.name == "xsd:string") {
-            quads += new Quad(context.language, DBpediaDatasets.WikidataR2R_mappingerrors, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceIri, datatype)
+          val (valueStr, wikidataDatatype) = propertyValue._2
+          
+          // Always use Wikidata datatype directly (it already contains full URI)
+          val datatype =
+           if (wikidataDatatype != null && wikidataDatatype.nonEmpty)
+           new org.dbpedia.extraction.ontology.datatypes.Datatype(wikidataDatatype)
+           else
+              null
+              
+          if (valueStr.startsWith("http:") && datatype != null && datatype.name == "xsd:string") {
+            quads += new Quad(context.language, DBpediaDatasets.WikidataR2R_mappingerrors, subjectUri, ontologyProperty, valueStr, page.wikiPage.sourceIri, datatype)
           } else {
 
             //split to literal / object datasets
             val mapDataset = if (ontologyProperty.isInstanceOf[OntologyObjectProperty]) DBpediaDatasets.WikidataR2R_objects else DBpediaDatasets.WikidataR2R_literals
             //Wikidata R2R mapping without reification
-            val quad = new Quad(context.language, mapDataset, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceIri, datatype)
+            val quad = new Quad(context.language, mapDataset, subjectUri, ontologyProperty, valueStr, page.wikiPage.sourceIri, datatype)
             quads += quad
 
             //Reification added to R2R mapping
             quads ++= getReificationQuads(page, statementUri, datatype, quad)
           }
         } catch {
-          case e: Exception => println("exception caught: " + e)
+          case e: Exception => {
+            println(s"Exception in getQuad for property ${propertyValue._1}: " + e.getMessage)
+            e.printStackTrace()
+          }
         }
 
       }
@@ -207,9 +236,12 @@ class WikidataR2RExtractor(
                 mappedQualifierValue => {
                   try {
                     val ontologyProperty = context.ontology.properties(mappedQualifierValue._1)
-                    val datatype = if (ontologyProperty.range.isInstanceOf[Datatype]) ontologyProperty.range.asInstanceOf[Datatype] else null
+                    val (valueStr, wikidataDatatype) = mappedQualifierValue._2
+                    
+                    val datatype = getDatatypeForQualifier(wikidataDatatype, ontologyProperty)
+                    
                     quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2RQualifier,
-                      statementUri, ontologyProperty, mappedQualifierValue._2, page.wikiPage.sourceIri, datatype)
+                      statementUri, ontologyProperty, valueStr, page.wikiPage.sourceIri, datatype)
                   } catch {
                     case e: Exception => println("exception caught: " + e)
                   }
@@ -243,15 +275,6 @@ class WikidataR2RExtractor(
     duplicateList= duplicateList.diff(duplicateList.distinct).distinct
     duplicateList
   }
-
-  private def findType(datatype: Datatype, range: OntologyType): Datatype = {
-    if (datatype != null) datatype
-    else range match {
-      case datatype: Datatype => datatype
-      case _ => null
-    }
-  }
-
   private def getEquivalentClass(value: Value): Set[OntologyClass] = {
     value match {
       case v: ItemIdValue =>
