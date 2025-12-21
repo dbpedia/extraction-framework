@@ -55,6 +55,10 @@ jobs:
       run: |
           cd scripts/src/main/bash
           ./test-extraction-combinations.sh
+    - name: Run Stats and Redirects Tests
+      run: |
+        cd scripts/src/main/bash
+        ./stats-redirects-test.sh
     - name: Stop DBpedia Server
       run: |
         if [ -f server.pid ]; then

@@ -54,6 +54,7 @@
         <!--moved to surefire plugin configuration-->
         <!--<skipTests>false</skipTests>-->
         <gpg.keyname>AKSW.GPG</gpg.keyname>
+        <github.repo.url>https://maven.pkg.github.com/DBpedia-Enterprise/extraction-framework</github.repo.url>
     </properties>
 
     <modules>
@@ -513,8 +514,8 @@ for the test compilation and execution phases. This scope is not transitive.
     <distributionManagement>
         <snapshotRepository>
             <id>github</id>
-            <name>GitHub DBpedia-Enterprise Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/DBpedia-Enterprise/extraction-framework</url>
+            <name>GitHub Maven Packages</name>
+            <url>${github.repo.url}</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
