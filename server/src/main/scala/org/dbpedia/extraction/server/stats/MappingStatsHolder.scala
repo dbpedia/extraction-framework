@@ -5,6 +5,7 @@ import scala.collection.mutable
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.wikiparser.{Namespace,TemplateNode}
+import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import MappingStats.InvalidTarget
 
 object MappingStatsHolder {
@@ -24,11 +25,22 @@ object MappingStatsHolder {
 
       val templateNamespace = Namespace.Template.name(language) + ":"
       
+      // Get all valid namespace prefixes for the Template namespace (code 10)
+      // This handles languages like Macedonian that have multiple valid prefixes
+      val validTemplatePrefixes = Namespaces.names(language)
+        .filter(_._2 == 10)  // Template namespace code is 10
+        .keys
+        .map(_ + ":")
+        .toSet + templateNamespace  // Include the default name as well
+      
       for ((rawTemplate, templateStats) <- wikiStats.templates)
       {
-        if (rawTemplate startsWith templateNamespace) {
+        // Try to match any valid template prefix
+        val matchedPrefix = validTemplatePrefixes.find(rawTemplate.startsWith)
+        
+        if (matchedPrefix.isDefined) {
           
-          val templateName = rawTemplate.substring(templateNamespace.length)
+          val templateName = rawTemplate.substring(matchedPrefix.get.length)
           val isMapped = templateMappings.contains(templateName)
           val mappedProps = 
             if (isMapped) new PropertyCollector(templateMappings(templateName)).properties 
@@ -47,11 +59,15 @@ object MappingStatsHolder {
           statistics += new MappingStats(templateStats, templateName, isMapped, properties.toMap, ignoreList)
           
         } else {
-          logger.warning(language.wikiCode+" template '"+rawTemplate+"' does not start with '"+templateNamespace+"'")
+          logger.warning(language.wikiCode+" template '"+rawTemplate+"' does not start with any valid template namespace prefix")
         }
       }
       
-      val redirects = wikiStats.redirects.filterKeys(title => templateMappings.contains(title.substring(templateNamespace.length))).map(_.swap)
+      // Filter redirects that start with any valid template prefix
+      val redirects = wikiStats.redirects.filterKeys { title =>
+        val matchedPrefix = validTemplatePrefixes.find(title.startsWith)
+        matchedPrefix.isDefined && templateMappings.contains(title.substring(matchedPrefix.get.length))
+      }.map(_.swap)
       
       val holder = new MappingStatsHolder(mappings, statistics.toList, redirects, ignoreList)
       
