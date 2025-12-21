@@ -51,6 +51,10 @@ jobs:
       run: |
         cd scripts/src/main/bash
         ./coords-integration-test.sh
+    - name: Run Multi-Extractor Combination Tests
+      run: |
+          cd scripts/src/main/bash
+          ./test-extraction-combinations.sh
     - name: Run Stats and Redirects Tests
       run: |
         cd scripts/src/main/bash

@@ -35,10 +35,35 @@ class TriX
         <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:trix="http://www.w3.org/2004/03/trix/trix-1/">
           <xsl:template match="/trix:TriX">
             <html>
-              <head>
+              <head> 
+                <style>
+  .warning-banner {{
+    background-color: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+  }}
+  .warning-banner h3 {{
+    color: #856404;
+    margin: 0 0 10px 0;
+  }}
+  .error-details {{
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    padding: 15px;
+    margin-top: 20px;
+  }}
+</style>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
               </head>
               <body>
+                <xsl:if test="comment()[contains(., 'WARNING')]">
+  <div class="warning-banner">
+    <h3>⚠️ Partial Extraction Results</h3>
+    <p>Some extractors failed. See details below.</p>
+  </div>
+</xsl:if>
                 <h2>DBpedia Extraction Results</h2>
                 <form>
                     <p>Namespaces: 
@@ -72,6 +97,12 @@ class TriX
                       </xsl:for-each>
                   </xsl:for-each>
                 </table>
+                <xsl:if test="comment()[contains(., 'WARNING')]">
+  <div class="error-details">
+    <h3>Error Messages:</h3>
+    <pre><xsl:value-of select="comment()[contains(., 'WARNING')]"/></pre>
+  </div>
+</xsl:if>
               </body>
             </html>
           </xsl:template>
