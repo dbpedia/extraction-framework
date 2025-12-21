@@ -67,6 +67,9 @@ jobs:
           echo "Using Maven revision: ${REVISION}"
           echo "REVISION=${REVISION}" >> "$GITHUB_ENV"
 
+      - name: Set Maven Version
+        run: mvn versions:set -DnewVersion="${REVISION}"
+
       - name: Deploy Snapshot
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -74,5 +77,4 @@ jobs:
         run: |
           echo "Deploying to https://maven.pkg.github.com/${REPO} with revision ${REVISION}"
           mvn deploy -DskipTests \
-            -Dgithub.repo.url="https://maven.pkg.github.com/${REPO}" \
-            -Drevision="${REVISION}"
+            -Dgithub.repo.url="https://maven.pkg.github.com/${REPO}"
