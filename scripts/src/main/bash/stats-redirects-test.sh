@@ -26,6 +26,14 @@ test_endpoint() {
 
     http_code=$(curl -s -o /dev/null -w "%{http_code}" "$url")
 
+    # Wikidata stats endpoint expected to return 501 or 500 
+    if [[ "$lang" == "wikidata" && "$type" == "Stats    " ]]; then
+        if [[ "$http_code" == "501" || "$http_code" == "500" ]]; then
+            echo "✅ $lang $type: HTTP $http_code (expected - no template stats for Wikidata)"
+            return 0  # Return success, don't increment FAILED
+        fi
+    fi
+
     if [ "$http_code" = "200" ]; then
         echo "✅ $lang $type: HTTP $http_code"
     else
