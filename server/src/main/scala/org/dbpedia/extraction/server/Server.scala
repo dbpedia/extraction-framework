@@ -202,6 +202,11 @@ object Server
 
         _instance = new Server(serverPassword, languages, paths, _config.mappingTestExtractorClasses, _config.customTestExtractorClasses)
 
+      // Initialize all extractors and statistics
+      logger.info("Initializing extractors and statistics...")
+      _instance.extractor.updateAll
+      logger.info("Extractors and statistics initialized")
+
         // Configure the HTTP server
         val resources = new PackagesResourceConfig("org.dbpedia.extraction.server.resources", "org.dbpedia.extraction.server.providers")
 
