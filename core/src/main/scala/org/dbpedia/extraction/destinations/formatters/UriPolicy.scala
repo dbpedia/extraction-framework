@@ -11,7 +11,7 @@ import org.dbpedia.iri.IRI
 import scala.xml.Utility.{isNameChar, isNameStart}
 import scala.collection.Map
 import scala.collection.mutable.{ArrayBuffer, HashMap}
-import scala.collection.JavaConversions.asScalaSet
+import org.dbpedia.extraction.compat.JavaConversions.asScalaSet
 
 /**
  * TODO: use scala.collection.Map[String, String] instead of java.util.Properties?

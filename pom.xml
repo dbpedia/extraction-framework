@@ -42,9 +42,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <java.enforcer.range>[1.8,1.9)</java.enforcer.range>
         <scala.version>2.11.4</scala.version>
         <scala.compat.version>2.11</scala.compat.version>
         <scalatest.version>2.2.1</scalatest.version>
+        <scala-xml.version>2.11.0-M4</scala-xml.version>
+        <scala-collection-compat.version>2.11.0</scala-collection-compat.version>
+        <scalaj-http.version>2.2.1</scalaj-http.version>
+        <scopt.version>3.7.1</scopt.version>
+        <jackson.version>2.6.0</jackson.version>
+        <jackson.scala.version>2.6.0</jackson.scala.version>
 
         <spark.compat.version>2.11</spark.compat.version>
         <spark.version>2.2.1</spark.version>
@@ -87,7 +94,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.7</version>
+                <version>3.1.2</version>
                 <configuration>
                     <skipTests>true</skipTests>
                 </configuration>
@@ -194,7 +201,7 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[1.8,1.9)</version>
+                                    <version>${java.enforcer.range}</version>
                                     <message>ERROR! USE JAVA 8 TO RUN THE FRAMEWORK. You can check your current java version with "mvn -version" command</message>
                                 </requireJavaVersion>
                             </rules>
@@ -207,7 +214,6 @@
 
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>org.dbpedia.extraction</groupId>
                 <artifactId>core</artifactId>
@@ -245,9 +251,15 @@
 
 
             <dependency>
+                <groupId>org.scala-lang.modules</groupId>
+                <artifactId>scala-collection-compat_${scala.compat.version}</artifactId>
+                <version>${scala-collection-compat.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.scala-lang</groupId>
                 <artifactId>scala-xml</artifactId>
-                <version>2.11.0-M4</version>
+                <version>${scala-xml.version}</version>
             </dependency>
 
 
@@ -335,17 +347,17 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.6.0</version>
+                <version>${jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.6.0</version>
+                <version>${jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-scala_${scala.compat.version}</artifactId>
-                <version>2.6.0</version>
+                <version>${jackson.scala.version}</version>
             </dependency>
             <!--snuggletex dependencies: used to convert latex formula into infix notation maybe replace these-->
             <dependency>
@@ -366,13 +378,13 @@
             <dependency>
                 <groupId>org.scalaj</groupId>
                 <artifactId>scalaj-http_${scala.compat.version}</artifactId>
-                <version>2.2.1</version>
+                <version>${scalaj-http.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.scopt/scopt -->
             <dependency>
                 <groupId>com.github.scopt</groupId>
-                <artifactId>scopt_2.11</artifactId>
-                <version>3.7.1</version>
+                <artifactId>scopt_${scala.compat.version}</artifactId>
+                <version>${scopt.version}</version>
             </dependency>
 
 
@@ -521,6 +533,58 @@ for the test compilation and execution phases. This scope is not transitive.
     </distributionManagement>
 
     <profiles>
+        <profile>
+            <id>legacy</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <java.version>1.8</java.version>
+                <java.enforcer.range>[1.8,1.9)</java.enforcer.range>
+                <scala.version>2.11.4</scala.version>
+                <scala.compat.version>2.11</scala.compat.version>
+                <scalatest.version>2.2.1</scalatest.version>
+                <scala-xml.version>2.11.0-M4</scala-xml.version>
+                <scala-collection-compat.version>2.11.0</scala-collection-compat.version>
+                <scalaj-http.version>2.2.1</scalaj-http.version>
+                <scopt.version>3.7.1</scopt.version>
+                <jackson.version>2.6.0</jackson.version>
+                <jackson.scala.version>2.6.0</jackson.scala.version>
+                <spark.version>2.2.1</spark.version>
+                <spark.compat.version>2.11</spark.compat.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>modern</id>
+            <properties>
+                <java.version>17</java.version>
+                <java.enforcer.range>[17,18)</java.enforcer.range>
+                <scala.version>2.13.12</scala.version>
+                <scala.compat.version>2.13</scala.compat.version>
+                <scalatest.version>3.2.18</scalatest.version>
+                <scala-xml.version>2.1.0</scala-xml.version>
+                <scala-collection-compat.version>2.11.0</scala-collection-compat.version>
+                <scalaj-http.version>2.4.2</scalaj-http.version>
+                <scopt.version>3.7.1</scopt.version>
+                <jackson.version>2.15.2</jackson.version>
+                <jackson.scala.version>2.15.2</jackson.scala.version>
+                <spark.version>3.5.1</spark.version>
+                <spark.compat.version>2.13</spark.compat.version>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
         <profile>
             <id>incremental</id>
             <build>

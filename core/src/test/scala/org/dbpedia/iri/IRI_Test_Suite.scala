@@ -8,7 +8,7 @@ import org.apache.jena.rdf.model.ModelFactory
 import org.apache.jena.riot.system.IRIResolver
 import org.scalatest.FunSuite
 
-import scala.collection.JavaConversions._
+import org.dbpedia.extraction.compat.JavaConversions._
 import scala.util.matching.Regex
 
 

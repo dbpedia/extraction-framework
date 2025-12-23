@@ -7,7 +7,7 @@ import scala.collection.mutable
 import org.dbpedia.extraction.live.main.Main
 import org.dbpedia.extraction.live.publisher.DiffData
 
-import scala.collection.JavaConversions._
+import org.dbpedia.extraction.compat.JavaConversions._
 import scala.collection.mutable.ArrayBuffer
 
 /**

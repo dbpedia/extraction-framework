@@ -45,6 +45,11 @@ If you plan to work on improving the codebase of the framework you would need to
 
 * Check the [Debugging Guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/debug.md) and learn how to debug the extraction framework.
 
+### Build Profiles (legacy & modern)
+* `mvn clean install -Plegacy` → Scala 2.11 / Java 8 / Spark 2.2 (default, production-compatible)
+* `mvn clean install -Pmodern` → Scala 2.13 / Java 17 / Spark 3.5 (contributor-friendly)
+* Both profiles are built in CI; modern adds JVM `--add-opens` for Java 17.
+
 ### Execution using Apache Spark
 In order to speed up the extraction process, the extraction framework has been adopted to run on Apache Spark.
 Currently, more than half of the extractors can be executed using Spark. The extraction process using Spark is a slightly different process and requires different Execution. Check the [QuickStart](https://github.com/dbpedia/extraction-framework/blob/master/documentation/extraction-process.md#2-generic-spark-extraction) guide on how to run the extraction using Apache Spark.

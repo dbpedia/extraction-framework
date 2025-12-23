@@ -6,7 +6,7 @@ import java.util.concurrent.{Callable, ExecutorService, Executors}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitle}
 
-import scala.collection.JavaConversions._
+import org.dbpedia.extraction.compat.JavaConversions._
 import scala.util.Try
 import scala.xml.Elem
 
