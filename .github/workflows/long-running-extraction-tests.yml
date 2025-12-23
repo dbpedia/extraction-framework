@@ -5,17 +5,21 @@ name: DIEF Long-Running Extraction Tests
 
 on:
   workflow_dispatch:
+  pull_request:
+  schedule:
+    # Runs once a week (Sunday at 02:00 UTC)
+      - cron: '0 2 * * 0'
 
 jobs:
   long-running-tests:
 
     runs-on: ubuntu-latest
     env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      JAVA_TOOL_OPTIONS: '-Dhttp.agent=curl/8.6.0 -Dextract.wikiapi.customUserAgent.enabled=true -Dextract.wikiapi.customUserAgent.text=curl/8.6.0' 
+      JAVA_TOOL_OPTIONS: '-Dhttp.agent=curl/8.6.0 -Dextract.wikiapi.customUserAgent.enabled=true -Dextract.wikiapi.customUserAgent.text=curl/8.6.0'
     
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
     
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
@@ -23,33 +27,72 @@ jobs:
         java-version: 1.8
     
     - name: Build DIEF with Maven
-      run: mvn clean install -Dskip=true -DskipTests -Dmaven.source.skip=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.count=3
-    
+      run: |
+        mvn clean install \
+          -Dskip=true \
+          -DskipTests \
+          -Dmaven.source.skip=true \
+          -Dhttp.keepAlive=false \
+          -Dmaven.wagon.http.pool=false \
+          -Dmaven.wagon.http.retryHandler.count=3
+
+    - name: Create temporary server config with languages (CI-only)
+      run: |
+        cd server
+        cp server.default.properties server.ci.properties
+        sed -i 's/^languages=.*/languages=wikidata,en,de,fr,es,it,pt,ru,ja,ko,ar,hi,nl,sv,pl,uk,cs,sk,sl,sr,hr,ro,bg,hu,tr,el,fi,et,lv,lt,ga,cy,eo,ca,gl,eu,be,az,hy,am,bn,ur,vi,id,mk,commons/' server.ci.properties
+        grep '^languages=' server.ci.properties
+
     - name: Start DBpedia Server
       run: |
         cd server
-        ../run server -Daa.languages=@mappings,wikidata &
-        SERVER_PID=$!
-        echo "Server started with PID $SERVER_PID"
-        echo $SERVER_PID > server.pid
-    
-    - name: Wait for Server to be Ready
+        mvn scala:run \
+          -Dlauncher=server \
+          -Dexec.args=server.ci.properties \
+          > server.log 2>&1 &
+        echo $! > server.pid
+        sleep 10
+
+    - name: Debug - Check server status immediately
       run: |
-        echo "Waiting for DIEF server to listen on localhost:9999..."
-        for i in {1..720}; do
+        echo "=== Checking server process ==="
+        if [ ! -f server/server.pid ]; then
+          echo "❌ server.pid not found"
+          exit 1
+        fi
+
+        PID=$(cat server/server.pid)
+        if ps -p $PID > /dev/null; then
+          echo "✅ Server process $PID is running"
+        else
+          echo "❌ Server process crashed"
+          echo "===== server.log ====="
+          tail -200 server/server.log || true
+          exit 1
+        fi
+
+        echo ""
+        echo "=== Last 100 lines of server.log ==="
+        tail -100 server/server.log || true
+
+    - name: Wait for server to be ready (port 9999)
+      run: |
+        echo "Waiting for DIEF server on localhost:9999..."
+        for i in {1..120}; do
           if nc -z localhost 9999; then
-            echo "Server is ready!"
-            break
+            echo "✅ Server is listening"
+            exit 0
           fi
           echo "Attempt $i: Server not ready yet, waiting..."
           sleep 5
         done
-        if ! nc -z localhost 9999; then
-          echo "Server failed to start within 1 hour"
-          exit 1
-        fi
-    
-    - name: Run Wikidata Extractor Tests
+
+        echo "❌ Server never started listening on port 9999"
+        echo "===== server.log ====="
+        tail -200 server/server.log || true
+        exit 1
+
+    - name: Run Wikidata extractor tests
       run: |
           cd scripts/src/main/bash
           ./test-wikidata-extractors.sh
@@ -67,16 +110,11 @@ jobs:
     - name: Stop DBpedia Server
       if: always()
       run: |
-        if [ -f server.pid ]; then
-          SERVER_PID=$(cat server.pid)
-          echo "Stopping server with PID $SERVER_PID"
-          kill -TERM $SERVER_PID || kill -KILL $SERVER_PID
-          rm server.pid
+        if [ -f server/server.pid ]; then
+          PID=$(cat server/server.pid)
+          echo "Stopping server $PID"
+          kill -TERM $PID || kill -KILL $PID
+          rm server/server.pid
         fi
+
     
-    - uses: act10ns/slack@44541246747a30eb3102d87f7866679b92cca3b8  # v1.9.0
-      with:
-        status: ${{ job.status }}
-        steps: ${{ toJson(steps) }}
-        channel: '#dev-team'
-      if: failure()
