@@ -44,5 +44,8 @@ cd ../server
 #../run stats #4 required params: input dir, output dir, file suffix ('.gz', '.bz2' or ''), pretty-printing flag (true) may be followed by list of language codes
 #../run stats create.mappings.stats.properties # only for template-test
 
-../run server 
+# Create server config with languages
+cp server.default.properties server.properties
+sed -i 's/^languages=.*/languages=wikidata,en,de,fr,es,it,pt,ru,ja,ko,ar,hi,nl,sv,pl,uk,cs,sk,sl,sr,hr,ro,bg,hu,tr,el,fi,et,lv,lt,ga,cy,eo,ca,gl,eu,be,az,hy,am,bn,ur,vi,id,mk,commons/' server.properties
+../run server server.properties
 
