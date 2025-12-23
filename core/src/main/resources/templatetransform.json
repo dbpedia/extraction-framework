@@ -1,0 +1,220 @@
+{
+  "en":{
+    "Dash":{
+      "transformer":"textNode",
+      "replace": " - "
+    },
+    "paced ndash":{
+      "transformer":"textNode",
+      "replace": " - "
+    },
+    "Ndash":{
+      "transformer":"textNode",
+      "replace": "-"
+    },
+    "Mdash":{
+      "transformer":"textNode",
+      "replace": " - "
+    },
+    "Emdash":{
+      "transformer":"textNode",
+      "replace": " - "
+    },
+    "-":{
+      "transformer":"textNode",
+      "replace": " - "
+    },
+    "Clr":{
+      "transformer":"textNode",
+      "replace": "<br />"
+    },
+    "Lang":{
+      "transformer":"textNode",
+      "replace": "<br />$(3||)<br />"
+    },
+    "Marriage":{
+      "transformer":"extractChildren",
+      "keys": ["end", "()"],
+      "whileList":false
+    },
+    "Nowrap":{
+      "transformer":"extractChildren",
+      "keys": [],
+      "whileList":false
+    },
+    "Nobr":{
+      "transformer":"extractChildren",
+      "keys": [],
+      "whileList":false
+    },
+    "Flatlist":{
+      "transformer":"extractChildren",
+      "keys": ["class", "style", "indent"],
+      "whileList":false,
+      "additionalSplitString": "*"
+    },
+    "Plainlist|Plain list":{
+      "transformer":"extractChildren",
+      "keys": ["class", "style", "indent"],
+      "whileList":false,
+      "additionalSplitString": "*"
+    },
+    "Hlist":{
+      "transformer":"extractChildren",
+      "keys": ["class", "style", "list_style", "item_style", "indent", "item1_style", "item2_style", "item3_style", "item4_style", "item5_style", "item6_style", "item7_style", "item8_style", "item9_style", "item10_style", "item11_style", "item12_style", "item13_style", "item14_style", "item15_style", "item16_style", "item17_style", "item18_style", "item19_style", "item20_style", "item21_style", "item22_style", "item23_style", "item24_style", "item25_style"],
+      "whileList":false,
+      "additionalSplitString": "*"
+    },
+    "Unbulleted list":{
+      "transformer":"extractChildren",
+      "keys": ["class", "style", "list_style", "item_style", "item1_style", "item2_style", "item3_style", "item4_style", "item5_style", "item6_style", "item7_style", "item8_style", "item9_style", "item10_style", "item11_style", "item12_style", "item13_style", "item14_style", "item15_style", "item16_style", "item17_style", "item18_style", "item19_style", "item20_style", "item21_style", "item22_style", "item23_style", "item24_style", "item25_style"],
+      "whileList":false
+    },
+    "Collapsible list":{
+      "transformer":"extractChildren",
+      "keys": ["expand", "frame_style", "title_style", "framestyle", "titlestyle", "list_style", "title", "liststyle", "hlist", "bullets"],
+      "whileList":false,
+      "additionalSplitString": "*"
+    },
+    "ICD9":{
+      "transformer":"extractChildren",
+      "keys": ["1"],
+      "whileList":true
+    },
+    "ICD10":{
+      "transformer":"extractChildren",
+      "keys": ["1", "2", "3"],
+      "whileList":true,
+      "replace": "$(1||)$(2||)$(3|.|)"
+    },
+    "Lang-$(lang)":{
+      "transformer":"getLangText",
+      "keys": ["1"],
+      "whileList":true
+    },
+    "Official website":{
+      "transformer":"externalLinkNode"
+    },
+    "URL|url":{
+      "transformer":"externalLinkNode"
+    },
+    "Currency":{
+      "transformer":"textNode",
+      "replace": "<br /> $(2||) $(1||)<br />"
+    },
+    "US$":{
+      "transformer":"textNode",
+      "replace": "<br /> USD $(1||)<br />"
+    },
+    "GB£":{
+      "transformer":"textNode",
+      "replace": "<br /> GBP $(1||)<br />"
+    },
+    "AUD":{
+      "transformer":"textNode",
+      "replace": "<br /> AUD $(1||)<br />"
+    },
+    "CAD":{
+      "transformer":"textNode",
+      "replace": "<br /> CAD $(1||)<br />"
+    },
+    "CNY":{
+      "transformer":"textNode",
+      "replace": "<br /> CNY $(1||)<br />"
+    },
+    "BDT":{
+      "transformer":"textNode",
+      "replace": "<br /> BDT $(1||)<br />"
+    },
+    "INR":{
+      "transformer":"textNode",
+      "replace": "<br /> INR $(1||)<br />"
+    },
+    "JPY":{
+      "transformer":"textNode",
+      "replace": "<br /> JPY $(1||)<br />"
+    },
+    "ISIN":{
+      "transformer":"textNode",
+      "replace": "$(1||)"
+    },
+    "New York Stock Exchange|NYSE|nyse|NYSE was|NYSE link":{
+      "transformer":"textNode",
+      "replace": "NYSE:$(1||)"
+    },
+    "NYSE American|AMEX|amex|AMEX link|AMEX was":{
+      "transformer":"textNode",
+      "replace": "AMEX:$(1||)"
+    },
+    "NASDAQ|nasdaq|NASDAQ was|NASDAQ link":{
+      "transformer":"textNode",
+      "replace": "NASDAQ:$(1||)"
+    },
+    "NASDAQ Dubai":{
+      "transformer":"textNode",
+      "replace": "NASDAQ Dubai:$(1||)"
+    },
+    "Frankfurt Stock Exchange|FWB|fwb|FWB link|FWB was":{
+      "transformer":"textNode",
+      "replace": "FWB:$(1||)"
+    },
+    "Euronext|Euronext link|Euronext was":{
+      "transformer":"textNode",
+      "replace": "Euronext:$(1||)"
+    },
+    "Luxembourg Stock Exchange":{
+      "transformer":"textNode",
+      "replace": "LuxSE:$(1||)"
+    },
+    "London Stock Exchange|LSE|lse|LSE link|LSE was":{
+      "transformer":"textNode",
+      "replace": "LSE:$(1||)"
+    },
+    "Hong Kong Stock Exchange|SEHK|SEHK link|SEHK was|Hkse|HKEX":{
+      "transformer":"textNode",
+      "replace": "SEHK:$(1||)"
+    }
+  },
+  "commons":{
+    "Self":{
+      "transformer":"unwrapTemplates",
+      "keys": ["author", "attribution", "migration"],
+      "whileList":false
+    },
+    "PD-Art":{
+      "transformer":"unwrapTemplates",
+      "keys": ["1"],
+      "whileList":true
+    },
+    "PD-Art-two":{
+      "transformer":"unwrapTemplates",
+      "keys": ["deathyear"],
+      "whileList":false
+    },
+    "Licensed-PD-Art":{
+      "transformer":"unwrapTemplates",
+      "keys": ["1", "2"],
+      "whileList":true
+    },
+    "Licensed-PD-Art-two":{
+      "transformer":"unwrapTemplates",
+      "keys": ["1", "2", "3"],
+      "whileList":true
+    },
+    "Licensed-FOP":{
+      "transformer":"unwrapTemplates",
+      "keys": ["1", "2"],
+      "whileList":true
+    },
+    "Copyright information":{
+      "transformer":"unwrapTemplates",
+      "keys": ["13"],
+      "whileList":false
+    },
+    "PD-scan":{
+      "transformer":"unwrapTemplates",
+      "keys": ["1"],
+      "whileList":true
+    }
+  }
+}

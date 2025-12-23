@@ -1,0 +1,27 @@
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "NL/phgmDhcrvMZ5FO6IOkwxJXZmOtNLFf9cFPEeY0Ei0PawSvCH4MiqF2eZdsf+pP0VpQqitTqDgrRPCGWqDdzCVGvbpPYWsV+T1iFEeX1b3FDaSgpjLg1CGVqbtgmOeap1UYVu0cmfDg2lZe/7ncNDTIjAwiXKAW4EaLJXBklA="
+
+sudo: false
+dist: trusty
+language: java
+jdk:
+    - oraclejdk8
+branches:
+  only:
+    - master
+    - testing
+before_install:
+  - sed -i.bak -e 's|https://nexus.codehaus.org/snapshots/|https://oss.sonatype.org/content/repositories/codehaus-snapshots/|g' ~/.m2/settings.xml
+script: "mvn clean install"
+notifications:
+  email:
+    recipients:
+      - dbpedia-developers@lists.sourceforge.net
+    on_success: change
+    on_failure: change
+cache:
+  directories:
+  - $HOME/.m2

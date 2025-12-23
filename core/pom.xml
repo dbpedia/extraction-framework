@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.dbpedia</groupId>
+        <artifactId>extraction</artifactId>
+        <version>4.2-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.dbpedia.extraction</groupId>
+    <artifactId>core</artifactId>
+    <name>DBpedia Core Libraries</name>
+
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>attach-docs-sources</id>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>doc-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <launchers>
+                        <launcher>
+                            <id>gen-eval-mod</id>
+                            <mainClass>org.dbpedia.databus.mod.EvalMod</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xmx32G</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+
+                        <launcher>
+                            <id>download-ontology</id>
+                            <mainClass>org.dbpedia.extraction.util.OntologyDownloader</mainClass>
+                            <args>
+                                <arg>../ontology.xml</arg>
+                                <arg>../ontology.owl</arg>
+                                <arg>${project.version}</arg>
+                            </args>
+                        </launcher>
+
+                        <launcher>
+                            <id>download-mappings</id>
+                            <mainClass>org.dbpedia.extraction.util.MappingsDownloader</mainClass>
+                            <args>
+                                <arg>../mappings</arg>
+                            </args>
+                        </launcher>
+
+                        <launcher>
+                            <id>iriTest</id>
+                            <mainClass>org.dbpedia.validation.ValidationLauncher</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xmx8G</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+
+                        <launcher>
+                            <id>generate-settings</id>
+                            <mainClass>org.dbpedia.extraction.wikiparser.impl.wikipedia.GenerateWikiSettings</mainClass>
+                            <args>
+                                <arg>src/main/settings</arg><!-- wiki config xml files folder -->
+                                <arg>true</arg><!-- download info again and overwrite existing files? -->
+                            </args>
+                        </launcher>
+                    </launchers>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!--snuggletex dependencies: used to convert latex formula into infix notation maybe replace these-->
+        <repository>
+            <id>www2.ph.ed.ac.uk-releases</id>
+            <url>https://www2.ph.ed.ac.uk/maven2</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+
+        <dependency>
+            <!-- TODO REMOVE IN FUTURE, see main pom -->
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-arq</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-collection-compat_${scala.compat.version}</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.compat.version}</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.sweble.wikitext</groupId>
+            <artifactId>swc-engine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.sweble.wom3</groupId>
+            <artifactId>sweble-wom3</artifactId>
+            <version>2.1.0</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wikidata.wdtk</groupId>
+            <artifactId>wdtk-dumpfiles</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wikidata.wdtk</groupId>
+            <artifactId>wdtk-datamodel</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-xml</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-scala_${scala.compat.version}</artifactId>
+        </dependency>
+        <!--snuggletex dependencies: used to convert latex formula into infix notation maybe replace these-->
+        <dependency>
+            <groupId>uk.ac.ed.ph.snuggletex</groupId>
+            <artifactId>snuggletex-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>uk.ac.ed.ph.snuggletex</groupId>
+            <artifactId>snuggletex-upconversion</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>uk.ac.ed.ph.snuggletex</groupId>
+            <artifactId>snuggletex-jeuclid</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalaj</groupId>
+            <artifactId>scalaj-http_${scala.compat.version}</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
+

@@ -1,0 +1,118 @@
+
+<!-- saved from url=(0050)http://mappings.dbpedia.org/sprint/progression.php -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>DBpedia Mapping Sprint, Summer 2011 - Language Race</title>
+  <link href="./summer2011_files/jquery-ui.css" rel="stylesheet" type="text/css">
+  <script src="./summer2011_files/jquery.min.js"></script>
+  <script src="./summer2011_files/jquery-ui.min.js"></script>
+  <style type="text/css">
+  .bar { margin: 0px; width: 100px; height: 18px; margin:2px; background: green; border: 1px solid black; }
+  .po { margin: 0px; width: 100px; height: 18px; margin:2px; background: green; border: 1px solid black;  }
+  .to { margin: 0px; width: 100px; height: 18px; margin:2px; background: #3f92d2; border: 1px solid black;  }
+  .t { margin: 0px; width: 100px; height: 18px; margin:2px; background: brown; border: 1px solid black;  }
+  .lang { text-decoration: none; color: black; padding: 2px; left: 0px;}
+  .title { text-decoration: bold; font-size: 14pt; }
+  .percent { float: right }
+  .copyright { border-top: 1px solid gray; }
+  .menu { background-color: #ddd; font-decoration: bold; width: 100%; padding: 3px;}
+
+  </style>
+
+<link href="./summer2011_files/tooltip.css" rel="stylesheet" type="text/css"></head>
+<body>
+<div class="menu">[ <a href="http://mappings.dbpedia.org/sprint/index.php">Current Statistics</a> | <a href="./summer2011_files/summer2011.html">Race Progression</a> | <a href="http://mappings.dbpedia.org/index.php/Mapping_Statistics">I want to race!</a> ]</div>
+<h1>DBpedia Mapping Sprint, Summer 2011 - Language Race</h1>
+<p>These statistics are gathered daily and displayed as percentages.</p>
+
+
+    <script type="text/javascript" src="./summer2011_files/jsapi"></script>
+ 
+   <script type="text/javascript">
+  
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(getData);
+
+      function getData() {
+	$.get("history.php", drawCharts);
+      }
+
+      function drawCharts(json) {
+         //console.log(json);
+         var stats = $.parseJSON(json);
+  	 var languages = getLanguages(stats).sort();
+         drawChart(stats,"property_occurrences","Property Occurrences",languages)
+         drawChart(stats,"template_occurrences","Template Occurrences",languages)
+         drawChart(stats,"templates","Templates", languages)
+      }
+
+      function getLanguages(stats) {
+        var first = "";
+        for (e in stats) {
+	   first = e; 
+	   break;
+        }
+        var languages = new Array();	
+        $.each(stats[first], function(l, numbers) {                        
+             languages.push(l);
+        })
+        console.log(languages);
+        return languages;
+      }  
+
+      function drawChart(stats,field,title,languages) {
+
+        var data = new google.visualization.DataTable();
+	// add the date in the x axis
+        data.addColumn('string', 'Date');
+	
+        // now one series per language
+        $.each(languages, function(l) { data.addColumn('number', languages[l]); });
+
+        // set number of rows (one per date)
+        data.addRows(Object.size(stats)); 
+        
+	var dIndex = 0;
+        $.each(stats, function(d,langStats) {
+          var lIndex = 1;
+          var formatted = d.substring(0,4) + "-" + d.substring(4,6) + "-" + d.substring(6);
+          data.setValue(dIndex, 0, formatted);          
+	  $.each(languages, function(l) {
+            var numbers = langStats[languages[l]];                        
+            var value = parseFloat(numbers[field]);
+            //console.log(dIndex,lIndex,value);
+	    data.setValue(dIndex,lIndex,value);
+            lIndex++; 
+          })
+          dIndex++;
+	});
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div_'+field));
+        chart.draw(data, {width: 1024, height: 768, title: 'Language Race Progression ('+title+')'});
+      }
+    </script><script src="./summer2011_files/saved_resource" type="text/javascript"></script><script src="./summer2011_files/format+en,default,corechart.I.js" type="text/javascript"></script>
+  
+
+  
+    <div id="chart_div_property_occurrences" style="position: relative; "><iframe name="Drawing_Frame_8996" id="Drawing_Frame_8996" width="1024" height="768" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><div></div></div>
+    <div id="chart_div_template_occurrences" style="position: relative; "><iframe name="Drawing_Frame_59624" id="Drawing_Frame_59624" width="1024" height="768" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><div></div></div>
+    <div id="chart_div_templates" style="position: relative; "><iframe name="Drawing_Frame_42771" id="Drawing_Frame_42771" width="1024" height="768" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><div></div></div>
+  
+
+
+
+<p>More information at: <a href="http://mappings.dbpedia.org/">http://mappings.dbpedia.org</a></p>
+<div class="copyright">
+Author: 
+<a href="http://pablomendes.com/">Pablo N. Mendes</a> (call for action and race pages).
+Thanks to Paul Kreis and Max Jakob for doing the actual work of computing the things I display here. 
+</div>
+
+</body></html>

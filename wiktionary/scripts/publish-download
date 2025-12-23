@@ -1,0 +1,12 @@
+P=`pwd`
+for LANG in $*
+do
+
+DATE=$(date +"%Y-%m-%d");
+FNAME="wiktionary_${LANG}_$DATE.nt.bz2";
+cd "$P/output/$LANG";
+echo "upload $LANG wiktionary as $FNAME to downloads.dbpedia.org";
+scp "wiktionary.dbpedia.org_$LANG.nt.bz2" "root@db0:/var/www/downloads.dbpedia.org/wiktionary/dumps/$LANG/$FNAME";
+
+done
+

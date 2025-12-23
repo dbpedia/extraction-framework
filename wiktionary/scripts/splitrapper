@@ -1,0 +1,23 @@
+#!/bin/sh
+P=`pwd`;
+P="$P/";
+ORIG=$1;
+TDIR="/tmp/splitrapper/";
+echo "make temp working dir at $TDIR";
+mkdir $TDIR;
+cd $TDIR;
+echo "split $ORIG";
+split -C 1000m "$P$ORIG" "$ORIG.part.";
+find . -name "$ORIG.part.*" | while read FILE; do 
+ echo "rapper to $FILE.fixed";
+ rapper -i turtle -o ntriples "$FILE" > "$FILE.fixed";
+done
+echo "cat to $ORIG.fixed";
+cat $ORIG.part.*.fixed > "$ORIG.fixed";
+echo "arranging files";
+mv "$ORIG.fixed" $P;
+cd $P;
+rm -rf $TDIR;
+mv "$ORIG" "$ORIG.orig";
+mv "$ORIG.fixed" "$ORIG";
+

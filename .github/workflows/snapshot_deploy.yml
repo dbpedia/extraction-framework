@@ -1,0 +1,80 @@
+name: Snapshot Deploy
+
+on:
+  push:
+    branches: [ master , dev] 
+  pull_request:
+    branches: [ master , dev ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+    
+      - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Set up settings.xml for deploy
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml <<EOF
+          <settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${{ github.actor }}</username>
+                <password>${{ secrets.GITHUB_TOKEN }}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+
+      - name: Compute Maven-safe REVISION
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sanitize() {
+            # lowercase; allow only [a-z0-9.-]; collapse dashes; trim edges
+            echo "$1" \
+              | tr '[:upper:]' '[:lower:]' \
+              | sed -E 's/[^a-z0-9.-]+/-/g; s/-+/-/g; s/^-+//; s/-+$//'
+          }
+
+          if [[ "${GITHUB_REF}" == refs/pull/* ]]; then
+            # e.g. refs/pull/42/merge -> pr-42-SNAPSHOT
+            pr_num="$(echo "${GITHUB_REF}" | sed -E 's#refs/pull/([0-9]+).*#\1#')"
+            base="pr-${pr_num}"
+          else
+            # e.g. refs/heads/feature/foo -> feature-foo-SNAPSHOT
+            base="${GITHUB_REF##*/}"
+          fi
+
+          safe_base="$(sanitize "${base}")"
+          [[ -z "${safe_base}" ]] && safe_base="build"
+
+          REVISION="${safe_base}-SNAPSHOT"
+          echo "Using Maven revision: ${REVISION}"
+          echo "REVISION=${REVISION}" >> "$GITHUB_ENV"
+
+      - name: Set Maven Version
+        run: mvn versions:set -DnewVersion="${REVISION}"
+
+      - name: Deploy Snapshot
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            REPO: ${{ github.repository }}
+        run: |
+          echo "Deploying to https://maven.pkg.github.com/${REPO} with revision ${REVISION}"
+          mvn deploy -DskipTests \
+            -Dgithub.repo.url="https://maven.pkg.github.com/${REPO}"

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Shortcut for mvn scala:run -Dlauncher=... -DaddArgs=...
+# Must be called with one of the modules (core/, dump/, ...) as current directory.
+# Example:
+# extraction_framework/core> ../run LAUNCHER ARG1 ARG2 ARG3
+# is equivalent to
+# extraction_framework/core> mvn scala:run "-Dlauncher=LAUNCHER" "-DaddArgs=ARG1|ARG2|ARG3"
+
+LAUNCHER="$1"
+SLACK=false
+
+ADD_ARGS="$2"
+if [[ $ADD_ARGS == log-slack* ]] ;
+then
+  ADD_ARGS=""
+  SLACK=${ADD_ARGS#*log-slack=}
+fi
+
+for ARG in ${@:3}
+do
+  ADD_ARGS="$ADD_ARGS|$ARG"
+done
+
+# export MAVEN_OPTS='-Xmx4096M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGC -XX:+PrintGCTimeStamps'
+# export MAVEN_DEBUG='-X -e'
+
+# if we're not on a terminal, use batch mode to avoid ugly log files
+[ ! -t 1 ] && BATCH="-B"
+# setting the user agent for WikiAPI for apache and java http clients; PLEASE change this according to https://foundation.wikimedia.org/wiki/Policy%3AWikimedia_Foundation_User-Agent_Policy
+# TODO maybe think about making a better default user agent string here requiring configuration of an email address and service URL
+export JAVA_TOOL_OPTIONS='-Dhttp.agent=curl/8.6.0 -Dextract.wikiapi.customUserAgent.enabled=true -Dextract.wikiapi.customUserAgent.text=curl/8.6.0'
+mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS"

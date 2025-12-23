@@ -1,0 +1,46 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Extraction Framework Build and MiniDump Test 
+
+on:
+  push:
+    branches: [ master , dev, testing]
+  pull_request:
+    branches: [ master , dev]
+  schedule:
+    - cron: '0 0 *,12 * *' 
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # needed for Wikimedia API calls
+      JAVA_TOOL_OPTIONS: '-Dhttp.agent=curl/8.6.0 -Dextract.wikiapi.customUserAgent.enabled=true -Dextract.wikiapi.customUserAgent.text=curl/8.6.0' 
+    strategy:
+      matrix:
+        include:
+          - name: legacy
+            java: '1.8'
+            profile: legacy
+          - name: modern
+            java: '17'
+            profile: modern
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK ${{ matrix.java }}
+      uses: actions/setup-java@v3
+      with:
+        distribution: temurin
+        java-version: ${{ matrix.java }}
+        cache: maven
+    - name: Build with Maven (${{ matrix.profile }})
+      run: mvn clean install -P${{ matrix.profile }} -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.http.retryHandler.count=3
+    - uses: act10ns/slack@v1
+      with:
+        status: ${{ job.status }}
+        steps: ${{ toJson(steps) }}
+        channel: '#dev-team'
+      if: failure()

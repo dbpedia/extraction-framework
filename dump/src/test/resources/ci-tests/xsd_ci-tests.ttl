@@ -1,0 +1,92 @@
+    @prefix v: <http://dev.vocab.org/> .
+@prefix trigger: <http://dev.vocab.org/trigger/> .
+@prefix validator: <http://dev.vocab.org/validator/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dataid-mt: <http://dataid.dbpedia.org/ns/mt#> .
+
+
+<#xsd_dateTime> 
+   a v:TestGenerator ;
+   v:trigger [
+		a v:RDF_Literal_Trigger ;
+		rdfs:label "Datatype xsd:dateTime" ;
+		trigger:datatype <http://www.w3.org/2001/XMLSchema#dateTime> 
+   ] ;
+   v:validator [
+		a v:Datatype_Literal_Validator ;
+		rdfs:comment "taken from https://www.w3.org/TR/xmlschema11-2/#dateTime" ;
+		v:pattern "^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+   ] .
+
+
+<#xsd_date> 
+   a v:TestGenerator ;
+   v:trigger [
+		a v:RDF_Literal_Trigger ;
+		rdfs:label "Datatype xsd:date" ;
+		trigger:datatype <http://www.w3.org/2001/XMLSchema#date> 
+   ] ;
+   v:validator [
+		a v:Datatype_Literal_Validator ;
+		rdfs:comment "taken from https://www.w3.org/TR/xmlschema11-2/#date" ;
+		v:pattern "^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$" 
+   ] .
+
+# Decimal and derivatives
+
+<#xsd_decimal>
+   a v:TestGenerator ;
+   v:trigger [
+		a v:RDF_Literal_Trigger ;
+		rdfs:label "Datatype xsd:decimal" ;
+		trigger:datatype <http://www.w3.org/2001/XMLSchema#decimal> 
+   ] ;
+   v:validator [
+		a v:Datatype_Literal_Validator ;
+		rdfs:comment "taken from https://www.w3.org/TR/xmlschema11-2/#decimal" ;
+		v:pattern "^(\\+|-)?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)$" 
+		] .
+
+<#xsd_integer>
+	a v:TestGenerator ;
+	v:trigger [
+		a v:RDF_Literal_Trigger ;
+		rdfs:label "Datatype xsd:integer" ;
+		trigger:datatype <http://www.w3.org/2001/XMLSchema#integer>
+   ] ;
+   v:validator [
+		a v:Datatype_Literal_Validator ;
+		rdfs:comment "taken from https://www.w3.org/TR/xmlschema11-2/#integer" ;
+		v:pattern "^[\\-+]?[0-9]+$"
+		] .
+
+<#xsd_nonNegativeInteger>
+	a v:TestGenerator ;
+	v:trigger [
+		a v:RDF_Literal_Trigger ;
+		rdfs:label "Datatype xsd:nonNegativeInteger" ;
+		trigger:datatype <http://www.w3.org/2001/XMLSchema#nonNegativeInteger>
+   ] ;
+   v:validator [
+		a v:Datatype_Literal_Validator ;
+		rdfs:comment """
+			taken from https://www.w3.org/TR/xmlschema11-2/#nonNegativeInteger
+			NOTE: removed '-' from official regex
+			"""  ;
+		v:pattern "^[+]?[0-9]+$"
+		] .
+
+<#xsd_float>
+	a v:TestGenerator ;
+	v:trigger [
+		a v:RDF_Literal_Trigger ;
+		rdfs:label "Datatype xsd:float" ;
+		trigger:datatype <http://www.w3.org/2001/XMLSchema#float>
+   ] ;
+   v:validator [
+		a v:Datatype_Literal_Validator ;
+		rdfs:comment """taken from https://www.w3.org/TR/xmlschema11-2/#float"""  ;
+		# todo not sure about this one
+		v:pattern "^(\\+|-)?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)([Ee](\\+|-)?[0-9]+)?|(\\+|-)?INF|NaN$"
+		] .
+		

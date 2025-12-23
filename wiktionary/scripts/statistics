@@ -1,0 +1,104 @@
+#!/usr/bin/php -q
+<?php
+$FILE=$argv[1];
+
+$TARGET='stats_results';
+$SENSEFILE=$TARGET.'/sense.csv';
+$SENSECOUNTFILE=$TARGET.'/sense_count.csv';
+$PROPERTYCOUNTFILE=$TARGET.'/property_count.csv';
+
+passthru("mkdir -p $TARGET");
+passthru("rm -f $TARGET/*");
+
+echo "General Dump Statistics for file $FILE".PHP_EOL;
+echo "---------".PHP_EOL;
+$DATE=date('c');
+echo "Date: $DATE".PHP_EOL;
+$MDSUM=`md5sum $FILE | cut -f1 -d ' '`;
+echo "md5sum: $MDSUM".PHP_EOL;
+$TRIPLECOUNT=(int)`wc -l $FILE | cut -f1 -d ' '`;
+$TOTAL=(int)`wc -l $FILE | cut -f1 -d ' '`;
+echo "$TRIPLECOUNT triples".PHP_EOL;
+
+$LANGDETECTEDCOUNT=(int)`grep -F "hasLangUsage" $FILE | cut -f1 -d '>' | sed 's/<//;s/>//' | sort -u | wc -l | cut -f1 -d ' '`;
+$LEXICALWORDCOUNT=(int)`grep -F "lemon#LexicalEntry" $FILE | cut -f1 -d '>' | sed 's/<//;s/>//' | sort -u | wc -l | cut -f1 -d ' '`;
+echo "$LEXICALWORDCOUNT entries".PHP_EOL;
+echo "$LANGDETECTEDCOUNT unique words parsed (at least a language usage detected)".PHP_EOL;
+$AVGTRIPELSPERWORD=(int)`echo "scale = 2; $TRIPLECOUNT / $LEXICALWORDCOUNT" | bc -l `;
+echo "$AVGTRIPELSPERWORD triples/word".PHP_EOL;
+echo "---------".PHP_EOL;
+
+$SUBJECTCOUNT=`cat $FILE  | cut -f1 -d '>' | sed 's/<//;s/>//' | sort -u | wc -l | cut -f1 -d ' '`;
+$OBJECTCOUNT=`cat $FILE  | cut -f3 -d '>' | sed 's/<//;s/>//' | sort -u | wc -l | cut -f1 -d ' '`;
+$RESOURCECOUNT=$SUBJECTCOUNT+$OBJECTCOUNT;
+echo "$RESOURCECOUNT unique resources used.".PHP_EOL;
+echo "---------".PHP_EOL;
+
+passthru("cat $FILE | cut -f2 -d '>' | sed 's/<//;s/>//' | awk '{count[$1]++}END{for(j in count) print \"<\" j \">\" \"\t\"count[j]}' > $PROPERTYCOUNTFILE");
+$PREDICATECOUNT=(int)`wc -l $PROPERTYCOUNTFILE | cut -f1 -d ' '`;
+echo "$PREDICATECOUNT unique predicates used. statistic saved to $PROPERTYCOUNTFILE".PHP_EOL;
+echo "---------".PHP_EOL;
+
+$STATFILE = $TARGET."/stat.tmp";
+passthru("grep -F '/statistics' $FILE | cut -f3 -d '>' | sed 's/\\\"//;s/\\\"//' > $STATFILE");
+$handle = @fopen($STATFILE, "r");
+$sum = 0.0;
+if ($handle) {
+    while (($buffer = fgets($handle, 4096)) !== false) {
+        $a = explode("-",$buffer);
+        $triples = (int)$a[0];
+        $lines = (int)$a[1];
+        if($lines != 0){
+            $sum += ($triples / $lines);
+        } else {
+            $sum += 1;
+        }
+    }
+    if (!feof($handle)) {
+        echo "Fehler: unerwarteter fgets() Fehlschlag\n";
+    }
+    fclose($handle);
+}
+if($LEXICALWORDCOUNT != 0){
+    $AVGTRIPLESPERLINE=$sum / $LEXICALWORDCOUNT;
+}else{
+    $AVGTRIPLESPERLINE=0;
+}
+echo $AVGTRIPLESPERLINE." triples/line (averaged)".PHP_EOL;
+echo "---------".PHP_EOL;
+
+if ($argc == 3){
+  $FACET1=$argv[2];
+  echo "Sense Statistics for $FACET1".PHP_EOL;
+  passthru("grep hasSense $FILE | grep '\-'\"$FACET1\" |  cut -f1 -d '>' | sed 's/<//;s/>//'  > $SENSEFILE");
+  echo "all resources with type $FACET1 saved to $SENSEFILE (non-unique)".PHP_EOL;
+} else if ($argc ==  4){
+
+    $FACET1=$argv[2];
+    $FACET2=$argv[3];
+    echo "Sense Statistics for $FACET1 $FACET2".PHP_EOL;
+    passthru("grep hasSense $FILE | grep '\-'\"$FACET1\"'\-'\"$FACET2\" |  cut -f1 -d '>' | sed 's/<//;s/>//'  > $SENSEFILE");
+    echo "all resources with type $FACET1 $FACET2 saved to $SENSEFILE (non-unique)".PHP_EOL;
+  } else {
+    echo "Sense Statistics".PHP_EOL;
+    passthru("grep hasSense $FILE |  cut -f1 -d '>' | sed 's/<//;s/>//'  > $SENSEFILE");
+    echo "all resources saved to $SENSEFILE (non-unique, one per sense)".PHP_EOL;
+  }
+
+$TOTAL=(int)`wc -l $SENSEFILE | cut -f1 -d ' '`;
+$UNIQUE=(int)`sort -u $SENSEFILE | wc -l | cut -f1 -d ' '`;
+$AVG=(int)`echo "scale = 2; $TOTAL / $UNIQUE" | bc -l `;
+
+passthru("cat $SENSEFILE | awk  '{count[$1]++}END{for(j in count) print \"<\" j \">\" \"\t\"count [j]}'  > $SENSECOUNTFILE");
+echo "count of senses saved to $SENSECOUNTFILE".PHP_EOL;
+echo "Total $TOTAL / Unique $UNIQUE / Average $AVG ".PHP_EOL;
+
+echo PHP_EOL;
+echo "conclusion".PHP_EOL;
+echo "quantitative".PHP_EOL;
+echo "#words #triples #resources #predicates #senses".PHP_EOL;
+echo "$LEXICALWORDCOUNT $TRIPLECOUNT $RESOURCECOUNT $PREDICATECOUNT $UNIQUE".PHP_EOL;
+echo "qualitative".PHP_EOL;
+echo "t/w #wws s/wws t/l".PHP_EOL;
+echo "$AVGTRIPELSPERWORD $TOTAL $AVG $AVGTRIPLESPERLINE".PHP_EOL;
+

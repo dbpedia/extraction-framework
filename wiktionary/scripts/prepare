@@ -1,0 +1,18 @@
+#!/bin/sh
+LANG=$1;
+SW=$(pwd)/scripts/splitrapper
+S=$(pwd)/scripts/statistics
+DIR=`dirname $FILE`
+cd output/$LANG
+FILE=wiktionary.dbpedia.org_$LANG.nt
+echo "clean it with rapper"
+$SW $FILE
+echo "generate statistics"
+$S $FILE > $FILE.statistics
+echo "filter internal statistics triples"
+grep -v -F "/terms/statistics" $FILE > $FILE.clean
+rm $FILE
+mv $FILE.clean $FILE
+echo "bzip2 the file";
+bzip2 -f -k "$FILE";
+

@@ -1,0 +1,20 @@
+@base <https://github.com/dbpedia/extraction-framework> .
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix dbp: <http://dbpedia.org/property/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+
+<#en_abstract_validation>
+	a sh:NodeShape  ;
+	sh:targetSubjectsOf <http://dbpedia.org/ontology/abstract> ;
+	prov:wasDerivedFrom <https://github.com/dbpedia/extraction-framework/issues/693> ;
+    sh:message "Error, found (; in dbo:abstract. "@en ;
+	sh:property [
+		sh:path <http://dbpedia.org/ontology/abstract>  ;
+        sh:pattern "^((?!\\(\\;).)*$" ;
+	] .

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbpediaGrammar>
+	<template name="ConditionalMapping" type="TemplateMapping">
+		<property name="cases" type="Condition" multiplicity="+">
+			<documentation>Only the last condition may have an 'otherwise' property, the previous ones must have an 'operator' property.</documentation>
+		</property>
+		<property name="defaultMappings" type="PropertyMapping" multiplicity="*"/>
+	</template>
+
+	<template name="Condition" type="Condition">
+		<property name="templateProperty" type="TemplateProperty" multiplicity="?"/>
+		<property name="operator" type="String">
+			<documentation>Possible values are 'equals', 'isSet', 'contains' or 'otherwise'.</documentation>
+		</property>
+		<property name="value" type="String" multiplicity="?">
+			<documentation>Required if operator is 'equals' or 'contains'.</documentation>
+		</property>
+		<property name="mapping" type="TemplateMapping" multiplicity="?"/>
+	</template>
+	
+	<template name="TemplateMapping" type="TemplateMapping">
+		<property name="mapToClass" type="OntologyClass" />
+		<property name="correspondingClass" type="OntologyClass" multiplicity="?"/>
+		<property name="correspondingProperty" type="OntologyProperty" multiplicity="?"/>
+		<property name="mappings" type="PropertyMapping" multiplicity="*"/>
+	</template>
+
+	<template name="PropertyMapping" type="PropertyMapping">
+		<property name="templateProperty" type="TemplateProperty" />
+		<property name="ontologyProperty" type="OntologyProperty" />
+		<property name="unit" type="Datatype" multiplicity="?"/>
+	</template>
+
+	<template name="CalculateMapping" type="PropertyMapping">
+		<property name="templateProperty1" type="TemplateProperty" />
+		<property name="templateProperty2" type="TemplateProperty" />
+		<property name="unit1" type="Datatype" />
+		<property name="unit2" type="Datatype" />
+		<property name="operator" type="String">
+			<documentation>Possible values are 'add'.</documentation>
+		</property>
+		<property name="ontologyProperty" type="OntologyProperty" />
+	</template>
+	
+	<template name="CombineDateMapping" type="PropertyMapping">
+		<property name="templateProperty1" type="TemplateProperty" />
+		<property name="templateProperty2" type="TemplateProperty" />
+		<property name="templateProperty3" type="TemplateProperty" multiplicity="?" />
+		<property name="unit1" type="Datatype" />
+		<property name="unit2" type="Datatype" />
+		<property name="unit3" type="Datatype" multiplicity="?" />
+		<property name="ontologyProperty" type="OntologyProperty" />
+	</template>
+	
+	<template name="DateIntervalMapping" type="PropertyMapping">
+		<property name="templateProperty" type="TemplateProperty" />
+		<property name="startDateOntologyProperty" type="OntologyProperty" />
+		<property name="endDateOntologyProperty" type="OntologyProperty" />
+	</template>
+						   
+	<template name="GeocoordinatesMapping" type="PropertyMapping">
+		<property name="coordinates" type="TemplateProperty" multiplicity="?" />
+		<property name="latitude" type="TemplateProperty" multiplicity="?" />
+		<property name="longitude" type="TemplateProperty" multiplicity="?" />
+		<property name="longitudeDegrees" type="TemplateProperty" multiplicity="?" />
+		<property name="longitudeMinutes" type="TemplateProperty" multiplicity="?" />
+		<property name="longitudeSeconds" type="TemplateProperty" multiplicity="?" />
+		<property name="longitudeDirection" type="TemplateProperty" multiplicity="?" />
+		<property name="latitudeDegrees" type="TemplateProperty" multiplicity="?" />
+		<property name="latitudeMinutes" type="TemplateProperty" multiplicity="?" />
+		<property name="latitudeSeconds" type="TemplateProperty" multiplicity="?" />
+		<property name="latitudeDirection" type="TemplateProperty" multiplicity="?" />
+		<property name="ontologyProperty" type="OntologyProperty" multiplicity="?" />
+	</template>
+   
+	<template name="IntermediateNodeMapping" type="PropertyMapping">
+		<property name="nodeClass" type="OntologyClass" />
+		<property name="correspondingProperty" type="OntologyProperty" />
+		<property name="mappings" type="PropertyMapping" multiplicity="+"/>
+	</template>
+</dbpediaGrammar>

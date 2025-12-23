@@ -1,0 +1,31 @@
+@base <https://github.com/dbpedia/extraction-framework> .
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix dbp: <http://dbpedia.org/property/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+
+
+<#Angela_Merkel>
+	a sh:NodeShape ;
+	sh:targetNode dbr:Angela_Merkel ;
+	
+	# related to issue https://github.com/dbpedia/extraction-framework/issues/595
+	# types kept disappearing due to null pointer exception
+	sh:property [
+		sh:path rdf:type ;
+		sh:hasValue dbo:Politician ;
+	] .
+
+	# related to issue: https://github.com/dbpedia/extraction-framework/issues/619 
+    # more info at: https://forum.dbpedia.org/t/dbpedia-dataset-2019-08-30-pre-release/219/7
+	# InfoboxExtractor discarded all triples with wikilinks/objects
+# TODO hackathon
+#	sh:property [
+#		sh:path dbp:birthPlace ;
+#		sh:in ( dbr:Hamburg  dbr:Germany) ;
+#	] .

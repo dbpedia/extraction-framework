@@ -1,0 +1,337 @@
+@base <https://github.com/dbpedia/extraction-framework> .
+@prefix v: <http://dev.vocab.org/> .
+@prefix trigger: <http://dev.vocab.org/trigger/> .
+@prefix validator: <http://dev.vocab.org/validator/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dataid-mt: <http://dataid.dbpedia.org/ns/mt#> .
+
+
+v:RDF_IRI_Trigger a rdfs:Class;
+	rdfs:label "RDF IRI Trigger" ;
+	rdfs:comment "triggers on IRIs in RDF" ;
+	v:applicableMediaType dataid-mt:ApplicationNTriples .
+
+#########################
+# Reusable Triggers, several triggers per TestCase 
+#########################
+
+# TODO trigger does not seem to work
+trigger:wikipedia
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://en.wikipedia.org/wiki/.*" ;
+   rdfs:label "wikipedia"  .
+
+<#wikipedia_IRIs>
+  a v:TestGenerator ;
+  v:trigger trigger:wikipedia ;
+  # same as dbpedia
+  v:validator validator:dissallowed_chars ;
+  v:validator validator:dbpedia_resource_delims ;
+  v:validator [
+		a v:IRI_Validator ;
+		v:doesNotContain "<" , ">", "\"" , " ", "{", "}", "|", "\\", "^" , "`"
+		] .
+
+trigger:generic_wikipedia_dbpedia_extraction
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://(ga\\.|af\\.|als\\.|am\\.|an\\.|ar\\.|arz\\.|ast\\.|az\\.|azb\\.|ba\\.|bar\\.|batsmg\\.|be\\.|bg\\.|bn\\.|bpy\\.|br\\.|bs\\.|bug\\.|ca\\.|cdo\\.|ce\\.|ceb\\.|ckb\\.|cs\\.|cv\\.|cy\\.|da\\.|de\\.|el\\.|eml\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fo\\.|fr\\.|fy\\.|gd\\.|gl\\.|gu\\.|he\\.|hi\\.|hr\\.|hsb\\.|ht\\.|hu\\.|hy\\.|ia\\.|id\\.|ilo\\.|io\\.|is\\.|it\\.|ja\\.|jv\\.|ka\\.|kk\\.|kn\\.|ko\\.|ku\\.|ky\\.|la\\.|lb\\.|li\\.|lmo\\.|lt\\.|lv\\.|mai\\.|mg\\.|mhr\\.|min\\.|mk\\.|ml\\.|mn\\.|mr\\.|mrj\\.|ms\\.|my\\.|mzn\\.|nan\\.|nap\\.|nds\\.|ne\\.|new\\.|nl\\.|nn\\.|no\\.|oc\\.|or\\.|os\\.|pa\\.|pl\\.|pms\\.|pnb\\.|pt\\.|qu\\.|ro\\.|ru\\.|sa\\.|sah\\.|scn\\.|sco\\.|sd\\.|sh\\.|si\\.|simple\\.|sk\\.|sl\\.|sq\\.|sr\\.|su\\.|sv\\.|sw\\.|ta\\.|te\\.|tg\\.|th\\.|tl\\.|tr\\.|tt\\.|uk\\.|ur\\.|uz\\.|vec\\.|vi\\.|vo\\.|wa\\.|war\\.|wuu\\.|xmf\\.|yi\\.|yo\\.|yue\\.|zh\\.)?dbpedia.org/resource/((?!(\\?.*(nif=|dbpv=).*(dbpv=|nif=))).)*$" ;
+	rdfs:label "DBpedia IRIs from Wikipedia used in Generic Extraction" ;
+	rdfs:comment "Starting with http://dbpedia.org or for 140 languages with http://xx.dbpedia.org" .
+
+trigger:mappings_wikipedia_dbpedia_extraction
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://(ar\\.|az\\.|be\\.|bg\\.|bn\\.|ca\\.|cs\\.|cy\\.|da\\.|de\\.|el\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fr\\.|ga\\.|gl\\.|hi\\.|hr\\.|hu\\.|hy\\.|id\\.|it\\.|ja\\.|ko\\.|lt\\.|lv\\.|mk\\.|nl\\.|pl\\.|pt\\.|ro\\.|ru\\.|sk\\.|sl\\.|sr\\.|sv\\.|tr\\.|uk\\.|ur\\.|vi\\.|war\\.|zh\\.|commons\\.)?dbpedia.org/resource/((?!(\\?.*(nif=|dbpv=).*(dbpv=|nif=))).)*$" ;
+	rdfs:label "DBpedia IRIs from Wikipedia used in Mappings Extraction" ;
+	rdfs:comment "Starting with http://dbpedia.org or for 40 mapped languages with http://xx.dbpedia.org" .
+
+trigger:wikidata_dbpedia_extraction
+    a v:RDF_IRI_Trigger ;
+    trigger:pattern  "^http://wikidata.dbpedia.org/resource/Q((?!(\\?.*(nif=|dbpv=).*(dbpv=|nif=))).)*$" ;
+	rdfs:label   "DBpedia IRIs from Wikidata extraction" ;
+	rdfs:comment "Starting with http://wikidata.dbpedia.org/resource/Q" .
+
+trigger:wikidata
+    a v:RDF_IRI_Trigger ;
+    trigger:pattern "^http://www.wikidata.org/entity/Q.*" ;
+	rdfs:label "Wikidata IRIs" ;
+	rdfs:comment "Starting with http://www.wikidata.org/entity/Q" .
+
+trigger:abstract_property
+    a v:RDF_IRI_Trigger ;
+    trigger:pattern "http://dbpedia.org/ontology/abstract" ;
+	rdfs:label "abstract IRIs" ;
+	rdfs:comment "Match abstracts" .
+
+trigger:dbpedia_nif
+    a v:RDF_IRI_Trigger ;
+    trigger:pattern "^http://(\\w*\\.)?dbpedia.org/resource/.*\\?.*(nif=|dbpv=).*(dbpv=|nif=).*" ;
+    rdfs:label "DBpedia NIF IRIs" ;
+    rdfs:comment "Containing NIF query part" .
+
+trigger:dbpedia_ontology
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://dbpedia.org/ontology/.*" ;
+   rdfs:label "DBpedia Ontology IRIs" ;
+   rdfs:comment "http://dbpedia.org/ontology/*" .
+
+trigger:dbpedia_property
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://(\\w*\\.)?dbpedia.org/property/[a-z].*" ;
+   rdfs:label "DBpedia Property IRIs" ;
+   rdfs:comment "http://dbpedia.org/property/*" .
+
+############### TODO Vocab triggers, can be automated
+
+trigger:wgs84
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://www.w3.org/2003/01/geo/wgs84_pos#.*" ;
+   rdfs:label "whs84 trigger" ;
+   rdfs:comment "http://www.w3.org/2003/01/geo/wgs84_pos#" .
+
+trigger:georss
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://www.georss.org/georss/.*" ;
+   rdfs:label "georss trigger" ;
+   rdfs:comment "http://www.georss.org/georss/" .
+
+trigger:w3_rdfs
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://www.w3.org/2000/01/rdf-schema#.*" ;
+   rdfs:label "rdfs trigger" ;
+   rdfs:comment "http://www.w3.org/2000/01/rdf-schema#" .
+
+trigger:w3_rdf
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://www.w3.org/1999/02/22-rdf-syntax-ns#.*" ;
+   rdfs:label "rdf trigger" ;
+   rdfs:comment "http://www.w3.org/1999/02/22-rdf-syntax-ns#" .
+
+trigger:foaf
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://xmlns.com/foaf/0.1/.*" ;
+   rdfs:label "foaf trigger" ;
+   rdfs:comment "http://xmlns.com/foaf/0.1/" .
+
+trigger:skos
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://www.w3.org/2004/02/skos/core#.*" ;
+   rdfs:label "skos trigger" ;
+   rdfs:comment "http://www.w3.org/2004/02/skos/core#" .
+
+trigger:itsrdf
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://www.w3.org/2005/11/its/rdf#.*" ;
+   rdfs:label "itsrdf trigger" ;
+   rdfs:comment "http://www.w3.org/2005/11/its/rdf#" .
+
+trigger:nif
+   a v:RDF_IRI_Trigger ;
+   trigger:pattern "^http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#.*" ;
+   rdfs:label "nif vocab trigger" ;
+   rdfs:comment "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#" .
+
+trigger:generic_iri
+    a v:RDF_IRI_Trigger ;
+    trigger:pattern "^https?://.*" ;
+    rdfs:label "Generic IRI" ;
+    rdfs:comment "Match IRIs" .
+
+#########################
+# Reusable Validators, several Validators per TestCase
+#########################
+
+# todo check https://sourceforge.net/p/dbpedia/mailman/message/28982391/
+# http://en.wikipedia.org/wiki/Wikipedia:Naming_conventions_(technical_restrictions)#Forbidden_characters
+validator:dissallowed_chars
+	a v:IRI_Validator ;
+   rdfs:comment """Dissallowed in URIs, cf. https://www.ietf.org/rfc/rfc3987.txt: 	Systems accepting IRIs MAY also deal with the printable characters in    US-ASCII that are not allowed in URIs, namely "<", ">", '"', space, "{", "}", "|", "\", "^", and "`", in step 2 above.  If these characters are found but are not converted, then the conversion SHOULD fail.  Please note that the number sign ("#"), the percent sign ("%"), and the square bracket characters ("[", "]") are not part of the above list and MUST NOT be converted.  """ ;
+	v:doesNotContain "<" , ">", "\"" , " ", "{", "}", "|", "\\", "^" , "`" .
+
+validator:reserved_gen_delims
+    a v:IRI_Validator ;
+    rdfs:comment """reserved gen-delims from https://www.ietf.org/rfc/rfc3987.txt ":", "?", "#", "[", "]", "/", "@" """ ;
+    v:doesNotContain ":", "?", "#", "[", "]", "@" .
+
+validator:reserved_sub_delims
+    a v:IRI_Validator ;
+    rdfs:comment """reserved sub-delims from https://www.ietf.org/rfc/rfc3987.txt  "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "=" """ ;
+    v:doesNotContain "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "=" .
+
+validator:dbpedia_resource_delims
+	a v:IRI_Validator ;
+	rdfs:comment """
+	1. gen-delims are not allowed, except ":" and "@" per rfc3987
+	"ipchar = iunreserved / pct-encoded / sub-delims / ":" / "@" "
+	2. sub-delims are allowed:
+	These are allowed in DBpedia Uris, so we check that they are not encoded
+	sub-delims  =  "%21", "%24", "%26", "%27", "%28", "%29", "%2A", "%2B", "%2C", "%3B", "%3D"
+    sub-delims = "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="
+	reserved gen-delims from above """ ;
+	v:doesNotContain  "?", "#", "[", "]" ;
+	v:doesNotContain  "%21", "%24", "%26", "%27", "%28", "%29", "%2A", "%2B", "%2C", "%3B", "%3D" .
+
+validator:dbpedia_ontology
+	a v:IRI_Validator ;
+	# todo get download URL of the ontology from the bus
+	# v:oneOfVocab <https://databus.dbpedia.org/dbpedia/ontology/dbo-snapshots/latest/.nt>
+	# todo use this for now
+	v:oneOfVocab <https://raw.githubusercontent.com/dbpedia/ontology-tracker/master/databus/dbpedia/ontology/dbo-snapshots/dbo-snapshots.nt> .
+
+# no priority to implement this
+validator:foaf
+   a v:IRI_Validator ;
+   v:oneOfVocab <https://akswnc7.informatik.uni-leipzig.de/dstreitmatter/archivo/xmlns.com/foaf--0--1/2020.06.10-215725/foaf--0--1_type=parsed.ttl> .
+
+validator:w3_rdf
+   a v:IRI_Validator ;
+   v:oneOfVocab <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+validator:w3_rdfs
+   a v:IRI_Validator ;
+   v:oneOfVocab <http://www.w3.org/2000/01/rdf-schema#> .
+
+validator:wgs84
+   a v:IRI_Validator ;
+   v:oneOfVocab <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+validator:georss
+   a v:IRI_Validator ;
+   v:oneOfVocab <https://databus.dbpedia.org/ontologies/georss.org/georss/2020.08.10-110000/georss_type=orig.owl> .
+
+validator:skos
+   a v:IRI_Validator ;
+   v:oneOfVocab <http://www.w3.org/2004/02/skos/core#> .
+
+validator:itsrdf
+   a v:IRI_Validator ;
+   v:oneOfVocab <http://www.w3.org/2005/11/its/rdf#> .
+
+#########################
+# Specific instantiations below
+#########################
+
+<#genericDBpediaWikipediaIRIs>
+	a v:TestGenerator ;
+	v:trigger trigger:generic_wikipedia_dbpedia_extraction ;
+	v:validator validator:dissallowed_chars ;
+	v:validator validator:dbpedia_resource_delims .
+
+<#mappingsDBpediaWikipediaIRIs>
+	a v:TestGenerator ;
+	v:trigger trigger:mappings_wikipedia_dbpedia_extraction ;
+	v:validator validator:dissallowed_chars ;
+	v:validator validator:dbpedia_resource_delims .
+
+<#dbpediaOntology>
+   a v:TestGenerator ;
+   v:trigger trigger:dbpedia_ontology ;
+   v:validator validator:dissallowed_chars ;
+   v:validator validator:dbpedia_ontology .
+
+<#dbpediaGenericProperty>
+     a v:TestGenerator ;
+     v:trigger [
+       a v:RDF_IRI_Trigger ;
+       rdfs:label "DBpedia Generic IRIs" ;
+       trigger:pattern "^http://dbpedia.org/property/"
+     ] .
+     # TODO validator
+
+# no priority to implement this
+<#foaf>
+   a v:TestGenerator ;
+   v:trigger trigger:foaf ;
+   v:validator validator:foaf .
+
+<#w3_rdf>
+   a v:TestGenerator ;
+   v:trigger trigger:w3_rdf ;
+   v:validator validator:w3_rdf .
+
+<#w3_rdfs>
+   a v:TestGenerator ;
+   v:trigger trigger:w3_rdfs ;
+   v:validator validator:w3_rdfs .
+
+<#wgs84>
+   a v:TestGenerator ;
+   v:trigger trigger:wgs84 ;
+   v:validator validator:wgs84 .
+
+<#georss>
+   a v:TestGenerator ;
+   v:trigger trigger:georss ;
+   v:validator validator:georss .
+
+<#skos>
+   a v:TestGenerator ;
+   v:trigger trigger:skos ;
+   v:validator validator:skos .
+
+<#itsrdf>
+   a v:TestGenerator ;
+   v:trigger trigger:itsrdf ;
+   v:validator validator:itsrdf .
+
+<#wikidata_IRIs>
+  a v:TestGenerator ;
+  v:trigger trigger:wikidata ;
+  v:validator [
+		a v:IRI_Validator ;
+		v:pattern "^http://www.wikidata.org/entity/Q[0-9]+$"
+		] .
+
+<#abstracts>
+  a v:TestGenerator ;
+  v:trigger trigger:abstract_property ;
+  rdfs:comment """related to the issue #693""" ;
+  v:validator [
+		a v:Datatype_Literal_Validator ;
+		v:validatorGroup v:rightValidator ;
+		v:doesNotContain "(;", "()"
+		] .
+
+<#forward_slash_in_resource_names>
+  a v:TestGenerator ;
+  v:trigger trigger:generic_wikipedia_dbpedia_extraction ;
+  rdfs:comment """related to the issue #626""" ;
+  v:validator [
+        a v:IRI_Validator ;
+		v:pattern "^((?!(http://(ga\\.|af\\.|als\\.|am\\.|an\\.|ar\\.|arz\\.|ast\\.|az\\.|azb\\.|ba\\.|bar\\.|batsmg\\.|be\\.|bg\\.|bn\\.|bpy\\.|br\\.|bs\\.|bug\\.|ca\\.|cdo\\.|ce\\.|ceb\\.|ckb\\.|cs\\.|cv\\.|cy\\.|da\\.|de\\.|el\\.|eml\\.|en\\.|eo\\.|es\\.|et\\.|eu\\.|fa\\.|fi\\.|fo\\.|fr\\.|fy\\.|gd\\.|gl\\.|gu\\.|he\\.|hi\\.|hr\\.|hsb\\.|ht\\.|hu\\.|hy\\.|ia\\.|id\\.|ilo\\.|io\\.|is\\.|it\\.|ja\\.|jv\\.|ka\\.|kk\\.|kn\\.|ko\\.|ku\\.|ky\\.|la\\.|lb\\.|li\\.|lmo\\.|lt\\.|lv\\.|mai\\.|mg\\.|mhr\\.|min\\.|mk\\.|ml\\.|mn\\.|mr\\.|mrj\\.|ms\\.|my\\.|mzn\\.|nan\\.|nap\\.|nds\\.|ne\\.|new\\.|nl\\.|nn\\.|no\\.|oc\\.|or\\.|os\\.|pa\\.|pl\\.|pms\\.|pnb\\.|pt\\.|qu\\.|ro\\.|ru\\.|sa\\.|sah\\.|scn\\.|sco\\.|sd\\.|sh\\.|si\\.|simple\\.|sk\\.|sl\\.|sq\\.|sr\\.|su\\.|sv\\.|sw\\.|ta\\.|te\\.|tg\\.|th\\.|tl\\.|tr\\.|tt\\.|uk\\.|ur\\.|uz\\.|vec\\.|vi\\.|vo\\.|wa\\.|war\\.|wuu\\.|xmf\\.|yi\\.|yo\\.|yue\\.|zh\\.)?dbpedia.org/resource/.*/.)).)*$"
+		] .
+
+<#iri_slash_n>
+  a v:TestGenerator ;
+  v:trigger trigger:generic_iri ;
+  rdfs:comment """related to the issue #617""" ;
+  v:validator [
+        a v:IRI_Validator ;
+        v:doesNotContain "\\n"
+        ] .
+
+<#multiple_dbpedia_resources_in_IRI>
+  a v:TestGenerator ;
+  v:trigger trigger:generic_wikipedia_dbpedia_extraction ;
+  rdfs:comment """related to the issue #598""" ;
+  v:validator [
+         a v:IRI_Validator ;
+         v:pattern "^((?!(http://(.*\\.)?dbpedia.org/resource/http://(.*\\.)?dbpedia.org/resource/.*)).)*$" ;
+         ] .
+
+<#whitespace_in_iri>
+  a v:TestGenerator ;
+  v:trigger trigger:generic_iri ;
+  rdfs:comment """related to the issue #594""" ;
+  v:validator [
+        a v:IRI_Validator ;
+        v:doesNotContain " "
+        ] .
+
+<#percent_sign_not_encoded>
+  a v:TestGenerator ;
+  v:trigger trigger:generic_iri ;
+  rdfs:comment """related to the issue #639""" ;
+  v:validator [
+        a v:IRI_Validator ;
+        v:pattern "^((?!.*%$).)*$"
+        ] .

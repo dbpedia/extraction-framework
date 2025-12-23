@@ -1,0 +1,559 @@
+{
+  "default":{
+    "nif-find-pageend":[
+      "span[id*='eference']",
+      "span[id='Note']",
+      "span[id='External_Links']",
+      "span[id='External_links_and_references']",
+      ".references",
+      ".printfooter",
+      ".catlinks"
+    ],
+    "nif-find-next-title":["h1", "h2", "h3", "h4"],
+    "nif-find-toc":[".toc", "span[id='toc']"],
+    "nif-remove-elements":[
+      ".noprint",
+      ".haudio",
+      "sup.reference",
+      "span.mw-editsection",
+      ".error",
+      "#coordinates",
+      ".navbox",
+      ".thumb",
+      ".image",
+      "div[role='img']",
+      ".mw-cite-backlink",
+      "mw|editsection"
+    ],
+    "nif-replace-elements":[
+      "ul > li:not(:last-child) -> \\n* $c",
+      "ul > li:last-child -> \\n* $c",
+      "ol > li:not(:last-child) -> \\n* $c",
+      "ol > li:last-child -> \\n* $c"],
+    "nif-note-elements":[
+    "div.hatnote -> ($c)"
+    ]
+  },
+  "de":{
+    "nif-find-pageend":[
+      "span[id=Gesprochene_Version]",
+      "span[id=Weblinks]",
+      "span[id=Literatur]",
+      "span[id=Anmerkungen]",
+      "span[id=Quellen]",
+      "span[id=Einzelnachweise]"
+    ],
+    "nif-find-next-title":[],
+    "nif-find-toc":[],
+    "nif-remove-elements":[
+      "a[title*='Datei'] ~ sup",
+      "a[title*='Datei']",
+      "a[title*='Hörbeispiel']",
+      ".hauptartikel-pfeil"
+    ],
+    "nif-replace-elements":[
+    ],
+    "nif-note-elements":[
+      "div.sieheauch -> ($c)",
+      "div.hauptartikel -> ($c)"
+    ]
+  },
+  "fr":{
+    "nif-find-pageend":[
+      "span[id*=Note_et]",
+      "span[id*=R.C3.A9f.C3.A9rences]",
+      "span[id=Bibliographie]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "es":{
+    "nif-find-pageend":[
+      "span[id*=Referencias]",
+      "span[id*=Bibliograf]",
+      "span[id*=Enlaces_externos]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "it":{
+    "nif-find-pageend":[
+      "span[id*=Referencias]",
+      "span[id*=Note]",
+      "span[id*=Altri_progetti]",
+      "span[id*=Collegamenti_esterni]",
+      "span[id*=Voci_correlate]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "nl":{
+    "nif-find-pageend":[
+      ".toccolours",
+      ".navigatiesjabloon"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "pl":{
+    "nif-find-pageend":[
+      "span[id*=Bibliografia]",
+      "span[id*=Przypisy]",
+      "span[id*=normdaten]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "ja":{
+    "nif-find-pageend":[
+      "span[id*=.E5.A4.96.E9.83.A8.E3.83.AA.E3.83.B3.E3.82.AF]",
+      "span[id*=.E9.96.A2.E9.80.A3.E9.A0.85.E7.9B.AE]",
+      "span[id*=.E5.8F.82.E8.80.83.E6.96.87.E7.8C.AE]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "ko":{
+    "nif-find-pageend":[
+      "span[id*=.EA.B0.81.EC.A3.BC]",
+      "span[id*=.EA.B0.99.EC.9D.B4_.EB.B3.B4.EA.B8.B0]",
+      "span[id*=.EB.B0.94.EA.B9.A5_.EA.B3.A0.EB.A6.AC]",
+      ".notice.metadata.plainlinks"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "pt":{
+    "nif-find-pageend":[
+      "span[id*=Refer.C3.AAncias]",
+      "span[id*=Liga.C3.A7.C3.B5es_externas]",
+      "span[id*=Bibliografia]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "sv":{
+    "nif-find-pageend":[
+      "span[id*=K.C3.A4llor]",
+      "span[id*=Referenser]",
+      "span[id*=Noter]",
+      "span[id*=Vidare_l.C3.A4sning]",
+      "span[id*=Externa_l.C3.A4nkar]",
+      "span[id*=Tryckta_k.C3.A4llor]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "ceb":{
+    "nif-find-pageend":[
+      "span[id*=Saysay]",
+      "span[id*=Mga_reperensiya]",
+      "span[id*=Mga_sumpay_sa_gawas]",
+      "span[id*=Ang_mga_gi_basihan_niini]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "ru":{
+    "nif-find-pageend":[
+      "span[id*=.D0.9F.D1.80.D0.B8.D0.BC.D0.B5.D1.87.D0.B0.D0.BD.D0.B8.D1.8F]",
+      "span[id*=.D0.9B.D0.B8.D1.82.D0.B5.D1.80.D0.B0.D1.82.D1.83.D1.80.D0.B0]",
+      "span[id*=.D0.A1.D1.81.D1.8B.D0.BB.D0.BA.D0.B8]",
+      "span[id*=Ang_mga_gi_basihan_niini]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "war":{
+    "nif-find-pageend":[
+      "span[id*=Mga_kasarigan]",
+      "span[id*=Mga_Sumpay_ha_Gawas]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "vi":{
+    "nif-find-pageend":[
+      "span[id*=Ch.C3.BA_th.C3.ADch]",
+      "span[id*=Tham_kh.E1.BA.A3o]",
+      "span[id*=.C4.90.E1.BB.8Dc_th.C3.AAm]",
+      "span[id*=Li.C3.AAn_k.E1.BA.BFt_ngo.C3.A0i]",
+      "span[id*=Ghi_ch.C3.BA]",
+      "span[id*=Xem_th.C3.AAm]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "sh":{
+    "nif-find-pageend":[
+      "span[id*=Literatura]",
+      "span[id*=Vanjske_veze]",
+      "span[id*=Izvori]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "zh":{
+    "nif-find-pageend":[
+      "span[id*=.E5.8F.83.E8.80.83.E6.96.87.E7.8D.BB]",
+      "span[id*=.E5.A4.96.E9.83.A8.E9.80.A3.E7.B5.90]",
+      "span[id*=.E6.89.A9.E5.B1.95.E9.98.85.E8.AF.BB]",
+      "span[id*=.E6.93.B4.E5.B1.95.E9.96.B1.E8.AE.80]",
+      "span[id*=.E5.8F.83.E8.80.83.E8.B3.87.E6.96.99]",
+      "span[id*=.E8.A8.BB.E9.87.8B]",
+      "span[id*=.E5.8F.82.E8.80.83.E6.96.87.E7.8C.AE]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "fa":{
+    "nif-find-pageend":[
+      "span[id*=.D9.88.D8.A7.DA.98.D9.87.E2.80.8C.D9.86.D8.A7.D9.85.D9.87]",
+      "span[id*=.D9.85.D9.86.D8.A7.D8.A8.D8.B9]",
+      "span[id*=.D9.BE.DB.8C.D9.88.D9.86.D8.AF_.D8.A8.D9.87_.D8.A8.DB.8C.D8.B1.D9.88.D9.86]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "ar":{
+    "nif-find-pageend":[
+      "span[id*=.D9.85.D8.B5.D8.A7.D8.AF.D8.B1]",
+      "span[id*=.D8.A7.D9.84.D9.85.D8.B1.D8.A7.D8.AC.D8.B9_.D9.88.D8.A7.D9.84.D9.85.D8.B5.D8.A7.D8.AF.D8.B1]",
+      "span[id*=.D9.88.D8.B5.D9.84.D8.A7.D8.AA_.D8.AE.D8.A7.D8.B1.D8.AC.D9.8A.D8.A9]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "uk":{
+    "nif-find-pageend":[
+      "span[id*=.D0.9F.D1.80.D0.B8.D0.BC.D1.96.D1.82.D0.BA.D0.B8]",
+      "span[id*=.D0.94.D0.B6.D0.B5.D1.80.D0.B5.D0.BB.D0.B0]",
+      "span[id*=.D0.9B.D1.96.D1.82.D0.B5.D1.80.D0.B0.D1.82.D1.83.D1.80.D0.B0]",
+      "span[id*=.D0.9F.D0.BE.D1.81.D0.B8.D0.BB.D0.B0.D0.BD.D0.BD.D1.8F]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "id":{
+    "nif-find-pageend":[
+      "span[id*=Referensi]",
+      "span[id*=Daftar_pustaka]",
+      "span[id*=Bacaan_tambahan]",
+      "span[id*=Pranala_luar]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "ro":{
+    "nif-find-pageend":[
+      "span[id*=Referin]",
+      "span[id*=Bibliografie]",
+      "span[id*=Leg.C4.83turi_externe]",
+      "span[id*=Vezi_.C8.99i]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "tr":{
+    "nif-find-pageend":[
+      "span[id*=Kaynak.C3.A7a]",
+      "span[id*=Notlar]",
+      "span[id*=D.C4.B1.C5.9F_ba.C4.9Flant.C4.B1lar]"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "en":{
+    "nif-find-pageend":[
+
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  }
+}

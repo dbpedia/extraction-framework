@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.dbpedia</groupId>
+        <artifactId>extraction</artifactId>
+        <version>4.2-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.dbpedia.extraction</groupId>
+    <artifactId>dump</artifactId>
+    <name>DBpedia Dump Extraction</name>
+
+    <properties>
+        <shaclTestGroup>PRODUCTIVE</shaclTestGroup>
+        <cvTestGroup>PRODUCTIVE</cvTestGroup>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>write-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${project.build.outputDirectory}/properties-from-pom.properties</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.scalatest</groupId>
+                <artifactId>scalatest-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                    <junitxml>.</junitxml>
+                    <filereports>WDF TestSuite.txt</filereports>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>test</id>
+
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-docs-sources</id>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>doc-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <launchers>
+
+                        <launcher>
+                            <id>import</id>
+                            <mainClass>org.dbpedia.extraction.dump.sql.Import</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+                                <jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+                            </jvmArgs>
+                            <args>
+                                <!-- ALL PARAMS MOVED TO: mysql.import.properties !!!!!!!!!!!!!!
+
+                                <arg>/data/extraction-data/2016-10</arg>-->
+                                <!-- location of SQL file containing MediaWiki table definitions
+                                <arg>/home/extractor/mediawikiTables.sql</arg>-->
+                                <!-- JDBC URL of MySQL server. Import creates a new database for
+                                    each wiki.
+                                <arg>jdbc:mysql://localhost/?characterEncoding=UTF-8&amp;user=root</arg>-->
+                                <!-- require-download-complete
+                                <arg>true</arg> -->
+                                <!-- file name: pages-articles.xml{,.bz2,.gz}
+                                <arg>pages-articles.xml.bz2</arg>-->
+                                <!-- number of parallel imports; this number depends on the number of processors in use
+                                    and the type of hard disc (hhd/ssd) and how many parallel files reads it can support
+                                <arg>16</arg>-->
+                                <!-- languages and article count ranges, comma-separated, e.g. "de,en"
+                                    or "@mappings" etc.
+                                <arg>@downloaded</arg>-->
+                            </args>
+                        </launcher>
+
+                        <launcher>
+                            <id>extraction</id>
+                            <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
+
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+                                <jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+                                <jvmArg>-Xmx160G</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <!-- <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg> <jvmArg>-XX:+PrintGC</jvmArg> <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                                    <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg> <jvmArg>-Dhttp.proxyPort=80</jvmArg>
+                                    <jvmArg>-Dhttp.proxyUser=user</jvmArg> <jvmArg>-Dhttp.proxyPassword=password</jvmArg>
+                                    <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg> -->
+                            </jvmArgs>
+                        </launcher>
+
+                        <launcher>
+                            <id>sparkextraction</id>
+                            <mainClass>org.dbpedia.extraction.dump.extract.SparkExtraction</mainClass>
+
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+                                <jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+                                <jvmArg>-Xmx160G</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+
+                        <launcher>
+                            <id>stats-extraction</id>
+                            <mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+                                <jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+                                <!-- Request statistics -->
+                                <jvmArg>-Dextract.template.stats=true</jvmArg>
+                                <!-- <jvmArg>-Xmx4096m</jvmArg> <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                    <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg> <jvmArg>-XX:+PrintGC</jvmArg> <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                                    <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg> <jvmArg>-Dhttp.proxyPort=80</jvmArg>
+                                    <jvmArg>-Dhttp.proxyUser=user</jvmArg> <jvmArg>-Dhttp.proxyPassword=password</jvmArg>
+                                    <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg> -->
+                            </jvmArgs>
+                        </launcher>
+
+                        <launcher>
+                            <id>compress</id>
+                            <mainClass>org.dbpedia.extraction.dump.compress.Compress</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+                                <jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+                                <jvmArg>-Xmx2048m</jvmArg>
+                            </jvmArgs>
+                            <!-- mvn scala:run -Dlauncher=Compress "-DaddArgs=/data|/data-compressed" -->
+                        </launcher>
+
+                        <launcher>
+                            <id>download</id>
+                            <mainClass>org.dbpedia.extraction.dump.download.Download</mainClass>
+                            <!-- <jvmArgs> <jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg>
+                                <jvmArg>-Dhttp.proxyPort=port</jvmArg> <jvmArg>-Dhttp.proxyUser=user</jvmArg>
+                                <jvmArg>-Dhttp.proxyPassword=password</jvmArg> <jvmArg>-Dhttp.nonProxyHosts="localhost|127.0.0.1"</jvmArg>
+                                </jvmArgs> -->
+                            <!-- ../run download config=download.properties -->
+                        </launcher>
+
+                        <launcher>
+                            <id>purge-download</id>
+                            <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
+                            <args>
+                                <arg>/home/release/wikipedia</arg>
+                                <arg>download-complete</arg>
+                                <arg>1</arg><!-- keep only one latest download -->
+                                <arg>*.sql.gz,*.xml.bz2,*.sql,*-pages-articles.xml,index.html</arg><!--
+									delete these files -->
+                            </args>
+                            <jvmArgs>
+                                <jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+                                <jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+
+                        <launcher>
+                            <id>purge-extraction</id>
+                            <mainClass>org.dbpedia.extraction.dump.clean.Clean</mainClass>
+                            <args>
+                                <arg>/home/release/wikipedia</arg>
+                                <arg>extraction-complete</arg>
+                                <arg>2</arg><!-- keep two extractions -->
+                                <arg>*.nt,*.nq,*.tql,*.ttl,*.trix,*-redirects.obj</arg><!-- delete
+									these files -->
+                            </args>
+                            <jvmArgs>
+                                <jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+                                <jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>minidumpdoc</id>
+                            <mainClass>org.dbpedia.extraction.dump.util.MinidumpDoc</mainClass>
+                            <args>
+                                <arg>./src/test/resources/shacl-tests/custom-shacl-tests.ttl</arg>
+                                <arg>./target/minidumptest/base</arg>
+                                <arg>./src/test/bash/uris.lst</arg>
+                            </args>
+                        </launcher>
+                    </launchers>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <!-- core dependency -->
+        <dependency>
+            <groupId>org.dbpedia.extraction</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+
+        <!-- post process dependency -->
+        <dependency>
+            <groupId>org.dbpedia.extraction</groupId>
+            <artifactId>scripts</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-xml</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_${scala.compat.version}</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${scala.compat.version}</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aksw.rdfunit</groupId>
+            <artifactId>rdfunit-validate</artifactId>
+        </dependency>
+
+        <!-- Guava Stopwatch Spark fix -->
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-core</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <dependency>
+            <!-- TODO CHECK OVERRIDES MAIN POM -->
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.compat.version}</artifactId>
+            <version>3.0.8</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- CLI -->
+
+        <dependency>
+            <groupId>com.github.scopt</groupId>
+            <artifactId>scopt_2.11</artifactId>
+        </dependency>
+
+        <!--TODO-->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.pathikrit</groupId>
+            <artifactId>better-files_${scala.compat.version}</artifactId>
+        </dependency>
+
+    </dependencies>
+
+
+</project>

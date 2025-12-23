@@ -1,0 +1,21 @@
+@base <https://github.com/dbpedia/extraction-framework> .
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix dbp: <http://dbpedia.org/property/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+
+<#Český_(rozcestník)_cs>
+	a sh:NodeShape ;
+	sh:targetNode <http://cs.dbpedia.org/resource/Český_(rozcestník)> ;
+
+	# assuring that the dissambiguation extractor for Czech is active
+	# noticed that for some languages the dissambiguation extractor is not active (e.g. the case Czech)
+	sh:property [
+		sh:path dbo:wikiPageDisambiguates ;
+		sh:hasValue <http://cs.dbpedia.org/resource/Český> ;
+	] .
