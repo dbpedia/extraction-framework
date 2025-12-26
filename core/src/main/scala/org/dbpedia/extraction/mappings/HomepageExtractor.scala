@@ -6,7 +6,7 @@ import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Language, DataQualityMonitor}
 import org.dbpedia.iri.{IRISyntaxException, UriUtils}
 
 import scala.language.reflectiveCalls
@@ -25,6 +25,9 @@ class HomepageExtractor(
 extends PageNodeExtractor
 {
   private val language = context.language.wikiCode
+
+  // Extraction quality monitor for logging and metrics
+  private val monitor = DataQualityMonitor.forExtractor("HomepageExtractor")
 
   private val propertyNames = HomepageExtractorConfig.propertyNames(language)
   
@@ -48,7 +51,10 @@ extends PageNodeExtractor
 
   override def extract(page: PageNode, subjectUri: String): Seq[Quad] =
   {
-    if(page.title.namespace != Namespace.Main) return Seq.empty
+    if(page.title.namespace != Namespace.Main) {
+      monitor.logSkipped(page.title.encoded, s"Not in main namespace: ${page.title.namespace}")
+      return Seq.empty
+    }
 
     val list = collectProperties(page).filter(p => propertyNames.contains(p.key.toLowerCase)).flatMap {
       NodeUtil.splitPropertyNode(_, splitPropertyNodeLinkStrict, true)
@@ -118,12 +124,34 @@ extends PageNodeExtractor
   {
     UriUtils.createURI(url) match{
       case Success(u) => UriUtils.cleanLink(u) match{
-        case Some(c) => Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, c , node.sourceIri))
-        case None => Seq()
+        case Some(c) =>
+          monitor.logSuccess(subjectUri, 1)
+          Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, c , node.sourceIri))
+        case None =>
+          monitor.logInvalidData(
+            subjectUri,
+            "URL could not be cleaned",
+            data = Some(url)
+          )
+          Seq()
       }
       case Failure(f) => f match{
-        case _ : IRISyntaxException => Seq()  //   TODO: log
-        case _ => Seq()
+        case ex: IRISyntaxException =>
+          monitor.logInvalidData(
+            subjectUri,
+            "Malformed IRI syntax",
+            exception = Some(ex),
+            data = Some(url)
+          )
+          Seq()
+        case ex =>
+          monitor.logInvalidData(
+            subjectUri,
+            "Unexpected error creating URI",
+            exception = Some(ex),
+            data = Some(url)
+          )
+          Seq()
       }
     }
   }
