@@ -4,7 +4,7 @@
 **Homepage**: http://dbpedia.org <br/>
 **Documentation**: http://dev.dbpedia.org/Extraction  <br/>
 **Get in touch with DBpedia**: https://wiki.dbpedia.org/join/get-in-touch <br/>
-**Slack**: join the [**#dev-team**](https://dbpedia.slack.com/archives/C0L9MJFU7) slack channel within the DBpedia Slack workspace - the main point for [developement updates](https://github.com/dbpedia/extraction-framework/blob/master/.github/workflows/maven.yml) and discussions <br/>
+**Slack**: join the [**#dev-team**](https://dbpedia.slack.com/archives/C0L9MJFU7) Slack channel within the DBpedia Slack workspace — the main point for [development updates](https://github.com/dbpedia/extraction-framework/blob/master/.github/workflows/maven.yml) and discussions <br/>
 
 ## Contents
 
@@ -60,8 +60,9 @@ The DBpedia extraction framework is structured into different modules
 * **Dump extraction Module** : Contains the DBpedia dump extraction application.
 
 ### Core Module
+<!-- original link to Data flow image was broken -- replaced by archive.org link -->
 
-<!-- Data flow image removed - original link was broken -->
+![https://web.archive.org/web/20111109084216if_/http://www4.wiwiss.fu-berlin.de/dbpedia/wiki/DataFlow.png](https://web.archive.org/web/20111109084216if_/http://www4.wiwiss.fu-berlin.de/dbpedia/wiki/DataFlow.png "https://web.archive.org/web/20111109084216if_/http://www4.wiwiss.fu-berlin.de/dbpedia/wiki/DataFlow.png")
 
 <a name="p27582-10"></a>
 
@@ -76,13 +77,13 @@ The DBpedia extraction framework is structured into different modules
 
 In addition to the core components, a number of utility packages offers essential functionality to be used by the extraction code:
 
-* **Ontology** Classes used to represent an ontology. Methods for both, reading and writing ontologies are provided. All classes are located in the namespace [org.dbpedia.extraction.ontology](core/src/main/scala/org/dbpedia/extraction/ontology)
+* **Ontology** Classes used to represent an ontology. Methods for both, reading and writing ontologies are provided. All classes are located in the namespace [org.dbpedia.extraction.ontology](https://github.com/dbpedia/extraction-framework/tree/master/core/src/main/scala/org/dbpedia/extraction/ontology)
 
  
-* **DataParser** Parsers to extract data from nodes in the abstract syntax tree. All classes are located in the namespace `org.dbpedia.extraction.dataparser`
-<!-- Broken link removed: previously linked to dataparser source -->
-* **Util** Various utility classes. All classes are located in the namespace `org.dbpedia.extraction.util`
-<!-- Broken link removed: previously linked to util source -->
+* **DataParser** Parsers to extract data from nodes in the abstract syntax tree. All classes are located in the namespace [org.dbpedia.extraction.dataparser](https://github.com/dbpedia/extraction-framework/tree/master/core/src/main/scala/org/dbpedia/extraction/dataparser)
+
+* **Util** Various utility classes. All classes are located in the namespace [org.dbpedia.extraction.util](https://github.com/dbpedia/extraction-framework/tree/master/core/src/main/scala/org/dbpedia/extraction/util)
+
 
 <a name="dump-extraction-module"></a>
 ### Dump extraction Module
@@ -123,12 +124,12 @@ Please keep in mind:
 
 More tips:
 - Guides to setup your development environment for [IntelliJ IDEA](https://github.com/dbpedia/extraction-framework/wiki/Setting-up-intellij-idea) or [Eclipse](https://github.com/dbpedia/extraction-framework/wiki/Setting-up-eclipse).
-- Get help with the Maven build or another form of installation.
-<!-- Broken links removed: previously linked to Build-from-Source-with-Maven and Installation pages -->
-- Download some data from [DBpedia Downloads](https://www.dbpedia.org/resources/downloads/) to work with.
-- How to run from Scala/Java or from a JAR.
-<!-- Broken links removed: previously linked to Run-from-Java-or-Scala and Run-from-a-JAR pages -->
-- Having different troubles? Check the project wiki or post on https://forum.dbpedia.org.
+- Get help with the [Maven build](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html) or another form of [installation](https://maven.apache.org/install.html).
+
+- [Downloads](https://www.dbpedia.org/resources/downloads/) some data to work with.
+- How to run from [Scala/Java](https://docs.scala-lang.org/tutorials/scala-with-maven.html) or from a [JAR.](https://docs.oracle.com/javase/tutorial/deployment/jar/run.html)
+
+- Having different troubles? Check the [troubleshooting page](https://maven.apache.org/users/getting-help.html)  or post on https://forum.dbpedia.org.
 
 ### Important: Developer's Certificate of Origin
 By sending a pull request to the [extraction-framework repository](https://github.com/dbpedia/extraction-framework) on GitHub, you implicitly accept the [Developer's Certificate of Origin 1.1](https://github.com/dbpedia/extraction-framework/blob/master/documentation/DeveloperCertificateOfOrigin.md)
