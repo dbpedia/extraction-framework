@@ -51,11 +51,12 @@ class GenderExtractor(
       super.extract(node, subjectUri)
 
     /** Check if entity is a dbo:Person */
-    val isPerson: Boolean =
-      mappingGraph.exists(q =>
-        q.predicate == typeProperty &&
-        q.value == personClass
-      )
+   val isPerson: Boolean =
+  mappingGraph.exists(q =>
+    q.predicate.uri == typeProperty.uri &&
+    q.value.uri == personClass.uri
+  )
+
 
     if (!isPerson) return Seq.empty
 
