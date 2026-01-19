@@ -124,12 +124,11 @@ Please keep in mind:
 
 More tips:
 - Guides to setup your development environment for [IntelliJ IDEA](https://github.com/dbpedia/extraction-framework/wiki/Setting-up-intellij-idea) or [Eclipse](https://github.com/dbpedia/extraction-framework/wiki/Setting-up-eclipse).
-- Get help with the [Maven build](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html) or another form of [installation](https://maven.apache.org/install.html).
+- Get help with the [ quick-start guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/quickstart.md).
 
-- [Downloads](https://www.dbpedia.org/resources/downloads/) some data to work with.
-- How to run from [Scala/Java](https://docs.scala-lang.org/tutorials/scala-with-maven.html) or from a [JAR.](https://docs.oracle.com/javase/tutorial/deployment/jar/run.html)
+- [DBpedia resources](https://www.dbpedia.org/resources/)  to work with.
 
-- Having different troubles? Check the [troubleshooting page](https://maven.apache.org/users/getting-help.html)  or post on https://forum.dbpedia.org.
+- Having different troubles? Check the [troubleshooting page](https://www.dbpedia.org/sample-page)  or post on https://forum.dbpedia.org.
 
 ### Important: Developer's Certificate of Origin
 By sending a pull request to the [extraction-framework repository](https://github.com/dbpedia/extraction-framework) on GitHub, you implicitly accept the [Developer's Certificate of Origin 1.1](https://github.com/dbpedia/extraction-framework/blob/master/documentation/DeveloperCertificateOfOrigin.md)
