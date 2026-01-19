@@ -124,7 +124,7 @@ Please keep in mind:
 
 More tips:
 - Guides to setup your development environment for [IntelliJ IDEA](https://github.com/dbpedia/extraction-framework/wiki/Setting-up-intellij-idea) or [Eclipse](https://github.com/dbpedia/extraction-framework/wiki/Setting-up-eclipse).
-- Get help with the [ quick-start guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/quickstart.md).
+- Get help with the [quick-start guide](https://github.com/dbpedia/extraction-framework/blob/master/documentation/quickstart.md).
 
 - [DBpedia resources](https://www.dbpedia.org/resources/)  to work with.
 
