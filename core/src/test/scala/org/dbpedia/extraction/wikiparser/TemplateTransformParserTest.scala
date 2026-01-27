@@ -53,6 +53,26 @@ class TemplateTransformParserTest extends FlatSpec with Matchers
       parse("en", "{{url|https://www.dji.com DJI.com}}") should be (Some("[https://www.dji.com]"))
     }
 
+  it should "extract text from {{lang|nap|Abbrùzzu}}" in
+    {
+      parse("en", "{{lang|nap|Abbrùzzu}}") should be (Some("Abbrùzzu"))
+    }
+
+  it should "extract text from {{native name|nap|Abbrùzze}}" in
+    {
+      parse("en", "{{native name|nap|Abbrùzze}}") should be (Some("Abbrùzze"))
+    }
+
+  it should "extract text from {{Nihongo2|東京都}}" in
+    {
+      parse("en", "{{Nihongo2|東京都}}") should be (Some("東京都"))
+    }
+
+  it should "extract text from {{Nihongo|Tokyo|東京|Tōkyō}}" in
+    {
+      parse("en", "{{Nihongo|Tokyo|東京|Tōkyō}}") should be (Some("東京"))
+    }
+
 
   private val wikiParser = WikiParser.getInstance()
 
