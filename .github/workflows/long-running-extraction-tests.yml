@@ -39,16 +39,13 @@ jobs:
     - name: Create temporary server config with languages (CI-only)
       run: |
         cd server
-        cp server.default.properties server.ci.properties
-        sed -i 's/^languages=.*/languages=wikidata,en,de,fr,es,it,pt,ru,ja,ko,ar,hi,nl,sv,pl,uk,cs,sk,sl,sr,hr,ro,bg,hu,tr,el,fi,et,lv,lt,ga,cy,eo,ca,gl,eu,be,az,hy,am,bn,ur,vi,id,mk,commons/' server.ci.properties
-        grep '^languages=' server.ci.properties
+        sed -i 's/^languages=.*/languages=wikidata,en,de,fr,es,it,pt,ru,ja,ko,ar,hi,nl,sv,pl,uk,cs,sk,sl,sr,hr,ro,bg,hu,tr,el,fi,et,lv,lt,ga,cy,eo,ca,gl,eu,be,az,hy,am,bn,ur,vi,id,mk,commons/' server.default.properties
 
     - name: Start DBpedia Server
       run: |
         cd server
         mvn scala:run \
           -Dlauncher=server \
-          -Dexec.args=server.ci.properties \
           > server.log 2>&1 &
         echo $! > server.pid
         sleep 10
