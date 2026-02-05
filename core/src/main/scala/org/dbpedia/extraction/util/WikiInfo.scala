@@ -68,13 +68,19 @@ object WikiInfo
   def fromLine(line: String): Option[WikiInfo] = {
       val fields = line.split(",", -1)
       
-      if (fields.length < 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
+      if (fields.length < 15) {
+        logger.warning("expected [15] fields, found ["+fields.length+"] in line ["+line+"] - skipping line")
+        return None
+      }
       
       val pages = try fields(4).toInt
       catch { case nfe: NumberFormatException => 0 }
       
       val wikiCode = fields(2)
-      if (! ConfigUtils.LanguageRegex.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
+      if (! ConfigUtils.LanguageRegex.pattern.matcher(fields(2)).matches) {
+       logger.warning("expected language code in field with index [2], found line ["+line+"] - skipping line")
+       return None
+    }
 
       //if(Language.map.keySet.contains(wikiCode))
         Option(new WikiInfo(wikiCode, pages))
