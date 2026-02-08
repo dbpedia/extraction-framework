@@ -1,53 +1,45 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.config.mappings.GenderExtractorConfig
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.config.mappings.GenderExtractorConfig
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
 import util.matching.Regex
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import scala.language.reflectiveCalls
 /**
  * Extracts the grammatical gender of people using a pronoun-based heuristic.
  */
 class GenderExtractor(
   context: {
-    def mappings: Mappings
-    def ontology: Ontology
-    def language: Language
-    def redirects: Redirects
+  def mappings: Mappings
+  def ontology: Ontology
+  def language: Language
+  def redirects: Redirects
   }
 ) extends MappingExtractor(context) {
-  
   /** Language code (en, de, fr, etc.) */
   private val language: String =
-    context.language.wikiCode
+  context.language.wikiCode
   /** Pronoun → gender map (from config) */
   private val pronounMap: Map[String, String] =
-    GenderExtractorConfig.pronounsMap(language)
-
+  GenderExtractorConfig.pronounsMap(language)
   /** Ontology-based properties & classes */
   private val genderProperty =
-    context.ontology.properties("foaf:gender")
-
+  context.ontology.properties("foaf:gender")
   private val typeProperty =
-    context.ontology.properties("rdf:type")
-
+  context.ontology.properties("rdf:type")
   private val personClass =
-    context.ontology.classes("Person")
-
+  context.ontology.classes("Person")
   private val langStringDatatype =
-    new Datatype("rdf:langString")
-
+  new Datatype("rdf:langString")
   override val datasets = Set(DBpediaDatasets.Genders)
-
   override def extract(node: PageNode, subjectUri: String): Seq[Quad] = {
-
-    /** First pass: extract mappings to detect rdf:type */
-    val mappingGraph: Seq[Quad] =
-      super.extract(node, subjectUri)
+  /** First pass: extract mappings to detect rdf:type */
+  val mappingGraph: Seq[Quad] =
+  super.extract(node, subjectUri)
 
     /** Check if entity is a dbo:Person */
     val isPerson: Boolean =
