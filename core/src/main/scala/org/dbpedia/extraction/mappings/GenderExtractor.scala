@@ -13,12 +13,14 @@ import scala.language.reflectiveCalls
  * Extracts the grammatical gender of people using a pronoun-based heuristic.
  */
 class GenderExtractor(
-  context: {
+  context : {
     def mappings : Mappings
     def ontology : Ontology
     def language : Language
     def redirects : Redirects
-   }
+  } 
+     
+   
   
 
 ) 
