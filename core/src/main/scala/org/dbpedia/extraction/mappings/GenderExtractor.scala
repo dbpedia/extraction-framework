@@ -9,15 +9,16 @@ import org.dbpedia.extraction.util.Language
 import util.matching.Regex
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import scala.language.reflectiveCalls
+
 /**
  * Extracts the grammatical gender of people using a pronoun-based heuristic.
  */
-class GenderExtractor(
+class GenderExtractor( 
   context : {
     def mappings : Mappings
     def ontology : Ontology
     def language : Language
-    def redirects : Redirects
+    def redirects : Redirects 
   } 
      
    
