@@ -14,11 +14,13 @@ import scala.language.reflectiveCalls
  */
 class GenderExtractor(
   context: {
-    def mappings: Mappings
-    def ontology: Ontology
-    def language: Language
-    def redirects: Redirects
-  }
+    def mappings : Mappings
+    def ontology : Ontology
+    def language : Language
+    def redirects : Redirects
+   }
+  
+
 ) 
 extends MappingExtractor(context) 
 {
