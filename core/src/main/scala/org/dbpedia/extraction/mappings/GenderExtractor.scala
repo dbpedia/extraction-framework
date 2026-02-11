@@ -20,10 +20,6 @@ class GenderExtractor(
     def language : Language
     def redirects : Redirects 
   } 
-     
-   
-  
-
 ) 
 extends MappingExtractor(context) 
 {
