@@ -13,26 +13,30 @@ import scala.language.reflectiveCalls
 /**
  * Extracts the grammatical gender of people using a heuristic.
  */
-class GenderExtractor( 
+class GenderExtractor(
   context : {
     def mappings : Mappings
     def ontology : Ontology
     def language : Language
-    def redirects : Redirects 
-  } 
-) 
+    def redirects : Redirects
+  }
+)
 extends MappingExtractor(context)
 {
   private val language = context.language.wikiCode
 
-  private val pronounMap: Map[String, String] = GenderExtractorConfig.pronounsMap(language)
+  private val pronounMap: Map[String, String] =
+    GenderExtractorConfig.pronounsMap(language)
 
-  // FIXME: don't use string constant, use context.ontology (or at least RdfNamespace.FOAF)
-  private val genderProperty = "http://xmlns.com/foaf/0.1/gender"
-  // FIXME: don't use string constant, use context.ontology (or at least RdfNamespace.RDF)
-  private val typeProperty = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-  // FIXME: don't use string constant, use context.ontology (or at least DBpediaNamespace.ONTOLOGY)
-  private val personUri = "http://dbpedia.org/ontology/Person"
+  // ✅ Use ontology instead of hardcoded URIs
+  private val genderProperty =
+    context.ontology.properties("foaf:gender").uri
+
+  private val typeProperty =
+    context.ontology.properties("rdf:type").uri
+
+  private val personUri =
+    context.ontology.classes("Person").uri
 
   override val datasets = Set(DBpediaDatasets.Genders)
 
@@ -45,14 +49,17 @@ extends MappingExtractor(context)
     // Even better: in the first extraction pass, extract all types. Use them in the second pass.
     val mappingGraph = super.extract(node, subjectUri)
 
-    // if this page is mapped onto Person
-    if (mappingGraph.exists(q => q.predicate == typeProperty && q.value == personUri))
+    // check if page is typed as Person
+    if (mappingGraph.exists(q =>
+      q.predicate == typeProperty && q.value == personUri
+    ))
     {
       // get the page text
       val wikiText: String = node.toWikiText
 
       // count gender pronouns
       var genderCounts: Map[String, Int] = Map()
+
       for ((pronoun, gender) <- pronounMap)
       {
         val regex = new Regex("\\W" + pronoun + "\\W")
@@ -65,6 +72,7 @@ extends MappingExtractor(context)
       var maxGender = ""
       var maxCount = 0
       var secondCount = 0.0
+
       for ((gender, count) <- genderCounts)
       {
         if (count > maxCount)
@@ -75,10 +83,24 @@ extends MappingExtractor(context)
         }
       }
 
-      // output triple for maximum gender
-      if (maxGender != "" && maxCount > GenderExtractorConfig.minCount && maxCount/secondCount > GenderExtractorConfig.minDifference)
+      if (
+        maxGender != "" &&
+        maxCount > GenderExtractorConfig.minCount &&
+        secondCount > 0 &&
+        maxCount / secondCount > GenderExtractorConfig.minDifference
+      )
       {
-        return Seq(new Quad(context.language, DBpediaDatasets.Genders, subjectUri, genderProperty, maxGender, node.sourceIri, new Datatype("rdf:langString")))
+        return Seq(
+          new Quad(
+            context.language,
+            DBpediaDatasets.Genders,
+            subjectUri,
+            genderProperty,
+            maxGender,
+            node.sourceIri,
+            new Datatype("rdf:langString")
+          )
+        )
       }
     }
 
