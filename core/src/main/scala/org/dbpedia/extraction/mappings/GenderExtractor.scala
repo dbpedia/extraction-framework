@@ -21,7 +21,7 @@ class GenderExtractor(
     def redirects : Redirects 
   } 
 ) 
-extends MappingExtractor(context) 
+extends MappingExtractor(context)
 {
   /** Language code (en, de, fr, etc.) */
   private val language: String =
