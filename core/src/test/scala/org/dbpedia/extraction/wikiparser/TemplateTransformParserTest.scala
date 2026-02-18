@@ -73,6 +73,21 @@ class TemplateTransformParserTest extends FlatSpec with Matchers
       parse("en", "{{Nihongo|Tokyo|東京|Tōkyō}}") should be (Some("東京"))
     }
 
+  it should "extract text from {{Script|Arab|أبجدية عربية}}" in
+    {
+      parse("en", "{{Script|Arab|أبجدية عربية}}") should be (Some("أبجدية عربية"))
+    }
+
+  it should "extract text from {{Transliteration|ru|Moskva}}" in
+    {
+      parse("en", "{{Transliteration|ru|Moskva}}") should be (Some("Moskva"))
+    }
+
+  it should "extract text from {{Langx|ja|東京}}" in
+    {
+      parse("en", "{{Langx|ja|東京}}") should be (Some("東京"))
+    }
+
 
   private val wikiParser = WikiParser.getInstance()
 
