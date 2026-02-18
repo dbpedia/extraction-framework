@@ -20,68 +20,89 @@ class WikiInfo(val wikicode: String, val pages: Int)
 object WikiInfo
 {
   val logger = Logger.getLogger(WikiInfo.getClass.getName)
+
   // hard-coded - there probably is no mirror, and the format is very specific.
-  // TODO: user might want to use a local file...
-  // TODO: mayby change this to XML serialization
   val URL = new URL("http://wikistats.wmflabs.org/api.php?action=dump&table=wikipedias&format=csv")
-  
-  // Most browsers would save the file with this name, because s23.org returns it in a http header.
+
+  // Most browsers would save the file with this name
   val FileName = "wikipedias.csv"
-  
+
   def fromFile(file: File, codec: Codec): Seq[WikiInfo] = {
     val source = Source.fromFile(file)(codec)
     try fromSource(source) finally source.close
   }
-  
+
   def fromURL(url: URL, codec: Codec): Seq[WikiInfo] = {
     val source = Source.fromURL(url)(codec)
     try fromSource(source) finally source.close
   }
-  
-  def fromSource(source: Source): Seq[WikiInfo] = { 
+
+  def fromSource(source: Source): Seq[WikiInfo] = {
     fromLines(source.getLines)
   }
-  
+
   /**
-  * Retrieves a list of all available Wikipedias from a CSV file like http://s23.org/wikistats/wikipedias_csv.php
-  * 
-  */
-  def fromLines(lines: Iterator[String]): Seq[WikiInfo] = {    
+   * Retrieves a list of all available Wikipedias from a CSV file.
+   */
+  def fromLines(lines: Iterator[String]): Seq[WikiInfo] = {
     val info = new ArrayBuffer[WikiInfo]
-    
-    if (! lines.hasNext) throw new Exception("empty file")
-    lines.next // skip first line (headers)
-    
-    for (line <- lines)
-      if (line.nonEmpty)
-        fromLine(line) match{
-          case Some(x) => info += x
-          case None =>
+
+    if (!lines.hasNext) {
+      logger.warning("wikipedias.csv is empty")
+      return info
+    }
+
+    lines.next() // skip header
+
+    for (line <- lines) {
+      if (line.nonEmpty) {
+        fromLine(line) match {
+          case Some(wikiInfo) => info += wikiInfo
+          case None => // skip malformed line
         }
-    
+      }
+    }
+
     info
   }
-  
+
   /**
    * Reads a WikiInfo object from a single CSV line.
+   * Malformed lines are logged and skipped.
    */
   def fromLine(line: String): Option[WikiInfo] = {
-      val fields = line.split(",", -1)
-      
-      if (fields.length < 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
-      
-      val pages = try fields(4).toInt
-      catch { case nfe: NumberFormatException => 0 }
-      
-      val wikiCode = fields(2)
-      if (! ConfigUtils.LanguageRegex.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
 
-      //if(Language.map.keySet.contains(wikiCode))
-        Option(new WikiInfo(wikiCode, pages))
-      //else
-      //{
-      //  logger.log(Level.WARNING, "Language: " + wikiCode + " will be ignored. Add this language to the addonlangs.json file to extract it.")
-      //  None
-      //}
+    val fields = line.split(",", -1)
+
+    // 1️⃣ Validate field count
+    if (fields.length < 15) {
+      logger.warning(
+        s"Skipping malformed CSV line: expected 15 fields, found ${fields.length}. Line: [$line]"
+      )
+      return None
+    }
+
+    // 2️⃣ Parse pages safely
+    val pages =
+      try fields(4).toInt
+      catch {
+        case _: NumberFormatException =>
+          logger.warning(
+            s"Invalid page count in CSV line, defaulting to 0. Line: [$line]"
+          )
+          0
+      }
+
+    // 3️⃣ Validate language code
+    val wikiCode = fields(2)
+    if (!ConfigUtils.LanguageRegex.pattern.matcher(wikiCode).matches) {
+      logger.warning(
+        s"Invalid language code [$wikiCode] in CSV line, skipping. Line: [$line]"
+      )
+      return None
+    }
+
+    // 4️⃣ Valid line → create WikiInfo
+    Some(new WikiInfo(wikiCode, pages))
   }
 }
