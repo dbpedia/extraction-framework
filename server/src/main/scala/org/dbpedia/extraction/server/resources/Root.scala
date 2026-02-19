@@ -25,6 +25,7 @@ class Root
             <a href="statistics/">Statistics</a> -
             <a href="mappings/">Mappings</a> -
             <a href="extraction/">Extractors</a> -
+            <a href="quality/">Data Quality</a> -
             <a href="ontology/labels/missing/">Missing labels</a>
             </p>
             <table class="tablesorter table myTable" align="center" style="width:500px; margin:auto">
