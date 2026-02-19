@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dump.clean
 
 import java.nio.file.{Path,Paths}
-import scala.collection.JavaConversions.iterableAsScalaIterable
+import org.dbpedia.extraction.compat.JavaConversions.iterableAsScalaIterable
 import org.dbpedia.extraction.util.{Language,Finder}
 import org.dbpedia.extraction.util.RichPath.wrapPath
 import org.dbpedia.extraction.dump.download.Download

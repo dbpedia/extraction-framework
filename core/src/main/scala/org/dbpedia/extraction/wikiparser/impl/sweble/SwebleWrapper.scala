@@ -16,7 +16,7 @@ import org.sweble.wikitext.parser.parser.PreprocessorToParserTransformer
 import org.sweble.wikitext.parser.preprocessor.PreprocessedWikitext
 import org.sweble.wikitext.parser.{WtEntityMap, WtEntityMapImpl}
 
-import scala.collection.JavaConversions._
+import org.dbpedia.extraction.compat.JavaConversions._
 import scala.collection.mutable.ListBuffer
 import scala.language.implicitConversions
 import scala.util.{Failure, Success}

@@ -2,7 +2,7 @@ package org.dbpedia.extraction.util
 
 import scala.collection.Iterator.empty
 import scala.collection.Iterator.single
-import scala.collection.JavaConversions.asJavaIterator
+import org.dbpedia.extraction.compat.JavaConversions.asJavaIterator
 
 import javax.xml.stream.events.Attribute
 import javax.xml.stream.{XMLEventFactory,XMLEventWriter}

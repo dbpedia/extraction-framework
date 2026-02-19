@@ -6,7 +6,7 @@ import org.openrdf.model.{Resource, Value, Model}
 import org.openrdf.model.impl.{StatementImpl, LiteralImpl, URIImpl, TreeModel}
 import org.openrdf.rio.{RioSetting, Rio, RDFFormat, WriterConfig}
 import org.openrdf.rio.helpers.{JSONLDMode, JSONLDSettings, BasicWriterSettings}
-import scala.collection.JavaConversions
+import org.dbpedia.extraction.compat.JavaConversions
 
 /**
   * Created by Chile on 2/16/2016.

@@ -6,7 +6,7 @@ import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
 import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
 
-import scala.collection.JavaConversions._
+import org.dbpedia.extraction.compat.JavaConversions._
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
