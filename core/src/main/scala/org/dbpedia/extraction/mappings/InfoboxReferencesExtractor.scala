@@ -14,15 +14,20 @@ import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
+import org.dbpedia.extraction.wikiparser.WikiPage
 
 import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import org.dbpedia.extraction.mappings.MappingsLoader.loadOntologyProperty
+import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.iri.UriUtils
 
+import scala.collection.mutable
 import scala.language.reflectiveCalls
 
 class InfoboxReferencesExtractor(
   context : {
+      def mappings : Mappings
     def ontology : Ontology
     def language : Language
     def redirects : Redirects 
@@ -35,6 +40,8 @@ extends PageNodeExtractor
     private val ontology = context.ontology
 
     private val language = context.language
+
+    private val redirects = context.redirects
 
     private val wikiCode = language.wikiCode
 
@@ -52,10 +59,16 @@ extends PageNodeExtractor
 
     private val TrailingNumberRegex = InfoboxExtractorConfig.TrailingNumberRegex
 
-    override val datasets = Set(DBpediaDatasets.InfoboxTest)
+    private val templateMappings = context.mappings.templateMappings
+
+    private val resolvedMappings: Map[String, Extractor[TemplateNode]] = context.redirects.resolveMap(templateMappings)
+
+    override val datasets = Set(DBpediaDatasets.InfoboxReferences,DBpediaDatasets.MappedInfoboxReferences)
 
     override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
     {
+        var refCount = 0
+        val citExt = new CitationExtractor(context)
 
         if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) return Seq.empty
 
@@ -169,38 +182,92 @@ extends PageNodeExtractor
           if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(getTitle).isDefined) 
         }
         {
+            val grapH = extractMappings(template, subjectUri)
 
             var propertiesFound = false
             
             val propertyList = template.children.filterNot(property => ignoreProperties.get(wikiCode).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
 
-            
 
             val countPropertyKeys = propertyList.count(property => !property.key.forall(_.isDigit))
             if ((countPropertyKeys >= minPropertyCount) && (countPropertyKeys.toDouble / propertyList.size) > minRatioOfExplicitPropertyKeys)
             {
                 for(property <- propertyList) {
                     val propertyUri = getPropertyUri(property.key)
+
                     try {
                         if (infoboxesRaw contains template.title.decoded) {
                             if (infoboxesRaw(template.title.decoded) contains property.key) {
+
+                                var tT = "template="+template.title.decoded.replace(" ","_")+"&property="+property.key.replace(" ","_")
+                                var isMapped = ""
+                                for(qd<-grapH) {
+                                    if (qd.context.contains("template="+template.title.decoded.replace(" ","_")+"&property="+property.key.replace(" ","_"))) {
+                                        quads += new Quad(language, DBpediaDatasets.MappedInfoboxReferences, qd.subject, qd.predicate, qd.value, qd.context, rdfLangStrDt)
+                                        isMapped = qd.predicate
+                                    }
+                                }
 
                                 val rawParameter = infoboxesRaw(template.title.decoded)(property.key)
 
                                 val refWithContent = reg.findAllMatchIn(rawParameter).toArray
                                 for (ref <- refWithContent) {
                                     //val refB = ref.group("refn")
+                                    refCount+=1
                                     val refValue = ref.group("refv")
-                                    quads += new Quad(language, DBpediaDatasets.InfoboxTest, subjectUri, propertyUri, refValue, property.sourceIri, rdfLangStrDt)
+                                    quads += new Quad(language, DBpediaDatasets.InfoboxReferences, subjectUri+"#ref:"+refCount, propertyUri, refValue, property.sourceIri, rdfLangStrDt)
+                                    if (isMapped != "") {
+                                        quads += new Quad(language, DBpediaDatasets.MappedInfoboxReferences, subjectUri+"#ref:"+refCount, isMapped, refValue, property.sourceIri, rdfLangStrDt)
+                                    }
+                                    //CitationExtractor need to be fixed: template names without whitespace are ignored (eq. "{{citeweb|...}}
+                                    val templateToExt = new WikiPage(node.title,refValue.replace("|", " |"))
+                                    val citExtRes = citExt.extract(templateToExt,"")
+                                    for (qwa <- citExtRes) {
+                                        var qWa2 = new Quad(language, DBpediaDatasets.InfoboxReferences, qwa.subject, qwa.predicate, qwa.value, qwa.context, rdfLangStrDt)
+
+                                        if (qWa2.predicate.contains("isCitedBy")){
+                                            qWa2 = new Quad(language, DBpediaDatasets.InfoboxReferences, qwa.subject, qwa.predicate, subjectUri+"#ref:"+refCount, qwa.context, rdfLangStrDt)
+                                        }
+                                        quads += qWa2
+                                        if (isMapped != "") {
+                                            var qWa3 = new Quad(language, DBpediaDatasets.MappedInfoboxReferences, qwa.subject, isMapped, qwa.value, qwa.context, rdfLangStrDt)
+                                            if (qWa3.predicate.contains("isCitedBy")){
+                                                qWa3 = new Quad(language, DBpediaDatasets.MappedInfoboxReferences, qwa.subject, isMapped, subjectUri+"#ref:"+refCount, qwa.context, rdfLangStrDt)
+                                            }
+                                            quads += qWa3
+                                        }
+                                    }
                                 }
 
 
                                 val refWithOnlyName = regz.findAllMatchIn(rawParameter).toArray
                                 if (refWithOnlyName.length > 0) {
+
                                     for (refi <- refWithOnlyName) {
                                         val nameRe = """name[ '\\"]?=[ ]?[ '\\"]?([^>'\\"]+)""".r("nm").findFirstMatchIn(refi.group("refz")).get.group("nm")
                                         if (refNames.contains(nameRe)) {
-                                            quads += new Quad(language, DBpediaDatasets.InfoboxTest, subjectUri, propertyUri, refNames(nameRe), property.sourceIri, rdfLangStrDt)
+                                            refCount+=1
+                                            quads += new Quad(language, DBpediaDatasets.InfoboxReferences, subjectUri+"#ref:"+refCount, propertyUri, refNames(nameRe), property.sourceIri, rdfLangStrDt)
+                                            if (isMapped != "") {
+                                                quads += new Quad(language, DBpediaDatasets.MappedInfoboxReferences, subjectUri+"#ref:"+refCount, isMapped, refNames(nameRe), property.sourceIri, rdfLangStrDt)
+                                            }
+                                            val templateToExt = new WikiPage(node.title,refNames(nameRe).replace("|", " |"))
+                                            val citExtRes = citExt.extract(templateToExt,"")
+                                            for (qwa <- citExtRes) {
+                                                var qWa2 = new Quad(language, DBpediaDatasets.InfoboxReferences, qwa.subject, qwa.predicate, qwa.value, qwa.context, rdfLangStrDt)
+
+                                                if (qWa2.predicate.contains("isCitedBy")){
+                                                    qWa2 = new Quad(language, DBpediaDatasets.InfoboxReferences, qwa.subject, qwa.predicate, subjectUri+"#ref:"+refCount, qwa.context, rdfLangStrDt)
+                                                }
+                                                quads += qWa2
+                                            if (isMapped != "") {
+                                                var qWa3 = new Quad(language, DBpediaDatasets.MappedInfoboxReferences, qwa.subject, isMapped, qwa.value, qwa.context, rdfLangStrDt)
+                                                if (qWa3.predicate.contains("isCitedBy")){
+                                                    qWa3 = new Quad(language, DBpediaDatasets.MappedInfoboxReferences, qwa.subject, isMapped, subjectUri+"#ref:"+refCount, qwa.context, rdfLangStrDt)
+                                                }
+                                                quads += qWa3
+                                            }
+                                            }
                                         }
 
                                     }
@@ -209,11 +276,34 @@ extends PageNodeExtractor
 
                                 val refWithOnlyName2 = regz2.findFirstMatchIn(rawParameter).toArray
                                 if (refWithOnlyName2.length > 0) {
+
                                     for (refi <- refWithOnlyName2) {
                                         val refK = refi.group("refc").split("\\|")
                                         for (refiz <- refK) { // why if name contains \?
                                             if (refNames.contains(refiz)) {
-                                                quads += new Quad(language, DBpediaDatasets.InfoboxTest, subjectUri, propertyUri, refNames(refiz.replace("\\", "")), property.sourceIri, rdfLangStrDt)
+                                                refCount+=1
+                                                quads += new Quad(language, DBpediaDatasets.InfoboxReferences, subjectUri+"#ref:"+refCount, propertyUri, refNames(refiz.replace("\\", "")), property.sourceIri, rdfLangStrDt)
+                                                if (isMapped != "") {
+                                                    quads += new Quad(language, DBpediaDatasets.MappedInfoboxReferences, subjectUri+"#ref:"+refCount, isMapped, refNames(refiz.replace("\\", "")), property.sourceIri, rdfLangStrDt)
+                                                }
+                                                val templateToExt = new WikiPage(node.title,refNames(refiz.replace("\\", "").replace("|", " |")))
+                                                val citExtRes = citExt.extract(templateToExt,"")
+                                                for (qwa <- citExtRes) {
+                                                    var qWa2 = new Quad(language, DBpediaDatasets.InfoboxReferences, qwa.subject, qwa.predicate, qwa.value, qwa.context, rdfLangStrDt)
+                                                    if (qWa2.predicate.contains("isCitedBy")){
+                                                        qWa2 = new Quad(language, DBpediaDatasets.InfoboxReferences, qwa.subject, qwa.predicate, subjectUri+"#ref:"+refCount, qwa.context, rdfLangStrDt)
+                                                    }
+                                                    quads += qWa2
+                                                    if (isMapped != "") {
+                                                        var qWa3 = new Quad(language, DBpediaDatasets.MappedInfoboxReferences, qwa.subject, isMapped, qwa.value, qwa.context, rdfLangStrDt)
+                                                        if (qWa3.predicate.contains("isCitedBy")){
+                                                            qWa3 = new Quad(language, DBpediaDatasets.MappedInfoboxReferences, qwa.subject, isMapped, subjectUri+"#ref:"+refCount, qwa.context, rdfLangStrDt)
+                                                        }
+                                                        quads += qWa3
+                                                    }
+
+                                                }
+
                                             }
 
                                         }
@@ -257,6 +347,32 @@ extends PageNodeExtractor
         language.propertyUri.append(result)
     }
 
+    private def extractMappings(node : Node, subjectUri : String) : Seq[Quad] =
+    {
+        val graph = node match
+        {
+            case templateNode : TemplateNode =>
+            {
+                resolvedMappings.get(templateNode.title.decoded) match
+                {
+                    case Some(mapping) => {
+                        mapping.extract(templateNode, subjectUri)
+                    }
+                    case None => Seq.empty
+                }
+            }
+            case _ => Seq.empty
+        }
+
+        if(graph.isEmpty)
+        {
+            node.children.flatMap(child => extractMappings(child, subjectUri))
+        }
+        else
+        {
+            graph
+        }
+    }
 
 }
 
