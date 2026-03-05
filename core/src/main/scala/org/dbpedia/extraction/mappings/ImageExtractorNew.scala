@@ -289,7 +289,9 @@ class ImageExtractorNew(
         }
         // String ends => file name does too
       } else {
-        sb.append(c)
+        if (c != ':' && c != '=' && c != '|' && c != '\n') {
+          sb.append(c)
+        }
         imageFound = false
         images += sb.reverse.toString()
         sb.clear()
