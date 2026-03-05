@@ -148,31 +148,50 @@ abstract class ExtractionManager(
 
     protected def loadMappingPages(language : Language) : Map[WikiTitle, WikiPage] =
     {
-        val namespace = language.wikiCode match {
-          case "wikidata" =>
-            Namespace.mappings(Language.English)
-          case _ =>
-            Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
+    val namespaceOpt = language.wikiCode match {
+      case "wikidata" =>
+        Some(Namespace.mappings(Language.English))
+      case _ =>
+        Namespace.mappings.get(language)
+    }
+
+    if (namespaceOpt.isEmpty) {
+      logger.warning(
+        s"No mapping namespace for language ${language.wikiCode} – skipping mapping pages."
+      )
+      return Map.empty
+    }
+
+    val namespace = namespaceOpt.get
+
+    val source = if (paths.mappingsDir != null && paths.mappingsDir.isDirectory)
+    {
+        val file = new File(
+          paths.mappingsDir,
+          namespace.name(Language.Mappings).replace(' ','_') + ".xml"
+        )
+
+        if (!file.exists()) {
+          logger.warning(
+            "MAPPING FILE [" + file + "] DOES NOT EXIST! WILL BE IGNORED"
+          )
+          return Map.empty
         }
 
+        logger.warning(
+          "LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE [" + file +
+          "] - MAY BE OUTDATED - ONLY FOR TESTING!"
+        )
 
-        val source = if (paths.mappingsDir != null && paths.mappingsDir.isDirectory)
-        {
-            val file = new File(paths.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-            if(!file.exists()) {
-              logger.warning("MAPPING FILE [" + file + "] DOES NOT EXIST! WILL BE IGNORED")
-              return Map[WikiTitle, WikiPage]()
-            }
-            logger.warning("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
-            XMLSource.fromFile(file, language) // TODO: use Language.Mappings?
-        }
-        else
-        {
-            val url = paths.apiUrl
-            WikiSource.fromNamespaces(Set(namespace), url, language) // TODO: use Language.Mappings?
-        }
+        XMLSource.fromFile(file, language)
+    }
+    else
+    {
+        val url = paths.apiUrl
+        WikiSource.fromNamespaces(Set(namespace), url, language)
+    }
 
-        source.map(page => (page.title, page)).toMap
+    source.map(page => (page.title, page)).toMap
     }
 
     protected def loadOntology() : Ontology =
