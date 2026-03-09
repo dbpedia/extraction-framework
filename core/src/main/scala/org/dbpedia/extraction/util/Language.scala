@@ -9,6 +9,9 @@ import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 import scala.collection.mutable.HashMap
 import scala.io.{Codec, Source}
 
+import org.apache.http.impl.client.HttpClients
+import org.apache.http.client.methods.HttpGet
+
 /**
  * Represents a MediaWiki instance and the language used on it. Initially, this class was
  * only used for xx.wikipedia.org instances, but now we also use it for mappings.dbpedia.org
@@ -91,8 +94,43 @@ object Language extends (String => Language)
     }
 
     val languages = new HashMap[String,Language]
-    val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
-    val wikiLanguageCodes = try source.getLines.toList finally source.close
+    val client = HttpClients.createDefault()
+    val request = new HttpGet(wikipediaLanguageUrl)
+    //request.setHeader("User-Agent", "curl/8.6.0") 
+
+    val customUserAgentEnabled : Boolean =
+      try{
+        System.getProperty("extract.wikiapi.customUserAgent.enabled", "false").toBoolean
+      }
+      catch{
+        case _: Exception => 
+          logger.log(Level.WARNING, "Could not read system property extract.wikiapi.customUserAgent.enabled, using default value false")
+          false
+      }
+    
+    val customUserAgentText: String =
+      try{
+        System.getProperty("extract.wikiapi.customUserAgent.text", "curl/8.6.0")
+      }
+      catch { 
+        case _: Exception =>
+          logger.log(Level.WARNING, "Could not read system property extract.wikiapi.customUserAgent.text, using default value DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)")
+          "DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)"
+      }
+
+    // Apply User-Agent conditionally
+    if (customUserAgentEnabled) {
+      request.setHeader("User-Agent", customUserAgentText)
+    }
+
+    val response = client.execute(request)
+    val stream = response.getEntity.getContent
+    val wikiLanguageCodes = 
+      try Source.fromInputStream(stream).getLines().toList 
+      finally{ 
+        stream.close()
+        client.close() 
+      }
 
     val specialLangs: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("addonlangs.json"))
 

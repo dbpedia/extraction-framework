@@ -32,9 +32,13 @@ object WikiApi
     /** Specify a custom user agent for queries to the MediaWiki API */
     private val customUserAgentText =
     try {
-        System.getProperty("extract.wikiapi.customUserAgent.text", "curl/7.54")
+        // curl seems not blocked by Wikimedia yet so we take this; TODO think about a better default user agent here, problem we do not want to give dbpedia mail adress here since Wikimedia might get confused between officially hosted and community executed instances of this code
+        System.getProperty("extract.wikiapi.customUserAgent.text", "curl/8.6.0") 
     } catch {
-        case ex : Exception => "DBpedia Extraction Framework"
+        // set agent as per https://foundation.wikimedia.org/wiki/Policy%3AWikimedia_Foundation_User-Agent_Policy 
+        // this is a fallback in case sth really goes wrong, it is desirable that Wikimedia gets in touch with us in this case
+        case ex : Exception => "DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)"
+        
     }
 }
 
@@ -242,6 +246,9 @@ class WikiApi(url: URL, language: Language)
 
         val queryURLString = language.baseUri.replace("http:", "https:") + "/wiki/" + fileNamespaceIdentifier + ":" + fileName
         val connection = new URL(queryURLString).openConnection().asInstanceOf[HttpsURLConnection]
+        if (customUserAgentEnabled) {
+            connection.setRequestProperty("User-Agent", customUserAgentText)
+        }
         connection.setRequestMethod("HEAD")
         val responseCode = connection.getResponseCode()
         connection.disconnect()
@@ -282,7 +289,24 @@ class WikiApi(url: URL, language: Language)
             {
                 val ur = new URL(url + params)
                 val request = new HttpGet(new URL(url + params).toString)
+                // NOTE applying custom user agents are somewhat mandatory as of Sep 2025 but we leave it switchable and disabled by default for backward compatibility reasons and set curl as default custom user agent
+                // TODO think about making custom user agent enabled by default
+                if (customUserAgentEnabled) {
+                    request.setHeader("User-Agent", customUserAgentText)
+                }
                 val response = client.execute(request)
+                val statusCode = response.getStatusLine.getStatusCode
+                if (statusCode == 403) {
+                    val statusLine = response.getStatusLine.toString
+                    logger.warning(s"WikiApi request blocked by Wikimedia. Check conformity of the used HTTP user-agent: ${request.getHeaders("User-Agent").mkString("")} ; request url: ${ur.toString} with status: $statusLine")
+                    throw new IOException(s"WikiApi request blocked by Wikimedia. Check conformity of the used HTTP user-agent: ${request.getHeaders("User-Agent").mkString("")} ; request url:  ${ur.toString} with status: $statusLine")
+                }
+                if (statusCode != 200) {
+                    val statusLine = response.getStatusLine.toString
+                    logger.warning(s"WikiApi request failed: ${ur.toString} -> $statusLine")
+                    throw new IOException(s"WikiApi request failed with status: $statusCode: $statusLine for URL: ${ur.toString}")
+                }
+
 //                val connection = new URL(url + params).openConnection()
 //                if (customUserAgentEnabled) {
 //                    connection.setRequestProperty("User-Agent", customUserAgentText)

@@ -33,7 +33,7 @@ abstract class ExtractionManager(
     customTestExtractors: Map[Language, Seq[Class[_ <: Extractor[_]]]])
 {
   self =>
-    
+
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
 
     def mappingExtractor(language : Language) : WikiPageExtractor
@@ -62,7 +62,7 @@ abstract class ExtractionManager(
      * Called by server to update all users of this extraction manager.
      */
     def updateAll()
-    
+
     protected val parser: WikiParser = WikiParser.getInstance()
 
     def extract(source: Source, destination: Destination, language: Language, useCustomExtraction: Boolean = false): Unit = {
@@ -76,7 +76,7 @@ abstract class ExtractionManager(
     def validateMapping(mappingsPages: Traversable[WikiPage], lang: Language) : Elem =
     {
         val logger = Logger.getLogger(MappingsLoader.getClass.getName)
-        
+
         //Register xml log hanlder
         val logHandler = new XMLLogHandler()
         logHandler.setLevel(Level.WARNING)
@@ -84,7 +84,7 @@ abstract class ExtractionManager(
 
         //Load mappings
         val mappings = loadMappings(lang)
-        
+
         if (mappings.templateMappings.isEmpty && mappings.tableMappings.isEmpty)
           logger.severe("no mappings found")
 
@@ -123,7 +123,7 @@ abstract class ExtractionManager(
             logger.warning("LOADING ONTOLOGY NOT FROM SERVER, BUT FROM LOCAL FILE ["+paths.ontologyFile+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
             XMLSource.fromFile(paths.ontologyFile, language = Language.Mappings)
         }
-        else 
+        else
         {
             val namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty)
             val url = paths.apiUrl
@@ -131,7 +131,7 @@ abstract class ExtractionManager(
             logger.info("Loading ontology pages from URL ["+url+"]")
             WikiSource.fromNamespaces(namespaces, url, language)
         }
-        
+
         source.map(parser).flatten.map(page => (page.title, page)).toMap
     }
 
@@ -148,25 +148,50 @@ abstract class ExtractionManager(
 
     protected def loadMappingPages(language : Language) : Map[WikiTitle, WikiPage] =
     {
-        val namespace = Namespace.mappings.getOrElse(language, throw new NoSuchElementException("no mapping namespace for language "+language.wikiCode))
-        
-        val source = if (paths.mappingsDir != null && paths.mappingsDir.isDirectory)
-        {
-            val file = new File(paths.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-            if(!file.exists()) {
-              logger.warning("MAPPING FILE [" + file + "] DOES NOT EXIST! WILL BE IGNORED")
-              return Map[WikiTitle, WikiPage]()
-            }
-            logger.warning("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
-            XMLSource.fromFile(file, language) // TODO: use Language.Mappings?
+    val namespaceOpt = language.wikiCode match {
+      case "wikidata" =>
+        Some(Namespace.mappings(Language.English))
+      case _ =>
+        Namespace.mappings.get(language)
+    }
+
+    if (namespaceOpt.isEmpty) {
+      logger.warning(
+        s"No mapping namespace for language ${language.wikiCode} – skipping mapping pages."
+      )
+      return Map.empty
+    }
+
+    val namespace = namespaceOpt.get
+
+    val source = if (paths.mappingsDir != null && paths.mappingsDir.isDirectory)
+    {
+        val file = new File(
+          paths.mappingsDir,
+          namespace.name(Language.Mappings).replace(' ','_') + ".xml"
+        )
+
+        if (!file.exists()) {
+          logger.warning(
+            "MAPPING FILE [" + file + "] DOES NOT EXIST! WILL BE IGNORED"
+          )
+          return Map.empty
         }
-        else
-        {
-            val url = paths.apiUrl
-            WikiSource.fromNamespaces(Set(namespace), url, language) // TODO: use Language.Mappings?
-        }
-        
-        source.map(page => (page.title, page)).toMap
+
+        logger.warning(
+          "LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE [" + file +
+          "] - MAY BE OUTDATED - ONLY FOR TESTING!"
+        )
+
+        XMLSource.fromFile(file, language)
+    }
+    else
+    {
+        val url = paths.apiUrl
+        WikiSource.fromNamespaces(Set(namespace), url, language)
+    }
+
+    source.map(page => (page.title, page)).toMap
     }
 
     protected def loadOntology() : Ontology =

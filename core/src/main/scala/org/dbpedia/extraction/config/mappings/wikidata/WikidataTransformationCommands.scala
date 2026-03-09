@@ -31,7 +31,7 @@ class WikidataOneToManyCommand(receiver: WikidataCommandReceiver) extends Wikida
 
 class WikidataCommandReceiver() {
 
-  var MapResult = mutable.Map.empty[String, String]
+  var MapResult = mutable.Map.empty[String, (String, String)]
   private var property: String = ""
   private var value: Value = _
   private var map = Map.empty[String, String]
@@ -49,7 +49,7 @@ class WikidataCommandReceiver() {
   }
 
 
-  def getMap(): mutable.Map[String, String] = {
+  def getMap(): mutable.Map[String, (String, String)] = {
     MapResult
   }
 
@@ -68,38 +68,38 @@ class WikidataCommandReceiver() {
         if (keyVal._2 != null) {
           if (keyVal._2.contains("$1")) {
               val v = substitute(keyVal._2, WikidataUtil.replacePunctuation(value.toString).replace(" ", "_").trim)
-              MapResult += (keyVal._1 -> v)
+              MapResult += (keyVal._1 -> (v, ""))
           } else if (keyVal._2.contains("$2")) {
               Language.get("commons") match {
                 case Some(dbpedia_lang) => {
                   val wikiTitle = WikiTitle.parse(WikidataUtil.replacePunctuation(value.toString), dbpedia_lang)
                   val v = substitute(keyVal._2, wikiTitle.encoded.toString)
-                  MapResult += (keyVal._1 -> v)
+                  MapResult += (keyVal._1 -> (v, ""))
                 }
                 case _=>
               }
             } else {
             keyVal._2 match {
-              case "$getLatitude" => MapResult += (keyVal._1 -> getLatitude(value).toString)
-              case "$getLongitude" => MapResult += (keyVal._1 -> getLongitude(value).toString)
-              case "$getGeoRss" => MapResult += (keyVal._1 -> getGeoRss(value))
+              case "$getLatitude" => MapResult += (keyVal._1 -> (getLatitude(value).toString, ""))
+              case "$getLongitude" => MapResult += (keyVal._1 -> (getLongitude(value).toString, ""))
+              case "$getGeoRss" => MapResult += (keyVal._1 -> (getGeoRss(value), ""))
               case "$getDBpediaClass" => if (!equivClassSet.isEmpty) MapResult ++= getDBpediaClass(keyVal._1)
-              case _ => MapResult += (keyVal._1 -> keyVal._2)
+              case _ => MapResult += (keyVal._1 -> (keyVal._2, ""))
             }
 
           }
         } else {
-          if (value.toString!="") MapResult += (keyVal._1 -> WikidataUtil.replacePunctuation(WikidataUtil.replaceItemId(value.toString)))
-          else MapResult += (keyVal._1 -> "")
+          if (value.toString!="") MapResult += (keyVal._1 -> (WikidataUtil.replacePunctuation(WikidataUtil.replaceItemId(value.toString)), ""))
+          else MapResult += (keyVal._1 -> ("", ""))
         }
       }
     }
   }
 
-  def getDBpediaClass(key: String): mutable.Map[String, String] = {
-    var classMap = mutable.Map.empty[String, String]
+  def getDBpediaClass(key: String): mutable.Map[String, (String, String)] = {
+    var classMap = mutable.Map.empty[String, (String, String)]
     equivClassSet.foreach {
-      mappedClass => classMap += (key -> mappedClass.toString)
+      mappedClass => classMap += (key -> (mappedClass.toString, ""))
     }
     classMap
   }
@@ -108,7 +108,7 @@ class WikidataCommandReceiver() {
       equivPropertySet.foreach {
         mappedProperty => {
           val propKey = mappedProperty.toString.replace("http://dbpedia.org/ontology/", "")
-            MapResult += (propKey -> WikidataUtil.getValue(value))
+            MapResult += (propKey -> (WikidataUtil.getValue(value), WikidataUtil.getDatatype(value)))
         }
       }
   }

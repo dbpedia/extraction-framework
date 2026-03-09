@@ -71,7 +71,6 @@ object DateTimeParserConfig
         "pt" -> Map("AC"-> -1, "A\\.C\\."-> -1, "DC"-> 1, "D\\.C\\."-> 1, "AD"-> 1, "A\\.D\\."-> 1, "AEC"-> 1, "A\\.E\\.C\\."-> 1 , "EC"-> 1, "E\\.C\\."-> 1),
         "sv" -> Map("f\\.Kr\\." -> -1, "e\\.Kr\\." -> 1, "f\\.v\\.t\\." -> -1, "e\\.v\\.t\\." -> 1)
     )
-
     //suffixes for 1st, 2nd etc. (maybe add this to infobox extractor RankRegex val)
     val cardinalityRegexMap = Map(
         "en" -> "st|nd|rd|th",
