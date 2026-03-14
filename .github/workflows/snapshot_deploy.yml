@@ -77,4 +77,5 @@ jobs:
         run: |
           echo "Deploying to https://maven.pkg.github.com/${REPO} with revision ${REVISION}"
           mvn deploy -DskipTests \
-            -Dgithub.repo.url="https://maven.pkg.github.com/${REPO}"
+            -Dgithub.repo.url="https://maven.pkg.github.com/${REPO}" \
+            -DskipNexusStagingDeployMojo=true
