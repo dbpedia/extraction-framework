@@ -1,0 +1,12 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {}
+}## Anti-Bypass Controls
+
+- Enforce server-side authorization for every status transition.
+- Require signed applicant attestation before readiness review.
+- Treat `auto_approved_for_submission_readiness` as internal-only and non-legal.
+- Block direct client-side updates to compliance, submission, or approval fields.
+- Record immutable audit logs for all document uploads, verification checks, and reviewer actions.
+- Require manual compliance override for any high-risk mismatch.
+- Store final status transitions through a backend workflow service only.
