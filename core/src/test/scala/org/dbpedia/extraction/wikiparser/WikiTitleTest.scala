@@ -57,4 +57,20 @@ class WikiTitleTest extends FlatSpec with Matchers {
     title should equal (new WikiTitle("Test", Namespace.Template, destLang, false))
     title should not be 'interLanguageLink
   }
+
+  it should "recognize the localized Amharic Module namespace" in {
+    val language = Language("am")
+    val title = WikiTitle.parse("ሞጁል:String", language)
+
+    title.namespace should equal (Namespace.Module)
+    title.decoded should equal ("String")
+  }
+
+  it should "keep the English Module alias for older Amharic dumps" in {
+    val language = Language("am")
+    val title = WikiTitle.parse("Module:String", language)
+
+    title.namespace should equal (Namespace.Module)
+    title.decoded should equal ("String")
+  }
 }
