@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.dataparser
 import java.util.logging.{Logger, Level}
+import java.util.regex.Pattern
 import scala.util.matching.Regex
 import org.dbpedia.extraction.config.dataparser.{
   EthiopianDateParserConfig,
@@ -15,9 +16,25 @@ class EthiopianDateParser(datatype: Datatype, val strict: Boolean = false) {
 
   val geezNumberParser = new GeezNumberUtils()
   private val monthsMap = EthiopianDateParserConfig.monthsMap
-  private val monthsName = monthsMap.keys.mkString("|")
+  private val monthsName = monthsMap.keys.toSeq
+    .sortBy(name => -name.length)
+    .map(Pattern.quote)
+    .mkString("|")
   private val geezNumberDate =
-    EthiopianDateParserConfig.geezNumberDateMap.values.mkString("|")
+    EthiopianDateParserConfig.geezNumberDateMap.values.toSeq
+      .sortBy(number => -number.length)
+      .map(Pattern.quote)
+      .mkString("|")
+  private val dayMarkers = EthiopianDateParserConfig.dayMarkers.toSeq
+    .sortBy(marker => -marker.length)
+    .map(Pattern.quote)
+    .mkString("|")
+  private val eraMarkers = EthiopianDateParserConfig.eraMarkers.toSeq
+    .sortBy(marker => -marker.length)
+    .map(Pattern.quote)
+    .mkString("|")
+  private val optionalDayMarker = s"""(?:\\s+(?:$dayMarkers))?"""
+  private val optionalEraMarker = s"""(?:\\s+(?:$eraMarkers))?"""
 
   private val gregorianDateIndicator = s""".*(እ.ኤ.አ).*""".r
   private val prefix = if (strict) """\s*""" else """.*?"""
@@ -25,24 +42,24 @@ class EthiopianDateParser(datatype: Datatype, val strict: Boolean = false) {
 
   // catches dd-mm-yyyy including a 13th month 21 13 2013, 21-13-2013, 21/13/2013, 21-13-2013, 21/13/2013
   private val dateRegex1: Regex =
-    s"""$prefix\\b(0?[1-9]|[12][0-9]|3[01])\\b[-/\\s]\\b(0?[1-9]|1[0-2]|13)\\b[-/\\s](\\d{4}|[\\u1369-\\u137C]+)$postfix""".r
+    s"""$prefix\\b(0?[1-9]|[12][0-9]|3[01])\\b[-/\\s]\\b(0?[1-9]|1[0-2]|13)\\b[-/\\s](\\d{4}|[\\u1369-\\u137C]+)$optionalEraMarker$postfix""".r
 
   // Regex for dates containing geez characters
   // catches dates like ጥቅምት-21-2013 or ጥቅምት/21/2013 or ጥቅምት 21 2013
   private val dateRegex2: Regex =
-    s"""$prefix($monthsName)[\\s/-](\\b(0?[1-9]|[12][0-9]|3[01])\\b)[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$postfix""".r
+    s"""$prefix($monthsName)[\\s/-](\\b(?:0?[1-9]|[12][0-9]|3[01])\\b)$optionalDayMarker[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$optionalEraMarker$postfix""".r
 
   // catches dates dd-month-yyyy like 21-ጥቅምት-2013 or 21/ጥቅምት/2013 or 21 ጥቅምት 2013
   private val dateRegex3: Regex =
-    s"""$prefix(\\b(0?[1-9]|[12][0-9]|3[01])\\b)[\\s/-]($monthsName)[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$postfix""".r
+    s"""$prefix(\\b(?:0?[1-9]|[12][0-9]|3[01])\\b)[\\s/-]($monthsName)[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$optionalEraMarker$postfix""".r
 
   // catches dates month-dd-yyyy ጥቅምት ፳፩ ፳፻፲፫ or ጥቅምት/፳፩/፳፻፲፫ or ጥቅምት ፳፩ ፳፻፲፫ mmmm-dd-yyyy
   private val dateRegex4: Regex =
-    s"""$prefix(\\b$monthsName)[\\s/-]($geezNumberDate|0?[1-9]|[12][0-9]|3[01])[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$postfix""".r
+    s"""$prefix(\\b(?:$monthsName))[\\s/-]($geezNumberDate|0?[1-9]|[12][0-9]|3[01])$optionalDayMarker[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$optionalEraMarker$postfix""".r
 
   // catches dates like ፳፩ ጥቅምት ፳፻፲፫ or ፳፩/ጥቅምት/፳፻፲፫ or 21/ጥቅምት/2013 dd-mmmm-yyyy
   private val dateRegex5: Regex =
-    s"""$prefix(\\b$geezNumberDate|0?[1-9]|[12][0-9]|3[01])[\\s/-]($monthsName)[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$postfix""".r
+    s"""$prefix(\\b(?:$geezNumberDate|0?[1-9]|[12][0-9]|3[01]))[\\s/-]($monthsName)[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$optionalEraMarker$postfix""".r
 
   def catchGeezDate(dateString: String): Option[(String, String, String)] = {
 
@@ -149,7 +166,8 @@ class EthiopianDateParser(datatype: Datatype, val strict: Boolean = false) {
     val F: Long = (30.6001 * E).toLong
     val gregorianDay: Int = (B - D - F + (Q - Z)).toInt
     val gregorianMonth: Long = if (E - 1 <= 12) E - 1 else E - 13
-    val gregorianYear: Long = if (month <= 2) C - 4715 else C - 4716
+    val gregorianYear: Long =
+      if (gregorianMonth <= 2) C - 4715 else C - 4716
 
     Some(
       new Date(
