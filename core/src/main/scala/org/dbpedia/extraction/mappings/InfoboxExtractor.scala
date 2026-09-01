@@ -136,7 +136,7 @@ extends PageNodeExtractor
                     //for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.unit.nonEmpty)
                     //sh: removed pr.unit.nonEmpty as it kicked out all objectproperty triples from wikilinks,
                     // didn't test for further side-effects seems to work
-                    for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode))
+                    for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.value.trim.nonEmpty)
                     {
                         val propertyUri = getPropertyUri(property.key)
                         try
