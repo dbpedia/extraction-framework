@@ -39,7 +39,7 @@ object ImageExtractorConfig
 
     val supportedLanguages = NonFreeRegex.keySet
 
-    val ImageRegex = """(?i)[^\"/\*?<>|:]+\.(?:jpe?g|png|gif|svg)""".r
+    val ImageRegex = """(?i)[^\"/\*?<>|:\n]+\.(?:jpe?g|png|gif|svg)""".r
 
     val ImageLinkRegex = """(?i).*\.(?:jpe?g|png|gif|svg)""".r
 }
