@@ -30,11 +30,11 @@ class EthiopianDateParser(datatype: Datatype, val strict: Boolean = false) {
   // Regex for dates containing geez characters
   // catches dates like ጥቅምት-21-2013 or ጥቅምት/21/2013 or ጥቅምት 21 2013
   private val dateRegex2: Regex =
-    s"""$prefix($monthsName)[\\s/-](\\b(0?[1-9]|[12][0-9]|3[01])\\b)[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$postfix""".r
+    s"""$prefix($monthsName)[\\s/-]\\b(0?[1-9]|[12][0-9]|3[01])\\b[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$postfix""".r
 
   // catches dates dd-month-yyyy like 21-ጥቅምት-2013 or 21/ጥቅምት/2013 or 21 ጥቅምት 2013
   private val dateRegex3: Regex =
-    s"""$prefix(\\b(0?[1-9]|[12][0-9]|3[01])\\b)[\\s/-]($monthsName)[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$postfix""".r
+    s"""$prefix\\b(0?[1-9]|[12][0-9]|3[01])\\b[\\s/-]($monthsName)[\\s/-](\\d{4}|[\\u1369-\\u137C]+)$postfix""".r
 
   // catches dates month-dd-yyyy ጥቅምት ፳፩ ፳፻፲፫ or ጥቅምት/፳፩/፳፻፲፫ or ጥቅምት ፳፩ ፳፻፲፫ mmmm-dd-yyyy
   private val dateRegex4: Regex =
