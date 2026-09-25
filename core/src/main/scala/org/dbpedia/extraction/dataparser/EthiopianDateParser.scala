@@ -149,7 +149,7 @@ class EthiopianDateParser(datatype: Datatype, val strict: Boolean = false) {
     val F: Long = (30.6001 * E).toLong
     val gregorianDay: Int = (B - D - F + (Q - Z)).toInt
     val gregorianMonth: Long = if (E - 1 <= 12) E - 1 else E - 13
-    val gregorianYear: Long = if (month <= 2) C - 4715 else C - 4716
+    val gregorianYear: Long = if (gregorianMonth <= 2) C - 4715 else C - 4716
 
     Some(
       new Date(
