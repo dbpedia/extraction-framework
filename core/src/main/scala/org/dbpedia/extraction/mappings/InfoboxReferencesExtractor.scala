@@ -44,7 +44,7 @@ extends PageNodeExtractor
 
     private val ignoreTemplatesRegex = InfoboxExtractorConfig.ignoreTemplatesRegex
 
-    private val ignoreProperties = InfoboxExtractorConfig.ignoreProperties
+    private val ignoreProperties = InfoboxExtractorConfig.ignoredProperties(wikiCode)
 
     private val rdfLangStrDt = ontology.datatypes("rdf:langString")
 
@@ -172,7 +172,7 @@ extends PageNodeExtractor
 
             var propertiesFound = false
             
-            val propertyList = template.children.filterNot(property => ignoreProperties.get(wikiCode).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
+            val propertyList = template.children.filterNot(property => ignoreProperties.contains(property.key.toLowerCase))
 
             
 

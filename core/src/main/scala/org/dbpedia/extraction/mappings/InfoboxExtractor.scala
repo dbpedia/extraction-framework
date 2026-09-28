@@ -55,7 +55,7 @@ extends PageNodeExtractor
 
     private val ignoreTemplatesRegex = InfoboxExtractorConfig.ignoreTemplatesRegex
 
-    private val ignoreProperties = InfoboxExtractorConfig.ignoreProperties
+    private val ignoreProperties = InfoboxExtractorConfig.ignoredProperties(wikiCode)
 
     private val labelProperty = ontology.properties("rdfs:label")
     private val typeProperty = ontology.properties("rdf:type")
@@ -118,7 +118,7 @@ extends PageNodeExtractor
           if !ignoreTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined) 
         }
         {
-            val propertyList = template.children.filterNot(property => ignoreProperties.get(wikiCode).getOrElse(ignoreProperties("en")).contains(property.key.toLowerCase))
+            val propertyList = template.children.filterNot(property => ignoreProperties.contains(property.key.toLowerCase))
 
             var propertiesFound = false
 
@@ -136,7 +136,7 @@ extends PageNodeExtractor
                     //for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.unit.nonEmpty)
                     //sh: removed pr.unit.nonEmpty as it kicked out all objectproperty triples from wikilinks,
                     // didn't test for further side-effects seems to work
-                    for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode))
+                    for(splitNode <- splitPropertyNodes; pr <- extractValue(splitNode); if pr.value.trim.nonEmpty)
                     {
                         val propertyUri = getPropertyUri(property.key)
                         try

@@ -12,13 +12,16 @@ object InfoboxExtractorConfig
 
     val ignoreProperties = Map (
         "en"-> Set("image", "image_photo", "map"),
-        "am"-> Set("ምስል", "ፎቶ", "ስዕል", "ካርታ", "አርማ"),
+        "am"-> Set("ምስል", "ፎቶ", "ስዕል", "ሥዕል", "ካርታ", "አርማ", "ባንዲራ", "ማኅተም", "ባንዲራ_ሥዕል", "ማኅተም_ሥዕል", "ካርታ_ሥዕል"),
         "ar"-> Set("صورة"),
         "id"-> Set("foto", "gambar"),
         "el"-> Set("εικόνα", "εικονα", "Εικόνα", "Εικονα", "χάρτης", "Χάρτης"),
         "eo"-> Set("dosiero"),
         "pt" -> Set("imagem", "foto","mapa")
     )
+
+    def ignoredProperties(wikiCode: String): Set[String] =
+        ignoreProperties("en") ++ ignoreProperties.getOrElse(wikiCode, Set.empty[String])
     
     // TODO: i18n
     val RankRegex = """(?i)([0-9]+)\s?(?:st|nd|rd|th)""".r

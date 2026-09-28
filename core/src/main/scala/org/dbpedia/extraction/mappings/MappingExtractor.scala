@@ -29,7 +29,9 @@ extends PageNodeExtractor
   {
     if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
 
-    val graph = extractNode(page, subjectUri)
+    val graph = extractNode(page, subjectUri).filter(quad =>
+      quad.datatype == null || quad.value.trim.nonEmpty
+    )
 
     if (graph.isEmpty) Seq.empty
     else splitInferredFromDirectTypes(graph, page, subjectUri)
