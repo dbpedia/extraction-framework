@@ -28,7 +28,7 @@ class ImageExtractorTest extends FlatSpec with Matchers with PrivateMethodTester
     res._2 should not be ('empty)
   }
 
-  // A wiki-markup image link broken across a line, e.g. [[File:\nBerlin_Map.png]], used to have its
+  // A wiki-markup image link broken across a line (e.g., [[File:\nBerlin_Map.png]]) used to have its
   // leading newline swept into the matched filename by ImageRegex, producing an invalid
   // foaf:depiction/thumbnail IRI with a literal newline in it (#774, #748).
   "ImageExtractorConfig.ImageRegex" must "not include a newline before the filename" in {
