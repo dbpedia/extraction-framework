@@ -1,6 +1,6 @@
 package org.dbpedia.extraction
 
-import collection.JavaConversions._
+import org.dbpedia.extraction.compat.JavaConversions._
 import sources.{WikipediaDumpParser, Source}
 import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitle}
 import org.springframework.core.io.Resource

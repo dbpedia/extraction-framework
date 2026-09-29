@@ -15,7 +15,7 @@ import org.dbpedia.extraction.config.mappings.wikidata.{WikidataOneToOneCommand,
 import org.dbpedia.extraction.ontology.OntologyClass
 import org.wikidata.wdtk.datamodel.interfaces.Value
 
-import scala.collection.JavaConversions._
+import org.dbpedia.extraction.compat.JavaConversions._
 import scala.language.postfixOps
 
 class JsonConfig(fileUrl:URL) {

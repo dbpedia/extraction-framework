@@ -12,7 +12,7 @@ import org.dbpedia.validation.construct.model.validators._
 import org.dbpedia.validation.construct.model.validators.generic.{GenericIRIValidator, GenericLiteralLangTagValidator, GenericLiteralValidator, GenericRdfLangStringValidator, GenericValidator}
 
 import scala.collection.mutable.ArrayBuffer
-import scala.collection.JavaConversions._
+import org.dbpedia.extraction.compat.JavaConversions._
 import scala.collection.immutable.{HashMap, HashSet}
 import scala.collection.mutable
 

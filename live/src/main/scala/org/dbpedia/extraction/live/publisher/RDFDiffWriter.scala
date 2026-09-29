@@ -10,7 +10,7 @@ import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.RichFile._
 
-import scala.collection.JavaConversions._
+import org.dbpedia.extraction.compat.JavaConversions._
 
 /**
  * Helper object that writes a set of Quads to a file,
