@@ -11,11 +11,29 @@ public class Link implements Comparable<Link> {
 	private boolean topicLink = false;
 	private boolean topicPartLink = false;
 	private boolean surfaceFormLink = false;
-	
+	private boolean citation = false;
+	private String citationId = "";
+
 	public Link() {
-		
+
 	}
-	
+
+	public boolean isCitation() {
+		return citation;
+	}
+
+	public void setCitation(boolean citation) {
+		this.citation = citation;
+	}
+
+	public String getCitationId() {
+		return citationId;
+	}
+
+	public void setCitationId(String citationId) {
+		this.citationId = citationId;
+	}
+
 	public boolean isSurfaceFormLink() {
 		return surfaceFormLink;
 	}
@@ -91,12 +109,12 @@ public class Link implements Comparable<Link> {
 	@Override
 	public int compareTo(Link link) {
 		// TODO Auto-generated method stub
-		if(this.wordStart==link.getWordStart()) 
+		if (this.wordStart == link.getWordStart())
 			return 0;
-		else if(this.wordStart<link.getWordStart())
+		else if (this.wordStart < link.getWordStart())
 			return -1;
 		else
 			return 1;
 	}
-	
+
 }

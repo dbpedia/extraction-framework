@@ -39,6 +39,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
   protected val templateString = "Template"
 
   private val sectionMap = new mutable.HashMap[PageSection, ExtractedSection]()
+  private val citationMap = new mutable.HashMap[String, String]()
 
   /**
     * Extract the relevant html page divided in sections and paragraphs
@@ -285,9 +286,17 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
         words += nifLinks(word, RdfNamespace.NIF.append("beginIndex"), (offset + link.getWordStart).toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
         words += nifLinks(word, RdfNamespace.NIF.append("endIndex"), (offset + link.getWordEnd).toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
         words += nifLinks(word, RdfNamespace.NIF.append("superString"), paragraphUri, sourceUrl, null)
-        UriUtils.createURI(link.getUri) match{
-          case Success(s) => words += nifLinks(word, "http://www.w3.org/2005/11/its/rdf#taIdentRef", s.toString, sourceUrl, null)  //TODO IRI's might throw exception in org.dbpedia.extraction.destinations.formatters please check this
-          case Failure(f) =>
+        if (link.isCitation) {
+          words += nifLinks(word, RdfNamespace.RDF.append("type"), "http://dbpedia.org/ontology/Citation", sourceUrl, null)
+          citationMap.get(link.getCitationId) match {
+            case Some(url) => words += nifLinks(word, "http://www.w3.org/2005/11/its/rdf#taIdentRef", url, sourceUrl, null)
+            case None =>
+          }
+        } else {
+          UriUtils.createURI(link.getUri) match{
+            case Success(s) => words += nifLinks(word, "http://www.w3.org/2005/11/its/rdf#taIdentRef", s.toString, sourceUrl, null)  //TODO IRI's might throw exception in org.dbpedia.extraction.destinations.formatters please check this
+            case Failure(f) =>
+          }
         }
         if(writeLinkAnchors)
           words += nifLinks(word, RdfNamespace.NIF.append("anchorOf"), link.getLinkText, sourceUrl, RdfNamespace.XSD.append("string"))
@@ -345,6 +354,15 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, nifPara
 
   protected def getJsoupDoc(html: String): Document = {
     val doc = Jsoup.parse(cleanHtml(html))
+
+    //extract citations
+    for(note <- doc.select("li[id^=cite_note-]").asScala){
+      val id = note.id()
+      val extLink = note.select("a.external.text").first()
+      if (extLink != null) {
+        citationMap.put(id, extLink.attr("href"))
+      }
+    }
 
     //delete queries
     for(query <- cssSelectorConfigMap.removeElements)
