@@ -204,7 +204,7 @@ object DBpediaDatasets extends java.io.Serializable
     val TemplateMappingsHints: Dataset = datasets("template_mapping_hints")
     val TemplateMappingsHintsInstance: Dataset = datasets("template_mapping_hints_instance")
     val InfoboxTest: Dataset = datasets("infobox_test")
-
+ 
     /**
      * Abstracts & Page text
      */
@@ -271,13 +271,14 @@ object DBpediaDatasets extends java.io.Serializable
     val WikidataDuplicateIRIDataset = DBpediaDatasets.WikidataDublicateIriSplit
 
     /**
-     * Citations
+     * Citations/References
      */
     val CitationLinks: Dataset = datasets("citation_links")
     val CitationData: Dataset = datasets("citation_data")
     val CitatedFacts: Dataset = datasets("cited_facts")  //TODO add description @Dimitris
     //val CitationTypes = datasets.get("citation_types").get
-
+    val InfoboxReferences: Dataset = datasets("infobox_references")
+    val MappedInfoboxReferences: Dataset = datasets("mapped_infobox_references")
 
   /**
     * misc
