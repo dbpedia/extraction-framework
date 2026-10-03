@@ -98,12 +98,23 @@ object TypeConsistencyCheck {
 
       // create destination for this language
       val finder = new Finder[File](baseDir, lang, "wiki")
-      val date = finder.dates().last
-      val destination = createDestination(finder, date, formats)
+      val dates = finder.dates(required = false)
+      if (dates.isEmpty) {
+        Console.err.println(lang.wikiCode + ": no date directory found, skipping.")
+      } else {
+        val date = dates.last
+        val destination = createDestination(finder, date, formats)
 
-      val typeDatasetFile: File = finder.file(date, typesDataset).get
-      val mappedTripleDatasetFile: File = finder.file(date, mappedTripleDataset).get
-      checkTypeConsistency(ontology, typeDatasetFile, mappedTripleDatasetFile, destination, lang)
+        val typeDatasetFileOption = finder.file(date, typesDataset)
+        val mappedTripleDatasetFileOption = finder.file(date, mappedTripleDataset)
+
+        (typeDatasetFileOption, mappedTripleDatasetFileOption) match {
+          case (Some(typeDatasetFile), Some(mappedTripleDatasetFile)) if typeDatasetFile.exists && mappedTripleDatasetFile.exists =>
+            checkTypeConsistency(ontology, typeDatasetFile, mappedTripleDatasetFile, destination, lang)
+          case _ =>
+            Console.err.println(lang.wikiCode + ": required datasets missing, skipping.")
+        }
+      }
     }
   }
 

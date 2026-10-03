@@ -22,7 +22,7 @@ extends PageNodeExtractor
 {
   private val language = context.language
 
-  private val replaceString = DisambiguationExtractorConfig.disambiguationTitlePartMap(language.wikiCode)
+  private val replaceString = DisambiguationExtractorConfig.disambiguationTitlePartMap.getOrElse(language.wikiCode, " (disambiguation)")
 
   val wikiPageDisambiguatesProperty = context.ontology.properties("wikiPageDisambiguates")
 

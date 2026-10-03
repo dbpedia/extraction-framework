@@ -63,7 +63,7 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
         case None => false
       }}
 
-    val dates = wikiDir.names.filter(dateFilter).filter(suffixFilter).sortBy(_.toInt)
+    val dates = wikiDir.names.filter(dateFilter).filter(suffixFilter).distinct.sortBy(_.toInt)
     
     if (required && dates.isEmpty) {
       var msg = "found no directory "+wikiDir+"/[YYYYMMDD]"

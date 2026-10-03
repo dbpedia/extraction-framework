@@ -123,13 +123,35 @@ object Language extends (String => Language)
       request.setHeader("User-Agent", customUserAgentText)
     }
 
-    val response = client.execute(request)
-    val stream = response.getEntity.getContent
-    val wikiLanguageCodes = 
-      try Source.fromInputStream(stream).getLines().toList 
-      finally{ 
-        stream.close()
-        client.close() 
+    val wikiLanguageCodes =
+      try {
+        // Set a default User-Agent if none is provided
+        if (!customUserAgentEnabled) {
+          request.setHeader("User-Agent", "DBpedia-Extraction-Framework/1.0 (https://github.com/dbpedia/extraction-framework; dbpedia@infai.org)")
+        }
+
+        val response = client.execute(request)
+        val status = response.getStatusLine.getStatusCode
+        if (status >= 200 && status < 300) {
+          val stream = response.getEntity.getContent
+          try {
+            Source.fromInputStream(stream).getLines()
+              .map(_.trim)
+              .filter(line => line.nonEmpty && !line.contains(" ")) // Basic filter for language codes
+              .toList
+          } finally {
+            stream.close()
+          }
+        } else {
+          logger.log(Level.WARNING, "Language list fetch failed with status " + status + " from " + wikipediaLanguageUrl)
+          List.empty
+        }
+      } catch {
+        case e: Exception =>
+          logger.log(Level.WARNING, "Could not fetch language list from " + wikipediaLanguageUrl + ": " + e.getMessage)
+          List.empty // Fallback to empty list, addonlangs.json will still be used
+      } finally {
+        client.close()
       }
 
     val specialLangs: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("addonlangs.json"))

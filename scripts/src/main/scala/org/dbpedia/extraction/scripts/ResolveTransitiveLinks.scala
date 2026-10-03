@@ -67,7 +67,11 @@ object ResolveTransitiveLinks {
     Workers.work(SimpleWorkers(1.5, 1.0) { language: Language =>
 
       val finder = new DateFinder(baseDir, language)
-      finder.byName("redirects" + suffix, auto = true)
+      val inputFile = finder.byName(input + suffix, auto = true, required = false)
+      if (inputFile.isEmpty) {
+        err.println(language.wikiCode + ": input dataset " + input + " not found, skipping.")
+        return
+      }
 
       // use LinkedHashMap to preserve order
       val map = new LinkedHashMap[String, String]()
@@ -96,7 +100,7 @@ object ResolveTransitiveLinks {
 
       var count = 0
       var predicate: String = null
-      new QuadMapper(logfile).readQuads(finder, input + suffix) { quad =>
+      new QuadMapper(logfile).readQuads(finder, input + suffix, auto = true, required = false) { quad =>
         wikidatamap.get(quad.subject) match {
           case Some(s) =>
             count = count +1  //do nothing since we dont want to redirect if a wikidata uri exists
@@ -107,6 +111,11 @@ object ResolveTransitiveLinks {
             map(quad.subject) = quad.value
           }
         }
+      }
+
+      if (predicate == null) {
+        err.println(language.wikiCode + ": input dataset " + input + " not found or empty, skipping.")
+        return
       }
       err.println(language.wikiCode + ": " + count + " redirects were suppressed since they have a wikidata uri")
 

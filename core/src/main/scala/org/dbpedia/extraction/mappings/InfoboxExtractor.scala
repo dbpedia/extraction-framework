@@ -58,6 +58,7 @@ extends PageNodeExtractor
     private val ignoreProperties = InfoboxExtractorConfig.ignoredProperties(wikiCode)
 
     private val labelProperty = ontology.properties("rdfs:label")
+    private val commentProperty = ontology.properties("rdfs:comment")
     private val typeProperty = ontology.properties("rdf:type")
     private val propertyClass = ontology.classes("rdf:Property")
     private val rdfLangStrDt = ontology.datatypes("rdf:langString")
@@ -165,6 +166,8 @@ extends PageNodeExtractor
                                 seenProperties += propertyUri
                                 quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceIri)
                                 quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceIri, rdfLangStrDt)
+                                val propertyComment = "Raw property extracted from Wikipedia infobox: " + property.key
+                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, commentProperty, propertyComment, splitNode.sourceIri, rdfLangStrDt)
                             }
                         }
                     }

@@ -40,16 +40,21 @@ class QuadReader(log: FileLike[File] = null, preamble: String = null) {
    * @param input file name, e.g. interlanguage-links-same-as.nt.gz
    * @param proc process quad
    */
-  def readQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, auto: Boolean = false)(proc: Quad => Unit): Unit = {
-    readQuads(finder.language, finder.byName(input, auto).get)(proc)
+  def readQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, auto: Boolean = false, required: Boolean = true)(proc: Quad => Unit): Unit = {
+    finder.byName(input, auto, required) match {
+      case Some(file) if file.exists => readQuads(finder.language, file)(proc)
+      case _ => if (required) throw new IllegalArgumentException("file " + input + " not found")
+    }
   }
 
   /**
     * @param pattern regex of filenemes
     * @param proc process quad
     */
-  def readQuadsOfMultipleFiles[T <% FileLike[T]](finder: DateFinder[T], pattern: String, auto: Boolean = false)(proc: Quad => Unit): Unit = {
-    for(file <- finder.byPattern(pattern, auto))
+  def readQuadsOfMultipleFiles[T <% FileLike[T]](finder: DateFinder[T], pattern: String, auto: Boolean = false, required: Boolean = true)(proc: Quad => Unit): Unit = {
+    val files = finder.byPattern(pattern, auto, required)
+    if (required && files.isEmpty) throw new IllegalArgumentException("no files found for pattern " + pattern)
+    for(file <- files)
       readQuads(finder.language, file)(proc)
   }
 

@@ -18,19 +18,23 @@ class DateFinder[T](val finder: Finder[T]){
     _date
   else throw new IllegalStateException("date not set")
 
-  def byName(name: String, auto: Boolean = false): Option[T] = {
+  def byName(name: String, auto: Boolean = false, required: Boolean = true): Option[T] = {
     if (_date == null) {
       if (! auto)
         throw new IllegalStateException("date not set")
-      _date = finder.dates(name).last
+      val dates = finder.dates(name, required)
+      if (dates.isEmpty) return None
+      _date = dates.last
     }
     finder.file(_date, name)
   }
 
-  def byPattern (pattern: String, auto: Boolean = false): Seq[T] = {
+  def byPattern (pattern: String, auto: Boolean = false, required: Boolean = true): Seq[T] = {
     if (_date == null) {
       if (! auto) throw new IllegalStateException("date not set")
-      _date = finder.dates(pattern, true, true).last
+      val dates = finder.dates(pattern, required, isSuffixRegex = true)
+      if (dates.isEmpty) return Seq.empty
+      _date = dates.last
     }
     finder.matchFiles(_date, pattern).toSeq
   }

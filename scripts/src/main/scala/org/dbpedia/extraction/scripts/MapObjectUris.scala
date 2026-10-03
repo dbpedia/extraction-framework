@@ -5,7 +5,7 @@ import java.io.File
 import org.apache.jena.ext.com.google.common.collect.{Multimaps, TreeMultimap}
 import org.dbpedia.extraction.config.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.{DateFinder, Language, SimpleWorkers, Workers}
+import org.dbpedia.extraction.util.{DateFinder, Language, SimpleWorkers, Workers, RichFile, FileLike}
 
 import scala.Console.err
 import scala.collection.convert.decorateAsScala._
@@ -125,46 +125,46 @@ object MapObjectUris {
 
         Workers.work(SimpleWorkers(1.5, 1.0) { mapping: String =>
         var count = 0
-        new QuadMapper().readQuads(finder, mapping + mappingSuffix, auto = true) { quad =>
+        new QuadMapper().readQuads(finder, mapping + mappingSuffix, auto = true, required = false) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException(mapping + ": expected object uri, found object literal: " + quad)
-          // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
-          // be enough. Also, the fields of the Quad are derived by calling substring() on the whole
-          // line, which means that the character array for the whole line is kept in memory, which
-          // basically means that the whole redirects file is kept in memory. We should
-          // - only store the resource title in the map
-          // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
-          // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
           map.put(quad.subject, quad.value)
           count += 1
         }
-        err.println(mapping + ": found " + count + " mappings")
+        if (count > 0) err.println(mapping + ": found " + count + " mappings")
+        else err.println(mapping + ": mapping file not found or empty, skipping for " + language.wikiCode)
       }, mappings.toList)
 
       Workers.work(SimpleWorkers(1.5, 1.0) { input: (String, String) =>
-        var count = 0
-        val inputFile = if(isExternal) new File(secondary, input._1 + input._2) else finder.byName(input._1 + input._2, auto = true).get
-        val outputFile = if(isExternal) new File(secondary, input._1 + extension + input._2) else finder.byName(input._1 + extension + input._2, auto = true).get
-        new QuadMapper().mapQuads(language, inputFile, outputFile) { quad =>
+        var changeCount = 0
+        val inputFileOption: Option[FileLike[_]] = if(isExternal) Some(new RichFile(new File(secondary, input._1 + input._2))) else finder.byName(input._1 + input._2, auto = true, required = false).map(x => x: FileLike[_])
+        val outputFileOption: Option[FileLike[_]] = if(isExternal) Some(new RichFile(new File(secondary, input._1 + extension + input._2))) else finder.byName(input._1 + extension + input._2, auto = true, required = false).map(x => x: FileLike[_])
 
-          if (quad.datatype != null) {
-            // just copy quad with literal values. TODO: make this configurable
-            List(quad)
-          }
-          else {
-            val uris = map.get(quad.value).asScala
-            count = count + 1
-            val ret = for (uri <- uris)
-              yield quad.copy(
-                value = uri, // change object URI
-                context = if (quad.context == null) quad.context else quad.context + "&objectMappedFrom=" + quad.value) // add change provenance
-            // none found
-            if(ret.isEmpty)
+        if (inputFileOption.isDefined && outputFileOption.isDefined && inputFileOption.get.exists) {
+          val inputFile = inputFileOption.get
+          val outputFile = outputFileOption.get
+          new QuadMapper().mapQuads(language, inputFile, outputFile) { quad =>
+            if (quad.datatype != null) {
+              // just copy quad with literal values. TODO: make this configurable
               List(quad)
-            else
-              ret
+            }
+            else {
+              val uris = map.get(quad.value).asScala
+              changeCount = changeCount + 1
+              val ret = for (uri <- uris)
+                yield quad.copy(
+                  value = uri, // change object URI
+                  context = if (quad.context == null) quad.context else quad.context + "&objectMappedFrom=" + quad.value) // add change provenance
+              // none found
+              if(ret.isEmpty)
+                List(quad)
+              else
+                ret
+            }
           }
+          err.println(input._1 + ": changed " + changeCount + " quads.")
+        } else {
+          err.println(input._1 + ": input file not found or empty, skipping for " + language.wikiCode)
         }
-        err.println(input._1 + ": changed " + count + " quads.")
       }, inputs.flatMap(x => suffixes.map(y => (x, y))).toList)
     }
   }
