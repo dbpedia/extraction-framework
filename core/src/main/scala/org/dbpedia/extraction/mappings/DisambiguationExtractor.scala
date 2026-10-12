@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import java.util.logging.Logger
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
@@ -20,9 +21,19 @@ class DisambiguationExtractor(
 )
 extends PageNodeExtractor
 {
+  @transient private val logger = Logger.getLogger(classOf[DisambiguationExtractor].getName)
+
   private val language = context.language
 
-  private val replaceString = DisambiguationExtractorConfig.disambiguationTitlePartMap(language.wikiCode)
+  // disambiguationTitlePartMap only covers the languages whose disambiguation title suffix is
+  // known; a language missing from it (anything enabled for extraction/the live server that
+  // hasn't been added here yet) must not crash extractor construction for every page of that
+  // language -- fall back to stripping nothing rather than guessing a suffix.
+  private val replaceString = DisambiguationExtractorConfig.disambiguationTitlePartMap.getOrElse(language.wikiCode, {
+    logger.warning("No disambiguation title suffix configured for language '" + language.wikiCode +
+      "'; disambiguation page titles for this language will not have their suffix stripped.")
+    ""
+  })
 
   val wikiPageDisambiguatesProperty = context.ontology.properties("wikiPageDisambiguates")
 
