@@ -265,7 +265,15 @@ extends PropertyMapping
         for(templateClass <- node.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
             currentClass <- templateClass.relatedClasses)
         {
-            for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty)))
+            // specificPropertyUnit is looked up independently of the pr.unit check above (it comes
+            // from a per-class ontology specialization, e.g. a currency override), so it can be an
+            // InconvertibleUnitDatatype even when pr.unit itself is not. fromStandardUnit() on such
+            // a unit always throws (see InconvertibleUnitDatatype), and stdValue here is on the
+            // *standard* unit's scale anyway, which an inconvertible unit (e.g. a currency) has no
+            // meaningful relationship to -- so skip writing that specific property rather than
+            // crash or fabricate a bogus converted value.
+            for(specificPropertyUnit <- context.ontology.specializations.get((currentClass, ontologyProperty));
+                if !specificPropertyUnit.isInstanceOf[InconvertibleUnitDatatype])
             {
                  val outputValue = specificPropertyUnit.fromStandardUnit(stdValue)
                  val propertyUri = DBpediaNamespace.ONTOLOGY.append(currentClass.name+'/'+ontologyProperty.name)
