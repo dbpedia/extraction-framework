@@ -126,7 +126,15 @@ extends PropertyMapping
     // FIXME: copy-and-paste in SimplePropertyMapping
     for(cls <- ontologyProperty.domain.relatedClasses)
     {
-      for(specificPropertyUnit <- context.ontology.specializations.get((cls, ontologyProperty)))
+      // specificPropertyUnit is looked up independently of the already-checked `unit` above (it
+      // comes from a per-class ontology specialization, e.g. a currency override), so it can be
+      // an InconvertibleUnitDatatype even when `unit` itself is not. fromStandardUnit() on such a
+      // unit always throws (see InconvertibleUnitDatatype), and `value` here is on the *standard*
+      // unit's scale anyway, which an inconvertible unit (e.g. a currency) has no meaningful
+      // relationship to -- so skip writing that specific property rather than crash or fabricate
+      // a bogus converted value.
+      for(specificPropertyUnit <- context.ontology.specializations.get((cls, ontologyProperty));
+          if !specificPropertyUnit.isInstanceOf[InconvertibleUnitDatatype])
       {
          val outputValue = specificPropertyUnit.fromStandardUnit(value)
          val propertyUri = DBpediaNamespace.ONTOLOGY.append(cls.name+'/'+ontologyProperty.name)
