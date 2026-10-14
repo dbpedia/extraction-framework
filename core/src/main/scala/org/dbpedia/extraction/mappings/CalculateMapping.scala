@@ -69,10 +69,16 @@ extends PropertyMapping
               case(val1: ParseResult[Double], val2: ParseResult[Double]) if val1.unit.nonEmpty && val2.unit.nonEmpty =>
               {
                 val value1 = val1.unit.get match{
+                  // InconvertibleUnitDatatype.toStandardUnit() always throws (by design, see its
+                  // class doc), so it must be checked before the UnitDatatype case below, which it
+                  // otherwise also matches. writeUnitValue() already special-cases this datatype for
+                  // the same reason -- but that check runs too late to protect this conversion.
+                  case u : InconvertibleUnitDatatype => val1.value
                   case u : UnitDatatype => u.toStandardUnit(val1.value)
                   case d : Datatype => val1.value
                 }
                 val value2 = val2.unit.get match{
+                  case u : InconvertibleUnitDatatype => val2.value
                   case u : UnitDatatype => u.toStandardUnit(val2.value)
                   case d : Datatype => val2.value
                 }
