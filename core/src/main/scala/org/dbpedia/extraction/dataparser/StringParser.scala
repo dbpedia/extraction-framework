@@ -45,7 +45,11 @@ object StringParser extends DataParser
     // in the node, which might not be the editor's semantics
     private def postProcess(input: String): String ={
         var text: String = input
-        text = smallTagRegex.replaceAllIn(text, (m: Match) => if (m.group(1).nonEmpty) "($1)" else "")
+        // replaceAllIn's Match => String overload uses the returned string verbatim (it is
+        // passed through Matcher.quoteReplacement before being applied), it does not expand
+        // "$1" group references the way the String-replacement overload does -- so the old
+        // "($1)" literal was emitted as-is instead of the captured group's actual text.
+        text = smallTagRegex.replaceAllIn(text, (m: Match) => if (m.group(1).nonEmpty) "(" + m.group(1) + ")" else "")
         text = tagRegex.replaceAllIn(text, "") //strip tags
         text = WikiUtil.removeWikiEmphasis(text)
         text = text.replace("&nbsp;", " ")//TODO decode all html entities here
