@@ -62,18 +62,14 @@ extends MappingExtractor(context)
       }
 
       // get maximum gender
-      var maxGender = ""
-      var maxCount = 0
-      var secondCount = 0.0
-      for ((gender, count) <- genderCounts)
-      {
-        if (count > maxCount)
-        {
-          secondCount = maxCount.toDouble
-          maxCount = count
-          maxGender = gender
-        }
-      }
+      // The previous single-pass version only recorded secondCount when the running max was
+      // dethroned, so it stayed 0.0 (making maxCount/secondCount always Infinity, i.e. always
+      // "confident") whenever the true max happened to be the first entry Map iteration order
+      // produced -- same pronoun counts, different (unspecified) iteration order, different
+      // outcome. Sort by count instead, so the top two counts are found regardless of order.
+      val sortedCounts = genderCounts.toSeq.sortBy(-_._2)
+      val (maxGender, maxCount) = sortedCounts.headOption.getOrElse(("", 0))
+      val secondCount = if (sortedCounts.size > 1) sortedCounts(1)._2.toDouble else 0.0
 
       // output triple for maximum gender
       if (maxGender != "" && maxCount > GenderExtractorConfig.minCount && maxCount/secondCount > GenderExtractorConfig.minDifference)
