@@ -27,12 +27,9 @@ extends MappingExtractor(context)
 
   private val pronounMap: Map[String, String] = GenderExtractorConfig.pronounsMap(language)
 
-  // FIXME: don't use string constant, use context.ontology (or at least RdfNamespace.FOAF)
-  private val genderProperty = "http://xmlns.com/foaf/0.1/gender"
-  // FIXME: don't use string constant, use context.ontology (or at least RdfNamespace.RDF)
-  private val typeProperty = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-  // FIXME: don't use string constant, use context.ontology (or at least DBpediaNamespace.ONTOLOGY)
-  private val personUri = "http://dbpedia.org/ontology/Person"
+  private val genderProperty = context.ontology.properties("foaf:gender")
+  private val typeProperty = context.ontology.properties("rdf:type").uri
+  private val personUri = context.ontology.classes("Person").uri
 
   override val datasets = Set(DBpediaDatasets.Genders)
 
