@@ -157,7 +157,15 @@ class DurationParserTest extends FlatSpec with Matchers
      {
          parse("am", "Time", "27 ዓመታት, 2 ወራት, 5 ቀናት, 1 ሰዓት 40 ደቂቃ, 17 ሴኮንድ  ").get should be (approximatelyEqualTo(857752817.0))
      }
-   
+
+    // Unit words in non-Latin alphabets used to be stripped down to an empty string by the
+    // a-zA-Z-only cleanup before the config lookup, so they never matched even though they're
+    // listed in DurationParserConfig (#760).
+    "DurationParser" should "return 14400 seconds for 'context 4 ώρες'" in
+     {
+         parse("el", "Time", "context 4 ώρες").get should equal (14400.0)
+     }
+
 
      /**
      * Matcher to test if 2 values are approximately equal.
