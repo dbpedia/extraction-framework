@@ -131,7 +131,7 @@ class DurationParser( context : { def language : Language } ) extends java.io.Se
                 val durationsMap = TimeValueUnitRegex.findAllIn(input).matchData.map{ m =>
                 {
                     // Seconds and minutes could be indicated as ','',"
-                    val unit = timeUnits.get(m.subgroups(1).replaceAll("""[^\'\"a-zA-Z]""", "")).getOrElse(return None)  // hack to deal with e.g "min)" matches
+                    val unit = timeUnits.get(m.subgroups(1).replaceAll("""[^\'\"\p{L}]""", "")).getOrElse(return None)  // hack to deal with e.g "min)" matches; \p{L} (not a-zA-Z) so non-Latin unit words (e.g. Greek "ώρες") survive this strip
                     val num = getNum(m).getOrElse(return None)
                     (unit, num) }
                 }.toMap
