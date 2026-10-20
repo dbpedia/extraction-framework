@@ -160,8 +160,14 @@ object Language extends (String => Language)
       }
     }
 
-    for (langEntry <- wikiLanguageCodes)
+    for (langEntry <- wikiLanguageCodes if !languages.keySet.contains(langEntry))
     {
+      // Some addonlangs.json entries (e.g. "sh", "simple", "zh-min-nan", "zh-yue", "bat-smg")
+      // are themselves real Wikipedia language codes that also show up in the live langlist
+      // fetched below. The catch block already assumes such a collision is possible --
+      // it only warns if the code isn't already in `languages` -- but nothing previously
+      // stopped this loop from unconditionally overwriting that addonlangs.json entry with
+      // a generically auto-generated one. Skip codes already configured from addonlangs.json.
       val loc = new Locale(langEntry)
       try {
         languages(langEntry) = language(langEntry, loc.getDisplayName, loc.getLanguage, loc.getISO3Language)
