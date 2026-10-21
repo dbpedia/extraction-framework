@@ -127,7 +127,10 @@ object ExtractorUtils {
   {
     node match
     {
-      case linkNode : InternalLinkNode => List(linkNode)
+      // Unlike this function's siblings below (collectParserFunctionsFromNode etc.), this
+      // case used to stop recursing once it matched, so a link nested inside another link's
+      // own label/children (e.g. "[[A|see also [[B]]]]") would only ever yield A, never B.
+      case linkNode : InternalLinkNode => List(linkNode) ++ node.children.flatMap(collectInternalLinksFromNode)
       case _ => node.children.flatMap(collectInternalLinksFromNode)
     }
   }
