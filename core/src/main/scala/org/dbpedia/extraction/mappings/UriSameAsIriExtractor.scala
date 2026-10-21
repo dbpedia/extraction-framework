@@ -35,13 +35,19 @@ extends PageNodeExtractor
   override def extract(page: PageNode, subjectUri: String): Seq[Quad] =
   {
     // only extract triple if IRI is actually different from URI
-    val encodedUri = UriUtils.createURI(subjectUri) match{
-      case Success(u) => u.toASCIIString
-      case Failure(f) => throw f
+    //
+    // CompositeExtractor.extract has no try/catch around individual extractors, so throwing
+    // here (as this used to) would abort every other extractor's output for the whole page
+    // over a single malformed subjectUri -- instead, skip just this page's sameAs quad,
+    // like the rest of the codebase does for unparseable input.
+    UriUtils.createURI(subjectUri) match{
+      case Success(u) =>
+        val encodedUri = u.toASCIIString
+        if (encodedUri == subjectUri)
+          Seq.empty
+        else
+          Seq(quad(encodedUri, subjectUri, page.sourceIri))
+      case Failure(_) => Seq.empty
     }
-    if (encodedUri == subjectUri)
-      Seq.empty
-    else
-      Seq(quad(encodedUri, subjectUri, page.sourceIri))
   }
 }
