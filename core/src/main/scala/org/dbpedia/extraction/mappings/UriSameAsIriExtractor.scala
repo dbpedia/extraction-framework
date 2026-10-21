@@ -38,8 +38,8 @@ extends PageNodeExtractor
     //
     // CompositeExtractor.extract has no try/catch around individual extractors, so throwing
     // here (as this used to) would abort every other extractor's output for the whole page
-    // over a single malformed subjectUri -- skip just this page's sameAs quad instead, like
-    // the rest of the codebase does for unparseable input.
+    // over a single malformed subjectUri -- instead, skip just this page's sameAs quad,
+    // like the rest of the codebase does for unparseable input.
     UriUtils.createURI(subjectUri) match{
       case Success(u) =>
         val encodedUri = u.toASCIIString
